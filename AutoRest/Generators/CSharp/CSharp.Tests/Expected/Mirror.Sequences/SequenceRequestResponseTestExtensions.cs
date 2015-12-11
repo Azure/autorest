@@ -46,8 +46,8 @@ namespace Fixtures.MirrorSequences
             /// </param>
             public static async Task<IList<Pet>> AddPetAsync( this ISequenceRequestResponseTest operations, IList<Pet> pets, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.AddPetWithHttpMessagesAsync(pets, null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.AddPetWithHttpMessagesAsync(pets, null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -78,8 +78,8 @@ namespace Fixtures.MirrorSequences
             /// </param>
             public static async Task<IList<int?>> AddPetStylesAsync( this ISequenceRequestResponseTest operations, IList<int?> petStyle, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.AddPetStylesWithHttpMessagesAsync(petStyle, null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.AddPetStylesWithHttpMessagesAsync(petStyle, null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -110,8 +110,8 @@ namespace Fixtures.MirrorSequences
             /// </param>
             public static async Task<IList<int?>> UpdatePetStylesAsync( this ISequenceRequestResponseTest operations, IList<int?> petStyle, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.UpdatePetStylesWithHttpMessagesAsync(petStyle, null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.UpdatePetStylesWithHttpMessagesAsync(petStyle, null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
     }

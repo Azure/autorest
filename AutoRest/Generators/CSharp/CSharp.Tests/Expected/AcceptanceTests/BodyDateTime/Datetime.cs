@@ -60,94 +60,94 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         public async Task<HttpOperationResponse<DateTime?>> GetNullWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool shouldTrace = ServiceClientTracing.IsEnabled;
-            string invocationId = null;
-            if (shouldTrace)
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
+            string _invocationId = null;
+            if (_shouldTrace)
             {
-                invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(invocationId, this, "GetNull", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "GetNull", tracingParameters);
             }
             // Construct URL
-            var baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "datetime/null").ToString();
+            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "datetime/null").ToString();
             // Create HTTP transport objects
-            HttpRequestMessage httpRequest = new HttpRequestMessage();
-            httpRequest.Method = new HttpMethod("GET");
-            httpRequest.RequestUri = new Uri(url);
+            HttpRequestMessage _httpRequest = new HttpRequestMessage();
+            _httpRequest.Method = new HttpMethod("GET");
+            _httpRequest.RequestUri = new Uri(_url);
             // Set Headers
             if (customHeaders != null)
             {
-                foreach(var header in customHeaders)
+                foreach(var _header in customHeaders)
                 {
-                    if (httpRequest.Headers.Contains(header.Key))
+                    if (_httpRequest.Headers.Contains(_header.Key))
                     {
-                        httpRequest.Headers.Remove(header.Key);
+                        _httpRequest.Headers.Remove(_header.Key);
                     }
-                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
+                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
             }
 
             // Send Request
-            if (shouldTrace)
+            if (_shouldTrace)
             {
-                ServiceClientTracing.SendRequest(invocationId, httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
-            if (shouldTrace)
+            HttpResponseMessage _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            if (_shouldTrace)
             {
-                ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            HttpStatusCode statusCode = httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if ((int)statusCode != 200)
+            if ((int)_statusCode != 200)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
-                    if (errorBody != null)
+                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    if (_errorBody != null)
                     {
-                        ex.Body = errorBody;
+                        ex.Body = _errorBody;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = httpRequest;
-                ex.Response = httpResponse;
-                if (shouldTrace)
+                ex.Request = _httpRequest;
+                ex.Response = _httpResponse;
+                if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse<DateTime?>();
-            result.Request = httpRequest;
-            result.Response = httpResponse;
+            var _result = new HttpOperationResponse<DateTime?>();
+            _result.Request = _httpRequest;
+            _result.Response = _httpResponse;
             // Deserialize Response
-            if ((int)statusCode == 200)
+            if ((int)_statusCode == 200)
             {
                 try
                 {
-                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = SafeJsonConvert.DeserializeObject<DateTime?>(responseContent, this.Client.DeserializationSettings);
+                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _result.Body = SafeJsonConvert.DeserializeObject<DateTime?>(_responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
                     throw new RestException("Unable to deserialize the response.", ex);
                 }
             }
-            if (shouldTrace)
+            if (_shouldTrace)
             {
-                ServiceClientTracing.Exit(invocationId, result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
-            return result;
+            return _result;
         }
 
         /// <summary>
@@ -162,94 +162,94 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         public async Task<HttpOperationResponse<DateTime?>> GetInvalidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool shouldTrace = ServiceClientTracing.IsEnabled;
-            string invocationId = null;
-            if (shouldTrace)
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
+            string _invocationId = null;
+            if (_shouldTrace)
             {
-                invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(invocationId, this, "GetInvalid", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "GetInvalid", tracingParameters);
             }
             // Construct URL
-            var baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "datetime/invalid").ToString();
+            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "datetime/invalid").ToString();
             // Create HTTP transport objects
-            HttpRequestMessage httpRequest = new HttpRequestMessage();
-            httpRequest.Method = new HttpMethod("GET");
-            httpRequest.RequestUri = new Uri(url);
+            HttpRequestMessage _httpRequest = new HttpRequestMessage();
+            _httpRequest.Method = new HttpMethod("GET");
+            _httpRequest.RequestUri = new Uri(_url);
             // Set Headers
             if (customHeaders != null)
             {
-                foreach(var header in customHeaders)
+                foreach(var _header in customHeaders)
                 {
-                    if (httpRequest.Headers.Contains(header.Key))
+                    if (_httpRequest.Headers.Contains(_header.Key))
                     {
-                        httpRequest.Headers.Remove(header.Key);
+                        _httpRequest.Headers.Remove(_header.Key);
                     }
-                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
+                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
             }
 
             // Send Request
-            if (shouldTrace)
+            if (_shouldTrace)
             {
-                ServiceClientTracing.SendRequest(invocationId, httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
-            if (shouldTrace)
+            HttpResponseMessage _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            if (_shouldTrace)
             {
-                ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            HttpStatusCode statusCode = httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if ((int)statusCode != 200)
+            if ((int)_statusCode != 200)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
-                    if (errorBody != null)
+                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    if (_errorBody != null)
                     {
-                        ex.Body = errorBody;
+                        ex.Body = _errorBody;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = httpRequest;
-                ex.Response = httpResponse;
-                if (shouldTrace)
+                ex.Request = _httpRequest;
+                ex.Response = _httpResponse;
+                if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse<DateTime?>();
-            result.Request = httpRequest;
-            result.Response = httpResponse;
+            var _result = new HttpOperationResponse<DateTime?>();
+            _result.Request = _httpRequest;
+            _result.Response = _httpResponse;
             // Deserialize Response
-            if ((int)statusCode == 200)
+            if ((int)_statusCode == 200)
             {
                 try
                 {
-                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = SafeJsonConvert.DeserializeObject<DateTime?>(responseContent, this.Client.DeserializationSettings);
+                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _result.Body = SafeJsonConvert.DeserializeObject<DateTime?>(_responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
                     throw new RestException("Unable to deserialize the response.", ex);
                 }
             }
-            if (shouldTrace)
+            if (_shouldTrace)
             {
-                ServiceClientTracing.Exit(invocationId, result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
-            return result;
+            return _result;
         }
 
         /// <summary>
@@ -264,94 +264,94 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         public async Task<HttpOperationResponse<DateTime?>> GetOverflowWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool shouldTrace = ServiceClientTracing.IsEnabled;
-            string invocationId = null;
-            if (shouldTrace)
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
+            string _invocationId = null;
+            if (_shouldTrace)
             {
-                invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(invocationId, this, "GetOverflow", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "GetOverflow", tracingParameters);
             }
             // Construct URL
-            var baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "datetime/overflow").ToString();
+            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "datetime/overflow").ToString();
             // Create HTTP transport objects
-            HttpRequestMessage httpRequest = new HttpRequestMessage();
-            httpRequest.Method = new HttpMethod("GET");
-            httpRequest.RequestUri = new Uri(url);
+            HttpRequestMessage _httpRequest = new HttpRequestMessage();
+            _httpRequest.Method = new HttpMethod("GET");
+            _httpRequest.RequestUri = new Uri(_url);
             // Set Headers
             if (customHeaders != null)
             {
-                foreach(var header in customHeaders)
+                foreach(var _header in customHeaders)
                 {
-                    if (httpRequest.Headers.Contains(header.Key))
+                    if (_httpRequest.Headers.Contains(_header.Key))
                     {
-                        httpRequest.Headers.Remove(header.Key);
+                        _httpRequest.Headers.Remove(_header.Key);
                     }
-                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
+                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
             }
 
             // Send Request
-            if (shouldTrace)
+            if (_shouldTrace)
             {
-                ServiceClientTracing.SendRequest(invocationId, httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
-            if (shouldTrace)
+            HttpResponseMessage _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            if (_shouldTrace)
             {
-                ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            HttpStatusCode statusCode = httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if ((int)statusCode != 200)
+            if ((int)_statusCode != 200)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
-                    if (errorBody != null)
+                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    if (_errorBody != null)
                     {
-                        ex.Body = errorBody;
+                        ex.Body = _errorBody;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = httpRequest;
-                ex.Response = httpResponse;
-                if (shouldTrace)
+                ex.Request = _httpRequest;
+                ex.Response = _httpResponse;
+                if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse<DateTime?>();
-            result.Request = httpRequest;
-            result.Response = httpResponse;
+            var _result = new HttpOperationResponse<DateTime?>();
+            _result.Request = _httpRequest;
+            _result.Response = _httpResponse;
             // Deserialize Response
-            if ((int)statusCode == 200)
+            if ((int)_statusCode == 200)
             {
                 try
                 {
-                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = SafeJsonConvert.DeserializeObject<DateTime?>(responseContent, this.Client.DeserializationSettings);
+                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _result.Body = SafeJsonConvert.DeserializeObject<DateTime?>(_responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
                     throw new RestException("Unable to deserialize the response.", ex);
                 }
             }
-            if (shouldTrace)
+            if (_shouldTrace)
             {
-                ServiceClientTracing.Exit(invocationId, result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
-            return result;
+            return _result;
         }
 
         /// <summary>
@@ -366,94 +366,94 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         public async Task<HttpOperationResponse<DateTime?>> GetUnderflowWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool shouldTrace = ServiceClientTracing.IsEnabled;
-            string invocationId = null;
-            if (shouldTrace)
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
+            string _invocationId = null;
+            if (_shouldTrace)
             {
-                invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(invocationId, this, "GetUnderflow", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "GetUnderflow", tracingParameters);
             }
             // Construct URL
-            var baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "datetime/underflow").ToString();
+            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "datetime/underflow").ToString();
             // Create HTTP transport objects
-            HttpRequestMessage httpRequest = new HttpRequestMessage();
-            httpRequest.Method = new HttpMethod("GET");
-            httpRequest.RequestUri = new Uri(url);
+            HttpRequestMessage _httpRequest = new HttpRequestMessage();
+            _httpRequest.Method = new HttpMethod("GET");
+            _httpRequest.RequestUri = new Uri(_url);
             // Set Headers
             if (customHeaders != null)
             {
-                foreach(var header in customHeaders)
+                foreach(var _header in customHeaders)
                 {
-                    if (httpRequest.Headers.Contains(header.Key))
+                    if (_httpRequest.Headers.Contains(_header.Key))
                     {
-                        httpRequest.Headers.Remove(header.Key);
+                        _httpRequest.Headers.Remove(_header.Key);
                     }
-                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
+                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
             }
 
             // Send Request
-            if (shouldTrace)
+            if (_shouldTrace)
             {
-                ServiceClientTracing.SendRequest(invocationId, httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
-            if (shouldTrace)
+            HttpResponseMessage _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            if (_shouldTrace)
             {
-                ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            HttpStatusCode statusCode = httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if ((int)statusCode != 200)
+            if ((int)_statusCode != 200)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
-                    if (errorBody != null)
+                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    if (_errorBody != null)
                     {
-                        ex.Body = errorBody;
+                        ex.Body = _errorBody;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = httpRequest;
-                ex.Response = httpResponse;
-                if (shouldTrace)
+                ex.Request = _httpRequest;
+                ex.Response = _httpResponse;
+                if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse<DateTime?>();
-            result.Request = httpRequest;
-            result.Response = httpResponse;
+            var _result = new HttpOperationResponse<DateTime?>();
+            _result.Request = _httpRequest;
+            _result.Response = _httpResponse;
             // Deserialize Response
-            if ((int)statusCode == 200)
+            if ((int)_statusCode == 200)
             {
                 try
                 {
-                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = SafeJsonConvert.DeserializeObject<DateTime?>(responseContent, this.Client.DeserializationSettings);
+                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _result.Body = SafeJsonConvert.DeserializeObject<DateTime?>(_responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
                     throw new RestException("Unable to deserialize the response.", ex);
                 }
             }
-            if (shouldTrace)
+            if (_shouldTrace)
             {
-                ServiceClientTracing.Exit(invocationId, result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
-            return result;
+            return _result;
         }
 
         /// <summary>
@@ -474,86 +474,86 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 throw new ValidationException(ValidationRules.CannotBeNull, "datetimeBody");
             }
             // Tracing
-            bool shouldTrace = ServiceClientTracing.IsEnabled;
-            string invocationId = null;
-            if (shouldTrace)
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
+            string _invocationId = null;
+            if (_shouldTrace)
             {
-                invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("datetimeBody", datetimeBody);
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(invocationId, this, "PutUtcMaxDateTime", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "PutUtcMaxDateTime", tracingParameters);
             }
             // Construct URL
-            var baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "datetime/max/utc").ToString();
+            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "datetime/max/utc").ToString();
             // Create HTTP transport objects
-            HttpRequestMessage httpRequest = new HttpRequestMessage();
-            httpRequest.Method = new HttpMethod("PUT");
-            httpRequest.RequestUri = new Uri(url);
+            HttpRequestMessage _httpRequest = new HttpRequestMessage();
+            _httpRequest.Method = new HttpMethod("PUT");
+            _httpRequest.RequestUri = new Uri(_url);
             // Set Headers
             if (customHeaders != null)
             {
-                foreach(var header in customHeaders)
+                foreach(var _header in customHeaders)
                 {
-                    if (httpRequest.Headers.Contains(header.Key))
+                    if (_httpRequest.Headers.Contains(_header.Key))
                     {
-                        httpRequest.Headers.Remove(header.Key);
+                        _httpRequest.Headers.Remove(_header.Key);
                     }
-                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
+                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
             }
 
             // Serialize Request
-            string requestContent = SafeJsonConvert.SerializeObject(datetimeBody, this.Client.SerializationSettings);
-            httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
-            httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+            string _requestContent = SafeJsonConvert.SerializeObject(datetimeBody, this.Client.SerializationSettings);
+            _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
+            _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
-            if (shouldTrace)
+            if (_shouldTrace)
             {
-                ServiceClientTracing.SendRequest(invocationId, httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
-            if (shouldTrace)
+            HttpResponseMessage _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            if (_shouldTrace)
             {
-                ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            HttpStatusCode statusCode = httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if ((int)statusCode != 200)
+            if ((int)_statusCode != 200)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
-                    if (errorBody != null)
+                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    if (_errorBody != null)
                     {
-                        ex.Body = errorBody;
+                        ex.Body = _errorBody;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = httpRequest;
-                ex.Response = httpResponse;
-                if (shouldTrace)
+                ex.Request = _httpRequest;
+                ex.Response = _httpResponse;
+                if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse();
-            result.Request = httpRequest;
-            result.Response = httpResponse;
-            if (shouldTrace)
+            var _result = new HttpOperationResponse();
+            _result.Request = _httpRequest;
+            _result.Response = _httpResponse;
+            if (_shouldTrace)
             {
-                ServiceClientTracing.Exit(invocationId, result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
-            return result;
+            return _result;
         }
 
         /// <summary>
@@ -568,94 +568,94 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         public async Task<HttpOperationResponse<DateTime?>> GetUtcLowercaseMaxDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool shouldTrace = ServiceClientTracing.IsEnabled;
-            string invocationId = null;
-            if (shouldTrace)
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
+            string _invocationId = null;
+            if (_shouldTrace)
             {
-                invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(invocationId, this, "GetUtcLowercaseMaxDateTime", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "GetUtcLowercaseMaxDateTime", tracingParameters);
             }
             // Construct URL
-            var baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "datetime/max/utc/lowercase").ToString();
+            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "datetime/max/utc/lowercase").ToString();
             // Create HTTP transport objects
-            HttpRequestMessage httpRequest = new HttpRequestMessage();
-            httpRequest.Method = new HttpMethod("GET");
-            httpRequest.RequestUri = new Uri(url);
+            HttpRequestMessage _httpRequest = new HttpRequestMessage();
+            _httpRequest.Method = new HttpMethod("GET");
+            _httpRequest.RequestUri = new Uri(_url);
             // Set Headers
             if (customHeaders != null)
             {
-                foreach(var header in customHeaders)
+                foreach(var _header in customHeaders)
                 {
-                    if (httpRequest.Headers.Contains(header.Key))
+                    if (_httpRequest.Headers.Contains(_header.Key))
                     {
-                        httpRequest.Headers.Remove(header.Key);
+                        _httpRequest.Headers.Remove(_header.Key);
                     }
-                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
+                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
             }
 
             // Send Request
-            if (shouldTrace)
+            if (_shouldTrace)
             {
-                ServiceClientTracing.SendRequest(invocationId, httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
-            if (shouldTrace)
+            HttpResponseMessage _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            if (_shouldTrace)
             {
-                ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            HttpStatusCode statusCode = httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if ((int)statusCode != 200)
+            if ((int)_statusCode != 200)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
-                    if (errorBody != null)
+                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    if (_errorBody != null)
                     {
-                        ex.Body = errorBody;
+                        ex.Body = _errorBody;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = httpRequest;
-                ex.Response = httpResponse;
-                if (shouldTrace)
+                ex.Request = _httpRequest;
+                ex.Response = _httpResponse;
+                if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse<DateTime?>();
-            result.Request = httpRequest;
-            result.Response = httpResponse;
+            var _result = new HttpOperationResponse<DateTime?>();
+            _result.Request = _httpRequest;
+            _result.Response = _httpResponse;
             // Deserialize Response
-            if ((int)statusCode == 200)
+            if ((int)_statusCode == 200)
             {
                 try
                 {
-                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = SafeJsonConvert.DeserializeObject<DateTime?>(responseContent, this.Client.DeserializationSettings);
+                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _result.Body = SafeJsonConvert.DeserializeObject<DateTime?>(_responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
                     throw new RestException("Unable to deserialize the response.", ex);
                 }
             }
-            if (shouldTrace)
+            if (_shouldTrace)
             {
-                ServiceClientTracing.Exit(invocationId, result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
-            return result;
+            return _result;
         }
 
         /// <summary>
@@ -670,94 +670,94 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         public async Task<HttpOperationResponse<DateTime?>> GetUtcUppercaseMaxDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool shouldTrace = ServiceClientTracing.IsEnabled;
-            string invocationId = null;
-            if (shouldTrace)
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
+            string _invocationId = null;
+            if (_shouldTrace)
             {
-                invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(invocationId, this, "GetUtcUppercaseMaxDateTime", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "GetUtcUppercaseMaxDateTime", tracingParameters);
             }
             // Construct URL
-            var baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "datetime/max/utc/uppercase").ToString();
+            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "datetime/max/utc/uppercase").ToString();
             // Create HTTP transport objects
-            HttpRequestMessage httpRequest = new HttpRequestMessage();
-            httpRequest.Method = new HttpMethod("GET");
-            httpRequest.RequestUri = new Uri(url);
+            HttpRequestMessage _httpRequest = new HttpRequestMessage();
+            _httpRequest.Method = new HttpMethod("GET");
+            _httpRequest.RequestUri = new Uri(_url);
             // Set Headers
             if (customHeaders != null)
             {
-                foreach(var header in customHeaders)
+                foreach(var _header in customHeaders)
                 {
-                    if (httpRequest.Headers.Contains(header.Key))
+                    if (_httpRequest.Headers.Contains(_header.Key))
                     {
-                        httpRequest.Headers.Remove(header.Key);
+                        _httpRequest.Headers.Remove(_header.Key);
                     }
-                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
+                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
             }
 
             // Send Request
-            if (shouldTrace)
+            if (_shouldTrace)
             {
-                ServiceClientTracing.SendRequest(invocationId, httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
-            if (shouldTrace)
+            HttpResponseMessage _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            if (_shouldTrace)
             {
-                ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            HttpStatusCode statusCode = httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if ((int)statusCode != 200)
+            if ((int)_statusCode != 200)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
-                    if (errorBody != null)
+                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    if (_errorBody != null)
                     {
-                        ex.Body = errorBody;
+                        ex.Body = _errorBody;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = httpRequest;
-                ex.Response = httpResponse;
-                if (shouldTrace)
+                ex.Request = _httpRequest;
+                ex.Response = _httpResponse;
+                if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse<DateTime?>();
-            result.Request = httpRequest;
-            result.Response = httpResponse;
+            var _result = new HttpOperationResponse<DateTime?>();
+            _result.Request = _httpRequest;
+            _result.Response = _httpResponse;
             // Deserialize Response
-            if ((int)statusCode == 200)
+            if ((int)_statusCode == 200)
             {
                 try
                 {
-                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = SafeJsonConvert.DeserializeObject<DateTime?>(responseContent, this.Client.DeserializationSettings);
+                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _result.Body = SafeJsonConvert.DeserializeObject<DateTime?>(_responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
                     throw new RestException("Unable to deserialize the response.", ex);
                 }
             }
-            if (shouldTrace)
+            if (_shouldTrace)
             {
-                ServiceClientTracing.Exit(invocationId, result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
-            return result;
+            return _result;
         }
 
         /// <summary>
@@ -779,86 +779,86 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 throw new ValidationException(ValidationRules.CannotBeNull, "datetimeBody");
             }
             // Tracing
-            bool shouldTrace = ServiceClientTracing.IsEnabled;
-            string invocationId = null;
-            if (shouldTrace)
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
+            string _invocationId = null;
+            if (_shouldTrace)
             {
-                invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("datetimeBody", datetimeBody);
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(invocationId, this, "PutLocalPositiveOffsetMaxDateTime", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "PutLocalPositiveOffsetMaxDateTime", tracingParameters);
             }
             // Construct URL
-            var baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "datetime/max/localpositiveoffset").ToString();
+            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "datetime/max/localpositiveoffset").ToString();
             // Create HTTP transport objects
-            HttpRequestMessage httpRequest = new HttpRequestMessage();
-            httpRequest.Method = new HttpMethod("PUT");
-            httpRequest.RequestUri = new Uri(url);
+            HttpRequestMessage _httpRequest = new HttpRequestMessage();
+            _httpRequest.Method = new HttpMethod("PUT");
+            _httpRequest.RequestUri = new Uri(_url);
             // Set Headers
             if (customHeaders != null)
             {
-                foreach(var header in customHeaders)
+                foreach(var _header in customHeaders)
                 {
-                    if (httpRequest.Headers.Contains(header.Key))
+                    if (_httpRequest.Headers.Contains(_header.Key))
                     {
-                        httpRequest.Headers.Remove(header.Key);
+                        _httpRequest.Headers.Remove(_header.Key);
                     }
-                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
+                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
             }
 
             // Serialize Request
-            string requestContent = SafeJsonConvert.SerializeObject(datetimeBody, this.Client.SerializationSettings);
-            httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
-            httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+            string _requestContent = SafeJsonConvert.SerializeObject(datetimeBody, this.Client.SerializationSettings);
+            _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
+            _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
-            if (shouldTrace)
+            if (_shouldTrace)
             {
-                ServiceClientTracing.SendRequest(invocationId, httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
-            if (shouldTrace)
+            HttpResponseMessage _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            if (_shouldTrace)
             {
-                ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            HttpStatusCode statusCode = httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if ((int)statusCode != 200)
+            if ((int)_statusCode != 200)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
-                    if (errorBody != null)
+                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    if (_errorBody != null)
                     {
-                        ex.Body = errorBody;
+                        ex.Body = _errorBody;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = httpRequest;
-                ex.Response = httpResponse;
-                if (shouldTrace)
+                ex.Request = _httpRequest;
+                ex.Response = _httpResponse;
+                if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse();
-            result.Request = httpRequest;
-            result.Response = httpResponse;
-            if (shouldTrace)
+            var _result = new HttpOperationResponse();
+            _result.Request = _httpRequest;
+            _result.Response = _httpResponse;
+            if (_shouldTrace)
             {
-                ServiceClientTracing.Exit(invocationId, result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
-            return result;
+            return _result;
         }
 
         /// <summary>
@@ -874,94 +874,94 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         public async Task<HttpOperationResponse<DateTime?>> GetLocalPositiveOffsetLowercaseMaxDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool shouldTrace = ServiceClientTracing.IsEnabled;
-            string invocationId = null;
-            if (shouldTrace)
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
+            string _invocationId = null;
+            if (_shouldTrace)
             {
-                invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(invocationId, this, "GetLocalPositiveOffsetLowercaseMaxDateTime", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "GetLocalPositiveOffsetLowercaseMaxDateTime", tracingParameters);
             }
             // Construct URL
-            var baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "datetime/max/localpositiveoffset/lowercase").ToString();
+            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "datetime/max/localpositiveoffset/lowercase").ToString();
             // Create HTTP transport objects
-            HttpRequestMessage httpRequest = new HttpRequestMessage();
-            httpRequest.Method = new HttpMethod("GET");
-            httpRequest.RequestUri = new Uri(url);
+            HttpRequestMessage _httpRequest = new HttpRequestMessage();
+            _httpRequest.Method = new HttpMethod("GET");
+            _httpRequest.RequestUri = new Uri(_url);
             // Set Headers
             if (customHeaders != null)
             {
-                foreach(var header in customHeaders)
+                foreach(var _header in customHeaders)
                 {
-                    if (httpRequest.Headers.Contains(header.Key))
+                    if (_httpRequest.Headers.Contains(_header.Key))
                     {
-                        httpRequest.Headers.Remove(header.Key);
+                        _httpRequest.Headers.Remove(_header.Key);
                     }
-                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
+                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
             }
 
             // Send Request
-            if (shouldTrace)
+            if (_shouldTrace)
             {
-                ServiceClientTracing.SendRequest(invocationId, httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
-            if (shouldTrace)
+            HttpResponseMessage _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            if (_shouldTrace)
             {
-                ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            HttpStatusCode statusCode = httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if ((int)statusCode != 200)
+            if ((int)_statusCode != 200)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
-                    if (errorBody != null)
+                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    if (_errorBody != null)
                     {
-                        ex.Body = errorBody;
+                        ex.Body = _errorBody;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = httpRequest;
-                ex.Response = httpResponse;
-                if (shouldTrace)
+                ex.Request = _httpRequest;
+                ex.Response = _httpResponse;
+                if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse<DateTime?>();
-            result.Request = httpRequest;
-            result.Response = httpResponse;
+            var _result = new HttpOperationResponse<DateTime?>();
+            _result.Request = _httpRequest;
+            _result.Response = _httpResponse;
             // Deserialize Response
-            if ((int)statusCode == 200)
+            if ((int)_statusCode == 200)
             {
                 try
                 {
-                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = SafeJsonConvert.DeserializeObject<DateTime?>(responseContent, this.Client.DeserializationSettings);
+                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _result.Body = SafeJsonConvert.DeserializeObject<DateTime?>(_responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
                     throw new RestException("Unable to deserialize the response.", ex);
                 }
             }
-            if (shouldTrace)
+            if (_shouldTrace)
             {
-                ServiceClientTracing.Exit(invocationId, result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
-            return result;
+            return _result;
         }
 
         /// <summary>
@@ -977,94 +977,94 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         public async Task<HttpOperationResponse<DateTime?>> GetLocalPositiveOffsetUppercaseMaxDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool shouldTrace = ServiceClientTracing.IsEnabled;
-            string invocationId = null;
-            if (shouldTrace)
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
+            string _invocationId = null;
+            if (_shouldTrace)
             {
-                invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(invocationId, this, "GetLocalPositiveOffsetUppercaseMaxDateTime", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "GetLocalPositiveOffsetUppercaseMaxDateTime", tracingParameters);
             }
             // Construct URL
-            var baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "datetime/max/localpositiveoffset/uppercase").ToString();
+            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "datetime/max/localpositiveoffset/uppercase").ToString();
             // Create HTTP transport objects
-            HttpRequestMessage httpRequest = new HttpRequestMessage();
-            httpRequest.Method = new HttpMethod("GET");
-            httpRequest.RequestUri = new Uri(url);
+            HttpRequestMessage _httpRequest = new HttpRequestMessage();
+            _httpRequest.Method = new HttpMethod("GET");
+            _httpRequest.RequestUri = new Uri(_url);
             // Set Headers
             if (customHeaders != null)
             {
-                foreach(var header in customHeaders)
+                foreach(var _header in customHeaders)
                 {
-                    if (httpRequest.Headers.Contains(header.Key))
+                    if (_httpRequest.Headers.Contains(_header.Key))
                     {
-                        httpRequest.Headers.Remove(header.Key);
+                        _httpRequest.Headers.Remove(_header.Key);
                     }
-                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
+                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
             }
 
             // Send Request
-            if (shouldTrace)
+            if (_shouldTrace)
             {
-                ServiceClientTracing.SendRequest(invocationId, httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
-            if (shouldTrace)
+            HttpResponseMessage _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            if (_shouldTrace)
             {
-                ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            HttpStatusCode statusCode = httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if ((int)statusCode != 200)
+            if ((int)_statusCode != 200)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
-                    if (errorBody != null)
+                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    if (_errorBody != null)
                     {
-                        ex.Body = errorBody;
+                        ex.Body = _errorBody;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = httpRequest;
-                ex.Response = httpResponse;
-                if (shouldTrace)
+                ex.Request = _httpRequest;
+                ex.Response = _httpResponse;
+                if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse<DateTime?>();
-            result.Request = httpRequest;
-            result.Response = httpResponse;
+            var _result = new HttpOperationResponse<DateTime?>();
+            _result.Request = _httpRequest;
+            _result.Response = _httpResponse;
             // Deserialize Response
-            if ((int)statusCode == 200)
+            if ((int)_statusCode == 200)
             {
                 try
                 {
-                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = SafeJsonConvert.DeserializeObject<DateTime?>(responseContent, this.Client.DeserializationSettings);
+                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _result.Body = SafeJsonConvert.DeserializeObject<DateTime?>(_responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
                     throw new RestException("Unable to deserialize the response.", ex);
                 }
             }
-            if (shouldTrace)
+            if (_shouldTrace)
             {
-                ServiceClientTracing.Exit(invocationId, result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
-            return result;
+            return _result;
         }
 
         /// <summary>
@@ -1086,86 +1086,86 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 throw new ValidationException(ValidationRules.CannotBeNull, "datetimeBody");
             }
             // Tracing
-            bool shouldTrace = ServiceClientTracing.IsEnabled;
-            string invocationId = null;
-            if (shouldTrace)
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
+            string _invocationId = null;
+            if (_shouldTrace)
             {
-                invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("datetimeBody", datetimeBody);
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(invocationId, this, "PutLocalNegativeOffsetMaxDateTime", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "PutLocalNegativeOffsetMaxDateTime", tracingParameters);
             }
             // Construct URL
-            var baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "datetime/max/localnegativeoffset").ToString();
+            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "datetime/max/localnegativeoffset").ToString();
             // Create HTTP transport objects
-            HttpRequestMessage httpRequest = new HttpRequestMessage();
-            httpRequest.Method = new HttpMethod("PUT");
-            httpRequest.RequestUri = new Uri(url);
+            HttpRequestMessage _httpRequest = new HttpRequestMessage();
+            _httpRequest.Method = new HttpMethod("PUT");
+            _httpRequest.RequestUri = new Uri(_url);
             // Set Headers
             if (customHeaders != null)
             {
-                foreach(var header in customHeaders)
+                foreach(var _header in customHeaders)
                 {
-                    if (httpRequest.Headers.Contains(header.Key))
+                    if (_httpRequest.Headers.Contains(_header.Key))
                     {
-                        httpRequest.Headers.Remove(header.Key);
+                        _httpRequest.Headers.Remove(_header.Key);
                     }
-                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
+                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
             }
 
             // Serialize Request
-            string requestContent = SafeJsonConvert.SerializeObject(datetimeBody, this.Client.SerializationSettings);
-            httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
-            httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+            string _requestContent = SafeJsonConvert.SerializeObject(datetimeBody, this.Client.SerializationSettings);
+            _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
+            _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
-            if (shouldTrace)
+            if (_shouldTrace)
             {
-                ServiceClientTracing.SendRequest(invocationId, httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
-            if (shouldTrace)
+            HttpResponseMessage _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            if (_shouldTrace)
             {
-                ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            HttpStatusCode statusCode = httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if ((int)statusCode != 200)
+            if ((int)_statusCode != 200)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
-                    if (errorBody != null)
+                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    if (_errorBody != null)
                     {
-                        ex.Body = errorBody;
+                        ex.Body = _errorBody;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = httpRequest;
-                ex.Response = httpResponse;
-                if (shouldTrace)
+                ex.Request = _httpRequest;
+                ex.Response = _httpResponse;
+                if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse();
-            result.Request = httpRequest;
-            result.Response = httpResponse;
-            if (shouldTrace)
+            var _result = new HttpOperationResponse();
+            _result.Request = _httpRequest;
+            _result.Response = _httpResponse;
+            if (_shouldTrace)
             {
-                ServiceClientTracing.Exit(invocationId, result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
-            return result;
+            return _result;
         }
 
         /// <summary>
@@ -1181,94 +1181,94 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         public async Task<HttpOperationResponse<DateTime?>> GetLocalNegativeOffsetUppercaseMaxDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool shouldTrace = ServiceClientTracing.IsEnabled;
-            string invocationId = null;
-            if (shouldTrace)
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
+            string _invocationId = null;
+            if (_shouldTrace)
             {
-                invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(invocationId, this, "GetLocalNegativeOffsetUppercaseMaxDateTime", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "GetLocalNegativeOffsetUppercaseMaxDateTime", tracingParameters);
             }
             // Construct URL
-            var baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "datetime/max/localnegativeoffset/uppercase").ToString();
+            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "datetime/max/localnegativeoffset/uppercase").ToString();
             // Create HTTP transport objects
-            HttpRequestMessage httpRequest = new HttpRequestMessage();
-            httpRequest.Method = new HttpMethod("GET");
-            httpRequest.RequestUri = new Uri(url);
+            HttpRequestMessage _httpRequest = new HttpRequestMessage();
+            _httpRequest.Method = new HttpMethod("GET");
+            _httpRequest.RequestUri = new Uri(_url);
             // Set Headers
             if (customHeaders != null)
             {
-                foreach(var header in customHeaders)
+                foreach(var _header in customHeaders)
                 {
-                    if (httpRequest.Headers.Contains(header.Key))
+                    if (_httpRequest.Headers.Contains(_header.Key))
                     {
-                        httpRequest.Headers.Remove(header.Key);
+                        _httpRequest.Headers.Remove(_header.Key);
                     }
-                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
+                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
             }
 
             // Send Request
-            if (shouldTrace)
+            if (_shouldTrace)
             {
-                ServiceClientTracing.SendRequest(invocationId, httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
-            if (shouldTrace)
+            HttpResponseMessage _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            if (_shouldTrace)
             {
-                ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            HttpStatusCode statusCode = httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if ((int)statusCode != 200)
+            if ((int)_statusCode != 200)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
-                    if (errorBody != null)
+                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    if (_errorBody != null)
                     {
-                        ex.Body = errorBody;
+                        ex.Body = _errorBody;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = httpRequest;
-                ex.Response = httpResponse;
-                if (shouldTrace)
+                ex.Request = _httpRequest;
+                ex.Response = _httpResponse;
+                if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse<DateTime?>();
-            result.Request = httpRequest;
-            result.Response = httpResponse;
+            var _result = new HttpOperationResponse<DateTime?>();
+            _result.Request = _httpRequest;
+            _result.Response = _httpResponse;
             // Deserialize Response
-            if ((int)statusCode == 200)
+            if ((int)_statusCode == 200)
             {
                 try
                 {
-                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = SafeJsonConvert.DeserializeObject<DateTime?>(responseContent, this.Client.DeserializationSettings);
+                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _result.Body = SafeJsonConvert.DeserializeObject<DateTime?>(_responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
                     throw new RestException("Unable to deserialize the response.", ex);
                 }
             }
-            if (shouldTrace)
+            if (_shouldTrace)
             {
-                ServiceClientTracing.Exit(invocationId, result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
-            return result;
+            return _result;
         }
 
         /// <summary>
@@ -1284,94 +1284,94 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         public async Task<HttpOperationResponse<DateTime?>> GetLocalNegativeOffsetLowercaseMaxDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool shouldTrace = ServiceClientTracing.IsEnabled;
-            string invocationId = null;
-            if (shouldTrace)
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
+            string _invocationId = null;
+            if (_shouldTrace)
             {
-                invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(invocationId, this, "GetLocalNegativeOffsetLowercaseMaxDateTime", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "GetLocalNegativeOffsetLowercaseMaxDateTime", tracingParameters);
             }
             // Construct URL
-            var baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "datetime/max/localnegativeoffset/lowercase").ToString();
+            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "datetime/max/localnegativeoffset/lowercase").ToString();
             // Create HTTP transport objects
-            HttpRequestMessage httpRequest = new HttpRequestMessage();
-            httpRequest.Method = new HttpMethod("GET");
-            httpRequest.RequestUri = new Uri(url);
+            HttpRequestMessage _httpRequest = new HttpRequestMessage();
+            _httpRequest.Method = new HttpMethod("GET");
+            _httpRequest.RequestUri = new Uri(_url);
             // Set Headers
             if (customHeaders != null)
             {
-                foreach(var header in customHeaders)
+                foreach(var _header in customHeaders)
                 {
-                    if (httpRequest.Headers.Contains(header.Key))
+                    if (_httpRequest.Headers.Contains(_header.Key))
                     {
-                        httpRequest.Headers.Remove(header.Key);
+                        _httpRequest.Headers.Remove(_header.Key);
                     }
-                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
+                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
             }
 
             // Send Request
-            if (shouldTrace)
+            if (_shouldTrace)
             {
-                ServiceClientTracing.SendRequest(invocationId, httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
-            if (shouldTrace)
+            HttpResponseMessage _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            if (_shouldTrace)
             {
-                ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            HttpStatusCode statusCode = httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if ((int)statusCode != 200)
+            if ((int)_statusCode != 200)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
-                    if (errorBody != null)
+                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    if (_errorBody != null)
                     {
-                        ex.Body = errorBody;
+                        ex.Body = _errorBody;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = httpRequest;
-                ex.Response = httpResponse;
-                if (shouldTrace)
+                ex.Request = _httpRequest;
+                ex.Response = _httpResponse;
+                if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse<DateTime?>();
-            result.Request = httpRequest;
-            result.Response = httpResponse;
+            var _result = new HttpOperationResponse<DateTime?>();
+            _result.Request = _httpRequest;
+            _result.Response = _httpResponse;
             // Deserialize Response
-            if ((int)statusCode == 200)
+            if ((int)_statusCode == 200)
             {
                 try
                 {
-                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = SafeJsonConvert.DeserializeObject<DateTime?>(responseContent, this.Client.DeserializationSettings);
+                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _result.Body = SafeJsonConvert.DeserializeObject<DateTime?>(_responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
                     throw new RestException("Unable to deserialize the response.", ex);
                 }
             }
-            if (shouldTrace)
+            if (_shouldTrace)
             {
-                ServiceClientTracing.Exit(invocationId, result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
-            return result;
+            return _result;
         }
 
         /// <summary>
@@ -1392,86 +1392,86 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 throw new ValidationException(ValidationRules.CannotBeNull, "datetimeBody");
             }
             // Tracing
-            bool shouldTrace = ServiceClientTracing.IsEnabled;
-            string invocationId = null;
-            if (shouldTrace)
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
+            string _invocationId = null;
+            if (_shouldTrace)
             {
-                invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("datetimeBody", datetimeBody);
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(invocationId, this, "PutUtcMinDateTime", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "PutUtcMinDateTime", tracingParameters);
             }
             // Construct URL
-            var baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "datetime/min/utc").ToString();
+            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "datetime/min/utc").ToString();
             // Create HTTP transport objects
-            HttpRequestMessage httpRequest = new HttpRequestMessage();
-            httpRequest.Method = new HttpMethod("PUT");
-            httpRequest.RequestUri = new Uri(url);
+            HttpRequestMessage _httpRequest = new HttpRequestMessage();
+            _httpRequest.Method = new HttpMethod("PUT");
+            _httpRequest.RequestUri = new Uri(_url);
             // Set Headers
             if (customHeaders != null)
             {
-                foreach(var header in customHeaders)
+                foreach(var _header in customHeaders)
                 {
-                    if (httpRequest.Headers.Contains(header.Key))
+                    if (_httpRequest.Headers.Contains(_header.Key))
                     {
-                        httpRequest.Headers.Remove(header.Key);
+                        _httpRequest.Headers.Remove(_header.Key);
                     }
-                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
+                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
             }
 
             // Serialize Request
-            string requestContent = SafeJsonConvert.SerializeObject(datetimeBody, this.Client.SerializationSettings);
-            httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
-            httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+            string _requestContent = SafeJsonConvert.SerializeObject(datetimeBody, this.Client.SerializationSettings);
+            _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
+            _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
-            if (shouldTrace)
+            if (_shouldTrace)
             {
-                ServiceClientTracing.SendRequest(invocationId, httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
-            if (shouldTrace)
+            HttpResponseMessage _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            if (_shouldTrace)
             {
-                ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            HttpStatusCode statusCode = httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if ((int)statusCode != 200)
+            if ((int)_statusCode != 200)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
-                    if (errorBody != null)
+                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    if (_errorBody != null)
                     {
-                        ex.Body = errorBody;
+                        ex.Body = _errorBody;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = httpRequest;
-                ex.Response = httpResponse;
-                if (shouldTrace)
+                ex.Request = _httpRequest;
+                ex.Response = _httpResponse;
+                if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse();
-            result.Request = httpRequest;
-            result.Response = httpResponse;
-            if (shouldTrace)
+            var _result = new HttpOperationResponse();
+            _result.Request = _httpRequest;
+            _result.Response = _httpResponse;
+            if (_shouldTrace)
             {
-                ServiceClientTracing.Exit(invocationId, result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
-            return result;
+            return _result;
         }
 
         /// <summary>
@@ -1486,94 +1486,94 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         public async Task<HttpOperationResponse<DateTime?>> GetUtcMinDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool shouldTrace = ServiceClientTracing.IsEnabled;
-            string invocationId = null;
-            if (shouldTrace)
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
+            string _invocationId = null;
+            if (_shouldTrace)
             {
-                invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(invocationId, this, "GetUtcMinDateTime", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "GetUtcMinDateTime", tracingParameters);
             }
             // Construct URL
-            var baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "datetime/min/utc").ToString();
+            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "datetime/min/utc").ToString();
             // Create HTTP transport objects
-            HttpRequestMessage httpRequest = new HttpRequestMessage();
-            httpRequest.Method = new HttpMethod("GET");
-            httpRequest.RequestUri = new Uri(url);
+            HttpRequestMessage _httpRequest = new HttpRequestMessage();
+            _httpRequest.Method = new HttpMethod("GET");
+            _httpRequest.RequestUri = new Uri(_url);
             // Set Headers
             if (customHeaders != null)
             {
-                foreach(var header in customHeaders)
+                foreach(var _header in customHeaders)
                 {
-                    if (httpRequest.Headers.Contains(header.Key))
+                    if (_httpRequest.Headers.Contains(_header.Key))
                     {
-                        httpRequest.Headers.Remove(header.Key);
+                        _httpRequest.Headers.Remove(_header.Key);
                     }
-                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
+                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
             }
 
             // Send Request
-            if (shouldTrace)
+            if (_shouldTrace)
             {
-                ServiceClientTracing.SendRequest(invocationId, httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
-            if (shouldTrace)
+            HttpResponseMessage _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            if (_shouldTrace)
             {
-                ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            HttpStatusCode statusCode = httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if ((int)statusCode != 200)
+            if ((int)_statusCode != 200)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
-                    if (errorBody != null)
+                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    if (_errorBody != null)
                     {
-                        ex.Body = errorBody;
+                        ex.Body = _errorBody;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = httpRequest;
-                ex.Response = httpResponse;
-                if (shouldTrace)
+                ex.Request = _httpRequest;
+                ex.Response = _httpResponse;
+                if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse<DateTime?>();
-            result.Request = httpRequest;
-            result.Response = httpResponse;
+            var _result = new HttpOperationResponse<DateTime?>();
+            _result.Request = _httpRequest;
+            _result.Response = _httpResponse;
             // Deserialize Response
-            if ((int)statusCode == 200)
+            if ((int)_statusCode == 200)
             {
                 try
                 {
-                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = SafeJsonConvert.DeserializeObject<DateTime?>(responseContent, this.Client.DeserializationSettings);
+                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _result.Body = SafeJsonConvert.DeserializeObject<DateTime?>(_responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
                     throw new RestException("Unable to deserialize the response.", ex);
                 }
             }
-            if (shouldTrace)
+            if (_shouldTrace)
             {
-                ServiceClientTracing.Exit(invocationId, result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
-            return result;
+            return _result;
         }
 
         /// <summary>
@@ -1594,86 +1594,86 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 throw new ValidationException(ValidationRules.CannotBeNull, "datetimeBody");
             }
             // Tracing
-            bool shouldTrace = ServiceClientTracing.IsEnabled;
-            string invocationId = null;
-            if (shouldTrace)
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
+            string _invocationId = null;
+            if (_shouldTrace)
             {
-                invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("datetimeBody", datetimeBody);
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(invocationId, this, "PutLocalPositiveOffsetMinDateTime", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "PutLocalPositiveOffsetMinDateTime", tracingParameters);
             }
             // Construct URL
-            var baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "datetime/min/localpositiveoffset").ToString();
+            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "datetime/min/localpositiveoffset").ToString();
             // Create HTTP transport objects
-            HttpRequestMessage httpRequest = new HttpRequestMessage();
-            httpRequest.Method = new HttpMethod("PUT");
-            httpRequest.RequestUri = new Uri(url);
+            HttpRequestMessage _httpRequest = new HttpRequestMessage();
+            _httpRequest.Method = new HttpMethod("PUT");
+            _httpRequest.RequestUri = new Uri(_url);
             // Set Headers
             if (customHeaders != null)
             {
-                foreach(var header in customHeaders)
+                foreach(var _header in customHeaders)
                 {
-                    if (httpRequest.Headers.Contains(header.Key))
+                    if (_httpRequest.Headers.Contains(_header.Key))
                     {
-                        httpRequest.Headers.Remove(header.Key);
+                        _httpRequest.Headers.Remove(_header.Key);
                     }
-                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
+                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
             }
 
             // Serialize Request
-            string requestContent = SafeJsonConvert.SerializeObject(datetimeBody, this.Client.SerializationSettings);
-            httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
-            httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+            string _requestContent = SafeJsonConvert.SerializeObject(datetimeBody, this.Client.SerializationSettings);
+            _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
+            _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
-            if (shouldTrace)
+            if (_shouldTrace)
             {
-                ServiceClientTracing.SendRequest(invocationId, httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
-            if (shouldTrace)
+            HttpResponseMessage _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            if (_shouldTrace)
             {
-                ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            HttpStatusCode statusCode = httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if ((int)statusCode != 200)
+            if ((int)_statusCode != 200)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
-                    if (errorBody != null)
+                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    if (_errorBody != null)
                     {
-                        ex.Body = errorBody;
+                        ex.Body = _errorBody;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = httpRequest;
-                ex.Response = httpResponse;
-                if (shouldTrace)
+                ex.Request = _httpRequest;
+                ex.Response = _httpResponse;
+                if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse();
-            result.Request = httpRequest;
-            result.Response = httpResponse;
-            if (shouldTrace)
+            var _result = new HttpOperationResponse();
+            _result.Request = _httpRequest;
+            _result.Response = _httpResponse;
+            if (_shouldTrace)
             {
-                ServiceClientTracing.Exit(invocationId, result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
-            return result;
+            return _result;
         }
 
         /// <summary>
@@ -1688,94 +1688,94 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         public async Task<HttpOperationResponse<DateTime?>> GetLocalPositiveOffsetMinDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool shouldTrace = ServiceClientTracing.IsEnabled;
-            string invocationId = null;
-            if (shouldTrace)
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
+            string _invocationId = null;
+            if (_shouldTrace)
             {
-                invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(invocationId, this, "GetLocalPositiveOffsetMinDateTime", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "GetLocalPositiveOffsetMinDateTime", tracingParameters);
             }
             // Construct URL
-            var baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "datetime/min/localpositiveoffset").ToString();
+            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "datetime/min/localpositiveoffset").ToString();
             // Create HTTP transport objects
-            HttpRequestMessage httpRequest = new HttpRequestMessage();
-            httpRequest.Method = new HttpMethod("GET");
-            httpRequest.RequestUri = new Uri(url);
+            HttpRequestMessage _httpRequest = new HttpRequestMessage();
+            _httpRequest.Method = new HttpMethod("GET");
+            _httpRequest.RequestUri = new Uri(_url);
             // Set Headers
             if (customHeaders != null)
             {
-                foreach(var header in customHeaders)
+                foreach(var _header in customHeaders)
                 {
-                    if (httpRequest.Headers.Contains(header.Key))
+                    if (_httpRequest.Headers.Contains(_header.Key))
                     {
-                        httpRequest.Headers.Remove(header.Key);
+                        _httpRequest.Headers.Remove(_header.Key);
                     }
-                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
+                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
             }
 
             // Send Request
-            if (shouldTrace)
+            if (_shouldTrace)
             {
-                ServiceClientTracing.SendRequest(invocationId, httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
-            if (shouldTrace)
+            HttpResponseMessage _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            if (_shouldTrace)
             {
-                ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            HttpStatusCode statusCode = httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if ((int)statusCode != 200)
+            if ((int)_statusCode != 200)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
-                    if (errorBody != null)
+                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    if (_errorBody != null)
                     {
-                        ex.Body = errorBody;
+                        ex.Body = _errorBody;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = httpRequest;
-                ex.Response = httpResponse;
-                if (shouldTrace)
+                ex.Request = _httpRequest;
+                ex.Response = _httpResponse;
+                if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse<DateTime?>();
-            result.Request = httpRequest;
-            result.Response = httpResponse;
+            var _result = new HttpOperationResponse<DateTime?>();
+            _result.Request = _httpRequest;
+            _result.Response = _httpResponse;
             // Deserialize Response
-            if ((int)statusCode == 200)
+            if ((int)_statusCode == 200)
             {
                 try
                 {
-                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = SafeJsonConvert.DeserializeObject<DateTime?>(responseContent, this.Client.DeserializationSettings);
+                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _result.Body = SafeJsonConvert.DeserializeObject<DateTime?>(_responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
                     throw new RestException("Unable to deserialize the response.", ex);
                 }
             }
-            if (shouldTrace)
+            if (_shouldTrace)
             {
-                ServiceClientTracing.Exit(invocationId, result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
-            return result;
+            return _result;
         }
 
         /// <summary>
@@ -1796,86 +1796,86 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
                 throw new ValidationException(ValidationRules.CannotBeNull, "datetimeBody");
             }
             // Tracing
-            bool shouldTrace = ServiceClientTracing.IsEnabled;
-            string invocationId = null;
-            if (shouldTrace)
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
+            string _invocationId = null;
+            if (_shouldTrace)
             {
-                invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("datetimeBody", datetimeBody);
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(invocationId, this, "PutLocalNegativeOffsetMinDateTime", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "PutLocalNegativeOffsetMinDateTime", tracingParameters);
             }
             // Construct URL
-            var baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "datetime/min/localnegativeoffset").ToString();
+            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "datetime/min/localnegativeoffset").ToString();
             // Create HTTP transport objects
-            HttpRequestMessage httpRequest = new HttpRequestMessage();
-            httpRequest.Method = new HttpMethod("PUT");
-            httpRequest.RequestUri = new Uri(url);
+            HttpRequestMessage _httpRequest = new HttpRequestMessage();
+            _httpRequest.Method = new HttpMethod("PUT");
+            _httpRequest.RequestUri = new Uri(_url);
             // Set Headers
             if (customHeaders != null)
             {
-                foreach(var header in customHeaders)
+                foreach(var _header in customHeaders)
                 {
-                    if (httpRequest.Headers.Contains(header.Key))
+                    if (_httpRequest.Headers.Contains(_header.Key))
                     {
-                        httpRequest.Headers.Remove(header.Key);
+                        _httpRequest.Headers.Remove(_header.Key);
                     }
-                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
+                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
             }
 
             // Serialize Request
-            string requestContent = SafeJsonConvert.SerializeObject(datetimeBody, this.Client.SerializationSettings);
-            httpRequest.Content = new StringContent(requestContent, Encoding.UTF8);
-            httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+            string _requestContent = SafeJsonConvert.SerializeObject(datetimeBody, this.Client.SerializationSettings);
+            _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
+            _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
-            if (shouldTrace)
+            if (_shouldTrace)
             {
-                ServiceClientTracing.SendRequest(invocationId, httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
-            if (shouldTrace)
+            HttpResponseMessage _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            if (_shouldTrace)
             {
-                ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            HttpStatusCode statusCode = httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if ((int)statusCode != 200)
+            if ((int)_statusCode != 200)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
-                    if (errorBody != null)
+                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    if (_errorBody != null)
                     {
-                        ex.Body = errorBody;
+                        ex.Body = _errorBody;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = httpRequest;
-                ex.Response = httpResponse;
-                if (shouldTrace)
+                ex.Request = _httpRequest;
+                ex.Response = _httpResponse;
+                if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse();
-            result.Request = httpRequest;
-            result.Response = httpResponse;
-            if (shouldTrace)
+            var _result = new HttpOperationResponse();
+            _result.Request = _httpRequest;
+            _result.Response = _httpResponse;
+            if (_shouldTrace)
             {
-                ServiceClientTracing.Exit(invocationId, result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
-            return result;
+            return _result;
         }
 
         /// <summary>
@@ -1890,94 +1890,94 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
         public async Task<HttpOperationResponse<DateTime?>> GetLocalNegativeOffsetMinDateTimeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
-            bool shouldTrace = ServiceClientTracing.IsEnabled;
-            string invocationId = null;
-            if (shouldTrace)
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
+            string _invocationId = null;
+            if (_shouldTrace)
             {
-                invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(invocationId, this, "GetLocalNegativeOffsetMinDateTime", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "GetLocalNegativeOffsetMinDateTime", tracingParameters);
             }
             // Construct URL
-            var baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var url = new Uri(new Uri(baseUrl + (baseUrl.EndsWith("/") ? "" : "/")), "datetime/min/localnegativeoffset").ToString();
+            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "datetime/min/localnegativeoffset").ToString();
             // Create HTTP transport objects
-            HttpRequestMessage httpRequest = new HttpRequestMessage();
-            httpRequest.Method = new HttpMethod("GET");
-            httpRequest.RequestUri = new Uri(url);
+            HttpRequestMessage _httpRequest = new HttpRequestMessage();
+            _httpRequest.Method = new HttpMethod("GET");
+            _httpRequest.RequestUri = new Uri(_url);
             // Set Headers
             if (customHeaders != null)
             {
-                foreach(var header in customHeaders)
+                foreach(var _header in customHeaders)
                 {
-                    if (httpRequest.Headers.Contains(header.Key))
+                    if (_httpRequest.Headers.Contains(_header.Key))
                     {
-                        httpRequest.Headers.Remove(header.Key);
+                        _httpRequest.Headers.Remove(_header.Key);
                     }
-                    httpRequest.Headers.TryAddWithoutValidation(header.Key, header.Value);
+                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
             }
 
             // Send Request
-            if (shouldTrace)
+            if (_shouldTrace)
             {
-                ServiceClientTracing.SendRequest(invocationId, httpRequest);
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage httpResponse = await this.Client.HttpClient.SendAsync(httpRequest, cancellationToken).ConfigureAwait(false);
-            if (shouldTrace)
+            HttpResponseMessage _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            if (_shouldTrace)
             {
-                ServiceClientTracing.ReceiveResponse(invocationId, httpResponse);
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
             }
-            HttpStatusCode statusCode = httpResponse.StatusCode;
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
-            if ((int)statusCode != 200)
+            if ((int)_statusCode != 200)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", statusCode));
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error errorBody = SafeJsonConvert.DeserializeObject<Error>(responseContent, this.Client.DeserializationSettings);
-                    if (errorBody != null)
+                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    if (_errorBody != null)
                     {
-                        ex.Body = errorBody;
+                        ex.Body = _errorBody;
                     }
                 }
                 catch (JsonException)
                 {
                     // Ignore the exception
                 }
-                ex.Request = httpRequest;
-                ex.Response = httpResponse;
-                if (shouldTrace)
+                ex.Request = _httpRequest;
+                ex.Response = _httpResponse;
+                if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(invocationId, ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
                 throw ex;
             }
             // Create Result
-            var result = new HttpOperationResponse<DateTime?>();
-            result.Request = httpRequest;
-            result.Response = httpResponse;
+            var _result = new HttpOperationResponse<DateTime?>();
+            _result.Request = _httpRequest;
+            _result.Response = _httpResponse;
             // Deserialize Response
-            if ((int)statusCode == 200)
+            if ((int)_statusCode == 200)
             {
                 try
                 {
-                    string responseContent = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    result.Body = SafeJsonConvert.DeserializeObject<DateTime?>(responseContent, this.Client.DeserializationSettings);
+                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _result.Body = SafeJsonConvert.DeserializeObject<DateTime?>(_responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
                 {
                     throw new RestException("Unable to deserialize the response.", ex);
                 }
             }
-            if (shouldTrace)
+            if (_shouldTrace)
             {
-                ServiceClientTracing.Exit(invocationId, result);
+                ServiceClientTracing.Exit(_invocationId, _result);
             }
-            return result;
+            return _result;
         }
 
     }

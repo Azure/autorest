@@ -40,8 +40,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, int?>> GetNullAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -66,8 +66,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, int?>> GetEmptyAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -121,8 +121,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, string>> GetNullValueAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetNullValueWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetNullValueWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -147,8 +147,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, string>> GetNullKeyAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetNullKeyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetNullKeyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -173,8 +173,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, string>> GetEmptyStringKeyAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetEmptyStringKeyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetEmptyStringKeyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -199,8 +199,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, string>> GetInvalidAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -227,8 +227,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, bool?>> GetBooleanTfftAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetBooleanTfftWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetBooleanTfftWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -282,8 +282,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, bool?>> GetBooleanInvalidNullAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetBooleanInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetBooleanInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -308,8 +308,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, bool?>> GetBooleanInvalidStringAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetBooleanInvalidStringWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetBooleanInvalidStringWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -334,8 +334,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, int?>> GetIntegerValidAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetIntegerValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetIntegerValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -389,8 +389,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, int?>> GetIntInvalidNullAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetIntInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetIntInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -415,8 +415,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, int?>> GetIntInvalidStringAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetIntInvalidStringWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetIntInvalidStringWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -441,8 +441,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, long?>> GetLongValidAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetLongValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetLongValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -496,8 +496,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, long?>> GetLongInvalidNullAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetLongInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetLongInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -522,8 +522,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, long?>> GetLongInvalidStringAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetLongInvalidStringWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetLongInvalidStringWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -548,8 +548,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, double?>> GetFloatValidAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetFloatValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetFloatValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -603,8 +603,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, double?>> GetFloatInvalidNullAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetFloatInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetFloatInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -629,8 +629,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, double?>> GetFloatInvalidStringAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetFloatInvalidStringWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetFloatInvalidStringWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -655,8 +655,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, double?>> GetDoubleValidAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetDoubleValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetDoubleValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -710,8 +710,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, double?>> GetDoubleInvalidNullAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetDoubleInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetDoubleInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -736,8 +736,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, double?>> GetDoubleInvalidStringAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetDoubleInvalidStringWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetDoubleInvalidStringWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -762,8 +762,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, string>> GetStringValidAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetStringValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetStringValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -817,8 +817,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, string>> GetStringWithNullAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetStringWithNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetStringWithNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -843,8 +843,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, string>> GetStringWithInvalidAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetStringWithInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetStringWithInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -871,8 +871,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, DateTime?>> GetDateValidAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetDateValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetDateValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -928,8 +928,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, DateTime?>> GetDateInvalidNullAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetDateInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetDateInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -954,8 +954,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, DateTime?>> GetDateInvalidCharsAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetDateInvalidCharsWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetDateInvalidCharsWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -982,8 +982,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, DateTime?>> GetDateTimeValidAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetDateTimeValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetDateTimeValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1039,8 +1039,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, DateTime?>> GetDateTimeInvalidNullAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetDateTimeInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetDateTimeInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1065,8 +1065,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, DateTime?>> GetDateTimeInvalidCharsAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetDateTimeInvalidCharsWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetDateTimeInvalidCharsWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1095,8 +1095,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, DateTime?>> GetDateTimeRfc1123ValidAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetDateTimeRfc1123ValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetDateTimeRfc1123ValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1154,8 +1154,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, TimeSpan?>> GetDurationValidAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetDurationValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetDurationValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1211,8 +1211,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, byte[]>> GetByteValidAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetByteValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetByteValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1270,8 +1270,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, byte[]>> GetByteInvalidNullAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetByteInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetByteInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1296,8 +1296,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, Widget>> GetComplexNullAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetComplexNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetComplexNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1322,8 +1322,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, Widget>> GetComplexEmptyAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetComplexEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetComplexEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1350,8 +1350,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, Widget>> GetComplexItemNullAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetComplexItemNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetComplexItemNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1378,8 +1378,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, Widget>> GetComplexItemEmptyAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetComplexItemEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetComplexItemEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1406,8 +1406,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, Widget>> GetComplexValidAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetComplexValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetComplexValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1465,8 +1465,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, IList<string>>> GetArrayNullAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetArrayNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetArrayNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1491,8 +1491,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, IList<string>>> GetArrayEmptyAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetArrayEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetArrayEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1519,8 +1519,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, IList<string>>> GetArrayItemNullAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetArrayItemNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetArrayItemNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1547,8 +1547,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, IList<string>>> GetArrayItemEmptyAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetArrayItemEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetArrayItemEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1575,8 +1575,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, IList<string>>> GetArrayValidAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetArrayValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetArrayValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1632,8 +1632,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, IDictionary<string, string>>> GetDictionaryNullAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetDictionaryNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetDictionaryNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1660,8 +1660,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, IDictionary<string, string>>> GetDictionaryEmptyAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetDictionaryEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetDictionaryEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1690,8 +1690,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, IDictionary<string, string>>> GetDictionaryItemNullAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetDictionaryItemNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetDictionaryItemNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1720,8 +1720,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, IDictionary<string, string>>> GetDictionaryItemEmptyAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetDictionaryItemEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetDictionaryItemEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1750,8 +1750,8 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
             /// </param>
             public static async Task<IDictionary<string, IDictionary<string, string>>> GetDictionaryValidAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetDictionaryValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetDictionaryValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
