@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsBodyFile
     /// <summary>
     /// Test Infrastructure for AutoRest Swagger BAT
     /// </summary>
-    public partial interface IAutoRestSwaggerBATFileService
+    public partial interface IAutoRestSwaggerBATFileService : IDisposable
     {
         /// <summary>
         /// The base URI of the service.

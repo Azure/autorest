@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsBodyDuration
     /// <summary>
     /// Test Infrastructure for AutoRest
     /// </summary>
-    public partial interface IAutoRestDurationTestService
+    public partial interface IAutoRestDurationTestService : IDisposable
     {
         /// <summary>
         /// The base URI of the service.

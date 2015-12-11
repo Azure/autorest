@@ -21,7 +21,7 @@ namespace Fixtures.AcceptanceTestsValidation
     /// Test Infrastructure for AutoRest. No server backend exists for these
     /// tests.
     /// </summary>
-    public partial interface IAutoRestValidationTest
+    public partial interface IAutoRestValidationTest : IDisposable
     {
         /// <summary>
         /// The base URI of the service.

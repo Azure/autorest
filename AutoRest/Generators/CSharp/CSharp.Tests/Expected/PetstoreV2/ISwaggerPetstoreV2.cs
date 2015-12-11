@@ -24,7 +24,7 @@ namespace Fixtures.PetstoreV2
     /// irc.freenode.net, #swagger.  For this sample, you can use the api key
     /// "special-key" to test the authorization filters
     /// </summary>
-    public partial interface ISwaggerPetstoreV2
+    public partial interface ISwaggerPetstoreV2 : IDisposable
     {
         /// <summary>
         /// The base URI of the service.
