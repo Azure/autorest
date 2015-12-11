@@ -312,6 +312,24 @@ namespace Microsoft.Rest.Generator.CSharp
         }
 
         /// <summary>
+        /// Get the method's form data (or null if there is no form data)
+        /// </summary>
+        public ParameterTemplateModel FormData
+        {
+            get { return ParameterTemplateModels.FirstOrDefault(p => p.Location == ParameterLocation.FormData); }
+        }
+
+        /// <summary>
+        /// Get the method's file name parameter for form data (or null if there is no file parameter)
+        /// </summary>
+        public ParameterTemplateModel FormDataFileName
+        {
+            get { return ParameterTemplateModels
+                    .FirstOrDefault(p => p.Location == ParameterLocation.FormData && 
+                    p.Extensions.ContainsKey(Generator.Extensions.FileName)); }
+        }
+
+        /// <summary>
         /// Generate a reference to the ServiceClient
         /// </summary>
         public string ClientReference

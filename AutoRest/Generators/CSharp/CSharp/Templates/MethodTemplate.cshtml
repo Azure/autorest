@@ -1,4 +1,4 @@
-@using System.Globalization
+﻿@using System.Globalization
 @using System.Linq;
 @using System
 @using Microsoft.Rest.Generator.ClientModel
@@ -110,6 +110,22 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     string _requestContent = SafeJsonConvert.SerializeObject(@(Model.RequestBody.Name), @(Model.GetSerializationSettingsReference(Model.RequestBody.Type)));
     _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
     _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("@(Model.ContentType)");
+        </text>
+    }
+    else if (Model.FormData != null)
+    {
+        <text>
+    // Serialize Request    
+    StreamContent _fileStreamContent = new StreamContent(@(Model.FormData.Name));
+    _fileStreamContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
+	    {
+	        Name = "\"fileUpload\"",
+	        FileName = "\"" + @(Model.FormDataFileName == null ? "\"" + Model.FormData.Name + "\"" : Model.FormDataFileName.Name) + "\""
+	    };
+    _fileStreamContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream"); 
+    var _multiPartContent = new MultipartFormDataContent(); 
+    _multiPartContent.Add(_fileStreamContent);
+    _httpRequest.Content = _multiPartContent; 
         </text>
     }
 

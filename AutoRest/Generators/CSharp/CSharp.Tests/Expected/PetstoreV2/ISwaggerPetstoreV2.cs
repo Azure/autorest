@@ -122,7 +122,10 @@ namespace Fixtures.PetstoreV2
         /// <param name='petId'>
         /// Id of pet that needs to be updated
         /// </param>
-        /// <param name='name'>
+        /// <param name='fileContent'>
+        /// File to upload.
+        /// </param>
+        /// <param name='fileName'>
         /// Updated name of the pet
         /// </param>
         /// <param name='status'>
@@ -134,7 +137,7 @@ namespace Fixtures.PetstoreV2
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse> UpdatePetWithFormWithHttpMessagesAsync(long? petId, string name = default(string), string status = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> UpdatePetWithFormWithHttpMessagesAsync(long? petId, System.IO.Stream fileContent, string fileName = default(string), string status = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Deletes a pet

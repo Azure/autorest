@@ -19,6 +19,7 @@ namespace Microsoft.Rest.Generator
         public const string SkipUrlEncodingExtension = "x-ms-skip-url-encoding";
         public const string NameOverrideExtension = "x-ms-client-name";
         public const string ParameterGroupExtension = "x-ms-parameter-grouping";
+        public const string FileName = "x-ms-file-name";
         
         /// <summary>
         /// Normalizes client model using generic extensions.
