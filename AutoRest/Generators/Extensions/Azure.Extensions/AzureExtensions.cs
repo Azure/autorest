@@ -500,19 +500,17 @@ namespace Microsoft.Rest.Generator.Azure
             return requestIdName;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
         private static void CheckAzureResourceProperties(CompositeType compositeType)
         {
             // If derived from resource with x-ms-azure-resource then resource should have resource specific properties
-            var extraResourceProperties = compositeType.ComposedProperties
-                                                       .Select(p => p.Name.ToUpperInvariant())
-                                                       .OrderBy(n => n)
-                                                       .Except(ResourcePropertyNames.Select(n => n.ToUpperInvariant()));
+            var missingResourceProperties = ResourcePropertyNames.Select(p => p.ToLowerInvariant())
+                                               .Except(compositeType.ComposedProperties.Select(n => n.Name.ToLowerInvariant()));
 
-            if (compositeType.Properties.Count() != ResourcePropertyNames.Count() ||
-               extraResourceProperties.Count() != 0)
+            if (missingResourceProperties.Count() != 0)
             {
                 Logger.LogWarning(Resources.ResourcePropertyMismatch,
-                    string.Join(", ", ResourcePropertyNames));
+                    string.Join(", ", missingResourceProperties));
             }
         }
     }
