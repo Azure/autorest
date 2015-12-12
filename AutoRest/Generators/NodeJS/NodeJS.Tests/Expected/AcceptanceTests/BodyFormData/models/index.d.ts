@@ -11,50 +11,6 @@
 
 /**
  * @class
- * Initializes a new instance of the UploadFile class.
- * @constructor
- * @member {string} [fieldName]
- * 
- * @member {string} [originalName]
- * 
- * @member {string} [encoding]
- * 
- * @member {string} [mimetype]
- * 
- * @member {object} [buffer]
- * 
- * @member {string} [buffer.type]
- * 
- * @member {array} [buffer.data]
- * 
- * @member {number} [size]
- * 
- */
-export interface UploadFile {
-    fieldName?: string;
-    originalName?: string;
-    encoding?: string;
-    mimetype?: string;
-    buffer?: BufferModel;
-    size?: number;
-}
-
-/**
- * @class
- * Initializes a new instance of the BufferModel class.
- * @constructor
- * @member {string} [type]
- * 
- * @member {array} [data]
- * 
- */
-export interface BufferModel {
-    type?: string;
-    data?: number[];
-}
-
-/**
- * @class
  * Initializes a new instance of the ErrorModel class.
  * @constructor
  * @member {number} [status]

@@ -276,16 +276,9 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                     memStream.Write(testBytes, 0, testBytes.Length);
                     memStream.Seek(0, SeekOrigin.Begin);
                     var response = client.Formdata.UploadFile(memStream, "UploadFile.txt");
-                    StringBuilder sb = new StringBuilder();
-                    foreach(int hexChar in response.Buffer.Data)
-                    {
-                        if(hexChar == 0)
-                        {
-                            continue;
-                        }
-                        sb.Append(Convert.ToChar(hexChar));
-                    }
-                    string desearializedJson = sb.ToString();
+                    byte[] buff = new byte[response.Length];
+                    response.Read(buff, 0, (int)response.Length);
+                    string desearializedJson = Encoding.Unicode.GetString(buff);
                     Assert.Equal(desearializedJson, testString);
                 }
             }

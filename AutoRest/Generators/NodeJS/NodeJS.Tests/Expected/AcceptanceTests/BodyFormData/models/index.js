@@ -14,6 +14,4 @@
 
 'use strict';
 
-exports.UploadFile = require('./uploadFile');
-exports.BufferModel = require('./bufferModel');
 exports.ErrorModel = require('./errorModel');

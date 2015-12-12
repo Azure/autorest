@@ -37,6 +37,25 @@ export interface Formdata {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    uploadFile(fileContent: stream.Readable, fileName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.UploadFile>): void;
-    uploadFile(fileContent: stream.Readable, fileName: string, callback: ServiceCallback<models.UploadFile>): void;
+    uploadFile(fileContent: stream.Readable, fileName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<stream.Readable>): void;
+    uploadFile(fileContent: stream.Readable, fileName: string, callback: ServiceCallback<stream.Readable>): void;
+
+    /**
+     * Upload file
+     *
+     * @param {object} fileContent File to upload.
+     * 
+     * @param {string} fileName File name to upload. Name has to be spelled
+     * exactly as written here.
+     * 
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    uploadFileViaBody(fileContent: any, fileName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<stream.Readable>): void;
+    uploadFileViaBody(fileContent: any, fileName: string, callback: ServiceCallback<stream.Readable>): void;
 }

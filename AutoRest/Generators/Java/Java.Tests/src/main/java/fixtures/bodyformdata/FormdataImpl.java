@@ -17,8 +17,6 @@ import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
-import fixtures.bodyformdata.models.Error;
-import fixtures.bodyformdata.models.UploadFile;
 import java.io.InputStream;
 import java.io.IOException;
 import retrofit.Call;
@@ -54,9 +52,9 @@ public class FormdataImpl implements Formdata {
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the UploadFile object wrapped in {@link ServiceResponse} if successful.
+     * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<UploadFile> uploadFile(InputStream fileContent, String fileName) throws ServiceException, IOException, IllegalArgumentException {
+    public ServiceResponse<InputStream> uploadFile(InputStream fileContent, String fileName) throws ServiceException, IOException, IllegalArgumentException {
         if (fileContent == null) {
             throw new IllegalArgumentException("Parameter fileContent is required and cannot be null.");
         }
@@ -75,7 +73,7 @@ public class FormdataImpl implements Formdata {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> uploadFileAsync(InputStream fileContent, String fileName, final ServiceCallback<UploadFile> serviceCallback) {
+    public Call<ResponseBody> uploadFileAsync(InputStream fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) {
         if (fileContent == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter fileContent is required and cannot be null."));
             return null;
@@ -85,7 +83,7 @@ public class FormdataImpl implements Formdata {
             return null;
         }
         Call<ResponseBody> call = service.uploadFile(fileContent, fileName);
-        call.enqueue(new ServiceResponseCallback<UploadFile>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<InputStream>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
@@ -98,10 +96,67 @@ public class FormdataImpl implements Formdata {
         return call;
     }
 
-    private ServiceResponse<UploadFile> uploadFileDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<UploadFile>()
-                .register(200, new TypeToken<UploadFile>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+    private ServiceResponse<InputStream> uploadFileDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+        return new ServiceResponseBuilder<InputStream>()
+                .register(200, new TypeToken<InputStream>() { }.getType())
+                .build(response, retrofit);
+    }
+
+    /**
+     * Upload file.
+     *
+     * @param fileContent File to upload.
+     * @param fileName File name to upload. Name has to be spelled exactly as written here.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<InputStream> uploadFileViaBody(Object fileContent, String fileName) throws ServiceException, IOException, IllegalArgumentException {
+        if (fileContent == null) {
+            throw new IllegalArgumentException("Parameter fileContent is required and cannot be null.");
+        }
+        if (fileName == null) {
+            throw new IllegalArgumentException("Parameter fileName is required and cannot be null.");
+        }
+        Call<ResponseBody> call = service.uploadFileViaBody(fileContent, fileName);
+        return uploadFileViaBodyDelegate(call.execute(), null);
+    }
+
+    /**
+     * Upload file.
+     *
+     * @param fileContent File to upload.
+     * @param fileName File name to upload. Name has to be spelled exactly as written here.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
+     */
+    public Call<ResponseBody> uploadFileViaBodyAsync(Object fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) {
+        if (fileContent == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter fileContent is required and cannot be null."));
+            return null;
+        }
+        if (fileName == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter fileName is required and cannot be null."));
+            return null;
+        }
+        Call<ResponseBody> call = service.uploadFileViaBody(fileContent, fileName);
+        call.enqueue(new ServiceResponseCallback<InputStream>(serviceCallback) {
+            @Override
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+                try {
+                    serviceCallback.success(uploadFileViaBodyDelegate(response, retrofit));
+                } catch (ServiceException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return call;
+    }
+
+    private ServiceResponse<InputStream> uploadFileViaBodyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+        return new ServiceResponseBuilder<InputStream>()
+                .register(200, new TypeToken<InputStream>() { }.getType())
                 .build(response, retrofit);
     }
 

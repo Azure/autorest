@@ -14,11 +14,12 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
-import fixtures.bodyformdata.models.UploadFile;
 import java.io.InputStream;
 import java.io.IOException;
 import retrofit.Call;
+import retrofit.http.Body;
 import retrofit.http.POST;
+import retrofit.http.PUT;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -33,6 +34,9 @@ public interface Formdata {
         @POST("/formdata/stream/uploadfile")
         Call<ResponseBody> uploadFile(InputStream fileContent, String fileName);
 
+        @PUT("/formdata/stream/uploadfile")
+        Call<ResponseBody> uploadFileViaBody(@Body Object fileContent, String fileName);
+
     }
     /**
      * Upload file.
@@ -42,9 +46,9 @@ public interface Formdata {
      * @throws ServiceException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the UploadFile object wrapped in {@link ServiceResponse} if successful.
+     * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<UploadFile> uploadFile(InputStream fileContent, String fileName) throws ServiceException, IOException, IllegalArgumentException;
+    ServiceResponse<InputStream> uploadFile(InputStream fileContent, String fileName) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Upload file.
@@ -54,6 +58,28 @@ public interface Formdata {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    Call<ResponseBody> uploadFileAsync(InputStream fileContent, String fileName, final ServiceCallback<UploadFile> serviceCallback);
+    Call<ResponseBody> uploadFileAsync(InputStream fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback);
+
+    /**
+     * Upload file.
+     *
+     * @param fileContent File to upload.
+     * @param fileName File name to upload. Name has to be spelled exactly as written here.
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
+     */
+    ServiceResponse<InputStream> uploadFileViaBody(Object fileContent, String fileName) throws ServiceException, IOException, IllegalArgumentException;
+
+    /**
+     * Upload file.
+     *
+     * @param fileContent File to upload.
+     * @param fileName File name to upload. Name has to be spelled exactly as written here.
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
+     */
+    Call<ResponseBody> uploadFileViaBodyAsync(Object fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback);
 
 }

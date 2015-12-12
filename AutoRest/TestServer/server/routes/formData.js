@@ -11,14 +11,14 @@ var formData = function (coverage) {
   coverage['FormdataStreamUploadFile'] = 0;
   router.post('/stream/uploadfile', function (req, res, next) {
     upload(req, res, function(err) {
-	if(err) {
-	    console.log(req.file);
-	    console.log(err);
-	    return;
-	}
-	console.log(req.file);
-	coverage['FormdataStreamUploadFile']++;
-	res.send(req.file);        
+        if(err) {
+            console.log(req.file);
+            console.log(err);
+            return;
+        }
+        console.log(req.file);
+        coverage['FormdataStreamUploadFile']++;
+        res.send(req.file);        
     });
   });
 }

@@ -20,7 +20,7 @@
           "application/octet-stream"
         ],
         "produces": [
-          "application/json"
+          "application/octet-stream"
         ],
         "description": "Upload file",
         "tags": [
@@ -47,7 +47,54 @@
           "200": {
             "description": "Serialized file stream",
             "schema": {
-              "$ref": "#/definitions/UploadFile"
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "formdata_UploadFileViaBody",
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "produces": [
+          "application/octet-stream"
+        ],
+        "description": "Upload file",
+        "tags": [
+          "Formdata"
+        ],
+        "parameters": [
+          {
+            "name": "fileContent",
+            "description": "File to upload.",
+            "required": true,
+            "in": "body",
+            "schema": {
+                "type": "object",
+                "format": "file"
+            }
+          },
+          {
+            "name": "fileName",
+            "description": "File name to upload. Name has to be spelled exactly as written here.",
+            "required": true,
+            "in": "formData",
+            "type": "string",
+            "x-ms-file-name": "true"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Serialized file stream",
+            "schema": {
+              "type": "file"
             }
           },
           "default": {
@@ -61,43 +108,6 @@
     }
   },
   "definitions": {
-    "UploadFile": {
-      "properties": {
-        "fieldName": {
-          "type": "string"
-        },
-        "originalName": {
-          "type": "string"
-        },
-        "encoding": {
-          "type": "string"
-        },
-        "mimetype": {
-          "type": "string"
-        },
-        "buffer": {
-          "$ref": "#/definitions/Buffer"
-        },
-        "size": {
-          "type": "integer",
-          "format": "int64"
-        }
-      }
-    },
-    "Buffer": {
-      "properties": {
-        "type": {
-          "type": "string"
-        },
-        "data": {
-          "type": "array",
-          "items": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      }
-    },
     "Error": {
       "properties": {
         "status": {

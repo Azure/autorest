@@ -63,7 +63,7 @@ namespace Fixtures.AcceptanceTestsBodyFormData
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<UploadFile>> UploadFileWithHttpMessagesAsync(System.IO.Stream fileContent, string fileName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<System.IO.Stream>> UploadFileWithHttpMessagesAsync(System.IO.Stream fileContent, string fileName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (fileContent == null)
             {
@@ -129,20 +129,7 @@ namespace Fixtures.AcceptanceTestsBodyFormData
             cancellationToken.ThrowIfCancellationRequested();
             if ((int)_statusCode != 200)
             {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 ex.Request = _httpRequest;
                 ex.Response = _httpResponse;
                 if (_shouldTrace)
@@ -152,21 +139,114 @@ namespace Fixtures.AcceptanceTestsBodyFormData
                 throw ex;
             }
             // Create Result
-            var _result = new HttpOperationResponse<UploadFile>();
+            var _result = new HttpOperationResponse<System.IO.Stream>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
-                try
+                _result.Body = await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            }
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.Exit(_invocationId, _result);
+            }
+            return _result;
+        }
+
+        /// <summary>
+        /// Upload file
+        /// </summary>
+        /// <param name='fileContent'>
+        /// File to upload.
+        /// </param>
+        /// <param name='fileName'>
+        /// File name to upload. Name has to be spelled exactly as written here.
+        /// </param>
+        /// <param name='customHeaders'>
+        /// Headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public async Task<HttpOperationResponse<System.IO.Stream>> UploadFileViaBodyWithHttpMessagesAsync(object fileContent, string fileName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (fileContent == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "fileContent");
+            }
+            if (fileName == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "fileName");
+            }
+            // Tracing
+            bool _shouldTrace = ServiceClientTracing.IsEnabled;
+            string _invocationId = null;
+            if (_shouldTrace)
+            {
+                _invocationId = ServiceClientTracing.NextInvocationId.ToString();
+                Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("fileContent", fileContent);
+                tracingParameters.Add("fileName", fileName);
+                tracingParameters.Add("cancellationToken", cancellationToken);
+                ServiceClientTracing.Enter(_invocationId, this, "UploadFileViaBody", tracingParameters);
+            }
+            // Construct URL
+            var _baseUrl = this.Client.BaseUri.AbsoluteUri;
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "formdata/stream/uploadfile").ToString();
+            // Create HTTP transport objects
+            HttpRequestMessage _httpRequest = new HttpRequestMessage();
+            _httpRequest.Method = new HttpMethod("PUT");
+            _httpRequest.RequestUri = new Uri(_url);
+            // Set Headers
+            if (customHeaders != null)
+            {
+                foreach(var _header in customHeaders)
                 {
-                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    _result.Body = SafeJsonConvert.DeserializeObject<UploadFile>(_responseContent, this.Client.DeserializationSettings);
+                    if (_httpRequest.Headers.Contains(_header.Key))
+                    {
+                        _httpRequest.Headers.Remove(_header.Key);
+                    }
+                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
-                catch (JsonException ex)
+            }
+
+            // Serialize Request
+            string _requestContent = SafeJsonConvert.SerializeObject(fileContent, this.Client.SerializationSettings);
+            _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
+            _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+            // Send Request
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+            }
+            cancellationToken.ThrowIfCancellationRequested();
+            HttpResponseMessage _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+            }
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            cancellationToken.ThrowIfCancellationRequested();
+            if ((int)_statusCode != 200)
+            {
+                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                ex.Request = _httpRequest;
+                ex.Response = _httpResponse;
+                if (_shouldTrace)
                 {
-                    throw new RestException("Unable to deserialize the response.", ex);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
+                throw ex;
+            }
+            // Create Result
+            var _result = new HttpOperationResponse<System.IO.Stream>();
+            _result.Request = _httpRequest;
+            _result.Response = _httpResponse;
+            // Deserialize Response
+            if ((int)_statusCode == 200)
+            {
+                _result.Body = await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
             }
             if (_shouldTrace)
             {
