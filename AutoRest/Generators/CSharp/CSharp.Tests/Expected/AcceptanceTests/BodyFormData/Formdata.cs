@@ -107,11 +107,9 @@ namespace Fixtures.AcceptanceTestsBodyFormData
 
             // Serialize Request    
             StreamContent _fileStreamContent = new StreamContent(fileContent);
-            _fileStreamContent.Headers.ContentDisposition = new ContentDispositionHeaderValue("form-data")
-        	    {
-        	        Name = "\"fileUpload\"",
-        	        FileName = "\"" + fileName + "\""
-        	    };
+            ContentDispositionHeaderValue _contentDispositionHeaderValue = new ContentDispositionHeaderValue("form-data");
+            _contentDispositionHeaderValue.Name = "\"fileUpload\"";
+            _contentDispositionHeaderValue.FileName = "\"" + fileName + "\"";
             _fileStreamContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream"); 
             var _multiPartContent = new MultipartFormDataContent(); 
             _multiPartContent.Add(_fileStreamContent);

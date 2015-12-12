@@ -314,19 +314,36 @@ namespace Microsoft.Rest.Generator.CSharp
         /// <summary>
         /// Get the method's form data (or null if there is no form data)
         /// </summary>
-        public ParameterTemplateModel FormData
+        public ParameterTemplateModel RequestFile
         {
-            get { return ParameterTemplateModels.FirstOrDefault(p => p.Location == ParameterLocation.FormData); }
+            get
+            {
+                if (this.Body != null && this.Body.Type == PrimaryType.Stream)
+                {
+                    return RequestBody;
+                }
+                return ParameterTemplateModels.FirstOrDefault(p => p.Location == ParameterLocation.FormData 
+                    && p.Type == PrimaryType.Stream);
+            }
         }
 
         /// <summary>
         /// Get the method's file name parameter for form data (or null if there is no file parameter)
         /// </summary>
-        public ParameterTemplateModel FormDataFileName
+        public string RequestFileName
         {
-            get { return ParameterTemplateModels
-                    .FirstOrDefault(p => p.Location == ParameterLocation.FormData && 
-                    p.Extensions.ContainsKey(Generator.Extensions.FileName)); }
+            get
+            {
+                var fileNameParameter = ParameterTemplateModels.FirstOrDefault(p => p.Extensions.ContainsKey(Generator.Extensions.FileName));
+                if (fileNameParameter != null)
+                {
+                    return fileNameParameter.Name;
+                }
+                else
+                {
+                    return "\"file\"";
+                }
+            }
         }
 
         /// <summary>
