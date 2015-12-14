@@ -110,6 +110,7 @@ namespace Fixtures.AcceptanceTestsBodyFormData
             ContentDispositionHeaderValue _contentDispositionHeaderValue = new ContentDispositionHeaderValue("form-data");
             _contentDispositionHeaderValue.Name = "\"fileUpload\"";
             _contentDispositionHeaderValue.FileName = "\"" + fileName + "\"";
+            _fileStreamContent.Headers.ContentDisposition = _contentDispositionHeaderValue;
             _fileStreamContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream"); 
             var _multiPartContent = new MultipartFormDataContent(); 
             _multiPartContent.Add(_fileStreamContent);
@@ -169,7 +170,7 @@ namespace Fixtures.AcceptanceTestsBodyFormData
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse<System.IO.Stream>> UploadFileViaBodyWithHttpMessagesAsync(object fileContent, string fileName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<System.IO.Stream>> UploadFileViaBodyWithHttpMessagesAsync(System.IO.Stream fileContent, string fileName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (fileContent == null)
             {
@@ -211,10 +212,13 @@ namespace Fixtures.AcceptanceTestsBodyFormData
                 }
             }
 
-            // Serialize Request
-            string _requestContent = SafeJsonConvert.SerializeObject(fileContent, this.Client.SerializationSettings);
-            _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
-            _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+            // Serialize Request    
+            StreamContent _fileStreamContent = new StreamContent(fileContent);
+            ContentDispositionHeaderValue _contentDispositionHeaderValue = new ContentDispositionHeaderValue("attachment");
+            _contentDispositionHeaderValue.FileName = "\"" + fileName + "\"";
+            _fileStreamContent.Headers.ContentDisposition = _contentDispositionHeaderValue;
+            _fileStreamContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream"); 
+            _httpRequest.Content = _fileStreamContent;
             // Send Request
             if (_shouldTrace)
             {

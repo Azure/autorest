@@ -112,7 +112,7 @@ public class FormdataImpl implements Formdata {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<InputStream> uploadFileViaBody(Object fileContent, String fileName) throws ServiceException, IOException, IllegalArgumentException {
+    public ServiceResponse<InputStream> uploadFileViaBody(InputStream fileContent, String fileName) throws ServiceException, IOException, IllegalArgumentException {
         if (fileContent == null) {
             throw new IllegalArgumentException("Parameter fileContent is required and cannot be null.");
         }
@@ -131,7 +131,7 @@ public class FormdataImpl implements Formdata {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> uploadFileViaBodyAsync(Object fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) {
+    public Call<ResponseBody> uploadFileViaBodyAsync(InputStream fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) {
         if (fileContent == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter fileContent is required and cannot be null."));
             return null;

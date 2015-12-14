@@ -155,7 +155,7 @@ Formdata.prototype.uploadFileViaBody = function (fileContent, fileName, options,
   }
   // Validate
   try {
-    if (fileContent === null || fileContent === undefined || typeof fileContent !== 'object') {
+    if (fileContent === null || fileContent === undefined) {
       throw new Error('fileContent cannot be null or undefined and it must be of type object.');
     }
     if (fileName === null || fileName === undefined || typeof fileName.valueOf() !== 'string') {
@@ -190,10 +190,9 @@ Formdata.prototype.uploadFileViaBody = function (fileContent, fileName, options,
   var requestContent = null;
   var requestModel = null;
   try {
-    if (fileContent === null || fileContent === undefined || typeof fileContent !== 'object') {
-      throw new Error('fileContent cannot be null or undefined and it must be of type object.');
+    if (requestModel === null || requestModel === undefined) {
+      throw new Error('requestModel cannot be null or undefined and it must be of type object.');
     }
-    requestModel = fileContent;
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));

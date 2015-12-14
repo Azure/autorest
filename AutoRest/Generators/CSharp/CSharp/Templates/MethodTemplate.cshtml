@@ -103,7 +103,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     }
     @EmptyLine
 
-    @if (Model.RequestBody != null)
+    @if (Model.RequestBody != null && Model.RequestBody.Type != PrimaryType.Stream)
     {
         <text>
     // Serialize Request
@@ -117,27 +117,28 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
         <text>
     // Serialize Request    
     StreamContent _fileStreamContent = new StreamContent(@(Model.RequestFile.Name));
-    @if (Model.RequestFile.Location == ParameterLocation.FormData)
-    {
+        @if (Model.RequestFile.Location == ParameterLocation.FormData)
+        {
     @:ContentDispositionHeaderValue _contentDispositionHeaderValue = new ContentDispositionHeaderValue("form-data");
     @:_contentDispositionHeaderValue.Name = "\"fileUpload\"";
-    }
-    else
-    {
-    @:ContentDispositionHeaderValue _contentDispositionHeaderValue = new ContentDispositionHeaderValue("attachment")
-    }
+        }
+        else
+        {
+    @:ContentDispositionHeaderValue _contentDispositionHeaderValue = new ContentDispositionHeaderValue("attachment");
+        }
     _contentDispositionHeaderValue.FileName = "\"" + @(Model.RequestFileName) + "\"";
+    _fileStreamContent.Headers.ContentDisposition = _contentDispositionHeaderValue;
     _fileStreamContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream"); 
-    @if (Model.RequestFile.Location == ParameterLocation.FormData)
-    {
+        @if (Model.RequestFile.Location == ParameterLocation.FormData)
+        {
     @:var _multiPartContent = new MultipartFormDataContent(); 
     @:_multiPartContent.Add(_fileStreamContent);
     @:_httpRequest.Content = _multiPartContent; 
-    }
-    else
-    {
+        }
+        else
+        {
     @:_httpRequest.Content = _fileStreamContent;
-    }
+        }
         </text>
     }
 

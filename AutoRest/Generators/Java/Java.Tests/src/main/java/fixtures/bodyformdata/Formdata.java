@@ -35,7 +35,7 @@ public interface Formdata {
         Call<ResponseBody> uploadFile(InputStream fileContent, String fileName);
 
         @PUT("/formdata/stream/uploadfile")
-        Call<ResponseBody> uploadFileViaBody(@Body Object fileContent, String fileName);
+        Call<ResponseBody> uploadFileViaBody(@Body InputStream fileContent, String fileName);
 
     }
     /**
@@ -70,7 +70,7 @@ public interface Formdata {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<InputStream> uploadFileViaBody(Object fileContent, String fileName) throws ServiceException, IOException, IllegalArgumentException;
+    ServiceResponse<InputStream> uploadFileViaBody(InputStream fileContent, String fileName) throws ServiceException, IOException, IllegalArgumentException;
 
     /**
      * Upload file.
@@ -80,6 +80,6 @@ public interface Formdata {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    Call<ResponseBody> uploadFileViaBodyAsync(Object fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback);
+    Call<ResponseBody> uploadFileViaBodyAsync(InputStream fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback);
 
 }

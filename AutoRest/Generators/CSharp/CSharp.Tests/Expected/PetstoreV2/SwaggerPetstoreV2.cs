@@ -726,6 +726,7 @@ namespace Fixtures.PetstoreV2
             ContentDispositionHeaderValue _contentDispositionHeaderValue = new ContentDispositionHeaderValue("form-data");
             _contentDispositionHeaderValue.Name = "\"fileUpload\"";
             _contentDispositionHeaderValue.FileName = "\"" + "file" + "\"";
+            _fileStreamContent.Headers.ContentDisposition = _contentDispositionHeaderValue;
             _fileStreamContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream"); 
             var _multiPartContent = new MultipartFormDataContent(); 
             _multiPartContent.Add(_fileStreamContent);

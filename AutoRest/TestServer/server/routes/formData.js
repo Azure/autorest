@@ -18,13 +18,14 @@ var formData = function (coverage) {
         }
         console.log(req.file);
         coverage['FormdataStreamUploadFile']++;
-        res.send(req.file);        
+        res.send(req.file.buffer);        
     });
   });
   
   coverage['StreamUploadFile'] = 0;
   router.put('/stream/uploadfile', function (req, res, next) {
     coverage['StreamUploadFile']++;
+    console.log(req.files);
     res.send(req.body);    
   });
 }

@@ -275,11 +275,11 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 {
                     memStream.Write(testBytes, 0, testBytes.Length);
                     memStream.Seek(0, SeekOrigin.Begin);
-                    var response = client.Formdata.UploadFile(memStream, "UploadFile.txt");
-                    byte[] buff = new byte[response.Length];
-                    response.Read(buff, 0, (int)response.Length);
-                    string desearializedJson = Encoding.Unicode.GetString(buff);
-                    Assert.Equal(desearializedJson, testString);
+                    using (StreamReader reader = new StreamReader(client.Formdata.UploadFile(memStream, "UploadFile.txt")))
+                    {
+                        string actual = reader.ReadToEnd();
+                        Assert.Equal(testString, actual);
+                    }
                 }
             }
         }
@@ -297,11 +297,11 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 {
                     memStream.Write(testBytes, 0, testBytes.Length);
                     memStream.Seek(0, SeekOrigin.Begin);
-                    var response = client.Formdata.UploadFileViaBody(memStream, "UploadFile.txt");
-                    byte[] buff = new byte[response.Length];
-                    response.Read(buff, 0, (int)response.Length);
-                    string desearializedJson = Encoding.Unicode.GetString(buff);
-                    Assert.Equal(desearializedJson, testString);
+                    using (StreamReader reader = new StreamReader(client.Formdata.UploadFileViaBody(memStream, "UploadFile.txt")))
+                    {
+                        string actual = reader.ReadToEnd();
+                        Assert.Equal(testString, actual);
+                    }                    
                 }
             }
         }

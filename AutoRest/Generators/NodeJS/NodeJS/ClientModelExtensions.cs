@@ -687,6 +687,17 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                             .Outdent()
                             .AppendLine("}").ToString();
             }
+            else if (primary == PrimaryType.Stream)
+            {
+                if (isRequired)
+                {
+                    builder.AppendLine("if ({0} === null || {0} === undefined) {{", valueReference, lowercaseTypeName);
+                    return ConstructValidationCheck(builder, requiredTypeErrorMessage, valueReference, primary.Name).ToString();
+                }
+
+                builder.AppendLine("if ({0} !== null && {0} !== undefined && typeof {0}.valueOf() !== '{1}') {{", valueReference, lowercaseTypeName);
+                return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
+            }
             else if (primary == PrimaryType.String)
             {
                 if (isRequired)

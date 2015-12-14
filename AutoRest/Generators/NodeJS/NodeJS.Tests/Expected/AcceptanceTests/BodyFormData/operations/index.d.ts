@@ -56,6 +56,6 @@ export interface Formdata {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    uploadFileViaBody(fileContent: any, fileName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<stream.Readable>): void;
-    uploadFileViaBody(fileContent: any, fileName: string, callback: ServiceCallback<stream.Readable>): void;
+    uploadFileViaBody(fileContent: stream.Readable, fileName: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<stream.Readable>): void;
+    uploadFileViaBody(fileContent: stream.Readable, fileName: string, callback: ServiceCallback<stream.Readable>): void;
 }

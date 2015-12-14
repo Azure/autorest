@@ -54,6 +54,6 @@ namespace Fixtures.AcceptanceTestsBodyFormData
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<System.IO.Stream>> UploadFileViaBodyWithHttpMessagesAsync(object fileContent, string fileName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<System.IO.Stream>> UploadFileViaBodyWithHttpMessagesAsync(System.IO.Stream fileContent, string fileName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
