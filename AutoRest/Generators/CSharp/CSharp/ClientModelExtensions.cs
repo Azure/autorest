@@ -205,7 +205,7 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
             }
 
             return string.Format(CultureInfo.InvariantCulture,
-                    "JsonConvert.SerializeObject({0}, {1}).Trim('\"')",
+                    "SafeJsonConvert.SerializeObject({0}, {1}).Trim('\"')",
                     reference,
                     serializationSettings);
         }

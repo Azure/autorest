@@ -369,17 +369,18 @@ describe('nodejs', function () {
 
     it('should work with Custom Headers', function (done) {
       var options = {
+        product: product,
         customHeaders: {
           'x-ms-client-request-id': '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
         }
       };
-      testClient.lROsCustomHeader.putAsyncRetrySucceeded(product, options, function (error, result) {
+      testClient.lROsCustomHeader.putAsyncRetrySucceeded(options, function (error, result) {
         should.not.exist(error);
-        testClient.lROsCustomHeader.postAsyncRetrySucceeded(product, options, function (error, result) {
+        testClient.lROsCustomHeader.postAsyncRetrySucceeded(options, function (error, result) {
           should.not.exist(error);
-          testClient.lROsCustomHeader.put201CreatingSucceeded200(product, options, function (error, result) {
+          testClient.lROsCustomHeader.put201CreatingSucceeded200(options, function (error, result) {
             should.not.exist(error);
-            testClient.lROsCustomHeader.post202Retry200(product, options, function (error, result) {
+            testClient.lROsCustomHeader.post202Retry200(options, function (error, result) {
               should.not.exist(error);
               done();
             });

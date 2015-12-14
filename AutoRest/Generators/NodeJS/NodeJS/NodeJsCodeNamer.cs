@@ -156,6 +156,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                 }
             }
         }
+
         public override IType NormalizeTypeDeclaration(IType type)
         {
             return NormalizeTypeReference(type);
@@ -204,6 +205,48 @@ namespace Microsoft.Rest.Generator.NodeJS
 
             throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture,
                 "Type {0} is not supported.", type.GetType()));
+        }
+
+        /// <summary>
+        /// Normalize odata filter parameter to PrimaryType.String
+        /// </summary>
+        /// <param name="client">Service Client</param>
+        public void NormalizeOdataFilterParameter(ServiceClient client)
+        {
+            if (client == null)
+            {
+                throw new ArgumentNullException("client");
+            }
+
+            foreach(var method in client.Methods)
+            {
+                foreach(var parameter in method.Parameters)
+                {
+                    if (parameter.SerializedName.Equals("$filter",StringComparison.OrdinalIgnoreCase) &&
+                        parameter.Location == ParameterLocation.Query &&
+                        parameter.Type is CompositeType)
+                    {
+                        parameter.Type = PrimaryType.String;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Normalizes the method name if it is a reserved word in javascript.
+        /// </summary>
+        /// <param name="client">The service client.</param>
+        public void NormalizeMethodNames(ServiceClient client)
+        {
+            if (client == null)
+            {
+                throw new ArgumentNullException("client");
+            }
+
+            foreach (var method in client.Methods)
+            {
+                method.Name = GetMethodName(method.Name);
+            }
         }
 
         private static IType NormalizeEnumType(EnumType enumType)

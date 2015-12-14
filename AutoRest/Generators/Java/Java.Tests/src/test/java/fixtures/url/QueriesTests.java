@@ -7,14 +7,13 @@ import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class QueriesTests {
-    static AutoRestUrlTestService client;
+    private static AutoRestUrlTestService client;
 
     @BeforeClass
     public static void setup() {
@@ -53,12 +52,12 @@ public class QueriesTests {
 
     @Test
     public void getTenBillion() throws Exception {
-        client.getQueries().getTenBillion(10000000000l);
+        client.getQueries().getTenBillion(10000000000L);
     }
 
     @Test
     public void getNegativeTenBillion() throws Exception {
-        client.getQueries().getNegativeTenBillion(-10000000000l);
+        client.getQueries().getNegativeTenBillion(-10000000000L);
     }
 
     @Test
@@ -216,7 +215,7 @@ public class QueriesTests {
         client.getQueries().arrayStringTsvValid(query);
     }
 
-    @Ignore("Fixed when OkHttp 2.6 comes out")
+    @Test
     public void arrayStringPipesValid() throws Exception {
         List<String> query = new ArrayList<>();
         query.add("ArrayQuery1");

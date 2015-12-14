@@ -94,6 +94,22 @@ namespace Microsoft.Rest.Generator
             client.ModelTypes.Clear();
             normalizedModels.ForEach( (item) => client.ModelTypes.Add(item));
 
+            var normalizedErrors = new List<CompositeType>();
+            foreach (var modelType in client.ErrorTypes)
+            {
+                normalizedErrors.Add(NormalizeTypeDeclaration(modelType) as CompositeType);
+            }
+            client.ErrorTypes.Clear();
+            normalizedErrors.ForEach((item) => client.ErrorTypes.Add(item));
+
+            var normalizedHeaders = new List<CompositeType>();
+            foreach (var modelType in client.HeaderTypes)
+            {
+                normalizedHeaders.Add(NormalizeTypeDeclaration(modelType) as CompositeType);
+            }
+            client.HeaderTypes.Clear();
+            normalizedHeaders.ForEach((item) => client.HeaderTypes.Add(item));
+
             var normalizedEnums = new List<EnumType>();
             foreach (var enumType in client.EnumTypes)
             {
@@ -108,37 +124,51 @@ namespace Microsoft.Rest.Generator
 
             foreach (var method in client.Methods)
             {
-                method.Name = GetMethodName(method.Name);
-                method.Group = GetMethodGroupName(method.Group);
-                method.ReturnType = NormalizeTypeReference(method.ReturnType);
-                method.DefaultResponse = NormalizeTypeReference(method.DefaultResponse);
-                var normalizedResponses = new Dictionary<HttpStatusCode, IType>();
-                foreach (var statusCode in method.Responses.Keys)
-                {
-                    normalizedResponses[statusCode] = NormalizeTypeReference(method.Responses[statusCode]);
-                }
+                NormalizeMethod(method);
+            }
+        }
 
-                method.Responses.Clear();
-                foreach (var statusCode in normalizedResponses.Keys)
-                {
-                    method.Responses[statusCode] = normalizedResponses[statusCode];
-                }
-                foreach (var parameter in method.Parameters)
-                {
-                    parameter.Name = GetParameterName(parameter.Name);
-                    parameter.Type = NormalizeTypeReference(parameter.Type);
-                }
+        /// <summary>
+        /// Normalizes names in the method
+        /// </summary>
+        /// <param name="method"></param>
+        public virtual void NormalizeMethod(Method method)
+        {
+            if (method == null)
+            {
+                throw new ArgumentNullException("method");
+            }
+            method.Name = GetMethodName(method.Name);
+            method.Group = GetMethodGroupName(method.Group);
+            method.ReturnType = NormalizeTypeReference(method.ReturnType);
+            method.DefaultResponse = NormalizeTypeReference(method.DefaultResponse);
+            var normalizedResponses = new Dictionary<HttpStatusCode, Response>();
+            foreach (var statusCode in method.Responses.Keys)
+            {
+                normalizedResponses[statusCode] = NormalizeTypeReference(method.Responses[statusCode]);
+            }
 
-                foreach (var parameterMapping in method.InputParameterMappings)
-                {
-                    parameterMapping.InputParameter.Name = GetParameterName(parameterMapping.InputParameter.Name);
-                    parameterMapping.InputParameter.Type = NormalizeTypeReference(parameterMapping.InputParameter.Type);
-                    parameterMapping.OutputParameter.Name = GetParameterName(parameterMapping.OutputParameter.Name);
-                    parameterMapping.OutputParameter.Type = NormalizeTypeReference(parameterMapping.OutputParameter.Type);
+            method.Responses.Clear();
+            foreach (var statusCode in normalizedResponses.Keys)
+            {
+                method.Responses[statusCode] = normalizedResponses[statusCode];
+            }
+            foreach (var parameter in method.Parameters)
+            {
+                parameter.Name = GetParameterName(parameter.Name);
+                parameter.Type = NormalizeTypeReference(parameter.Type);
+            }
 
+            foreach (var parameterTransformation in method.InputParameterTransformation)
+            {
+                parameterTransformation.OutputParameter.Name = GetParameterName(parameterTransformation.OutputParameter.Name);
+                parameterTransformation.OutputParameter.Type = NormalizeTypeReference(parameterTransformation.OutputParameter.Type);
+
+                foreach (var parameterMapping in parameterTransformation.ParameterMappings)
+                {
                     if (parameterMapping.InputParameterProperty != null)
                     {
-                        parameterMapping.InputParameterProperty = string.Join(".", 
+                        parameterMapping.InputParameterProperty = string.Join(".",
                             parameterMapping.InputParameterProperty.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries)
                                 .Select(p => GetPropertyName(p)));
                     }
@@ -291,6 +321,17 @@ namespace Microsoft.Rest.Generator
                 return name;
             }
             return CamelCase(RemoveInvalidCharacters(GetEscapedReservedName(name, "Variable")));
+        }
+
+        /// <summary>
+        /// Returns language specific type reference name.
+        /// </summary>
+        /// <param name="typePair"></param>
+        /// <returns></returns>
+        public virtual Response NormalizeTypeReference(Response typePair)
+        {
+            return new Response(NormalizeTypeReference(typePair.Body),
+                                NormalizeTypeReference(typePair.Headers));
         }
 
         /// <summary>
@@ -459,7 +500,6 @@ namespace Microsoft.Rest.Generator
 
             var models = new List<CompositeType>(serviceClient.ModelTypes);
             serviceClient.ModelTypes.Clear();
-
             foreach (var model in models)
             {
                 model.Name = ResolveNameConflict(
@@ -469,7 +509,25 @@ namespace Microsoft.Rest.Generator
                     "Model");
 
                 serviceClient.ModelTypes.Add(model);
+            }
 
+            models = new List<CompositeType>(serviceClient.HeaderTypes);
+            serviceClient.HeaderTypes.Clear();
+            foreach (var model in models)
+            {
+                model.Name = ResolveNameConflict(
+                    exclusionDictionary,
+                    model.Name,
+                    "Schema definition",
+                    "Model");
+
+                serviceClient.HeaderTypes.Add(model);
+            }
+
+            foreach (var model in serviceClient.ModelTypes
+                                                  .Concat(serviceClient.HeaderTypes)
+                                                  .Concat(serviceClient.ErrorTypes))
+            {
                 foreach (var property in model.Properties)
                 {
                     if (property.Name.Equals(model.Name, StringComparison.OrdinalIgnoreCase))

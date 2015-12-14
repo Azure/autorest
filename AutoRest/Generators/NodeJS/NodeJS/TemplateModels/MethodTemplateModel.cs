@@ -34,13 +34,68 @@ namespace Microsoft.Rest.Generator.NodeJS
             {
                 OperationName = serviceClient.Name;
             }
+
+            BuildOptionsParameterTemplateModel();
+        }
+
+        private void BuildOptionsParameterTemplateModel()
+        {
+            CompositeType optionsType;
+            optionsType = new CompositeType
+            {
+                Name = "options",
+                SerializedName = "options",
+                Documentation = "Optional Parameters."
+            };
+            var optionsParmeter = new Parameter
+            {
+                Name = "options",
+                SerializedName = "options",
+                IsRequired = false,
+                Documentation = "Optional Parameters.",
+                Location = ParameterLocation.None,
+                Type = optionsType
+            };
+
+            IEnumerable<ParameterTemplateModel> optionalParameters = LocalParameters.Where(p => !p.IsRequired);
+            foreach (ParameterTemplateModel parameter in optionalParameters)
+            {
+                Property optionalProperty = new Property
+                {
+                    IsReadOnly = false,
+                    Name = parameter.Name,
+                    IsRequired = parameter.IsRequired,
+                    DefaultValue = parameter.DefaultValue,
+                    Documentation = parameter.Documentation,
+                    Type = parameter.Type,
+                    SerializedName = parameter.SerializedName   
+                };
+                parameter.Constraints.ToList().ForEach(x => optionalProperty.Constraints.Add(x.Key, x.Value));
+                parameter.Extensions.ToList().ForEach(x => optionalProperty.Extensions.Add(x.Key, x.Value));
+                ((CompositeType)optionsParmeter.Type).Properties.Add(optionalProperty);
+            }
+
+            //Adding customHeaders to the options object
+            Property customHeaders = new Property
+            {
+                IsReadOnly = false,
+                Name = "customHeaders",
+                IsRequired = false,
+                Documentation = "Headers that will be added to the request",
+                Type = PrimaryType.Object,
+                SerializedName = "customHeaders"
+            };
+            ((CompositeType)optionsParmeter.Type).Properties.Add(customHeaders);
+            OptionsParameterTemplateModel = new ParameterTemplateModel(optionsParmeter);
         }
 
         public string OperationName { get; set; }
 
         public ServiceClient ServiceClient { get; set; }
 
-        protected List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
+        public List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
+
+        public ParameterTemplateModel OptionsParameterTemplateModel { get; private set; }
 
         protected List<ParameterTemplateModel> GroupedParameterTemplateModels { get; private set; }
 
@@ -81,29 +136,29 @@ namespace Microsoft.Rest.Generator.NodeJS
             get
             {
                 List<string> declarations = new List<string>();
-                foreach (var parameter in LocalParameters)
+                foreach (var parameter in LocalParametersWithOptions)
                 {
                     declarations.Add(parameter.Name);
                 }
 
-                declarations.Add("options");
                 var declaration = string.Join(", ", declarations);
                 declaration += ", ";
                 return declaration;
             }
         }
-		
+
         /// <summary>
         /// Generate the method parameter declarations for a method, using TypeScript declaration syntax
         /// <param name="includeOptions">whether the ServiceClientOptions parameter should be included</param>
         /// </summary>
         public string MethodParameterDeclarationTS(bool includeOptions)
-		{
+        {
             StringBuilder declarations = new StringBuilder();
 
             bool first = true;
-            foreach (var parameter in LocalParameters)
-			{
+            IEnumerable<ParameterTemplateModel> requiredParameters = LocalParameters.Where(p => p.IsRequired);
+            foreach (var parameter in requiredParameters)
+            {
                 if (!first)
                     declarations.Append(", ");
 
@@ -123,7 +178,26 @@ namespace Microsoft.Rest.Generator.NodeJS
             {
                 if (!first)
                     declarations.Append(", ");
-                declarations.Append("options: RequestOptions");
+                declarations.Append("options: { ");
+                var optionalParameters = ((CompositeType)OptionsParameterTemplateModel.Type).Properties;
+                for(int i = 0; i < optionalParameters.Count; i++)
+                {
+                    if (i != 0)
+                    {
+                        declarations.Append(", ");
+                    }
+                    declarations.Append(optionalParameters[i].Name);
+                    declarations.Append("? : ");
+                    if (optionalParameters[i].Name.Equals("customHeaders", StringComparison.OrdinalIgnoreCase))
+                    {
+                        declarations.Append("{ [headerName: string]: string; }");
+                    }
+                    else
+                    {
+                        declarations.Append(optionalParameters[i].Type.TSType(false));
+                    }
+                }
+                declarations.Append(" }");
             }
 
             return declarations.ToString();
@@ -146,9 +220,10 @@ namespace Microsoft.Rest.Generator.NodeJS
         /// Generate the method parameter declarations with callback for a method, using TypeScript method syntax
         /// <param name="includeOptions">whether the ServiceClientOptions parameter should be included</param>
         /// </summary>
-        public string MethodParameterDeclarationWithCallbackTS(bool includeOptions) {
+        public string MethodParameterDeclarationWithCallbackTS(bool includeOptions)
+        {
             //var parameters = MethodParameterDeclarationTS(includeOptions);
-            var returnTypeTSString = ReturnType == null ? "void" : ReturnType.TSType(false);
+            var returnTypeTSString = ReturnType.Body == null ? "void" : ReturnType.Body.TSType(false);
 
             StringBuilder parameters = new StringBuilder();
             parameters.Append(MethodParameterDeclarationTS(includeOptions));
@@ -162,15 +237,29 @@ namespace Microsoft.Rest.Generator.NodeJS
 
         /// <summary>
         /// Get the parameters that are actually method parameters in the order they appear in the method signature
-        /// exclude global parameters
+        /// exclude global parameters.
         /// </summary>
-        public IEnumerable<ParameterTemplateModel> LocalParameters
+        internal IEnumerable<ParameterTemplateModel> LocalParameters
         {
             get
             {
                 return ParameterTemplateModels.Where(
                     p => p != null && p.ClientProperty == null && !string.IsNullOrWhiteSpace(p.Name))
                     .OrderBy(item => !item.IsRequired);
+            }
+        }
+
+        /// <summary>
+        /// Get the parameters that are actually method parameters in the order they appear in the method signature
+        /// exclude global parameters. All the optional parameters are pushed into the second last "options" parameter.
+        /// </summary>
+        public IEnumerable<ParameterTemplateModel> LocalParametersWithOptions
+        {
+            get
+            {
+                List<ParameterTemplateModel> requiredParamsWithOptionsList = LocalParameters.Where(p => p.IsRequired).ToList();
+                requiredParamsWithOptionsList.Add(OptionsParameterTemplateModel);
+                return requiredParamsWithOptionsList as IEnumerable<ParameterTemplateModel>;
             }
         }
 
@@ -186,7 +275,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                 var visitedHash = new Dictionary<string, ParameterTemplateModel>();
                 var retValue = new Stack<ParameterTemplateModel>();
 
-                foreach (var param in LocalParameters)
+                foreach (var param in LocalParametersWithOptions)
                 {
                     traversalStack.Push(param);
                 }
@@ -198,7 +287,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                     {
                         retValue.Push(param);
                     }
-                    
+
                     if (param.Type is CompositeType)
                     {
                         if (!visitedHash.ContainsKey(param.Type.Name))
@@ -217,7 +306,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                                 propertyParameter.Documentation = property.Documentation;
                                 traversalStack.Push(new ParameterTemplateModel(propertyParameter));
                             }
-                            
+
                             visitedHash.Add(param.Type.Name, new ParameterTemplateModel(param));
                         }
                         else
@@ -237,7 +326,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             return builder.AppendLine(documentation)
                           .AppendLine(" * ").ToString();
         }
-        
+
         /// <summary>
         /// Get the type name for the method's return type
         /// </summary>
@@ -245,17 +334,20 @@ namespace Microsoft.Rest.Generator.NodeJS
         {
             get
             {
-                if (ReturnType != null)
+                if (ReturnType.Body != null)
                 {
-                    return ReturnType.Name;
+                    return ReturnType.Body.Name;
                 }
-                return "null";
+                else
+                {
+                    return "null";
+                }
             }
         }
 
         /// <summary>
         /// The Deserialization Error handling code block that provides a useful Error 
-        /// message when exceptions occure in deserialization along with the request 
+        /// message when exceptions occur in deserialization along with the request 
         /// and response object
         /// </summary>
         public string DeserializationError
@@ -329,7 +421,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             if (primary != null)
             {
                 if (primary == PrimaryType.DateTime ||
-                    primary == PrimaryType.Date || 
+                    primary == PrimaryType.Date ||
                     primary == PrimaryType.DateTimeRfc1123)
                 {
                     builder.AppendLine("{0} = new Date({0});", valueReference);
@@ -347,7 +439,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             {
                 builder.AppendLine("for (var i = 0; i < {0}.length; i++) {{", valueReference)
                          .Indent();
-                    
+
                 // Loop through the sequence if each property is Date, DateTime or ByteArray 
                 // as they need special treatment for deserialization
                 if (sequence.ElementType is PrimaryType)
@@ -355,7 +447,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                     builder.AppendLine("if ({0}[i] !== null && {0}[i] !== undefined) {{", valueReference)
                              .Indent();
                     if (sequence.ElementType == PrimaryType.DateTime ||
-                       sequence.ElementType == PrimaryType.Date || 
+                       sequence.ElementType == PrimaryType.Date ||
                         sequence.ElementType == PrimaryType.DateTimeRfc1123)
                     {
                         builder.AppendLine("{0}[i] = new Date({0}[i]);", valueReference);
@@ -391,8 +483,8 @@ namespace Microsoft.Rest.Generator.NodeJS
                 {
                     builder.AppendLine("if ({0}[property] !== null && {0}[property] !== undefined) {{", valueReference)
                              .Indent();
-                    if (dictionary.ValueType == PrimaryType.DateTime || 
-                        dictionary.ValueType == PrimaryType.Date || 
+                    if (dictionary.ValueType == PrimaryType.DateTime ||
+                        dictionary.ValueType == PrimaryType.Date ||
                         dictionary.ValueType == PrimaryType.DateTimeRfc1123)
                     {
                         builder.AppendLine("{0}[property] = new Date({0}[property]);", valueReference);
@@ -437,10 +529,10 @@ namespace Microsoft.Rest.Generator.NodeJS
 
         public string ValidationString
         {
-            get 
+            get
             {
                 var builder = new IndentedStringBuilder("  ");
-                foreach (var parameter in LogicalParameters)
+                foreach (var parameter in ParameterTemplateModels)
                 {
                     if ((HttpMethod == HttpMethod.Patch && parameter.Type is CompositeType))
                     {
@@ -453,9 +545,15 @@ namespace Microsoft.Rest.Generator.NodeJS
                                    .AppendLine("}");
                         }
                     }
-
+                    else
                     {
                         builder.AppendLine(parameter.Type.ValidateType(Scope, parameter.Name, parameter.IsRequired));
+                        if (parameter.Constraints != null && parameter.Constraints.Count > 0 && parameter.Location != ParameterLocation.Body)
+                        {
+                            builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", parameter.Name).Indent();
+                            builder = parameter.Type.AppendConstraintValidations(parameter.Name, parameter.Constraints, builder);
+                            builder.Outdent().AppendLine("}");
+                        }        
                     }
                 }
                 return builder.ToString();
@@ -505,7 +603,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                      .AppendLine(type.InitializeSerializationType(Scope, valueReference, responseVariable, "client._models"));
             var deserializeBody = this.GetDeserializationString(type, valueReference, responseVariable);
             if (!string.IsNullOrWhiteSpace(deserializeBody))
-            {             
+            {
                 builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", responseVariable)
                          .Indent()
                          .AppendLine(deserializeBody)
@@ -694,9 +792,9 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
         }
 
-        public virtual string InitializeResult 
-        { 
-            get 
+        public virtual string InitializeResult
+        {
+            get
             {
                 return string.Empty;
             }
@@ -707,24 +805,27 @@ namespace Microsoft.Rest.Generator.NodeJS
             get
             {
                 string result = null;
-                if (ReturnType is EnumType)
+
+                if (ReturnType.Body is EnumType)
                 {
+                    var returnBodyType = ReturnType.Body as EnumType;
+
                     string enumValues = "";
-                    for (var i = 0; i <((EnumType)ReturnType).Values.Count; i++)
+                    for (var i = 0; i < returnBodyType.Values.Count; i++)
                     {
-                        if (i == ((EnumType)ReturnType).Values.Count - 1)
+                        if (i == returnBodyType.Values.Count - 1)
                         {
-                            enumValues += ((EnumType)ReturnType).Values[i].SerializedName;
+                            enumValues += returnBodyType.Values[i].SerializedName;
                         }
                         else
                         {
-                            enumValues += ((EnumType)ReturnType).Values[i].SerializedName + ", ";
+                            enumValues += returnBodyType.Values[i].SerializedName + ", ";
                         }
                     }
                     result = string.Format(CultureInfo.InvariantCulture,
                         "Possible values for result are - {0}.", enumValues);
                 }
-                else if (ReturnType is CompositeType)
+                else if (ReturnType.Body is CompositeType)
                 {
                     result = string.Format(CultureInfo.InvariantCulture,
                         "See {{@link {0}}} for more information.", ReturnTypeString);
@@ -740,23 +841,25 @@ namespace Microsoft.Rest.Generator.NodeJS
             get
             {
                 string typeName = "object";
-                if (ReturnType == null)
+                IType returnBodyType = ReturnType.Body;
+
+                if (returnBodyType == null)
                 {
                     typeName = "null";
                 }
-                else if (ReturnType is PrimaryType)
+                else if (returnBodyType is PrimaryType)
                 {
-                    typeName = ReturnType.Name;
+                    typeName = returnBodyType.Name;
                 }
-                else if (ReturnType is SequenceType)
+                else if (returnBodyType is SequenceType)
                 {
                     typeName = "array";
                 }
-                else if (ReturnType is EnumType)
+                else if (returnBodyType is EnumType)
                 {
                     typeName = PrimaryType.String.Name;
                 }
-                else if (ReturnType is CompositeType || ReturnType is DictionaryType)
+                else if (returnBodyType is CompositeType || returnBodyType is DictionaryType)
                 {
                     typeName = PrimaryType.Object.Name;
                 }
@@ -764,5 +867,79 @@ namespace Microsoft.Rest.Generator.NodeJS
                 return typeName.ToLower(CultureInfo.InvariantCulture);
             }
         }
-    }
+
+        /// <summary>
+        /// Generates input mapping code block.
+        /// </summary>
+        /// <returns></returns>
+        public virtual string BuildInputMappings()
+        {
+            var builder = new IndentedStringBuilder();
+            foreach (var transformation in InputParameterTransformation)
+            {
+                builder.AppendLine("var {0};",
+                        transformation.OutputParameter.Name);
+
+                builder.AppendLine("if ({0})", BuildNullCheckExpression(transformation))
+                       .AppendLine("{").Indent();
+
+                if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
+                    transformation.OutputParameter.Type is CompositeType)
+                {
+                    builder.AppendLine("{0} = new client._models['{1}']();",
+                        transformation.OutputParameter.Name,
+                        transformation.OutputParameter.Type.Name);
+                }
+
+                foreach (var mapping in transformation.ParameterMappings)
+                {
+                    builder.AppendLine("{0}{1};",
+                        transformation.OutputParameter.Name,
+                        mapping);
+                }
+
+                builder.Outdent()
+                       .AppendLine("}");
+            }
+
+            return builder.ToString();
+        }
+
+        private static string BuildNullCheckExpression(ParameterTransformation transformation)
+        {
+            if (transformation == null)
+            {
+                throw new ArgumentNullException("transformation");
+            }
+
+            return string.Join(" || ",
+                transformation.ParameterMappings.Select(m => 
+                    string.Format(CultureInfo.InvariantCulture,
+                    "({0} !== null && {0} !== undefined)", m.InputParameter.Name)));
+        }
+
+        public string  BuildOptionalMappings()
+        {
+            IEnumerable<Property> optionalParameters = 
+                ((CompositeType)OptionsParameterTemplateModel.Type)
+                .Properties.Where(p => p.Name != "customHeaders");
+            var builder = new IndentedStringBuilder("  ");
+            foreach (var optionalParam in optionalParameters)
+            {
+                string defaultValue = "undefined";
+                if (!string.IsNullOrWhiteSpace(optionalParam.DefaultValue))
+                {
+                    defaultValue = optionalParam.DefaultValue;
+                    if (optionalParam.Type == PrimaryType.String || optionalParam.Type is EnumType)
+                    {
+                        defaultValue = string.Format(CultureInfo.InvariantCulture, 
+                            "'{0}'", optionalParam.DefaultValue);
+                    }
+                }
+                builder.AppendLine("var {0} = ({1} && {1}.{2} !== undefined) ? {1}.{2} : {3};", 
+                    optionalParam.Name, OptionsParameterTemplateModel.Name, optionalParam.Name, defaultValue);
+            }
+            return builder.ToString();
+        }
+    }        
 }

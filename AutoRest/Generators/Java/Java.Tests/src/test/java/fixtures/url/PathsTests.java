@@ -1,18 +1,15 @@
 package fixtures.url;
 
-import com.microsoft.rest.ServiceException;
 import fixtures.url.models.UriColor;
-import org.apache.commons.codec.binary.Base64;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class PathsTests {
-    static AutoRestUrlTestService client;
+    private static AutoRestUrlTestService client;
 
     @BeforeClass
     public static void setup() {
@@ -41,12 +38,12 @@ public class PathsTests {
 
     @Test
     public void getTenBillion() throws Exception {
-        client.getPaths().getTenBillion(10000000000l);
+        client.getPaths().getTenBillion(10000000000L);
     }
 
     @Test
     public void getNegativeTenBillion() throws Exception {
-        client.getPaths().getNegativeTenBillion(-10000000000l);
+        client.getPaths().getNegativeTenBillion(-10000000000L);
     }
 
     @Test
@@ -69,7 +66,7 @@ public class PathsTests {
         client.getPaths().doubleDecimalNegative(-9999999.999);
     }
 
-    @Ignore("Fixed when OkHttp 2.6 comes out")
+    @Test
     public void stringUrlEncoded() throws Exception {
         client.getPaths().stringUrlEncoded("begin!*'();:@ &=+$,/?#[]end");
     }
@@ -83,7 +80,7 @@ public class PathsTests {
     public void stringNull() throws Exception {
         try {
             client.getPaths().stringNull(null);
-        } catch (ServiceException ex) {
+        } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("Parameter stringPath is required"));
         }
     }
@@ -97,7 +94,7 @@ public class PathsTests {
     public void enumNull() throws Exception {
         try {
             client.getPaths().enumNull(null);
-        } catch (ServiceException ex) {
+        } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("Parameter enumPath is required"));
         }
     }
@@ -116,7 +113,7 @@ public class PathsTests {
     public void byteNull() throws Exception {
         try {
             client.getPaths().byteNull(null);
-        } catch (ServiceException ex) {
+        } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("Parameter bytePath is required"));
         }
     }
@@ -130,7 +127,7 @@ public class PathsTests {
     public void dateNull() throws Exception {
         try {
             client.getPaths().dateNull(null);
-        } catch (ServiceException ex) {
+        } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("Parameter datePath is required"));
         }
     }
@@ -144,7 +141,7 @@ public class PathsTests {
     public void dateTimeNull() throws Exception {
         try {
             client.getPaths().dateTimeNull(null);
-        } catch (ServiceException ex) {
+        } catch (IllegalArgumentException ex) {
             Assert.assertTrue(ex.getMessage().contains("Parameter dateTimePath is required"));
         }
     }

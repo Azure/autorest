@@ -19,7 +19,7 @@
   <ItemGroup>
     <Content Include=".jshintrc" />
     <Content Include="package.json" />
-    <Compile Include="AcceptanceTests\parameterGrouping.js" >
+    <Compile Include="AcceptanceTests\parameterGrouping.js">
       <TestFramework>Mocha</TestFramework>
     </Compile>
     <Compile Include="AcceptanceTests\coverage.js">
@@ -73,7 +73,8 @@
     <Content Include="bin\Net45-Debug\Swagger\swagger-recursive-type.json" />
     <Content Include="bin\Net45-Debug\Swagger\swagger-simple-spec.json" />
     <Content Include="bin\Net45-Debug\Swagger\swagger-streaming.json" />
-    <Content Include="packages.config" />
+    <Content Include="tsconfig.json" />
+    <Content Include="tsd.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AcceptanceTests" />

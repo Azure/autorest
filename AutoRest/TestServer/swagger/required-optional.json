@@ -20,7 +20,8 @@
       "name": "required-global-path",
       "in": "path",
       "description": "number of items to skip",
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "required-global-query": {
       "name": "required-global-query",
@@ -47,7 +48,8 @@
           {
             "name": "pathParameter",
             "in": "path",
-            "type": "string"
+            "type": "string",
+            "required": true
           }
         ],
         "responses": {

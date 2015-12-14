@@ -25,6 +25,17 @@ export interface ServiceClientOptions {
 	noRetryPolicy?: boolean;
 }
 
+export class ServiceClient {
+  /**
+  * Initializes a new instance of the ServiceClient class.
+  *
+  * @param {ServiceClientCredentials} [credentials]    - BasicAuthenticationCredentials or 
+  * TokenCredentials object used for authentication. 
+  * @param {ServiceClientOptions} [options] The parameter options
+  */
+  constructor(credentials?: ServiceClientCredentials, options?: ServiceClientOptions);
+}
+
 export interface ServiceError extends Error {
   statusCode: number;
   request: WebResource;
@@ -208,7 +219,11 @@ export class WebResource {
 }
 
 // TODO: Finish this;  expose signRequest?
-export class TokenCredentials {
+export class ServiceClientCredentials {
+}
+
+// TODO: Finish this
+export class TokenCredentials extends ServiceClientCredentials {
   /**
   * Creates a new TokenCredentials object.
   *

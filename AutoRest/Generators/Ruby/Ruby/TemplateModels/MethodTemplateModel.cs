@@ -265,7 +265,7 @@ namespace Microsoft.Rest.Generator.Ruby
 
             // Secondly parse each js object into appropriate Ruby type (DateTime, Byte array, etc.)
             // and overwrite temporary variable variable value.
-            string deserializationLogic = type.DeserializeType(this.Scope, tempVariable, ClassNamespaces);
+            string deserializationLogic = type.DeserializeType(this.Scope, tempVariable);
             builder.AppendLine(deserializationLogic);
 
             // Assigning value of temporary variable to the output variable.
@@ -284,7 +284,7 @@ namespace Microsoft.Rest.Generator.Ruby
             var builder = new IndentedStringBuilder("  ");
 
             // Firstly recursively serialize each component of the object.
-            string serializationLogic = type.SerializeType(this.Scope, inputVariable, ClassNamespaces);
+            string serializationLogic = type.SerializeType(this.Scope, inputVariable);
 
             builder.AppendLine(serializationLogic);
 

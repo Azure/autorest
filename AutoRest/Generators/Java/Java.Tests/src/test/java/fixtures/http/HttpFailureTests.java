@@ -8,7 +8,7 @@ import org.junit.Test;
 import static org.junit.Assert.fail;
 
 public class HttpFailureTests {
-    static AutoRestHttpInfrastructureTestService client;
+    private static AutoRestHttpInfrastructureTestService client;
 
     @BeforeClass
     public static void setup() {

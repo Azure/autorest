@@ -5,7 +5,7 @@
   </PropertyGroup>
   <ItemGroup Condition=" '$(LibraryFxTarget)' == 'portable' ">
     <Reference Include="Newtonsoft.Json">
-      <HintPath>$(CommonNugetPackageFolder)\Newtonsoft.Json.6.0.8\lib\portable-net45+wp80+win8+wpa81+aspnetcore50\Newtonsoft.Json.dll</HintPath>
+      <HintPath>$(CommonNugetPackageFolder)\Newtonsoft.Json.7.0.1\lib\portable-net45+wp80+win8+wpa81+aspnetcore50\Newtonsoft.Json.dll</HintPath>
     </Reference>
   </ItemGroup>
 </Project>

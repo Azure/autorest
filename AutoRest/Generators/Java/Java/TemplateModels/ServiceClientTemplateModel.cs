@@ -51,14 +51,13 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public IEnumerable<string> ImplImports
+        public virtual IEnumerable<string> ImplImports
         {
             get
             {
                 HashSet<string> classes = new HashSet<string>();
 
-                if (this.Properties.Any(p => p.Type != null &&
-                                             p.Type.Name.Equals("ServiceClientCredentials", System.StringComparison.OrdinalIgnoreCase)))
+                if (this.Properties.Any(p => p.Type == PrimaryType.Credentials))
                 {
                     classes.Add("com.microsoft.rest.credentials.ServiceClientCredentials");
                 }
@@ -73,80 +72,38 @@ namespace Microsoft.Rest.Generator.Java
                     return classes;
                 }
 
-                classes.AddRange(new[]{
-                    "java.math.BigDecimal",
-                    "com.google.common.reflect.TypeToken",
-                    "com.microsoft.rest.ServiceCallback",
-                    "com.microsoft.rest.ServiceException",
-                    "com.microsoft.rest.ServiceResponse",
-                    "com.microsoft.rest.ServiceResponseBuilder",
-                    "com.microsoft.rest.ServiceResponseCallback",
-                    "com.microsoft.rest.ServiceResponseEmptyCallback",
-                    "com.squareup.okhttp.ResponseBody",
-                    "retrofit.Call",
-                    "retrofit.Retrofit",
-                    "retrofit.Response"
-                });
-
-                IList<IType> types = this.MethodTemplateModels
-                    .SelectMany(mtm => mtm.Parameters.Select(p => p.Type))
-                    .Concat(this.MethodTemplateModels.SelectMany(mtm => mtm.Responses.Select(res => res.Value)))
-                    .Concat(this.MethodTemplateModels.Select(mtm => mtm.DefaultResponse))
-                    .Distinct()
-                    .ToList();
-
-                classes.UnionWith(types.TypeImports(this.Namespace));
+                classes.AddRange(this.MethodTemplateModels
+                    .SelectMany(m => m.ImplImports)
+                    .OrderBy(i => i));
 
 
                 return classes.AsEnumerable();
             }
         }
 
-        public IEnumerable<string> InterfaceImports
+        public virtual List<string> InterfaceImports
         {
             get
             {
                 HashSet<string> classes = new HashSet<string>();
-
-                if (this.Properties.Any(p => p.Type != null &&
-                                             p.Type.Name.Equals("ServiceClientCredentials", System.StringComparison.OrdinalIgnoreCase)))
+                classes.Add("java.util.List");
+                classes.Add("com.squareup.okhttp.Interceptor");
+                classes.Add("com.squareup.okhttp.logging.HttpLoggingInterceptor.Level");
+                if (this.Properties.Any(p => p.Type == PrimaryType.Credentials))
                 {
                     classes.Add("com.microsoft.rest.credentials.ServiceClientCredentials");
                 }
 
                 if (this.MethodTemplateModels.IsNullOrEmpty())
                 {
-                    return classes;
+                    return classes.ToList();
                 }
 
-                classes.AddRange(new[]{
-                    "java.math.BigDecimal",
-                    "com.microsoft.rest.ServiceCallback",
-                    "com.microsoft.rest.ServiceException",
-                    "com.microsoft.rest.ServiceResponseCallback",
-                    "com.squareup.okhttp.ResponseBody",
-                    "retrofit.Call"
-                });
+                classes.AddRange(this.MethodTemplateModels
+                    .SelectMany(m => m.InterfaceImports)
+                    .OrderBy(i => i).Distinct());
 
-                IList<IType> types = this.MethodTemplateModels
-                    .SelectMany(mtm => mtm.Parameters.Select(p => p.Type))
-                    .Concat(this.MethodTemplateModels.Select(mtm => mtm.ReturnType))
-                    .Distinct()
-                    .ToList();
-                classes.UnionWith(types.TypeImports(this.Namespace));
-
-                foreach (var method in this.MethodTemplateModels)
-                {
-                    classes.Add("retrofit.http." + method.HttpMethod.ToString().ToUpper(CultureInfo.InvariantCulture));
-                    foreach (var param in method.Parameters)
-                    {
-                        if (param.Location != ParameterLocation.None &&
-                            param.Location != ParameterLocation.FormData)
-                            classes.Add("retrofit.http." + param.Location.ToString());
-                    }
-                }
-
-                return classes.AsEnumerable();
+                return classes.ToList();
             }
         }
     }

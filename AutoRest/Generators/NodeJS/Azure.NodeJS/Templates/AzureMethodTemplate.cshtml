@@ -36,10 +36,6 @@ else
                                         + "} " + MethodTemplateModel.GetParameterDocumentationName(parameter)
                                         + " " + parameter.Documentation))
 }
-@WrapComment(" * ", " @param {object} [options]")
- *
-@WrapComment(" * ", " @param {object} [options.customHeaders] headers that will be added to request")
- *
 @WrapComment(" * ", " @param {function} callback")
  *
 @WrapComment(" * ", " @returns {function} callback(err, result, request, response)")
@@ -68,8 +64,6 @@ else
   this.begin@(Model.Name.ToPascalCase())(@(Model.MethodParameterDeclaration)function (err, parsedResult, httpRequest, response){
     if (err) return callback(err);
     @EmptyLine
-    //if (parsedResult !== null && parsedResult !== undefined) return callback(null, parsedResult, httpRequest, response);
-    @EmptyLine
     var initialResult = new msRest.HttpOperationResponse();
     initialResult.request = httpRequest;
     initialResult.response = response;
@@ -85,14 +79,14 @@ else
       if (responseBody === '') responseBody = null;
       @EmptyLine
       // Deserialize Response
-      @if (Model.ReturnType != null)
+      @if (Model.ReturnType.Body != null)
       {
-      @:@(Model.DeserializeResponse(Model.ReturnType))
+      @:@(Model.DeserializeResponse(Model.ReturnType.Body))
       }
 
-      @if (Model.ReturnType != null && Model.DefaultResponse != null && !Model.Responses.Any())
+      @if (Model.ReturnType.Body != null && Model.DefaultResponse.Body != null && !Model.Responses.Any())
       {
-      @:@(Model.DeserializeResponse(Model.DefaultResponse))
+      @:@(Model.DeserializeResponse(Model.DefaultResponse.Body))
       }
       @EmptyLine
       return callback(null, result, httpRequest, response);

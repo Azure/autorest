@@ -70,30 +70,37 @@ Licensed under the MIT License. See License.txt in the project root for license 
         /// Gets or sets the path to the input specification file.
         /// </summary>
         [SettingsInfo("The location of the input specification.", true)]
+        [SettingsAlias("i")]
+        [SettingsAlias("input")]
         public string Input { get; set; }
 
         /// <summary>
         /// Gets or sets a base namespace for generated code.
         /// </summary>
         [SettingsInfo("The namespace to use for generated code.")]
+        [SettingsAlias("n")]
         public string Namespace { get; set; }
 
         /// <summary>
         /// Gets or sets the output directory for generated files. If not specified, uses 'Generated' as the default.
         /// </summary>
         [SettingsInfo("The location for generated files. If not specified, uses \"Generated\" as the default.")]
+        [SettingsAlias("o")]
+        [SettingsAlias("output")]
         public string OutputDirectory { get; set; }
 
         /// <summary>
         /// Gets or sets the code generation language.
         /// </summary>
         [SettingsInfo("The code generator language. If not specified, defaults to CSharp.")]
+        [SettingsAlias("g")]
         public string CodeGenerator { get; set; }
 
         /// <summary>
         /// Gets or sets the modeler to use for processing the input specification.
         /// </summary>
         [SettingsInfo("The Modeler to use on the input. If not specified, defaults to Swagger.")]
+        [SettingsAlias("m")]
         public string Modeler { get; set; }
 
         #endregion
@@ -105,13 +112,27 @@ Licensed under the MIT License. See License.txt in the project root for license 
         /// </summary>
         [SettingsInfo("Name to use for the generated client type. By default, uses " +
                       "the value of the 'Title' field from the Swagger input.")]
+        [SettingsAlias("name")]
         public string ClientName { get; set; }
+
+        /// <summary>
+        /// Gets or sets the maximum number of properties in the request body. 
+        /// If the number of properties in the request body is less than or 
+        /// equal to this value, then these properties will be represented as method arguments.
+        /// </summary>
+        [SettingsInfo("The maximum number of properties in the request body. " + 
+                      "If the number of properties in the request body is less " + 
+                      "than or equal to this value, these properties will " + 
+                      "be represented as method arguments.")]
+        [SettingsAlias("ft")]
+        public int PayloadFlatteningThreshold { get; set; }
 
         /// <summary>
         /// Gets or sets a comment header to include in each generated file.
         /// </summary>
         [SettingsInfo("Text to include as a header comment in generated files. " +
                       "Use NONE to suppress the default header.")]
+        [SettingsAlias("header")]
         public string Header
         {
             get { return _header; }
@@ -152,6 +173,13 @@ Licensed under the MIT License. See License.txt in the project root for license 
         public string OutputFileName { get; set; }
 
         /// <summary>
+        /// If set to true, print out help message. 
+        /// </summary>
+        [SettingsAlias("?")]
+        [SettingsAlias("h")]
+        public bool ShowHelp { get; set; }
+
+        /// <summary>
         /// Factory method to generate CodeGenerationSettings from command line arguments.
         /// Matches dictionary keys to the settings properties.
         /// </summary>
@@ -176,7 +204,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
                             AddArgumentToDictionary(key, value, argsDictionary);
                             value = null;
                         }
-                        key = argument.Substring(1);
+                        key = argument.TrimStart('-');
                     }
                     else
                     {
@@ -209,25 +237,52 @@ Licensed under the MIT License. See License.txt in the project root for license 
         public static Settings Create(IDictionary<string, string> settings)
         {
             var autoRestSettings = new Settings();
+            var unmatchedSettings = PopulateSettings(autoRestSettings, settings);
+            if (settings == null || settings.Count > 0)
+            {
+                autoRestSettings.ShowHelp = true;
+            }
+
+            autoRestSettings.CustomSettings = unmatchedSettings;
+            return autoRestSettings;
+        }
+
+        /// <summary>
+        /// Sets object properties from the dictionary matching keys to property names or aliases.
+        /// </summary>
+        /// <param name="entityToPopulate">Object to populate from dictionary.</param>
+        /// <param name="settings">Dictionary of settings.</param>
+        /// <returns>Dictionary of settings that were not matched.</returns>
+        public static IDictionary<string, string> PopulateSettings(object entityToPopulate, IDictionary<string, string> settings)
+        {
+            Dictionary<string, string> unmatchedSettings = new Dictionary<string, string>();
+
+            if (entityToPopulate == null)
+            {
+                throw new ArgumentNullException("entityToPopulate");
+            }
+
             if (settings != null && settings.Count > 0)
             {
                 // Setting property value from dictionary
                 foreach (var setting in settings)
                 {
-                    PropertyInfo property = (typeof (Settings)).GetProperties()
-                        .FirstOrDefault(p => p.Name.Equals(setting.Key, StringComparison.OrdinalIgnoreCase));
+                    PropertyInfo property = entityToPopulate.GetType().GetProperties()
+                        .FirstOrDefault(p => setting.Key.Equals(p.Name, StringComparison.OrdinalIgnoreCase) ||
+                                             p.GetCustomAttributes<SettingsAliasAttribute>()
+                                                .Any(a => setting.Key.Equals(a.Alias, StringComparison.OrdinalIgnoreCase)));
 
                     if (property != null)
                     {
                         try
                         {
-                            if (setting.Value.IsNullOrEmpty() && property.PropertyType == typeof (bool))
+                            if (setting.Value.IsNullOrEmpty() && property.PropertyType == typeof(bool))
                             {
-                                property.SetValue(autoRestSettings, true);
+                                property.SetValue(entityToPopulate, true);
                             }
                             else
                             {
-                                property.SetValue(autoRestSettings,
+                                property.SetValue(entityToPopulate,
                                     Convert.ChangeType(setting.Value, property.PropertyType, CultureInfo.InvariantCulture), null);
                             }
                         }
@@ -239,16 +294,12 @@ Licensed under the MIT License. See License.txt in the project root for license 
                     }
                     else
                     {
-                        autoRestSettings.CustomSettings[setting.Key] = setting.Value;
+                        unmatchedSettings[setting.Key] = setting.Value;
                     }
                 }
             }
-            else
-            {
-                autoRestSettings.CustomSettings["?"] = String.Empty;
-            }
 
-            return autoRestSettings;
+            return unmatchedSettings;
         }
 
         public void Validate()
@@ -256,12 +307,19 @@ Licensed under the MIT License. See License.txt in the project root for license 
             foreach (PropertyInfo property in (typeof (Settings)).GetProperties())
             {
                 // If property value is not set - throw exception.
-                var doc = (SettingsInfoAttribute) property
-                    .GetCustomAttributes(typeof (SettingsInfoAttribute)).FirstOrDefault();
+                var doc = property.GetCustomAttributes<SettingsInfoAttribute>().FirstOrDefault();
                 if (doc != null && doc.IsRequired && property.GetValue(this) == null)
                 {
                     Logger.LogError(new ArgumentException(property.Name),
                         Resources.ParameterValueIsMissing, property.Name);
+                }
+            }
+            if (CustomSettings != null)
+            {
+                foreach (var unmatchedSetting in CustomSettings.Keys)
+                {
+                    Logger.LogError(new ArgumentException(unmatchedSetting),
+                        Resources.ParameterIsNotValid, unmatchedSetting);
                 }
             }
             ErrorManager.ThrowErrors();

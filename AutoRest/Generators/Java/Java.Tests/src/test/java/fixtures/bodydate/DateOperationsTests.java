@@ -1,6 +1,6 @@
 package fixtures.bodydate;
 
-import com.microsoft.rest.ServiceException;
+import org.joda.time.IllegalFieldValueException;
 import org.joda.time.LocalDate;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -9,7 +9,7 @@ import org.junit.Test;
 import java.util.concurrent.CountDownLatch;
 
 public class DateOperationsTests {
-    static AutoRestDateTestService client;
+    private static AutoRestDateTestService client;
     private CountDownLatch lock = new CountDownLatch(1);
 
     @BeforeClass
@@ -19,7 +19,7 @@ public class DateOperationsTests {
 
     @Test
     public void getNull() throws Exception {
-        Assert.assertNull(client.getDateOperations().getNull());
+        Assert.assertNull(client.getDateOperations().getNull().getBody());
     }
 
     @Test
@@ -29,8 +29,7 @@ public class DateOperationsTests {
             Assert.assertTrue(false);
         } catch (Exception exception) {
             // expected
-            Assert.assertEquals(ServiceException.class, exception.getClass());
-            Assert.assertTrue(exception.getMessage().contains("Invalid format"));
+            Assert.assertEquals(IllegalArgumentException.class, exception.getClass());
         }
     }
 
@@ -41,8 +40,7 @@ public class DateOperationsTests {
             Assert.assertTrue(false);
         } catch (Exception exception) {
             // expected
-            Assert.assertEquals(ServiceException.class, exception.getClass());
-            Assert.assertTrue(exception.getMessage().contains("Invalid format"));
+            Assert.assertEquals(IllegalArgumentException.class, exception.getClass());
         }
     }
 
@@ -53,8 +51,7 @@ public class DateOperationsTests {
             Assert.assertTrue(false);
         } catch (Exception exception) {
             // expected
-            Assert.assertEquals(ServiceException.class, exception.getClass());
-            Assert.assertTrue(exception.getMessage().contains("IllegalFieldValueException"));
+            Assert.assertEquals(IllegalFieldValueException.class, exception.getClass());
         }
     }
 
@@ -67,7 +64,7 @@ public class DateOperationsTests {
     @Test
     public void getMaxDate() throws Exception {
         LocalDate expected = new LocalDate(9999, 12, 31);
-        LocalDate result = client.getDateOperations().getMaxDate();
+        LocalDate result = client.getDateOperations().getMaxDate().getBody();
         Assert.assertEquals(expected, result);
     }
 
@@ -80,7 +77,7 @@ public class DateOperationsTests {
     @Test
     public void getMinDate() throws Exception {
         LocalDate expected = new LocalDate(1, 1, 1);
-        LocalDate result = client.getDateOperations().getMinDate();
+        LocalDate result = client.getDateOperations().getMinDate().getBody();
         Assert.assertEquals(expected, result);
     }
 }

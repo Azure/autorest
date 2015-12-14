@@ -9,6 +9,7 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'com.bmuschko.nexus'
+apply plugin: 'checkstyle'
 
 group = 'com.microsoft.rest'
 version = '0.0.1-SNAPSHOT'
@@ -23,9 +24,17 @@ repositories {
     maven { url "../../../../ClientRuntimes/Java/client-runtime/build/repo-snapshots/"}
 }
 
+checkstyle {
+    configFile = new File("$rootDir/Tools/checkstyle/checkstyle.xml")
+    configProperties = [samedir: "$rootDir/Tools/checkstyle"]
+    reportsDir = new File("$rootDir/Tools/checkstyle/reports")
+}
+
+
 dependencies {
     compile 'commons-codec:commons-codec:1.10'
-    compile 'com.squareup.okhttp:okhttp:2.5.0'
+    compile 'com.squareup.okhttp:okhttp:2.6.0-SNAPSHOT'
+    compile 'com.squareup.okhttp:logging-interceptor:2.6.0-SNAPSHOT'
     compile 'com.microsoft.rest:client-runtime:0.0.1-SNAPSHOT'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'joda-time:joda-time:2.8.2'

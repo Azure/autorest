@@ -73,7 +73,8 @@ describe('nodejs', function () {
     });
 
     it('should accept null optional parameters', function (done) {
-      testClient.parameterGrouping.postOptional(null, function (error, result, request, response) {
+      var options = { parameterGroupingPostOptionalParameters : null };
+      testClient.parameterGrouping.postOptional(options, function (error, result, request, response) {
         should.not.exist(error);
         response.statusCode.should.equal(200);
         done();
@@ -81,8 +82,11 @@ describe('nodejs', function () {
     });
 
     it('should allow multiple parameter groups', function (done) {
-      testClient.parameterGrouping.postMultipleParameterGroups({headerOne: header, queryOne: query}, {headerTwo: "header2", queryTwo: 42}, 
-        function (error, result, request, response) {
+      var options = {
+        firstParameterGroup : { headerOne: header, queryOne: query },
+        parameterGroupingPostMultipleParameterGroupsSecondParameterGroup: { headerTwo: "header2", queryTwo: 42 }
+      };
+      testClient.parameterGrouping.postMultipleParameterGroups(options, function (error, result, request, response) {
           should.not.exist(error);
           response.statusCode.should.equal(200);
           done();
@@ -90,8 +94,22 @@ describe('nodejs', function () {
     });
 
     it('should allow multiple parameter groups with some defaults omitted', function (done) {
-      testClient.parameterGrouping.postMultipleParameterGroups({headerOne: header}, {queryTwo: 42}, 
-        function (error, result, request, response) {
+      var options = {
+        firstParameterGroup : { headerOne: header},
+        parameterGroupingPostMultipleParameterGroupsSecondParameterGroup: { queryTwo: 42 }
+      };
+      testClient.parameterGrouping.postMultipleParameterGroups(options, function (error, result, request, response) {
+          should.not.exist(error);
+          response.statusCode.should.equal(200);
+          done();
+      });
+    });
+
+    it('should allow parameter group objects to be shared between operations', function (done) {
+      var options = {
+        firstParameterGroup : { headerOne: header, queryOne: 42 }
+      };
+      testClient.parameterGrouping.postSharedParameterGroupObject(options, function (error, result, request, response) {
           should.not.exist(error);
           response.statusCode.should.equal(200);
           done();

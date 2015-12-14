@@ -1,0 +1,27 @@
+{
+  "version": "1.4.2-preview",
+  "summary": "Generator.CSharp Tests.",
+  "authors": [ "Microsoft" ],
+  "tags": [ "Microsoft AutoRest ClientRuntime REST" ],
+  "projectUrl": "https://github.com/Azure/AutoRest",
+  "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE",
+  "commands": {
+    "test": "xunit.runner.dnx"
+  },
+  "frameworks": {
+    "dnxcore50": {
+      "compilationOptions": { "define": [ "PORTABLE" ] },
+      "dependencies": {
+        "xunit.runner.dnx": "2.1.0-rc1-build198",
+        "Microsoft.Rest.ClientRuntime": "",
+        "Microsoft.Rest.ClientRuntime.Azure": "",
+        "CSharp.Tests": "",
+        "xunit": "2.1.0"
+      }
+    }
+  },
+  "exclude": [ "CSharpAzureCodeNamingFrameworkTests.*" ],
+  "dependencies": {
+    "Microsoft.Framework.Logging.Console": "1.0.0-beta8"
+  }
+}

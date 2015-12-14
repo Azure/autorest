@@ -32,7 +32,15 @@ namespace Microsoft.Rest.Generator.NodeJS.Tests
         public static void SampleTestForGeneratingNodeJS()
         {
             SwaggerSpecHelper.RunTests<NodeJSCodeGenerator>(
-                SwaggerPath("body-complex.json"), ExpectedPath("BodyComplex"));
+                new Settings
+                {
+                    Input = SwaggerPath("body-complex.json"),
+                    OutputDirectory = "X:\\Output",
+                    Header = "MICROSOFT_MIT",
+                    Modeler = "Swagger",
+                    CodeGenerator = "NodeJS",
+                    PayloadFlatteningThreshold = 1
+                }, ExpectedPath("BodyComplex"));
         }
     }
 }

@@ -28,7 +28,7 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             // default value
             nextLinkName = null;
-            var ext = extensions[AzureCodeGenerator.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
+            var ext = extensions[AzureExtensions.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
             if (ext == null)
             {
                 return null;
@@ -58,6 +58,67 @@ namespace Microsoft.Rest.Generator.CSharp
             return pageClasses[keypair];
         }
 
+        protected override IType NormalizePrimaryType(PrimaryType primaryType)
+        {
+            if (primaryType != null && primaryType == PrimaryType.Credentials)
+            {
+                primaryType.Name = "ServiceClientCredentials";
+                return primaryType;
+            }
+            else
+            {
+                return base.NormalizePrimaryType(primaryType);
+            }
+        }
+
+        public virtual void NormalizeODataMethods(ServiceClient client)
+        {
+            if (client == null)
+            {
+                throw new ArgumentNullException("client");
+            }
+
+            foreach (var method in client.Methods)
+            {
+                if (method.Extensions.ContainsKey(AzureExtensions.ODataExtension))
+                {
+                    var odataFilter = method.Parameters.FirstOrDefault(p =>
+                        p.SerializedName.Equals("$filter", StringComparison.OrdinalIgnoreCase) &&
+                        p.Location == ParameterLocation.Query &&
+                        p.Type is CompositeType);
+
+                    if (odataFilter == null)
+                    {
+                        continue;
+                    }
+
+                    // Remove all odata parameters
+                    method.Parameters.RemoveAll(source =>
+                        (source.SerializedName.Equals("$filter", StringComparison.OrdinalIgnoreCase) ||
+                        source.SerializedName.Equals("$top", StringComparison.OrdinalIgnoreCase) ||
+                        source.SerializedName.Equals("$orderby", StringComparison.OrdinalIgnoreCase) ||
+                        source.SerializedName.Equals("$skip", StringComparison.OrdinalIgnoreCase) ||
+                        source.SerializedName.Equals("$expand", StringComparison.OrdinalIgnoreCase))
+                        && source.Location == ParameterLocation.Query);
+
+                    var odataQuery = new Parameter
+                    {
+                        SerializedName = "$filter",
+                        Name = "odataQuery",
+                        Type = new CompositeType
+                        {
+                            Name = string.Format(CultureInfo.InvariantCulture, "ODataQuery<{0}>", odataFilter.Type.Name)
+                        },
+                        Documentation = "OData parameters to apply to the operation.",
+                        Location = ParameterLocation.Query,
+                        IsRequired = odataFilter.IsRequired
+                    };
+                    odataQuery.Extensions[AzureExtensions.ODataExtension] = method.Extensions[AzureExtensions.ODataExtension];
+                    method.Parameters.Insert(0, odataQuery);
+                }
+            }
+        }
+
         /// <summary>
         /// Changes paginated method signatures to return Page type.
         /// </summary>
@@ -72,7 +133,7 @@ namespace Microsoft.Rest.Generator.CSharp
 
             var convertedTypes = new Dictionary<IType, CompositeType>();
 
-            foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureCodeGenerator.PageableExtension)))
+            foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension)))
             {
                 string nextLinkString;
                 string pageClassName = GetPagingSetting(method.Extensions, pageClasses, out nextLinkString);
@@ -83,15 +144,14 @@ namespace Microsoft.Rest.Generator.CSharp
                 var pageTypeFormat = "{0}<{1}>";
                 var ipageTypeFormat = "IPage<{0}>";
 
-                foreach (var responseStatus in method.Responses.Where(r => r.Value is CompositeType).Select(s => s.Key).ToArray())
+                foreach (var responseStatus in method.Responses
+                    .Where(r => r.Value.Body is CompositeType).Select(s => s.Key).ToArray())
                 {
-                    var compositType = (CompositeType) method.Responses[responseStatus];
+                    var compositType = (CompositeType) method.Responses[responseStatus].Body;
                     var sequenceType = compositType.Properties.Select(p => p.Type).FirstOrDefault(t => t is SequenceType) as SequenceType;
 
                     // if the type is a wrapper over page-able response
-                    if(sequenceType != null &&
-                       compositType.Properties.Count == 2 &&
-                       compositType.Properties.Any(p => p.SerializedName.Equals(nextLinkString, StringComparison.OrdinalIgnoreCase)))
+                    if(sequenceType != null)
                     {
                         var pagableTypeName = string.Format(CultureInfo.InvariantCulture, pageTypeFormat, pageClassName, sequenceType.ElementType.Name);
                         var ipagableTypeName = string.Format(CultureInfo.InvariantCulture, ipageTypeFormat, sequenceType.ElementType.Name);
@@ -100,21 +160,22 @@ namespace Microsoft.Rest.Generator.CSharp
                         {
                             Name = pagableTypeName
                         };
-                        pagedResult.Extensions[AzureCodeGenerator.ExternalExtension] = true;
-                        pagedResult.Extensions[AzureCodeGenerator.PageableExtension] = ipagableTypeName;
+                        pagedResult.Extensions[AzureExtensions.ExternalExtension] = true;
+                        pagedResult.Extensions[AzureExtensions.PageableExtension] = ipagableTypeName;
 
-                        convertedTypes[method.Responses[responseStatus]] = pagedResult;
-                        method.Responses[responseStatus] = pagedResult;
+                        convertedTypes[method.Responses[responseStatus].Body] = pagedResult;
+                        method.Responses[responseStatus] = new Response(pagedResult, method.Responses[responseStatus].Headers);
                     }
                 }
 
-                if (convertedTypes.ContainsKey(method.ReturnType))
+                if (convertedTypes.ContainsKey(method.ReturnType.Body))
                 {
-                    method.ReturnType = convertedTypes[method.ReturnType];
+                    method.ReturnType = new Response(convertedTypes[method.ReturnType.Body], 
+                        method.ReturnType.Headers);
                 }
             }
 
-            AzureCodeGenerator.RemoveUnreferencedTypes(serviceClient, convertedTypes.Keys.Cast<CompositeType>().Select(t => t.Name));
+            AzureExtensions.RemoveUnreferencedTypes(serviceClient, convertedTypes.Keys.Cast<CompositeType>().Select(t => t.Name));
         }
     }
 }

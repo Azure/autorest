@@ -28,10 +28,6 @@
                                         + "} " + MethodTemplateModel.GetParameterDocumentationName(parameter)
                                         + " " + parameter.Documentation))
 }
-@WrapComment(" * ", " @param {object} [options]")
- *
-@WrapComment(" * ", " @param {object} [options.customHeaders] headers that will be added to request")
- *
 @WrapComment(" * ", " @param {function} callback")
  *
 @WrapComment(" * ", " @returns {function} callback(err, result, request, response)")
@@ -54,15 +50,11 @@
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  @foreach (var mapping in Model.InputParameterMappings)
+  @if (((CompositeType)Model.OptionsParameterTemplateModel.Type).Properties.Count > 1)
   {
-  @:var @(mapping.OutputParameter.Name) = @string.Format(CultureInfo.InvariantCulture,
-                           "({0} ? {0}.{1} : undefined)",
-                           mapping.InputParameter.Name,
-                           mapping.InputParameterProperty);
+  @:@(Model.BuildOptionalMappings())
   }
-
-  @if (Model.LogicalParameters.Any())
+  @if (Model.ParameterTemplateModels.Any())
   {
       var validationBlock = Model.ValidationString;
   if (!string.IsNullOrWhiteSpace(validationBlock))
@@ -77,6 +69,8 @@
   </text>
   }
   }
+
+  @Model.BuildInputMappings()
   @EmptyLine
   // Construct URL
   @if (Model.IsAbsoluteUrl)
@@ -134,7 +128,7 @@
   }
   else
   {
-    @:@(Model.RequestBody.Type.SerializeType(Model.Scope, Model.RequestBody.Name, "requestModel", Model.RequestBody.IsRequired))
+    @:@(Model.RequestBody.Type.SerializeType(Model.Scope, Model.RequestBody.Name, "requestModel", Model.RequestBody.IsRequired, Model.RequestBody.Constraints))
     @:requestContent = JSON.stringify(requestModel);
   }
   } catch (error) {
@@ -154,7 +148,7 @@
   </text>
   }
 
-  @if (Model.Responses.Any(r => r.Value == PrimaryType.Stream))
+  @if (Model.Responses.Any(r => r.Value.Body == PrimaryType.Stream))
   {
 @:  @Include(new MethodStreamPipelineTemplate(), Model)
   }

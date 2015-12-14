@@ -62,6 +62,30 @@ namespace Microsoft.Rest.Generator.Test
         }
 
         [Fact]
+        public void CreateWithAliasedParametersWorks()
+        {
+            var settings = Settings.Create(new[]
+            {
+                "-h", " --i", "/c/input",
+                "-output", " c:\\output", "-clientName", "MyClient"
+            });
+            Assert.True(settings.ShowHelp);
+            Assert.Equal("/c/input", settings.Input);
+            Assert.Equal("c:\\output", settings.OutputDirectory);
+            Assert.Equal("MyClient", settings.ClientName);
+        }
+
+        [Fact]
+        public void IntegerParameterWorks()
+        {
+            var settings = Settings.Create(new[]
+            {
+                "-ft", "3", "-PayloadFlatteningThreshold", "4"
+            });
+            Assert.Equal(4, settings.PayloadFlatteningThreshold);
+        }
+
+        [Fact]
         public void MissingParameterThrowsException()
         {
             var settings = Settings.Create(new[] {"-Modeler", "foo"});

@@ -141,7 +141,7 @@ var header = function (coverage, optionalCoverage) {
             break;
           }
         } else if (scenario === "empty") {
-          if (value === "") {
+          if (value === "" || value === null || value === undefined) {
             coverage['HeaderParameterStringEmpty']++;
             res.status(200).end();
             break;
@@ -315,7 +315,7 @@ var header = function (coverage, optionalCoverage) {
           break;
         } else if (scenario === "null") {
           coverage['HeaderResponseEnumNull']++;
-          res.status(200).set('value', null).end();
+          res.status(200).set('value', '').end();
           break;
         }
         utils.send400(res, next, "Did not like enum scenario \"" + scenario + "\" with value " + value);

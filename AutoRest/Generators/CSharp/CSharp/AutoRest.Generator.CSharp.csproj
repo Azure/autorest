@@ -47,6 +47,9 @@
     <Compile Include="TemplateModels\ParameterTemplateModel.cs" />
     <Compile Include="TemplateModels\PropertyTemplateModel.cs" />
     <Compile Include="TemplateModels\ModelTemplateModel.cs" />
+    <Compile Include="Templates\ExceptionTemplate.cs">
+      <DependentUpon>ExceptionTemplate.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Templates\EnumTemplate.cs">
       <DependentUpon>EnumTemplate.cshtml</DependentUpon>
     </Compile>
@@ -68,18 +71,23 @@
     <Compile Include="Templates\ModelTemplate.cs">
       <DependentUpon>ModelTemplate.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Templates\ServiceClientBodyTemplate.cs">
+      <DependentUpon>ServiceClientBodyTemplate.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Templates\ServiceClientInterfaceTemplate.cs">
       <DependentUpon>ServiceClientInterfaceTemplate.cshtml</DependentUpon>
     </Compile>
     <Compile Include="Templates\ServiceClientTemplate.cs">
       <DependentUpon>ServiceClientTemplate.cshtml</DependentUpon>
     </Compile>
+    <None Include="Templates\ExceptionTemplate.cshtml" />
     <None Include="Templates\ExtensionMethodTemplate.cshtml" />
     <None Include="Templates\ExtensionsTemplate.cshtml" />
     <None Include="Templates\EnumTemplate.cshtml" />
     <None Include="Templates\ServiceClientInterfaceTemplate.cshtml" />
     <None Include="Templates\MethodGroupTemplate.cshtml" />
     <None Include="Templates\MethodGroupInterfaceTemplate.cshtml" />
+    <None Include="Templates\ServiceClientBodyTemplate.cshtml" />
     <None Include="Templates\ServiceClientTemplate.cshtml" />
     <None Include="Templates\MethodTemplate.cshtml" />
     <None Include="Templates\ModelTemplate.cshtml" />
@@ -94,6 +102,10 @@
     <ProjectReference Include="..\..\..\AutoRest.Core\AutoRest.Core.csproj">
       <Project>{c876085f-9dc3-41f0-b7b4-17022cd84684}</Project>
       <Name>AutoRest.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Extensions\Extensions\AutoRest.Generator.Extensions.csproj">
+      <Project>{7dd043eb-5e53-4180-b123-cc3cc5022e34}</Project>
+      <Name>AutoRest.Generator.Extensions</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

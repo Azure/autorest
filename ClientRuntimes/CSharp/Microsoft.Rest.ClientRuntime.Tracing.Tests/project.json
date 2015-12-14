@@ -1,0 +1,26 @@
+{
+  "version": "1.4.2-preview",
+  "summary": "ClientRuntime Tests.",
+  "authors": [ "Microsoft" ],
+  "tags": [ "Microsoft AutoRest ClientRuntime REST" ],
+  "projectUrl": "https://github.com/Azure/AutoRest",
+  "licenseUrl": "https://raw.githubusercontent.com/Microsoft/dotnet/master/LICENSE",
+
+  "frameworks": {
+    "net45": {
+      "frameworkAssemblies": {
+        "System": "",
+        "System.Runtime": "",
+        "System.Threading": ""
+      }
+    }
+  },
+
+  "dependencies": {
+    "xunit": "2.1.0",
+    "xunit.runner.visualstudio": "2.1.0",
+    "Microsoft.Diagnostics.Tracing.TraceEvent": "1.0.39",
+    "Microsoft.Rest.ClientRuntime.Log4Net": "",
+    "Microsoft.Rest.ClientRuntime.Etw": ""
+  }
+}

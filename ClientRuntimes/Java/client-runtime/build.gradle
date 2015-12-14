@@ -3,17 +3,27 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
         classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.2'
     }
 }
 
 apply plugin: 'java'
-apply plugin: 'com.bmuschko.nexus'
+apply plugin: 'maven'
 apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'checkstyle'
 
 group = 'com.microsoft.rest'
 version = '0.0.1-SNAPSHOT'
+
+configurations {
+    deployerJars
+}
+
+checkstyle {
+    configFile = new File("$rootDir/Tools/checkstyle/checkstyle.xml")
+    configProperties = [samedir: "$rootDir/Tools/checkstyle"]
+    reportsDir = new File("$rootDir/Tools/checkstyle/reports")
+}
 
 repositories {
     mavenCentral()
@@ -21,51 +31,51 @@ repositories {
 }
 
 dependencies {
-    compile 'org.apache.commons:commons-lang3:3.4'
-    compile 'commons-codec:commons-codec:1.10'
-    compile 'commons-io:commons-io:2.4'
     compile 'com.google.guava:guava:18.0'
     compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
-    compile 'com.squareup.okhttp:okhttp:2.5.0'
+    compile 'com.squareup.okhttp:okhttp:2.6.0'
+    compile 'com.squareup.okhttp:logging-interceptor:2.6.0'
     compile 'com.squareup.retrofit:converter-jackson:2.0.0-beta2'
     compile 'com.fasterxml.jackson.datatype:jackson-datatype-joda:2.1.1'
     testCompile 'junit:junit:4.11'
     testCompile 'junit:junit-dep:4.11'
+    deployerJars "org.apache.maven.wagon:wagon-ftp:2.10"
 }
 
-modifyPom {
-    setArtifactId 'client-runtime'
-    project {
-        name 'Microsoft AutoRest Runtime for Java'
-        description 'This is the client runtime for AutoRest generated Java clients.'
-        url 'https://github.com/Azure/autorest'
-
-        scm {
-            url 'scm:git:https://github.com/Azure/AutoRest'
-            connection 'scm:git:git://github.com/Azure/AutoRest.git'
-        }
-
-        licenses {
-            license {
-                name 'The MIT License (MIT)'
-                url 'http://opensource.org/licenses/MIT'
-                distribution 'repo'
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            configuration = configurations.deployerJars
+            snapshotRepository(url: "ftp://waws-prod-bay-005.ftp.azurewebsites.windows.net/site/wwwroot/") {
+                authentication(userName: username, password: password)
             }
-        }
+            pom.project {
+                name 'Microsoft AutoRest Runtime for Java'
+                description 'This is the client runtime for AutoRest generated Java clients.'
+                url 'https://github.com/Azure/autorest'
 
-        developers {
-            developer {
-                id 'microsoft'
-                name 'Microsoft'
+                scm {
+                    url 'scm:git:https://github.com/Azure/AutoRest'
+                    connection 'scm:git:git://github.com/Azure/AutoRest.git'
+                }
+
+                licenses {
+                    license {
+                        name 'The MIT License (MIT)'
+                        url 'http://opensource.org/licenses/MIT'
+                        distribution 'repo'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'microsoft'
+                        name 'Microsoft'
+                    }
+                }
             }
         }
     }
-}
-
-nexus {
-    sign = true
-    repositoryUrl = "file://$buildDir/repo"
-    snapshotRepositoryUrl = "file://$buildDir/repo-snapshots"
 }
 
 test {
@@ -76,6 +86,15 @@ test {
 
 javadoc {
     options.encoding = 'UTF-8'
+}
+
+task sourcesJar(type: Jar, dependsOn:classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives sourcesJar
 }
 
 test {

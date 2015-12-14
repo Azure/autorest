@@ -14,7 +14,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 
 public class PolymorphismrecursiveTests {
-    static AutoRestComplexTestService client;
+    private static AutoRestComplexTestService client;
 
     @BeforeClass
     public static void setup() {
@@ -23,11 +23,11 @@ public class PolymorphismrecursiveTests {
 
     @Test
     public void getValid() throws Exception {
-        Fish result = client.getPolymorphicrecursive().getValid();
-        Salmon salmon = (Salmon)result;
-        Shark sib1 = (Shark)(salmon.getSiblings().get(0));
-        Salmon sib2 = (Salmon)(sib1.getSiblings().get(0));
-        Shark sib3 = (Shark)(sib2.getSiblings().get(0));
+        Fish result = client.getPolymorphicrecursive().getValid().getBody();
+        Salmon salmon = (Salmon) result;
+        Shark sib1 = (Shark) (salmon.getSiblings().get(0));
+        Salmon sib2 = (Salmon) (sib1.getSiblings().get(0));
+        Shark sib3 = (Shark) (sib2.getSiblings().get(0));
         Assert.assertEquals(
                 new DateTime(2012, 1, 5, 1, 0, 0, DateTimeZone.UTC),
                 sib3.getBirthday());
@@ -54,7 +54,7 @@ public class PolymorphismrecursiveTests {
         sib2.setAge(105);
         sib2.setBirthday(new DateTime(1900, 1, 5, 1, 0, 0, DateTimeZone.UTC));
         sib2.setLength(10.0);
-        sib2.setPicture(new byte[] {(byte)255, (byte)255, (byte)255, (byte)255, (byte)254});
+        sib2.setPicture(new byte[] {(byte) 255, (byte) 255, (byte) 255, (byte) 255, (byte) 254});
         sib2.setSpecies("dangerous");
         sib2.setSiblings(new ArrayList<Fish>());
         body.getSiblings().add(sib2);
@@ -79,7 +79,7 @@ public class PolymorphismrecursiveTests {
         sib112.setAge(105);
         sib112.setBirthday(new DateTime(1900, 1, 5, 1, 0, 0, DateTimeZone.UTC));
         sib112.setLength(10.0);
-        sib112.setPicture(new byte[] {(byte)255, (byte)255, (byte)255, (byte)255, (byte)254});
+        sib112.setPicture(new byte[] {(byte) 255, (byte) 255, (byte) 255, (byte) 255, (byte) 254});
         sib112.setSpecies("dangerous");
         sib11.getSiblings().add(sib112);
 

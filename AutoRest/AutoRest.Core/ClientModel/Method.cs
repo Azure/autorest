@@ -23,8 +23,8 @@ namespace Microsoft.Rest.Generator.ClientModel
             Extensions = new Dictionary<string, object>();
             Parameters = new List<Parameter>();
             RequestHeaders = new Dictionary<string, string>();
-            Responses = new Dictionary<HttpStatusCode, IType>();
-            InputParameterMappings = new List<ParameterMapping>();
+            Responses = new Dictionary<HttpStatusCode, Response>();
+            InputParameterTransformation = new List<ParameterTransformation>();
         }
 
         /// <summary>
@@ -67,7 +67,7 @@ namespace Microsoft.Rest.Generator.ClientModel
             get
             {
                 return Parameters.Where(gp => gp.Location != ParameterLocation.None)
-                    .Union(InputParameterMappings.Select(m => m.OutputParameter));
+                    .Union(InputParameterTransformation.Select(m => m.OutputParameter));
             }
         }
 
@@ -83,9 +83,9 @@ namespace Microsoft.Rest.Generator.ClientModel
         }
 
         /// <summary>
-        /// Gets the list of input Parameter Mappings
+        /// Gets the list of input Parameter transformations
         /// </summary>
-        public List<ParameterMapping> InputParameterMappings { get; private set; }
+        public IList<ParameterTransformation> InputParameterTransformation { get; private set; }
 
         /// <summary>
         /// Gets or sets request headers.
@@ -104,18 +104,20 @@ namespace Microsoft.Rest.Generator.ClientModel
 
         /// <summary>
         /// Gets or sets response bodies by HttpStatusCode.
+        /// and headers.
         /// </summary>
-        public Dictionary<HttpStatusCode, IType> Responses { get; private set; }
+        public Dictionary<HttpStatusCode, Response> Responses { get; private set; }
 
         /// <summary>
         /// Gets or sets the default response.
         /// </summary>
-        public IType DefaultResponse { get; set; }
+        public Response DefaultResponse { get; set; }
 
         /// <summary>
-        /// Gets or sets the method return type.
+        /// Gets or sets the method return type. The tuple contains a body
+        /// and headers.
         /// </summary>
-        public IType ReturnType { get; set; }
+        public Response ReturnType { get; set; }
 
         /// <summary>
         /// Gets or sets the description.
@@ -159,11 +161,11 @@ namespace Microsoft.Rest.Generator.ClientModel
             newMethod.Extensions = new Dictionary<string, object>();
             newMethod.Parameters = new List<Parameter>();
             newMethod.RequestHeaders = new Dictionary<string, string>();
-            newMethod.Responses = new Dictionary<HttpStatusCode, IType>();
-            newMethod.InputParameterMappings = new List<ParameterMapping>();
+            newMethod.Responses = new Dictionary<HttpStatusCode, Response>();
+            newMethod.InputParameterTransformation = new List<ParameterTransformation>();
             this.Extensions.ForEach(e => newMethod.Extensions[e.Key] = e.Value);
             this.Parameters.ForEach(p => newMethod.Parameters.Add((Parameter)p.Clone()));
-            this.InputParameterMappings.ForEach(m => newMethod.InputParameterMappings.Add((ParameterMapping)m.Clone()));
+            this.InputParameterTransformation.ForEach(m => newMethod.InputParameterTransformation.Add((ParameterTransformation)m.Clone()));
             this.RequestHeaders.ForEach(r => newMethod.RequestHeaders[r.Key] = r.Value);
             this.Responses.ForEach(r => newMethod.Responses[r.Key] = r.Value);
             return newMethod;

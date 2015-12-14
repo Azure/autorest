@@ -17,11 +17,27 @@ import java.io.IOException;
  * An instance of this interceptor placed in the request pipeline handles retriable errors.
  */
 public class RetryHandler implements Interceptor {
+    /**
+     * Represents the default number of retries.
+     */
     private static final int DEFAULT_NUMBER_OF_ATTEMPTS = 3;
+    /**
+     * Represents the default value that will be used to calculate a random
+     * delta in the exponential delay between retries.
+     */
     private static final int DEFAULT_BACKOFF_DELTA = 1000 * 10;
+    /**
+     * Represents the default maximum backoff time.
+     */
     private static final int DEFAULT_MAX_BACKOFF = 1000 * 10;
+    /**
+     * Represents the default minimum backoff time.
+     */
     private static final int DEFAULT_MIN_BACKOFF = 1000;
 
+    /**
+     * The retry strategy to use.
+     */
     private RetryStrategy retryStrategy;
 
     /**

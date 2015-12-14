@@ -1,18 +1,15 @@
 package fixtures.bodycomplex;
 
-import fixtures.bodycomplex.models.ArrayWrapper;
 import fixtures.bodycomplex.models.DictionaryWrapper;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class DictionaryTests {
-    static AutoRestComplexTestService client;
+    private static AutoRestComplexTestService client;
 
     @BeforeClass
     public static void setup() {
@@ -21,7 +18,7 @@ public class DictionaryTests {
 
     @Test
     public void getValid() throws Exception {
-        DictionaryWrapper result = client.getDictionary().getValid();
+        DictionaryWrapper result = client.getDictionary().getValid().getBody();
         Assert.assertEquals(5, result.getDefaultProgram().size());
         Assert.assertEquals("", result.getDefaultProgram().get("exe"));
         Assert.assertEquals(null, result.getDefaultProgram().get(""));
@@ -42,7 +39,7 @@ public class DictionaryTests {
 
     @Test
     public void getEmpty() throws Exception {
-        DictionaryWrapper result = client.getDictionary().getEmpty();
+        DictionaryWrapper result = client.getDictionary().getEmpty().getBody();
         Assert.assertEquals(0, result.getDefaultProgram().size());
     }
 
@@ -55,13 +52,13 @@ public class DictionaryTests {
 
     @Test
     public void getNull() throws Exception {
-        DictionaryWrapper result = client.getDictionary().getNull();
+        DictionaryWrapper result = client.getDictionary().getNull().getBody();
         Assert.assertNull(result.getDefaultProgram());
     }
 
     @Test
     public void getNotProvided() throws Exception {
-        DictionaryWrapper result = client.getDictionary().getNotProvided();
+        DictionaryWrapper result = client.getDictionary().getNotProvided().getBody();
         Assert.assertNull(result.getDefaultProgram());
     }
 }

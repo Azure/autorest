@@ -1,0 +1,179 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft Azure Redis Cache Management API",
+    "description": "Some cool documentation.",
+    "version": "2014-04-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "basePath": "/",
+  "produces": [ "application/json" ],
+  "consumes": [ "application/json" ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups": {
+      "get": {
+        "operationId": "list",
+        "summary": "Product Types",
+        "description": "The Products endpoint returns information about the Uber products offered at a given location. The response includes the display name and other details about each product, and lists the products in the proper display order.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParamterer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of caches",
+            "schema": {
+              "$ref": "Product"
+            },
+            "headers": {
+              "X-Rate-Limit-Limit": {
+                "description": "The number of allowed requests in the current period",
+                "type": "integer"
+              },
+              "X-Rate-Limit-Remaining": {
+                "description": "The number of remaining requests in the current period",
+                "type": "integer"
+              },
+              "X-Rate-Seconds": {
+                "description": "The number of seconds left in the current period",
+                "type": "string"
+              }
+            }
+          },
+          "201": {
+            "description": "A list of caches",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            },
+            "headers": {
+              "X-Rate-Limit-Limit": {
+                "description": "The number of allowed requests in the current period",
+                "type": "integer"
+              },
+              "X-Rate-Limit-Remaining": {
+                "description": "The number of remaining requests in the current period",
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "create",
+        "summary": "Product Types",
+        "description": "The Products endpoint returns information about the Uber products offered at a given location. The response includes the display name and other details about each product, and lists the products in the proper display order.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParamterer"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of caches",
+            "schema": {
+              "$ref": "Product"
+            },
+            "headers": {
+              "X-Rate-Limit-Limit": {
+                "description": "The number of allowed requests in the current period",
+                "type": "integer"
+              },
+              "X-Rate-Limit-Remaining": {
+                "description": "The number of remaining requests in the current period",
+                "type": "integer"
+              },
+              "X-Rate-Seconds": {
+                "description": "The number of seconds left in the current period",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Product": {
+      "description": "The product documentation.",
+      "properties": {
+        "product_id": {
+          "type": "string",
+          "description": "Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of product."
+        },
+        "display_name": {
+          "type": "string",
+          "description": "Display name of product."
+        },
+        "capacity": {
+          "type": "string",
+          "description": "Capacity of product. For example, 4 people."
+        },
+        "image": {
+          "type": "string",
+          "description": "Image URL representing the product."
+        }
+      },
+      "example": {
+        "name": "Puma",
+        "id": 1
+      }
+    },
+    "Error": {
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "fields": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParamterer": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "ApiVersionParameter": {
+      "name": "apiVersion",
+      "in": "path",
+      "description": "API ID.",
+      "required": true,
+      "type": "string"
+    }
+  }
+}

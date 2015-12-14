@@ -15,6 +15,8 @@ namespace Microsoft.Rest.Generator.Java
     {
         private readonly HashSet<IType> _normalizedTypes;
 
+        public static HashSet<string> PrimaryTypes {get; private set;}
+
         /// <summary>
         /// Initializes a new instance of CSharpCodeNamingFramework.
         /// </summary>
@@ -39,6 +41,26 @@ namespace Microsoft.Rest.Generator.Java
             }.ForEach(s => ReservedWords.Add(s));
 
             _normalizedTypes = new HashSet<IType>();
+            PrimaryTypes = new HashSet<string>();
+            new HashSet<string>
+            {
+                "int", "Integer",
+                "long", "Long",
+                "object", "Object",
+                "bool", "Boolean",
+                "double", "Double",
+                "float", "Float",
+                "byte", "Byte",
+                "byte[]", "Byte[]",
+                "String",
+                "LocalDate",
+                "DateTime",
+                "DateTimeRfc1123",
+                "Duration",
+                "Period",
+                "BigDecimal",
+                "InputStream"
+            }.ForEach(s => PrimaryTypes.Add(s));
         }
 
         public override string GetFieldName(string name)
@@ -278,6 +300,10 @@ namespace Microsoft.Rest.Generator.Java
             {
                 primaryType.Name = "Object";
             }
+            else if (primaryType == PrimaryType.Credentials)
+            {
+                primaryType.Name = "ServiceClientCredentials";
+            }
 
             return primaryType;
         }
@@ -335,7 +361,7 @@ namespace Microsoft.Rest.Generator.Java
             return dictionaryType;
         }
 
-        public static String ImportedFrom(PrimaryType primaryType)
+        public static string GetJavaType(PrimaryType primaryType)
         {
             if (primaryType == null)
             {
@@ -367,11 +393,6 @@ namespace Microsoft.Rest.Generator.Java
             {
                 return "java.io.InputStream";
             }
-            else if (primaryType == PrimaryType.ByteArray ||
-                primaryType.Name == "ByteArray")
-            {
-                return "org.apache.commons.codec.binary.Base64";
-            }
             else if (primaryType == PrimaryType.TimeSpan ||
                 primaryType.Name == "Period")
             {
@@ -380,6 +401,18 @@ namespace Microsoft.Rest.Generator.Java
             else
             {
                 return null;
+            }
+        }
+
+        public static string GetJavaException(string exception)
+        {
+            switch (exception) {
+                case "IOException": 
+                    return "java.io.IOException";
+                case "ServiceException":
+                    return "com.microsoft.rest.ServiceException";
+                default:
+                    return null;
             }
         }
     }

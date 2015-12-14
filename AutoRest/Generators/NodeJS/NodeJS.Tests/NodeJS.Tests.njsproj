@@ -13,6 +13,9 @@
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
     <Name>NodeJS.Tests</Name>
+    <EnableTypeScript>true</EnableTypeScript>
+    <TypeScriptSourceMap>true</TypeScriptSourceMap>
+    <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
@@ -81,6 +84,11 @@
     <Compile Include="Expected\AcceptanceTests\BodyComplex\operations\Polymorphicrecursive.js" />
     <Compile Include="Expected\AcceptanceTests\BodyComplex\operations\Polymorphism.js" />
     <Compile Include="Expected\AcceptanceTests\BodyComplex\operations\Primitive.js" />
+    <Compile Include="Expected\AcceptanceTests\BodyDateTimeRfc1123\autoRestRFC1123DateTimeTestService.js" />
+    <Compile Include="Expected\AcceptanceTests\BodyDateTimeRfc1123\models\errorModel.js" />
+    <Compile Include="Expected\AcceptanceTests\BodyDateTimeRfc1123\models\index.js" />
+    <Compile Include="Expected\AcceptanceTests\BodyDateTimeRfc1123\operations\datetimerfc1123.js" />
+    <Compile Include="Expected\AcceptanceTests\BodyDateTimeRfc1123\operations\index.js" />
     <Compile Include="Expected\AcceptanceTests\BodyDateTime\AutoRestDateTimeTestService.js" />
     <Compile Include="Expected\AcceptanceTests\BodyDateTime\models\ErrorModel.js" />
     <Compile Include="Expected\AcceptanceTests\BodyDateTime\models\index.js" />
@@ -97,6 +105,11 @@
     <Compile Include="Expected\AcceptanceTests\BodyDictionary\models\Widget.js" />
     <Compile Include="Expected\AcceptanceTests\BodyDictionary\operations\Dictionary.js" />
     <Compile Include="Expected\AcceptanceTests\BodyDictionary\operations\index.js" />
+    <Compile Include="Expected\AcceptanceTests\BodyDuration\autoRestDurationTestService.js" />
+    <Compile Include="Expected\AcceptanceTests\BodyDuration\models\errorModel.js" />
+    <Compile Include="Expected\AcceptanceTests\BodyDuration\models\index.js" />
+    <Compile Include="Expected\AcceptanceTests\BodyDuration\operations\duration.js" />
+    <Compile Include="Expected\AcceptanceTests\BodyDuration\operations\index.js" />
     <Compile Include="Expected\AcceptanceTests\BodyFile\autoRestSwaggerBATFileService.js" />
     <Compile Include="Expected\AcceptanceTests\BodyFile\models\errorModel.js" />
     <Compile Include="Expected\AcceptanceTests\BodyFile\models\index.js" />
@@ -232,6 +245,8 @@
     <Content Include="obj\Debug\AutoRest.Generator.NodeJS.Tests.njsproj.FileListAbsolute.txt" />
     <Content Include="obj\Net45-Debug\AutoRest.Generator.NodeJS.Tests.csproj.FileListAbsolute.txt" />
     <Content Include="packages.config" />
+    <Content Include="tsconfig.json" />
+    <Content Include="tsd.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AcceptanceTests" />
@@ -253,6 +268,9 @@
     <Folder Include="Expected\AcceptanceTests\BodyComplex\" />
     <Folder Include="Expected\AcceptanceTests\BodyComplex\models\" />
     <Folder Include="Expected\AcceptanceTests\BodyComplex\operations\" />
+    <Folder Include="Expected\AcceptanceTests\BodyDateTimeRfc1123\" />
+    <Folder Include="Expected\AcceptanceTests\BodyDateTimeRfc1123\models\" />
+    <Folder Include="Expected\AcceptanceTests\BodyDateTimeRfc1123\operations\" />
     <Folder Include="Expected\AcceptanceTests\BodyDateTime\" />
     <Folder Include="Expected\AcceptanceTests\BodyDateTime\models\" />
     <Folder Include="Expected\AcceptanceTests\BodyDateTime\operations\" />
@@ -262,6 +280,9 @@
     <Folder Include="Expected\AcceptanceTests\BodyDictionary\" />
     <Folder Include="Expected\AcceptanceTests\BodyDictionary\models\" />
     <Folder Include="Expected\AcceptanceTests\BodyDictionary\operations\" />
+    <Folder Include="Expected\AcceptanceTests\BodyDuration\" />
+    <Folder Include="Expected\AcceptanceTests\BodyDuration\models\" />
+    <Folder Include="Expected\AcceptanceTests\BodyDuration\operations\" />
     <Folder Include="Expected\AcceptanceTests\BodyFile\" />
     <Folder Include="Expected\AcceptanceTests\BodyFile\models\" />
     <Folder Include="Expected\AcceptanceTests\BodyFile\operations\" />
@@ -296,6 +317,15 @@
     <Folder Include="obj\Net45-Debug" />
     <Folder Include="obj\Net45-Debug\TempPE" />
     <Folder Include="Swagger" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="AcceptanceTests\validationTests.ts" />
+    <TypeScriptCompile Include="Expected\AcceptanceTests\BodyDateTimeRfc1123\autoRestRFC1123DateTimeTestService.d.ts" />
+    <TypeScriptCompile Include="Expected\AcceptanceTests\BodyDateTimeRfc1123\models\index.d.ts" />
+    <TypeScriptCompile Include="Expected\AcceptanceTests\BodyDateTimeRfc1123\operations\index.d.ts" />
+    <TypeScriptCompile Include="Expected\AcceptanceTests\BodyDuration\autoRestDurationTestService.d.ts" />
+    <TypeScriptCompile Include="Expected\AcceptanceTests\BodyDuration\models\index.d.ts" />
+    <TypeScriptCompile Include="Expected\AcceptanceTests\BodyDuration\operations\index.d.ts" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <!--Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them.-->

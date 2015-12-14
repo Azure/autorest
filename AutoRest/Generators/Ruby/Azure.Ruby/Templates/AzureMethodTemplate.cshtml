@@ -37,7 +37,7 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
   promise = promise.then do |response|
     # Defining deserialization method.
     deserialize_method = lambda do |parsed_response|
-      @(Model.DeserializePollingResponse("parsed_response", Model.ReturnType))
+      @(Model.DeserializePollingResponse("parsed_response", Model.ReturnType.Body))
     end
 
    @EmptyLine
@@ -79,7 +79,7 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
   promise = promise.then do |response|
     # Defining deserialization method.
     deserialize_method = lambda do |parsed_response|
-      @(Model.DeserializePollingResponse("parsed_response", Model.ReturnType))
+      @(Model.DeserializePollingResponse("parsed_response", Model.ReturnType.Body))
     end
 
     @EmptyLine

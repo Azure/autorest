@@ -17,7 +17,7 @@ namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
 
         public override bool CanConvert(System.Type objectType)
         {
-            return (objectType == typeof (Response));
+            return (objectType == typeof (OperationResponse));
         }
 
         public override object ReadJson(JsonReader reader, System.Type objectType, object existingValue,
@@ -37,7 +37,7 @@ namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
                 jo = Document.SelectToken(referencePath.Replace("#/", "").Replace("/", ".")) as JObject;
             }
 
-            Response swaggerResponse = JsonConvert.DeserializeObject<Response>(jo.ToString(),
+            OperationResponse swaggerResponse = JsonConvert.DeserializeObject<OperationResponse>(jo.ToString(),
                 GetSettings(serializer));
             return swaggerResponse;
         }

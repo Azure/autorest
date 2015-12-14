@@ -41,10 +41,10 @@ foreach (var parameter in Model.LocalParameters)
 public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
 {
     // Send request
-    @(Model.OperationResponseReturnTypeString) response = await Begin@(Model.Name)WithHttpMessagesAsync(
+    @(Model.OperationResponseReturnTypeString) _response = await Begin@(Model.Name)WithHttpMessagesAsync(
         @(Model.GetAsyncMethodInvocationArgs("customHeaders")));
 
-    return await @(Model.ClientReference).GetPostOrDeleteOperationResultAsync(response, customHeaders, cancellationToken);
+    return await @(Model.ClientReference).GetPostOrDeleteOperationResultAsync(_response, customHeaders, cancellationToken);
 }
 </text>
 }
@@ -76,10 +76,10 @@ foreach (var parameter in Model.LocalParameters)
 public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
 {
     // Send Request
-    @(Model.OperationResponseReturnTypeString) response = await Begin@(Model.Name)WithHttpMessagesAsync(
+    @(Model.OperationResponseReturnTypeString) _response = await Begin@(Model.Name)WithHttpMessagesAsync(
         @(Model.GetAsyncMethodInvocationArgs("customHeaders")));
 
-    return await @(Model.ClientReference).GetPutOrPatchOperationResultAsync<@(Model.ReturnType.Name)>(response,
+    return await @(Model.ClientReference).GetPutOrPatchOperationResultAsync(_response,
         customHeaders,
         cancellationToken);
 }

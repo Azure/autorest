@@ -1,6 +1,5 @@
 package fixtures.bodyduration;
 
-import com.microsoft.rest.ServiceException;
 import org.joda.time.Period;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -8,7 +7,7 @@ import org.junit.Test;
 
 
 public class DurationOperationsTests {
-    static AutoRestDurationTestService client;
+    private static AutoRestDurationTestService client;
 
     @BeforeClass
     public static void setup() {
@@ -17,7 +16,7 @@ public class DurationOperationsTests {
 
     @Test
     public void getNull() throws Exception {
-        Assert.assertNull(client.getDuration().getNull());
+        Assert.assertNull(client.getDuration().getNull().getBody());
     }
 
     @Test
@@ -26,11 +25,11 @@ public class DurationOperationsTests {
             client.getDuration().getInvalid();
             Assert.fail(); //Should not reach here
         }
-        catch(ServiceException e) {
+        catch (IllegalArgumentException e) {
             //Swallow exceptions
         }
     }
-    
+
     @Test
     public void getPositiveDuration() throws Exception {
         client.getDuration().getPositiveDuration();
@@ -40,5 +39,4 @@ public class DurationOperationsTests {
     public void putPositiveDuration() throws Exception {
         client.getDuration().putPositiveDuration(new Period(0, 0, 0, 123, 22, 14, 12, 11));
     }
-    
 }
