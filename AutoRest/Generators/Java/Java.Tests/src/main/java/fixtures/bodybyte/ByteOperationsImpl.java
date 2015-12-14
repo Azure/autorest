@@ -27,7 +27,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in ByteOperations.
  */
-public class ByteOperationsImpl implements ByteOperations {
+public final class ByteOperationsImpl implements ByteOperations {
     /** The Retrofit service to perform REST calls. */
     private ByteService service;
     /** The service client containing this operation class. */
@@ -207,7 +207,7 @@ public class ByteOperationsImpl implements ByteOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putNonAsciiDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> putNonAsciiDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())

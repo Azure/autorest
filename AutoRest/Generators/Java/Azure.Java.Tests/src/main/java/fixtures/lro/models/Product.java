@@ -57,13 +57,4 @@ public class Product extends Resource {
         return this.provisioningStateValues;
     }
 
-    /**
-     * Set the provisioningStateValues value.
-     *
-     * @param provisioningStateValues the provisioningStateValues value to set
-     */
-    public void setProvisioningStateValues(String provisioningStateValues) {
-        this.provisioningStateValues = provisioningStateValues;
-    }
-
 }

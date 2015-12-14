@@ -27,7 +27,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in Bool.
  */
-public class BoolImpl implements Bool {
+public final class BoolImpl implements Bool {
     /** The Retrofit service to perform REST calls. */
     private BoolService service;
     /** The service client containing this operation class. */

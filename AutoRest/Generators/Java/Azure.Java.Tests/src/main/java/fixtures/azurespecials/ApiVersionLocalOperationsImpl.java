@@ -28,7 +28,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in ApiVersionLocalOperations.
  */
-public class ApiVersionLocalOperationsImpl implements ApiVersionLocalOperations {
+public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOperations {
     /** The Retrofit service to perform REST calls. */
     private ApiVersionLocalService service;
     /** The service client containing this operation class. */
@@ -88,7 +88,7 @@ public class ApiVersionLocalOperationsImpl implements ApiVersionLocalOperations 
         return call;
     }
 
-    private ServiceResponse<Void> getMethodLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> getMethodLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())
@@ -180,7 +180,7 @@ public class ApiVersionLocalOperationsImpl implements ApiVersionLocalOperations 
         return call;
     }
 
-    private ServiceResponse<Void> getPathLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> getPathLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())
@@ -230,7 +230,7 @@ public class ApiVersionLocalOperationsImpl implements ApiVersionLocalOperations 
         return call;
     }
 
-    private ServiceResponse<Void> getSwaggerLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> getSwaggerLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())

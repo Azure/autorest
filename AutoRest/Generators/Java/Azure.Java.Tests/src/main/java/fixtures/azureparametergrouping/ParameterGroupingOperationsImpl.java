@@ -33,7 +33,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in ParameterGroupingOperations.
  */
-public class ParameterGroupingOperationsImpl implements ParameterGroupingOperations {
+public final class ParameterGroupingOperationsImpl implements ParameterGroupingOperations {
     /** The Retrofit service to perform REST calls. */
     private ParameterGroupingService service;
     /** The service client containing this operation class. */
@@ -103,7 +103,7 @@ public class ParameterGroupingOperationsImpl implements ParameterGroupingOperati
         return call;
     }
 
-    private ServiceResponse<Void> postRequiredDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> postRequiredDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())

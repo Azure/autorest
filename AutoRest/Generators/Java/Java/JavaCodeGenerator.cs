@@ -137,6 +137,16 @@ namespace Microsoft.Rest.Generator.Java
                 await Write(enumTemplate, Path.Combine("models", enumTemplate.Model.Name.ToPascalCase() + ".java"));
             }
 
+            // Exception
+            foreach (var exceptionType in serviceClient.ErrorTypes)
+            {
+                var exceptionTemplate = new ExceptionTemplate
+                {
+                    Model = new ModelTemplateModel(exceptionType, serviceClient),
+                };
+                await Write(exceptionTemplate, Path.Combine("models", exceptionTemplate.Model.ExceptionTypeDefinitionName.ToPascalCase() + ".java"));
+            }
+
             // package-info.java
             await Write(new PackageInfoTemplate
             {

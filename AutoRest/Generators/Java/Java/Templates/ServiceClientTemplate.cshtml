@@ -22,7 +22,7 @@ package @(Settings.Namespace.ToLower());
 /**
  * Initializes a new instance of the @Model.Name class.
  */
-public class @(Model.Name)Impl extends ServiceClient implements @Model.Name {
+public final class @(Model.Name)Impl extends ServiceClient implements @Model.Name {
 @if (Model.MethodTemplateModels.Any())
 {
 @:    /**
@@ -33,7 +33,7 @@ public class @(Model.Name)Impl extends ServiceClient implements @Model.Name {
     /**
      * The URI used as the base for all cloud service requests.
      */
-    private String baseUri;
+    private final String baseUri;
 @EmptyLine
     /**
      * Gets the URI used as the base for all cloud service requests.

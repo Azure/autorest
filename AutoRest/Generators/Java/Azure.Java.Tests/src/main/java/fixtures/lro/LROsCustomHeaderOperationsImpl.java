@@ -26,7 +26,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in LROsCustomHeaderOperations.
  */
-public class LROsCustomHeaderOperationsImpl implements LROsCustomHeaderOperations {
+public final class LROsCustomHeaderOperationsImpl implements LROsCustomHeaderOperations {
     /** The Retrofit service to perform REST calls. */
     private LROsCustomHeaderService service;
     /** The service client containing this operation class. */

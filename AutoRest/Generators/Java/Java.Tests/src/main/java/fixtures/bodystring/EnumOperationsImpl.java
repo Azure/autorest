@@ -28,7 +28,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in EnumOperations.
  */
-public class EnumOperationsImpl implements EnumOperations {
+public final class EnumOperationsImpl implements EnumOperations {
     /** The Retrofit service to perform REST calls. */
     private EnumService service;
     /** The service client containing this operation class. */
@@ -128,7 +128,7 @@ public class EnumOperationsImpl implements EnumOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putNotExpandableDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> putNotExpandableDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())

@@ -28,7 +28,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in LROsOperations.
  */
-public class LROsOperationsImpl implements LROsOperations {
+public final class LROsOperationsImpl implements LROsOperations {
     /** The Retrofit service to perform REST calls. */
     private LROsService service;
     /** The service client containing this operation class. */

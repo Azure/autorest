@@ -30,7 +30,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in OdataOperations.
  */
-public class OdataOperationsImpl implements OdataOperations {
+public final class OdataOperationsImpl implements OdataOperations {
     /** The Retrofit service to perform REST calls. */
     private OdataService service;
     /** The service client containing this operation class. */

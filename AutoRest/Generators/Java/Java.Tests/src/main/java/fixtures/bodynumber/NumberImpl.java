@@ -28,7 +28,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in Number.
  */
-public class NumberImpl implements Number {
+public final class NumberImpl implements Number {
     /** The Retrofit service to perform REST calls. */
     private NumberService service;
     /** The service client containing this operation class. */
@@ -576,7 +576,7 @@ public class NumberImpl implements Number {
         return call;
     }
 
-    private ServiceResponse<Void> putBigDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> putBigDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())
@@ -666,7 +666,7 @@ public class NumberImpl implements Number {
         return call;
     }
 
-    private ServiceResponse<Void> putBigDecimalPositiveDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> putBigDecimalPositiveDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())
@@ -756,7 +756,7 @@ public class NumberImpl implements Number {
         return call;
     }
 
-    private ServiceResponse<Void> putBigDecimalNegativeDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> putBigDecimalNegativeDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())
@@ -1010,7 +1010,7 @@ public class NumberImpl implements Number {
         return call;
     }
 
-    private ServiceResponse<Void> putSmallDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> putSmallDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())
