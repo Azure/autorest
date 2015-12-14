@@ -40,6 +40,9 @@
     <Compile Include="TemplateModels\MethodTemplateModel.cs" />
     <Compile Include="ClientModelExtensions.cs" />
     <Compile Include="TemplateModels\ParameterTemplateModel.cs" />
+    <Compile Include="Templates\ExceptionTemplate.cs">
+      <DependentUpon>ExceptionTemplate.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Templates\PackageInfoTemplate.cs">
       <DependentUpon>PackageInfoTemplate.cshtml</DependentUpon>
     </Compile>
@@ -64,6 +67,7 @@
     <Compile Include="Templates\ServiceClientTemplate.cs">
       <DependentUpon>ServiceClientTemplate.cshtml</DependentUpon>
     </Compile>
+    <None Include="Templates\ExceptionTemplate.cshtml" />
     <None Include="Templates\PackageInfoTemplate.cshtml" />
     <None Include="Templates\EnumTemplate.cshtml" />
     <None Include="Templates\MethodGroupInterfaceTemplate.cshtml" />

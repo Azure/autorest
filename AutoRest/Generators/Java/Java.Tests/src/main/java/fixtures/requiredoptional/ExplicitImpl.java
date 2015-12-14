@@ -185,7 +185,7 @@ public final class ExplicitImpl implements Explicit {
         return call;
     }
 
-    private ServiceResponse<Error> postRequiredIntegerPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Error> postRequiredIntegerPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
@@ -359,7 +359,7 @@ public final class ExplicitImpl implements Explicit {
         return call;
     }
 
-    private ServiceResponse<Error> postRequiredStringParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Error> postRequiredStringParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
@@ -452,7 +452,7 @@ public final class ExplicitImpl implements Explicit {
         return call;
     }
 
-    private ServiceResponse<Error> postRequiredStringPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Error> postRequiredStringPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
@@ -543,7 +543,7 @@ public final class ExplicitImpl implements Explicit {
         return call;
     }
 
-    private ServiceResponse<Error> postRequiredStringHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Error> postRequiredStringHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
@@ -636,7 +636,7 @@ public final class ExplicitImpl implements Explicit {
         return call;
     }
 
-    private ServiceResponse<Error> postRequiredClassParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Error> postRequiredClassParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
@@ -729,7 +729,7 @@ public final class ExplicitImpl implements Explicit {
         return call;
     }
 
-    private ServiceResponse<Error> postRequiredClassPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Error> postRequiredClassPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
@@ -822,7 +822,7 @@ public final class ExplicitImpl implements Explicit {
         return call;
     }
 
-    private ServiceResponse<Error> postRequiredArrayParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Error> postRequiredArrayParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
@@ -915,7 +915,7 @@ public final class ExplicitImpl implements Explicit {
         return call;
     }
 
-    private ServiceResponse<Error> postRequiredArrayPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Error> postRequiredArrayPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
@@ -1008,7 +1008,7 @@ public final class ExplicitImpl implements Explicit {
         return call;
     }
 
-    private ServiceResponse<Error> postRequiredArrayHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Error> postRequiredArrayHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);

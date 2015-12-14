@@ -15,7 +15,6 @@ import com.squareup.okhttp.MediaType;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.ResponseBody;
 import retrofit.Converter;
-import retrofit.Retrofit;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -26,20 +25,35 @@ import java.lang.reflect.Type;
  * A similar implementation of {@link retrofit.JacksonConverterFactory} which supports polymorphism.
  */
 public final class JacksonConverterFactory extends Converter.Factory {
-    /** Create an instance using a default {@link ObjectMapper} instance for conversion. */
+    /**
+     * Create an instance using a default {@link ObjectMapper} instance for conversion.
+     *
+     * @return an instance of JacksonConverterFactory
+     */
     public static JacksonConverterFactory create() {
         return create(new ObjectMapper());
     }
 
-    /** Create an instance using {@code mapper} for conversion. */
+
+    /**
+     * Create an instance using {@code mapper} for conversion.
+     *
+     * @param mapper a user-provided {@link ObjectMapper} to use
+     * @return an instance of JacksonConverterFactory
+     */
     public static JacksonConverterFactory create(ObjectMapper mapper) {
         return new JacksonConverterFactory(mapper);
     }
 
+    /**
+     * The Jackson object mapper.
+     */
     private final ObjectMapper mapper;
 
     private JacksonConverterFactory(ObjectMapper mapper) {
-        if (mapper == null) throw new NullPointerException("mapper == null");
+        if (mapper == null) {
+            throw new NullPointerException("mapper == null");
+        }
         this.mapper = mapper;
     }
 
@@ -56,7 +70,13 @@ public final class JacksonConverterFactory extends Converter.Factory {
         return new JacksonRequestBodyConverter<>(writer);
     }
 
+    /**
+     * An instance of this class converts an object into JSON.
+     *
+     * @param <T> type of request object
+     */
     final class JacksonRequestBodyConverter<T> implements Converter<T, RequestBody> {
+        /** Jackson object writer. */
         private final ObjectWriter adapter;
 
         JacksonRequestBodyConverter(ObjectWriter adapter) {
@@ -69,7 +89,13 @@ public final class JacksonConverterFactory extends Converter.Factory {
         }
     }
 
+    /**
+     * An instance of this class converts a JSON payload into an object.
+     *
+     * @param <T> the expected object type to convert to
+     */
     final class JacksonResponseBodyConverter<T> implements Converter<ResponseBody, T> {
+        /** Jackson object reader. */
         private final ObjectReader adapter;
 
         JacksonResponseBodyConverter(ObjectReader adapter) {

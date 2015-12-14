@@ -87,7 +87,7 @@ public final class ImplicitImpl implements Implicit {
         return call;
     }
 
-    private ServiceResponse<Error> getRequiredPathDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Error> getRequiredPathDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
@@ -260,7 +260,7 @@ public final class ImplicitImpl implements Implicit {
         return call;
     }
 
-    private ServiceResponse<Error> getRequiredGlobalPathDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Error> getRequiredGlobalPathDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
@@ -307,7 +307,7 @@ public final class ImplicitImpl implements Implicit {
         return call;
     }
 
-    private ServiceResponse<Error> getRequiredGlobalQueryDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Error> getRequiredGlobalQueryDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);

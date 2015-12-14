@@ -42,7 +42,7 @@ else
 @: * @@return the ServiceResponse object if successful.
 }
  */
-public ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)(@Model.MethodParameterDeclaration) throws @Model.Exceptions {
+public ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)(@Model.MethodParameterDeclaration) throws @Model.ExceptionString {
     Response<ResponseBody> result = service.@(Model.Name)(@Model.MethodParameterInvocation).execute();
     return client.getAzureClient().@(Model.PollingMethod)(result, new TypeToken<@Model.GenericReturnTypeString>() { }.getType());
 }

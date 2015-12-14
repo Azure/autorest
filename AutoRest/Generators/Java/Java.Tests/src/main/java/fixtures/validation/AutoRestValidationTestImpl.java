@@ -184,7 +184,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         return call;
     }
 
-    private ServiceResponse<Product> validationOfMethodParametersDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Product> validationOfMethodParametersDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Product>()
                 .register(200, new TypeToken<Product>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())
@@ -252,7 +252,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         return call;
     }
 
-    private ServiceResponse<Product> validationOfBodyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Product> validationOfBodyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Product>()
                 .register(200, new TypeToken<Product>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())

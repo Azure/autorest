@@ -103,7 +103,7 @@ public final class GroupOperationsImpl implements GroupOperations {
         return call;
     }
 
-    private ServiceResponse<SampleResourceGroup> getSampleResourceGroupDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<SampleResourceGroup> getSampleResourceGroupDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<SampleResourceGroup>(new AzureJacksonUtils())
                 .register(200, new TypeToken<SampleResourceGroup>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())

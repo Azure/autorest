@@ -107,7 +107,7 @@ public final class PathItemsImpl implements PathItems {
         return call;
     }
 
-    private ServiceResponse<Void> getAllWithValuesDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> getAllWithValuesDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())
@@ -177,7 +177,7 @@ public final class PathItemsImpl implements PathItems {
         return call;
     }
 
-    private ServiceResponse<Void> getGlobalQueryNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> getGlobalQueryNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())
@@ -247,7 +247,7 @@ public final class PathItemsImpl implements PathItems {
         return call;
     }
 
-    private ServiceResponse<Void> getGlobalAndLocalQueryNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> getGlobalAndLocalQueryNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())
@@ -317,7 +317,7 @@ public final class PathItemsImpl implements PathItems {
         return call;
     }
 
-    private ServiceResponse<Void> getLocalPathItemQueryNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> getLocalPathItemQueryNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())

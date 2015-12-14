@@ -372,7 +372,7 @@ public final class PagingOperationsImpl implements PagingOperations {
         return call;
     }
 
-    private ServiceResponse<PageImpl<Product>> getSinglePagesNextDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<PageImpl<Product>> getSinglePagesNextDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<PageImpl<Product>>(new AzureJacksonUtils())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(new TypeToken<CloudError>() { }.getType())
@@ -424,7 +424,7 @@ public final class PagingOperationsImpl implements PagingOperations {
         return call;
     }
 
-    private ServiceResponse<PageImpl<Product>> getMultiplePagesNextDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<PageImpl<Product>> getMultiplePagesNextDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<PageImpl<Product>>(new AzureJacksonUtils())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(new TypeToken<CloudError>() { }.getType())
@@ -474,7 +474,7 @@ public final class PagingOperationsImpl implements PagingOperations {
         return call;
     }
 
-    private ServiceResponse<PageImpl<Product>> getMultiplePagesRetryFirstNextDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<PageImpl<Product>> getMultiplePagesRetryFirstNextDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<PageImpl<Product>>(new AzureJacksonUtils())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(new TypeToken<CloudError>() { }.getType())
@@ -524,7 +524,7 @@ public final class PagingOperationsImpl implements PagingOperations {
         return call;
     }
 
-    private ServiceResponse<PageImpl<Product>> getMultiplePagesRetrySecondNextDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<PageImpl<Product>> getMultiplePagesRetrySecondNextDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<PageImpl<Product>>(new AzureJacksonUtils())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(new TypeToken<CloudError>() { }.getType())
@@ -574,7 +574,7 @@ public final class PagingOperationsImpl implements PagingOperations {
         return call;
     }
 
-    private ServiceResponse<PageImpl<Product>> getSinglePagesFailureNextDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<PageImpl<Product>> getSinglePagesFailureNextDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<PageImpl<Product>>(new AzureJacksonUtils())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(new TypeToken<CloudError>() { }.getType())
@@ -624,7 +624,7 @@ public final class PagingOperationsImpl implements PagingOperations {
         return call;
     }
 
-    private ServiceResponse<PageImpl<Product>> getMultiplePagesFailureNextDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<PageImpl<Product>> getMultiplePagesFailureNextDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<PageImpl<Product>>(new AzureJacksonUtils())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(new TypeToken<CloudError>() { }.getType())
@@ -674,7 +674,7 @@ public final class PagingOperationsImpl implements PagingOperations {
         return call;
     }
 
-    private ServiceResponse<PageImpl<Product>> getMultiplePagesFailureUriNextDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<PageImpl<Product>> getMultiplePagesFailureUriNextDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<PageImpl<Product>>(new AzureJacksonUtils())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(new TypeToken<CloudError>() { }.getType())

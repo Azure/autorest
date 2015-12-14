@@ -128,7 +128,7 @@ public final class EnumOperationsImpl implements EnumOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putNotExpandableDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> putNotExpandableDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())
