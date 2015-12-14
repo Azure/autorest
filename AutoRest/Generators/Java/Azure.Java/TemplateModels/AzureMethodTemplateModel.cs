@@ -75,14 +75,14 @@ namespace Microsoft.Rest.Generator.Java.Azure
             }
         }
 
-        public override string Exceptions
+        public override IEnumerable<string> Exceptions
         {
             get
             {
-                string exceptions = base.Exceptions;
+                var exceptions = base.Exceptions.ToList();
                 if (this.IsLongRunningOperation)
                 {
-                    exceptions = string.Join(", ", exceptions, "InterruptedException");
+                    exceptions.Add("InterruptedException");
                 }
                 return exceptions;
             }

@@ -64,6 +64,8 @@ if (!jsonSetting.IsNullOrEmpty())
 @:        return this.@(property.Name);
 @:    }
 @EmptyLine
+if (!property.IsReadOnly)
+{
 @:    /**
 @:     * Set the @property.Name value.
 @:     *
@@ -73,5 +75,6 @@ if (!jsonSetting.IsNullOrEmpty())
 @:        this.@(property.Name) = @property.Name;
 @:    }
 @EmptyLine
+}
 }
 }

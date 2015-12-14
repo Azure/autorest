@@ -27,7 +27,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in IntOperations.
  */
-public class IntOperationsImpl implements IntOperations {
+public final class IntOperationsImpl implements IntOperations {
     /** The Retrofit service to perform REST calls. */
     private IntService service;
     /** The service client containing this operation class. */

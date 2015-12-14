@@ -27,7 +27,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in Implicit.
  */
-public class ImplicitImpl implements Implicit {
+public final class ImplicitImpl implements Implicit {
     /** The Retrofit service to perform REST calls. */
     private ImplicitService service;
     /** The service client containing this operation class. */
@@ -87,7 +87,7 @@ public class ImplicitImpl implements Implicit {
         return call;
     }
 
-    private ServiceResponse<Error> getRequiredPathDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Error> getRequiredPathDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
@@ -260,7 +260,7 @@ public class ImplicitImpl implements Implicit {
         return call;
     }
 
-    private ServiceResponse<Error> getRequiredGlobalPathDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Error> getRequiredGlobalPathDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);
@@ -307,7 +307,7 @@ public class ImplicitImpl implements Implicit {
         return call;
     }
 
-    private ServiceResponse<Error> getRequiredGlobalQueryDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Error> getRequiredGlobalQueryDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Error>()
                 .registerError(new TypeToken<Error>() { }.getType())
                 .build(response, retrofit);

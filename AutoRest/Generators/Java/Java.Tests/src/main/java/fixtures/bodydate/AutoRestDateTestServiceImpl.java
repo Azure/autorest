@@ -17,11 +17,11 @@ import retrofit.Retrofit;
 /**
  * Initializes a new instance of the AutoRestDateTestService class.
  */
-public class AutoRestDateTestServiceImpl extends ServiceClient implements AutoRestDateTestService {
+public final class AutoRestDateTestServiceImpl extends ServiceClient implements AutoRestDateTestService {
     /**
      * The URI used as the base for all cloud service requests.
      */
-    private String baseUri;
+    private final String baseUri;
 
     /**
      * Gets the URI used as the base for all cloud service requests.

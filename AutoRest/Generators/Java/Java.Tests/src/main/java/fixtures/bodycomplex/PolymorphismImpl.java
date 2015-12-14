@@ -29,7 +29,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in Polymorphism.
  */
-public class PolymorphismImpl implements Polymorphism {
+public final class PolymorphismImpl implements Polymorphism {
     /** The Retrofit service to perform REST calls. */
     private PolymorphismService service;
     /** The service client containing this operation class. */
@@ -195,7 +195,7 @@ public class PolymorphismImpl implements Polymorphism {
         return call;
     }
 
-    private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())
@@ -297,7 +297,7 @@ public class PolymorphismImpl implements Polymorphism {
         return call;
     }
 
-    private ServiceResponse<Void> putValidMissingRequiredDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> putValidMissingRequiredDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())

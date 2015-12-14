@@ -72,7 +72,7 @@ public interface @Model.MethodGroupType {
     @: * @@return the {@@link ServiceResponse} object if successful.
     }
     @: */
-    @:ServiceResponse<@method.GenericReturnTypeString> @(method.Name)(@method.MethodParameterDeclaration) throws @method.Exceptions;
+    @:ServiceResponse<@method.GenericReturnTypeString> @(method.Name)(@method.MethodParameterDeclaration) throws @method.ExceptionString;
     @EmptyLine
     @:/**
     if (!String.IsNullOrEmpty(method.Summary))

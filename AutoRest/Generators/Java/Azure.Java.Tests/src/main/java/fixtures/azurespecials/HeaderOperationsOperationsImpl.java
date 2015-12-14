@@ -28,7 +28,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in HeaderOperationsOperations.
  */
-public class HeaderOperationsOperationsImpl implements HeaderOperationsOperations {
+public final class HeaderOperationsOperationsImpl implements HeaderOperationsOperations {
     /** The Retrofit service to perform REST calls. */
     private HeaderOperationsService service;
     /** The service client containing this operation class. */
@@ -88,7 +88,7 @@ public class HeaderOperationsOperationsImpl implements HeaderOperationsOperation
         return call;
     }
 
-    private ServiceResponse<Void> customNamedRequestIdDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> customNamedRequestIdDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())

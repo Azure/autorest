@@ -27,7 +27,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in HttpSuccessOperations.
  */
-public class HttpSuccessOperationsImpl implements HttpSuccessOperations {
+public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
     /** The Retrofit service to perform REST calls. */
     private HttpSuccessService service;
     /** The service client containing this operation class. */

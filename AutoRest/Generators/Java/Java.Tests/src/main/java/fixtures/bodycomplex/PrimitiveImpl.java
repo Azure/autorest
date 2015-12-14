@@ -39,7 +39,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in Primitive.
  */
-public class PrimitiveImpl implements Primitive {
+public final class PrimitiveImpl implements Primitive {
     /** The Retrofit service to perform REST calls. */
     private PrimitiveService service;
     /** The service client containing this operation class. */
@@ -141,7 +141,7 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<Void> putIntDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> putIntDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())
@@ -233,7 +233,7 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<Void> putLongDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> putLongDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())
@@ -325,7 +325,7 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<Void> putFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> putFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())
@@ -417,7 +417,7 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<Void> putDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> putDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())
@@ -509,7 +509,7 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<Void> putBoolDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> putBoolDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())
@@ -601,7 +601,7 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<Void> putStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> putStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())
@@ -693,7 +693,7 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<Void> putDateDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> putDateDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())
@@ -785,7 +785,7 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<Void> putDateTimeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> putDateTimeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())
@@ -877,7 +877,7 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<Void> putDateTimeRfc1123Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> putDateTimeRfc1123Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())
@@ -969,7 +969,7 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<Void> putDurationDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> putDurationDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())
@@ -1061,7 +1061,7 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<Void> putByteDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> putByteDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())

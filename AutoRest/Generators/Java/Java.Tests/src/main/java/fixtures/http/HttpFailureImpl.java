@@ -27,7 +27,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in HttpFailure.
  */
-public class HttpFailureImpl implements HttpFailure {
+public final class HttpFailureImpl implements HttpFailure {
     /** The Retrofit service to perform REST calls. */
     private HttpFailureService service;
     /** The service client containing this operation class. */

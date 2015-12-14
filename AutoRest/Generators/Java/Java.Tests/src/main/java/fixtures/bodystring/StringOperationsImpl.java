@@ -27,7 +27,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in StringOperations.
  */
-public class StringOperationsImpl implements StringOperations {
+public final class StringOperationsImpl implements StringOperations {
     /** The Retrofit service to perform REST calls. */
     private StringService service;
     /** The service client containing this operation class. */
@@ -209,7 +209,7 @@ public class StringOperationsImpl implements StringOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())
@@ -299,7 +299,7 @@ public class StringOperationsImpl implements StringOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putMbcsDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> putMbcsDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())
@@ -389,7 +389,7 @@ public class StringOperationsImpl implements StringOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putWhitespaceDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> putWhitespaceDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())

@@ -32,7 +32,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in Paths.
  */
-public class PathsImpl implements Paths {
+public final class PathsImpl implements Paths {
     /** The Retrofit service to perform REST calls. */
     private PathsService service;
     /** The service client containing this operation class. */
@@ -512,7 +512,7 @@ public class PathsImpl implements Paths {
         return call;
     }
 
-    private ServiceResponse<Void> stringUnicodeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> stringUnicodeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())
@@ -562,7 +562,7 @@ public class PathsImpl implements Paths {
         return call;
     }
 
-    private ServiceResponse<Void> stringUrlEncodedDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> stringUrlEncodedDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())
@@ -612,7 +612,7 @@ public class PathsImpl implements Paths {
         return call;
     }
 
-    private ServiceResponse<Void> stringEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> stringEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())
@@ -662,7 +662,7 @@ public class PathsImpl implements Paths {
         return call;
     }
 
-    private ServiceResponse<Void> stringNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> stringNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(400, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())
@@ -712,7 +712,7 @@ public class PathsImpl implements Paths {
         return call;
     }
 
-    private ServiceResponse<Void> enumValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> enumValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())
@@ -762,7 +762,7 @@ public class PathsImpl implements Paths {
         return call;
     }
 
-    private ServiceResponse<Void> enumNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> enumNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(400, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())
@@ -812,7 +812,7 @@ public class PathsImpl implements Paths {
         return call;
     }
 
-    private ServiceResponse<Void> byteMultiByteDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> byteMultiByteDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())
@@ -862,7 +862,7 @@ public class PathsImpl implements Paths {
         return call;
     }
 
-    private ServiceResponse<Void> byteEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> byteEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())
@@ -912,7 +912,7 @@ public class PathsImpl implements Paths {
         return call;
     }
 
-    private ServiceResponse<Void> byteNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> byteNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(400, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())
@@ -962,7 +962,7 @@ public class PathsImpl implements Paths {
         return call;
     }
 
-    private ServiceResponse<Void> dateValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> dateValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())
@@ -1012,7 +1012,7 @@ public class PathsImpl implements Paths {
         return call;
     }
 
-    private ServiceResponse<Void> dateNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> dateNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(400, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())
@@ -1062,7 +1062,7 @@ public class PathsImpl implements Paths {
         return call;
     }
 
-    private ServiceResponse<Void> dateTimeValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> dateTimeValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())
@@ -1112,7 +1112,7 @@ public class PathsImpl implements Paths {
         return call;
     }
 
-    private ServiceResponse<Void> dateTimeNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> dateTimeNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void>()
                 .register(400, new TypeToken<Void>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())

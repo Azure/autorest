@@ -29,7 +29,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in GroupOperations.
  */
-public class GroupOperationsImpl implements GroupOperations {
+public final class GroupOperationsImpl implements GroupOperations {
     /** The Retrofit service to perform REST calls. */
     private GroupService service;
     /** The service client containing this operation class. */
@@ -103,7 +103,7 @@ public class GroupOperationsImpl implements GroupOperations {
         return call;
     }
 
-    private ServiceResponse<SampleResourceGroup> getSampleResourceGroupDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<SampleResourceGroup> getSampleResourceGroupDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<SampleResourceGroup>(new AzureJacksonUtils())
                 .register(200, new TypeToken<SampleResourceGroup>() { }.getType())
                 .registerError(new TypeToken<Error>() { }.getType())

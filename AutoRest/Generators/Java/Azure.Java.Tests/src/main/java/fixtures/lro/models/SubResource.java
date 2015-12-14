@@ -30,13 +30,4 @@ public class SubResource extends BaseResource {
         return this.id;
     }
 
-    /**
-     * Set the id value.
-     *
-     * @param id the id value to set
-     */
-    public void setId(String id) {
-        this.id = id;
-    }
-
 }
