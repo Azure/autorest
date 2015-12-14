@@ -18,8 +18,7 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
 {
     public class AzureNodeJSCodeGenerator : NodeJSCodeGenerator
     {
-        private const string ClientRuntimePackage = "ms-rest-azure version 1.2.0";
-        public const string LongRunningExtension = "x-ms-long-running-operation";
+        private const string ClientRuntimePackage = "ms-rest-azure version 1.3.0";
 
         // List of models with paging extensions.
         private IList<PageTemplateModel> pageModels;
