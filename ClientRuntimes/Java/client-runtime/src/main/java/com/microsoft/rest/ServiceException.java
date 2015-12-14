@@ -12,7 +12,7 @@ import retrofit.Response;
 /**
  * Exception thrown for an invalid response with custom error information.
  */
-public class ServiceException extends Exception {
+public class ServiceException extends AutoRestException {
 
     /**
      * Information about the associated HTTP response.

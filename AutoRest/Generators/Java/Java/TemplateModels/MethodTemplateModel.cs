@@ -286,18 +286,51 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public virtual string Exceptions
+        /// <summary>
+        /// Get the type for operation exception
+        /// </summary>
+        public virtual string OperationExceptionTypeString
         {
             get
             {
-                List<string> exceptions = new List<string>();
-                exceptions.Add("ServiceException");
-                exceptions.Add("IOException");
+                if (this.DefaultResponse.Body is CompositeType)
+                {
+                    CompositeType type = this.DefaultResponse.Body as CompositeType;
+                    if (type.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.NameOverrideExtension))
+                    {
+                        var ext = type.Extensions[Microsoft.Rest.Generator.Extensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
+                        if (ext != null && ext["name"] != null)
+                        {
+                            return ext["name"].ToString();
+                        }
+                    }
+                    return type.Name + "Exception";
+                }
+                else
+                {
+                    return "ServiceException";
+                }
+            }
+        }
+
+        public virtual IEnumerable<string> Exceptions
+        {
+            get
+            {
+                yield return "ServiceException";
+                yield return "IOException";
                 if (RequiredNullableParameters.Any())
                 {
-                    exceptions.Add("IllegalArgumentException");
+                    yield return "IllegalArgumentException";
                 }
-                return string.Join(", ", exceptions);
+            }
+        }
+
+        public virtual string ExceptionString
+        {
+            get
+            {
+                return string.Join(", ", Exceptions);
             }
         }
 
@@ -419,7 +452,7 @@ namespace Microsoft.Rest.Generator.Java
                 // Http verb annotations
                 imports.Add(this.HttpMethod.ImportFrom());
                 // exceptions
-                this.Exceptions.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
+                this.ExceptionString.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
                     .ForEach(ex => {
                         string exceptionImport = JavaCodeNamer.GetJavaException(ex);
                         if (exceptionImport != null) imports.Add(JavaCodeNamer.GetJavaException(ex));
@@ -475,7 +508,7 @@ namespace Microsoft.Rest.Generator.Java
                 this.Responses.ForEach(r => imports.AddRange(r.Value.Body.ImportFrom(ServiceClient.Namespace)));
                 imports.AddRange(DefaultResponse.Body.ImportFrom(ServiceClient.Namespace));
                 // exceptions
-                this.Exceptions.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
+                this.ExceptionString.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
                     .ForEach(ex =>
                     {
                         string exceptionImport = JavaCodeNamer.GetJavaException(ex);
