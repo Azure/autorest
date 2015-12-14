@@ -263,7 +263,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         }
 
         [Fact]
-        public void FormDataTests()
+        public void FormDataFileUploadTests()
         {
             SwaggerSpecRunner.RunTests(
                 SwaggerPath("body-formdata.json"), ExpectedPath("BodyFormData"));
@@ -276,6 +276,28 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                     memStream.Write(testBytes, 0, testBytes.Length);
                     memStream.Seek(0, SeekOrigin.Begin);
                     var response = client.Formdata.UploadFile(memStream, "UploadFile.txt");
+                    byte[] buff = new byte[response.Length];
+                    response.Read(buff, 0, (int)response.Length);
+                    string desearializedJson = Encoding.Unicode.GetString(buff);
+                    Assert.Equal(desearializedJson, testString);
+                }
+            }
+        }
+
+        [Fact]
+        public void FileUploadTests()
+        {
+            SwaggerSpecRunner.RunTests(
+                SwaggerPath("body-formdata.json"), ExpectedPath("BodyFormData"));
+            using (var client = new AutoRestSwaggerBATFormDataService(Fixture.Uri))
+            {
+                const string testString = "Upload file test case";
+                byte[] testBytes = new UnicodeEncoding().GetBytes(testString);
+                using (Stream memStream = new MemoryStream(100))
+                {
+                    memStream.Write(testBytes, 0, testBytes.Length);
+                    memStream.Seek(0, SeekOrigin.Begin);
+                    var response = client.Formdata.UploadFileViaBody(memStream, "UploadFile.txt");
                     byte[] buff = new byte[response.Length];
                     response.Read(buff, 0, (int)response.Length);
                     string desearializedJson = Encoding.Unicode.GetString(buff);
