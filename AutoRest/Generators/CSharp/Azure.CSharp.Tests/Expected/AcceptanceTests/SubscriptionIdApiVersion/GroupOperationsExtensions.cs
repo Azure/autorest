@@ -47,8 +47,8 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
             /// </param>
             public static async Task<SampleResourceGroup> GetSampleResourceGroupAsync( this IGroupOperations operations, string resourceGroupName, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetSampleResourceGroupWithHttpMessagesAsync(resourceGroupName, null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetSampleResourceGroupWithHttpMessagesAsync(resourceGroupName, null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
     }

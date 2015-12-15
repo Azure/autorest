@@ -21,7 +21,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
     /// <summary>
     /// Test Infrastructure for AutoRest
     /// </summary>
-    public partial interface IAutoRestAzureSpecialParametersTestClient
+    public partial interface IAutoRestAzureSpecialParametersTestClient : IDisposable
     {
         /// <summary>
         /// The base URI of the service.

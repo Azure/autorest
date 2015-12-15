@@ -12,7 +12,6 @@ package fixtures.bodycomplex;
 
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
@@ -25,7 +24,7 @@ import fixtures.bodycomplex.models.DatetimeWrapper;
 import fixtures.bodycomplex.models.DateWrapper;
 import fixtures.bodycomplex.models.DoubleWrapper;
 import fixtures.bodycomplex.models.DurationWrapper;
-import fixtures.bodycomplex.models.Error;
+import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.FloatWrapper;
 import fixtures.bodycomplex.models.IntWrapper;
 import fixtures.bodycomplex.models.LongWrapper;
@@ -39,7 +38,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in Primitive.
  */
-public class PrimitiveImpl implements Primitive {
+public final class PrimitiveImpl implements Primitive {
     /** The Retrofit service to perform REST calls. */
     private PrimitiveService service;
     /** The service client containing this operation class. */
@@ -59,11 +58,11 @@ public class PrimitiveImpl implements Primitive {
     /**
      * Get complex types with integer properties.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the IntWrapper object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<IntWrapper> getInt() throws ServiceException, IOException {
+    public ServiceResponse<IntWrapper> getInt() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getInt();
         return getIntDelegate(call.execute(), null);
     }
@@ -81,7 +80,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getIntDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -89,10 +88,10 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<IntWrapper> getIntDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<IntWrapper>()
+    private ServiceResponse<IntWrapper> getIntDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<IntWrapper, ErrorException>()
                 .register(200, new TypeToken<IntWrapper>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -100,12 +99,12 @@ public class PrimitiveImpl implements Primitive {
      * Put complex types with integer properties.
      *
      * @param complexBody Please put -1 and 2
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putInt(IntWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException {
+    public ServiceResponse<Void> putInt(IntWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -133,7 +132,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putIntDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -141,21 +140,21 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<Void> putIntDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> putIntDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
     /**
      * Get complex types with long properties.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the LongWrapper object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<LongWrapper> getLong() throws ServiceException, IOException {
+    public ServiceResponse<LongWrapper> getLong() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getLong();
         return getLongDelegate(call.execute(), null);
     }
@@ -173,7 +172,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getLongDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -181,10 +180,10 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<LongWrapper> getLongDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<LongWrapper>()
+    private ServiceResponse<LongWrapper> getLongDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<LongWrapper, ErrorException>()
                 .register(200, new TypeToken<LongWrapper>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -192,12 +191,12 @@ public class PrimitiveImpl implements Primitive {
      * Put complex types with long properties.
      *
      * @param complexBody Please put 1099511627775 and -999511627788
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putLong(LongWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException {
+    public ServiceResponse<Void> putLong(LongWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -225,7 +224,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putLongDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -233,21 +232,21 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<Void> putLongDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> putLongDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
     /**
      * Get complex types with float properties.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the FloatWrapper object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<FloatWrapper> getFloat() throws ServiceException, IOException {
+    public ServiceResponse<FloatWrapper> getFloat() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getFloat();
         return getFloatDelegate(call.execute(), null);
     }
@@ -265,7 +264,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getFloatDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -273,10 +272,10 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<FloatWrapper> getFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<FloatWrapper>()
+    private ServiceResponse<FloatWrapper> getFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<FloatWrapper, ErrorException>()
                 .register(200, new TypeToken<FloatWrapper>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -284,12 +283,12 @@ public class PrimitiveImpl implements Primitive {
      * Put complex types with float properties.
      *
      * @param complexBody Please put 1.05 and -0.003
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putFloat(FloatWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException {
+    public ServiceResponse<Void> putFloat(FloatWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -317,7 +316,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putFloatDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -325,21 +324,21 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<Void> putFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> putFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
     /**
      * Get complex types with double properties.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the DoubleWrapper object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<DoubleWrapper> getDouble() throws ServiceException, IOException {
+    public ServiceResponse<DoubleWrapper> getDouble() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getDouble();
         return getDoubleDelegate(call.execute(), null);
     }
@@ -357,7 +356,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDoubleDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -365,10 +364,10 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<DoubleWrapper> getDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<DoubleWrapper>()
+    private ServiceResponse<DoubleWrapper> getDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<DoubleWrapper, ErrorException>()
                 .register(200, new TypeToken<DoubleWrapper>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -376,12 +375,12 @@ public class PrimitiveImpl implements Primitive {
      * Put complex types with double properties.
      *
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putDouble(DoubleWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException {
+    public ServiceResponse<Void> putDouble(DoubleWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -409,7 +408,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putDoubleDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -417,21 +416,21 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<Void> putDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> putDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
     /**
      * Get complex types with bool properties.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the BooleanWrapper object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<BooleanWrapper> getBool() throws ServiceException, IOException {
+    public ServiceResponse<BooleanWrapper> getBool() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getBool();
         return getBoolDelegate(call.execute(), null);
     }
@@ -449,7 +448,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getBoolDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -457,10 +456,10 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<BooleanWrapper> getBoolDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<BooleanWrapper>()
+    private ServiceResponse<BooleanWrapper> getBoolDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<BooleanWrapper, ErrorException>()
                 .register(200, new TypeToken<BooleanWrapper>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -468,12 +467,12 @@ public class PrimitiveImpl implements Primitive {
      * Put complex types with bool properties.
      *
      * @param complexBody Please put true and false
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putBool(BooleanWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException {
+    public ServiceResponse<Void> putBool(BooleanWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -501,7 +500,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putBoolDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -509,21 +508,21 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<Void> putBoolDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> putBoolDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
     /**
      * Get complex types with string properties.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the StringWrapper object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<StringWrapper> getString() throws ServiceException, IOException {
+    public ServiceResponse<StringWrapper> getString() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getString();
         return getStringDelegate(call.execute(), null);
     }
@@ -541,7 +540,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getStringDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -549,10 +548,10 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<StringWrapper> getStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<StringWrapper>()
+    private ServiceResponse<StringWrapper> getStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<StringWrapper, ErrorException>()
                 .register(200, new TypeToken<StringWrapper>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -560,12 +559,12 @@ public class PrimitiveImpl implements Primitive {
      * Put complex types with string properties.
      *
      * @param complexBody Please put 'goodrequest', '', and null
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putString(StringWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException {
+    public ServiceResponse<Void> putString(StringWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -593,7 +592,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putStringDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -601,21 +600,21 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<Void> putStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> putStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
     /**
      * Get complex types with date properties.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the DateWrapper object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<DateWrapper> getDate() throws ServiceException, IOException {
+    public ServiceResponse<DateWrapper> getDate() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getDate();
         return getDateDelegate(call.execute(), null);
     }
@@ -633,7 +632,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDateDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -641,10 +640,10 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<DateWrapper> getDateDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<DateWrapper>()
+    private ServiceResponse<DateWrapper> getDateDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<DateWrapper, ErrorException>()
                 .register(200, new TypeToken<DateWrapper>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -652,12 +651,12 @@ public class PrimitiveImpl implements Primitive {
      * Put complex types with date properties.
      *
      * @param complexBody Please put '0001-01-01' and '2016-02-29'
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putDate(DateWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException {
+    public ServiceResponse<Void> putDate(DateWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -685,7 +684,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putDateDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -693,21 +692,21 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<Void> putDateDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> putDateDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
     /**
      * Get complex types with datetime properties.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the DatetimeWrapper object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<DatetimeWrapper> getDateTime() throws ServiceException, IOException {
+    public ServiceResponse<DatetimeWrapper> getDateTime() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getDateTime();
         return getDateTimeDelegate(call.execute(), null);
     }
@@ -725,7 +724,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDateTimeDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -733,10 +732,10 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<DatetimeWrapper> getDateTimeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<DatetimeWrapper>()
+    private ServiceResponse<DatetimeWrapper> getDateTimeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<DatetimeWrapper, ErrorException>()
                 .register(200, new TypeToken<DatetimeWrapper>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -744,12 +743,12 @@ public class PrimitiveImpl implements Primitive {
      * Put complex types with datetime properties.
      *
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putDateTime(DatetimeWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException {
+    public ServiceResponse<Void> putDateTime(DatetimeWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -777,7 +776,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putDateTimeDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -785,21 +784,21 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<Void> putDateTimeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> putDateTimeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
     /**
      * Get complex types with datetimeRfc1123 properties.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Datetimerfc1123Wrapper object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Datetimerfc1123Wrapper> getDateTimeRfc1123() throws ServiceException, IOException {
+    public ServiceResponse<Datetimerfc1123Wrapper> getDateTimeRfc1123() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getDateTimeRfc1123();
         return getDateTimeRfc1123Delegate(call.execute(), null);
     }
@@ -817,7 +816,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDateTimeRfc1123Delegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -825,10 +824,10 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<Datetimerfc1123Wrapper> getDateTimeRfc1123Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Datetimerfc1123Wrapper>()
+    private ServiceResponse<Datetimerfc1123Wrapper> getDateTimeRfc1123Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Datetimerfc1123Wrapper, ErrorException>()
                 .register(200, new TypeToken<Datetimerfc1123Wrapper>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -836,12 +835,12 @@ public class PrimitiveImpl implements Primitive {
      * Put complex types with datetimeRfc1123 properties.
      *
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody) throws ServiceException, IOException, IllegalArgumentException {
+    public ServiceResponse<Void> putDateTimeRfc1123(Datetimerfc1123Wrapper complexBody) throws ErrorException, IOException, IllegalArgumentException {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -869,7 +868,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putDateTimeRfc1123Delegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -877,21 +876,21 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<Void> putDateTimeRfc1123Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> putDateTimeRfc1123Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
     /**
      * Get complex types with duration properties.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the DurationWrapper object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<DurationWrapper> getDuration() throws ServiceException, IOException {
+    public ServiceResponse<DurationWrapper> getDuration() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getDuration();
         return getDurationDelegate(call.execute(), null);
     }
@@ -909,7 +908,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDurationDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -917,10 +916,10 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<DurationWrapper> getDurationDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<DurationWrapper>()
+    private ServiceResponse<DurationWrapper> getDurationDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<DurationWrapper, ErrorException>()
                 .register(200, new TypeToken<DurationWrapper>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -928,12 +927,12 @@ public class PrimitiveImpl implements Primitive {
      * Put complex types with duration properties.
      *
      * @param complexBody Please put 'P123DT22H14M12.011S'
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putDuration(DurationWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException {
+    public ServiceResponse<Void> putDuration(DurationWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -961,7 +960,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putDurationDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -969,21 +968,21 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<Void> putDurationDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> putDurationDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
     /**
      * Get complex types with byte properties.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the ByteWrapper object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<ByteWrapper> getByte() throws ServiceException, IOException {
+    public ServiceResponse<ByteWrapper> getByte() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getByte();
         return getByteDelegate(call.execute(), null);
     }
@@ -1001,7 +1000,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getByteDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1009,10 +1008,10 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<ByteWrapper> getByteDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<ByteWrapper>()
+    private ServiceResponse<ByteWrapper> getByteDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<ByteWrapper, ErrorException>()
                 .register(200, new TypeToken<ByteWrapper>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -1020,12 +1019,12 @@ public class PrimitiveImpl implements Primitive {
      * Put complex types with byte properties.
      *
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putByte(ByteWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException {
+    public ServiceResponse<Void> putByte(ByteWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -1053,7 +1052,7 @@ public class PrimitiveImpl implements Primitive {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putByteDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1061,10 +1060,10 @@ public class PrimitiveImpl implements Primitive {
         return call;
     }
 
-    private ServiceResponse<Void> putByteDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> putByteDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 

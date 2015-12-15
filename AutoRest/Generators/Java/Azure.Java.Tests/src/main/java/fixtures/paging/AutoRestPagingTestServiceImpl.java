@@ -21,10 +21,10 @@ import retrofit.Retrofit;
 /**
  * Initializes a new instance of the AutoRestPagingTestService class.
  */
-public class AutoRestPagingTestServiceImpl extends AzureServiceClient implements AutoRestPagingTestService {
+public final class AutoRestPagingTestServiceImpl extends AzureServiceClient implements AutoRestPagingTestService {
     /** The URI used as the base for all cloud service requests. */
-    private String baseUri;
-    /** the {@link AzureClient} used for long running operations .*/
+    private final String baseUri;
+    /** the {@link AzureClient} used for long running operations. */
     private AzureClient azureClient;
 
     /**

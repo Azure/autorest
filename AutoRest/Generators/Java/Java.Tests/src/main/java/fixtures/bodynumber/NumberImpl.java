@@ -12,12 +12,11 @@ package fixtures.bodynumber;
 
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
-import fixtures.bodynumber.models.Error;
+import fixtures.bodynumber.models.ErrorException;
 import java.io.IOException;
 import java.math.BigDecimal;
 import retrofit.Call;
@@ -28,7 +27,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in Number.
  */
-public class NumberImpl implements Number {
+public final class NumberImpl implements Number {
     /** The Retrofit service to perform REST calls. */
     private NumberService service;
     /** The service client containing this operation class. */
@@ -48,11 +47,11 @@ public class NumberImpl implements Number {
     /**
      * Get null Number value.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Double object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Double> getNull() throws ServiceException, IOException {
+    public ServiceResponse<Double> getNull() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getNull();
         return getNullDelegate(call.execute(), null);
     }
@@ -70,7 +69,7 @@ public class NumberImpl implements Number {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getNullDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -78,21 +77,21 @@ public class NumberImpl implements Number {
         return call;
     }
 
-    private ServiceResponse<Double> getNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Double>()
+    private ServiceResponse<Double> getNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Double, ErrorException>()
                 .register(200, new TypeToken<Double>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
     /**
      * Get invalid float Number value.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Double object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Double> getInvalidFloat() throws ServiceException, IOException {
+    public ServiceResponse<Double> getInvalidFloat() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getInvalidFloat();
         return getInvalidFloatDelegate(call.execute(), null);
     }
@@ -110,7 +109,7 @@ public class NumberImpl implements Number {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getInvalidFloatDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -118,21 +117,21 @@ public class NumberImpl implements Number {
         return call;
     }
 
-    private ServiceResponse<Double> getInvalidFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Double>()
+    private ServiceResponse<Double> getInvalidFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Double, ErrorException>()
                 .register(200, new TypeToken<Double>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
     /**
      * Get invalid double Number value.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Double object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Double> getInvalidDouble() throws ServiceException, IOException {
+    public ServiceResponse<Double> getInvalidDouble() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getInvalidDouble();
         return getInvalidDoubleDelegate(call.execute(), null);
     }
@@ -150,7 +149,7 @@ public class NumberImpl implements Number {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getInvalidDoubleDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -158,21 +157,21 @@ public class NumberImpl implements Number {
         return call;
     }
 
-    private ServiceResponse<Double> getInvalidDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Double>()
+    private ServiceResponse<Double> getInvalidDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Double, ErrorException>()
                 .register(200, new TypeToken<Double>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
     /**
      * Get invalid decimal Number value.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the BigDecimal object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<BigDecimal> getInvalidDecimal() throws ServiceException, IOException {
+    public ServiceResponse<BigDecimal> getInvalidDecimal() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getInvalidDecimal();
         return getInvalidDecimalDelegate(call.execute(), null);
     }
@@ -190,7 +189,7 @@ public class NumberImpl implements Number {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getInvalidDecimalDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -198,10 +197,10 @@ public class NumberImpl implements Number {
         return call;
     }
 
-    private ServiceResponse<BigDecimal> getInvalidDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<BigDecimal>()
+    private ServiceResponse<BigDecimal> getInvalidDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<BigDecimal, ErrorException>()
                 .register(200, new TypeToken<BigDecimal>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -209,11 +208,11 @@ public class NumberImpl implements Number {
      * Put big float value 3.402823e+20.
      *
      * @param numberBody the double value
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putBigFloat(double numberBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putBigFloat(double numberBody) throws ErrorException, IOException {
         Call<ResponseBody> call = service.putBigFloat(numberBody);
         return putBigFloatDelegate(call.execute(), null);
     }
@@ -232,7 +231,7 @@ public class NumberImpl implements Number {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putBigFloatDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -240,21 +239,21 @@ public class NumberImpl implements Number {
         return call;
     }
 
-    private ServiceResponse<Void> putBigFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> putBigFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
     /**
      * Get big float value 3.402823e+20.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Double object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Double> getBigFloat() throws ServiceException, IOException {
+    public ServiceResponse<Double> getBigFloat() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getBigFloat();
         return getBigFloatDelegate(call.execute(), null);
     }
@@ -272,7 +271,7 @@ public class NumberImpl implements Number {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getBigFloatDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -280,10 +279,10 @@ public class NumberImpl implements Number {
         return call;
     }
 
-    private ServiceResponse<Double> getBigFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Double>()
+    private ServiceResponse<Double> getBigFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Double, ErrorException>()
                 .register(200, new TypeToken<Double>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -291,11 +290,11 @@ public class NumberImpl implements Number {
      * Put big double value 2.5976931e+101.
      *
      * @param numberBody the double value
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putBigDouble(double numberBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putBigDouble(double numberBody) throws ErrorException, IOException {
         Call<ResponseBody> call = service.putBigDouble(numberBody);
         return putBigDoubleDelegate(call.execute(), null);
     }
@@ -314,7 +313,7 @@ public class NumberImpl implements Number {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putBigDoubleDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -322,21 +321,21 @@ public class NumberImpl implements Number {
         return call;
     }
 
-    private ServiceResponse<Void> putBigDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> putBigDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
     /**
      * Get big double value 2.5976931e+101.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Double object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Double> getBigDouble() throws ServiceException, IOException {
+    public ServiceResponse<Double> getBigDouble() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getBigDouble();
         return getBigDoubleDelegate(call.execute(), null);
     }
@@ -354,7 +353,7 @@ public class NumberImpl implements Number {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getBigDoubleDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -362,10 +361,10 @@ public class NumberImpl implements Number {
         return call;
     }
 
-    private ServiceResponse<Double> getBigDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Double>()
+    private ServiceResponse<Double> getBigDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Double, ErrorException>()
                 .register(200, new TypeToken<Double>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -373,11 +372,11 @@ public class NumberImpl implements Number {
      * Put big double value 99999999.99.
      *
      * @param numberBody the double value
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putBigDoublePositiveDecimal(double numberBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putBigDoublePositiveDecimal(double numberBody) throws ErrorException, IOException {
         Call<ResponseBody> call = service.putBigDoublePositiveDecimal(numberBody);
         return putBigDoublePositiveDecimalDelegate(call.execute(), null);
     }
@@ -396,7 +395,7 @@ public class NumberImpl implements Number {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putBigDoublePositiveDecimalDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -404,21 +403,21 @@ public class NumberImpl implements Number {
         return call;
     }
 
-    private ServiceResponse<Void> putBigDoublePositiveDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> putBigDoublePositiveDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
     /**
      * Get big double value 99999999.99.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Double object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Double> getBigDoublePositiveDecimal() throws ServiceException, IOException {
+    public ServiceResponse<Double> getBigDoublePositiveDecimal() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getBigDoublePositiveDecimal();
         return getBigDoublePositiveDecimalDelegate(call.execute(), null);
     }
@@ -436,7 +435,7 @@ public class NumberImpl implements Number {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getBigDoublePositiveDecimalDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -444,10 +443,10 @@ public class NumberImpl implements Number {
         return call;
     }
 
-    private ServiceResponse<Double> getBigDoublePositiveDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Double>()
+    private ServiceResponse<Double> getBigDoublePositiveDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Double, ErrorException>()
                 .register(200, new TypeToken<Double>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -455,11 +454,11 @@ public class NumberImpl implements Number {
      * Put big double value -99999999.99.
      *
      * @param numberBody the double value
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putBigDoubleNegativeDecimal(double numberBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putBigDoubleNegativeDecimal(double numberBody) throws ErrorException, IOException {
         Call<ResponseBody> call = service.putBigDoubleNegativeDecimal(numberBody);
         return putBigDoubleNegativeDecimalDelegate(call.execute(), null);
     }
@@ -478,7 +477,7 @@ public class NumberImpl implements Number {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putBigDoubleNegativeDecimalDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -486,21 +485,21 @@ public class NumberImpl implements Number {
         return call;
     }
 
-    private ServiceResponse<Void> putBigDoubleNegativeDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> putBigDoubleNegativeDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
     /**
      * Get big double value -99999999.99.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Double object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Double> getBigDoubleNegativeDecimal() throws ServiceException, IOException {
+    public ServiceResponse<Double> getBigDoubleNegativeDecimal() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getBigDoubleNegativeDecimal();
         return getBigDoubleNegativeDecimalDelegate(call.execute(), null);
     }
@@ -518,7 +517,7 @@ public class NumberImpl implements Number {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getBigDoubleNegativeDecimalDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -526,10 +525,10 @@ public class NumberImpl implements Number {
         return call;
     }
 
-    private ServiceResponse<Double> getBigDoubleNegativeDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Double>()
+    private ServiceResponse<Double> getBigDoubleNegativeDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Double, ErrorException>()
                 .register(200, new TypeToken<Double>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -537,12 +536,12 @@ public class NumberImpl implements Number {
      * Put big decimal value 2.5976931e+101.
      *
      * @param numberBody the BigDecimal value
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putBigDecimal(BigDecimal numberBody) throws ServiceException, IOException, IllegalArgumentException {
+    public ServiceResponse<Void> putBigDecimal(BigDecimal numberBody) throws ErrorException, IOException, IllegalArgumentException {
         if (numberBody == null) {
             throw new IllegalArgumentException("Parameter numberBody is required and cannot be null.");
         }
@@ -568,7 +567,7 @@ public class NumberImpl implements Number {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putBigDecimalDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -576,21 +575,21 @@ public class NumberImpl implements Number {
         return call;
     }
 
-    private ServiceResponse<Void> putBigDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> putBigDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
     /**
      * Get big decimal value 2.5976931e+101.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the BigDecimal object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<BigDecimal> getBigDecimal() throws ServiceException, IOException {
+    public ServiceResponse<BigDecimal> getBigDecimal() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getBigDecimal();
         return getBigDecimalDelegate(call.execute(), null);
     }
@@ -608,7 +607,7 @@ public class NumberImpl implements Number {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getBigDecimalDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -616,10 +615,10 @@ public class NumberImpl implements Number {
         return call;
     }
 
-    private ServiceResponse<BigDecimal> getBigDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<BigDecimal>()
+    private ServiceResponse<BigDecimal> getBigDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<BigDecimal, ErrorException>()
                 .register(200, new TypeToken<BigDecimal>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -627,12 +626,12 @@ public class NumberImpl implements Number {
      * Put big decimal value 99999999.99.
      *
      * @param numberBody the BigDecimal value
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putBigDecimalPositiveDecimal(BigDecimal numberBody) throws ServiceException, IOException, IllegalArgumentException {
+    public ServiceResponse<Void> putBigDecimalPositiveDecimal(BigDecimal numberBody) throws ErrorException, IOException, IllegalArgumentException {
         if (numberBody == null) {
             throw new IllegalArgumentException("Parameter numberBody is required and cannot be null.");
         }
@@ -658,7 +657,7 @@ public class NumberImpl implements Number {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putBigDecimalPositiveDecimalDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -666,21 +665,21 @@ public class NumberImpl implements Number {
         return call;
     }
 
-    private ServiceResponse<Void> putBigDecimalPositiveDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> putBigDecimalPositiveDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
     /**
      * Get big decimal value 99999999.99.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the BigDecimal object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<BigDecimal> getBigDecimalPositiveDecimal() throws ServiceException, IOException {
+    public ServiceResponse<BigDecimal> getBigDecimalPositiveDecimal() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getBigDecimalPositiveDecimal();
         return getBigDecimalPositiveDecimalDelegate(call.execute(), null);
     }
@@ -698,7 +697,7 @@ public class NumberImpl implements Number {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getBigDecimalPositiveDecimalDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -706,10 +705,10 @@ public class NumberImpl implements Number {
         return call;
     }
 
-    private ServiceResponse<BigDecimal> getBigDecimalPositiveDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<BigDecimal>()
+    private ServiceResponse<BigDecimal> getBigDecimalPositiveDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<BigDecimal, ErrorException>()
                 .register(200, new TypeToken<BigDecimal>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -717,12 +716,12 @@ public class NumberImpl implements Number {
      * Put big decimal value -99999999.99.
      *
      * @param numberBody the BigDecimal value
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putBigDecimalNegativeDecimal(BigDecimal numberBody) throws ServiceException, IOException, IllegalArgumentException {
+    public ServiceResponse<Void> putBigDecimalNegativeDecimal(BigDecimal numberBody) throws ErrorException, IOException, IllegalArgumentException {
         if (numberBody == null) {
             throw new IllegalArgumentException("Parameter numberBody is required and cannot be null.");
         }
@@ -748,7 +747,7 @@ public class NumberImpl implements Number {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putBigDecimalNegativeDecimalDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -756,21 +755,21 @@ public class NumberImpl implements Number {
         return call;
     }
 
-    private ServiceResponse<Void> putBigDecimalNegativeDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> putBigDecimalNegativeDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
     /**
      * Get big decimal value -99999999.99.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the BigDecimal object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<BigDecimal> getBigDecimalNegativeDecimal() throws ServiceException, IOException {
+    public ServiceResponse<BigDecimal> getBigDecimalNegativeDecimal() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getBigDecimalNegativeDecimal();
         return getBigDecimalNegativeDecimalDelegate(call.execute(), null);
     }
@@ -788,7 +787,7 @@ public class NumberImpl implements Number {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getBigDecimalNegativeDecimalDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -796,10 +795,10 @@ public class NumberImpl implements Number {
         return call;
     }
 
-    private ServiceResponse<BigDecimal> getBigDecimalNegativeDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<BigDecimal>()
+    private ServiceResponse<BigDecimal> getBigDecimalNegativeDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<BigDecimal, ErrorException>()
                 .register(200, new TypeToken<BigDecimal>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -807,11 +806,11 @@ public class NumberImpl implements Number {
      * Put small float value 3.402823e-20.
      *
      * @param numberBody the double value
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putSmallFloat(double numberBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putSmallFloat(double numberBody) throws ErrorException, IOException {
         Call<ResponseBody> call = service.putSmallFloat(numberBody);
         return putSmallFloatDelegate(call.execute(), null);
     }
@@ -830,7 +829,7 @@ public class NumberImpl implements Number {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putSmallFloatDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -838,21 +837,21 @@ public class NumberImpl implements Number {
         return call;
     }
 
-    private ServiceResponse<Void> putSmallFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> putSmallFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
     /**
      * Get big double value 3.402823e-20.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Double object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Double> getSmallFloat() throws ServiceException, IOException {
+    public ServiceResponse<Double> getSmallFloat() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getSmallFloat();
         return getSmallFloatDelegate(call.execute(), null);
     }
@@ -870,7 +869,7 @@ public class NumberImpl implements Number {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getSmallFloatDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -878,10 +877,10 @@ public class NumberImpl implements Number {
         return call;
     }
 
-    private ServiceResponse<Double> getSmallFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Double>()
+    private ServiceResponse<Double> getSmallFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Double, ErrorException>()
                 .register(200, new TypeToken<Double>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -889,11 +888,11 @@ public class NumberImpl implements Number {
      * Put small double value 2.5976931e-101.
      *
      * @param numberBody the double value
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putSmallDouble(double numberBody) throws ServiceException, IOException {
+    public ServiceResponse<Void> putSmallDouble(double numberBody) throws ErrorException, IOException {
         Call<ResponseBody> call = service.putSmallDouble(numberBody);
         return putSmallDoubleDelegate(call.execute(), null);
     }
@@ -912,7 +911,7 @@ public class NumberImpl implements Number {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putSmallDoubleDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -920,21 +919,21 @@ public class NumberImpl implements Number {
         return call;
     }
 
-    private ServiceResponse<Void> putSmallDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> putSmallDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
     /**
      * Get big double value 2.5976931e-101.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Double object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Double> getSmallDouble() throws ServiceException, IOException {
+    public ServiceResponse<Double> getSmallDouble() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getSmallDouble();
         return getSmallDoubleDelegate(call.execute(), null);
     }
@@ -952,7 +951,7 @@ public class NumberImpl implements Number {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getSmallDoubleDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -960,10 +959,10 @@ public class NumberImpl implements Number {
         return call;
     }
 
-    private ServiceResponse<Double> getSmallDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Double>()
+    private ServiceResponse<Double> getSmallDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Double, ErrorException>()
                 .register(200, new TypeToken<Double>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -971,12 +970,12 @@ public class NumberImpl implements Number {
      * Put small decimal value 2.5976931e-101.
      *
      * @param numberBody the BigDecimal value
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putSmallDecimal(BigDecimal numberBody) throws ServiceException, IOException, IllegalArgumentException {
+    public ServiceResponse<Void> putSmallDecimal(BigDecimal numberBody) throws ErrorException, IOException, IllegalArgumentException {
         if (numberBody == null) {
             throw new IllegalArgumentException("Parameter numberBody is required and cannot be null.");
         }
@@ -1002,7 +1001,7 @@ public class NumberImpl implements Number {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putSmallDecimalDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1010,21 +1009,21 @@ public class NumberImpl implements Number {
         return call;
     }
 
-    private ServiceResponse<Void> putSmallDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> putSmallDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
     /**
      * Get small decimal value 2.5976931e-101.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the BigDecimal object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<BigDecimal> getSmallDecimal() throws ServiceException, IOException {
+    public ServiceResponse<BigDecimal> getSmallDecimal() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getSmallDecimal();
         return getSmallDecimalDelegate(call.execute(), null);
     }
@@ -1042,7 +1041,7 @@ public class NumberImpl implements Number {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getSmallDecimalDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1050,10 +1049,10 @@ public class NumberImpl implements Number {
         return call;
     }
 
-    private ServiceResponse<BigDecimal> getSmallDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<BigDecimal>()
+    private ServiceResponse<BigDecimal> getSmallDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<BigDecimal, ErrorException>()
                 .register(200, new TypeToken<BigDecimal>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 

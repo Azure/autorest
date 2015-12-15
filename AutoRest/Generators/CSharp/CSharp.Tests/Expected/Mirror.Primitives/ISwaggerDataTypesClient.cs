@@ -20,7 +20,7 @@ namespace Fixtures.MirrorPrimitives
     /// <summary>
     /// Some cool documentation.
     /// </summary>
-    public partial interface ISwaggerDataTypesClient
+    public partial interface ISwaggerDataTypesClient : IDisposable
     {
         /// <summary>
         /// The base URI of the service.

@@ -14,11 +14,10 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.AzureServiceResponseBuilder;
 import com.microsoft.rest.serializer.AzureJacksonUtils;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
-import fixtures.azurespecials.models.Error;
+import fixtures.azurespecials.models.ErrorException;
 import java.io.IOException;
 import retrofit.Call;
 import retrofit.Response;
@@ -28,7 +27,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in XMsClientRequestIdOperations.
  */
-public class XMsClientRequestIdOperationsImpl implements XMsClientRequestIdOperations {
+public final class XMsClientRequestIdOperationsImpl implements XMsClientRequestIdOperations {
     /** The Retrofit service to perform REST calls. */
     private XMsClientRequestIdService service;
     /** The service client containing this operation class. */
@@ -48,11 +47,11 @@ public class XMsClientRequestIdOperationsImpl implements XMsClientRequestIdOpera
     /**
      * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> get() throws ServiceException, IOException {
+    public ServiceResponse<Void> get() throws ErrorException, IOException {
         Call<ResponseBody> call = service.get(this.client.getAcceptLanguage());
         return getDelegate(call.execute(), null);
     }
@@ -70,7 +69,7 @@ public class XMsClientRequestIdOperationsImpl implements XMsClientRequestIdOpera
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -78,10 +77,10 @@ public class XMsClientRequestIdOperationsImpl implements XMsClientRequestIdOpera
         return call;
     }
 
-    private ServiceResponse<Void> getDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
+    private ServiceResponse<Void> getDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new AzureServiceResponseBuilder<Void, ErrorException>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -89,12 +88,12 @@ public class XMsClientRequestIdOperationsImpl implements XMsClientRequestIdOpera
      * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
      *
      * @param xMsClientRequestId This should appear as a method parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> paramGet(String xMsClientRequestId) throws ServiceException, IOException, IllegalArgumentException {
+    public ServiceResponse<Void> paramGet(String xMsClientRequestId) throws ErrorException, IOException, IllegalArgumentException {
         if (xMsClientRequestId == null) {
             throw new IllegalArgumentException("Parameter xMsClientRequestId is required and cannot be null.");
         }
@@ -120,7 +119,7 @@ public class XMsClientRequestIdOperationsImpl implements XMsClientRequestIdOpera
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(paramGetDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -128,10 +127,10 @@ public class XMsClientRequestIdOperationsImpl implements XMsClientRequestIdOpera
         return call;
     }
 
-    private ServiceResponse<Void> paramGetDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
+    private ServiceResponse<Void> paramGetDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+        return new AzureServiceResponseBuilder<Void, ErrorException>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 

@@ -22,15 +22,15 @@ package @(Settings.Namespace.ToLower());
 /**
  * Initializes a new instance of the @Model.Name class.
  */
-public class @(Model.Name)Impl extends AzureServiceClient implements @Model.Name {
+public final class @(Model.Name)Impl extends AzureServiceClient implements @Model.Name {
 @if (Model.MethodTemplateModels.Any())
 {
 @:    /** The Retrofit service to perform REST calls. */
 @:    private @Model.ServiceClientServiceType service;
 }
     /** The URI used as the base for all cloud service requests. */
-    private String baseUri;
-    /** the {@@link AzureClient} used for long running operations .*/
+    private final String baseUri;
+    /** the {@@link AzureClient} used for long running operations. */
     private AzureClient azureClient;
 @EmptyLine
     /**

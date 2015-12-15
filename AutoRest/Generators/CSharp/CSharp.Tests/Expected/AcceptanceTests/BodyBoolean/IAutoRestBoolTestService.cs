@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
     /// <summary>
     /// Test Infrastructure for AutoRest
     /// </summary>
-    public partial interface IAutoRestBoolTestService
+    public partial interface IAutoRestBoolTestService : IDisposable
     {
         /// <summary>
         /// The base URI of the service.

@@ -15,7 +15,6 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Joiner;
-import retrofit.JacksonConverterFactory;
 
 import java.io.IOException;
 import java.io.StringWriter;

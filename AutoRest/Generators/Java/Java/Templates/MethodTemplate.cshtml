@@ -31,7 +31,7 @@ else
 @: * @@return the {@@link ServiceResponse} object if successful.
 }
  */
-public ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)(@Model.MethodParameterDeclaration) throws @Model.Exceptions {
+public ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)(@Model.MethodParameterDeclaration) throws @Model.ExceptionString {
 @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {
@@ -97,7 +97,7 @@ public Call<@Model.CallType> @(Model.Name)Async(@Model.MethodParameterDeclaratio
         public void onResponse(Response<@Model.CallType> response, Retrofit retrofit) {
             try {
                 serviceCallback.success(@(Model.Name)Delegate(response, retrofit));
-            } catch (ServiceException | IOException exception) {
+            } catch (@Model.OperationExceptionTypeString | IOException exception) {
                 serviceCallback.failure(exception);
             }
         }
@@ -105,8 +105,8 @@ public Call<@Model.CallType> @(Model.Name)Async(@Model.MethodParameterDeclaratio
     return call;
 }
 @EmptyLine
-private ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)Delegate(Response<@Model.CallType> response, Retrofit retrofit) throws ServiceException, IOException {
-    return new @Model.ResponseBuilder<@Model.GenericReturnTypeString>(@Model.ServiceResponseBuilderArgs)
+private ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)Delegate(Response<@Model.CallType> response, Retrofit retrofit) throws @Model.ExceptionString {
+    return new @Model.ResponseBuilder<@Model.GenericReturnTypeString, @Model.OperationExceptionTypeString>(@Model.ServiceResponseBuilderArgs)
 @foreach (var response in Model.Responses)
 {
 
@@ -114,7 +114,7 @@ private ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)Delegate(Re
 }
 @if (Model.DefaultResponse.Body != null)
 {
-            @:.registerError(new TypeToken<@(JavaCodeNamer.WrapPrimitiveType(Model.DefaultResponse.Body).Name)>() { }.getType())
+            @:.registerError(@(Model.OperationExceptionTypeString).class)
 }
 @if (Model.HttpMethod == HttpMethod.Head)
 {

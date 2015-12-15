@@ -62,6 +62,21 @@ namespace Microsoft.Rest.Generator.Java.Azure
             get { return Url == "{nextLink}"; }
         }
 
+        /// <summary>
+        /// Get the type for operation exception.
+        /// </summary>
+        public override string OperationExceptionTypeString
+        {
+            get
+            {
+                if (DefaultResponse.Body == null || DefaultResponse.Body.Name == "CloudError")
+                {
+                    return "CloudException";
+                }
+                return base.OperationExceptionTypeString;
+            }
+        }
+
         public override string MethodParameterApiDeclaration
         {
             get
@@ -75,14 +90,14 @@ namespace Microsoft.Rest.Generator.Java.Azure
             }
         }
 
-        public override string Exceptions
+        public override IEnumerable<string> Exceptions
         {
             get
             {
-                string exceptions = base.Exceptions;
+                var exceptions = base.Exceptions.ToList();
                 if (this.IsLongRunningOperation)
                 {
-                    exceptions = string.Join(", ", exceptions, "InterruptedException");
+                    exceptions.Add("InterruptedException");
                 }
                 return exceptions;
             }

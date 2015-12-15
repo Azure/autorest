@@ -11,9 +11,9 @@
 package fixtures.bodyfile;
 
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
+import fixtures.bodyfile.models.ErrorException;
 import java.io.InputStream;
 import java.io.IOException;
 import retrofit.Call;
@@ -39,11 +39,11 @@ public interface Files {
     /**
      * Get file.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<InputStream> getFile() throws ServiceException, IOException;
+    ServiceResponse<InputStream> getFile() throws ErrorException, IOException;
 
     /**
      * Get file.
@@ -56,11 +56,11 @@ public interface Files {
     /**
      * Get empty file.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<InputStream> getEmptyFile() throws ServiceException, IOException;
+    ServiceResponse<InputStream> getEmptyFile() throws ErrorException, IOException;
 
     /**
      * Get empty file.

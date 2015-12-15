@@ -29,7 +29,7 @@ public enum GreyscaleColors {
     /** The actual serialized value for a GreyscaleColors instance. */
     private String value;
 
-    private GreyscaleColors(String value) {
+    GreyscaleColors(String value) {
         this.value = value;
     }
 

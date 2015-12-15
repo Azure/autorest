@@ -53,12 +53,12 @@ namespace Microsoft.Rest.Generator.CSharp
                     foreach (var responseStatus in Responses.Keys)
                     {
                         predicates.Add(string.Format(CultureInfo.InvariantCulture,
-                            "(int)statusCode != {0}", GetStatusCodeReference(responseStatus)));
+                            "(int)_statusCode != {0}", GetStatusCodeReference(responseStatus)));
                     }
 
                     return string.Join(" && ", predicates);
                 }
-                return "!httpResponse.IsSuccessStatusCode";
+                return "!_httpResponse.IsSuccessStatusCode";
             }
         }
 
@@ -394,19 +394,19 @@ namespace Microsoft.Rest.Generator.CSharp
             }
             if (this.LogicalParameterTemplateModels.Any(p => p.Location == ParameterLocation.Query))
             {
-                builder.AppendLine("List<string> queryParameters = new List<string>();");
+                builder.AppendLine("List<string> _queryParameters = new List<string>();");
                 foreach (var queryParameter in this.LogicalParameterTemplateModels.Where(p => p.Location == ParameterLocation.Query))
                 {
                     builder.AppendLine("if ({0} != null)", queryParameter.Name)
                         .AppendLine("{").Indent()
-                        .AppendLine("queryParameters.Add(string.Format(\"{0}={{0}}\", Uri.EscapeDataString({1})));",
+                        .AppendLine("_queryParameters.Add(string.Format(\"{0}={{0}}\", Uri.EscapeDataString({1})));",
                             queryParameter.SerializedName, queryParameter.GetFormattedReferenceValue(ClientReference)).Outdent()
                         .AppendLine("}");
                 }
 
-                builder.AppendLine("if (queryParameters.Count > 0)")
+                builder.AppendLine("if (_queryParameters.Count > 0)")
                     .AppendLine("{").Indent()
-                    .AppendLine("{0} += \"?\" + string.Join(\"&\", queryParameters);", variableName).Outdent()
+                    .AppendLine("{0} += \"?\" + string.Join(\"&\", _queryParameters);", variableName).Outdent()
                     .AppendLine("}");
             }
 

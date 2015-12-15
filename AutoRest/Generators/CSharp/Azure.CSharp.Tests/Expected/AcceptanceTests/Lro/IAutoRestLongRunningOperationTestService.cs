@@ -21,7 +21,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
     /// <summary>
     /// Long-running Operation for AutoRest
     /// </summary>
-    public partial interface IAutoRestLongRunningOperationTestService
+    public partial interface IAutoRestLongRunningOperationTestService : IDisposable
     {
         /// <summary>
         /// The base URI of the service.

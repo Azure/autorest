@@ -12,12 +12,11 @@ package fixtures.http;
 
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
-import fixtures.http.models.Error;
+import fixtures.http.models.ErrorException;
 import java.io.IOException;
 import retrofit.Call;
 import retrofit.Response;
@@ -27,7 +26,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in HttpFailure.
  */
-public class HttpFailureImpl implements HttpFailure {
+public final class HttpFailureImpl implements HttpFailure {
     /** The Retrofit service to perform REST calls. */
     private HttpFailureService service;
     /** The service client containing this operation class. */
@@ -47,11 +46,11 @@ public class HttpFailureImpl implements HttpFailure {
     /**
      * Get empty error form server.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Boolean> getEmptyError() throws ServiceException, IOException {
+    public ServiceResponse<Boolean> getEmptyError() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getEmptyError();
         return getEmptyErrorDelegate(call.execute(), null);
     }
@@ -69,7 +68,7 @@ public class HttpFailureImpl implements HttpFailure {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getEmptyErrorDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -77,10 +76,10 @@ public class HttpFailureImpl implements HttpFailure {
         return call;
     }
 
-    private ServiceResponse<Boolean> getEmptyErrorDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Boolean>()
+    private ServiceResponse<Boolean> getEmptyErrorDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Boolean, ErrorException>()
                 .register(200, new TypeToken<Boolean>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 

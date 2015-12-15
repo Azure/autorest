@@ -18,12 +18,11 @@ import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.CustomHeaderInterceptor;
 import com.microsoft.rest.serializer.AzureJacksonUtils;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.ResponseBody;
-import fixtures.azurereport.models.Error;
+import fixtures.azurereport.models.ErrorException;
 import java.io.IOException;
 import java.util.Map;
 import java.util.UUID;
@@ -34,12 +33,12 @@ import retrofit.Retrofit;
 /**
  * Initializes a new instance of the AutoRestReportServiceForAzure class.
  */
-public class AutoRestReportServiceForAzureImpl extends AzureServiceClient implements AutoRestReportServiceForAzure {
+public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient implements AutoRestReportServiceForAzure {
     /** The Retrofit service to perform REST calls. */
     private AutoRestReportServiceForAzureService service;
     /** The URI used as the base for all cloud service requests. */
-    private String baseUri;
-    /** the {@link AzureClient} used for long running operations .*/
+    private final String baseUri;
+    /** the {@link AzureClient} used for long running operations. */
     private AzureClient azureClient;
 
     /**
@@ -180,11 +179,11 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient implem
     /**
      * Get test coverage report.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Map<String, Integer>> getReport() throws ServiceException, IOException {
+    public ServiceResponse<Map<String, Integer>> getReport() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getReport(this.getAcceptLanguage());
         return getReportDelegate(call.execute(), null);
     }
@@ -202,7 +201,7 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient implem
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getReportDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -210,10 +209,10 @@ public class AutoRestReportServiceForAzureImpl extends AzureServiceClient implem
         return call;
     }
 
-    private ServiceResponse<Map<String, Integer>> getReportDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new AzureServiceResponseBuilder<Map<String, Integer>>(new AzureJacksonUtils())
+    private ServiceResponse<Map<String, Integer>> getReportDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new AzureServiceResponseBuilder<Map<String, Integer>, ErrorException>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Map<String, Integer>>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 

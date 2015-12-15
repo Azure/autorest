@@ -1,7 +1,7 @@
 package fixtures.paging;
 
+import com.microsoft.rest.CloudException;
 import com.microsoft.rest.Page;
-import com.microsoft.rest.ServiceException;
 import fixtures.paging.models.Product;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -64,7 +64,7 @@ public class PagingTests {
         try {
             Page<Product> response = client.getPaging().getSinglePagesFailure().getBody();
             fail();
-        } catch (ServiceException ex) {
+        } catch (CloudException ex) {
             Assert.assertNotNull(ex.getResponse());
         }
     }
@@ -76,7 +76,7 @@ public class PagingTests {
             Assert.assertNotNull(response.getNextPageLink());
             response = client.getPaging().getMultiplePagesNext(response.getNextPageLink(), "client-id").getBody();
             fail();
-        } catch (ServiceException ex) {
+        } catch (CloudException ex) {
             Assert.assertNotNull(ex.getResponse());
         }
     }
@@ -88,7 +88,7 @@ public class PagingTests {
             Assert.assertNotNull(response.getNextPageLink());
             response = client.getPaging().getMultiplePagesFailureUriNext(response.getNextPageLink()).getBody();
             fail();
-        } catch (ServiceException ex) {
+        } catch (CloudException ex) {
             Assert.assertNotNull(ex.getResponse());
         }
     }

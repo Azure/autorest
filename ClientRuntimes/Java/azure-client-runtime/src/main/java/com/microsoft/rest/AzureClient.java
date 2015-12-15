@@ -69,13 +69,13 @@ public class AzureClient extends AzureServiceClient {
      * @param <T>       the return type of the caller
      * @param resourceType the type of the resource
      * @return          the terminal response for the operation.
-     * @throws ServiceException service exception
+     * @throws CloudException REST exception
      * @throws InterruptedException interrupted exception
      * @throws IOException thrown by deserialization
      */
-    public <T> ServiceResponse<T> getPutOrPatchResult(Response<ResponseBody> response, Type resourceType) throws ServiceException, InterruptedException, IOException {
+    public <T> ServiceResponse<T> getPutOrPatchResult(Response<ResponseBody> response, Type resourceType) throws CloudException, InterruptedException, IOException {
         if (response == null) {
-            throw new ServiceException("response is null.");
+            throw new CloudException("response is null.");
         }
 
         int statusCode = response.code();
@@ -86,10 +86,10 @@ public class AzureClient extends AzureServiceClient {
             responseBody = response.errorBody();
         }
         if (statusCode != 200 && statusCode != 201 && statusCode != 202) {
-            ServiceException exception = new ServiceException(statusCode + " is not a valid polling status code");
+            CloudException exception = new CloudException(statusCode + " is not a valid polling status code");
             exception.setResponse(response);
             if (responseBody != null) {
-                exception.setErrorModel(new AzureJacksonUtils().deserialize(responseBody.string(), Object.class));
+                exception.setBody((CloudError) new AzureJacksonUtils().deserialize(responseBody.string(), CloudError.class));
             }
             throw exception;
         }
@@ -117,7 +117,7 @@ public class AzureClient extends AzureServiceClient {
         }
 
         if (AzureAsyncOperation.getFailedStatuses().contains(pollingState.getStatus())) {
-            throw new ServiceException("Async operation failed");
+            throw new CloudException("Async operation failed");
         }
 
         return new ServiceResponse<T>(pollingState.getResource(), pollingState.getResponse());
@@ -148,11 +148,11 @@ public class AzureClient extends AzureServiceClient {
             responseBody = response.errorBody();
         }
         if (statusCode != 200 && statusCode != 201 && statusCode != 202) {
-            ServiceException exception = new ServiceException(statusCode + " is not a valid polling status code");
+            CloudException exception = new CloudException(statusCode + " is not a valid polling status code");
             exception.setResponse(response);
             try {
                 if (responseBody != null) {
-                    exception.setErrorModel(new AzureJacksonUtils().deserialize(responseBody.string(), Object.class));
+                    exception.setBody((CloudError) new AzureJacksonUtils().deserialize(responseBody.string(), CloudError.class));
                 }
             } catch (Exception e) { /* ignore serialization errors on top of service errors */ }
             callback.failure(exception);
@@ -182,13 +182,13 @@ public class AzureClient extends AzureServiceClient {
      * @param <T>       the return type of the caller
      * @param resourceType the type of the resource
      * @return          the terminal response for the operation.
-     * @throws ServiceException service exception
+     * @throws CloudException REST exception
      * @throws InterruptedException interrupted exception
      * @throws IOException thrown by deserialization
      */
-    public <T> ServiceResponse<T> getPostOrDeleteResult(Response<ResponseBody> response, Type resourceType) throws ServiceException, InterruptedException, IOException {
+    public <T> ServiceResponse<T> getPostOrDeleteResult(Response<ResponseBody> response, Type resourceType) throws CloudException, InterruptedException, IOException {
         if (response == null) {
-            throw new ServiceException("response is null.");
+            throw new CloudException("response is null.");
         }
 
         int statusCode = response.code();
@@ -199,10 +199,10 @@ public class AzureClient extends AzureServiceClient {
             responseBody = response.errorBody();
         }
         if (statusCode != 200 && statusCode != 202 && statusCode != 204) {
-            ServiceException exception = new ServiceException(statusCode + " is not a valid polling status code");
+            CloudException exception = new CloudException(statusCode + " is not a valid polling status code");
             exception.setResponse(response);
             if (responseBody != null) {
-                exception.setErrorModel(new AzureJacksonUtils().deserialize(responseBody.string(), Object.class));
+                exception.setBody((CloudError) new AzureJacksonUtils().deserialize(responseBody.string(), CloudError.class));
             }
             throw exception;
         }
@@ -220,7 +220,7 @@ public class AzureClient extends AzureServiceClient {
                     && !pollingState.getLocationHeaderLink().isEmpty()) {
                 updateStateFromLocationHeaderOnPostOrDelete(pollingState);
             } else {
-                ServiceException exception = new ServiceException("No header in response");
+                CloudException exception = new CloudException("No header in response");
                 exception.setResponse(response);
                 throw exception;
             }
@@ -229,7 +229,7 @@ public class AzureClient extends AzureServiceClient {
         // Check if operation failed
         if (AzureAsyncOperation.getFailedStatuses().contains(pollingState.getStatus()))
         {
-            throw new ServiceException("Async operation failed");
+            throw new CloudException("Async operation failed");
         }
 
         return new ServiceResponse<T>(pollingState.getResource(), pollingState.getResponse());
@@ -260,11 +260,11 @@ public class AzureClient extends AzureServiceClient {
             responseBody = response.errorBody();
         }
         if (statusCode != 200 && statusCode != 201 && statusCode != 202) {
-            ServiceException exception = new ServiceException(statusCode + " is not a valid polling status code");
+            CloudException exception = new CloudException(statusCode + " is not a valid polling status code");
             exception.setResponse(response);
             try {
                 if (responseBody != null) {
-                    exception.setErrorModel(new AzureJacksonUtils().deserialize(responseBody.string(), Object.class));
+                    exception.setBody((CloudError) new AzureJacksonUtils().deserialize(responseBody.string(), CloudError.class));
                 }
             } catch (Exception e) { /* ignore serialization errors on top of service errors */ }
             callback.failure(exception);
@@ -291,10 +291,10 @@ public class AzureClient extends AzureServiceClient {
      *
      * @param pollingState the polling state for the current operation.
      * @param <T> the return type of the caller.
-     * @throws ServiceException service exception
+     * @throws CloudException REST exception
      * @throws IOException thrown by deserialization
      */
-    private <T> void updateStateFromLocationHeaderOnPut(PollingState<T> pollingState) throws ServiceException, IOException {
+    private <T> void updateStateFromLocationHeaderOnPut(PollingState<T> pollingState) throws CloudException, IOException {
         Response<ResponseBody> response = poll(pollingState.getLocationHeaderLink());
         int statusCode = response.code();
         if (statusCode == 202) {
@@ -348,7 +348,7 @@ public class AzureClient extends AzureServiceClient {
      * @throws ServiceException service exception
      * @throws IOException thrown by deserialization
      */
-    private <T> void updateStateFromLocationHeaderOnPostOrDelete(PollingState<T> pollingState) throws ServiceException, IOException {
+    private <T> void updateStateFromLocationHeaderOnPostOrDelete(PollingState<T> pollingState) throws CloudException, IOException {
         Response<ResponseBody> response = poll(pollingState.getLocationHeaderLink());
         int statusCode = response.code();
         if (statusCode == 202) {
@@ -403,7 +403,7 @@ public class AzureClient extends AzureServiceClient {
      * @throws ServiceException service exception
      * @throws IOException thrown by deserialization
      */
-    private <T> void updateStateFromGetResourceOperation(PollingState<T> pollingState, String url) throws ServiceException, IOException {
+    private <T> void updateStateFromGetResourceOperation(PollingState<T> pollingState, String url) throws CloudException, IOException {
         Response<ResponseBody> response = poll(url);
         pollingState.updateFromResponseOnPutPatch(response);
     }
@@ -446,7 +446,7 @@ public class AzureClient extends AzureServiceClient {
      * @throws ServiceException service exception
      * @throws IOException thrown by deserialization
      */
-    private <T> void updateStateFromAzureAsyncOperationHeader(PollingState<T> pollingState) throws ServiceException, IOException {
+    private <T> void updateStateFromAzureAsyncOperationHeader(PollingState<T> pollingState) throws CloudException, IOException {
         Response<ResponseBody> response = poll(pollingState.getAzureAsyncOperationHeaderLink());
 
         AzureAsyncOperation body = null;
@@ -455,10 +455,10 @@ public class AzureClient extends AzureServiceClient {
         }
 
         if (body == null || body.getStatus() == null) {
-            ServiceException exception = new ServiceException("no body");
+            CloudException exception = new CloudException("no body");
             exception.setResponse(response);
             if (response.errorBody() != null) {
-                exception.setErrorModel(new AzureJacksonUtils().deserialize(response.errorBody().string(), Object.class));
+                exception.setBody((CloudError) new AzureJacksonUtils().deserialize(response.errorBody().string(), CloudError.class));
             }
             throw exception;
         }
@@ -492,10 +492,10 @@ public class AzureClient extends AzureServiceClient {
                         body = new AzureJacksonUtils().deserialize(result.getBody().string(), AzureAsyncOperation.class);
                     }
                     if (body == null || body.getStatus() == null) {
-                        ServiceException exception = new ServiceException("no body");
+                        CloudException exception = new CloudException("no body");
                         exception.setResponse(result.getResponse());
                         if (result.getResponse().errorBody() != null) {
-                            exception.setErrorModel(new AzureJacksonUtils().deserialize(result.getResponse().errorBody().string(), Object.class));
+                            exception.setBody((CloudError) new AzureJacksonUtils().deserialize(result.getResponse().errorBody().string(), CloudError.class));
                         }
                         failure(exception);
                     } else {
@@ -516,10 +516,10 @@ public class AzureClient extends AzureServiceClient {
      *
      * @param url the URL to poll from.
      * @return the raw response.
-     * @throws ServiceException service exception
+     * @throws CloudException REST exception
      * @throws IOException thrown by deserialization
      */
-    private Response<ResponseBody> poll(String url) throws ServiceException, IOException {
+    private Response<ResponseBody> poll(String url) throws CloudException, IOException {
         URL endpoint;
         endpoint = new URL(url);
         int port = endpoint.getPort();
@@ -531,12 +531,12 @@ public class AzureClient extends AzureServiceClient {
         Response<ResponseBody> response = service.get(endpoint.getFile()).execute();
         int statusCode = response.code();
         if (statusCode != 200 && statusCode != 201 && statusCode != 202 && statusCode != 204) {
-            ServiceException exception = new ServiceException(statusCode + " is not a valid polling status code");
+            CloudException exception = new CloudException(statusCode + " is not a valid polling status code");
             exception.setResponse(response);
             if (response.body() != null) {
-                exception.setErrorModel(new AzureJacksonUtils().deserialize(response.body().string(), Object.class));
+                exception.setBody((CloudError) new AzureJacksonUtils().deserialize(response.body().string(), CloudError.class));
             } else if (response.errorBody() != null) {
-                exception.setErrorModel(new AzureJacksonUtils().deserialize(response.errorBody().string(), Object.class));
+                exception.setBody((CloudError) new AzureJacksonUtils().deserialize(response.errorBody().string(), CloudError.class));
             }
             throw exception;
         }
@@ -571,12 +571,12 @@ public class AzureClient extends AzureServiceClient {
                 try {
                     int statusCode = response.code();
                     if (statusCode != 200 && statusCode != 201 && statusCode != 202 && statusCode != 204) {
-                        ServiceException exception = new ServiceException(statusCode + " is not a valid polling status code");
+                        CloudException exception = new CloudException(statusCode + " is not a valid polling status code");
                         exception.setResponse(response);
                         if (response.body() != null) {
-                            exception.setErrorModel(new AzureJacksonUtils().deserialize(response.body().string(), Object.class));
+                            exception.setBody((CloudError) new AzureJacksonUtils().deserialize(response.body().string(), CloudError.class));
                         } else if (response.errorBody() != null) {
-                            exception.setErrorModel(new AzureJacksonUtils().deserialize(response.errorBody().string(), Object.class));
+                            exception.setBody((CloudError) new AzureJacksonUtils().deserialize(response.errorBody().string(), CloudError.class));
                         }
                         callback.failure(exception);
                         return;

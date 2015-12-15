@@ -38,7 +38,7 @@ namespace Microsoft.Rest.Serialization
                 {
                     typeName = type.GetCustomAttribute<JsonObjectAttribute>().Id;
                 }
-                if (typeName.Equals(name, StringComparison.OrdinalIgnoreCase))
+                if (typeName != null && typeName.Equals(name, StringComparison.OrdinalIgnoreCase))
                 {
                     return type.AsType();
                 }

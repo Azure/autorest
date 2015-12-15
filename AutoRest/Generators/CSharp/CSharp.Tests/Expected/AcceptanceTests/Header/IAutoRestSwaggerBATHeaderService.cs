@@ -20,7 +20,7 @@ namespace Fixtures.AcceptanceTestsHeader
     /// <summary>
     /// Test Infrastructure for AutoRest
     /// </summary>
-    public partial interface IAutoRestSwaggerBATHeaderService
+    public partial interface IAutoRestSwaggerBATHeaderService : IDisposable
     {
         /// <summary>
         /// The base URI of the service.

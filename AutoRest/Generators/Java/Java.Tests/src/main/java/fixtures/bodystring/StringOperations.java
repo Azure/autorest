@@ -11,9 +11,9 @@
 package fixtures.bodystring;
 
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
+import fixtures.bodystring.models.ErrorException;
 import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.Body;
@@ -61,11 +61,11 @@ public interface StringOperations {
     /**
      * Get null string value value.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the String object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<String> getNull() throws ServiceException, IOException;
+    ServiceResponse<String> getNull() throws ErrorException, IOException;
 
     /**
      * Get null string value value.
@@ -79,11 +79,11 @@ public interface StringOperations {
      * Set string value null.
      *
      * @param stringBody Possible values for this parameter include: ''
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putNull(String stringBody) throws ServiceException, IOException;
+    ServiceResponse<Void> putNull(String stringBody) throws ErrorException, IOException;
 
     /**
      * Set string value null.
@@ -97,11 +97,11 @@ public interface StringOperations {
     /**
      * Get empty string value value ''.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the String object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<String> getEmpty() throws ServiceException, IOException;
+    ServiceResponse<String> getEmpty() throws ErrorException, IOException;
 
     /**
      * Get empty string value value ''.
@@ -115,12 +115,12 @@ public interface StringOperations {
      * Set string value empty ''.
      *
      * @param stringBody Possible values for this parameter include: ''
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putEmpty(String stringBody) throws ServiceException, IOException, IllegalArgumentException;
+    ServiceResponse<Void> putEmpty(String stringBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set string value empty ''.
@@ -134,11 +134,11 @@ public interface StringOperations {
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the String object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<String> getMbcs() throws ServiceException, IOException;
+    ServiceResponse<String> getMbcs() throws ErrorException, IOException;
 
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
@@ -152,12 +152,12 @@ public interface StringOperations {
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
      *
      * @param stringBody Possible values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putMbcs(String stringBody) throws ServiceException, IOException, IllegalArgumentException;
+    ServiceResponse<Void> putMbcs(String stringBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
@@ -171,11 +171,11 @@ public interface StringOperations {
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the String object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<String> getWhitespace() throws ServiceException, IOException;
+    ServiceResponse<String> getWhitespace() throws ErrorException, IOException;
 
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
@@ -189,12 +189,12 @@ public interface StringOperations {
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
      * @param stringBody Possible values for this parameter include: '    Now is the time for all good men to come to the aid of their country    '
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putWhitespace(String stringBody) throws ServiceException, IOException, IllegalArgumentException;
+    ServiceResponse<Void> putWhitespace(String stringBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
@@ -208,11 +208,11 @@ public interface StringOperations {
     /**
      * Get String value when no string value is sent in response payload.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the String object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<String> getNotProvided() throws ServiceException, IOException;
+    ServiceResponse<String> getNotProvided() throws ErrorException, IOException;
 
     /**
      * Get String value when no string value is sent in response payload.

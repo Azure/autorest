@@ -12,10 +12,9 @@ package fixtures.head;
 
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.AzureServiceResponseBuilder;
-import com.microsoft.rest.CloudError;
+import com.microsoft.rest.CloudException;
 import com.microsoft.rest.serializer.AzureJacksonUtils;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseEmptyCallback;
 import java.io.IOException;
@@ -27,7 +26,7 @@ import retrofit.Retrofit;
  * An instance of this class provides access to all the operations defined
  * in HttpSuccessOperations.
  */
-public class HttpSuccessOperationsImpl implements HttpSuccessOperations {
+public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
     /** The Retrofit service to perform REST calls. */
     private HttpSuccessService service;
     /** The service client containing this operation class. */
@@ -47,11 +46,11 @@ public class HttpSuccessOperationsImpl implements HttpSuccessOperations {
     /**
      * Return 200 status code if successful.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Boolean> head200() throws ServiceException, IOException {
+    public ServiceResponse<Boolean> head200() throws CloudException, IOException {
         Call<Void> call = service.head200(this.client.getAcceptLanguage());
         return head200Delegate(call.execute(), null);
     }
@@ -69,7 +68,7 @@ public class HttpSuccessOperationsImpl implements HttpSuccessOperations {
             public void onResponse(Response<Void> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(head200Delegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (CloudException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -77,22 +76,22 @@ public class HttpSuccessOperationsImpl implements HttpSuccessOperations {
         return call;
     }
 
-    private ServiceResponse<Boolean> head200Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new AzureServiceResponseBuilder<Boolean>(new AzureJacksonUtils())
+    private ServiceResponse<Boolean> head200Delegate(Response<Void> response, Retrofit retrofit) throws CloudException, IOException {
+        return new AzureServiceResponseBuilder<Boolean, CloudException>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(404, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<CloudError>() { }.getType())
+                .registerError(CloudException.class)
                 .buildEmpty(response, retrofit);
     }
 
     /**
      * Return 204 status code if successful.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Boolean> head204() throws ServiceException, IOException {
+    public ServiceResponse<Boolean> head204() throws CloudException, IOException {
         Call<Void> call = service.head204(this.client.getAcceptLanguage());
         return head204Delegate(call.execute(), null);
     }
@@ -110,7 +109,7 @@ public class HttpSuccessOperationsImpl implements HttpSuccessOperations {
             public void onResponse(Response<Void> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(head204Delegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (CloudException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -118,22 +117,22 @@ public class HttpSuccessOperationsImpl implements HttpSuccessOperations {
         return call;
     }
 
-    private ServiceResponse<Boolean> head204Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new AzureServiceResponseBuilder<Boolean>(new AzureJacksonUtils())
+    private ServiceResponse<Boolean> head204Delegate(Response<Void> response, Retrofit retrofit) throws CloudException, IOException {
+        return new AzureServiceResponseBuilder<Boolean, CloudException>(new AzureJacksonUtils())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .register(404, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<CloudError>() { }.getType())
+                .registerError(CloudException.class)
                 .buildEmpty(response, retrofit);
     }
 
     /**
      * Return 404 status code if successful.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Boolean> head404() throws ServiceException, IOException {
+    public ServiceResponse<Boolean> head404() throws CloudException, IOException {
         Call<Void> call = service.head404(this.client.getAcceptLanguage());
         return head404Delegate(call.execute(), null);
     }
@@ -151,7 +150,7 @@ public class HttpSuccessOperationsImpl implements HttpSuccessOperations {
             public void onResponse(Response<Void> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(head404Delegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (CloudException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -159,11 +158,11 @@ public class HttpSuccessOperationsImpl implements HttpSuccessOperations {
         return call;
     }
 
-    private ServiceResponse<Boolean> head404Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new AzureServiceResponseBuilder<Boolean>(new AzureJacksonUtils())
+    private ServiceResponse<Boolean> head404Delegate(Response<Void> response, Retrofit retrofit) throws CloudException, IOException {
+        return new AzureServiceResponseBuilder<Boolean, CloudException>(new AzureJacksonUtils())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .register(404, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<CloudError>() { }.getType())
+                .registerError(CloudException.class)
                 .buildEmpty(response, retrofit);
     }
 

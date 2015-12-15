@@ -40,8 +40,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<int?>> GetNullAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -66,8 +66,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<int?>> GetInvalidAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -92,8 +92,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<int?>> GetEmptyAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -147,8 +147,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<bool?>> GetBooleanTfftAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetBooleanTfftWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetBooleanTfftWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -202,8 +202,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<bool?>> GetBooleanInvalidNullAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetBooleanInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetBooleanInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -228,8 +228,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<bool?>> GetBooleanInvalidStringAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetBooleanInvalidStringWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetBooleanInvalidStringWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -254,8 +254,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<int?>> GetIntegerValidAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetIntegerValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetIntegerValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -309,8 +309,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<int?>> GetIntInvalidNullAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetIntInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetIntInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -335,8 +335,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<int?>> GetIntInvalidStringAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetIntInvalidStringWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetIntInvalidStringWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -361,8 +361,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<long?>> GetLongValidAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetLongValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetLongValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -416,8 +416,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<long?>> GetLongInvalidNullAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetLongInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetLongInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -442,8 +442,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<long?>> GetLongInvalidStringAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetLongInvalidStringWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetLongInvalidStringWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -468,8 +468,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<double?>> GetFloatValidAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetFloatValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetFloatValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -523,8 +523,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<double?>> GetFloatInvalidNullAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetFloatInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetFloatInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -549,8 +549,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<double?>> GetFloatInvalidStringAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetFloatInvalidStringWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetFloatInvalidStringWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -575,8 +575,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<double?>> GetDoubleValidAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetDoubleValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetDoubleValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -630,8 +630,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<double?>> GetDoubleInvalidNullAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetDoubleInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetDoubleInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -656,8 +656,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<double?>> GetDoubleInvalidStringAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetDoubleInvalidStringWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetDoubleInvalidStringWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -682,8 +682,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<string>> GetStringValidAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetStringValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetStringValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -737,8 +737,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<string>> GetStringWithNullAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetStringWithNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetStringWithNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -763,8 +763,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<string>> GetStringWithInvalidAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetStringWithInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetStringWithInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -789,8 +789,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<DateTime?>> GetDateValidAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetDateValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetDateValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -844,8 +844,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<DateTime?>> GetDateInvalidNullAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetDateInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetDateInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -870,8 +870,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<DateTime?>> GetDateInvalidCharsAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetDateInvalidCharsWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetDateInvalidCharsWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -898,8 +898,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<DateTime?>> GetDateTimeValidAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetDateTimeValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetDateTimeValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -955,8 +955,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<DateTime?>> GetDateTimeInvalidNullAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetDateTimeInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetDateTimeInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -981,8 +981,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<DateTime?>> GetDateTimeInvalidCharsAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetDateTimeInvalidCharsWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetDateTimeInvalidCharsWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1009,8 +1009,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<DateTime?>> GetDateTimeRfc1123ValidAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetDateTimeRfc1123ValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetDateTimeRfc1123ValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1066,8 +1066,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<TimeSpan?>> GetDurationValidAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetDurationValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetDurationValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1123,8 +1123,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<byte[]>> GetByteValidAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetByteValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetByteValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1182,8 +1182,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<byte[]>> GetByteInvalidNullAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetByteInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetByteInvalidNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1208,8 +1208,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<Product>> GetComplexNullAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetComplexNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetComplexNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1234,8 +1234,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<Product>> GetComplexEmptyAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetComplexEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetComplexEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1262,8 +1262,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<Product>> GetComplexItemNullAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetComplexItemNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetComplexItemNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1290,8 +1290,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<Product>> GetComplexItemEmptyAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetComplexItemEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetComplexItemEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1318,8 +1318,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<Product>> GetComplexValidAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetComplexValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetComplexValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1375,8 +1375,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<IList<string>>> GetArrayNullAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetArrayNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetArrayNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1401,8 +1401,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<IList<string>>> GetArrayEmptyAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetArrayEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetArrayEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1427,8 +1427,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<IList<string>>> GetArrayItemNullAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetArrayItemNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetArrayItemNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1453,8 +1453,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<IList<string>>> GetArrayItemEmptyAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetArrayItemEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetArrayItemEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1481,8 +1481,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<IList<string>>> GetArrayValidAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetArrayValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetArrayValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1538,8 +1538,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<IDictionary<string, string>>> GetDictionaryNullAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetDictionaryNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetDictionaryNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1564,8 +1564,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<IDictionary<string, string>>> GetDictionaryEmptyAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetDictionaryEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetDictionaryEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1594,8 +1594,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<IDictionary<string, string>>> GetDictionaryItemNullAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetDictionaryItemNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetDictionaryItemNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1624,8 +1624,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<IDictionary<string, string>>> GetDictionaryItemEmptyAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetDictionaryItemEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetDictionaryItemEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
@@ -1654,8 +1654,8 @@ namespace Fixtures.AcceptanceTestsBodyArray
             /// </param>
             public static async Task<IList<IDictionary<string, string>>> GetDictionaryValidAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var result = await operations.GetDictionaryValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return result.Body;
+                var _result = await operations.GetDictionaryValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+                return _result.Body;
             }
 
             /// <summary>
