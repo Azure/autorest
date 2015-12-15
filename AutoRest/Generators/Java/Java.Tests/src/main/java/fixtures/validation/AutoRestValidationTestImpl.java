@@ -15,12 +15,11 @@ import com.squareup.okhttp.OkHttpClient;
 import retrofit.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
-import fixtures.validation.models.Error;
+import fixtures.validation.models.ErrorException;
 import fixtures.validation.models.Product;
 import java.io.IOException;
 import retrofit.Call;
@@ -130,12 +129,12 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      *
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Product> validationOfMethodParameters(String resourceGroupName, int id) throws ServiceException, IOException, IllegalArgumentException {
+    public ServiceResponse<Product> validationOfMethodParameters(String resourceGroupName, int id) throws ErrorException, IOException, IllegalArgumentException {
         if (this.getSubscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.getSubscriptionId() is required and cannot be null.");
         }
@@ -176,7 +175,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(validationOfMethodParametersDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -184,10 +183,10 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         return call;
     }
 
-    private ServiceResponse<Product> validationOfMethodParametersDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Product>()
+    private ServiceResponse<Product> validationOfMethodParametersDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Product, ErrorException>()
                 .register(200, new TypeToken<Product>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -197,12 +196,12 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param body the Product value
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Product> validationOfBody(String resourceGroupName, int id, Product body) throws ServiceException, IOException, IllegalArgumentException {
+    public ServiceResponse<Product> validationOfBody(String resourceGroupName, int id, Product body) throws ErrorException, IOException, IllegalArgumentException {
         if (this.getSubscriptionId() == null) {
             throw new IllegalArgumentException("Parameter this.getSubscriptionId() is required and cannot be null.");
         }
@@ -244,7 +243,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(validationOfBodyDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -252,10 +251,10 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         return call;
     }
 
-    private ServiceResponse<Product> validationOfBodyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Product>()
+    private ServiceResponse<Product> validationOfBodyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Product, ErrorException>()
                 .register(200, new TypeToken<Product>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 

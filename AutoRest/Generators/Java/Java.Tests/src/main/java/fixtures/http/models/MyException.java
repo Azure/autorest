@@ -26,11 +26,11 @@ public class MyException extends AutoRestException {
      */
     private A body;
     /**
-     * Initializes a new instance of the ServiceException class.
+     * Initializes a new instance of the MyException class.
      */
     public MyException() { }
     /**
-     * Initializes a new instance of the ServiceException class.
+     * Initializes a new instance of the MyException class.
      *
      * @param message The exception message.
      */
@@ -38,7 +38,7 @@ public class MyException extends AutoRestException {
         super(message);
     }
     /**
-     * Initializes a new instance of the ServiceException class.
+     * Initializes a new instance of the MyException class.
      *
      * @param message the exception message
      * @param cause   exception that caused this exception to occur
@@ -47,7 +47,7 @@ public class MyException extends AutoRestException {
         super(message, cause);
     }
     /**
-     * Initializes a new instance of the ServiceException class.
+     * Initializes a new instance of the MyException class.
      *
      * @param cause exception that caused this exception to occur
      */

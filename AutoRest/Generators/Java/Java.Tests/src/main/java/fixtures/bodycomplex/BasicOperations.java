@@ -11,10 +11,10 @@
 package fixtures.bodycomplex;
 
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.bodycomplex.models.Basic;
+import fixtures.bodycomplex.models.ErrorException;
 import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.Body;
@@ -53,11 +53,11 @@ public interface BasicOperations {
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Basic object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Basic> getValid() throws ServiceException, IOException;
+    ServiceResponse<Basic> getValid() throws ErrorException, IOException;
 
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
@@ -71,12 +71,12 @@ public interface BasicOperations {
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
      *
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> putValid(Basic complexBody) throws ServiceException, IOException, IllegalArgumentException;
+    ServiceResponse<Void> putValid(Basic complexBody) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
@@ -90,11 +90,11 @@ public interface BasicOperations {
     /**
      * Get a basic complex type that is invalid for the local strong type.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Basic object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Basic> getInvalid() throws ServiceException, IOException;
+    ServiceResponse<Basic> getInvalid() throws ErrorException, IOException;
 
     /**
      * Get a basic complex type that is invalid for the local strong type.
@@ -107,11 +107,11 @@ public interface BasicOperations {
     /**
      * Get a basic complex type that is empty.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Basic object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Basic> getEmpty() throws ServiceException, IOException;
+    ServiceResponse<Basic> getEmpty() throws ErrorException, IOException;
 
     /**
      * Get a basic complex type that is empty.
@@ -124,11 +124,11 @@ public interface BasicOperations {
     /**
      * Get a basic complex type whose properties are null.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Basic object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Basic> getNull() throws ServiceException, IOException;
+    ServiceResponse<Basic> getNull() throws ErrorException, IOException;
 
     /**
      * Get a basic complex type whose properties are null.
@@ -141,11 +141,11 @@ public interface BasicOperations {
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Basic object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Basic> getNotProvided() throws ServiceException, IOException;
+    ServiceResponse<Basic> getNotProvided() throws ErrorException, IOException;
 
     /**
      * Get a basic complex type while the server doesn't provide a response payload.

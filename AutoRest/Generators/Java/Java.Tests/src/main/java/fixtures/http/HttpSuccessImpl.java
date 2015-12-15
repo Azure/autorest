@@ -12,13 +12,12 @@ package fixtures.http;
 
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.ServiceResponseEmptyCallback;
 import com.squareup.okhttp.ResponseBody;
-import fixtures.http.models.Error;
+import fixtures.http.models.ErrorException;
 import java.io.IOException;
 import retrofit.Call;
 import retrofit.Response;
@@ -48,11 +47,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
     /**
      * Return 200 status code if successful.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> head200() throws ServiceException, IOException {
+    public ServiceResponse<Void> head200() throws ErrorException, IOException {
         Call<Void> call = service.head200();
         return head200Delegate(call.execute(), null);
     }
@@ -70,7 +69,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
             public void onResponse(Response<Void> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(head200Delegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -78,21 +77,21 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return call;
     }
 
-    private ServiceResponse<Void> head200Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> head200Delegate(Response<Void> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .buildEmpty(response, retrofit);
     }
 
     /**
      * Get 200 success.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Boolean> get200() throws ServiceException, IOException {
+    public ServiceResponse<Boolean> get200() throws ErrorException, IOException {
         Call<ResponseBody> call = service.get200();
         return get200Delegate(call.execute(), null);
     }
@@ -110,7 +109,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(get200Delegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -118,10 +117,10 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return call;
     }
 
-    private ServiceResponse<Boolean> get200Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Boolean>()
+    private ServiceResponse<Boolean> get200Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Boolean, ErrorException>()
                 .register(200, new TypeToken<Boolean>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -129,11 +128,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Put boolean value true returning 200 success.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> put200(Boolean booleanValue) throws ServiceException, IOException {
+    public ServiceResponse<Void> put200(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.put200(booleanValue);
         return put200Delegate(call.execute(), null);
     }
@@ -152,7 +151,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(put200Delegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -160,10 +159,10 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return call;
     }
 
-    private ServiceResponse<Void> put200Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> put200Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -171,11 +170,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Patch true Boolean value in request returning 200.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> patch200(Boolean booleanValue) throws ServiceException, IOException {
+    public ServiceResponse<Void> patch200(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.patch200(booleanValue);
         return patch200Delegate(call.execute(), null);
     }
@@ -194,7 +193,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(patch200Delegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -202,10 +201,10 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return call;
     }
 
-    private ServiceResponse<Void> patch200Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> patch200Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -213,11 +212,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Post bollean value true in request that returns a 200.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> post200(Boolean booleanValue) throws ServiceException, IOException {
+    public ServiceResponse<Void> post200(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.post200(booleanValue);
         return post200Delegate(call.execute(), null);
     }
@@ -236,7 +235,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(post200Delegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -244,10 +243,10 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return call;
     }
 
-    private ServiceResponse<Void> post200Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> post200Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -255,11 +254,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Delete simple boolean value true returns 200.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> delete200(Boolean booleanValue) throws ServiceException, IOException {
+    public ServiceResponse<Void> delete200(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.delete200(booleanValue);
         return delete200Delegate(call.execute(), null);
     }
@@ -278,7 +277,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(delete200Delegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -286,10 +285,10 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return call;
     }
 
-    private ServiceResponse<Void> delete200Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> delete200Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -297,11 +296,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Put true Boolean value in request returns 201.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> put201(Boolean booleanValue) throws ServiceException, IOException {
+    public ServiceResponse<Void> put201(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.put201(booleanValue);
         return put201Delegate(call.execute(), null);
     }
@@ -320,7 +319,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(put201Delegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -328,10 +327,10 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return call;
     }
 
-    private ServiceResponse<Void> put201Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> put201Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(201, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -339,11 +338,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Post true Boolean value in request returns 201 (Created).
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> post201(Boolean booleanValue) throws ServiceException, IOException {
+    public ServiceResponse<Void> post201(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.post201(booleanValue);
         return post201Delegate(call.execute(), null);
     }
@@ -362,7 +361,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(post201Delegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -370,10 +369,10 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return call;
     }
 
-    private ServiceResponse<Void> post201Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> post201Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(201, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -381,11 +380,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Put true Boolean value in request returns 202 (Accepted).
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> put202(Boolean booleanValue) throws ServiceException, IOException {
+    public ServiceResponse<Void> put202(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.put202(booleanValue);
         return put202Delegate(call.execute(), null);
     }
@@ -404,7 +403,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(put202Delegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -412,10 +411,10 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return call;
     }
 
-    private ServiceResponse<Void> put202Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> put202Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(202, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -423,11 +422,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Patch true Boolean value in request returns 202.
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> patch202(Boolean booleanValue) throws ServiceException, IOException {
+    public ServiceResponse<Void> patch202(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.patch202(booleanValue);
         return patch202Delegate(call.execute(), null);
     }
@@ -446,7 +445,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(patch202Delegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -454,10 +453,10 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return call;
     }
 
-    private ServiceResponse<Void> patch202Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> patch202Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(202, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -465,11 +464,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Post true Boolean value in request returns 202 (Accepted).
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> post202(Boolean booleanValue) throws ServiceException, IOException {
+    public ServiceResponse<Void> post202(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.post202(booleanValue);
         return post202Delegate(call.execute(), null);
     }
@@ -488,7 +487,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(post202Delegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -496,10 +495,10 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return call;
     }
 
-    private ServiceResponse<Void> post202Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> post202Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(202, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -507,11 +506,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Delete true Boolean value in request returns 202 (accepted).
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> delete202(Boolean booleanValue) throws ServiceException, IOException {
+    public ServiceResponse<Void> delete202(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.delete202(booleanValue);
         return delete202Delegate(call.execute(), null);
     }
@@ -530,7 +529,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(delete202Delegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -538,21 +537,21 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return call;
     }
 
-    private ServiceResponse<Void> delete202Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> delete202Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(202, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
     /**
      * Return 204 status code if successful.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> head204() throws ServiceException, IOException {
+    public ServiceResponse<Void> head204() throws ErrorException, IOException {
         Call<Void> call = service.head204();
         return head204Delegate(call.execute(), null);
     }
@@ -570,7 +569,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
             public void onResponse(Response<Void> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(head204Delegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -578,10 +577,10 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return call;
     }
 
-    private ServiceResponse<Void> head204Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> head204Delegate(Response<Void> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(204, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .buildEmpty(response, retrofit);
     }
 
@@ -589,11 +588,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Put true Boolean value in request returns 204 (no content).
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> put204(Boolean booleanValue) throws ServiceException, IOException {
+    public ServiceResponse<Void> put204(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.put204(booleanValue);
         return put204Delegate(call.execute(), null);
     }
@@ -612,7 +611,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(put204Delegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -620,10 +619,10 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return call;
     }
 
-    private ServiceResponse<Void> put204Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> put204Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(204, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -631,11 +630,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Patch true Boolean value in request returns 204 (no content).
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> patch204(Boolean booleanValue) throws ServiceException, IOException {
+    public ServiceResponse<Void> patch204(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.patch204(booleanValue);
         return patch204Delegate(call.execute(), null);
     }
@@ -654,7 +653,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(patch204Delegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -662,10 +661,10 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return call;
     }
 
-    private ServiceResponse<Void> patch204Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> patch204Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(204, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -673,11 +672,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Post true Boolean value in request returns 204 (no content).
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> post204(Boolean booleanValue) throws ServiceException, IOException {
+    public ServiceResponse<Void> post204(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.post204(booleanValue);
         return post204Delegate(call.execute(), null);
     }
@@ -696,7 +695,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(post204Delegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -704,10 +703,10 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return call;
     }
 
-    private ServiceResponse<Void> post204Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> post204Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(204, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -715,11 +714,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
      * Delete true Boolean value in request returns 204 (no content).
      *
      * @param booleanValue Simple boolean value true
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> delete204(Boolean booleanValue) throws ServiceException, IOException {
+    public ServiceResponse<Void> delete204(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.delete204(booleanValue);
         return delete204Delegate(call.execute(), null);
     }
@@ -738,7 +737,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(delete204Delegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -746,21 +745,21 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return call;
     }
 
-    private ServiceResponse<Void> delete204Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> delete204Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(204, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
     /**
      * Return 404 status code.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> head404() throws ServiceException, IOException {
+    public ServiceResponse<Void> head404() throws ErrorException, IOException {
         Call<Void> call = service.head404();
         return head404Delegate(call.execute(), null);
     }
@@ -778,7 +777,7 @@ public final class HttpSuccessImpl implements HttpSuccess {
             public void onResponse(Response<Void> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(head404Delegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -786,11 +785,11 @@ public final class HttpSuccessImpl implements HttpSuccess {
         return call;
     }
 
-    private ServiceResponse<Void> head404Delegate(Response<Void> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> head404Delegate(Response<Void> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(204, new TypeToken<Void>() { }.getType())
                 .register(404, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .buildEmpty(response, retrofit);
     }
 

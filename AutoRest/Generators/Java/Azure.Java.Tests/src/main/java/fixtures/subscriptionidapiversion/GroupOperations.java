@@ -11,9 +11,9 @@
 package fixtures.subscriptionidapiversion;
 
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
+import fixtures.subscriptionidapiversion.models.ErrorException;
 import fixtures.subscriptionidapiversion.models.SampleResourceGroup;
 import java.io.IOException;
 import retrofit.Call;
@@ -40,12 +40,12 @@ public interface GroupOperations {
      * Provides a resouce group with name 'testgroup101' and location 'West US'.
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the SampleResourceGroup object wrapped in ServiceResponse if successful.
      */
-    ServiceResponse<SampleResourceGroup> getSampleResourceGroup(String resourceGroupName) throws ServiceException, IOException, IllegalArgumentException;
+    ServiceResponse<SampleResourceGroup> getSampleResourceGroup(String resourceGroupName) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Provides a resouce group with name 'testgroup101' and location 'West US'.

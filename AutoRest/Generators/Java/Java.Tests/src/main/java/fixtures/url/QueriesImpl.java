@@ -14,12 +14,11 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.serializer.CollectionFormat;
 import com.microsoft.rest.serializer.JacksonUtils;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
-import fixtures.url.models.Error;
+import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
 import java.io.IOException;
 import java.util.List;
@@ -55,11 +54,11 @@ public final class QueriesImpl implements Queries {
      * Get true Boolean value on path.
      *
      * @param boolQuery true boolean value
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getBooleanTrue(Boolean boolQuery) throws ServiceException, IOException {
+    public ServiceResponse<Void> getBooleanTrue(Boolean boolQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.getBooleanTrue(boolQuery);
         return getBooleanTrueDelegate(call.execute(), null);
     }
@@ -78,7 +77,7 @@ public final class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getBooleanTrueDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -86,10 +85,10 @@ public final class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> getBooleanTrueDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> getBooleanTrueDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -97,11 +96,11 @@ public final class QueriesImpl implements Queries {
      * Get false Boolean value on path.
      *
      * @param boolQuery false boolean value
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getBooleanFalse(Boolean boolQuery) throws ServiceException, IOException {
+    public ServiceResponse<Void> getBooleanFalse(Boolean boolQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.getBooleanFalse(boolQuery);
         return getBooleanFalseDelegate(call.execute(), null);
     }
@@ -120,7 +119,7 @@ public final class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getBooleanFalseDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -128,10 +127,10 @@ public final class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> getBooleanFalseDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> getBooleanFalseDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -139,11 +138,11 @@ public final class QueriesImpl implements Queries {
      * Get null Boolean value on query (query string should be absent).
      *
      * @param boolQuery null boolean value
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getBooleanNull(Boolean boolQuery) throws ServiceException, IOException {
+    public ServiceResponse<Void> getBooleanNull(Boolean boolQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.getBooleanNull(boolQuery);
         return getBooleanNullDelegate(call.execute(), null);
     }
@@ -162,7 +161,7 @@ public final class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getBooleanNullDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -170,10 +169,10 @@ public final class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> getBooleanNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> getBooleanNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -181,11 +180,11 @@ public final class QueriesImpl implements Queries {
      * Get '1000000' integer value.
      *
      * @param intQuery '1000000' integer value
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getIntOneMillion(Integer intQuery) throws ServiceException, IOException {
+    public ServiceResponse<Void> getIntOneMillion(Integer intQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.getIntOneMillion(intQuery);
         return getIntOneMillionDelegate(call.execute(), null);
     }
@@ -204,7 +203,7 @@ public final class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getIntOneMillionDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -212,10 +211,10 @@ public final class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> getIntOneMillionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> getIntOneMillionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -223,11 +222,11 @@ public final class QueriesImpl implements Queries {
      * Get '-1000000' integer value.
      *
      * @param intQuery '-1000000' integer value
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getIntNegativeOneMillion(Integer intQuery) throws ServiceException, IOException {
+    public ServiceResponse<Void> getIntNegativeOneMillion(Integer intQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.getIntNegativeOneMillion(intQuery);
         return getIntNegativeOneMillionDelegate(call.execute(), null);
     }
@@ -246,7 +245,7 @@ public final class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getIntNegativeOneMillionDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -254,10 +253,10 @@ public final class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> getIntNegativeOneMillionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> getIntNegativeOneMillionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -265,11 +264,11 @@ public final class QueriesImpl implements Queries {
      * Get null integer value (no query parameter).
      *
      * @param intQuery null integer value
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getIntNull(Integer intQuery) throws ServiceException, IOException {
+    public ServiceResponse<Void> getIntNull(Integer intQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.getIntNull(intQuery);
         return getIntNullDelegate(call.execute(), null);
     }
@@ -288,7 +287,7 @@ public final class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getIntNullDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -296,10 +295,10 @@ public final class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> getIntNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> getIntNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -307,11 +306,11 @@ public final class QueriesImpl implements Queries {
      * Get '10000000000' 64 bit integer value.
      *
      * @param longQuery '10000000000' 64 bit integer value
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getTenBillion(Long longQuery) throws ServiceException, IOException {
+    public ServiceResponse<Void> getTenBillion(Long longQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.getTenBillion(longQuery);
         return getTenBillionDelegate(call.execute(), null);
     }
@@ -330,7 +329,7 @@ public final class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getTenBillionDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -338,10 +337,10 @@ public final class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> getTenBillionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> getTenBillionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -349,11 +348,11 @@ public final class QueriesImpl implements Queries {
      * Get '-10000000000' 64 bit integer value.
      *
      * @param longQuery '-10000000000' 64 bit integer value
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getNegativeTenBillion(Long longQuery) throws ServiceException, IOException {
+    public ServiceResponse<Void> getNegativeTenBillion(Long longQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.getNegativeTenBillion(longQuery);
         return getNegativeTenBillionDelegate(call.execute(), null);
     }
@@ -372,7 +371,7 @@ public final class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getNegativeTenBillionDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -380,10 +379,10 @@ public final class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> getNegativeTenBillionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> getNegativeTenBillionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -391,11 +390,11 @@ public final class QueriesImpl implements Queries {
      * Get 'null 64 bit integer value (no query param in uri).
      *
      * @param longQuery null 64 bit integer value
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getLongNull(Long longQuery) throws ServiceException, IOException {
+    public ServiceResponse<Void> getLongNull(Long longQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.getLongNull(longQuery);
         return getLongNullDelegate(call.execute(), null);
     }
@@ -414,7 +413,7 @@ public final class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getLongNullDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -422,10 +421,10 @@ public final class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> getLongNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> getLongNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -433,11 +432,11 @@ public final class QueriesImpl implements Queries {
      * Get '1.034E+20' numeric value.
      *
      * @param floatQuery '1.034E+20'numeric value
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> floatScientificPositive(Double floatQuery) throws ServiceException, IOException {
+    public ServiceResponse<Void> floatScientificPositive(Double floatQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.floatScientificPositive(floatQuery);
         return floatScientificPositiveDelegate(call.execute(), null);
     }
@@ -456,7 +455,7 @@ public final class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(floatScientificPositiveDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -464,10 +463,10 @@ public final class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> floatScientificPositiveDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> floatScientificPositiveDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -475,11 +474,11 @@ public final class QueriesImpl implements Queries {
      * Get '-1.034E-20' numeric value.
      *
      * @param floatQuery '-1.034E-20'numeric value
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> floatScientificNegative(Double floatQuery) throws ServiceException, IOException {
+    public ServiceResponse<Void> floatScientificNegative(Double floatQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.floatScientificNegative(floatQuery);
         return floatScientificNegativeDelegate(call.execute(), null);
     }
@@ -498,7 +497,7 @@ public final class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(floatScientificNegativeDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -506,10 +505,10 @@ public final class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> floatScientificNegativeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> floatScientificNegativeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -517,11 +516,11 @@ public final class QueriesImpl implements Queries {
      * Get null numeric value (no query parameter).
      *
      * @param floatQuery null numeric value
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> floatNull(Double floatQuery) throws ServiceException, IOException {
+    public ServiceResponse<Void> floatNull(Double floatQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.floatNull(floatQuery);
         return floatNullDelegate(call.execute(), null);
     }
@@ -540,7 +539,7 @@ public final class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(floatNullDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -548,10 +547,10 @@ public final class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> floatNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> floatNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -559,11 +558,11 @@ public final class QueriesImpl implements Queries {
      * Get '9999999.999' numeric value.
      *
      * @param doubleQuery '9999999.999'numeric value
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> doubleDecimalPositive(Double doubleQuery) throws ServiceException, IOException {
+    public ServiceResponse<Void> doubleDecimalPositive(Double doubleQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.doubleDecimalPositive(doubleQuery);
         return doubleDecimalPositiveDelegate(call.execute(), null);
     }
@@ -582,7 +581,7 @@ public final class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(doubleDecimalPositiveDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -590,10 +589,10 @@ public final class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> doubleDecimalPositiveDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> doubleDecimalPositiveDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -601,11 +600,11 @@ public final class QueriesImpl implements Queries {
      * Get '-9999999.999' numeric value.
      *
      * @param doubleQuery '-9999999.999'numeric value
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> doubleDecimalNegative(Double doubleQuery) throws ServiceException, IOException {
+    public ServiceResponse<Void> doubleDecimalNegative(Double doubleQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.doubleDecimalNegative(doubleQuery);
         return doubleDecimalNegativeDelegate(call.execute(), null);
     }
@@ -624,7 +623,7 @@ public final class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(doubleDecimalNegativeDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -632,10 +631,10 @@ public final class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> doubleDecimalNegativeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> doubleDecimalNegativeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -643,11 +642,11 @@ public final class QueriesImpl implements Queries {
      * Get null numeric value (no query parameter).
      *
      * @param doubleQuery null numeric value
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> doubleNull(Double doubleQuery) throws ServiceException, IOException {
+    public ServiceResponse<Void> doubleNull(Double doubleQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.doubleNull(doubleQuery);
         return doubleNullDelegate(call.execute(), null);
     }
@@ -666,7 +665,7 @@ public final class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(doubleNullDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -674,10 +673,10 @@ public final class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> doubleNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> doubleNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -685,11 +684,11 @@ public final class QueriesImpl implements Queries {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
      * @param stringQuery '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> stringUnicode(String stringQuery) throws ServiceException, IOException {
+    public ServiceResponse<Void> stringUnicode(String stringQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.stringUnicode(stringQuery);
         return stringUnicodeDelegate(call.execute(), null);
     }
@@ -708,7 +707,7 @@ public final class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(stringUnicodeDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -716,10 +715,10 @@ public final class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> stringUnicodeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> stringUnicodeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -727,11 +726,11 @@ public final class QueriesImpl implements Queries {
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
      * @param stringQuery 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible values for this parameter include: 'begin!*'();:@ &amp;=+$,/?#[]end'
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> stringUrlEncoded(String stringQuery) throws ServiceException, IOException {
+    public ServiceResponse<Void> stringUrlEncoded(String stringQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.stringUrlEncoded(stringQuery);
         return stringUrlEncodedDelegate(call.execute(), null);
     }
@@ -750,7 +749,7 @@ public final class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(stringUrlEncodedDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -758,10 +757,10 @@ public final class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> stringUrlEncodedDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> stringUrlEncodedDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -769,11 +768,11 @@ public final class QueriesImpl implements Queries {
      * Get ''.
      *
      * @param stringQuery '' string value. Possible values for this parameter include: ''
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> stringEmpty(String stringQuery) throws ServiceException, IOException {
+    public ServiceResponse<Void> stringEmpty(String stringQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.stringEmpty(stringQuery);
         return stringEmptyDelegate(call.execute(), null);
     }
@@ -792,7 +791,7 @@ public final class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(stringEmptyDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -800,10 +799,10 @@ public final class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> stringEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> stringEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -811,11 +810,11 @@ public final class QueriesImpl implements Queries {
      * Get null (no query parameter in url).
      *
      * @param stringQuery null string value
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> stringNull(String stringQuery) throws ServiceException, IOException {
+    public ServiceResponse<Void> stringNull(String stringQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.stringNull(stringQuery);
         return stringNullDelegate(call.execute(), null);
     }
@@ -834,7 +833,7 @@ public final class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(stringNullDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -842,10 +841,10 @@ public final class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> stringNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> stringNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -853,11 +852,11 @@ public final class QueriesImpl implements Queries {
      * Get using uri with query parameter 'green color'.
      *
      * @param enumQuery 'green color' enum value. Possible values for this parameter include: 'red color', 'green color', 'blue color'
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> enumValid(UriColor enumQuery) throws ServiceException, IOException {
+    public ServiceResponse<Void> enumValid(UriColor enumQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.enumValid(JacksonUtils.serializeRaw(enumQuery));
         return enumValidDelegate(call.execute(), null);
     }
@@ -876,7 +875,7 @@ public final class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(enumValidDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -884,10 +883,10 @@ public final class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> enumValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> enumValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -895,11 +894,11 @@ public final class QueriesImpl implements Queries {
      * Get null (no query parameter in url).
      *
      * @param enumQuery null string value. Possible values for this parameter include: 'red color', 'green color', 'blue color'
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> enumNull(UriColor enumQuery) throws ServiceException, IOException {
+    public ServiceResponse<Void> enumNull(UriColor enumQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.enumNull(JacksonUtils.serializeRaw(enumQuery));
         return enumNullDelegate(call.execute(), null);
     }
@@ -918,7 +917,7 @@ public final class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(enumNullDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -926,10 +925,10 @@ public final class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> enumNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> enumNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -937,11 +936,11 @@ public final class QueriesImpl implements Queries {
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
      *
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> byteMultiByte(byte[] byteQuery) throws ServiceException, IOException {
+    public ServiceResponse<Void> byteMultiByte(byte[] byteQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.byteMultiByte(Base64.encodeBase64String(byteQuery));
         return byteMultiByteDelegate(call.execute(), null);
     }
@@ -960,7 +959,7 @@ public final class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(byteMultiByteDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -968,10 +967,10 @@ public final class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> byteMultiByteDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> byteMultiByteDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -979,11 +978,11 @@ public final class QueriesImpl implements Queries {
      * Get '' as byte array.
      *
      * @param byteQuery '' as byte array
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> byteEmpty(byte[] byteQuery) throws ServiceException, IOException {
+    public ServiceResponse<Void> byteEmpty(byte[] byteQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.byteEmpty(Base64.encodeBase64String(byteQuery));
         return byteEmptyDelegate(call.execute(), null);
     }
@@ -1002,7 +1001,7 @@ public final class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(byteEmptyDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1010,10 +1009,10 @@ public final class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> byteEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> byteEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -1021,11 +1020,11 @@ public final class QueriesImpl implements Queries {
      * Get null as byte array (no query parameters in uri).
      *
      * @param byteQuery null as byte array (no query parameters in uri)
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> byteNull(byte[] byteQuery) throws ServiceException, IOException {
+    public ServiceResponse<Void> byteNull(byte[] byteQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.byteNull(Base64.encodeBase64String(byteQuery));
         return byteNullDelegate(call.execute(), null);
     }
@@ -1044,7 +1043,7 @@ public final class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(byteNullDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1052,10 +1051,10 @@ public final class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> byteNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> byteNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -1063,11 +1062,11 @@ public final class QueriesImpl implements Queries {
      * Get '2012-01-01' as date.
      *
      * @param dateQuery '2012-01-01' as date
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> dateValid(LocalDate dateQuery) throws ServiceException, IOException {
+    public ServiceResponse<Void> dateValid(LocalDate dateQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.dateValid(JacksonUtils.serializeRaw(dateQuery));
         return dateValidDelegate(call.execute(), null);
     }
@@ -1086,7 +1085,7 @@ public final class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(dateValidDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1094,10 +1093,10 @@ public final class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> dateValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> dateValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -1105,11 +1104,11 @@ public final class QueriesImpl implements Queries {
      * Get null as date - this should result in no query parameters in uri.
      *
      * @param dateQuery null as date (no query parameters in uri)
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> dateNull(LocalDate dateQuery) throws ServiceException, IOException {
+    public ServiceResponse<Void> dateNull(LocalDate dateQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.dateNull(JacksonUtils.serializeRaw(dateQuery));
         return dateNullDelegate(call.execute(), null);
     }
@@ -1128,7 +1127,7 @@ public final class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(dateNullDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1136,10 +1135,10 @@ public final class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> dateNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> dateNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -1147,11 +1146,11 @@ public final class QueriesImpl implements Queries {
      * Get '2012-01-01T01:01:01Z' as date-time.
      *
      * @param dateTimeQuery '2012-01-01T01:01:01Z' as date-time
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> dateTimeValid(DateTime dateTimeQuery) throws ServiceException, IOException {
+    public ServiceResponse<Void> dateTimeValid(DateTime dateTimeQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.dateTimeValid(JacksonUtils.serializeRaw(dateTimeQuery));
         return dateTimeValidDelegate(call.execute(), null);
     }
@@ -1170,7 +1169,7 @@ public final class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(dateTimeValidDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1178,10 +1177,10 @@ public final class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> dateTimeValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> dateTimeValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -1189,11 +1188,11 @@ public final class QueriesImpl implements Queries {
      * Get null as date-time, should result in no query parameters in uri.
      *
      * @param dateTimeQuery null as date-time (no query parameters)
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> dateTimeNull(DateTime dateTimeQuery) throws ServiceException, IOException {
+    public ServiceResponse<Void> dateTimeNull(DateTime dateTimeQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.dateTimeNull(JacksonUtils.serializeRaw(dateTimeQuery));
         return dateTimeNullDelegate(call.execute(), null);
     }
@@ -1212,7 +1211,7 @@ public final class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(dateTimeNullDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1220,10 +1219,10 @@ public final class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> dateTimeNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> dateTimeNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -1231,11 +1230,11 @@ public final class QueriesImpl implements Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> arrayStringCsvValid(List<String> arrayQuery) throws ServiceException, IOException {
+    public ServiceResponse<Void> arrayStringCsvValid(List<String> arrayQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.arrayStringCsvValid(JacksonUtils.serializeList(arrayQuery, CollectionFormat.CSV));
         return arrayStringCsvValidDelegate(call.execute(), null);
     }
@@ -1254,7 +1253,7 @@ public final class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(arrayStringCsvValidDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1262,10 +1261,10 @@ public final class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> arrayStringCsvValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> arrayStringCsvValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -1273,11 +1272,11 @@ public final class QueriesImpl implements Queries {
      * Get a null array of string using the csv-array format.
      *
      * @param arrayQuery a null array of string using the csv-array format
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> arrayStringCsvNull(List<String> arrayQuery) throws ServiceException, IOException {
+    public ServiceResponse<Void> arrayStringCsvNull(List<String> arrayQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.arrayStringCsvNull(JacksonUtils.serializeList(arrayQuery, CollectionFormat.CSV));
         return arrayStringCsvNullDelegate(call.execute(), null);
     }
@@ -1296,7 +1295,7 @@ public final class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(arrayStringCsvNullDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1304,10 +1303,10 @@ public final class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> arrayStringCsvNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> arrayStringCsvNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -1315,11 +1314,11 @@ public final class QueriesImpl implements Queries {
      * Get an empty array [] of string using the csv-array format.
      *
      * @param arrayQuery an empty array [] of string using the csv-array format
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> arrayStringCsvEmpty(List<String> arrayQuery) throws ServiceException, IOException {
+    public ServiceResponse<Void> arrayStringCsvEmpty(List<String> arrayQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.arrayStringCsvEmpty(JacksonUtils.serializeList(arrayQuery, CollectionFormat.CSV));
         return arrayStringCsvEmptyDelegate(call.execute(), null);
     }
@@ -1338,7 +1337,7 @@ public final class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(arrayStringCsvEmptyDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1346,10 +1345,10 @@ public final class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> arrayStringCsvEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> arrayStringCsvEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -1357,11 +1356,11 @@ public final class QueriesImpl implements Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> arrayStringSsvValid(List<String> arrayQuery) throws ServiceException, IOException {
+    public ServiceResponse<Void> arrayStringSsvValid(List<String> arrayQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.arrayStringSsvValid(JacksonUtils.serializeList(arrayQuery, CollectionFormat.SSV));
         return arrayStringSsvValidDelegate(call.execute(), null);
     }
@@ -1380,7 +1379,7 @@ public final class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(arrayStringSsvValidDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1388,10 +1387,10 @@ public final class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> arrayStringSsvValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> arrayStringSsvValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -1399,11 +1398,11 @@ public final class QueriesImpl implements Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> arrayStringTsvValid(List<String> arrayQuery) throws ServiceException, IOException {
+    public ServiceResponse<Void> arrayStringTsvValid(List<String> arrayQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.arrayStringTsvValid(JacksonUtils.serializeList(arrayQuery, CollectionFormat.TSV));
         return arrayStringTsvValidDelegate(call.execute(), null);
     }
@@ -1422,7 +1421,7 @@ public final class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(arrayStringTsvValidDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1430,10 +1429,10 @@ public final class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> arrayStringTsvValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> arrayStringTsvValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -1441,11 +1440,11 @@ public final class QueriesImpl implements Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> arrayStringPipesValid(List<String> arrayQuery) throws ServiceException, IOException {
+    public ServiceResponse<Void> arrayStringPipesValid(List<String> arrayQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.arrayStringPipesValid(JacksonUtils.serializeList(arrayQuery, CollectionFormat.PIPES));
         return arrayStringPipesValidDelegate(call.execute(), null);
     }
@@ -1464,7 +1463,7 @@ public final class QueriesImpl implements Queries {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(arrayStringPipesValidDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -1472,10 +1471,10 @@ public final class QueriesImpl implements Queries {
         return call;
     }
 
-    private ServiceResponse<Void> arrayStringPipesValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> arrayStringPipesValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 

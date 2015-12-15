@@ -11,8 +11,8 @@
 package fixtures.lro;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.CloudException;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.lro.models.Product;
@@ -47,12 +47,12 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * Long running put request, service returns a 400 to the initial request.
      *
      * @param product Product to put
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object wrapped in ServiceResponse if successful.
      */
-    public ServiceResponse<Product> putNonRetry400(Product product) throws ServiceException, IOException, InterruptedException {
+    public ServiceResponse<Product> putNonRetry400(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.putNonRetry400(product, this.client.getAcceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
     }
@@ -83,12 +83,12 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
      *
      * @param product Product to put
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object wrapped in ServiceResponse if successful.
      */
-    public ServiceResponse<Product> putNonRetry201Creating400(Product product) throws ServiceException, IOException, InterruptedException {
+    public ServiceResponse<Product> putNonRetry201Creating400(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.putNonRetry201Creating400(product, this.client.getAcceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
     }
@@ -119,12 +119,12 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object wrapped in ServiceResponse if successful.
      */
-    public ServiceResponse<Product> putAsyncRelativeRetry400(Product product) throws ServiceException, IOException, InterruptedException {
+    public ServiceResponse<Product> putAsyncRelativeRetry400(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.putAsyncRelativeRetry400(product, this.client.getAcceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
     }
@@ -154,12 +154,12 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     /**
      * Long running delete request, service returns a 400 with an error body.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the ServiceResponse object if successful.
      */
-    public ServiceResponse<Void> deleteNonRetry400() throws ServiceException, IOException, InterruptedException {
+    public ServiceResponse<Void> deleteNonRetry400() throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.deleteNonRetry400(this.client.getAcceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
     }
@@ -188,12 +188,12 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     /**
      * Long running delete request, service returns a 202 with a location header.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the ServiceResponse object if successful.
      */
-    public ServiceResponse<Void> delete202NonRetry400() throws ServiceException, IOException, InterruptedException {
+    public ServiceResponse<Void> delete202NonRetry400() throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.delete202NonRetry400(this.client.getAcceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
     }
@@ -222,12 +222,12 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the ServiceResponse object if successful.
      */
-    public ServiceResponse<Void> deleteAsyncRelativeRetry400() throws ServiceException, IOException, InterruptedException {
+    public ServiceResponse<Void> deleteAsyncRelativeRetry400() throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.deleteAsyncRelativeRetry400(this.client.getAcceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
     }
@@ -257,12 +257,12 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * Long running post request, service returns a 400 with no error body.
      *
      * @param product Product to put
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the ServiceResponse object if successful.
      */
-    public ServiceResponse<Void> postNonRetry400(Product product) throws ServiceException, IOException, InterruptedException {
+    public ServiceResponse<Void> postNonRetry400(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.postNonRetry400(product, this.client.getAcceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
     }
@@ -293,12 +293,12 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * Long running post request, service returns a 202 with a location header.
      *
      * @param product Product to put
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the ServiceResponse object if successful.
      */
-    public ServiceResponse<Void> post202NonRetry400(Product product) throws ServiceException, IOException, InterruptedException {
+    public ServiceResponse<Void> post202NonRetry400(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.post202NonRetry400(product, this.client.getAcceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
     }
@@ -329,12 +329,12 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the ServiceResponse object if successful.
      */
-    public ServiceResponse<Void> postAsyncRelativeRetry400(Product product) throws ServiceException, IOException, InterruptedException {
+    public ServiceResponse<Void> postAsyncRelativeRetry400(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.postAsyncRelativeRetry400(product, this.client.getAcceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
     }
@@ -365,12 +365,12 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * Long running put request, service returns a 201 to the initial request with no payload.
      *
      * @param product Product to put
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object wrapped in ServiceResponse if successful.
      */
-    public ServiceResponse<Product> putError201NoProvisioningStatePayload(Product product) throws ServiceException, IOException, InterruptedException {
+    public ServiceResponse<Product> putError201NoProvisioningStatePayload(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.putError201NoProvisioningStatePayload(product, this.client.getAcceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
     }
@@ -401,12 +401,12 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object wrapped in ServiceResponse if successful.
      */
-    public ServiceResponse<Product> putAsyncRelativeRetryNoStatus(Product product) throws ServiceException, IOException, InterruptedException {
+    public ServiceResponse<Product> putAsyncRelativeRetryNoStatus(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.putAsyncRelativeRetryNoStatus(product, this.client.getAcceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
     }
@@ -437,12 +437,12 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object wrapped in ServiceResponse if successful.
      */
-    public ServiceResponse<Product> putAsyncRelativeRetryNoStatusPayload(Product product) throws ServiceException, IOException, InterruptedException {
+    public ServiceResponse<Product> putAsyncRelativeRetryNoStatusPayload(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.putAsyncRelativeRetryNoStatusPayload(product, this.client.getAcceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
     }
@@ -472,12 +472,12 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     /**
      * Long running delete request, service returns a 204 to the initial request, indicating success.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the ServiceResponse object if successful.
      */
-    public ServiceResponse<Void> delete204Succeeded() throws ServiceException, IOException, InterruptedException {
+    public ServiceResponse<Void> delete204Succeeded() throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.delete204Succeeded(this.client.getAcceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
     }
@@ -506,12 +506,12 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the ServiceResponse object if successful.
      */
-    public ServiceResponse<Void> deleteAsyncRelativeRetryNoStatus() throws ServiceException, IOException, InterruptedException {
+    public ServiceResponse<Void> deleteAsyncRelativeRetryNoStatus() throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.deleteAsyncRelativeRetryNoStatus(this.client.getAcceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
     }
@@ -541,12 +541,12 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * Long running post request, service returns a 202 to the initial request, without a location header.
      *
      * @param product Product to put
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the ServiceResponse object if successful.
      */
-    public ServiceResponse<Void> post202NoLocation(Product product) throws ServiceException, IOException, InterruptedException {
+    public ServiceResponse<Void> post202NoLocation(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.post202NoLocation(product, this.client.getAcceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
     }
@@ -577,12 +577,12 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the ServiceResponse object if successful.
      */
-    public ServiceResponse<Void> postAsyncRelativeRetryNoPayload(Product product) throws ServiceException, IOException, InterruptedException {
+    public ServiceResponse<Void> postAsyncRelativeRetryNoPayload(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.postAsyncRelativeRetryNoPayload(product, this.client.getAcceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
     }
@@ -613,12 +613,12 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
      *
      * @param product Product to put
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object wrapped in ServiceResponse if successful.
      */
-    public ServiceResponse<Product> put200InvalidJson(Product product) throws ServiceException, IOException, InterruptedException {
+    public ServiceResponse<Product> put200InvalidJson(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.put200InvalidJson(product, this.client.getAcceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
     }
@@ -649,12 +649,12 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @param product Product to put
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object wrapped in ServiceResponse if successful.
      */
-    public ServiceResponse<Product> putAsyncRelativeRetryInvalidHeader(Product product) throws ServiceException, IOException, InterruptedException {
+    public ServiceResponse<Product> putAsyncRelativeRetryInvalidHeader(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.putAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
     }
@@ -685,12 +685,12 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the Product object wrapped in ServiceResponse if successful.
      */
-    public ServiceResponse<Product> putAsyncRelativeRetryInvalidJsonPolling(Product product) throws ServiceException, IOException, InterruptedException {
+    public ServiceResponse<Product> putAsyncRelativeRetryInvalidJsonPolling(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.putAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
     }
@@ -720,12 +720,12 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     /**
      * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the ServiceResponse object if successful.
      */
-    public ServiceResponse<Void> delete202RetryInvalidHeader() throws ServiceException, IOException, InterruptedException {
+    public ServiceResponse<Void> delete202RetryInvalidHeader() throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.delete202RetryInvalidHeader(this.client.getAcceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
     }
@@ -754,12 +754,12 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     /**
      * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the ServiceResponse object if successful.
      */
-    public ServiceResponse<Void> deleteAsyncRelativeRetryInvalidHeader() throws ServiceException, IOException, InterruptedException {
+    public ServiceResponse<Void> deleteAsyncRelativeRetryInvalidHeader() throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.deleteAsyncRelativeRetryInvalidHeader(this.client.getAcceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
     }
@@ -788,12 +788,12 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the ServiceResponse object if successful.
      */
-    public ServiceResponse<Void> deleteAsyncRelativeRetryInvalidJsonPolling() throws ServiceException, IOException, InterruptedException {
+    public ServiceResponse<Void> deleteAsyncRelativeRetryInvalidJsonPolling() throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.deleteAsyncRelativeRetryInvalidJsonPolling(this.client.getAcceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
     }
@@ -823,12 +823,12 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
      *
      * @param product Product to put
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the ServiceResponse object if successful.
      */
-    public ServiceResponse<Void> post202RetryInvalidHeader(Product product) throws ServiceException, IOException, InterruptedException {
+    public ServiceResponse<Void> post202RetryInvalidHeader(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.post202RetryInvalidHeader(product, this.client.getAcceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
     }
@@ -859,12 +859,12 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      *
      * @param product Product to put
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the ServiceResponse object if successful.
      */
-    public ServiceResponse<Void> postAsyncRelativeRetryInvalidHeader(Product product) throws ServiceException, IOException, InterruptedException {
+    public ServiceResponse<Void> postAsyncRelativeRetryInvalidHeader(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.postAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
     }
@@ -895,12 +895,12 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      *
      * @param product Product to put
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
      * @return the ServiceResponse object if successful.
      */
-    public ServiceResponse<Void> postAsyncRelativeRetryInvalidJsonPolling(Product product) throws ServiceException, IOException, InterruptedException {
+    public ServiceResponse<Void> postAsyncRelativeRetryInvalidJsonPolling(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.postAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
     }

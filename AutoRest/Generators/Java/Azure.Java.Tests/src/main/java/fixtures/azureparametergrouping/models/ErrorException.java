@@ -8,7 +8,7 @@
  * regenerated.
  */
 
-package fixtures.bodydatetime.models;
+package fixtures.azureparametergrouping.models;
 
 import com.microsoft.rest.AutoRestException;
 import retrofit.Response;

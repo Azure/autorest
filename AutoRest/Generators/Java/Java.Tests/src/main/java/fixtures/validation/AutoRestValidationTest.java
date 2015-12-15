@@ -14,9 +14,9 @@ import java.util.List;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
+import fixtures.validation.models.ErrorException;
 import fixtures.validation.models.Product;
 import java.io.IOException;
 import retrofit.Call;
@@ -97,12 +97,12 @@ public interface AutoRestValidationTest {
      *
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Product> validationOfMethodParameters(String resourceGroupName, int id) throws ServiceException, IOException, IllegalArgumentException;
+    ServiceResponse<Product> validationOfMethodParameters(String resourceGroupName, int id) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Validates input parameters on the method. See swagger for details.
@@ -119,12 +119,12 @@ public interface AutoRestValidationTest {
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param body the Product value
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Product> validationOfBody(String resourceGroupName, int id, Product body) throws ServiceException, IOException, IllegalArgumentException;
+    ServiceResponse<Product> validationOfBody(String resourceGroupName, int id, Product body) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Validates body parameters on the method. See swagger for details.
