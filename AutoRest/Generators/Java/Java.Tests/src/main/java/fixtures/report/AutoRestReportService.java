@@ -14,9 +14,9 @@ import java.util.List;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
+import fixtures.report.models.ErrorException;
 import java.io.IOException;
 import java.util.Map;
 import retrofit.Call;
@@ -60,11 +60,11 @@ public interface AutoRestReportService {
     /**
      * Get test coverage report.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<Map<String, Integer>> getReport() throws ServiceException, IOException;
+    ServiceResponse<Map<String, Integer>> getReport() throws ErrorException, IOException;
 
     /**
      * Get test coverage report.

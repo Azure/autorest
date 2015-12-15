@@ -8,7 +8,7 @@
  * regenerated.
  */
 
-package fixtures.bodydatetime.models;
+package fixtures.azurereport.models;
 
 import com.microsoft.rest.AutoRestException;
 import retrofit.Response;

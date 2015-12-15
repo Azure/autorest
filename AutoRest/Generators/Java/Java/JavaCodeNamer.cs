@@ -404,15 +404,24 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public static string GetJavaException(string exception)
+        public static string GetJavaException(string exception, ServiceClient serviceClient)
         {
             switch (exception) {
-                case "IOException": 
+                case "IOException":
                     return "java.io.IOException";
                 case "ServiceException":
                     return "com.microsoft.rest.ServiceException";
-                default:
+                case "CloudException":
+                    return "com.microsoft.rest.CloudException";
+                case "AutoRestException":
+                    return "com.microsoft.rest.AutoRestException";
+                case "IllegalArgumentException":
                     return null;
+                case "InterruptedException":
+                    return null;
+                default:
+                    return serviceClient.Namespace.ToLower(CultureInfo.InvariantCulture)
+                        + ".models." + exception;
             }
         }
     }

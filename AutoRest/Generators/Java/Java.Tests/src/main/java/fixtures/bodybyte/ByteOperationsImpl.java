@@ -12,12 +12,11 @@ package fixtures.bodybyte;
 
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
-import fixtures.bodybyte.models.Error;
+import fixtures.bodybyte.models.ErrorException;
 import java.io.IOException;
 import retrofit.Call;
 import retrofit.Response;
@@ -47,11 +46,11 @@ public final class ByteOperationsImpl implements ByteOperations {
     /**
      * Get null byte value.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the byte[] object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<byte[]> getNull() throws ServiceException, IOException {
+    public ServiceResponse<byte[]> getNull() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getNull();
         return getNullDelegate(call.execute(), null);
     }
@@ -69,7 +68,7 @@ public final class ByteOperationsImpl implements ByteOperations {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getNullDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -77,21 +76,21 @@ public final class ByteOperationsImpl implements ByteOperations {
         return call;
     }
 
-    private ServiceResponse<byte[]> getNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<byte[]>()
+    private ServiceResponse<byte[]> getNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<byte[], ErrorException>()
                 .register(200, new TypeToken<byte[]>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
     /**
      * Get empty byte value ''.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the byte[] object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<byte[]> getEmpty() throws ServiceException, IOException {
+    public ServiceResponse<byte[]> getEmpty() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getEmpty();
         return getEmptyDelegate(call.execute(), null);
     }
@@ -109,7 +108,7 @@ public final class ByteOperationsImpl implements ByteOperations {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getEmptyDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -117,21 +116,21 @@ public final class ByteOperationsImpl implements ByteOperations {
         return call;
     }
 
-    private ServiceResponse<byte[]> getEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<byte[]>()
+    private ServiceResponse<byte[]> getEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<byte[], ErrorException>()
                 .register(200, new TypeToken<byte[]>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
     /**
      * Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the byte[] object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<byte[]> getNonAscii() throws ServiceException, IOException {
+    public ServiceResponse<byte[]> getNonAscii() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getNonAscii();
         return getNonAsciiDelegate(call.execute(), null);
     }
@@ -149,7 +148,7 @@ public final class ByteOperationsImpl implements ByteOperations {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getNonAsciiDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -157,10 +156,10 @@ public final class ByteOperationsImpl implements ByteOperations {
         return call;
     }
 
-    private ServiceResponse<byte[]> getNonAsciiDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<byte[]>()
+    private ServiceResponse<byte[]> getNonAsciiDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<byte[], ErrorException>()
                 .register(200, new TypeToken<byte[]>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -168,12 +167,12 @@ public final class ByteOperationsImpl implements ByteOperations {
      * Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6).
      *
      * @param byteBody Base64-encoded non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putNonAscii(byte[] byteBody) throws ServiceException, IOException, IllegalArgumentException {
+    public ServiceResponse<Void> putNonAscii(byte[] byteBody) throws ErrorException, IOException, IllegalArgumentException {
         if (byteBody == null) {
             throw new IllegalArgumentException("Parameter byteBody is required and cannot be null.");
         }
@@ -199,7 +198,7 @@ public final class ByteOperationsImpl implements ByteOperations {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putNonAsciiDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -207,21 +206,21 @@ public final class ByteOperationsImpl implements ByteOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putNonAsciiDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> putNonAsciiDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
     /**
      * Get invalid byte value ':::SWAGGER::::'.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the byte[] object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<byte[]> getInvalid() throws ServiceException, IOException {
+    public ServiceResponse<byte[]> getInvalid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getInvalid();
         return getInvalidDelegate(call.execute(), null);
     }
@@ -239,7 +238,7 @@ public final class ByteOperationsImpl implements ByteOperations {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getInvalidDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -247,10 +246,10 @@ public final class ByteOperationsImpl implements ByteOperations {
         return call;
     }
 
-    private ServiceResponse<byte[]> getInvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<byte[]>()
+    private ServiceResponse<byte[]> getInvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<byte[], ErrorException>()
                 .register(200, new TypeToken<byte[]>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 

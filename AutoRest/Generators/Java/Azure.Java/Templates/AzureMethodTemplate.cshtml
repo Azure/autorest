@@ -68,8 +68,7 @@ public Call<@Model.CallType> @(Model.Name)Async(@Model.MethodParameterDeclaratio
 @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {
-@:        serviceCallback.failure(new ServiceException(
-@:            new IllegalArgumentException("Parameter @param.Name is required and cannot be null.")));
+@:        serviceCallback.failure(new IllegalArgumentException("Parameter @param.Name is required and cannot be null."));
 @:    }
 }
 @foreach (var param in Model.ParametersToValidate)

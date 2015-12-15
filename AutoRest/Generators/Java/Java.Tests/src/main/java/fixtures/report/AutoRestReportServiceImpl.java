@@ -15,12 +15,11 @@ import com.squareup.okhttp.OkHttpClient;
 import retrofit.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
-import fixtures.report.models.Error;
+import fixtures.report.models.ErrorException;
 import java.io.IOException;
 import java.util.Map;
 import retrofit.Call;
@@ -86,11 +85,11 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
     /**
      * Get test coverage report.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Map&lt;String, Integer&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<Map<String, Integer>> getReport() throws ServiceException, IOException {
+    public ServiceResponse<Map<String, Integer>> getReport() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getReport();
         return getReportDelegate(call.execute(), null);
     }
@@ -108,7 +107,7 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getReportDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -116,10 +115,10 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
         return call;
     }
 
-    private ServiceResponse<Map<String, Integer>> getReportDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Map<String, Integer>>()
+    private ServiceResponse<Map<String, Integer>> getReportDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<Map<String, Integer>, ErrorException>()
                 .register(200, new TypeToken<Map<String, Integer>>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 

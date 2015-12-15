@@ -12,6 +12,8 @@ import com.microsoft.rest.serializer.JacksonUtils;
 import retrofit.Response;
 import retrofit.Retrofit;
 
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,8 +22,9 @@ import java.util.Map;
  * The builder for building a {@link ServiceResponse}.
  *
  * @param <T> the return type from caller.
+ * @param <E> the exception to throw in case of error.
  */
-public class AzureServiceResponseBuilder<T> extends ServiceResponseBuilder<T> {
+public class AzureServiceResponseBuilder<T, E extends AutoRestException> extends ServiceResponseBuilder<T, E> {
     /**
      * Create a ServiceResponseBuilder instance.
      */
@@ -50,18 +53,23 @@ public class AzureServiceResponseBuilder<T> extends ServiceResponseBuilder<T> {
 
     @SuppressWarnings("unchecked")
     @Override
-    public ServiceResponse<T> buildEmpty(Response<Void> response, Retrofit retrofit) throws ServiceException {
+    public ServiceResponse<T> buildEmpty(Response<Void> response, Retrofit retrofit) throws E, IOException {
         int statusCode = response.code();
         if (responseTypes.containsKey(statusCode)) {
             if (new TypeToken<T>(getClass()) { }.getRawType().isAssignableFrom(Boolean.class)) {
-                return new ServiceResponse<T>((T) (Object) (statusCode / 100 == 2), response);
+                return new ServiceResponse<>((T) (Object) (statusCode / 100 == 2), response);
             } else {
-                return new ServiceResponse<T>(null, response);
+                return new ServiceResponse<>(null, response);
             }
         } else {
-            ServiceException exception = new ServiceException();
-            exception.setResponse(response);
-            throw exception;
+            try {
+                E exception = (E) exceptionType.getConstructor(String.class).newInstance("Invalid status code " + statusCode);
+                exceptionType.getMethod("setResponse", response.getClass()).invoke(exception, response);
+                throw exception;
+            } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+                throw new IOException("Invalid status code " + statusCode + ", but an instance of " + exceptionType.getCanonicalName()
+                        + " cannot be created.", e);
+            }
         }
     }
 }

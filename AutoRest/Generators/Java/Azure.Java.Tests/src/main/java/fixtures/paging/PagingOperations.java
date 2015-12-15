@@ -10,8 +10,8 @@
 
 package fixtures.paging;
 
+import com.microsoft.rest.CloudException;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.paging.models.PageImpl;
@@ -78,11 +78,11 @@ public interface PagingOperations {
     /**
      * A paging operation that finishes on the first call without a nextlink.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the PageImpl&lt;Product&gt; object wrapped in ServiceResponse if successful.
      */
-    ServiceResponse<PageImpl<Product>> getSinglePages() throws ServiceException, IOException;
+    ServiceResponse<PageImpl<Product>> getSinglePages() throws CloudException, IOException;
 
     /**
      * A paging operation that finishes on the first call without a nextlink.
@@ -96,11 +96,11 @@ public interface PagingOperations {
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param clientRequestId the String value
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the PageImpl&lt;Product&gt; object wrapped in ServiceResponse if successful.
      */
-    ServiceResponse<PageImpl<Product>> getMultiplePages(String clientRequestId) throws ServiceException, IOException;
+    ServiceResponse<PageImpl<Product>> getMultiplePages(String clientRequestId) throws CloudException, IOException;
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
@@ -114,11 +114,11 @@ public interface PagingOperations {
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the PageImpl&lt;Product&gt; object wrapped in ServiceResponse if successful.
      */
-    ServiceResponse<PageImpl<Product>> getMultiplePagesRetryFirst() throws ServiceException, IOException;
+    ServiceResponse<PageImpl<Product>> getMultiplePagesRetryFirst() throws CloudException, IOException;
 
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
@@ -131,11 +131,11 @@ public interface PagingOperations {
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the PageImpl&lt;Product&gt; object wrapped in ServiceResponse if successful.
      */
-    ServiceResponse<PageImpl<Product>> getMultiplePagesRetrySecond() throws ServiceException, IOException;
+    ServiceResponse<PageImpl<Product>> getMultiplePagesRetrySecond() throws CloudException, IOException;
 
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
@@ -148,11 +148,11 @@ public interface PagingOperations {
     /**
      * A paging operation that receives a 400 on the first call.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the PageImpl&lt;Product&gt; object wrapped in ServiceResponse if successful.
      */
-    ServiceResponse<PageImpl<Product>> getSinglePagesFailure() throws ServiceException, IOException;
+    ServiceResponse<PageImpl<Product>> getSinglePagesFailure() throws CloudException, IOException;
 
     /**
      * A paging operation that receives a 400 on the first call.
@@ -165,11 +165,11 @@ public interface PagingOperations {
     /**
      * A paging operation that receives a 400 on the second call.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the PageImpl&lt;Product&gt; object wrapped in ServiceResponse if successful.
      */
-    ServiceResponse<PageImpl<Product>> getMultiplePagesFailure() throws ServiceException, IOException;
+    ServiceResponse<PageImpl<Product>> getMultiplePagesFailure() throws CloudException, IOException;
 
     /**
      * A paging operation that receives a 400 on the second call.
@@ -182,11 +182,11 @@ public interface PagingOperations {
     /**
      * A paging operation that receives an invalid nextLink.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the PageImpl&lt;Product&gt; object wrapped in ServiceResponse if successful.
      */
-    ServiceResponse<PageImpl<Product>> getMultiplePagesFailureUri() throws ServiceException, IOException;
+    ServiceResponse<PageImpl<Product>> getMultiplePagesFailureUri() throws CloudException, IOException;
 
     /**
      * A paging operation that receives an invalid nextLink.
@@ -200,12 +200,12 @@ public interface PagingOperations {
      * A paging operation that finishes on the first call without a nextlink.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PageImpl&lt;Product&gt; object wrapped in ServiceResponse if successful.
      */
-    ServiceResponse<PageImpl<Product>> getSinglePagesNext(String nextPageLink) throws ServiceException, IOException, IllegalArgumentException;
+    ServiceResponse<PageImpl<Product>> getSinglePagesNext(String nextPageLink) throws CloudException, IOException, IllegalArgumentException;
 
     /**
      * A paging operation that finishes on the first call without a nextlink.
@@ -221,12 +221,12 @@ public interface PagingOperations {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param clientRequestId the String value
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PageImpl&lt;Product&gt; object wrapped in ServiceResponse if successful.
      */
-    ServiceResponse<PageImpl<Product>> getMultiplePagesNext(String nextPageLink, String clientRequestId) throws ServiceException, IOException, IllegalArgumentException;
+    ServiceResponse<PageImpl<Product>> getMultiplePagesNext(String nextPageLink, String clientRequestId) throws CloudException, IOException, IllegalArgumentException;
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
@@ -242,12 +242,12 @@ public interface PagingOperations {
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PageImpl&lt;Product&gt; object wrapped in ServiceResponse if successful.
      */
-    ServiceResponse<PageImpl<Product>> getMultiplePagesRetryFirstNext(String nextPageLink) throws ServiceException, IOException, IllegalArgumentException;
+    ServiceResponse<PageImpl<Product>> getMultiplePagesRetryFirstNext(String nextPageLink) throws CloudException, IOException, IllegalArgumentException;
 
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
@@ -262,12 +262,12 @@ public interface PagingOperations {
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PageImpl&lt;Product&gt; object wrapped in ServiceResponse if successful.
      */
-    ServiceResponse<PageImpl<Product>> getMultiplePagesRetrySecondNext(String nextPageLink) throws ServiceException, IOException, IllegalArgumentException;
+    ServiceResponse<PageImpl<Product>> getMultiplePagesRetrySecondNext(String nextPageLink) throws CloudException, IOException, IllegalArgumentException;
 
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
@@ -282,12 +282,12 @@ public interface PagingOperations {
      * A paging operation that receives a 400 on the first call.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PageImpl&lt;Product&gt; object wrapped in ServiceResponse if successful.
      */
-    ServiceResponse<PageImpl<Product>> getSinglePagesFailureNext(String nextPageLink) throws ServiceException, IOException, IllegalArgumentException;
+    ServiceResponse<PageImpl<Product>> getSinglePagesFailureNext(String nextPageLink) throws CloudException, IOException, IllegalArgumentException;
 
     /**
      * A paging operation that receives a 400 on the first call.
@@ -302,12 +302,12 @@ public interface PagingOperations {
      * A paging operation that receives a 400 on the second call.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PageImpl&lt;Product&gt; object wrapped in ServiceResponse if successful.
      */
-    ServiceResponse<PageImpl<Product>> getMultiplePagesFailureNext(String nextPageLink) throws ServiceException, IOException, IllegalArgumentException;
+    ServiceResponse<PageImpl<Product>> getMultiplePagesFailureNext(String nextPageLink) throws CloudException, IOException, IllegalArgumentException;
 
     /**
      * A paging operation that receives a 400 on the second call.
@@ -322,12 +322,12 @@ public interface PagingOperations {
      * A paging operation that receives an invalid nextLink.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PageImpl&lt;Product&gt; object wrapped in ServiceResponse if successful.
      */
-    ServiceResponse<PageImpl<Product>> getMultiplePagesFailureUriNext(String nextPageLink) throws ServiceException, IOException, IllegalArgumentException;
+    ServiceResponse<PageImpl<Product>> getMultiplePagesFailureUriNext(String nextPageLink) throws CloudException, IOException, IllegalArgumentException;
 
     /**
      * A paging operation that receives an invalid nextLink.

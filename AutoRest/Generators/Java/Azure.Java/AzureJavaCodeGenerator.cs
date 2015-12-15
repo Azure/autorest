@@ -169,6 +169,21 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 await Write(pageTemplate, Path.Combine("models", pageTemplate.Model.TypeDefinitionName + ".java"));
             }
 
+            // Exceptions
+            foreach (var exceptionType in serviceClient.ErrorTypes)
+            {
+                if (exceptionType.Name == "CloudError")
+                {
+                    continue;
+                }
+
+                var exceptionTemplate = new ExceptionTemplate
+                {
+                    Model = new ModelTemplateModel(exceptionType, serviceClient),
+                };
+                await Write(exceptionTemplate, Path.Combine("models", exceptionTemplate.Model.ExceptionTypeDefinitionName + ".java"));
+            }
+
             // package-info.java
             await Write(new PackageInfoTemplate
             {

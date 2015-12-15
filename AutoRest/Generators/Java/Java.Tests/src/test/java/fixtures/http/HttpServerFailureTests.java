@@ -1,6 +1,7 @@
 package fixtures.http;
 
 import com.microsoft.rest.ServiceException;
+import fixtures.http.models.ErrorException;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -17,7 +18,7 @@ public class HttpServerFailureTests {
     public void head501() throws Exception {
         try {
             client.getHttpServerFailure().head501();
-        } catch (ServiceException ex) {
+        } catch (ErrorException ex) {
             Assert.assertEquals(501, ex.getResponse().code());
         }
     }
@@ -26,7 +27,7 @@ public class HttpServerFailureTests {
     public void get501() throws Exception {
         try {
             client.getHttpServerFailure().get501();
-        } catch (ServiceException ex) {
+        } catch (ErrorException ex) {
             Assert.assertEquals(501, ex.getResponse().code());
         }
     }
@@ -35,7 +36,7 @@ public class HttpServerFailureTests {
     public void post505() throws Exception {
         try {
             client.getHttpServerFailure().post505(true);
-        } catch (ServiceException ex) {
+        } catch (ErrorException ex) {
             Assert.assertEquals(505, ex.getResponse().code());
         }
     }
@@ -44,7 +45,7 @@ public class HttpServerFailureTests {
     public void delete505() throws Exception {
         try {
             client.getHttpServerFailure().delete505(true);
-        } catch (ServiceException ex) {
+        } catch (ErrorException ex) {
             Assert.assertEquals(505, ex.getResponse().code());
         }
     }

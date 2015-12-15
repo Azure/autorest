@@ -19,9 +19,9 @@ public class ServiceException extends AutoRestException {
     private Response response;
 
     /**
-     * The HTTP response object.
+     * The HTTP response body.
      */
-    private Object errorModel;
+    private Object body;
 
     /**
      * Initializes a new instance of the ServiceException class.
@@ -66,12 +66,12 @@ public class ServiceException extends AutoRestException {
     }
 
     /**
-     * Gets the HTTP response object.
+     * Gets the HTTP response body.
      *
-     * @return the response object
+     * @return the response body
      */
-    public Object getErrorModel() {
-        return errorModel;
+    public Object getBody() {
+        return body;
     }
 
     /**
@@ -84,11 +84,11 @@ public class ServiceException extends AutoRestException {
     }
 
     /**
-     * Sets the HTTP response object.
+     * Sets the HTTP response body.
      *
-     * @param errorModel the response object
+     * @param body the response object
      */
-    public void setErrorModel(Object errorModel) {
-        this.errorModel = errorModel;
+    public void setBody(Object body) {
+        this.body = body;
     }
 }

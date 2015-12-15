@@ -10,8 +10,8 @@
 
 package fixtures.head;
 
+import com.microsoft.rest.CloudException;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import java.io.IOException;
 import retrofit.Call;
@@ -41,11 +41,11 @@ public interface HttpSuccessOperations {
     /**
      * Return 200 status code if successful.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Boolean object wrapped in ServiceResponse if successful.
      */
-    ServiceResponse<Boolean> head200() throws ServiceException, IOException;
+    ServiceResponse<Boolean> head200() throws CloudException, IOException;
 
     /**
      * Return 200 status code if successful.
@@ -58,11 +58,11 @@ public interface HttpSuccessOperations {
     /**
      * Return 204 status code if successful.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Boolean object wrapped in ServiceResponse if successful.
      */
-    ServiceResponse<Boolean> head204() throws ServiceException, IOException;
+    ServiceResponse<Boolean> head204() throws CloudException, IOException;
 
     /**
      * Return 204 status code if successful.
@@ -75,11 +75,11 @@ public interface HttpSuccessOperations {
     /**
      * Return 404 status code if successful.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the Boolean object wrapped in ServiceResponse if successful.
      */
-    ServiceResponse<Boolean> head404() throws ServiceException, IOException;
+    ServiceResponse<Boolean> head404() throws CloudException, IOException;
 
     /**
      * Return 404 status code if successful.

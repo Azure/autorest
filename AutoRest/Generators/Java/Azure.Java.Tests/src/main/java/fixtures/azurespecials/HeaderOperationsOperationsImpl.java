@@ -14,11 +14,10 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.AzureServiceResponseBuilder;
 import com.microsoft.rest.serializer.AzureJacksonUtils;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
-import fixtures.azurespecials.models.Error;
+import fixtures.azurespecials.models.ErrorException;
 import java.io.IOException;
 import retrofit.Call;
 import retrofit.Response;
@@ -49,12 +48,12 @@ public final class HeaderOperationsOperationsImpl implements HeaderOperationsOpe
      * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
      * @param fooClientRequestId The fooRequestId
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> customNamedRequestId(String fooClientRequestId) throws ServiceException, IOException, IllegalArgumentException {
+    public ServiceResponse<Void> customNamedRequestId(String fooClientRequestId) throws ErrorException, IOException, IllegalArgumentException {
         if (fooClientRequestId == null) {
             throw new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null.");
         }
@@ -80,7 +79,7 @@ public final class HeaderOperationsOperationsImpl implements HeaderOperationsOpe
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(customNamedRequestIdDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -88,10 +87,10 @@ public final class HeaderOperationsOperationsImpl implements HeaderOperationsOpe
         return call;
     }
 
-    private ServiceResponse<Void> customNamedRequestIdDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void>(new AzureJacksonUtils())
+    private ServiceResponse<Void> customNamedRequestIdDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+        return new AzureServiceResponseBuilder<Void, ErrorException>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 

@@ -12,14 +12,13 @@ package fixtures.bodycomplex;
 
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.Validator;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.bodycomplex.models.ArrayWrapper;
-import fixtures.bodycomplex.models.Error;
+import fixtures.bodycomplex.models.ErrorException;
 import java.io.IOException;
 import retrofit.Call;
 import retrofit.Response;
@@ -49,11 +48,11 @@ public final class ArrayImpl implements Array {
     /**
      * Get complex types with array property.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the ArrayWrapper object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<ArrayWrapper> getValid() throws ServiceException, IOException {
+    public ServiceResponse<ArrayWrapper> getValid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getValid();
         return getValidDelegate(call.execute(), null);
     }
@@ -71,7 +70,7 @@ public final class ArrayImpl implements Array {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getValidDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -79,10 +78,10 @@ public final class ArrayImpl implements Array {
         return call;
     }
 
-    private ServiceResponse<ArrayWrapper> getValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<ArrayWrapper>()
+    private ServiceResponse<ArrayWrapper> getValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<ArrayWrapper, ErrorException>()
                 .register(200, new TypeToken<ArrayWrapper>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -90,12 +89,12 @@ public final class ArrayImpl implements Array {
      * Put complex types with array property.
      *
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putValid(ArrayWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException {
+    public ServiceResponse<Void> putValid(ArrayWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -123,7 +122,7 @@ public final class ArrayImpl implements Array {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putValidDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -131,21 +130,21 @@ public final class ArrayImpl implements Array {
         return call;
     }
 
-    private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
     /**
      * Get complex types with array property which is empty.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the ArrayWrapper object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<ArrayWrapper> getEmpty() throws ServiceException, IOException {
+    public ServiceResponse<ArrayWrapper> getEmpty() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getEmpty();
         return getEmptyDelegate(call.execute(), null);
     }
@@ -163,7 +162,7 @@ public final class ArrayImpl implements Array {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getEmptyDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -171,10 +170,10 @@ public final class ArrayImpl implements Array {
         return call;
     }
 
-    private ServiceResponse<ArrayWrapper> getEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<ArrayWrapper>()
+    private ServiceResponse<ArrayWrapper> getEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<ArrayWrapper, ErrorException>()
                 .register(200, new TypeToken<ArrayWrapper>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
@@ -182,12 +181,12 @@ public final class ArrayImpl implements Array {
      * Put complex types with array property which is empty.
      *
      * @param complexBody Please put an empty array
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> putEmpty(ArrayWrapper complexBody) throws ServiceException, IOException, IllegalArgumentException {
+    public ServiceResponse<Void> putEmpty(ArrayWrapper complexBody) throws ErrorException, IOException, IllegalArgumentException {
         if (complexBody == null) {
             throw new IllegalArgumentException("Parameter complexBody is required and cannot be null.");
         }
@@ -215,7 +214,7 @@ public final class ArrayImpl implements Array {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(putEmptyDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -223,21 +222,21 @@ public final class ArrayImpl implements Array {
         return call;
     }
 
-    private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void>()
+    private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+        return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
     /**
      * Get complex types with array property while server doesn't provide a response payload.
      *
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the ArrayWrapper object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<ArrayWrapper> getNotProvided() throws ServiceException, IOException {
+    public ServiceResponse<ArrayWrapper> getNotProvided() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getNotProvided();
         return getNotProvidedDelegate(call.execute(), null);
     }
@@ -255,7 +254,7 @@ public final class ArrayImpl implements Array {
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getNotProvidedDelegate(response, retrofit));
-                } catch (ServiceException | IOException exception) {
+                } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -263,10 +262,10 @@ public final class ArrayImpl implements Array {
         return call;
     }
 
-    private ServiceResponse<ArrayWrapper> getNotProvidedDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<ArrayWrapper>()
+    private ServiceResponse<ArrayWrapper> getNotProvidedDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+        return new ServiceResponseBuilder<ArrayWrapper, ErrorException>()
                 .register(200, new TypeToken<ArrayWrapper>() { }.getType())
-                .registerError(new TypeToken<Error>() { }.getType())
+                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 

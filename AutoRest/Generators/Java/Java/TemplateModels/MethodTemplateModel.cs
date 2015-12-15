@@ -317,7 +317,7 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                yield return "ServiceException";
+                yield return OperationExceptionTypeString;
                 yield return "IOException";
                 if (RequiredNullableParameters.Any())
                 {
@@ -339,7 +339,7 @@ namespace Microsoft.Rest.Generator.Java
             get
             {
                 List<string> exceptions = new List<string>();
-                exceptions.Add("ServiceException exception thrown from REST call");
+                exceptions.Add(OperationExceptionTypeString + " exception thrown from REST call");
                 exceptions.Add("IOException exception thrown from serialization/deserialization");
                 if (RequiredNullableParameters.Any())
                 {
@@ -434,7 +434,6 @@ namespace Microsoft.Rest.Generator.Java
                     imports.Add("com.squareup.okhttp.ResponseBody");
                 }
                 imports.Add("com.microsoft.rest.ServiceResponse");
-                imports.Add("com.microsoft.rest.ServiceException");
                 imports.Add("com.microsoft.rest.ServiceCallback");
                 // parameter types
                 this.Parameters.ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace)));
@@ -454,8 +453,8 @@ namespace Microsoft.Rest.Generator.Java
                 // exceptions
                 this.ExceptionString.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
                     .ForEach(ex => {
-                        string exceptionImport = JavaCodeNamer.GetJavaException(ex);
-                        if (exceptionImport != null) imports.Add(JavaCodeNamer.GetJavaException(ex));
+                        string exceptionImport = JavaCodeNamer.GetJavaException(ex, ServiceClient);
+                        if (exceptionImport != null) imports.Add(JavaCodeNamer.GetJavaException(ex, ServiceClient));
                     });
                 return imports.ToList();
             }
@@ -476,7 +475,6 @@ namespace Microsoft.Rest.Generator.Java
                 }
                 imports.Add("com.microsoft.rest.ServiceResponse");
                 imports.Add("com.microsoft.rest." + ResponseBuilder);
-                imports.Add("com.microsoft.rest.ServiceException");
                 imports.Add("com.microsoft.rest.ServiceCallback");
 
                 // response type conversion
@@ -506,13 +504,13 @@ namespace Microsoft.Rest.Generator.Java
                 imports.AddRange(this.ReturnType.Body.ImportFrom(ServiceClient.Namespace));
                 // response type (can be different from return type)
                 this.Responses.ForEach(r => imports.AddRange(r.Value.Body.ImportFrom(ServiceClient.Namespace)));
-                imports.AddRange(DefaultResponse.Body.ImportFrom(ServiceClient.Namespace));
+                // imports.AddRange(DefaultResponse.Body.ImportFrom(ServiceClient.Namespace));
                 // exceptions
                 this.ExceptionString.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
                     .ForEach(ex =>
                     {
-                        string exceptionImport = JavaCodeNamer.GetJavaException(ex);
-                        if (exceptionImport != null) imports.Add(JavaCodeNamer.GetJavaException(ex));
+                        string exceptionImport = JavaCodeNamer.GetJavaException(ex, ServiceClient);
+                        if (exceptionImport != null) imports.Add(JavaCodeNamer.GetJavaException(ex, ServiceClient));
                     });
                 return imports.ToList();
             }
