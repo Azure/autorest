@@ -29,7 +29,7 @@ public enum UriColor {
     /** The actual serialized value for a UriColor instance. */
     private String value;
 
-    private UriColor(String value) {
+    UriColor(String value) {
         this.value = value;
     }
 

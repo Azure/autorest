@@ -1,6 +1,5 @@
 package fixtures.url;
 
-import com.microsoft.rest.ServiceException;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
 import org.joda.time.DateTime;

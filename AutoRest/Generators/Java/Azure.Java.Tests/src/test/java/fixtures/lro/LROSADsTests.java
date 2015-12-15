@@ -2,7 +2,6 @@ package fixtures.lro;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.microsoft.rest.CloudException;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.serializer.AzureJacksonUtils;
 import com.squareup.okhttp.OkHttpClient;

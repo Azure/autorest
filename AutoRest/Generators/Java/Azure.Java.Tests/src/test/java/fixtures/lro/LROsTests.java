@@ -2,7 +2,6 @@ package fixtures.lro;
 
 import com.microsoft.rest.CloudException;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.lro.models.Product;
 import fixtures.lro.models.Sku;

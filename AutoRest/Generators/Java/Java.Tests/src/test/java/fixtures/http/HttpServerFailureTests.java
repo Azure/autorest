@@ -1,6 +1,5 @@
 package fixtures.http;
 
-import com.microsoft.rest.ServiceException;
 import fixtures.http.models.ErrorException;
 import org.junit.Assert;
 import org.junit.BeforeClass;

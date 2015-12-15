@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.microsoft.rest.DateTimeRfc1123;
-import com.microsoft.rest.ServiceException;
 import fixtures.bodyarray.models.ErrorException;
 import fixtures.bodyarray.models.Product;
 import org.joda.time.DateTime;

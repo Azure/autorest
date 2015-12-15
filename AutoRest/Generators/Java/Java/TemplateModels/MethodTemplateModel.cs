@@ -478,7 +478,7 @@ namespace Microsoft.Rest.Generator.Java
                 imports.Add("com.microsoft.rest.ServiceCallback");
 
                 // response type conversion
-                if (this.Responses.Any() || this.DefaultResponse.Body != null)
+                if (this.Responses.Any())
                 {
                     imports.Add("com.google.common.reflect.TypeToken");
                 }

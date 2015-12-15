@@ -20,6 +20,7 @@ configurations {
 }
 
 checkstyle {
+    toolVersion = "6.9"
     configFile = new File("$rootDir/Tools/checkstyle/checkstyle.xml")
     configProperties = [samedir: "$rootDir/Tools/checkstyle"]
     reportsDir = new File("$rootDir/Tools/checkstyle/reports")
