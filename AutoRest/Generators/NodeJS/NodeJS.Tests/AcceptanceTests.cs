@@ -42,5 +42,20 @@ namespace Microsoft.Rest.Generator.NodeJS.Tests
                     PayloadFlatteningThreshold = 1
                 }, ExpectedPath("BodyComplex"));
         }
+
+        [Fact]
+        public static void GeneratingComplexModelDefinitionsInNodeJS()
+        {
+            SwaggerSpecHelper.RunTests<NodeJSCodeGenerator>(
+                new Settings
+                {
+                    Input = SwaggerPath("complex-model.json"),
+                    OutputDirectory = "X:\\Output",
+                    Header = "MICROSOFT_MIT",
+                    Modeler = "Swagger",
+                    CodeGenerator = "NodeJS",
+                    PayloadFlatteningThreshold = 1
+                }, ExpectedPath("ComplexModelClient"));
+        }
     }
 }

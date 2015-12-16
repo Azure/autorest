@@ -98,6 +98,10 @@ var nodeAzureMappings = {
   'AcceptanceTests/StorageManagementClient': '../../../TestServer/swagger/storage.json'
 };
 
+var nodeMappings = {
+  'AcceptanceTests/ComplexModelClient': '../../../TestServer/swagger/complex-model.json'
+};
+
 var rubyAzureMappings = {
   'head':['../../../TestServer/swagger/head.json', 'HeadModule'],
   'paging':['../../../TestServer/swagger/paging.json', 'PagingModule'],
@@ -150,10 +154,13 @@ gulp.task('regenerate:expected:nodeazure', function(cb){
 })
 
 gulp.task('regenerate:expected:node', function(cb){
+  for (var p in defaultMappings) {
+    nodeMappings[p] = defaultMappings[p];
+  }
   regenExpected({
     'outputBaseDir': 'AutoRest/Generators/NodeJS/NodeJS.Tests',
     'inputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
-    'mappings': defaultMappings,
+    'mappings': nodeMappings,
     'outputDir': 'Expected',
     'codeGenerator': 'NodeJS',
     'flatteningThreshold': '1'
