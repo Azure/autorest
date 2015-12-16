@@ -8,6 +8,8 @@ import fixtures.http.models.A;
 import fixtures.http.models.C;
 import fixtures.http.models.D;
 import fixtures.http.models.Error;
+import fixtures.http.models.ErrorException;
+import fixtures.http.models.MyException;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -44,7 +46,7 @@ public class MultipleResponsesTests {
         try {
             client.getMultipleResponses().get200Model204NoModelDefaultError201Invalid();
             fail();
-        } catch (ServiceException ex) {
+        } catch (ErrorException ex) {
             Assert.assertEquals(201, ex.getResponse().code());
         }
     }
@@ -53,7 +55,7 @@ public class MultipleResponsesTests {
     public void get200Model204NoModelDefaultError202None() throws Exception {
         try {
             A result = client.getMultipleResponses().get200Model204NoModelDefaultError202None().getBody();
-        } catch (ServiceException ex) {
+        } catch (ErrorException ex) {
             Assert.assertEquals(202, ex.getResponse().code());
         }
     }
@@ -63,7 +65,7 @@ public class MultipleResponsesTests {
         try {
             client.getMultipleResponses().get200Model204NoModelDefaultError400Valid();
             fail();
-        } catch (ServiceException ex) {
+        } catch (ErrorException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
         }
     }
@@ -85,10 +87,10 @@ public class MultipleResponsesTests {
         try {
             client.getMultipleResponses().get200Model201ModelDefaultError400Valid();
             fail();
-        } catch (ServiceException ex) {
+        } catch (ErrorException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
             Error model = new JacksonUtils().getObjectMapper().convertValue(
-                    ex.getErrorModel(), Error.class);
+                    ex.getBody(), Error.class);
             Assert.assertEquals(400, model.getStatus().intValue());
             Assert.assertEquals("client error", model.getMessage());
         }
@@ -120,10 +122,10 @@ public class MultipleResponsesTests {
         try {
             client.getMultipleResponses().get200ModelA201ModelC404ModelDDefaultError400Valid();
             fail();
-        } catch (ServiceException ex) {
+        } catch (ErrorException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
             Error model = new JacksonUtils().getObjectMapper().convertValue(
-                    ex.getErrorModel(), Error.class);
+                    ex.getBody(), Error.class);
             Assert.assertEquals(400, model.getStatus().intValue());
             Assert.assertEquals("client error", model.getMessage());
         }
@@ -168,10 +170,10 @@ public class MultipleResponsesTests {
         try {
             client.getMultipleResponses().get202None204NoneDefaultError400Valid();
             fail();
-        } catch (ServiceException ex) {
+        } catch (ErrorException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
             Error model = new JacksonUtils().getObjectMapper().convertValue(
-                    ex.getErrorModel(), Error.class);
+                    ex.getBody(), Error.class);
             Assert.assertEquals(400, model.getStatus().intValue());
             Assert.assertEquals("client error", model.getMessage());
         }
@@ -224,10 +226,10 @@ public class MultipleResponsesTests {
         try {
             client.getMultipleResponses().getDefaultModelA400Valid();
             fail();
-        } catch (ServiceException ex) {
+        } catch (MyException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
             A model = new JacksonUtils().getObjectMapper().convertValue(
-                    ex.getErrorModel(), A.class);
+                    ex.getBody(), A.class);
             Assert.assertEquals("400", model.getStatusCode());
         }
     }
@@ -237,7 +239,7 @@ public class MultipleResponsesTests {
         try {
             client.getMultipleResponses().getDefaultModelA400None();
             fail();
-        } catch (ServiceException ex) {
+        } catch (MyException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
         }
     }
@@ -296,7 +298,7 @@ public class MultipleResponsesTests {
             fail();
         } catch (ServiceException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
-            Assert.assertNull(ex.getErrorModel());
+            Assert.assertNull(ex.getBody());
         }
     }
 

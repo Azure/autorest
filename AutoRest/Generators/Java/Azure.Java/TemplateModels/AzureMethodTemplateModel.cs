@@ -62,6 +62,21 @@ namespace Microsoft.Rest.Generator.Java.Azure
             get { return Url == "{nextLink}"; }
         }
 
+        /// <summary>
+        /// Get the type for operation exception.
+        /// </summary>
+        public override string OperationExceptionTypeString
+        {
+            get
+            {
+                if (DefaultResponse.Body == null || DefaultResponse.Body.Name == "CloudError")
+                {
+                    return "CloudException";
+                }
+                return base.OperationExceptionTypeString;
+            }
+        }
+
         public override string MethodParameterApiDeclaration
         {
             get

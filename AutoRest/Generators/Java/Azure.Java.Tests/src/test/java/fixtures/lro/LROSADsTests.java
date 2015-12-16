@@ -1,7 +1,7 @@
 package fixtures.lro;
 
 import com.fasterxml.jackson.core.JsonParseException;
-import com.microsoft.rest.ServiceException;
+import com.microsoft.rest.CloudException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.serializer.AzureJacksonUtils;
 import com.squareup.okhttp.OkHttpClient;
@@ -45,7 +45,7 @@ public class LROSADsTests {
         try {
             ServiceResponse<Product> response = client.getLROSADs().putNonRetry400(product);
             fail();
-        } catch (ServiceException ex) {
+        } catch (CloudException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
         }
     }
@@ -57,7 +57,7 @@ public class LROSADsTests {
         try {
             ServiceResponse<Product> response = client.getLROSADs().putNonRetry201Creating400(product);
             fail();
-        } catch (ServiceException ex) {
+        } catch (CloudException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
         }
     }
@@ -69,7 +69,7 @@ public class LROSADsTests {
         try {
             ServiceResponse<Product> response = client.getLROSADs().putAsyncRelativeRetry400(product);
             fail();
-        } catch (ServiceException ex) {
+        } catch (CloudException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
         }
     }
@@ -79,7 +79,7 @@ public class LROSADsTests {
         try {
             ServiceResponse<Void> response = client.getLROSADs().deleteNonRetry400();
             fail();
-        } catch (ServiceException ex) {
+        } catch (CloudException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
         }
     }
@@ -89,7 +89,7 @@ public class LROSADsTests {
         try {
             ServiceResponse<Void> response = client.getLROSADs().delete202NonRetry400();
             fail();
-        } catch (ServiceException ex) {
+        } catch (CloudException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
         }
     }
@@ -99,7 +99,7 @@ public class LROSADsTests {
         try {
             ServiceResponse<Void> response = client.getLROSADs().deleteAsyncRelativeRetry400();
             fail();
-        } catch (ServiceException ex) {
+        } catch (CloudException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
         }
     }
@@ -111,7 +111,7 @@ public class LROSADsTests {
         try {
             ServiceResponse<Void> response = client.getLROSADs().postNonRetry400(product);
             fail();
-        } catch (ServiceException ex) {
+        } catch (CloudException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
         }
     }
@@ -123,7 +123,7 @@ public class LROSADsTests {
         try {
             ServiceResponse<Void> response = client.getLROSADs().post202NonRetry400(product);
             fail();
-        } catch (ServiceException ex) {
+        } catch (CloudException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
         }
     }
@@ -135,7 +135,7 @@ public class LROSADsTests {
         try {
             ServiceResponse<Void> response = client.getLROSADs().postAsyncRelativeRetry400(product);
             fail();
-        } catch (ServiceException ex) {
+        } catch (CloudException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
         }
     }
@@ -147,7 +147,7 @@ public class LROSADsTests {
         try {
             ServiceResponse<Product> response = client.getLROSADs().putError201NoProvisioningStatePayload(product);
             fail();
-        } catch (ServiceException ex) {
+        } catch (CloudException ex) {
             Assert.assertEquals(200, ex.getResponse().code());
             Assert.assertTrue(ex.getMessage().contains("no body"));
         }
@@ -160,7 +160,7 @@ public class LROSADsTests {
         try {
             ServiceResponse<Product> response = client.getLROSADs().putAsyncRelativeRetryNoStatus(product);
             fail();
-        } catch (ServiceException ex) {
+        } catch (CloudException ex) {
             Assert.assertEquals(200, ex.getResponse().code());
             Assert.assertTrue(ex.getMessage().contains("no body"));
         }
@@ -173,7 +173,7 @@ public class LROSADsTests {
         try {
             ServiceResponse<Product> response = client.getLROSADs().putAsyncRelativeRetryNoStatusPayload(product);
             fail();
-        } catch (ServiceException ex) {
+        } catch (CloudException ex) {
             Assert.assertEquals(200, ex.getResponse().code());
             Assert.assertTrue(ex.getMessage().contains("no body"));
         }
@@ -190,7 +190,7 @@ public class LROSADsTests {
         try {
             ServiceResponse<Void> response = client.getLROSADs().deleteAsyncRelativeRetryNoStatus();
             fail();
-        } catch (ServiceException ex) {
+        } catch (CloudException ex) {
             Assert.assertEquals(200, ex.getResponse().code());
             Assert.assertTrue(ex.getMessage().contains("no body"));
         }
@@ -203,7 +203,7 @@ public class LROSADsTests {
         try {
             ServiceResponse<Void> response = client.getLROSADs().post202NoLocation(product);
             fail();
-        } catch (ServiceException ex) {
+        } catch (CloudException ex) {
             Assert.assertEquals(202, ex.getResponse().code());
             Assert.assertTrue(ex.getMessage().contains("No header in response"));
         }
@@ -216,7 +216,7 @@ public class LROSADsTests {
         try {
             ServiceResponse<Void> response = client.getLROSADs().postAsyncRelativeRetryNoPayload(product);
             fail();
-        } catch (ServiceException ex) {
+        } catch (CloudException ex) {
             Assert.assertEquals(200, ex.getResponse().code());
             Assert.assertTrue(ex.getMessage().contains("no body"));
         }
