@@ -109,7 +109,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     // Serialize Request
     string _requestContent = SafeJsonConvert.SerializeObject(@(Model.RequestBody.Name), @(Model.GetSerializationSettingsReference(Model.RequestBody.Type)));
     _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
-    _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("@(Model.ContentType)");
+    _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("@(Model.RequestContentType)");
         </text>
     }
     else if (Model.RequestFile != null)
@@ -128,7 +128,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
         }
     _contentDispositionHeaderValue.FileName = "\"" + @(Model.RequestFileName) + "\"";
     _fileStreamContent.Headers.ContentDisposition = _contentDispositionHeaderValue;
-    _fileStreamContent.Headers.ContentType = new MediaTypeHeaderValue("@(Model.ContentType)"); 
+    _fileStreamContent.Headers.ContentType = new MediaTypeHeaderValue("@(Model.RequestContentType)"); 
         @if (Model.RequestFile.Location == ParameterLocation.FormData)
         {
     @:var _multiPartContent = new MultipartFormDataContent(); 

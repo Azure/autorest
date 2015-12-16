@@ -132,7 +132,7 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// <summary>
         /// Gets or sets the content type.
         /// </summary>
-        public string ContentType { get; set; }
+        public string RequestContentType { get; set; }
 
         /// <summary>
         /// Gets vendor extensions dictionary.

@@ -106,7 +106,7 @@
       }
     }
   }
-  httpRequest.headers['Content-Type'] = '@(Model.ContentType)';
+  httpRequest.headers['Content-Type'] = '@(Model.RequestContentType)';
 
   @if (Model.RequestBody != null && Model.RequestBody.Type != PrimaryType.Stream)
   {
@@ -161,7 +161,7 @@
   var requestContent = @(Model.RequestFile.Name);
   form.append('fileUpload', requestContent, {
     filename: '@(Model.RequestFileName)',
-    contentType: '@(Model.ContentType)'
+    contentType: '@(Model.RequestContentType)'
   });
   httpRequest.form = form;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');

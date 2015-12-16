@@ -295,10 +295,9 @@
         "description": "",
         "operationId": "updatePetWithForm",
         "consumes": [
-          "application/x-www-form-urlencoded"
+          "multipart/form-data"
         ],
         "produces": [
-          "application/xml",
           "application/json"
         ],
         "parameters": [

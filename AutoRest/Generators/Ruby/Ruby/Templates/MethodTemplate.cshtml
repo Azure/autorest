@@ -74,7 +74,7 @@ def @(Model.Name)(@(Model.MethodParameterDeclaration))
   {
   @EmptyLine
   @:# Serialize Request
-  @:request_headers['Content-Type'] = '@(Model.ContentType)'
+  @:request_headers['Content-Type'] = '@(Model.RequestContentType)'
   @:@Model.CreateSerializationString(Model.RequestBody.Name, Model.RequestBody.Type, "request_content")
   }
 
