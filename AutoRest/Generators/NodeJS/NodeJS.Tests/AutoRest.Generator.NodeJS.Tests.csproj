@@ -75,6 +75,9 @@
       <Link>Swagger\body-complex.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="..\..\..\TestServer\swagger\complex-model.json">
+      <Link>Swagger\complex-model.json</Link>
+    </None>
     <None Include="app.config" />
     <None Include="Expected\**\*.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
