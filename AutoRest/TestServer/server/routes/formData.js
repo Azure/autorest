@@ -24,9 +24,8 @@ var formData = function (coverage) {
   
   coverage['StreamUploadFile'] = 0;
   router.put('/stream/uploadfile', function (req, res, next) {
-    coverage['StreamUploadFile']++;
-    console.log(req.files);
-    res.send(req.body);    
+      res.writeHead(200, { 'Content-Type': 'text/plain' });
+      req.pipe(res); 
   });
 }
 

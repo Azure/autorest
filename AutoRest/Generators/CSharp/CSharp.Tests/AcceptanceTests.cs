@@ -275,7 +275,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 {
                     memStream.Write(testBytes, 0, testBytes.Length);
                     memStream.Seek(0, SeekOrigin.Begin);
-                    using (StreamReader reader = new StreamReader(client.Formdata.UploadFile(memStream, "UploadFile.txt")))
+                    using (StreamReader reader = new StreamReader(client.Formdata.UploadFile(memStream, "UploadFile.txt"), Encoding.Unicode))
                     {
                         string actual = reader.ReadToEnd();
                         Assert.Equal(testString, actual);
@@ -285,7 +285,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         }
 
         [Fact]
-        public void FileUploadTests()
+        public void BodyFileUploadTests()
         {
             SwaggerSpecRunner.RunTests(
                 SwaggerPath("body-formdata.json"), ExpectedPath("BodyFormData"));
@@ -297,7 +297,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 {
                     memStream.Write(testBytes, 0, testBytes.Length);
                     memStream.Seek(0, SeekOrigin.Begin);
-                    using (StreamReader reader = new StreamReader(client.Formdata.UploadFileViaBody(memStream, "UploadFile.txt")))
+                    using (StreamReader reader = new StreamReader(client.Formdata.UploadFileViaBody(memStream, "UploadFile.txt"), Encoding.Unicode))
                     {
                         string actual = reader.ReadToEnd();
                         Assert.Equal(testString, actual);
