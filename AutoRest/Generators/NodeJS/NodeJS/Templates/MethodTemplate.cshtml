@@ -108,7 +108,7 @@
   }
   httpRequest.headers['Content-Type'] = '@(Model.ContentType)';
 
-  @if (Model.RequestBody != null)
+  @if (Model.RequestBody != null && Model.RequestBody.Type != PrimaryType.Stream)
   {
   <text>
   // Serialize Request
@@ -116,21 +116,21 @@
   var requestModel = null;
   try {
     @(Model.InitializeRequestBody)
-  @if (Model.RequestBody.Type is CompositeType)
-  {
-  <text>
+      @if (Model.RequestBody.Type is CompositeType)
+      {
+      <text>
     if (requestModel !== null && requestModel !== undefined) {
       requestContent = JSON.stringify(requestModel.serialize());
     } else {
       requestContent = JSON.stringify(requestModel);
     }
-  </text>
-  }
-  else
-  {
+      </text>
+      }
+      else
+      {
     @:@(Model.RequestBody.Type.SerializeType(Model.Scope, Model.RequestBody.Name, "requestModel", Model.RequestBody.IsRequired, Model.RequestBody.Constraints))
     @:requestContent = JSON.stringify(requestModel);
-  }
+      }
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
     return callback(serializationError);
@@ -139,6 +139,34 @@
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   </text>
+  }
+  else if (Model.RequestFile != null)
+  {
+      @if (Model.RequestFile.Location == ParameterLocation.Body)
+      {
+  <text>
+  // Serialize Request  
+
+  var requestContent = @(Model.RequestFile.Name);
+  httpRequest.body = requestContent;
+  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  </text>
+      }
+      else
+      {
+  <text>
+  // Serialize Request  
+
+  var form = httpRequest.form();
+  var requestContent = @(Model.RequestFile.Name);
+  form.append('fileUpload', requestContent, {
+    filename: '@(Model.RequestFileName)',
+    contentType: '@(Model.ContentType)'
+  });
+  httpRequest.form = form;
+  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  </text>
+      }
   }
   else
   {

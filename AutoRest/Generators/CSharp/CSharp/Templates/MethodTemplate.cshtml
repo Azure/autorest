@@ -128,7 +128,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
         }
     _contentDispositionHeaderValue.FileName = "\"" + @(Model.RequestFileName) + "\"";
     _fileStreamContent.Headers.ContentDisposition = _contentDispositionHeaderValue;
-    _fileStreamContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream"); 
+    _fileStreamContent.Headers.ContentType = new MediaTypeHeaderValue("@(Model.ContentType)"); 
         @if (Model.RequestFile.Location == ParameterLocation.FormData)
         {
     @:var _multiPartContent = new MultipartFormDataContent(); 
