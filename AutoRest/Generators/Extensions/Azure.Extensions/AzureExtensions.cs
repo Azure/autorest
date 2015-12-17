@@ -11,6 +11,7 @@ using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Logging;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger;
+using Newtonsoft.Json.Linq;
 
 namespace Microsoft.Rest.Generator.Azure
 {
@@ -421,7 +422,8 @@ namespace Microsoft.Rest.Generator.Azure
 
             foreach (var method in serviceClient.Methods.ToArray())
             {
-                if (method.Extensions.ContainsKey(PageableExtension))
+                if (method.Extensions.ContainsKey(PageableExtension) && 
+                    !string.IsNullOrWhiteSpace(((JObject)method.Extensions[PageableExtension]).SelectToken("nextLinkName").ToString()))
                 {
                     var newMethod = (Method) method.Clone();
                     newMethod.Name = newMethod.Name + "Next";
