@@ -94,7 +94,7 @@ public class AzureClient extends AzureServiceClient {
             throw exception;
         }
 
-        PollingState<T> pollingState = new PollingState<T>(response, this.getLongRunningOperationRetryTimeout(), resourceType);
+        PollingState<T> pollingState = new PollingState<>(response, this.getLongRunningOperationRetryTimeout(), resourceType);
         String url = response.raw().request().urlString();
 
         // Check provisioning state
@@ -120,7 +120,30 @@ public class AzureClient extends AzureServiceClient {
             throw new CloudException("Async operation failed");
         }
 
-        return new ServiceResponse<T>(pollingState.getResource(), pollingState.getResponse());
+        return new ServiceResponse<>(pollingState.getResource(), pollingState.getResponse());
+    }
+
+    /**
+     * Handles an initial response from a PUT or PATCH operation response by polling
+     * the status of the operation until the long running operation terminates.
+     *
+     * @param response  the initial response from the PUT or PATCH operation.
+     * @param resourceType the type of the resource
+     * @param headerType the type of the response header
+     * @param <T>       the return type of the caller
+     * @param <THeader> the type of the response header
+     * @return          the terminal response for the operation.
+     * @throws CloudException REST exception
+     * @throws InterruptedException interrupted exception
+     * @throws IOException thrown by deserialization
+     */
+    public <T, THeader> ServiceResponseWithHeaders<T, THeader> getPutOrPatchResultWithHeaders(Response<ResponseBody> response, Type resourceType, Class<THeader> headerType) throws CloudException, InterruptedException, IOException {
+        ServiceResponse<T> bodyResponse = getPutOrPatchResult(response, resourceType);
+        return new ServiceResponseWithHeaders<>(
+                bodyResponse.getBody(),
+                new AzureJacksonUtils().<THeader>deserialize(AzureJacksonUtils.serialize(bodyResponse.getResponse().headers()), headerType),
+                bodyResponse.getResponse()
+        );
     }
 
     /**
@@ -161,7 +184,7 @@ public class AzureClient extends AzureServiceClient {
 
         PollingState<T> pollingState;
         try {
-            pollingState = new PollingState<T>(response, this.getLongRunningOperationRetryTimeout(), resourceType);
+            pollingState = new PollingState<>(response, this.getLongRunningOperationRetryTimeout(), resourceType);
         } catch (IOException e) {
             callback.failure(e);
             return null;
@@ -169,9 +192,44 @@ public class AzureClient extends AzureServiceClient {
         String url = response.raw().request().urlString();
 
         // Task runner will take it from here
-        PutPatchPollingTask<T> task = new PutPatchPollingTask<T>(pollingState, url, callback);
+        PutPatchPollingTask<T> task = new PutPatchPollingTask<>(pollingState, url, callback);
         executor.schedule(task, pollingState.getDelayInMilliseconds(), TimeUnit.MILLISECONDS);
         return task;
+    }
+
+    /**
+     * Handles an initial response from a PUT or PATCH operation response by polling
+     * the status of the operation asynchronously, calling the user provided callback
+     * when the operation terminates.
+     *
+     * @param response  the initial response from the PUT or PATCH operation.
+     * @param <T>       the return type of the caller
+     * @param <THeader> the type of the response header
+     * @param resourceType the type of the resource.
+     * @param headerType the type of the response header
+     * @param callback  the user callback to call when operation terminates.
+     * @return          the task describing the asynchronous polling.
+     */
+    public <T, THeader> AsyncPollingTask<T> getPutOrPatchResultWithHeadersAsync(Response<ResponseBody> response, Type resourceType, final Class<THeader> headerType, final ServiceCallback<T> callback) {
+        return this.getPutOrPatchResultAsync(response, resourceType, new ServiceCallback<T>() {
+            @Override
+            public void failure(Throwable t) {
+                callback.failure(t);
+            }
+
+            @Override
+            public void success(ServiceResponse<T> result) {
+                try {
+                    callback.success(new ServiceResponseWithHeaders<>(
+                            result.getBody(),
+                            new AzureJacksonUtils().<THeader>deserialize(AzureJacksonUtils.serialize(result.getResponse().headers()), headerType),
+                            result.getResponse()
+                    ));
+                } catch (IOException e) {
+                    failure(e);
+                }
+            }
+        });
     }
 
     /**
@@ -207,7 +265,7 @@ public class AzureClient extends AzureServiceClient {
             throw exception;
         }
 
-        PollingState<T> pollingState = new PollingState<T>(response, this.getLongRunningOperationRetryTimeout(), resourceType);
+        PollingState<T> pollingState = new PollingState<>(response, this.getLongRunningOperationRetryTimeout(), resourceType);
 
         // Check provisioning state
         while (!AzureAsyncOperation.getTerminalStatuses().contains(pollingState.getStatus())) {
@@ -232,7 +290,30 @@ public class AzureClient extends AzureServiceClient {
             throw new CloudException("Async operation failed");
         }
 
-        return new ServiceResponse<T>(pollingState.getResource(), pollingState.getResponse());
+        return new ServiceResponse<>(pollingState.getResource(), pollingState.getResponse());
+    }
+
+    /**
+     * Handles an initial response from a POST or DELETE operation response by polling
+     * the status of the operation until the long running operation terminates.
+     *
+     * @param response  the initial response from the POST or DELETE operation.
+     * @param resourceType the type of the resource
+     * @param headerType the type of the response header
+     * @param <T>       the return type of the caller
+     * @param <THeader> the type of the response header
+     * @return          the terminal response for the operation.
+     * @throws CloudException REST exception
+     * @throws InterruptedException interrupted exception
+     * @throws IOException thrown by deserialization
+     */
+    public <T, THeader> ServiceResponseWithHeaders<T, THeader> getPostOrDeleteResultWithHeaders(Response<ResponseBody> response, Type resourceType, Class<THeader> headerType) throws CloudException, InterruptedException, IOException {
+        ServiceResponse<T> bodyResponse = getPostOrDeleteResult(response, resourceType);
+        return new ServiceResponseWithHeaders<>(
+                bodyResponse.getBody(),
+                new AzureJacksonUtils().<THeader>deserialize(AzureJacksonUtils.serialize(bodyResponse.getResponse().headers()), headerType),
+                bodyResponse.getResponse()
+        );
     }
 
     /**
@@ -273,16 +354,51 @@ public class AzureClient extends AzureServiceClient {
 
         PollingState<T> pollingState;
         try {
-            pollingState = new PollingState<T>(response, this.getLongRunningOperationRetryTimeout(), resourceType);
+            pollingState = new PollingState<>(response, this.getLongRunningOperationRetryTimeout(), resourceType);
         } catch (IOException e) {
             callback.failure(e);
             return null;
         }
 
         // Task runner will take it from here
-        PostDeletePollingTask<T> task = new PostDeletePollingTask<T>(pollingState, callback);
+        PostDeletePollingTask<T> task = new PostDeletePollingTask<>(pollingState, callback);
         executor.schedule(task, pollingState.getDelayInMilliseconds(), TimeUnit.MILLISECONDS);
         return task;
+    }
+
+    /**
+     * Handles an initial response from a POST or DELETE operation response by polling
+     * the status of the operation asynchronously, calling the user provided callback
+     * when the operation terminates.
+     *
+     * @param response  the initial response from the POST or DELETE operation.
+     * @param <T>       the return type of the caller
+     * @param <THeader> the type of the response header
+     * @param resourceType the type of the resource.
+     * @param headerType the type of the response header
+     * @param callback  the user callback to call when operation terminates.
+     * @return          the task describing the asynchronous polling.
+     */
+    public <T, THeader> AsyncPollingTask<T> getPostOrDeleteResultWithHeadersAsync(Response<ResponseBody> response, Type resourceType, final Class<THeader> headerType, final ServiceCallback<T> callback) {
+        return this.getPostOrDeleteResultAsync(response, resourceType, new ServiceCallback<T>() {
+            @Override
+            public void failure(Throwable t) {
+                callback.failure(t);
+            }
+
+            @Override
+            public void success(ServiceResponse<T> result) {
+                try {
+                    callback.success(new ServiceResponseWithHeaders<>(
+                            result.getBody(),
+                            new AzureJacksonUtils().<THeader>deserialize(AzureJacksonUtils.serialize(result.getResponse().headers()), headerType),
+                            result.getResponse()
+                    ));
+                } catch (IOException e) {
+                    failure(e);
+                }
+            }
+        });
     }
 
     /**
@@ -329,9 +445,9 @@ public class AzureClient extends AzureServiceClient {
                         pollingState.setResponse(result.getResponse());
                         pollingState.setStatus(AzureAsyncOperation.IN_PROGRESS_STATUS);
                     } else if (statusCode == 200 || statusCode == 201) {
-                        pollingState.updateFromResponseOnPutPatch(result.getResponse());
+                        pollingState.updateFromResponseOnPutPatch(result.<ResponseBody>getResponse());
                     }
-                    callback.success(new ServiceResponse<T>(pollingState.getResource(), pollingState.getResponse()));
+                    callback.success(new ServiceResponse<>(pollingState.getResource(), pollingState.getResponse()));
                 } catch (Throwable t) {
                     failure(t);
                 }
@@ -345,7 +461,7 @@ public class AzureClient extends AzureServiceClient {
      *
      * @param pollingState the polling state for the current operation.
      * @param <T> the return type of the caller.
-     * @throws ServiceException service exception
+     * @throws CloudException service exception
      * @throws IOException thrown by deserialization
      */
     private <T> void updateStateFromLocationHeaderOnPostOrDelete(PollingState<T> pollingState) throws CloudException, IOException {
@@ -385,7 +501,7 @@ public class AzureClient extends AzureServiceClient {
                     } else if (statusCode == 200 || statusCode == 201 || statusCode == 204) {
                         pollingState.updateFromResponseOnDeletePost(result.getResponse());
                     }
-                    callback.success(new ServiceResponse<T>(pollingState.getResource(), pollingState.getResponse()));
+                    callback.success(new ServiceResponse<>(pollingState.getResource(), pollingState.getResponse()));
                 } catch (Throwable t) {
                     failure(t);
                 }
@@ -400,7 +516,7 @@ public class AzureClient extends AzureServiceClient {
      * @param pollingState the polling state for the current operation.
      * @param url the url to poll from
      * @param <T> the return type of the caller.
-     * @throws ServiceException service exception
+     * @throws CloudException service exception
      * @throws IOException thrown by deserialization
      */
     private <T> void updateStateFromGetResourceOperation(PollingState<T> pollingState, String url) throws CloudException, IOException {
@@ -429,7 +545,7 @@ public class AzureClient extends AzureServiceClient {
             public void success(ServiceResponse<ResponseBody> result) {
                 try {
                     pollingState.updateFromResponseOnPutPatch(result.getResponse());
-                    callback.success(new ServiceResponse<T>(pollingState.getResource(), pollingState.getResponse()));
+                    callback.success(new ServiceResponse<>(pollingState.getResource(), pollingState.getResponse()));
                 } catch (Throwable t) {
                     failure(t);
                 }
@@ -443,7 +559,7 @@ public class AzureClient extends AzureServiceClient {
      *
      * @param pollingState the polling state for the current operation.
      * @param <T> the return type of the caller.
-     * @throws ServiceException service exception
+     * @throws CloudException service exception
      * @throws IOException thrown by deserialization
      */
     private <T> void updateStateFromAzureAsyncOperationHeader(PollingState<T> pollingState) throws CloudException, IOException {
@@ -502,7 +618,7 @@ public class AzureClient extends AzureServiceClient {
                         pollingState.setStatus(body.getStatus());
                         pollingState.setResponse(result.getResponse());
                         pollingState.setResource(null);
-                        callback.success(new ServiceResponse<T>(pollingState.getResource(), pollingState.getResponse()));
+                        callback.success(new ServiceResponse<>(pollingState.getResource(), pollingState.getResponse()));
                     }
                 } catch (IOException ex) {
                     failure(ex);
@@ -581,7 +697,7 @@ public class AzureClient extends AzureServiceClient {
                         callback.failure(exception);
                         return;
                     }
-                    callback.success(new ServiceResponse<ResponseBody>(response.body(), response));
+                    callback.success(new ServiceResponse<>(response.body(), response));
                 } catch (IOException ex) {
                     callback.failure(ex);
                 }
@@ -702,7 +818,7 @@ public class AzureClient extends AzureServiceClient {
 
                 @Override
                 public void success(ServiceResponse<T> result) {
-                    PutPatchPollingTask<T> task = new PutPatchPollingTask<T>(pollingState, url, clientCallback);
+                    PutPatchPollingTask<T> task = new PutPatchPollingTask<>(pollingState, url, clientCallback);
                     executor.schedule(task, pollingState.getDelayInMilliseconds(), TimeUnit.MILLISECONDS);
                 }
             };
@@ -728,7 +844,7 @@ public class AzureClient extends AzureServiceClient {
                 } else if (AzureAsyncOperation.getFailedStatuses().contains(pollingState.getStatus())) {
                     clientCallback.failure(new ServiceException("Async operation failed"));
                 } else {
-                    clientCallback.success(new ServiceResponse<T>(pollingState.getResource(), pollingState.getResponse()));
+                    clientCallback.success(new ServiceResponse<>(pollingState.getResource(), pollingState.getResponse()));
                 }
             }
         }
@@ -768,7 +884,7 @@ public class AzureClient extends AzureServiceClient {
 
                 @Override
                 public void success(ServiceResponse<T> result) {
-                    PostDeletePollingTask<T> task = new PostDeletePollingTask<T>(pollingState, clientCallback);
+                    PostDeletePollingTask<T> task = new PostDeletePollingTask<>(pollingState, clientCallback);
                     executor.schedule(task, pollingState.getDelayInMilliseconds(), TimeUnit.MILLISECONDS);
                 }
             };
@@ -793,7 +909,7 @@ public class AzureClient extends AzureServiceClient {
                 {
                     clientCallback.failure(new ServiceException("Async operation failed"));
                 } else {
-                    clientCallback.success(new ServiceResponse<T>(pollingState.getResource(), pollingState.getResponse()));
+                    clientCallback.success(new ServiceResponse<>(pollingState.getResource(), pollingState.getResponse()));
                 }
             }
         }

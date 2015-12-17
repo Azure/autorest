@@ -14,7 +14,31 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.CloudException;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.ServiceResponseWithHeaders;
 import com.squareup.okhttp.ResponseBody;
+import fixtures.lro.models.LROsDelete202NoRetry204Headers;
+import fixtures.lro.models.LROsDelete202Retry200Headers;
+import fixtures.lro.models.LROsDeleteAsyncNoHeaderInRetryHeaders;
+import fixtures.lro.models.LROsDeleteAsyncNoRetrySucceededHeaders;
+import fixtures.lro.models.LROsDeleteAsyncRetrycanceledHeaders;
+import fixtures.lro.models.LROsDeleteAsyncRetryFailedHeaders;
+import fixtures.lro.models.LROsDeleteAsyncRetrySucceededHeaders;
+import fixtures.lro.models.LROsDeleteNoHeaderInRetryHeaders;
+import fixtures.lro.models.LROsDeleteProvisioning202Accepted200SucceededHeaders;
+import fixtures.lro.models.LROsDeleteProvisioning202Deletingcanceled200Headers;
+import fixtures.lro.models.LROsDeleteProvisioning202DeletingFailed200Headers;
+import fixtures.lro.models.LROsPost202NoRetry204Headers;
+import fixtures.lro.models.LROsPost202Retry200Headers;
+import fixtures.lro.models.LROsPostAsyncNoRetrySucceededHeaders;
+import fixtures.lro.models.LROsPostAsyncRetrycanceledHeaders;
+import fixtures.lro.models.LROsPostAsyncRetryFailedHeaders;
+import fixtures.lro.models.LROsPostAsyncRetrySucceededHeaders;
+import fixtures.lro.models.LROsPutAsyncNoHeaderInRetryHeaders;
+import fixtures.lro.models.LROsPutAsyncNoRetrycanceledHeaders;
+import fixtures.lro.models.LROsPutAsyncNoRetrySucceededHeaders;
+import fixtures.lro.models.LROsPutAsyncRetryFailedHeaders;
+import fixtures.lro.models.LROsPutAsyncRetrySucceededHeaders;
+import fixtures.lro.models.LROsPutNoHeaderInRetryHeaders;
 import fixtures.lro.models.Product;
 import fixtures.lro.models.Sku;
 import fixtures.lro.models.SubProduct;
@@ -304,11 +328,11 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
-    public ServiceResponse<Product> putNoHeaderInRetry(Product product) throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Product, LROsPutNoHeaderInRetryHeaders> putNoHeaderInRetry(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.putNoHeaderInRetry(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsPutNoHeaderInRetryHeaders.class);
     }
 
     /**
@@ -327,7 +351,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsPutNoHeaderInRetryHeaders.class, serviceCallback);
             }
         });
         return call;
@@ -340,11 +364,11 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
-    public ServiceResponse<Product> putAsyncRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Product, LROsPutAsyncRetrySucceededHeaders> putAsyncRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.putAsyncRetrySucceeded(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsPutAsyncRetrySucceededHeaders.class);
     }
 
     /**
@@ -363,7 +387,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsPutAsyncRetrySucceededHeaders.class, serviceCallback);
             }
         });
         return call;
@@ -376,11 +400,11 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
-    public ServiceResponse<Product> putAsyncNoRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrySucceededHeaders> putAsyncNoRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.putAsyncNoRetrySucceeded(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsPutAsyncNoRetrySucceededHeaders.class);
     }
 
     /**
@@ -399,7 +423,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsPutAsyncNoRetrySucceededHeaders.class, serviceCallback);
             }
         });
         return call;
@@ -412,11 +436,11 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
-    public ServiceResponse<Product> putAsyncRetryFailed(Product product) throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Product, LROsPutAsyncRetryFailedHeaders> putAsyncRetryFailed(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.putAsyncRetryFailed(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsPutAsyncRetryFailedHeaders.class);
     }
 
     /**
@@ -435,7 +459,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsPutAsyncRetryFailedHeaders.class, serviceCallback);
             }
         });
         return call;
@@ -448,11 +472,11 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
-    public ServiceResponse<Product> putAsyncNoRetrycanceled(Product product) throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrycanceledHeaders> putAsyncNoRetrycanceled(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.putAsyncNoRetrycanceled(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsPutAsyncNoRetrycanceledHeaders.class);
     }
 
     /**
@@ -471,7 +495,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsPutAsyncNoRetrycanceledHeaders.class, serviceCallback);
             }
         });
         return call;
@@ -484,11 +508,11 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
-    public ServiceResponse<Product> putAsyncNoHeaderInRetry(Product product) throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Product, LROsPutAsyncNoHeaderInRetryHeaders> putAsyncNoHeaderInRetry(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.putAsyncNoHeaderInRetry(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsPutAsyncNoHeaderInRetryHeaders.class);
     }
 
     /**
@@ -507,7 +531,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsPutAsyncNoHeaderInRetryHeaders.class, serviceCallback);
             }
         });
         return call;
@@ -663,11 +687,11 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
-    public ServiceResponse<Product> deleteProvisioning202Accepted200Succeeded() throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202Accepted200SucceededHeaders> deleteProvisioning202Accepted200Succeeded() throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.deleteProvisioning202Accepted200Succeeded(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Product>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsDeleteProvisioning202Accepted200SucceededHeaders.class);
     }
 
     /**
@@ -685,7 +709,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsDeleteProvisioning202Accepted200SucceededHeaders.class, serviceCallback);
             }
         });
         return call;
@@ -697,11 +721,11 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
-    public ServiceResponse<Product> deleteProvisioning202DeletingFailed200() throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202DeletingFailed200Headers> deleteProvisioning202DeletingFailed200() throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.deleteProvisioning202DeletingFailed200(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Product>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsDeleteProvisioning202DeletingFailed200Headers.class);
     }
 
     /**
@@ -719,7 +743,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsDeleteProvisioning202DeletingFailed200Headers.class, serviceCallback);
             }
         });
         return call;
@@ -731,11 +755,11 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
-    public ServiceResponse<Product> deleteProvisioning202Deletingcanceled200() throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202Deletingcanceled200Headers> deleteProvisioning202Deletingcanceled200() throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.deleteProvisioning202Deletingcanceled200(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Product>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsDeleteProvisioning202Deletingcanceled200Headers.class);
     }
 
     /**
@@ -753,7 +777,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsDeleteProvisioning202Deletingcanceled200Headers.class, serviceCallback);
             }
         });
         return call;
@@ -799,11 +823,11 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
-    public ServiceResponse<Product> delete202Retry200() throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Product, LROsDelete202Retry200Headers> delete202Retry200() throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.delete202Retry200(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Product>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsDelete202Retry200Headers.class);
     }
 
     /**
@@ -821,7 +845,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsDelete202Retry200Headers.class, serviceCallback);
             }
         });
         return call;
@@ -833,11 +857,11 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
-    public ServiceResponse<Product> delete202NoRetry204() throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Product, LROsDelete202NoRetry204Headers> delete202NoRetry204() throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.delete202NoRetry204(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Product>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsDelete202NoRetry204Headers.class);
     }
 
     /**
@@ -855,7 +879,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsDelete202NoRetry204Headers.class, serviceCallback);
             }
         });
         return call;
@@ -867,11 +891,11 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponse<Void> deleteNoHeaderInRetry() throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeaders> deleteNoHeaderInRetry() throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.deleteNoHeaderInRetry(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsDeleteNoHeaderInRetryHeaders.class);
     }
 
     /**
@@ -889,7 +913,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Void>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROsDeleteNoHeaderInRetryHeaders.class, serviceCallback);
             }
         });
         return call;
@@ -901,11 +925,11 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponse<Void> deleteAsyncNoHeaderInRetry() throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeaders> deleteAsyncNoHeaderInRetry() throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.deleteAsyncNoHeaderInRetry(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncNoHeaderInRetryHeaders.class);
     }
 
     /**
@@ -923,7 +947,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Void>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncNoHeaderInRetryHeaders.class, serviceCallback);
             }
         });
         return call;
@@ -935,11 +959,11 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponse<Void> deleteAsyncRetrySucceeded() throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeaders> deleteAsyncRetrySucceeded() throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.deleteAsyncRetrySucceeded(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncRetrySucceededHeaders.class);
     }
 
     /**
@@ -957,7 +981,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Void>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncRetrySucceededHeaders.class, serviceCallback);
             }
         });
         return call;
@@ -969,11 +993,11 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponse<Void> deleteAsyncNoRetrySucceeded() throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeaders> deleteAsyncNoRetrySucceeded() throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.deleteAsyncNoRetrySucceeded(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncNoRetrySucceededHeaders.class);
     }
 
     /**
@@ -991,7 +1015,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Void>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncNoRetrySucceededHeaders.class, serviceCallback);
             }
         });
         return call;
@@ -1003,11 +1027,11 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponse<Void> deleteAsyncRetryFailed() throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeaders> deleteAsyncRetryFailed() throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.deleteAsyncRetryFailed(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncRetryFailedHeaders.class);
     }
 
     /**
@@ -1025,7 +1049,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Void>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncRetryFailedHeaders.class, serviceCallback);
             }
         });
         return call;
@@ -1037,11 +1061,11 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponse<Void> deleteAsyncRetrycanceled() throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeaders> deleteAsyncRetrycanceled() throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.deleteAsyncRetrycanceled(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncRetrycanceledHeaders.class);
     }
 
     /**
@@ -1059,7 +1083,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Void>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROsDeleteAsyncRetrycanceledHeaders.class, serviceCallback);
             }
         });
         return call;
@@ -1106,11 +1130,11 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponse<Void> post202Retry200(Product product) throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers> post202Retry200(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.post202Retry200(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsPost202Retry200Headers.class);
     }
 
     /**
@@ -1129,7 +1153,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Void>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROsPost202Retry200Headers.class, serviceCallback);
             }
         });
         return call;
@@ -1142,11 +1166,11 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
-    public ServiceResponse<Product> post202NoRetry204(Product product) throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Product, LROsPost202NoRetry204Headers> post202NoRetry204(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.post202NoRetry204(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Product>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsPost202NoRetry204Headers.class);
     }
 
     /**
@@ -1165,7 +1189,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsPost202NoRetry204Headers.class, serviceCallback);
             }
         });
         return call;
@@ -1178,11 +1202,11 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
-    public ServiceResponse<Product> postAsyncRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Product, LROsPostAsyncRetrySucceededHeaders> postAsyncRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.postAsyncRetrySucceeded(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Product>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsPostAsyncRetrySucceededHeaders.class);
     }
 
     /**
@@ -1201,7 +1225,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsPostAsyncRetrySucceededHeaders.class, serviceCallback);
             }
         });
         return call;
@@ -1214,11 +1238,11 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
-    public ServiceResponse<Product> postAsyncNoRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Product, LROsPostAsyncNoRetrySucceededHeaders> postAsyncNoRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.postAsyncNoRetrySucceeded(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Product>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROsPostAsyncNoRetrySucceededHeaders.class);
     }
 
     /**
@@ -1237,7 +1261,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROsPostAsyncNoRetrySucceededHeaders.class, serviceCallback);
             }
         });
         return call;
@@ -1250,11 +1274,11 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponse<Void> postAsyncRetryFailed(Product product) throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders> postAsyncRetryFailed(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.postAsyncRetryFailed(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetryFailedHeaders.class);
     }
 
     /**
@@ -1273,7 +1297,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Void>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetryFailedHeaders.class, serviceCallback);
             }
         });
         return call;
@@ -1286,11 +1310,11 @@ public final class LROsOperationsImpl implements LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponse<Void> postAsyncRetrycanceled(Product product) throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders> postAsyncRetrycanceled(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.postAsyncRetrycanceled(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetrycanceledHeaders.class);
     }
 
     /**
@@ -1309,7 +1333,7 @@ public final class LROsOperationsImpl implements LROsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Void>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROsPostAsyncRetrycanceledHeaders.class, serviceCallback);
             }
         });
         return call;

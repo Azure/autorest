@@ -14,7 +14,14 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.CloudException;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.ServiceResponseWithHeaders;
 import com.squareup.okhttp.ResponseBody;
+import fixtures.lro.models.LRORetrysDelete202Retry200Headers;
+import fixtures.lro.models.LRORetrysDeleteAsyncRelativeRetrySucceededHeaders;
+import fixtures.lro.models.LRORetrysDeleteProvisioning202Accepted200SucceededHeaders;
+import fixtures.lro.models.LRORetrysPost202Retry200Headers;
+import fixtures.lro.models.LRORetrysPostAsyncRelativeRetrySucceededHeaders;
+import fixtures.lro.models.LRORetrysPutAsyncRelativeRetrySucceededHeaders;
 import fixtures.lro.models.Product;
 import java.io.IOException;
 import retrofit.Call;
@@ -86,11 +93,11 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
-    public ServiceResponse<Product> putAsyncRelativeRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders> putAsyncRelativeRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.putAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LRORetrysPutAsyncRelativeRetrySucceededHeaders.class);
     }
 
     /**
@@ -109,7 +116,7 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LRORetrysPutAsyncRelativeRetrySucceededHeaders.class, serviceCallback);
             }
         });
         return call;
@@ -121,11 +128,11 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
-    public ServiceResponse<Product> deleteProvisioning202Accepted200Succeeded() throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Product, LRORetrysDeleteProvisioning202Accepted200SucceededHeaders> deleteProvisioning202Accepted200Succeeded() throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.deleteProvisioning202Accepted200Succeeded(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Product>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LRORetrysDeleteProvisioning202Accepted200SucceededHeaders.class);
     }
 
     /**
@@ -143,7 +150,7 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LRORetrysDeleteProvisioning202Accepted200SucceededHeaders.class, serviceCallback);
             }
         });
         return call;
@@ -155,11 +162,11 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponse<Void> delete202Retry200() throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200Headers> delete202Retry200() throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.delete202Retry200(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LRORetrysDelete202Retry200Headers.class);
     }
 
     /**
@@ -177,7 +184,7 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Void>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LRORetrysDelete202Retry200Headers.class, serviceCallback);
             }
         });
         return call;
@@ -189,11 +196,11 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponse<Void> deleteAsyncRelativeRetrySucceeded() throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeaders> deleteAsyncRelativeRetrySucceeded() throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.deleteAsyncRelativeRetrySucceeded(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LRORetrysDeleteAsyncRelativeRetrySucceededHeaders.class);
     }
 
     /**
@@ -211,7 +218,7 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Void>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LRORetrysDeleteAsyncRelativeRetrySucceededHeaders.class, serviceCallback);
             }
         });
         return call;
@@ -224,11 +231,11 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponse<Void> post202Retry200(Product product) throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers> post202Retry200(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.post202Retry200(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LRORetrysPost202Retry200Headers.class);
     }
 
     /**
@@ -247,7 +254,7 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Void>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LRORetrysPost202Retry200Headers.class, serviceCallback);
             }
         });
         return call;
@@ -260,11 +267,11 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponse<Void> postAsyncRelativeRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders> postAsyncRelativeRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.postAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LRORetrysPostAsyncRelativeRetrySucceededHeaders.class);
     }
 
     /**
@@ -283,7 +290,7 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Void>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LRORetrysPostAsyncRelativeRetrySucceededHeaders.class, serviceCallback);
             }
         });
         return call;

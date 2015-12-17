@@ -8,6 +8,7 @@
 package com.microsoft.rest;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.serializer.JacksonUtils;
 import com.squareup.okhttp.ResponseBody;
 import retrofit.Response;
@@ -183,9 +184,9 @@ public class ServiceResponseBuilder<T, E extends AutoRestException> {
     public ServiceResponse<T> buildEmpty(Response<Void> response, Retrofit retrofit) throws E, IOException {
         int statusCode = response.code();
         if (responseTypes.containsKey(statusCode)) {
-            return new ServiceResponse<T>(null, response);
+            return new ServiceResponse<>(response);
         } else if (response.isSuccess() && responseTypes.size() == 1) {
-            return new ServiceResponse<T>(null, response);
+            return new ServiceResponse<>(response);
         } else {
             try {
                 E exception = (E) exceptionType.getConstructor(String.class).newInstance("Invalid status code " + statusCode);
@@ -196,6 +197,58 @@ public class ServiceResponseBuilder<T, E extends AutoRestException> {
                         + " cannot be created.", e);
             }
         }
+    }
+
+    /**
+     * Build a ServiceResponseWithHeaders instance from a REST call response, a header
+     * in JSON format, and a possible error.
+     *
+     * <p>
+     *     If the status code in the response is registered, the response will
+     *     be considered valid and deserialized into the specified destination
+     *     type. If the status code is not registered, the response will be
+     *     considered invalid and deserialized into the specified error type if
+     *     there is one. An AutoRestException is also thrown.
+     * </p>
+     *
+     * @param response the {@link Response} instance from REST call
+     * @param retrofit the {@link Retrofit} instance from REST call
+     * @param <THeader> the type of the header
+     * @return a ServiceResponseWithHeaders instance of generic type {@link T}
+     * @throws E exceptions from the REST call
+     * @throws IOException exceptions from deserialization
+     */
+    public <THeader> ServiceResponseWithHeaders<T, THeader> buildWithHeaders(Response<ResponseBody> response, Retrofit retrofit, Class<THeader> type) throws E, IOException {
+        ServiceResponse<T> bodyResponse = build(response, retrofit);
+        THeader headers = deserializer.deserialize(
+                JacksonUtils.serialize(response.headers()),
+                type);
+        return new ServiceResponseWithHeaders<>(bodyResponse.getBody(), headers, bodyResponse.getResponse());
+    }
+
+    /**
+     * Build a ServiceResponseWithHeaders instance from a REST call response, a header
+     * in JSON format, and a possible error, which does not have a response body.
+     *
+     * <p>
+     *     If the status code in the response is registered, the response will
+     *     be considered valid. If the status code is not registered, the
+     *     response will be considered invalid. An AutoRestException is also thrown.
+     * </p>
+     *
+     * @param response the {@link Response} instance from REST call
+     * @param retrofit the {@link Retrofit} instance from REST call
+     * @param <THeader> the type of the header
+     * @return a ServiceResponseWithHeaders instance of generic type {@link T}
+     * @throws E exceptions from the REST call
+     * @throws IOException exceptions from deserialization
+     */
+    public <THeader> ServiceResponseWithHeaders<T, THeader> buildEmptyWithHeaders(Response<Void> response, Retrofit retrofit, Class<THeader> type) throws E, IOException {
+        ServiceResponse<T> bodyResponse = buildEmpty(response, retrofit);
+        THeader headers = deserializer.deserialize(
+                JacksonUtils.serialize(response.headers()),
+                type);
+        return new ServiceResponseWithHeaders<>(headers, bodyResponse.getHEADResponse());
     }
 
     /**

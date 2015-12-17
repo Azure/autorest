@@ -30,7 +30,7 @@ public class HttpRetryTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(200, response.getResponse().code());
+                Assert.assertEquals(200, response.getHEADResponse().code());
                 lock.countDown();
             }
         });

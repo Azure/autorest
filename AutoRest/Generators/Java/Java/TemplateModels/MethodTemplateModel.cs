@@ -376,6 +376,36 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
+        public string OperationResponseType
+        {
+            get
+            {
+                if (ReturnType.Headers == null)
+                {
+                    return "ServiceResponse";
+                }
+                else
+                {
+                    return "ServiceResponseWithHeaders";
+                }
+            }
+        }
+
+        public string OperationResponseReturnTypeString
+        {
+            get
+            {
+                if (ReturnType.Headers == null)
+                {
+                    return string.Format("{0}<{1}>", OperationResponseType, GenericReturnTypeString);
+                }
+                else
+                {
+                    return string.Format("{0}<{1}, {2}>", OperationResponseType, GenericReturnTypeString, ReturnType.Headers.Name);
+                }
+            }
+        }
+
         public string CallType
         {
             get
@@ -433,7 +463,7 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     imports.Add("com.squareup.okhttp.ResponseBody");
                 }
-                imports.Add("com.microsoft.rest.ServiceResponse");
+                imports.Add("com.microsoft.rest." + OperationResponseType);
                 imports.Add("com.microsoft.rest.ServiceCallback");
                 // parameter types
                 this.Parameters.ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace)));
@@ -448,6 +478,8 @@ namespace Microsoft.Rest.Generator.Java
                 });
                 // return type
                 imports.AddRange(this.ReturnType.Body.ImportFrom(ServiceClient.Namespace));
+                // Header type
+                imports.AddRange(this.ReturnType.Headers.ImportFrom(ServiceClient.Namespace));
                 // Http verb annotations
                 imports.Add(this.HttpMethod.ImportFrom());
                 // exceptions
@@ -473,7 +505,7 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     imports.Add("com.squareup.okhttp.ResponseBody");
                 }
-                imports.Add("com.microsoft.rest.ServiceResponse");
+                imports.Add("com.microsoft.rest." + OperationResponseType);
                 imports.Add("com.microsoft.rest." + ResponseBuilder);
                 imports.Add("com.microsoft.rest.ServiceCallback");
 
@@ -504,7 +536,8 @@ namespace Microsoft.Rest.Generator.Java
                 imports.AddRange(this.ReturnType.Body.ImportFrom(ServiceClient.Namespace));
                 // response type (can be different from return type)
                 this.Responses.ForEach(r => imports.AddRange(r.Value.Body.ImportFrom(ServiceClient.Namespace)));
-                // imports.AddRange(DefaultResponse.Body.ImportFrom(ServiceClient.Namespace));
+                // Header type
+                imports.AddRange(this.ReturnType.Headers.ImportFrom(ServiceClient.Namespace));
                 // exceptions
                 this.ExceptionString.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
                     .ForEach(ex =>

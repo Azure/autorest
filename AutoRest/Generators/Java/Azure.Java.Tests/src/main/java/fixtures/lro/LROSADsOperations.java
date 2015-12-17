@@ -13,7 +13,28 @@ package fixtures.lro;
 import com.microsoft.rest.CloudException;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.ServiceResponseWithHeaders;
 import com.squareup.okhttp.ResponseBody;
+import fixtures.lro.models.LROSADsDelete202NonRetry400Headers;
+import fixtures.lro.models.LROSADsDelete202RetryInvalidHeaderHeaders;
+import fixtures.lro.models.LROSADsDeleteAsyncRelativeRetry400Headers;
+import fixtures.lro.models.LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders;
+import fixtures.lro.models.LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders;
+import fixtures.lro.models.LROSADsDeleteAsyncRelativeRetryNoStatusHeaders;
+import fixtures.lro.models.LROSADsDeleteNonRetry400Headers;
+import fixtures.lro.models.LROSADsPost202NoLocationHeaders;
+import fixtures.lro.models.LROSADsPost202NonRetry400Headers;
+import fixtures.lro.models.LROSADsPost202RetryInvalidHeaderHeaders;
+import fixtures.lro.models.LROSADsPostAsyncRelativeRetry400Headers;
+import fixtures.lro.models.LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders;
+import fixtures.lro.models.LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders;
+import fixtures.lro.models.LROSADsPostAsyncRelativeRetryNoPayloadHeaders;
+import fixtures.lro.models.LROSADsPostNonRetry400Headers;
+import fixtures.lro.models.LROSADsPutAsyncRelativeRetry400Headers;
+import fixtures.lro.models.LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders;
+import fixtures.lro.models.LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders;
+import fixtures.lro.models.LROSADsPutAsyncRelativeRetryNoStatusHeaders;
+import fixtures.lro.models.LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders;
 import fixtures.lro.models.Product;
 import java.io.IOException;
 import retrofit.Call;
@@ -156,9 +177,9 @@ public interface LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
-    ServiceResponse<Product> putAsyncRelativeRetry400(Product product) throws CloudException, IOException, InterruptedException;
+    ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetry400Headers> putAsyncRelativeRetry400(Product product) throws CloudException, IOException, InterruptedException;
 
     /**
      * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -175,9 +196,9 @@ public interface LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    ServiceResponse<Void> deleteNonRetry400() throws CloudException, IOException, InterruptedException;
+    ServiceResponseWithHeaders<Void, LROSADsDeleteNonRetry400Headers> deleteNonRetry400() throws CloudException, IOException, InterruptedException;
 
     /**
      * Long running delete request, service returns a 400 with an error body.
@@ -193,9 +214,9 @@ public interface LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    ServiceResponse<Void> delete202NonRetry400() throws CloudException, IOException, InterruptedException;
+    ServiceResponseWithHeaders<Void, LROSADsDelete202NonRetry400Headers> delete202NonRetry400() throws CloudException, IOException, InterruptedException;
 
     /**
      * Long running delete request, service returns a 202 with a location header.
@@ -211,9 +232,9 @@ public interface LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    ServiceResponse<Void> deleteAsyncRelativeRetry400() throws CloudException, IOException, InterruptedException;
+    ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetry400Headers> deleteAsyncRelativeRetry400() throws CloudException, IOException, InterruptedException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -230,9 +251,9 @@ public interface LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    ServiceResponse<Void> postNonRetry400(Product product) throws CloudException, IOException, InterruptedException;
+    ServiceResponseWithHeaders<Void, LROSADsPostNonRetry400Headers> postNonRetry400(Product product) throws CloudException, IOException, InterruptedException;
 
     /**
      * Long running post request, service returns a 400 with no error body.
@@ -250,9 +271,9 @@ public interface LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    ServiceResponse<Void> post202NonRetry400(Product product) throws CloudException, IOException, InterruptedException;
+    ServiceResponseWithHeaders<Void, LROSADsPost202NonRetry400Headers> post202NonRetry400(Product product) throws CloudException, IOException, InterruptedException;
 
     /**
      * Long running post request, service returns a 202 with a location header.
@@ -270,9 +291,9 @@ public interface LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    ServiceResponse<Void> postAsyncRelativeRetry400(Product product) throws CloudException, IOException, InterruptedException;
+    ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetry400Headers> postAsyncRelativeRetry400(Product product) throws CloudException, IOException, InterruptedException;
 
     /**
      * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -310,9 +331,9 @@ public interface LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
-    ServiceResponse<Product> putAsyncRelativeRetryNoStatus(Product product) throws CloudException, IOException, InterruptedException;
+    ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusHeaders> putAsyncRelativeRetryNoStatus(Product product) throws CloudException, IOException, InterruptedException;
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -330,9 +351,9 @@ public interface LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
-    ServiceResponse<Product> putAsyncRelativeRetryNoStatusPayload(Product product) throws CloudException, IOException, InterruptedException;
+    ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders> putAsyncRelativeRetryNoStatusPayload(Product product) throws CloudException, IOException, InterruptedException;
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -367,9 +388,9 @@ public interface LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    ServiceResponse<Void> deleteAsyncRelativeRetryNoStatus() throws CloudException, IOException, InterruptedException;
+    ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryNoStatusHeaders> deleteAsyncRelativeRetryNoStatus() throws CloudException, IOException, InterruptedException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -386,9 +407,9 @@ public interface LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    ServiceResponse<Void> post202NoLocation(Product product) throws CloudException, IOException, InterruptedException;
+    ServiceResponseWithHeaders<Void, LROSADsPost202NoLocationHeaders> post202NoLocation(Product product) throws CloudException, IOException, InterruptedException;
 
     /**
      * Long running post request, service returns a 202 to the initial request, without a location header.
@@ -406,9 +427,9 @@ public interface LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    ServiceResponse<Void> postAsyncRelativeRetryNoPayload(Product product) throws CloudException, IOException, InterruptedException;
+    ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryNoPayloadHeaders> postAsyncRelativeRetryNoPayload(Product product) throws CloudException, IOException, InterruptedException;
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -446,9 +467,9 @@ public interface LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
-    ServiceResponse<Product> putAsyncRelativeRetryInvalidHeader(Product product) throws CloudException, IOException, InterruptedException;
+    ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders> putAsyncRelativeRetryInvalidHeader(Product product) throws CloudException, IOException, InterruptedException;
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
@@ -466,9 +487,9 @@ public interface LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
-    ServiceResponse<Product> putAsyncRelativeRetryInvalidJsonPolling(Product product) throws CloudException, IOException, InterruptedException;
+    ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders> putAsyncRelativeRetryInvalidJsonPolling(Product product) throws CloudException, IOException, InterruptedException;
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -485,9 +506,9 @@ public interface LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    ServiceResponse<Void> delete202RetryInvalidHeader() throws CloudException, IOException, InterruptedException;
+    ServiceResponseWithHeaders<Void, LROSADsDelete202RetryInvalidHeaderHeaders> delete202RetryInvalidHeader() throws CloudException, IOException, InterruptedException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers.
@@ -503,9 +524,9 @@ public interface LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    ServiceResponse<Void> deleteAsyncRelativeRetryInvalidHeader() throws CloudException, IOException, InterruptedException;
+    ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders> deleteAsyncRelativeRetryInvalidHeader() throws CloudException, IOException, InterruptedException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid.
@@ -521,9 +542,9 @@ public interface LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    ServiceResponse<Void> deleteAsyncRelativeRetryInvalidJsonPolling() throws CloudException, IOException, InterruptedException;
+    ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders> deleteAsyncRelativeRetryInvalidJsonPolling() throws CloudException, IOException, InterruptedException;
 
     /**
      * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
@@ -540,9 +561,9 @@ public interface LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    ServiceResponse<Void> post202RetryInvalidHeader(Product product) throws CloudException, IOException, InterruptedException;
+    ServiceResponseWithHeaders<Void, LROSADsPost202RetryInvalidHeaderHeaders> post202RetryInvalidHeader(Product product) throws CloudException, IOException, InterruptedException;
 
     /**
      * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
@@ -560,9 +581,9 @@ public interface LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    ServiceResponse<Void> postAsyncRelativeRetryInvalidHeader(Product product) throws CloudException, IOException, InterruptedException;
+    ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders> postAsyncRelativeRetryInvalidHeader(Product product) throws CloudException, IOException, InterruptedException;
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
@@ -580,9 +601,9 @@ public interface LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    ServiceResponse<Void> postAsyncRelativeRetryInvalidJsonPolling(Product product) throws CloudException, IOException, InterruptedException;
+    ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders> postAsyncRelativeRetryInvalidJsonPolling(Product product) throws CloudException, IOException, InterruptedException;
 
     /**
      * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.

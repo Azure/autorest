@@ -17,9 +17,24 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
+import com.microsoft.rest.ServiceResponseWithHeaders;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.header.models.ErrorException;
 import fixtures.header.models.GreyscaleColors;
+import fixtures.header.models.HeaderResponseBoolHeaders;
+import fixtures.header.models.HeaderResponseByteHeaders;
+import fixtures.header.models.HeaderResponseDateHeaders;
+import fixtures.header.models.HeaderResponseDatetimeHeaders;
+import fixtures.header.models.HeaderResponseDatetimeRfc1123Headers;
+import fixtures.header.models.HeaderResponseDoubleHeaders;
+import fixtures.header.models.HeaderResponseDurationHeaders;
+import fixtures.header.models.HeaderResponseEnumHeaders;
+import fixtures.header.models.HeaderResponseExistingKeyHeaders;
+import fixtures.header.models.HeaderResponseFloatHeaders;
+import fixtures.header.models.HeaderResponseIntegerHeaders;
+import fixtures.header.models.HeaderResponseLongHeaders;
+import fixtures.header.models.HeaderResponseProtectedKeyHeaders;
+import fixtures.header.models.HeaderResponseStringHeaders;
 import java.io.IOException;
 import org.apache.commons.codec.binary.Base64;
 import org.joda.time.DateTime;
@@ -105,9 +120,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public ServiceResponse<Void> responseExistingKey() throws ErrorException, IOException {
+    public ServiceResponseWithHeaders<Void, HeaderResponseExistingKeyHeaders> responseExistingKey() throws ErrorException, IOException {
         Call<ResponseBody> call = service.responseExistingKey();
         return responseExistingKeyDelegate(call.execute(), null);
     }
@@ -133,11 +148,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponse<Void> responseExistingKeyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponseWithHeaders<Void, HeaderResponseExistingKeyHeaders> responseExistingKeyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .buildWithHeaders(response, retrofit, HeaderResponseExistingKeyHeaders.class);
     }
 
     /**
@@ -195,9 +210,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public ServiceResponse<Void> responseProtectedKey() throws ErrorException, IOException {
+    public ServiceResponseWithHeaders<Void, HeaderResponseProtectedKeyHeaders> responseProtectedKey() throws ErrorException, IOException {
         Call<ResponseBody> call = service.responseProtectedKey();
         return responseProtectedKeyDelegate(call.execute(), null);
     }
@@ -223,11 +238,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponse<Void> responseProtectedKeyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponseWithHeaders<Void, HeaderResponseProtectedKeyHeaders> responseProtectedKeyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .buildWithHeaders(response, retrofit, HeaderResponseProtectedKeyHeaders.class);
     }
 
     /**
@@ -289,9 +304,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public ServiceResponse<Void> responseInteger(String scenario) throws ErrorException, IOException, IllegalArgumentException {
+    public ServiceResponseWithHeaders<Void, HeaderResponseIntegerHeaders> responseInteger(String scenario) throws ErrorException, IOException, IllegalArgumentException {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -325,11 +340,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponse<Void> responseIntegerDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponseWithHeaders<Void, HeaderResponseIntegerHeaders> responseIntegerDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .buildWithHeaders(response, retrofit, HeaderResponseIntegerHeaders.class);
     }
 
     /**
@@ -391,9 +406,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public ServiceResponse<Void> responseLong(String scenario) throws ErrorException, IOException, IllegalArgumentException {
+    public ServiceResponseWithHeaders<Void, HeaderResponseLongHeaders> responseLong(String scenario) throws ErrorException, IOException, IllegalArgumentException {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -427,11 +442,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponse<Void> responseLongDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponseWithHeaders<Void, HeaderResponseLongHeaders> responseLongDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .buildWithHeaders(response, retrofit, HeaderResponseLongHeaders.class);
     }
 
     /**
@@ -493,9 +508,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public ServiceResponse<Void> responseFloat(String scenario) throws ErrorException, IOException, IllegalArgumentException {
+    public ServiceResponseWithHeaders<Void, HeaderResponseFloatHeaders> responseFloat(String scenario) throws ErrorException, IOException, IllegalArgumentException {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -529,11 +544,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponse<Void> responseFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponseWithHeaders<Void, HeaderResponseFloatHeaders> responseFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .buildWithHeaders(response, retrofit, HeaderResponseFloatHeaders.class);
     }
 
     /**
@@ -595,9 +610,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public ServiceResponse<Void> responseDouble(String scenario) throws ErrorException, IOException, IllegalArgumentException {
+    public ServiceResponseWithHeaders<Void, HeaderResponseDoubleHeaders> responseDouble(String scenario) throws ErrorException, IOException, IllegalArgumentException {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -631,11 +646,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponse<Void> responseDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponseWithHeaders<Void, HeaderResponseDoubleHeaders> responseDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .buildWithHeaders(response, retrofit, HeaderResponseDoubleHeaders.class);
     }
 
     /**
@@ -697,9 +712,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public ServiceResponse<Void> responseBool(String scenario) throws ErrorException, IOException, IllegalArgumentException {
+    public ServiceResponseWithHeaders<Void, HeaderResponseBoolHeaders> responseBool(String scenario) throws ErrorException, IOException, IllegalArgumentException {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -733,11 +748,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponse<Void> responseBoolDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponseWithHeaders<Void, HeaderResponseBoolHeaders> responseBoolDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .buildWithHeaders(response, retrofit, HeaderResponseBoolHeaders.class);
     }
 
     /**
@@ -799,9 +814,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public ServiceResponse<Void> responseString(String scenario) throws ErrorException, IOException, IllegalArgumentException {
+    public ServiceResponseWithHeaders<Void, HeaderResponseStringHeaders> responseString(String scenario) throws ErrorException, IOException, IllegalArgumentException {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -835,11 +850,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponse<Void> responseStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponseWithHeaders<Void, HeaderResponseStringHeaders> responseStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .buildWithHeaders(response, retrofit, HeaderResponseStringHeaders.class);
     }
 
     /**
@@ -908,9 +923,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public ServiceResponse<Void> responseDate(String scenario) throws ErrorException, IOException, IllegalArgumentException {
+    public ServiceResponseWithHeaders<Void, HeaderResponseDateHeaders> responseDate(String scenario) throws ErrorException, IOException, IllegalArgumentException {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -944,11 +959,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponse<Void> responseDateDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponseWithHeaders<Void, HeaderResponseDateHeaders> responseDateDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .buildWithHeaders(response, retrofit, HeaderResponseDateHeaders.class);
     }
 
     /**
@@ -1017,9 +1032,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public ServiceResponse<Void> responseDatetime(String scenario) throws ErrorException, IOException, IllegalArgumentException {
+    public ServiceResponseWithHeaders<Void, HeaderResponseDatetimeHeaders> responseDatetime(String scenario) throws ErrorException, IOException, IllegalArgumentException {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1053,11 +1068,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponse<Void> responseDatetimeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponseWithHeaders<Void, HeaderResponseDatetimeHeaders> responseDatetimeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .buildWithHeaders(response, retrofit, HeaderResponseDatetimeHeaders.class);
     }
 
     /**
@@ -1119,9 +1134,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public ServiceResponse<Void> responseDatetimeRfc1123(String scenario) throws ErrorException, IOException, IllegalArgumentException {
+    public ServiceResponseWithHeaders<Void, HeaderResponseDatetimeRfc1123Headers> responseDatetimeRfc1123(String scenario) throws ErrorException, IOException, IllegalArgumentException {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1155,11 +1170,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponse<Void> responseDatetimeRfc1123Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponseWithHeaders<Void, HeaderResponseDatetimeRfc1123Headers> responseDatetimeRfc1123Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .buildWithHeaders(response, retrofit, HeaderResponseDatetimeRfc1123Headers.class);
     }
 
     /**
@@ -1228,9 +1243,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public ServiceResponse<Void> responseDuration(String scenario) throws ErrorException, IOException, IllegalArgumentException {
+    public ServiceResponseWithHeaders<Void, HeaderResponseDurationHeaders> responseDuration(String scenario) throws ErrorException, IOException, IllegalArgumentException {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1264,11 +1279,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponse<Void> responseDurationDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponseWithHeaders<Void, HeaderResponseDurationHeaders> responseDurationDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .buildWithHeaders(response, retrofit, HeaderResponseDurationHeaders.class);
     }
 
     /**
@@ -1337,9 +1352,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public ServiceResponse<Void> responseByte(String scenario) throws ErrorException, IOException, IllegalArgumentException {
+    public ServiceResponseWithHeaders<Void, HeaderResponseByteHeaders> responseByte(String scenario) throws ErrorException, IOException, IllegalArgumentException {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1373,11 +1388,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponse<Void> responseByteDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponseWithHeaders<Void, HeaderResponseByteHeaders> responseByteDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .buildWithHeaders(response, retrofit, HeaderResponseByteHeaders.class);
     }
 
     /**
@@ -1439,9 +1454,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    public ServiceResponse<Void> responseEnum(String scenario) throws ErrorException, IOException, IllegalArgumentException {
+    public ServiceResponseWithHeaders<Void, HeaderResponseEnumHeaders> responseEnum(String scenario) throws ErrorException, IOException, IllegalArgumentException {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
@@ -1475,11 +1490,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponse<Void> responseEnumDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponseWithHeaders<Void, HeaderResponseEnumHeaders> responseEnumDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .buildWithHeaders(response, retrofit, HeaderResponseEnumHeaders.class);
     }
 
     /**
