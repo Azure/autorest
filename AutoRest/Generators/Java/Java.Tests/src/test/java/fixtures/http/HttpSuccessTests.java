@@ -30,7 +30,7 @@ public class HttpSuccessTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(200, response.getHEADResponse().code());
+                Assert.assertEquals(200, response.getHeadResponse().code());
                 lock.countDown();
             }
         });
@@ -234,7 +234,7 @@ public class HttpSuccessTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(204, response.getHEADResponse().code());
+                Assert.assertEquals(204, response.getHeadResponse().code());
                 lock.countDown();
             }
         });
@@ -319,7 +319,7 @@ public class HttpSuccessTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(404, response.getHEADResponse().code());
+                Assert.assertEquals(404, response.getHeadResponse().code());
                 lock.countDown();
             }
         });

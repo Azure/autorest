@@ -8,7 +8,6 @@
 package com.microsoft.rest;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.serializer.JacksonUtils;
 import com.squareup.okhttp.ResponseBody;
 import retrofit.Response;
@@ -213,16 +212,17 @@ public class ServiceResponseBuilder<T, E extends AutoRestException> {
      *
      * @param response the {@link Response} instance from REST call
      * @param retrofit the {@link Retrofit} instance from REST call
+     * @param headerType the type of the header
      * @param <THeader> the type of the header
      * @return a ServiceResponseWithHeaders instance of generic type {@link T}
      * @throws E exceptions from the REST call
      * @throws IOException exceptions from deserialization
      */
-    public <THeader> ServiceResponseWithHeaders<T, THeader> buildWithHeaders(Response<ResponseBody> response, Retrofit retrofit, Class<THeader> type) throws E, IOException {
+    public <THeader> ServiceResponseWithHeaders<T, THeader> buildWithHeaders(Response<ResponseBody> response, Retrofit retrofit, Class<THeader> headerType) throws E, IOException {
         ServiceResponse<T> bodyResponse = build(response, retrofit);
         THeader headers = deserializer.deserialize(
                 JacksonUtils.serialize(response.headers()),
-                type);
+                headerType);
         return new ServiceResponseWithHeaders<>(bodyResponse.getBody(), headers, bodyResponse.getResponse());
     }
 
@@ -238,17 +238,18 @@ public class ServiceResponseBuilder<T, E extends AutoRestException> {
      *
      * @param response the {@link Response} instance from REST call
      * @param retrofit the {@link Retrofit} instance from REST call
+     * @param headerType the type of the header
      * @param <THeader> the type of the header
      * @return a ServiceResponseWithHeaders instance of generic type {@link T}
      * @throws E exceptions from the REST call
      * @throws IOException exceptions from deserialization
      */
-    public <THeader> ServiceResponseWithHeaders<T, THeader> buildEmptyWithHeaders(Response<Void> response, Retrofit retrofit, Class<THeader> type) throws E, IOException {
+    public <THeader> ServiceResponseWithHeaders<T, THeader> buildEmptyWithHeaders(Response<Void> response, Retrofit retrofit, Class<THeader> headerType) throws E, IOException {
         ServiceResponse<T> bodyResponse = buildEmpty(response, retrofit);
         THeader headers = deserializer.deserialize(
                 JacksonUtils.serialize(response.headers()),
-                type);
-        return new ServiceResponseWithHeaders<>(headers, bodyResponse.getHEADResponse());
+                headerType);
+        return new ServiceResponseWithHeaders<>(headers, bodyResponse.getHeadResponse());
     }
 
     /**

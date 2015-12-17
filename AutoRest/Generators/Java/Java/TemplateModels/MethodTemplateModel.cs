@@ -397,11 +397,11 @@ namespace Microsoft.Rest.Generator.Java
             {
                 if (ReturnType.Headers == null)
                 {
-                    return string.Format("{0}<{1}>", OperationResponseType, GenericReturnTypeString);
+                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}>", OperationResponseType, GenericReturnTypeString);
                 }
                 else
                 {
-                    return string.Format("{0}<{1}, {2}>", OperationResponseType, GenericReturnTypeString, ReturnType.Headers.Name);
+                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}, {2}>", OperationResponseType, GenericReturnTypeString, ReturnType.Headers.Name);
                 }
             }
         }

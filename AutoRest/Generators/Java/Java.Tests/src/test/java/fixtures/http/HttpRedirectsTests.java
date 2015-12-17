@@ -32,7 +32,7 @@ public class HttpRedirectsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(200, response.getHEADResponse().code());
+                Assert.assertEquals(200, response.getHeadResponse().code());
                 lock.countDown();
             }
         });
@@ -66,7 +66,7 @@ public class HttpRedirectsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(200, response.getHEADResponse().code());
+                Assert.assertEquals(200, response.getHeadResponse().code());
                 lock.countDown();
             }
         });
@@ -118,7 +118,7 @@ public class HttpRedirectsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(200, response.getHEADResponse().code());
+                Assert.assertEquals(200, response.getHeadResponse().code());
                 lock.countDown();
             }
         });
@@ -187,7 +187,7 @@ public class HttpRedirectsTests {
 
             @Override
             public void success(ServiceResponse<Void> response) {
-                Assert.assertEquals(200, response.getHEADResponse().code());
+                Assert.assertEquals(200, response.getHeadResponse().code());
                 lock.countDown();
             }
         });

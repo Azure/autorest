@@ -26,7 +26,10 @@ public class ServiceResponse<T> {
      */
     private Response<ResponseBody> response;
 
-    private Response<Void> HEADResponse;
+    /**
+     * The retrofit response wrapper if it's returned from a HEAD operation.
+     */
+    private Response<Void> headResponse;
 
     /**
      * Instantiate a ServiceResponse instance with a response object and a raw REST response.
@@ -42,10 +45,10 @@ public class ServiceResponse<T> {
     /**
      * Instantiate a ServiceResponse instance with a response from a HEAD operation.
      *
-     * @param HEADResponse raw REST response from a HEAD operation
+     * @param headResponse raw REST response from a HEAD operation
      */
-    public ServiceResponse(Response<Void> HEADResponse) {
-        this.HEADResponse = HEADResponse;
+    public ServiceResponse(Response<Void> headResponse) {
+        this.headResponse = headResponse;
     }
 
     /**
@@ -79,7 +82,7 @@ public class ServiceResponse<T> {
      *
      * @return the raw REST response from a HEAD operation.
      */
-    public Response<Void> getHEADResponse() {
-        return HEADResponse;
+    public Response<Void> getHeadResponse() {
+        return headResponse;
     }
 }

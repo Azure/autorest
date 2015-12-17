@@ -14,6 +14,7 @@ import retrofit.Response;
  * An instance of this class holds a response object and a raw REST response.
  *
  * @param <TBody> the type of the response
+ * @param <THeader> the type of the response header object
  */
 public class ServiceResponseWithHeaders<TBody, THeader> extends ServiceResponse<TBody> {
     /**
@@ -25,6 +26,7 @@ public class ServiceResponseWithHeaders<TBody, THeader> extends ServiceResponse<
      * Instantiate a ServiceResponse instance with a response object and a raw REST response.
      *
      * @param body deserialized response object
+     * @param headers deserialized response header object
      * @param response raw REST response
      */
     public ServiceResponseWithHeaders(TBody body, THeader headers, Response<ResponseBody> response) {
@@ -32,6 +34,12 @@ public class ServiceResponseWithHeaders<TBody, THeader> extends ServiceResponse<
         this.headers = headers;
     }
 
+    /**
+     * Instantiate a ServiceResponse instance with a response object and a raw REST response.
+     *
+     * @param headers deserialized response header object
+     * @param response raw REST response
+     */
     public ServiceResponseWithHeaders(THeader headers, Response<Void> response) {
         super(response);
         this.headers = headers;
