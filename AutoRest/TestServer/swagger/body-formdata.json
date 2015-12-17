@@ -39,8 +39,7 @@
             "description": "File name to upload. Name has to be spelled exactly as written here.",
             "required": true,
             "in": "formData",
-            "type": "string",
-            "x-ms-file-name": "true"
+            "type": "string"
           }
         ],
         "responses": {
@@ -86,8 +85,7 @@
             "description": "File name to upload. Name has to be spelled exactly as written here.",
             "required": true,
             "in": "formData",
-            "type": "string",
-            "x-ms-file-name": "true"
+            "type": "string"
           }
         ],
         "responses": {
