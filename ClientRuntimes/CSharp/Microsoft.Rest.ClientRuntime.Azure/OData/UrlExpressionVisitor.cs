@@ -43,8 +43,14 @@ namespace Microsoft.Rest.Azure.OData
         {
             _baseExpression = baseExpression;
             _skipNullFilterParameters = skipNullFilterParameters;
+            
+            // For binary expression add current string to a stack
+            // so that if the expression contains null it can be cleared
+            _fullExpressionStack.Push(_currentExpressionString);
+            _currentExpressionString = new StringBuilder();
+            _currentExpressionContainsNull = false;
         }
-        
+
         /// <summary>
         /// Visits binary expression (e.g. ==, &amp;&amp;, >, etc).
         /// </summary>
@@ -56,11 +62,15 @@ namespace Microsoft.Rest.Azure.OData
             {
                 throw new ArgumentNullException("node");
             }
+
             // For binary expression add current string to a stack
-            // so that if the expression contains cull it can be cleared
-            _fullExpressionStack.Push(_currentExpressionString);
-            _currentExpressionString = new StringBuilder();
-            _currentExpressionContainsNull = false;
+            // so that if the expression contains null it can be cleared
+            if (_fullExpressionStack.Count == 0)
+            {
+                _fullExpressionStack.Push(_currentExpressionString);
+                _currentExpressionString = new StringBuilder();
+                _currentExpressionContainsNull = false;
+            }
 
             this.Visit(node.Left);
             CloseUnaryBooleanOperator(node.NodeType);
@@ -274,7 +284,7 @@ namespace Microsoft.Rest.Azure.OData
 
                 _currentExpressionString.Append("startswith(");
                 Visit(leftSide);
-                _currentExpressionString.Append(", ");
+                _currentExpressionString.Append(",");
                 Visit(rightSide);
                 _currentExpressionString.Append(")");
                 return node;
