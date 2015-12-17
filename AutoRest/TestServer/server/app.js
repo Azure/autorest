@@ -407,7 +407,9 @@ var coverage = {
   "HeaderResponseDateTimeRfc1123Valid": 0,
   "HeaderResponseDateTimeRfc1123Min": 0,
   "HeaderResponseBytesValid": 0,
-  "HeaderResponseDurationValid": 0
+  "HeaderResponseDurationValid": 0,
+  "FormdataStreamUploadFile": 0,
+  "StreamUploadFile": 0
 };
 
 // view engine setup

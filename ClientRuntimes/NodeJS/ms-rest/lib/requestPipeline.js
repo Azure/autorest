@@ -80,7 +80,6 @@ exports.createWithSink = function(sink) {
  * @param callback function(err, result, response, body) callback function that
  * will be called at completion of the request.
  */
-
 exports.requestLibrarySink = function (requestOptions) {
 
   return function (options, callback) {
@@ -97,7 +96,14 @@ exports.requestLibrarySink = function (requestOptions) {
       });      
       return requestHeaderStream;
     } else if (options.streamedResponse) {
-      var requestStream = request(options);
+      var requestStream;
+      if (options.body && typeof options.body.pipe === 'function') {
+        var bodyStream = options.body;
+        options.body = null;
+        requestStream = bodyStream.pipe(request(options));
+      } else {
+        requestStream = request(options);
+      }
       requestStream.on('error', function (err) {
         return callback(err);
       });
@@ -105,6 +111,13 @@ exports.requestLibrarySink = function (requestOptions) {
         return callback(null, response);
       });
       return requestStream;
+    } else if (options.body && typeof options.body.pipe === 'function') {
+      var bodyStream = options.body;
+      options.body = null;
+      return bodyStream.pipe(request(options, function (err, response, body) {
+        if (err) { return callback(err); }
+        return callback(null, response, body);
+      }));
     } else {
       return request(options, function (err, response, body) {
         if (err) { return callback(err); }
@@ -113,6 +126,7 @@ exports.requestLibrarySink = function (requestOptions) {
     }
   };
 };
+
 /**
  *
  * create a new http client pipeline that ends with a call to the

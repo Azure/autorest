@@ -46,21 +46,22 @@ using Newtonsoft.Json;
 using Xunit;
 using Xunit.Abstractions;
 using Error = Fixtures.AcceptanceTestsHttp.Models.Error;
-
+using System.Reflection;
 
 namespace Microsoft.Rest.Generator.CSharp.Tests
 {
     [Collection("AutoRest Tests")]
     [TestCaseOrderer("Microsoft.Rest.Generator.CSharp.Tests.AcceptanceTestOrderer",
         "AutoRest.Generator.CSharp.Tests")]
-    public class AcceptanceTests : IClassFixture<ServiceController>
+    public class AcceptanceTests : IClassFixture<ServiceController>, IDisposable
     {
         private static readonly TestTracingInterceptor _interceptor;
+        private readonly string dummyFile;
 
         static AcceptanceTests()
         {
             _interceptor = new TestTracingInterceptor();
-            ServiceClientTracing.AddTracingInterceptor(_interceptor);
+            ServiceClientTracing.AddTracingInterceptor(_interceptor);            
         }
 
         public AcceptanceTests(ServiceController data)
@@ -68,6 +69,8 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             this.Fixture = data;
             this.Fixture.TearDown = EnsureTestCoverage;
             ServiceClientTracing.IsEnabled = false;
+            dummyFile = Path.GetTempFileName();
+            File.WriteAllText(dummyFile, "Test file");
         }
 
         public ServiceController Fixture { get; set; }
@@ -263,7 +266,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         }
 
         [Fact]
-        public void FormDataFileUploadTests()
+        public void FormDataFileUploadStreamTests()
         {
             SwaggerSpecRunner.RunTests(
                 SwaggerPath("body-formdata.json"), ExpectedPath("BodyFormData"));
@@ -280,6 +283,25 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                         string actual = reader.ReadToEnd();
                         Assert.Equal(testString, actual);
                     }
+                }
+            }
+        }
+
+        [Fact]
+        public void FormDataFileUploadFileStreamTests()
+        {
+            SwaggerSpecRunner.RunTests(
+                SwaggerPath("body-formdata.json"), ExpectedPath("BodyFormData"));
+
+            using (var client = new AutoRestSwaggerBATFormDataService(Fixture.Uri))
+            {
+                string testString = "Upload file test case";
+                byte[] testBytes = new UnicodeEncoding().GetBytes(testString);
+                using (var fileStream = File.OpenRead(dummyFile))
+                using (var serverStream = new StreamReader(client.Formdata.UploadFile(fileStream, dummyFile)))
+                {
+
+                    Assert.Equal(File.ReadAllText(dummyFile), serverStream.ReadToEnd());
                 }
             }
         }
@@ -1904,6 +1926,14 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             Action operation, string expectedMessage)
         {
             EnsureThrowsWithStatusCode(expectedStatusCode, operation, GetDefaultErrorValidator((int)expectedStatusCode, expectedMessage));
+        }
+
+        public void Dispose()
+        {
+            if (File.Exists(dummyFile))
+            {
+                File.Delete(dummyFile);
+            }
         }
     }
 }

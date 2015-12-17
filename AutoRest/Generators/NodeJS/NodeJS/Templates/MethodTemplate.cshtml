@@ -108,8 +108,18 @@
   }
   httpRequest.headers['Content-Type'] = '@(Model.RequestContentType)';
 
-  @if (Model.RequestBody != null && Model.RequestBody.Type != PrimaryType.Stream)
+  @if (Model.RequestBody != null)
   {
+      if (Model.RequestBody.Type == PrimaryType.Stream)
+      {
+  <text>
+  // Serialize Request  
+  var requestContent = @(Model.RequestBody.Name);
+  httpRequest.body = requestContent;
+  </text>
+      }
+      else
+      { 
   <text>
   // Serialize Request
   var requestContent = null;
@@ -139,34 +149,28 @@
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   </text>
+      }
   }
-  else if (Model.RequestFile != null)
-  {
-      @if (Model.RequestFile.Location == ParameterLocation.Body)
-      {
+  else if (Model.LogicalParameters.Where(p => p.Location == ParameterLocation.FormData).Any())
+  {      
   <text>
   // Serialize Request  
-
-  var requestContent = @(Model.RequestFile.Name);
-  httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
-  </text>
-      }
-      else
+  var formData = {};  
+      @foreach (var parameter in Model.LogicalParameters.Where(p => p.Location == ParameterLocation.FormData))
       {
-  <text>
-  // Serialize Request  
-
-  var form = httpRequest.form();
-  var requestContent = @(Model.RequestFile.Name);
-  form.append('fileUpload', requestContent, {
-    filename: '@(Model.RequestFileName)',
-    contentType: '@(Model.RequestContentType)'
-  });
-  httpRequest.form = form;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
-  </text>
-      }
+  @:if (@(parameter.Name) !== undefined && @(parameter.Name) !== null) {
+          if (parameter.Type == PrimaryType.Stream)
+          {  
+    @:formData['@(parameter.SerializedName)'] = @(parameter.Name);  
+          }
+          else
+          {
+    @:formData['@(parameter.SerializedName)'] = @(parameter.Type.ToString(parameter.Name));
+          }
+  @:}
+      }  
+  httpRequest.formData = formData;
+  </text>      
   }
   else
   {

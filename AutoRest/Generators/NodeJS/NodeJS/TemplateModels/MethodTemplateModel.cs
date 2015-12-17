@@ -629,42 +629,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             {
                 return this.Body != null ? new ParameterTemplateModel(this.Body) : null;
             }
-        }
-
-        /// <summary>
-        /// Get the method's form data (or null if there is no form data)
-        /// </summary>
-        public ParameterTemplateModel RequestFile
-        {
-            get
-            {
-                if (this.Body != null && this.Body.Type == PrimaryType.Stream)
-                {
-                    return RequestBody;
-                }
-                return ParameterTemplateModels.FirstOrDefault(p => p.Location == ParameterLocation.FormData
-                    && p.Type == PrimaryType.Stream);
-            }
-        }
-
-        /// <summary>
-        /// Get the method's file name parameter for form data (or null if there is no file parameter)
-        /// </summary>
-        public string RequestFileName
-        {
-            get
-            {
-                var fileNameParameter = ParameterTemplateModels.FirstOrDefault(p => p.Extensions.ContainsKey(Generator.Extensions.FileName));
-                if (fileNameParameter != null)
-                {
-                    return fileNameParameter.Name;
-                }
-                else
-                {
-                    return "\"file\"";
-                }
-            }
-        }
+        }        
 
         /// <summary>
         /// Generate a reference to the ServiceClient

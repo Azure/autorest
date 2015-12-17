@@ -105,16 +105,28 @@ namespace Fixtures.AcceptanceTestsBodyFormData
                 }
             }
 
-            // Serialize Request    
-            StreamContent _fileStreamContent = new StreamContent(fileContent);
-            ContentDispositionHeaderValue _contentDispositionHeaderValue = new ContentDispositionHeaderValue("form-data");
-            _contentDispositionHeaderValue.Name = "\"fileUpload\"";
-            _contentDispositionHeaderValue.FileName = "\"" + fileName + "\"";
-            _fileStreamContent.Headers.ContentDisposition = _contentDispositionHeaderValue;
-            _fileStreamContent.Headers.ContentType = new MediaTypeHeaderValue("multipart/form-data"); 
-            var _multiPartContent = new MultipartFormDataContent(); 
-            _multiPartContent.Add(_fileStreamContent);
-            _httpRequest.Content = _multiPartContent; 
+            // Serialize Request 
+            MultipartFormDataContent _multiPartContent = new MultipartFormDataContent();
+            if (fileContent != null)
+            {
+                StreamContent _fileContent = new StreamContent(fileContent);
+                _fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+                System.IO.FileStream _fileContentAsFileStream = fileContent as System.IO.FileStream;
+                if (_fileContentAsFileStream != null)
+                {
+                    ContentDispositionHeaderValue _contentDispositionHeaderValue = new ContentDispositionHeaderValue("form-data");
+                    _contentDispositionHeaderValue.Name = "fileContent";
+                    _contentDispositionHeaderValue.FileName = _fileContentAsFileStream.Name;
+                    _fileContent.Headers.ContentDisposition = _contentDispositionHeaderValue;        
+                }    
+                _multiPartContent.Add(_fileContent, "fileContent");
+            }
+            if (fileName != null)
+            {
+                StringContent _fileName = new StringContent(fileName, Encoding.UTF8);
+                _multiPartContent.Add(_fileName, "fileName");
+            }
+            _httpRequest.Content = _multiPartContent;
             // Send Request
             if (_shouldTrace)
             {
@@ -214,11 +226,8 @@ namespace Fixtures.AcceptanceTestsBodyFormData
 
             // Serialize Request    
             StreamContent _fileStreamContent = new StreamContent(fileContent);
-            ContentDispositionHeaderValue _contentDispositionHeaderValue = new ContentDispositionHeaderValue("attachment");
-            _contentDispositionHeaderValue.FileName = "\"" + fileName + "\"";
-            _fileStreamContent.Headers.ContentDisposition = _contentDispositionHeaderValue;
-            _fileStreamContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream"); 
             _httpRequest.Content = _fileStreamContent;
+            _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/octet-stream");
             // Send Request
             if (_shouldTrace)
             {

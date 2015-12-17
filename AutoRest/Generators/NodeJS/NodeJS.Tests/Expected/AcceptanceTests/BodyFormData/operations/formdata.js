@@ -96,14 +96,14 @@ Formdata.prototype.uploadFile = function (fileContent, fileName, options, callba
   }
   httpRequest.headers['Content-Type'] = 'multipart/form-data';
   // Serialize Request  
-  var form = httpRequest.form();
-  var requestContent = fileContent;
-  form.append('fileUpload', requestContent, {
-    filename: 'fileName',
-    contentType: 'multipart/form-data'
-  });
-  httpRequest.form = form;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  var formData = {};  
+  if (fileContent !== undefined && fileContent !== null) {
+    formData['fileContent'] = fileContent;  
+  }
+  if (fileName !== undefined && fileName !== null) {
+    formData['fileName'] = fileName;
+  }
+  httpRequest.formData = formData;
   // Send Request
   httpRequest.streamedResponse = true;
   return client.pipeline(httpRequest, function (err, response) {
@@ -196,7 +196,6 @@ Formdata.prototype.uploadFileViaBody = function (fileContent, fileName, options,
   // Serialize Request  
   var requestContent = fileContent;
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   httpRequest.streamedResponse = true;
   return client.pipeline(httpRequest, function (err, response) {
