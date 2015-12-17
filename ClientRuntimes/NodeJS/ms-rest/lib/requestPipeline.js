@@ -84,6 +84,8 @@ exports.requestLibrarySink = function (requestOptions) {
 
   return function (options, callback) {
     request = request.defaults(requestOptions);
+    var requestStream;
+    var bodyStream;
     if (options.headersOnly) {
       var requestHeaderStream = request(options);
       requestHeaderStream.on('error', function (err) {
@@ -96,9 +98,8 @@ exports.requestLibrarySink = function (requestOptions) {
       });      
       return requestHeaderStream;
     } else if (options.streamedResponse) {
-      var requestStream;
       if (options.body && typeof options.body.pipe === 'function') {
-        var bodyStream = options.body;
+        bodyStream = options.body;
         options.body = null;
         requestStream = bodyStream.pipe(request(options));
       } else {
@@ -112,7 +113,7 @@ exports.requestLibrarySink = function (requestOptions) {
       });
       return requestStream;
     } else if (options.body && typeof options.body.pipe === 'function') {
-      var bodyStream = options.body;
+      bodyStream = options.body;
       options.body = null;
       return bodyStream.pipe(request(options, function (err, response, body) {
         if (err) { return callback(err); }
