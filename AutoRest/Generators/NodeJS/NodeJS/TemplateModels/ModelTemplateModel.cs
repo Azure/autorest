@@ -165,7 +165,9 @@ namespace Microsoft.Rest.Generator.NodeJS
 
         public bool ContainsPropertiesInSequenceType()
         {
-            var sample = ComposedProperties.FirstOrDefault(p => p.Type is SequenceType);
+            var sample = ComposedProperties.FirstOrDefault(p => 
+            p.Type is SequenceType ||
+            p.Type is DictionaryType && (p.Type as DictionaryType).ValueType is SequenceType);
             return sample != null;
         }
 
