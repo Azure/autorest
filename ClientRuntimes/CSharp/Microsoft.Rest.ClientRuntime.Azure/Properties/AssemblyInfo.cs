@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Microsoft Rest Azure Client Runtime")]
 [assembly: AssemblyDescription("Client infrastructure for Azure client libraries.")]
 [assembly: AssemblyVersion("2.0.0.0")]
-[assembly: AssemblyFileVersion("2.5.1.0")]
+[assembly: AssemblyFileVersion("2.5.3.0")]
 
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft Corporation")]

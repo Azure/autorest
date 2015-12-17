@@ -152,7 +152,21 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                 }
             };
             var result = FilterString.Generate<Param1>(p => p.Foo.StartsWith(param.Param.Value));
-            Assert.Equal("startswith(foo, 'foo')", result);
+            Assert.Equal("startswith(foo,'foo')", result);
+        }
+
+        [Fact]
+        public void StartsWithWorksWihNullInODataFilter()
+        {
+            var param = new InputParam2
+            {
+                Param = new InputParam1
+                {
+                    Value = null
+                }
+            };
+            var result = FilterString.Generate<Param1>(p => p.Foo.StartsWith(param.Param.Value));
+            Assert.Equal("", result);
         }
 
         [Fact]
