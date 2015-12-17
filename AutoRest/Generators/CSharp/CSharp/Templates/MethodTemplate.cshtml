@@ -1,4 +1,4 @@
-@using System.Globalization
+﻿@using System.Globalization
 @using System.Linq;
 @using System
 @using Microsoft.Rest.Generator.ClientModel
@@ -105,12 +105,58 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
 
     @if (Model.RequestBody != null)
     {
+        if (Model.RequestBody.Type == PrimaryType.Stream)
+        {
+        <text>
+    // Serialize Request    
+    StreamContent _fileStreamContent = new StreamContent(@(Model.RequestBody.Name));
+    _httpRequest.Content = _fileStreamContent;
+    _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("@(Model.RequestContentType)");
+        </text>
+        }
+        else
+        {
         <text>
     // Serialize Request
     string _requestContent = SafeJsonConvert.SerializeObject(@(Model.RequestBody.Name), @(Model.GetSerializationSettingsReference(Model.RequestBody.Type)));
     _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
-    _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("@(Model.ContentType)");
+    _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("@(Model.RequestContentType)");
         </text>
+        }
+    }
+    else if (Model.LogicalParameters.Where(p => p.Location == ParameterLocation.FormData).Any())
+    {
+        <text>
+    // Serialize Request 
+    MultipartFormDataContent _multiPartContent = new MultipartFormDataContent();
+        </text>
+        foreach (var parameter in Model.LogicalParameterTemplateModels.Where(p => p.Location == ParameterLocation.FormData))
+        {
+    @:if (@(parameter.Name) != null)
+    @:{
+            if (parameter.Type == PrimaryType.Stream)
+            {
+        <text>        
+        StreamContent _@parameter.Name = new StreamContent(@parameter.Name);
+        _@(parameter.Name).Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+        System.IO.FileStream _@(parameter.Name)AsFileStream = @parameter.Name as System.IO.FileStream;
+        if (_@(parameter.Name)AsFileStream != null)
+        {
+            ContentDispositionHeaderValue _contentDispositionHeaderValue = new ContentDispositionHeaderValue("form-data");
+            _contentDispositionHeaderValue.Name = "@(parameter.SerializedName)";
+            _contentDispositionHeaderValue.FileName = _@(parameter.Name)AsFileStream.Name;
+            _@(parameter.Name).Headers.ContentDisposition = _contentDispositionHeaderValue;        
+        }    
+        </text>
+            }
+            else
+            {
+        @:StringContent _@(parameter.Name) = new StringContent(@(parameter.Type.ToString(Model.ClientReference, parameter.Name)), Encoding.UTF8);
+            }
+        @:_multiPartContent.Add(_@(parameter.Name), "@(parameter.SerializedName)");
+    @:}
+        }
+    @:_httpRequest.Content = _multiPartContent;
     }
 
     @if (Settings.AddCredentials)

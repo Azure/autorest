@@ -661,7 +661,10 @@ namespace Fixtures.PetstoreV2
         /// <param name='petId'>
         /// Id of pet that needs to be updated
         /// </param>
-        /// <param name='name'>
+        /// <param name='fileContent'>
+        /// File to upload.
+        /// </param>
+        /// <param name='fileName'>
         /// Updated name of the pet
         /// </param>
         /// <param name='status'>
@@ -673,11 +676,15 @@ namespace Fixtures.PetstoreV2
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> UpdatePetWithFormWithHttpMessagesAsync(long? petId, string name = default(string), string status = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> UpdatePetWithFormWithHttpMessagesAsync(long? petId, System.IO.Stream fileContent, string fileName = default(string), string status = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (petId == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "petId");
+            }
+            if (fileContent == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "fileContent");
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -687,7 +694,8 @@ namespace Fixtures.PetstoreV2
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("petId", petId);
-                tracingParameters.Add("name", name);
+                tracingParameters.Add("fileContent", fileContent);
+                tracingParameters.Add("fileName", fileName);
                 tracingParameters.Add("status", status);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "UpdatePetWithForm", tracingParameters);
@@ -713,6 +721,33 @@ namespace Fixtures.PetstoreV2
                 }
             }
 
+            // Serialize Request 
+            MultipartFormDataContent _multiPartContent = new MultipartFormDataContent();
+            if (fileContent != null)
+            {
+                StreamContent _fileContent = new StreamContent(fileContent);
+                _fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+                System.IO.FileStream _fileContentAsFileStream = fileContent as System.IO.FileStream;
+                if (_fileContentAsFileStream != null)
+                {
+                    ContentDispositionHeaderValue _contentDispositionHeaderValue = new ContentDispositionHeaderValue("form-data");
+                    _contentDispositionHeaderValue.Name = "fileContent";
+                    _contentDispositionHeaderValue.FileName = _fileContentAsFileStream.Name;
+                    _fileContent.Headers.ContentDisposition = _contentDispositionHeaderValue;        
+                }    
+                _multiPartContent.Add(_fileContent, "fileContent");
+            }
+            if (fileName != null)
+            {
+                StringContent _fileName = new StringContent(fileName, Encoding.UTF8);
+                _multiPartContent.Add(_fileName, "fileName");
+            }
+            if (status != null)
+            {
+                StringContent _status = new StringContent(status, Encoding.UTF8);
+                _multiPartContent.Add(_status, "status");
+            }
+            _httpRequest.Content = _multiPartContent;
             // Send Request
             if (_shouldTrace)
             {

@@ -19,6 +19,8 @@ using Fixtures.AcceptanceTestsBodyByte;
 using Fixtures.AcceptanceTestsBodyComplex;
 using Fixtures.AcceptanceTestsBodyComplex.Models;
 using Fixtures.AcceptanceTestsBodyDate;
+using Fixtures.AcceptanceTestsBodyFormData;
+using Fixtures.AcceptanceTestsBodyFormData.Models;
 using Fixtures.AcceptanceTestsBodyDateTime;
 using Fixtures.AcceptanceTestsBodyDateTimeRfc1123;
 using Fixtures.AcceptanceTestsBodyDictionary;
@@ -44,21 +46,22 @@ using Newtonsoft.Json;
 using Xunit;
 using Xunit.Abstractions;
 using Error = Fixtures.AcceptanceTestsHttp.Models.Error;
-
+using System.Reflection;
 
 namespace Microsoft.Rest.Generator.CSharp.Tests
 {
     [Collection("AutoRest Tests")]
     [TestCaseOrderer("Microsoft.Rest.Generator.CSharp.Tests.AcceptanceTestOrderer",
         "AutoRest.Generator.CSharp.Tests")]
-    public class AcceptanceTests : IClassFixture<ServiceController>
+    public class AcceptanceTests : IClassFixture<ServiceController>, IDisposable
     {
         private static readonly TestTracingInterceptor _interceptor;
+        private readonly string dummyFile;
 
         static AcceptanceTests()
         {
             _interceptor = new TestTracingInterceptor();
-            ServiceClientTracing.AddTracingInterceptor(_interceptor);
+            ServiceClientTracing.AddTracingInterceptor(_interceptor);            
         }
 
         public AcceptanceTests(ServiceController data)
@@ -66,6 +69,8 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             this.Fixture = data;
             this.Fixture.TearDown = EnsureTestCoverage;
             ServiceClientTracing.IsEnabled = false;
+            dummyFile = Path.GetTempFileName();
+            File.WriteAllText(dummyFile, "Test file");
         }
 
         public ServiceController Fixture { get; set; }
@@ -257,6 +262,69 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
                 var emptyStream = client.Files.GetEmptyFile();
                 Assert.Equal(0, emptyStream.Length);
+            }
+        }
+
+        [Fact]
+        public void FormDataFileUploadStreamTests()
+        {
+            SwaggerSpecRunner.RunTests(
+                SwaggerPath("body-formdata.json"), ExpectedPath("BodyFormData"));
+            using (var client = new AutoRestSwaggerBATFormDataService(Fixture.Uri))
+            {
+                const string testString = "Upload file test case";
+                byte[] testBytes = new UnicodeEncoding().GetBytes(testString);
+                using (Stream memStream = new MemoryStream(100))
+                {
+                    memStream.Write(testBytes, 0, testBytes.Length);
+                    memStream.Seek(0, SeekOrigin.Begin);
+                    using (StreamReader reader = new StreamReader(client.Formdata.UploadFile(memStream, "UploadFile.txt"), Encoding.Unicode))
+                    {
+                        string actual = reader.ReadToEnd();
+                        Assert.Equal(testString, actual);
+                    }
+                }
+            }
+        }
+
+        [Fact]
+        public void FormDataFileUploadFileStreamTests()
+        {
+            SwaggerSpecRunner.RunTests(
+                SwaggerPath("body-formdata.json"), ExpectedPath("BodyFormData"));
+
+            using (var client = new AutoRestSwaggerBATFormDataService(Fixture.Uri))
+            {
+                string testString = "Upload file test case";
+                byte[] testBytes = new UnicodeEncoding().GetBytes(testString);
+                using (var fileStream = File.OpenRead(dummyFile))
+                using (var serverStream = new StreamReader(client.Formdata.UploadFile(fileStream, dummyFile)))
+                {
+
+                    Assert.Equal(File.ReadAllText(dummyFile), serverStream.ReadToEnd());
+                }
+            }
+        }
+
+        [Fact]
+        public void BodyFileUploadTests()
+        {
+            SwaggerSpecRunner.RunTests(
+                SwaggerPath("body-formdata.json"), ExpectedPath("BodyFormData"));
+            using (var client = new AutoRestSwaggerBATFormDataService(Fixture.Uri))
+            {
+                const string testString = "Upload file test case";
+                byte[] testBytes = new UnicodeEncoding().GetBytes(testString);
+                using (Stream memStream = new MemoryStream(100))
+                {
+                    memStream.Write(testBytes, 0, testBytes.Length);
+                    memStream.Seek(0, SeekOrigin.Begin);
+                    using (StreamReader reader = new StreamReader(client.Formdata.UploadFileViaBody(memStream, "UploadFile.txt"), Encoding.Unicode))
+                    {
+                        string actual = reader.ReadToEnd();
+                        Assert.Equal(testString, actual);
+                    }                    
+                }
             }
         }
 
@@ -1858,6 +1926,14 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             Action operation, string expectedMessage)
         {
             EnsureThrowsWithStatusCode(expectedStatusCode, operation, GetDefaultErrorValidator((int)expectedStatusCode, expectedMessage));
+        }
+
+        public void Dispose()
+        {
+            if (File.Exists(dummyFile))
+            {
+                File.Delete(dummyFile);
+            }
         }
     }
 }

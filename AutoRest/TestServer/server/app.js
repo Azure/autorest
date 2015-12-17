@@ -27,6 +27,7 @@ var header = require('./routes/header');
 var reqopt = require('./routes/reqopt');
 var httpResponses = require('./routes/httpResponses');
 var files = require('./routes/files');
+var formData = require('./routes/formData');
 var lros = require('./routes/lros');
 var paging = require('./routes/paging');
 var resourceFlatten = require('./routes/resource-flatten');
@@ -406,7 +407,9 @@ var coverage = {
   "HeaderResponseDateTimeRfc1123Valid": 0,
   "HeaderResponseDateTimeRfc1123Min": 0,
   "HeaderResponseBytesValid": 0,
-  "HeaderResponseDurationValid": 0
+  "HeaderResponseDurationValid": 0,
+  "FormdataStreamUploadFile": 0,
+  "StreamUploadFile": 0
 };
 
 // view engine setup
@@ -440,6 +443,7 @@ app.use('/pathitem', new pathitem(coverage).router);
 app.use('/header', new header(coverage, optionalCoverage).router);
 app.use('/reqopt', new reqopt(coverage).router);
 app.use('/files', new files(coverage).router);
+app.use('/formdata', new formData(coverage).router);
 app.use('/http', new httpResponses(coverage, optionalCoverage).router);
 app.use('/lro', new lros(azurecoverage).router);
 app.use('/paging', new paging(azurecoverage).router);
