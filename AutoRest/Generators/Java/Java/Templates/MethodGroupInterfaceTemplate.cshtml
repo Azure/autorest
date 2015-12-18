@@ -65,14 +65,14 @@ public interface @Model.MethodGroupType {
     }
     if (method.ReturnType.Body != null)
     {
-    @: * @@return the @method.ReturnTypeString.EscapeXmlComment() object wrapped in {@@link ServiceResponse} if successful.
+    @: * @@return the @method.ReturnTypeString.EscapeXmlComment() object wrapped in {@@link @method.OperationResponseType} if successful.
     }
     else
     {
-    @: * @@return the {@@link ServiceResponse} object if successful.
+    @: * @@return the {@@link @method.OperationResponseType} object if successful.
     }
     @: */
-    @:ServiceResponse<@method.GenericReturnTypeString> @(method.Name)(@method.MethodParameterDeclaration) throws @method.ExceptionString;
+    @:@method.OperationResponseReturnTypeString @(method.Name)(@method.MethodParameterDeclaration) throws @method.ExceptionString;
     @EmptyLine
     @:/**
     if (!String.IsNullOrEmpty(method.Summary))

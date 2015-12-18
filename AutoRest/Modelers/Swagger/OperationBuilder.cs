@@ -23,6 +23,7 @@ namespace Microsoft.Rest.Modeler.Swagger
     public class OperationBuilder
     {
         private IList<string> _effectiveProduces;
+        private IList<string> _effectiveConsumes;
         private SwaggerModeler _swaggerModeler;
         private Operation _operation;
         private const string APP_JSON_MIME = "application/json";
@@ -40,7 +41,8 @@ namespace Microsoft.Rest.Modeler.Swagger
 
             this._operation = operation;
             this._swaggerModeler = swaggerModeler;
-            this._effectiveProduces = operation.Produces ?? swaggerModeler.ServiceDefinition.Produces;
+            this._effectiveProduces = operation.Produces.Any() ? operation.Produces : swaggerModeler.ServiceDefinition.Produces;
+            this._effectiveConsumes = operation.Consumes.Any() ? operation.Consumes : swaggerModeler.ServiceDefinition.Consumes;
         }
 
         public Method BuildMethod(HttpMethod httpMethod, string url, string methodName, string methodGroup)
@@ -54,17 +56,18 @@ namespace Microsoft.Rest.Modeler.Swagger
                 Name = methodName
             };
 
-            method.ContentType = APP_JSON_MIME;
-            string produce = _effectiveProduces.FirstOrDefault(s => s.StartsWith(APP_JSON_MIME, StringComparison.OrdinalIgnoreCase));
+            method.RequestContentType = _effectiveConsumes.FirstOrDefault() ?? APP_JSON_MIME;
+            string produce = _effectiveConsumes.FirstOrDefault(s => s.StartsWith(APP_JSON_MIME, StringComparison.OrdinalIgnoreCase));
             if (!string.IsNullOrEmpty(produce))
             {
-                method.ContentType = produce;
+                method.RequestContentType = produce;
             }
 
-            if (method.ContentType.IndexOf("charset=", StringComparison.OrdinalIgnoreCase) == -1)
+            if (method.RequestContentType.StartsWith(APP_JSON_MIME, StringComparison.OrdinalIgnoreCase) &&
+                method.RequestContentType.IndexOf("charset=", StringComparison.OrdinalIgnoreCase) == -1)
             {
                 // Enable UTF-8 charset
-                method.ContentType += "; charset=utf-8";
+                method.RequestContentType += "; charset=utf-8";
             }
             method.Description = _operation.Description;
             method.Summary = _operation.Summary;

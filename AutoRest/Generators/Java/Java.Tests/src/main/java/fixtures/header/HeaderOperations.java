@@ -13,9 +13,24 @@ package fixtures.header;
 import com.microsoft.rest.DateTimeRfc1123;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.ServiceResponseWithHeaders;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.header.models.ErrorException;
 import fixtures.header.models.GreyscaleColors;
+import fixtures.header.models.HeaderResponseBoolHeaders;
+import fixtures.header.models.HeaderResponseByteHeaders;
+import fixtures.header.models.HeaderResponseDateHeaders;
+import fixtures.header.models.HeaderResponseDatetimeHeaders;
+import fixtures.header.models.HeaderResponseDatetimeRfc1123Headers;
+import fixtures.header.models.HeaderResponseDoubleHeaders;
+import fixtures.header.models.HeaderResponseDurationHeaders;
+import fixtures.header.models.HeaderResponseEnumHeaders;
+import fixtures.header.models.HeaderResponseExistingKeyHeaders;
+import fixtures.header.models.HeaderResponseFloatHeaders;
+import fixtures.header.models.HeaderResponseIntegerHeaders;
+import fixtures.header.models.HeaderResponseLongHeaders;
+import fixtures.header.models.HeaderResponseProtectedKeyHeaders;
+import fixtures.header.models.HeaderResponseStringHeaders;
 import java.io.IOException;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
@@ -147,9 +162,9 @@ public interface HeaderOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    ServiceResponse<Void> responseExistingKey() throws ErrorException, IOException;
+    ServiceResponseWithHeaders<Void, HeaderResponseExistingKeyHeaders> responseExistingKey() throws ErrorException, IOException;
 
     /**
      * Get a response with header value "User-Agent": "overwrite".
@@ -184,9 +199,9 @@ public interface HeaderOperations {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    ServiceResponse<Void> responseProtectedKey() throws ErrorException, IOException;
+    ServiceResponseWithHeaders<Void, HeaderResponseProtectedKeyHeaders> responseProtectedKey() throws ErrorException, IOException;
 
     /**
      * Get a response with header value "Content-Type": "text/html".
@@ -225,9 +240,9 @@ public interface HeaderOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    ServiceResponse<Void> responseInteger(String scenario) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponseWithHeaders<Void, HeaderResponseIntegerHeaders> responseInteger(String scenario) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Get a response with header value "value": 1 or -2.
@@ -267,9 +282,9 @@ public interface HeaderOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    ServiceResponse<Void> responseLong(String scenario) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponseWithHeaders<Void, HeaderResponseLongHeaders> responseLong(String scenario) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Get a response with header value "value": 105 or -2.
@@ -309,9 +324,9 @@ public interface HeaderOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    ServiceResponse<Void> responseFloat(String scenario) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponseWithHeaders<Void, HeaderResponseFloatHeaders> responseFloat(String scenario) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Get a response with header value "value": 0.07 or -3.0.
@@ -351,9 +366,9 @@ public interface HeaderOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    ServiceResponse<Void> responseDouble(String scenario) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponseWithHeaders<Void, HeaderResponseDoubleHeaders> responseDouble(String scenario) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Get a response with header value "value": 7e120 or -3.0.
@@ -393,9 +408,9 @@ public interface HeaderOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    ServiceResponse<Void> responseBool(String scenario) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponseWithHeaders<Void, HeaderResponseBoolHeaders> responseBool(String scenario) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Get a response with header value "value": true or false.
@@ -435,9 +450,9 @@ public interface HeaderOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    ServiceResponse<Void> responseString(String scenario) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponseWithHeaders<Void, HeaderResponseStringHeaders> responseString(String scenario) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
@@ -477,9 +492,9 @@ public interface HeaderOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    ServiceResponse<Void> responseDate(String scenario) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponseWithHeaders<Void, HeaderResponseDateHeaders> responseDate(String scenario) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Get a response with header values "2010-01-01" or "0001-01-01".
@@ -519,9 +534,9 @@ public interface HeaderOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    ServiceResponse<Void> responseDatetime(String scenario) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponseWithHeaders<Void, HeaderResponseDatetimeHeaders> responseDatetime(String scenario) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
@@ -561,9 +576,9 @@ public interface HeaderOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    ServiceResponse<Void> responseDatetimeRfc1123(String scenario) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponseWithHeaders<Void, HeaderResponseDatetimeRfc1123Headers> responseDatetimeRfc1123(String scenario) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
@@ -603,9 +618,9 @@ public interface HeaderOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    ServiceResponse<Void> responseDuration(String scenario) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponseWithHeaders<Void, HeaderResponseDurationHeaders> responseDuration(String scenario) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Get a response with header values "P123DT22H14M12.011S".
@@ -645,9 +660,9 @@ public interface HeaderOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    ServiceResponse<Void> responseByte(String scenario) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponseWithHeaders<Void, HeaderResponseByteHeaders> responseByte(String scenario) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
@@ -687,9 +702,9 @@ public interface HeaderOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the {@link ServiceResponse} object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
-    ServiceResponse<Void> responseEnum(String scenario) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponseWithHeaders<Void, HeaderResponseEnumHeaders> responseEnum(String scenario) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Get a response with header values "GREY" or null.

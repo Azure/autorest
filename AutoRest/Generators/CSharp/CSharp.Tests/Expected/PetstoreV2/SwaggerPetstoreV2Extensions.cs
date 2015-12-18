@@ -194,15 +194,18 @@ namespace Fixtures.PetstoreV2
             /// <param name='petId'>
             /// Id of pet that needs to be updated
             /// </param>
-            /// <param name='name'>
+            /// <param name='fileContent'>
+            /// File to upload.
+            /// </param>
+            /// <param name='fileName'>
             /// Updated name of the pet
             /// </param>
             /// <param name='status'>
             /// Updated status of the pet
             /// </param>
-            public static void UpdatePetWithForm(this ISwaggerPetstoreV2 operations, long? petId, string name = default(string), string status = default(string))
+            public static void UpdatePetWithForm(this ISwaggerPetstoreV2 operations, long? petId, System.IO.Stream fileContent, string fileName = default(string), string status = default(string))
             {
-                Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).UpdatePetWithFormAsync(petId, name, status), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((ISwaggerPetstoreV2)s).UpdatePetWithFormAsync(petId, fileContent, fileName, status), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -214,7 +217,10 @@ namespace Fixtures.PetstoreV2
             /// <param name='petId'>
             /// Id of pet that needs to be updated
             /// </param>
-            /// <param name='name'>
+            /// <param name='fileContent'>
+            /// File to upload.
+            /// </param>
+            /// <param name='fileName'>
             /// Updated name of the pet
             /// </param>
             /// <param name='status'>
@@ -223,9 +229,9 @@ namespace Fixtures.PetstoreV2
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task UpdatePetWithFormAsync( this ISwaggerPetstoreV2 operations, long? petId, string name = default(string), string status = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task UpdatePetWithFormAsync( this ISwaggerPetstoreV2 operations, long? petId, System.IO.Stream fileContent, string fileName = default(string), string status = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.UpdatePetWithFormWithHttpMessagesAsync(petId, name, status, null, cancellationToken).ConfigureAwait(false);
+                await operations.UpdatePetWithFormWithHttpMessagesAsync(petId, fileContent, fileName, status, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>

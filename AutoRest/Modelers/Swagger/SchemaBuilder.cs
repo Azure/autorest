@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Globalization;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
@@ -40,6 +41,14 @@ namespace Microsoft.Rest.Modeler.Swagger
                 _schema.AdditionalProperties != null)
             {
                 return _schema.GetBuilder(Modeler).ParentBuildServiceType(serviceTypeName);
+            }
+
+            // If object with file format treat as stream
+            if (_schema.Type != null 
+                && _schema.Type == DataType.Object 
+                && "file".Equals(SwaggerObject.Format, StringComparison.OrdinalIgnoreCase))
+            {
+                return PrimaryType.Stream;
             }
 
             // If the object does not have any properties, treat it as raw json (i.e. object)

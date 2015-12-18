@@ -97,16 +97,13 @@ namespace Microsoft.Rest.Generator.Java
             await Write(serviceClientInterfaceTemplate, serviceClient.Name.ToPascalCase() + ".java");
 
             //Models
-            if (serviceClient.ModelTypes.Any())
+            foreach (var modelType in serviceClient.ModelTypes.Concat(serviceClient.HeaderTypes))
             {
-                foreach (var modelType in serviceClientTemplateModel.ModelTemplateModels)
+                var modelTemplate = new ModelTemplate
                 {
-                    var modelTemplate = new ModelTemplate
-                    {
-                        Model = modelType
-                    };
-                    await Write(modelTemplate, Path.Combine("models", modelType.Name.ToPascalCase() + ".java"));
-                }
+                    Model = new ModelTemplateModel(modelType, serviceClient)
+                };
+                await Write(modelTemplate, Path.Combine("models", modelType.Name.ToPascalCase() + ".java"));
             }
 
             //MethodGroups

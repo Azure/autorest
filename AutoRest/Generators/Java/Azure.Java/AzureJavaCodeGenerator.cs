@@ -113,22 +113,19 @@ namespace Microsoft.Rest.Generator.Java.Azure
             await Write(serviceClientInterfaceTemplate, serviceClient.Name.ToPascalCase() + ".java");
 
             //Models
-            if (serviceClient.ModelTypes.Any())
+            foreach (var modelType in serviceClient.ModelTypes.Concat(serviceClient.HeaderTypes))
             {
-                foreach (var modelType in serviceClientTemplateModel.ModelTemplateModels)
+                if (modelType.Extensions.ContainsKey(AzureExtensions.ExternalExtension) &&
+                    (bool)modelType.Extensions[AzureExtensions.ExternalExtension])
                 {
-                    if (modelType.Extensions.ContainsKey(AzureExtensions.ExternalExtension) && 
-                        (bool)modelType.Extensions[AzureExtensions.ExternalExtension])
-                    {
-                        continue;
-                    }
-
-                    var modelTemplate = new ModelTemplate
-                    {
-                        Model = modelType
-                    };
-                    await Write(modelTemplate, Path.Combine("models", modelType.Name.ToPascalCase() + ".java"));
+                    continue;
                 }
+
+                var modelTemplate = new ModelTemplate
+                {
+                    Model = new AzureModelTemplateModel(modelType, serviceClient)
+                };
+                await Write(modelTemplate, Path.Combine("models", modelType.Name.ToPascalCase() + ".java"));
             }
 
             //MethodGroups

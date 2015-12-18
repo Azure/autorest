@@ -106,31 +106,41 @@
       }
     }
   }
-  httpRequest.headers['Content-Type'] = '@(Model.ContentType)';
+  httpRequest.headers['Content-Type'] = '@(Model.RequestContentType)';
 
   @if (Model.RequestBody != null)
   {
+      if (Model.RequestBody.Type == PrimaryType.Stream)
+      {
+  <text>
+  // Serialize Request  
+  var requestContent = @(Model.RequestBody.Name);
+  httpRequest.body = requestContent;
+  </text>
+      }
+      else
+      { 
   <text>
   // Serialize Request
   var requestContent = null;
   var requestModel = null;
   try {
     @(Model.InitializeRequestBody)
-  @if (Model.RequestBody.Type is CompositeType)
-  {
-  <text>
+      @if (Model.RequestBody.Type is CompositeType)
+      {
+      <text>
     if (requestModel !== null && requestModel !== undefined) {
       requestContent = JSON.stringify(requestModel.serialize());
     } else {
       requestContent = JSON.stringify(requestModel);
     }
-  </text>
-  }
-  else
-  {
+      </text>
+      }
+      else
+      {
     @:@(Model.RequestBody.Type.SerializeType(Model.Scope, Model.RequestBody.Name, "requestModel", Model.RequestBody.IsRequired, Model.RequestBody.Constraints))
     @:requestContent = JSON.stringify(requestModel);
-  }
+      }
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
     return callback(serializationError);
@@ -139,6 +149,28 @@
   httpRequest.body = requestContent;
   httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
   </text>
+      }
+  }
+  else if (Model.LogicalParameters.Where(p => p.Location == ParameterLocation.FormData).Any())
+  {      
+  <text>
+  // Serialize Request  
+  var formData = {};  
+      @foreach (var parameter in Model.LogicalParameters.Where(p => p.Location == ParameterLocation.FormData))
+      {
+  @:if (@(parameter.Name) !== undefined && @(parameter.Name) !== null) {
+          if (parameter.Type == PrimaryType.Stream)
+          {  
+    @:formData['@(parameter.SerializedName)'] = @(parameter.Name);  
+          }
+          else
+          {
+    @:formData['@(parameter.SerializedName)'] = @(parameter.Type.ToString(parameter.Name));
+          }
+  @:}
+      }  
+  httpRequest.formData = formData;
+  </text>      
   }
   else
   {

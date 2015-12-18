@@ -18,7 +18,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
     {
         private readonly AzureCSharpCodeNamer _namer;
 
-        private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.Azure.2.5.2";
+        private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.Azure.2.5.3";
 
         // page extensions class dictionary.
         private IDictionary<KeyValuePair<string, string>, string> pageClasses;
