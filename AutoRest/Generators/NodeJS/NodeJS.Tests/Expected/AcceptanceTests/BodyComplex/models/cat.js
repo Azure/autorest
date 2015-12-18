@@ -63,9 +63,6 @@ Cat.prototype.serialize = function () {
     payload['hates'] = [];
     for (var i = 0; i < this['hates'].length; i++) {
       if (this['hates'][i]) {
-        if (payload['hates'] === null || payload['hates'] === undefined) {
-          payload['hates'] = {};
-        }
         payload['hates'][i] = this['hates'][i].serialize();
       }
     }

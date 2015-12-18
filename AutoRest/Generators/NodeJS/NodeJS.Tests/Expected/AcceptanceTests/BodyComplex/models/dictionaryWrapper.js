@@ -46,9 +46,6 @@ DictionaryWrapper.prototype.serialize = function () {
         if (typeof this['defaultProgram'][valueElement1].valueOf() !== 'string') {
           throw new Error('this[\'defaultProgram\'][valueElement1] must be of type string.');
         }
-        if (payload['defaultProgram'] === null || payload['defaultProgram'] === undefined) {
-          payload['defaultProgram'] = {};
-        }
         payload['defaultProgram'][valueElement1] = this['defaultProgram'][valueElement1];
       }
       else {

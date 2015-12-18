@@ -6211,9 +6211,6 @@ Dictionary.prototype.putArrayValid = function (arrayBody, options, callback) {
             if (typeof arrayBody[valueElement2][i1].valueOf() !== 'string') {
               throw new Error('arrayBody[valueElement2][i1] must be of type string.');
             }
-            if (requestModel[valueElement2] === null || requestModel[valueElement2] === undefined) {
-              requestModel[valueElement2] = {};
-            }
             requestModel[valueElement2][i1] = arrayBody[valueElement2][i1];
           }
         }
@@ -6847,9 +6844,6 @@ Dictionary.prototype.putDictionaryValid = function (arrayBody, options, callback
           if (arrayBody[valueElement4][valueElement5] !== null && arrayBody[valueElement4][valueElement5] !== undefined) {
             if (typeof arrayBody[valueElement4][valueElement5].valueOf() !== 'string') {
               throw new Error('arrayBody[valueElement4][valueElement5] must be of type string.');
-            }
-            if (requestModel[valueElement4] === null || requestModel[valueElement4] === undefined) {
-              requestModel[valueElement4] = {};
             }
             requestModel[valueElement4][valueElement5] = arrayBody[valueElement4][valueElement5];
           }

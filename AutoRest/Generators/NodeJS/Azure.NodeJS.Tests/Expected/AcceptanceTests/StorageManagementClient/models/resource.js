@@ -98,9 +98,6 @@ Resource.prototype.serialize = function () {
         if (typeof this['tags'][valueElement1].valueOf() !== 'string') {
           throw new Error('this[\'tags\'][valueElement1] must be of type string.');
         }
-        if (payload['tags'] === null || payload['tags'] === undefined) {
-          payload['tags'] = {};
-        }
         payload['tags'][valueElement1] = this['tags'][valueElement1];
       }
       else {

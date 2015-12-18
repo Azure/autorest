@@ -50,9 +50,6 @@ UsageListResult.prototype.serialize = function () {
     payload['value'] = [];
     for (var i = 0; i < this['value'].length; i++) {
       if (this['value'][i]) {
-        if (payload['value'] === null || payload['value'] === undefined) {
-          payload['value'] = {};
-        }
         payload['value'][i] = this['value'][i].serialize();
       }
     }

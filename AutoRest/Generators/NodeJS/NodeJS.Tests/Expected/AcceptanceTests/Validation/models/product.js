@@ -74,9 +74,6 @@ Product.prototype.serialize = function () {
         if (typeof this['displayNames'][i].valueOf() !== 'string') {
           throw new Error('this[\'displayNames\'][i] must be of type string.');
         }
-        if (payload['display_names'] === null || payload['display_names'] === undefined) {
-          payload['display_names'] = {};
-        }
         payload['display_names'][i] = this['displayNames'][i];
       }
     }

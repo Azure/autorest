@@ -50,9 +50,6 @@ ArrayWrapper.prototype.serialize = function () {
         if (typeof this['array'][i].valueOf() !== 'string') {
           throw new Error('this[\'array\'][i] must be of type string.');
         }
-        if (payload['array'] === null || payload['array'] === undefined) {
-          payload['array'] = {};
-        }
         payload['array'][i] = this['array'][i];
       }
     }
