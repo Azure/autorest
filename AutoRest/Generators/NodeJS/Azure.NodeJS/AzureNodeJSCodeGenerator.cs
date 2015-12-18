@@ -117,7 +117,7 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
                     continue;
                 }
                 
-                nextLinkName = (string)ext["nextLinkName"] ?? "nextLink";
+                nextLinkName = (string)ext["nextLinkName"];
                 string itemName = (string)ext["itemName"] ?? "value";
                 foreach (var responseStatus in method.Responses.Where(r => r.Value.Body is CompositeType).Select(s => s.Key).ToArray())
                 {

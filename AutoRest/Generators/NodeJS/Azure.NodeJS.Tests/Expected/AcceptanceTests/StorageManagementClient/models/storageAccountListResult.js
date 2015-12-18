@@ -49,9 +49,6 @@ StorageAccountListResult.prototype.deserialize = function (instance) {
       });
       Array.prototype.push.apply(this, deserializedInstancevalue);
     }
-    if (instance['nextLink'] !== undefined) {
-      this['nextLink'] = instance.nextLink;
-    }
   }
 
   return this;
