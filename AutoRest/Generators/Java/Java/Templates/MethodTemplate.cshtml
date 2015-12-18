@@ -24,14 +24,14 @@
 }
 @if (Model.ReturnType.Body != null)
 {
-@: * @@return the @Model.ReturnTypeString.EscapeXmlComment() object wrapped in {@@link ServiceResponse} if successful.
+@: * @@return the @Model.ReturnTypeString.EscapeXmlComment() object wrapped in {@@link @Model.OperationResponseType} if successful.
 }
 else
 {
-@: * @@return the {@@link ServiceResponse} object if successful.
+@: * @@return the {@@link @Model.OperationResponseType} object if successful.
 }
  */
-public ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)(@Model.MethodParameterDeclaration) throws @Model.ExceptionString {
+public @Model.OperationResponseReturnTypeString @(Model.Name)(@Model.MethodParameterDeclaration) throws @Model.ExceptionString {
 @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {
@@ -105,7 +105,7 @@ public Call<@Model.CallType> @(Model.Name)Async(@Model.MethodParameterDeclaratio
     return call;
 }
 @EmptyLine
-private ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)Delegate(Response<@Model.CallType> response, Retrofit retrofit) throws @Model.ExceptionString {
+private @Model.OperationResponseReturnTypeString @(Model.Name)Delegate(Response<@Model.CallType> response, Retrofit retrofit) throws @Model.ExceptionString {
     return new @Model.ResponseBuilder<@Model.GenericReturnTypeString, @Model.OperationExceptionTypeString>(@Model.ServiceResponseBuilderArgs)
 @foreach (var response in Model.Responses)
 {
@@ -118,10 +118,24 @@ private ServiceResponse<@Model.GenericReturnTypeString> @(Model.Name)Delegate(Re
 }
 @if (Model.HttpMethod == HttpMethod.Head)
 {
+    if (Model.ReturnType.Headers != null)
+    {
+            @:.buildEmptyWithHeaders(response, retrofit, @(Model.ReturnType.Headers.Name).class);
+    }
+    else
+    {
             @:.buildEmpty(response, retrofit);
+    }
 }
 else
 {
+    if (Model.ReturnType.Headers != null)
+    {
+            @:.buildWithHeaders(response, retrofit, @(Model.ReturnType.Headers.Name).class);
+    }
+    else
+    {
             @:.build(response, retrofit);
+    }
 }
 }

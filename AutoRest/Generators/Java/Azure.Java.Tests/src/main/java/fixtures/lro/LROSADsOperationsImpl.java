@@ -14,7 +14,28 @@ import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.CloudException;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.ServiceResponseWithHeaders;
 import com.squareup.okhttp.ResponseBody;
+import fixtures.lro.models.LROSADsDelete202NonRetry400Headers;
+import fixtures.lro.models.LROSADsDelete202RetryInvalidHeaderHeaders;
+import fixtures.lro.models.LROSADsDeleteAsyncRelativeRetry400Headers;
+import fixtures.lro.models.LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders;
+import fixtures.lro.models.LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders;
+import fixtures.lro.models.LROSADsDeleteAsyncRelativeRetryNoStatusHeaders;
+import fixtures.lro.models.LROSADsDeleteNonRetry400Headers;
+import fixtures.lro.models.LROSADsPost202NoLocationHeaders;
+import fixtures.lro.models.LROSADsPost202NonRetry400Headers;
+import fixtures.lro.models.LROSADsPost202RetryInvalidHeaderHeaders;
+import fixtures.lro.models.LROSADsPostAsyncRelativeRetry400Headers;
+import fixtures.lro.models.LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders;
+import fixtures.lro.models.LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders;
+import fixtures.lro.models.LROSADsPostAsyncRelativeRetryNoPayloadHeaders;
+import fixtures.lro.models.LROSADsPostNonRetry400Headers;
+import fixtures.lro.models.LROSADsPutAsyncRelativeRetry400Headers;
+import fixtures.lro.models.LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders;
+import fixtures.lro.models.LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders;
+import fixtures.lro.models.LROSADsPutAsyncRelativeRetryNoStatusHeaders;
+import fixtures.lro.models.LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders;
 import fixtures.lro.models.Product;
 import java.io.IOException;
 import retrofit.Call;
@@ -122,11 +143,11 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
-    public ServiceResponse<Product> putAsyncRelativeRetry400(Product product) throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetry400Headers> putAsyncRelativeRetry400(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.putAsyncRelativeRetry400(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetry400Headers.class);
     }
 
     /**
@@ -145,7 +166,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetry400Headers.class, serviceCallback);
             }
         });
         return call;
@@ -157,11 +178,11 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponse<Void> deleteNonRetry400() throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Void, LROSADsDeleteNonRetry400Headers> deleteNonRetry400() throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.deleteNonRetry400(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsDeleteNonRetry400Headers.class);
     }
 
     /**
@@ -179,7 +200,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Void>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsDeleteNonRetry400Headers.class, serviceCallback);
             }
         });
         return call;
@@ -191,11 +212,11 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponse<Void> delete202NonRetry400() throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Void, LROSADsDelete202NonRetry400Headers> delete202NonRetry400() throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.delete202NonRetry400(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsDelete202NonRetry400Headers.class);
     }
 
     /**
@@ -213,7 +234,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Void>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsDelete202NonRetry400Headers.class, serviceCallback);
             }
         });
         return call;
@@ -225,11 +246,11 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponse<Void> deleteAsyncRelativeRetry400() throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetry400Headers> deleteAsyncRelativeRetry400() throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.deleteAsyncRelativeRetry400(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsDeleteAsyncRelativeRetry400Headers.class);
     }
 
     /**
@@ -247,7 +268,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Void>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsDeleteAsyncRelativeRetry400Headers.class, serviceCallback);
             }
         });
         return call;
@@ -260,11 +281,11 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponse<Void> postNonRetry400(Product product) throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Void, LROSADsPostNonRetry400Headers> postNonRetry400(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.postNonRetry400(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsPostNonRetry400Headers.class);
     }
 
     /**
@@ -283,7 +304,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Void>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsPostNonRetry400Headers.class, serviceCallback);
             }
         });
         return call;
@@ -296,11 +317,11 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponse<Void> post202NonRetry400(Product product) throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Void, LROSADsPost202NonRetry400Headers> post202NonRetry400(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.post202NonRetry400(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsPost202NonRetry400Headers.class);
     }
 
     /**
@@ -319,7 +340,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Void>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsPost202NonRetry400Headers.class, serviceCallback);
             }
         });
         return call;
@@ -332,11 +353,11 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponse<Void> postAsyncRelativeRetry400(Product product) throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetry400Headers> postAsyncRelativeRetry400(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.postAsyncRelativeRetry400(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsPostAsyncRelativeRetry400Headers.class);
     }
 
     /**
@@ -355,7 +376,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Void>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsPostAsyncRelativeRetry400Headers.class, serviceCallback);
             }
         });
         return call;
@@ -404,11 +425,11 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
-    public ServiceResponse<Product> putAsyncRelativeRetryNoStatus(Product product) throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusHeaders> putAsyncRelativeRetryNoStatus(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.putAsyncRelativeRetryNoStatus(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetryNoStatusHeaders.class);
     }
 
     /**
@@ -427,7 +448,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetryNoStatusHeaders.class, serviceCallback);
             }
         });
         return call;
@@ -440,11 +461,11 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
-    public ServiceResponse<Product> putAsyncRelativeRetryNoStatusPayload(Product product) throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders> putAsyncRelativeRetryNoStatusPayload(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.putAsyncRelativeRetryNoStatusPayload(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders.class);
     }
 
     /**
@@ -463,7 +484,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetryNoStatusPayloadHeaders.class, serviceCallback);
             }
         });
         return call;
@@ -509,11 +530,11 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponse<Void> deleteAsyncRelativeRetryNoStatus() throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryNoStatusHeaders> deleteAsyncRelativeRetryNoStatus() throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.deleteAsyncRelativeRetryNoStatus(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsDeleteAsyncRelativeRetryNoStatusHeaders.class);
     }
 
     /**
@@ -531,7 +552,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Void>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsDeleteAsyncRelativeRetryNoStatusHeaders.class, serviceCallback);
             }
         });
         return call;
@@ -544,11 +565,11 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponse<Void> post202NoLocation(Product product) throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Void, LROSADsPost202NoLocationHeaders> post202NoLocation(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.post202NoLocation(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsPost202NoLocationHeaders.class);
     }
 
     /**
@@ -567,7 +588,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Void>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsPost202NoLocationHeaders.class, serviceCallback);
             }
         });
         return call;
@@ -580,11 +601,11 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponse<Void> postAsyncRelativeRetryNoPayload(Product product) throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryNoPayloadHeaders> postAsyncRelativeRetryNoPayload(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.postAsyncRelativeRetryNoPayload(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsPostAsyncRelativeRetryNoPayloadHeaders.class);
     }
 
     /**
@@ -603,7 +624,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Void>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsPostAsyncRelativeRetryNoPayloadHeaders.class, serviceCallback);
             }
         });
         return call;
@@ -652,11 +673,11 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
-    public ServiceResponse<Product> putAsyncRelativeRetryInvalidHeader(Product product) throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders> putAsyncRelativeRetryInvalidHeader(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.putAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders.class);
     }
 
     /**
@@ -675,7 +696,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetryInvalidHeaderHeaders.class, serviceCallback);
             }
         });
         return call;
@@ -688,11 +709,11 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
-    public ServiceResponse<Product> putAsyncRelativeRetryInvalidJsonPolling(Product product) throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Product, LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders> putAsyncRelativeRetryInvalidJsonPolling(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.putAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
+        return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders.class);
     }
 
     /**
@@ -711,7 +732,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPutOrPatchResultAsync(response, new TypeToken<Product>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPutOrPatchResultWithHeadersAsync(response, new TypeToken<Product>() { }.getType(), LROSADsPutAsyncRelativeRetryInvalidJsonPollingHeaders.class, serviceCallback);
             }
         });
         return call;
@@ -723,11 +744,11 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponse<Void> delete202RetryInvalidHeader() throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Void, LROSADsDelete202RetryInvalidHeaderHeaders> delete202RetryInvalidHeader() throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.delete202RetryInvalidHeader(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsDelete202RetryInvalidHeaderHeaders.class);
     }
 
     /**
@@ -745,7 +766,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Void>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsDelete202RetryInvalidHeaderHeaders.class, serviceCallback);
             }
         });
         return call;
@@ -757,11 +778,11 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponse<Void> deleteAsyncRelativeRetryInvalidHeader() throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders> deleteAsyncRelativeRetryInvalidHeader() throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.deleteAsyncRelativeRetryInvalidHeader(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders.class);
     }
 
     /**
@@ -779,7 +800,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Void>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsDeleteAsyncRelativeRetryInvalidHeaderHeaders.class, serviceCallback);
             }
         });
         return call;
@@ -791,11 +812,11 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponse<Void> deleteAsyncRelativeRetryInvalidJsonPolling() throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Void, LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders> deleteAsyncRelativeRetryInvalidJsonPolling() throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.deleteAsyncRelativeRetryInvalidJsonPolling(this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders.class);
     }
 
     /**
@@ -813,7 +834,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Void>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsDeleteAsyncRelativeRetryInvalidJsonPollingHeaders.class, serviceCallback);
             }
         });
         return call;
@@ -826,11 +847,11 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponse<Void> post202RetryInvalidHeader(Product product) throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Void, LROSADsPost202RetryInvalidHeaderHeaders> post202RetryInvalidHeader(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.post202RetryInvalidHeader(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsPost202RetryInvalidHeaderHeaders.class);
     }
 
     /**
@@ -849,7 +870,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Void>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsPost202RetryInvalidHeaderHeaders.class, serviceCallback);
             }
         });
         return call;
@@ -862,11 +883,11 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponse<Void> postAsyncRelativeRetryInvalidHeader(Product product) throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders> postAsyncRelativeRetryInvalidHeader(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.postAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders.class);
     }
 
     /**
@@ -885,7 +906,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Void>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsPostAsyncRelativeRetryInvalidHeaderHeaders.class, serviceCallback);
             }
         });
         return call;
@@ -898,11 +919,11 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the ServiceResponseWithHeaders object if successful.
      */
-    public ServiceResponse<Void> postAsyncRelativeRetryInvalidJsonPolling(Product product) throws CloudException, IOException, InterruptedException {
+    public ServiceResponseWithHeaders<Void, LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders> postAsyncRelativeRetryInvalidJsonPolling(Product product) throws CloudException, IOException, InterruptedException {
         Response<ResponseBody> result = service.postAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage()).execute();
-        return client.getAzureClient().getPostOrDeleteResult(result, new TypeToken<Void>() { }.getType());
+        return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders.class);
     }
 
     /**
@@ -921,7 +942,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
             }
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                client.getAzureClient().getPostOrDeleteResultAsync(response, new TypeToken<Void>() { }.getType(), serviceCallback);
+                client.getAzureClient().getPostOrDeleteResultWithHeadersAsync(response, new TypeToken<Void>() { }.getType(), LROSADsPostAsyncRelativeRetryInvalidJsonPollingHeaders.class, serviceCallback);
             }
         });
         return call;

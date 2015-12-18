@@ -57,9 +57,11 @@ public class AzureServiceResponseBuilder<T, E extends AutoRestException> extends
         int statusCode = response.code();
         if (responseTypes.containsKey(statusCode)) {
             if (new TypeToken<T>(getClass()) { }.getRawType().isAssignableFrom(Boolean.class)) {
-                return new ServiceResponse<>((T) (Object) (statusCode / 100 == 2), response);
+                ServiceResponse<T> serviceResponse =  new ServiceResponse<>(response);
+                serviceResponse.setBody((T) (Object) (statusCode / 100 == 2));
+                return serviceResponse;
             } else {
-                return new ServiceResponse<>(null, response);
+                return new ServiceResponse<>(response);
             }
         } else {
             try {
