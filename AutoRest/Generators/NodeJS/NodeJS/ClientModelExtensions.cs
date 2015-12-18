@@ -950,6 +950,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                            .Outdent()
                            .AppendLine("}");
                     builder = sequence.AppendConstraintValidations(objectReference, constraints, builder);
+                    builder = ConstructBasePropertyCheck(builder, valueReference);
                     builder.AppendLine("{0} = [];", valueReference)
                            .AppendLine("for (var {1} = 0; {1} < {0}.length; {1}++) {{", objectReference, indexVar)
                              .Indent()
@@ -961,6 +962,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
 
                 builder.AppendLine("if (util.isArray({0})) {{", objectReference).Indent();
                 builder = sequence.AppendConstraintValidations(objectReference, constraints, builder);
+                builder = ConstructBasePropertyCheck(builder, valueReference);
                 builder.AppendLine("{0} = [];", valueReference)
                        .AppendLine("for (var {1} = 0; {1} < {0}.length; {1}++) {{", objectReference, indexVar)
                          .Indent()
@@ -1000,6 +1002,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                            .Outdent()
                            .AppendLine("}");
                     builder = dictionary.AppendConstraintValidations(objectReference, constraints, builder);
+                    builder = ConstructBasePropertyCheck(builder, valueReference);
                     builder.AppendLine("{0} = {{}};", valueReference)
                       .AppendLine("for(var {0} in {1}) {{", valueVar, objectReference)
                         .Indent()
@@ -1011,6 +1014,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
 
                 builder.AppendLine("if ({0} && typeof {0} === 'object') {{", objectReference).Indent();
                 builder = dictionary.AppendConstraintValidations(objectReference, constraints, builder);
+                builder = ConstructBasePropertyCheck(builder, valueReference);
                 builder.AppendLine("{0} = {{}};", valueReference)
                        .AppendLine("for(var {0} in {1}) {{", valueVar, objectReference)
                          .Indent()
