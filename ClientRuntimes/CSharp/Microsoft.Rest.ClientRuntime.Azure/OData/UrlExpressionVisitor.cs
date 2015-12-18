@@ -65,12 +65,9 @@ namespace Microsoft.Rest.Azure.OData
 
             // For binary expression add current string to a stack
             // so that if the expression contains null it can be cleared
-            if (_fullExpressionStack.Count == 0)
-            {
-                _fullExpressionStack.Push(_currentExpressionString);
-                _currentExpressionString = new StringBuilder();
-                _currentExpressionContainsNull = false;
-            }
+            _fullExpressionStack.Push(_currentExpressionString);
+            _currentExpressionString = new StringBuilder();
+            _currentExpressionContainsNull = false;
 
             this.Visit(node.Left);
             CloseUnaryBooleanOperator(node.NodeType);
