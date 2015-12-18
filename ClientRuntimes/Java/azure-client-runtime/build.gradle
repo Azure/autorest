@@ -12,7 +12,7 @@ apply plugin: 'maven'
 apply plugin: 'checkstyle'
 
 group = 'com.microsoft.rest'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.2-SNAPSHOT'
 
 configurations {
     deployerJars
@@ -32,7 +32,7 @@ repositories {
 }
 
 dependencies {
-    compile 'com.microsoft.rest:client-runtime:0.0.1-SNAPSHOT'
+    compile 'com.microsoft.rest:client-runtime:0.0.2-SNAPSHOT'
     compile 'com.microsoft.azure:adal4j:1.1.2'
     testCompile 'junit:junit:4.11'
     testCompile 'junit:junit-dep:4.11'
