@@ -78,9 +78,6 @@ ResourceCollection.prototype.serialize = function () {
     payload['arrayofresources'] = [];
     for (var i = 0; i < this['arrayofresources'].length; i++) {
       if (this['arrayofresources'][i]) {
-        if (payload['arrayofresources'] === null || payload['arrayofresources'] === undefined) {
-          payload['arrayofresources'] = {};
-        }
         payload['arrayofresources'][i] = this['arrayofresources'][i].serialize();
       }
     }
@@ -90,9 +87,6 @@ ResourceCollection.prototype.serialize = function () {
     payload['dictionaryofresources'] = {};
     for(var valueElement1 in this['dictionaryofresources']) {
       if (this['dictionaryofresources'][valueElement1]) {
-        if (payload['dictionaryofresources'] === null || payload['dictionaryofresources'] === undefined) {
-          payload['dictionaryofresources'] = {};
-        }
         payload['dictionaryofresources'][valueElement1] = this['dictionaryofresources'][valueElement1].serialize();
       }
       else {

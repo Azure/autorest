@@ -5925,9 +5925,6 @@ ArrayModel.prototype.putArrayValid = function (arrayBody, options, callback) {
             if (typeof arrayBody[i2][i3].valueOf() !== 'string') {
               throw new Error('arrayBody[i2][i3] must be of type string.');
             }
-            if (requestModel[i2] === null || requestModel[i2] === undefined) {
-              requestModel[i2] = {};
-            }
             requestModel[i2][i3] = arrayBody[i2][i3];
           }
         }
@@ -6561,9 +6558,6 @@ ArrayModel.prototype.putDictionaryValid = function (arrayBody, options, callback
           if (arrayBody[i1][valueElement2] !== null && arrayBody[i1][valueElement2] !== undefined) {
             if (typeof arrayBody[i1][valueElement2].valueOf() !== 'string') {
               throw new Error('arrayBody[i1][valueElement2] must be of type string.');
-            }
-            if (requestModel[i1] === null || requestModel[i1] === undefined) {
-              requestModel[i1] = {};
             }
             requestModel[i1][valueElement2] = arrayBody[i1][valueElement2];
           }

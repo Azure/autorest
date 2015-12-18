@@ -50,9 +50,6 @@ ArrayOptionalWrapper.prototype.serialize = function () {
         if (typeof this['value'][i].valueOf() !== 'string') {
           throw new Error('this[\'value\'][i] must be of type string.');
         }
-        if (payload['value'] === null || payload['value'] === undefined) {
-          payload['value'] = {};
-        }
         payload['value'][i] = this['value'][i];
       }
     }

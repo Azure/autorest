@@ -57,9 +57,6 @@ CatalogDictionaryOfArray.prototype.serialize = function () {
         payload['productDictionaryOfArray'][valueElement1] = [];
         for (var i = 0; i < this['productDictionaryOfArray'][valueElement1].length; i++) {
           if (this['productDictionaryOfArray'][valueElement1][i]) {
-            if (payload['productDictionaryOfArray'] === null || payload['productDictionaryOfArray'] === undefined) {
-              payload['productDictionaryOfArray'] = {};
-            }
             payload['productDictionaryOfArray'][valueElement1][i] = this['productDictionaryOfArray'][valueElement1][i].serialize();
           }
         }

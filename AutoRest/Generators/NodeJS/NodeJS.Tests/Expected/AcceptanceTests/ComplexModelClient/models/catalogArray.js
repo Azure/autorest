@@ -49,9 +49,6 @@ CatalogArray.prototype.serialize = function () {
     payload['productArray'] = [];
     for (var i = 0; i < this['productArray'].length; i++) {
       if (this['productArray'][i]) {
-        if (payload['productArray'] === null || payload['productArray'] === undefined) {
-          payload['productArray'] = {};
-        }
         payload['productArray'][i] = this['productArray'][i].serialize();
       }
     }

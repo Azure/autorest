@@ -45,9 +45,6 @@ CatalogDictionary.prototype.serialize = function () {
     payload['productDictionary'] = {};
     for(var valueElement1 in this['productDictionary']) {
       if (this['productDictionary'][valueElement1]) {
-        if (payload['productDictionary'] === null || payload['productDictionary'] === undefined) {
-          payload['productDictionary'] = {};
-        }
         payload['productDictionary'][valueElement1] = this['productDictionary'][valueElement1].serialize();
       }
       else {

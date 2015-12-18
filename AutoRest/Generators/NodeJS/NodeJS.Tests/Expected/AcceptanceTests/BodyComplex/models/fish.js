@@ -77,9 +77,6 @@ Fish.prototype.serialize = function () {
     for (var i = 0; i < this['siblings'].length; i++) {
       if (this['siblings'][i]) {
         if(this['siblings'][i]['fishtype'] !== null && this['siblings'][i]['fishtype'] !== undefined && models.discriminators[this['siblings'][i]['fishtype']]) {
-          if (payload['siblings'] === null || payload['siblings'] === undefined) {
-            payload['siblings'] = {};
-          }
           payload['siblings'][i] = this['siblings'][i].serialize();
         } else {
           throw new Error('No discriminator field "fishtype" was found in parameter "this[\'siblings\'][i]".');
