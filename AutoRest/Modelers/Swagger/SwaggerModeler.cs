@@ -79,7 +79,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             }
 
             // Build methods
-            foreach (var path in ServiceDefinition.Paths)
+            foreach (var path in ServiceDefinition.Paths.Concat(ServiceDefinition.CustomPaths))
             {
                 foreach (var verb in path.Value.Keys)
                 {
@@ -97,7 +97,12 @@ namespace Microsoft.Rest.Modeler.Swagger
 
                     if (verb.ToHttpMethod() != HttpMethod.Options)
                     {
-                        var method = BuildMethod(verb.ToHttpMethod(), path.Key, methodName, operation);
+                        string url = path.Key;
+                        if (url.Contains("?"))
+                        {
+                            url = url.Substring(0, url.IndexOf('?'));
+                        }
+                        var method = BuildMethod(verb.ToHttpMethod(), url, methodName, operation);
                         method.Group = methodGroup;
                         ServiceClient.Methods.Add(method);
                         if (method.DefaultResponse.Body is CompositeType)

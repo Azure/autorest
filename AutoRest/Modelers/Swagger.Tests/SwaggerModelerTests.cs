@@ -471,5 +471,21 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.True(clientModel.HeaderTypes.Any(c => c.Name == "list-Headers"));
             Assert.True(clientModel.HeaderTypes.Any(c => c.Name == "create-Headers"));
         }
+
+        [Fact]
+        public void TestCustomPaths()
+        {
+            var modeler = new SwaggerModeler(new Settings
+            {
+                Namespace = "Test",
+                Input = Path.Combine("Swagger", "swagger-x-ms-paths.json")
+            });
+            var clientModel = modeler.Build();
+
+            Assert.NotNull(clientModel);
+            Assert.Equal(3, clientModel.Methods.Count);
+            Assert.True(clientModel.Methods.All(m => m.Url == "/values/foo"));
+
+        }
     }
 }

@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace Microsoft.Rest.Modeler.Swagger.Model
 {
@@ -21,6 +22,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
             Consumes = new List<string>();
             Produces = new List<string>();
             Paths = new Dictionary<string, Dictionary<string, Operation>>();
+            CustomPaths = new Dictionary<string, Dictionary<string, Operation>>();
             Parameters = new Dictionary<string, SwaggerParameter>();
             Responses = new Dictionary<string, OperationResponse>();
             SecurityDefinitions = new Dictionary<string, SecurityDefinition>();
@@ -68,6 +70,12 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         /// Key is actual path and the value is serializationProperty of http operations and operation objects.
         /// </summary>
         public Dictionary<string, Dictionary<string, Operation>> Paths { get; set; }
+
+        /// <summary>
+        /// Key is actual path and the value is serializationProperty of http operations and operation objects.
+        /// </summary>
+        [JsonProperty("x-ms-paths")]
+        public Dictionary<string, Dictionary<string, Operation>> CustomPaths { get; set; }
 
         /// <summary>
         /// Key is the object serviceTypeName and the value is swagger definition.
