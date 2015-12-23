@@ -12,7 +12,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Azure.Tests
 {
     public class SampleAzureCodeNamer : CodeNamer
     {
-        public SampleAzureCodeNamer(Settings settings)
+        public SampleAzureCodeNamer()
         {
         }
 
