@@ -84,10 +84,10 @@ public interface AutoRestValidationTest {
      * used by Retrofit to perform actually REST calls.
      */
     interface AutoRestValidationTestService {
-        @GET("/fakepath/{subscriptionId}/{resourceGroupName}/{id}?api-version={apiVersion}")
+        @GET("/fakepath/{subscriptionId}/{resourceGroupName}/{id}")
         Call<ResponseBody> validationOfMethodParameters(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("id") int id, @Query("apiVersion") String apiVersion);
 
-        @PUT("/fakepath/{subscriptionId}/{resourceGroupName}/{id}?api-version={apiVersion}")
+        @PUT("/fakepath/{subscriptionId}/{resourceGroupName}/{id}")
         Call<ResponseBody> validationOfBody(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("id") int id, @Body Product body, @Query("apiVersion") String apiVersion);
 
     }
