@@ -57,7 +57,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             Settings.AddCredentials = true;
             AzureExtensions.UpdateHeadMethods(serviceClient);
             AzureExtensions.ParseODataExtension(serviceClient);
-            AzureExtensions.AddPageableMethod(serviceClient);
+            AzureExtensions.AddPageableMethod(serviceClient, CodeNamer);
             AzureExtensions.AddLongRunningOperations(serviceClient);
             AzureExtensions.AddAzureProperties(serviceClient);
             AzureExtensions.SetDefaultResponses(serviceClient);

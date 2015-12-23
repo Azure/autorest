@@ -18,7 +18,11 @@
   "paths": {
     "/paging/single": {
       "get": {
-        "x-ms-pageable": { "nextLinkName": "nextLink" },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "myvalues",
+          "operationName": "Paging_deleteSinglePage"
+        },
         "operationId": "Paging_getSinglePage",
         "description": "A paging operation that finishes on the first call without a nextlink",
         "responses": {
@@ -34,7 +38,10 @@
         }
       },
       "put": {
-        "x-ms-pageable": { "nextLinkName": "nextLink" },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "operationName": "Paging_putSinglePageSpecialNext"
+        },
         "operationId": "Paging_putSinglePage",
         "description": "A paging operation that finishes on the first call without a nextlink",
         "responses": {

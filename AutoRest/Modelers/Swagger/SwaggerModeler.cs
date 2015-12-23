@@ -273,9 +273,14 @@ namespace Microsoft.Rest.Modeler.Swagger
         /// </summary>
         /// <param name="operation">The swagger operation.</param>
         /// <returns>Method group name or null.</returns>
-        private static string GetMethodGroup(Operation operation)
+        public static string GetMethodGroup(Operation operation)
         {
-            if (operation.OperationId.IndexOf('_') == -1)
+            if (operation == null)
+            {
+                throw new ArgumentNullException("operation");
+            }
+
+            if (operation.OperationId == null || operation.OperationId.IndexOf('_') == -1)
             {
                 return null;
             }
@@ -289,8 +294,18 @@ namespace Microsoft.Rest.Modeler.Swagger
         /// </summary>
         /// <param name="operation">The swagger operation.</param>
         /// <returns>Method name.</returns>
-        private static string GetMethodName(Operation operation)
+        public static string GetMethodName(Operation operation)
         {
+            if (operation == null)
+            {
+                throw new ArgumentNullException("operation");
+            }
+
+            if (operation.OperationId == null)
+            {
+                return null;
+            }
+
             if (operation.OperationId.IndexOf('_') == -1)
             {
                 return operation.OperationId;

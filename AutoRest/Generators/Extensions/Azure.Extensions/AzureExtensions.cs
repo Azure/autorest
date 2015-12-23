@@ -6,11 +6,13 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
+using Microsoft.Rest.Generator.Azure.Model;
 using Microsoft.Rest.Generator.Azure.Properties;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Logging;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Microsoft.Rest.Generator.Azure
@@ -59,8 +61,9 @@ namespace Microsoft.Rest.Generator.Azure
         /// </summary>
         /// <param name="serviceClient">Service client</param>
         /// <param name="settings">AutoRest settings</param>
+        /// <param name="codeNamer">AutoRest settings</param>
         /// <returns></returns>
-        public static void NormalizeAzureClientModel(ServiceClient serviceClient, Settings settings)
+        public static void NormalizeAzureClientModel(ServiceClient serviceClient, Settings settings, CodeNamer codeNamer)
         {
             if (serviceClient == null)
             {
@@ -70,13 +73,17 @@ namespace Microsoft.Rest.Generator.Azure
             {
                 throw new ArgumentNullException("settings");
             }
+            if (codeNamer == null)
+            {
+                throw new ArgumentNullException("codeNamer");
+            }
 
             settings.AddCredentials = true;
             UpdateHeadMethods(serviceClient);
             ParseODataExtension(serviceClient);
             FlattenResourceProperties(serviceClient);
             FlattenRequestPayload(serviceClient, settings);
-            AddPageableMethod(serviceClient);
+            AddPageableMethod(serviceClient, codeNamer);
             AddLongRunningOperations(serviceClient);
             AddAzureProperties(serviceClient);
             SetDefaultResponses(serviceClient);
@@ -413,8 +420,13 @@ namespace Microsoft.Rest.Generator.Azure
         /// Adds ListNext() method for each List method with x-ms-pageable extension.
         /// </summary>
         /// <param name="serviceClient"></param>
-        public static void AddPageableMethod(ServiceClient serviceClient)
+        /// <param name="codeNamer"></param>
+        public static void AddPageableMethod(ServiceClient serviceClient, CodeNamer codeNamer)
         {
+            if (codeNamer == null)
+            {
+                throw new ArgumentNullException("codeNamer");
+            }
             if (serviceClient == null)
             {
                 throw new ArgumentNullException("serviceClient");
@@ -422,37 +434,63 @@ namespace Microsoft.Rest.Generator.Azure
 
             foreach (var method in serviceClient.Methods.ToArray())
             {
-                if (method.Extensions.ContainsKey(PageableExtension) && 
-                    !string.IsNullOrWhiteSpace(((JObject)method.Extensions[PageableExtension]).SelectToken("nextLinkName").ToString()))
+                if (method.Extensions.ContainsKey(PageableExtension))
                 {
-                    var newMethod = (Method) method.Clone();
-                    newMethod.Name = newMethod.Name + "Next";
-                    newMethod.Parameters.Clear();
-                    newMethod.Url = "{nextLink}";
-                    newMethod.IsAbsoluteUrl = true;
-                    var nextLinkParameter = new Parameter
+                    var pageableExtension = JsonConvert.DeserializeObject<PageableExtension>(method.Extensions[PageableExtension].ToString());
+                    if (string.IsNullOrWhiteSpace(pageableExtension.NextLinkName))
                     {
-                        Name = "nextPageLink",
-                        SerializedName = "nextLink",
-                        Type = PrimaryType.String,
-                        Documentation = "The NextLink from the previous successful call to List operation.",
-                        IsRequired = true,
-                        Location = ParameterLocation.Path
-                    };
-                    nextLinkParameter.Extensions[SkipUrlEncodingExtension] = true;
-                    newMethod.Parameters.Add(nextLinkParameter);
-
-                    // Need copy all the header parameters from List method to ListNext method
-                    foreach (var param in method.Parameters.Where(p => p.Location == ParameterLocation.Header))
-                    {
-                        newMethod.Parameters.Add((Parameter)param.Clone());
+                        continue;
                     }
 
-                    serviceClient.Methods.Add(newMethod);
+                    Method nextLinkMethod = null;
+                    if (!string.IsNullOrEmpty(pageableExtension.OperationName))
+                    {
+                        nextLinkMethod = serviceClient.Methods.FirstOrDefault(m =>
+                            pageableExtension.OperationName.Equals(m.SerializedName, StringComparison.OrdinalIgnoreCase));
+                    }
+
+                    if (nextLinkMethod == null)
+                    {
+                        nextLinkMethod = (Method)method.Clone();
+
+                        if (!string.IsNullOrEmpty(pageableExtension.OperationName))
+                        {
+                            nextLinkMethod.Name = codeNamer.GetMethodName(SwaggerModeler.GetMethodName(
+                                new Rest.Modeler.Swagger.Model.Operation { OperationId = pageableExtension.OperationName }));
+                            nextLinkMethod.Group = codeNamer.GetMethodGroupName(SwaggerModeler.GetMethodGroup(
+                                new Rest.Modeler.Swagger.Model.Operation { OperationId = pageableExtension.OperationName }));
+                        }
+                        else
+                        {
+                            nextLinkMethod.Name = nextLinkMethod.Name + "Next";
+                        }
+                        nextLinkMethod.Parameters.Clear();
+                        nextLinkMethod.Url = "{nextLink}";
+                        nextLinkMethod.IsAbsoluteUrl = true;
+                        var nextLinkParameter = new Parameter
+                        {
+                            Name = "nextPageLink",
+                            SerializedName = "nextLink",
+                            Type = PrimaryType.String,
+                            Documentation = "The NextLink from the previous successful call to List operation.",
+                            IsRequired = true,
+                            Location = ParameterLocation.Path
+                        };
+                        nextLinkParameter.Extensions[SkipUrlEncodingExtension] = true;
+                        nextLinkMethod.Parameters.Add(nextLinkParameter);
+
+                        // Need copy all the header parameters from List method to ListNext method
+                        foreach (var param in method.Parameters.Where(p => p.Location == ParameterLocation.Header))
+                        {
+                            nextLinkMethod.Parameters.Add((Parameter)param.Clone());
+                        }
+
+                        serviceClient.Methods.Add(nextLinkMethod);
+                    }
                 }
             }
         }
-
+        
         public static string GetClientRequestIdString(Method method)
         {
             if (method == null)
