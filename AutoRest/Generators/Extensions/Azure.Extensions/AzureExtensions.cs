@@ -455,8 +455,10 @@ namespace Microsoft.Rest.Generator.Azure
 
                         if (!string.IsNullOrEmpty(pageableExtension.OperationName))
                         {
-                            nextLinkMethod.Name = codeNamer.GetMethodName(GetMethodName(pageableExtension.OperationName));
-                            nextLinkMethod.Group = codeNamer.GetMethodGroupName(GetMethodGroup(pageableExtension.OperationName));
+                            nextLinkMethod.Name = codeNamer.GetMethodName(SwaggerModeler.GetMethodName(
+                                new Rest.Modeler.Swagger.Model.Operation { OperationId = pageableExtension.OperationName }));
+                            nextLinkMethod.Group = codeNamer.GetMethodGroupName(SwaggerModeler.GetMethodGroup(
+                                new Rest.Modeler.Swagger.Model.Operation { OperationId = pageableExtension.OperationName }));
                         }
                         else
                         {
@@ -488,39 +490,7 @@ namespace Microsoft.Rest.Generator.Azure
                 }
             }
         }
-
-        /// <summary>
-        /// Extracts method group from operation ID.
-        /// </summary>
-        /// <param name="operationId">The swagger operation.</param>
-        /// <returns>Method group name or null.</returns>
-        private static string GetMethodGroup(string operationId)
-        {
-            if (operationId.IndexOf('_') == -1)
-            {
-                return null;
-            }
-
-            var parts = operationId.Split('_');
-            return parts[0];
-        }
-
-        /// <summary>
-        /// Extracts method name from operation ID.
-        /// </summary>
-        /// <param name="operationId">The swagger operation.</param>
-        /// <returns>Method name.</returns>
-        private static string GetMethodName(string operationId)
-        {
-            if (operationId.IndexOf('_') == -1)
-            {
-                return operationId;
-            }
-
-            var parts = operationId.Split('_');
-            return parts[1];
-        }
-
+        
         public static string GetClientRequestIdString(Method method)
         {
             if (method == null)
