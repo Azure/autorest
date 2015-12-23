@@ -65,7 +65,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
             AzureExtensions.UpdateHeadMethods(serviceClient);
             AzureExtensions.ParseODataExtension(serviceClient);
             AzureExtensions.FlattenResourceProperties(serviceClient);
-            AzureExtensions.AddPageableMethod(serviceClient);
+            AzureExtensions.AddPageableMethod(serviceClient, _namer);
             AzureExtensions.AddAzureProperties(serviceClient);
             AzureExtensions.SetDefaultResponses(serviceClient);
             AzureExtensions.AddParameterGroups(serviceClient);

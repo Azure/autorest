@@ -53,7 +53,8 @@ namespace Microsoft.Rest.Modeler.Swagger
             {
                 HttpMethod = httpMethod,
                 Url = url,
-                Name = methodName
+                Name = methodName,
+                SerializedName = _operation.OperationId
             };
 
             method.RequestContentType = _effectiveConsumes.FirstOrDefault() ?? APP_JSON_MIME;

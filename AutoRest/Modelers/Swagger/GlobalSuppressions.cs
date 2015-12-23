@@ -143,3 +143,6 @@
     Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Model.SwaggerObject.#Enum", Justification = "Serialization Type")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", 
     Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.JsonConverters.SwaggerJsonConverter.#Document", Justification = "Serialization Type")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", 
+    Scope = "member", Target = "Microsoft.Rest.Modeler.Swagger.Model.ServiceDefinition.#CustomPaths", Justification = "Serialization Type")]
+

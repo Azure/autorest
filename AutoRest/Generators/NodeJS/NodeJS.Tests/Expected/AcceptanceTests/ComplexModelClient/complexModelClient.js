@@ -118,7 +118,7 @@ ComplexModelClient.prototype.list = function (resourceGroupName, options, callba
 
   // Construct URL
   var requestUrl = this.baseUri +
-                   '//subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/Microsoft.Cache/Redis?api-version={apiVersion}';
+                   '//subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/Microsoft.Cache/Redis';
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.subscriptionId));
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
   requestUrl = requestUrl.replace('{apiVersion}', encodeURIComponent(this.apiVersion));
@@ -259,7 +259,7 @@ ComplexModelClient.prototype.create = function (subscriptionId, resourceGroupNam
 
   // Construct URL
   var requestUrl = this.baseUri +
-                   '//subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/Microsoft.Cache/Redis?api-version={apiVersion}';
+                   '//subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/Microsoft.Cache/Redis';
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(subscriptionId));
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
   requestUrl = requestUrl.replace('{apiVersion}', encodeURIComponent(apiVersion));
@@ -416,7 +416,7 @@ ComplexModelClient.prototype.update = function (subscriptionId, resourceGroupNam
 
   // Construct URL
   var requestUrl = this.baseUri +
-                   '//subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/Microsoft.Cache/Redis?api-version={apiVersion}';
+                   '//subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/Microsoft.Cache/Redis';
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(subscriptionId));
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
   requestUrl = requestUrl.replace('{apiVersion}', encodeURIComponent(apiVersion));

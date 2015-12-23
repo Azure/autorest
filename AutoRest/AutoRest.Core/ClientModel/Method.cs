@@ -33,6 +33,11 @@ namespace Microsoft.Rest.Generator.ClientModel
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets the name defined in the spec (OperationId).
+        /// </summary>
+        public string SerializedName { get; set; }
+
+        /// <summary>
         /// Gets or sets the group name.
         /// </summary>
         public string Group { get; set; }

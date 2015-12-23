@@ -244,6 +244,16 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             Assert.Equal("", query.ToString());
             query = new ODataQuery<Param1>(p => p.Foo == null);
             Assert.Equal("", query.ToString());
+            var param = new InputParam1
+            {
+                Value = null
+            };
+            query = new ODataQuery<Param1>(p => p.Foo == param.Value);
+            Assert.Equal("", query.ToString());
+            query = new ODataQuery<Param1>(p => p.Foo == param.Value && p.AssignedTo(param.Value));
+            Assert.Equal("", query.ToString());
+            query = new ODataQuery<Param1>(p => p.AssignedTo(param.Value));
+            Assert.Equal("", query.ToString());
         }
 
         [Fact]

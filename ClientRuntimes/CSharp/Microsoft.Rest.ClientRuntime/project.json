@@ -1,5 +1,5 @@
 {
-  "version": "1.8.1",
+  "version": "1.9.0",
   "copyright": "Copyright (c) Microsoft Corporation",
   "iconUrl": "https://cdn.rawgit.com/Azure/AutoRest/7c1576dfb56974176223545cfac5762d168ded5f/Documentation/images/autorest-small-flat.png",
   "title": "Client Runtime Library for Microsoft AutoRest Generated Clients",
@@ -24,6 +24,9 @@
         "System.Net.Http": "",
         "System.Net.Http.WebRequest": "",
         "System.Xml": ""
+      },
+      "dependencies": {
+        "Newtonsoft.Json": "6.0.8"
       }
     },
     ".NETPortable,Version=v4.5,Profile=Profile111": {
@@ -51,6 +54,9 @@
         "System.Threading.Tasks": "",
         "System.Xml": "",
         "System.Xml.ReaderWriter": ""
+      },
+      "dependencies": {
+        "Newtonsoft.Json": "6.0.8"
       }
     },
     "dnxcore50": {
@@ -61,12 +67,9 @@
         "System.Net.Http": "4.0.0",
         "System.Runtime.Serialization.Primitives": "4.0.10",
         "System.Threading.Tasks": "4.0.10",
-        "System.Xml.ReaderWriter": "4.0.10"
-      }
+        "System.Xml.ReaderWriter": "4.0.10",
+        "Newtonsoft.Json": "7.0.1"
+     }
     }
-  },
-
-  "dependencies": {
-    "Newtonsoft.Json": "7.0.1"
   }
 }

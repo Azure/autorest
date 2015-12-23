@@ -64,7 +64,7 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
             // generating cloned methods for long running operations with reserved words. For
             // example - beginDeleteMethod() insteadof beginDelete() as delete is a reserved word.
             Namer.NormalizeMethodNames(serviceClient);
-            AzureExtensions.NormalizeAzureClientModel(serviceClient, Settings);
+            AzureExtensions.NormalizeAzureClientModel(serviceClient, Settings, Namer);
             base.NormalizeClientModel(serviceClient);
             NormalizeApiVersion(serviceClient);
             NormalizePaginatedMethods(serviceClient);

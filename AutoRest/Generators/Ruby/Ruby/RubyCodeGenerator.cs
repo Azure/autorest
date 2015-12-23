@@ -14,11 +14,6 @@ namespace Microsoft.Rest.Generator.Ruby
     public class RubyCodeGenerator : CodeGenerator
     {
         /// <summary>
-        /// A code namer instance (object which is responsible for correct files/variables naming).
-        /// </summary>
-        private readonly RubyCodeNamer codeNamer;
-
-        /// <summary>
         /// The name of the SDK. Determined in the following way:
         /// if the parameter 'Name' is provided that it becames the
         /// name of the SDK, otherwise the name of input swagger is converted
@@ -37,12 +32,17 @@ namespace Microsoft.Rest.Generator.Ruby
         protected readonly string modelsPath;
 
         /// <summary>
+        /// A code namer instance (object which is responsible for correct files/variables naming).
+        /// </summary>
+        protected RubyCodeNamer CodeNamer { get; private set; }
+
+        /// <summary>
         /// Initializes a new instance of the class RubyCodeGenerator.
         /// </summary>
         /// <param name="settings">The settings.</param>
         public RubyCodeGenerator(Settings settings) : base(settings)
         {
-            codeNamer = new RubyCodeNamer();
+            CodeNamer = new RubyCodeNamer();
 
             if (Settings.CustomSettings.ContainsKey("Name"))
             {
@@ -53,7 +53,7 @@ namespace Microsoft.Rest.Generator.Ruby
                 sdkName = Path.GetFileNameWithoutExtension(Settings.Input);
             }
 
-            sdkName = RubyCodeNamer.UnderscoreCase(codeNamer.RubyRemoveInvalidCharacters(sdkName));
+            sdkName = RubyCodeNamer.UnderscoreCase(CodeNamer.RubyRemoveInvalidCharacters(sdkName));
             sdkPath = sdkName;
             modelsPath = Path.Combine(sdkPath, "models");
         }
@@ -97,8 +97,8 @@ namespace Microsoft.Rest.Generator.Ruby
         public override void NormalizeClientModel(ServiceClient serviceClientModel)
         {
             PopulateAdditionalProperties(serviceClientModel);
-            codeNamer.NormalizeClientModel(serviceClientModel);
-            codeNamer.ResolveNameCollisions(serviceClientModel, Settings.Namespace,
+            CodeNamer.NormalizeClientModel(serviceClientModel);
+            CodeNamer.ResolveNameCollisions(serviceClientModel, Settings.Namespace,
                 Settings.Namespace + "::Models");
         }
 

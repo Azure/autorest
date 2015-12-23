@@ -1,5 +1,5 @@
 {
-  "version": "2.5.3",
+  "version": "2.6.0",
   "copyright": "Copyright (c) Microsoft Corporation",
   "iconUrl": "http://go.microsoft.com/fwlink/?LinkID=288890",
   "title": "Client Runtime for Microsoft Azure Libraries",
@@ -60,6 +60,6 @@
   },
 
   "dependencies": {
-    "Microsoft.Rest.ClientRuntime": "[1.8.1,2.0)"
+    "Microsoft.Rest.ClientRuntime": "[1.9.0,2.0)"
   }
 }

@@ -153,7 +153,7 @@ AutoRestValidationTest.prototype.validationOfMethodParameters = function (resour
 
   // Construct URL
   var requestUrl = this.baseUri +
-                   '//fakepath/{subscriptionId}/{resourceGroupName}/{id}?api-version={apiVersion}';
+                   '//fakepath/{subscriptionId}/{resourceGroupName}/{id}';
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.subscriptionId));
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
   requestUrl = requestUrl.replace('{id}', encodeURIComponent(id.toString()));
@@ -334,7 +334,7 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
 
   // Construct URL
   var requestUrl = this.baseUri +
-                   '//fakepath/{subscriptionId}/{resourceGroupName}/{id}?api-version={apiVersion}';
+                   '//fakepath/{subscriptionId}/{resourceGroupName}/{id}';
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.subscriptionId));
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
   requestUrl = requestUrl.replace('{id}', encodeURIComponent(id.toString()));
