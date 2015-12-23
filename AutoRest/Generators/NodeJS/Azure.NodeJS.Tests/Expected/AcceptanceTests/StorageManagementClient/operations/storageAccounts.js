@@ -150,6 +150,10 @@ StorageAccounts.prototype.checkNameAvailability = function (accountName, options
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        if (errorCode) error.code = errorCode;
+        if (errorMessage) error.message = errorMessage;
         error.body = new client._models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           error.body.deserialize(parsedErrorResponse);
@@ -425,6 +429,10 @@ StorageAccounts.prototype.beginCreate = function (resourceGroupName, accountName
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        if (errorCode) error.code = errorCode;
+        if (errorMessage) error.message = errorMessage;
         error.body = new client._models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           error.body.deserialize(parsedErrorResponse);
@@ -569,6 +577,10 @@ StorageAccounts.prototype.deleteMethod = function (resourceGroupName, accountNam
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        if (errorCode) error.code = errorCode;
+        if (errorMessage) error.message = errorMessage;
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
         return callback(error);
@@ -693,6 +705,10 @@ StorageAccounts.prototype.getProperties = function (resourceGroupName, accountNa
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        if (errorCode) error.code = errorCode;
+        if (errorMessage) error.message = errorMessage;
         error.body = new client._models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           error.body.deserialize(parsedErrorResponse);
@@ -890,6 +906,10 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        if (errorCode) error.code = errorCode;
+        if (errorMessage) error.message = errorMessage;
         error.body = new client._models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           error.body.deserialize(parsedErrorResponse);
@@ -1032,6 +1052,10 @@ StorageAccounts.prototype.listKeys = function (resourceGroupName, accountName, o
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        if (errorCode) error.code = errorCode;
+        if (errorMessage) error.message = errorMessage;
         error.body = new client._models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           error.body.deserialize(parsedErrorResponse);
@@ -1164,6 +1188,10 @@ StorageAccounts.prototype.list = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        if (errorCode) error.code = errorCode;
+        if (errorMessage) error.message = errorMessage;
         error.body = new client._models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           error.body.deserialize(parsedErrorResponse);
@@ -1304,6 +1332,10 @@ StorageAccounts.prototype.listByResourceGroup = function (resourceGroupName, opt
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        if (errorCode) error.code = errorCode;
+        if (errorMessage) error.message = errorMessage;
         error.body = new client._models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           error.body.deserialize(parsedErrorResponse);
@@ -1481,6 +1513,10 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        if (errorCode) error.code = errorCode;
+        if (errorMessage) error.message = errorMessage;
         error.body = new client._models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           error.body.deserialize(parsedErrorResponse);

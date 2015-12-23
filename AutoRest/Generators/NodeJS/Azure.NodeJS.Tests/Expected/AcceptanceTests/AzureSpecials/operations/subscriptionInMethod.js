@@ -121,6 +121,10 @@ SubscriptionInMethod.prototype.postMethodLocalValid = function (subscriptionId, 
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        if (errorCode) error.code = errorCode;
+        if (errorMessage) error.message = errorMessage;
         error.body = new client._models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           error.body.deserialize(parsedErrorResponse);
@@ -232,6 +236,10 @@ SubscriptionInMethod.prototype.postMethodLocalNull = function (subscriptionId, o
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        if (errorCode) error.code = errorCode;
+        if (errorMessage) error.message = errorMessage;
         error.body = new client._models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           error.body.deserialize(parsedErrorResponse);
@@ -342,6 +350,10 @@ SubscriptionInMethod.prototype.postPathLocalValid = function (subscriptionId, op
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        if (errorCode) error.code = errorCode;
+        if (errorMessage) error.message = errorMessage;
         error.body = new client._models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           error.body.deserialize(parsedErrorResponse);
@@ -452,6 +464,10 @@ SubscriptionInMethod.prototype.postSwaggerLocalValid = function (subscriptionId,
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        if (errorCode) error.code = errorCode;
+        if (errorMessage) error.message = errorMessage;
         error.body = new client._models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           error.body.deserialize(parsedErrorResponse);

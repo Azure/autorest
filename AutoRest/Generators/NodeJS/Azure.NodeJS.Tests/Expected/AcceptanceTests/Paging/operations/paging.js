@@ -114,6 +114,10 @@ Paging.prototype.getSinglePages = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        if (errorCode) error.code = errorCode;
+        if (errorMessage) error.message = errorMessage;
         error.body = new client._models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           error.body.deserialize(parsedErrorResponse);
@@ -245,6 +249,10 @@ Paging.prototype.getMultiplePages = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        if (errorCode) error.code = errorCode;
+        if (errorMessage) error.message = errorMessage;
         error.body = new client._models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           error.body.deserialize(parsedErrorResponse);
@@ -368,6 +376,10 @@ Paging.prototype.getMultiplePagesRetryFirst = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        if (errorCode) error.code = errorCode;
+        if (errorMessage) error.message = errorMessage;
         error.body = new client._models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           error.body.deserialize(parsedErrorResponse);
@@ -492,6 +504,10 @@ Paging.prototype.getMultiplePagesRetrySecond = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        if (errorCode) error.code = errorCode;
+        if (errorMessage) error.message = errorMessage;
         error.body = new client._models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           error.body.deserialize(parsedErrorResponse);
@@ -614,6 +630,10 @@ Paging.prototype.getSinglePagesFailure = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        if (errorCode) error.code = errorCode;
+        if (errorMessage) error.message = errorMessage;
         error.body = new client._models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           error.body.deserialize(parsedErrorResponse);
@@ -736,6 +756,10 @@ Paging.prototype.getMultiplePagesFailure = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        if (errorCode) error.code = errorCode;
+        if (errorMessage) error.message = errorMessage;
         error.body = new client._models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           error.body.deserialize(parsedErrorResponse);
@@ -858,6 +882,10 @@ Paging.prototype.getMultiplePagesFailureUri = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        if (errorCode) error.code = errorCode;
+        if (errorMessage) error.message = errorMessage;
         error.body = new client._models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           error.body.deserialize(parsedErrorResponse);
@@ -982,6 +1010,10 @@ Paging.prototype.getSinglePagesNext = function (nextPageLink, options, callback)
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        if (errorCode) error.code = errorCode;
+        if (errorMessage) error.message = errorMessage;
         error.body = new client._models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           error.body.deserialize(parsedErrorResponse);
@@ -1115,6 +1147,10 @@ Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callbac
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        if (errorCode) error.code = errorCode;
+        if (errorMessage) error.message = errorMessage;
         error.body = new client._models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           error.body.deserialize(parsedErrorResponse);
@@ -1240,6 +1276,10 @@ Paging.prototype.getMultiplePagesRetryFirstNext = function (nextPageLink, option
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        if (errorCode) error.code = errorCode;
+        if (errorMessage) error.message = errorMessage;
         error.body = new client._models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           error.body.deserialize(parsedErrorResponse);
@@ -1366,6 +1406,10 @@ Paging.prototype.getMultiplePagesRetrySecondNext = function (nextPageLink, optio
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        if (errorCode) error.code = errorCode;
+        if (errorMessage) error.message = errorMessage;
         error.body = new client._models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           error.body.deserialize(parsedErrorResponse);
@@ -1490,6 +1534,10 @@ Paging.prototype.getSinglePagesFailureNext = function (nextPageLink, options, ca
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        if (errorCode) error.code = errorCode;
+        if (errorMessage) error.message = errorMessage;
         error.body = new client._models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           error.body.deserialize(parsedErrorResponse);
@@ -1614,6 +1662,10 @@ Paging.prototype.getMultiplePagesFailureNext = function (nextPageLink, options, 
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        if (errorCode) error.code = errorCode;
+        if (errorMessage) error.message = errorMessage;
         error.body = new client._models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           error.body.deserialize(parsedErrorResponse);
@@ -1738,6 +1790,10 @@ Paging.prototype.getMultiplePagesFailureUriNext = function (nextPageLink, option
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        if (errorCode) error.code = errorCode;
+        if (errorMessage) error.message = errorMessage;
         error.body = new client._models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           error.body.deserialize(parsedErrorResponse);
