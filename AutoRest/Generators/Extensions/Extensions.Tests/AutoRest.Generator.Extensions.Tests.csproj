@@ -45,6 +45,22 @@
       <Project>{c876085f-9dc3-41f0-b7b4-17022cd84684}</Project>
       <Name>AutoRest.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\CSharp\CSharp\AutoRest.Generator.CSharp.csproj">
+      <Project>{cc1eec95-41ef-44b6-8761-00fa3e647248}</Project>
+      <Name>AutoRest.Generator.CSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Java\Java\AutoRest.Generator.Java.csproj">
+      <Project>{34b82690-0083-4f4c-8abf-2d2a09304915}</Project>
+      <Name>AutoRest.Generator.Java</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\NodeJS\NodeJS\AutoRest.Generator.NodeJS.csproj">
+      <Project>{77e73f37-9586-44ea-91b0-f244d08467d2}</Project>
+      <Name>AutoRest.Generator.NodeJS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Ruby\Ruby\AutoRest.Generator.Ruby.csproj">
+      <Project>{a7780698-3072-486e-a105-81eddf552598}</Project>
+      <Name>AutoRest.Generator.Ruby</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Azure.Extensions\AutoRest.Generator.Azure.Extensions.csproj">
       <Project>{90b943ab-3879-4b64-b9ff-1a21297c0f26}</Project>
       <Name>AutoRest.Generator.Azure.Common</Name>
