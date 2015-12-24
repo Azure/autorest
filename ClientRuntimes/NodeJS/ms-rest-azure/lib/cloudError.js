@@ -3,20 +3,84 @@
 
 'use strict';
 
-/**
- * @class
- * Initializes a new instance of the CloudError class.
- * @constructor
- */
-function CloudError() { }
+var util = require('util');
 
 /**
- * Validate the payload against the CloudError schema
+ * @class
+ * Provides additional information about an http error response returned from a Microsoft Azure service.
+ * @constructor
+ * @member {string} [code] The error code parsed from the body of the http error response
+ * 
+ * @member {string} [message] The error message parsed from the body of the http error response
+ * 
+ * @member {string} [target] The target of the error
+ * 
+ * @member {array} [details] An array of CloudError objects specifying the details
+ */
+function CloudError(parameters) {
+  Error.call(this);
+  Error.captureStackTrace(this, this.constructor);
+  
+  this.name = this.constructor.name;
+
+  if (parameters) {
+    if (parameters.code) {
+      this.code = parameters.code;
+    }
+
+    if (parameters.message) {
+      this.message = parameters.message;
+    }
+
+    if (parameters.target) {
+      this.target = parameters.target;
+    }
+
+    if (parameters.details) {
+      var tempDetails = [];
+      parameters.details.forEach(function (element) {
+        if (element) {
+          element = new CloudError(element);
+        }
+        tempDetails.push(element);
+      });
+      this.details = tempDetails;
+    }
+  }
+}
+
+util.inherits(CloudError, Error);
+
+/**
+ * Serialize the instance to CloudError schema
  *
- * @param {JSON} payload
+ * @param {JSON} instance
  *
  */
-CloudError.prototype.validate = function (payload) {
+CloudError.prototype.serialize = function () {
+  var payload = {error: {}};
+  if (this.code) {
+    payload.error.code = this.code;
+  }
+
+  if (this.message) {
+    payload.error.message = this.message;
+  }
+
+  if (this.target) {
+    payload.error.target = this.target;
+  }
+
+  if (this.details) {
+    var deserializedArray = [];
+    this.details.forEach(function (element1) {
+      if (element1) {
+        element1 = this.serialize(element1);
+      }
+      deserializedArray.push(element1);
+    });
+    payload.error.details = deserializedArray;
+  }
   return payload;
 };
 
@@ -28,19 +92,34 @@ CloudError.prototype.validate = function (payload) {
  */
 CloudError.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance.details !== null && instance.details !== undefined) {
-      var deserializedArray = [];
-      instance.details.forEach(function(element1) {
-        if (element1 !== null && element1 !== undefined) {
-          element1 = this.deserialize(element1);
-        }
-        deserializedArray.push(element1);
-      });
-      instance.details = deserializedArray;
-    }
 
+    if (instance.error) {
+
+      if (instance.error.code) {
+        this.code = instance.error.code;
+      }
+
+      if (instance.error.message) {
+        this.message = instance.error.message;
+      }
+
+      if (instance.error.target) {
+        this.target = instance.error.target;
+      }
+
+      if (instance.error.details) {
+        var deserializedArray = [];
+        instance.error.details.forEach(function (element1) {
+          if (element1) {
+            element1 = this.deserialize(element1);
+          }
+          deserializedArray.push(element1);
+        });
+        this.details = deserializedArray;
+      }
+    }
   }
-  return instance;
+  return this;
 };
 
 module.exports = CloudError;

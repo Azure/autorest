@@ -404,7 +404,7 @@ describe('nodejs', function () {
     it('should throw on PutNonRetry400', function (done) {
       testClient.lROSADs.putNonRetry400(product, function (error, result) {
         should.exist(error);
-        error.message.should.containEql('{"message":"Expected bad request message","status":400}');
+        error.message.should.containEql('Expected bad request message');
         done();
       });
     });
