@@ -10,15 +10,15 @@ The following documents describes AutoRest specific vendor extensions for [Swagg
 * [x-ms-paths](#x-ms-paths) - alternative to [Paths Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#pathsObject) that allows [Path Item Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#pathItemObject) to have query parameters for non pure REST APIs
 * x-ms-client-name - *not currently implemented*
 * [x-ms-external](#x-ms-external) - allows specific [Definition Objects](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#definitionsObject) to not be excluded from code generation
+* [x-ms-discriminator-value](#x-ms-discriminator-value) - maps discriminator value on the wire with the definition name.
 
 ## Microsoft Azure Extensions
-* x-ms-odata
-* x-ms-pageable
-* x-ms-long-running-operation
-* x-ms-azure-resource
-* x-ms-discriminator-value 
-* x-ms-request-id
-* x-ms-client-request-id
+* [x-ms-odata](#x-ms-odata) - indicates the operation includes one or more [OData](http://www.odata.org/) query parameters.
+* [x-ms-pageable](#x-ms-pageable) - allows paging through lists of data.
+* [x-ms-long-running-operation](#x-ms-long-running-operation) - indicates that the operation implemented Long Running Operation pattern as defined by the [Resource Managemer API](https://msdn.microsoft.com/en-us/library/azure/dn790568.aspx).
+* [x-ms-azure-resource](#x-ms-azure-resource) - indicates that the [Definition Schema Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#schemaObject) is a resource as defined by the [Resource Managemer API](https://msdn.microsoft.com/en-us/library/azure/dn790568.aspx)
+* [x-ms-request-id](#x-ms-request-id) - allows to overwrite the request id header name
+* [x-ms-client-request-id](#x-ms-client-request-id) - allows to overwrite the client request id header name
 
 ## x-ms-skip-url-encoding
 By default, `path` parameters will be URL-encoded automatically. This is a good default choice for user-provided values. This is not a good choice when the parameter is provided from a source where the value is known to be URL-encoded. The URL encoding is NOT an idempotent operation. For example, the percent character "%" is URL-encoded as "%25". If the parameter is URL-encoded again, "%25" becomes "%2525". Mark parameters where the source is KNOWN to be URL-encoded to prevent the automatic encoding behavior.
@@ -177,4 +177,179 @@ To allow generated clients to share models via shared libraries an `x-ms-externa
      }
   }
 }        
+```
+
+##x-ms-discriminator-value
+Swagger 2.0 specification requires that when used, the value of `discriminator` field MUST match the name of the schema or any schema that inherits it. To overcome this limitation `x-ms-discriminator-value` extension was introduced.
+
+**Schema**:
+`string` - the expected value of the `discriminator` field on the wire.
+
+**Parent element**:  [Schema Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#schemaObject)
+
+**Example**:
+```js
+"definitions": {
+  "SqlDefinition": {
+      "x-ms-discriminator-value": "USql",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SqlProperties"
+        }
+      ]
+   }
+}
+```
+
+##x-ms-odata
+When present the `x-ms-odata` extensions indicates the operation includes one or more [OData](http://www.odata.org/) query parameters. These parameters inlude `$filter`, `$top`, `$orderby`,  `$skip`,  and `$expand`. In some languages the generated method will expose these parameters as strongly types OData type.
+
+**Schema**:
+[`ref`](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#referenceObject) to the definition that describes object used in filter.
+
+**Parent element**:  [Operation Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#operationObject)
+
+**Example**:
+```js
+"paths": {    
+  "/subscriptions/resource": {
+    "get": {
+      "x-ms-odata": "#/definitions/Product"
+    }
+  }
+}
+```
+
+##x-ms-pageable
+The REST API guidelines define a common pattern for paging through lists of data. The operation response is modeled in Swagger as the list of items and the nextLink. Tag the operation as `x-ms-pageable` and the generated code will include methods for navigating between pages.
+
+**Schema**:
+Field Name | Type | Description
+---|:---:|---
+nextLinkName| `string` | Specifies the name of the property that provides the nextLink. If the model does not have the nextLink property then specify null.
+itemName | `string` | Specifies the name of the property that provides the collection of pageable items. Default value is 'value'.{Postfix}`.
+operationName | `string` | Specifies the name of the Next operation. Default value is 'XXXNext' where XXX is the name of the operation
+
+**Parent element**:  [Operation Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#operationObject)
+
+**Example**:
+x-ms-pageable operation definition
+```js
+"paths": {
+  "/products": {
+    "get": {
+      "x-ms-pageable": {
+        "nextLinkName": "nextLink"
+      },
+      "operationId": "products_list",
+      "description": "A pageable list of Products.",
+      "responses": {
+        "200": {
+          "schema": {
+            "$ref": "#/definitions/ProductListResult"
+          }
+        }
+      }
+    }
+  }
+}
+```
+x-ms-pageable model definition
+```js
+"ProductListResult": {
+  "properties": {
+    "value": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Product"
+      }
+    },
+    "nextLink": {
+      "type": "string"
+    }
+  }
+}
+```
+
+##x-ms-long-running-operation
+Some requests like creating/deleting a resource cannot be carried out immediately. In such a situation, the server sends a 201 (Created) or 202 (Accepted) and provides a link to monitor the status of the request. When such an operation is marked with extension `"x-ms-long-running-operation": true`, in Swagger, the generated code will know how to fetch the link to monitor the status. It will keep on polling at regular intervals till the request reaches one of the terminal states: Succeeded, Failed, or Canceled.
+
+**Parent element**:  [Operation Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#operationObject)
+
+**Schema**: 
+`true|false`
+
+**Example**:
+```js
+"paths": {
+  "/products/{name}": {
+    "put": {
+      "operationId": "products_create",
+      "x-ms-long-running-operation": true,
+      "description": "A pageable list of Products."
+    }
+  }
+}
+```
+
+##x-ms-azure-resource
+Resource types as defined by the [Resource Managemer API](https://msdn.microsoft.com/en-us/library/azure/dn790568.aspx) are tagged by using a `x-ms-azure-resource` extension.
+
+**Parent element**:  [Schema Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#schemaObject)
+
+**Schema**: 
+`true|false`
+
+**Example**:
+```js
+"Resource": {
+  "x-ms-azure-resource": true,
+  "properties": {
+    "id": {
+      "type": "string",
+      "readOnly": true,
+      "description": "Resource Id"
+    }
+  }
+}
+```
+
+##x-ms-request-id
+When set, allows to overwrite the `x-ms-request-id` response header (default is x-ms-request-id).
+
+**Parent element**:  [Operation Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#operationObject)
+
+**Schema**: 
+`string` - the name of the request id header to use when setting Response.RequestId property.
+
+**Example**:
+```js
+"paths": {
+  "/products/{name}": {
+    "get": {
+      "operationId": "products_create",
+      "x-ms-request-id": "request-id"
+    }
+  }
+}
+```
+
+##x-ms-client-request-id
+When set, allows to overwrite the `x-ms-client-request-id` request header (default is x-ms-client-request-id).
+
+**Parent element**:  [Operation Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#operationObject)
+
+**Schema**: 
+`string` - the name of the client request id header to use when setting sending request.
+
+**Example**:
+```js
+"paths": {
+  "/products/{name}": {
+    "get": {
+      "operationId": "products_create",
+      "x-ms-client-request-id": "request-id"
+    }
+  }
+}
 ```
