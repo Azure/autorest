@@ -9,7 +9,7 @@ The following documents describes AutoRest specific vendor extensions for [Swagg
 * [x-ms-parameter-grouping](#x-ms-parameter-grouping) - groups method parameters in generated clients
 * [x-ms-paths](#x-ms-paths) - alternative to [Paths Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#pathsObject) that allows [Path Item Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#pathItemObject) to have query parameters for non pure REST APIs
 * x-ms-client-name - *not currently implemented*
-* [x-ms-external](#x-ms-external) - allows specific [Definition Objects](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#definitionsObject) to not be excluded from code generation
+* [x-ms-external](#x-ms-external) - allows specific [Definition Objects](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#definitionsObject) to be excluded from code generation
 * [x-ms-discriminator-value](#x-ms-discriminator-value) - maps discriminator value on the wire with the definition name.
 
 ## Microsoft Azure Extensions
@@ -42,9 +42,9 @@ By default, `path` parameters will be URL-encoded automatically. This is a good 
 ```
 
 ## x-ms-enum
-Enum definitions in Swagger indicate that only a particular set of values may be used for a property or parameter. When the property is represented on the wire as a string, it would be a natural choice to represent the property type in C# as an enum. However, not all enumeration values should necessarily be represented as C# enums - there are additional considerations, such as how often expected values might change, since adding a new value to a C# enum is a breaking change requiring an updated API version. Additionally, there is some metadata that is required to create a useful C# enum, such as a descriptive name, which is not represented in swagger. For this reason, enums are not automatically turned into enum types in C# - instead they are rendered in the documentation comments for the property or parameter to indcate allowed values. To indicate that an enum will rarely change and that C# enum semantics are desired, use the `x-ms-enum` exension.
+Enum definitions in Swagger indicate that only a particular set of values may be used for a property or parameter. When the property is represented on the wire as a string, it would be a natural choice to represent the property type in C# and Java as an enum. However, not all enumeration values should necessarily be represented as strongly typed enums - there are additional considerations, such as how often expected values might change, since adding a new value to a strongly typed enum is a breaking change requiring an updated API version. Additionally, there is some metadata that is required to create a useful enum, such as a descriptive name, which is not represented in swagger. For this reason, enums are not automatically turned into strongly typed enum types - instead they are rendered in the documentation comments for the property or parameter to indicate allowed values. To indicate that an enum will rarely change and that C#/Java enum semantics are desired, use the `x-ms-enum` exension. Note that depending on the code generation language the behavior of this extension may differ.
 
-In C#, an enum type is generated and is declared as the type of the related request/response object. The enum is serialized as the string expected by the REST API.
+In C# and Java, an enum type is generated and is declared as the type of the related request/response object. The enum is serialized as the string expected by the REST API.
 
 **Parent element**: [Parameter Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#parameterObject), [Schema Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#schemaObject), [Items Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#itemsObject), or [Header Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#headerObject)
 
