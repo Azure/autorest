@@ -18,7 +18,7 @@ API descriptions that are valid according to the schema can produce client libra
 	- [Generating Operation Classes](#generating-operation-classes)
 	- [Specifying required parameters and properties](#specifying-required-parameters-and-properties)
 	- [Error Modeling](#error-modeling)
-- [Extensions](#Extensions)
+- [Extensions](#extensions)
 
 ## Data Types
 ### Primitive Data Types
