@@ -79,6 +79,7 @@ By default operation parameters are generated in the client as method arguments.
 **Parent element**: [Parameter Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#parameterObject)
 
 **Schema**:
+
 Field Name | Type | Description
 ---|:---:|---
 name | `string` | When set, specifies the name for the composite type.
@@ -224,6 +225,7 @@ When present the `x-ms-odata` extensions indicates the operation includes one or
 The REST API guidelines define a common pattern for paging through lists of data. The operation response is modeled in Swagger as the list of items and the nextLink. Tag the operation as `x-ms-pageable` and the generated code will include methods for navigating between pages.
 
 **Schema**:
+
 Field Name | Type | Description
 ---|:---:|---
 nextLinkName| `string` | Specifies the name of the property that provides the nextLink. If the model does not have the nextLink property then specify null.
