@@ -49,6 +49,9 @@
     "paths": {
       "$ref": "#/definitions/paths"
     },
+    "x-ms-paths": {
+      "$ref": "#/definitions/xmsPaths"
+    },
     "definitions": {
       "$ref": "#/definitions/definitions"
     },
