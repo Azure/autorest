@@ -75,6 +75,11 @@ ruby dk.rb init
 ruby dk.rb install
 gem install bundler
 ```
+
+### Python
+Install [Python 2.7 and Python 3.5](https://www.python.org/downloads/), and add one of them to your PATH (we recommend 3.5).
+>set PATH=PATH;C:\Python35
+
 ## Gulp
 We use [gulp](http://gulpjs.com) and msbuild / xbuild to handle the builds. Install for global use with
 >npm install gulp -g

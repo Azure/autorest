@@ -52,7 +52,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
         public void TestNextLinkDeSerialization()
         {
             var responseBody = @"{
-  ""value"": [
+  ""values"": [
     {
       ""id"": ""Product_1"",
       ""name"": ""ProductOne""
