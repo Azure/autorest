@@ -337,9 +337,9 @@ When set, allows to overwrite the `x-ms-request-id` response header (default is 
 ```
 
 ##x-ms-client-request-id
-When set, allows to overwrite the `x-ms-client-request-id` request header (default is x-ms-client-request-id).
+When set, specifies the header parameter to be used instead of `x-ms-client-request-id` (default is x-ms-client-request-id).
 
-**Parent element**:  [Operation Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#operationObject)
+**Parent element**:  [Header Parameter Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#parameterObject)
 
 **Schema**: 
 `string` - the name of the client request id header to use when setting sending request.
@@ -350,7 +350,7 @@ When set, allows to overwrite the `x-ms-client-request-id` request header (defau
   "/products/{name}": {
     "get": {
       "operationId": "products_create",
-      "x-ms-client-request-id": "request-id"
+      "x-ms-client-request-id": true
     }
   }
 }
