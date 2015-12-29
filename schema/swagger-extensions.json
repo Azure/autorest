@@ -178,11 +178,6 @@
     },
     "definitions": {
       "type": "object",
-      "properties": {
-        "x-ms-external": {
-          "$ref": "#/definitions/xmsExternal"
-        }
-      },
       "additionalProperties": {
         "$ref": "#/definitions/schema"
       },
@@ -1100,6 +1095,9 @@
         },
         "x-ms-azure-resource": {
           "$ref": "#/definitions/xmsAzureResource"
+        },
+        "x-ms-external": {
+          "$ref": "#/definitions/xmsExternal"
         },
         "xml": {
           "$ref": "#/definitions/xml"
