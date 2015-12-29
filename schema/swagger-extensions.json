@@ -1,6 +1,6 @@
 {
   "title": "A JSON Schema for Swagger 2.0 API.",
-  "id": "https://github.com/Azure/autorest/schema/swagger-extensions-strict.json#",
+  "id": "https://raw.githubusercontent.com/Azure/autorest/master/schema/swagger-extensions.json#",
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "required": [
