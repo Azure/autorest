@@ -49,6 +49,9 @@
     "paths": {
       "$ref": "#/definitions/paths"
     },
+    "x-ms-paths": {
+      "$ref": "#/definitions/xmsPaths"
+    },
     "definitions": {
       "$ref": "#/definitions/definitions"
     },
@@ -297,9 +300,6 @@
         },
         "x-ms-request-id": {
           "$ref": "#/definitions/xmsRequestId"
-        },
-        "x-ms-client-request-id": {
-          "$ref": "#/definitions/xmsClientRequestId"
         }
       }
     },
@@ -626,6 +626,9 @@
         },
         "x-ms-parameter-grouping": {
           "$ref": "#/definitions/xmsParameterGrouping"
+        },
+        "x-ms-client-request-id": {
+          "$ref": "#/definitions/xmsClientRequestId"
         },
         "multipleOf": {
           "$ref": "#/definitions/multipleOf"
@@ -1667,7 +1670,8 @@
         "modelAsString": {
           "type": "boolean"
         }
-      }
+      },
+      "additionalProperties": false
     },
     "xmsParameterGrouping": {
       "oneOf": [
@@ -1677,7 +1681,8 @@
             "name": {
               "type": [ "string", "null" ]
             }
-          }
+          },
+          "additionalProperties": false
         },
         {
           "type": "object",
@@ -1685,7 +1690,8 @@
             "postfix": {
               "type": [ "string", "null" ]
             }
-          }
+          },
+          "additionalProperties": false
         }
       ]
     },
@@ -1713,7 +1719,8 @@
         "operationName": {
           "type": [ "string", "null" ]
         }
-      }
+      },
+      "additionalProperties": false
     },
     "xmsLongRunningOperation": {
       "type": "boolean"
@@ -1725,7 +1732,7 @@
       "type": "string"
     },
     "xmsClientRequestId": {
-      "type": "string"
+      "type": "boolean"
     }
   }
 }
