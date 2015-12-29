@@ -789,13 +789,13 @@
             "required": true,
             "type": "string",
             "description": "The fooRequestId",
-            "x-ms-client-request-id": { "value": "true" }
+            "x-ms-client-request-id": true
           }
         ],
         "tags": [
           "Header Operations"
         ],
-        "x-ms-request-id": { "value": "foo-request-id" },
+        "x-ms-request-id": "foo-request-id",
         "responses": {
           "200": {
             "headers": {

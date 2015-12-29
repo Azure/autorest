@@ -503,10 +503,10 @@ namespace Microsoft.Rest.Generator.Azure
             {
                 if (parameter.Extensions.ContainsKey(ClientRequestIdExtension))
                 {
-                    JToken extensionObject = parameter.Extensions[ClientRequestIdExtension] as JToken;
+                    bool? extensionObject = parameter.Extensions[ClientRequestIdExtension] as bool?;
                     if (extensionObject != null)
                     {
-                        bool useParamAsClientRequestId = (bool)extensionObject;
+                        bool useParamAsClientRequestId = extensionObject.Value;
                         if (useParamAsClientRequestId)
                         {
                             //TODO: Need to do something if they specify two ClientRequestIdExtensions for the same method...?
@@ -530,10 +530,10 @@ namespace Microsoft.Rest.Generator.Azure
             string requestIdName = "x-ms-request-id";
             if (method.Extensions.ContainsKey(RequestIdExtension))
             {
-                JToken extensionObject = method.Extensions[RequestIdExtension] as JToken;
+                string extensionObject = method.Extensions[RequestIdExtension] as string;
                 if (extensionObject != null)
                 {
-                    requestIdName = (string)extensionObject;
+                    requestIdName = extensionObject;
                 }
             }
             
