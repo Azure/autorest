@@ -5,13 +5,9 @@ debug = require('gulp-debug'),
 env = require('gulp-env'),
 path = require('path'),
 fs = require('fs'),
-merge = require('merge2'),
 shell = require('gulp-shell'),
 glob = require('glob'),
-spawn = require('child_process').spawn,
-assemblyInfo = require('gulp-dotnet-assembly-info'),
 nuspecSync = require('./Tools/gulp/gulp-nuspec-sync'),
-runtimeVersionSync = require('./Tools/gulp/gulp-runtime-version-sync'),
 nugetProjSync = require('./Tools/gulp/gulp-nuget-proj-sync'),
 regenExpected = require('./Tools/gulp/gulp-regenerate-expected'),
 del = require('del'),
@@ -20,7 +16,6 @@ runSequence = require('run-sequence'),
 requireDir = require('require-dir')('./Tools/gulp');
 
 const DEFAULT_ASSEMBLY_VERSION = '0.9.0.0';
-const DNX_VERSION = '1.0.0-rc1-final';
 const MAX_BUFFER = 1024 * 4096;
 var isWindows = (process.platform.lastIndexOf('win') === 0);
 process.env.MSBUILDDISABLENODEREUSE = 1;
@@ -34,8 +29,8 @@ function basePathOrThrow() {
 
 function mergeOptions(obj1,obj2){
     var obj3 = {};
-    for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
-    for (var attrname in obj2) { obj3[attrname] = obj2[attrname]; }
+    for (var attributeName in obj1) { obj3[attributeName] = obj1[attributeName]; }
+    for (var attributeName in obj2) { obj3[attributeName] = obj2[attributeName]; }
     return obj3;
 }
 
@@ -110,7 +105,7 @@ var rubyAzureMappings = {
   'lro':['../../../TestServer/swagger/lro.json', 'LroModule'],
   'azure_url':['../../../TestServer/swagger/subscriptionId-apiVersion.json', 'AzureUrlModule'],
   'azure_special_properties': ['../../../TestServer/swagger/azure-special-properties.json', 'AzureSpecialPropertiesModule'],
-  'azure_report':['../../../TestServer/swagger/azure-report.json', 'AzureReportModule'],
+  'azure_report':['../../../TestServer/swagger/azure-report.json', 'AzureReportModule']
 };
 
 gulp.task('regenerate:expected', function(cb){
@@ -152,7 +147,7 @@ gulp.task('regenerate:expected:nodeazure', function(cb){
     'codeGenerator': 'Azure.NodeJS',
     'flatteningThreshold': '1'
   }, cb);
-})
+});
 
 gulp.task('regenerate:expected:node', function(cb){
   for (var p in defaultMappings) {
@@ -166,7 +161,7 @@ gulp.task('regenerate:expected:node', function(cb){
     'codeGenerator': 'NodeJS',
     'flatteningThreshold': '1'
   }, cb);
-})
+});
 
 gulp.task('regenerate:expected:rubyazure', function(cb){
   regenExpected({
@@ -177,7 +172,7 @@ gulp.task('regenerate:expected:rubyazure', function(cb){
     'codeGenerator': 'Azure.Ruby',
     'nsPrefix': 'MyNamespace'
   }, cb);
-})
+});
 
 gulp.task('regenerate:expected:ruby', function(cb){
   regenExpected({
@@ -188,10 +183,10 @@ gulp.task('regenerate:expected:ruby', function(cb){
     'codeGenerator': 'Ruby',
     'nsPrefix': 'MyNamespace'
   }, cb);
-})
+});
 
 gulp.task('regenerate:expected:javaazure', function(cb){
-  mappings = {};
+  var mappings = {};
   for (var key in defaultAzureMappings) {
     mappings[key.substring(16).toLowerCase()] = defaultAzureMappings[key];
   }
@@ -203,10 +198,10 @@ gulp.task('regenerate:expected:javaazure', function(cb){
     'codeGenerator': 'Azure.Java',
     'nsPrefix': 'Fixtures'
   }, cb);
-})
+});
 
 gulp.task('regenerate:expected:java', function(cb){
-  mappings = {};
+  var mappings = {};
   for (var key in defaultMappings) {
     mappings[key.substring(16).toLowerCase()] = defaultMappings[key];
   }
@@ -218,10 +213,10 @@ gulp.task('regenerate:expected:java', function(cb){
     'codeGenerator': 'Java',
     'nsPrefix': 'Fixtures'
   }, cb);
-})
+});
 
 gulp.task('regenerate:expected:csazure', function(cb){
-  mappings = mergeOptions({
+  var mappings = mergeOptions({
     'AcceptanceTests/AzureBodyDuration': '../../../TestServer/swagger/body-duration.json'
   }, defaultAzureMappings);
 
@@ -237,12 +232,12 @@ gulp.task('regenerate:expected:csazure', function(cb){
 });
 
 gulp.task('regenerate:expected:cs', function(cb){
-  mappings = mergeOptions({
+  var mappings = mergeOptions({
     'PetstoreV2': 'Swagger/swagger.2.0.example.v2.json',
     'Mirror.RecursiveTypes': 'Swagger/swagger-mirror-recursive-type.json',
     'Mirror.Primitives': 'Swagger/swagger-mirror-primitives.json',
     'Mirror.Sequences': 'Swagger/swagger-mirror-sequences.json',
-    'Mirror.Polymorphic': 'Swagger/swagger-mirror-polymorphic.json',
+    'Mirror.Polymorphic': 'Swagger/swagger-mirror-polymorphic.json'
   }, defaultMappings);
 
   regenExpected({
@@ -266,10 +261,10 @@ var msbuildDefaults = {
 };
 
 gulp.task('clean:node_modules', function(cb) {
-  del(['./AutoRest/**/node_modules', './ClientRuntimes/**/node_modules'], cb)
-})
+  return del(['./AutoRest/**/node_modules', './ClientRuntimes/**/node_modules'], cb);
+});
 
-gulp.task('clean:build', ['clean:node_modules'], function (cb) {
+gulp.task('clean:build', ['clean:node_modules'], function () {
   return gulp.src('build.proj').pipe(msbuild(mergeOptions(msbuildDefaults, {
     targets: ['clean']
   })));
@@ -277,7 +272,7 @@ gulp.task('clean:build', ['clean:node_modules'], function (cb) {
 
 gulp.task('clean:templates', function(cb) {
   del([
-    './AutoRest/**/Templates/*.cs',
+    './AutoRest/**/Templates/*.cs'
   ], cb);
 });
 
@@ -285,7 +280,7 @@ gulp.task('clean:generatedTest', function(cb) {
   var basePath = './AutoRest/NugetPackageTest';
   del([
     path.join(basePath, 'Generated/**/*'),
-    path.join(basePath, 'packages/**/*'),
+    path.join(basePath, 'packages/**/*')
   ], cb);
 });
 
@@ -306,7 +301,7 @@ gulp.task('syncDependencies:nugetProj', function() {
       default_version: DEFAULT_ASSEMBLY_VERSION
     }))
     .pipe(gulp.dest('.'));
-})
+});
 
 gulp.task('syncDependencies:nuspec', function() {
   var dirs = glob.sync(path.join(basePathOrThrow(), '/**/packages.config'))
@@ -327,7 +322,7 @@ gulp.task('syncDependencies:runtime', ['syncDependencies:runtime:cs', 'syncDepen
 
 gulp.task('syncDependencies', ['syncDependencies:nugetProj', 'syncDependencies:nuspec', 'syncDependencies:runtime']);
 
-gulp.task('build', function(cb) {
+gulp.task('build', function() {
   // warning 0219 is for unused variables, which causes the build to fail on xbuild
   return gulp.src('build.proj').pipe(msbuild(mergeOptions(msbuildDefaults, {
     targets: ['build'],
@@ -335,7 +330,7 @@ gulp.task('build', function(cb) {
   })));
 });
 
-gulp.task('build:release', function(cb) {
+gulp.task('build:release', function() {
   // warning 0219 is for unused variables, which causes the build to fail on xbuild
   return gulp.src('build.proj').pipe(msbuild(mergeOptions(msbuildDefaults,{
     targets: ['build'],
@@ -343,10 +338,10 @@ gulp.task('build:release', function(cb) {
   })));
 });
 
-gulp.task('package', function(cb) {
+gulp.task('package', function() {
   return gulp.src('build.proj').pipe(msbuild(mergeOptions(msbuildDefaults, {
     targets: ['package'],
-    verbosity: 'normal',
+    verbosity: 'normal'
   })));
 });
 
@@ -386,7 +381,9 @@ var xunitDnxXproj = [
 
 var defaultShellOptions = {
   verbosity: 3,
+  verbose: true,
   env: {
+    DEBUG: '*',
     AUTOREST_TEST_SERVER_PATH: path.resolve('AutoRest/TestServer')
   }
 };
@@ -407,7 +404,7 @@ var clrTask = function(cmd, options){
 var xunit = function(template, options){
   var xunitRunner = path.resolve('packages/xunit.runner.console.2.1.0/tools/xunit.console.exe');
   return execClrCmd(xunitRunner + ' ' + template, options);
-}
+};
 
 var xunitdnx = function(options){
   options.templateData = {
@@ -415,22 +412,16 @@ var xunitdnx = function(options){
       return path.basename(path.dirname(s))
     }
   };
-  var printStatusCodeCmd = 'echo Status code: %errorlevel%';
-  if (!isWindows) {
-      printStatusCodeCmd = 'echo Status code: $?';
-  }
-  var dnxScript = 'dnx --project "<%= file.path %>" test -verbose -xml "' + path.join(basePathOrThrow(), '/TestResults/') + '<%= f(file.path) %>.xml" && ' + printStatusCodeCmd;
+  var dnxScript = 'dnx --project "<%= file.path %>" test -verbose -xml "' + path.join(basePathOrThrow(), '/TestResults/') + '<%= f(file.path) %>.xml"';
   return shell(dnxScript, options);
-}
+};
 
 gulp.task('test:xunit', ['regenerate:expected:cs', 'regenerate:expected:csazure', 'test:xunit:dnx'], function () {
   return gulp.src(xunitTestsDlls).pipe(xunit('<%= file.path %> -noshadow -noappdomain -diagnostics', defaultShellOptions));
 });
 
 gulp.task('test:xunit:dnx', function () {
-  return gulp.src(xunitDnxXproj)
-        .pipe(debug())
-        .pipe(xunitdnx(defaultShellOptions));
+  return gulp.src(xunitDnxXproj).pipe(xunitdnx(defaultShellOptions));
 });
 
 var nugetPath = path.resolve('Tools/NuGet.exe');
@@ -447,7 +438,7 @@ gulp.task('test:nugetPackages:clean', function () {
 var autoRestExe = function(){
   gutil.log(glob.sync(path.join(basePathOrThrow(), 'AutoRest/NugetPackageTest/packages/autorest.*/tools/AutoRest.exe')));
   return glob.sync(path.join(basePathOrThrow(), 'AutoRest/NugetPackageTest/packages/autorest.*/tools/AutoRest.exe'))[0];
-}
+};
 
 gulp.task('test:nugetPackages:generate:csharp', ['test:nugetPackages:restore', 'test:nugetPackages:clean'], function(){
   var csharp = autoRestExe() + ' -Modeler Swagger -CodeGenerator CSharp -OutputDirectory ' + path.join(nugetTestProjDir, '/Generated/CSharp') + ' -Namespace Fixtures.Bodynumber -Input <%= file.path %> -Header NONE';
@@ -471,41 +462,34 @@ gulp.task('test:nugetPackages:xunit', ['test:nugetPackages:build'], function(){
   return xunitSrc.pipe(xunit('<%= file.path %> -noshadow -noappdomain', defaultShellOptions))
 });
 
-gulp.task('test:nugetPackages:npm', ['test:nugetPackages:generate'], shell.task('npm test', {cwd: nugetTestProjDir, verbosity: 3}))
+gulp.task('test:nugetPackages:npm', ['test:nugetPackages:generate'], shell.task('npm test', {cwd: nugetTestProjDir, verbosity: 3}));
 
 gulp.task('test:nugetPackages', ['test:nugetPackages:npm', 'test:nugetPackages:xunit']);
 
 gulp.task('test', function(cb){
+  var sequence = [
+    'test:xunit',
+    'test:clientruntime',
+    'test:node',
+    'test:node:azure',
+    'test:ruby',
+    'test:ruby:azure',
+    'test:java',
+    'test:java:azure'
+  ];
+
   if (isWindows) {
-    runSequence(
-      'test:xunit',
-      'test:clientruntime',
-      'test:node',
-      'test:node:azure',
-      'test:ruby',
-      'test:ruby:azure',
-      'test:java',
-      'test:java:azure',
-      'test:nugetPackages',
-      cb);
-  } else {
-    runSequence(
-      'test:xunit',
-      'test:clientruntime',
-      'test:node',
-      'test:node:azure',
-      'test:ruby',
-      'test:ruby:azure',
-      'test:java',
-      'test:java:azure',
-      cb);
+    sequence.push('test:nugetPackages');
   }
+
+  sequence.push(cb);
+  runSequence.apply(this, sequence);
 });
 
-gulp.task('analysis', function(cb) {
+gulp.task('analysis', function() {
   return gulp.src('build.proj').pipe(msbuild(mergeOptions(msbuildDefaults, {
     targets: ['codeanalysis'],
-    properties: { WarningsNotAsErrors: 0219, Configuration: 'Debug' },
+    properties: { WarningsNotAsErrors: 0219, Configuration: 'Debug' }
   })));
 });
 
@@ -513,9 +497,11 @@ gulp.task('default', function(cb){
   // analysis runs rebuild under the covers, so this cause build to be run in debug
   // the build release causes release bits to be built, so we can package release dlls
   // test then runs in debug, but uses the packages created in package
+  var sequence = ['clean', 'build'];
   if (isWindows) {
-    runSequence('clean', 'build', 'analysis', 'build:release', 'package', 'test', cb);
-  } else {
-    runSequence('clean', 'build', 'test', cb);
+    sequence.push('analysis', 'build:release', 'package');
   }
+
+  sequence.push('test', cb);
+  runSequence.apply(this, sequence);
 });
