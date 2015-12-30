@@ -208,6 +208,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             process.ErrorDataReceived += _listener.ProcessError;
             process.Start();
             process.BeginOutputReadLine();
+            process.BeginErrorReadLine();
             if (waitForServerStart)
             {
                 _listener.ProcessStarted.WaitOne(TimeSpan.FromSeconds(30));
