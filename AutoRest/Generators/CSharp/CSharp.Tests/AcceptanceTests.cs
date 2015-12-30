@@ -1572,12 +1572,138 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             using (var client = new AutoRestHttpInfrastructureTestService(Fixture.Uri))
             {
                 TestSuccessStatusCodes(client);
-                TestRedirectStatusCodes(client);
                 TestClientErrorStatusCodes(client);
                 TestServerErrorStatusCodes(client);
                 TestResponseModeling(client);
             }
         }
+
+#region HTTP Redirect Tests
+
+    [Fact]
+        public void RedirectHead300WithHttpMessagesTest()
+        {
+            WithClient(client =>
+                EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Head300WithHttpMessagesAsync()));
+        }
+
+        [Fact]
+        public void RedirectGet300WithHttpMessagesTest()
+        {
+            WithClient(client =>
+                EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Get300WithHttpMessagesAsync()));
+        }
+
+        [Fact]
+        public void RedirectHead302WithHttpMessagesTest()
+        {
+            WithClient(client =>
+                EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Head302WithHttpMessagesAsync()));
+        }
+
+        [Fact]
+        public void RedirectHead301WithHttpMessagesTest()
+        {
+            WithClient(client =>
+                EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Head301WithHttpMessagesAsync()));
+        }
+
+        [Fact]
+        public void RedirectGet301WithHttpMessagesTest()
+        {
+            WithClient(client =>
+                EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Get301WithHttpMessagesAsync()));
+        }
+
+        [Fact]
+        public void RedirectPut301WithHttpMessagesTest()
+        {
+            //TODO, 4048201: http client incorrectly redirects non-get/head requests when receiving a 301 or 302 response
+            WithClient(client =>
+            {
+                //EnsureStatusCode(HttpStatusCode.MovedPermanently, () => client.HttpRedirects.Put301WithHttpMessagesAsync(true));
+            });
+        }
+
+        [Fact]
+        public void RedirectPatch302WithHttpMessagesTest()
+        {
+            //TODO, 4048201: http client incorrectly redirects non-get/head requests when receiving a 301 or 302 response
+            WithClient(client =>
+            {
+                //EnsureStatusCode(HttpStatusCode.Found, () => client.HttpRedirects.Patch302WithHttpMessagesAsync(true));
+            });
+        }
+
+        // [Fact]
+        // public void RedirectPost303WithHttpMessagesTest()
+        // {
+        //     WithClient(client =>
+        //         EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Post303WithHttpMessagesAsync(true)));
+        // }
+
+        [Fact]
+        public void RedirectHead307WithHttpMessagesTest()
+        {
+            WithClient(client =>
+                EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Head307WithHttpMessagesAsync()));
+        }
+
+        [Fact]
+        public void RedirectGet307WithHttpMessagesTest()
+        {
+            WithClient(client =>
+                EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Get307WithHttpMessagesAsync()));
+        }
+
+        [Fact]
+        public void RedirectOptions307WithHttpMessagesTest()
+        {
+            //TODO, 4042586: Support options operations in swagger modeler
+            WithClient(client =>
+            {
+                //EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Options307WithHttpMessagesAsync());
+            });
+        }
+
+        [Fact]
+        public void RedirectPut307WithHttpMessagesTest()
+        {
+            WithClient(client =>
+                EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Put307WithHttpMessagesAsync(true)));
+        }
+
+        [Fact]
+        public void RedirectPost307WithHttpMessagesTest()
+        {
+            WithClient(client =>
+                EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Post307WithHttpMessagesAsync(true)));
+        }
+
+        [Fact]
+        public void RedirectPatch307WithHttpMessagesTest()
+        {
+            WithClient(client =>
+                EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Patch307WithHttpMessagesAsync(true)));
+        }
+
+        [Fact]
+        public void RedirectDelete307WithHttpMessagesTest()
+        {
+            WithClient(client =>
+                EnsureStatusCode(HttpStatusCode.OK, () => client.HttpRedirects.Delete307WithHttpMessagesAsync(true)));
+        }
+
+        private void WithClient(Action<AutoRestHttpInfrastructureTestService> action)
+        {
+            using (var client = new AutoRestHttpInfrastructureTestService(Fixture.Uri))
+            {
+                action(client);
+            }
+        }
+
+#endregion
+
 
         private static void TestResponseModeling(AutoRestHttpInfrastructureTestService client)
         {
@@ -1646,16 +1772,15 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             EnsureThrowsWithStatusCode(HttpStatusCode.HttpVersionNotSupported, () => client.HttpServerFailure.Delete505(true));
             client.HttpRetry.Head408();
             //TODO: Retry logic is flakey on Unix under DNX
-            //client.HttpRetry.Get502();            
-            //client.HttpRetry.Get502();
-            //client.HttpRetry.Put500(true);
+            client.HttpRetry.Get502();
+            client.HttpRetry.Put500(true);
             //TODO, 4042586: Support options operations in swagger modeler
             //client.HttpRetry.Options429();
-            //client.HttpRetry.Patch500(true);
-            //client.HttpRetry.Post503(true);
-            //client.HttpRetry.Delete503(true);
-            //client.HttpRetry.Put504(true);
-            //client.HttpRetry.Patch504(true);
+            client.HttpRetry.Patch500(true);
+            client.HttpRetry.Post503(true);
+            client.HttpRetry.Delete503(true);
+            client.HttpRetry.Put504(true);
+            client.HttpRetry.Patch504(true);
         }
 
         private static void TestClientErrorStatusCodes(AutoRestHttpInfrastructureTestService client)
@@ -1846,7 +1971,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                     logger.LogInformation(string.Format(CultureInfo.CurrentCulture, "SKIPPED {0}.", item));
                 }
 #if PORTABLE
-                float totalTests = report.Count - 9;  // there are 9 tests that fail in DNX
+                float totalTests = report.Count - 4;  // there are 5 tests that fail in DNX
 #else
                 float totalTests = report.Count;
 #endif
