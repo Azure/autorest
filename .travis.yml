@@ -8,6 +8,7 @@ addons:
     - debian-sid
     packages:
     - libunwind8
+    - tree
 install:
   - curl -sSL https://raw.githubusercontent.com/aspnet/Home/dev/dnvminstall.sh | sh && source ~/.dnx/dnvm/dnvm.sh && dnvm upgrade
   - npm install -g npm@'>=1.4.3'
