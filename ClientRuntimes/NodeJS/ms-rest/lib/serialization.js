@@ -157,23 +157,23 @@ exports.serialize = function (mapper, object, objectName, client) {
   var payload = {};
   var mapperType = mapper.type.name;
   if (!objectName) objectName = objectNameFromSerializedName(mapper.serializedName);
-  if (mapperType === 'Sequence') payload = [];
+  if (mapperType.match(/^Sequence$/ig) !== null) payload = [];
   //Set Defaults
   if (mapper.defaultValue && (object === null || object === undefined)) object = mapper.defaultValue;
   
   if (mapperType.match(/^(Number|String|Boolean)$/ig) !== null) {
     payload = serializeBasicTypes(mapperType, objectName, object);
-  } else if (mapperType === 'Enum') {
+  } else if (mapperType.match(/^Enum$/ig) !== null) {
     payload = serializeEnumType(objectName, mapper.type.allowedValues, object);
   } else if (mapperType.match(/^(Date|DateTime|TimeSpan|DateTimeRfc1123)$/ig) !== null) {
     payload = serializeDateTypes(mapperType, object, objectName);
-  } else if (mapperType === 'ByteArray') {
+  } else if (mapperType.match(/^ByteArray$/ig) !== null) {
     payload = serializeBufferType(objectName, object);
-  } else if (mapperType === 'Sequence') {
+  } else if (mapperType.match(/^Sequence$/ig) !== null) {
     payload = serializeSequenceType(mapper, object, objectName, client);
-  } else if (mapperType === 'Dictionary') {
+  } else if (mapperType.match(/^Dictionary$/ig) !== null) {
     payload = serializeDictionaryType(mapper, object, objectName, client);
-  } else if (mapperType === 'Composite') {
+  } else if (mapperType.match(/^Composite$/ig) !== null) {
     payload = serializeCompositeType(mapper, object, objectName, client);
   }
   return payload;
@@ -212,7 +212,9 @@ function serializeDictionaryType(mapper, object, objectName, client) {
   }
   var tempDictionary = {};
   for (var key in object) {
-    tempDictionary[key] = exports.serialize(mapper.type.value, object[key], objectName, client);
+    if (object.hasOwnProperty(key)) {
+      tempDictionary[key] = exports.serialize(mapper.type.value, object[key], objectName, client);
+    }
   }
   return tempDictionary;
 }
@@ -249,18 +251,20 @@ function serializeCompositeType(mapper, object, objectName, client) {
     }
     if (requiresFlattening(modelProps, object) && !payload.properties) payload.properties = {};
     for (var key in modelProps) {
-      //make sure required properties of the CompositeType are present
-      if (modelProps[key].required) {
-        if (object[key] === null || object[key] === undefined) {
-          throw new Error(util.format('\'%s\' cannot be null or undefined in \'%s\'.', key, objectName));
+      if (modelProps.hasOwnProperty(key)) {
+        //make sure required properties of the CompositeType are present
+        if (modelProps[key].required) {
+          if (object[key] === null || object[key] === undefined) {
+            throw new Error(util.format('\'%s\' cannot be null or undefined in \'%s\'.', key, objectName));
+          }
         }
-      }
-      //serialize the property if it is present in the provided object instance
-      if (object[key] !== null && object[key] !== undefined) {
-        var propertyObjectName = objectName + '.' + objectNameFromSerializedName(modelProps[key].serializedName);
-        var propertyMapper = modelProps[key];
-        var serializedValue = exports.serialize(propertyMapper, object[key], propertyObjectName, client);
-        assignProperty(modelProps[key].serializedName, payload, serializedValue);
+        //serialize the property if it is present in the provided object instance
+        if (object[key] !== null && object[key] !== undefined) {
+          var propertyObjectName = objectName + '.' + objectNameFromSerializedName(modelProps[key].serializedName);
+          var propertyMapper = modelProps[key];
+          var serializedValue = exports.serialize(propertyMapper, object[key], propertyObjectName, client);
+          assignProperty(modelProps[key].serializedName, payload, serializedValue);
+        }
       }
     }
     return payload;
@@ -269,15 +273,15 @@ function serializeCompositeType(mapper, object, objectName, client) {
 }
 
 function serializeBasicTypes(typeName, objectName, value) {
-  if (typeName === 'Number') {
+  if (typeName.match(/^Number$/ig) !== null) {
     if (typeof value !== 'number') {
       throw new Error(util.format('%s must be of type number.', objectName));
     }
-  } else if (typeName === 'String') {
+  } else if (typeName.match(/^String$/ig) !== null) {
     if (typeof value.valueOf() !== 'string') {
       throw new Error(util.format('%s must be of type string.', objectName));
     }
-  } else if (typeName === 'Boolean') {
+  } else if (typeName.match(/^Boolean$/ig) !== null) {
     if (typeof value !== 'boolean') {
       throw new Error(util.format('%s must be of type boolean.', objectName));
     }
@@ -305,25 +309,25 @@ function serializeBufferType(objectName, value) {
 }
 
 function serializeDateTypes(typeName, value, objectName) {
-  if (typeName === 'Date') {
+  if (typeName.match(/^Date$/ig) !== null) {
     if (!(value instanceof Date || 
         (typeof value.valueOf() === 'string' && !isNaN(Date.parse(value))))) {
       throw new Error(util.format('%s must be an instanceof Date or a string in ISO8601 format.', objectName));
     }
     value = (value instanceof Date) ? value.toISOString().substring(0, 10) : new Date(value).toISOString().substring(0, 10);
-  } else if (typeName === 'DateTime') {
+  } else if (typeName.match(/^DateTime$/ig) !== null) {
     if (!(value instanceof Date || 
         (typeof value.valueOf() === 'string' && !isNaN(Date.parse(value))))) {
       throw new Error(util.format('%s must be an instanceof Date or a string in ISO8601 format.', objectName));
     }
     value = (value instanceof Date) ? value.toISOString() :  new Date(value).toISOString();
-  } else if (typeName === 'DateTimeRfc1123') {
+  } else if (typeName.match(/^DateTimeRfc1123$/ig) !== null) {
     if (!(value instanceof Date || 
         (typeof value.valueOf() === 'string' && !isNaN(Date.parse(value))))) {
       throw new Error(util.format('%s must be an instanceof Date or a string in RFC-1123 format.', objectName));
     }
     value = (value instanceof Date) ? value.toUTCString() :  new Date(value).toUTCString();
-  } else if (typeName === 'TimeSpan') {
+  } else if (typeName.match(/^TimeSpan$/ig) !== null) {
     if (!moment.isDuration(value)) {
       throw new Error(util.format('%s must be a TimeSpan/Duration.', objectName));
     }

@@ -495,7 +495,8 @@ describe('msrest', function () {
 
     it('should correctly serialize a composite type', function (done) {
       var client = new testClient('http://localhost:9090');
-      mapper = new client.models['Product']().mapper();
+      var product = new client.models['Product']();
+      mapper = product.mapper();
       var productObj = {
         id: 101,
         name: 'TestProduct',
