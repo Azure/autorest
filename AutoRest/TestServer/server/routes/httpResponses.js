@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var util = require('util');
 var utils = require('../util/utils')
+var debugRetry = require('debug')('http:retry');
 
 var getHttpScenarioName = function(scenario, method, code) {
     var lookup = {
@@ -175,20 +176,21 @@ var getHttpScenarioName = function(scenario, method, code) {
 };
 
 var isRetryRequest = function(req, code, method) {
-    var cookies = req.headers['cookie'];
-    var cookieMatch;
-    if (cookies) {
-        cookieMatch = /tries=(\w+)/.exec(cookies);
-        if (cookieMatch && cookieMatch[1] && cookieMatch[1] === code + '_' + method) {
+    debugRetry('method: ', req.method, ' uri: ', req.url + ' cookies: ', JSON.stringify(req.cookies))
+    if (req.cookies.tries) {
+        var tries = req.cookies.tries
+        if (tries === code + '_' + method) {
+            debugRetry('method: ', req.method + ' match: ', true, ' uri: ', req.url)
             return true;
         }
     }
-
+    debugRetry('method: ', req.method + ', match: ', false, ', uri: ', req.url)
     return false;
 };
 
 var addRetryTracker = function(res, code, method) {
-    res.cookie('tries', code + '_' + method, {'maxAge': 900000});
+    var day = 24 * 60 * 60 * 1000;
+    res.cookie('tries', code + '_' + method, { maxAge: day });
     return res;
 };
 
@@ -497,14 +499,14 @@ var httpResponses = function(coverage, optionalCoverage) {
     });
 
     router.all('/retry/:code', function( req, res, next) {
-       var scenario = getHttpScenarioName("Retry", req.method, req.params.code);
-       var code = JSON.parse(req.params.code);
+        var scenario = getHttpScenarioName("Retry", req.method, req.params.code);
+        var code = JSON.parse(req.params.code);
         if (scenario !== null) {
             if (isRetryRequest(req, code, req.method.toLowerCase())) {
-               updateScenarioCoverage(scenario, req.method);
-               removeRetryTracker(res).status(200).end();
+                updateScenarioCoverage(scenario, req.method);
+                removeRetryTracker(res).status(200).end();
             } else {
-               utils.sendError(code, addRetryTracker(res, code, req.method.toLowerCase()), next, "Retry scenario initial request");
+                utils.sendError(code, addRetryTracker(res, code, req.method.toLowerCase()), next, "Retry scenario initial request");
             }
         }
         else {
