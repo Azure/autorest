@@ -12,7 +12,7 @@ install:
   - curl -sSL https://raw.githubusercontent.com/aspnet/Home/dev/dnvminstall.sh | sh && source ~/.dnx/dnvm/dnvm.sh && dnvm upgrade
   - npm install -g npm@'>=1.4.3'
   - npm install
-  - rvm use 2.2.1 --install --binary --fuzzy
+  - rvm use 2 --install --binary --fuzzy
   - gem install bundler
   - bundle install
 script:
