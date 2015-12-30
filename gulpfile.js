@@ -412,7 +412,7 @@ var xunitdnx = function(options){
       return path.basename(path.dirname(s))
     }
   };
-  var dnxScript = 'dnx --project "<%= file.path %>" test -verbose "';
+  var dnxScript = 'dnx --project "<%= file.path %>" test -verbose';
   return shell(dnxScript, options);
 };
 
