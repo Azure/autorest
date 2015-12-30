@@ -495,7 +495,7 @@ describe('msrest', function () {
 
     it('should correctly serialize a composite type', function (done) {
       var client = new testClient('http://localhost:9090');
-      mapper = new client._models['Product']().mapper();
+      mapper = new client.models['Product']().mapper();
       var productObj = {
         id: 101,
         name: 'TestProduct',
@@ -545,7 +545,29 @@ describe('msrest', function () {
         ]
       };
       var serializedProduct = msRest.serialize(mapper, productObj, 'productObject', client);
-      JSON.stringify(productObj).should.equal(JSON.stringify(serializedProduct));
+      for (var prop in serializedProduct) {
+        if (prop === 'properties') {
+          serializedProduct[prop].provisioningState.should.equal(productObj.provisioningState);
+        }
+        if (prop === 'id') {
+          serializedProduct[prop].should.equal(productObj.id);
+        }
+        if (prop === 'name') {
+          serializedProduct[prop].should.equal(productObj.name);
+        }
+        if (prop === 'tags') {
+          JSON.stringify(serializedProduct[prop]).should.equal(JSON.stringify(productObj.tags));
+        }
+        if (prop === 'dispatchTime') {
+          JSON.stringify(serializedProduct[prop]).should.equal(JSON.stringify(productObj.dispatchTime));
+        }
+        if (prop === 'invoiceInfo') {
+          (JSON.stringify(serializedProduct[prop]).length - JSON.stringify(productObj.invoiceInfo).length).should.equal(4);
+        }
+        if (prop === 'subProducts') {
+          (JSON.stringify(serializedProduct[prop]).length - JSON.stringify(productObj.subProducts).length).should.equal(8);
+        }
+      }
       done();
     });
   });

@@ -158,6 +158,9 @@ exports.serialize = function (mapper, object, objectName, client) {
   var mapperType = mapper.type.name;
   if (!objectName) objectName = objectNameFromSerializedName(mapper.serializedName);
   if (mapperType === 'Sequence') payload = [];
+  //Set Defaults
+  if (mapper.defaultValue && (object === null || object === undefined)) object = mapper.defaultValue;
+  
   if (mapperType.match(/^(Number|String|Boolean)$/ig) !== null) {
     payload = serializeBasicTypes(mapperType, objectName, object);
   } else if (mapperType === 'Enum') {
@@ -232,13 +235,19 @@ function serializeCompositeType(mapper, object, objectName, client) {
       }
       //get the mapper if modelProperties of the CompositeType is not present and 
       //then get the modelProperties from it.
-      modelMapper = new client._models[mapper.type.className]().mapper();
+      modelMapper = new client.models[mapper.type.className]().mapper();
       if (!modelMapper) {
         throw new Error(util.format('mapper() cannot be null or undefined for model \'%s\'', 
               mapper.type.className));
       }
       modelProps = modelMapper.type.modelProperties;
+      if (!modelProps) {
+        throw new Error(util.format('modelProperties cannot be null or undefined in the ' + 
+          'mapper \'%s\' of type \'%s\' for object \'%s\'.', JSON.stringify(modelMapper), 
+          mapper.type.className, objectName));
+      }
     }
+    if (requiresFlattening(modelProps, object) && !payload.properties) payload.properties = {};
     for (var key in modelProps) {
       //make sure required properties of the CompositeType are present
       if (modelProps[key].required) {
@@ -250,7 +259,8 @@ function serializeCompositeType(mapper, object, objectName, client) {
       if (object[key] !== null && object[key] !== undefined) {
         var propertyObjectName = objectName + '.' + objectNameFromSerializedName(modelProps[key].serializedName);
         var propertyMapper = modelProps[key];
-        payload[key] = exports.serialize(propertyMapper, object[key], propertyObjectName, client);
+        var serializedValue = exports.serialize(propertyMapper, object[key], propertyObjectName, client);
+        assignProperty(modelProps[key].serializedName, payload, serializedValue);
       }
     }
     return payload;
@@ -322,15 +332,17 @@ function serializeDateTypes(typeName, value, objectName) {
   return value;
 }
 
-function assignProperty(key, payload, object) {
-  if (stringContainsProperties(key)) {
-    payload.properties[key] = object[key];
+function assignProperty(serializedName, payload, serializedValue) {
+  var key = objectNameFromSerializedName(serializedName);
+  if (stringContainsProperties(serializedName)) {
+    payload.properties[key] = serializedValue;
   } else {
-    payload[key] = object[key];
+    payload[key] = serializedValue;
   }
 }
+
 function requiresFlattening(mapper, object) {
-  return Object.keys(mapper).some(function (item) {
+  return Object.keys(mapper).some(function (key) {
     return ((mapper[key].serializedName.match(/^properties\./ig) !== null) && 
             (object[key] !== null && object[key] !== undefined));
   });
@@ -338,13 +350,13 @@ function requiresFlattening(mapper, object) {
 
 function objectNameFromSerializedName(name) {
   if (stringContainsProperties(name)) {
-    return name.match(/^properties\.(\w+)/ig)[0];
+    return name.match(/^properties\.(\w+)$/i)[1];
   }
   return name;
 }
 
 function stringContainsProperties(prop) {
-  return (prop.match(/^properties\.(\w+)/ig) !== null);
+  return (prop.match(/^properties\.(\w+)$/i) !== null);
 }
 
 exports = module.exports;

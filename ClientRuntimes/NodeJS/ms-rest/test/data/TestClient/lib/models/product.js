@@ -19,7 +19,7 @@
  * @member {string} [string]
  * 
  */
-function Product(parameters) {}
+function Product() {}
 
 
 /**
@@ -49,7 +49,7 @@ Product.prototype.mapper = function () {
           }
         },
         provisioningState : {
-          serializedName: 'provisioningState',
+          serializedName: 'properties.provisioningState',
           required: false,
           type : {
             name: 'Enum',

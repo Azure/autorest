@@ -58,8 +58,10 @@ function ServiceClient(credentials, options) {
   
   // enable network tracing
   this._setDefaultProxy();
+  this.models = [];
 }
 
+ServiceClient.prototype.models;
 /*
 * Loads the fields "useProxy" and respective protocol, port and url
 * from the environment values HTTPS_PROXY and HTTP_PROXY
