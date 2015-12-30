@@ -19,9 +19,6 @@ script:
   - dnvm install 1.0.0-rc1-final -r mono
   - dnvm install 1.0.0-rc1-final -r coreclr
   - dnvm use 1.0.0-rc1-final -r coreclr -persistent
-  - ls -la /home/travis/build/Azure/autorest/AutoRest/Generators/CSharp/Azure.CSharp.Tests/
-  - ls -la /home/travis/build/Azure/autorest/TestResults/
-  - ls -la /home/travis/build/Azure/autorest/AutoRest/Generators/CSharp/CSharp.Tests/
   - gulp
 after_script:
   - echo "========== Server log: ============"
