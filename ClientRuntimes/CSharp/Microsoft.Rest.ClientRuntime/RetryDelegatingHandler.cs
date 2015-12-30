@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http;
 using System.Threading;
@@ -95,7 +96,26 @@ namespace Microsoft.Rest
             {
                 await RetryPolicy.ExecuteAsync(async () =>
                 {
+                    var clientHandler = InnerHandler as HttpClientHandler;
+                    if(clientHandler != null && clientHandler.CookieContainer != null)
+                    {
+                        var cookieHeader = clientHandler.CookieContainer.GetCookieHeader(request.RequestUri);
+                        if (!string.IsNullOrEmpty(cookieHeader)) {
+                            request.Headers.TryAddWithoutValidation("Cookie", cookieHeader);
+                        }
+                    }
+
                     responseMessage = await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
+
+                    if(clientHandler != null && clientHandler.CookieContainer != null)
+                    {
+                        IEnumerable<string> cookieHeaders;
+                        if (responseMessage.Headers.TryGetValues("Set-Cookie", out cookieHeaders)) {
+                            foreach (string cookie in cookieHeaders) {
+                                clientHandler.CookieContainer.SetCookies(request.RequestUri, cookie);
+                            }
+                        }
+                    }
 
                     if (!responseMessage.IsSuccessStatusCode)
                     {
