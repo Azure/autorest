@@ -19,6 +19,7 @@ import com.squareup.okhttp.Response;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
+import java.util.concurrent.CountDownLatch;
 
 import javax.crypto.NoSuchPaddingException;
 
@@ -32,6 +33,8 @@ public class UserTokenCredentialsInterceptor implements Interceptor {
     private UserTokenCredentials credentials;
 
     private Activity activity;
+
+    private CountDownLatch signal = new CountDownLatch(1);
 
     /**
      * Initialize a UserTokenCredentialsInterceptor class with a
@@ -67,9 +70,9 @@ public class UserTokenCredentialsInterceptor implements Interceptor {
 
     private void acquireAccessToken(final Request request) throws IOException {
         String authorityUrl = credentials.getEnvironment().getAuthenticationEndpoint() + credentials.getDomain();
-        AuthenticationContext context = null;
+        AuthenticationContext context;
         try {
-            context = new AuthenticationContext(activity, authorityUrl, false);
+            context = new AuthenticationContext(activity, authorityUrl, true);
         } catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
             return;
         }
@@ -77,13 +80,13 @@ public class UserTokenCredentialsInterceptor implements Interceptor {
                 credentials.getEnvironment().getTokenAudience(),
                 credentials.getClientId(),
                 credentials.getClientRedirectUri(),
-                PromptBehavior.Auto,
+                PromptBehavior.REFRESH_SESSION,
                 new AuthenticationCallback<AuthenticationResult>() {
                     @Override
                     public void onSuccess(AuthenticationResult authenticationResult) {
                         if (authenticationResult != null && authenticationResult.getAccessToken() != null) {
                             credentials.setToken(authenticationResult.getAccessToken());
-                            credentials.getCallback().onSuccess(authenticationResult);
+                            signal.countDown();
                         } else {
                             onError(new IOException("Failed to acquire access token for request url " + request.urlString()));
                         }
@@ -91,8 +94,11 @@ public class UserTokenCredentialsInterceptor implements Interceptor {
 
                     @Override
                     public void onError(Exception e) {
-                        credentials.getCallback().onError(e);
+                        signal.countDown();
                     }
-        });
+                });
+        try {
+            signal.await();
+        } catch (InterruptedException e) { /* Ignore */ }
     }
 }

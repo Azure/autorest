@@ -8,6 +8,9 @@ buildscript {
 apply plugin: 'com.android.library'
 apply plugin: 'maven'
 
+group = 'com.microsoft.rest'
+version = '0.0.1-SNAPSHOT'
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.1"
@@ -54,7 +57,7 @@ uploadArchives {
             snapshotRepository(url: "ftp://waws-prod-bay-005.ftp.azurewebsites.windows.net/site/wwwroot/") {
                 authentication(userName: username, password: password)
             }
-            pom.setArtifactId "azure-client-authentication"
+            pom.setArtifactId "azure-android-client-authentication"
             pom.project {
                 name 'Microsoft Azure AutoRest Authentication Library for Java'
                 description 'This is the authentication library for AutoRest generated Azure Java clients.'
