@@ -1,5 +1,5 @@
 language: csharp
-sudo: false
+sudo: true
 mono:
   - beta
 addons:
