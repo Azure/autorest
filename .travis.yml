@@ -1,5 +1,6 @@
 language: csharp
 sudo: true
+dist: trusty
 mono:
   - beta
 addons:
