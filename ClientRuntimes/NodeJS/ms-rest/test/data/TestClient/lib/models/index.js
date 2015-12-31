@@ -17,3 +17,5 @@
 exports.Product = require('./product');
 exports.Invoice = require('./invoice');
 exports.SubProduct = require('./subProduct');
+exports.ProductListResult = require('./productListResult');
+exports.ProductListResultNextLink = require('./productListResultNextLink');

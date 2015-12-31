@@ -38,6 +38,8 @@
     <Compile Include="test\data\TestClient\lib\models\index.js" />
     <Compile Include="test\data\TestClient\lib\models\invoice.js" />
     <Compile Include="test\data\TestClient\lib\models\product.js" />
+    <Compile Include="test\data\TestClient\lib\models\productListResultNextLink.js" />
+    <Compile Include="test\data\TestClient\lib\models\productListResult.js" />
     <Compile Include="test\data\TestClient\lib\models\subProduct.js" />
     <Compile Include="test\data\TestClient\lib\testClient.js" />
     <Compile Include="test\logFilterTests.js" />

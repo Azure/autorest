@@ -4,6 +4,7 @@
 var assert = require('assert');
 var should = require('should');
 var moment = require('moment');
+var util = require('util');
 var msRest = require('../lib/msRest');
 var testClient = require('./data/TestClient/lib/testClient');
 
@@ -549,24 +550,173 @@ describe('msrest', function () {
       for (var prop in serializedProduct) {
         if (prop === 'properties') {
           serializedProduct[prop].provisioningState.should.equal(productObj.provisioningState);
-        }
-        if (prop === 'id') {
+        } else if (prop === 'id') {
           serializedProduct[prop].should.equal(productObj.id);
-        }
-        if (prop === 'name') {
+        } else if (prop === 'name') {
           serializedProduct[prop].should.equal(productObj.name);
-        }
-        if (prop === 'tags') {
+        } else if (prop === 'tags') {
           JSON.stringify(serializedProduct[prop]).should.equal(JSON.stringify(productObj.tags));
-        }
-        if (prop === 'dispatchTime') {
+        } else if (prop === 'dispatchTime') {
           JSON.stringify(serializedProduct[prop]).should.equal(JSON.stringify(productObj.dispatchTime));
-        }
-        if (prop === 'invoiceInfo') {
+        } else if (prop === 'invoiceInfo') {
           (JSON.stringify(serializedProduct[prop]).length - JSON.stringify(productObj.invoiceInfo).length).should.equal(4);
-        }
-        if (prop === 'subProducts') {
+        } else if (prop === 'subProducts') {
           (JSON.stringify(serializedProduct[prop]).length - JSON.stringify(productObj.subProducts).length).should.equal(8);
+        }
+      }
+      done();
+    });
+
+    it('should correctly deserialize a composite type', function (done) {
+      var client = new testClient('http://localhost:9090');
+      var product = new client.models['Product']();
+      mapper = product.mapper();
+      var responseBody = {
+        id: 101,
+        name: 'TestProduct',
+        properties: {
+          provisioningState: 'Succeeded'
+        },
+        tags: {
+          tag1: 'value1',
+          tag2: 'value2'
+        },
+        dispatchTime: new Date('2015-01-01T12:35:36.009Z'),
+        invoiceInfo: {
+          invoiceId: 1002,
+          invDate: '2015-12-25',
+          invProducts: [
+            {
+              'Product1' : {
+                id: 101,
+                name: 'TestProduct'
+              }
+            },
+            {
+              'Product2' : {
+                id: 104,
+                name: 'TestProduct1'
+              }
+            }
+          ]
+        },
+        subProducts: [
+          {
+            subId: 102,
+            subName: 'SubProduct1',
+            makeTime: new Date('2015-12-21T01:01:01'),
+            invoiceInfo: {
+              invoiceId: 1002,
+              invDate: '2015-12-25'
+            }
+          },
+          {
+            subId: 103,
+            subName: 'SubProduct2',
+            makeTime: new Date('2015-12-21T01:01:01'),
+            invoiceInfo: {
+              invoiceId: 1003,
+              invDate: '2015-12-25'
+            }
+          }
+        ]
+      };
+      var deserializedProduct = msRest.deserialize(mapper, responseBody, 'responseBody', client);
+      for (var prop in deserializedProduct) {
+        if (prop === 'provisioningState') {
+          deserializedProduct.provisioningState.should.equal(responseBody.properties.provisioningState);
+        } else if (prop === 'id') {
+          deserializedProduct[prop].should.equal(responseBody.id);
+        } else if (prop === 'name') {
+          deserializedProduct[prop].should.equal(responseBody.name);
+        } else if (prop === 'tags') {
+          JSON.stringify(deserializedProduct[prop]).should.equal(JSON.stringify(responseBody.tags));
+        } else if (prop === 'dispatchTime') {
+          JSON.stringify(deserializedProduct[prop]).should.equal(JSON.stringify(responseBody.dispatchTime));
+        } else if (prop === 'invoiceInfo') {
+          (JSON.stringify(deserializedProduct[prop]).length - JSON.stringify(responseBody.invoiceInfo).length).should.equal(10);
+        } else if (prop === 'subProducts') {
+          (JSON.stringify(deserializedProduct[prop]).length - JSON.stringify(responseBody.subProducts).length).should.equal(20);
+        }
+      }
+      done();
+    });
+
+    it('should correctly deserialize a pageable type without nextLink', function (done) {
+      var client = new testClient('http://localhost:9090');
+      var productListResult = new client.models['ProductListResult']();
+      mapper = productListResult.mapper();
+      var responseBody = {
+        value: [
+          {
+            id: 101,
+            name: 'TestProduct',
+            properties: {
+              provisioningState: 'Succeeded'
+            }
+          },
+          {
+            id: 104,
+            name: 'TestProduct1',
+            properties: {
+              provisioningState: 'Failed'
+            }
+          }
+        ]
+      };
+      var deserializedProduct = msRest.deserialize(mapper, responseBody, 'responseBody', client);
+      (util.isArray(deserializedProduct)).should.be.true;
+      deserializedProduct.length.should.equal(2);
+      for (var i = 0; i < deserializedProduct.length; i++) {
+        if (i === 0) {
+          deserializedProduct[i].id.should.equal(101);
+          deserializedProduct[i].name.should.equal('TestProduct');
+          deserializedProduct[i].provisioningState.should.equal('Succeeded');
+        } else if (i === 1) {
+          deserializedProduct[i].id.should.equal(104);
+          deserializedProduct[i].name.should.equal('TestProduct1');
+          deserializedProduct[i].provisioningState.should.equal('Failed');
+        }
+      }
+      done();
+    });
+
+    it('should correctly deserialize a pageable type with nextLink', function (done) {
+      var client = new testClient('http://localhost:9090');
+      var productListResultNextLink = new client.models['ProductListResultNextLink']();
+      mapper = productListResultNextLink.mapper();
+      var responseBody = {
+        value: [
+          {
+            id: 101,
+            name: 'TestProduct',
+            properties: {
+              provisioningState: 'Succeeded'
+            }
+          },
+          {
+            id: 104,
+            name: 'TestProduct1',
+            properties: {
+              provisioningState: 'Failed'
+            }
+          }
+        ],
+        nextLink: 'https://helloworld.com'
+      };
+      var deserializedProduct = msRest.deserialize(mapper, responseBody, 'responseBody', client);
+      (util.isArray(deserializedProduct)).should.be.true;
+      deserializedProduct.length.should.equal(2);
+      deserializedProduct.nextLink.should.equal('https://helloworld.com');
+      for (var i = 0; i < deserializedProduct.length; i++) {
+        if (i === 0) {
+          deserializedProduct[i].id.should.equal(101);
+          deserializedProduct[i].name.should.equal('TestProduct');
+          deserializedProduct[i].provisioningState.should.equal('Succeeded');
+        } else if (i === 1) {
+          deserializedProduct[i].id.should.equal(104);
+          deserializedProduct[i].name.should.equal('TestProduct1');
+          deserializedProduct[i].provisioningState.should.equal('Failed');
         }
       }
       done();

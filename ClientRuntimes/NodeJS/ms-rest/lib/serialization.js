@@ -336,6 +336,142 @@ function serializeDateTypes(typeName, value, objectName) {
   return value;
 }
 
+/**
+ * Deserialize the given object based on its metadata defined in the mapper
+ *
+ * @param {object} mapper The mapper which defines the metadata of the serializable object
+ *
+ * @param {object|string|Array|number|boolean|Date|stream} responseBody A valid Javascript entity to be deserialized
+ *
+ * @param {string} objectName Name of the deserialized object
+ *
+ * @param {object} [client] The ServiceClient instance which contains the reference to its list of model types
+ *
+ * @returns {object|string|Array|number|boolean|Date|stream} A valid deserialized Javascript object
+ */
+exports.deserialize = function (mapper, responseBody, objectName, client) {
+  if (responseBody === null || responseBody === undefined) return responseBody;
+  var payload = {};
+  var mapperType = mapper.type.name;
+  if (!objectName) objectName = objectNameFromSerializedName(mapper.serializedName);
+  if (mapperType.match(/^Sequence$/ig) !== null) payload = [];
+  
+  if (mapperType.match(/^(Number|String|Boolean|Enum)$/ig) !== null) {
+    payload = responseBody;
+  } else if (mapperType.match(/^(Date|DateTime|DateTimeRfc1123)$/ig) !== null) {
+    payload = new Date(responseBody);
+  } else if (mapperType.match(/^(TimeSpan)$/ig) !== null) {
+    payload = moment.duration(responseBody);
+  } else if (mapperType.match(/^ByteArray$/ig) !== null) {
+    payload = new Buffer(responseBody, 'base64');
+  } else if (mapperType.match(/^Sequence$/ig) !== null) {
+    payload = deserializeSequenceType(mapper, responseBody, objectName, client);
+  } else if (mapperType.match(/^Dictionary$/ig) !== null) {
+    payload = deserializeDictionaryType(mapper, responseBody, objectName, client);
+  } else if (mapperType.match(/^Composite$/ig) !== null) {
+    payload = deserializeCompositeType(mapper, responseBody, objectName, client);
+  }
+  return payload;
+}
+
+function deserializeSequenceType(mapper, responseBody, objectName, client) {
+  if (!client) {
+    throw new Error(util.format('Please provide a valid client instance to deserialize the ' + 
+        'responseBody: \'%s\' of SequenceType', JSON.stringify(responseBody)));
+  }
+  if (!mapper.type.element || typeof mapper.type.element !== 'object') {
+    throw new Error(util.format('\'element\' metadata for an Array must be defined in the ' + 
+      'mapper and it must of type \'object\' in %s', objectName));
+  }
+  if (responseBody) {
+    var tempArray = [];
+    for (var i = 0; i < responseBody.length; i++) {
+      tempArray[i] = exports.deserialize(mapper.type.element, responseBody[i], objectName, client);
+    }
+    return tempArray;
+  }
+  return responseBody;
+}
+
+function deserializeDictionaryType(mapper, responseBody, objectName, client) {
+  if (!client) {
+    throw new Error(util.format('Please provide a valid client instance to serialize the ' + 
+        'responseBody: \'%s\' of DictionaryType', JSON.stringify(responseBody)));
+  }
+  if (!mapper.type.value || typeof mapper.type.value !== 'object') {
+    throw new Error(util.format('\'value\' metadata for a Dictionary must be defined in the ' + 
+      'mapper and it must of type \'object\' in %s', objectName));
+  }
+  if (responseBody) {
+    var tempDictionary = {};
+    for (var key in responseBody) {
+      if (responseBody.hasOwnProperty(key)) {
+        tempDictionary[key] = exports.deserialize(mapper.type.value, responseBody[key], objectName, client);
+      }
+    }
+    return tempDictionary;
+  }
+  return responseBody;
+}
+
+function deserializeCompositeType(mapper, responseBody, objectName, client) {
+  if (!client) {
+    throw new Error(util.format('Please provide a valid client instance to serialize the ' + 
+        'responseBody: \'%s\' of CompositeType', JSON.stringify(responseBody)));
+  }
+  var instance = {};
+  var modelMapper = {};
+  var mapperType = mapper.type.name;
+  if (mapperType === 'Sequence') instance = [];
+  if (responseBody !== null && responseBody !== undefined) {
+    var modelProps = mapper.type.modelProperties;
+    if (!modelProps) {
+      if (!mapper.type.className) {
+        throw new Error(util.format('Class name for model \'%s\' is not provided in the mapper \'%s\'',
+            objectName, JSON.stringify(mapper)));
+      }
+      //get the mapper if modelProperties of the CompositeType is not present and 
+      //then get the modelProperties from it.
+      modelMapper = new client.models[mapper.type.className]().mapper();
+      if (!modelMapper) {
+        throw new Error(util.format('mapper() cannot be null or undefined for model \'%s\'', 
+              mapper.type.className));
+      }
+      modelProps = modelMapper.type.modelProperties;
+      if (!modelProps) {
+        throw new Error(util.format('modelProperties cannot be null or undefined in the ' + 
+          'mapper \'%s\' of type \'%s\' for responseBody \'%s\'.', JSON.stringify(modelMapper), 
+          mapper.type.className, objectName));
+      }
+    }
+
+    for (var key in modelProps) {
+      if (modelProps.hasOwnProperty(key)) {
+        //deserialize the property if it is present in the provided responseBody instance
+        var propertyInstance = responseBody[modelProps[key].serializedName];
+        if (stringContainsProperties(modelProps[key].serializedName)) {
+          if (responseBody.properties) {
+            propertyInstance = responseBody.properties[key];
+          }
+        }
+        var propertyObjectName = objectName + '.' + modelProps[key].serializedName;
+        var propertyMapper = modelProps[key];
+        var serializedValue;
+        //paging
+        if (key === 'value' && util.isArray(responseBody[key]) && modelProps[key].serializedName === '') {
+          propertyInstance = responseBody[key];
+          instance = exports.deserialize(propertyMapper, propertyInstance, propertyObjectName, client);
+        } else if (propertyInstance !== null && propertyInstance !== undefined) {
+          serializedValue = exports.deserialize(propertyMapper, propertyInstance, propertyObjectName, client);
+          instance[key] = serializedValue;
+        }
+      }
+    }
+    return instance;
+  }
+  return responseBody;
+}
+
 function assignProperty(serializedName, payload, serializedValue) {
   var key = objectNameFromSerializedName(serializedName);
   if (stringContainsProperties(serializedName)) {
