@@ -503,10 +503,10 @@ namespace Microsoft.Rest.Generator.Azure
             {
                 if (parameter.Extensions.ContainsKey(ClientRequestIdExtension))
                 {
-                    Newtonsoft.Json.Linq.JContainer extensionObject = parameter.Extensions[ClientRequestIdExtension] as Newtonsoft.Json.Linq.JContainer;
+                    bool? extensionObject = parameter.Extensions[ClientRequestIdExtension] as bool?;
                     if (extensionObject != null)
                     {
-                        bool useParamAsClientRequestId = (bool)extensionObject["value"];
+                        bool useParamAsClientRequestId = extensionObject.Value;
                         if (useParamAsClientRequestId)
                         {
                             //TODO: Need to do something if they specify two ClientRequestIdExtensions for the same method...?
@@ -530,10 +530,10 @@ namespace Microsoft.Rest.Generator.Azure
             string requestIdName = "x-ms-request-id";
             if (method.Extensions.ContainsKey(RequestIdExtension))
             {
-                Newtonsoft.Json.Linq.JContainer extensionObject = method.Extensions[RequestIdExtension] as Newtonsoft.Json.Linq.JContainer;
+                string extensionObject = method.Extensions[RequestIdExtension] as string;
                 if (extensionObject != null)
                 {
-                    requestIdName = extensionObject["value"].ToString();
+                    requestIdName = extensionObject;
                 }
             }
             
