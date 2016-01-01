@@ -36,6 +36,9 @@ Product.prototype.mapper = function () {
       modelProperties: {
         id : {
           serializedName: 'id',
+          constraints: {
+          
+          },
           required: true,
           type : {
             name: 'Number'

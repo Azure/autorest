@@ -160,7 +160,8 @@ exports.serialize = function (mapper, object, objectName, client) {
   if (mapperType.match(/^Sequence$/ig) !== null) payload = [];
   //Set Defaults
   if (mapper.defaultValue && (object === null || object === undefined)) object = mapper.defaultValue;
-  
+  //Validate Constraints if any
+  validateConstraints(mapper, object, objectName);
   if (mapperType.match(/^(Number|String|Boolean)$/ig) !== null) {
     payload = serializeBasicTypes(mapperType, objectName, object);
   } else if (mapperType.match(/^Enum$/ig) !== null) {
@@ -177,6 +178,71 @@ exports.serialize = function (mapper, object, objectName, client) {
     payload = serializeCompositeType(mapper, object, objectName, client);
   }
   return payload;
+}
+
+function validateConstraints(mapper, value, objectName) {
+  if (mapper.constraints && (value !== null || value !== undefined)) {
+    for (var constraintType in Object.keys(mapper.constraints)) {
+      if (constraintType.match(/^ExclusiveMaximum$/ig) !== null) {
+        if (value >= mapper.constraints[constraintType]) {
+          throw new Error(util.format('\'%s\' with value \'%s\' should satify the constraint \'ExclusiveMaximum\': %s.', 
+          objectName, value, mapper.constraints[constraintType]));
+        }
+      } else if (constraintType.match(/^ExclusiveMinimum$/ig) !== null) {
+        if (value <= mapper.constraints[constraintType]) {
+          throw new Error(util.format('\'%s\' with value \'%s\' should satify the constraint \'ExclusiveMinimum\': %s.', 
+          objectName, value, mapper.constraints[constraintType]));
+        }
+      } else if (constraintType.match(/^InclusiveMaximum$/ig) !== null) {
+        if (value > mapper.constraints[constraintType]) {
+          throw new Error(util.format('\'%s\' with value \'%s\' should satify the constraint \'InclusiveMaximum\': %s.', 
+          objectName, value, mapper.constraints[constraintType]));
+        }
+      } else if (constraintType.match(/^InclusiveMinimum$/ig) !== null) {
+        if (value < mapper.constraints[constraintType]) {
+          throw new Error(util.format('\'%s\' with value \'%s\' should satify the constraint \'InclusiveMinimum\': %s.', 
+          objectName, value, mapper.constraints[constraintType]));
+        }
+      } else if (constraintType.match(/^MaxItems$/ig) !== null) {
+        if (value.length > mapper.constraints[constraintType]) {
+          throw new Error(util.format('\'%s\' with value \'%s\' should satify the constraint \'MaxItems\': %s.', 
+          objectName, value, mapper.constraints[constraintType]));
+        }
+      } else if (constraintType.match(/^MaxLength$/ig) !== null) {
+        if (value.length > mapper.constraints[constraintType]) {
+          throw new Error(util.format('\'%s\' with value \'%s\' should satify the constraint \'MaxLength\': %s.', 
+          objectName, value, mapper.constraints[constraintType]));
+        }
+      } else if (constraintType.match(/^MinItems$/ig) !== null) {
+        if (value.length < mapper.constraints[constraintType]) {
+          throw new Error(util.format('\'%s\' with value \'%s\' should satify the constraint \'MinItems\': %s.', 
+          objectName, value, mapper.constraints[constraintType]));
+        }
+      } else if (constraintType.match(/^MinLength$/ig) !== null) {
+        if (value.length < mapper.constraints[constraintType]) {
+          throw new Error(util.format('\'%s\' with value \'%s\' should satify the constraint \'MinLength\': %s.', 
+          objectName, value, mapper.constraints[constraintType]));
+        }
+      } else if (constraintType.match(/^MultipleOf$/ig) !== null) {
+        if (value.length % mapper.constraints[constraintType] !== 0) {
+          throw new Error(util.format('\'%s\' with value \'%s\' should satify the constraint \'MultipleOf\': %s.', 
+          objectName, value, mapper.constraints[constraintType]));
+        }
+      } else if (constraintType.match(/^Pattern$/ig) !== null) {
+        if (value.match(mapper.constraints[constraintType].split('/').join('\/')) === null) {
+          throw new Error(util.format('\'%s\' with value \'%s\' should satify the constraint \'Pattern\': %s.', 
+          objectName, value, mapper.constraints[constraintType]));
+        }
+      } else if (constraintType.match(/^UniqueItems/ig) !== null) {
+        if (mapper.constraints[constraintType]) {
+          if (value.length !== value.filter(function (item, i, ar) { { return ar.indexOf(item) === i; } }).length) {
+            throw new Error(util.format('\'%s\' with value \'%s\' should satify the constraint \'UniqueItems\': %s', 
+          objectName, value, mapper.constraints[constraintType]));
+          }
+        }
+      }
+    }
+  }
 }
 
 function serializeSequenceType(mapper, object, objectName, client) {
