@@ -266,6 +266,71 @@ namespace Microsoft.Rest.Generator.NodeJS
             return builder.ToString();
         }
 
+        public string ConstructModelMapper()
+        {
+            var builder = new IndentedStringBuilder("  ");
+            builder.AppendLine("type: {")
+                     .Indent()
+                     .AppendLine("name: 'Composite',")
+                     .AppendLine("className: '{0}',", this.Name)
+                     .AppendLine("modelProperties: {").Indent();
+            var composedPropertyList = new List<Property>(ComposedProperties);
+            for (var i=0; i < composedPropertyList.Count; i++)
+            {
+                var prop = composedPropertyList[i];
+                builder.AppendLine("{0}: {{", prop.Name).Indent();
+                if (prop.IsRequired)
+                {
+                    builder.AppendLine("required: true,");
+                }
+                else
+                {
+                    builder.AppendLine("required: false,");
+                }
+                
+                if (prop.SerializedName != null)
+                {
+                    builder.AppendLine("serializedName: '{0}',", prop.SerializedName);
+                }
+                if (prop.DefaultValue != null)
+                {
+                    builder.AppendLine("defaultValue: '{0}',", prop.DefaultValue);
+                }
+                if (prop.Constraints.Count > 0)
+                {
+                    builder.AppendLine("constraints: {").Indent();
+                    var constraints = prop.Constraints;
+                    var keys = constraints.Keys.ToList<Constraint>();
+                    for (int j = 0; j < keys.Count; j++)
+                    {
+                        if (j != keys.Count-1)
+                        {
+                            builder.AppendLine("{0}: '{1}',", keys[j], constraints[keys[j]]);
+                        }
+                        else
+                        {
+                            builder.AppendLine("{0}: '{1}'", keys[j], constraints[keys[j]]);
+                        }
+                    }
+                    builder.Outdent().AppendLine("}");
+                }
+                builder = prop.Type.ConstructType(builder);
+                // end of a particular property
+                
+                if (i != composedPropertyList.Count - 1)
+                {
+                    builder.Outdent().AppendLine("},");
+                }
+                else
+                {
+                    builder.Outdent().AppendLine("}");
+                }
+                
+            }
+            // end of modelProperties and type
+            builder.Outdent().AppendLine("}").Outdent().Append("}");
+            return builder.ToString();
+        }
         public string SerializeProperty(string objectName, string serializedName, Property property)
         {
             if (property == null || property.Type == null)

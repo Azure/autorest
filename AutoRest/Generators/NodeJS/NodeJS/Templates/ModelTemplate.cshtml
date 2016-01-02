@@ -38,24 +38,12 @@
                                              + " " + ModelTemplateModel.GetPropertyDocumentationString(property)))
 }
  */
-function @(Model.Name)(parameters) {
+function @(Model.Name)() {
 @{
-  @:@(Model.AssignDefaultValues())
   if (Model.BaseModelType != null)
   {
-  @:@(Model.Name)['super_'].call(this, parameters);
+  @:@(Model.Name)['super_'].call(this);
   }
-  var propertyList = new List<Property>(Model.Properties);
-  if (propertyList.Count > 0)
-  {
-  @:if (parameters !== null && parameters !== undefined) {
-    for (int i = 0; i < propertyList.Count; i++) 
-    {
-    @:@(Model.InitializeProperty("this", "parameters", propertyList[i]))
-    }
-  @:}    
-  }
-}
 }
 @EmptyLine
 @{
@@ -67,6 +55,21 @@ if (Model.BaseModelType != null)
 @EmptyLine
 @if(Model.SerializableProperties.Any())
 {
+@:/**
+@: * Defines the metadata of @Model.Name
+@: *
+@: * @@returns {object} metadata of @Model.Name
+@: *
+@: */
+@:@(Model.Name).prototype.mapper = function () {
+{
+  @:return {
+    @:@(Model.ConstructModelMapper())
+  @:};
+}
+@:};
+@EmptyLine
+
 @:/**
 @: * Validate the payload against the @Model.Name schema
 @: *

@@ -1057,6 +1057,88 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             return null;
         }
 
+        public static IndentedStringBuilder ConstructType(this IType type, IndentedStringBuilder builder)
+        {
+            CompositeType composite = type as CompositeType;
+            SequenceType sequence = type as SequenceType;
+            DictionaryType dictionary = type as DictionaryType;
+            PrimaryType primary = type as PrimaryType;
+            EnumType enumType = type as EnumType;
+            if (primary != null)
+            {
+                if (primary == PrimaryType.Boolean)
+                {
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'Boolean'").Outdent().AppendLine("}");
+                }
+                else if(primary == PrimaryType.Int || primary == PrimaryType.Long || primary == PrimaryType.Decimal || primary == PrimaryType.Double)
+                {
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'Number'").Outdent().AppendLine("}");
+                }
+                else if (primary == PrimaryType.String)
+                {
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'String'").Outdent().AppendLine("}");
+                }
+                else if (primary == PrimaryType.ByteArray)
+                {
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'ByteArray'").Outdent().AppendLine("}");
+                }
+                else if (primary == PrimaryType.Date)
+                {
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'Date'").Outdent().AppendLine("}");
+                }
+                else if (primary == PrimaryType.DateTime)
+                {
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'DateTime'").Outdent().AppendLine("}");
+                }
+                else if (primary == PrimaryType.DateTimeRfc1123)
+                {
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'DateTimeRfc1123'").Outdent().AppendLine("}");
+                }
+                else if (primary == PrimaryType.TimeSpan)
+                {
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'TimeSpan'").Outdent().AppendLine("}");
+                }
+            }
+            else if (enumType != null)
+            {
+                builder.AppendLine("type: {")
+                         .Indent()
+                         .AppendLine("name: 'Enum',")
+                         .AppendLine("allowedValues: {0}", enumType.GetEnumValuesArray())
+                       .Outdent()
+                       .AppendLine("}");
+            }
+            else if (sequence != null)
+            {
+                builder.AppendLine("type: {")
+                         .Indent()
+                         .AppendLine("name: 'Sequence',")
+                         .AppendLine("element: {").Indent();
+                builder = sequence.ElementType.ConstructType(builder);
+                builder.Outdent().AppendLine("}").Outdent().AppendLine("}");
+            }
+            else if (dictionary != null)
+            {
+                builder.AppendLine("type: {")
+                         .Indent()
+                         .AppendLine("name: 'Dictionary',")
+                         .AppendLine("value: {").Indent();
+                builder = dictionary.ValueType.ConstructType(builder);
+                builder.Outdent().AppendLine("}").Outdent().AppendLine("}");
+            }
+            else if (composite != null)
+            {
+                builder.AppendLine("type: {")
+                         .Indent()
+                         .AppendLine("name: 'Composite',");
+                if (composite.PolymorphicDiscriminator != null)
+                {
+                    builder.AppendLine("polymorphicDiscriminator: '{0}',", composite.PolymorphicDiscriminator);
+                }
+                builder.AppendLine("className: '{0}'", composite.Name).Outdent().AppendLine("}");
+            }
+            return builder;
+        }
         /// <summary>
         /// Generate code to perform serialization on a parameter or property
         /// </summary>
