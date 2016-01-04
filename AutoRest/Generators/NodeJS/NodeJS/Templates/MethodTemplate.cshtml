@@ -125,22 +125,11 @@
   var requestContent = null;
   var requestModel = null;
   try {
-    @(Model.InitializeRequestBody)
-      @if (Model.RequestBody.Type is CompositeType)
-      {
-      <text>
-    if (requestModel !== null && requestModel !== undefined) {
-      requestContent = JSON.stringify(requestModel.serialize());
-    } else {
+    if (@(Model.RequestBody.Name) !== null && @(Model.RequestBody.Name) !== undefined) {
+      @(Model.ConstructRequestBodyMapper)
+      requestModel = msRest.serialize(requestModelMapper, @(Model.RequestBody.Name), '@(Model.RequestBody.Name)', client);
       requestContent = JSON.stringify(requestModel);
     }
-      </text>
-      }
-      else
-      {
-    @:@(Model.RequestBody.Type.SerializeType(Model.Scope, Model.RequestBody.Name, "requestModel", Model.RequestBody.IsRequired, Model.RequestBody.Constraints))
-    @:requestContent = JSON.stringify(requestModel);
-      }
   } catch (error) {
     var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
     return callback(serializationError);

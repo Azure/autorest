@@ -412,7 +412,17 @@ namespace Microsoft.Rest.Generator.NodeJS
 
         public string GetDeserializationString(IType type, string valueReference = "result", string responseVariable = "parsedResponse")
         {
-            CompositeType composite = type as CompositeType;
+            var builder = new IndentedStringBuilder("  ");
+            if (type is CompositeType)
+            {
+                builder.AppendLine("var resultMapper = new client._models['{0}']().mapper();", type.Name);
+            }
+            else
+            {
+                builder.AppendLine("var resultMapper = {{{0}}};", type.ConstructMapper(responseVariable));
+            }
+            builder.AppendLine("result = msRest.deserialize(resultMapper, {0}, {1}, client);", responseVariable, valueReference);
+            /*CompositeType composite = type as CompositeType;
             SequenceType sequence = type as SequenceType;
             DictionaryType dictionary = type as DictionaryType;
             PrimaryType primary = type as PrimaryType;
@@ -522,7 +532,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             else
             {
                 return string.Empty;
-            }
+            }*/
             return builder.ToString();
         }
 
@@ -599,8 +609,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                    .AppendLine("try {")
                    .Indent()
                      .AppendLine("{0} = JSON.parse(responseBody);", responseVariable)
-                     .AppendLine("{0} = JSON.parse(responseBody);", valueReference)
-                     .AppendLine(type.InitializeSerializationType(Scope, valueReference, responseVariable, "client._models"));
+                     .AppendLine("{0} = JSON.parse(responseBody);", valueReference);
             var deserializeBody = this.GetDeserializationString(type, valueReference, responseVariable);
             if (!string.IsNullOrWhiteSpace(deserializeBody))
             {
@@ -788,6 +797,25 @@ namespace Microsoft.Rest.Generator.NodeJS
                     }
                 }
 
+                return builder.ToString();
+            }
+        }
+
+        public string ConstructRequestBodyMapper
+        {
+            get
+            {
+                var builder = new IndentedStringBuilder("  ");
+                if (RequestBody.Type is CompositeType)
+                {
+                    builder.AppendLine("var requestModelMapper = new client._models['{0}']().mapper();", RequestBody.Type.Name);
+                }
+                else
+                {
+                    builder.AppendLine("var requestModelMapper = {{{0}}};",
+                        RequestBody.Type.ConstructMapper(RequestBody.SerializedName, RequestBody.IsRequired,
+                        RequestBody.Constraints, RequestBody.DefaultValue));
+                }
                 return builder.ToString();
             }
         }

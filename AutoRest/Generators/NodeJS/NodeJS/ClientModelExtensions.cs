@@ -1057,13 +1057,55 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             return null;
         }
 
-        public static IndentedStringBuilder ConstructType(this IType type, IndentedStringBuilder builder)
+        public static string ConstructMapper(this IType type, string serializedName, bool isRequired = false, Dictionary<Constraint, string> constraints = null, 
+            string defaultValue = null, bool expandComposite = false)
         {
+            var builder = new IndentedStringBuilder("  ");
             CompositeType composite = type as CompositeType;
             SequenceType sequence = type as SequenceType;
             DictionaryType dictionary = type as DictionaryType;
             PrimaryType primary = type as PrimaryType;
             EnumType enumType = type as EnumType;
+            builder.AppendLine("").Indent();
+            if (isRequired)
+            {
+                builder.AppendLine("required: true,");
+            }
+            else
+            {
+                builder.AppendLine("required: false,");
+            }
+            if (serializedName != null)
+            {
+                builder.AppendLine("serializedName: '{0}',", serializedName);
+            }
+            if (defaultValue != null)
+            {
+                builder.AppendLine("defaultValue: '{0}',", defaultValue);
+            }
+            if (constraints != null && constraints.Count > 0)
+            {
+                builder.AppendLine("constraints: {").Indent();
+                var keys = constraints.Keys.ToList<Constraint>();
+                for (int j = 0; j < keys.Count; j++)
+                {
+                    var constraintValue = constraints[keys[j]];
+                    if (keys[j] == Constraint.Pattern)
+                    {
+                        constraintValue = string.Format("'{0}'", constraintValue);
+                    }
+                    if (j != keys.Count - 1)
+                    {
+                        builder.AppendLine("{0}: {1},", keys[j], constraintValue);
+                    }
+                    else
+                    {
+                        builder.AppendLine("{0}: {1}", keys[j], constraintValue);
+                    }
+                }
+                builder.Outdent().AppendLine("}");
+            }
+            // Add type information 
             if (primary != null)
             {
                 if (primary == PrimaryType.Boolean)
@@ -1113,18 +1155,20 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 builder.AppendLine("type: {")
                          .Indent()
                          .AppendLine("name: 'Sequence',")
-                         .AppendLine("element: {").Indent();
-                builder = sequence.ElementType.ConstructType(builder);
-                builder.Outdent().AppendLine("}").Outdent().AppendLine("}");
+                         .AppendLine("element: {")
+                           .Indent()
+                           .AppendLine("{{{0}}}", sequence.ElementType.ConstructMapper(sequence.ElementType.Name + "ElementType"))
+                         .Outdent().AppendLine("}").Outdent().AppendLine("}");
             }
             else if (dictionary != null)
             {
                 builder.AppendLine("type: {")
                          .Indent()
                          .AppendLine("name: 'Dictionary',")
-                         .AppendLine("value: {").Indent();
-                builder = dictionary.ValueType.ConstructType(builder);
-                builder.Outdent().AppendLine("}").Outdent().AppendLine("}");
+                         .AppendLine("value: {")
+                           .Indent()
+                           .AppendLine("{{{0}}}", dictionary.ValueType.ConstructMapper(dictionary.ValueType.Name + "ElementType"))
+                         .Outdent().AppendLine("}").Outdent().AppendLine("}");
             }
             else if (composite != null)
             {
@@ -1135,9 +1179,32 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 {
                     builder.AppendLine("polymorphicDiscriminator: '{0}',", composite.PolymorphicDiscriminator);
                 }
-                builder.AppendLine("className: '{0}'", composite.Name).Outdent().AppendLine("}");
+                if (!expandComposite)
+                {
+                    builder.AppendLine("className: '{0}'", composite.Name).Outdent().AppendLine("}");
+                }
+                else
+                {
+                    builder.AppendLine("className: '{0}',", composite.Name)
+                           .AppendLine("modelProperties: {").Indent();
+                    var composedPropertyList = new List<Property>(composite.ComposedProperties);
+                    for (var i = 0; i < composedPropertyList.Count; i++)
+                    {
+                        var prop = composedPropertyList[i];
+                        if (i != composedPropertyList.Count - 1)
+                        {
+                            builder.AppendLine("{0}: {{{1}}},", prop.Name, prop.Type.ConstructMapper(prop.SerializedName, prop.IsRequired, prop.Constraints, prop.DefaultValue));
+                        }
+                        else
+                        {
+                            builder.AppendLine("{0}: {{{1}}}", prop.Name, prop.Type.ConstructMapper(prop.SerializedName, prop.IsRequired, prop.Constraints, prop.DefaultValue));
+                        }
+                    }
+                    // end of modelProperties and type
+                    builder.Outdent().AppendLine("}").Outdent().AppendLine("}");
+                }
             }
-            return builder;
+            return builder.ToString();
         }
         /// <summary>
         /// Generate code to perform serialization on a parameter or property

@@ -45,14 +45,15 @@ function @(Model.Name)() {
   @:@(Model.Name)['super_'].call(this);
   }
 }
+}
 @EmptyLine
 @{
 if (Model.BaseModelType != null)
 {
 @:util.inherits(@(Model.Name), models['@(Model.BaseModelType.Name)']);
-}
-}
 @EmptyLine
+}
+}
 @if(Model.SerializableProperties.Any())
 {
 @:/**
@@ -63,13 +64,11 @@ if (Model.BaseModelType != null)
 @: */
 @:@(Model.Name).prototype.mapper = function () {
 {
-  @:return {
-    @:@(Model.ConstructModelMapper())
-  @:};
+  @EmptyLine
+  @:@(Model.ConstructModelMapper())
 }
 @:};
 @EmptyLine
-
 @:/**
 @: * Validate the payload against the @Model.Name schema
 @: *

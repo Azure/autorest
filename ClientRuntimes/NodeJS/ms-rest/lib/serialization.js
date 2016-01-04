@@ -162,7 +162,7 @@ exports.serialize = function (mapper, object, objectName, client) {
   if (mapper.defaultValue && (object === null || object === undefined)) object = mapper.defaultValue;
   //Validate Constraints if any
   validateConstraints(mapper, object, objectName);
-  if (mapperType.match(/^(Number|String|Boolean)$/ig) !== null) {
+  if (mapperType.match(/^(Number|String|Boolean|Object)$/ig) !== null) {
     payload = serializeBasicTypes(mapperType, objectName, object);
   } else if (mapperType.match(/^Enum$/ig) !== null) {
     payload = serializeEnumType(objectName, mapper.type.allowedValues, object);
@@ -350,6 +350,10 @@ function serializeBasicTypes(typeName, objectName, value) {
   } else if (typeName.match(/^Boolean$/ig) !== null) {
     if (typeof value !== 'boolean') {
       throw new Error(util.format('%s must be of type boolean.', objectName));
+    }
+  } else if (typeName.match(/^Object$/ig) !== null) {
+    if (typeof value !== 'object') {
+      throw new Error(util.format('%s must be of type object.', objectName));
     }
   }
   return value;

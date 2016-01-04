@@ -266,9 +266,13 @@ namespace Microsoft.Rest.Generator.NodeJS
             return builder.ToString();
         }
 
-        public string ConstructModelMapper()
+        public virtual string ConstructModelMapper()
         {
+            var modelMapper = this.ConstructMapper(SerializedName, false, null, null, true);
             var builder = new IndentedStringBuilder("  ");
+            builder.AppendLine("return {{{0}}};", modelMapper);
+            return builder.ToString();
+            /*var builder = new IndentedStringBuilder("  ");
             builder.AppendLine("type: {")
                      .Indent()
                      .AppendLine("name: 'Composite',")
@@ -303,18 +307,23 @@ namespace Microsoft.Rest.Generator.NodeJS
                     var keys = constraints.Keys.ToList<Constraint>();
                     for (int j = 0; j < keys.Count; j++)
                     {
+                        var constraintValue = constraints[keys[j]];
+                        if (keys[j] == Constraint.Pattern)
+                        {
+                            constraintValue = string.Format("'{0}'", constraintValue);
+                        }
                         if (j != keys.Count-1)
                         {
-                            builder.AppendLine("{0}: '{1}',", keys[j], constraints[keys[j]]);
+                            builder.AppendLine("{0}: {1},", keys[j], constraintValue);
                         }
                         else
                         {
-                            builder.AppendLine("{0}: '{1}'", keys[j], constraints[keys[j]]);
+                            builder.AppendLine("{0}: {1}", keys[j], constraintValue);
                         }
                     }
                     builder.Outdent().AppendLine("}");
                 }
-                builder = prop.Type.ConstructType(builder);
+                //builder = prop.Type.ConstructType(builder);
                 // end of a particular property
                 
                 if (i != composedPropertyList.Count - 1)
@@ -329,7 +338,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
             // end of modelProperties and type
             builder.Outdent().AppendLine("}").Outdent().Append("}");
-            return builder.ToString();
+            return builder.ToString();*/
         }
         public string SerializeProperty(string objectName, string serializedName, Property property)
         {
