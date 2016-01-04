@@ -35,7 +35,11 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
 
         public override string ConstructModelMapper()
         {
+            var modelMapper = this.ConstructMapper(SerializedName, false, null, null, true);
             var builder = new IndentedStringBuilder("  ");
+            builder.AppendLine("return {{{0}}};", modelMapper);
+            return builder.ToString();
+            /*var builder = new IndentedStringBuilder("  ");
             builder.AppendLine("type: {")
                      .Indent()
                      .AppendLine("name: 'Composite',")
@@ -113,7 +117,7 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
             }
             // end of modelProperties and type
             builder.Outdent().AppendLine("}").Outdent().Append("}");
-            return builder.ToString();
+            return builder.ToString();*/
         }
     }
 }
