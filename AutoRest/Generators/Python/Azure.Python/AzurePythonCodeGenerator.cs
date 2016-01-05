@@ -6,6 +6,7 @@ using Microsoft.Rest.Generator.Azure.Python.Templates;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Python;
 using Microsoft.Rest.Generator.Python.Templates;
+using Microsoft.Rest.Generator.Python.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
 using System;
 using System.Collections.Generic;

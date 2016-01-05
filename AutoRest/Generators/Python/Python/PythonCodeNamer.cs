@@ -1,12 +1,14 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using Microsoft.Rest.Generator.ClientModel;
+using Microsoft.Rest.Generator.Utilities;
+using Microsoft.Rest.Generator.Python.TemplateModels;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.Utilities;
+using System.Text.RegularExpressions;
 
 namespace Microsoft.Rest.Generator.Python
 {
@@ -70,6 +72,46 @@ namespace Microsoft.Rest.Generator.Python
             }.ForEach(s => ReservedWords.Add(s));
 
             _normalizedTypes = new HashSet<IType>();
+        }
+
+        // "joined_lower" for functions, methods, attributes
+        // do not invoke this for a class name which should be "StudlyCaps"
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
+        public static string PythonCase(string name)
+        {
+            name = Regex.Replace(name, @"[A-Z]+", m =>
+            {
+                string matchedStr = m.ToString().ToLowerInvariant();
+                if (m.Index > 0 && name[m.Index - 1] == '_')
+                {
+                    //we are good if a '_' already exists 
+                    return matchedStr;
+                }
+                else
+                {
+                    // The first letter should not have _
+                    string prefix = m.Index > 0 ? "_" : string.Empty;
+                    if (ShouldInsertExtraLowerScoreInTheMiddle(name, m, matchedStr))
+                    {
+                        // We will add extra _ if there are multiple capital chars together
+                        return prefix + matchedStr.Substring(0, matchedStr.Length - 1) + "_" + matchedStr.Substring(matchedStr.Length - 1);
+                    }
+                    else
+                    {
+                        return prefix + matchedStr;
+                    }
+                }
+            });
+            return name;
+        }
+
+        private static bool ShouldInsertExtraLowerScoreInTheMiddle(string name, Match m, string matchedStr)
+        {
+            //For name like "SQLConnection", we will insert an extra '_' between "SQL" and "Connection"
+            //we will only insert if there are more than 2 consecutive upper cases, because 2 upper cases
+            //most likely means one single word. 
+            int nextNonUpperCaseCharLocation = m.Index + matchedStr.Length;
+            return matchedStr.Length > 2 && nextNonUpperCaseCharLocation < name.Length && char.IsLetter(name[nextNonUpperCaseCharLocation]);
         }
 
         private string GetValidPythonName(string name, string padString)

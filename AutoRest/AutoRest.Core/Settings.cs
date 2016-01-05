@@ -302,7 +302,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
             return unmatchedSettings;
         }
 
-        public void Validate()
+        public void Validate(CodeGenerator codeGenerator)
         {
             foreach (PropertyInfo property in (typeof (Settings)).GetProperties())
             {
@@ -314,11 +314,15 @@ Licensed under the MIT License. See License.txt in the project root for license 
                         Resources.ParameterValueIsMissing, property.Name);
                 }
             }
-            if (CustomSettings != null)
+            if (CustomSettings != null && codeGenerator != null)
             {
                 foreach (var unmatchedSetting in CustomSettings.Keys)
                 {
-                    Logger.LogWarning(Resources.ParameterIsNotValid, unmatchedSetting);
+                    if (!codeGenerator.DoesSupportSetting(unmatchedSetting))
+                    {
+                        Logger.LogError(new ArgumentException(unmatchedSetting),
+                            Resources.ParameterIsNotValid, unmatchedSetting);
+                    }
                 }
             }
             ErrorManager.ThrowErrors();

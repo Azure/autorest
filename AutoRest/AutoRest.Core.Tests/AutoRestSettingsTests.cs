@@ -91,7 +91,7 @@ namespace Microsoft.Rest.Generator.Test
             var settings = Settings.Create(new[] {"-Modeler", "foo"});
             try
             {
-                settings.Validate();
+                settings.Validate(null);
                 Assert.True(false);
             }
             catch (CodeGenerationException e)

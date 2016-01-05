@@ -195,16 +195,6 @@ namespace Microsoft.Rest.Generator.Utilities
         }
 
         /// <summary>
-        /// Converts the specified string to a python style string.
-        /// </summary>
-        /// <param name="value">The string to convert.</param>
-        /// <returns>The python style string.</returns>
-        public static string ToPythonCase(this string value)
-        {
-            return CodeNamer.PythonCase(value);
-        }
-
-        /// <summary>
         /// Converts the specified string to a camel cased string.
         /// </summary>
         /// <param name="value">The string to convert.</param>

@@ -4,6 +4,7 @@
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Python.Properties;
 using Microsoft.Rest.Generator.Python.Templates;
+using Microsoft.Rest.Generator.Python.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
 using System;
 using System.Globalization;
@@ -50,6 +51,19 @@ namespace Microsoft.Rest.Generator.Python
         }
 
         /// <summary>
+        /// Check the customized setting name is valid.
+        /// </summary>
+        /// <param name="settingName">the setting name</param>
+        /// <returns></returns>
+        public override bool DoesSupportSetting(string settingName)
+        {
+            if (settingName == "Version")
+                return true;
+
+            return false;
+        }
+
+        /// <summary>
         /// Normalizes client model by updating names and types to be language specific.
         /// </summary>
         /// <param name="serviceClient"></param>
@@ -66,23 +80,17 @@ namespace Microsoft.Rest.Generator.Python
         {
             if (Settings.AddCredentials)
             {
-                if (serviceClient.Properties.FirstOrDefault(
-                    p => p.Name.Equals("Credentials", StringComparison.OrdinalIgnoreCase) &&
-                         p.SerializedName.Equals("credentials", StringComparison.OrdinalIgnoreCase)) == null)
+                if (!serviceClient.Properties.Any(p => p.Type == PrimaryType.Credentials))
                 {
                     serviceClient.Properties.Add(new Property
                     {
                         Name = "credentials",
                         SerializedName = "credentials",
-                        Type = new CompositeType
-                        {
-                            Name = "ServiceClientCredentials"
-                        },
+                        Type = PrimaryType.Credentials,
                         IsRequired = true,
                         Documentation = "Subscription credentials which uniquely identify client subscription."
                     });
                 }
-                
             }
         }
 

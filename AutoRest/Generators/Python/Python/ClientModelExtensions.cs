@@ -89,6 +89,16 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
         }
 
         /// <summary>
+        /// Converts the specified string to a python style string.
+        /// </summary>
+        /// <param name="value">The string to convert.</param>
+        /// <returns>The python style string.</returns>
+        public static string ToPythonCase(this string value)
+        {
+            return PythonCodeNamer.PythonCase(value);
+        }
+
+        /// <summary>
         /// Simple conversion of the type to string
         /// </summary>
         /// <param name="type">The type to convert</param>
