@@ -486,16 +486,86 @@ namespace Microsoft.Rest.Generator.Azure
                         }
 
                         // Copy all grouped parameters that only contain header parameters
-                        if (method.InputParameterTransformation.All(t => t.OutputParameter.Location == ParameterLocation.Header))
-                        {
-                            method.InputParameterTransformation.Select(t => t.ParameterMappings[0].InputParameter)
-                                .Distinct().ForEach(p => nextLinkMethod.Parameters.Add(p));
-                        }
+                        method.InputParameterTransformation.GroupBy(t => t.ParameterMappings[0].InputParameter)
+                            .ForEach(grouping => {
+                                if (grouping.All(t => t.OutputParameter.Location == ParameterLocation.Header))
+                                {
+                                    // All grouped properties were header parameters, reuse data type
+                                    nextLinkMethod.Parameters.Add(grouping.Key);
+                                }
+                                else if (grouping.Any(t => t.OutputParameter.Location == ParameterLocation.Header))
+                                {
+                                    // Some grouped properties were header parameters, creating new data types
+                                    grouping.Where(t => t.OutputParameter.Location != ParameterLocation.Header)
+                                        .ForEach(t => method.InputParameterTransformation.Remove(t));
+                                    nextLinkMethod.Parameters.Add(CreateParameterFromGrouping(grouping, nextLinkMethod, serviceClient));
+                                }
+                            });
 
                         serviceClient.Methods.Add(nextLinkMethod);
                     }
                 }
             }
+        }
+
+        private static Parameter CreateParameterFromGrouping(IGrouping<Parameter, ParameterTransformation> grouping, Method method, ServiceClient serviceClient)
+        {
+            var properties = new List<Property>();
+            string parameterGroupName = null;
+            foreach (var parameter in grouping.Select(g => g.OutputParameter))
+            {
+                Newtonsoft.Json.Linq.JContainer extensionObject = parameter.Extensions[ParameterGroupExtension] as Newtonsoft.Json.Linq.JContainer;
+                string specifiedGroupName = extensionObject.Value<string>("name");
+                if (specifiedGroupName == null)
+                {
+                    string postfix = extensionObject.Value<string>("postfix") ?? "Parameters";
+                    parameterGroupName = method.Group + "-" + method.Name + "-" + postfix;
+                }
+                else
+                {
+                    parameterGroupName = specifiedGroupName;
+                }
+
+                Property groupProperty = new Property()
+                {
+                    IsReadOnly = false, //Since these properties are used as parameters they are never read only
+                    Name = parameter.Name,
+                    IsRequired = parameter.IsRequired,
+                    DefaultValue = parameter.DefaultValue,
+                    //Constraints = parameter.Constraints, Omit these since we don't want to perform parameter validation
+                    Documentation = parameter.Documentation,
+                    Type = parameter.Type,
+                    SerializedName = null //Parameter is never serialized directly
+                };
+                properties.Add(groupProperty);
+            }
+            
+            var parameterGroupType = new CompositeType()
+            {
+                Name = parameterGroupName,
+                Documentation = "Additional parameters for the " + method.Name + " operation."
+            };
+
+            //Add to the service client
+            serviceClient.ModelTypes.Add(parameterGroupType);
+
+            foreach (Property property in properties)
+            {
+                parameterGroupType.Properties.Add(property);
+            }
+
+            bool isGroupParameterRequired = parameterGroupType.Properties.Any(p => p.IsRequired);
+
+            //Create the new parameter object based on the parameter group type
+            return new Parameter()
+            {
+                Name = parameterGroupName,
+                IsRequired = isGroupParameterRequired,
+                Location = ParameterLocation.None,
+                SerializedName = string.Empty,
+                Type = parameterGroupType,
+                Documentation = "Additional parameters for the operation"
+            };
         }
         
         public static string GetClientRequestIdString(Method method)
