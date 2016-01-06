@@ -35,7 +35,7 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
 
         public override string ConstructModelMapper()
         {
-            var modelMapper = this.ConstructMapper(SerializedName, false, null, null, true);
+            var modelMapper = this.ConstructMapper(SerializedName, false, null, null, true, true);
             var builder = new IndentedStringBuilder("  ");
             builder.AppendLine("return {{{0}}};", modelMapper);
             return builder.ToString();

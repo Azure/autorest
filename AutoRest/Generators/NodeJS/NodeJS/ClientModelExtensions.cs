@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
 {
     using System.Collections.Generic;
-
+    using System.Reflection;
     public static class ClientModelExtensions
     {
         public static string GetHttpMethod(this HttpMethod method)
@@ -1058,7 +1058,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
         }
 
         public static string ConstructMapper(this IType type, string serializedName, bool isRequired = false, Dictionary<Constraint, string> constraints = null, 
-            string defaultValue = null, bool expandComposite = false)
+            string defaultValue = null, bool isPageable = false, bool expandComposite = false)
         {
             var builder = new IndentedStringBuilder("  ");
             CompositeType composite = type as CompositeType;
@@ -1157,7 +1157,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                          .AppendLine("name: 'Sequence',")
                          .AppendLine("element: {")
                            .Indent()
-                           .AppendLine("{{{0}}}", sequence.ElementType.ConstructMapper(sequence.ElementType.Name + "ElementType"))
+                           .AppendLine("{0}", sequence.ElementType.ConstructMapper(sequence.ElementType.Name + "ElementType"))
                          .Outdent().AppendLine("}").Outdent().AppendLine("}");
             }
             else if (dictionary != null)
@@ -1167,7 +1167,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                          .AppendLine("name: 'Dictionary',")
                          .AppendLine("value: {")
                            .Indent()
-                           .AppendLine("{{{0}}}", dictionary.ValueType.ConstructMapper(dictionary.ValueType.Name + "ElementType"))
+                           .AppendLine("{0}", dictionary.ValueType.ConstructMapper(dictionary.ValueType.Name + "ElementType"))
                          .Outdent().AppendLine("}").Outdent().AppendLine("}");
             }
             else if (composite != null)
@@ -1191,13 +1191,48 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                     for (var i = 0; i < composedPropertyList.Count; i++)
                     {
                         var prop = composedPropertyList[i];
+                        var serializedPropertyName = prop.SerializedName;
+                        PropertyInfo nextLinkName = null;
+                        string nextLinkNameValue = null;
+                        if (isPageable)
+                        {
+                            var itemName = composite.GetType().GetProperty("ItemName");
+                            nextLinkName = composite.GetType().GetProperty("NextLinkName");
+                            nextLinkNameValue = (string)nextLinkName.GetValue(composite);
+                            if (itemName != null && ((string)itemName.GetValue(composite) == prop.Name))
+                            {
+                                serializedPropertyName = "";
+                            }
+
+                            if (prop.Name.Contains("nextLink") && nextLinkName != null && nextLinkNameValue == null)
+                            {
+                                continue;
+                            }
+                        }
+
                         if (i != composedPropertyList.Count - 1)
                         {
-                            builder.AppendLine("{0}: {{{1}}},", prop.Name, prop.Type.ConstructMapper(prop.SerializedName, prop.IsRequired, prop.Constraints, prop.DefaultValue));
+                            if (!isPageable)
+                            {
+                                builder.AppendLine("{0}: {{{1}}},", prop.Name, prop.Type.ConstructMapper(serializedPropertyName, prop.IsRequired, prop.Constraints, prop.DefaultValue));
+                            }
+                            else
+                            {
+                                // if pageable and nextlink is also present then we need a comma as nextLink would be the next one to be added
+                                if (nextLinkNameValue != null)
+                                {
+                                    builder.AppendLine("{0}: {{{1}}},", prop.Name, prop.Type.ConstructMapper(serializedPropertyName, prop.IsRequired, prop.Constraints, prop.DefaultValue));
+                                }
+                                else
+                                {
+                                    builder.AppendLine("{0}: {{{1}}}", prop.Name, prop.Type.ConstructMapper(serializedPropertyName, prop.IsRequired, prop.Constraints, prop.DefaultValue));
+                                }
+                                    
+                            }   
                         }
                         else
                         {
-                            builder.AppendLine("{0}: {{{1}}}", prop.Name, prop.Type.ConstructMapper(prop.SerializedName, prop.IsRequired, prop.Constraints, prop.DefaultValue));
+                            builder.AppendLine("{0}: {{{1}}}", prop.Name, prop.Type.ConstructMapper(serializedPropertyName, prop.IsRequired, prop.Constraints, prop.DefaultValue));
                         }
                     }
                     // end of modelProperties and type
@@ -1206,6 +1241,90 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             }
             return builder.ToString();
         }
+
+        public static IndentedStringBuilder ConstructType(this IType type, IndentedStringBuilder builder)
+        {
+            CompositeType composite = type as CompositeType;
+            SequenceType sequence = type as SequenceType;
+            DictionaryType dictionary = type as DictionaryType;
+            PrimaryType primary = type as PrimaryType;
+            EnumType enumType = type as EnumType;
+            if (primary != null)
+            {
+                if (primary == PrimaryType.Boolean)
+                {
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'Boolean'").Outdent().AppendLine("}");
+                }
+                else if (primary == PrimaryType.Int || primary == PrimaryType.Long || primary == PrimaryType.Decimal || primary == PrimaryType.Double)
+                {
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'Number'").Outdent().AppendLine("}");
+                }
+                else if (primary == PrimaryType.String)
+                {
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'String'").Outdent().AppendLine("}");
+                }
+                else if (primary == PrimaryType.ByteArray)
+                {
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'ByteArray'").Outdent().AppendLine("}");
+                }
+                else if (primary == PrimaryType.Date)
+                {
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'Date'").Outdent().AppendLine("}");
+                }
+                else if (primary == PrimaryType.DateTime)
+                {
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'DateTime'").Outdent().AppendLine("}");
+                }
+                else if (primary == PrimaryType.DateTimeRfc1123)
+                {
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'DateTimeRfc1123'").Outdent().AppendLine("}");
+                }
+                else if (primary == PrimaryType.TimeSpan)
+                {
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'TimeSpan'").Outdent().AppendLine("}");
+                }
+            }
+            else if (enumType != null)
+            {
+                builder.AppendLine("type: {")
+                         .Indent()
+                         .AppendLine("name: 'Enum',")
+                         .AppendLine("allowedValues: {0}", enumType.GetEnumValuesArray())
+                       .Outdent()
+                       .AppendLine("}");
+            }
+            else if (sequence != null)
+            {
+                builder.AppendLine("type: {")
+                         .Indent()
+                         .AppendLine("name: 'Sequence',")
+                         .AppendLine("element: {").Indent();
+                builder = sequence.ElementType.ConstructType(builder);
+                builder.Outdent().AppendLine("}").Outdent().AppendLine("}");
+            }
+            else if (dictionary != null)
+            {
+                builder.AppendLine("type: {")
+                         .Indent()
+                         .AppendLine("name: 'Dictionary',")
+                         .AppendLine("value: {").Indent();
+                builder = dictionary.ValueType.ConstructType(builder);
+                builder.Outdent().AppendLine("}").Outdent().AppendLine("}");
+            }
+            else if (composite != null)
+            {
+                builder.AppendLine("type: {")
+                         .Indent()
+                         .AppendLine("name: 'Composite',");
+                if (composite.PolymorphicDiscriminator != null)
+                {
+                    builder.AppendLine("polymorphicDiscriminator: '{0}',", composite.PolymorphicDiscriminator);
+                }
+                builder.AppendLine("className: '{0}'", composite.Name).Outdent().AppendLine("}");
+            }
+            return builder;
+        }
+
         /// <summary>
         /// Generate code to perform serialization on a parameter or property
         /// </summary>

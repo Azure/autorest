@@ -42,20 +42,14 @@ function @(Model.Name)() {
 @EmptyLine
 util.inherits(@(Model.Name), Array);
 @EmptyLine
-@if (Model.SerializableProperties.Any())
-{
-@:/**
-@: * Defines the metadata of @Model.Name
-@: *
-@: * @@returns {object} metadata of @Model.Name
-@: *
-@: */
-@:@(Model.Name).prototype.mapper = function () {
-{
-  @EmptyLine
-  @:@(Model.ConstructModelMapper())
-}
-@:};
-}
+/**
+ * Defines the metadata of @Model.Name
+ *
+ * @@returns {object} metadata of @Model.Name
+ *
+ */
+@(Model.Name).prototype.mapper = function () {
+  @(Model.ConstructModelMapper())
+};
 @EmptyLine
 module.exports = @(Model.Name);

@@ -54,20 +54,17 @@ if (Model.BaseModelType != null)
 @EmptyLine
 }
 }
-@if(Model.SerializableProperties.Any())
+/**
+ * Defines the metadata of @Model.Name
+ *
+ * @@returns {object} metadata of @Model.Name
+ *
+ */
+@(Model.Name).prototype.mapper = function () {
+  @(Model.ConstructModelMapper())
+};
+@if (Model.SerializableProperties.Any())
 {
-@:/**
-@: * Defines the metadata of @Model.Name
-@: *
-@: * @@returns {object} metadata of @Model.Name
-@: *
-@: */
-@:@(Model.Name).prototype.mapper = function () {
-{
-  @EmptyLine
-  @:@(Model.ConstructModelMapper())
-}
-@:};
 @EmptyLine
 @:/**
 @: * Validate the payload against the @Model.Name schema

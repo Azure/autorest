@@ -421,7 +421,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             {
                 builder.AppendLine("var resultMapper = {{{0}}};", type.ConstructMapper(responseVariable));
             }
-            builder.AppendLine("result = msRest.deserialize(resultMapper, {0}, {1}, client);", responseVariable, valueReference);
+            builder.AppendLine("result = msRest.deserialize(resultMapper, {0}, '{1}', client);", responseVariable, valueReference);
             /*CompositeType composite = type as CompositeType;
             SequenceType sequence = type as SequenceType;
             DictionaryType dictionary = type as DictionaryType;

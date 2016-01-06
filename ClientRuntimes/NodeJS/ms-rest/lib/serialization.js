@@ -290,6 +290,26 @@ function serializeCompositeType(mapper, object, objectName, client) {
     throw new Error(util.format('Please provide a valid client instance to serialize the ' + 
         'object: \'%s\' of CompositeType', JSON.stringify(object)));
   }
+
+  //check for polymorphic discriminator
+  if (mapper.type.polymorphicDiscriminator) {
+    if (object === null || object === undefined) {
+      throw new Error(util.format('\'%s\' cannot be null or undefined. \'%s\' is the ' + 
+        'polmorphicDiscriminator and is a required property.', objectName, 
+        mapper.type.polymorphicDiscriminator));
+    }
+    if (!object[mapper.type.polymorphicDiscriminator]) {
+      throw new Error(util.format('No discriminator field \'%s\' was found in \'%s\'.', 
+        mapper.type.polymorphicDiscriminator, objectName));
+    }
+    if (!client.models.discriminators[object[mapper.type.polymorphicDiscriminator]]) {
+      throw new Error(util.format('\'%s\': \'%s\'  in \'%s\' is not a valid ' + 
+        'discriminator as a corresponding model class for that value was not found.', 
+        mapper.type.polymorphicDiscriminator, object[mapper.type.polymorphicDiscriminator], objectName));
+    }
+    mapper = new client.models.discriminators[object[mapper.type.polymorphicDiscriminator]]().mapper();
+  }
+
   var payload = {};
   var modelMapper = {};
   var mapperType = mapper.type.name;
@@ -315,6 +335,7 @@ function serializeCompositeType(mapper, object, objectName, client) {
           mapper.type.className, objectName));
       }
     }
+
     if (requiresFlattening(modelProps, object) && !payload.properties) payload.properties = {};
     for (var key in modelProps) {
       if (modelProps.hasOwnProperty(key)) {
