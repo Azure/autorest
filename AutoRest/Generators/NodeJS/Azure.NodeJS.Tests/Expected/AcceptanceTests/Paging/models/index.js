@@ -21,4 +21,5 @@ exports.CloudError = msRestAzure.CloudError;
 exports.Product = require('./product');
 exports.ProductProperties = require('./productProperties');
 exports.OperationResult = require('./operationResult');
+exports.PagingGetMultiplePagesOptions = require('./pagingGetMultiplePagesOptions');
 exports.ProductResult = require('./productResult');

@@ -91,7 +91,12 @@ namespace Microsoft.Rest.Generator.Java
                     }
                     else
                     {
-                        declarationBuilder.Append(parameter.Type.ToString());
+                        string typeString = parameter.Type.Name;
+                        if (!parameter.IsRequired)
+                        {
+                            typeString = JavaCodeNamer.WrapPrimitiveType(parameter.Type).Name;
+                        }
+                        declarationBuilder.Append(typeString);
                     }
                     declarationBuilder.Append(" " + declarativeName);
                     declarations.Add(declarationBuilder.ToString());

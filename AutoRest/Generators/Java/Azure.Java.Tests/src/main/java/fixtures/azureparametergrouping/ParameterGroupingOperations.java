@@ -37,16 +37,16 @@ public interface ParameterGroupingOperations {
      */
     interface ParameterGroupingService {
         @POST("/parameterGrouping/postRequired/{path}")
-        Call<ResponseBody> postRequired(@Path("path") String path, @Header("accept-language") String acceptLanguage, @Body int body, @Header("customHeader") String customHeader, @Query("query") int query);
+        Call<ResponseBody> postRequired(@Path("path") String path, @Header("accept-language") String acceptLanguage, @Body int body, @Header("customHeader") String customHeader, @Query("query") Integer query);
 
         @POST("/parameterGrouping/postOptional")
-        Call<ResponseBody> postOptional(@Header("accept-language") String acceptLanguage, @Header("customHeader") String customHeader, @Query("query") int query);
+        Call<ResponseBody> postOptional(@Header("accept-language") String acceptLanguage, @Header("customHeader") String customHeader, @Query("query") Integer query);
 
         @POST("/parameterGrouping/postMultipleParameterGroups")
-        Call<ResponseBody> postMultipleParameterGroups(@Header("accept-language") String acceptLanguage, @Header("header-one") String headerOne, @Query("query-one") int queryOne, @Header("header-two") String headerTwo, @Query("query-two") int queryTwo);
+        Call<ResponseBody> postMultipleParameterGroups(@Header("accept-language") String acceptLanguage, @Header("header-one") String headerOne, @Query("query-one") Integer queryOne, @Header("header-two") String headerTwo, @Query("query-two") Integer queryTwo);
 
         @POST("/parameterGrouping/sharedParameterGroupObject")
-        Call<ResponseBody> postSharedParameterGroupObject(@Header("accept-language") String acceptLanguage, @Header("header-one") String headerOne, @Query("query-one") int queryOne);
+        Call<ResponseBody> postSharedParameterGroupObject(@Header("accept-language") String acceptLanguage, @Header("header-one") String headerOne, @Query("query-one") Integer queryOne);
 
     }
     /**

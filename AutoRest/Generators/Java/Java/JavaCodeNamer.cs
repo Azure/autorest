@@ -15,7 +15,9 @@ namespace Microsoft.Rest.Generator.Java
     {
         private readonly HashSet<IType> _normalizedTypes;
 
-        public static HashSet<string> PrimaryTypes {get; private set;}
+        public static HashSet<string> PrimaryTypes { get; private set; }
+
+        public static HashSet<string> JavaBuiltInTypes { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of CSharpCodeNamingFramework.
@@ -60,6 +62,17 @@ namespace Microsoft.Rest.Generator.Java
                 "Period",
                 "BigDecimal",
                 "InputStream"
+            }.ForEach(s => PrimaryTypes.Add(s));
+            JavaBuiltInTypes = new HashSet<string>();
+            new HashSet<string>
+            {
+                "int",
+                "long",
+                "bool",
+                "double",
+                "float",
+                "byte",
+                "byte[]"
             }.ForEach(s => PrimaryTypes.Add(s));
         }
 

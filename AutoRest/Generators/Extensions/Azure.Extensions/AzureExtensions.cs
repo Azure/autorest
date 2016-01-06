@@ -83,11 +83,11 @@ namespace Microsoft.Rest.Generator.Azure
             ParseODataExtension(serviceClient);
             FlattenResourceProperties(serviceClient);
             FlattenRequestPayload(serviceClient, settings);
-            AddPageableMethod(serviceClient, codeNamer);
             AddLongRunningOperations(serviceClient);
             AddAzureProperties(serviceClient);
             SetDefaultResponses(serviceClient);
             AddParameterGroups(serviceClient);
+            AddPageableMethod(serviceClient, codeNamer);
         }
 
         /// <summary>
@@ -483,6 +483,13 @@ namespace Microsoft.Rest.Generator.Azure
                         foreach (var param in method.Parameters.Where(p => p.Location == ParameterLocation.Header))
                         {
                             nextLinkMethod.Parameters.Add((Parameter)param.Clone());
+                        }
+
+                        // Copy all grouped parameters that only contain header parameters
+                        if (method.InputParameterTransformation.All(t => t.OutputParameter.Location == ParameterLocation.Header))
+                        {
+                            method.InputParameterTransformation.Select(t => t.ParameterMappings[0].InputParameter)
+                                .Distinct().ForEach(p => nextLinkMethod.Parameters.Add(p));
                         }
 
                         serviceClient.Methods.Add(nextLinkMethod);
