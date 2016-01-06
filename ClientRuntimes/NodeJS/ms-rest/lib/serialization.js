@@ -510,6 +510,26 @@ function deserializeCompositeType(mapper, responseBody, objectName, client) {
     throw new Error(util.format('Please provide a valid client instance to serialize the ' + 
         'responseBody: \'%s\' of CompositeType', JSON.stringify(responseBody)));
   }
+  
+  //check for polymorphic discriminator
+  if (mapper.type.polymorphicDiscriminator) {
+    if (responseBody === null || responseBody === undefined) {
+      throw new Error(util.format('\'%s\' cannot be null or undefined. \'%s\' is the ' + 
+        'polmorphicDiscriminator and is a required property.', objectName, 
+        mapper.type.polymorphicDiscriminator));
+    }
+    if (!responseBody[mapper.type.polymorphicDiscriminator]) {
+      throw new Error(util.format('No discriminator field \'%s\' was found in \'%s\'.', 
+        mapper.type.polymorphicDiscriminator, objectName));
+    }
+    if (!client.models.discriminators[responseBody[mapper.type.polymorphicDiscriminator]]) {
+      throw new Error(util.format('\'%s\': \'%s\'  in \'%s\' is not a valid ' + 
+        'discriminator as a corresponding model class for that value was not found.', 
+        mapper.type.polymorphicDiscriminator, responseBody[mapper.type.polymorphicDiscriminator], objectName));
+    }
+    mapper = new client.models.discriminators[responseBody[mapper.type.polymorphicDiscriminator]]().mapper();
+  }
+
   var instance = {};
   var modelMapper = {};
   var mapperType = mapper.type.name;
