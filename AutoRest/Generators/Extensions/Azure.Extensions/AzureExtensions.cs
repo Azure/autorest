@@ -86,8 +86,8 @@ namespace Microsoft.Rest.Generator.Azure
             AddLongRunningOperations(serviceClient);
             AddAzureProperties(serviceClient);
             SetDefaultResponses(serviceClient);
-            AddParameterGroups(serviceClient);
             AddPageableMethod(serviceClient, codeNamer);
+            AddParameterGroups(serviceClient); //This should come after all methods have been dynamically added
         }
 
         /// <summary>
