@@ -20,7 +20,8 @@
           "application/octet-stream"
         ],
         "produces": [
-          "application/octet-stream"
+          "application/octet-stream",
+          "application/json"
         ],
         "description": "Upload file",
         "tags": [
@@ -63,7 +64,8 @@
           "application/octet-stream"
         ],
         "produces": [
-          "application/octet-stream"
+          "application/octet-stream",
+          "application/json"
         ],
         "description": "Upload file",
         "tags": [
