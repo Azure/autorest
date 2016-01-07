@@ -84,7 +84,7 @@ else
         self.config = config
 @foreach (var methodGroup in Model.MethodGroupModels)
 {
-        @:self.@(methodGroup.MethodGroupName) = @(methodGroup.MethodGroupType)(
+        @:self.@(methodGroup.MethodGroupName.ToPythonCase()) = @(methodGroup.MethodGroupType)(
             @:self._client, self.config, self._serialize, self._deserialize)
 }
 @foreach (var method in Model.MethodTemplateModels)

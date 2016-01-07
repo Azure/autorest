@@ -55,7 +55,7 @@ namespace Microsoft.Rest.Generator.Python
         /// </summary>
         /// <param name="settingName">the setting name</param>
         /// <returns></returns>
-        public override bool DoesSupportSetting(string settingName)
+        public override bool IsSettingSupported(string settingName)
         {
             if (settingName == "Version")
                 return true;

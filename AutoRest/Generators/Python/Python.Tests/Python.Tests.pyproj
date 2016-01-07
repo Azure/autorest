@@ -26,6 +26,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="AcceptanceTests\form_data_tests.py" />
     <Compile Include="AcceptanceTests\zzz_tests.py">
       <SubType>Code</SubType>
     </Compile>
@@ -103,6 +104,10 @@
     <Folder Include="Expected\AcceptanceTests\BodyFile\auto_rest_swagger_bat_file_service\" />
     <Folder Include="Expected\AcceptanceTests\BodyFile\auto_rest_swagger_bat_file_service\models\" />
     <Folder Include="Expected\AcceptanceTests\BodyFile\auto_rest_swagger_bat_file_service\operations\" />
+    <Folder Include="Expected\AcceptanceTests\BodyFormData\" />
+    <Folder Include="Expected\AcceptanceTests\BodyFormData\auto_rest_swagger_bat_form_data_service\" />
+    <Folder Include="Expected\AcceptanceTests\BodyFormData\auto_rest_swagger_bat_form_data_service\models\" />
+    <Folder Include="Expected\AcceptanceTests\BodyFormData\auto_rest_swagger_bat_form_data_service\operations\" />
     <Folder Include="Expected\AcceptanceTests\BodyInteger\" />
     <Folder Include="Expected\AcceptanceTests\BodyInteger\auto_rest_integer_test_service\" />
     <Folder Include="Expected\AcceptanceTests\BodyInteger\auto_rest_integer_test_service\models\" />

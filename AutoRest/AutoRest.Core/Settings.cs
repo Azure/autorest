@@ -304,6 +304,11 @@ Licensed under the MIT License. See License.txt in the project root for license 
 
         public void Validate(CodeGenerator codeGenerator)
         {
+            if (codeGenerator == null)
+            {
+                throw new ArgumentNullException("codeGenerator");
+            }
+
             foreach (PropertyInfo property in (typeof (Settings)).GetProperties())
             {
                 // If property value is not set - throw exception.
@@ -314,11 +319,12 @@ Licensed under the MIT License. See License.txt in the project root for license 
                         Resources.ParameterValueIsMissing, property.Name);
                 }
             }
-            if (CustomSettings != null && codeGenerator != null)
+
+            if (CustomSettings != null)
             {
                 foreach (var unmatchedSetting in CustomSettings.Keys)
                 {
-                    if (!codeGenerator.DoesSupportSetting(unmatchedSetting))
+                    if (!codeGenerator.IsSettingSupported(unmatchedSetting))
                     {
                         Logger.LogError(new ArgumentException(unmatchedSetting),
                             Resources.ParameterIsNotValid, unmatchedSetting);

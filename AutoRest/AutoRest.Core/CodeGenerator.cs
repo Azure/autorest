@@ -56,7 +56,7 @@ namespace Microsoft.Rest.Generator
         /// </summary>
         /// <param name="settingName">the setting name</param>
         /// <returns></returns>
-        public virtual bool DoesSupportSetting(string settingName)
+        public virtual bool IsSettingSupported(string settingName)
         {
             // Don't support any customized setting
             return false;
