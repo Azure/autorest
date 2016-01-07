@@ -114,9 +114,7 @@ namespace Microsoft.Rest.Generator.Azure
                 }
                 else
                 {
-                    throw new NotSupportedException(
-                        string.Format(CultureInfo.InvariantCulture, 
-                        Resources.HeadMethodInvalidResponses, method.Name));
+                    Logger.LogWarning("HEAD method missing 404 status code section -- this might be unintentional");
                 }
             }
         }
