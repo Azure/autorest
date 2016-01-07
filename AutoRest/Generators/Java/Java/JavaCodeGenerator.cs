@@ -97,16 +97,13 @@ namespace Microsoft.Rest.Generator.Java
             await Write(serviceClientInterfaceTemplate, serviceClient.Name.ToPascalCase() + ".java");
 
             //Models
-            if (serviceClient.ModelTypes.Any())
+            foreach (var modelType in serviceClient.ModelTypes.Concat(serviceClient.HeaderTypes))
             {
-                foreach (var modelType in serviceClientTemplateModel.ModelTemplateModels)
+                var modelTemplate = new ModelTemplate
                 {
-                    var modelTemplate = new ModelTemplate
-                    {
-                        Model = modelType
-                    };
-                    await Write(modelTemplate, Path.Combine("models", modelType.Name.ToPascalCase() + ".java"));
-                }
+                    Model = new ModelTemplateModel(modelType, serviceClient)
+                };
+                await Write(modelTemplate, Path.Combine("models", modelType.Name.ToPascalCase() + ".java"));
             }
 
             //MethodGroups
@@ -135,6 +132,16 @@ namespace Microsoft.Rest.Generator.Java
                     Model = new EnumTemplateModel(enumType),
                 };
                 await Write(enumTemplate, Path.Combine("models", enumTemplate.Model.Name.ToPascalCase() + ".java"));
+            }
+
+            // Exception
+            foreach (var exceptionType in serviceClient.ErrorTypes)
+            {
+                var exceptionTemplate = new ExceptionTemplate
+                {
+                    Model = new ModelTemplateModel(exceptionType, serviceClient),
+                };
+                await Write(exceptionTemplate, Path.Combine("models", exceptionTemplate.Model.ExceptionTypeDefinitionName.ToPascalCase() + ".java"));
             }
 
             // package-info.java

@@ -1,0 +1,123 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutoRest Swagger BAT Form Data Service",
+    "description": "Test Infrastructure for AutoRest Swagger BAT",
+    "version": "1.0.0"
+  },
+  "host": "localhost",
+  "schemes": [
+    "http"
+  ],
+  "produces": [ "application/octet-stream" ],
+  "consumes": [ "application/json" ],
+  "paths": {
+    "/formdata/stream/uploadfile": {
+      "post": {
+        "operationId": "formdata_UploadFile",
+        "consumes": [
+          "multipart/form-data",
+          "application/octet-stream"
+        ],
+        "produces": [
+          "application/octet-stream",
+          "application/json"
+        ],
+        "description": "Upload file",
+        "tags": [
+          "Formdata"
+        ],
+        "parameters": [
+          {
+            "name": "fileContent",
+            "description": "File to upload.",
+            "required": true,
+            "type": "file",
+            "in": "formData"
+          },
+          {
+            "name": "fileName",
+            "description": "File name to upload. Name has to be spelled exactly as written here.",
+            "required": true,
+            "in": "formData",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Serialized file stream",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "formdata_UploadFileViaBody",
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "produces": [
+          "application/octet-stream",
+          "application/json"
+        ],
+        "description": "Upload file",
+        "tags": [
+          "Formdata"
+        ],
+        "parameters": [
+          {
+            "name": "fileContent",
+            "description": "File to upload.",
+            "required": true,
+            "in": "body",
+            "schema": {
+                "type": "object",
+                "format": "file"
+            }
+          },
+          {
+            "name": "fileName",
+            "description": "File name to upload. Name has to be spelled exactly as written here.",
+            "required": true,
+            "in": "formData",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Serialized file stream",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Error": {
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

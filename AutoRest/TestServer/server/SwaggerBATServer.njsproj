@@ -23,6 +23,7 @@
     <Compile Include="routes\azureUrl.js" />
     <Compile Include="routes\datetime-rfc1123.js" />
     <Compile Include="routes\files.js" />
+    <Compile Include="routes\formData.js" />
     <Compile Include="util\constants.js" />
     <Compile Include="util\utils.js" />
     <Content Include="package.json" />

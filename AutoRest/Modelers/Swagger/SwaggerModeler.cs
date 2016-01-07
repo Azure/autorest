@@ -79,7 +79,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             }
 
             // Build methods
-            foreach (var path in ServiceDefinition.Paths)
+            foreach (var path in ServiceDefinition.Paths.Concat(ServiceDefinition.CustomPaths))
             {
                 foreach (var verb in path.Value.Keys)
                 {
@@ -97,7 +97,12 @@ namespace Microsoft.Rest.Modeler.Swagger
 
                     if (verb.ToHttpMethod() != HttpMethod.Options)
                     {
-                        var method = BuildMethod(verb.ToHttpMethod(), path.Key, methodName, operation);
+                        string url = path.Key;
+                        if (url.Contains("?"))
+                        {
+                            url = url.Substring(0, url.IndexOf('?'));
+                        }
+                        var method = BuildMethod(verb.ToHttpMethod(), url, methodName, operation);
                         method.Group = methodGroup;
                         ServiceClient.Methods.Add(method);
                         if (method.DefaultResponse.Body is CompositeType)
@@ -268,9 +273,14 @@ namespace Microsoft.Rest.Modeler.Swagger
         /// </summary>
         /// <param name="operation">The swagger operation.</param>
         /// <returns>Method group name or null.</returns>
-        private static string GetMethodGroup(Operation operation)
+        public static string GetMethodGroup(Operation operation)
         {
-            if (operation.OperationId.IndexOf('_') == -1)
+            if (operation == null)
+            {
+                throw new ArgumentNullException("operation");
+            }
+
+            if (operation.OperationId == null || operation.OperationId.IndexOf('_') == -1)
             {
                 return null;
             }
@@ -284,8 +294,18 @@ namespace Microsoft.Rest.Modeler.Swagger
         /// </summary>
         /// <param name="operation">The swagger operation.</param>
         /// <returns>Method name.</returns>
-        private static string GetMethodName(Operation operation)
+        public static string GetMethodName(Operation operation)
         {
+            if (operation == null)
+            {
+                throw new ArgumentNullException("operation");
+            }
+
+            if (operation.OperationId == null)
+            {
+                return null;
+            }
+
             if (operation.OperationId.IndexOf('_') == -1)
             {
                 return operation.OperationId;

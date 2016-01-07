@@ -34,7 +34,7 @@ namespace Microsoft.Rest.Generator.CSharp
                 return null;
             }
 
-            nextLinkName = (string)ext["nextLinkName"] ?? "nextLink";
+            nextLinkName = (string)ext["nextLinkName"];
             string itemName = (string)ext["itemName"] ?? "value";
             
             var keypair = new KeyValuePair<string, string>(nextLinkName, itemName);
@@ -143,6 +143,11 @@ namespace Microsoft.Rest.Generator.CSharp
                 }
                 var pageTypeFormat = "{0}<{1}>";
                 var ipageTypeFormat = "IPage<{0}>";
+                if (string.IsNullOrWhiteSpace(nextLinkString))
+                {
+                    ipageTypeFormat = "IEnumerable<{0}>";
+                }
+                
 
                 foreach (var responseStatus in method.Responses
                     .Where(r => r.Value.Body is CompositeType).Select(s => s.Key).ToArray())

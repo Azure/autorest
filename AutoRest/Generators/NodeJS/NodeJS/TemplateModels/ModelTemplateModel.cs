@@ -165,15 +165,37 @@ namespace Microsoft.Rest.Generator.NodeJS
 
         public bool ContainsPropertiesInSequenceType()
         {
-            var sample = ComposedProperties.FirstOrDefault(p => p.Type is SequenceType);
+            var sample = ComposedProperties.FirstOrDefault(p => 
+            p.Type is SequenceType ||
+            p.Type is DictionaryType && (p.Type as DictionaryType).ValueType is SequenceType);
             return sample != null;
         }
 
         public bool ContainsPropertiesInCompositeType()
         {
-            var sample = ComposedProperties.FirstOrDefault(p => 
-                p.Type is CompositeType || p.Type is SequenceType && (p.Type as SequenceType).ElementType is CompositeType);
+            var sample = ComposedProperties.FirstOrDefault(p => ContainsCompositeType(p.Type));
             return sample != null;
+        }
+
+        private bool ContainsCompositeType(IType type)
+        {
+            bool result = false;
+            //base condition
+            if (type is CompositeType || 
+                type is SequenceType && (type as SequenceType).ElementType is CompositeType || 
+                type is DictionaryType && (type as DictionaryType).ValueType is CompositeType)
+            {
+                result = true;
+            }
+            else if (type is SequenceType)
+            {
+                result = ContainsCompositeType((type as SequenceType).ElementType);
+            }
+            else if (type is DictionaryType)
+            {
+                result = ContainsCompositeType((type as DictionaryType).ValueType);
+            }
+            return result;
         }
 
         public bool ContainsDurationProperty()

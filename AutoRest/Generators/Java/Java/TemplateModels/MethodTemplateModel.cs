@@ -91,7 +91,12 @@ namespace Microsoft.Rest.Generator.Java
                     }
                     else
                     {
-                        declarationBuilder.Append(parameter.Type.ToString());
+                        string typeString = parameter.Type.Name;
+                        if (!parameter.IsRequired)
+                        {
+                            typeString = JavaCodeNamer.WrapPrimitiveType(parameter.Type).Name;
+                        }
+                        declarationBuilder.Append(typeString);
                     }
                     declarationBuilder.Append(" " + declarativeName);
                     declarations.Add(declarationBuilder.ToString());
@@ -286,18 +291,51 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public virtual string Exceptions
+        /// <summary>
+        /// Get the type for operation exception
+        /// </summary>
+        public virtual string OperationExceptionTypeString
         {
             get
             {
-                List<string> exceptions = new List<string>();
-                exceptions.Add("ServiceException");
-                exceptions.Add("IOException");
+                if (this.DefaultResponse.Body is CompositeType)
+                {
+                    CompositeType type = this.DefaultResponse.Body as CompositeType;
+                    if (type.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.NameOverrideExtension))
+                    {
+                        var ext = type.Extensions[Microsoft.Rest.Generator.Extensions.NameOverrideExtension] as Newtonsoft.Json.Linq.JContainer;
+                        if (ext != null && ext["name"] != null)
+                        {
+                            return ext["name"].ToString();
+                        }
+                    }
+                    return type.Name + "Exception";
+                }
+                else
+                {
+                    return "ServiceException";
+                }
+            }
+        }
+
+        public virtual IEnumerable<string> Exceptions
+        {
+            get
+            {
+                yield return OperationExceptionTypeString;
+                yield return "IOException";
                 if (RequiredNullableParameters.Any())
                 {
-                    exceptions.Add("IllegalArgumentException");
+                    yield return "IllegalArgumentException";
                 }
-                return string.Join(", ", exceptions);
+            }
+        }
+
+        public virtual string ExceptionString
+        {
+            get
+            {
+                return string.Join(", ", Exceptions);
             }
         }
 
@@ -306,7 +344,7 @@ namespace Microsoft.Rest.Generator.Java
             get
             {
                 List<string> exceptions = new List<string>();
-                exceptions.Add("ServiceException exception thrown from REST call");
+                exceptions.Add(OperationExceptionTypeString + " exception thrown from REST call");
                 exceptions.Add("IOException exception thrown from serialization/deserialization");
                 if (RequiredNullableParameters.Any())
                 {
@@ -340,6 +378,36 @@ namespace Microsoft.Rest.Generator.Java
                     return JavaCodeNamer.WrapPrimitiveType(ReturnType.Body).Name;
                 }
                 return "Void";
+            }
+        }
+
+        public string OperationResponseType
+        {
+            get
+            {
+                if (ReturnType.Headers == null)
+                {
+                    return "ServiceResponse";
+                }
+                else
+                {
+                    return "ServiceResponseWithHeaders";
+                }
+            }
+        }
+
+        public string OperationResponseReturnTypeString
+        {
+            get
+            {
+                if (ReturnType.Headers == null)
+                {
+                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}>", OperationResponseType, GenericReturnTypeString);
+                }
+                else
+                {
+                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}, {2}>", OperationResponseType, GenericReturnTypeString, ReturnType.Headers.Name);
+                }
             }
         }
 
@@ -400,8 +468,7 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     imports.Add("com.squareup.okhttp.ResponseBody");
                 }
-                imports.Add("com.microsoft.rest.ServiceResponse");
-                imports.Add("com.microsoft.rest.ServiceException");
+                imports.Add("com.microsoft.rest." + OperationResponseType);
                 imports.Add("com.microsoft.rest.ServiceCallback");
                 // parameter types
                 this.Parameters.ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace)));
@@ -416,13 +483,15 @@ namespace Microsoft.Rest.Generator.Java
                 });
                 // return type
                 imports.AddRange(this.ReturnType.Body.ImportFrom(ServiceClient.Namespace));
+                // Header type
+                imports.AddRange(this.ReturnType.Headers.ImportFrom(ServiceClient.Namespace));
                 // Http verb annotations
                 imports.Add(this.HttpMethod.ImportFrom());
                 // exceptions
-                this.Exceptions.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
+                this.ExceptionString.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
                     .ForEach(ex => {
-                        string exceptionImport = JavaCodeNamer.GetJavaException(ex);
-                        if (exceptionImport != null) imports.Add(JavaCodeNamer.GetJavaException(ex));
+                        string exceptionImport = JavaCodeNamer.GetJavaException(ex, ServiceClient);
+                        if (exceptionImport != null) imports.Add(JavaCodeNamer.GetJavaException(ex, ServiceClient));
                     });
                 return imports.ToList();
             }
@@ -441,13 +510,12 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     imports.Add("com.squareup.okhttp.ResponseBody");
                 }
-                imports.Add("com.microsoft.rest.ServiceResponse");
+                imports.Add("com.microsoft.rest." + OperationResponseType);
                 imports.Add("com.microsoft.rest." + ResponseBuilder);
-                imports.Add("com.microsoft.rest.ServiceException");
                 imports.Add("com.microsoft.rest.ServiceCallback");
 
                 // response type conversion
-                if (this.Responses.Any() || this.DefaultResponse.Body != null)
+                if (this.Responses.Any())
                 {
                     imports.Add("com.google.common.reflect.TypeToken");
                 }
@@ -473,13 +541,14 @@ namespace Microsoft.Rest.Generator.Java
                 imports.AddRange(this.ReturnType.Body.ImportFrom(ServiceClient.Namespace));
                 // response type (can be different from return type)
                 this.Responses.ForEach(r => imports.AddRange(r.Value.Body.ImportFrom(ServiceClient.Namespace)));
-                imports.AddRange(DefaultResponse.Body.ImportFrom(ServiceClient.Namespace));
+                // Header type
+                imports.AddRange(this.ReturnType.Headers.ImportFrom(ServiceClient.Namespace));
                 // exceptions
-                this.Exceptions.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
+                this.ExceptionString.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
                     .ForEach(ex =>
                     {
-                        string exceptionImport = JavaCodeNamer.GetJavaException(ex);
-                        if (exceptionImport != null) imports.Add(JavaCodeNamer.GetJavaException(ex));
+                        string exceptionImport = JavaCodeNamer.GetJavaException(ex, ServiceClient);
+                        if (exceptionImport != null) imports.Add(JavaCodeNamer.GetJavaException(ex, ServiceClient));
                     });
                 return imports.ToList();
             }

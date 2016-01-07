@@ -15,7 +15,9 @@ namespace Microsoft.Rest.Generator.Java
     {
         private readonly HashSet<IType> _normalizedTypes;
 
-        public static HashSet<string> PrimaryTypes {get; private set;}
+        public static HashSet<string> PrimaryTypes { get; private set; }
+
+        public static HashSet<string> JavaBuiltInTypes { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of CSharpCodeNamingFramework.
@@ -60,6 +62,17 @@ namespace Microsoft.Rest.Generator.Java
                 "Period",
                 "BigDecimal",
                 "InputStream"
+            }.ForEach(s => PrimaryTypes.Add(s));
+            JavaBuiltInTypes = new HashSet<string>();
+            new HashSet<string>
+            {
+                "int",
+                "long",
+                "bool",
+                "double",
+                "float",
+                "byte",
+                "byte[]"
             }.ForEach(s => PrimaryTypes.Add(s));
         }
 
@@ -404,15 +417,24 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public static string GetJavaException(string exception)
+        public static string GetJavaException(string exception, ServiceClient serviceClient)
         {
             switch (exception) {
-                case "IOException": 
+                case "IOException":
                     return "java.io.IOException";
                 case "ServiceException":
                     return "com.microsoft.rest.ServiceException";
-                default:
+                case "CloudException":
+                    return "com.microsoft.rest.CloudException";
+                case "AutoRestException":
+                    return "com.microsoft.rest.AutoRestException";
+                case "IllegalArgumentException":
                     return null;
+                case "InterruptedException":
+                    return null;
+                default:
+                    return serviceClient.Namespace.ToLower(CultureInfo.InvariantCulture)
+                        + ".models." + exception;
             }
         }
     }

@@ -50,6 +50,7 @@ var defaultMappings = {
   'AcceptanceTests/BodyDuration': '../../../TestServer/swagger/body-duration.json',
   'AcceptanceTests/BodyDictionary': '../../../TestServer/swagger/body-dictionary.json',
   'AcceptanceTests/BodyFile': '../../../TestServer/swagger/body-file.json',
+  'AcceptanceTests/BodyFormData': '../../../TestServer/swagger/body-formdata.json',
   'AcceptanceTests/BodyInteger': '../../../TestServer/swagger/body-integer.json',
   'AcceptanceTests/BodyNumber': '../../../TestServer/swagger/body-number.json',
   'AcceptanceTests/BodyString': '../../../TestServer/swagger/body-string.json',
@@ -96,6 +97,10 @@ var defaultAzureMappings = {
 
 var nodeAzureMappings = {
   'AcceptanceTests/StorageManagementClient': '../../../TestServer/swagger/storage.json'
+};
+
+var nodeMappings = {
+  'AcceptanceTests/ComplexModelClient': '../../../TestServer/swagger/complex-model.json'
 };
 
 var rubyAzureMappings = {
@@ -154,10 +159,13 @@ gulp.task('regenerate:expected:nodeazure', function(cb){
 })
 
 gulp.task('regenerate:expected:node', function(cb){
+  for (var p in defaultMappings) {
+    nodeMappings[p] = defaultMappings[p];
+  }
   regenExpected({
     'outputBaseDir': 'AutoRest/Generators/NodeJS/NodeJS.Tests',
     'inputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
-    'mappings': defaultMappings,
+    'mappings': nodeMappings,
     'outputDir': 'Expected',
     'codeGenerator': 'NodeJS',
     'flatteningThreshold': '1'
@@ -458,7 +466,7 @@ var xunitdnx = function(options){
   return shell(dnxScript, options);
 }
 
-gulp.task('test:xunit', ['test:xunit:dnx'], function () {
+gulp.task('test:xunit', ['regenerate:expected:cs', 'regenerate:expected:csazure', 'test:xunit:dnx'], function () {
   return gulp.src(xunitTestsDlls).pipe(xunit('<%= file.path %> -noshadow -noappdomain -diagnostics', defaultShellOptions));
 });
 

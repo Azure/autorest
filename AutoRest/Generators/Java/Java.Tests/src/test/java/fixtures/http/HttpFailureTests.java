@@ -1,6 +1,6 @@
 package fixtures.http;
 
-import com.microsoft.rest.ServiceException;
+import fixtures.http.models.ErrorException;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -20,7 +20,7 @@ public class HttpFailureTests {
         try {
             client.getHttpFailure().getEmptyError();
             fail();
-        } catch (ServiceException ex) {
+        } catch (ErrorException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
         }
     }

@@ -18,6 +18,7 @@ API descriptions that are valid according to the schema can produce client libra
 	- [Generating Operation Classes](#generating-operation-classes)
 	- [Specifying required parameters and properties](#specifying-required-parameters-and-properties)
 	- [Error Modeling](#error-modeling)
+- [Extensions](#extensions)
 
 ## Data Types
 ### Primitive Data Types
@@ -696,6 +697,9 @@ if (statusCode != HttpStatusCode.OK) // and more if more acceptable status codes
 ```
 
 See [Error Handling](clients-error.md) for details on how to catch and use the exceptions from generated clients.
+
+## Extensions
+AutoRest supports a number of extensions used to configure generated clients. Please refer to [Swagger Extensions](swagger-extensions.md) document for details.
 
 [Swagger-spec2.0]:https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md
 [JSON-primitive-types]:http://json-schema.org/latest/json-schema-core.html#anchor8

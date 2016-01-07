@@ -44,17 +44,17 @@ namespace AutoRest.Generator.CSharp.Tests.Utilities
 
         public void ReceiveResponse(string invocationId, HttpResponseMessage response)
         {
-            //_logger.LogInformation("response: {0}", response.AsFormattedString());
+            _logger.LogInformation("   response: {0}", response.AsFormattedString());
         }
 
         public void SendRequest(string invocationId, HttpRequestMessage request)
         {
-            //_logger.LogInformation("request: {0}", request.AsFormattedString());
+            _logger.LogInformation("    request: {0}", request.AsFormattedString());
         }
 
         public void TraceError(string invocationId, Exception exception)
         {
-            // Ignore
+            _logger.LogInformation("    error: {1},{0}", invocationId, exception);
         }
     }
 }

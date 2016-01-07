@@ -22,7 +22,7 @@ import java.lang.reflect.Type;
  */
 public class PollingState<T> {
     /** The Retrofit response object. */
-    private Response response;
+    private Response<ResponseBody> response;
     /** The polling status. */
     private String status;
     /** The link in 'Azure-AsyncOperation' header. */
@@ -83,17 +83,17 @@ public class PollingState<T> {
      * Updates the polling state from a PUT or PATCH operation.
      *
      * @param response the response from Retrofit REST call
-     * @throws ServiceException thrown if the response is invalid
+     * @throws CloudException thrown if the response is invalid
      * @throws IOException thrown by deserialization
      */
-    public void updateFromResponseOnPutPatch(Response<ResponseBody> response) throws ServiceException, IOException {
+    public void updateFromResponseOnPutPatch(Response<ResponseBody> response) throws CloudException, IOException {
         String responseContent = null;
         if (response.body() != null) {
             responseContent = response.body().string();
         }
 
         if (responseContent == null || responseContent.isEmpty()) {
-            ServiceException exception = new ServiceException("no body");
+            CloudException exception = new CloudException("no body");
             exception.setResponse(response);
             throw exception;
         }
@@ -173,7 +173,7 @@ public class PollingState<T> {
      *
      * @return the last operation response.
      */
-    public Response getResponse() {
+    public Response<ResponseBody> getResponse() {
         return this.response;
     }
 
@@ -183,7 +183,7 @@ public class PollingState<T> {
      *
      * @param response the last operation response.
      */
-    public void setResponse(Response response) {
+    public void setResponse(Response<ResponseBody> response) {
         this.response = response;
         if (response != null) {
             String asyncHeader = response.headers().get("Azure-AsyncOperation");
