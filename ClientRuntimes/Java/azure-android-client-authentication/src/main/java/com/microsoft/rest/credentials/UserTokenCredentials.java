@@ -9,7 +9,16 @@ package com.microsoft.rest.credentials;
 
 import android.app.Activity;
 
-import com.squareup.okhttp.OkHttpClient;
+import com.microsoft.aad.adal.AuthenticationCallback;
+import com.microsoft.aad.adal.AuthenticationContext;
+import com.microsoft.aad.adal.AuthenticationResult;
+import com.microsoft.aad.adal.PromptBehavior;
+
+import java.io.IOException;
+import java.security.NoSuchAlgorithmException;
+import java.util.concurrent.CountDownLatch;
+
+import javax.crypto.NoSuchPaddingException;
 
 /**
  * Token based credentials for use with a REST Service Client.
@@ -25,6 +34,8 @@ public class UserTokenCredentials extends TokenCredentials {
     private AzureEnvironment environment;
     /** The caller activity. */
     private Activity activity;
+    /** The count down latch to synchronize token acquisition. */
+    private CountDownLatch signal = new CountDownLatch(1);
 
     /**
      * Initializes a new instance of the UserTokenCredentials.
@@ -84,12 +95,51 @@ public class UserTokenCredentials extends TokenCredentials {
         return environment;
     }
 
-    public Activity getActivity() {
-        return activity;
+    @Override
+    public String getToken() throws IOException {
+        if (token == null) {
+            acquireAccessToken();
+        }
+        return token;
     }
 
     @Override
-    public void applyCredentialsFilter(OkHttpClient client) {
-        client.interceptors().add(new UserTokenCredentialsInterceptor(this, activity));
+    public void refreshToken() throws IOException {
+        acquireAccessToken();
+    }
+
+    private void acquireAccessToken() throws IOException {
+        String authorityUrl = this.getEnvironment().getAuthenticationEndpoint() + this.getDomain();
+        AuthenticationContext context;
+        try {
+            context = new AuthenticationContext(activity, authorityUrl, true);
+        } catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
+            return;
+        }
+        final TokenCredentials self = this;
+        context.acquireToken(activity,
+                this.getEnvironment().getTokenAudience(),
+                this.getClientId(),
+                this.getClientRedirectUri(),
+                PromptBehavior.REFRESH_SESSION,
+                new AuthenticationCallback<AuthenticationResult>() {
+                    @Override
+                    public void onSuccess(AuthenticationResult authenticationResult) {
+                        if (authenticationResult != null && authenticationResult.getAccessToken() != null) {
+                            self.setToken(authenticationResult.getAccessToken());
+                            signal.countDown();
+                        } else {
+                            onError(new IOException("Failed to acquire access token"));
+                        }
+                    }
+
+                    @Override
+                    public void onError(Exception e) {
+                        signal.countDown();
+                    }
+                });
+        try {
+            signal.await();
+        } catch (InterruptedException e) { /* Ignore */ }
     }
 }
