@@ -162,6 +162,16 @@ Paging.prototype.getSinglePages = function (options, callback) {
  * 
  * @param {string} [options.clientRequestId]
  * 
+ * @param {object} [options.pagingGetMultiplePagesOptions] Additional
+ * parameters for the operation
+ * 
+ * @param {number} [options.pagingGetMultiplePagesOptions.maxresults] Sets the
+ * maximum number of items to return in the response.
+ * 
+ * @param {number} [options.pagingGetMultiplePagesOptions.timeout] Sets the
+ * maximum time that the server can spend processing the request, in seconds.
+ * The default is 30 seconds.
+ * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  * 
@@ -188,6 +198,7 @@ Paging.prototype.getMultiplePages = function (options, callback) {
     throw new Error('callback cannot be null.');
   }
   var clientRequestId = (options && options.clientRequestId !== undefined) ? options.clientRequestId : undefined;
+  var pagingGetMultiplePagesOptions = (options && options.pagingGetMultiplePagesOptions !== undefined) ? options.pagingGetMultiplePagesOptions : undefined;
   // Validate
   try {
     if (clientRequestId !== null && clientRequestId !== undefined && typeof clientRequestId.valueOf() !== 'string') {
@@ -198,6 +209,16 @@ Paging.prototype.getMultiplePages = function (options, callback) {
     }
   } catch (error) {
     return callback(error);
+  }
+  var maxresults;
+  if ((pagingGetMultiplePagesOptions !== null && pagingGetMultiplePagesOptions !== undefined))
+  {
+      maxresults = pagingGetMultiplePagesOptions.maxresults;
+  }
+  var timeout;
+  if ((pagingGetMultiplePagesOptions !== null && pagingGetMultiplePagesOptions !== undefined))
+  {
+      timeout = pagingGetMultiplePagesOptions.timeout;
   }
 
   // Construct URL
@@ -223,6 +244,12 @@ Paging.prototype.getMultiplePages = function (options, callback) {
   }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
+  if (maxresults !== undefined && maxresults !== null) {
+    httpRequest.headers['maxresults'] = maxresults.toString();
+  }
+  if (timeout !== undefined && timeout !== null) {
+    httpRequest.headers['timeout'] = timeout.toString();
   }
   if(options) {
     for(var headerName in options['customHeaders']) {
@@ -1061,6 +1088,16 @@ Paging.prototype.getSinglePagesNext = function (nextPageLink, options, callback)
  * 
  * @param {string} [options.clientRequestId]
  * 
+ * @param {object} [options.pagingGetMultiplePagesOptions] Additional
+ * parameters for the operation
+ * 
+ * @param {number} [options.pagingGetMultiplePagesOptions.maxresults] Sets the
+ * maximum number of items to return in the response.
+ * 
+ * @param {number} [options.pagingGetMultiplePagesOptions.timeout] Sets the
+ * maximum time that the server can spend processing the request, in seconds.
+ * The default is 30 seconds.
+ * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  * 
@@ -1087,6 +1124,7 @@ Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callbac
     throw new Error('callback cannot be null.');
   }
   var clientRequestId = (options && options.clientRequestId !== undefined) ? options.clientRequestId : undefined;
+  var pagingGetMultiplePagesOptions = (options && options.pagingGetMultiplePagesOptions !== undefined) ? options.pagingGetMultiplePagesOptions : undefined;
   // Validate
   try {
     if (nextPageLink === null || nextPageLink === undefined || typeof nextPageLink.valueOf() !== 'string') {
@@ -1100,6 +1138,16 @@ Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callbac
     }
   } catch (error) {
     return callback(error);
+  }
+  var maxresults;
+  if ((pagingGetMultiplePagesOptions !== null && pagingGetMultiplePagesOptions !== undefined))
+  {
+      maxresults = pagingGetMultiplePagesOptions.maxresults;
+  }
+  var timeout;
+  if ((pagingGetMultiplePagesOptions !== null && pagingGetMultiplePagesOptions !== undefined))
+  {
+      timeout = pagingGetMultiplePagesOptions.timeout;
   }
 
   // Construct URL
@@ -1121,6 +1169,12 @@ Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callbac
   }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
+  }
+  if (maxresults !== undefined && maxresults !== null) {
+    httpRequest.headers['maxresults'] = maxresults.toString();
+  }
+  if (timeout !== undefined && timeout !== null) {
+    httpRequest.headers['timeout'] = timeout.toString();
   }
   if(options) {
     for(var headerName in options['customHeaders']) {

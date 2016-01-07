@@ -65,7 +65,7 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
         Validator.validate(parameterGroupingPostRequiredParameters);
         int body = parameterGroupingPostRequiredParameters.getBody();
         String customHeader = parameterGroupingPostRequiredParameters.getCustomHeader();
-        int query = parameterGroupingPostRequiredParameters.getQuery();
+        Integer query = parameterGroupingPostRequiredParameters.getQuery();
         String path = parameterGroupingPostRequiredParameters.getPath();
         Call<ResponseBody> call = service.postRequired(path, this.client.getAcceptLanguage(), body, customHeader, query);
         return postRequiredDelegate(call.execute(), null);
@@ -86,7 +86,7 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
         Validator.validate(parameterGroupingPostRequiredParameters, serviceCallback);
         int body = parameterGroupingPostRequiredParameters.getBody();
         String customHeader = parameterGroupingPostRequiredParameters.getCustomHeader();
-        int query = parameterGroupingPostRequiredParameters.getQuery();
+        Integer query = parameterGroupingPostRequiredParameters.getQuery();
         String path = parameterGroupingPostRequiredParameters.getPath();
         Call<ResponseBody> call = service.postRequired(path, this.client.getAcceptLanguage(), body, customHeader, query);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -118,8 +118,12 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> postOptional(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters) throws ErrorException, IOException {
-        String customHeader = parameterGroupingPostOptionalParameters.getCustomHeader();
-        int query = parameterGroupingPostOptionalParameters.getQuery();
+        String customHeader = null;
+        Integer query = null;
+        if (parameterGroupingPostOptionalParameters != null) {
+            customHeader = parameterGroupingPostOptionalParameters.getCustomHeader();
+            query = parameterGroupingPostOptionalParameters.getQuery();
+        }
         Call<ResponseBody> call = service.postOptional(this.client.getAcceptLanguage(), customHeader, query);
         return postOptionalDelegate(call.execute(), null);
     }
@@ -132,8 +136,12 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
      * @return the {@link Call} object
      */
     public Call<ResponseBody> postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters, final ServiceCallback<Void> serviceCallback) {
-        String customHeader = parameterGroupingPostOptionalParameters.getCustomHeader();
-        int query = parameterGroupingPostOptionalParameters.getQuery();
+        String customHeader = null;
+        Integer query = null;
+        if (parameterGroupingPostOptionalParameters != null) {
+            customHeader = parameterGroupingPostOptionalParameters.getCustomHeader();
+            query = parameterGroupingPostOptionalParameters.getQuery();
+        }
         Call<ResponseBody> call = service.postOptional(this.client.getAcceptLanguage(), customHeader, query);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -165,10 +173,18 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> postMultipleParameterGroups(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup parameterGroupingPostMultipleParameterGroupsSecondParameterGroup) throws ErrorException, IOException {
-        String headerOne = firstParameterGroup.getHeaderOne();
-        int queryOne = firstParameterGroup.getQueryOne();
-        String headerTwo = parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.getHeaderTwo();
-        int queryTwo = parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.getQueryTwo();
+        String headerOne = null;
+        Integer queryOne = null;
+        if (firstParameterGroup != null) {
+            headerOne = firstParameterGroup.getHeaderOne();
+            queryOne = firstParameterGroup.getQueryOne();
+        }
+        String headerTwo = null;
+        Integer queryTwo = null;
+        if (parameterGroupingPostMultipleParameterGroupsSecondParameterGroup != null) {
+            headerTwo = parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.getHeaderTwo();
+            queryTwo = parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.getQueryTwo();
+        }
         Call<ResponseBody> call = service.postMultipleParameterGroups(this.client.getAcceptLanguage(), headerOne, queryOne, headerTwo, queryTwo);
         return postMultipleParameterGroupsDelegate(call.execute(), null);
     }
@@ -182,10 +198,18 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
      * @return the {@link Call} object
      */
     public Call<ResponseBody> postMultipleParameterGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup parameterGroupingPostMultipleParameterGroupsSecondParameterGroup, final ServiceCallback<Void> serviceCallback) {
-        String headerOne = firstParameterGroup.getHeaderOne();
-        int queryOne = firstParameterGroup.getQueryOne();
-        String headerTwo = parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.getHeaderTwo();
-        int queryTwo = parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.getQueryTwo();
+        String headerOne = null;
+        Integer queryOne = null;
+        if (firstParameterGroup != null) {
+            headerOne = firstParameterGroup.getHeaderOne();
+            queryOne = firstParameterGroup.getQueryOne();
+        }
+        String headerTwo = null;
+        Integer queryTwo = null;
+        if (parameterGroupingPostMultipleParameterGroupsSecondParameterGroup != null) {
+            headerTwo = parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.getHeaderTwo();
+            queryTwo = parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.getQueryTwo();
+        }
         Call<ResponseBody> call = service.postMultipleParameterGroups(this.client.getAcceptLanguage(), headerOne, queryOne, headerTwo, queryTwo);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -216,8 +240,12 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> postSharedParameterGroupObject(FirstParameterGroup firstParameterGroup) throws ErrorException, IOException {
-        String headerOne = firstParameterGroup.getHeaderOne();
-        int queryOne = firstParameterGroup.getQueryOne();
+        String headerOne = null;
+        Integer queryOne = null;
+        if (firstParameterGroup != null) {
+            headerOne = firstParameterGroup.getHeaderOne();
+            queryOne = firstParameterGroup.getQueryOne();
+        }
         Call<ResponseBody> call = service.postSharedParameterGroupObject(this.client.getAcceptLanguage(), headerOne, queryOne);
         return postSharedParameterGroupObjectDelegate(call.execute(), null);
     }
@@ -230,8 +258,12 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
      * @return the {@link Call} object
      */
     public Call<ResponseBody> postSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup, final ServiceCallback<Void> serviceCallback) {
-        String headerOne = firstParameterGroup.getHeaderOne();
-        int queryOne = firstParameterGroup.getQueryOne();
+        String headerOne = null;
+        Integer queryOne = null;
+        if (firstParameterGroup != null) {
+            headerOne = firstParameterGroup.getHeaderOne();
+            queryOne = firstParameterGroup.getQueryOne();
+        }
         Call<ResponseBody> call = service.postSharedParameterGroupObject(this.client.getAcceptLanguage(), headerOne, queryOne);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
