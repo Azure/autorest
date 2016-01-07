@@ -65,15 +65,23 @@ class Model(object):
             if hasattr(self, k):
                 setattr(self, k, kwargs[k])
 
-    def __eq__(self, value):
+    def __eq__(self, other):
         """Compare objects by comparing all arributes."""
-        for key, val in self.__dict__.items():
-            if not hasattr(value, key):
-                return False
+        return (isinstance(other, self.__class__)
+            and self.__dict__ == other.__dict__)
 
-            if val != getattr(value, key):
-                return False
-        return True
+    def __ne__(self, other):
+        """Compare objects by comparing all arributes."""
+        return not self.__eq__(other)
+
+    def __lt__(self, other):
+        """Sort objects by comparing each attribute."""
+        try:
+            for key, val in self.__dict__.items():
+                if val != getattr(other, key):
+                    return val < getattr(other, key)
+        except AttributeError:
+            return str(self) < str(other)
 
     def __str__(self):
         return str(self.__dict__)

@@ -59,13 +59,8 @@ class Paged(object):
             yield i
 
         while self.next_link is not None:
-            next = self.next()
-            try:
-                for i in next.output:
-                    yield i
-            except AttributeError:
-                for i in next:
-                    yield i
+            for i in self.next():
+                yield i
 
     def __len__(self):
         """Returnds length of items in current page."""
@@ -77,9 +72,10 @@ class Paged(object):
 
     def _validate_url(self):
         """Validate next page URL."""
-        parsed = urlparse(self.next_link)
-        if not parsed.scheme or not parsed.netloc:
-            raise ValueError("Invalid URL: " + self.next_link)
+        if self.next_link:
+            parsed = urlparse(self.next_link)
+            if not parsed.scheme or not parsed.netloc:
+                raise ValueError("Invalid URL: " + self.next_link)
 
     @property
     def raw(self):
@@ -104,8 +100,7 @@ class Paged(object):
         """Get next page."""
         if self.next_link is None:
             raise GeneratorExit("End of paging")
-        elif self.next_link:
-            self._validate_url()
+        self._validate_url()
         self._response = self._get_next(self.next_link)
         self._derserializer(self, self._response)
         return self.items
