@@ -113,16 +113,17 @@ def set_log_level(logger, level):
 
     :param Logger logger: Logger object being configured.
     :param str/int level: Logging level, can be integer in
-     {10, 20, 30, 40, 50} or a string in {'debug', 'info', 'warning',
+     {logging.DEBUG, logging.INFO, logging.WARNING, logging.ERROR,
+     logging.CRITICAL} or a string in {'debug', 'info', 'warning',
      'error', 'critical'}.
     :returns: Current logging level as an int.
     :raises: ValueError if supplied logging level is invalid.
     """
-    levels = {'debug': 10,
-              'info': 20,
-              'warning': 30,
-              'error': 40,
-              'critical': 50}
+    levels = {'debug': logging.DEBUG,
+              'info': logging.INFO,
+              'warning': logging.WARNING,
+              'error': logging.ERROR,
+              'critical': logging.CRITICAL}
     try:
         level = levels[level.lower()]
     except (AttributeError, KeyError):

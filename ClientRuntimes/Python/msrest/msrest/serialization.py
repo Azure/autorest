@@ -68,7 +68,7 @@ class Model(object):
     def __eq__(self, other):
         """Compare objects by comparing all arributes."""
         return (isinstance(other, self.__class__)
-            and self.__dict__ == other.__dict__)
+                and self.__dict__ == other.__dict__)
 
     def __ne__(self, other):
         """Compare objects by comparing all arributes."""
