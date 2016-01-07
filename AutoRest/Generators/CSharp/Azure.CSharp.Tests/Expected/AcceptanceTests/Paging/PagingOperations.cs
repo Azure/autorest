@@ -181,14 +181,27 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// </summary>
         /// <param name='clientRequestId'>
         /// </param>
+        /// <param name='pagingGetMultiplePagesOptions'>
+        /// Additional parameters for the operation
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<IPage<Product>>> GetMultiplePagesWithHttpMessagesAsync(string clientRequestId = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<IPage<Product>>> GetMultiplePagesWithHttpMessagesAsync(string clientRequestId = default(string), PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = default(PagingGetMultiplePagesOptions), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
+            int? maxresults = null;
+            if (pagingGetMultiplePagesOptions != null)
+            {
+                maxresults = pagingGetMultiplePagesOptions.Maxresults;
+            }
+            int? timeout = null;
+            if (pagingGetMultiplePagesOptions != null)
+            {
+                timeout = pagingGetMultiplePagesOptions.Timeout;
+            }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -197,6 +210,8 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("clientRequestId", clientRequestId);
+                tracingParameters.Add("maxresults", maxresults);
+                tracingParameters.Add("timeout", timeout);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "GetMultiplePages", tracingParameters);
             }
@@ -229,6 +244,22 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                     _httpRequest.Headers.Remove("accept-language");
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", this.Client.AcceptLanguage);
+            }
+            if (maxresults != null)
+            {
+                if (_httpRequest.Headers.Contains("maxresults"))
+                {
+                    _httpRequest.Headers.Remove("maxresults");
+                }
+                _httpRequest.Headers.TryAddWithoutValidation("maxresults", SafeJsonConvert.SerializeObject(maxresults, this.Client.SerializationSettings).Trim('"'));
+            }
+            if (timeout != null)
+            {
+                if (_httpRequest.Headers.Contains("timeout"))
+                {
+                    _httpRequest.Headers.Remove("timeout");
+                }
+                _httpRequest.Headers.TryAddWithoutValidation("timeout", SafeJsonConvert.SerializeObject(timeout, this.Client.SerializationSettings).Trim('"'));
             }
             if (customHeaders != null)
             {
@@ -1095,17 +1126,30 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// </param>
         /// <param name='clientRequestId'>
         /// </param>
+        /// <param name='pagingGetMultiplePagesOptions'>
+        /// Additional parameters for the operation
+        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<IPage<Product>>> GetMultiplePagesNextWithHttpMessagesAsync(string nextPageLink, string clientRequestId = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<IPage<Product>>> GetMultiplePagesNextWithHttpMessagesAsync(string nextPageLink, string clientRequestId = default(string), PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = default(PagingGetMultiplePagesOptions), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (nextPageLink == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "nextPageLink");
+            }
+            int? maxresults = null;
+            if (pagingGetMultiplePagesOptions != null)
+            {
+                maxresults = pagingGetMultiplePagesOptions.Maxresults;
+            }
+            int? timeout = null;
+            if (pagingGetMultiplePagesOptions != null)
+            {
+                timeout = pagingGetMultiplePagesOptions.Timeout;
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1116,6 +1160,8 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("nextPageLink", nextPageLink);
                 tracingParameters.Add("clientRequestId", clientRequestId);
+                tracingParameters.Add("maxresults", maxresults);
+                tracingParameters.Add("timeout", timeout);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "GetMultiplePagesNext", tracingParameters);
             }
@@ -1148,6 +1194,22 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                     _httpRequest.Headers.Remove("accept-language");
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", this.Client.AcceptLanguage);
+            }
+            if (maxresults != null)
+            {
+                if (_httpRequest.Headers.Contains("maxresults"))
+                {
+                    _httpRequest.Headers.Remove("maxresults");
+                }
+                _httpRequest.Headers.TryAddWithoutValidation("maxresults", SafeJsonConvert.SerializeObject(maxresults, this.Client.SerializationSettings).Trim('"'));
+            }
+            if (timeout != null)
+            {
+                if (_httpRequest.Headers.Contains("timeout"))
+                {
+                    _httpRequest.Headers.Remove("timeout");
+                }
+                _httpRequest.Headers.TryAddWithoutValidation("timeout", SafeJsonConvert.SerializeObject(timeout, this.Client.SerializationSettings).Trim('"'));
             }
             if (customHeaders != null)
             {
