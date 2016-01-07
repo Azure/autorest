@@ -11,9 +11,9 @@
 package fixtures.bodyformdata;
 
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
+import fixtures.bodyformdata.models.ErrorException;
 import java.io.InputStream;
 import java.io.IOException;
 import retrofit.Call;
@@ -43,12 +43,12 @@ public interface Formdata {
      *
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<InputStream> uploadFile(InputStream fileContent, String fileName) throws ServiceException, IOException, IllegalArgumentException;
+    ServiceResponse<InputStream> uploadFile(InputStream fileContent, String fileName) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Upload file.
@@ -65,12 +65,12 @@ public interface Formdata {
      *
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
-     * @throws ServiceException exception thrown from REST call
+     * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the InputStream object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<InputStream> uploadFileViaBody(InputStream fileContent, String fileName) throws ServiceException, IOException, IllegalArgumentException;
+    ServiceResponse<InputStream> uploadFileViaBody(InputStream fileContent, String fileName) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Upload file.
