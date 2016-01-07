@@ -15,6 +15,10 @@ install:
   - rvm use 2.2.1 --install --binary --fuzzy
   - gem install bundler
   - bundle install
+  - mkdir android
+  - wget -qO- "http://dl.google.com/android/android-sdk_r23.0.2-linux.tgz" | tar -zxv -C ./android
+  - echo y | ./android/android-sdk-linux/tools/android update sdk --all --filter platform-tools,android-23,build-tools-23.0.1,extra-android-support,extra-android-m2repository,extra-google-m2repository --no-ui --force
+  - export ANDROID_HOME=`pwd`/android/android-sdk-linux
 script:
   - dnvm install 1.0.0-rc1-final -r mono
   - dnvm install 1.0.0-rc1-final -r coreclr
