@@ -62,6 +62,21 @@ namespace Microsoft.Rest.Generator.Java.Azure
             get { return Url == "{nextLink}"; }
         }
 
+        /// <summary>
+        /// Get the type for operation exception.
+        /// </summary>
+        public override string OperationExceptionTypeString
+        {
+            get
+            {
+                if (DefaultResponse.Body == null || DefaultResponse.Body.Name == "CloudError")
+                {
+                    return "CloudException";
+                }
+                return base.OperationExceptionTypeString;
+            }
+        }
+
         public override string MethodParameterApiDeclaration
         {
             get
@@ -75,14 +90,14 @@ namespace Microsoft.Rest.Generator.Java.Azure
             }
         }
 
-        public override string Exceptions
+        public override IEnumerable<string> Exceptions
         {
             get
             {
-                string exceptions = base.Exceptions;
+                var exceptions = base.Exceptions.ToList();
                 if (this.IsLongRunningOperation)
                 {
-                    exceptions = string.Join(", ", exceptions, "InterruptedException");
+                    exceptions.Add("InterruptedException");
                 }
                 return exceptions;
             }
@@ -105,15 +120,37 @@ namespace Microsoft.Rest.Generator.Java.Azure
         {
             get
             {
+                string method;
                 if (this.HttpMethod == HttpMethod.Put || this.HttpMethod == HttpMethod.Patch)
                 {
-                    return "getPutOrPatchResult";
+                    method = "getPutOrPatchResult";
                 }
                 else if (this.HttpMethod == HttpMethod.Delete || this.HttpMethod == HttpMethod.Post)
                 {
-                    return "getPostOrDeleteResult";
+                    method = "getPostOrDeleteResult";
                 }
-                throw new InvalidOperationException("Invalid long running operation HTTP method " + this.HttpMethod);
+                else
+                {
+                    throw new InvalidOperationException("Invalid long running operation HTTP method " + this.HttpMethod);
+                }
+                if (ReturnType.Headers != null)
+                {
+                    method += "WithHeaders";
+                }
+                return method;
+            }
+        }
+
+        public string PollingResourceTypeArgs
+        {
+            get
+            {
+                string args = "new TypeToken<" + GenericReturnTypeString + ">() { }.getType()";
+                if (ReturnType.Headers != null)
+                {
+                    args += ", " + ReturnType.Headers.Name + ".class";
+                }
+                return args;
             }
         }
 

@@ -152,7 +152,21 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
                 }
             };
             var result = FilterString.Generate<Param1>(p => p.Foo.StartsWith(param.Param.Value));
-            Assert.Equal("startswith(foo, 'foo')", result);
+            Assert.Equal("startswith(foo,'foo')", result);
+        }
+
+        [Fact]
+        public void StartsWithWorksWihNullInODataFilter()
+        {
+            var param = new InputParam2
+            {
+                Param = new InputParam1
+                {
+                    Value = null
+                }
+            };
+            var result = FilterString.Generate<Param1>(p => p.Foo.StartsWith(param.Param.Value));
+            Assert.Equal("", result);
         }
 
         [Fact]
@@ -229,6 +243,16 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             var query = new ODataQuery<Param1>();
             Assert.Equal("", query.ToString());
             query = new ODataQuery<Param1>(p => p.Foo == null);
+            Assert.Equal("", query.ToString());
+            var param = new InputParam1
+            {
+                Value = null
+            };
+            query = new ODataQuery<Param1>(p => p.Foo == param.Value);
+            Assert.Equal("", query.ToString());
+            query = new ODataQuery<Param1>(p => p.Foo == param.Value && p.AssignedTo(param.Value));
+            Assert.Equal("", query.ToString());
+            query = new ODataQuery<Param1>(p => p.AssignedTo(param.Value));
             Assert.Equal("", query.ToString());
         }
 

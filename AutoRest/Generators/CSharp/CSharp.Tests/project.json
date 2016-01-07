@@ -22,7 +22,6 @@
     }
   },
   "exclude": [ "CSharpCodeNamingFrameworkTests.*" ],
-  "content": [ "sample.png" ],
   "dependencies": {
     "Microsoft.Rest.ClientRuntime": "",
     "System.Runtime.Serialization.Primitives": "4.0.10",

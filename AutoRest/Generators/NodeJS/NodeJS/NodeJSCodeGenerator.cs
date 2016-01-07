@@ -16,7 +16,7 @@ namespace Microsoft.Rest.Generator.NodeJS
 {
     public class NodeJSCodeGenerator : CodeGenerator
     {
-        private const string ClientRuntimePackage = "ms-rest version 1.2.0";
+        private const string ClientRuntimePackage = "ms-rest version 1.3.0";
 
         public NodeJsCodeNamer Namer { get; private set; }
 
@@ -64,6 +64,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             Namer.NormalizeClientModel(serviceClient);
             Namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");
+            Namer.NormalizeOdataFilterParameter(serviceClient);
         }
 
         private void PopulateAdditionalProperties(ServiceClient serviceClient)

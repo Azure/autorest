@@ -137,11 +137,11 @@ namespace Microsoft.Rest
         }
 
         /// <summary>
-        /// Serializes HttpResponseHeaders as Json dictionary.
+        /// Serializes HttpHeaders as Json dictionary.
         /// </summary>
-        /// <param name="headers">HttpResponseHeaders</param>
+        /// <param name="headers">HttpHeaders</param>
         /// <returns>Json string</returns>
-        public static JObject ToJson(this HttpResponseHeaders headers)
+        public static JObject ToJson(this HttpHeaders headers)
         {
             if (headers == null || !headers.Any())
             {
@@ -163,6 +163,47 @@ namespace Microsoft.Rest
                 }
                 return jObject;
             }
+        }
+
+        /// <summary>
+        /// Serializes HttpResponseHeaders and HttpContentHeaders as Json dictionary.
+        /// </summary>
+        /// <param name="message">HttpResponseMessage</param>
+        /// <returns>Json string</returns>
+        public static JObject GetHeadersAsJson(this HttpResponseMessage message)
+        {
+            if (message == null)
+            {
+                return new JObject();
+            }
+
+            var jObject = new JObject();
+            foreach (var httpResponseHeader in message.Headers)
+            {
+                if (httpResponseHeader.Value.Count() > 1)
+                {
+                    jObject[httpResponseHeader.Key] = new JArray(httpResponseHeader.Value);
+                }
+                else
+                {
+                    jObject[httpResponseHeader.Key] = httpResponseHeader.Value.FirstOrDefault();
+                }
+            }
+            if (message.Content != null)
+            {
+                foreach (var httpResponseHeader in message.Content.Headers)
+                {
+                    if (httpResponseHeader.Value.Count() > 1)
+                    {
+                        jObject[httpResponseHeader.Key] = new JArray(httpResponseHeader.Value);
+                    }
+                    else
+                    {
+                        jObject[httpResponseHeader.Key] = httpResponseHeader.Value.FirstOrDefault();
+                    }
+                }
+            }
+            return jObject;
         }
     }
 }

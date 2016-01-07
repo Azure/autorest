@@ -11,17 +11,26 @@ catch (HttpOperationException ex)
     var response = ex.Response;
 }
 ```
-Many services define models for error conditions. Use the `HttpOperationException<T>` class to access the specific error type:
+Many services define models for error conditions. Use either the base type `RestException` or a model type to catch the exception:
 ```csharp
 try
 {
     pets = client.FindPets(null, -1);
 }
-catch (HttpOperationException<ErrorModel> ex)
+catch (RestException ex)
 {
     var request = ex.Request;
     var response = ex.Response;
-  
+}
+
+try
+{
+    pets = client.FindPets(null, -1);
+}
+catch (PetException ex)
+{
+    var request = ex.Request;
+    var response = ex.Response;
     var errorData = ex.Body;
     var message = errorData.Message;
 }

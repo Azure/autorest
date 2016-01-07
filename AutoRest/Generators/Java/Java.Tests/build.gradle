@@ -25,6 +25,7 @@ repositories {
 }
 
 checkstyle {
+    toolVersion = "6.9"
     configFile = new File("$rootDir/Tools/checkstyle/checkstyle.xml")
     configProperties = [samedir: "$rootDir/Tools/checkstyle"]
     reportsDir = new File("$rootDir/Tools/checkstyle/reports")
@@ -35,7 +36,7 @@ dependencies {
     compile 'commons-codec:commons-codec:1.10'
     compile 'com.squareup.okhttp:okhttp:2.6.0-SNAPSHOT'
     compile 'com.squareup.okhttp:logging-interceptor:2.6.0-SNAPSHOT'
-    compile 'com.microsoft.rest:client-runtime:0.0.1-SNAPSHOT'
+    compile 'com.microsoft.rest:client-runtime:0.0.2-SNAPSHOT'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'joda-time:joda-time:2.8.2'
     compile 'javax.validation:validation-api:1.1.0.Final'

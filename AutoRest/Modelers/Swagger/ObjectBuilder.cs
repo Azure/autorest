@@ -42,6 +42,10 @@ namespace Microsoft.Rest.Modeler.Swagger
         public virtual IType BuildServiceType(string serviceTypeName)
         {
             PrimaryType type = SwaggerObject.ToType();
+            if (type == PrimaryType.Object && "file".Equals(SwaggerObject.Format, StringComparison.OrdinalIgnoreCase))
+            {
+                type = PrimaryType.Stream;
+            }
             if (SwaggerObject.Enum != null && SwaggerObject.Enum.Any() && type == PrimaryType.String)
             {
                 var enumType = new EnumType();

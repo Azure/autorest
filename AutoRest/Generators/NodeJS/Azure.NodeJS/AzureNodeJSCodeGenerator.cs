@@ -18,8 +18,7 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
 {
     public class AzureNodeJSCodeGenerator : NodeJSCodeGenerator
     {
-        private const string ClientRuntimePackage = "ms-rest-azure version 1.2.0";
-        public const string LongRunningExtension = "x-ms-long-running-operation";
+        private const string ClientRuntimePackage = "ms-rest-azure version 1.3.0";
 
         // List of models with paging extensions.
         private IList<PageTemplateModel> pageModels;
@@ -65,7 +64,7 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
             // generating cloned methods for long running operations with reserved words. For
             // example - beginDeleteMethod() insteadof beginDelete() as delete is a reserved word.
             Namer.NormalizeMethodNames(serviceClient);
-            AzureExtensions.NormalizeAzureClientModel(serviceClient, Settings);
+            AzureExtensions.NormalizeAzureClientModel(serviceClient, Settings, Namer);
             base.NormalizeClientModel(serviceClient);
             NormalizeApiVersion(serviceClient);
             NormalizePaginatedMethods(serviceClient);
@@ -118,7 +117,7 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
                     continue;
                 }
                 
-                nextLinkName = (string)ext["nextLinkName"] ?? "nextLink";
+                nextLinkName = (string)ext["nextLinkName"];
                 string itemName = (string)ext["itemName"] ?? "value";
                 foreach (var responseStatus in method.Responses.Where(r => r.Value.Body is CompositeType).Select(s => s.Key).ToArray())
                 {

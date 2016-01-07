@@ -1,5 +1,6 @@
 package fixtures.bodycomplex;
 
+import com.squareup.okhttp.logging.HttpLoggingInterceptor;
 import fixtures.bodycomplex.models.Fish;
 import fixtures.bodycomplex.models.Goblinshark;
 import fixtures.bodycomplex.models.Salmon;
@@ -9,7 +10,6 @@ import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.junit.Assert;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -20,6 +20,7 @@ public class PolymorphismTests {
     @BeforeClass
     public static void setup() {
         client = new AutoRestComplexTestServiceImpl("http://localhost.:3000");
+        client.setLogLevel(HttpLoggingInterceptor.Level.BODY);
     }
 
     @Test
@@ -43,7 +44,7 @@ public class PolymorphismTests {
         Assert.assertEquals(5, sib3.getJawsize().longValue());
     }
 
-    @Ignore("Pending https://github.com/square/retrofit/issues/1192")
+    @Test
     public void putValid() throws Exception {
         Salmon body = new Salmon();
         body.setLocation("alaska");

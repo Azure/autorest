@@ -43,7 +43,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Azure.Tests
 
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
-            AzureExtensions.NormalizeAzureClientModel(serviceClient, Settings);
+            AzureExtensions.NormalizeAzureClientModel(serviceClient, Settings, new SampleAzureCodeNamer());
         }
     }
 }

@@ -1,0 +1,99 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.13",
+    "title": "Swagger Custom Paths"
+  },
+  "host": "autorestresourcesproxysite.azurewebsites.net",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/values/foo": {
+      "post": {
+        "tags": [
+          "Values"
+        ],
+        "operationId": "Values_Post",
+        "consumes": [ "application/json" ],
+        "parameters": [
+          {
+            "name": "body",
+            "description": "file to upload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/values/foo": {
+      "post": {
+        "tags": [
+          "Values"
+        ],
+        "operationId": "Values_CustomPost1",
+        "consumes": [ "application/json" ],
+        "parameters": [
+          {
+            "name": "body",
+            "description": "file to upload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/values/foo?query": {
+      "post": {
+        "tags": [
+          "Values"
+        ],
+        "operationId": "Values_CustomPost2",
+        "consumes": [ "application/json" ],
+        "parameters": [
+          {
+            "name": "body",
+            "description": "file to upload",
+            "required": true,
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/Product"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Product": {
+      "properties": {
+        "integer": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}

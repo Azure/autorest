@@ -629,7 +629,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             {
                 return this.Body != null ? new ParameterTemplateModel(this.Body) : null;
             }
-        }
+        }        
 
         /// <summary>
         /// Generate a reference to the ServiceClient
