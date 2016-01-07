@@ -25,18 +25,15 @@
 #--------------------------------------------------------------------------
 
 import json
-
-try:
-    import unittest2 as unittest
-except ImportError:
-    import unittest
-
+import sys
+import unittest
 try:
     from unittest import mock
 except ImportError:
     import mock
 
-import unittest
+from requests_oauthlib import OAuth2Session
+import oauthlib
 
 from msrestazure import AzureConfiguration
 from msrestazure import azure_active_directory
@@ -46,14 +43,11 @@ from msrestazure.azure_active_directory import (
     ServicePrincipalCredentials,
     UserPassCredentials
     )
-
 from msrest.exceptions import (
     TokenExpiredError,
     AuthenticationError,
     )
 
-from requests_oauthlib import OAuth2Session
-import oauthlib
 
 class TestInteractiveCredentials(unittest.TestCase):
 
@@ -101,12 +95,17 @@ class TestInteractiveCredentials(unittest.TestCase):
         mix = AADMixin()
         mix.state = "abc"
 
-        self.assertFalse(mix._check_state("test"))
-        self.assertFalse(mix._check_state("test&abc"))
-        self.assertFalse(mix._check_state("test&state=xyx"))
-        self.assertFalse(mix._check_state("test&state=xyx&"))
-        self.assertFalse(mix._check_state("test&state=abcd&"))
-        self.assertTrue(mix._check_state("test&state=abc&"))
+        with self.assertRaises(ValueError):
+            mix._check_state("server?test")
+        with self.assertRaises(ValueError):
+            mix._check_state("server?test&abc")
+        with self.assertRaises(ValueError):
+            mix._check_state("server?test&state=xyx")
+        with self.assertRaises(ValueError):
+            mix._check_state("server?test&state=xyx&")
+        with self.assertRaises(ValueError):
+            mix._check_state("server?test&state=abcd&")
+        mix._check_state("server?test&state=abc&")
 
     @mock.patch('msrestazure.azure_active_directory.keyring')
     def test_store_token(self, mock_keyring):
@@ -114,7 +113,7 @@ class TestInteractiveCredentials(unittest.TestCase):
         mix = AADMixin()
         mix.cred_store = "store_name"
         mix.id = "client_id"
-        mix._store_token({'token_type':'1', 'access_token':'2'})
+        mix._default_token_cache({'token_type':'1', 'access_token':'2'})
 
         mock_keyring.set_password.assert_called_with(
             "store_name", "client_id",
@@ -126,7 +125,7 @@ class TestInteractiveCredentials(unittest.TestCase):
         mix = AADMixin()
         mix.cred_store = "store_name"
         mix.id = "client_id"
-        mix._clear_token()
+        mix.clear_cached_token()
 
         mock_keyring.delete_password.assert_called_with(
             "store_name", "client_id")
@@ -204,7 +203,7 @@ class TestInteractiveCredentials(unittest.TestCase):
         creds.redirect = "//my_service.com"
         creds.token_uri = "token_uri"
         creds._check_state.return_value = True
-        creds.verify=True
+        creds.verify = True
 
         InteractiveCredentials.get_token(creds, "response")
         self.assertEqual(creds.token, session.fetch_token.return_value)
@@ -213,11 +212,11 @@ class TestInteractiveCredentials(unittest.TestCase):
             authorization_response="https://my_service.com/response",
             verify=True)
 
-        creds._check_state.return_value=False
+        creds._check_state.side_effect = ValueError("failed")
         with self.assertRaises(ValueError):
             InteractiveCredentials.get_token(creds, "response")
 
-        creds._check_state.return_value=True
+        creds._check_state.side_effect = None
         session.fetch_token.side_effect = oauthlib.oauth2.OAuth2Error
         with self.assertRaises(AuthenticationError):
             InteractiveCredentials.get_token(creds, "response")
@@ -240,7 +239,7 @@ class TestInteractiveCredentials(unittest.TestCase):
             token=creds.token,
             auto_refresh_url='token_uri',
             auto_refresh_kwargs={'client_id':'client_id', 'resource':'resource'},
-            token_updater=creds._store_token)
+            token_updater=creds._default_token_cache)
 
     def test_service_principal(self):
 
@@ -253,7 +252,7 @@ class TestInteractiveCredentials(unittest.TestCase):
             'expires_in':'2'}
 
         creds.token_uri = "token_uri"
-        creds.verify=True
+        creds.verify = True
         creds.id = 123
         creds.secret = 'secret'
         creds.resource = 'resource'
@@ -295,7 +294,7 @@ class TestInteractiveCredentials(unittest.TestCase):
                 resource='https://management.core.chinacloudapi.cn/',
                 response_type="client_credentials", verify=False)
 
-    def test_user_pass_credentails(self):
+    def test_user_pass_credentials(self):
 
         creds = mock.create_autospec(UserPassCredentials)
         session = mock.create_autospec(OAuth2Session)
@@ -306,17 +305,18 @@ class TestInteractiveCredentials(unittest.TestCase):
             'expires_in':'2'}
 
         creds.token_uri = "token_uri"
-        creds.verify=True
+        creds.verify = True
         creds.username = "user"
         creds.password = 'pass'
         creds.secret = 'secret'
+        creds.resource = 'resource'
         creds.id = "id"
 
         UserPassCredentials.get_token(creds)
         self.assertEqual(creds.token, session.fetch_token.return_value)
         session.fetch_token.assert_called_with(
             "token_uri", client_id="id", username='user',
-            client_secret="secret", password='pass')
+            client_secret="secret", password='pass', resource='resource')
 
         session.fetch_token.side_effect = oauthlib.oauth2.OAuth2Error
 
@@ -327,24 +327,25 @@ class TestInteractiveCredentials(unittest.TestCase):
         with mock.patch.object(
             UserPassCredentials, '_setup_session', return_value=session):
             
-            creds = UserPassCredentials("client_id", "my_username", "my_password", 
-                                        verify=False, tenant="private")
+            creds = UserPassCredentials("my_username", "my_password", 
+                                        verify=False, tenant="private", resource='resource')
 
             session.fetch_token.assert_called_with(
                 "https://login.microsoftonline.com/private/oauth2/token",
-                client_id="client_id", username='my_username',
-                password='my_password')
+                client_id='04b07795-8ddb-461a-bbee-02f9e1bf7b46', username='my_username',
+                password='my_password', resource='resource')
 
         with mock.patch.object(
             UserPassCredentials, '_setup_session', return_value=session):
             
-            creds = UserPassCredentials("client_id", "my_username", "my_password", 
+            creds = UserPassCredentials("my_username", "my_password", client_id="client_id",
                                         verify=False, tenant="private", china=True)
 
             session.fetch_token.assert_called_with(
                 "https://login.chinacloudapi.cn/private/oauth2/token",
                 client_id="client_id", username='my_username',
-                password='my_password')
+                password='my_password', resource='https://management.core.chinacloudapi.cn/')
+
 
 if __name__ == '__main__':
     unittest.main()

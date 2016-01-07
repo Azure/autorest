@@ -1,4 +1,4 @@
-#--------------------------------------------------------------------------
+﻿#--------------------------------------------------------------------------
 #
 # Copyright (c) Microsoft Corporation. All rights reserved. 
 #
@@ -25,25 +25,22 @@
 #--------------------------------------------------------------------------
 
 import json
-
-try:
-    import unittest2 as unittest
-except ImportError:
-    import unittest
-
+import unittest
 try:
     from unittest import mock
 except ImportError:
     import mock
-
-import unittest
 
 from requests import Response
 
 from msrest import Deserializer
 from msrest.exceptions import RequestException
 from msrestazure.azure_exceptions import CloudError
-from msrestazure.azure_operation import LongRunningOperation, AzureOperationPoller
+from msrestazure.azure_operation import (
+    PostDeleteOperation,
+    PutPatchOperation,
+    AzureOperationPoller)
+
 
 class TestLongRunningOperation(unittest.TestCase):
 
@@ -61,10 +58,6 @@ class TestLongRunningOperation(unittest.TestCase):
 
         response.content = json.dumps(message)
         response.json = lambda: json.loads(response.content)
-
-        op = LongRunningOperation()
-
-
 
 
 if __name__ == '__main__':

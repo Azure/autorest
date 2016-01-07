@@ -29,23 +29,19 @@ import json
 import isodate
 import logging
 from datetime import datetime
-
-try:
-    import unittest2 as unittest
-except ImportError:
-    import unittest
-
+import unittest
 try:
     from unittest import mock
 except ImportError:
     import mock
+
+from requests import Response
 
 from msrest import logger
 from msrest.serialization import Model
 from msrest import Serializer, Deserializer
 from msrest.exceptions import SerializationError, DeserializationError
 
-from requests import Response
 
 class TestRuntimeSerialized(unittest.TestCase):
 
@@ -67,6 +63,9 @@ class TestRuntimeSerialized(unittest.TestCase):
             self.attr_c = None
             self.attr_d = None
             self.attr_e = None
+
+        def __str__(self):
+            return "Test_Object"
 
     def setUp(self):
         logger.LOGGER = logging.getLogger("TestSuite")
@@ -135,12 +134,12 @@ class TestRuntimeSerialized(unittest.TestCase):
         test_obj.attr_b = 25
 
         message = self.s._serialize(test_obj)
-        self.assertEqual(message['AttrB'], 25)
+        self.assertEqual(message['AttrB'], int(test_obj.attr_b))
 
         test_obj.attr_b = "34534"
 
         message = self.s._serialize(test_obj)
-        self.assertEqual(message['AttrB'], 34534)
+        self.assertEqual(message['AttrB'], int(test_obj.attr_b))
 
         test_obj.attr_b = "NotANumber"
 
@@ -164,23 +163,22 @@ class TestRuntimeSerialized(unittest.TestCase):
         test_obj.attr_a = "TestString"
 
         message = self.s._serialize(test_obj)
-        self.assertEqual(message['id'], "TestString")
+        self.assertEqual(message['id'], str(test_obj.attr_a))
 
         test_obj.attr_a = 1234
 
         message = self.s._serialize(test_obj)
-        self.assertEqual(message['id'], "1234")
+        self.assertEqual(message['id'], str(test_obj.attr_a))
 
         test_obj.attr_a = list()
 
         message = self.s._serialize(test_obj)
-        self.assertEqual(message['id'], '[]')
-        #self.assertFalse('id' in message)
+        self.assertEqual(message['id'], str(test_obj.attr_a))
 
         test_obj.attr_a = [1]
 
         message = self.s._serialize(test_obj)
-        self.assertEqual(message['id'], "[1]")
+        self.assertEqual(message['id'], str(test_obj.attr_a))
 
     def test_attr_bool(self):
         """
@@ -214,11 +212,11 @@ class TestRuntimeSerialized(unittest.TestCase):
 
         test_obj = ["A", "B", "C"]
         output = self.s._serialize(test_obj, '[str]', div='|')
-        self.assertEqual(output, "A|B|C")
+        self.assertEqual(output, "|".join(test_obj))
 
         test_obj = [1,2,3]
         output = self.s._serialize(test_obj, '[str]', div=',')
-        self.assertEqual(output, "1,2,3")
+        self.assertEqual(output, ",".join([str(i) for i in test_obj]))
 
     def test_attr_list_simple(self):
         """
@@ -228,18 +226,17 @@ class TestRuntimeSerialized(unittest.TestCase):
         test_obj.attr_d = []
 
         message = self.s._serialize(test_obj)
-        #self.assertFalse('AttrD' in message)
-        self.assertEqual(message['AttrD'], [])
+        self.assertEqual(message['AttrD'], test_obj.attr_d)
 
         test_obj.attr_d = [1,2,3]
 
         message = self.s._serialize(test_obj)
-        self.assertEqual(message['AttrD'], [1,2,3])
+        self.assertEqual(message['AttrD'], test_obj.attr_d)
 
         test_obj.attr_d = ["1","2","3"]
 
         message = self.s._serialize(test_obj)
-        self.assertEqual(message['AttrD'], [1,2,3])
+        self.assertEqual(message['AttrD'], [int(i) for i in test_obj.attr_d])
 
         test_obj.attr_d = ["test","test2","test3"]
 
@@ -255,7 +252,7 @@ class TestRuntimeSerialized(unittest.TestCase):
 
         input = []
         output = self.s._serialize(input, '[str]')
-        self.assertEqual(output, [])
+        self.assertEqual(output, input)
 
     def test_attr_list_complex(self):
         """
@@ -293,12 +290,12 @@ class TestRuntimeSerialized(unittest.TestCase):
         test_obj.attr_e = {"value": 3.14}
 
         message = self.s._serialize(test_obj)
-        self.assertEqual(message['AttrE']['value'], 3.14)
+        self.assertEqual(message['AttrE']['value'], float(test_obj.attr_e["value"]))
 
         test_obj.attr_e = {1: "3.14"}
 
         message = self.s._serialize(test_obj)
-        self.assertEqual(message['AttrE']['1'], 3.14)
+        self.assertEqual(message['AttrE']['1'], float(test_obj.attr_e[1]))
 
         test_obj.attr_e = "NotADict"
 
@@ -358,6 +355,35 @@ class TestRuntimeSerialized(unittest.TestCase):
 
         d = self.s.serialize_data(100.0123, 'float', True)
         self.assertEqual(d, 100.0123)
+
+    def test_serialize_object(self):
+
+        a = self.s.body(1, 'object')
+        self.assertEqual(a, 1)
+
+        b = self.s.body(True, 'object')
+        self.assertEqual(b, True)
+
+        c = self.s.serialize_data('True', 'object', True)
+        self.assertEqual(c, 'True')
+
+        d = self.s.serialize_data(100.0123, 'object', True)
+        self.assertEqual(d, 100.0123)
+
+        e = self.s.serialize_data({}, 'object', True)
+        self.assertEqual(e, {})
+
+        f = self.s.body({"test":"data"}, 'object')
+        self.assertEqual(f, {"test":"data"})
+
+        g = self.s.body({"test":{"value":"data"}}, 'object')
+        self.assertEqual(g, {"test":{"value":"data"}})
+
+        h = self.s.serialize_data({"test":self.TestObj()}, 'object', True)
+        self.assertEqual(h, {"test":"Test_Object"})
+
+        i =  self.s.serialize_data({"test":[1,2,3,4,5]}, 'object', True)
+        self.assertEqual(i, {"test":[1,2,3,4,5]})
 
     def test_serialize_empty_iter(self):
 
@@ -589,9 +615,10 @@ class TestRuntimeDeserialized(unittest.TestCase):
         response = self.d("[str]", response_data)
         self.assertIsNone(response)
 
-        response_data.content = json.dumps(["a","b","b"])
+        message = ["a","b","b"]
+        response_data.content = json.dumps(message)
         response = self.d("[str]", response_data)
-        self.assertEqual(response, ["a","b","b"])
+        self.assertEqual(response, message)
 
         response_data.content = json.dumps(12345)
         with self.assertRaises(DeserializationError):
@@ -685,13 +712,6 @@ class TestRuntimeDeserialized(unittest.TestCase):
         response = self.d(self.TestObj, response_data)
         self.assertIsNone(response)
 
-        #self.assertIsNone(response.status_code)
-        #self.assertIsNone(response.client_request_id)
-        #self.assertIsNone(response.e_tag)
-
-        #self.assertIsNone(response.attr_a)
-        #self.assertIsInstance(response, self.TestObj)
-
     def test_attr_int(self):
         """
         Test deserializing an object with Int attributes.
@@ -704,14 +724,11 @@ class TestRuntimeDeserialized(unittest.TestCase):
         response = self.d(self.TestObj, response_data)
         self.assertIsNone(response)
 
-        #self.assertEqual(response.status_code, "200")
-        #self.assertEqual(response.client_request_id, "123")
-        #self.assertEqual(response.e_tag, "456.3")
-
-        response_data.content = json.dumps({'AttrB':'1234'})
+        message = {'AttrB':'1234'}
+        response_data.content = json.dumps(message)
         response = self.d(self.TestObj, response_data)
         self.assertTrue(hasattr(response, 'attr_b'))
-        self.assertEqual(response.attr_b, 1234)
+        self.assertEqual(response.attr_b, int(message['AttrB']))
 
         with self.assertRaises(DeserializationError):
             response_data.content = json.dumps({'AttrB':'NotANumber'})
@@ -721,22 +738,25 @@ class TestRuntimeDeserialized(unittest.TestCase):
         """
         Test deserializing an object with Str attributes.
         """
+        message = {'id':'InterestingValue'}
         response_data = mock.create_autospec(Response)
         response_data.status_code = 200
         response_data.headers = {'client-request-id': 'a', 'etag': 'b'}
-        response_data.content = json.dumps({'id':'InterestingValue'})
+        response_data.content = json.dumps(message)
 
         response = self.d(self.TestObj, response_data)
         self.assertTrue(hasattr(response, 'attr_a'))
-        self.assertEqual(response.attr_a, 'InterestingValue')
+        self.assertEqual(response.attr_a, message['id'])
 
-        response_data.content = json.dumps({'id':1234})
+        message = {'id':1234}
+        response_data.content = json.dumps(message)
         response = self.d(self.TestObj, response_data)
-        self.assertEqual(response.attr_a, '1234')
+        self.assertEqual(response.attr_a, str(message['id']))
 
-        response_data.content = json.dumps({'id':list()})
+        message = {'id':list()}
+        response_data.content = json.dumps(message)
         response = self.d(self.TestObj, response_data)
-        self.assertEqual(response.attr_a, '[]')
+        self.assertEqual(response.attr_a, str(message['id']))
 
         response_data.content = json.dumps({'id':None})
         response = self.d(self.TestObj, response_data)
@@ -781,15 +801,17 @@ class TestRuntimeDeserialized(unittest.TestCase):
         deserialized_list = [d for d in response.attr_d]
         self.assertEqual(deserialized_list, [])
 
-        response_data.content = json.dumps({'AttrD': [1,2,3]})
+        message = {'AttrD': [1,2,3]}
+        response_data.content = json.dumps(message)
         response = self.d(self.TestObj, response_data)
         deserialized_list = [d for d in response.attr_d]
-        self.assertEqual(deserialized_list, [1,2,3])
+        self.assertEqual(deserialized_list, message['AttrD'])
 
-        response_data.content = json.dumps({'AttrD': ["1","2","3"]})
+        message = {'AttrD': ["1","2","3"]}
+        response_data.content = json.dumps(message)
         response = self.d(self.TestObj, response_data)
         deserialized_list = [d for d in response.attr_d]
-        self.assertEqual(deserialized_list, [1,2,3])
+        self.assertEqual(deserialized_list, [int(i) for i in message['AttrD']])
 
         response_data.content = json.dumps({'AttrD': ["test","test2","test3"]})
         with self.assertRaises(DeserializationError):
@@ -827,17 +849,19 @@ class TestRuntimeDeserialized(unittest.TestCase):
         self.assertTrue(hasattr(response, 'attr_f'))
         self.assertEqual(response.attr_f, None)
 
-        response_data.content = json.dumps({'AttrF':[[]]})
+        message = {'AttrF':[[]]}
+        response_data.content = json.dumps(message)
 
         response = self.d(self.TestObj, response_data)
         self.assertTrue(hasattr(response, 'attr_f'))
-        self.assertEqual(response.attr_f, [[]])
+        self.assertEqual(response.attr_f, message['AttrF'])
 
-        response_data.content = json.dumps({'AttrF':[[1,2,3], ['a','b','c']]})
+        message = {'AttrF':[[1,2,3], ['a','b','c']]}
+        response_data.content = json.dumps(message)
 
         response = self.d(self.TestObj, response_data)
         self.assertTrue(hasattr(response, 'attr_f'))
-        self.assertEqual(response.attr_f, [['1','2','3'], ['a','b','c']])
+        self.assertEqual(response.attr_f, [[str(i) for i in k] for k in message['AttrF']])
 
         with self.assertRaises(DeserializationError):
             response_data.content = json.dumps({'AttrF':[1,2,3]})
@@ -868,10 +892,39 @@ class TestRuntimeDeserialized(unittest.TestCase):
 
         d = Deserializer({'ListObj':ListObj})
         response = d(CmplxTestObj, response_data)
-        deserialized_list = [a for a in response.attr_a]
+        deserialized_list = list(response.attr_a)
 
         self.assertIsInstance(deserialized_list[0], ListObj)
         self.assertEqual(deserialized_list[0].abc, 123)
+
+    def test_deserialize_object(self):
+
+        a = self.d('object', 1)
+        self.assertEqual(a, 1)
+
+        b = self.d('object', True)
+        self.assertEqual(b, True)
+
+        c = self.d('object', 'True')
+        self.assertEqual(c, 'True')
+
+        d = self.d('object', 100.0123)
+        self.assertEqual(d, 100.0123)
+
+        e = self.d('object', {})
+        self.assertEqual(e, {})
+
+        f = self.d('object', {"test":"data"})
+        self.assertEqual(f, {"test":"data"})
+
+        g = self.d('object', {"test":{"value":"data"}})
+        self.assertEqual(g, {"test":{"value":"data"}})
+
+        with self.assertRaises(DeserializationError):
+            self.d('object', {"test":self.TestObj()})
+
+        h =  self.d('object', {"test":[1,2,3,4,5]})
+        self.assertEqual(h, {"test":[1,2,3,4,5]})
 
     def test_deserialize_datetime(self):
 
@@ -1032,16 +1085,16 @@ class TestRuntimeDeserialized(unittest.TestCase):
         self.assertEqual(len(animals), 3)
         self.assertIsInstance(animals[0], Dog)
         self.assertTrue(animals[0].likes_dog_food)
-        self.assertEqual(animals[0].name, 'Fido')
+        self.assertEqual(animals[0].name, message['Animals'][0]["Name"])
 
         self.assertIsInstance(animals[1], Cat)
         self.assertFalse(animals[1].likes_mice)
         self.assertIsInstance(animals[1].dislikes, Dog)
-        self.assertEqual(animals[1].dislikes.name, 'Angry')
-        self.assertEqual(animals[1].name, 'Felix')
+        self.assertEqual(animals[1].dislikes.name, message['Animals'][1]["dislikes"]["Name"])
+        self.assertEqual(animals[1].name, message['Animals'][1]["Name"])
 
         self.assertIsInstance(animals[2], Siamese)
-        self.assertEqual(animals[2].color, "grey")
+        self.assertEqual(animals[2].color, message['Animals'][2]["Color"])
         self.assertTrue(animals[2].likes_mice)
 
 if __name__ == '__main__':

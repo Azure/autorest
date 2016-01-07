@@ -27,14 +27,8 @@
 import json
 import requests
 import datetime
-
 from enum import Enum
-
-try:
-    import unittest2 as unittest
-except ImportError:
-    import unittest
-
+import unittest
 try:
     from unittest import mock
 except ImportError:
@@ -167,9 +161,10 @@ class TestClientRequest(unittest.TestCase):
     def test_request_data(self):
 
         request = ClientRequest()
-        request.add_content("Lots of dataaaa")
+        data = "Lots of dataaaa"
+        request.add_content(data)
 
-        self.assertEqual(request.data, json.dumps("Lots of dataaaa"))
+        self.assertEqual(request.data, json.dumps(data))
         self.assertEqual(request.headers.get('Content-Length'), 17)
 
 class TestClientResponse(unittest.TestCase):
