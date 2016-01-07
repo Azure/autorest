@@ -350,14 +350,13 @@ When set, specifies the header parameter to be used instead of `x-ms-client-requ
   "/products/{name}": {
     "get": {
       "operationId": "products_create",
-      "parameters": [
-      {
+      "parameters": [{
         "name": "x-ms-client-request-id",
         "in": "header",
         "type": "string",
         "required": false,
         "x-ms-client-request-id": true
-      },
+      }]
     }
   }
 }
