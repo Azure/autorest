@@ -361,7 +361,8 @@ gulp.task('test:clientruntime:javaauthandroid', shell.task(basePathOrThrow() + '
 gulp.task('test:clientruntime', function (cb) {
   runSequence('test:clientruntime:node', 'test:clientruntime:nodeazure',
     'test:clientruntime:ruby', 'test:clientruntime:rubyazure',
-    'test:clientruntime:java', 'test:clientruntime:javaazure', cb);
+    'test:clientruntime:java', 'test:clientruntime:javaazure',
+    'test:clientruntime:javaauthjdk', 'test:clientruntime:javaauthandroid', cb);
 });
 
 gulp.task('test:node', shell.task('npm test', {cwd: './AutoRest/Generators/NodeJS/NodeJS.Tests/', verbosity: 3}));
