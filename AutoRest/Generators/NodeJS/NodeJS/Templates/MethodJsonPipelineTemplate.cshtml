@@ -18,8 +18,12 @@ return client.pipeline(httpRequest, function (err, response, responseBody) {
     var parsedErrorResponse;
     try {
       parsedErrorResponse = JSON.parse(responseBody);
-      var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
-      var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+      var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
+                                                     parsedErrorResponse.error.code : 
+                                                            parsedErrorResponse.code;
+      var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
+                                                        parsedErrorResponse.error.message : 
+                                                               parsedErrorResponse.message;
       if (errorCode) error.code = errorCode;
       if (errorMessage) error.message = errorMessage;
   @if (Model.DefaultResponse.Body != null)
@@ -49,7 +53,8 @@ return client.pipeline(httpRequest, function (err, response, responseBody) {
       }
   }
     } catch (defaultError) {
-      error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+      error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+                       '- "%s" for the default response.', defaultError.message, responseBody);
       return callback(error);
     }
     return callback(error);

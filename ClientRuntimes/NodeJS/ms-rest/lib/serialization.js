@@ -5,140 +5,6 @@
 
 var util = require('util');
 var moment = require('moment');
-/**
- * Serializes the JSON Object. It serializes Buffer object to a 
- * 'base64' encoded string and a Date Object to a string 
- * compliant with ISO8601 format.
- * 
- * @param {Object} toSerialize
- * 
- * @returns {Object} serializedObject
- */
-exports.serializeObject = function (toSerialize) {
-  if (toSerialize === null || toSerialize === undefined) return null;
-  if (Buffer.isBuffer(toSerialize)) {
-    toSerialize = toSerialize.toString('base64');
-    return toSerialize;
-  }
-  else if (toSerialize instanceof Date) {
-    return toSerialize.toISOString();
-  }
-  else if (Array.isArray(toSerialize)) {
-    var array = [];
-    for (var i = 0; i < toSerialize.length; i++) {
-      array.push(exports.serializeObject(toSerialize[i]));
-    }
-    return array;
-  } else if (typeof toSerialize === 'object') {
-    var dictionary = {};
-    for (var property in toSerialize) {
-      dictionary[property] = exports.serializeObject(toSerialize[property]);
-    }
-    return dictionary;
-  }
-  return toSerialize;
-};
-
-/**
- * Deserializes the given input in to a Date() object if it is compliant 
- * with ISO 8601 format
- * 
- * @param {string} input
- * 
- * @returns {Date} Date Object
- */
-exports.deserializeDate = function (input) {
-  if (exports.isValidISODateTime(input)) {
-    return new Date(input);
-  } else {
-    throw new Error('Invalid input  \'' + input + '\'.  It cannot be deserialized as a Date().');
-  }
-};
-
-/**
- * Validates if the given string is compliant with the ISO 8601 
- * Date and DateTime format
- * 
- * @param {string} dateString
- * 
- * @returns {bool} true - if valid, false otherwise
- */
-exports.isValidISODateTime = function (dateString) {
-  var re = /^([0-9]{4})-(1[0-2]|0[1-9])-(3[01]|0[1-9]|[12][0-9])?(T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(\.[0-9]+)?(Z|[+-](?:2[0-3]|[01][0-9]):[0-5][0-9]))?$/i;
-  return re.test(dateString);
-};
-
-//TODO: Check for stream
-exports.serializeInit = function (client, mapper, object) {
-  var payload = {};
-  if (requiresFlattening(mapper, object)) payload.properties = {};
-  for (var key in mapper) {
-    if (key.required) {
-      if (object[key] === null || object[key] === undefined) {
-        throw new Error(util.format('%s cannot be null or undefined.', key));
-      }
-    }
-    
-    if (object[key] !== null && object[key] !== undefined) {
-      if (mapper[key].type.name === 'Number') {
-        if (typeof object[key] !== 'number') {
-          throw new Error(util.format('%s must be of type number.', key));
-        }
-        assignProperty(key, payload, object);
-      } else if (mapper[key].type.name === 'Boolean') {
-        if (typeof object[key] !== 'boolean') {
-          throw new Error(util.format('%s must be of type boolean.', key));
-        }
-        assignProperty(key, payload, object);
-      } else if (mapper[key].type.name === 'String') {
-        if (typeof object[key].valueOf() !== 'string') {
-          throw new Error(util.format('%s must be of type string.', key));
-        }
-        assignProperty(key, payload, object);
-      } else if (mapper[key].type.name === 'Enum') {
-        if (!mapper[key].type.allowedValues.some(function (item) { return item === object[key]; })) {
-          throw new Error(util.format('%s  is not a valid value. The valid values are: %s', 
-            object[key], JSON.stringify(mapper[key].type.allowedValues)));
-        }
-        assignProperty(key, payload, object);
-      } else if (mapper[key].type.name === 'ByteArray') {
-        if (!Buffer.isBuffer(object[key])) {
-          throw new Error(util.format('%s must be of type Buffer.', key));
-        }
-        object[key] = object[key].toString('base64');
-        assignProperty(key, payload, object);
-      } else if (mapper[key].type.name === 'Date') {
-        if (!(object[key] instanceof Date || 
-          (typeof object[key].valueOf() === 'string' && !isNaN(Date.parse(object[key]))))) {
-          throw new Error(util.format('%s must be an instanceof Date or a string in ISO8601 format.', key));
-        }
-        object[key] = (object[key] instanceof Date) ? object[key].toISOString().substring(0, 10) : object[key];
-        assignProperty(key, payload, object);
-      } else if (mapper[key].type.name === 'DateTime') {
-        if (!(object[key] instanceof Date || 
-          (typeof object[key].valueOf() === 'string' && !isNaN(Date.parse(object[key]))))) {
-          throw new Error(util.format('%s must be an instanceof Date or a string in ISO8601 format.', key));
-        }
-        object[key] = (object[key] instanceof Date) ? object[key].toISOString() : object[key];
-        assignProperty(key, payload, object);
-      } else if (mapper[key].type.name === 'DateTimeRfc1123') {
-        if (!(object[key] instanceof Date || 
-          (typeof object[key].valueOf() === 'string' && !isNaN(Date.parse(object[key]))))) {
-          throw new Error(util.format('%s must be an instanceof Date or a string in RFC-1123 format.', key));
-        }
-        object[key] = (object[key] instanceof Date) ? object[key].toUTCString() : object[key];
-        assignProperty(key, payload, object);
-      } else if (mapper[key].type.name === 'TimeSpan') {
-        if (!moment.isDuration(object[key])) {
-          throw new Error(util.format('%s must be a TimeSpan.', key));
-        }
-        object[key] = object[key].toISOString();
-        assignProperty(key, payload, object);
-      }
-    }
-  }
-  return payload;
-};
 
 /**
  * Serialize the given object based on its metadata defined in the mapper
@@ -158,6 +24,10 @@ exports.serialize = function (mapper, object, objectName, client) {
   var mapperType = mapper.type.name;
   if (!objectName) objectName = objectNameFromSerializedName(mapper.serializedName);
   if (mapperType.match(/^Sequence$/ig) !== null) payload = [];
+  //Throw if required and object is null or undefined
+  if (mapper.required && (object === null || object === undefined)) {
+    throw new Error(util.format('\'%s\' cannot be null or undefined.'), objectName);
+  }
   //Set Defaults
   if (mapper.defaultValue && (object === null || object === undefined)) object = mapper.defaultValue;
   //Validate Constraints if any
@@ -182,7 +52,7 @@ exports.serialize = function (mapper, object, objectName, client) {
 
 function validateConstraints(mapper, value, objectName) {
   if (mapper.constraints && (value !== null || value !== undefined)) {
-    for (var constraintType in Object.keys(mapper.constraints)) {
+    Object.keys(mapper.constraints).forEach(function (constraintType) {
       if (constraintType.match(/^ExclusiveMaximum$/ig) !== null) {
         if (value >= mapper.constraints[constraintType]) {
           throw new Error(util.format('\'%s\' with value \'%s\' should satify the constraint \'ExclusiveMaximum\': %s.', 
@@ -241,7 +111,7 @@ function validateConstraints(mapper, value, objectName) {
           }
         }
       }
-    }
+    });
   }
 }
 
@@ -302,12 +172,12 @@ function serializeCompositeType(mapper, object, objectName, client) {
       throw new Error(util.format('No discriminator field \'%s\' was found in \'%s\'.', 
         mapper.type.polymorphicDiscriminator, objectName));
     }
-    if (!client.models.discriminators[object[mapper.type.polymorphicDiscriminator]]) {
+    if (!client._models.discriminators[object[mapper.type.polymorphicDiscriminator]]) {
       throw new Error(util.format('\'%s\': \'%s\'  in \'%s\' is not a valid ' + 
         'discriminator as a corresponding model class for that value was not found.', 
         mapper.type.polymorphicDiscriminator, object[mapper.type.polymorphicDiscriminator], objectName));
     }
-    mapper = new client.models.discriminators[object[mapper.type.polymorphicDiscriminator]]().mapper();
+    mapper = new client._models.discriminators[object[mapper.type.polymorphicDiscriminator]]().mapper();
   }
 
   var payload = {};
@@ -323,7 +193,7 @@ function serializeCompositeType(mapper, object, objectName, client) {
       }
       //get the mapper if modelProperties of the CompositeType is not present and 
       //then get the modelProperties from it.
-      modelMapper = new client.models[mapper.type.className]().mapper();
+      modelMapper = new client._models[mapper.type.className]().mapper();
       if (!modelMapper) {
         throw new Error(util.format('mapper() cannot be null or undefined for model \'%s\'', 
               mapper.type.className));
@@ -360,21 +230,23 @@ function serializeCompositeType(mapper, object, objectName, client) {
 }
 
 function serializeBasicTypes(typeName, objectName, value) {
-  if (typeName.match(/^Number$/ig) !== null) {
-    if (typeof value !== 'number') {
-      throw new Error(util.format('%s must be of type number.', objectName));
-    }
-  } else if (typeName.match(/^String$/ig) !== null) {
-    if (typeof value.valueOf() !== 'string') {
-      throw new Error(util.format('%s must be of type string.', objectName));
-    }
-  } else if (typeName.match(/^Boolean$/ig) !== null) {
-    if (typeof value !== 'boolean') {
-      throw new Error(util.format('%s must be of type boolean.', objectName));
-    }
-  } else if (typeName.match(/^Object$/ig) !== null) {
-    if (typeof value !== 'object') {
-      throw new Error(util.format('%s must be of type object.', objectName));
+  if (value !== null && value !== undefined) {
+    if (typeName.match(/^Number$/ig) !== null) {
+      if (typeof value !== 'number') {
+        throw new Error(util.format('%s must be of type number.', objectName));
+      }
+    } else if (typeName.match(/^String$/ig) !== null) {
+      if (typeof value.valueOf() !== 'string') {
+        throw new Error(util.format('%s must be of type string.', objectName));
+      }
+    } else if (typeName.match(/^Boolean$/ig) !== null) {
+      if (typeof value !== 'boolean') {
+        throw new Error(util.format('%s must be of type boolean.', objectName));
+      }
+    } else if (typeName.match(/^Object$/ig) !== null) {
+      if (typeof value !== 'object') {
+        throw new Error(util.format('%s must be of type object.', objectName));
+      }
     }
   }
   return value;
@@ -392,37 +264,41 @@ function serializeEnumType(objectName, allowedValues, value) {
 }
 
 function serializeBufferType(objectName, value) {
-  if (!Buffer.isBuffer(value)) {
-    throw new Error(util.format('%s must be of type Buffer.', objectName));
+  if (value !== null && value !== undefined) {
+    if (!Buffer.isBuffer(value)) {
+      throw new Error(util.format('%s must be of type Buffer.', objectName));
+    }
+    value = value.toString('base64');
   }
-  value = value.toString('base64');
   return value;
 }
 
 function serializeDateTypes(typeName, value, objectName) {
-  if (typeName.match(/^Date$/ig) !== null) {
-    if (!(value instanceof Date || 
+  if (value !== null && value !== undefined) {
+    if (typeName.match(/^Date$/ig) !== null) {
+      if (!(value instanceof Date || 
         (typeof value.valueOf() === 'string' && !isNaN(Date.parse(value))))) {
-      throw new Error(util.format('%s must be an instanceof Date or a string in ISO8601 format.', objectName));
-    }
-    value = (value instanceof Date) ? value.toISOString().substring(0, 10) : new Date(value).toISOString().substring(0, 10);
-  } else if (typeName.match(/^DateTime$/ig) !== null) {
-    if (!(value instanceof Date || 
+        throw new Error(util.format('%s must be an instanceof Date or a string in ISO8601 format.', objectName));
+      }
+      value = (value instanceof Date) ? value.toISOString().substring(0, 10) : new Date(value).toISOString().substring(0, 10);
+    } else if (typeName.match(/^DateTime$/ig) !== null) {
+      if (!(value instanceof Date || 
         (typeof value.valueOf() === 'string' && !isNaN(Date.parse(value))))) {
-      throw new Error(util.format('%s must be an instanceof Date or a string in ISO8601 format.', objectName));
-    }
-    value = (value instanceof Date) ? value.toISOString() :  new Date(value).toISOString();
-  } else if (typeName.match(/^DateTimeRfc1123$/ig) !== null) {
-    if (!(value instanceof Date || 
+        throw new Error(util.format('%s must be an instanceof Date or a string in ISO8601 format.', objectName));
+      }
+      value = (value instanceof Date) ? value.toISOString() :  new Date(value).toISOString();
+    } else if (typeName.match(/^DateTimeRfc1123$/ig) !== null) {
+      if (!(value instanceof Date || 
         (typeof value.valueOf() === 'string' && !isNaN(Date.parse(value))))) {
-      throw new Error(util.format('%s must be an instanceof Date or a string in RFC-1123 format.', objectName));
+        throw new Error(util.format('%s must be an instanceof Date or a string in RFC-1123 format.', objectName));
+      }
+      value = (value instanceof Date) ? value.toUTCString() :  new Date(value).toUTCString();
+    } else if (typeName.match(/^TimeSpan$/ig) !== null) {
+      if (!moment.isDuration(value)) {
+        throw new Error(util.format('%s must be a TimeSpan/Duration.', objectName));
+      }
+      value = value.toISOString();
     }
-    value = (value instanceof Date) ? value.toUTCString() :  new Date(value).toUTCString();
-  } else if (typeName.match(/^TimeSpan$/ig) !== null) {
-    if (!moment.isDuration(value)) {
-      throw new Error(util.format('%s must be a TimeSpan/Duration.', objectName));
-    }
-    value = value.toISOString();
   }
   return value;
 }
@@ -447,7 +323,7 @@ exports.deserialize = function (mapper, responseBody, objectName, client) {
   if (!objectName) objectName = objectNameFromSerializedName(mapper.serializedName);
   if (mapperType.match(/^Sequence$/ig) !== null) payload = [];
   
-  if (mapperType.match(/^(Number|String|Boolean|Enum)$/ig) !== null) {
+  if (mapperType.match(/^(Number|String|Boolean|Enum|Object)$/ig) !== null) {
     payload = responseBody;
   } else if (mapperType.match(/^(Date|DateTime|DateTimeRfc1123)$/ig) !== null) {
     payload = new Date(responseBody);
@@ -522,12 +398,12 @@ function deserializeCompositeType(mapper, responseBody, objectName, client) {
       throw new Error(util.format('No discriminator field \'%s\' was found in \'%s\'.', 
         mapper.type.polymorphicDiscriminator, objectName));
     }
-    if (!client.models.discriminators[responseBody[mapper.type.polymorphicDiscriminator]]) {
+    if (!client._models.discriminators[responseBody[mapper.type.polymorphicDiscriminator]]) {
       throw new Error(util.format('\'%s\': \'%s\'  in \'%s\' is not a valid ' + 
         'discriminator as a corresponding model class for that value was not found.', 
         mapper.type.polymorphicDiscriminator, responseBody[mapper.type.polymorphicDiscriminator], objectName));
     }
-    mapper = new client.models.discriminators[responseBody[mapper.type.polymorphicDiscriminator]]().mapper();
+    mapper = new client._models.discriminators[responseBody[mapper.type.polymorphicDiscriminator]]().mapper();
   }
 
   var instance = {};
@@ -543,7 +419,7 @@ function deserializeCompositeType(mapper, responseBody, objectName, client) {
       }
       //get the mapper if modelProperties of the CompositeType is not present and 
       //then get the modelProperties from it.
-      modelMapper = new client.models[mapper.type.className]().mapper();
+      modelMapper = new client._models[mapper.type.className]().mapper();
       if (!modelMapper) {
         throw new Error(util.format('mapper() cannot be null or undefined for model \'%s\'', 
               mapper.type.className));
@@ -562,7 +438,8 @@ function deserializeCompositeType(mapper, responseBody, objectName, client) {
         var propertyInstance = responseBody[modelProps[key].serializedName];
         if (stringContainsProperties(modelProps[key].serializedName)) {
           if (responseBody.properties) {
-            propertyInstance = responseBody.properties[key];
+            var serializedKey = objectNameFromSerializedName(modelProps[key].serializedName);
+            propertyInstance = responseBody.properties[serializedKey];
           }
         }
         var propertyObjectName = objectName + '.' + modelProps[key].serializedName;

@@ -1103,7 +1103,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                         builder.AppendLine("{0}: {1}", keys[j], constraintValue);
                     }
                 }
-                builder.Outdent().AppendLine("}");
+                builder.Outdent().AppendLine("},");
             }
             // Add type information 
             if (primary != null)

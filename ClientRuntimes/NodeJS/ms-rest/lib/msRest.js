@@ -30,10 +30,7 @@ exports.ExponentialRetryPolicyFilter = require('./filters/exponentialRetryPolicy
 
 exports.validate = require('./validate');
 exports.requestPipeline = require('./requestPipeline');
-exports.serializeObject = require('./serialization').serializeObject;
 exports.serialize = require('./serialization').serialize;
 exports.deserialize = require('./serialization').deserialize;
-exports.deserializeDate = require('./serialization').deserializeDate;
-exports.isValidISODateTime = require('./serialization').isValidISODateTime;
 
 exports = module.exports;

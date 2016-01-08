@@ -421,7 +421,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             {
                 builder.AppendLine("var resultMapper = {{{0}}};", type.ConstructMapper(responseVariable));
             }
-            builder.AppendLine("result = msRest.deserialize(resultMapper, {0}, '{1}', client);", responseVariable, valueReference);
+            builder.AppendLine("{1} = msRest.deserialize(resultMapper, {0}, '{1}', client);", responseVariable, valueReference);
             /*CompositeType composite = type as CompositeType;
             SequenceType sequence = type as SequenceType;
             DictionaryType dictionary = type as DictionaryType;
@@ -902,34 +902,47 @@ namespace Microsoft.Rest.Generator.NodeJS
         /// <returns></returns>
         public virtual string BuildInputMappings()
         {
-            var builder = new IndentedStringBuilder();
-            foreach (var transformation in InputParameterTransformation)
+            var builder = new IndentedStringBuilder("  ");
+            if (InputParameterTransformation.Count > 0)
             {
-                builder.AppendLine("var {0};",
-                        transformation.OutputParameter.Name);
-
-                builder.AppendLine("if ({0})", BuildNullCheckExpression(transformation))
-                       .AppendLine("{").Indent();
-
-                if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
-                    transformation.OutputParameter.Type is CompositeType)
+                // Declare all the output paramaters outside the try block
+                foreach (var transformation in InputParameterTransformation)
                 {
-                    builder.AppendLine("{0} = new client._models['{1}']();",
-                        transformation.OutputParameter.Name,
-                        transformation.OutputParameter.Type.Name);
+                    builder.AppendLine("var {0};", transformation.OutputParameter.Name);
                 }
-
-                foreach (var mapping in transformation.ParameterMappings)
+                builder.AppendLine("try {").Indent();
+                foreach (var transformation in InputParameterTransformation)
                 {
-                    builder.AppendLine("{0}{1};",
-                        transformation.OutputParameter.Name,
-                        mapping);
-                }
+                    builder.AppendLine("if ({0})", BuildNullCheckExpression(transformation))
+                           .AppendLine("{").Indent();
+                    var outputParameter = transformation.OutputParameter;
 
+                    if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
+                        transformation.OutputParameter.Type is CompositeType)
+                    {
+                        builder.AppendLine("{0} = new client._models['{1}']();",
+                            transformation.OutputParameter.Name,
+                            transformation.OutputParameter.Type.Name);
+                    }
+
+                    foreach (var mapping in transformation.ParameterMappings)
+                    {
+                        builder.AppendLine("{0}{1};",
+                            transformation.OutputParameter.Name,
+                            mapping);
+                        builder.AppendLine(outputParameter.Type.ValidateType(Scope, outputParameter.Name, outputParameter.IsRequired));
+                    }
+
+                    builder.Outdent()
+                           .AppendLine("}");
+                }
                 builder.Outdent()
+                       .AppendLine("} catch (error) {")
+                         .Indent()
+                         .AppendLine("return callback(error);")
+                       .Outdent()
                        .AppendLine("}");
             }
-
             return builder.ToString();
         }
 
