@@ -49,7 +49,7 @@ function TestClient(baseUri, options) {
   if(!this.acceptLanguage) {
     this.acceptLanguage = 'en-US';
   }
-  this.models = models;
+  this._models = models;
 }
 
 util.inherits(TestClient, ServiceClient);

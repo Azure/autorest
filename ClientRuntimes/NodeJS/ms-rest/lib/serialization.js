@@ -81,7 +81,7 @@ exports.serialize = function (mapper, object, objectName, client) {
     payload = serializeCompositeType(mapper, object, objectName, client);
   }
   return payload;
-}
+};
 
 function validateConstraints(mapper, value, objectName) {
   if (mapper.constraints && (value !== null || value !== undefined)) {
@@ -372,7 +372,7 @@ exports.deserialize = function (mapper, responseBody, objectName, client) {
     payload = deserializeCompositeType(mapper, responseBody, objectName, client);
   }
   return payload;
-}
+};
 
 function deserializeSequenceType(mapper, responseBody, objectName, client) {
   if (!client) {
