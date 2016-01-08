@@ -471,7 +471,8 @@ namespace Microsoft.Rest.Generator.Java
                 imports.Add("com.microsoft.rest." + OperationResponseType);
                 imports.Add("com.microsoft.rest.ServiceCallback");
                 // parameter types
-                this.Parameters.ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace)));
+                this.Parameters.Concat(this.LogicalParameters)
+                    .ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace)));
                 // parameter locations
                 this.LogicalParameters.ForEach(p =>
                 {
@@ -534,9 +535,11 @@ namespace Microsoft.Rest.Generator.Java
                     imports.Add("com.microsoft.rest.ServiceResponseCallback");
                 }
                 // parameter types
-                this.LocalParameters.ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace)));
+                this.LocalParameters.Concat(this.LogicalParameters)
+                    .ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace)));
                 // parameter utils
-                this.LocalParameters.ForEach(p => imports.AddRange(p.ImportFrom()));
+                this.LocalParameters.Concat(this.LogicalParameters)
+                    .ForEach(p => imports.AddRange(p.ImportFrom()));
                 // return type
                 imports.AddRange(this.ReturnType.Body.ImportFrom(ServiceClient.Namespace));
                 // response type (can be different from return type)
