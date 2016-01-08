@@ -31,10 +31,10 @@ public interface Formdata {
      * used by Retrofit to perform actually REST calls.
      */
     interface FormdataService {
-        @POST("/formdata/stream/uploadfile")
+        @POST("formdata/stream/uploadfile")
         Call<ResponseBody> uploadFile(InputStream fileContent, String fileName);
 
-        @PUT("/formdata/stream/uploadfile")
+        @PUT("formdata/stream/uploadfile")
         Call<ResponseBody> uploadFileViaBody(@Body InputStream fileContent, String fileName);
 
     }

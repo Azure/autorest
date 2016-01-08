@@ -31,13 +31,13 @@ public interface Polymorphism {
      * used by Retrofit to perform actually REST calls.
      */
     interface PolymorphismService {
-        @GET("/complex/polymorphism/valid")
+        @GET("complex/polymorphism/valid")
         Call<ResponseBody> getValid();
 
-        @PUT("/complex/polymorphism/valid")
+        @PUT("complex/polymorphism/valid")
         Call<ResponseBody> putValid(@Body Fish complexBody);
 
-        @PUT("/complex/polymorphism/missingrequired/invalid")
+        @PUT("complex/polymorphism/missingrequired/invalid")
         Call<ResponseBody> putValidMissingRequired(@Body Fish complexBody);
 
     }

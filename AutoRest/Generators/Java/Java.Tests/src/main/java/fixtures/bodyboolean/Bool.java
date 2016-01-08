@@ -30,22 +30,22 @@ public interface Bool {
      * used by Retrofit to perform actually REST calls.
      */
     interface BoolService {
-        @GET("/bool/true")
+        @GET("bool/true")
         Call<ResponseBody> getTrue();
 
-        @PUT("/bool/true")
+        @PUT("bool/true")
         Call<ResponseBody> putTrue(@Body boolean boolBody);
 
-        @GET("/bool/false")
+        @GET("bool/false")
         Call<ResponseBody> getFalse();
 
-        @PUT("/bool/false")
+        @PUT("bool/false")
         Call<ResponseBody> putFalse(@Body boolean boolBody);
 
-        @GET("/bool/null")
+        @GET("bool/null")
         Call<ResponseBody> getNull();
 
-        @GET("/bool/invalid")
+        @GET("bool/invalid")
         Call<ResponseBody> getInvalid();
 
     }

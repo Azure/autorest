@@ -31,25 +31,25 @@ public interface SkipUrlEncodingOperations {
      * used by Retrofit to perform actually REST calls.
      */
     interface SkipUrlEncodingService {
-        @GET("/azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}")
+        @GET("azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}")
         Call<ResponseBody> getMethodPathValid(@Path("unencodedPathParam") String unencodedPathParam, @Header("accept-language") String acceptLanguage);
 
-        @GET("/azurespecials/skipUrlEncoding/path/path/valid/{unencodedPathParam}")
+        @GET("azurespecials/skipUrlEncoding/path/path/valid/{unencodedPathParam}")
         Call<ResponseBody> getPathPathValid(@Path("unencodedPathParam") String unencodedPathParam, @Header("accept-language") String acceptLanguage);
 
-        @GET("/azurespecials/skipUrlEncoding/swagger/path/valid/{unencodedPathParam}")
+        @GET("azurespecials/skipUrlEncoding/swagger/path/valid/{unencodedPathParam}")
         Call<ResponseBody> getSwaggerPathValid(@Path("unencodedPathParam") String unencodedPathParam, @Header("accept-language") String acceptLanguage);
 
-        @GET("/azurespecials/skipUrlEncoding/method/query/valid")
+        @GET("azurespecials/skipUrlEncoding/method/query/valid")
         Call<ResponseBody> getMethodQueryValid(@Query("q1") String q1, @Header("accept-language") String acceptLanguage);
 
-        @GET("/azurespecials/skipUrlEncoding/method/query/null")
+        @GET("azurespecials/skipUrlEncoding/method/query/null")
         Call<ResponseBody> getMethodQueryNull(@Query("q1") String q1, @Header("accept-language") String acceptLanguage);
 
-        @GET("/azurespecials/skipUrlEncoding/path/query/valid")
+        @GET("azurespecials/skipUrlEncoding/path/query/valid")
         Call<ResponseBody> getPathQueryValid(@Query("q1") String q1, @Header("accept-language") String acceptLanguage);
 
-        @GET("/azurespecials/skipUrlEncoding/swagger/query/valid")
+        @GET("azurespecials/skipUrlEncoding/swagger/query/valid")
         Call<ResponseBody> getSwaggerQueryValid(@Query("q1") String q1, @Header("accept-language") String acceptLanguage);
 
     }

@@ -32,73 +32,73 @@ public interface Paths {
      * used by Retrofit to perform actually REST calls.
      */
     interface PathsService {
-        @GET("/paths/bool/true/{boolPath}")
+        @GET("paths/bool/true/{boolPath}")
         Call<ResponseBody> getBooleanTrue(@Path("boolPath") boolean boolPath);
 
-        @GET("/paths/bool/false/{boolPath}")
+        @GET("paths/bool/false/{boolPath}")
         Call<ResponseBody> getBooleanFalse(@Path("boolPath") boolean boolPath);
 
-        @GET("/paths/int/1000000/{intPath}")
+        @GET("paths/int/1000000/{intPath}")
         Call<ResponseBody> getIntOneMillion(@Path("intPath") int intPath);
 
-        @GET("/paths/int/-1000000/{intPath}")
+        @GET("paths/int/-1000000/{intPath}")
         Call<ResponseBody> getIntNegativeOneMillion(@Path("intPath") int intPath);
 
-        @GET("/paths/long/10000000000/{longPath}")
+        @GET("paths/long/10000000000/{longPath}")
         Call<ResponseBody> getTenBillion(@Path("longPath") long longPath);
 
-        @GET("/paths/long/-10000000000/{longPath}")
+        @GET("paths/long/-10000000000/{longPath}")
         Call<ResponseBody> getNegativeTenBillion(@Path("longPath") long longPath);
 
-        @GET("/paths/float/1.034E+20/{floatPath}")
+        @GET("paths/float/1.034E+20/{floatPath}")
         Call<ResponseBody> floatScientificPositive(@Path("floatPath") double floatPath);
 
-        @GET("/paths/float/-1.034E-20/{floatPath}")
+        @GET("paths/float/-1.034E-20/{floatPath}")
         Call<ResponseBody> floatScientificNegative(@Path("floatPath") double floatPath);
 
-        @GET("/paths/double/9999999.999/{doublePath}")
+        @GET("paths/double/9999999.999/{doublePath}")
         Call<ResponseBody> doubleDecimalPositive(@Path("doublePath") double doublePath);
 
-        @GET("/paths/double/-9999999.999/{doublePath}")
+        @GET("paths/double/-9999999.999/{doublePath}")
         Call<ResponseBody> doubleDecimalNegative(@Path("doublePath") double doublePath);
 
-        @GET("/paths/string/unicode/{stringPath}")
+        @GET("paths/string/unicode/{stringPath}")
         Call<ResponseBody> stringUnicode(@Path("stringPath") String stringPath);
 
-        @GET("/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}")
+        @GET("paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}")
         Call<ResponseBody> stringUrlEncoded(@Path("stringPath") String stringPath);
 
-        @GET("/paths/string/empty/{stringPath}")
+        @GET("paths/string/empty/{stringPath}")
         Call<ResponseBody> stringEmpty(@Path("stringPath") String stringPath);
 
-        @GET("/paths/string/null/{stringPath}")
+        @GET("paths/string/null/{stringPath}")
         Call<ResponseBody> stringNull(@Path("stringPath") String stringPath);
 
-        @GET("/paths/enum/green%20color/{enumPath}")
+        @GET("paths/enum/green%20color/{enumPath}")
         Call<ResponseBody> enumValid(@Path("enumPath") String enumPath);
 
-        @GET("/paths/string/null/{enumPath}")
+        @GET("paths/string/null/{enumPath}")
         Call<ResponseBody> enumNull(@Path("enumPath") String enumPath);
 
-        @GET("/paths/byte/multibyte/{bytePath}")
+        @GET("paths/byte/multibyte/{bytePath}")
         Call<ResponseBody> byteMultiByte(@Path("bytePath") String bytePath);
 
-        @GET("/paths/byte/empty/{bytePath}")
+        @GET("paths/byte/empty/{bytePath}")
         Call<ResponseBody> byteEmpty(@Path("bytePath") String bytePath);
 
-        @GET("/paths/byte/null/{bytePath}")
+        @GET("paths/byte/null/{bytePath}")
         Call<ResponseBody> byteNull(@Path("bytePath") String bytePath);
 
-        @GET("/paths/date/2012-01-01/{datePath}")
+        @GET("paths/date/2012-01-01/{datePath}")
         Call<ResponseBody> dateValid(@Path("datePath") String datePath);
 
-        @GET("/paths/date/null/{datePath}")
+        @GET("paths/date/null/{datePath}")
         Call<ResponseBody> dateNull(@Path("datePath") String datePath);
 
-        @GET("/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}")
+        @GET("paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}")
         Call<ResponseBody> dateTimeValid(@Path("dateTimePath") String dateTimePath);
 
-        @GET("/paths/datetime/null/{dateTimePath}")
+        @GET("paths/datetime/null/{dateTimePath}")
         Call<ResponseBody> dateTimeNull(@Path("dateTimePath") String dateTimePath);
 
     }

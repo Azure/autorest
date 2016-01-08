@@ -50,49 +50,49 @@ public interface HttpRedirects {
      * used by Retrofit to perform actually REST calls.
      */
     interface HttpRedirectsService {
-        @HEAD("/http/redirect/300")
+        @HEAD("http/redirect/300")
         Call<Void> head300();
 
-        @GET("/http/redirect/300")
+        @GET("http/redirect/300")
         Call<ResponseBody> get300();
 
-        @HEAD("/http/redirect/301")
+        @HEAD("http/redirect/301")
         Call<Void> head301();
 
-        @GET("/http/redirect/301")
+        @GET("http/redirect/301")
         Call<ResponseBody> get301();
 
-        @PUT("/http/redirect/301")
+        @PUT("http/redirect/301")
         Call<ResponseBody> put301(@Body Boolean booleanValue);
 
-        @HEAD("/http/redirect/302")
+        @HEAD("http/redirect/302")
         Call<Void> head302();
 
-        @GET("/http/redirect/302")
+        @GET("http/redirect/302")
         Call<ResponseBody> get302();
 
-        @PATCH("/http/redirect/302")
+        @PATCH("http/redirect/302")
         Call<ResponseBody> patch302(@Body Boolean booleanValue);
 
-        @POST("/http/redirect/303")
+        @POST("http/redirect/303")
         Call<ResponseBody> post303(@Body Boolean booleanValue);
 
-        @HEAD("/http/redirect/307")
+        @HEAD("http/redirect/307")
         Call<Void> head307();
 
-        @GET("/http/redirect/307")
+        @GET("http/redirect/307")
         Call<ResponseBody> get307();
 
-        @PUT("/http/redirect/307")
+        @PUT("http/redirect/307")
         Call<ResponseBody> put307(@Body Boolean booleanValue);
 
-        @PATCH("/http/redirect/307")
+        @PATCH("http/redirect/307")
         Call<ResponseBody> patch307(@Body Boolean booleanValue);
 
-        @POST("/http/redirect/307")
+        @POST("http/redirect/307")
         Call<ResponseBody> post307(@Body Boolean booleanValue);
 
-        @HTTP(path = "/http/redirect/307", method = "DELETE", hasBody = true)
+        @HTTP(path = "http/redirect/307", method = "DELETE", hasBody = true)
         Call<ResponseBody> delete307(@Body Boolean booleanValue);
 
     }

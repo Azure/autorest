@@ -40,25 +40,25 @@ public interface LRORetrysOperations {
      * used by Retrofit to perform actually REST calls.
      */
     interface LRORetrysService {
-        @PUT("/lro/retryerror/put/201/creating/succeeded/200")
+        @PUT("lro/retryerror/put/201/creating/succeeded/200")
         Call<ResponseBody> put201CreatingSucceeded200(@Body Product product, @Header("accept-language") String acceptLanguage);
 
-        @PUT("/lro/retryerror/putasync/retry/succeeded")
+        @PUT("lro/retryerror/putasync/retry/succeeded")
         Call<ResponseBody> putAsyncRelativeRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage);
 
-        @HTTP(path = "/lro/retryerror/delete/provisioning/202/accepted/200/succeeded", method = "DELETE", hasBody = true)
+        @HTTP(path = "lro/retryerror/delete/provisioning/202/accepted/200/succeeded", method = "DELETE", hasBody = true)
         Call<ResponseBody> deleteProvisioning202Accepted200Succeeded(@Header("accept-language") String acceptLanguage);
 
-        @HTTP(path = "/lro/retryerror/delete/202/retry/200", method = "DELETE", hasBody = true)
+        @HTTP(path = "lro/retryerror/delete/202/retry/200", method = "DELETE", hasBody = true)
         Call<ResponseBody> delete202Retry200(@Header("accept-language") String acceptLanguage);
 
-        @HTTP(path = "/lro/retryerror/deleteasync/retry/succeeded", method = "DELETE", hasBody = true)
+        @HTTP(path = "lro/retryerror/deleteasync/retry/succeeded", method = "DELETE", hasBody = true)
         Call<ResponseBody> deleteAsyncRelativeRetrySucceeded(@Header("accept-language") String acceptLanguage);
 
-        @POST("/lro/retryerror/post/202/retry/200")
+        @POST("lro/retryerror/post/202/retry/200")
         Call<ResponseBody> post202Retry200(@Body Product product, @Header("accept-language") String acceptLanguage);
 
-        @POST("/lro/retryerror/postasync/retry/succeeded")
+        @POST("lro/retryerror/postasync/retry/succeeded")
         Call<ResponseBody> postAsyncRelativeRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage);
 
     }

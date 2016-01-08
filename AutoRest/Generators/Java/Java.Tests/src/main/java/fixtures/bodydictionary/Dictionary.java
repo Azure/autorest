@@ -37,196 +37,196 @@ public interface Dictionary {
      * used by Retrofit to perform actually REST calls.
      */
     interface DictionaryService {
-        @GET("/dictionary/null")
+        @GET("dictionary/null")
         Call<ResponseBody> getNull();
 
-        @GET("/dictionary/empty")
+        @GET("dictionary/empty")
         Call<ResponseBody> getEmpty();
 
-        @PUT("/dictionary/empty")
+        @PUT("dictionary/empty")
         Call<ResponseBody> putEmpty(@Body Map<String, String> arrayBody);
 
-        @GET("/dictionary/nullvalue")
+        @GET("dictionary/nullvalue")
         Call<ResponseBody> getNullValue();
 
-        @GET("/dictionary/nullkey")
+        @GET("dictionary/nullkey")
         Call<ResponseBody> getNullKey();
 
-        @GET("/dictionary/keyemptystring")
+        @GET("dictionary/keyemptystring")
         Call<ResponseBody> getEmptyStringKey();
 
-        @GET("/dictionary/invalid")
+        @GET("dictionary/invalid")
         Call<ResponseBody> getInvalid();
 
-        @GET("/dictionary/prim/boolean/tfft")
+        @GET("dictionary/prim/boolean/tfft")
         Call<ResponseBody> getBooleanTfft();
 
-        @PUT("/dictionary/prim/boolean/tfft")
+        @PUT("dictionary/prim/boolean/tfft")
         Call<ResponseBody> putBooleanTfft(@Body Map<String, Boolean> arrayBody);
 
-        @GET("/dictionary/prim/boolean/true.null.false")
+        @GET("dictionary/prim/boolean/true.null.false")
         Call<ResponseBody> getBooleanInvalidNull();
 
-        @GET("/dictionary/prim/boolean/true.boolean.false")
+        @GET("dictionary/prim/boolean/true.boolean.false")
         Call<ResponseBody> getBooleanInvalidString();
 
-        @GET("/dictionary/prim/integer/1.-1.3.300")
+        @GET("dictionary/prim/integer/1.-1.3.300")
         Call<ResponseBody> getIntegerValid();
 
-        @PUT("/dictionary/prim/integer/1.-1.3.300")
+        @PUT("dictionary/prim/integer/1.-1.3.300")
         Call<ResponseBody> putIntegerValid(@Body Map<String, Integer> arrayBody);
 
-        @GET("/dictionary/prim/integer/1.null.zero")
+        @GET("dictionary/prim/integer/1.null.zero")
         Call<ResponseBody> getIntInvalidNull();
 
-        @GET("/dictionary/prim/integer/1.integer.0")
+        @GET("dictionary/prim/integer/1.integer.0")
         Call<ResponseBody> getIntInvalidString();
 
-        @GET("/dictionary/prim/long/1.-1.3.300")
+        @GET("dictionary/prim/long/1.-1.3.300")
         Call<ResponseBody> getLongValid();
 
-        @PUT("/dictionary/prim/long/1.-1.3.300")
+        @PUT("dictionary/prim/long/1.-1.3.300")
         Call<ResponseBody> putLongValid(@Body Map<String, Long> arrayBody);
 
-        @GET("/dictionary/prim/long/1.null.zero")
+        @GET("dictionary/prim/long/1.null.zero")
         Call<ResponseBody> getLongInvalidNull();
 
-        @GET("/dictionary/prim/long/1.integer.0")
+        @GET("dictionary/prim/long/1.integer.0")
         Call<ResponseBody> getLongInvalidString();
 
-        @GET("/dictionary/prim/float/0--0.01-1.2e20")
+        @GET("dictionary/prim/float/0--0.01-1.2e20")
         Call<ResponseBody> getFloatValid();
 
-        @PUT("/dictionary/prim/float/0--0.01-1.2e20")
+        @PUT("dictionary/prim/float/0--0.01-1.2e20")
         Call<ResponseBody> putFloatValid(@Body Map<String, Double> arrayBody);
 
-        @GET("/dictionary/prim/float/0.0-null-1.2e20")
+        @GET("dictionary/prim/float/0.0-null-1.2e20")
         Call<ResponseBody> getFloatInvalidNull();
 
-        @GET("/dictionary/prim/float/1.number.0")
+        @GET("dictionary/prim/float/1.number.0")
         Call<ResponseBody> getFloatInvalidString();
 
-        @GET("/dictionary/prim/double/0--0.01-1.2e20")
+        @GET("dictionary/prim/double/0--0.01-1.2e20")
         Call<ResponseBody> getDoubleValid();
 
-        @PUT("/dictionary/prim/double/0--0.01-1.2e20")
+        @PUT("dictionary/prim/double/0--0.01-1.2e20")
         Call<ResponseBody> putDoubleValid(@Body Map<String, Double> arrayBody);
 
-        @GET("/dictionary/prim/double/0.0-null-1.2e20")
+        @GET("dictionary/prim/double/0.0-null-1.2e20")
         Call<ResponseBody> getDoubleInvalidNull();
 
-        @GET("/dictionary/prim/double/1.number.0")
+        @GET("dictionary/prim/double/1.number.0")
         Call<ResponseBody> getDoubleInvalidString();
 
-        @GET("/dictionary/prim/string/foo1.foo2.foo3")
+        @GET("dictionary/prim/string/foo1.foo2.foo3")
         Call<ResponseBody> getStringValid();
 
-        @PUT("/dictionary/prim/string/foo1.foo2.foo3")
+        @PUT("dictionary/prim/string/foo1.foo2.foo3")
         Call<ResponseBody> putStringValid(@Body Map<String, String> arrayBody);
 
-        @GET("/dictionary/prim/string/foo.null.foo2")
+        @GET("dictionary/prim/string/foo.null.foo2")
         Call<ResponseBody> getStringWithNull();
 
-        @GET("/dictionary/prim/string/foo.123.foo2")
+        @GET("dictionary/prim/string/foo.123.foo2")
         Call<ResponseBody> getStringWithInvalid();
 
-        @GET("/dictionary/prim/date/valid")
+        @GET("dictionary/prim/date/valid")
         Call<ResponseBody> getDateValid();
 
-        @PUT("/dictionary/prim/date/valid")
+        @PUT("dictionary/prim/date/valid")
         Call<ResponseBody> putDateValid(@Body Map<String, LocalDate> arrayBody);
 
-        @GET("/dictionary/prim/date/invalidnull")
+        @GET("dictionary/prim/date/invalidnull")
         Call<ResponseBody> getDateInvalidNull();
 
-        @GET("/dictionary/prim/date/invalidchars")
+        @GET("dictionary/prim/date/invalidchars")
         Call<ResponseBody> getDateInvalidChars();
 
-        @GET("/dictionary/prim/date-time/valid")
+        @GET("dictionary/prim/date-time/valid")
         Call<ResponseBody> getDateTimeValid();
 
-        @PUT("/dictionary/prim/date-time/valid")
+        @PUT("dictionary/prim/date-time/valid")
         Call<ResponseBody> putDateTimeValid(@Body Map<String, DateTime> arrayBody);
 
-        @GET("/dictionary/prim/date-time/invalidnull")
+        @GET("dictionary/prim/date-time/invalidnull")
         Call<ResponseBody> getDateTimeInvalidNull();
 
-        @GET("/dictionary/prim/date-time/invalidchars")
+        @GET("dictionary/prim/date-time/invalidchars")
         Call<ResponseBody> getDateTimeInvalidChars();
 
-        @GET("/dictionary/prim/date-time-rfc1123/valid")
+        @GET("dictionary/prim/date-time-rfc1123/valid")
         Call<ResponseBody> getDateTimeRfc1123Valid();
 
-        @PUT("/dictionary/prim/date-time-rfc1123/valid")
+        @PUT("dictionary/prim/date-time-rfc1123/valid")
         Call<ResponseBody> putDateTimeRfc1123Valid(@Body Map<String, DateTimeRfc1123> arrayBody);
 
-        @GET("/dictionary/prim/duration/valid")
+        @GET("dictionary/prim/duration/valid")
         Call<ResponseBody> getDurationValid();
 
-        @PUT("/dictionary/prim/duration/valid")
+        @PUT("dictionary/prim/duration/valid")
         Call<ResponseBody> putDurationValid(@Body Map<String, Period> arrayBody);
 
-        @GET("/dictionary/prim/byte/valid")
+        @GET("dictionary/prim/byte/valid")
         Call<ResponseBody> getByteValid();
 
-        @PUT("/dictionary/prim/byte/valid")
+        @PUT("dictionary/prim/byte/valid")
         Call<ResponseBody> putByteValid(@Body Map<String, byte[]> arrayBody);
 
-        @GET("/dictionary/prim/byte/invalidnull")
+        @GET("dictionary/prim/byte/invalidnull")
         Call<ResponseBody> getByteInvalidNull();
 
-        @GET("/dictionary/complex/null")
+        @GET("dictionary/complex/null")
         Call<ResponseBody> getComplexNull();
 
-        @GET("/dictionary/complex/empty")
+        @GET("dictionary/complex/empty")
         Call<ResponseBody> getComplexEmpty();
 
-        @GET("/dictionary/complex/itemnull")
+        @GET("dictionary/complex/itemnull")
         Call<ResponseBody> getComplexItemNull();
 
-        @GET("/dictionary/complex/itemempty")
+        @GET("dictionary/complex/itemempty")
         Call<ResponseBody> getComplexItemEmpty();
 
-        @GET("/dictionary/complex/valid")
+        @GET("dictionary/complex/valid")
         Call<ResponseBody> getComplexValid();
 
-        @PUT("/dictionary/complex/valid")
+        @PUT("dictionary/complex/valid")
         Call<ResponseBody> putComplexValid(@Body Map<String, Widget> arrayBody);
 
-        @GET("/dictionary/array/null")
+        @GET("dictionary/array/null")
         Call<ResponseBody> getArrayNull();
 
-        @GET("/dictionary/array/empty")
+        @GET("dictionary/array/empty")
         Call<ResponseBody> getArrayEmpty();
 
-        @GET("/dictionary/array/itemnull")
+        @GET("dictionary/array/itemnull")
         Call<ResponseBody> getArrayItemNull();
 
-        @GET("/dictionary/array/itemempty")
+        @GET("dictionary/array/itemempty")
         Call<ResponseBody> getArrayItemEmpty();
 
-        @GET("/dictionary/array/valid")
+        @GET("dictionary/array/valid")
         Call<ResponseBody> getArrayValid();
 
-        @PUT("/dictionary/array/valid")
+        @PUT("dictionary/array/valid")
         Call<ResponseBody> putArrayValid(@Body Map<String, List<String>> arrayBody);
 
-        @GET("/dictionary/dictionary/null")
+        @GET("dictionary/dictionary/null")
         Call<ResponseBody> getDictionaryNull();
 
-        @GET("/dictionary/dictionary/empty")
+        @GET("dictionary/dictionary/empty")
         Call<ResponseBody> getDictionaryEmpty();
 
-        @GET("/dictionary/dictionary/itemnull")
+        @GET("dictionary/dictionary/itemnull")
         Call<ResponseBody> getDictionaryItemNull();
 
-        @GET("/dictionary/dictionary/itemempty")
+        @GET("dictionary/dictionary/itemempty")
         Call<ResponseBody> getDictionaryItemEmpty();
 
-        @GET("/dictionary/dictionary/valid")
+        @GET("dictionary/dictionary/valid")
         Call<ResponseBody> getDictionaryValid();
 
-        @PUT("/dictionary/dictionary/valid")
+        @PUT("dictionary/dictionary/valid")
         Call<ResponseBody> putDictionaryValid(@Body Map<String, Map<String, String>> arrayBody);
 
     }

@@ -31,22 +31,22 @@ public interface BasicOperations {
      * used by Retrofit to perform actually REST calls.
      */
     interface BasicService {
-        @GET("/complex/basic/valid")
+        @GET("complex/basic/valid")
         Call<ResponseBody> getValid();
 
-        @PUT("/complex/basic/valid")
+        @PUT("complex/basic/valid")
         Call<ResponseBody> putValid(@Body Basic complexBody);
 
-        @GET("/complex/basic/invalid")
+        @GET("complex/basic/invalid")
         Call<ResponseBody> getInvalid();
 
-        @GET("/complex/basic/empty")
+        @GET("complex/basic/empty")
         Call<ResponseBody> getEmpty();
 
-        @GET("/complex/basic/null")
+        @GET("complex/basic/null")
         Call<ResponseBody> getNull();
 
-        @GET("/complex/basic/notprovided")
+        @GET("complex/basic/notprovided")
         Call<ResponseBody> getNotProvided();
 
     }

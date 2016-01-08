@@ -49,91 +49,91 @@ public interface HeaderOperations {
      * used by Retrofit to perform actually REST calls.
      */
     interface HeaderService {
-        @POST("/header/param/existingkey")
+        @POST("header/param/existingkey")
         Call<ResponseBody> paramExistingKey(@Header("User-Agent") String userAgent);
 
-        @POST("/header/response/existingkey")
+        @POST("header/response/existingkey")
         Call<ResponseBody> responseExistingKey();
 
-        @POST("/header/param/protectedkey")
+        @POST("header/param/protectedkey")
         Call<ResponseBody> paramProtectedKey(@Header("Content-Type") String contentType);
 
-        @POST("/header/response/protectedkey")
+        @POST("header/response/protectedkey")
         Call<ResponseBody> responseProtectedKey();
 
-        @POST("/header/param/prim/integer")
+        @POST("header/param/prim/integer")
         Call<ResponseBody> paramInteger(@Header("scenario") String scenario, @Header("value") int value);
 
-        @POST("/header/response/prim/integer")
+        @POST("header/response/prim/integer")
         Call<ResponseBody> responseInteger(@Header("scenario") String scenario);
 
-        @POST("/header/param/prim/long")
+        @POST("header/param/prim/long")
         Call<ResponseBody> paramLong(@Header("scenario") String scenario, @Header("value") long value);
 
-        @POST("/header/response/prim/long")
+        @POST("header/response/prim/long")
         Call<ResponseBody> responseLong(@Header("scenario") String scenario);
 
-        @POST("/header/param/prim/float")
+        @POST("header/param/prim/float")
         Call<ResponseBody> paramFloat(@Header("scenario") String scenario, @Header("value") double value);
 
-        @POST("/header/response/prim/float")
+        @POST("header/response/prim/float")
         Call<ResponseBody> responseFloat(@Header("scenario") String scenario);
 
-        @POST("/header/param/prim/double")
+        @POST("header/param/prim/double")
         Call<ResponseBody> paramDouble(@Header("scenario") String scenario, @Header("value") double value);
 
-        @POST("/header/response/prim/double")
+        @POST("header/response/prim/double")
         Call<ResponseBody> responseDouble(@Header("scenario") String scenario);
 
-        @POST("/header/param/prim/bool")
+        @POST("header/param/prim/bool")
         Call<ResponseBody> paramBool(@Header("scenario") String scenario, @Header("value") boolean value);
 
-        @POST("/header/response/prim/bool")
+        @POST("header/response/prim/bool")
         Call<ResponseBody> responseBool(@Header("scenario") String scenario);
 
-        @POST("/header/param/prim/string")
+        @POST("header/param/prim/string")
         Call<ResponseBody> paramString(@Header("scenario") String scenario, @Header("value") String value);
 
-        @POST("/header/response/prim/string")
+        @POST("header/response/prim/string")
         Call<ResponseBody> responseString(@Header("scenario") String scenario);
 
-        @POST("/header/param/prim/date")
+        @POST("header/param/prim/date")
         Call<ResponseBody> paramDate(@Header("scenario") String scenario, @Header("value") String value);
 
-        @POST("/header/response/prim/date")
+        @POST("header/response/prim/date")
         Call<ResponseBody> responseDate(@Header("scenario") String scenario);
 
-        @POST("/header/param/prim/datetime")
+        @POST("header/param/prim/datetime")
         Call<ResponseBody> paramDatetime(@Header("scenario") String scenario, @Header("value") String value);
 
-        @POST("/header/response/prim/datetime")
+        @POST("header/response/prim/datetime")
         Call<ResponseBody> responseDatetime(@Header("scenario") String scenario);
 
-        @POST("/header/param/prim/datetimerfc1123")
+        @POST("header/param/prim/datetimerfc1123")
         Call<ResponseBody> paramDatetimeRfc1123(@Header("scenario") String scenario, @Header("value") DateTimeRfc1123 value);
 
-        @POST("/header/response/prim/datetimerfc1123")
+        @POST("header/response/prim/datetimerfc1123")
         Call<ResponseBody> responseDatetimeRfc1123(@Header("scenario") String scenario);
 
-        @POST("/header/param/prim/duration")
+        @POST("header/param/prim/duration")
         Call<ResponseBody> paramDuration(@Header("scenario") String scenario, @Header("value") Period value);
 
-        @POST("/header/response/prim/duration")
+        @POST("header/response/prim/duration")
         Call<ResponseBody> responseDuration(@Header("scenario") String scenario);
 
-        @POST("/header/param/prim/byte")
+        @POST("header/param/prim/byte")
         Call<ResponseBody> paramByte(@Header("scenario") String scenario, @Header("value") String value);
 
-        @POST("/header/response/prim/byte")
+        @POST("header/response/prim/byte")
         Call<ResponseBody> responseByte(@Header("scenario") String scenario);
 
-        @POST("/header/param/prim/enum")
+        @POST("header/param/prim/enum")
         Call<ResponseBody> paramEnum(@Header("scenario") String scenario, @Header("value") String value);
 
-        @POST("/header/response/prim/enum")
+        @POST("header/response/prim/enum")
         Call<ResponseBody> responseEnum(@Header("scenario") String scenario);
 
-        @POST("/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0")
+        @POST("header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0")
         Call<ResponseBody> customRequestId();
 
     }

@@ -41,70 +41,70 @@ public interface Primitive {
      * used by Retrofit to perform actually REST calls.
      */
     interface PrimitiveService {
-        @GET("/complex/primitive/integer")
+        @GET("complex/primitive/integer")
         Call<ResponseBody> getInt();
 
-        @PUT("/complex/primitive/integer")
+        @PUT("complex/primitive/integer")
         Call<ResponseBody> putInt(@Body IntWrapper complexBody);
 
-        @GET("/complex/primitive/long")
+        @GET("complex/primitive/long")
         Call<ResponseBody> getLong();
 
-        @PUT("/complex/primitive/long")
+        @PUT("complex/primitive/long")
         Call<ResponseBody> putLong(@Body LongWrapper complexBody);
 
-        @GET("/complex/primitive/float")
+        @GET("complex/primitive/float")
         Call<ResponseBody> getFloat();
 
-        @PUT("/complex/primitive/float")
+        @PUT("complex/primitive/float")
         Call<ResponseBody> putFloat(@Body FloatWrapper complexBody);
 
-        @GET("/complex/primitive/double")
+        @GET("complex/primitive/double")
         Call<ResponseBody> getDouble();
 
-        @PUT("/complex/primitive/double")
+        @PUT("complex/primitive/double")
         Call<ResponseBody> putDouble(@Body DoubleWrapper complexBody);
 
-        @GET("/complex/primitive/bool")
+        @GET("complex/primitive/bool")
         Call<ResponseBody> getBool();
 
-        @PUT("/complex/primitive/bool")
+        @PUT("complex/primitive/bool")
         Call<ResponseBody> putBool(@Body BooleanWrapper complexBody);
 
-        @GET("/complex/primitive/string")
+        @GET("complex/primitive/string")
         Call<ResponseBody> getString();
 
-        @PUT("/complex/primitive/string")
+        @PUT("complex/primitive/string")
         Call<ResponseBody> putString(@Body StringWrapper complexBody);
 
-        @GET("/complex/primitive/date")
+        @GET("complex/primitive/date")
         Call<ResponseBody> getDate();
 
-        @PUT("/complex/primitive/date")
+        @PUT("complex/primitive/date")
         Call<ResponseBody> putDate(@Body DateWrapper complexBody);
 
-        @GET("/complex/primitive/datetime")
+        @GET("complex/primitive/datetime")
         Call<ResponseBody> getDateTime();
 
-        @PUT("/complex/primitive/datetime")
+        @PUT("complex/primitive/datetime")
         Call<ResponseBody> putDateTime(@Body DatetimeWrapper complexBody);
 
-        @GET("/complex/primitive/datetimerfc1123")
+        @GET("complex/primitive/datetimerfc1123")
         Call<ResponseBody> getDateTimeRfc1123();
 
-        @PUT("/complex/primitive/datetimerfc1123")
+        @PUT("complex/primitive/datetimerfc1123")
         Call<ResponseBody> putDateTimeRfc1123(@Body Datetimerfc1123Wrapper complexBody);
 
-        @GET("/complex/primitive/duration")
+        @GET("complex/primitive/duration")
         Call<ResponseBody> getDuration();
 
-        @PUT("/complex/primitive/duration")
+        @PUT("complex/primitive/duration")
         Call<ResponseBody> putDuration(@Body DurationWrapper complexBody);
 
-        @GET("/complex/primitive/byte")
+        @GET("complex/primitive/byte")
         Call<ResponseBody> getByte();
 
-        @PUT("/complex/primitive/byte")
+        @PUT("complex/primitive/byte")
         Call<ResponseBody> putByte(@Body ByteWrapper complexBody);
 
     }

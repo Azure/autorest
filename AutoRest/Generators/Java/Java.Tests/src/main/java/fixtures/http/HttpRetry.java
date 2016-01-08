@@ -34,28 +34,28 @@ public interface HttpRetry {
      * used by Retrofit to perform actually REST calls.
      */
     interface HttpRetryService {
-        @HEAD("/http/retry/408")
+        @HEAD("http/retry/408")
         Call<Void> head408();
 
-        @PUT("/http/retry/500")
+        @PUT("http/retry/500")
         Call<ResponseBody> put500(@Body Boolean booleanValue);
 
-        @PATCH("/http/retry/500")
+        @PATCH("http/retry/500")
         Call<ResponseBody> patch500(@Body Boolean booleanValue);
 
-        @GET("/http/retry/502")
+        @GET("http/retry/502")
         Call<ResponseBody> get502();
 
-        @POST("/http/retry/503")
+        @POST("http/retry/503")
         Call<ResponseBody> post503(@Body Boolean booleanValue);
 
-        @HTTP(path = "/http/retry/503", method = "DELETE", hasBody = true)
+        @HTTP(path = "http/retry/503", method = "DELETE", hasBody = true)
         Call<ResponseBody> delete503(@Body Boolean booleanValue);
 
-        @PUT("/http/retry/504")
+        @PUT("http/retry/504")
         Call<ResponseBody> put504(@Body Boolean booleanValue);
 
-        @PATCH("/http/retry/504")
+        @PATCH("http/retry/504")
         Call<ResponseBody> patch504(@Body Boolean booleanValue);
 
     }

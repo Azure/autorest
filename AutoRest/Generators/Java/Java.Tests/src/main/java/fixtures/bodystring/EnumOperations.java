@@ -31,10 +31,10 @@ public interface EnumOperations {
      * used by Retrofit to perform actually REST calls.
      */
     interface EnumService {
-        @GET("/string/enum/notExpandable")
+        @GET("string/enum/notExpandable")
         Call<ResponseBody> getNotExpandable();
 
-        @PUT("/string/enum/notExpandable")
+        @PUT("string/enum/notExpandable")
         Call<ResponseBody> putNotExpandable(@Body Colors stringBody);
 
     }

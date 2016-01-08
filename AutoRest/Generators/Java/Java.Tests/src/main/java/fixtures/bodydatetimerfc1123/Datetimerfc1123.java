@@ -31,31 +31,31 @@ public interface Datetimerfc1123 {
      * used by Retrofit to perform actually REST calls.
      */
     interface Datetimerfc1123Service {
-        @GET("/datetimerfc1123/null")
+        @GET("datetimerfc1123/null")
         Call<ResponseBody> getNull();
 
-        @GET("/datetimerfc1123/invalid")
+        @GET("datetimerfc1123/invalid")
         Call<ResponseBody> getInvalid();
 
-        @GET("/datetimerfc1123/overflow")
+        @GET("datetimerfc1123/overflow")
         Call<ResponseBody> getOverflow();
 
-        @GET("/datetimerfc1123/underflow")
+        @GET("datetimerfc1123/underflow")
         Call<ResponseBody> getUnderflow();
 
-        @PUT("/datetimerfc1123/max")
+        @PUT("datetimerfc1123/max")
         Call<ResponseBody> putUtcMaxDateTime(@Body DateTimeRfc1123 datetimeBody);
 
-        @GET("/datetimerfc1123/max/lowercase")
+        @GET("datetimerfc1123/max/lowercase")
         Call<ResponseBody> getUtcLowercaseMaxDateTime();
 
-        @GET("/datetimerfc1123/max/uppercase")
+        @GET("datetimerfc1123/max/uppercase")
         Call<ResponseBody> getUtcUppercaseMaxDateTime();
 
-        @PUT("/datetimerfc1123/min")
+        @PUT("datetimerfc1123/min")
         Call<ResponseBody> putUtcMinDateTime(@Body DateTimeRfc1123 datetimeBody);
 
-        @GET("/datetimerfc1123/min")
+        @GET("datetimerfc1123/min")
         Call<ResponseBody> getUtcMinDateTime();
 
     }

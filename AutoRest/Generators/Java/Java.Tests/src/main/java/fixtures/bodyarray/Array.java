@@ -37,187 +37,187 @@ public interface Array {
      * used by Retrofit to perform actually REST calls.
      */
     interface ArrayService {
-        @GET("/array/null")
+        @GET("array/null")
         Call<ResponseBody> getNull();
 
-        @GET("/array/invalid")
+        @GET("array/invalid")
         Call<ResponseBody> getInvalid();
 
-        @GET("/array/empty")
+        @GET("array/empty")
         Call<ResponseBody> getEmpty();
 
-        @PUT("/array/empty")
+        @PUT("array/empty")
         Call<ResponseBody> putEmpty(@Body List<String> arrayBody);
 
-        @GET("/array/prim/boolean/tfft")
+        @GET("array/prim/boolean/tfft")
         Call<ResponseBody> getBooleanTfft();
 
-        @PUT("/array/prim/boolean/tfft")
+        @PUT("array/prim/boolean/tfft")
         Call<ResponseBody> putBooleanTfft(@Body List<Boolean> arrayBody);
 
-        @GET("/array/prim/boolean/true.null.false")
+        @GET("array/prim/boolean/true.null.false")
         Call<ResponseBody> getBooleanInvalidNull();
 
-        @GET("/array/prim/boolean/true.boolean.false")
+        @GET("array/prim/boolean/true.boolean.false")
         Call<ResponseBody> getBooleanInvalidString();
 
-        @GET("/array/prim/integer/1.-1.3.300")
+        @GET("array/prim/integer/1.-1.3.300")
         Call<ResponseBody> getIntegerValid();
 
-        @PUT("/array/prim/integer/1.-1.3.300")
+        @PUT("array/prim/integer/1.-1.3.300")
         Call<ResponseBody> putIntegerValid(@Body List<Integer> arrayBody);
 
-        @GET("/array/prim/integer/1.null.zero")
+        @GET("array/prim/integer/1.null.zero")
         Call<ResponseBody> getIntInvalidNull();
 
-        @GET("/array/prim/integer/1.integer.0")
+        @GET("array/prim/integer/1.integer.0")
         Call<ResponseBody> getIntInvalidString();
 
-        @GET("/array/prim/long/1.-1.3.300")
+        @GET("array/prim/long/1.-1.3.300")
         Call<ResponseBody> getLongValid();
 
-        @PUT("/array/prim/long/1.-1.3.300")
+        @PUT("array/prim/long/1.-1.3.300")
         Call<ResponseBody> putLongValid(@Body List<Long> arrayBody);
 
-        @GET("/array/prim/long/1.null.zero")
+        @GET("array/prim/long/1.null.zero")
         Call<ResponseBody> getLongInvalidNull();
 
-        @GET("/array/prim/long/1.integer.0")
+        @GET("array/prim/long/1.integer.0")
         Call<ResponseBody> getLongInvalidString();
 
-        @GET("/array/prim/float/0--0.01-1.2e20")
+        @GET("array/prim/float/0--0.01-1.2e20")
         Call<ResponseBody> getFloatValid();
 
-        @PUT("/array/prim/float/0--0.01-1.2e20")
+        @PUT("array/prim/float/0--0.01-1.2e20")
         Call<ResponseBody> putFloatValid(@Body List<Double> arrayBody);
 
-        @GET("/array/prim/float/0.0-null-1.2e20")
+        @GET("array/prim/float/0.0-null-1.2e20")
         Call<ResponseBody> getFloatInvalidNull();
 
-        @GET("/array/prim/float/1.number.0")
+        @GET("array/prim/float/1.number.0")
         Call<ResponseBody> getFloatInvalidString();
 
-        @GET("/array/prim/double/0--0.01-1.2e20")
+        @GET("array/prim/double/0--0.01-1.2e20")
         Call<ResponseBody> getDoubleValid();
 
-        @PUT("/array/prim/double/0--0.01-1.2e20")
+        @PUT("array/prim/double/0--0.01-1.2e20")
         Call<ResponseBody> putDoubleValid(@Body List<Double> arrayBody);
 
-        @GET("/array/prim/double/0.0-null-1.2e20")
+        @GET("array/prim/double/0.0-null-1.2e20")
         Call<ResponseBody> getDoubleInvalidNull();
 
-        @GET("/array/prim/double/1.number.0")
+        @GET("array/prim/double/1.number.0")
         Call<ResponseBody> getDoubleInvalidString();
 
-        @GET("/array/prim/string/foo1.foo2.foo3")
+        @GET("array/prim/string/foo1.foo2.foo3")
         Call<ResponseBody> getStringValid();
 
-        @PUT("/array/prim/string/foo1.foo2.foo3")
+        @PUT("array/prim/string/foo1.foo2.foo3")
         Call<ResponseBody> putStringValid(@Body List<String> arrayBody);
 
-        @GET("/array/prim/string/foo.null.foo2")
+        @GET("array/prim/string/foo.null.foo2")
         Call<ResponseBody> getStringWithNull();
 
-        @GET("/array/prim/string/foo.123.foo2")
+        @GET("array/prim/string/foo.123.foo2")
         Call<ResponseBody> getStringWithInvalid();
 
-        @GET("/array/prim/date/valid")
+        @GET("array/prim/date/valid")
         Call<ResponseBody> getDateValid();
 
-        @PUT("/array/prim/date/valid")
+        @PUT("array/prim/date/valid")
         Call<ResponseBody> putDateValid(@Body List<LocalDate> arrayBody);
 
-        @GET("/array/prim/date/invalidnull")
+        @GET("array/prim/date/invalidnull")
         Call<ResponseBody> getDateInvalidNull();
 
-        @GET("/array/prim/date/invalidchars")
+        @GET("array/prim/date/invalidchars")
         Call<ResponseBody> getDateInvalidChars();
 
-        @GET("/array/prim/date-time/valid")
+        @GET("array/prim/date-time/valid")
         Call<ResponseBody> getDateTimeValid();
 
-        @PUT("/array/prim/date-time/valid")
+        @PUT("array/prim/date-time/valid")
         Call<ResponseBody> putDateTimeValid(@Body List<DateTime> arrayBody);
 
-        @GET("/array/prim/date-time/invalidnull")
+        @GET("array/prim/date-time/invalidnull")
         Call<ResponseBody> getDateTimeInvalidNull();
 
-        @GET("/array/prim/date-time/invalidchars")
+        @GET("array/prim/date-time/invalidchars")
         Call<ResponseBody> getDateTimeInvalidChars();
 
-        @GET("/array/prim/date-time-rfc1123/valid")
+        @GET("array/prim/date-time-rfc1123/valid")
         Call<ResponseBody> getDateTimeRfc1123Valid();
 
-        @PUT("/array/prim/date-time-rfc1123/valid")
+        @PUT("array/prim/date-time-rfc1123/valid")
         Call<ResponseBody> putDateTimeRfc1123Valid(@Body List<DateTimeRfc1123> arrayBody);
 
-        @GET("/array/prim/duration/valid")
+        @GET("array/prim/duration/valid")
         Call<ResponseBody> getDurationValid();
 
-        @PUT("/array/prim/duration/valid")
+        @PUT("array/prim/duration/valid")
         Call<ResponseBody> putDurationValid(@Body List<Period> arrayBody);
 
-        @GET("/array/prim/byte/valid")
+        @GET("array/prim/byte/valid")
         Call<ResponseBody> getByteValid();
 
-        @PUT("/array/prim/byte/valid")
+        @PUT("array/prim/byte/valid")
         Call<ResponseBody> putByteValid(@Body List<byte[]> arrayBody);
 
-        @GET("/array/prim/byte/invalidnull")
+        @GET("array/prim/byte/invalidnull")
         Call<ResponseBody> getByteInvalidNull();
 
-        @GET("/array/complex/null")
+        @GET("array/complex/null")
         Call<ResponseBody> getComplexNull();
 
-        @GET("/array/complex/empty")
+        @GET("array/complex/empty")
         Call<ResponseBody> getComplexEmpty();
 
-        @GET("/array/complex/itemnull")
+        @GET("array/complex/itemnull")
         Call<ResponseBody> getComplexItemNull();
 
-        @GET("/array/complex/itemempty")
+        @GET("array/complex/itemempty")
         Call<ResponseBody> getComplexItemEmpty();
 
-        @GET("/array/complex/valid")
+        @GET("array/complex/valid")
         Call<ResponseBody> getComplexValid();
 
-        @PUT("/array/complex/valid")
+        @PUT("array/complex/valid")
         Call<ResponseBody> putComplexValid(@Body List<Product> arrayBody);
 
-        @GET("/array/array/null")
+        @GET("array/array/null")
         Call<ResponseBody> getArrayNull();
 
-        @GET("/array/array/empty")
+        @GET("array/array/empty")
         Call<ResponseBody> getArrayEmpty();
 
-        @GET("/array/array/itemnull")
+        @GET("array/array/itemnull")
         Call<ResponseBody> getArrayItemNull();
 
-        @GET("/array/array/itemempty")
+        @GET("array/array/itemempty")
         Call<ResponseBody> getArrayItemEmpty();
 
-        @GET("/array/array/valid")
+        @GET("array/array/valid")
         Call<ResponseBody> getArrayValid();
 
-        @PUT("/array/array/valid")
+        @PUT("array/array/valid")
         Call<ResponseBody> putArrayValid(@Body List<List<String>> arrayBody);
 
-        @GET("/array/dictionary/null")
+        @GET("array/dictionary/null")
         Call<ResponseBody> getDictionaryNull();
 
-        @GET("/array/dictionary/empty")
+        @GET("array/dictionary/empty")
         Call<ResponseBody> getDictionaryEmpty();
 
-        @GET("/array/dictionary/itemnull")
+        @GET("array/dictionary/itemnull")
         Call<ResponseBody> getDictionaryItemNull();
 
-        @GET("/array/dictionary/itemempty")
+        @GET("array/dictionary/itemempty")
         Call<ResponseBody> getDictionaryItemEmpty();
 
-        @GET("/array/dictionary/valid")
+        @GET("array/dictionary/valid")
         Call<ResponseBody> getDictionaryValid();
 
-        @PUT("/array/dictionary/valid")
+        @PUT("array/dictionary/valid")
         Call<ResponseBody> putDictionaryValid(@Body List<Map<String, String>> arrayBody);
 
     }

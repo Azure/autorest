@@ -28,13 +28,13 @@ public interface HttpSuccessOperations {
      * used by Retrofit to perform actually REST calls.
      */
     interface HttpSuccessService {
-        @HEAD("/http/success/200")
+        @HEAD("http/success/200")
         Call<Void> head200(@Header("accept-language") String acceptLanguage);
 
-        @HEAD("/http/success/204")
+        @HEAD("http/success/204")
         Call<Void> head204(@Header("accept-language") String acceptLanguage);
 
-        @HEAD("/http/success/404")
+        @HEAD("http/success/404")
         Call<Void> head404(@Header("accept-language") String acceptLanguage);
 
     }
