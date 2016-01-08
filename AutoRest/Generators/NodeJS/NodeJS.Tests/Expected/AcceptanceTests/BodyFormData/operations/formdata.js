@@ -94,7 +94,7 @@ Formdata.prototype.uploadFile = function (fileContent, fileName, options, callba
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.headers['Content-Type'] = 'multipart/form-data';
   // Serialize Request  
   var formData = {};  
   if (fileContent !== undefined && fileContent !== null) {
@@ -192,7 +192,7 @@ Formdata.prototype.uploadFileViaBody = function (fileContent, fileName, options,
       }
     }
   }
-  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  httpRequest.headers['Content-Type'] = 'application/octet-stream';
   // Serialize Request  
   var requestContent = fileContent;
   httpRequest.body = requestContent;
