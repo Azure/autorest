@@ -65,10 +65,10 @@ namespace Microsoft.Rest.Generator.Java.Azure
             AzureExtensions.UpdateHeadMethods(serviceClient);
             AzureExtensions.ParseODataExtension(serviceClient);
             AzureExtensions.FlattenResourceProperties(serviceClient);
-            AzureExtensions.AddPageableMethod(serviceClient);
             AzureExtensions.AddAzureProperties(serviceClient);
             AzureExtensions.SetDefaultResponses(serviceClient);
             AzureExtensions.AddParameterGroups(serviceClient);
+            AzureExtensions.AddPageableMethod(serviceClient, _namer);
             _namer.NormalizeClientModel(serviceClient);
             _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");
@@ -113,22 +113,19 @@ namespace Microsoft.Rest.Generator.Java.Azure
             await Write(serviceClientInterfaceTemplate, serviceClient.Name.ToPascalCase() + ".java");
 
             //Models
-            if (serviceClient.ModelTypes.Any())
+            foreach (var modelType in serviceClient.ModelTypes.Concat(serviceClient.HeaderTypes))
             {
-                foreach (var modelType in serviceClientTemplateModel.ModelTemplateModels)
+                if (modelType.Extensions.ContainsKey(AzureExtensions.ExternalExtension) &&
+                    (bool)modelType.Extensions[AzureExtensions.ExternalExtension])
                 {
-                    if (modelType.Extensions.ContainsKey(AzureExtensions.ExternalExtension) && 
-                        (bool)modelType.Extensions[AzureExtensions.ExternalExtension])
-                    {
-                        continue;
-                    }
-
-                    var modelTemplate = new ModelTemplate
-                    {
-                        Model = modelType
-                    };
-                    await Write(modelTemplate, Path.Combine("models", modelType.Name.ToPascalCase() + ".java"));
+                    continue;
                 }
+
+                var modelTemplate = new ModelTemplate
+                {
+                    Model = new AzureModelTemplateModel(modelType, serviceClient)
+                };
+                await Write(modelTemplate, Path.Combine("models", modelType.Name.ToPascalCase() + ".java"));
             }
 
             //MethodGroups
@@ -167,6 +164,21 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     Model = new PageTemplateModel(pageClass.Value, pageClass.Key.Key, pageClass.Key.Value),
                 };
                 await Write(pageTemplate, Path.Combine("models", pageTemplate.Model.TypeDefinitionName + ".java"));
+            }
+
+            // Exceptions
+            foreach (var exceptionType in serviceClient.ErrorTypes)
+            {
+                if (exceptionType.Name == "CloudError")
+                {
+                    continue;
+                }
+
+                var exceptionTemplate = new ExceptionTemplate
+                {
+                    Model = new ModelTemplateModel(exceptionType, serviceClient),
+                };
+                await Write(exceptionTemplate, Path.Combine("models", exceptionTemplate.Model.ExceptionTypeDefinitionName + ".java"));
             }
 
             // package-info.java

@@ -31,7 +31,6 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="PythonCodeGenerator.cs" />
     <Compile Include="PythonCodeNamer.cs" />
-    <Compile Include="IScopeProvider.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

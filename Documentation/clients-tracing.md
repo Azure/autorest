@@ -11,7 +11,7 @@ Clients generated with AutoRest come with an extensible tracing infrastructure. 
 In order to enable ETW tracing first download _Microsoft.Rest.ClientRuntime.Etw_ package from NuGet.
 Next, register `EtwTracingInterceptor` by calling:
 ```csharp
-ServiceClientInterceptor.AddTracingInterceptor(new EtwTracingInterceptor());
+ServiceClientTracing.AddTracingInterceptor(new EtwTracingInterceptor());
 ```
 Finally, use a tool such as [PerfView](http://www.microsoft.com/en-us/download/details.aspx?id=28567) to capture events under the `Microsoft.Rest` provider.
 
@@ -46,7 +46,7 @@ Next, configure Log4Net in the application by adding this line to `AssemblyInfo.
 ```
 Finally, register `Log4NetTracingInterceptor` by calling:
 ```csharp
-ServiceClientInterceptor.AddTracingInterceptor(new Log4NetTracingInterceptor());
+ServiceClientTracing.AddTracingInterceptor(new Log4NetTracingInterceptor());
 ```
 
 ## Custom Tracing
@@ -73,5 +73,5 @@ public class ConsoleTracingInterceptor : IServiceClientTracingInterceptor
 ```
 Finally, register the custom tracing interceptor by calling:
 ```csharp
-ServiceClientInterceptor.AddTracingInterceptor(new ConsoleTracingInterceptor());
+ServiceClientTracing.AddTracingInterceptor(new ConsoleTracingInterceptor());
 ```

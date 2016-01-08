@@ -185,96 +185,88 @@ namespace Microsoft.Rest.Generator.Azure.Python
         /// <returns></returns>
         public override async Task Generate(ServiceClient serviceClient)
         {
-            try
+            var serviceClientTemplateModel = new AzureServiceClientTemplateModel(serviceClient);
+
+            if (Settings.CustomSettings.ContainsKey("Version"))
             {
-                var serviceClientTemplateModel = new AzureServiceClientTemplateModel(serviceClient);
+                serviceClientTemplateModel.Version = Settings.CustomSettings["Version"];
+            }
 
-                if (Settings.CustomSettings.ContainsKey("Version"))
-                {
-                    serviceClientTemplateModel.Version = Settings.CustomSettings["Version"];
-                }
+            // Service client
+            var setupTemplate = new SetupTemplate
+            {
+                Model = serviceClientTemplateModel
+            };
+            await Write(setupTemplate, "setup.py");
 
-                // Service client
-                var setupTemplate = new SetupTemplate
+            var serviceClientInitTemplate = new ServiceClientInitTemplate
+            {
+                Model = serviceClientTemplateModel
+            };
+            await Write(serviceClientInitTemplate, Path.Combine(serviceClient.Name.ToPythonCase(), "__init__.py"));
+
+            var serviceClientTemplate = new AzureServiceClientTemplate
+            {
+                Model = serviceClientTemplateModel,
+            };
+            await Write(serviceClientTemplate, Path.Combine(serviceClient.Name.ToPythonCase(), "api_client.py"));
+
+            //Models
+            if (serviceClientTemplateModel.ModelTemplateModels.Any())
+            {
+                var modelInitTemplate = new AzureModelInitTemplate
                 {
-                    Model = serviceClientTemplateModel
+                    Model = new AzureModelInitTemplateModel(serviceClient, pageModels.Select(t => t.TypeDefinitionName))
                 };
-                await Write(setupTemplate, "setup.py");
+                await Write(modelInitTemplate, Path.Combine(serviceClient.Name.ToPythonCase(), "models", "__init__.py"));
 
-                var serviceClientInitTemplate = new ServiceClientInitTemplate
+                foreach (var modelType in serviceClientTemplateModel.ModelTemplateModels)
                 {
-                    Model = serviceClientTemplateModel
-                };
-                await Write(serviceClientInitTemplate, Path.Combine(serviceClient.Name.ToPythonCase(), "__init__.py"));
-
-                var serviceClientTemplate = new AzureServiceClientTemplate
-                {
-                    Model = serviceClientTemplateModel,
-                };
-                await Write(serviceClientTemplate, Path.Combine(serviceClient.Name.ToPythonCase(), "api_client.py"));
-
-                //Models
-                if (serviceClientTemplateModel.ModelTemplateModels.Any())
-                {
-                    var modelInitTemplate = new AzureModelInitTemplate
+                    var modelTemplate = new ModelTemplate
                     {
-                        Model = new AzureModelInitTemplateModel(serviceClient, pageModels.Select(t => t.TypeDefinitionName))
+                        Model = modelType
                     };
-                    await Write(modelInitTemplate, Path.Combine(serviceClient.Name.ToPythonCase(), "models", "__init__.py"));
-
-                    foreach (var modelType in serviceClientTemplateModel.ModelTemplateModels)
-                    {
-                        var modelTemplate = new ModelTemplate
-                        {
-                            Model = modelType
-                        };
-                        await Write(modelTemplate, Path.Combine(serviceClient.Name.ToPythonCase(), "models", modelType.Name.ToPythonCase() + ".py"));
-                    }
-                }
-
-                //MethodGroups
-                if (serviceClientTemplateModel.MethodGroupModels.Any())
-                {
-                    var methodGroupIndexTemplate = new MethodGroupInitTemplate
-                    {
-                        Model = serviceClientTemplateModel
-                    };
-                    await Write(methodGroupIndexTemplate, Path.Combine(serviceClient.Name.ToPythonCase(), "operations", "__init__.py"));
-
-                    foreach (var methodGroupModel in serviceClientTemplateModel.MethodGroupModels)
-                    {
-                        var methodGroupTemplate = new AzureMethodGroupTemplate
-                        {
-                            Model = methodGroupModel as AzureMethodGroupTemplateModel
-                        };
-                        await Write(methodGroupTemplate, Path.Combine(serviceClient.Name.ToPythonCase(), "operations", methodGroupModel.MethodGroupType.ToPythonCase() + ".py"));
-                    }
-                }
-
-                // Enums
-                if (serviceClient.EnumTypes.Any())
-                {
-                    var enumTemplate = new EnumTemplate
-                    {
-                        Model = new EnumTemplateModel(serviceClient.EnumTypes),
-                    };
-                    await Write(enumTemplate, Path.Combine(serviceClient.Name.ToPythonCase(), "models", "enums.py"));
-                }
-
-                // Page class
-                foreach (var pageModel in pageModels)
-                {
-                    var pageTemplate = new PageTemplate
-                    {
-                        Model = pageModel
-                    };
-                    await Write(pageTemplate, Path.Combine(serviceClient.Name.ToPythonCase(), "models", pageModel.TypeDefinitionName.ToPythonCase() + ".py"));
+                    await Write(modelTemplate, Path.Combine(serviceClient.Name.ToPythonCase(), "models", modelType.Name.ToPythonCase() + ".py"));
                 }
             }
-            catch (Exception ex)
+
+            //MethodGroups
+            if (serviceClientTemplateModel.MethodGroupModels.Any())
             {
-                Console.WriteLine(ex.Message);
-                throw;
+                var methodGroupIndexTemplate = new MethodGroupInitTemplate
+                {
+                    Model = serviceClientTemplateModel
+                };
+                await Write(methodGroupIndexTemplate, Path.Combine(serviceClient.Name.ToPythonCase(), "operations", "__init__.py"));
+
+                foreach (var methodGroupModel in serviceClientTemplateModel.MethodGroupModels)
+                {
+                    var methodGroupTemplate = new AzureMethodGroupTemplate
+                    {
+                        Model = methodGroupModel as AzureMethodGroupTemplateModel
+                    };
+                    await Write(methodGroupTemplate, Path.Combine(serviceClient.Name.ToPythonCase(), "operations", methodGroupModel.MethodGroupType.ToPythonCase() + ".py"));
+                }
+            }
+
+            // Enums
+            if (serviceClient.EnumTypes.Any())
+            {
+                var enumTemplate = new EnumTemplate
+                {
+                    Model = new EnumTemplateModel(serviceClient.EnumTypes),
+                };
+                await Write(enumTemplate, Path.Combine(serviceClient.Name.ToPythonCase(), "models", "enums.py"));
+            }
+
+            // Page class
+            foreach (var pageModel in pageModels)
+            {
+                var pageTemplate = new PageTemplate
+                {
+                    Model = pageModel
+                };
+                await Write(pageTemplate, Path.Combine(serviceClient.Name.ToPythonCase(), "models", pageModel.TypeDefinitionName.ToPythonCase() + ".py"));
             }
         }
     }

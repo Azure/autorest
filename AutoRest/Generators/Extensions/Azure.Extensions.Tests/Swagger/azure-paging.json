@@ -1,0 +1,201 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutoRest Paging Test Service",
+    "description": "Long-running Operation for AutoRest",
+    "version": "1.0.0"
+  },
+  "host": "localhost",
+  "schemes": [
+    "http"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "paths": {
+    "/paging/single": {
+      "get": {
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "itemName": "myvalues",
+          "operationName": "Paging_deleteSinglePage"
+        },
+        "operationId": "Paging_getSinglePage",
+        "description": "A paging operation that finishes on the first call without a nextlink",
+        "responses": {
+          "200": {
+            "description": "Initial response with ProvisioningState='Canceled'",
+            "schema": {
+              "$ref": "#/definitions/ProductResult"
+            }
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      },
+      "put": {
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink",
+          "operationName": "Paging_putSinglePageSpecialNext"
+        },
+        "operationId": "Paging_putSinglePage",
+        "description": "A paging operation that finishes on the first call without a nextlink",
+        "responses": {
+          "200": {
+            "description": "Initial response with ProvisioningState='Canceled'",
+            "schema": {
+              "$ref": "#/definitions/ProductResult"
+            }
+          },
+          "202": {
+            "description": "Simple return value",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      },
+      "post": {
+        "x-ms-pageable": { "nextLinkName": "nextLink" },
+        "operationId": "Paging_postSinglePage",
+        "description": "A paging operation that finishes on the first call without a nextlink",
+        "responses": {
+          "200": {
+            "description": "Initial response with ProvisioningState='Canceled'",
+            "schema": {
+              "$ref": "#/definitions/ProductResult"
+            }
+          },
+          "202": {
+            "description": "Simple return value",
+            "schema": {
+              "$ref": "#/definitions/ProductResult2"
+            }
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      },
+      "delete": {
+        "x-ms-pageable": { "nextLinkName": "nextLink" },
+        "operationId": "Paging_deleteSinglePage",
+        "description": "A paging operation that finishes on the first call without a nextlink",
+        "responses": {
+          "200": {
+            "description": "Initial response with ProvisioningState='Canceled'",
+            "schema": {
+              "$ref": "#/definitions/ProductResult"
+            }
+          },
+          "202": {
+            "description": "Simple return value",
+            "schema": {
+              "$ref": "#/definitions/ProductResult3"
+            }
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ProductResult": {
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Product"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "ProductResult2": {
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Product"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "ProductResult3": {
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProductChild"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "Product": {
+      "properties": {
+        "properties": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer"
+            },
+            "name": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "ProductChild": {
+      "AllOf": [
+        {
+          "$ref": "Product"
+        }
+      ],
+      "properties": {
+        "color": {
+          "type": "string",
+          "description": "product color"
+        }
+      }
+    },
+    "OperationResult": {
+      "properties": {
+        "status": {
+          "description": "The status of the request",
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "canceled",
+            "Accepted",
+            "Creating",
+            "Created",
+            "Updating",
+            "Updated",
+            "Deleting",
+            "Deleted",
+            "OK"
+          ]
+        }
+      }
+    }
+  }
+}

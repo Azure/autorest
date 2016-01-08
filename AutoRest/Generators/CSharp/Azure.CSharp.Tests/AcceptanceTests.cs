@@ -36,14 +36,18 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
         "AutoRest.Generator.CSharp.Tests")]
     public class AcceptanceTests : IClassFixture<ServiceController>
     {
-        private readonly TestTracingInterceptor _interceptor;
+        private static readonly TestTracingInterceptor _interceptor;
+
+        static AcceptanceTests()
+        {
+            _interceptor = new TestTracingInterceptor();
+            ServiceClientTracing.AddTracingInterceptor(_interceptor);
+        }
 
         public AcceptanceTests(ServiceController data)
         {
             this.Fixture = data;
             this.Fixture.TearDown = EnsureTestCoverage;
-            _interceptor = new TestTracingInterceptor();
-            ServiceClientTracing.AddTracingInterceptor(_interceptor);
             ServiceClientTracing.IsEnabled = false;
         }
 

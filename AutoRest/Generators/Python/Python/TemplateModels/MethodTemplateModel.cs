@@ -16,8 +16,6 @@ namespace Microsoft.Rest.Generator.Python
 {
     public class MethodTemplateModel : Method
     {
-        private readonly IScopeProvider _scopeProvider = new ScopeProvider();
-
         public MethodTemplateModel(Method source, ServiceClient serviceClient)
         {
             this.LoadFrom(source);
@@ -42,11 +40,6 @@ namespace Microsoft.Rest.Generator.Python
         public ServiceClient ServiceClient { get; set; }
 
         public List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
-
-        public IScopeProvider Scope
-        {
-            get { return _scopeProvider; }
-        }
 
         public bool IsResponseStream
         {
@@ -417,6 +410,14 @@ namespace Microsoft.Rest.Generator.Python
             else if (type is EnumType)
             {
                 result = PrimaryType.String.Name;
+            }
+            else if (type is DictionaryType)
+            {
+                result = "dict";
+            }
+            else if (type is CompositeType)
+            {
+                result = type.Name;
             }
 
             //If None is allowed

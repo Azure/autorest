@@ -29,6 +29,7 @@ import arrayClient = require('../Expected/AcceptanceTests/BodyArray/autoRestSwag
 import dictionaryClient = require('../Expected/AcceptanceTests/BodyDictionary/autoRestSwaggerBATdictionaryService');
 import dictionaryModels = require('../Expected/AcceptanceTests/BodyDictionary/models');
 import httpClient = require('../Expected/AcceptanceTests/Http/autoRestHttpInfrastructureTestService');
+import formDataClient = require('../Expected/AcceptanceTests/BodyFormData/autoRestSwaggerBATFormDataService');
 
 
 var dummyToken = 'dummy12321343423';
@@ -1588,6 +1589,34 @@ describe('nodejs', function () {
         });
       });
     });
+
+    describe('Form Data Client', function() {
+      var testClient = new formDataClient(baseUri, clientOptions);
+      it('should correctly accept file via form-data', function(done) {
+        testClient.formdata.uploadFile(fs.createReadStream(__dirname + '/sample.png'), 'sample.png', function(error, result) {
+          should.not.exist(error);
+          should.exist(result);
+          readStreamToBuffer(result, function(err, buff) {
+            should.not.exist(err);
+            assert.deepEqual(buff, fs.readFileSync(__dirname + '/sample.png'));
+            done();
+          });
+        });
+      });
+
+      it('should correctly accept file via body', function(done) {
+        testClient.formdata.uploadFileViaBody(fs.createReadStream(__dirname + '/sample.png'), 'sample.png', function(error, result) {
+          should.not.exist(error);
+          should.exist(result);
+          readStreamToBuffer(result, function(err, buff) {
+            should.not.exist(err);
+            assert.deepEqual(buff, fs.readFileSync(__dirname + '/sample.png'));
+            done();
+          });
+        });
+      });
+    });
+
     describe('Url Client', function () {
       var testClient = new urlClient('globalStringPath', baseUri, clientOptions);
       testClient.globalStringQuery = 'globalStringQuery';

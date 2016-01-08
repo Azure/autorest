@@ -1,7 +1,7 @@
 package fixtures.lro;
 
+import com.microsoft.rest.CloudException;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.lro.models.Product;
 import fixtures.lro.models.Sku;
@@ -106,7 +106,7 @@ public class LROsTests {
         try {
             ServiceResponse<Product> response = client.getLROs().put201CreatingFailed200(product);
             fail();
-        } catch (ServiceException e) {
+        } catch (CloudException e) {
             Assert.assertEquals("Async operation failed", e.getMessage());
         }
     }
@@ -118,7 +118,7 @@ public class LROsTests {
         try {
             ServiceResponse<Product> response = client.getLROs().put200Acceptedcanceled200(product);
             fail();
-        } catch (ServiceException e) {
+        } catch (CloudException e) {
             Assert.assertEquals("Async operation failed", e.getMessage());
         }
     }
@@ -157,7 +157,7 @@ public class LROsTests {
         try {
             ServiceResponse<Product> response = client.getLROs().putAsyncRetryFailed(product);
             fail();
-        } catch (ServiceException e) {
+        } catch (CloudException e) {
             Assert.assertEquals("Async operation failed", e.getMessage());
         }
     }
@@ -169,7 +169,7 @@ public class LROsTests {
         try {
             ServiceResponse<Product> response = client.getLROs().putAsyncNoRetrycanceled(product);
             fail();
-        } catch (ServiceException e) {
+        } catch (CloudException e) {
             Assert.assertEquals("Async operation failed", e.getMessage());
         }
     }
@@ -283,7 +283,7 @@ public class LROsTests {
         try {
             ServiceResponse<Void> response = client.getLROs().deleteAsyncRetryFailed();
             fail();
-        } catch (ServiceException e) {
+        } catch (CloudException e) {
             Assert.assertEquals("Async operation failed", e.getMessage());
         }
     }
@@ -293,7 +293,7 @@ public class LROsTests {
         try {
             ServiceResponse<Void> response = client.getLROs().deleteAsyncRetrycanceled();
             fail();
-        } catch (ServiceException e) {
+        } catch (CloudException e) {
             Assert.assertEquals("Async operation failed", e.getMessage());
         }
     }
@@ -344,7 +344,7 @@ public class LROsTests {
             product.setLocation("West US");
             ServiceResponse<Void> response = client.getLROs().postAsyncRetryFailed(product);
             fail();
-        } catch (ServiceException e) {
+        } catch (CloudException e) {
             Assert.assertEquals("Async operation failed", e.getMessage());
         }
     }
@@ -356,7 +356,7 @@ public class LROsTests {
             product.setLocation("West US");
             ServiceResponse<Void> response = client.getLROs().postAsyncRetrycanceled(product);
             fail();
-        } catch (ServiceException e) {
+        } catch (CloudException e) {
             Assert.assertEquals("Async operation failed", e.getMessage());
         }
     }

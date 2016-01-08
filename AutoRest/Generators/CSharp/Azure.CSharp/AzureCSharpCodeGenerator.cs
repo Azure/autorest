@@ -18,7 +18,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
     {
         private readonly AzureCSharpCodeNamer _namer;
 
-        private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.Azure.2.3.0";
+        private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.Azure.2.6.0";
 
         // page extensions class dictionary.
         private IDictionary<KeyValuePair<string, string>, string> pageClasses;
@@ -60,7 +60,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
         /// <param name="serviceClient"></param>
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
-            AzureExtensions.NormalizeAzureClientModel(serviceClient, Settings);
+            AzureExtensions.NormalizeAzureClientModel(serviceClient, Settings, _namer);
             _namer.NormalizeClientModel(serviceClient);
             _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");

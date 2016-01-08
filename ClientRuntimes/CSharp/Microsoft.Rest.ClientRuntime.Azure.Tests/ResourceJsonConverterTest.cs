@@ -8,6 +8,7 @@ using Newtonsoft.Json.Linq;
 using Xunit;
 using Microsoft.Azure;
 using Microsoft.Rest.Azure;
+using Microsoft.Azure.Management.DataLake.Analytics.Models;
 
 namespace Microsoft.Rest.ClientRuntime.Azure.Test
 {
@@ -354,7 +355,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         public void Failure()
         {
             var expected = @"{
-  ""id"": ""/subscriptions/5c7c0e6a-3d2f-4b8e-9ffd-089778451d1e/resourceGroups/csmrg6766/providers/Microsoft.Web/sites/csmr6039"",
+  ""id"": ""/subscriptions/1234564654654654654/resourceGroups/csmrg6766/providers/Microsoft.Web/sites/csmr6039"",
   ""name"": ""csmr6039"",
   ""type"": ""Microsoft.Web/sites"",
   ""location"": ""South Central US"",
@@ -366,7 +367,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
       ""csmr6039.antares-int.windows-int.net""
     ],
     ""webSpace"": ""csmrg6766-SouthCentralUSwebspace"",
-    ""selfLink"": ""https://antpreview1.api.admin-antares-int.windows-int.net:454/subscriptions/5c7c0e6a-3d2f-4b8e-9ffd-089778451d1e/webspaces/csmrg6766-SouthCentralUSwebspace/sites/csmr6039"",
+    ""selfLink"": ""https://azure.com/subscriptions/1234564654654654654/webspaces/csmrg6766-SouthCentralUSwebspace/sites/csmr6039"",
     ""repositorySiteName"": ""csmr6039"",
     ""owner"": null,
     ""usageState"": 0,
@@ -435,6 +436,67 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
 
             Assert.Equal("South Central US", deserializedResource.Location);
             Assert.Equal("csmr6039", deserializedResource.Name);
+        }
+
+        [Fact]
+        public void PolymorphismWithPage()
+        {
+            var expected = @"{
+    ""jobId"": ""12ac4036-cb63-4244-a7dd-03a087062b43"",
+    ""name"": ""azure sdk data lake analytics job"",
+    ""type"": ""USql"",
+    ""submitter"": ""admin@aad264.ccsctp.net"",
+    ""account"": null,
+    ""degreeOfParallelism"": 2,
+    ""priority"": 0,
+    ""submitTime"": ""Sat, 12 Dec 2015 00:04:50 GMT"",
+    ""startTime"": null,
+    ""endTime"": null,
+    ""state"": ""Compiling"",
+    ""result"": ""Succeeded"",
+    ""errorMessage"": ""null"",
+    ""storageAccounts"": null,
+    ""stateAuditRecords"": [
+        {
+            ""newState"": ""New"",
+            ""timeStamp"": ""Sat, 12 Dec 2015 00:04:50 GMT"",
+            ""requestedByUser"": null,
+            ""details"": ""userName:admin@aad264.ccsctp.net;submitMachine:N/A""
+        }
+    ],
+    ""properties"": {
+        ""owner"": ""admin@aad264.ccsctp.net"",
+        ""runtimeVersion"": ""default"",
+        ""rootProcessNodeId"": ""00000000-0000-0000-0000-000000000000"",
+        ""algebraFilePath"": ""adl://azure.net/system/jobservice/jobs/Usql/2015/12/12/00/04/12ac4036-cb63-4244-a7dd-03a087062b43/algebra.xml"",
+        ""compileMode"": ""Semantic"",
+        ""errorSource"": ""Unknown"",
+        ""totalCompilationTime"": ""00:00:00"",
+        ""totalPausedTime"": ""00:00:00"",
+        ""totalQueuedTime"": ""00:00:00"",
+        ""totalRunningTime"": ""00:00:00"",
+        ""type"": ""USql""
+    }
+}";
+
+            var deserializationSettings = new JsonSerializerSettings
+            {
+                DateFormatHandling = DateFormatHandling.IsoDateFormat,
+                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
+                NullValueHandling = NullValueHandling.Ignore,
+                ReferenceLoopHandling = ReferenceLoopHandling.Serialize,
+                ContractResolver = new ReadOnlyJsonContractResolver(),
+                Converters = new List<JsonConverter>
+                    {
+                        new Iso8601TimeSpanConverter()
+                    }
+            };
+            deserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<JobProperties>("type"));
+            deserializationSettings.Converters.Add(new ResourceJsonConverter());
+            deserializationSettings.Converters.Add(new CloudErrorJsonConverter());
+            var deserializedResource = JsonConvert.DeserializeObject<JobInformation>(expected, deserializationSettings);
+
+            Assert.True(deserializedResource.Properties is USql);
         }
     }
 }

@@ -295,10 +295,9 @@
         "description": "",
         "operationId": "updatePetWithForm",
         "consumes": [
-          "application/x-www-form-urlencoded"
+          "multipart/form-data"
         ],
         "produces": [
-          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -311,7 +310,14 @@
             "format": "int64"
           },
           {
-            "name": "name",
+            "name": "fileContent",
+            "description": "File to upload.",
+            "required": true,
+            "type": "file",
+            "in": "formData"
+          },
+          {
+            "name": "fileName",
             "in": "formData",
             "description": "Updated name of the pet",
             "required": false,

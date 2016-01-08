@@ -1,13 +1,12 @@
 ﻿// Copyright (c) Microsoft Open Technologies, Inc. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
-using System;
-using System.Globalization;
-using System.Linq;
 using Microsoft.Rest.Generator;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
-using System.Text.RegularExpressions;
+using System;
+using System.Globalization;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 

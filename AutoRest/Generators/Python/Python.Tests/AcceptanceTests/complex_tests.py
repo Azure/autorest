@@ -45,32 +45,32 @@ class ComplexTests(unittest.TestCase):
         client = AutoRestComplexTestService(config)
 
         # GET basic/valid
-        basic_result = client.basicOperations.get_valid()
+        basic_result = client.basic_operations.get_valid()
         self.assertEqual(2, basic_result.id)
         self.assertEqual("abc", basic_result.name);
         self.assertEqual(CMYKColors.yellow, basic_result.color);
 
         # PUT basic/valid
         basic_result = Basic(id=2, name='abc', color=CMYKColors.magenta)
-        client.basicOperations.put_valid(basic_result)
+        client.basic_operations.put_valid(basic_result)
 
         # GET basic/empty
-        basic_result = client.basicOperations.get_empty()
+        basic_result = client.basic_operations.get_empty()
         self.assertIsNone(basic_result.id)
         self.assertIsNone(basic_result.name)
 
         # GET basic/null
-        basic_result = client.basicOperations.get_null()
+        basic_result = client.basic_operations.get_null()
         self.assertIsNone(basic_result.id)
         self.assertIsNone(basic_result.name)
 
         # GET basic/notprovided
-        basic_result = client.basicOperations.get_not_provided()
+        basic_result = client.basic_operations.get_not_provided()
         self.assertIsNone(basic_result)
 
         # GET basic/invalid
         with self.assertRaises(DeserializationError):
-            client.basicOperations.get_invalid()
+            client.basic_operations.get_invalid()
 
         """
         COMPLEX TYPE WITH PRIMITIVE PROPERTIES

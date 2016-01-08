@@ -2,9 +2,9 @@ package fixtures.header;
 
 import com.microsoft.rest.DateTimeRfc1123;
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.Headers;
+import fixtures.header.models.ErrorException;
 import fixtures.header.models.GreyscaleColors;
 import org.apache.commons.codec.binary.Base64;
 import org.joda.time.DateTime;
@@ -61,7 +61,7 @@ public class HeaderOperationsTests {
     public void paramProtectedKey() throws Exception {
         try {
             client.getHeaderOperations().paramProtectedKey("text/html");
-        } catch (ServiceException ex) {
+        } catch (ErrorException ex) {
             // OkHttp can actually overwrite header "Content-Type"
         }
     }

@@ -1,6 +1,6 @@
 package fixtures.url;
 
-import com.microsoft.rest.ServiceException;
+import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -109,7 +109,7 @@ public class QueriesTests {
     public void stringNull() throws Exception {
         try {
             client.getQueries().stringNull(null);
-        } catch (ServiceException ex) {
+        } catch (ErrorException ex) {
             Assert.assertTrue(ex.getMessage().contains("Parameter stringPath is required"));
         }
     }
@@ -123,7 +123,7 @@ public class QueriesTests {
     public void enumNull() throws Exception {
         try {
             client.getQueries().enumNull(null);
-        } catch (ServiceException ex) {
+        } catch (ErrorException ex) {
             Assert.assertTrue(ex.getMessage().contains("Parameter enumPath is required"));
         }
     }
@@ -142,7 +142,7 @@ public class QueriesTests {
     public void byteNull() throws Exception {
         try {
             client.getQueries().byteNull(null);
-        } catch (ServiceException ex) {
+        } catch (ErrorException ex) {
             Assert.assertTrue(ex.getMessage().contains("Parameter bytePath is required"));
         }
     }
@@ -156,7 +156,7 @@ public class QueriesTests {
     public void dateNull() throws Exception {
         try {
             client.getQueries().dateNull(null);
-        } catch (ServiceException ex) {
+        } catch (ErrorException ex) {
             Assert.assertTrue(ex.getMessage().contains("Parameter datePath is required"));
         }
     }
@@ -170,7 +170,7 @@ public class QueriesTests {
     public void dateTimeNull() throws Exception {
         try {
             client.getQueries().dateTimeNull(null);
-        } catch (ServiceException ex) {
+        } catch (ErrorException ex) {
             Assert.assertTrue(ex.getMessage().contains("Parameter dateTimePath is required"));
         }
     }

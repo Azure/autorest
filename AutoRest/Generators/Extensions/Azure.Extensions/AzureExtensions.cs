@@ -6,11 +6,14 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
+using Microsoft.Rest.Generator.Azure.Model;
 using Microsoft.Rest.Generator.Azure.Properties;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Logging;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Microsoft.Rest.Generator.Azure
 {
@@ -22,15 +25,14 @@ namespace Microsoft.Rest.Generator.Azure
     {
         public const string LongRunningExtension = "x-ms-long-running-operation";
         public const string PageableExtension = "x-ms-pageable";
-        public const string ExternalExtension = "x-ms-external";
         public const string AzureResourceExtension = "x-ms-azure-resource";
         public const string ODataExtension = "x-ms-odata";
         public const string ClientRequestIdExtension = "x-ms-client-request-id";
+        public const string ExternalExtension = "x-ms-external";
 
         //TODO: Ideally this would be the same extension as the ClientRequestIdExtension and have it specified on the response headers,
         //TODO: But the response headers aren't currently used at all so we put an extension on the operation for now
         public const string RequestIdExtension = "x-ms-request-id";
-        public const string ParameterGroupExtension = "x-ms-parameter-grouping";
         public const string ApiVersion = "api-version";
         public const string AcceptLanguage = "accept-language";
         
@@ -59,8 +61,9 @@ namespace Microsoft.Rest.Generator.Azure
         /// </summary>
         /// <param name="serviceClient">Service client</param>
         /// <param name="settings">AutoRest settings</param>
+        /// <param name="codeNamer">AutoRest settings</param>
         /// <returns></returns>
-        public static void NormalizeAzureClientModel(ServiceClient serviceClient, Settings settings)
+        public static void NormalizeAzureClientModel(ServiceClient serviceClient, Settings settings, CodeNamer codeNamer)
         {
             if (serviceClient == null)
             {
@@ -70,17 +73,21 @@ namespace Microsoft.Rest.Generator.Azure
             {
                 throw new ArgumentNullException("settings");
             }
+            if (codeNamer == null)
+            {
+                throw new ArgumentNullException("codeNamer");
+            }
 
             settings.AddCredentials = true;
             UpdateHeadMethods(serviceClient);
             ParseODataExtension(serviceClient);
             FlattenResourceProperties(serviceClient);
             FlattenRequestPayload(serviceClient, settings);
-            AddPageableMethod(serviceClient);
             AddLongRunningOperations(serviceClient);
             AddAzureProperties(serviceClient);
             SetDefaultResponses(serviceClient);
             AddParameterGroups(serviceClient);
+            AddPageableMethod(serviceClient, codeNamer);
         }
 
         /// <summary>
@@ -219,145 +226,6 @@ namespace Microsoft.Rest.Generator.Azure
                    }
                    
                    method.Extensions.Remove(LongRunningExtension);
-                }
-            }
-        }
-
-        /// <summary>
-        /// Adds the parameter groups to operation parameters.
-        /// </summary>
-        /// <param name="serviceClient"></param>
-        public static void AddParameterGroups(ServiceClient serviceClient)
-        {
-            if (serviceClient == null)
-            {
-                throw new ArgumentNullException("serviceClient");
-            }
-
-            HashSet<CompositeType> generatedParameterGroups = new HashSet<CompositeType>();
-
-            foreach (Method method in serviceClient.Methods)
-            {
-                //This group name is normalized by each languages code generator later, so it need not happen here.
-                Dictionary<string, Dictionary<Property, Parameter>> parameterGroups = new Dictionary<string, Dictionary<Property, Parameter>>();
-                
-                foreach (Parameter parameter in method.Parameters)
-                {
-                    if (parameter.Extensions.ContainsKey(ParameterGroupExtension))
-                    {
-                        Newtonsoft.Json.Linq.JContainer extensionObject = parameter.Extensions[ParameterGroupExtension] as Newtonsoft.Json.Linq.JContainer;
-                        if (extensionObject != null)
-                        {
-                            string specifiedGroupName = extensionObject.Value<string>("name");
-                            string parameterGroupName;
-                            if (specifiedGroupName == null)
-                            {
-                                string postfix = extensionObject.Value<string>("postfix") ?? "Parameters";
-                                parameterGroupName = method.Group + "-" + method.Name + "-" + postfix;
-                            }
-                            else
-                            {
-                                parameterGroupName = specifiedGroupName;
-                            }
-
-                            if (!parameterGroups.ContainsKey(parameterGroupName))
-                            {
-                                parameterGroups.Add(parameterGroupName, new Dictionary<Property, Parameter>());
-                            }
-
-                            Property groupProperty = new Property()
-                                {
-                                    IsReadOnly = false, //Since these properties are used as parameters they are never read only
-                                    Name = parameter.Name,
-                                    IsRequired = parameter.IsRequired,
-                                    DefaultValue = parameter.DefaultValue,
-                                    //Constraints = parameter.Constraints, Omit these since we don't want to perform parameter validation
-                                    Documentation = parameter.Documentation,
-                                    Type = parameter.Type,
-                                    SerializedName = null //Parameter is never serialized directly
-                                };
-                            
-                            parameterGroups[parameterGroupName].Add(groupProperty, parameter);
-                        }
-                    }
-                }
-
-                foreach (string parameterGroupName in parameterGroups.Keys)
-                {
-                    CompositeType parameterGroupType =
-                        generatedParameterGroups.FirstOrDefault(item => item.Name == parameterGroupName);
-                    bool createdNewCompositeType = false;
-                    if (parameterGroupType == null)
-                    { 
-                        parameterGroupType = new CompositeType()
-                            {
-                                Name = parameterGroupName,
-                                Documentation = "Additional parameters for the " + method.Name + " operation."
-                            };
-                        generatedParameterGroups.Add(parameterGroupType);
-
-                        //Populate the parameter group type with properties.
-                        
-                        //Add to the service client
-                        serviceClient.ModelTypes.Add(parameterGroupType);
-                        createdNewCompositeType = true;
-                    }
-                    
-                    foreach (Property property in parameterGroups[parameterGroupName].Keys)
-                    {
-                        //Either the paramter group is "empty" since it is new, or it is "full" and we don't allow different schemas
-                        if (createdNewCompositeType)
-                        {
-                            parameterGroupType.Properties.Add(property);
-                        }
-                        else
-                        {
-                            Property matchingProperty = parameterGroupType.Properties.FirstOrDefault(
-                                item => item.Name == property.Name &&
-                                        item.IsReadOnly == property.IsReadOnly &&
-                                        item.DefaultValue == property.DefaultValue &&
-                                        item.SerializedName == property.SerializedName);
-
-                            if (matchingProperty == null)
-                            {
-                                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Property {0} was specified on group {1} but it is not on shared parameter group object {2}",
-                                    property.Name, method.Name, parameterGroupType.Name));
-                            }
-                        }
-                    }
-                    
-                    bool isGroupParameterRequired = parameterGroupType.Properties.Any(p => p.IsRequired);
-
-                    //Create the new parameter object based on the parameter group type
-                    Parameter parameterGroup = new Parameter()
-                        {
-                            Name = parameterGroupName,
-                            IsRequired = isGroupParameterRequired,
-                            Location = ParameterLocation.None,
-                            SerializedName = string.Empty,
-                            Type = parameterGroupType,
-                            Documentation = "Additional parameters for the operation"
-                        };
-                    
-                    method.Parameters.Add(parameterGroup);
-
-                    //Link the grouped parameters to their parent, and remove them from the method parameters
-                    foreach (Property property in parameterGroups[parameterGroupName].Keys)
-                    {
-                        Parameter p = parameterGroups[parameterGroupName][property];
-
-                        var parameterTransformation = new ParameterTransformation
-                        {
-                            OutputParameter = p
-                        };
-                        parameterTransformation.ParameterMappings.Add(new ParameterMapping
-                        {
-                            InputParameter = parameterGroup,
-                            InputParameterProperty = property.Name
-                        });
-                        method.InputParameterTransformation.Add(parameterTransformation);
-                        method.Parameters.Remove(p);
-                    }
                 }
             }
         }
@@ -552,8 +420,13 @@ namespace Microsoft.Rest.Generator.Azure
         /// Adds ListNext() method for each List method with x-ms-pageable extension.
         /// </summary>
         /// <param name="serviceClient"></param>
-        public static void AddPageableMethod(ServiceClient serviceClient)
+        /// <param name="codeNamer"></param>
+        public static void AddPageableMethod(ServiceClient serviceClient, CodeNamer codeNamer)
         {
+            if (codeNamer == null)
+            {
+                throw new ArgumentNullException("codeNamer");
+            }
             if (serviceClient == null)
             {
                 throw new ArgumentNullException("serviceClient");
@@ -563,34 +436,138 @@ namespace Microsoft.Rest.Generator.Azure
             {
                 if (method.Extensions.ContainsKey(PageableExtension))
                 {
-                    var newMethod = (Method) method.Clone();
-                    newMethod.Name = newMethod.Name + "Next";
-                    newMethod.Parameters.Clear();
-                    newMethod.Url = "{nextLink}";
-                    newMethod.IsAbsoluteUrl = true;
-                    var nextLinkParameter = new Parameter
+                    var pageableExtension = JsonConvert.DeserializeObject<PageableExtension>(method.Extensions[PageableExtension].ToString());
+                    if (string.IsNullOrWhiteSpace(pageableExtension.NextLinkName))
                     {
-                        Name = "nextPageLink",
-                        SerializedName = "nextLink",
-                        Type = PrimaryType.String,
-                        Documentation = "The NextLink from the previous successful call to List operation.",
-                        IsRequired = true,
-                        Location = ParameterLocation.Path
-                    };
-                    nextLinkParameter.Extensions[SkipUrlEncodingExtension] = true;
-                    newMethod.Parameters.Add(nextLinkParameter);
-
-                    // Need copy all the header parameters from List method to ListNext method
-                    foreach (var param in method.Parameters.Where(p => p.Location == ParameterLocation.Header))
-                    {
-                        newMethod.Parameters.Add((Parameter)param.Clone());
+                        continue;
                     }
 
-                    serviceClient.Methods.Add(newMethod);
+                    Method nextLinkMethod = null;
+                    if (!string.IsNullOrEmpty(pageableExtension.OperationName))
+                    {
+                        nextLinkMethod = serviceClient.Methods.FirstOrDefault(m =>
+                            pageableExtension.OperationName.Equals(m.SerializedName, StringComparison.OrdinalIgnoreCase));
+                    }
+
+                    if (nextLinkMethod == null)
+                    {
+                        nextLinkMethod = (Method)method.Clone();
+
+                        if (!string.IsNullOrEmpty(pageableExtension.OperationName))
+                        {
+                            nextLinkMethod.Name = codeNamer.GetMethodName(SwaggerModeler.GetMethodName(
+                                new Rest.Modeler.Swagger.Model.Operation { OperationId = pageableExtension.OperationName }));
+                            nextLinkMethod.Group = codeNamer.GetMethodGroupName(SwaggerModeler.GetMethodGroup(
+                                new Rest.Modeler.Swagger.Model.Operation { OperationId = pageableExtension.OperationName }));
+                        }
+                        else
+                        {
+                            nextLinkMethod.Name = nextLinkMethod.Name + "Next";
+                        }
+                        nextLinkMethod.Parameters.Clear();
+                        nextLinkMethod.Url = "{nextLink}";
+                        nextLinkMethod.IsAbsoluteUrl = true;
+                        var nextLinkParameter = new Parameter
+                        {
+                            Name = "nextPageLink",
+                            SerializedName = "nextLink",
+                            Type = PrimaryType.String,
+                            Documentation = "The NextLink from the previous successful call to List operation.",
+                            IsRequired = true,
+                            Location = ParameterLocation.Path
+                        };
+                        nextLinkParameter.Extensions[SkipUrlEncodingExtension] = true;
+                        nextLinkMethod.Parameters.Add(nextLinkParameter);
+
+                        // Need copy all the header parameters from List method to ListNext method
+                        foreach (var param in method.Parameters.Where(p => p.Location == ParameterLocation.Header))
+                        {
+                            nextLinkMethod.Parameters.Add((Parameter)param.Clone());
+                        }
+
+                        // Copy all grouped parameters that only contain header parameters
+                        method.InputParameterTransformation.GroupBy(t => t.ParameterMappings[0].InputParameter)
+                            .ForEach(grouping => {
+                                if (grouping.All(t => t.OutputParameter.Location == ParameterLocation.Header))
+                                {
+                                    // All grouped properties were header parameters, reuse data type
+                                    nextLinkMethod.Parameters.Add(grouping.Key);
+                                }
+                                else if (grouping.Any(t => t.OutputParameter.Location == ParameterLocation.Header))
+                                {
+                                    // Some grouped properties were header parameters, creating new data types
+                                    grouping.Where(t => t.OutputParameter.Location != ParameterLocation.Header)
+                                        .ForEach(t => method.InputParameterTransformation.Remove(t));
+                                    nextLinkMethod.Parameters.Add(CreateParameterFromGrouping(grouping, nextLinkMethod, serviceClient));
+                                }
+                            });
+
+                        serviceClient.Methods.Add(nextLinkMethod);
+                    }
                 }
             }
         }
 
+        private static Parameter CreateParameterFromGrouping(IGrouping<Parameter, ParameterTransformation> grouping, Method method, ServiceClient serviceClient)
+        {
+            var properties = new List<Property>();
+            string parameterGroupName = null;
+            foreach (var parameter in grouping.Select(g => g.OutputParameter))
+            {
+                Newtonsoft.Json.Linq.JContainer extensionObject = parameter.Extensions[ParameterGroupExtension] as Newtonsoft.Json.Linq.JContainer;
+                string specifiedGroupName = extensionObject.Value<string>("name");
+                if (specifiedGroupName == null)
+                {
+                    string postfix = extensionObject.Value<string>("postfix") ?? "Parameters";
+                    parameterGroupName = method.Group + "-" + method.Name + "-" + postfix;
+                }
+                else
+                {
+                    parameterGroupName = specifiedGroupName;
+                }
+
+                Property groupProperty = new Property()
+                {
+                    IsReadOnly = false, //Since these properties are used as parameters they are never read only
+                    Name = parameter.Name,
+                    IsRequired = parameter.IsRequired,
+                    DefaultValue = parameter.DefaultValue,
+                    //Constraints = parameter.Constraints, Omit these since we don't want to perform parameter validation
+                    Documentation = parameter.Documentation,
+                    Type = parameter.Type,
+                    SerializedName = null //Parameter is never serialized directly
+                };
+                properties.Add(groupProperty);
+            }
+            
+            var parameterGroupType = new CompositeType()
+            {
+                Name = parameterGroupName,
+                Documentation = "Additional parameters for the " + method.Name + " operation."
+            };
+
+            //Add to the service client
+            serviceClient.ModelTypes.Add(parameterGroupType);
+
+            foreach (Property property in properties)
+            {
+                parameterGroupType.Properties.Add(property);
+            }
+
+            bool isGroupParameterRequired = parameterGroupType.Properties.Any(p => p.IsRequired);
+
+            //Create the new parameter object based on the parameter group type
+            return new Parameter()
+            {
+                Name = parameterGroupName,
+                IsRequired = isGroupParameterRequired,
+                Location = ParameterLocation.None,
+                SerializedName = string.Empty,
+                Type = parameterGroupType,
+                Documentation = "Additional parameters for the operation"
+            };
+        }
+        
         public static string GetClientRequestIdString(Method method)
         {
             if (method == null)
@@ -603,10 +580,10 @@ namespace Microsoft.Rest.Generator.Azure
             {
                 if (parameter.Extensions.ContainsKey(ClientRequestIdExtension))
                 {
-                    Newtonsoft.Json.Linq.JContainer extensionObject = parameter.Extensions[ClientRequestIdExtension] as Newtonsoft.Json.Linq.JContainer;
+                    bool? extensionObject = parameter.Extensions[ClientRequestIdExtension] as bool?;
                     if (extensionObject != null)
                     {
-                        bool useParamAsClientRequestId = (bool)extensionObject["value"];
+                        bool useParamAsClientRequestId = extensionObject.Value;
                         if (useParamAsClientRequestId)
                         {
                             //TODO: Need to do something if they specify two ClientRequestIdExtensions for the same method...?
@@ -630,29 +607,27 @@ namespace Microsoft.Rest.Generator.Azure
             string requestIdName = "x-ms-request-id";
             if (method.Extensions.ContainsKey(RequestIdExtension))
             {
-                Newtonsoft.Json.Linq.JContainer extensionObject = method.Extensions[RequestIdExtension] as Newtonsoft.Json.Linq.JContainer;
+                string extensionObject = method.Extensions[RequestIdExtension] as string;
                 if (extensionObject != null)
                 {
-                    requestIdName = extensionObject["value"].ToString();
+                    requestIdName = extensionObject;
                 }
             }
             
             return requestIdName;
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
         private static void CheckAzureResourceProperties(CompositeType compositeType)
         {
             // If derived from resource with x-ms-azure-resource then resource should have resource specific properties
-            var extraResourceProperties = compositeType.ComposedProperties
-                                                       .Select(p => p.Name.ToUpperInvariant())
-                                                       .OrderBy(n => n)
-                                                       .Except(ResourcePropertyNames.Select(n => n.ToUpperInvariant()));
+            var missingResourceProperties = ResourcePropertyNames.Select(p => p.ToLowerInvariant())
+                                               .Except(compositeType.ComposedProperties.Select(n => n.Name.ToLowerInvariant()));
 
-            if (compositeType.Properties.Count() != ResourcePropertyNames.Count() ||
-               extraResourceProperties.Count() != 0)
+            if (missingResourceProperties.Count() != 0)
             {
                 Logger.LogWarning(Resources.ResourcePropertyMismatch,
-                    string.Join(", ", ResourcePropertyNames));
+                    string.Join(", ", missingResourceProperties));
             }
         }
     }

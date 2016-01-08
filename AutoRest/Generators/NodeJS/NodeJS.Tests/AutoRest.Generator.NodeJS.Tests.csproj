@@ -75,6 +75,10 @@
       <Link>Swagger\body-complex.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="..\..\..\TestServer\swagger\complex-model.json">
+      <Link>Swagger\complex-model.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="app.config" />
     <None Include="Expected\**\*.js">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -102,6 +106,30 @@
     <Content Include="AcceptanceTests\sample.png" />
     <Content Include="AcceptanceTests\startServer.js" />
     <Content Include="AcceptanceTests\testlist.txt" />
+    <None Include="Expected\AcceptanceTests\ComplexModelClient\complexModelClient.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Expected\AcceptanceTests\ComplexModelClient\models\catalogArray.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Expected\AcceptanceTests\ComplexModelClient\models\catalogArrayOfDictionary.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Expected\AcceptanceTests\ComplexModelClient\models\catalogDictionary.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Expected\AcceptanceTests\ComplexModelClient\models\catalogDictionaryOfArray.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Expected\AcceptanceTests\ComplexModelClient\models\errorModel.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Expected\AcceptanceTests\ComplexModelClient\models\index.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Expected\AcceptanceTests\ComplexModelClient\models\product.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Expected\AcceptanceTests\BodyComplex\autoRestComplexTestService.d.ts">
@@ -121,6 +149,12 @@
     <TypeScriptCompile Include="AcceptanceTests\headerTests.ts" />
     <TypeScriptCompile Include="AcceptanceTests\requiredOptionalTests.ts" />
     <TypeScriptCompile Include="AcceptanceTests\startServer.ts" />
+    <None Include="Expected\AcceptanceTests\ComplexModelClient\complexModelClient.d.ts">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Expected\AcceptanceTests\ComplexModelClient\models\index.d.ts">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

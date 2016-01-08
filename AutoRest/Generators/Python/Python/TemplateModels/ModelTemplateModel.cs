@@ -14,7 +14,6 @@ namespace Microsoft.Rest.Generator.Python
 {
     public class ModelTemplateModel : CompositeType
     {
-        private readonly IScopeProvider _scope = new ScopeProvider();
         private ModelTemplateModel _parent = null;
         private bool _isException = false;
         private readonly IList<CompositeType> _subModelTypes = new List<CompositeType>();
@@ -87,11 +86,6 @@ namespace Microsoft.Rest.Generator.Python
                 }
                 return true;
             }
-        }
-
-        public IScopeProvider Scope
-        {
-            get { return _scope; }
         }
 
         public ServiceClient ServiceClient { get; set; }

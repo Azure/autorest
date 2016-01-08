@@ -209,6 +209,17 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 builder.AppendLine("if ({0} !== null && {0} !== undefined && typeof {0} !== '{1}') {{", valueReference, lowercaseTypeName);
                 return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
             }
+            else if (primary == PrimaryType.Stream)
+            {
+                if (isRequired)
+                {
+                    builder.AppendLine("if ({0} === null || {0} === undefined) {{", valueReference, lowercaseTypeName);
+                    return ConstructValidationCheck(builder, requiredTypeErrorMessage, valueReference, primary.Name).ToString();
+                }
+
+                builder.AppendLine("if ({0} !== null && {0} !== undefined && typeof {0}.valueOf() !== '{1}') {{", valueReference, lowercaseTypeName);
+                return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
+            }
             else if (primary == PrimaryType.String)
             {
                 if (isRequired)
@@ -638,7 +649,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
         }
 
         private static string SerializePrimaryType(this PrimaryType primary, IScopeProvider scope, 
-            string objectReference, string valueReference, bool isRequired, Dictionary<Constraint, string> constraints)
+            string objectReference, string valueReference, bool isRequired, Dictionary<Constraint, string> constraints, bool serializeInnerTypes = false)
         {
             if (scope == null)
             {
@@ -663,7 +674,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                         objectReference, lowercaseTypeName);
                     builder = ConstructValidationCheck(builder, requiredTypeErrorMessage, objectReference, primary.Name);
                     builder = primary.AppendConstraintValidations(objectReference, constraints, builder);
-                    builder = ConstructBasePropertyCheck(builder, valueReference);
+                    if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
                     return builder.AppendLine("{0} = {1};", valueReference, objectReference).ToString();
                 }
                 builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", objectReference)
@@ -671,10 +682,21 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                          .AppendLine("if (typeof {0} !== '{1}') {{", objectReference, lowercaseTypeName);
                 builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
                 builder = primary.AppendConstraintValidations(objectReference, constraints, builder);
-                builder = ConstructBasePropertyCheck(builder, valueReference);
+                if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
                 return builder.AppendLine("{0} = {1};", valueReference, objectReference)
                             .Outdent()
                             .AppendLine("}").ToString();
+            }
+            else if (primary == PrimaryType.Stream)
+            {
+                if (isRequired)
+                {
+                    builder.AppendLine("if ({0} === null || {0} === undefined) {{", valueReference, lowercaseTypeName);
+                    return ConstructValidationCheck(builder, requiredTypeErrorMessage, valueReference, primary.Name).ToString();
+                }
+
+                builder.AppendLine("if ({0} !== null && {0} !== undefined && typeof {0}.valueOf() !== '{1}') {{", valueReference, lowercaseTypeName);
+                return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
             }
             else if (primary == PrimaryType.String)
             {
@@ -685,7 +707,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                         objectReference, lowercaseTypeName);
                     builder = ConstructValidationCheck(builder, requiredTypeErrorMessage, objectReference, primary.Name);
                     builder = primary.AppendConstraintValidations(objectReference, constraints, builder);
-                    builder = ConstructBasePropertyCheck(builder, valueReference);
+                    if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
                     return builder.AppendLine("{0} = {1};", valueReference, objectReference).ToString();
                 }
                 builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", objectReference)
@@ -693,7 +715,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                          .AppendLine("if (typeof {0}.valueOf() !== '{1}') {{", objectReference, lowercaseTypeName);
                 builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
                 builder = primary.AppendConstraintValidations(objectReference, constraints, builder);
-                builder = ConstructBasePropertyCheck(builder, valueReference);
+                if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
                 return builder.AppendLine("{0} = {1};", valueReference, objectReference)
                             .Outdent()
                             .AppendLine("}").ToString();
@@ -713,7 +735,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                          .AppendLine("if (!Buffer.isBuffer({0})) {{", objectReference);
                 builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
                 builder = primary.AppendConstraintValidations(objectReference, constraints, builder);
-                builder = ConstructBasePropertyCheck(builder, valueReference);
+                if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
                 return builder.AppendLine("{0} = {1}.toString('base64');", valueReference, objectReference)
                             .Outdent()
                             .AppendLine("}").ToString();
@@ -726,7 +748,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                         objectReference);
                     builder = ConstructValidationCheck(builder, requiredTypeErrorMessage, objectReference, primary.Name);
                     builder = primary.AppendConstraintValidations(objectReference, constraints, builder);
-                    builder = ConstructBasePropertyCheck(builder, valueReference);
+                    if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
                     return builder.AppendLine("{0} = ({1} instanceof Date) ? {1}.toISOString().substring(0,10) : {1};", 
                         valueReference, objectReference).ToString();
                 }
@@ -737,7 +759,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                          objectReference);
                 builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
                 builder = primary.AppendConstraintValidations(objectReference, constraints, builder);
-                builder = ConstructBasePropertyCheck(builder, valueReference);
+                if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
                 return builder.AppendLine("{0} = ({1} instanceof Date) ? {1}.toISOString().substring(0,10) : {1};", valueReference, objectReference)
                                 .Outdent()
                                 .AppendLine("}").ToString();
@@ -750,7 +772,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                         objectReference);
                     builder = ConstructValidationCheck(builder, requiredTypeErrorMessage, objectReference, primary.Name);
                     builder = primary.AppendConstraintValidations(objectReference, constraints, builder);
-                    builder = ConstructBasePropertyCheck(builder, valueReference);
+                    if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
                     return builder.AppendLine("{0} = ({1} instanceof Date) ? {1}.toISOString() : {1};",
                         valueReference, objectReference).ToString();
                 }
@@ -761,7 +783,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                          objectReference);
                 builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
                 builder = primary.AppendConstraintValidations(objectReference, constraints, builder);
-                builder = ConstructBasePropertyCheck(builder, valueReference);
+                if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
                 return builder.AppendLine("{0} = ({1} instanceof Date) ? {1}.toISOString() : {1};", valueReference, objectReference)
                                 .Outdent()
                                 .AppendLine("}").ToString();
@@ -774,7 +796,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                         objectReference);
                     builder = ConstructValidationCheck(builder, requiredTypeErrorMessage, objectReference, primary.Name);
                     builder = primary.AppendConstraintValidations(objectReference, constraints, builder);
-                    builder = ConstructBasePropertyCheck(builder, valueReference);
+                    if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
                     return builder.AppendLine("{0} = ({1} instanceof Date) ? {1}.toUTCString() : {1};",
                         valueReference, objectReference).ToString();
                 }
@@ -785,7 +807,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                          objectReference);
                 builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
                 builder = primary.AppendConstraintValidations(objectReference, constraints, builder);
-                builder = ConstructBasePropertyCheck(builder, valueReference);
+                if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
                 return builder.AppendLine("{0} = ({1} instanceof Date) ? {1}.toUTCString() : {1};", valueReference, objectReference)
                                 .Outdent()
                                 .AppendLine("}").ToString();
@@ -797,7 +819,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                     builder.AppendLine("if(!{0} || !moment.isDuration({0})) {{", objectReference);
                     builder = ConstructValidationCheck(builder, requiredTypeErrorMessage, objectReference, primary.Name);
                     builder = primary.AppendConstraintValidations(objectReference, constraints, builder);
-                    builder = ConstructBasePropertyCheck(builder, valueReference);
+                    if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
                     return builder.AppendLine("{0} = {1}.toISOString();", valueReference, objectReference).ToString();
                 }
 
@@ -807,7 +829,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                          objectReference);
                 builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
                 builder = primary.AppendConstraintValidations(objectReference, constraints, builder);
-                builder = ConstructBasePropertyCheck(builder, valueReference);
+                if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
                 return builder.AppendLine("{0} = {1}.toISOString();", valueReference, objectReference)
                                 .Outdent()
                                 .AppendLine("}").ToString();
@@ -835,7 +857,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
         }
 
         private static string SerializeEnumType(this EnumType enumType, IScopeProvider scope, 
-            string objectReference, string valueReference, bool isRequired, Dictionary<Constraint, string> constraints)
+            string objectReference, string valueReference, bool isRequired, Dictionary<Constraint, string> constraints, bool serializeInnerTypes = false)
         {
             if (scope == null)
             {
@@ -858,7 +880,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                         .AppendLine("throw new Error({0} + ' is not a valid value. The valid values are: ' + {1});", objectReference, allowedValues)
                     .Outdent()
                     .AppendLine("}");
-            builder = ConstructBasePropertyCheck(builder, valueReference);
+            if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
             builder.AppendLine("{0} = {1};", valueReference, objectReference);
             if (isRequired)
             {
@@ -877,7 +899,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
         }
 
         private static string SerializeCompositeType(this CompositeType composite, IScopeProvider scope, string objectReference, 
-            string valueReference, bool isRequired, Dictionary<Constraint, string> constraints, string modelReference = "client._models")
+            string valueReference, bool isRequired, Dictionary<Constraint, string> constraints, string modelReference = "client._models", bool serializeInnerTypes = false)
         {
             if (scope == null)
             {
@@ -895,7 +917,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                                     objectReference,
                                     composite.PolymorphicDiscriminator, modelReference)
                     .Indent();
-                builder = ConstructBasePropertyCheck(builder, valueReference);
+                if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
                 builder.AppendLine("{0} = {1}.serialize();", valueReference, objectReference)
                     .Outdent()
                     .AppendLine("}} else {{", valueReference)
@@ -908,7 +930,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             }
             else
             {
-                builder = ConstructBasePropertyCheck(builder, valueReference);
+                if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
                 builder.AppendLine("{0} = {1}.serialize();", valueReference, objectReference);
             }
             builder.Outdent().AppendLine("}");
@@ -925,7 +947,8 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
         }
 
         private static string SerializeSequenceType(this SequenceType sequence, IScopeProvider scope, string objectReference, 
-            string valueReference, bool isRequired, Dictionary<Constraint, string> constraints, string modelReference = "client._models")
+            string valueReference, bool isRequired, Dictionary<Constraint, string> constraints, 
+            string modelReference = "client._models", bool serializeInnerTypes = false)
         {
             if (scope == null)
             {
@@ -938,7 +961,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             var indexVar = scope.GetVariableName("i");
             var innerConstraints = new Dictionary<Constraint, string>();
             var innerSerialization = sequence.ElementType.SerializeType(scope, objectReference + "[" + indexVar + "]", valueReference + "[" + indexVar + "]", false,
-                innerConstraints, modelReference);
+                innerConstraints, modelReference, true);
             if (!string.IsNullOrEmpty(innerSerialization))
             {
                 if (isRequired)
@@ -950,6 +973,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                            .Outdent()
                            .AppendLine("}");
                     builder = sequence.AppendConstraintValidations(objectReference, constraints, builder);
+                    if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
                     builder.AppendLine("{0} = [];", valueReference)
                            .AppendLine("for (var {1} = 0; {1} < {0}.length; {1}++) {{", objectReference, indexVar)
                              .Indent()
@@ -961,6 +985,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
 
                 builder.AppendLine("if (util.isArray({0})) {{", objectReference).Indent();
                 builder = sequence.AppendConstraintValidations(objectReference, constraints, builder);
+                if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
                 builder.AppendLine("{0} = [];", valueReference)
                        .AppendLine("for (var {1} = 0; {1} < {0}.length; {1}++) {{", objectReference, indexVar)
                          .Indent()
@@ -976,7 +1001,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
         }
 
         private static string SerializeDictionaryType(this DictionaryType dictionary, IScopeProvider scope, string objectReference, string valueReference, 
-            bool isRequired, Dictionary<Constraint, string> constraints, string modelReference = "client._models")
+            bool isRequired, Dictionary<Constraint, string> constraints, string modelReference = "client._models", bool serializeInnerTypes = false)
         {
             if (scope == null)
             {
@@ -988,7 +1013,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             var valueVar = scope.GetVariableName("valueElement");
             var innerConstraints = new Dictionary<Constraint, string>();
             var innerSerialization = dictionary.ValueType.SerializeType(scope, objectReference + "[" + valueVar + "]", valueReference + "[" + valueVar + "]", false,
-                innerConstraints, modelReference);
+                innerConstraints, modelReference, true);
             if (!string.IsNullOrEmpty(innerSerialization))
             {
                 if (isRequired)
@@ -1000,6 +1025,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                            .Outdent()
                            .AppendLine("}");
                     builder = dictionary.AppendConstraintValidations(objectReference, constraints, builder);
+                    if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
                     builder.AppendLine("{0} = {{}};", valueReference)
                       .AppendLine("for(var {0} in {1}) {{", valueVar, objectReference)
                         .Indent()
@@ -1011,6 +1037,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
 
                 builder.AppendLine("if ({0} && typeof {0} === 'object') {{", objectReference).Indent();
                 builder = dictionary.AppendConstraintValidations(objectReference, constraints, builder);
+                if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
                 builder.AppendLine("{0} = {{}};", valueReference)
                        .AppendLine("for(var {0} in {1}) {{", valueVar, objectReference)
                          .Indent()
@@ -1040,9 +1067,10 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
         /// <param name="isRequired">True if the parameter or property is required.</param>
         /// <param name="constraints">Constraints specified on the type.</param>
         /// <param name="modelReference">A reference to the models</param>
+        /// <param name="serializeInnerTypes">True if we serializing valueType/elementType of Dictionary/Sequence respectively</param>
         /// <returns>The code to serialize the given type</returns>
         public static string SerializeType(this IType type, IScopeProvider scope, string objectReference, 
-            string valueReference, bool isRequired, Dictionary<Constraint, string> constraints, string modelReference = "client._models")
+            string valueReference, bool isRequired, Dictionary<Constraint, string> constraints, string modelReference = "client._models", bool serializeInnerTypes = false)
         {
             if (scope == null)
             {
@@ -1056,23 +1084,23 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             EnumType enumType = type as EnumType;
             if (primary != null)
             {
-                return primary.SerializePrimaryType(scope, objectReference, valueReference, isRequired, constraints);
+                return primary.SerializePrimaryType(scope, objectReference, valueReference, isRequired, constraints, serializeInnerTypes);
             }
             else if (enumType != null && enumType.Values.Any())
             {
-                return enumType.SerializeEnumType(scope, objectReference, valueReference, isRequired, constraints);
+                return enumType.SerializeEnumType(scope, objectReference, valueReference, isRequired, constraints, serializeInnerTypes);
             }
             else if (composite != null && composite.Properties.Any())
             {
-                return composite.SerializeCompositeType(scope, objectReference, valueReference, isRequired, constraints, modelReference);
+                return composite.SerializeCompositeType(scope, objectReference, valueReference, isRequired, constraints, modelReference, serializeInnerTypes);
             }
             else if (sequence != null)
             {
-                return sequence.SerializeSequenceType(scope, objectReference, valueReference, isRequired, constraints, modelReference);
+                return sequence.SerializeSequenceType(scope, objectReference, valueReference, isRequired, constraints, modelReference, serializeInnerTypes);
             }
             else if (dictionary != null)
             {
-                return dictionary.SerializeDictionaryType(scope, objectReference, valueReference, isRequired, constraints, modelReference);
+                return dictionary.SerializeDictionaryType(scope, objectReference, valueReference, isRequired, constraints, modelReference, serializeInnerTypes);
             }
 
             return null;

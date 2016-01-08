@@ -36,7 +36,7 @@ public enum CollectionFormat {
     /**
      * Corresponds to multiple parameter instances instead of multiple values
      * for a single instance.
-     * E.g. foo=bar&foo=baz
+     * E.g. foo=bar&amp;foo=baz
      */
     MULTI("&");
 

@@ -9,36 +9,30 @@
     @@async_request
     def @(Model.Name.ToPythonCase())(
             self, @(Model.MethodParameterDeclaration(Model.AddCustomHeader))):
-        """
 @if (!String.IsNullOrEmpty(Model.Summary))
 {
-@:        @WrapComment(string.Empty, Model.Summary)
+@:        """@WrapComment(string.Empty, Model.Summary)
+}
+else
+{
+@:        """
 }
 @if (!String.IsNullOrEmpty(Model.Description))
 {
-@EmptyLine
 @:        @WrapComment(string.Empty, Model.Description)
 }
 @EmptyLine
     @foreach(var parameter in Model.DocumentationParameters)
     {
 @:        @WrapComment(string.Empty, ":param " + parameter.Name + ": " + parameter.Documentation)
-    }
-        @WrapComment(string.Empty, ":param custom_headers: headers that will be added to the request")
-        @WrapComment(string.Empty, ":param raw: returns the direct response alongside the deserialized response")
-        @WrapComment(string.Empty, ":param callback: if provided, the call will run asynchronously and call the callback when complete.  When specified the function returns a concurrent.futures.Future")
-    @foreach (var parameter in Model.DocumentationParameters)
-    {
 @:        @WrapComment(string.Empty, ":type " + parameter.Name + ": " + MethodTemplateModel.GetDocumentationType(parameter.Type, parameter.IsRequired))
     }
-        @WrapComment(string.Empty, ":type custom_headers: dict")
-        @WrapComment(string.Empty, ":type raw: boolean")
+        @WrapComment(string.Empty, ":param dict custom_headers: headers that will be added to the request")
+        @WrapComment(string.Empty, ":param boolean raw: returns the direct response alongside the deserialized response")
+        @WrapComment(string.Empty, ":param callback: if provided, the call will run asynchronously and call the callback when complete.  When specified the function returns a concurrent.futures.Future")
         @WrapComment(string.Empty, ":type callback: Callable[[concurrent.futures.Future], None] or None")
-
         @WrapComment(string.Empty, string.Format(":rtype: {0} or ({0}, requests.response) or concurrent.futures.Future", MethodTemplateModel.GetDocumentationType(Model.ReturnType.Body)))
-
         """
-@EmptyLine
 @if (Model.IsResponseStream)
 {
 <text>
@@ -65,7 +59,7 @@
 @EmptyLine
         # Construct headers
         header_parameters = {}
-        header_parameters['Content-Type'] = '@(Model.ContentType)'
+        header_parameters['Content-Type'] = '@(Model.RequestContentType)'
         @(Model.SetDefaultHeaders)
         @(Model.BuildHeaders("header_parameters"))
 @EmptyLine

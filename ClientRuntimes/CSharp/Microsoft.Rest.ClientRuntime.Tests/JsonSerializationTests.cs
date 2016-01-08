@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Linq;
 using System.Globalization;
 using System.Net.Http;
 using Microsoft.Rest.ClientRuntime.Tests.Resources;
@@ -9,12 +10,15 @@ using Microsoft.Rest.Serialization;
 using Microsoft.Rest.TransientFaultHandling;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
 using Xunit;
 
 namespace Microsoft.Rest.ClientRuntime.Tests
 {
     public class JsonSerializationTests
     {
+        private const string JsonErrorMessage = "Inappropriate use of JsonConvert.DefaultSettings detected!";
+
         [Fact]
         public void PolymorphicSerializeWorks()
         {
@@ -261,6 +265,103 @@ namespace Microsoft.Rest.ClientRuntime.Tests
             var expectedJsonString = string.Format("{{{0}  \"h1\": \"value\",{0}  \"h2\": \"\",{0}  \"h3\": [{0}    \"value1\",{0}    \"value2\"{0}  ]{0}}}", 
                 Environment.NewLine);
             Assert.Equal(expectedJsonString, json);
+        }
+
+        [Fact]
+        public void HeaderKnownValuesGetSerializedToJson()
+        {
+            var message = new HttpResponseMessage();
+            message.Content = new StringContent("Test");
+            message.Headers.Add("h1", "value");
+            message.Headers.Add("h2", "");
+            message.Headers.Add("h3", new string[] { "value1", "value2" });
+
+            var json = message.GetHeadersAsJson().ToString();
+
+            var expectedJsonString = string.Format("{{{0}  \"h1\": \"value\",{0}  \"h2\": \"\",{0}  \"h3\": [{0}    \"value1\",{0}    \"value2\"{0}  ],{0}  \"Content-Type\": \"text/plain; charset=utf-8\"{0}}}",
+                Environment.NewLine);
+            Assert.Equal(expectedJsonString, json);
+        }
+     
+        [Fact]   
+        public void SafeSerializeIgnoresDefaultSettings()
+        {
+            TestWithBadJsonSerializerSettings(() =>
+            {
+                const string ExpectedJson = @"{""Name"":""Bob"",""Rating"":5}";
+                var model = new Model() { Name = "Bob", Rating = 5 };
+                
+                string actualJson = SafeJsonConvert.SerializeObject(model, new JsonSerializerSettings());
+
+                Assert.Equal(ExpectedJson, actualJson); 
+            });
+        }
+
+        [Fact]        
+        public void SafeDeserializeIgnoresDefaultSettings()
+        {
+            TestWithBadJsonSerializerSettings(() =>
+            {
+                const string Json = @"{""Name"":""Bob"",""Rating"":5}";
+                
+                Model model = SafeJsonConvert.DeserializeObject<Model>(Json, new JsonSerializerSettings()); 
+                
+                Assert.Equal("Bob", model.Name);
+                Assert.Equal(5, model.Rating); 
+            });
+        }
+        
+        private static void TestWithBadJsonSerializerSettings(Action callback)
+        {
+            Func<JsonSerializerSettings> oldDefault = JsonConvert.DefaultSettings;
+            JsonConvert.DefaultSettings = () =>
+                new JsonSerializerSettings() 
+                {
+                    Converters = new[] { new InvalidJsonConverter() },
+                    ContractResolver = new InvalidContractResolver()
+                };
+
+            try
+            {
+                callback();
+            }
+            finally
+            {
+                JsonConvert.DefaultSettings = oldDefault;
+            }
+        }
+
+        private class Model
+        {
+            public string Name { get; set; }
+            
+            public int Rating { get; set; }
+        }
+
+        private class InvalidContractResolver : IContractResolver
+        {
+            public JsonContract ResolveContract(Type type)
+            {
+                throw new InvalidOperationException(JsonErrorMessage);
+            }
+        }
+
+        private class InvalidJsonConverter : JsonConverter
+        {
+            public override bool CanConvert(Type objectType)
+            {
+                throw new InvalidOperationException(JsonErrorMessage);
+            }
+
+            public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+            {
+                throw new InvalidOperationException(JsonErrorMessage);
+            }
+
+            public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+            {
+                throw new InvalidOperationException(JsonErrorMessage);
+            }
         }
     }
 }

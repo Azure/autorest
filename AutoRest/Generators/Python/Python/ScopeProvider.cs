@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.Rest.Generator.Python
 {
-    public class ScopeProvider : IScopeProvider
+    public class ScopeProvider
     {
         // HashSet to track variable names that have been used in a scope.
         private readonly HashSet<string> _variables = new HashSet<string>();

@@ -120,6 +120,14 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
+        public virtual string SetupRequires
+        {
+            get
+            {
+                return "\"msrest>=0.0.1\"";
+            }
+        }
+
         public string Version { get; set; }
     }
 }

@@ -159,10 +159,10 @@ namespace Microsoft.Rest.Generator.Python
             base.NormalizeClientModel(client);
             foreach (var method in client.Methods)
             {
-                if (method.Group != null)
-                {
-                    method.Group = method.Group.ToPythonCase();
-                }
+                //if (method.Group != null)
+                //{
+                //    method.Group = method.Group.ToPythonCase();
+                //}
                 var scope = new ScopeProvider();
                 foreach (var parameter in method.Parameters)
                 {
