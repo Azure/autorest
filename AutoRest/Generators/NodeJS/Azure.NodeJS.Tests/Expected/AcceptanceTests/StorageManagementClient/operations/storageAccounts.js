@@ -1472,17 +1472,10 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
     return callback(error);
   }
   var regenerateKey;
-  try {
-    if ((keyName !== null && keyName !== undefined))
-    {
-      regenerateKey = new client.models['StorageAccountRegenerateKeyParameters']();
+  if ((keyName !== null && keyName !== undefined))
+  {
+      regenerateKey = new client._models['StorageAccountRegenerateKeyParameters']();
       regenerateKey.keyName = keyName;
-      if (regenerateKey === null || regenerateKey === undefined) {
-        throw new Error('regenerateKey cannot be null or undefined.');
-      }
-    }
-  } catch (error) {
-    return callback(error);
   }
 
   // Construct URL

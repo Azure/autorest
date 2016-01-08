@@ -745,6 +745,84 @@ namespace Microsoft.Rest.Generator.NodeJS
             var builder = new IndentedStringBuilder("  ");
             if (InputParameterTransformation.Count > 0)
             {
+                if (AreWeFlatteningParameters())
+                {
+                    return BuildFlattenParameterMappings();
+                }
+                else
+                {
+                    return BuildGroupedParameterMappings();
+                }
+            }
+            return builder.ToString();
+        }
+
+        public virtual bool AreWeFlatteningParameters()
+        {
+            bool result = true;
+            foreach(var transformation in InputParameterTransformation)
+            {
+                var compositeOutputParameter = transformation.OutputParameter.Type as CompositeType;
+                if (compositeOutputParameter == null)
+                {
+                    result = false;
+                    break;
+                }
+                else
+                {
+                    foreach (var poperty in compositeOutputParameter.ComposedProperties.Select(p => p.Name))
+                    {
+                        if (!transformation.ParameterMappings.Select(m => m.InputParameter.Name).Contains(poperty))
+                        {
+                            result = false;
+                            break;
+                        }
+                    }
+                    if (!result) break;
+                }
+            }
+
+            return result;
+        }
+
+        public virtual string BuildFlattenParameterMappings()
+        {
+            var builder = new IndentedStringBuilder();
+            foreach (var transformation in InputParameterTransformation)
+            {
+                builder.AppendLine("var {0};",
+                        transformation.OutputParameter.Name);
+
+                builder.AppendLine("if ({0})", BuildNullCheckExpression(transformation))
+                       .AppendLine("{").Indent();
+
+                if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
+                    transformation.OutputParameter.Type is CompositeType)
+                {
+                    builder.AppendLine("{0} = new client._models['{1}']();",
+                        transformation.OutputParameter.Name,
+                        transformation.OutputParameter.Type.Name);
+                }
+
+                foreach (var mapping in transformation.ParameterMappings)
+                {
+                    builder.AppendLine("{0}{1};",
+                        transformation.OutputParameter.Name,
+                        mapping);
+                }
+
+                builder.Outdent()
+                       .AppendLine("}");
+            }
+
+            return builder.ToString();
+        }
+
+        public virtual string BuildGroupedParameterMappings()
+        {
+            var builder = new IndentedStringBuilder("  ");
+            if (InputParameterTransformation.Count > 0)
+            {
                 // Declare all the output paramaters outside the try block
                 foreach (var transformation in InputParameterTransformation)
                 {
@@ -756,13 +834,14 @@ namespace Microsoft.Rest.Generator.NodeJS
                     builder.AppendLine("if ({0})", BuildNullCheckExpression(transformation))
                            .AppendLine("{").Indent();
                     var outputParameter = transformation.OutputParameter;
-
+                    bool noCompositeTypeInitialized = true;
                     if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
                         transformation.OutputParameter.Type is CompositeType)
                     {
                         builder.AppendLine("{0} = new client.models['{1}']();",
                             transformation.OutputParameter.Name,
                             transformation.OutputParameter.Type.Name);
+                        noCompositeTypeInitialized = false;
                     }
 
                     foreach (var mapping in transformation.ParameterMappings)
@@ -770,7 +849,11 @@ namespace Microsoft.Rest.Generator.NodeJS
                         builder.AppendLine("{0}{1};",
                             transformation.OutputParameter.Name,
                             mapping);
-                        builder.AppendLine(outputParameter.Type.ValidateType(Scope, outputParameter.Name, outputParameter.IsRequired));
+                        if (noCompositeTypeInitialized)
+                        {
+                            // If composite type is initialized based on the above logic then it shouuld not be validated.
+                            builder.AppendLine(outputParameter.Type.ValidateType(Scope, outputParameter.Name, outputParameter.IsRequired));
+                        }
                     }
 
                     builder.Outdent()
@@ -794,7 +877,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
 
             return string.Join(" || ",
-                transformation.ParameterMappings.Select(m => 
+                transformation.ParameterMappings.Select(m =>
                     string.Format(CultureInfo.InvariantCulture,
                     "({0} !== null && {0} !== undefined)", m.InputParameter.Name)));
         }
