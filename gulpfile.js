@@ -91,6 +91,7 @@ var defaultAzureMappings = {
   'AcceptanceTests/AzureParameterGrouping': '../../../TestServer/swagger/azure-parameter-grouping.json',
   'AcceptanceTests/ResourceFlattening': '../../../TestServer/swagger/resource-flattening.json',
   'AcceptanceTests/Head': '../../../TestServer/swagger/head.json',
+  'AcceptanceTests/HeadExceptions': '../../../TestServer/swagger/head-exceptions.json',
   'AcceptanceTests/SubscriptionIdApiVersion': '../../../TestServer/swagger/subscriptionId-apiVersion.json',
   'AcceptanceTests/AzureSpecials': '../../../TestServer/swagger/azure-special-properties.json'
 };
@@ -105,6 +106,7 @@ var nodeMappings = {
 
 var rubyAzureMappings = {
   'head':['../../../TestServer/swagger/head.json', 'HeadModule'],
+  'head_exceptions':['../../../TestServer/swagger/head-exceptions.json', 'HeadExceptionsModule'],
   'paging':['../../../TestServer/swagger/paging.json', 'PagingModule'],
   'resource_flattening':['../../../TestServer/swagger/resource-flattening.json', 'ResourceFlatteningModule'],
   'lro':['../../../TestServer/swagger/lro.json', 'LroModule'],
