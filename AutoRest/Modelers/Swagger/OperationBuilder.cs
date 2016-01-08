@@ -23,7 +23,7 @@ namespace Microsoft.Rest.Modeler.Swagger
     public class OperationBuilder
     {
         private IList<string> _effectiveProduces;
-        private IList<string> _effectiveConsumes;
+        //private IList<string> _effectiveConsumes;
         private SwaggerModeler _swaggerModeler;
         private Operation _operation;
         private const string APP_JSON_MIME = "application/json";
@@ -42,7 +42,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             this._operation = operation;
             this._swaggerModeler = swaggerModeler;
             this._effectiveProduces = operation.Produces.Any() ? operation.Produces : swaggerModeler.ServiceDefinition.Produces;
-            this._effectiveConsumes = operation.Consumes.Any() ? operation.Consumes : swaggerModeler.ServiceDefinition.Consumes;
+            //this._effectiveConsumes = operation.Consumes.Any() ? operation.Consumes : swaggerModeler.ServiceDefinition.Consumes;
         }
 
         public Method BuildMethod(HttpMethod httpMethod, string url, string methodName, string methodGroup)

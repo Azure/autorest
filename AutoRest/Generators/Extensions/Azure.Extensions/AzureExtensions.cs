@@ -114,7 +114,7 @@ namespace Microsoft.Rest.Generator.Azure
                 }
                 else
                 {
-                    Logger.LogWarning("HEAD method missing 404 status code section -- this might be unintentional");
+                    Logger.LogWarning(string.Format(Resources.HeadMethodPossibleIncorrectSpecification, method.Name));
                 }
             }
         }
