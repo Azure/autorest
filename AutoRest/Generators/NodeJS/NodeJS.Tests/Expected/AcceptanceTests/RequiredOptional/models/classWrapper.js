@@ -53,37 +53,4 @@ ClassWrapper.prototype.mapper = function () {
   };
 };
 
-/**
- * Validate the payload against the ClassWrapper schema
- *
- * @param {JSON} payload
- *
- */
-ClassWrapper.prototype.serialize = function () {
-  var payload = {};
-  if (this['value']) {
-    payload['value'] = this['value'].serialize();
-  }
-   else {  throw new Error('this[\'value\'] cannot be null or undefined.');
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to ClassWrapper schema
- *
- * @param {JSON} instance
- *
- */
-ClassWrapper.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['value']) {
-      this['value'] = new models['Product']().deserialize(instance['value']);
-    }
-  }
-
-  return this;
-};
-
 module.exports = ClassWrapper;

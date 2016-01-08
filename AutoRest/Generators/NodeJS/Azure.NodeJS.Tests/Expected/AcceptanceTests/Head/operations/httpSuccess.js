@@ -121,9 +121,9 @@ HttpSuccess.prototype.head200 = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -234,9 +234,9 @@ HttpSuccess.prototype.head204 = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -347,9 +347,9 @@ HttpSuccess.prototype.head404 = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {

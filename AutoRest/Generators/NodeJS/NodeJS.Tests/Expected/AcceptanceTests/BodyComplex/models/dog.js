@@ -67,39 +67,4 @@ Dog.prototype.mapper = function () {
   };
 };
 
-/**
- * Validate the payload against the Dog schema
- *
- * @param {JSON} payload
- *
- */
-Dog.prototype.serialize = function () {
-  var payload = Dog['super_'].prototype.serialize.call(this);
-  if (this['food'] !== null && this['food'] !== undefined) {
-    if (typeof this['food'].valueOf() !== 'string') {
-      throw new Error('this[\'food\'] must be of type string.');
-    }
-    payload['food'] = this['food'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to Dog schema
- *
- * @param {JSON} instance
- *
- */
-Dog.prototype.deserialize = function (instance) {
-  Dog['super_'].prototype.deserialize.call(this, instance);
-  if (instance) {
-    if (instance['food'] !== undefined) {
-      this['food'] = instance['food'];
-    }
-  }
-
-  return this;
-};
-
 module.exports = Dog;

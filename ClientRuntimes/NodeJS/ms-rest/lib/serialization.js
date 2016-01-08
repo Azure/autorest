@@ -205,12 +205,12 @@ function serializeCompositeType(mapper, object, objectName, client) {
       throw new Error(util.format('No discriminator field \'%s\' was found in \'%s\'.', 
         mapper.type.polymorphicDiscriminator, objectName));
     }
-    if (!client._models.discriminators[object[mapper.type.polymorphicDiscriminator]]) {
+    if (!client.models.discriminators[object[mapper.type.polymorphicDiscriminator]]) {
       throw new Error(util.format('\'%s\': \'%s\'  in \'%s\' is not a valid ' + 
         'discriminator as a corresponding model class for that value was not found.', 
         mapper.type.polymorphicDiscriminator, object[mapper.type.polymorphicDiscriminator], objectName));
     }
-    mapper = new client._models.discriminators[object[mapper.type.polymorphicDiscriminator]]().mapper();
+    mapper = new client.models.discriminators[object[mapper.type.polymorphicDiscriminator]]().mapper();
   }
 
   var payload = {};
@@ -226,7 +226,7 @@ function serializeCompositeType(mapper, object, objectName, client) {
       }
       //get the mapper if modelProperties of the CompositeType is not present and 
       //then get the modelProperties from it.
-      modelMapper = new client._models[mapper.type.className]().mapper();
+      modelMapper = new client.models[mapper.type.className]().mapper();
       if (!modelMapper) {
         throw new Error(util.format('mapper() cannot be null or undefined for model \'%s\'', 
               mapper.type.className));
@@ -431,12 +431,12 @@ function deserializeCompositeType(mapper, responseBody, objectName, client) {
       throw new Error(util.format('No discriminator field \'%s\' was found in \'%s\'.', 
         mapper.type.polymorphicDiscriminator, objectName));
     }
-    if (!client._models.discriminators[responseBody[mapper.type.polymorphicDiscriminator]]) {
+    if (!client.models.discriminators[responseBody[mapper.type.polymorphicDiscriminator]]) {
       throw new Error(util.format('\'%s\': \'%s\'  in \'%s\' is not a valid ' + 
         'discriminator as a corresponding model class for that value was not found.', 
         mapper.type.polymorphicDiscriminator, responseBody[mapper.type.polymorphicDiscriminator], objectName));
     }
-    mapper = new client._models.discriminators[responseBody[mapper.type.polymorphicDiscriminator]]().mapper();
+    mapper = new client.models.discriminators[responseBody[mapper.type.polymorphicDiscriminator]]().mapper();
   }
 
   var instance = {};
@@ -452,7 +452,7 @@ function deserializeCompositeType(mapper, responseBody, objectName, client) {
       }
       //get the mapper if modelProperties of the CompositeType is not present and 
       //then get the modelProperties from it.
-      modelMapper = new client._models[mapper.type.className]().mapper();
+      modelMapper = new client.models[mapper.type.className]().mapper();
       if (!modelMapper) {
         throw new Error(util.format('mapper() cannot be null or undefined for model \'%s\'', 
               mapper.type.className));

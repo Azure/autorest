@@ -56,49 +56,4 @@ StorageAccountKeys.prototype.mapper = function () {
   };
 };
 
-/**
- * Validate the payload against the StorageAccountKeys schema
- *
- * @param {JSON} payload
- *
- */
-StorageAccountKeys.prototype.serialize = function () {
-  var payload = {};
-  if (this['key1'] !== null && this['key1'] !== undefined) {
-    if (typeof this['key1'].valueOf() !== 'string') {
-      throw new Error('this[\'key1\'] must be of type string.');
-    }
-    payload['key1'] = this['key1'];
-  }
-
-  if (this['key2'] !== null && this['key2'] !== undefined) {
-    if (typeof this['key2'].valueOf() !== 'string') {
-      throw new Error('this[\'key2\'] must be of type string.');
-    }
-    payload['key2'] = this['key2'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to StorageAccountKeys schema
- *
- * @param {JSON} instance
- *
- */
-StorageAccountKeys.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['key1'] !== undefined) {
-      this['key1'] = instance['key1'];
-    }
-
-    if (instance['key2'] !== undefined) {
-      this['key2'] = instance['key2'];
-    }
-  }
-
-  return this;
-};
-
 module.exports = StorageAccountKeys;

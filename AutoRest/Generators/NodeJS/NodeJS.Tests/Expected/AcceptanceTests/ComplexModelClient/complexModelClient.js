@@ -59,7 +59,7 @@ function ComplexModelClient(subscriptionId, apiVersion, baseUri, options) {
   this.subscriptionId = subscriptionId;
   this.apiVersion = apiVersion;
 
-  this._models = models;
+  this.models = models;
 }
 
 util.inherits(ComplexModelClient, ServiceClient);
@@ -165,9 +165,9 @@ ComplexModelClient.prototype.list = function (resourceGroupName, options, callba
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -187,7 +187,7 @@ ComplexModelClient.prototype.list = function (resourceGroupName, options, callba
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['CatalogArray']().mapper();
+          var resultMapper = new client.models['CatalogArray']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -262,7 +262,7 @@ ComplexModelClient.prototype.create = function (subscriptionId, resourceGroupNam
   try {
     if ((productDictionaryOfArray !== null && productDictionaryOfArray !== undefined))
     {
-      bodyParameter = new client._models['CatalogDictionaryOfArray']();
+      bodyParameter = new client.models['CatalogDictionaryOfArray']();
       bodyParameter.productDictionaryOfArray = productDictionaryOfArray;
       if (bodyParameter === null || bodyParameter === undefined) {
         throw new Error('bodyParameter cannot be null or undefined.');
@@ -301,7 +301,7 @@ ComplexModelClient.prototype.create = function (subscriptionId, resourceGroupNam
   var requestModel = null;
   try {
     if (bodyParameter !== null && bodyParameter !== undefined) {
-      var requestModelMapper = new client._models['CatalogDictionaryOfArray']().mapper();
+      var requestModelMapper = new client.models['CatalogDictionaryOfArray']().mapper();
       requestModel = msRest.serialize(requestModelMapper, bodyParameter, 'bodyParameter', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -337,9 +337,9 @@ ComplexModelClient.prototype.create = function (subscriptionId, resourceGroupNam
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -359,7 +359,7 @@ ComplexModelClient.prototype.create = function (subscriptionId, resourceGroupNam
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['CatalogDictionary']().mapper();
+          var resultMapper = new client.models['CatalogDictionary']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -434,7 +434,7 @@ ComplexModelClient.prototype.update = function (subscriptionId, resourceGroupNam
   try {
     if ((productArrayOfDictionary !== null && productArrayOfDictionary !== undefined))
     {
-      bodyParameter = new client._models['CatalogArrayOfDictionary']();
+      bodyParameter = new client.models['CatalogArrayOfDictionary']();
       bodyParameter.productArrayOfDictionary = productArrayOfDictionary;
       if (bodyParameter === null || bodyParameter === undefined) {
         throw new Error('bodyParameter cannot be null or undefined.');
@@ -473,7 +473,7 @@ ComplexModelClient.prototype.update = function (subscriptionId, resourceGroupNam
   var requestModel = null;
   try {
     if (bodyParameter !== null && bodyParameter !== undefined) {
-      var requestModelMapper = new client._models['CatalogArrayOfDictionary']().mapper();
+      var requestModelMapper = new client.models['CatalogArrayOfDictionary']().mapper();
       requestModel = msRest.serialize(requestModelMapper, bodyParameter, 'bodyParameter', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -509,9 +509,9 @@ ComplexModelClient.prototype.update = function (subscriptionId, resourceGroupNam
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -531,7 +531,7 @@ ComplexModelClient.prototype.update = function (subscriptionId, resourceGroupNam
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['CatalogArray']().mapper();
+          var resultMapper = new client.models['CatalogArray']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {

@@ -46,41 +46,4 @@ ByteWrapper.prototype.mapper = function () {
   };
 };
 
-/**
- * Validate the payload against the ByteWrapper schema
- *
- * @param {JSON} payload
- *
- */
-ByteWrapper.prototype.serialize = function () {
-  var payload = {};
-  if (this['field']) {
-    if (!Buffer.isBuffer(this['field'])) {
-      throw new Error('this[\'field\'] must be of type buffer.');
-    }
-    payload['field'] = this['field'].toString('base64');
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to ByteWrapper schema
- *
- * @param {JSON} instance
- *
- */
-ByteWrapper.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['field']) {
-      this['field'] = new Buffer(instance['field'], 'base64');
-    }
-    else if (instance['field'] !== undefined) {
-      this['field'] = instance['field'];
-    }
-  }
-
-  return this;
-};
-
 module.exports = ByteWrapper;

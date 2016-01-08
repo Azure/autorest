@@ -16,9 +16,9 @@
 
 var util = require('util');
 var msRest = require('ms-rest');
+var WebResource = msRest.WebResource;
 var msRestAzure = require('ms-rest-azure');
 var ServiceClient = msRestAzure.AzureServiceClient;
-var WebResource = msRest.WebResource;
 
 var models = require('./models');
 
@@ -57,7 +57,7 @@ function AutoRestReportServiceForAzure(credentials, baseUri, options) {
   if(!this.acceptLanguage) {
     this.acceptLanguage = 'en-US';
   }
-  this._models = models;
+  this.models = models;
 }
 
 util.inherits(AutoRestReportServiceForAzure, ServiceClient);
@@ -154,9 +154,9 @@ AutoRestReportServiceForAzure.prototype.getReport = function (options, callback)
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {

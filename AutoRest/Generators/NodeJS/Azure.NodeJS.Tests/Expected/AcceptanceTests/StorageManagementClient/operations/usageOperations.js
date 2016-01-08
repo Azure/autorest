@@ -131,9 +131,9 @@ UsageOperations.prototype.list = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -153,7 +153,7 @@ UsageOperations.prototype.list = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['UsageListResult']().mapper();
+          var resultMapper = new client.models['UsageListResult']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {

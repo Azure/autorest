@@ -15,10 +15,8 @@
 'use strict';
 
 var util = require('util');
-var msRest = require('ms-rest');
 var msRestAzure = require('ms-rest-azure');
 var ServiceClient = msRestAzure.AzureServiceClient;
-var WebResource = msRest.WebResource;
 
 var models = require('./models');
 var operations = require('./operations');
@@ -62,7 +60,7 @@ function AutoRestLongRunningOperationTestService(credentials, baseUri, options) 
   this.lRORetrys = new operations.LRORetrys(this);
   this.lROSADs = new operations.LROSADs(this);
   this.lROsCustomHeader = new operations.LROsCustomHeader(this);
-  this._models = models;
+  this.models = models;
 }
 
 util.inherits(AutoRestLongRunningOperationTestService, ServiceClient);

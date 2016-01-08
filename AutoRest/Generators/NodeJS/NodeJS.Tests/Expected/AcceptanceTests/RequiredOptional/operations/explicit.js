@@ -138,9 +138,9 @@ Explicit.prototype.postRequiredIntegerParameter = function (bodyParameter, optio
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -158,7 +158,7 @@ Explicit.prototype.postRequiredIntegerParameter = function (bodyParameter, optio
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
-        var resultMapper = new client._models['ErrorModel']().mapper();
+        var resultMapper = new client.models['ErrorModel']().mapper();
         result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
       }
     } catch (error) {
@@ -281,9 +281,9 @@ Explicit.prototype.postOptionalIntegerParameter = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -347,7 +347,7 @@ Explicit.prototype.postRequiredIntegerProperty = function (value, options, callb
   try {
     if ((value !== null && value !== undefined))
     {
-      bodyParameter = new client._models['IntWrapper']();
+      bodyParameter = new client.models['IntWrapper']();
       bodyParameter.value = value;
       if (bodyParameter === null || bodyParameter === undefined) {
         throw new Error('bodyParameter cannot be null or undefined.');
@@ -383,7 +383,7 @@ Explicit.prototype.postRequiredIntegerProperty = function (value, options, callb
   var requestModel = null;
   try {
     if (bodyParameter !== null && bodyParameter !== undefined) {
-      var requestModelMapper = new client._models['IntWrapper']().mapper();
+      var requestModelMapper = new client.models['IntWrapper']().mapper();
       requestModel = msRest.serialize(requestModelMapper, bodyParameter, 'bodyParameter', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -419,9 +419,9 @@ Explicit.prototype.postRequiredIntegerProperty = function (value, options, callb
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -439,7 +439,7 @@ Explicit.prototype.postRequiredIntegerProperty = function (value, options, callb
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
-        var resultMapper = new client._models['ErrorModel']().mapper();
+        var resultMapper = new client.models['ErrorModel']().mapper();
         result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
       }
     } catch (error) {
@@ -498,7 +498,7 @@ Explicit.prototype.postOptionalIntegerProperty = function (options, callback) {
   try {
     if ((value !== null && value !== undefined))
     {
-      bodyParameter = new client._models['IntOptionalWrapper']();
+      bodyParameter = new client.models['IntOptionalWrapper']();
       bodyParameter.value = value;
     }
   } catch (error) {
@@ -531,7 +531,7 @@ Explicit.prototype.postOptionalIntegerProperty = function (options, callback) {
   var requestModel = null;
   try {
     if (bodyParameter !== null && bodyParameter !== undefined) {
-      var requestModelMapper = new client._models['IntOptionalWrapper']().mapper();
+      var requestModelMapper = new client.models['IntOptionalWrapper']().mapper();
       requestModel = msRest.serialize(requestModelMapper, bodyParameter, 'bodyParameter', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -567,9 +567,9 @@ Explicit.prototype.postOptionalIntegerProperty = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -678,9 +678,9 @@ Explicit.prototype.postRequiredIntegerHeader = function (headerParameter, option
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -698,7 +698,7 @@ Explicit.prototype.postRequiredIntegerHeader = function (headerParameter, option
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
-        var resultMapper = new client._models['ErrorModel']().mapper();
+        var resultMapper = new client.models['ErrorModel']().mapper();
         result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
       }
     } catch (error) {
@@ -803,9 +803,9 @@ Explicit.prototype.postOptionalIntegerHeader = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -933,9 +933,9 @@ Explicit.prototype.postRequiredStringParameter = function (bodyParameter, option
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -953,7 +953,7 @@ Explicit.prototype.postRequiredStringParameter = function (bodyParameter, option
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
-        var resultMapper = new client._models['ErrorModel']().mapper();
+        var resultMapper = new client.models['ErrorModel']().mapper();
         result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
       }
     } catch (error) {
@@ -1076,9 +1076,9 @@ Explicit.prototype.postOptionalStringParameter = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -1142,7 +1142,7 @@ Explicit.prototype.postRequiredStringProperty = function (value, options, callba
   try {
     if ((value !== null && value !== undefined))
     {
-      bodyParameter = new client._models['StringWrapper']();
+      bodyParameter = new client.models['StringWrapper']();
       bodyParameter.value = value;
       if (bodyParameter === null || bodyParameter === undefined) {
         throw new Error('bodyParameter cannot be null or undefined.');
@@ -1178,7 +1178,7 @@ Explicit.prototype.postRequiredStringProperty = function (value, options, callba
   var requestModel = null;
   try {
     if (bodyParameter !== null && bodyParameter !== undefined) {
-      var requestModelMapper = new client._models['StringWrapper']().mapper();
+      var requestModelMapper = new client.models['StringWrapper']().mapper();
       requestModel = msRest.serialize(requestModelMapper, bodyParameter, 'bodyParameter', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -1214,9 +1214,9 @@ Explicit.prototype.postRequiredStringProperty = function (value, options, callba
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -1234,7 +1234,7 @@ Explicit.prototype.postRequiredStringProperty = function (value, options, callba
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
-        var resultMapper = new client._models['ErrorModel']().mapper();
+        var resultMapper = new client.models['ErrorModel']().mapper();
         result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
       }
     } catch (error) {
@@ -1293,7 +1293,7 @@ Explicit.prototype.postOptionalStringProperty = function (options, callback) {
   try {
     if ((value !== null && value !== undefined))
     {
-      bodyParameter = new client._models['StringOptionalWrapper']();
+      bodyParameter = new client.models['StringOptionalWrapper']();
       bodyParameter.value = value;
     }
   } catch (error) {
@@ -1326,7 +1326,7 @@ Explicit.prototype.postOptionalStringProperty = function (options, callback) {
   var requestModel = null;
   try {
     if (bodyParameter !== null && bodyParameter !== undefined) {
-      var requestModelMapper = new client._models['StringOptionalWrapper']().mapper();
+      var requestModelMapper = new client.models['StringOptionalWrapper']().mapper();
       requestModel = msRest.serialize(requestModelMapper, bodyParameter, 'bodyParameter', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -1362,9 +1362,9 @@ Explicit.prototype.postOptionalStringProperty = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -1473,9 +1473,9 @@ Explicit.prototype.postRequiredStringHeader = function (headerParameter, options
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -1493,7 +1493,7 @@ Explicit.prototype.postRequiredStringHeader = function (headerParameter, options
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
-        var resultMapper = new client._models['ErrorModel']().mapper();
+        var resultMapper = new client.models['ErrorModel']().mapper();
         result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
       }
     } catch (error) {
@@ -1598,9 +1598,9 @@ Explicit.prototype.postOptionalStringHeader = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -1690,7 +1690,7 @@ Explicit.prototype.postRequiredClassParameter = function (bodyParameter, options
   var requestModel = null;
   try {
     if (bodyParameter !== null && bodyParameter !== undefined) {
-      var requestModelMapper = new client._models['Product']().mapper();
+      var requestModelMapper = new client.models['Product']().mapper();
       requestModel = msRest.serialize(requestModelMapper, bodyParameter, 'bodyParameter', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -1726,9 +1726,9 @@ Explicit.prototype.postRequiredClassParameter = function (bodyParameter, options
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -1746,7 +1746,7 @@ Explicit.prototype.postRequiredClassParameter = function (bodyParameter, options
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
-        var resultMapper = new client._models['ErrorModel']().mapper();
+        var resultMapper = new client.models['ErrorModel']().mapper();
         result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
       }
     } catch (error) {
@@ -1823,7 +1823,7 @@ Explicit.prototype.postOptionalClassParameter = function (options, callback) {
   var requestModel = null;
   try {
     if (bodyParameter !== null && bodyParameter !== undefined) {
-      var requestModelMapper = new client._models['Product']().mapper();
+      var requestModelMapper = new client.models['Product']().mapper();
       requestModel = msRest.serialize(requestModelMapper, bodyParameter, 'bodyParameter', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -1859,9 +1859,9 @@ Explicit.prototype.postOptionalClassParameter = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -1929,7 +1929,7 @@ Explicit.prototype.postRequiredClassProperty = function (value, options, callbac
   try {
     if ((value !== null && value !== undefined))
     {
-      bodyParameter = new client._models['ClassWrapper']();
+      bodyParameter = new client.models['ClassWrapper']();
       bodyParameter.value = value;
       if (bodyParameter === null || bodyParameter === undefined) {
         throw new Error('bodyParameter cannot be null or undefined.');
@@ -1965,7 +1965,7 @@ Explicit.prototype.postRequiredClassProperty = function (value, options, callbac
   var requestModel = null;
   try {
     if (bodyParameter !== null && bodyParameter !== undefined) {
-      var requestModelMapper = new client._models['ClassWrapper']().mapper();
+      var requestModelMapper = new client.models['ClassWrapper']().mapper();
       requestModel = msRest.serialize(requestModelMapper, bodyParameter, 'bodyParameter', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -2001,9 +2001,9 @@ Explicit.prototype.postRequiredClassProperty = function (value, options, callbac
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -2021,7 +2021,7 @@ Explicit.prototype.postRequiredClassProperty = function (value, options, callbac
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
-        var resultMapper = new client._models['ErrorModel']().mapper();
+        var resultMapper = new client.models['ErrorModel']().mapper();
         result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
       }
     } catch (error) {
@@ -2076,7 +2076,7 @@ Explicit.prototype.postOptionalClassProperty = function (options, callback) {
   try {
     if ((value !== null && value !== undefined))
     {
-      bodyParameter = new client._models['ClassOptionalWrapper']();
+      bodyParameter = new client.models['ClassOptionalWrapper']();
       bodyParameter.value = value;
     }
   } catch (error) {
@@ -2109,7 +2109,7 @@ Explicit.prototype.postOptionalClassProperty = function (options, callback) {
   var requestModel = null;
   try {
     if (bodyParameter !== null && bodyParameter !== undefined) {
-      var requestModelMapper = new client._models['ClassOptionalWrapper']().mapper();
+      var requestModelMapper = new client.models['ClassOptionalWrapper']().mapper();
       requestModel = msRest.serialize(requestModelMapper, bodyParameter, 'bodyParameter', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -2145,9 +2145,9 @@ Explicit.prototype.postOptionalClassProperty = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -2287,9 +2287,9 @@ Explicit.prototype.postRequiredArrayParameter = function (bodyParameter, options
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -2307,7 +2307,7 @@ Explicit.prototype.postRequiredArrayParameter = function (bodyParameter, options
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
-        var resultMapper = new client._models['ErrorModel']().mapper();
+        var resultMapper = new client.models['ErrorModel']().mapper();
         result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
       }
     } catch (error) {
@@ -2441,9 +2441,9 @@ Explicit.prototype.postOptionalArrayParameter = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -2512,7 +2512,7 @@ Explicit.prototype.postRequiredArrayProperty = function (value, options, callbac
   try {
     if ((value !== null && value !== undefined))
     {
-      bodyParameter = new client._models['ArrayWrapper']();
+      bodyParameter = new client.models['ArrayWrapper']();
       bodyParameter.value = value;
       if (bodyParameter === null || bodyParameter === undefined) {
         throw new Error('bodyParameter cannot be null or undefined.');
@@ -2548,7 +2548,7 @@ Explicit.prototype.postRequiredArrayProperty = function (value, options, callbac
   var requestModel = null;
   try {
     if (bodyParameter !== null && bodyParameter !== undefined) {
-      var requestModelMapper = new client._models['ArrayWrapper']().mapper();
+      var requestModelMapper = new client.models['ArrayWrapper']().mapper();
       requestModel = msRest.serialize(requestModelMapper, bodyParameter, 'bodyParameter', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -2584,9 +2584,9 @@ Explicit.prototype.postRequiredArrayProperty = function (value, options, callbac
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -2604,7 +2604,7 @@ Explicit.prototype.postRequiredArrayProperty = function (value, options, callbac
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
-        var resultMapper = new client._models['ErrorModel']().mapper();
+        var resultMapper = new client.models['ErrorModel']().mapper();
         result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
       }
     } catch (error) {
@@ -2667,7 +2667,7 @@ Explicit.prototype.postOptionalArrayProperty = function (options, callback) {
   try {
     if ((value !== null && value !== undefined))
     {
-      bodyParameter = new client._models['ArrayOptionalWrapper']();
+      bodyParameter = new client.models['ArrayOptionalWrapper']();
       bodyParameter.value = value;
     }
   } catch (error) {
@@ -2700,7 +2700,7 @@ Explicit.prototype.postOptionalArrayProperty = function (options, callback) {
   var requestModel = null;
   try {
     if (bodyParameter !== null && bodyParameter !== undefined) {
-      var requestModelMapper = new client._models['ArrayOptionalWrapper']().mapper();
+      var requestModelMapper = new client.models['ArrayOptionalWrapper']().mapper();
       requestModel = msRest.serialize(requestModelMapper, bodyParameter, 'bodyParameter', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -2736,9 +2736,9 @@ Explicit.prototype.postOptionalArrayProperty = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -2852,9 +2852,9 @@ Explicit.prototype.postRequiredArrayHeader = function (headerParameter, options,
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -2872,7 +2872,7 @@ Explicit.prototype.postRequiredArrayHeader = function (headerParameter, options,
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
-        var resultMapper = new client._models['ErrorModel']().mapper();
+        var resultMapper = new client.models['ErrorModel']().mapper();
         result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
       }
     } catch (error) {
@@ -2981,9 +2981,9 @@ Explicit.prototype.postOptionalArrayHeader = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {

@@ -15,10 +15,8 @@
 'use strict';
 
 var util = require('util');
-var msRest = require('ms-rest');
 var msRestAzure = require('ms-rest-azure');
 var ServiceClient = msRestAzure.AzureServiceClient;
-var WebResource = msRest.WebResource;
 
 var models = require('./models');
 var operations = require('./operations');
@@ -68,7 +66,7 @@ function MicrosoftAzureTestUrl(credentials, subscriptionId, baseUri, options) {
     this.acceptLanguage = 'en-US';
   }
   this.group = new operations.Group(this);
-  this._models = models;
+  this.models = models;
 }
 
 util.inherits(MicrosoftAzureTestUrl, ServiceClient);

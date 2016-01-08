@@ -55,49 +55,4 @@ SampleResourceGroup.prototype.mapper = function () {
   };
 };
 
-/**
- * Validate the payload against the SampleResourceGroup schema
- *
- * @param {JSON} payload
- *
- */
-SampleResourceGroup.prototype.serialize = function () {
-  var payload = {};
-  if (this['name'] !== null && this['name'] !== undefined) {
-    if (typeof this['name'].valueOf() !== 'string') {
-      throw new Error('this[\'name\'] must be of type string.');
-    }
-    payload['name'] = this['name'];
-  }
-
-  if (this['location'] !== null && this['location'] !== undefined) {
-    if (typeof this['location'].valueOf() !== 'string') {
-      throw new Error('this[\'location\'] must be of type string.');
-    }
-    payload['location'] = this['location'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to SampleResourceGroup schema
- *
- * @param {JSON} instance
- *
- */
-SampleResourceGroup.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['name'] !== undefined) {
-      this['name'] = instance['name'];
-    }
-
-    if (instance['location'] !== undefined) {
-      this['location'] = instance['location'];
-    }
-  }
-
-  return this;
-};
-
 module.exports = SampleResourceGroup;

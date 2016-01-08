@@ -63,35 +63,4 @@ Foo.prototype.mapper = function () {
   };
 };
 
-/**
- * Validate the payload against the Foo schema
- *
- * @param {JSON} payload
- *
- */
-Foo.prototype.serialize = function () {
-  var payload = {};
-  if (this['barPoint']) {
-    payload['BarPoint'] = this['barPoint'].serialize();
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to Foo schema
- *
- * @param {JSON} instance
- *
- */
-Foo.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['BarPoint']) {
-      this['barPoint'] = new models['Bar']().deserialize(instance['BarPoint']);
-    }
-  }
-
-  return this;
-};
-
 module.exports = Foo;

@@ -60,49 +60,4 @@ CustomDomain.prototype.mapper = function () {
   };
 };
 
-/**
- * Validate the payload against the CustomDomain schema
- *
- * @param {JSON} payload
- *
- */
-CustomDomain.prototype.serialize = function () {
-  var payload = {};
-  if (this['name'] !== null && this['name'] !== undefined) {
-    if (typeof this['name'].valueOf() !== 'string') {
-      throw new Error('this[\'name\'] must be of type string.');
-    }
-    payload['name'] = this['name'];
-  }
-
-  if (this['useSubDomain'] !== null && this['useSubDomain'] !== undefined) {
-    if (typeof this['useSubDomain'] !== 'boolean') {
-      throw new Error('this[\'useSubDomain\'] must be of type boolean.');
-    }
-    payload['useSubDomain'] = this['useSubDomain'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to CustomDomain schema
- *
- * @param {JSON} instance
- *
- */
-CustomDomain.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['name'] !== undefined) {
-      this['name'] = instance['name'];
-    }
-
-    if (instance['useSubDomain'] !== undefined) {
-      this['useSubDomain'] = instance['useSubDomain'];
-    }
-  }
-
-  return this;
-};
-
 module.exports = CustomDomain;

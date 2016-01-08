@@ -105,9 +105,9 @@ Polymorphism.prototype.getValid = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -127,7 +127,7 @@ Polymorphism.prototype.getValid = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['Fish']().mapper();
+          var resultMapper = new client.models['Fish']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -249,7 +249,7 @@ Polymorphism.prototype.putValid = function (complexBody, options, callback) {
   var requestModel = null;
   try {
     if (complexBody !== null && complexBody !== undefined) {
-      var requestModelMapper = new client._models['Fish']().mapper();
+      var requestModelMapper = new client.models['Fish']().mapper();
       requestModel = msRest.serialize(requestModelMapper, complexBody, 'complexBody', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -285,9 +285,9 @@ Polymorphism.prototype.putValid = function (complexBody, options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -406,7 +406,7 @@ Polymorphism.prototype.putValidMissingRequired = function (complexBody, options,
   var requestModel = null;
   try {
     if (complexBody !== null && complexBody !== undefined) {
-      var requestModelMapper = new client._models['Fish']().mapper();
+      var requestModelMapper = new client.models['Fish']().mapper();
       requestModel = msRest.serialize(requestModelMapper, complexBody, 'complexBody', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -442,9 +442,9 @@ Polymorphism.prototype.putValidMissingRequired = function (complexBody, options,
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {

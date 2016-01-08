@@ -53,35 +53,4 @@ Product.prototype.mapper = function () {
   };
 };
 
-/**
- * Validate the payload against the Product schema
- *
- * @param {JSON} payload
- *
- */
-Product.prototype.serialize = function () {
-  var payload = {};
-  if (this['properties']) {
-    payload['properties'] = this['properties'].serialize();
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to Product schema
- *
- * @param {JSON} instance
- *
- */
-Product.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['properties']) {
-      this['properties'] = new models['ProductProperties']().deserialize(instance['properties']);
-    }
-  }
-
-  return this;
-};
-
 module.exports = Product;

@@ -17,7 +17,6 @@
 var util = require('util');
 var msRest = require('ms-rest');
 var ServiceClient = msRest.ServiceClient;
-var WebResource = msRest.WebResource;
 
 var models = require('./models');
 var operations = require('./operations');
@@ -49,7 +48,7 @@ function AutoRestIntegerTestService(baseUri, options) {
   }
 
   this.intModel = new operations.IntModel(this);
-  this._models = models;
+  this.models = models;
 }
 
 util.inherits(AutoRestIntegerTestService, ServiceClient);

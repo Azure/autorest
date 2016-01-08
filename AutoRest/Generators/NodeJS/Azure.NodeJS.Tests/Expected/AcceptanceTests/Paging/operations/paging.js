@@ -122,9 +122,9 @@ Paging.prototype.getSinglePages = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -144,7 +144,7 @@ Paging.prototype.getSinglePages = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['ProductResult']().mapper();
+          var resultMapper = new client.models['ProductResult']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -298,9 +298,9 @@ Paging.prototype.getMultiplePages = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -320,7 +320,7 @@ Paging.prototype.getMultiplePages = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['ProductResult']().mapper();
+          var resultMapper = new client.models['ProductResult']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -429,9 +429,9 @@ Paging.prototype.getMultiplePagesRetryFirst = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -451,7 +451,7 @@ Paging.prototype.getMultiplePagesRetryFirst = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['ProductResult']().mapper();
+          var resultMapper = new client.models['ProductResult']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -561,9 +561,9 @@ Paging.prototype.getMultiplePagesRetrySecond = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -583,7 +583,7 @@ Paging.prototype.getMultiplePagesRetrySecond = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['ProductResult']().mapper();
+          var resultMapper = new client.models['ProductResult']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -691,9 +691,9 @@ Paging.prototype.getSinglePagesFailure = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -713,7 +713,7 @@ Paging.prototype.getSinglePagesFailure = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['ProductResult']().mapper();
+          var resultMapper = new client.models['ProductResult']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -821,9 +821,9 @@ Paging.prototype.getMultiplePagesFailure = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -843,7 +843,7 @@ Paging.prototype.getMultiplePagesFailure = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['ProductResult']().mapper();
+          var resultMapper = new client.models['ProductResult']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -951,9 +951,9 @@ Paging.prototype.getMultiplePagesFailureUri = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -973,7 +973,7 @@ Paging.prototype.getMultiplePagesFailureUri = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['ProductResult']().mapper();
+          var resultMapper = new client.models['ProductResult']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -1083,9 +1083,9 @@ Paging.prototype.getSinglePagesNext = function (nextPageLink, options, callback)
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -1105,7 +1105,7 @@ Paging.prototype.getSinglePagesNext = function (nextPageLink, options, callback)
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['ProductResult']().mapper();
+          var resultMapper = new client.models['ProductResult']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -1261,9 +1261,9 @@ Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callbac
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -1283,7 +1283,7 @@ Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callbac
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['ProductResult']().mapper();
+          var resultMapper = new client.models['ProductResult']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -1394,9 +1394,9 @@ Paging.prototype.getMultiplePagesRetryFirstNext = function (nextPageLink, option
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -1416,7 +1416,7 @@ Paging.prototype.getMultiplePagesRetryFirstNext = function (nextPageLink, option
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['ProductResult']().mapper();
+          var resultMapper = new client.models['ProductResult']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -1528,9 +1528,9 @@ Paging.prototype.getMultiplePagesRetrySecondNext = function (nextPageLink, optio
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -1550,7 +1550,7 @@ Paging.prototype.getMultiplePagesRetrySecondNext = function (nextPageLink, optio
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['ProductResult']().mapper();
+          var resultMapper = new client.models['ProductResult']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -1660,9 +1660,9 @@ Paging.prototype.getSinglePagesFailureNext = function (nextPageLink, options, ca
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -1682,7 +1682,7 @@ Paging.prototype.getSinglePagesFailureNext = function (nextPageLink, options, ca
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['ProductResult']().mapper();
+          var resultMapper = new client.models['ProductResult']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -1792,9 +1792,9 @@ Paging.prototype.getMultiplePagesFailureNext = function (nextPageLink, options, 
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -1814,7 +1814,7 @@ Paging.prototype.getMultiplePagesFailureNext = function (nextPageLink, options, 
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['ProductResult']().mapper();
+          var resultMapper = new client.models['ProductResult']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -1924,9 +1924,9 @@ Paging.prototype.getMultiplePagesFailureUriNext = function (nextPageLink, option
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -1946,7 +1946,7 @@ Paging.prototype.getMultiplePagesFailureUriNext = function (nextPageLink, option
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['ProductResult']().mapper();
+          var resultMapper = new client.models['ProductResult']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {

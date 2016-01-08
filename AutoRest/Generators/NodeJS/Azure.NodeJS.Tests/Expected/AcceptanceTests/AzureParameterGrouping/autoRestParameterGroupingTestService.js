@@ -15,10 +15,8 @@
 'use strict';
 
 var util = require('util');
-var msRest = require('ms-rest');
 var msRestAzure = require('ms-rest-azure');
 var ServiceClient = msRestAzure.AzureServiceClient;
-var WebResource = msRest.WebResource;
 
 var models = require('./models');
 var operations = require('./operations');
@@ -59,7 +57,7 @@ function AutoRestParameterGroupingTestService(credentials, baseUri, options) {
     this.acceptLanguage = 'en-US';
   }
   this.parameterGrouping = new operations.ParameterGrouping(this);
-  this._models = models;
+  this.models = models;
 }
 
 util.inherits(AutoRestParameterGroupingTestService, ServiceClient);

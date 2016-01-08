@@ -64,46 +64,4 @@ OperationResult.prototype.mapper = function () {
   };
 };
 
-/**
- * Validate the payload against the OperationResult schema
- *
- * @param {JSON} payload
- *
- */
-OperationResult.prototype.serialize = function () {
-  var payload = {};
-  if (this['status'] !== null && this['status'] !== undefined) {
-    if (typeof this['status'].valueOf() !== 'string') {
-      throw new Error('this[\'status\'] must be of type string.');
-    }
-    payload['status'] = this['status'];
-  }
-
-  if (this['error']) {
-    payload['error'] = this['error'].serialize();
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to OperationResult schema
- *
- * @param {JSON} instance
- *
- */
-OperationResult.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['status'] !== undefined) {
-      this['status'] = instance['status'];
-    }
-
-    if (instance['error']) {
-      this['error'] = new models['OperationResultError']().deserialize(instance['error']);
-    }
-  }
-
-  return this;
-};
-
 module.exports = OperationResult;

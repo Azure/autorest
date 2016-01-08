@@ -59,7 +59,7 @@ function AutoRestValidationTest(subscriptionId, apiVersion, baseUri, options) {
   this.subscriptionId = subscriptionId;
   this.apiVersion = apiVersion;
 
-  this._models = models;
+  this.models = models;
 }
 
 util.inherits(AutoRestValidationTest, ServiceClient);
@@ -205,9 +205,9 @@ AutoRestValidationTest.prototype.validationOfMethodParameters = function (resour
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -227,7 +227,7 @@ AutoRestValidationTest.prototype.validationOfMethodParameters = function (resour
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['Product']().mapper();
+          var resultMapper = new client.models['Product']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -374,7 +374,7 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
   var requestModel = null;
   try {
     if (body !== null && body !== undefined) {
-      var requestModelMapper = new client._models['Product']().mapper();
+      var requestModelMapper = new client.models['Product']().mapper();
       requestModel = msRest.serialize(requestModelMapper, body, 'body', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -410,9 +410,9 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -432,7 +432,7 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['Product']().mapper();
+          var resultMapper = new client.models['Product']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {

@@ -415,127 +415,15 @@ namespace Microsoft.Rest.Generator.NodeJS
             var builder = new IndentedStringBuilder("  ");
             if (type is CompositeType)
             {
-                builder.AppendLine("var resultMapper = new client._models['{0}']().mapper();", type.Name);
+                builder.AppendLine("var resultMapper = new client.models['{0}']().mapper();", type.Name);
             }
             else
             {
                 builder.AppendLine("var resultMapper = {{{0}}};", type.ConstructMapper(responseVariable));
             }
             builder.AppendLine("{1} = msRest.deserialize(resultMapper, {0}, '{1}', client);", responseVariable, valueReference);
-            /*CompositeType composite = type as CompositeType;
-            SequenceType sequence = type as SequenceType;
-            DictionaryType dictionary = type as DictionaryType;
-            PrimaryType primary = type as PrimaryType;
-            EnumType enumType = type as EnumType;
-            var builder = new IndentedStringBuilder("  ");
-            if (primary != null)
-            {
-                if (primary == PrimaryType.DateTime ||
-                    primary == PrimaryType.Date ||
-                    primary == PrimaryType.DateTimeRfc1123)
-                {
-                    builder.AppendLine("{0} = new Date({0});", valueReference);
-                }
-                else if (primary == PrimaryType.ByteArray)
-                {
-                    builder.AppendLine("{0} = new Buffer({0}, 'base64');", valueReference);
-                }
-                else if (primary == PrimaryType.TimeSpan)
-                {
-                    builder.AppendLine("{0} = moment.duration({0});", valueReference);
-                }
-            }
-            else if (IsSpecialProcessingRequired(sequence))
-            {
-                builder.AppendLine("for (var i = 0; i < {0}.length; i++) {{", valueReference)
-                         .Indent();
-
-                // Loop through the sequence if each property is Date, DateTime or ByteArray 
-                // as they need special treatment for deserialization
-                if (sequence.ElementType is PrimaryType)
-                {
-                    builder.AppendLine("if ({0}[i] !== null && {0}[i] !== undefined) {{", valueReference)
-                             .Indent();
-                    if (sequence.ElementType == PrimaryType.DateTime ||
-                       sequence.ElementType == PrimaryType.Date ||
-                        sequence.ElementType == PrimaryType.DateTimeRfc1123)
-                    {
-                        builder.AppendLine("{0}[i] = new Date({0}[i]);", valueReference);
-                    }
-                    else if (sequence.ElementType == PrimaryType.ByteArray)
-                    {
-                        builder.AppendLine("{0}[i] = new Buffer({0}[i], 'base64');", valueReference);
-                    }
-                    else if (sequence.ElementType == PrimaryType.TimeSpan)
-                    {
-                        builder.AppendLine("{0}[i] = moment.duration({0}[i]);", valueReference);
-                    }
-                }
-                else if (sequence.ElementType is CompositeType)
-                {
-                    builder.AppendLine("if ({0}[i] !== null && {0}[i] !== undefined) {{", valueReference)
-                             .Indent()
-                             .AppendLine(GetDeserializationString(sequence.ElementType,
-                                string.Format(CultureInfo.InvariantCulture, "{0}[i]", valueReference),
-                                string.Format(CultureInfo.InvariantCulture, "{0}[i]", responseVariable)));
-                }
-
-                builder.Outdent()
-                        .AppendLine("}")
-                        .Outdent()
-                    .AppendLine("}");
-            }
-            else if (IsSpecialProcessingRequired(dictionary))
-            {
-                builder.AppendLine("for (var property in {0}) {{", valueReference)
-                    .Indent();
-                if (dictionary.ValueType is PrimaryType)
-                {
-                    builder.AppendLine("if ({0}[property] !== null && {0}[property] !== undefined) {{", valueReference)
-                             .Indent();
-                    if (dictionary.ValueType == PrimaryType.DateTime ||
-                        dictionary.ValueType == PrimaryType.Date ||
-                        dictionary.ValueType == PrimaryType.DateTimeRfc1123)
-                    {
-                        builder.AppendLine("{0}[property] = new Date({0}[property]);", valueReference);
-                    }
-                    else if (dictionary.ValueType == PrimaryType.ByteArray)
-                    {
-                        builder.AppendLine("{0}[property] = new Buffer({0}[property], 'base64');", valueReference);
-                    }
-                    else if (dictionary.ValueType == PrimaryType.TimeSpan)
-                    {
-                        builder.AppendLine("{0}[property] = moment.duration({0}[property]);", valueReference);
-                    }
-                }
-                else if (dictionary.ValueType is CompositeType)
-                {
-                    builder.AppendLine("if ({0}[property] !== null && {0}[property] !== undefined) {{", valueReference)
-                             .Indent()
-                             .AppendLine(GetDeserializationString(dictionary.ValueType,
-                                string.Format(CultureInfo.InvariantCulture, "{0}[property]", valueReference),
-                                string.Format(CultureInfo.InvariantCulture, "{0}[property]", responseVariable)));
-                }
-                builder.Outdent()
-                        .AppendLine("}")
-                        .Outdent()
-                    .AppendLine("}");
-            }
-            else if (composite != null)
-            {
-                builder.AppendLine("{0}.deserialize({1});", valueReference, responseVariable);
-            }
-            else if (enumType != null)
-            {
-                //Do No special deserialization
-            }
-            else
-            {
-                return string.Empty;
-            }*/
             return builder.ToString();
         }
-
 
         public string ValidationString
         {
@@ -569,33 +457,6 @@ namespace Microsoft.Rest.Generator.NodeJS
                 return builder.ToString();
             }
         }
-        /// <summary>
-        /// If the element type of a sequenece or value type of a dictionary 
-        /// contains one of the following special types then it needs to be 
-        /// processed. The special types are: Date, DateTime, ByteArray 
-        /// and CompositeType
-        /// </summary>
-        /// <param name="type">The type to determine if special deserialization is required</param>
-        /// <returns>True if special deserialization is required. False, otherwise.</returns>
-        private static bool IsSpecialProcessingRequired(IType type)
-        {
-            PrimaryType[] validTypes = new PrimaryType[] { PrimaryType.DateTime, PrimaryType.Date, PrimaryType.DateTimeRfc1123, PrimaryType.ByteArray, PrimaryType.TimeSpan };
-            SequenceType sequence = type as SequenceType;
-            DictionaryType dictionary = type as DictionaryType;
-            bool result = false;
-            if (sequence != null &&
-                (validTypes.Any(t => t == sequence.ElementType) || sequence.ElementType is CompositeType))
-            {
-                result = true;
-            }
-            else if (dictionary != null &&
-                (validTypes.Any(t => t == dictionary.ValueType) || dictionary.ValueType is CompositeType))
-            {
-                result = true;
-            }
-
-            return result;
-        }
 
         public string DeserializeResponse(IType type, string valueReference = "result", string responseVariable = "parsedResponse")
         {
@@ -610,7 +471,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                    .Indent()
                      .AppendLine("{0} = JSON.parse(responseBody);", responseVariable)
                      .AppendLine("{0} = JSON.parse(responseBody);", valueReference);
-            var deserializeBody = this.GetDeserializationString(type, valueReference, responseVariable);
+            var deserializeBody = GetDeserializationString(type, valueReference, responseVariable);
             if (!string.IsNullOrWhiteSpace(deserializeBody))
             {
                 builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", responseVariable)
@@ -780,27 +641,6 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
         }
 
-        public string InitializeRequestBody
-        {
-            get
-            {
-                var builder = new IndentedStringBuilder("  ");
-                if (this.RequestBody != null)
-                {
-                    if (this.RequestBody.Type is CompositeType)
-                    {
-                        builder.AppendLine(RequestBody.Type.InitializeSerializationType(Scope, "requestModel", RequestBody.Name, "client._models"));
-                    }
-                    else
-                    {
-                        builder.AppendLine(RequestBody.Type.InitializeSerializationType(Scope, RequestBody.Name, RequestBody.Name, "client._models"));
-                    }
-                }
-
-                return builder.ToString();
-            }
-        }
-
         public string ConstructRequestBodyMapper
         {
             get
@@ -808,7 +648,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                 var builder = new IndentedStringBuilder("  ");
                 if (RequestBody.Type is CompositeType)
                 {
-                    builder.AppendLine("var requestModelMapper = new client._models['{0}']().mapper();", RequestBody.Type.Name);
+                    builder.AppendLine("var requestModelMapper = new client.models['{0}']().mapper();", RequestBody.Type.Name);
                 }
                 else
                 {
@@ -920,7 +760,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                     if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
                         transformation.OutputParameter.Type is CompositeType)
                     {
-                        builder.AppendLine("{0} = new client._models['{1}']();",
+                        builder.AppendLine("{0} = new client.models['{1}']();",
                             transformation.OutputParameter.Name,
                             transformation.OutputParameter.Type.Name);
                     }

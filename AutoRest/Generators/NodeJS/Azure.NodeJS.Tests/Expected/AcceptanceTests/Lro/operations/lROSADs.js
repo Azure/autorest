@@ -94,7 +94,7 @@ LROSADs.prototype.putNonRetry400 = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['Product']().mapper();
+          var resultMapper = new client.models['Product']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -191,7 +191,7 @@ LROSADs.prototype.beginPutNonRetry400 = function (options, callback) {
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
-      var requestModelMapper = new client._models['Product']().mapper();
+      var requestModelMapper = new client.models['Product']().mapper();
       requestModel = msRest.serialize(requestModelMapper, product, 'product', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -227,9 +227,9 @@ LROSADs.prototype.beginPutNonRetry400 = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -249,7 +249,7 @@ LROSADs.prototype.beginPutNonRetry400 = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['Product']().mapper();
+          var resultMapper = new client.models['Product']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -266,7 +266,7 @@ LROSADs.prototype.beginPutNonRetry400 = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['Product']().mapper();
+          var resultMapper = new client.models['Product']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -347,7 +347,7 @@ LROSADs.prototype.putNonRetry201Creating400 = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['Product']().mapper();
+          var resultMapper = new client.models['Product']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -445,7 +445,7 @@ LROSADs.prototype.beginPutNonRetry201Creating400 = function (options, callback) 
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
-      var requestModelMapper = new client._models['Product']().mapper();
+      var requestModelMapper = new client.models['Product']().mapper();
       requestModel = msRest.serialize(requestModelMapper, product, 'product', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -481,9 +481,9 @@ LROSADs.prototype.beginPutNonRetry201Creating400 = function (options, callback) 
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -503,7 +503,7 @@ LROSADs.prototype.beginPutNonRetry201Creating400 = function (options, callback) 
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['Product']().mapper();
+          var resultMapper = new client.models['Product']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -520,7 +520,7 @@ LROSADs.prototype.beginPutNonRetry201Creating400 = function (options, callback) 
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['Product']().mapper();
+          var resultMapper = new client.models['Product']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -602,7 +602,7 @@ LROSADs.prototype.putAsyncRelativeRetry400 = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['Product']().mapper();
+          var resultMapper = new client.models['Product']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -701,7 +701,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetry400 = function (options, callback) {
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
-      var requestModelMapper = new client._models['Product']().mapper();
+      var requestModelMapper = new client.models['Product']().mapper();
       requestModel = msRest.serialize(requestModelMapper, product, 'product', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -737,9 +737,9 @@ LROSADs.prototype.beginPutAsyncRelativeRetry400 = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -759,7 +759,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetry400 = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['Product']().mapper();
+          var resultMapper = new client.models['Product']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -923,9 +923,9 @@ LROSADs.prototype.beginDeleteNonRetry400 = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -1092,9 +1092,9 @@ LROSADs.prototype.beginDelete202NonRetry400 = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -1265,9 +1265,9 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetry400 = function (options, callback
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -1431,7 +1431,7 @@ LROSADs.prototype.beginPostNonRetry400 = function (options, callback) {
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
-      var requestModelMapper = new client._models['Product']().mapper();
+      var requestModelMapper = new client.models['Product']().mapper();
       requestModel = msRest.serialize(requestModelMapper, product, 'product', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -1467,9 +1467,9 @@ LROSADs.prototype.beginPostNonRetry400 = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -1633,7 +1633,7 @@ LROSADs.prototype.beginPost202NonRetry400 = function (options, callback) {
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
-      var requestModelMapper = new client._models['Product']().mapper();
+      var requestModelMapper = new client.models['Product']().mapper();
       requestModel = msRest.serialize(requestModelMapper, product, 'product', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -1669,9 +1669,9 @@ LROSADs.prototype.beginPost202NonRetry400 = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -1839,7 +1839,7 @@ LROSADs.prototype.beginPostAsyncRelativeRetry400 = function (options, callback) 
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
-      var requestModelMapper = new client._models['Product']().mapper();
+      var requestModelMapper = new client.models['Product']().mapper();
       requestModel = msRest.serialize(requestModelMapper, product, 'product', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -1875,9 +1875,9 @@ LROSADs.prototype.beginPostAsyncRelativeRetry400 = function (options, callback) 
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -1961,7 +1961,7 @@ LROSADs.prototype.putError201NoProvisioningStatePayload = function (options, cal
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['Product']().mapper();
+          var resultMapper = new client.models['Product']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -2059,7 +2059,7 @@ LROSADs.prototype.beginPutError201NoProvisioningStatePayload = function (options
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
-      var requestModelMapper = new client._models['Product']().mapper();
+      var requestModelMapper = new client.models['Product']().mapper();
       requestModel = msRest.serialize(requestModelMapper, product, 'product', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -2095,9 +2095,9 @@ LROSADs.prototype.beginPutError201NoProvisioningStatePayload = function (options
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -2117,7 +2117,7 @@ LROSADs.prototype.beginPutError201NoProvisioningStatePayload = function (options
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['Product']().mapper();
+          var resultMapper = new client.models['Product']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -2134,7 +2134,7 @@ LROSADs.prototype.beginPutError201NoProvisioningStatePayload = function (options
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['Product']().mapper();
+          var resultMapper = new client.models['Product']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -2216,7 +2216,7 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatus = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['Product']().mapper();
+          var resultMapper = new client.models['Product']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -2315,7 +2315,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatus = function (options, callba
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
-      var requestModelMapper = new client._models['Product']().mapper();
+      var requestModelMapper = new client.models['Product']().mapper();
       requestModel = msRest.serialize(requestModelMapper, product, 'product', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -2351,9 +2351,9 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatus = function (options, callba
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -2373,7 +2373,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatus = function (options, callba
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['Product']().mapper();
+          var resultMapper = new client.models['Product']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -2455,7 +2455,7 @@ LROSADs.prototype.putAsyncRelativeRetryNoStatusPayload = function (options, call
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['Product']().mapper();
+          var resultMapper = new client.models['Product']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -2554,7 +2554,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatusPayload = function (options,
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
-      var requestModelMapper = new client._models['Product']().mapper();
+      var requestModelMapper = new client.models['Product']().mapper();
       requestModel = msRest.serialize(requestModelMapper, product, 'product', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -2590,9 +2590,9 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatusPayload = function (options,
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -2612,7 +2612,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatusPayload = function (options,
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['Product']().mapper();
+          var resultMapper = new client.models['Product']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -2778,9 +2778,9 @@ LROSADs.prototype.beginDelete204Succeeded = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -2951,9 +2951,9 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryNoStatus = function (options, cal
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -3119,7 +3119,7 @@ LROSADs.prototype.beginPost202NoLocation = function (options, callback) {
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
-      var requestModelMapper = new client._models['Product']().mapper();
+      var requestModelMapper = new client.models['Product']().mapper();
       requestModel = msRest.serialize(requestModelMapper, product, 'product', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -3155,9 +3155,9 @@ LROSADs.prototype.beginPost202NoLocation = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -3325,7 +3325,7 @@ LROSADs.prototype.beginPostAsyncRelativeRetryNoPayload = function (options, call
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
-      var requestModelMapper = new client._models['Product']().mapper();
+      var requestModelMapper = new client.models['Product']().mapper();
       requestModel = msRest.serialize(requestModelMapper, product, 'product', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -3361,9 +3361,9 @@ LROSADs.prototype.beginPostAsyncRelativeRetryNoPayload = function (options, call
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -3447,7 +3447,7 @@ LROSADs.prototype.put200InvalidJson = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['Product']().mapper();
+          var resultMapper = new client.models['Product']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -3545,7 +3545,7 @@ LROSADs.prototype.beginPut200InvalidJson = function (options, callback) {
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
-      var requestModelMapper = new client._models['Product']().mapper();
+      var requestModelMapper = new client.models['Product']().mapper();
       requestModel = msRest.serialize(requestModelMapper, product, 'product', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -3581,9 +3581,9 @@ LROSADs.prototype.beginPut200InvalidJson = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -3603,7 +3603,7 @@ LROSADs.prototype.beginPut200InvalidJson = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['Product']().mapper();
+          var resultMapper = new client.models['Product']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -3685,7 +3685,7 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidHeader = function (options, callba
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['Product']().mapper();
+          var resultMapper = new client.models['Product']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -3784,7 +3784,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidHeader = function (options, c
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
-      var requestModelMapper = new client._models['Product']().mapper();
+      var requestModelMapper = new client.models['Product']().mapper();
       requestModel = msRest.serialize(requestModelMapper, product, 'product', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -3820,9 +3820,9 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidHeader = function (options, c
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -3842,7 +3842,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidHeader = function (options, c
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['Product']().mapper();
+          var resultMapper = new client.models['Product']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -3924,7 +3924,7 @@ LROSADs.prototype.putAsyncRelativeRetryInvalidJsonPolling = function (options, c
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['Product']().mapper();
+          var resultMapper = new client.models['Product']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -4023,7 +4023,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidJsonPolling = function (optio
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
-      var requestModelMapper = new client._models['Product']().mapper();
+      var requestModelMapper = new client.models['Product']().mapper();
       requestModel = msRest.serialize(requestModelMapper, product, 'product', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -4059,9 +4059,9 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidJsonPolling = function (optio
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -4081,7 +4081,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidJsonPolling = function (optio
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['Product']().mapper();
+          var resultMapper = new client.models['Product']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -4247,9 +4247,9 @@ LROSADs.prototype.beginDelete202RetryInvalidHeader = function (options, callback
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -4418,9 +4418,9 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidHeader = function (options
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -4591,9 +4591,9 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidJsonPolling = function (op
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -4759,7 +4759,7 @@ LROSADs.prototype.beginPost202RetryInvalidHeader = function (options, callback) 
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
-      var requestModelMapper = new client._models['Product']().mapper();
+      var requestModelMapper = new client.models['Product']().mapper();
       requestModel = msRest.serialize(requestModelMapper, product, 'product', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -4795,9 +4795,9 @@ LROSADs.prototype.beginPost202RetryInvalidHeader = function (options, callback) 
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -4965,7 +4965,7 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidHeader = function (options, 
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
-      var requestModelMapper = new client._models['Product']().mapper();
+      var requestModelMapper = new client.models['Product']().mapper();
       requestModel = msRest.serialize(requestModelMapper, product, 'product', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -5001,9 +5001,9 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidHeader = function (options, 
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -5171,7 +5171,7 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidJsonPolling = function (opti
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
-      var requestModelMapper = new client._models['Product']().mapper();
+      var requestModelMapper = new client.models['Product']().mapper();
       requestModel = msRest.serialize(requestModelMapper, product, 'product', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -5207,9 +5207,9 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidJsonPolling = function (opti
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {

@@ -59,47 +59,4 @@ UsageListResult.prototype.mapper = function () {
   };
 };
 
-/**
- * Validate the payload against the UsageListResult schema
- *
- * @param {JSON} payload
- *
- */
-UsageListResult.prototype.serialize = function () {
-  var payload = {};
-  if (util.isArray(this['value'])) {
-    payload['value'] = [];
-    for (var i = 0; i < this['value'].length; i++) {
-      if (this['value'][i]) {
-        payload['value'][i] = this['value'][i].serialize();
-      }
-    }
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to UsageListResult schema
- *
- * @param {JSON} instance
- *
- */
-UsageListResult.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['value']) {
-      var tempInstancevalue = [];
-      instance['value'].forEach(function(element) {
-        if (element) {
-          element = new models['Usage']().deserialize(element);
-        }
-        tempInstancevalue.push(element);
-      });
-      this['value'] = tempInstancevalue;
-    }
-  }
-
-  return this;
-};
-
 module.exports = UsageListResult;

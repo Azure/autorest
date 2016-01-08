@@ -53,35 +53,4 @@ ClassOptionalWrapper.prototype.mapper = function () {
   };
 };
 
-/**
- * Validate the payload against the ClassOptionalWrapper schema
- *
- * @param {JSON} payload
- *
- */
-ClassOptionalWrapper.prototype.serialize = function () {
-  var payload = {};
-  if (this['value']) {
-    payload['value'] = this['value'].serialize();
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to ClassOptionalWrapper schema
- *
- * @param {JSON} instance
- *
- */
-ClassOptionalWrapper.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['value']) {
-      this['value'] = new models['Product']().deserialize(instance['value']);
-    }
-  }
-
-  return this;
-};
-
 module.exports = ClassOptionalWrapper;

@@ -55,49 +55,4 @@ Sku.prototype.mapper = function () {
   };
 };
 
-/**
- * Validate the payload against the Sku schema
- *
- * @param {JSON} payload
- *
- */
-Sku.prototype.serialize = function () {
-  var payload = {};
-  if (this['name'] !== null && this['name'] !== undefined) {
-    if (typeof this['name'].valueOf() !== 'string') {
-      throw new Error('this[\'name\'] must be of type string.');
-    }
-    payload['name'] = this['name'];
-  }
-
-  if (this['id'] !== null && this['id'] !== undefined) {
-    if (typeof this['id'].valueOf() !== 'string') {
-      throw new Error('this[\'id\'] must be of type string.');
-    }
-    payload['id'] = this['id'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to Sku schema
- *
- * @param {JSON} instance
- *
- */
-Sku.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['name'] !== undefined) {
-      this['name'] = instance['name'];
-    }
-
-    if (instance['id'] !== undefined) {
-      this['id'] = instance['id'];
-    }
-  }
-
-  return this;
-};
-
 module.exports = Sku;

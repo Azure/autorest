@@ -46,38 +46,4 @@ C.prototype.mapper = function () {
   };
 };
 
-/**
- * Validate the payload against the C schema
- *
- * @param {JSON} payload
- *
- */
-C.prototype.serialize = function () {
-  var payload = {};
-  if (this['httpCode'] !== null && this['httpCode'] !== undefined) {
-    if (typeof this['httpCode'].valueOf() !== 'string') {
-      throw new Error('this[\'httpCode\'] must be of type string.');
-    }
-    payload['httpCode'] = this['httpCode'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to C schema
- *
- * @param {JSON} instance
- *
- */
-C.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['httpCode'] !== undefined) {
-      this['httpCode'] = instance['httpCode'];
-    }
-  }
-
-  return this;
-};
-
 module.exports = C;

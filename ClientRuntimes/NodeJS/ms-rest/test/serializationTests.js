@@ -305,7 +305,7 @@ describe('msrest', function () {
 
     it('should correctly serialize a composite type', function (done) {
       var client = new testClient('http://localhost:9090');
-      var product = new client._models['Product']();
+      var product = new client.models['Product']();
       mapper = product.mapper();
       var productObj = {
         id: 101,
@@ -378,7 +378,7 @@ describe('msrest', function () {
 
     it('should correctly deserialize a composite type', function (done) {
       var client = new testClient('http://localhost:9090');
-      var product = new client._models['Product']();
+      var product = new client.models['Product']();
       mapper = product.mapper();
       var responseBody = {
         id: 101,
@@ -453,7 +453,7 @@ describe('msrest', function () {
 
     it('should correctly deserialize a pageable type without nextLink', function (done) {
       var client = new testClient('http://localhost:9090');
-      var productListResult = new client._models['ProductListResult']();
+      var productListResult = new client.models['ProductListResult']();
       mapper = productListResult.mapper();
       var responseBody = {
         value: [
@@ -492,7 +492,7 @@ describe('msrest', function () {
 
     it('should correctly deserialize a pageable type with nextLink', function (done) {
       var client = new testClient('http://localhost:9090');
-      var productListResultNextLink = new client._models['ProductListResultNextLink']();
+      var productListResultNextLink = new client.models['ProductListResultNextLink']();
       mapper = productListResultNextLink.mapper();
       var responseBody = {
         value: [

@@ -53,39 +53,4 @@ SubResource.prototype.mapper = function () {
   };
 };
 
-/**
- * Validate the payload against the SubResource schema
- *
- * @param {JSON} payload
- *
- */
-SubResource.prototype.serialize = function () {
-  var payload = SubResource['super_'].prototype.serialize.call(this);
-  if (this['id'] !== null && this['id'] !== undefined) {
-    if (typeof this['id'].valueOf() !== 'string') {
-      throw new Error('this[\'id\'] must be of type string.');
-    }
-    payload['id'] = this['id'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to SubResource schema
- *
- * @param {JSON} instance
- *
- */
-SubResource.prototype.deserialize = function (instance) {
-  SubResource['super_'].prototype.deserialize.call(this, instance);
-  if (instance) {
-    if (instance['id'] !== undefined) {
-      this['id'] = instance['id'];
-    }
-  }
-
-  return this;
-};
-
 module.exports = SubResource;

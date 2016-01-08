@@ -15,14 +15,6 @@ namespace Microsoft.Rest.Generator.NodeJS
             this.LoadFrom(source);
         }
 
-        /// <summary>
-        /// Gets parameter declaration
-        /// </summary>
-        public virtual string DeclarationExpression
-        {
-            get { return this.Type.Name; }
-        }
-
         public IEnumerable<Property> ComposedProperties
         {
             get

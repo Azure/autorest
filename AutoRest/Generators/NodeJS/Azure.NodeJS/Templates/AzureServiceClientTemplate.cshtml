@@ -17,11 +17,13 @@
 'use strict';
 @EmptyLine
 var util = require('util');
-var msRest = require('ms-rest');
+@if (Model.MethodTemplateModels.Any())
+{
+@:var msRest = require('ms-rest');
+@:var WebResource = msRest.WebResource;
+}
 var msRestAzure = require('ms-rest-azure');
 var ServiceClient = msRestAzure.AzureServiceClient;
-var WebResource = msRest.WebResource;
-
 @EmptyLine
 @if (Model.ModelTypes.Any())
 {
@@ -88,7 +90,7 @@ function @(Model.Name)(@(Model.RequiredConstructorParameters), options) {
   
   @if (Model.ModelTypes.Any())
   {
-  @:this._models = models;
+  @:this.models = models;
   }
 }
 

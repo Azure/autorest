@@ -105,9 +105,9 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError200Valid = function
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -127,7 +127,7 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError200Valid = function
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['A']().mapper();
+          var resultMapper = new client.models['A']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -219,9 +219,9 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError204Valid = function
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -241,7 +241,7 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError204Valid = function
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['A']().mapper();
+          var resultMapper = new client.models['A']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -333,9 +333,9 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError201Invalid = functi
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -355,7 +355,7 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError201Invalid = functi
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['A']().mapper();
+          var resultMapper = new client.models['A']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -447,9 +447,9 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError202None = function 
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -469,7 +469,7 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError202None = function 
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['A']().mapper();
+          var resultMapper = new client.models['A']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -562,9 +562,9 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError400Valid = function
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -584,7 +584,7 @@ MultipleResponses.prototype.get200Model204NoModelDefaultError400Valid = function
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['A']().mapper();
+          var resultMapper = new client.models['A']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -676,9 +676,9 @@ MultipleResponses.prototype.get200Model201ModelDefaultError200Valid = function (
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -698,7 +698,7 @@ MultipleResponses.prototype.get200Model201ModelDefaultError200Valid = function (
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['A']().mapper();
+          var resultMapper = new client.models['A']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -715,7 +715,7 @@ MultipleResponses.prototype.get200Model201ModelDefaultError200Valid = function (
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['B']().mapper();
+          var resultMapper = new client.models['B']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -808,9 +808,9 @@ MultipleResponses.prototype.get200Model201ModelDefaultError201Valid = function (
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -830,7 +830,7 @@ MultipleResponses.prototype.get200Model201ModelDefaultError201Valid = function (
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['A']().mapper();
+          var resultMapper = new client.models['A']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -847,7 +847,7 @@ MultipleResponses.prototype.get200Model201ModelDefaultError201Valid = function (
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['B']().mapper();
+          var resultMapper = new client.models['B']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -940,9 +940,9 @@ MultipleResponses.prototype.get200Model201ModelDefaultError400Valid = function (
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -962,7 +962,7 @@ MultipleResponses.prototype.get200Model201ModelDefaultError400Valid = function (
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['A']().mapper();
+          var resultMapper = new client.models['A']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -979,7 +979,7 @@ MultipleResponses.prototype.get200Model201ModelDefaultError400Valid = function (
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['B']().mapper();
+          var resultMapper = new client.models['B']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -1070,9 +1070,9 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError200Valid =
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -1092,7 +1092,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError200Valid =
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['A']().mapper();
+          var resultMapper = new client.models['A']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -1109,7 +1109,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError200Valid =
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['C']().mapper();
+          var resultMapper = new client.models['C']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -1126,7 +1126,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError200Valid =
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['D']().mapper();
+          var resultMapper = new client.models['D']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -1217,9 +1217,9 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError201Valid =
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -1239,7 +1239,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError201Valid =
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['A']().mapper();
+          var resultMapper = new client.models['A']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -1256,7 +1256,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError201Valid =
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['C']().mapper();
+          var resultMapper = new client.models['C']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -1273,7 +1273,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError201Valid =
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['D']().mapper();
+          var resultMapper = new client.models['D']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -1364,9 +1364,9 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError404Valid =
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -1386,7 +1386,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError404Valid =
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['A']().mapper();
+          var resultMapper = new client.models['A']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -1403,7 +1403,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError404Valid =
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['C']().mapper();
+          var resultMapper = new client.models['C']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -1420,7 +1420,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError404Valid =
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['D']().mapper();
+          var resultMapper = new client.models['D']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -1512,9 +1512,9 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError400Valid =
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -1534,7 +1534,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError400Valid =
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['A']().mapper();
+          var resultMapper = new client.models['A']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -1551,7 +1551,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError400Valid =
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['C']().mapper();
+          var resultMapper = new client.models['C']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -1568,7 +1568,7 @@ MultipleResponses.prototype.get200ModelA201ModelC404ModelDDefaultError400Valid =
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['D']().mapper();
+          var resultMapper = new client.models['D']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -1659,9 +1659,9 @@ MultipleResponses.prototype.get202None204NoneDefaultError202None = function (opt
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -1755,9 +1755,9 @@ MultipleResponses.prototype.get202None204NoneDefaultError204None = function (opt
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -1852,9 +1852,9 @@ MultipleResponses.prototype.get202None204NoneDefaultError400Valid = function (op
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -2313,9 +2313,9 @@ MultipleResponses.prototype.getDefaultModelA200Valid = function (options, callba
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['A']();
+        error.body = new client.models['A']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['A']().mapper();
+          var resultMapper = new client.models['A']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -2333,7 +2333,7 @@ MultipleResponses.prototype.getDefaultModelA200Valid = function (options, callba
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
-        var resultMapper = new client._models['A']().mapper();
+        var resultMapper = new client.models['A']().mapper();
         result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
       }
     } catch (error) {
@@ -2424,9 +2424,9 @@ MultipleResponses.prototype.getDefaultModelA200None = function (options, callbac
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['A']();
+        error.body = new client.models['A']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['A']().mapper();
+          var resultMapper = new client.models['A']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -2444,7 +2444,7 @@ MultipleResponses.prototype.getDefaultModelA200None = function (options, callbac
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
-        var resultMapper = new client._models['A']().mapper();
+        var resultMapper = new client.models['A']().mapper();
         result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
       }
     } catch (error) {
@@ -2535,9 +2535,9 @@ MultipleResponses.prototype.getDefaultModelA400Valid = function (options, callba
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['A']();
+        error.body = new client.models['A']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['A']().mapper();
+          var resultMapper = new client.models['A']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -2555,7 +2555,7 @@ MultipleResponses.prototype.getDefaultModelA400Valid = function (options, callba
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
-        var resultMapper = new client._models['A']().mapper();
+        var resultMapper = new client.models['A']().mapper();
         result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
       }
     } catch (error) {
@@ -2646,9 +2646,9 @@ MultipleResponses.prototype.getDefaultModelA400None = function (options, callbac
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['A']();
+        error.body = new client.models['A']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['A']().mapper();
+          var resultMapper = new client.models['A']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -2666,7 +2666,7 @@ MultipleResponses.prototype.getDefaultModelA400None = function (options, callbac
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
-        var resultMapper = new client._models['A']().mapper();
+        var resultMapper = new client.models['A']().mapper();
         result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
       }
     } catch (error) {
@@ -3139,7 +3139,7 @@ MultipleResponses.prototype.get200ModelA200None = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['A']().mapper();
+          var resultMapper = new client.models['A']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -3248,7 +3248,7 @@ MultipleResponses.prototype.get200ModelA200Valid = function (options, callback) 
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['A']().mapper();
+          var resultMapper = new client.models['A']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -3357,7 +3357,7 @@ MultipleResponses.prototype.get200ModelA200Invalid = function (options, callback
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['A']().mapper();
+          var resultMapper = new client.models['A']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -3467,7 +3467,7 @@ MultipleResponses.prototype.get200ModelA400None = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['A']().mapper();
+          var resultMapper = new client.models['A']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -3576,7 +3576,7 @@ MultipleResponses.prototype.get200ModelA400Valid = function (options, callback) 
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['A']().mapper();
+          var resultMapper = new client.models['A']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -3685,7 +3685,7 @@ MultipleResponses.prototype.get200ModelA400Invalid = function (options, callback
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['A']().mapper();
+          var resultMapper = new client.models['A']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -3794,7 +3794,7 @@ MultipleResponses.prototype.get200ModelA202Valid = function (options, callback) 
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['A']().mapper();
+          var resultMapper = new client.models['A']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {

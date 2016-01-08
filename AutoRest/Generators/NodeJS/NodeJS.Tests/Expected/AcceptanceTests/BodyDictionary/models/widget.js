@@ -55,49 +55,4 @@ Widget.prototype.mapper = function () {
   };
 };
 
-/**
- * Validate the payload against the Widget schema
- *
- * @param {JSON} payload
- *
- */
-Widget.prototype.serialize = function () {
-  var payload = {};
-  if (this['integer'] !== null && this['integer'] !== undefined) {
-    if (typeof this['integer'] !== 'number') {
-      throw new Error('this[\'integer\'] must be of type number.');
-    }
-    payload['integer'] = this['integer'];
-  }
-
-  if (this['string'] !== null && this['string'] !== undefined) {
-    if (typeof this['string'].valueOf() !== 'string') {
-      throw new Error('this[\'string\'] must be of type string.');
-    }
-    payload['string'] = this['string'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to Widget schema
- *
- * @param {JSON} instance
- *
- */
-Widget.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['integer'] !== undefined) {
-      this['integer'] = instance['integer'];
-    }
-
-    if (instance['string'] !== undefined) {
-      this['string'] = instance['string'];
-    }
-  }
-
-  return this;
-};
-
 module.exports = Widget;

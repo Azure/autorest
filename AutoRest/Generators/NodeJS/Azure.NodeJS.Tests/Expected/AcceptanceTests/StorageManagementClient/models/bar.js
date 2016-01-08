@@ -63,35 +63,4 @@ Bar.prototype.mapper = function () {
   };
 };
 
-/**
- * Validate the payload against the Bar schema
- *
- * @param {JSON} payload
- *
- */
-Bar.prototype.serialize = function () {
-  var payload = {};
-  if (this['recursivePoint']) {
-    payload['RecursivePoint'] = this['recursivePoint'].serialize();
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to Bar schema
- *
- * @param {JSON} instance
- *
- */
-Bar.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['RecursivePoint']) {
-      this['recursivePoint'] = new models['Endpoints']().deserialize(instance['RecursivePoint']);
-    }
-  }
-
-  return this;
-};
-
 module.exports = Bar;

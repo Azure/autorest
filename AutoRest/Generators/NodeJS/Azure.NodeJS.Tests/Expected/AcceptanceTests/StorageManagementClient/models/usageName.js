@@ -57,49 +57,4 @@ UsageName.prototype.mapper = function () {
   };
 };
 
-/**
- * Validate the payload against the UsageName schema
- *
- * @param {JSON} payload
- *
- */
-UsageName.prototype.serialize = function () {
-  var payload = {};
-  if (this['value'] !== null && this['value'] !== undefined) {
-    if (typeof this['value'].valueOf() !== 'string') {
-      throw new Error('this[\'value\'] must be of type string.');
-    }
-    payload['value'] = this['value'];
-  }
-
-  if (this['localizedValue'] !== null && this['localizedValue'] !== undefined) {
-    if (typeof this['localizedValue'].valueOf() !== 'string') {
-      throw new Error('this[\'localizedValue\'] must be of type string.');
-    }
-    payload['localizedValue'] = this['localizedValue'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to UsageName schema
- *
- * @param {JSON} instance
- *
- */
-UsageName.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['value'] !== undefined) {
-      this['value'] = instance['value'];
-    }
-
-    if (instance['localizedValue'] !== undefined) {
-      this['localizedValue'] = instance['localizedValue'];
-    }
-  }
-
-  return this;
-};
-
 module.exports = UsageName;

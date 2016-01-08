@@ -46,36 +46,4 @@ StringWrapper.prototype.mapper = function () {
   };
 };
 
-/**
- * Validate the payload against the StringWrapper schema
- *
- * @param {JSON} payload
- *
- */
-StringWrapper.prototype.serialize = function () {
-  var payload = {};
-  if (this['value'] === null || this['value'] === undefined || typeof this['value'].valueOf() !== 'string') {
-    throw new Error('this[\'value\'] cannot be null or undefined and it must be of type string.');
-  }
-  payload['value'] = this['value'];
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to StringWrapper schema
- *
- * @param {JSON} instance
- *
- */
-StringWrapper.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['value'] !== undefined) {
-      this['value'] = instance['value'];
-    }
-  }
-
-  return this;
-};
-
 module.exports = StringWrapper;

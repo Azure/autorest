@@ -116,9 +116,9 @@ Implicit.prototype.getRequiredPath = function (pathParameter, options, callback)
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -136,7 +136,7 @@ Implicit.prototype.getRequiredPath = function (pathParameter, options, callback)
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
-        var resultMapper = new client._models['ErrorModel']().mapper();
+        var resultMapper = new client.models['ErrorModel']().mapper();
         result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
       }
     } catch (error) {
@@ -244,9 +244,9 @@ Implicit.prototype.putOptionalQuery = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -354,9 +354,9 @@ Implicit.prototype.putOptionalHeader = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -483,9 +483,9 @@ Implicit.prototype.putOptionalBody = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -589,9 +589,9 @@ Implicit.prototype.getRequiredGlobalPath = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -609,7 +609,7 @@ Implicit.prototype.getRequiredGlobalPath = function (options, callback) {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
-        var resultMapper = new client._models['ErrorModel']().mapper();
+        var resultMapper = new client.models['ErrorModel']().mapper();
         result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
       }
     } catch (error) {
@@ -713,9 +713,9 @@ Implicit.prototype.getRequiredGlobalQuery = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -733,7 +733,7 @@ Implicit.prototype.getRequiredGlobalQuery = function (options, callback) {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
-        var resultMapper = new client._models['ErrorModel']().mapper();
+        var resultMapper = new client.models['ErrorModel']().mapper();
         result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
       }
     } catch (error) {
@@ -839,9 +839,9 @@ Implicit.prototype.getOptionalGlobalQuery = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -859,7 +859,7 @@ Implicit.prototype.getOptionalGlobalQuery = function (options, callback) {
       parsedResponse = JSON.parse(responseBody);
       result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
-        var resultMapper = new client._models['ErrorModel']().mapper();
+        var resultMapper = new client.models['ErrorModel']().mapper();
         result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
       }
     } catch (error) {

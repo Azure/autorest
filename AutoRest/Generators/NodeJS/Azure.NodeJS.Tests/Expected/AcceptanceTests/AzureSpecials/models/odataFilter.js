@@ -55,49 +55,4 @@ OdataFilter.prototype.mapper = function () {
   };
 };
 
-/**
- * Validate the payload against the OdataFilter schema
- *
- * @param {JSON} payload
- *
- */
-OdataFilter.prototype.serialize = function () {
-  var payload = {};
-  if (this['id'] !== null && this['id'] !== undefined) {
-    if (typeof this['id'] !== 'number') {
-      throw new Error('this[\'id\'] must be of type number.');
-    }
-    payload['id'] = this['id'];
-  }
-
-  if (this['name'] !== null && this['name'] !== undefined) {
-    if (typeof this['name'].valueOf() !== 'string') {
-      throw new Error('this[\'name\'] must be of type string.');
-    }
-    payload['name'] = this['name'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to OdataFilter schema
- *
- * @param {JSON} instance
- *
- */
-OdataFilter.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['id'] !== undefined) {
-      this['id'] = instance['id'];
-    }
-
-    if (instance['name'] !== undefined) {
-      this['name'] = instance['name'];
-    }
-  }
-
-  return this;
-};
-
 module.exports = OdataFilter;

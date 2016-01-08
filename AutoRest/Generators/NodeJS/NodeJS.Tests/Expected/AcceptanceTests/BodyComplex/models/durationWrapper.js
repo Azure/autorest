@@ -48,41 +48,4 @@ DurationWrapper.prototype.mapper = function () {
   };
 };
 
-/**
- * Validate the payload against the DurationWrapper schema
- *
- * @param {JSON} payload
- *
- */
-DurationWrapper.prototype.serialize = function () {
-  var payload = {};
-  if (this['field']) {
-    if (!moment.isDuration(this['field'])) {
-      throw new Error('this[\'field\'] must be of type moment.duration.');
-    }
-    payload['field'] = this['field'].toISOString();
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to DurationWrapper schema
- *
- * @param {JSON} instance
- *
- */
-DurationWrapper.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['field']) {
-      this['field'] = moment.duration(instance['field']);
-    }
-    else if (instance['field'] !== undefined) {
-      this['field'] = instance['field'];
-    }
-  }
-
-  return this;
-};
-
 module.exports = DurationWrapper;

@@ -17,7 +17,6 @@
 var util = require('util');
 var msRest = require('ms-rest');
 var ServiceClient = msRest.ServiceClient;
-var WebResource = msRest.WebResource;
 
 var models = require('./models');
 var operations = require('./operations');
@@ -57,7 +56,7 @@ function AutoRestUrlTestService(globalStringPath, baseUri, options) {
   this.paths = new operations.Paths(this);
   this.queries = new operations.Queries(this);
   this.pathItems = new operations.PathItems(this);
-  this._models = models;
+  this.models = models;
 }
 
 util.inherits(AutoRestUrlTestService, ServiceClient);

@@ -16,9 +16,9 @@
 
 var util = require('util');
 var msRest = require('ms-rest');
+var WebResource = msRest.WebResource;
 var msRestAzure = require('ms-rest-azure');
 var ServiceClient = msRestAzure.AzureServiceClient;
-var WebResource = msRest.WebResource;
 
 var models = require('./models');
 
@@ -57,7 +57,7 @@ function AutoRestResourceFlatteningTestService(credentials, baseUri, options) {
   if(!this.acceptLanguage) {
     this.acceptLanguage = 'en-US';
   }
-  this._models = models;
+  this.models = models;
 }
 
 util.inherits(AutoRestResourceFlatteningTestService, ServiceClient);
@@ -187,9 +187,9 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (options, ca
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -299,9 +299,9 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -476,9 +476,9 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (option
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -588,9 +588,9 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -734,7 +734,7 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
   var requestModel = null;
   try {
     if (resourceComplexObject !== null && resourceComplexObject !== undefined) {
-      var requestModelMapper = new client._models['ResourceCollection']().mapper();
+      var requestModelMapper = new client.models['ResourceCollection']().mapper();
       requestModel = msRest.serialize(requestModelMapper, resourceComplexObject, 'resourceComplexObject', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -770,9 +770,9 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -883,9 +883,9 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -905,7 +905,7 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['ResourceCollection']().mapper();
+          var resultMapper = new client.models['ResourceCollection']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {

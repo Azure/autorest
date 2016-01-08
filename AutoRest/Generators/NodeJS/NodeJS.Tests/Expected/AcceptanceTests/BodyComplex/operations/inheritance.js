@@ -105,9 +105,9 @@ Inheritance.prototype.getValid = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -127,7 +127,7 @@ Inheritance.prototype.getValid = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['Siamese']().mapper();
+          var resultMapper = new client.models['Siamese']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -217,7 +217,7 @@ Inheritance.prototype.putValid = function (complexBody, options, callback) {
   var requestModel = null;
   try {
     if (complexBody !== null && complexBody !== undefined) {
-      var requestModelMapper = new client._models['Siamese']().mapper();
+      var requestModelMapper = new client.models['Siamese']().mapper();
       requestModel = msRest.serialize(requestModelMapper, complexBody, 'complexBody', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -253,9 +253,9 @@ Inheritance.prototype.putValid = function (complexBody, options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {

@@ -105,9 +105,9 @@ ArrayModel.prototype.getValid = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -127,7 +127,7 @@ ArrayModel.prototype.getValid = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['ArrayWrapper']().mapper();
+          var resultMapper = new client.models['ArrayWrapper']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -190,7 +190,7 @@ ArrayModel.prototype.putValid = function (options, callback) {
   try {
     if ((arrayParameter !== null && arrayParameter !== undefined))
     {
-      complexBody = new client._models['ArrayWrapper']();
+      complexBody = new client.models['ArrayWrapper']();
       complexBody.array = arrayParameter;
       if (complexBody === null || complexBody === undefined) {
         throw new Error('complexBody cannot be null or undefined.');
@@ -226,7 +226,7 @@ ArrayModel.prototype.putValid = function (options, callback) {
   var requestModel = null;
   try {
     if (complexBody !== null && complexBody !== undefined) {
-      var requestModelMapper = new client._models['ArrayWrapper']().mapper();
+      var requestModelMapper = new client.models['ArrayWrapper']().mapper();
       requestModel = msRest.serialize(requestModelMapper, complexBody, 'complexBody', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -262,9 +262,9 @@ ArrayModel.prototype.putValid = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -359,9 +359,9 @@ ArrayModel.prototype.getEmpty = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -381,7 +381,7 @@ ArrayModel.prototype.getEmpty = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['ArrayWrapper']().mapper();
+          var resultMapper = new client.models['ArrayWrapper']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -444,7 +444,7 @@ ArrayModel.prototype.putEmpty = function (options, callback) {
   try {
     if ((arrayParameter !== null && arrayParameter !== undefined))
     {
-      complexBody = new client._models['ArrayWrapper']();
+      complexBody = new client.models['ArrayWrapper']();
       complexBody.array = arrayParameter;
       if (complexBody === null || complexBody === undefined) {
         throw new Error('complexBody cannot be null or undefined.');
@@ -480,7 +480,7 @@ ArrayModel.prototype.putEmpty = function (options, callback) {
   var requestModel = null;
   try {
     if (complexBody !== null && complexBody !== undefined) {
-      var requestModelMapper = new client._models['ArrayWrapper']().mapper();
+      var requestModelMapper = new client.models['ArrayWrapper']().mapper();
       requestModel = msRest.serialize(requestModelMapper, complexBody, 'complexBody', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -516,9 +516,9 @@ ArrayModel.prototype.putEmpty = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -614,9 +614,9 @@ ArrayModel.prototype.getNotProvided = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -636,7 +636,7 @@ ArrayModel.prototype.getNotProvided = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['ArrayWrapper']().mapper();
+          var resultMapper = new client.models['ArrayWrapper']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {

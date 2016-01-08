@@ -104,39 +104,4 @@ Goblinshark.prototype.mapper = function () {
   };
 };
 
-/**
- * Validate the payload against the Goblinshark schema
- *
- * @param {JSON} payload
- *
- */
-Goblinshark.prototype.serialize = function () {
-  var payload = Goblinshark['super_'].prototype.serialize.call(this);
-  if (this['jawsize'] !== null && this['jawsize'] !== undefined) {
-    if (typeof this['jawsize'] !== 'number') {
-      throw new Error('this[\'jawsize\'] must be of type number.');
-    }
-    payload['jawsize'] = this['jawsize'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to Goblinshark schema
- *
- * @param {JSON} instance
- *
- */
-Goblinshark.prototype.deserialize = function (instance) {
-  Goblinshark['super_'].prototype.deserialize.call(this, instance);
-  if (instance) {
-    if (instance['jawsize'] !== undefined) {
-      this['jawsize'] = instance['jawsize'];
-    }
-  }
-
-  return this;
-};
-
 module.exports = Goblinshark;

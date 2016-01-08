@@ -55,49 +55,4 @@ BooleanWrapper.prototype.mapper = function () {
   };
 };
 
-/**
- * Validate the payload against the BooleanWrapper schema
- *
- * @param {JSON} payload
- *
- */
-BooleanWrapper.prototype.serialize = function () {
-  var payload = {};
-  if (this['fieldTrue'] !== null && this['fieldTrue'] !== undefined) {
-    if (typeof this['fieldTrue'] !== 'boolean') {
-      throw new Error('this[\'fieldTrue\'] must be of type boolean.');
-    }
-    payload['field_true'] = this['fieldTrue'];
-  }
-
-  if (this['fieldFalse'] !== null && this['fieldFalse'] !== undefined) {
-    if (typeof this['fieldFalse'] !== 'boolean') {
-      throw new Error('this[\'fieldFalse\'] must be of type boolean.');
-    }
-    payload['field_false'] = this['fieldFalse'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to BooleanWrapper schema
- *
- * @param {JSON} instance
- *
- */
-BooleanWrapper.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['field_true'] !== undefined) {
-      this['fieldTrue'] = instance['field_true'];
-    }
-
-    if (instance['field_false'] !== undefined) {
-      this['fieldFalse'] = instance['field_false'];
-    }
-  }
-
-  return this;
-};
-
 module.exports = BooleanWrapper;

@@ -15,10 +15,8 @@
 'use strict';
 
 var util = require('util');
-var msRest = require('ms-rest');
 var msRestAzure = require('ms-rest-azure');
 var ServiceClient = msRestAzure.AzureServiceClient;
-var WebResource = msRest.WebResource;
 
 var models = require('./models');
 var operations = require('./operations');
@@ -59,7 +57,7 @@ function AutoRestPagingTestService(credentials, baseUri, options) {
     this.acceptLanguage = 'en-US';
   }
   this.paging = new operations.Paging(this);
-  this._models = models;
+  this.models = models;
 }
 
 util.inherits(AutoRestPagingTestService, ServiceClient);

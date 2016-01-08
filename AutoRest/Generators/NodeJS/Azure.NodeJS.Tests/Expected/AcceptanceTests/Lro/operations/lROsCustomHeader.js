@@ -98,7 +98,7 @@ LROsCustomHeader.prototype.putAsyncRetrySucceeded = function (options, callback)
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['Product']().mapper();
+          var resultMapper = new client.models['Product']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -199,7 +199,7 @@ LROsCustomHeader.prototype.beginPutAsyncRetrySucceeded = function (options, call
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
-      var requestModelMapper = new client._models['Product']().mapper();
+      var requestModelMapper = new client.models['Product']().mapper();
       requestModel = msRest.serialize(requestModelMapper, product, 'product', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -235,9 +235,9 @@ LROsCustomHeader.prototype.beginPutAsyncRetrySucceeded = function (options, call
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -257,7 +257,7 @@ LROsCustomHeader.prototype.beginPutAsyncRetrySucceeded = function (options, call
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['Product']().mapper();
+          var resultMapper = new client.models['Product']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -341,7 +341,7 @@ LROsCustomHeader.prototype.put201CreatingSucceeded200 = function (options, callb
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['Product']().mapper();
+          var resultMapper = new client.models['Product']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -442,7 +442,7 @@ LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (options, 
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
-      var requestModelMapper = new client._models['Product']().mapper();
+      var requestModelMapper = new client.models['Product']().mapper();
       requestModel = msRest.serialize(requestModelMapper, product, 'product', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -478,9 +478,9 @@ LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (options, 
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -500,7 +500,7 @@ LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (options, 
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['Product']().mapper();
+          var resultMapper = new client.models['Product']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -517,7 +517,7 @@ LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (options, 
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['Product']().mapper();
+          var resultMapper = new client.models['Product']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -684,7 +684,7 @@ LROsCustomHeader.prototype.beginPost202Retry200 = function (options, callback) {
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
-      var requestModelMapper = new client._models['Product']().mapper();
+      var requestModelMapper = new client.models['Product']().mapper();
       requestModel = msRest.serialize(requestModelMapper, product, 'product', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -720,9 +720,9 @@ LROsCustomHeader.prototype.beginPost202Retry200 = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -894,7 +894,7 @@ LROsCustomHeader.prototype.beginPostAsyncRetrySucceeded = function (options, cal
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
-      var requestModelMapper = new client._models['Product']().mapper();
+      var requestModelMapper = new client.models['Product']().mapper();
       requestModel = msRest.serialize(requestModelMapper, product, 'product', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -930,9 +930,9 @@ LROsCustomHeader.prototype.beginPostAsyncRetrySucceeded = function (options, cal
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['CloudError']().mapper();
+          var resultMapper = new client.models['CloudError']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {

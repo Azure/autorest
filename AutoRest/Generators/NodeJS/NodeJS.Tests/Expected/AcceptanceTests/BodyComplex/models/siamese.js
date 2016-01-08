@@ -89,39 +89,4 @@ Siamese.prototype.mapper = function () {
   };
 };
 
-/**
- * Validate the payload against the Siamese schema
- *
- * @param {JSON} payload
- *
- */
-Siamese.prototype.serialize = function () {
-  var payload = Siamese['super_'].prototype.serialize.call(this);
-  if (this['breed'] !== null && this['breed'] !== undefined) {
-    if (typeof this['breed'].valueOf() !== 'string') {
-      throw new Error('this[\'breed\'] must be of type string.');
-    }
-    payload['breed'] = this['breed'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to Siamese schema
- *
- * @param {JSON} instance
- *
- */
-Siamese.prototype.deserialize = function (instance) {
-  Siamese['super_'].prototype.deserialize.call(this, instance);
-  if (instance) {
-    if (instance['breed'] !== undefined) {
-      this['breed'] = instance['breed'];
-    }
-  }
-
-  return this;
-};
-
 module.exports = Siamese;

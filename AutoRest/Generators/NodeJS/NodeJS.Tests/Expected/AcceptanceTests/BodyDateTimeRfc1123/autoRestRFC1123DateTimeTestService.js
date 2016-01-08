@@ -17,7 +17,6 @@
 var util = require('util');
 var msRest = require('ms-rest');
 var ServiceClient = msRest.ServiceClient;
-var WebResource = msRest.WebResource;
 
 var models = require('./models');
 var operations = require('./operations');
@@ -49,7 +48,7 @@ function AutoRestRFC1123DateTimeTestService(baseUri, options) {
   }
 
   this.datetimerfc1123 = new operations.Datetimerfc1123(this);
-  this._models = models;
+  this.models = models;
 }
 
 util.inherits(AutoRestRFC1123DateTimeTestService, ServiceClient);

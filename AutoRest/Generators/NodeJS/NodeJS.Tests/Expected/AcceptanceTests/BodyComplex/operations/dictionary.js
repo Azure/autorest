@@ -105,9 +105,9 @@ Dictionary.prototype.getValid = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -127,7 +127,7 @@ Dictionary.prototype.getValid = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['DictionaryWrapper']().mapper();
+          var resultMapper = new client.models['DictionaryWrapper']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -190,7 +190,7 @@ Dictionary.prototype.putValid = function (options, callback) {
   try {
     if ((defaultProgram !== null && defaultProgram !== undefined))
     {
-      complexBody = new client._models['DictionaryWrapper']();
+      complexBody = new client.models['DictionaryWrapper']();
       complexBody.defaultProgram = defaultProgram;
       if (complexBody === null || complexBody === undefined) {
         throw new Error('complexBody cannot be null or undefined.');
@@ -226,7 +226,7 @@ Dictionary.prototype.putValid = function (options, callback) {
   var requestModel = null;
   try {
     if (complexBody !== null && complexBody !== undefined) {
-      var requestModelMapper = new client._models['DictionaryWrapper']().mapper();
+      var requestModelMapper = new client.models['DictionaryWrapper']().mapper();
       requestModel = msRest.serialize(requestModelMapper, complexBody, 'complexBody', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -262,9 +262,9 @@ Dictionary.prototype.putValid = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -359,9 +359,9 @@ Dictionary.prototype.getEmpty = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -381,7 +381,7 @@ Dictionary.prototype.getEmpty = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['DictionaryWrapper']().mapper();
+          var resultMapper = new client.models['DictionaryWrapper']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -444,7 +444,7 @@ Dictionary.prototype.putEmpty = function (options, callback) {
   try {
     if ((defaultProgram !== null && defaultProgram !== undefined))
     {
-      complexBody = new client._models['DictionaryWrapper']();
+      complexBody = new client.models['DictionaryWrapper']();
       complexBody.defaultProgram = defaultProgram;
       if (complexBody === null || complexBody === undefined) {
         throw new Error('complexBody cannot be null or undefined.');
@@ -480,7 +480,7 @@ Dictionary.prototype.putEmpty = function (options, callback) {
   var requestModel = null;
   try {
     if (complexBody !== null && complexBody !== undefined) {
-      var requestModelMapper = new client._models['DictionaryWrapper']().mapper();
+      var requestModelMapper = new client.models['DictionaryWrapper']().mapper();
       requestModel = msRest.serialize(requestModelMapper, complexBody, 'complexBody', client);
     }
     requestContent = JSON.stringify(requestModel);
@@ -516,9 +516,9 @@ Dictionary.prototype.putEmpty = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -613,9 +613,9 @@ Dictionary.prototype.getNull = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -635,7 +635,7 @@ Dictionary.prototype.getNull = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['DictionaryWrapper']().mapper();
+          var resultMapper = new client.models['DictionaryWrapper']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {
@@ -728,9 +728,9 @@ Dictionary.prototype.getNotProvided = function (options, callback) {
                                                                  parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client._models['ErrorModel']().mapper();
+          var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
         }
       } catch (defaultError) {
@@ -750,7 +750,7 @@ Dictionary.prototype.getNotProvided = function (options, callback) {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          var resultMapper = new client._models['DictionaryWrapper']().mapper();
+          var resultMapper = new client.models['DictionaryWrapper']().mapper();
           result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
         }
       } catch (error) {

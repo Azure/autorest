@@ -46,36 +46,4 @@ IntWrapper.prototype.mapper = function () {
   };
 };
 
-/**
- * Validate the payload against the IntWrapper schema
- *
- * @param {JSON} payload
- *
- */
-IntWrapper.prototype.serialize = function () {
-  var payload = {};
-  if (this['value'] === null || this['value'] === undefined || typeof this['value'] !== 'number') {
-    throw new Error('this[\'value\'] cannot be null or undefined and it must be of type number.');
-  }
-  payload['value'] = this['value'];
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to IntWrapper schema
- *
- * @param {JSON} instance
- *
- */
-IntWrapper.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['value'] !== undefined) {
-      this['value'] = instance['value'];
-    }
-  }
-
-  return this;
-};
-
 module.exports = IntWrapper;

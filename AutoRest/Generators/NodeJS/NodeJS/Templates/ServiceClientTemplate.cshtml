@@ -17,7 +17,10 @@
 var util = require('util');
 var msRest = require('ms-rest');
 var ServiceClient = msRest.ServiceClient;
-var WebResource = msRest.WebResource;
+@if (Model.MethodTemplateModels.Any())
+{
+@:var WebResource = msRest.WebResource;
+}
 
 @EmptyLine
 @if (Model.ModelTypes.Any())
@@ -85,7 +88,7 @@ function @(Model.Name)(@(Model.RequiredConstructorParameters), options) {
   
   @if (Model.ModelTypes.Any())
   {
-  @:this._models = models;
+  @:this.models = models;
   }
 }
 @EmptyLine

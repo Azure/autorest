@@ -46,38 +46,4 @@ D.prototype.mapper = function () {
   };
 };
 
-/**
- * Validate the payload against the D schema
- *
- * @param {JSON} payload
- *
- */
-D.prototype.serialize = function () {
-  var payload = {};
-  if (this['httpStatusCode'] !== null && this['httpStatusCode'] !== undefined) {
-    if (typeof this['httpStatusCode'].valueOf() !== 'string') {
-      throw new Error('this[\'httpStatusCode\'] must be of type string.');
-    }
-    payload['httpStatusCode'] = this['httpStatusCode'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to D schema
- *
- * @param {JSON} instance
- *
- */
-D.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['httpStatusCode'] !== undefined) {
-      this['httpStatusCode'] = instance['httpStatusCode'];
-    }
-  }
-
-  return this;
-};
-
 module.exports = D;

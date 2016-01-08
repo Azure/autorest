@@ -15,10 +15,8 @@
 'use strict';
 
 var util = require('util');
-var msRest = require('ms-rest');
 var msRestAzure = require('ms-rest-azure');
 var ServiceClient = msRestAzure.AzureServiceClient;
-var WebResource = msRest.WebResource;
 
 var models = require('./models');
 var operations = require('./operations');
@@ -75,7 +73,7 @@ function AutoRestAzureSpecialParametersTestClient(credentials, subscriptionId, b
   this.skipUrlEncoding = new operations.SkipUrlEncoding(this);
   this.odata = new operations.Odata(this);
   this.header = new operations.Header(this);
-  this._models = models;
+  this.models = models;
 }
 
 util.inherits(AutoRestAzureSpecialParametersTestClient, ServiceClient);

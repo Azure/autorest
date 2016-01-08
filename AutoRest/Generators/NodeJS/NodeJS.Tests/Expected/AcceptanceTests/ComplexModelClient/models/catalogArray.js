@@ -58,47 +58,4 @@ CatalogArray.prototype.mapper = function () {
   };
 };
 
-/**
- * Validate the payload against the CatalogArray schema
- *
- * @param {JSON} payload
- *
- */
-CatalogArray.prototype.serialize = function () {
-  var payload = {};
-  if (util.isArray(this['productArray'])) {
-    payload['productArray'] = [];
-    for (var i = 0; i < this['productArray'].length; i++) {
-      if (this['productArray'][i]) {
-        payload['productArray'][i] = this['productArray'][i].serialize();
-      }
-    }
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to CatalogArray schema
- *
- * @param {JSON} instance
- *
- */
-CatalogArray.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['productArray']) {
-      var tempInstanceproductArray = [];
-      instance['productArray'].forEach(function(element) {
-        if (element) {
-          element = new models['Product']().deserialize(element);
-        }
-        tempInstanceproductArray.push(element);
-      });
-      this['productArray'] = tempInstanceproductArray;
-    }
-  }
-
-  return this;
-};
-
 module.exports = CatalogArray;

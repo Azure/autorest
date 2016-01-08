@@ -17,7 +17,6 @@
 var util = require('util');
 var msRest = require('ms-rest');
 var ServiceClient = msRest.ServiceClient;
-var WebResource = msRest.WebResource;
 
 var models = require('./models');
 var operations = require('./operations');
@@ -55,7 +54,7 @@ function AutoRestComplexTestService(baseUri, options) {
   this.inheritance = new operations.Inheritance(this);
   this.polymorphism = new operations.Polymorphism(this);
   this.polymorphicrecursive = new operations.Polymorphicrecursive(this);
-  this._models = models;
+  this.models = models;
 }
 
 util.inherits(AutoRestComplexTestService, ServiceClient);

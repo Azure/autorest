@@ -55,47 +55,4 @@ Product.prototype.mapper = function () {
   };
 };
 
-/**
- * Validate the payload against the Product schema
- *
- * @param {JSON} payload
- *
- */
-Product.prototype.serialize = function () {
-  var payload = {};
-  if (this['id'] === null || this['id'] === undefined || typeof this['id'] !== 'number') {
-    throw new Error('this[\'id\'] cannot be null or undefined and it must be of type number.');
-  }
-  payload['id'] = this['id'];
-
-  if (this['name'] !== null && this['name'] !== undefined) {
-    if (typeof this['name'].valueOf() !== 'string') {
-      throw new Error('this[\'name\'] must be of type string.');
-    }
-    payload['name'] = this['name'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to Product schema
- *
- * @param {JSON} instance
- *
- */
-Product.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['id'] !== undefined) {
-      this['id'] = instance['id'];
-    }
-
-    if (instance['name'] !== undefined) {
-      this['name'] = instance['name'];
-    }
-  }
-
-  return this;
-};
-
 module.exports = Product;

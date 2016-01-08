@@ -104,42 +104,4 @@ Sawshark.prototype.mapper = function () {
   };
 };
 
-/**
- * Validate the payload against the Sawshark schema
- *
- * @param {JSON} payload
- *
- */
-Sawshark.prototype.serialize = function () {
-  var payload = Sawshark['super_'].prototype.serialize.call(this);
-  if (this['picture']) {
-    if (!Buffer.isBuffer(this['picture'])) {
-      throw new Error('this[\'picture\'] must be of type buffer.');
-    }
-    payload['picture'] = this['picture'].toString('base64');
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to Sawshark schema
- *
- * @param {JSON} instance
- *
- */
-Sawshark.prototype.deserialize = function (instance) {
-  Sawshark['super_'].prototype.deserialize.call(this, instance);
-  if (instance) {
-    if (instance['picture']) {
-      this['picture'] = new Buffer(instance['picture'], 'base64');
-    }
-    else if (instance['picture'] !== undefined) {
-      this['picture'] = instance['picture'];
-    }
-  }
-
-  return this;
-};
-
 module.exports = Sawshark;

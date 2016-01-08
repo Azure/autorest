@@ -32,11 +32,11 @@ return client.pipeline(httpRequest, function (err, response, responseBody) {
       {
           if (!string.IsNullOrEmpty(((CompositeType)Model.DefaultResponse.Body).PolymorphicDiscriminator))
           {
-      @:error.body = new client._models.discriminators[parsedErrorResponse['@(((CompositeType)Model.DefaultResponse.Body).PolymorphicDiscriminator)']]();
+      @:error.body = new client.models.discriminators[parsedErrorResponse['@(((CompositeType)Model.DefaultResponse.Body).PolymorphicDiscriminator)']]();
           }
           else
           {
-      @:error.body = new client._models['@(Model.DefaultResponse.Body.Name)']();
+      @:error.body = new client.models['@(Model.DefaultResponse.Body.Name)']();
           }
       }
       else

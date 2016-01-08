@@ -55,49 +55,4 @@ ErrorModel.prototype.mapper = function () {
   };
 };
 
-/**
- * Validate the payload against the ErrorModel schema
- *
- * @param {JSON} payload
- *
- */
-ErrorModel.prototype.serialize = function () {
-  var payload = {};
-  if (this['code'] !== null && this['code'] !== undefined) {
-    if (typeof this['code'] !== 'number') {
-      throw new Error('this[\'code\'] must be of type number.');
-    }
-    payload['code'] = this['code'];
-  }
-
-  if (this['message'] !== null && this['message'] !== undefined) {
-    if (typeof this['message'].valueOf() !== 'string') {
-      throw new Error('this[\'message\'] must be of type string.');
-    }
-    payload['message'] = this['message'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to ErrorModel schema
- *
- * @param {JSON} instance
- *
- */
-ErrorModel.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['code'] !== undefined) {
-      this['code'] = instance['code'];
-    }
-
-    if (instance['message'] !== undefined) {
-      this['message'] = instance['message'];
-    }
-  }
-
-  return this;
-};
-
 module.exports = ErrorModel;
