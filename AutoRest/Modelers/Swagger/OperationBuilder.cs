@@ -57,8 +57,8 @@ namespace Microsoft.Rest.Modeler.Swagger
                 SerializedName = _operation.OperationId
             };
 
-            method.RequestContentType = _effectiveConsumes.FirstOrDefault() ?? APP_JSON_MIME;
-            string produce = _effectiveConsumes.FirstOrDefault(s => s.StartsWith(APP_JSON_MIME, StringComparison.OrdinalIgnoreCase));
+            method.RequestContentType = _effectiveProduces.FirstOrDefault() ?? APP_JSON_MIME;
+            string produce = _effectiveProduces.FirstOrDefault(s => s.StartsWith(APP_JSON_MIME, StringComparison.OrdinalIgnoreCase));
             if (!string.IsNullOrEmpty(produce))
             {
                 method.RequestContentType = produce;
