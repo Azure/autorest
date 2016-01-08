@@ -240,7 +240,7 @@ namespace Fixtures.AcceptanceTestsBodyFormData
             // Serialize Request    
             StreamContent _fileStreamContent = new StreamContent(fileContent);
             _httpRequest.Content = _fileStreamContent;
-            _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/octet-stream");
+            _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
             if (_shouldTrace)
             {

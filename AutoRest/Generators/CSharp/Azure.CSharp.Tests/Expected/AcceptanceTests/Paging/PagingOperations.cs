@@ -1126,7 +1126,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// </param>
         /// <param name='clientRequestId'>
         /// </param>
-        /// <param name='pagingGetMultiplePagesOptions'>
+        /// <param name='pagingGetMultiplePagesNextOptions'>
         /// Additional parameters for the operation
         /// </param>
         /// <param name='customHeaders'>
@@ -1135,21 +1135,21 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<IPage<Product>>> GetMultiplePagesNextWithHttpMessagesAsync(string nextPageLink, string clientRequestId = default(string), PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = default(PagingGetMultiplePagesOptions), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<IPage<Product>>> GetMultiplePagesNextWithHttpMessagesAsync(string nextPageLink, string clientRequestId = default(string), PagingGetMultiplePagesNextOptions pagingGetMultiplePagesNextOptions = default(PagingGetMultiplePagesNextOptions), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (nextPageLink == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "nextPageLink");
             }
             int? maxresults = null;
-            if (pagingGetMultiplePagesOptions != null)
+            if (pagingGetMultiplePagesNextOptions != null)
             {
-                maxresults = pagingGetMultiplePagesOptions.Maxresults;
+                maxresults = pagingGetMultiplePagesNextOptions.Maxresults;
             }
             int? timeout = null;
-            if (pagingGetMultiplePagesOptions != null)
+            if (pagingGetMultiplePagesNextOptions != null)
             {
-                timeout = pagingGetMultiplePagesOptions.Timeout;
+                timeout = pagingGetMultiplePagesNextOptions.Timeout;
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;

@@ -260,12 +260,12 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             /// <param name='clientRequestId'>
             /// </param>
-            /// <param name='pagingGetMultiplePagesOptions'>
+            /// <param name='pagingGetMultiplePagesNextOptions'>
             /// Additional parameters for the operation
             /// </param>
-            public static IPage<Product> GetMultiplePagesNext(this IPagingOperations operations, string nextPageLink, string clientRequestId = default(string), PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = default(PagingGetMultiplePagesOptions))
+            public static IPage<Product> GetMultiplePagesNext(this IPagingOperations operations, string nextPageLink, string clientRequestId = default(string), PagingGetMultiplePagesNextOptions pagingGetMultiplePagesNextOptions = default(PagingGetMultiplePagesNextOptions))
             {
-                return Task.Factory.StartNew(s => ((IPagingOperations)s).GetMultiplePagesNextAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((IPagingOperations)s).GetMultiplePagesNextAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesNextOptions), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -279,15 +279,15 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             /// <param name='clientRequestId'>
             /// </param>
-            /// <param name='pagingGetMultiplePagesOptions'>
+            /// <param name='pagingGetMultiplePagesNextOptions'>
             /// Additional parameters for the operation
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<IPage<Product>> GetMultiplePagesNextAsync( this IPagingOperations operations, string nextPageLink, string clientRequestId = default(string), PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = default(PagingGetMultiplePagesOptions), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<IPage<Product>> GetMultiplePagesNextAsync( this IPagingOperations operations, string nextPageLink, string clientRequestId = default(string), PagingGetMultiplePagesNextOptions pagingGetMultiplePagesNextOptions = default(PagingGetMultiplePagesNextOptions), CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetMultiplePagesNextWithHttpMessagesAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions, null, cancellationToken).ConfigureAwait(false);
+                var _result = await operations.GetMultiplePagesNextWithHttpMessagesAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesNextOptions, null, cancellationToken).ConfigureAwait(false);
                 return _result.Body;
             }
 

@@ -114,7 +114,7 @@ namespace Microsoft.Rest.Generator.Azure
                 }
                 else
                 {
-                    Logger.LogWarning(string.Format(Resources.HeadMethodPossibleIncorrectSpecification, method.Name));
+                    Logger.LogWarning(string.Format(CultureInfo.InvariantCulture, Resources.HeadMethodPossibleIncorrectSpecification, method.Name));
                 }
             }
         }
