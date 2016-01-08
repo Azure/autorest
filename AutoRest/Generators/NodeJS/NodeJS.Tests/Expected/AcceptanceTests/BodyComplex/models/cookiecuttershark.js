@@ -19,11 +19,80 @@ var util = require('util');
  * Initializes a new instance of the Cookiecuttershark class.
  * @constructor
  */
-function Cookiecuttershark(parameters) {
-  Cookiecuttershark['super_'].call(this, parameters);
+function Cookiecuttershark() {
+  Cookiecuttershark['super_'].call(this);
 }
 
 util.inherits(Cookiecuttershark, models['Shark']);
 
+/**
+ * Defines the metadata of Cookiecuttershark
+ *
+ * @returns {object} metadata of Cookiecuttershark
+ *
+ */
+Cookiecuttershark.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'cookiecuttershark',
+    type: {
+      name: 'Composite',
+      className: 'Cookiecuttershark',
+      modelProperties: {
+        species: {
+          required: false,
+          serializedName: 'species',
+          type: {
+            name: 'String'
+          }
+        },
+        length: {
+          required: true,
+          serializedName: 'length',
+          type: {
+            name: 'Number'
+          }
+        },
+        siblings: {
+          required: false,
+          serializedName: 'siblings',
+          type: {
+            name: 'Sequence',
+            element: {
+                required: false,
+                serializedName: 'FishElementType',
+                type: {
+                  name: 'Composite',
+                  polymorphicDiscriminator: 'fishtype',
+                  className: 'Fish'
+                }
+            }
+          }
+        },
+        fishtype: {
+          required: true,
+          serializedName: 'fishtype',
+          type: {
+            name: 'String'
+          }
+        },
+        age: {
+          required: false,
+          serializedName: 'age',
+          type: {
+            name: 'Number'
+          }
+        },
+        birthday: {
+          required: true,
+          serializedName: 'birthday',
+          type: {
+            name: 'DateTime'
+          }
+        }
+      }
+    }
+  };
+};
 
 module.exports = Cookiecuttershark;

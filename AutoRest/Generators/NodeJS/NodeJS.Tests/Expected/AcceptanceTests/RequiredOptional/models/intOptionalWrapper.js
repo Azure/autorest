@@ -17,14 +17,34 @@
  * @member {number} [value]
  * 
  */
-function IntOptionalWrapper(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.value !== undefined) {
-      this.value = parameters.value;
-    }
-  }    
+function IntOptionalWrapper() {
 }
 
+/**
+ * Defines the metadata of IntOptionalWrapper
+ *
+ * @returns {object} metadata of IntOptionalWrapper
+ *
+ */
+IntOptionalWrapper.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'int-optional-wrapper',
+    type: {
+      name: 'Composite',
+      className: 'IntOptionalWrapper',
+      modelProperties: {
+        value: {
+          required: false,
+          serializedName: 'value',
+          type: {
+            name: 'Number'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the IntOptionalWrapper schema

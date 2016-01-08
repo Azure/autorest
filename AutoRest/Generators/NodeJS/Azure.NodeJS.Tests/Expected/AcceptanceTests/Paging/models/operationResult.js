@@ -19,14 +19,34 @@
  * 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'.
  * 
  */
-function OperationResult(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.status !== undefined) {
-      this.status = parameters.status;
-    }
-  }    
+function OperationResult() {
 }
 
+/**
+ * Defines the metadata of OperationResult
+ *
+ * @returns {object} metadata of OperationResult
+ *
+ */
+OperationResult.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'OperationResult',
+    type: {
+      name: 'Composite',
+      className: 'OperationResult',
+      modelProperties: {
+        status: {
+          required: false,
+          serializedName: 'status',
+          type: {
+            name: 'String'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the OperationResult schema

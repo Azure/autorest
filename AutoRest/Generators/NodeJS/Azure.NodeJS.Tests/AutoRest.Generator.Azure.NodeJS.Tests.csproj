@@ -76,6 +76,10 @@
       <Link>AutoRest.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="..\..\..\TestServer\swagger\azure-parameter-grouping.json">
+      <Link>Swagger\azure-parameter-grouping.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="..\..\..\TestServer\swagger\storage.json">
       <Link>Swagger\storage.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

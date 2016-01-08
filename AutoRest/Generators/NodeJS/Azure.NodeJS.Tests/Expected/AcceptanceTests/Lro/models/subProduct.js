@@ -25,19 +25,51 @@ var util = require('util');
  * 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'.
  * 
  */
-function SubProduct(parameters) {
-  SubProduct['super_'].call(this, parameters);
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.provisioningState !== undefined) {
-      this.provisioningState = parameters.provisioningState;
-    }
-    if (parameters.provisioningStateValues !== undefined) {
-      this.provisioningStateValues = parameters.provisioningStateValues;
-    }
-  }    
+function SubProduct() {
+  SubProduct['super_'].call(this);
 }
 
 util.inherits(SubProduct, models['SubResource']);
+
+/**
+ * Defines the metadata of SubProduct
+ *
+ * @returns {object} metadata of SubProduct
+ *
+ */
+SubProduct.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'SubProduct',
+    type: {
+      name: 'Composite',
+      className: 'SubProduct',
+      modelProperties: {
+        id: {
+          required: false,
+          serializedName: 'id',
+          type: {
+            name: 'String'
+          }
+        },
+        provisioningState: {
+          required: false,
+          serializedName: 'properties.provisioningState',
+          type: {
+            name: 'String'
+          }
+        },
+        provisioningStateValues: {
+          required: false,
+          serializedName: 'properties.provisioningStateValues',
+          type: {
+            name: 'String'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the SubProduct schema

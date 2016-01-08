@@ -25,27 +25,67 @@ var util = require('util');
  * @member {string} [image] Image URL representing the product.
  * 
  */
-function Product(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.displayNames) {
-      var tempParametersdisplayNames = [];
-      parameters.displayNames.forEach(function(element) {
-        if (element !== undefined) {
-          element = element;
-        }
-        tempParametersdisplayNames.push(element);
-      });
-      this.displayNames = tempParametersdisplayNames;
-    }
-    if (parameters.capacity !== undefined) {
-      this.capacity = parameters.capacity;
-    }
-    if (parameters.image !== undefined) {
-      this.image = parameters.image;
-    }
-  }    
+function Product() {
 }
 
+/**
+ * Defines the metadata of Product
+ *
+ * @returns {object} metadata of Product
+ *
+ */
+Product.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'Product',
+    type: {
+      name: 'Composite',
+      className: 'Product',
+      modelProperties: {
+        displayNames: {
+          required: false,
+          serializedName: 'display_names',
+          constraints: {
+            MaxItems: 6,
+            MinItems: 0,
+            UniqueItems: true
+          },
+          type: {
+            name: 'Sequence',
+            element: {
+                required: false,
+                serializedName: 'StringElementType',
+                type: {
+                  name: 'String'
+                }
+            }
+          }
+        },
+        capacity: {
+          required: false,
+          serializedName: 'capacity',
+          constraints: {
+            ExclusiveMaximum: 100,
+            ExclusiveMinimum: 0
+          },
+          type: {
+            name: 'Number'
+          }
+        },
+        image: {
+          required: false,
+          serializedName: 'image',
+          constraints: {
+            Pattern: 'http://\w+'
+          },
+          type: {
+            name: 'String'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the Product schema
@@ -118,11 +158,11 @@ Product.prototype.deserialize = function (instance) {
   if (instance) {
     if (instance['display_names']) {
       var tempInstancedisplayNames = [];
-      instance['display_names'].forEach(function(element1) {
-        if (element1 !== undefined) {
-          element1 = element1;
+      instance['display_names'].forEach(function(element) {
+        if (element !== undefined) {
+          element = element;
         }
-        tempInstancedisplayNames.push(element1);
+        tempInstancedisplayNames.push(element);
       });
       this['displayNames'] = tempInstancedisplayNames;
     }

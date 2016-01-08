@@ -21,26 +21,49 @@ var util = require('util');
  * @member {object} [productDictionaryOfArray] Dictionary of Array of product
  * 
  */
-function CatalogDictionaryOfArray(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.productDictionaryOfArray) {
-      this.productDictionaryOfArray = {};
-      for(var valueElement in parameters.productDictionaryOfArray) {
-        if (parameters.productDictionaryOfArray[valueElement]) {
-          var tempParametersproductDictionaryOfArrayvalueElement = [];
-          parameters.productDictionaryOfArray[valueElement].forEach(function(element) {
-            if (element) {
-              element = new models['Product'](element);
+function CatalogDictionaryOfArray() {
+}
+
+/**
+ * Defines the metadata of CatalogDictionaryOfArray
+ *
+ * @returns {object} metadata of CatalogDictionaryOfArray
+ *
+ */
+CatalogDictionaryOfArray.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'CatalogDictionaryOfArray',
+    type: {
+      name: 'Composite',
+      className: 'CatalogDictionaryOfArray',
+      modelProperties: {
+        productDictionaryOfArray: {
+          required: false,
+          serializedName: 'productDictionaryOfArray',
+          type: {
+            name: 'Dictionary',
+            value: {
+                required: false,
+                serializedName: 'ArrayElementType',
+                type: {
+                  name: 'Sequence',
+                  element: {
+                      required: false,
+                      serializedName: 'ProductElementType',
+                      type: {
+                        name: 'Composite',
+                        className: 'Product'
+                      }
+                  }
+                }
             }
-            tempParametersproductDictionaryOfArrayvalueElement.push(element);
-          });
-          this.productDictionaryOfArray[valueElement] = tempParametersproductDictionaryOfArrayvalueElement;
+          }
         }
       }
     }
-  }    
-}
-
+  };
+};
 
 /**
  * Validate the payload against the CatalogDictionaryOfArray schema
@@ -52,17 +75,17 @@ CatalogDictionaryOfArray.prototype.serialize = function () {
   var payload = {};
   if (this['productDictionaryOfArray'] && typeof this['productDictionaryOfArray'] === 'object') {
     payload['productDictionaryOfArray'] = {};
-    for(var valueElement1 in this['productDictionaryOfArray']) {
-      if (util.isArray(this['productDictionaryOfArray'][valueElement1])) {
-        payload['productDictionaryOfArray'][valueElement1] = [];
-        for (var i = 0; i < this['productDictionaryOfArray'][valueElement1].length; i++) {
-          if (this['productDictionaryOfArray'][valueElement1][i]) {
-            payload['productDictionaryOfArray'][valueElement1][i] = this['productDictionaryOfArray'][valueElement1][i].serialize();
+    for(var valueElement in this['productDictionaryOfArray']) {
+      if (util.isArray(this['productDictionaryOfArray'][valueElement])) {
+        payload['productDictionaryOfArray'][valueElement] = [];
+        for (var i = 0; i < this['productDictionaryOfArray'][valueElement].length; i++) {
+          if (this['productDictionaryOfArray'][valueElement][i]) {
+            payload['productDictionaryOfArray'][valueElement][i] = this['productDictionaryOfArray'][valueElement][i].serialize();
           }
         }
       }
       else {
-        payload['productDictionaryOfArray'][valueElement1] = this['productDictionaryOfArray'][valueElement1];
+        payload['productDictionaryOfArray'][valueElement] = this['productDictionaryOfArray'][valueElement];
       }
     }
   }
@@ -80,17 +103,17 @@ CatalogDictionaryOfArray.prototype.deserialize = function (instance) {
   if (instance) {
     if (instance['productDictionaryOfArray']) {
       this['productDictionaryOfArray'] = {};
-      for(var valueElement2 in instance['productDictionaryOfArray']) {
+      for(var valueElement1 in instance['productDictionaryOfArray']) {
         if (instance['productDictionaryOfArray'] !== null && instance['productDictionaryOfArray'] !== undefined) {
-          if (instance['productDictionaryOfArray'][valueElement2]) {
-            var tempInstanceproductDictionaryOfArrayvalueElement2 = [];
-            instance['productDictionaryOfArray'][valueElement2].forEach(function(element1) {
-              if (element1) {
-                element1 = new models['Product']().deserialize(element1);
+          if (instance['productDictionaryOfArray'][valueElement1]) {
+            var tempInstanceproductDictionaryOfArrayvalueElement1 = [];
+            instance['productDictionaryOfArray'][valueElement1].forEach(function(element) {
+              if (element) {
+                element = new models['Product']().deserialize(element);
               }
-              tempInstanceproductDictionaryOfArrayvalueElement2.push(element1);
+              tempInstanceproductDictionaryOfArrayvalueElement1.push(element);
             });
-            this['productDictionaryOfArray'][valueElement2] = tempInstanceproductDictionaryOfArrayvalueElement2;
+            this['productDictionaryOfArray'][valueElement1] = tempInstanceproductDictionaryOfArrayvalueElement1;
           }
         }
       }

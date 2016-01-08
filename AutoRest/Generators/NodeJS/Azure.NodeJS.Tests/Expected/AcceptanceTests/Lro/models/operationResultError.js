@@ -19,17 +19,41 @@
  * @member {string} [message] The detailed arror message
  * 
  */
-function OperationResultError(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.code !== undefined) {
-      this.code = parameters.code;
-    }
-    if (parameters.message !== undefined) {
-      this.message = parameters.message;
-    }
-  }    
+function OperationResultError() {
 }
 
+/**
+ * Defines the metadata of OperationResultError
+ *
+ * @returns {object} metadata of OperationResultError
+ *
+ */
+OperationResultError.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'OperationResult_error',
+    type: {
+      name: 'Composite',
+      className: 'OperationResultError',
+      modelProperties: {
+        code: {
+          required: false,
+          serializedName: 'code',
+          type: {
+            name: 'Number'
+          }
+        },
+        message: {
+          required: false,
+          serializedName: 'message',
+          type: {
+            name: 'String'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the OperationResultError schema

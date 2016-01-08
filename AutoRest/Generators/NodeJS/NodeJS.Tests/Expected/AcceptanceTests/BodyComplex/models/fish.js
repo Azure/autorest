@@ -27,30 +27,65 @@ var util = require('util');
  * @member {string} fishtype Polymorhpic Discriminator
  * 
  */
-function Fish(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.species !== undefined) {
-      this.species = parameters.species;
-    }
-    if (parameters.length !== undefined) {
-      this.length = parameters.length;
-    }
-    if (parameters.siblings) {
-      var tempParameterssiblings = [];
-      parameters.siblings.forEach(function(element) {
-        if (element) {
-          element = new models.discriminators[element['fishtype']](element);
-        }
-        tempParameterssiblings.push(element);
-      });
-      this.siblings = tempParameterssiblings;
-    }
-    if (parameters.fishtype !== undefined) {
-      this.fishtype = parameters.fishtype;
-    }
-  }    
+function Fish() {
 }
 
+/**
+ * Defines the metadata of Fish
+ *
+ * @returns {object} metadata of Fish
+ *
+ */
+Fish.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'Fish',
+    type: {
+      name: 'Composite',
+      polymorphicDiscriminator: 'fishtype',
+      className: 'Fish',
+      modelProperties: {
+        species: {
+          required: false,
+          serializedName: 'species',
+          type: {
+            name: 'String'
+          }
+        },
+        length: {
+          required: true,
+          serializedName: 'length',
+          type: {
+            name: 'Number'
+          }
+        },
+        siblings: {
+          required: false,
+          serializedName: 'siblings',
+          type: {
+            name: 'Sequence',
+            element: {
+                required: false,
+                serializedName: 'FishElementType',
+                type: {
+                  name: 'Composite',
+                  polymorphicDiscriminator: 'fishtype',
+                  className: 'Fish'
+                }
+            }
+          }
+        },
+        fishtype: {
+          required: true,
+          serializedName: 'fishtype',
+          type: {
+            name: 'String'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the Fish schema
@@ -111,11 +146,11 @@ Fish.prototype.deserialize = function (instance) {
 
     if (instance['siblings']) {
       var tempInstancesiblings = [];
-      instance['siblings'].forEach(function(element1) {
-        if (element1) {
-          element1 = new models.discriminators[element1['fishtype']]().deserialize(element1);
+      instance['siblings'].forEach(function(element) {
+        if (element) {
+          element = new models.discriminators[element['fishtype']]().deserialize(element);
         }
-        tempInstancesiblings.push(element1);
+        tempInstancesiblings.push(element);
       });
       this['siblings'] = tempInstancesiblings;
     }

@@ -17,14 +17,34 @@
  * @member {string} value
  * 
  */
-function StringWrapper(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.value !== undefined) {
-      this.value = parameters.value;
-    }
-  }    
+function StringWrapper() {
 }
 
+/**
+ * Defines the metadata of StringWrapper
+ *
+ * @returns {object} metadata of StringWrapper
+ *
+ */
+StringWrapper.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'string-wrapper',
+    type: {
+      name: 'Composite',
+      className: 'StringWrapper',
+      modelProperties: {
+        value: {
+          required: true,
+          serializedName: 'value',
+          type: {
+            name: 'String'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the StringWrapper schema

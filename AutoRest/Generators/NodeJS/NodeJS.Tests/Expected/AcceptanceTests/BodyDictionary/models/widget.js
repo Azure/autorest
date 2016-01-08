@@ -19,17 +19,41 @@
  * @member {string} [string]
  * 
  */
-function Widget(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.integer !== undefined) {
-      this.integer = parameters.integer;
-    }
-    if (parameters.string !== undefined) {
-      this.string = parameters.string;
-    }
-  }    
+function Widget() {
 }
 
+/**
+ * Defines the metadata of Widget
+ *
+ * @returns {object} metadata of Widget
+ *
+ */
+Widget.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'Widget',
+    type: {
+      name: 'Composite',
+      className: 'Widget',
+      modelProperties: {
+        integer: {
+          required: false,
+          serializedName: 'integer',
+          type: {
+            name: 'Number'
+          }
+        },
+        string: {
+          required: false,
+          serializedName: 'string',
+          type: {
+            name: 'String'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the Widget schema

@@ -17,14 +17,34 @@
  * @member {string} [statusCode]
  * 
  */
-function A(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.statusCode !== undefined) {
-      this.statusCode = parameters.statusCode;
-    }
-  }    
+function A() {
 }
 
+/**
+ * Defines the metadata of A
+ *
+ * @returns {object} metadata of A
+ *
+ */
+A.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'A',
+    type: {
+      name: 'Composite',
+      className: 'A',
+      modelProperties: {
+        statusCode: {
+          required: false,
+          serializedName: 'statusCode',
+          type: {
+            name: 'String'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the A schema

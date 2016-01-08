@@ -17,14 +17,34 @@
  * @member {string} [httpStatusCode]
  * 
  */
-function D(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.httpStatusCode !== undefined) {
-      this.httpStatusCode = parameters.httpStatusCode;
-    }
-  }    
+function D() {
 }
 
+/**
+ * Defines the metadata of D
+ *
+ * @returns {object} metadata of D
+ *
+ */
+D.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'D',
+    type: {
+      name: 'Composite',
+      className: 'D',
+      modelProperties: {
+        httpStatusCode: {
+          required: false,
+          serializedName: 'httpStatusCode',
+          type: {
+            name: 'String'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the D schema

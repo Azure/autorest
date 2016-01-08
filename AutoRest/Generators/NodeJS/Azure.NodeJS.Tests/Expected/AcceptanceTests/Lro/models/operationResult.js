@@ -27,17 +27,42 @@ var models = require('./index');
  * @member {string} [error.message] The detailed arror message
  * 
  */
-function OperationResult(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.status !== undefined) {
-      this.status = parameters.status;
-    }
-    if (parameters.error) {
-      this.error = new models['OperationResultError'](parameters.error);
-    }
-  }    
+function OperationResult() {
 }
 
+/**
+ * Defines the metadata of OperationResult
+ *
+ * @returns {object} metadata of OperationResult
+ *
+ */
+OperationResult.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'OperationResult',
+    type: {
+      name: 'Composite',
+      className: 'OperationResult',
+      modelProperties: {
+        status: {
+          required: false,
+          serializedName: 'status',
+          type: {
+            name: 'String'
+          }
+        },
+        error: {
+          required: false,
+          serializedName: 'error',
+          type: {
+            name: 'Composite',
+            className: 'OperationResultError'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the OperationResult schema

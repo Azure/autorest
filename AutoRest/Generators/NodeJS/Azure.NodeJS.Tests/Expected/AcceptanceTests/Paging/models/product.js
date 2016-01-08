@@ -23,14 +23,35 @@ var models = require('./index');
  * @member {string} [properties.name]
  * 
  */
-function Product(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.properties) {
-      this.properties = new models['ProductProperties'](parameters.properties);
-    }
-  }    
+function Product() {
 }
 
+/**
+ * Defines the metadata of Product
+ *
+ * @returns {object} metadata of Product
+ *
+ */
+Product.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'Product',
+    type: {
+      name: 'Composite',
+      className: 'Product',
+      modelProperties: {
+        properties: {
+          required: false,
+          serializedName: 'properties',
+          type: {
+            name: 'Composite',
+            className: 'ProductProperties'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the Product schema

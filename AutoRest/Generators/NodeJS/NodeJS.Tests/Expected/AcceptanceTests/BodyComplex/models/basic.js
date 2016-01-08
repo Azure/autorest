@@ -22,20 +22,48 @@
  * 'Magenta', 'YELLOW', 'blacK'.
  * 
  */
-function Basic(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.id !== undefined) {
-      this.id = parameters.id;
-    }
-    if (parameters.name !== undefined) {
-      this.name = parameters.name;
-    }
-    if (parameters.color !== undefined) {
-      this.color = parameters.color;
-    }
-  }    
+function Basic() {
 }
 
+/**
+ * Defines the metadata of Basic
+ *
+ * @returns {object} metadata of Basic
+ *
+ */
+Basic.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'basic',
+    type: {
+      name: 'Composite',
+      className: 'Basic',
+      modelProperties: {
+        id: {
+          required: false,
+          serializedName: 'id',
+          type: {
+            name: 'Number'
+          }
+        },
+        name: {
+          required: false,
+          serializedName: 'name',
+          type: {
+            name: 'String'
+          }
+        },
+        color: {
+          required: false,
+          serializedName: 'color',
+          type: {
+            name: 'String'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the Basic schema

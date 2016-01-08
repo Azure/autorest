@@ -25,19 +25,86 @@ var util = require('util');
  * 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'.
  * 
  */
-function Product(parameters) {
-  Product['super_'].call(this, parameters);
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.provisioningState !== undefined) {
-      this.provisioningState = parameters.provisioningState;
-    }
-    if (parameters.provisioningStateValues !== undefined) {
-      this.provisioningStateValues = parameters.provisioningStateValues;
-    }
-  }    
+function Product() {
+  Product['super_'].call(this);
 }
 
 util.inherits(Product, models['Resource']);
+
+/**
+ * Defines the metadata of Product
+ *
+ * @returns {object} metadata of Product
+ *
+ */
+Product.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'Product',
+    type: {
+      name: 'Composite',
+      className: 'Product',
+      modelProperties: {
+        id: {
+          required: false,
+          serializedName: 'id',
+          type: {
+            name: 'String'
+          }
+        },
+        type: {
+          required: false,
+          serializedName: 'type',
+          type: {
+            name: 'String'
+          }
+        },
+        tags: {
+          required: false,
+          serializedName: 'tags',
+          type: {
+            name: 'Dictionary',
+            value: {
+                required: false,
+                serializedName: 'StringElementType',
+                type: {
+                  name: 'String'
+                }
+            }
+          }
+        },
+        location: {
+          required: false,
+          serializedName: 'location',
+          type: {
+            name: 'String'
+          }
+        },
+        name: {
+          required: false,
+          serializedName: 'name',
+          type: {
+            name: 'String'
+          }
+        },
+        provisioningState: {
+          required: false,
+          serializedName: 'properties.provisioningState',
+          type: {
+            name: 'String'
+          }
+        },
+        provisioningStateValues: {
+          required: false,
+          serializedName: 'properties.provisioningStateValues',
+          type: {
+            name: 'String'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the Product schema

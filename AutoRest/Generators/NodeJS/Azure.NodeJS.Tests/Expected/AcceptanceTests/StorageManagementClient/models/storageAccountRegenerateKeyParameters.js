@@ -18,14 +18,35 @@
  * 'key1', 'key2'.
  * 
  */
-function StorageAccountRegenerateKeyParameters(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.keyName !== undefined) {
-      this.keyName = parameters.keyName;
-    }
-  }    
+function StorageAccountRegenerateKeyParameters() {
 }
 
+/**
+ * Defines the metadata of StorageAccountRegenerateKeyParameters
+ *
+ * @returns {object} metadata of StorageAccountRegenerateKeyParameters
+ *
+ */
+StorageAccountRegenerateKeyParameters.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'StorageAccountRegenerateKeyParameters',
+    type: {
+      name: 'Composite',
+      className: 'StorageAccountRegenerateKeyParameters',
+      modelProperties: {
+        keyName: {
+          required: false,
+          serializedName: 'keyName',
+          type: {
+            name: 'Enum',
+            allowedValues: [ 'key1', 'key2' ]
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the StorageAccountRegenerateKeyParameters schema

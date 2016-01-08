@@ -20,17 +20,41 @@
  * [field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose]
  * 
  */
-function DoubleWrapper(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.field1 !== undefined) {
-      this.field1 = parameters.field1;
-    }
-    if (parameters.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose !== undefined) {
-      this.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose = parameters.field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose;
-    }
-  }    
+function DoubleWrapper() {
 }
 
+/**
+ * Defines the metadata of DoubleWrapper
+ *
+ * @returns {object} metadata of DoubleWrapper
+ *
+ */
+DoubleWrapper.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'double-wrapper',
+    type: {
+      name: 'Composite',
+      className: 'DoubleWrapper',
+      modelProperties: {
+        field1: {
+          required: false,
+          serializedName: 'field1',
+          type: {
+            name: 'Number'
+          }
+        },
+        field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose: {
+          required: false,
+          serializedName: 'field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose',
+          type: {
+            name: 'Number'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the DoubleWrapper schema

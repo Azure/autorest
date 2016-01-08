@@ -21,20 +21,48 @@
  * @member {string} [null]
  * 
  */
-function StringWrapper(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.field !== undefined) {
-      this.field = parameters.field;
-    }
-    if (parameters.empty !== undefined) {
-      this.empty = parameters.empty;
-    }
-    if (parameters.null !== undefined) {
-      this.null = parameters.null;
-    }
-  }    
+function StringWrapper() {
 }
 
+/**
+ * Defines the metadata of StringWrapper
+ *
+ * @returns {object} metadata of StringWrapper
+ *
+ */
+StringWrapper.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'string-wrapper',
+    type: {
+      name: 'Composite',
+      className: 'StringWrapper',
+      modelProperties: {
+        field: {
+          required: false,
+          serializedName: 'field',
+          type: {
+            name: 'String'
+          }
+        },
+        empty: {
+          required: false,
+          serializedName: 'empty',
+          type: {
+            name: 'String'
+          }
+        },
+        null: {
+          required: false,
+          serializedName: 'null',
+          type: {
+            name: 'String'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the StringWrapper schema

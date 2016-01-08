@@ -33,14 +33,35 @@ var models = require('./index');
  * @member {object} [recursivePoint.fooPoint.barPoint] Bar point
  * 
  */
-function Bar(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.recursivePoint) {
-      this.recursivePoint = new models['Endpoints'](parameters.recursivePoint);
-    }
-  }    
+function Bar() {
 }
 
+/**
+ * Defines the metadata of Bar
+ *
+ * @returns {object} metadata of Bar
+ *
+ */
+Bar.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'Bar',
+    type: {
+      name: 'Composite',
+      className: 'Bar',
+      modelProperties: {
+        recursivePoint: {
+          required: false,
+          serializedName: 'RecursivePoint',
+          type: {
+            name: 'Composite',
+            className: 'Endpoints'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the Bar schema

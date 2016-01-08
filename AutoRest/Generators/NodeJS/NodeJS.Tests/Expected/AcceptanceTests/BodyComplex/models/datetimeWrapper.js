@@ -19,17 +19,41 @@
  * @member {date} [now]
  * 
  */
-function DatetimeWrapper(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.field !== undefined) {
-      this.field = parameters.field;
-    }
-    if (parameters.now !== undefined) {
-      this.now = parameters.now;
-    }
-  }    
+function DatetimeWrapper() {
 }
 
+/**
+ * Defines the metadata of DatetimeWrapper
+ *
+ * @returns {object} metadata of DatetimeWrapper
+ *
+ */
+DatetimeWrapper.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'datetime-wrapper',
+    type: {
+      name: 'Composite',
+      className: 'DatetimeWrapper',
+      modelProperties: {
+        field: {
+          required: false,
+          serializedName: 'field',
+          type: {
+            name: 'DateTime'
+          }
+        },
+        now: {
+          required: false,
+          serializedName: 'now',
+          type: {
+            name: 'DateTime'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the DatetimeWrapper schema

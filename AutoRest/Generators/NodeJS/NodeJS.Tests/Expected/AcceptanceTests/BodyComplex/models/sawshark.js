@@ -21,16 +21,88 @@ var util = require('util');
  * @member {buffer} [picture]
  * 
  */
-function Sawshark(parameters) {
-  Sawshark['super_'].call(this, parameters);
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.picture !== undefined) {
-      this.picture = parameters.picture;
-    }
-  }    
+function Sawshark() {
+  Sawshark['super_'].call(this);
 }
 
 util.inherits(Sawshark, models['Shark']);
+
+/**
+ * Defines the metadata of Sawshark
+ *
+ * @returns {object} metadata of Sawshark
+ *
+ */
+Sawshark.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'sawshark',
+    type: {
+      name: 'Composite',
+      className: 'Sawshark',
+      modelProperties: {
+        species: {
+          required: false,
+          serializedName: 'species',
+          type: {
+            name: 'String'
+          }
+        },
+        length: {
+          required: true,
+          serializedName: 'length',
+          type: {
+            name: 'Number'
+          }
+        },
+        siblings: {
+          required: false,
+          serializedName: 'siblings',
+          type: {
+            name: 'Sequence',
+            element: {
+                required: false,
+                serializedName: 'FishElementType',
+                type: {
+                  name: 'Composite',
+                  polymorphicDiscriminator: 'fishtype',
+                  className: 'Fish'
+                }
+            }
+          }
+        },
+        fishtype: {
+          required: true,
+          serializedName: 'fishtype',
+          type: {
+            name: 'String'
+          }
+        },
+        age: {
+          required: false,
+          serializedName: 'age',
+          type: {
+            name: 'Number'
+          }
+        },
+        birthday: {
+          required: true,
+          serializedName: 'birthday',
+          type: {
+            name: 'DateTime'
+          }
+        },
+        picture: {
+          required: false,
+          serializedName: 'picture',
+          type: {
+            name: 'ByteArray'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the Sawshark schema

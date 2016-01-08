@@ -19,17 +19,41 @@
  * @member {string} [name]
  * 
  */
-function OdataFilter(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.id !== undefined) {
-      this.id = parameters.id;
-    }
-    if (parameters.name !== undefined) {
-      this.name = parameters.name;
-    }
-  }    
+function OdataFilter() {
 }
 
+/**
+ * Defines the metadata of OdataFilter
+ *
+ * @returns {object} metadata of OdataFilter
+ *
+ */
+OdataFilter.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'OdataFilter',
+    type: {
+      name: 'Composite',
+      className: 'OdataFilter',
+      modelProperties: {
+        id: {
+          required: false,
+          serializedName: 'id',
+          type: {
+            name: 'Number'
+          }
+        },
+        name: {
+          required: false,
+          serializedName: 'name',
+          type: {
+            name: 'String'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the OdataFilter schema

@@ -33,7 +33,7 @@ namespace Microsoft.Rest.Generator.NodeJS.Azure.Tests
         public static void SampleTestForGeneratingAzureNodeJS()
         {
             SwaggerSpecHelper.RunTests<AzureNodeJSCodeGenerator>(
-                SwaggerPath("storage.json"), ExpectedPath("StorageManagementClient"));
+                SwaggerPath("azure-parameter-grouping.json"), ExpectedPath("AzureParameterGrouping"));
         }
     }
 }

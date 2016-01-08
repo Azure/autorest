@@ -19,17 +19,41 @@
  * @member {string} [location] resource group location 'West US'
  * 
  */
-function SampleResourceGroup(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.name !== undefined) {
-      this.name = parameters.name;
-    }
-    if (parameters.location !== undefined) {
-      this.location = parameters.location;
-    }
-  }    
+function SampleResourceGroup() {
 }
 
+/**
+ * Defines the metadata of SampleResourceGroup
+ *
+ * @returns {object} metadata of SampleResourceGroup
+ *
+ */
+SampleResourceGroup.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'SampleResourceGroup',
+    type: {
+      name: 'Composite',
+      className: 'SampleResourceGroup',
+      modelProperties: {
+        name: {
+          required: false,
+          serializedName: 'name',
+          type: {
+            name: 'String'
+          }
+        },
+        location: {
+          required: false,
+          serializedName: 'location',
+          type: {
+            name: 'String'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the SampleResourceGroup schema

@@ -21,17 +21,41 @@
  * resource name.
  * 
  */
-function UsageName(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.value !== undefined) {
-      this.value = parameters.value;
-    }
-    if (parameters.localizedValue !== undefined) {
-      this.localizedValue = parameters.localizedValue;
-    }
-  }    
+function UsageName() {
 }
 
+/**
+ * Defines the metadata of UsageName
+ *
+ * @returns {object} metadata of UsageName
+ *
+ */
+UsageName.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'UsageName',
+    type: {
+      name: 'Composite',
+      className: 'UsageName',
+      modelProperties: {
+        value: {
+          required: false,
+          serializedName: 'value',
+          type: {
+            name: 'String'
+          }
+        },
+        localizedValue: {
+          required: false,
+          serializedName: 'localizedValue',
+          type: {
+            name: 'String'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the UsageName schema

@@ -17,19 +17,41 @@
  * @member {object} [defaultProgram]
  * 
  */
-function DictionaryWrapper(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.defaultProgram) {
-      this.defaultProgram = {};
-      for(var valueElement in parameters.defaultProgram) {
-        if (parameters.defaultProgram[valueElement] !== undefined) {
-          this.defaultProgram[valueElement] = parameters.defaultProgram[valueElement];
+function DictionaryWrapper() {
+}
+
+/**
+ * Defines the metadata of DictionaryWrapper
+ *
+ * @returns {object} metadata of DictionaryWrapper
+ *
+ */
+DictionaryWrapper.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'dictionary-wrapper',
+    type: {
+      name: 'Composite',
+      className: 'DictionaryWrapper',
+      modelProperties: {
+        defaultProgram: {
+          required: false,
+          serializedName: 'defaultProgram',
+          type: {
+            name: 'Dictionary',
+            value: {
+                required: false,
+                serializedName: 'StringElementType',
+                type: {
+                  name: 'String'
+                }
+            }
+          }
         }
       }
     }
-  }    
-}
-
+  };
+};
 
 /**
  * Validate the payload against the DictionaryWrapper schema
@@ -41,15 +63,15 @@ DictionaryWrapper.prototype.serialize = function () {
   var payload = {};
   if (this['defaultProgram'] && typeof this['defaultProgram'] === 'object') {
     payload['defaultProgram'] = {};
-    for(var valueElement1 in this['defaultProgram']) {
-      if (this['defaultProgram'][valueElement1] !== null && this['defaultProgram'][valueElement1] !== undefined) {
-        if (typeof this['defaultProgram'][valueElement1].valueOf() !== 'string') {
-          throw new Error('this[\'defaultProgram\'][valueElement1] must be of type string.');
+    for(var valueElement in this['defaultProgram']) {
+      if (this['defaultProgram'][valueElement] !== null && this['defaultProgram'][valueElement] !== undefined) {
+        if (typeof this['defaultProgram'][valueElement].valueOf() !== 'string') {
+          throw new Error('this[\'defaultProgram\'][valueElement] must be of type string.');
         }
-        payload['defaultProgram'][valueElement1] = this['defaultProgram'][valueElement1];
+        payload['defaultProgram'][valueElement] = this['defaultProgram'][valueElement];
       }
       else {
-        payload['defaultProgram'][valueElement1] = this['defaultProgram'][valueElement1];
+        payload['defaultProgram'][valueElement] = this['defaultProgram'][valueElement];
       }
     }
   }
@@ -67,10 +89,10 @@ DictionaryWrapper.prototype.deserialize = function (instance) {
   if (instance) {
     if (instance['defaultProgram']) {
       this['defaultProgram'] = {};
-      for(var valueElement2 in instance['defaultProgram']) {
+      for(var valueElement1 in instance['defaultProgram']) {
         if (instance['defaultProgram'] !== null && instance['defaultProgram'] !== undefined) {
-          if (instance['defaultProgram'][valueElement2] !== undefined) {
-            this['defaultProgram'][valueElement2] = instance['defaultProgram'][valueElement2];
+          if (instance['defaultProgram'][valueElement1] !== undefined) {
+            this['defaultProgram'][valueElement1] = instance['defaultProgram'][valueElement1];
           }
         }
       }

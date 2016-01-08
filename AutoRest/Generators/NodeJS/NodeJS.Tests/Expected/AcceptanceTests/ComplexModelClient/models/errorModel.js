@@ -21,20 +21,48 @@
  * @member {string} [fields]
  * 
  */
-function ErrorModel(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.code !== undefined) {
-      this.code = parameters.code;
-    }
-    if (parameters.message !== undefined) {
-      this.message = parameters.message;
-    }
-    if (parameters.fields !== undefined) {
-      this.fields = parameters.fields;
-    }
-  }    
+function ErrorModel() {
 }
 
+/**
+ * Defines the metadata of ErrorModel
+ *
+ * @returns {object} metadata of ErrorModel
+ *
+ */
+ErrorModel.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'Error',
+    type: {
+      name: 'Composite',
+      className: 'ErrorModel',
+      modelProperties: {
+        code: {
+          required: false,
+          serializedName: 'code',
+          type: {
+            name: 'Number'
+          }
+        },
+        message: {
+          required: false,
+          serializedName: 'message',
+          type: {
+            name: 'String'
+          }
+        },
+        fields: {
+          required: false,
+          serializedName: 'fields',
+          type: {
+            name: 'String'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the ErrorModel schema

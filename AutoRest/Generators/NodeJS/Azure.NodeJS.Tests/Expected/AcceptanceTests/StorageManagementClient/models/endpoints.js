@@ -33,26 +33,64 @@ var models = require('./index');
  * @member {object} [fooPoint.barPoint.recursivePoint] Recursive Endpoints
  * 
  */
-function Endpoints(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.blob !== undefined) {
-      this.blob = parameters.blob;
-    }
-    if (parameters.queue !== undefined) {
-      this.queue = parameters.queue;
-    }
-    if (parameters.table !== undefined) {
-      this.table = parameters.table;
-    }
-    if (parameters.dummyEndPoint) {
-      this.dummyEndPoint = new models['Endpoints'](parameters.dummyEndPoint);
-    }
-    if (parameters.fooPoint) {
-      this.fooPoint = new models['Foo'](parameters.fooPoint);
-    }
-  }    
+function Endpoints() {
 }
 
+/**
+ * Defines the metadata of Endpoints
+ *
+ * @returns {object} metadata of Endpoints
+ *
+ */
+Endpoints.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'Endpoints',
+    type: {
+      name: 'Composite',
+      className: 'Endpoints',
+      modelProperties: {
+        blob: {
+          required: false,
+          serializedName: 'blob',
+          type: {
+            name: 'String'
+          }
+        },
+        queue: {
+          required: false,
+          serializedName: 'queue',
+          type: {
+            name: 'String'
+          }
+        },
+        table: {
+          required: false,
+          serializedName: 'table',
+          type: {
+            name: 'String'
+          }
+        },
+        dummyEndPoint: {
+          required: false,
+          serializedName: 'dummyEndPoint',
+          type: {
+            name: 'Composite',
+            className: 'Endpoints'
+          }
+        },
+        fooPoint: {
+          required: false,
+          serializedName: 'FooPoint',
+          type: {
+            name: 'Composite',
+            className: 'Foo'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the Endpoints schema

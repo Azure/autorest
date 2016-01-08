@@ -23,19 +23,81 @@ var util = require('util');
  * @member {boolean} [iswild]
  * 
  */
-function Salmon(parameters) {
-  Salmon['super_'].call(this, parameters);
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.location !== undefined) {
-      this.location = parameters.location;
-    }
-    if (parameters.iswild !== undefined) {
-      this.iswild = parameters.iswild;
-    }
-  }    
+function Salmon() {
+  Salmon['super_'].call(this);
 }
 
 util.inherits(Salmon, models['Fish']);
+
+/**
+ * Defines the metadata of Salmon
+ *
+ * @returns {object} metadata of Salmon
+ *
+ */
+Salmon.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'salmon',
+    type: {
+      name: 'Composite',
+      className: 'Salmon',
+      modelProperties: {
+        species: {
+          required: false,
+          serializedName: 'species',
+          type: {
+            name: 'String'
+          }
+        },
+        length: {
+          required: true,
+          serializedName: 'length',
+          type: {
+            name: 'Number'
+          }
+        },
+        siblings: {
+          required: false,
+          serializedName: 'siblings',
+          type: {
+            name: 'Sequence',
+            element: {
+                required: false,
+                serializedName: 'FishElementType',
+                type: {
+                  name: 'Composite',
+                  polymorphicDiscriminator: 'fishtype',
+                  className: 'Fish'
+                }
+            }
+          }
+        },
+        fishtype: {
+          required: true,
+          serializedName: 'fishtype',
+          type: {
+            name: 'String'
+          }
+        },
+        location: {
+          required: false,
+          serializedName: 'location',
+          type: {
+            name: 'String'
+          }
+        },
+        iswild: {
+          required: false,
+          serializedName: 'iswild',
+          type: {
+            name: 'Boolean'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the Salmon schema

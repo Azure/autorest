@@ -23,19 +23,81 @@ var util = require('util');
  * @member {date} birthday
  * 
  */
-function Shark(parameters) {
-  Shark['super_'].call(this, parameters);
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.age !== undefined) {
-      this.age = parameters.age;
-    }
-    if (parameters.birthday !== undefined) {
-      this.birthday = parameters.birthday;
-    }
-  }    
+function Shark() {
+  Shark['super_'].call(this);
 }
 
 util.inherits(Shark, models['Fish']);
+
+/**
+ * Defines the metadata of Shark
+ *
+ * @returns {object} metadata of Shark
+ *
+ */
+Shark.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'shark',
+    type: {
+      name: 'Composite',
+      className: 'Shark',
+      modelProperties: {
+        species: {
+          required: false,
+          serializedName: 'species',
+          type: {
+            name: 'String'
+          }
+        },
+        length: {
+          required: true,
+          serializedName: 'length',
+          type: {
+            name: 'Number'
+          }
+        },
+        siblings: {
+          required: false,
+          serializedName: 'siblings',
+          type: {
+            name: 'Sequence',
+            element: {
+                required: false,
+                serializedName: 'FishElementType',
+                type: {
+                  name: 'Composite',
+                  polymorphicDiscriminator: 'fishtype',
+                  className: 'Fish'
+                }
+            }
+          }
+        },
+        fishtype: {
+          required: true,
+          serializedName: 'fishtype',
+          type: {
+            name: 'String'
+          }
+        },
+        age: {
+          required: false,
+          serializedName: 'age',
+          type: {
+            name: 'Number'
+          }
+        },
+        birthday: {
+          required: true,
+          serializedName: 'birthday',
+          type: {
+            name: 'DateTime'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the Shark schema

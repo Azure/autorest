@@ -29,25 +29,100 @@ var util = require('util');
  * @member {string} [provisioningState]
  * 
  */
-function FlattenedProduct(parameters) {
-  FlattenedProduct['super_'].call(this, parameters);
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.pname !== undefined) {
-      this.pname = parameters.pname;
-    }
-    if (parameters.flattenedProductType !== undefined) {
-      this.flattenedProductType = parameters.flattenedProductType;
-    }
-    if (parameters.provisioningStateValues !== undefined) {
-      this.provisioningStateValues = parameters.provisioningStateValues;
-    }
-    if (parameters.provisioningState !== undefined) {
-      this.provisioningState = parameters.provisioningState;
-    }
-  }    
+function FlattenedProduct() {
+  FlattenedProduct['super_'].call(this);
 }
 
 util.inherits(FlattenedProduct, models['Resource']);
+
+/**
+ * Defines the metadata of FlattenedProduct
+ *
+ * @returns {object} metadata of FlattenedProduct
+ *
+ */
+FlattenedProduct.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'FlattenedProduct',
+    type: {
+      name: 'Composite',
+      className: 'FlattenedProduct',
+      modelProperties: {
+        id: {
+          required: false,
+          serializedName: 'id',
+          type: {
+            name: 'String'
+          }
+        },
+        type: {
+          required: false,
+          serializedName: 'type',
+          type: {
+            name: 'String'
+          }
+        },
+        tags: {
+          required: false,
+          serializedName: 'tags',
+          type: {
+            name: 'Dictionary',
+            value: {
+                required: false,
+                serializedName: 'StringElementType',
+                type: {
+                  name: 'String'
+                }
+            }
+          }
+        },
+        location: {
+          required: false,
+          serializedName: 'location',
+          type: {
+            name: 'String'
+          }
+        },
+        name: {
+          required: false,
+          serializedName: 'name',
+          type: {
+            name: 'String'
+          }
+        },
+        pname: {
+          required: false,
+          serializedName: 'properties.pname',
+          type: {
+            name: 'String'
+          }
+        },
+        flattenedProductType: {
+          required: false,
+          serializedName: 'properties.type',
+          type: {
+            name: 'String'
+          }
+        },
+        provisioningStateValues: {
+          required: false,
+          serializedName: 'properties.provisioningStateValues',
+          type: {
+            name: 'String'
+          }
+        },
+        provisioningState: {
+          required: false,
+          serializedName: 'properties.provisioningState',
+          type: {
+            name: 'String'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the FlattenedProduct schema

@@ -19,17 +19,41 @@
  * @member {string} [message]
  * 
  */
-function ErrorModel(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.status !== undefined) {
-      this.status = parameters.status;
-    }
-    if (parameters.message !== undefined) {
-      this.message = parameters.message;
-    }
-  }    
+function ErrorModel() {
 }
 
+/**
+ * Defines the metadata of ErrorModel
+ *
+ * @returns {object} metadata of ErrorModel
+ *
+ */
+ErrorModel.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'Error',
+    type: {
+      name: 'Composite',
+      className: 'ErrorModel',
+      modelProperties: {
+        status: {
+          required: false,
+          serializedName: 'status',
+          type: {
+            name: 'Number'
+          }
+        },
+        message: {
+          required: false,
+          serializedName: 'message',
+          type: {
+            name: 'String'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the ErrorModel schema

@@ -17,14 +17,34 @@
  * @member {string} [value]
  * 
  */
-function StringOptionalWrapper(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.value !== undefined) {
-      this.value = parameters.value;
-    }
-  }    
+function StringOptionalWrapper() {
 }
 
+/**
+ * Defines the metadata of StringOptionalWrapper
+ *
+ * @returns {object} metadata of StringOptionalWrapper
+ *
+ */
+StringOptionalWrapper.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'string-optional-wrapper',
+    type: {
+      name: 'Composite',
+      className: 'StringOptionalWrapper',
+      modelProperties: {
+        value: {
+          required: false,
+          serializedName: 'value',
+          type: {
+            name: 'String'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the StringOptionalWrapper schema

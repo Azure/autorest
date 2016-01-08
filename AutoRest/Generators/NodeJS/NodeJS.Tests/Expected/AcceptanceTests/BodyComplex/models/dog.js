@@ -21,16 +21,51 @@ var util = require('util');
  * @member {string} [food]
  * 
  */
-function Dog(parameters) {
-  Dog['super_'].call(this, parameters);
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.food !== undefined) {
-      this.food = parameters.food;
-    }
-  }    
+function Dog() {
+  Dog['super_'].call(this);
 }
 
 util.inherits(Dog, models['Pet']);
+
+/**
+ * Defines the metadata of Dog
+ *
+ * @returns {object} metadata of Dog
+ *
+ */
+Dog.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'dog',
+    type: {
+      name: 'Composite',
+      className: 'Dog',
+      modelProperties: {
+        id: {
+          required: false,
+          serializedName: 'id',
+          type: {
+            name: 'Number'
+          }
+        },
+        name: {
+          required: false,
+          serializedName: 'name',
+          type: {
+            name: 'String'
+          }
+        },
+        food: {
+          required: false,
+          serializedName: 'food',
+          type: {
+            name: 'String'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the Dog schema

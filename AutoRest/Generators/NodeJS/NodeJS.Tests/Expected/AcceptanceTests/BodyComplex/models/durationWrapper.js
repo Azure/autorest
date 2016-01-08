@@ -19,14 +19,34 @@ var moment = require('moment');
  * @member {moment.duration} [field]
  * 
  */
-function DurationWrapper(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.field !== undefined) {
-      this.field = parameters.field;
-    }
-  }    
+function DurationWrapper() {
 }
 
+/**
+ * Defines the metadata of DurationWrapper
+ *
+ * @returns {object} metadata of DurationWrapper
+ *
+ */
+DurationWrapper.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'duration-wrapper',
+    type: {
+      name: 'Composite',
+      className: 'DurationWrapper',
+      modelProperties: {
+        field: {
+          required: false,
+          serializedName: 'field',
+          type: {
+            name: 'TimeSpan'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the DurationWrapper schema

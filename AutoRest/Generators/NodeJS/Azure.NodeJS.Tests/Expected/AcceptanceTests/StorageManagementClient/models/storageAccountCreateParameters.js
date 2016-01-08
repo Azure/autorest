@@ -24,16 +24,80 @@ var util = require('util');
  * 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'.
  * 
  */
-function StorageAccountCreateParameters(parameters) {
-  StorageAccountCreateParameters['super_'].call(this, parameters);
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.accountType !== undefined) {
-      this.accountType = parameters.accountType;
-    }
-  }    
+function StorageAccountCreateParameters() {
+  StorageAccountCreateParameters['super_'].call(this);
 }
 
 util.inherits(StorageAccountCreateParameters, models['Resource']);
+
+/**
+ * Defines the metadata of StorageAccountCreateParameters
+ *
+ * @returns {object} metadata of StorageAccountCreateParameters
+ *
+ */
+StorageAccountCreateParameters.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'StorageAccountCreateParameters',
+    type: {
+      name: 'Composite',
+      className: 'StorageAccountCreateParameters',
+      modelProperties: {
+        id: {
+          required: false,
+          serializedName: 'id',
+          type: {
+            name: 'String'
+          }
+        },
+        name: {
+          required: false,
+          serializedName: 'name',
+          type: {
+            name: 'String'
+          }
+        },
+        type: {
+          required: false,
+          serializedName: 'type',
+          type: {
+            name: 'String'
+          }
+        },
+        location: {
+          required: true,
+          serializedName: 'location',
+          type: {
+            name: 'String'
+          }
+        },
+        tags: {
+          required: false,
+          serializedName: 'tags',
+          type: {
+            name: 'Dictionary',
+            value: {
+                required: false,
+                serializedName: 'StringElementType',
+                type: {
+                  name: 'String'
+                }
+            }
+          }
+        },
+        accountType: {
+          required: false,
+          serializedName: 'properties.accountType',
+          type: {
+            name: 'Enum',
+            allowedValues: [ 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS' ]
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the StorageAccountCreateParameters schema

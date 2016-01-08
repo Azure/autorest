@@ -21,16 +21,44 @@ var util = require('util');
  * @member {string} [textStatusCode]
  * 
  */
-function B(parameters) {
-  B['super_'].call(this, parameters);
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.textStatusCode !== undefined) {
-      this.textStatusCode = parameters.textStatusCode;
-    }
-  }    
+function B() {
+  B['super_'].call(this);
 }
 
 util.inherits(B, models['A']);
+
+/**
+ * Defines the metadata of B
+ *
+ * @returns {object} metadata of B
+ *
+ */
+B.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'B',
+    type: {
+      name: 'Composite',
+      className: 'B',
+      modelProperties: {
+        statusCode: {
+          required: false,
+          serializedName: 'statusCode',
+          type: {
+            name: 'String'
+          }
+        },
+        textStatusCode: {
+          required: false,
+          serializedName: 'textStatusCode',
+          type: {
+            name: 'String'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the B schema

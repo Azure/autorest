@@ -17,14 +17,34 @@
  * @member {string} [httpCode]
  * 
  */
-function C(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.httpCode !== undefined) {
-      this.httpCode = parameters.httpCode;
-    }
-  }    
+function C() {
 }
 
+/**
+ * Defines the metadata of C
+ *
+ * @returns {object} metadata of C
+ *
+ */
+C.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'C',
+    type: {
+      name: 'Composite',
+      className: 'C',
+      modelProperties: {
+        httpCode: {
+          required: false,
+          serializedName: 'httpCode',
+          type: {
+            name: 'String'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the C schema

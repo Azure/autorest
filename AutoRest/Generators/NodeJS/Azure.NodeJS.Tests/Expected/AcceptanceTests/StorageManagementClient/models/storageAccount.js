@@ -102,46 +102,156 @@ var util = require('util');
  * Recursive Endpoints
  * 
  */
-function StorageAccount(parameters) {
-  StorageAccount['super_'].call(this, parameters);
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.provisioningState !== undefined) {
-      this.provisioningState = parameters.provisioningState;
-    }
-    if (parameters.accountType !== undefined) {
-      this.accountType = parameters.accountType;
-    }
-    if (parameters.primaryEndpoints) {
-      this.primaryEndpoints = new models['Endpoints'](parameters.primaryEndpoints);
-    }
-    if (parameters.primaryLocation !== undefined) {
-      this.primaryLocation = parameters.primaryLocation;
-    }
-    if (parameters.statusOfPrimary !== undefined) {
-      this.statusOfPrimary = parameters.statusOfPrimary;
-    }
-    if (parameters.lastGeoFailoverTime !== undefined) {
-      this.lastGeoFailoverTime = parameters.lastGeoFailoverTime;
-    }
-    if (parameters.secondaryLocation !== undefined) {
-      this.secondaryLocation = parameters.secondaryLocation;
-    }
-    if (parameters.statusOfSecondary !== undefined) {
-      this.statusOfSecondary = parameters.statusOfSecondary;
-    }
-    if (parameters.creationTime !== undefined) {
-      this.creationTime = parameters.creationTime;
-    }
-    if (parameters.customDomain) {
-      this.customDomain = new models['CustomDomain'](parameters.customDomain);
-    }
-    if (parameters.secondaryEndpoints) {
-      this.secondaryEndpoints = new models['Endpoints'](parameters.secondaryEndpoints);
-    }
-  }    
+function StorageAccount() {
+  StorageAccount['super_'].call(this);
 }
 
 util.inherits(StorageAccount, models['Resource']);
+
+/**
+ * Defines the metadata of StorageAccount
+ *
+ * @returns {object} metadata of StorageAccount
+ *
+ */
+StorageAccount.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'StorageAccount',
+    type: {
+      name: 'Composite',
+      className: 'StorageAccount',
+      modelProperties: {
+        id: {
+          required: false,
+          serializedName: 'id',
+          type: {
+            name: 'String'
+          }
+        },
+        name: {
+          required: false,
+          serializedName: 'name',
+          type: {
+            name: 'String'
+          }
+        },
+        type: {
+          required: false,
+          serializedName: 'type',
+          type: {
+            name: 'String'
+          }
+        },
+        location: {
+          required: true,
+          serializedName: 'location',
+          type: {
+            name: 'String'
+          }
+        },
+        tags: {
+          required: false,
+          serializedName: 'tags',
+          type: {
+            name: 'Dictionary',
+            value: {
+                required: false,
+                serializedName: 'StringElementType',
+                type: {
+                  name: 'String'
+                }
+            }
+          }
+        },
+        provisioningState: {
+          required: false,
+          serializedName: 'properties.provisioningState',
+          type: {
+            name: 'Enum',
+            allowedValues: [ 'Creating', 'ResolvingDNS', 'Succeeded' ]
+          }
+        },
+        accountType: {
+          required: false,
+          serializedName: 'properties.accountType',
+          type: {
+            name: 'Enum',
+            allowedValues: [ 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS' ]
+          }
+        },
+        primaryEndpoints: {
+          required: false,
+          serializedName: 'properties.primaryEndpoints',
+          type: {
+            name: 'Composite',
+            className: 'Endpoints'
+          }
+        },
+        primaryLocation: {
+          required: false,
+          serializedName: 'properties.primaryLocation',
+          type: {
+            name: 'String'
+          }
+        },
+        statusOfPrimary: {
+          required: false,
+          serializedName: 'properties.statusOfPrimary',
+          type: {
+            name: 'Enum',
+            allowedValues: [ 'Available', 'Unavailable' ]
+          }
+        },
+        lastGeoFailoverTime: {
+          required: false,
+          serializedName: 'properties.lastGeoFailoverTime',
+          type: {
+            name: 'DateTime'
+          }
+        },
+        secondaryLocation: {
+          required: false,
+          serializedName: 'properties.secondaryLocation',
+          type: {
+            name: 'String'
+          }
+        },
+        statusOfSecondary: {
+          required: false,
+          serializedName: 'properties.statusOfSecondary',
+          type: {
+            name: 'Enum',
+            allowedValues: [ 'Available', 'Unavailable' ]
+          }
+        },
+        creationTime: {
+          required: false,
+          serializedName: 'properties.creationTime',
+          type: {
+            name: 'DateTime'
+          }
+        },
+        customDomain: {
+          required: false,
+          serializedName: 'properties.customDomain',
+          type: {
+            name: 'Composite',
+            className: 'CustomDomain'
+          }
+        },
+        secondaryEndpoints: {
+          required: false,
+          serializedName: 'properties.secondaryEndpoints',
+          type: {
+            name: 'Composite',
+            className: 'Endpoints'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the StorageAccount schema

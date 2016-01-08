@@ -19,17 +19,41 @@
  * @member {string} [name]
  * 
  */
-function Product(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.id !== undefined) {
-      this.id = parameters.id;
-    }
-    if (parameters.name !== undefined) {
-      this.name = parameters.name;
-    }
-  }    
+function Product() {
 }
 
+/**
+ * Defines the metadata of Product
+ *
+ * @returns {object} metadata of Product
+ *
+ */
+Product.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'product',
+    type: {
+      name: 'Composite',
+      className: 'Product',
+      modelProperties: {
+        id: {
+          required: true,
+          serializedName: 'id',
+          type: {
+            name: 'Number'
+          }
+        },
+        name: {
+          required: false,
+          serializedName: 'name',
+          type: {
+            name: 'String'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the Product schema

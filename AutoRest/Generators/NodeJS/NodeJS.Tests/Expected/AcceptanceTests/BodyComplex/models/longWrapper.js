@@ -19,17 +19,41 @@
  * @member {number} [field2]
  * 
  */
-function LongWrapper(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.field1 !== undefined) {
-      this.field1 = parameters.field1;
-    }
-    if (parameters.field2 !== undefined) {
-      this.field2 = parameters.field2;
-    }
-  }    
+function LongWrapper() {
 }
 
+/**
+ * Defines the metadata of LongWrapper
+ *
+ * @returns {object} metadata of LongWrapper
+ *
+ */
+LongWrapper.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'long-wrapper',
+    type: {
+      name: 'Composite',
+      className: 'LongWrapper',
+      modelProperties: {
+        field1: {
+          required: false,
+          serializedName: 'field1',
+          type: {
+            name: 'Number'
+          }
+        },
+        field2: {
+          required: false,
+          serializedName: 'field2',
+          type: {
+            name: 'Number'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the LongWrapper schema

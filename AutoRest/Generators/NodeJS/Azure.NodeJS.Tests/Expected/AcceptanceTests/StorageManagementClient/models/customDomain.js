@@ -24,17 +24,41 @@
  * updates
  * 
  */
-function CustomDomain(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.name !== undefined) {
-      this.name = parameters.name;
-    }
-    if (parameters.useSubDomain !== undefined) {
-      this.useSubDomain = parameters.useSubDomain;
-    }
-  }    
+function CustomDomain() {
 }
 
+/**
+ * Defines the metadata of CustomDomain
+ *
+ * @returns {object} metadata of CustomDomain
+ *
+ */
+CustomDomain.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'CustomDomain',
+    type: {
+      name: 'Composite',
+      className: 'CustomDomain',
+      modelProperties: {
+        name: {
+          required: false,
+          serializedName: 'name',
+          type: {
+            name: 'String'
+          }
+        },
+        useSubDomain: {
+          required: false,
+          serializedName: 'useSubDomain',
+          type: {
+            name: 'Boolean'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the CustomDomain schema

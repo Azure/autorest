@@ -19,23 +19,42 @@
  * @member {string} [type]  Default value: Microsoft.Storage/storageAccounts .
  * 
  */
-function StorageAccountCheckNameAvailabilityParameters(parameters) {
-  if (parameters === null || parameters === undefined) {
-    parameters = {};
-  }
-  if (parameters.type === undefined) {
-    parameters.type = 'Microsoft.Storage/storageAccounts';
-  }
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.name !== undefined) {
-      this.name = parameters.name;
-    }
-    if (parameters.type !== undefined) {
-      this.type = parameters.type;
-    }
-  }    
+function StorageAccountCheckNameAvailabilityParameters() {
 }
 
+/**
+ * Defines the metadata of StorageAccountCheckNameAvailabilityParameters
+ *
+ * @returns {object} metadata of StorageAccountCheckNameAvailabilityParameters
+ *
+ */
+StorageAccountCheckNameAvailabilityParameters.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'StorageAccountCheckNameAvailabilityParameters',
+    type: {
+      name: 'Composite',
+      className: 'StorageAccountCheckNameAvailabilityParameters',
+      modelProperties: {
+        name: {
+          required: true,
+          serializedName: 'name',
+          type: {
+            name: 'String'
+          }
+        },
+        type: {
+          required: false,
+          serializedName: 'type',
+          defaultValue: 'Microsoft.Storage/storageAccounts',
+          type: {
+            name: 'String'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the StorageAccountCheckNameAvailabilityParameters schema

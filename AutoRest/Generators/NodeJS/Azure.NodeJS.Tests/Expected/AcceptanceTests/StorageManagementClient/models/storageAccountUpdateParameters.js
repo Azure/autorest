@@ -38,19 +38,88 @@ var util = require('util');
  * set on updates
  * 
  */
-function StorageAccountUpdateParameters(parameters) {
-  StorageAccountUpdateParameters['super_'].call(this, parameters);
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.accountType !== undefined) {
-      this.accountType = parameters.accountType;
-    }
-    if (parameters.customDomain) {
-      this.customDomain = new models['CustomDomain'](parameters.customDomain);
-    }
-  }    
+function StorageAccountUpdateParameters() {
+  StorageAccountUpdateParameters['super_'].call(this);
 }
 
 util.inherits(StorageAccountUpdateParameters, models['Resource']);
+
+/**
+ * Defines the metadata of StorageAccountUpdateParameters
+ *
+ * @returns {object} metadata of StorageAccountUpdateParameters
+ *
+ */
+StorageAccountUpdateParameters.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'StorageAccountUpdateParameters',
+    type: {
+      name: 'Composite',
+      className: 'StorageAccountUpdateParameters',
+      modelProperties: {
+        id: {
+          required: false,
+          serializedName: 'id',
+          type: {
+            name: 'String'
+          }
+        },
+        name: {
+          required: false,
+          serializedName: 'name',
+          type: {
+            name: 'String'
+          }
+        },
+        type: {
+          required: false,
+          serializedName: 'type',
+          type: {
+            name: 'String'
+          }
+        },
+        location: {
+          required: true,
+          serializedName: 'location',
+          type: {
+            name: 'String'
+          }
+        },
+        tags: {
+          required: false,
+          serializedName: 'tags',
+          type: {
+            name: 'Dictionary',
+            value: {
+                required: false,
+                serializedName: 'StringElementType',
+                type: {
+                  name: 'String'
+                }
+            }
+          }
+        },
+        accountType: {
+          required: false,
+          serializedName: 'properties.accountType',
+          type: {
+            name: 'Enum',
+            allowedValues: [ 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS' ]
+          }
+        },
+        customDomain: {
+          required: false,
+          serializedName: 'properties.customDomain',
+          type: {
+            name: 'Composite',
+            className: 'CustomDomain'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the StorageAccountUpdateParameters schema

@@ -23,14 +23,35 @@ var models = require('./index');
  * @member {string} [value.name]
  * 
  */
-function ClassWrapper(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.value) {
-      this.value = new models['Product'](parameters.value);
-    }
-  }    
+function ClassWrapper() {
 }
 
+/**
+ * Defines the metadata of ClassWrapper
+ *
+ * @returns {object} metadata of ClassWrapper
+ *
+ */
+ClassWrapper.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'class-wrapper',
+    type: {
+      name: 'Composite',
+      className: 'ClassWrapper',
+      modelProperties: {
+        value: {
+          required: true,
+          serializedName: 'value',
+          type: {
+            name: 'Composite',
+            className: 'Product'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the ClassWrapper schema

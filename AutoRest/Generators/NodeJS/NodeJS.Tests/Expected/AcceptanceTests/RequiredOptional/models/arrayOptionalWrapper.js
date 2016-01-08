@@ -19,21 +19,41 @@ var util = require('util');
  * @member {array} [value]
  * 
  */
-function ArrayOptionalWrapper(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.value) {
-      var tempParametersvalue = [];
-      parameters.value.forEach(function(element) {
-        if (element !== undefined) {
-          element = element;
-        }
-        tempParametersvalue.push(element);
-      });
-      this.value = tempParametersvalue;
-    }
-  }    
+function ArrayOptionalWrapper() {
 }
 
+/**
+ * Defines the metadata of ArrayOptionalWrapper
+ *
+ * @returns {object} metadata of ArrayOptionalWrapper
+ *
+ */
+ArrayOptionalWrapper.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'array-optional-wrapper',
+    type: {
+      name: 'Composite',
+      className: 'ArrayOptionalWrapper',
+      modelProperties: {
+        value: {
+          required: false,
+          serializedName: 'value',
+          type: {
+            name: 'Sequence',
+            element: {
+                required: false,
+                serializedName: 'StringElementType',
+                type: {
+                  name: 'String'
+                }
+            }
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the ArrayOptionalWrapper schema
@@ -68,11 +88,11 @@ ArrayOptionalWrapper.prototype.deserialize = function (instance) {
   if (instance) {
     if (instance['value']) {
       var tempInstancevalue = [];
-      instance['value'].forEach(function(element1) {
-        if (element1 !== undefined) {
-          element1 = element1;
+      instance['value'].forEach(function(element) {
+        if (element !== undefined) {
+          element = element;
         }
-        tempInstancevalue.push(element1);
+        tempInstancevalue.push(element);
       });
       this['value'] = tempInstancevalue;
     }

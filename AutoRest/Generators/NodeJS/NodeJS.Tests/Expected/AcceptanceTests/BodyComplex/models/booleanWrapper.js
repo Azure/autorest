@@ -19,17 +19,41 @@
  * @member {boolean} [fieldFalse]
  * 
  */
-function BooleanWrapper(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.fieldTrue !== undefined) {
-      this.fieldTrue = parameters.fieldTrue;
-    }
-    if (parameters.fieldFalse !== undefined) {
-      this.fieldFalse = parameters.fieldFalse;
-    }
-  }    
+function BooleanWrapper() {
 }
 
+/**
+ * Defines the metadata of BooleanWrapper
+ *
+ * @returns {object} metadata of BooleanWrapper
+ *
+ */
+BooleanWrapper.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'boolean-wrapper',
+    type: {
+      name: 'Composite',
+      className: 'BooleanWrapper',
+      modelProperties: {
+        fieldTrue: {
+          required: false,
+          serializedName: 'field_true',
+          type: {
+            name: 'Boolean'
+          }
+        },
+        fieldFalse: {
+          required: false,
+          serializedName: 'field_false',
+          type: {
+            name: 'Boolean'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the BooleanWrapper schema

@@ -29,20 +29,49 @@
  * value in more detail.
  * 
  */
-function CheckNameAvailabilityResult(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.nameAvailable !== undefined) {
-      this.nameAvailable = parameters.nameAvailable;
-    }
-    if (parameters.reason !== undefined) {
-      this.reason = parameters.reason;
-    }
-    if (parameters.message !== undefined) {
-      this.message = parameters.message;
-    }
-  }    
+function CheckNameAvailabilityResult() {
 }
 
+/**
+ * Defines the metadata of CheckNameAvailabilityResult
+ *
+ * @returns {object} metadata of CheckNameAvailabilityResult
+ *
+ */
+CheckNameAvailabilityResult.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'CheckNameAvailabilityResult',
+    type: {
+      name: 'Composite',
+      className: 'CheckNameAvailabilityResult',
+      modelProperties: {
+        nameAvailable: {
+          required: false,
+          serializedName: 'nameAvailable',
+          type: {
+            name: 'Boolean'
+          }
+        },
+        reason: {
+          required: false,
+          serializedName: 'reason',
+          type: {
+            name: 'Enum',
+            allowedValues: [ 'AccountNameInvalid', 'AlreadyExists' ]
+          }
+        },
+        message: {
+          required: false,
+          serializedName: 'message',
+          type: {
+            name: 'String'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the CheckNameAvailabilityResult schema

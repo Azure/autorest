@@ -29,32 +29,63 @@
  * @member {string} [image] Image URL representing the product.
  * 
  */
-function Product(parameters) {
-  if (parameters === null || parameters === undefined) {
-    parameters = {};
-  }
-  if (parameters.capacity === undefined) {
-    parameters.capacity = '100';
-  }
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.productId !== undefined) {
-      this.productId = parameters.productId;
-    }
-    if (parameters.description !== undefined) {
-      this.description = parameters.description;
-    }
-    if (parameters.displayName !== undefined) {
-      this.displayName = parameters.displayName;
-    }
-    if (parameters.capacity !== undefined) {
-      this.capacity = parameters.capacity;
-    }
-    if (parameters.image !== undefined) {
-      this.image = parameters.image;
-    }
-  }    
+function Product() {
 }
 
+/**
+ * Defines the metadata of Product
+ *
+ * @returns {object} metadata of Product
+ *
+ */
+Product.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'Product',
+    type: {
+      name: 'Composite',
+      className: 'Product',
+      modelProperties: {
+        productId: {
+          required: false,
+          serializedName: 'product_id',
+          type: {
+            name: 'String'
+          }
+        },
+        description: {
+          required: false,
+          serializedName: 'description',
+          type: {
+            name: 'String'
+          }
+        },
+        displayName: {
+          required: false,
+          serializedName: 'display_name',
+          type: {
+            name: 'String'
+          }
+        },
+        capacity: {
+          required: false,
+          serializedName: 'capacity',
+          defaultValue: '100',
+          type: {
+            name: 'String'
+          }
+        },
+        image: {
+          required: false,
+          serializedName: 'image',
+          type: {
+            name: 'String'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the Product schema

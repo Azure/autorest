@@ -17,14 +17,34 @@
  * @member {number} value
  * 
  */
-function IntWrapper(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.value !== undefined) {
-      this.value = parameters.value;
-    }
-  }    
+function IntWrapper() {
 }
 
+/**
+ * Defines the metadata of IntWrapper
+ *
+ * @returns {object} metadata of IntWrapper
+ *
+ */
+IntWrapper.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'int-wrapper',
+    type: {
+      name: 'Composite',
+      className: 'IntWrapper',
+      modelProperties: {
+        value: {
+          required: true,
+          serializedName: 'value',
+          type: {
+            name: 'Number'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the IntWrapper schema

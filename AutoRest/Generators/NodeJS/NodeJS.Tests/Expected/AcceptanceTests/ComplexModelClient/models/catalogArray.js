@@ -21,21 +21,42 @@ var util = require('util');
  * @member {array} [productArray] Array of products
  * 
  */
-function CatalogArray(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.productArray) {
-      var tempParametersproductArray = [];
-      parameters.productArray.forEach(function(element) {
-        if (element) {
-          element = new models['Product'](element);
-        }
-        tempParametersproductArray.push(element);
-      });
-      this.productArray = tempParametersproductArray;
-    }
-  }    
+function CatalogArray() {
 }
 
+/**
+ * Defines the metadata of CatalogArray
+ *
+ * @returns {object} metadata of CatalogArray
+ *
+ */
+CatalogArray.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'CatalogArray',
+    type: {
+      name: 'Composite',
+      className: 'CatalogArray',
+      modelProperties: {
+        productArray: {
+          required: false,
+          serializedName: 'productArray',
+          type: {
+            name: 'Sequence',
+            element: {
+                required: false,
+                serializedName: 'ProductElementType',
+                type: {
+                  name: 'Composite',
+                  className: 'Product'
+                }
+            }
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the CatalogArray schema
@@ -67,11 +88,11 @@ CatalogArray.prototype.deserialize = function (instance) {
   if (instance) {
     if (instance['productArray']) {
       var tempInstanceproductArray = [];
-      instance['productArray'].forEach(function(element1) {
-        if (element1) {
-          element1 = new models['Product']().deserialize(element1);
+      instance['productArray'].forEach(function(element) {
+        if (element) {
+          element = new models['Product']().deserialize(element);
         }
-        tempInstanceproductArray.push(element1);
+        tempInstanceproductArray.push(element);
       });
       this['productArray'] = tempInstanceproductArray;
     }

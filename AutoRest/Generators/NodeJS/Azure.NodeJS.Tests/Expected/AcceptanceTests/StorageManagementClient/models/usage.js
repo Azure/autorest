@@ -35,23 +35,57 @@ var models = require('./index');
  * the resource name.
  * 
  */
-function Usage(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.unit !== undefined) {
-      this.unit = parameters.unit;
-    }
-    if (parameters.currentValue !== undefined) {
-      this.currentValue = parameters.currentValue;
-    }
-    if (parameters.limit !== undefined) {
-      this.limit = parameters.limit;
-    }
-    if (parameters.name) {
-      this.name = new models['UsageName'](parameters.name);
-    }
-  }    
+function Usage() {
 }
 
+/**
+ * Defines the metadata of Usage
+ *
+ * @returns {object} metadata of Usage
+ *
+ */
+Usage.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'Usage',
+    type: {
+      name: 'Composite',
+      className: 'Usage',
+      modelProperties: {
+        unit: {
+          required: false,
+          serializedName: 'unit',
+          type: {
+            name: 'Enum',
+            allowedValues: [ 'Count', 'Bytes', 'Seconds', 'Percent', 'CountsPerSecond', 'BytesPerSecond' ]
+          }
+        },
+        currentValue: {
+          required: false,
+          serializedName: 'currentValue',
+          type: {
+            name: 'Number'
+          }
+        },
+        limit: {
+          required: false,
+          serializedName: 'limit',
+          type: {
+            name: 'Number'
+          }
+        },
+        name: {
+          required: false,
+          serializedName: 'name',
+          type: {
+            name: 'Composite',
+            className: 'UsageName'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the Usage schema

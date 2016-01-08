@@ -21,16 +21,37 @@ var util = require('util');
  * @member {string} [id] Resource Id
  * 
  */
-function SubResource(parameters) {
-  SubResource['super_'].call(this, parameters);
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.id !== undefined) {
-      this.id = parameters.id;
-    }
-  }    
+function SubResource() {
+  SubResource['super_'].call(this);
 }
 
 util.inherits(SubResource, models['BaseResource']);
+
+/**
+ * Defines the metadata of SubResource
+ *
+ * @returns {object} metadata of SubResource
+ *
+ */
+SubResource.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'SubResource',
+    type: {
+      name: 'Composite',
+      className: 'SubResource',
+      modelProperties: {
+        id: {
+          required: false,
+          serializedName: 'id',
+          type: {
+            name: 'String'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the SubResource schema

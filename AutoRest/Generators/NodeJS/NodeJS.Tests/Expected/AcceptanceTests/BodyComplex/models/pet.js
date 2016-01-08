@@ -19,17 +19,41 @@
  * @member {string} [name]
  * 
  */
-function Pet(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.id !== undefined) {
-      this.id = parameters.id;
-    }
-    if (parameters.name !== undefined) {
-      this.name = parameters.name;
-    }
-  }    
+function Pet() {
 }
 
+/**
+ * Defines the metadata of Pet
+ *
+ * @returns {object} metadata of Pet
+ *
+ */
+Pet.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'pet',
+    type: {
+      name: 'Composite',
+      className: 'Pet',
+      modelProperties: {
+        id: {
+          required: false,
+          serializedName: 'id',
+          type: {
+            name: 'Number'
+          }
+        },
+        name: {
+          required: false,
+          serializedName: 'name',
+          type: {
+            name: 'String'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the Pet schema

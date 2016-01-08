@@ -19,17 +19,41 @@
  * @member {number} [field2]
  * 
  */
-function FloatWrapper(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.field1 !== undefined) {
-      this.field1 = parameters.field1;
-    }
-    if (parameters.field2 !== undefined) {
-      this.field2 = parameters.field2;
-    }
-  }    
+function FloatWrapper() {
 }
 
+/**
+ * Defines the metadata of FloatWrapper
+ *
+ * @returns {object} metadata of FloatWrapper
+ *
+ */
+FloatWrapper.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'float-wrapper',
+    type: {
+      name: 'Composite',
+      className: 'FloatWrapper',
+      modelProperties: {
+        field1: {
+          required: false,
+          serializedName: 'field1',
+          type: {
+            name: 'Number'
+          }
+        },
+        field2: {
+          required: false,
+          serializedName: 'field2',
+          type: {
+            name: 'Number'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the FloatWrapper schema

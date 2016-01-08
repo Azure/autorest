@@ -19,17 +19,41 @@
  * @member {string} [name]
  * 
  */
-function ProductProperties(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.id !== undefined) {
-      this.id = parameters.id;
-    }
-    if (parameters.name !== undefined) {
-      this.name = parameters.name;
-    }
-  }    
+function ProductProperties() {
 }
 
+/**
+ * Defines the metadata of ProductProperties
+ *
+ * @returns {object} metadata of ProductProperties
+ *
+ */
+ProductProperties.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'Product_properties',
+    type: {
+      name: 'Composite',
+      className: 'ProductProperties',
+      modelProperties: {
+        id: {
+          required: false,
+          serializedName: 'id',
+          type: {
+            name: 'Number'
+          }
+        },
+        name: {
+          required: false,
+          serializedName: 'name',
+          type: {
+            name: 'String'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the ProductProperties schema

@@ -19,17 +19,41 @@
  * @member {date} [leap]
  * 
  */
-function DateWrapper(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.field !== undefined) {
-      this.field = parameters.field;
-    }
-    if (parameters.leap !== undefined) {
-      this.leap = parameters.leap;
-    }
-  }    
+function DateWrapper() {
 }
 
+/**
+ * Defines the metadata of DateWrapper
+ *
+ * @returns {object} metadata of DateWrapper
+ *
+ */
+DateWrapper.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'date-wrapper',
+    type: {
+      name: 'Composite',
+      className: 'DateWrapper',
+      modelProperties: {
+        field: {
+          required: false,
+          serializedName: 'field',
+          type: {
+            name: 'Date'
+          }
+        },
+        leap: {
+          required: false,
+          serializedName: 'leap',
+          type: {
+            name: 'Date'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the DateWrapper schema

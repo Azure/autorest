@@ -21,16 +21,88 @@ var util = require('util');
  * @member {number} [jawsize]
  * 
  */
-function Goblinshark(parameters) {
-  Goblinshark['super_'].call(this, parameters);
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.jawsize !== undefined) {
-      this.jawsize = parameters.jawsize;
-    }
-  }    
+function Goblinshark() {
+  Goblinshark['super_'].call(this);
 }
 
 util.inherits(Goblinshark, models['Shark']);
+
+/**
+ * Defines the metadata of Goblinshark
+ *
+ * @returns {object} metadata of Goblinshark
+ *
+ */
+Goblinshark.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'goblin',
+    type: {
+      name: 'Composite',
+      className: 'Goblinshark',
+      modelProperties: {
+        species: {
+          required: false,
+          serializedName: 'species',
+          type: {
+            name: 'String'
+          }
+        },
+        length: {
+          required: true,
+          serializedName: 'length',
+          type: {
+            name: 'Number'
+          }
+        },
+        siblings: {
+          required: false,
+          serializedName: 'siblings',
+          type: {
+            name: 'Sequence',
+            element: {
+                required: false,
+                serializedName: 'FishElementType',
+                type: {
+                  name: 'Composite',
+                  polymorphicDiscriminator: 'fishtype',
+                  className: 'Fish'
+                }
+            }
+          }
+        },
+        fishtype: {
+          required: true,
+          serializedName: 'fishtype',
+          type: {
+            name: 'String'
+          }
+        },
+        age: {
+          required: false,
+          serializedName: 'age',
+          type: {
+            name: 'Number'
+          }
+        },
+        birthday: {
+          required: true,
+          serializedName: 'birthday',
+          type: {
+            name: 'DateTime'
+          }
+        },
+        jawsize: {
+          required: false,
+          serializedName: 'jawsize',
+          type: {
+            name: 'Number'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the Goblinshark schema

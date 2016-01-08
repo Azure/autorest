@@ -19,17 +19,41 @@
  * @member {string} [id]
  * 
  */
-function Sku(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.name !== undefined) {
-      this.name = parameters.name;
-    }
-    if (parameters.id !== undefined) {
-      this.id = parameters.id;
-    }
-  }    
+function Sku() {
 }
 
+/**
+ * Defines the metadata of Sku
+ *
+ * @returns {object} metadata of Sku
+ *
+ */
+Sku.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'Sku',
+    type: {
+      name: 'Composite',
+      className: 'Sku',
+      modelProperties: {
+        name: {
+          required: false,
+          serializedName: 'name',
+          type: {
+            name: 'String'
+          }
+        },
+        id: {
+          required: false,
+          serializedName: 'id',
+          type: {
+            name: 'String'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the Sku schema

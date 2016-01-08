@@ -17,14 +17,34 @@
  * @member {buffer} [field]
  * 
  */
-function ByteWrapper(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.field !== undefined) {
-      this.field = parameters.field;
-    }
-  }    
+function ByteWrapper() {
 }
 
+/**
+ * Defines the metadata of ByteWrapper
+ *
+ * @returns {object} metadata of ByteWrapper
+ *
+ */
+ByteWrapper.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'byte-wrapper',
+    type: {
+      name: 'Composite',
+      className: 'ByteWrapper',
+      modelProperties: {
+        field: {
+          required: false,
+          serializedName: 'field',
+          type: {
+            name: 'ByteArray'
+          }
+        }
+      }
+    }
+  };
+};
 
 /**
  * Validate the payload against the ByteWrapper schema
