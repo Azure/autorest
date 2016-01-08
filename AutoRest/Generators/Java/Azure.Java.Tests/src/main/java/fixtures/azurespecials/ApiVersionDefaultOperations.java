@@ -30,16 +30,16 @@ public interface ApiVersionDefaultOperations {
      * used by Retrofit to perform actually REST calls.
      */
     interface ApiVersionDefaultService {
-        @GET("/azurespecials/apiVersion/method/string/none/query/global/2015-07-01-preview")
+        @GET("azurespecials/apiVersion/method/string/none/query/global/2015-07-01-preview")
         Call<ResponseBody> getMethodGlobalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
 
-        @GET("/azurespecials/apiVersion/method/string/none/query/globalNotProvided/2015-07-01-preview")
+        @GET("azurespecials/apiVersion/method/string/none/query/globalNotProvided/2015-07-01-preview")
         Call<ResponseBody> getMethodGlobalNotProvidedValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
 
-        @GET("/azurespecials/apiVersion/path/string/none/query/global/2015-07-01-preview")
+        @GET("azurespecials/apiVersion/path/string/none/query/global/2015-07-01-preview")
         Call<ResponseBody> getPathGlobalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
 
-        @GET("/azurespecials/apiVersion/swagger/string/none/query/global/2015-07-01-preview")
+        @GET("azurespecials/apiVersion/swagger/string/none/query/global/2015-07-01-preview")
         Call<ResponseBody> getSwaggerGlobalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
 
     }

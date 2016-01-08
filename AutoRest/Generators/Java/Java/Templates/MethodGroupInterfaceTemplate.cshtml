@@ -32,11 +32,11 @@ public interface @Model.MethodGroupType {
     {
     if (method.HttpMethod == Microsoft.Rest.Generator.ClientModel.HttpMethod.Delete)
     {
-    @:    @@HTTP(path = "@(method.Url)", method = "DELETE", hasBody = true)
+    @:    @@HTTP(path = "@(method.Url.TrimStart('/'))", method = "DELETE", hasBody = true)
     }
     else
     {
-    @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url)")
+    @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url.TrimStart('/'))")
     }
     @:    Call<@method.CallType> @(method.Name)(@method.MethodParameterApiDeclaration);
     @EmptyLine

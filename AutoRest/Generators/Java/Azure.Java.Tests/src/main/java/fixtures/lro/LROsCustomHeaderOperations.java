@@ -36,16 +36,16 @@ public interface LROsCustomHeaderOperations {
      * used by Retrofit to perform actually REST calls.
      */
     interface LROsCustomHeaderService {
-        @PUT("/lro/customheader/putasync/retry/succeeded")
+        @PUT("lro/customheader/putasync/retry/succeeded")
         Call<ResponseBody> putAsyncRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage);
 
-        @PUT("/lro/customheader/put/201/creating/succeeded/200")
+        @PUT("lro/customheader/put/201/creating/succeeded/200")
         Call<ResponseBody> put201CreatingSucceeded200(@Body Product product, @Header("accept-language") String acceptLanguage);
 
-        @POST("/lro/customheader/post/202/retry/200")
+        @POST("lro/customheader/post/202/retry/200")
         Call<ResponseBody> post202Retry200(@Body Product product, @Header("accept-language") String acceptLanguage);
 
-        @POST("/lro/customheader/postasync/retry/succeeded")
+        @POST("lro/customheader/postasync/retry/succeeded")
         Call<ResponseBody> postAsyncRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage);
 
     }

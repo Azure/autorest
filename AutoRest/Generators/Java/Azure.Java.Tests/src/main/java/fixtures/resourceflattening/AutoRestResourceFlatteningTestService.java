@@ -99,22 +99,22 @@ public interface AutoRestResourceFlatteningTestService {
      * used by Retrofit to perform actually REST calls.
      */
     interface AutoRestResourceFlatteningTestServiceService {
-        @PUT("/azure/resource-flatten/array")
+        @PUT("azure/resource-flatten/array")
         Call<ResponseBody> putArray(@Body List<Resource> resourceArray, @Header("accept-language") String acceptLanguage);
 
-        @GET("/azure/resource-flatten/array")
+        @GET("azure/resource-flatten/array")
         Call<ResponseBody> getArray(@Header("accept-language") String acceptLanguage);
 
-        @PUT("/azure/resource-flatten/dictionary")
+        @PUT("azure/resource-flatten/dictionary")
         Call<ResponseBody> putDictionary(@Body Map<String, FlattenedProduct> resourceDictionary, @Header("accept-language") String acceptLanguage);
 
-        @GET("/azure/resource-flatten/dictionary")
+        @GET("azure/resource-flatten/dictionary")
         Call<ResponseBody> getDictionary(@Header("accept-language") String acceptLanguage);
 
-        @PUT("/azure/resource-flatten/resourcecollection")
+        @PUT("azure/resource-flatten/resourcecollection")
         Call<ResponseBody> putResourceCollection(@Body ResourceCollection resourceComplexObject, @Header("accept-language") String acceptLanguage);
 
-        @GET("/azure/resource-flatten/resourcecollection")
+        @GET("azure/resource-flatten/resourcecollection")
         Call<ResponseBody> getResourceCollection(@Header("accept-language") String acceptLanguage);
 
     }

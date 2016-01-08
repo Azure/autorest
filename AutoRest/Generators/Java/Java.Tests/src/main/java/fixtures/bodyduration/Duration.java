@@ -31,16 +31,16 @@ public interface Duration {
      * used by Retrofit to perform actually REST calls.
      */
     interface DurationService {
-        @GET("/duration/null")
+        @GET("duration/null")
         Call<ResponseBody> getNull();
 
-        @PUT("/duration/positiveduration")
+        @PUT("duration/positiveduration")
         Call<ResponseBody> putPositiveDuration(@Body Period durationBody);
 
-        @GET("/duration/positiveduration")
+        @GET("duration/positiveduration")
         Call<ResponseBody> getPositiveDuration();
 
-        @GET("/duration/invalid")
+        @GET("duration/invalid")
         Call<ResponseBody> getInvalid();
 
     }

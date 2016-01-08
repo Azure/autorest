@@ -29,10 +29,10 @@ public interface Files {
      * used by Retrofit to perform actually REST calls.
      */
     interface FilesService {
-        @GET("/files/stream/nonempty")
+        @GET("files/stream/nonempty")
         Call<ResponseBody> getFile();
 
-        @GET("/files/stream/empty")
+        @GET("files/stream/empty")
         Call<ResponseBody> getEmptyFile();
 
     }

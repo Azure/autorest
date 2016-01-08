@@ -30,16 +30,16 @@ public interface ApiVersionLocalOperations {
      * used by Retrofit to perform actually REST calls.
      */
     interface ApiVersionLocalService {
-        @GET("/azurespecials/apiVersion/method/string/none/query/local/2.0")
+        @GET("azurespecials/apiVersion/method/string/none/query/local/2.0")
         Call<ResponseBody> getMethodLocalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
 
-        @GET("/azurespecials/apiVersion/method/string/none/query/local/null")
+        @GET("azurespecials/apiVersion/method/string/none/query/local/null")
         Call<ResponseBody> getMethodLocalNull(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
 
-        @GET("/azurespecials/apiVersion/path/string/none/query/local/2.0")
+        @GET("azurespecials/apiVersion/path/string/none/query/local/2.0")
         Call<ResponseBody> getPathLocalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
 
-        @GET("/azurespecials/apiVersion/swagger/string/none/query/local/2.0")
+        @GET("azurespecials/apiVersion/swagger/string/none/query/local/2.0")
         Call<ResponseBody> getSwaggerLocalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
 
     }

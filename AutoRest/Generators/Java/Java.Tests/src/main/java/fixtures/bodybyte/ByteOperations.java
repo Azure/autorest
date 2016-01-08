@@ -30,19 +30,19 @@ public interface ByteOperations {
      * used by Retrofit to perform actually REST calls.
      */
     interface ByteService {
-        @GET("/byte/null")
+        @GET("byte/null")
         Call<ResponseBody> getNull();
 
-        @GET("/byte/empty")
+        @GET("byte/empty")
         Call<ResponseBody> getEmpty();
 
-        @GET("/byte/nonAscii")
+        @GET("byte/nonAscii")
         Call<ResponseBody> getNonAscii();
 
-        @PUT("/byte/nonAscii")
+        @PUT("byte/nonAscii")
         Call<ResponseBody> putNonAscii(@Body byte[] byteBody);
 
-        @GET("/byte/invalid")
+        @GET("byte/invalid")
         Call<ResponseBody> getInvalid();
 
     }

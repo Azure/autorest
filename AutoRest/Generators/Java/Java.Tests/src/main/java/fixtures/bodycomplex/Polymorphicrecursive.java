@@ -31,10 +31,10 @@ public interface Polymorphicrecursive {
      * used by Retrofit to perform actually REST calls.
      */
     interface PolymorphicrecursiveService {
-        @GET("/complex/polymorphicrecursive/valid")
+        @GET("complex/polymorphicrecursive/valid")
         Call<ResponseBody> getValid();
 
-        @PUT("/complex/polymorphicrecursive/valid")
+        @PUT("complex/polymorphicrecursive/valid")
         Call<ResponseBody> putValid(@Body Fish complexBody);
 
     }

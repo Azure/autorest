@@ -30,31 +30,31 @@ public interface StringOperations {
      * used by Retrofit to perform actually REST calls.
      */
     interface StringService {
-        @GET("/string/null")
+        @GET("string/null")
         Call<ResponseBody> getNull();
 
-        @PUT("/string/null")
+        @PUT("string/null")
         Call<ResponseBody> putNull(@Body String stringBody);
 
-        @GET("/string/empty")
+        @GET("string/empty")
         Call<ResponseBody> getEmpty();
 
-        @PUT("/string/empty")
+        @PUT("string/empty")
         Call<ResponseBody> putEmpty(@Body String stringBody);
 
-        @GET("/string/mbcs")
+        @GET("string/mbcs")
         Call<ResponseBody> getMbcs();
 
-        @PUT("/string/mbcs")
+        @PUT("string/mbcs")
         Call<ResponseBody> putMbcs(@Body String stringBody);
 
-        @GET("/string/whitespace")
+        @GET("string/whitespace")
         Call<ResponseBody> getWhitespace();
 
-        @PUT("/string/whitespace")
+        @PUT("string/whitespace")
         Call<ResponseBody> putWhitespace(@Body String stringBody);
 
-        @GET("/string/notProvided")
+        @GET("string/notProvided")
         Call<ResponseBody> getNotProvided();
 
     }

@@ -30,7 +30,7 @@ public interface HeaderOperationsOperations {
      * used by Retrofit to perform actually REST calls.
      */
     interface HeaderOperationsService {
-        @POST("/azurespecials/customNamedRequestId")
+        @POST("azurespecials/customNamedRequestId")
         Call<ResponseBody> customNamedRequestId(@Header("foo-client-request-id") String fooClientRequestId, @Header("accept-language") String acceptLanguage);
 
     }

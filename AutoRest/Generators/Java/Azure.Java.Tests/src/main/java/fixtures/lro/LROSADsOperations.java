@@ -54,79 +54,79 @@ public interface LROSADsOperations {
      * used by Retrofit to perform actually REST calls.
      */
     interface LROSADsService {
-        @PUT("/lro/nonretryerror/put/400")
+        @PUT("lro/nonretryerror/put/400")
         Call<ResponseBody> putNonRetry400(@Body Product product, @Header("accept-language") String acceptLanguage);
 
-        @PUT("/lro/nonretryerror/put/201/creating/400")
+        @PUT("lro/nonretryerror/put/201/creating/400")
         Call<ResponseBody> putNonRetry201Creating400(@Body Product product, @Header("accept-language") String acceptLanguage);
 
-        @PUT("/lro/nonretryerror/putasync/retry/400")
+        @PUT("lro/nonretryerror/putasync/retry/400")
         Call<ResponseBody> putAsyncRelativeRetry400(@Body Product product, @Header("accept-language") String acceptLanguage);
 
-        @HTTP(path = "/lro/nonretryerror/delete/400", method = "DELETE", hasBody = true)
+        @HTTP(path = "lro/nonretryerror/delete/400", method = "DELETE", hasBody = true)
         Call<ResponseBody> deleteNonRetry400(@Header("accept-language") String acceptLanguage);
 
-        @HTTP(path = "/lro/nonretryerror/delete/202/retry/400", method = "DELETE", hasBody = true)
+        @HTTP(path = "lro/nonretryerror/delete/202/retry/400", method = "DELETE", hasBody = true)
         Call<ResponseBody> delete202NonRetry400(@Header("accept-language") String acceptLanguage);
 
-        @HTTP(path = "/lro/nonretryerror/deleteasync/retry/400", method = "DELETE", hasBody = true)
+        @HTTP(path = "lro/nonretryerror/deleteasync/retry/400", method = "DELETE", hasBody = true)
         Call<ResponseBody> deleteAsyncRelativeRetry400(@Header("accept-language") String acceptLanguage);
 
-        @POST("/lro/nonretryerror/post/400")
+        @POST("lro/nonretryerror/post/400")
         Call<ResponseBody> postNonRetry400(@Body Product product, @Header("accept-language") String acceptLanguage);
 
-        @POST("/lro/nonretryerror/post/202/retry/400")
+        @POST("lro/nonretryerror/post/202/retry/400")
         Call<ResponseBody> post202NonRetry400(@Body Product product, @Header("accept-language") String acceptLanguage);
 
-        @POST("/lro/nonretryerror/postasync/retry/400")
+        @POST("lro/nonretryerror/postasync/retry/400")
         Call<ResponseBody> postAsyncRelativeRetry400(@Body Product product, @Header("accept-language") String acceptLanguage);
 
-        @PUT("/lro/error/put/201/noprovisioningstatepayload")
+        @PUT("lro/error/put/201/noprovisioningstatepayload")
         Call<ResponseBody> putError201NoProvisioningStatePayload(@Body Product product, @Header("accept-language") String acceptLanguage);
 
-        @PUT("/lro/error/putasync/retry/nostatus")
+        @PUT("lro/error/putasync/retry/nostatus")
         Call<ResponseBody> putAsyncRelativeRetryNoStatus(@Body Product product, @Header("accept-language") String acceptLanguage);
 
-        @PUT("/lro/error/putasync/retry/nostatuspayload")
+        @PUT("lro/error/putasync/retry/nostatuspayload")
         Call<ResponseBody> putAsyncRelativeRetryNoStatusPayload(@Body Product product, @Header("accept-language") String acceptLanguage);
 
-        @HTTP(path = "/lro/error/delete/204/nolocation", method = "DELETE", hasBody = true)
+        @HTTP(path = "lro/error/delete/204/nolocation", method = "DELETE", hasBody = true)
         Call<ResponseBody> delete204Succeeded(@Header("accept-language") String acceptLanguage);
 
-        @HTTP(path = "/lro/error/deleteasync/retry/nostatus", method = "DELETE", hasBody = true)
+        @HTTP(path = "lro/error/deleteasync/retry/nostatus", method = "DELETE", hasBody = true)
         Call<ResponseBody> deleteAsyncRelativeRetryNoStatus(@Header("accept-language") String acceptLanguage);
 
-        @POST("/lro/error/post/202/nolocation")
+        @POST("lro/error/post/202/nolocation")
         Call<ResponseBody> post202NoLocation(@Body Product product, @Header("accept-language") String acceptLanguage);
 
-        @POST("/lro/error/postasync/retry/nopayload")
+        @POST("lro/error/postasync/retry/nopayload")
         Call<ResponseBody> postAsyncRelativeRetryNoPayload(@Body Product product, @Header("accept-language") String acceptLanguage);
 
-        @PUT("/lro/error/put/200/invalidjson")
+        @PUT("lro/error/put/200/invalidjson")
         Call<ResponseBody> put200InvalidJson(@Body Product product, @Header("accept-language") String acceptLanguage);
 
-        @PUT("/lro/error/putasync/retry/invalidheader")
+        @PUT("lro/error/putasync/retry/invalidheader")
         Call<ResponseBody> putAsyncRelativeRetryInvalidHeader(@Body Product product, @Header("accept-language") String acceptLanguage);
 
-        @PUT("/lro/error/putasync/retry/invalidjsonpolling")
+        @PUT("lro/error/putasync/retry/invalidjsonpolling")
         Call<ResponseBody> putAsyncRelativeRetryInvalidJsonPolling(@Body Product product, @Header("accept-language") String acceptLanguage);
 
-        @HTTP(path = "/lro/error/delete/202/retry/invalidheader", method = "DELETE", hasBody = true)
+        @HTTP(path = "lro/error/delete/202/retry/invalidheader", method = "DELETE", hasBody = true)
         Call<ResponseBody> delete202RetryInvalidHeader(@Header("accept-language") String acceptLanguage);
 
-        @HTTP(path = "/lro/error/deleteasync/retry/invalidheader", method = "DELETE", hasBody = true)
+        @HTTP(path = "lro/error/deleteasync/retry/invalidheader", method = "DELETE", hasBody = true)
         Call<ResponseBody> deleteAsyncRelativeRetryInvalidHeader(@Header("accept-language") String acceptLanguage);
 
-        @HTTP(path = "/lro/error/deleteasync/retry/invalidjsonpolling", method = "DELETE", hasBody = true)
+        @HTTP(path = "lro/error/deleteasync/retry/invalidjsonpolling", method = "DELETE", hasBody = true)
         Call<ResponseBody> deleteAsyncRelativeRetryInvalidJsonPolling(@Header("accept-language") String acceptLanguage);
 
-        @POST("/lro/error/post/202/retry/invalidheader")
+        @POST("lro/error/post/202/retry/invalidheader")
         Call<ResponseBody> post202RetryInvalidHeader(@Body Product product, @Header("accept-language") String acceptLanguage);
 
-        @POST("/lro/error/postasync/retry/invalidheader")
+        @POST("lro/error/postasync/retry/invalidheader")
         Call<ResponseBody> postAsyncRelativeRetryInvalidHeader(@Body Product product, @Header("accept-language") String acceptLanguage);
 
-        @POST("/lro/error/postasync/retry/invalidjsonpolling")
+        @POST("lro/error/postasync/retry/invalidjsonpolling")
         Call<ResponseBody> postAsyncRelativeRetryInvalidJsonPolling(@Body Product product, @Header("accept-language") String acceptLanguage);
 
     }

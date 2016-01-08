@@ -28,7 +28,7 @@ public interface HttpFailure {
      * used by Retrofit to perform actually REST calls.
      */
     interface HttpFailureService {
-        @GET("/http/failure/emptybody/error")
+        @GET("http/failure/emptybody/error")
         Call<ResponseBody> getEmptyError();
 
     }

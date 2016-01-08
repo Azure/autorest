@@ -31,10 +31,10 @@ public interface Inheritance {
      * used by Retrofit to perform actually REST calls.
      */
     interface InheritanceService {
-        @GET("/complex/inheritance/valid")
+        @GET("complex/inheritance/valid")
         Call<ResponseBody> getValid();
 
-        @PUT("/complex/inheritance/valid")
+        @PUT("complex/inheritance/valid")
         Call<ResponseBody> putValid(@Body Siamese complexBody);
 
     }

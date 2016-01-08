@@ -31,61 +31,61 @@ public interface DatetimeOperations {
      * used by Retrofit to perform actually REST calls.
      */
     interface DatetimeService {
-        @GET("/datetime/null")
+        @GET("datetime/null")
         Call<ResponseBody> getNull();
 
-        @GET("/datetime/invalid")
+        @GET("datetime/invalid")
         Call<ResponseBody> getInvalid();
 
-        @GET("/datetime/overflow")
+        @GET("datetime/overflow")
         Call<ResponseBody> getOverflow();
 
-        @GET("/datetime/underflow")
+        @GET("datetime/underflow")
         Call<ResponseBody> getUnderflow();
 
-        @PUT("/datetime/max/utc")
+        @PUT("datetime/max/utc")
         Call<ResponseBody> putUtcMaxDateTime(@Body DateTime datetimeBody);
 
-        @GET("/datetime/max/utc/lowercase")
+        @GET("datetime/max/utc/lowercase")
         Call<ResponseBody> getUtcLowercaseMaxDateTime();
 
-        @GET("/datetime/max/utc/uppercase")
+        @GET("datetime/max/utc/uppercase")
         Call<ResponseBody> getUtcUppercaseMaxDateTime();
 
-        @PUT("/datetime/max/localpositiveoffset")
+        @PUT("datetime/max/localpositiveoffset")
         Call<ResponseBody> putLocalPositiveOffsetMaxDateTime(@Body DateTime datetimeBody);
 
-        @GET("/datetime/max/localpositiveoffset/lowercase")
+        @GET("datetime/max/localpositiveoffset/lowercase")
         Call<ResponseBody> getLocalPositiveOffsetLowercaseMaxDateTime();
 
-        @GET("/datetime/max/localpositiveoffset/uppercase")
+        @GET("datetime/max/localpositiveoffset/uppercase")
         Call<ResponseBody> getLocalPositiveOffsetUppercaseMaxDateTime();
 
-        @PUT("/datetime/max/localnegativeoffset")
+        @PUT("datetime/max/localnegativeoffset")
         Call<ResponseBody> putLocalNegativeOffsetMaxDateTime(@Body DateTime datetimeBody);
 
-        @GET("/datetime/max/localnegativeoffset/uppercase")
+        @GET("datetime/max/localnegativeoffset/uppercase")
         Call<ResponseBody> getLocalNegativeOffsetUppercaseMaxDateTime();
 
-        @GET("/datetime/max/localnegativeoffset/lowercase")
+        @GET("datetime/max/localnegativeoffset/lowercase")
         Call<ResponseBody> getLocalNegativeOffsetLowercaseMaxDateTime();
 
-        @PUT("/datetime/min/utc")
+        @PUT("datetime/min/utc")
         Call<ResponseBody> putUtcMinDateTime(@Body DateTime datetimeBody);
 
-        @GET("/datetime/min/utc")
+        @GET("datetime/min/utc")
         Call<ResponseBody> getUtcMinDateTime();
 
-        @PUT("/datetime/min/localpositiveoffset")
+        @PUT("datetime/min/localpositiveoffset")
         Call<ResponseBody> putLocalPositiveOffsetMinDateTime(@Body DateTime datetimeBody);
 
-        @GET("/datetime/min/localpositiveoffset")
+        @GET("datetime/min/localpositiveoffset")
         Call<ResponseBody> getLocalPositiveOffsetMinDateTime();
 
-        @PUT("/datetime/min/localnegativeoffset")
+        @PUT("datetime/min/localnegativeoffset")
         Call<ResponseBody> putLocalNegativeOffsetMinDateTime(@Body DateTime datetimeBody);
 
-        @GET("/datetime/min/localnegativeoffset")
+        @GET("datetime/min/localnegativeoffset")
         Call<ResponseBody> getLocalNegativeOffsetMinDateTime();
 
     }

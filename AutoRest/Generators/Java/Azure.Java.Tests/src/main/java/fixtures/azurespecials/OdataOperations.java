@@ -31,7 +31,7 @@ public interface OdataOperations {
      * used by Retrofit to perform actually REST calls.
      */
     interface OdataService {
-        @GET("/azurespecials/odata/filter")
+        @GET("azurespecials/odata/filter")
         Call<ResponseBody> getWithFilter(@Query("$filter") String filter, @Query("$top") Integer top, @Query("$orderby") String orderby, @Header("accept-language") String acceptLanguage);
 
     }

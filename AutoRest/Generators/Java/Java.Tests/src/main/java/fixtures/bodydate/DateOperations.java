@@ -31,28 +31,28 @@ public interface DateOperations {
      * used by Retrofit to perform actually REST calls.
      */
     interface DateService {
-        @GET("/date/null")
+        @GET("date/null")
         Call<ResponseBody> getNull();
 
-        @GET("/date/invaliddate")
+        @GET("date/invaliddate")
         Call<ResponseBody> getInvalidDate();
 
-        @GET("/date/overflowdate")
+        @GET("date/overflowdate")
         Call<ResponseBody> getOverflowDate();
 
-        @GET("/date/underflowdate")
+        @GET("date/underflowdate")
         Call<ResponseBody> getUnderflowDate();
 
-        @PUT("/date/max")
+        @PUT("date/max")
         Call<ResponseBody> putMaxDate(@Body LocalDate dateBody);
 
-        @GET("/date/max")
+        @GET("date/max")
         Call<ResponseBody> getMaxDate();
 
-        @PUT("/date/min")
+        @PUT("date/min")
         Call<ResponseBody> putMinDate(@Body LocalDate dateBody);
 
-        @GET("/date/min")
+        @GET("date/min")
         Call<ResponseBody> getMinDate();
 
     }

@@ -33,16 +33,16 @@ public interface HttpServerFailure {
      * used by Retrofit to perform actually REST calls.
      */
     interface HttpServerFailureService {
-        @HEAD("/http/failure/server/501")
+        @HEAD("http/failure/server/501")
         Call<Void> head501();
 
-        @GET("/http/failure/server/501")
+        @GET("http/failure/server/501")
         Call<ResponseBody> get501();
 
-        @POST("/http/failure/server/505")
+        @POST("http/failure/server/505")
         Call<ResponseBody> post505(@Body Boolean booleanValue);
 
-        @HTTP(path = "/http/failure/server/505", method = "DELETE", hasBody = true)
+        @HTTP(path = "http/failure/server/505", method = "DELETE", hasBody = true)
         Call<ResponseBody> delete505(@Body Boolean booleanValue);
 
     }

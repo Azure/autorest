@@ -31,19 +31,19 @@ public interface Array {
      * used by Retrofit to perform actually REST calls.
      */
     interface ArrayService {
-        @GET("/complex/array/valid")
+        @GET("complex/array/valid")
         Call<ResponseBody> getValid();
 
-        @PUT("/complex/array/valid")
+        @PUT("complex/array/valid")
         Call<ResponseBody> putValid(@Body ArrayWrapper complexBody);
 
-        @GET("/complex/array/empty")
+        @GET("complex/array/empty")
         Call<ResponseBody> getEmpty();
 
-        @PUT("/complex/array/empty")
+        @PUT("complex/array/empty")
         Call<ResponseBody> putEmpty(@Body ArrayWrapper complexBody);
 
-        @GET("/complex/array/notprovided")
+        @GET("complex/array/notprovided")
         Call<ResponseBody> getNotProvided();
 
     }
