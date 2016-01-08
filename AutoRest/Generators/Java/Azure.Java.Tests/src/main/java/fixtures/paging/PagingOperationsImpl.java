@@ -19,6 +19,7 @@ import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.paging.models.PageImpl;
+import fixtures.paging.models.PagingGetMultiplePagesOptions;
 import fixtures.paging.models.Product;
 import java.io.IOException;
 import retrofit.Call;
@@ -90,12 +91,19 @@ public final class PagingOperationsImpl implements PagingOperations {
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param clientRequestId the String value
+     * @param pagingGetMultiplePagesOptions Additional parameters for the operation
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the PageImpl&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<PageImpl<Product>> getMultiplePages(String clientRequestId) throws CloudException, IOException {
-        Call<ResponseBody> call = service.getMultiplePages(clientRequestId, this.client.getAcceptLanguage());
+    public ServiceResponse<PageImpl<Product>> getMultiplePages(String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) throws CloudException, IOException {
+        Integer maxresults = null;
+        Integer timeout = null;
+        if (pagingGetMultiplePagesOptions != null) {
+            maxresults = pagingGetMultiplePagesOptions.getMaxresults();
+            timeout = pagingGetMultiplePagesOptions.getTimeout();
+        }
+        Call<ResponseBody> call = service.getMultiplePages(clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
         return getMultiplePagesDelegate(call.execute(), null);
     }
 
@@ -103,11 +111,18 @@ public final class PagingOperationsImpl implements PagingOperations {
      * A paging operation that includes a nextLink that has 10 pages.
      *
      * @param clientRequestId the String value
+     * @param pagingGetMultiplePagesOptions Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getMultiplePagesAsync(String clientRequestId, final ServiceCallback<PageImpl<Product>> serviceCallback) {
-        Call<ResponseBody> call = service.getMultiplePages(clientRequestId, this.client.getAcceptLanguage());
+    public Call<ResponseBody> getMultiplePagesAsync(String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, final ServiceCallback<PageImpl<Product>> serviceCallback) {
+        Integer maxresults = null;
+        Integer timeout = null;
+        if (pagingGetMultiplePagesOptions != null) {
+            maxresults = pagingGetMultiplePagesOptions.getMaxresults();
+            timeout = pagingGetMultiplePagesOptions.getTimeout();
+        }
+        Call<ResponseBody> call = service.getMultiplePages(clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
         call.enqueue(new ServiceResponseCallback<PageImpl<Product>>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -383,16 +398,23 @@ public final class PagingOperationsImpl implements PagingOperations {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param clientRequestId the String value
+     * @param pagingGetMultiplePagesOptions Additional parameters for the operation
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the PageImpl&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<PageImpl<Product>> getMultiplePagesNext(String nextPageLink, String clientRequestId) throws CloudException, IOException, IllegalArgumentException {
+    public ServiceResponse<PageImpl<Product>> getMultiplePagesNext(String nextPageLink, String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) throws CloudException, IOException, IllegalArgumentException {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.getMultiplePagesNext(nextPageLink, clientRequestId, this.client.getAcceptLanguage());
+        Integer maxresults = null;
+        Integer timeout = null;
+        if (pagingGetMultiplePagesOptions != null) {
+            maxresults = pagingGetMultiplePagesOptions.getMaxresults();
+            timeout = pagingGetMultiplePagesOptions.getTimeout();
+        }
+        Call<ResponseBody> call = service.getMultiplePagesNext(nextPageLink, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
         return getMultiplePagesNextDelegate(call.execute(), null);
     }
 
@@ -401,15 +423,22 @@ public final class PagingOperationsImpl implements PagingOperations {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param clientRequestId the String value
+     * @param pagingGetMultiplePagesOptions Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getMultiplePagesNextAsync(String nextPageLink, String clientRequestId, final ServiceCallback<PageImpl<Product>> serviceCallback) {
+    public Call<ResponseBody> getMultiplePagesNextAsync(String nextPageLink, String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, final ServiceCallback<PageImpl<Product>> serviceCallback) {
         if (nextPageLink == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.getMultiplePagesNext(nextPageLink, clientRequestId, this.client.getAcceptLanguage());
+        Integer maxresults = null;
+        Integer timeout = null;
+        if (pagingGetMultiplePagesOptions != null) {
+            maxresults = pagingGetMultiplePagesOptions.getMaxresults();
+            timeout = pagingGetMultiplePagesOptions.getTimeout();
+        }
+        Call<ResponseBody> call = service.getMultiplePagesNext(nextPageLink, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
         call.enqueue(new ServiceResponseCallback<PageImpl<Product>>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {

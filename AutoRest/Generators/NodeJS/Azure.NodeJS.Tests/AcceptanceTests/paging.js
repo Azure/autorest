@@ -38,10 +38,10 @@ describe('nodejs', function () {
       });
 
       it('should get multiple pages', function (done) {
-          testClient.paging.getMultiplePages('client-id', function (error, result) {
+          testClient.paging.getMultiplePages({'clientRequestId': 'client-id', 'pagingGetMultiplePagesOptions': null}, function (error, result) {
           var loop = function (nextLink, count) {
             if (nextLink !== null && nextLink !== undefined) {
-                testClient.paging.getMultiplePagesNext(nextLink, 'client-id', function (err, res) {
+                testClient.paging.getMultiplePagesNext(nextLink, {'clientRequestId': 'client-id', 'pagingGetMultiplePagesOptions': null}, function (err, res) {
                 should.not.exist(err);
                 loop(res.nextLink, count + 1);
               });

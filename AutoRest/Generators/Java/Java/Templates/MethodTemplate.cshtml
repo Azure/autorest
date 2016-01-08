@@ -42,13 +42,45 @@ public @Model.OperationResponseReturnTypeString @(Model.Name)(@Model.MethodParam
 {
 @:    Validator.validate(@(param.Name));
 }
-@foreach (var transformation in Model.InputParameterTransformation)
+@foreach (var group in Model.InputParameterTransformation.Select(t => t.ParameterMappings[0].InputParameter).Distinct())
+{
+    var inParam = group.Name;
+if (!group.IsRequired)
+{
+foreach (var outProp in Model.InputParameterTransformation.Where(t => t.ParameterMappings[0].InputParameter == group).Select(t => t.OutputParameter))
+{
+if (outProp.IsRequired && JavaCodeNamer.JavaBuiltInTypes.Contains(outProp.Type.Name))
+{
+@:    @outProp.Type.Name @outProp.Name;
+}
+else
+{
+@:    @JavaCodeNamer.WrapPrimitiveType(outProp.Type).Name @outProp.Name = null;
+}
+}
+@:    if (@(group.Name) != null) {
+    foreach (var transformation in Model.InputParameterTransformation.Where(t => t.ParameterMappings[0].InputParameter.Name == inParam))
+    {
+        var outProp = transformation.OutputParameter.Name;
+        var inProp = transformation.ParameterMappings[0].InputParameterProperty;
+@:        @outProp = @(inParam).get@(inProp.ToPascalCase())();
+    }
+@:    }
+}
+else
+{
+foreach (var transformation in Model.InputParameterTransformation.Where(t => t.ParameterMappings[0].InputParameter.Name == inParam))
 {
     var outType = transformation.OutputParameter.Type.Name;
+    if (!transformation.OutputParameter.IsRequired)
+    {
+        outType = JavaCodeNamer.WrapPrimitiveType(transformation.OutputParameter.Type).Name;
+    }
     var outProp = transformation.OutputParameter.Name;
-    var inParam = transformation.ParameterMappings[0].InputParameter.Name;
     var inProp = transformation.ParameterMappings[0].InputParameterProperty;
 @:    @outType @outProp = @(inParam).get@(inProp.ToPascalCase())();
+}
+}
 }
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterInvocation);
     return @(Model.Name)Delegate(call.execute(), null);
@@ -83,13 +115,45 @@ public Call<@Model.CallType> @(Model.Name)Async(@Model.MethodParameterDeclaratio
 {
 @:    Validator.validate(@(param.Name), serviceCallback);
 }
-@foreach (var transformation in Model.InputParameterTransformation)
+@foreach (var group in Model.InputParameterTransformation.Select(t => t.ParameterMappings[0].InputParameter).Distinct())
+{
+    var inParam = group.Name;
+if (!group.IsRequired)
+{
+foreach (var outProp in Model.InputParameterTransformation.Where(t => t.ParameterMappings[0].InputParameter == group).Select(t => t.OutputParameter))
+{
+if (outProp.IsRequired && JavaCodeNamer.JavaBuiltInTypes.Contains(outProp.Type.Name))
+{
+@:    @outProp.Type.Name @outProp.Name;
+}
+else
+{
+@:    @JavaCodeNamer.WrapPrimitiveType(outProp.Type).Name @outProp.Name = null;
+}
+}
+@:    if (@(group.Name) != null) {
+    foreach (var transformation in Model.InputParameterTransformation.Where(t => t.ParameterMappings[0].InputParameter.Name == inParam))
+    {
+        var outProp = transformation.OutputParameter.Name;
+        var inProp = transformation.ParameterMappings[0].InputParameterProperty;
+@:        @outProp = @(inParam).get@(inProp.ToPascalCase())();
+    }
+@:    }
+}
+else
+{
+foreach (var transformation in Model.InputParameterTransformation.Where(t => t.ParameterMappings[0].InputParameter.Name == inParam))
 {
     var outType = transformation.OutputParameter.Type.Name;
+    if (!transformation.OutputParameter.IsRequired)
+    {
+        outType = JavaCodeNamer.WrapPrimitiveType(transformation.OutputParameter.Type).Name;
+    }
     var outProp = transformation.OutputParameter.Name;
-    var inParam = transformation.ParameterMappings[0].InputParameter.Name;
     var inProp = transformation.ParameterMappings[0].InputParameterProperty;
 @:    @outType @outProp = @(inParam).get@(inProp.ToPascalCase())();
+}
+}
 }
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterInvocation);
     call.enqueue(new @Model.InternalCallback<@(JavaCodeNamer.WrapPrimitiveType(Model.ReturnType.Body).Name)>(serviceCallback) {

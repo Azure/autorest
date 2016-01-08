@@ -1,27 +1,36 @@
 buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:1.2.2'
+    android {
+        lintOptions {
+            abortOnError false
+        }
     }
 }
-
-apply plugin: 'java'
+apply plugin: 'com.android.library'
 apply plugin: 'maven'
-apply plugin: 'checkstyle'
 
 group = 'com.microsoft.rest'
 version = '0.0.1-SNAPSHOT'
 
-configurations {
-    deployerJars
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.1"
+
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "0.0.1-SNAPSHOT"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
 }
 
-checkstyle {
-    configFile = new File("$rootDir/Tools/checkstyle/checkstyle.xml")
-    configProperties = [samedir: "$rootDir/Tools/checkstyle"]
-    reportsDir = new File("$rootDir/Tools/checkstyle/reports")
+configurations {
+    deployerJars
 }
 
 repositories {
@@ -31,7 +40,9 @@ repositories {
 }
 
 dependencies {
-    compile 'com.microsoft.azure:adal4j:1.1.2'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:23.0.1'
+    compile 'com.microsoft.aad:adal:1.1.11'
     testCompile 'junit:junit:4.11'
     testCompile 'junit:junit-dep:4.11'
     deployerJars "org.apache.maven.wagon:wagon-ftp:2.10"
@@ -45,7 +56,7 @@ uploadArchives {
             snapshotRepository(url: "ftp://waws-prod-bay-005.ftp.azurewebsites.windows.net/site/wwwroot/") {
                 authentication(userName: username, password: password)
             }
-            pom.setArtifactId "azure-client-authentication"
+            pom.setArtifactId "azure-android-client-authentication"
             pom.project {
                 name 'Microsoft Azure AutoRest Authentication Library for Java'
                 description 'This is the authentication library for AutoRest generated Azure Java clients.'
@@ -74,29 +85,3 @@ uploadArchives {
         }
     }
 }
-
-test {
-    testLogging {
-        events "passed", "skipped", "failed", "standardError"
-    }
-}
-
-javadoc {
-    options.encoding = 'UTF-8'
-}
-
-task sourcesJar(type: Jar, dependsOn:classes) {
-    classifier = 'sources'
-    from sourceSets.main.allSource
-}
-
-artifacts {
-    archives sourcesJar
-}
-
-test {
-    reports.getHtml()
-    reports.html.destination = file("${projectDir}/../../../TestResults/JavaAzureRuntime")
-}
-
-tasks.compileJava.dependsOn 'clean'
