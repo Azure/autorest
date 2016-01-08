@@ -236,9 +236,8 @@ gulp.task('regenerate:expected:csazure', function(cb){
   }, cb);
 });
 
-gulp.task('regenerate:expected:cs', function(cb){
+gulp.task('regenerate:expected:cs', ['regenerate:expected:cswithcreds'], function(cb){
   mappings = mergeOptions({
-    'PetstoreV2': 'Swagger/swagger.2.0.example.v2.json',
     'Mirror.RecursiveTypes': 'Swagger/swagger-mirror-recursive-type.json',
     'Mirror.Primitives': 'Swagger/swagger-mirror-primitives.json',
     'Mirror.Sequences': 'Swagger/swagger-mirror-sequences.json',
@@ -253,6 +252,24 @@ gulp.task('regenerate:expected:cs', function(cb){
     'codeGenerator': 'CSharp',
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1'
+  }, cb);
+});
+ 
+gulp.task('regenerate:expected:cswithcreds', function(cb){  
+  mappings = mergeOptions(
+  {
+    'PetstoreV2': 'Swagger/swagger.2.0.example.v2.json',
+  });
+
+  regenExpected({
+    'outputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
+    'mappings': mappings,
+    'outputDir': 'Expected',
+    'codeGenerator': 'CSharp',
+    'nsPrefix': 'Fixtures',
+    'flatteningThreshold': '1',
+    'addCredentials': true
   }, cb);
 });
 

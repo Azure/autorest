@@ -67,6 +67,7 @@ namespace Microsoft.Rest.Generator.CSharp
                     Name = "Credentials",
                     Type = PrimaryType.Credentials,
                     IsRequired = true,
+                    IsReadOnly = true,
                     Documentation = "Subscription credentials which uniquely identify client subscription."
                 });
             }

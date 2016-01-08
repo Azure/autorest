@@ -41,6 +41,12 @@ namespace Fixtures.PetstoreV2
         /// </summary>
         JsonSerializerSettings DeserializationSettings { get; }
 
+        /// <summary>
+        /// Subscription credentials which uniquely identify client
+        /// subscription.
+        /// </summary>
+        ServiceClientCredentials Credentials { get; }
+
 
             /// <summary>
         /// Add a new pet to the store

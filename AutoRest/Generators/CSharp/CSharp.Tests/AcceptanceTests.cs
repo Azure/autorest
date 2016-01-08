@@ -47,6 +47,7 @@ using Xunit;
 using Xunit.Abstractions;
 using Error = Fixtures.AcceptanceTestsHttp.Models.Error;
 using System.Reflection;
+using Fixtures.PetstoreV2;
 
 namespace Microsoft.Rest.Generator.CSharp.Tests
 {
@@ -141,6 +142,13 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             exception = Assert.Throws<ValidationException>(() => client2.ValidationOfMethodParameters("123", 150));
             Assert.Equal(ValidationRules.Pattern, exception.Rule);
             Assert.Equal("ApiVersion", exception.Target);
+        }
+
+        [Fact]
+        public void ConstructorWithCredentialsTests()
+        {
+            var client = new SwaggerPetstoreV2(new TokenCredentials(""));
+            client.Dispose();
         }
 
         [Fact]
