@@ -147,7 +147,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         [Fact]
         public void ConstructorWithCredentialsTests()
         {
-            var client = new SwaggerPetstoreV2(new TokenCredentials(""));
+            var client = new SwaggerPetstoreV2(new TokenCredentials("123"));
             client.Dispose();
         }
 
