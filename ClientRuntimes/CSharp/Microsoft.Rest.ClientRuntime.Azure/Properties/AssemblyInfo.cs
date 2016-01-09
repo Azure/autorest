@@ -8,8 +8,8 @@ using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("Microsoft Rest Azure Client Runtime")]
 [assembly: AssemblyDescription("Client infrastructure for Azure client libraries.")]
-[assembly: AssemblyVersion("2.6.0.0")]
-[assembly: AssemblyFileVersion("2.6.0.0")]
+[assembly: AssemblyVersion("2.0.0.0")]
+[assembly: AssemblyFileVersion("2.5.4.0")]
 
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Microsoft Corporation")]
