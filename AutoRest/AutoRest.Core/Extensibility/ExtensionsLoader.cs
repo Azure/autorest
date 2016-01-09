@@ -53,8 +53,7 @@ namespace Microsoft.Rest.Generator.Extensibility
                     var config = JsonConvert.DeserializeObject<AutoRestConfiguration>(configurationFile);
                     codeGenerator = LoadTypeFromAssembly<CodeGenerator>(config.CodeGenerators, settings.CodeGenerator,
                         settings);
-                    Settings.PopulateSettings(codeGenerator, settings.CustomSettings).ForEach(kv => settings.CustomSettings[kv.Key] = kv.Value);
-
+                    Settings.PopulateSettings(codeGenerator, settings.CustomSettings);
                 }
                 catch (Exception ex)
                 {
@@ -101,7 +100,7 @@ namespace Microsoft.Rest.Generator.Extensibility
                 {
                     var config = JsonConvert.DeserializeObject<AutoRestConfiguration>(configurationFile);
                     modeler = LoadTypeFromAssembly<Modeler>(config.Modelers, settings.Modeler, settings);
-                    Settings.PopulateSettings(modeler, settings.CustomSettings).ForEach(kv => settings.CustomSettings[kv.Key] = kv.Value);
+                    Settings.PopulateSettings(modeler, settings.CustomSettings);
                 }
                 catch (Exception ex)
                 {
