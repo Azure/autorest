@@ -96,15 +96,9 @@ String.prototype.getNull = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['ErrorModel']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -249,15 +243,9 @@ String.prototype.putNull = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['ErrorModel']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -345,15 +333,9 @@ String.prototype.getEmpty = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['ErrorModel']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -496,15 +478,9 @@ String.prototype.putEmpty = function (stringBody, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['ErrorModel']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -593,15 +569,9 @@ String.prototype.getMbcs = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['ErrorModel']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -746,15 +716,9 @@ String.prototype.putMbcs = function (stringBody, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['ErrorModel']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -844,15 +808,9 @@ String.prototype.getWhitespace = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['ErrorModel']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -999,15 +957,9 @@ String.prototype.putWhitespace = function (stringBody, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['ErrorModel']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -1095,15 +1047,9 @@ String.prototype.getNotProvided = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['ErrorModel']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');

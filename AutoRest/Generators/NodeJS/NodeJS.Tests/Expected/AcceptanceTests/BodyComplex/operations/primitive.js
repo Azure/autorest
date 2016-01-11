@@ -98,15 +98,9 @@ Primitive.prototype.getInt = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['ErrorModel']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -241,15 +235,9 @@ Primitive.prototype.putInt = function (complexBody, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['ErrorModel']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -338,15 +326,9 @@ Primitive.prototype.getLong = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['ErrorModel']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -481,15 +463,9 @@ Primitive.prototype.putLong = function (complexBody, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['ErrorModel']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -578,15 +554,9 @@ Primitive.prototype.getFloat = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['ErrorModel']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -721,15 +691,9 @@ Primitive.prototype.putFloat = function (complexBody, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['ErrorModel']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -818,15 +782,9 @@ Primitive.prototype.getDouble = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['ErrorModel']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -963,15 +921,9 @@ Primitive.prototype.putDouble = function (complexBody, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['ErrorModel']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -1060,15 +1012,9 @@ Primitive.prototype.getBool = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['ErrorModel']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -1203,15 +1149,9 @@ Primitive.prototype.putBool = function (complexBody, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['ErrorModel']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -1300,15 +1240,9 @@ Primitive.prototype.getString = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['ErrorModel']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -1445,15 +1379,9 @@ Primitive.prototype.putString = function (complexBody, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['ErrorModel']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -1542,15 +1470,9 @@ Primitive.prototype.getDate = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['ErrorModel']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -1685,15 +1607,9 @@ Primitive.prototype.putDate = function (complexBody, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['ErrorModel']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -1782,15 +1698,9 @@ Primitive.prototype.getDateTime = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['ErrorModel']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -1926,15 +1836,9 @@ Primitive.prototype.putDateTime = function (complexBody, options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['ErrorModel']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -2024,15 +1928,9 @@ Primitive.prototype.getDateTimeRfc1123 = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['ErrorModel']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -2168,15 +2066,9 @@ Primitive.prototype.putDateTimeRfc1123 = function (complexBody, options, callbac
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['ErrorModel']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -2265,15 +2157,9 @@ Primitive.prototype.getDuration = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['ErrorModel']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -2411,15 +2297,9 @@ Primitive.prototype.putDuration = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['ErrorModel']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -2508,15 +2388,9 @@ Primitive.prototype.getByte = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['ErrorModel']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -2654,15 +2528,9 @@ Primitive.prototype.putByte = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['ErrorModel']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');

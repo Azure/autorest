@@ -114,15 +114,9 @@ Paging.prototype.getSinglePages = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['CloudError']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -290,15 +284,9 @@ Paging.prototype.getMultiplePages = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['CloudError']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -421,15 +409,9 @@ Paging.prototype.getMultiplePagesRetryFirst = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['CloudError']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -553,15 +535,9 @@ Paging.prototype.getMultiplePagesRetrySecond = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['CloudError']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -683,15 +659,9 @@ Paging.prototype.getSinglePagesFailure = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['CloudError']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -813,15 +783,9 @@ Paging.prototype.getMultiplePagesFailure = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['CloudError']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -943,15 +907,9 @@ Paging.prototype.getMultiplePagesFailureUri = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['CloudError']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -1075,15 +1033,9 @@ Paging.prototype.getSinglePagesNext = function (nextPageLink, options, callback)
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['CloudError']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -1253,15 +1205,9 @@ Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callbac
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['CloudError']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -1386,15 +1332,9 @@ Paging.prototype.getMultiplePagesRetryFirstNext = function (nextPageLink, option
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['CloudError']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -1520,15 +1460,9 @@ Paging.prototype.getMultiplePagesRetrySecondNext = function (nextPageLink, optio
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['CloudError']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -1652,15 +1586,9 @@ Paging.prototype.getSinglePagesFailureNext = function (nextPageLink, options, ca
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['CloudError']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -1784,15 +1712,9 @@ Paging.prototype.getMultiplePagesFailureNext = function (nextPageLink, options, 
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['CloudError']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
@@ -1916,15 +1838,9 @@ Paging.prototype.getMultiplePagesFailureUriNext = function (nextPageLink, option
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
-                                                       parsedErrorResponse.error.code : 
-                                                              parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
-                                                          parsedErrorResponse.error.message : 
-                                                                 parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client.models['CloudError']();
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        error.code = parsedErrorResponse.code;
+        error.message = parsedErrorResponse.message;
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
           error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
