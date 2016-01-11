@@ -24,7 +24,7 @@ var util = require('util');
 function ProductListResultNextLink() {
 }
 
-util.inherits(UsageListResult, Array);
+util.inherits(ProductListResultNextLink, Array);
 
 ProductListResultNextLink.prototype.mapper = function () {
   return {
