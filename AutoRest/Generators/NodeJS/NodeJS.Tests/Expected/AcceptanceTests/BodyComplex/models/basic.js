@@ -22,75 +22,47 @@
  * 'Magenta', 'YELLOW', 'blacK'.
  * 
  */
-function Basic(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.id !== undefined) {
-      this.id = parameters.id;
-    }
-    if (parameters.name !== undefined) {
-      this.name = parameters.name;
-    }
-    if (parameters.color !== undefined) {
-      this.color = parameters.color;
-    }
-  }    
+function Basic() {
 }
 
-
 /**
- * Validate the payload against the Basic schema
+ * Defines the metadata of Basic
  *
- * @param {JSON} payload
+ * @returns {object} metadata of Basic
  *
  */
-Basic.prototype.serialize = function () {
-  var payload = {};
-  if (this['id'] !== null && this['id'] !== undefined) {
-    if (typeof this['id'] !== 'number') {
-      throw new Error('this[\'id\'] must be of type number.');
+Basic.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'basic',
+    type: {
+      name: 'Composite',
+      className: 'Basic',
+      modelProperties: {
+        id: {
+          required: false,
+          serializedName: 'id',
+          type: {
+            name: 'Number'
+          }
+        },
+        name: {
+          required: false,
+          serializedName: 'name',
+          type: {
+            name: 'String'
+          }
+        },
+        color: {
+          required: false,
+          serializedName: 'color',
+          type: {
+            name: 'String'
+          }
+        }
+      }
     }
-    payload['id'] = this['id'];
-  }
-
-  if (this['name'] !== null && this['name'] !== undefined) {
-    if (typeof this['name'].valueOf() !== 'string') {
-      throw new Error('this[\'name\'] must be of type string.');
-    }
-    payload['name'] = this['name'];
-  }
-
-  if (this['color'] !== null && this['color'] !== undefined) {
-    if (typeof this['color'].valueOf() !== 'string') {
-      throw new Error('this[\'color\'] must be of type string.');
-    }
-    payload['color'] = this['color'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to Basic schema
- *
- * @param {JSON} instance
- *
- */
-Basic.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['id'] !== undefined) {
-      this['id'] = instance['id'];
-    }
-
-    if (instance['name'] !== undefined) {
-      this['name'] = instance['name'];
-    }
-
-    if (instance['color'] !== undefined) {
-      this['color'] = instance['color'];
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = Basic;

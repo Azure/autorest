@@ -19,66 +19,40 @@ var util = require('util');
  * @member {array} [array]
  * 
  */
-function ArrayWrapper(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.array) {
-      var tempParametersarray = [];
-      parameters.array.forEach(function(element) {
-        if (element !== undefined) {
-          element = element;
-        }
-        tempParametersarray.push(element);
-      });
-      this.array = tempParametersarray;
-    }
-  }    
+function ArrayWrapper() {
 }
 
-
 /**
- * Validate the payload against the ArrayWrapper schema
+ * Defines the metadata of ArrayWrapper
  *
- * @param {JSON} payload
+ * @returns {object} metadata of ArrayWrapper
  *
  */
-ArrayWrapper.prototype.serialize = function () {
-  var payload = {};
-  if (util.isArray(this['array'])) {
-    payload['array'] = [];
-    for (var i = 0; i < this['array'].length; i++) {
-      if (this['array'][i] !== null && this['array'][i] !== undefined) {
-        if (typeof this['array'][i].valueOf() !== 'string') {
-          throw new Error('this[\'array\'][i] must be of type string.');
+ArrayWrapper.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'array-wrapper',
+    type: {
+      name: 'Composite',
+      className: 'ArrayWrapper',
+      modelProperties: {
+        array: {
+          required: false,
+          serializedName: 'array',
+          type: {
+            name: 'Sequence',
+            element: {
+                required: false,
+                serializedName: 'StringElementType',
+                type: {
+                  name: 'String'
+                }
+            }
+          }
         }
-        payload['array'][i] = this['array'][i];
       }
     }
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to ArrayWrapper schema
- *
- * @param {JSON} instance
- *
- */
-ArrayWrapper.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['array']) {
-      var tempInstancearray = [];
-      instance['array'].forEach(function(element1) {
-        if (element1 !== undefined) {
-          element1 = element1;
-        }
-        tempInstancearray.push(element1);
-      });
-      this['array'] = tempInstancearray;
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = ArrayWrapper;

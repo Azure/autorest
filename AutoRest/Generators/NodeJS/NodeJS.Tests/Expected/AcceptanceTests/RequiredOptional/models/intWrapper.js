@@ -17,45 +17,33 @@
  * @member {number} value
  * 
  */
-function IntWrapper(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.value !== undefined) {
-      this.value = parameters.value;
-    }
-  }    
+function IntWrapper() {
 }
 
-
 /**
- * Validate the payload against the IntWrapper schema
+ * Defines the metadata of IntWrapper
  *
- * @param {JSON} payload
+ * @returns {object} metadata of IntWrapper
  *
  */
-IntWrapper.prototype.serialize = function () {
-  var payload = {};
-  if (this['value'] === null || this['value'] === undefined || typeof this['value'] !== 'number') {
-    throw new Error('this[\'value\'] cannot be null or undefined and it must be of type number.');
-  }
-  payload['value'] = this['value'];
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to IntWrapper schema
- *
- * @param {JSON} instance
- *
- */
-IntWrapper.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['value'] !== undefined) {
-      this['value'] = instance['value'];
+IntWrapper.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'int-wrapper',
+    type: {
+      name: 'Composite',
+      className: 'IntWrapper',
+      modelProperties: {
+        value: {
+          required: true,
+          serializedName: 'value',
+          type: {
+            name: 'Number'
+          }
+        }
+      }
     }
-  }
-
-  return this;
+  };
 };
 
 module.exports = IntWrapper;

@@ -32,26 +32,37 @@ function StorageAccountListResult() {
 util.inherits(StorageAccountListResult, Array);
 
 /**
- * Deserialize the instance to StorageAccountListResult schema
+ * Defines the metadata of StorageAccountListResult
  *
- * @param {JSON} instance
+ * @returns {object} metadata of StorageAccountListResult
  *
  */
-StorageAccountListResult.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['value']) {
-      var deserializedInstancevalue = [];
-        instance['value'].forEach(function(element) {
-        if (element) {
-          element = new models['StorageAccount']().deserialize(element);
+StorageAccountListResult.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'StorageAccountListResult',
+    type: {
+      name: 'Composite',
+      className: 'StorageAccountListResult',
+      modelProperties: {
+        value: {
+          required: false,
+          serializedName: '',
+          type: {
+            name: 'Sequence',
+            element: {
+                required: false,
+                serializedName: 'StorageAccountElementType',
+                type: {
+                  name: 'Composite',
+                  className: 'StorageAccount'
+                }
+            }
+          }
         }
-        deserializedInstancevalue.push(element);
-      });
-      Array.prototype.push.apply(this, deserializedInstancevalue);
+      }
     }
-  }
-
-  return this;
+  };
 };
 
 module.exports = StorageAccountListResult;

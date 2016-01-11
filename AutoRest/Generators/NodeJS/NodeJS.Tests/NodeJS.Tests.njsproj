@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{189f9cfc-764a-48db-aea8-638cbba5b5aa}</ProjectGuid>
     <ProjectHome />
-    <ProjectView>ProjectFiles</ProjectView>
+    <ProjectView>ShowAllFiles</ProjectView>
     <StartupFile>unit.js</StartupFile>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -37,6 +37,9 @@
       <TestFramework>Mocha</TestFramework>
     </Compile>
     <Compile Include="AcceptanceTests\startServer.js" />
+    <Compile Include="AcceptanceTests\validationTests.js">
+      <TestFramework>Mocha</TestFramework>
+    </Compile>
     <Compile Include="Expected\AcceptanceTests\BodyArray\AutoRestSwaggerBATArrayService.js" />
     <Compile Include="Expected\AcceptanceTests\BodyArray\models\ErrorModel.js" />
     <Compile Include="Expected\AcceptanceTests\BodyArray\models\index.js" />

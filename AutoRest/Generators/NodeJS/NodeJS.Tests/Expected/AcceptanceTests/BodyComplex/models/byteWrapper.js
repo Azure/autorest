@@ -17,50 +17,33 @@
  * @member {buffer} [field]
  * 
  */
-function ByteWrapper(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.field !== undefined) {
-      this.field = parameters.field;
-    }
-  }    
+function ByteWrapper() {
 }
 
-
 /**
- * Validate the payload against the ByteWrapper schema
+ * Defines the metadata of ByteWrapper
  *
- * @param {JSON} payload
+ * @returns {object} metadata of ByteWrapper
  *
  */
-ByteWrapper.prototype.serialize = function () {
-  var payload = {};
-  if (this['field']) {
-    if (!Buffer.isBuffer(this['field'])) {
-      throw new Error('this[\'field\'] must be of type buffer.');
+ByteWrapper.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'byte-wrapper',
+    type: {
+      name: 'Composite',
+      className: 'ByteWrapper',
+      modelProperties: {
+        field: {
+          required: false,
+          serializedName: 'field',
+          type: {
+            name: 'ByteArray'
+          }
+        }
+      }
     }
-    payload['field'] = this['field'].toString('base64');
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to ByteWrapper schema
- *
- * @param {JSON} instance
- *
- */
-ByteWrapper.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['field']) {
-      this['field'] = new Buffer(instance['field'], 'base64');
-    }
-    else if (instance['field'] !== undefined) {
-      this['field'] = instance['field'];
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = ByteWrapper;

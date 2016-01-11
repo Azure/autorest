@@ -19,61 +19,40 @@
  * @member {string} [name]
  * 
  */
-function OdataFilter(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.id !== undefined) {
-      this.id = parameters.id;
-    }
-    if (parameters.name !== undefined) {
-      this.name = parameters.name;
-    }
-  }    
+function OdataFilter() {
 }
 
-
 /**
- * Validate the payload against the OdataFilter schema
+ * Defines the metadata of OdataFilter
  *
- * @param {JSON} payload
+ * @returns {object} metadata of OdataFilter
  *
  */
-OdataFilter.prototype.serialize = function () {
-  var payload = {};
-  if (this['id'] !== null && this['id'] !== undefined) {
-    if (typeof this['id'] !== 'number') {
-      throw new Error('this[\'id\'] must be of type number.');
+OdataFilter.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'OdataFilter',
+    type: {
+      name: 'Composite',
+      className: 'OdataFilter',
+      modelProperties: {
+        id: {
+          required: false,
+          serializedName: 'id',
+          type: {
+            name: 'Number'
+          }
+        },
+        name: {
+          required: false,
+          serializedName: 'name',
+          type: {
+            name: 'String'
+          }
+        }
+      }
     }
-    payload['id'] = this['id'];
-  }
-
-  if (this['name'] !== null && this['name'] !== undefined) {
-    if (typeof this['name'].valueOf() !== 'string') {
-      throw new Error('this[\'name\'] must be of type string.');
-    }
-    payload['name'] = this['name'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to OdataFilter schema
- *
- * @param {JSON} instance
- *
- */
-OdataFilter.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['id'] !== undefined) {
-      this['id'] = instance['id'];
-    }
-
-    if (instance['name'] !== undefined) {
-      this['name'] = instance['name'];
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = OdataFilter;

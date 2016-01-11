@@ -12,7 +12,8 @@
   "devDependencies":{
     "mocha": "2.2.5",
     "should": "5.2.0",
-    "shelljs": "~0.5"
+    "shelljs": "~0.5",
+    "moment": "*"
   },
   "scripts": {
     "pretest": "npm install --prefix ../TestServer/server && npm install",

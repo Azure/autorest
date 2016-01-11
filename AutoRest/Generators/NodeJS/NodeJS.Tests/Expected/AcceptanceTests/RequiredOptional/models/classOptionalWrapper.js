@@ -23,44 +23,34 @@ var models = require('./index');
  * @member {string} [value.name]
  * 
  */
-function ClassOptionalWrapper(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.value) {
-      this.value = new models['Product'](parameters.value);
-    }
-  }    
+function ClassOptionalWrapper() {
 }
 
-
 /**
- * Validate the payload against the ClassOptionalWrapper schema
+ * Defines the metadata of ClassOptionalWrapper
  *
- * @param {JSON} payload
+ * @returns {object} metadata of ClassOptionalWrapper
  *
  */
-ClassOptionalWrapper.prototype.serialize = function () {
-  var payload = {};
-  if (this['value']) {
-    payload['value'] = this['value'].serialize();
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to ClassOptionalWrapper schema
- *
- * @param {JSON} instance
- *
- */
-ClassOptionalWrapper.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['value']) {
-      this['value'] = new models['Product']().deserialize(instance['value']);
+ClassOptionalWrapper.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'class-optional-wrapper',
+    type: {
+      name: 'Composite',
+      className: 'ClassOptionalWrapper',
+      modelProperties: {
+        value: {
+          required: false,
+          serializedName: 'value',
+          type: {
+            name: 'Composite',
+            className: 'Product'
+          }
+        }
+      }
     }
-  }
-
-  return this;
+  };
 };
 
 module.exports = ClassOptionalWrapper;

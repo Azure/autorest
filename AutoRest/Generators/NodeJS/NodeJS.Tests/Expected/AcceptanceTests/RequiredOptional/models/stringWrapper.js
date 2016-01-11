@@ -17,45 +17,33 @@
  * @member {string} value
  * 
  */
-function StringWrapper(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.value !== undefined) {
-      this.value = parameters.value;
-    }
-  }    
+function StringWrapper() {
 }
 
-
 /**
- * Validate the payload against the StringWrapper schema
+ * Defines the metadata of StringWrapper
  *
- * @param {JSON} payload
+ * @returns {object} metadata of StringWrapper
  *
  */
-StringWrapper.prototype.serialize = function () {
-  var payload = {};
-  if (this['value'] === null || this['value'] === undefined || typeof this['value'].valueOf() !== 'string') {
-    throw new Error('this[\'value\'] cannot be null or undefined and it must be of type string.');
-  }
-  payload['value'] = this['value'];
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to StringWrapper schema
- *
- * @param {JSON} instance
- *
- */
-StringWrapper.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['value'] !== undefined) {
-      this['value'] = instance['value'];
+StringWrapper.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'string-wrapper',
+    type: {
+      name: 'Composite',
+      className: 'StringWrapper',
+      modelProperties: {
+        value: {
+          required: true,
+          serializedName: 'value',
+          type: {
+            name: 'String'
+          }
+        }
+      }
     }
-  }
-
-  return this;
+  };
 };
 
 module.exports = StringWrapper;

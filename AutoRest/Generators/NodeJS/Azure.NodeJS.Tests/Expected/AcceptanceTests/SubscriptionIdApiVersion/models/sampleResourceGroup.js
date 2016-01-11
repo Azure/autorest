@@ -19,61 +19,40 @@
  * @member {string} [location] resource group location 'West US'
  * 
  */
-function SampleResourceGroup(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.name !== undefined) {
-      this.name = parameters.name;
-    }
-    if (parameters.location !== undefined) {
-      this.location = parameters.location;
-    }
-  }    
+function SampleResourceGroup() {
 }
 
-
 /**
- * Validate the payload against the SampleResourceGroup schema
+ * Defines the metadata of SampleResourceGroup
  *
- * @param {JSON} payload
+ * @returns {object} metadata of SampleResourceGroup
  *
  */
-SampleResourceGroup.prototype.serialize = function () {
-  var payload = {};
-  if (this['name'] !== null && this['name'] !== undefined) {
-    if (typeof this['name'].valueOf() !== 'string') {
-      throw new Error('this[\'name\'] must be of type string.');
+SampleResourceGroup.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'SampleResourceGroup',
+    type: {
+      name: 'Composite',
+      className: 'SampleResourceGroup',
+      modelProperties: {
+        name: {
+          required: false,
+          serializedName: 'name',
+          type: {
+            name: 'String'
+          }
+        },
+        location: {
+          required: false,
+          serializedName: 'location',
+          type: {
+            name: 'String'
+          }
+        }
+      }
     }
-    payload['name'] = this['name'];
-  }
-
-  if (this['location'] !== null && this['location'] !== undefined) {
-    if (typeof this['location'].valueOf() !== 'string') {
-      throw new Error('this[\'location\'] must be of type string.');
-    }
-    payload['location'] = this['location'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to SampleResourceGroup schema
- *
- * @param {JSON} instance
- *
- */
-SampleResourceGroup.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['name'] !== undefined) {
-      this['name'] = instance['name'];
-    }
-
-    if (instance['location'] !== undefined) {
-      this['location'] = instance['location'];
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = SampleResourceGroup;

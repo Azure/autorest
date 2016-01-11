@@ -35,105 +35,64 @@ var util = require('util');
  * @member {object} [dictionaryofresources]
  * 
  */
-function ResourceCollection(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.productresource) {
-      this.productresource = new models['FlattenedProduct'](parameters.productresource);
-    }
-    if (parameters.arrayofresources) {
-      var tempParametersarrayofresources = [];
-      parameters.arrayofresources.forEach(function(element) {
-        if (element) {
-          element = new models['FlattenedProduct'](element);
-        }
-        tempParametersarrayofresources.push(element);
-      });
-      this.arrayofresources = tempParametersarrayofresources;
-    }
-    if (parameters.dictionaryofresources) {
-      this.dictionaryofresources = {};
-      for(var valueElement in parameters.dictionaryofresources) {
-        if (parameters.dictionaryofresources[valueElement]) {
-          this.dictionaryofresources[valueElement] = new models['FlattenedProduct'](parameters.dictionaryofresources[valueElement]);
-        }
-      }
-    }
-  }    
+function ResourceCollection() {
 }
 
-
 /**
- * Validate the payload against the ResourceCollection schema
+ * Defines the metadata of ResourceCollection
  *
- * @param {JSON} payload
+ * @returns {object} metadata of ResourceCollection
  *
  */
-ResourceCollection.prototype.serialize = function () {
-  var payload = {};
-  if (this['productresource']) {
-    payload['productresource'] = this['productresource'].serialize();
-  }
-
-  if (util.isArray(this['arrayofresources'])) {
-    payload['arrayofresources'] = [];
-    for (var i = 0; i < this['arrayofresources'].length; i++) {
-      if (this['arrayofresources'][i]) {
-        payload['arrayofresources'][i] = this['arrayofresources'][i].serialize();
-      }
-    }
-  }
-
-  if (this['dictionaryofresources'] && typeof this['dictionaryofresources'] === 'object') {
-    payload['dictionaryofresources'] = {};
-    for(var valueElement1 in this['dictionaryofresources']) {
-      if (this['dictionaryofresources'][valueElement1]) {
-        payload['dictionaryofresources'][valueElement1] = this['dictionaryofresources'][valueElement1].serialize();
-      }
-      else {
-        payload['dictionaryofresources'][valueElement1] = this['dictionaryofresources'][valueElement1];
-      }
-    }
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to ResourceCollection schema
- *
- * @param {JSON} instance
- *
- */
-ResourceCollection.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['productresource']) {
-      this['productresource'] = new models['FlattenedProduct']().deserialize(instance['productresource']);
-    }
-
-    if (instance['arrayofresources']) {
-      var tempInstancearrayofresources = [];
-      instance['arrayofresources'].forEach(function(element1) {
-        if (element1) {
-          element1 = new models['FlattenedProduct']().deserialize(element1);
-        }
-        tempInstancearrayofresources.push(element1);
-      });
-      this['arrayofresources'] = tempInstancearrayofresources;
-    }
-
-    if (instance['dictionaryofresources']) {
-      this['dictionaryofresources'] = {};
-      for(var valueElement2 in instance['dictionaryofresources']) {
-        if (instance['dictionaryofresources'] !== null && instance['dictionaryofresources'] !== undefined) {
-          if (instance['dictionaryofresources'][valueElement2]) {
-            this['dictionaryofresources'][valueElement2] = new models['FlattenedProduct']().deserialize(instance['dictionaryofresources'][valueElement2]);
+ResourceCollection.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'ResourceCollection',
+    type: {
+      name: 'Composite',
+      className: 'ResourceCollection',
+      modelProperties: {
+        productresource: {
+          required: false,
+          serializedName: 'productresource',
+          type: {
+            name: 'Composite',
+            className: 'FlattenedProduct'
+          }
+        },
+        arrayofresources: {
+          required: false,
+          serializedName: 'arrayofresources',
+          type: {
+            name: 'Sequence',
+            element: {
+                required: false,
+                serializedName: 'FlattenedProductElementType',
+                type: {
+                  name: 'Composite',
+                  className: 'FlattenedProduct'
+                }
+            }
+          }
+        },
+        dictionaryofresources: {
+          required: false,
+          serializedName: 'dictionaryofresources',
+          type: {
+            name: 'Dictionary',
+            value: {
+                required: false,
+                serializedName: 'FlattenedProductElementType',
+                type: {
+                  name: 'Composite',
+                  className: 'FlattenedProduct'
+                }
+            }
           }
         }
       }
     }
-  }
-
-  return this;
+  };
 };
 
 module.exports = ResourceCollection;

@@ -29,109 +29,62 @@
  * @member {string} [image] Image URL representing the product.
  * 
  */
-function Product(parameters) {
-  if (parameters === null || parameters === undefined) {
-    parameters = {};
-  }
-  if (parameters.capacity === undefined) {
-    parameters.capacity = '100';
-  }
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.productId !== undefined) {
-      this.productId = parameters.productId;
-    }
-    if (parameters.description !== undefined) {
-      this.description = parameters.description;
-    }
-    if (parameters.displayName !== undefined) {
-      this.displayName = parameters.displayName;
-    }
-    if (parameters.capacity !== undefined) {
-      this.capacity = parameters.capacity;
-    }
-    if (parameters.image !== undefined) {
-      this.image = parameters.image;
-    }
-  }    
+function Product() {
 }
 
-
 /**
- * Validate the payload against the Product schema
+ * Defines the metadata of Product
  *
- * @param {JSON} payload
+ * @returns {object} metadata of Product
  *
  */
-Product.prototype.serialize = function () {
-  var payload = {};
-  if (this['productId'] !== null && this['productId'] !== undefined) {
-    if (typeof this['productId'].valueOf() !== 'string') {
-      throw new Error('this[\'productId\'] must be of type string.');
+Product.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'Product',
+    type: {
+      name: 'Composite',
+      className: 'Product',
+      modelProperties: {
+        productId: {
+          required: false,
+          serializedName: 'product_id',
+          type: {
+            name: 'String'
+          }
+        },
+        description: {
+          required: false,
+          serializedName: 'description',
+          type: {
+            name: 'String'
+          }
+        },
+        displayName: {
+          required: false,
+          serializedName: 'display_name',
+          type: {
+            name: 'String'
+          }
+        },
+        capacity: {
+          required: false,
+          serializedName: 'capacity',
+          defaultValue: '100',
+          type: {
+            name: 'String'
+          }
+        },
+        image: {
+          required: false,
+          serializedName: 'image',
+          type: {
+            name: 'String'
+          }
+        }
+      }
     }
-    payload['product_id'] = this['productId'];
-  }
-
-  if (this['description'] !== null && this['description'] !== undefined) {
-    if (typeof this['description'].valueOf() !== 'string') {
-      throw new Error('this[\'description\'] must be of type string.');
-    }
-    payload['description'] = this['description'];
-  }
-
-  if (this['displayName'] !== null && this['displayName'] !== undefined) {
-    if (typeof this['displayName'].valueOf() !== 'string') {
-      throw new Error('this[\'displayName\'] must be of type string.');
-    }
-    payload['display_name'] = this['displayName'];
-  }
-
-  if (this['capacity'] !== null && this['capacity'] !== undefined) {
-    if (typeof this['capacity'].valueOf() !== 'string') {
-      throw new Error('this[\'capacity\'] must be of type string.');
-    }
-    payload['capacity'] = this['capacity'];
-  }
-
-  if (this['image'] !== null && this['image'] !== undefined) {
-    if (typeof this['image'].valueOf() !== 'string') {
-      throw new Error('this[\'image\'] must be of type string.');
-    }
-    payload['image'] = this['image'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to Product schema
- *
- * @param {JSON} instance
- *
- */
-Product.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['product_id'] !== undefined) {
-      this['productId'] = instance['product_id'];
-    }
-
-    if (instance['description'] !== undefined) {
-      this['description'] = instance['description'];
-    }
-
-    if (instance['display_name'] !== undefined) {
-      this['displayName'] = instance['display_name'];
-    }
-
-    if (instance['capacity'] !== undefined) {
-      this['capacity'] = instance['capacity'];
-    }
-
-    if (instance['image'] !== undefined) {
-      this['image'] = instance['image'];
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = Product;
