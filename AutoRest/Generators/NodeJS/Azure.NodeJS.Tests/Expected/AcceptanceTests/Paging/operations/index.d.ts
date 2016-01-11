@@ -160,15 +160,15 @@ export interface Paging {
      * 
      * @param {string} [options.clientRequestId]
      * 
-     * @param {object} [options.pagingGetMultiplePagesOptions] Additional
+     * @param {object} [options.pagingGetMultiplePagesNextOptions] Additional
      * parameters for the operation
      * 
-     * @param {number} [options.pagingGetMultiplePagesOptions.maxresults] Sets the
-     * maximum number of items to return in the response.
+     * @param {number} [options.pagingGetMultiplePagesNextOptions.maxresults] Sets
+     * the maximum number of items to return in the response.
      * 
-     * @param {number} [options.pagingGetMultiplePagesOptions.timeout] Sets the
-     * maximum time that the server can spend processing the request, in seconds.
-     * The default is 30 seconds.
+     * @param {number} [options.pagingGetMultiplePagesNextOptions.timeout] Sets
+     * the maximum time that the server can spend processing the request, in
+     * seconds. The default is 30 seconds.
      * 
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
@@ -176,7 +176,7 @@ export interface Paging {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getMultiplePagesNext(nextPageLink: string, options: { clientRequestId? : string, pagingGetMultiplePagesOptions? : models.PagingGetMultiplePagesOptions, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ProductResult>): void;
+    getMultiplePagesNext(nextPageLink: string, options: { clientRequestId? : string, pagingGetMultiplePagesNextOptions? : models.PagingGetMultiplePagesNextOptions, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ProductResult>): void;
     getMultiplePagesNext(nextPageLink: string, callback: ServiceCallback<models.ProductResult>): void;
 
     /**

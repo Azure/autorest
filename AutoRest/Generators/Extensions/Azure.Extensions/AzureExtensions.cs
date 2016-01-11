@@ -86,8 +86,8 @@ namespace Microsoft.Rest.Generator.Azure
             AddLongRunningOperations(serviceClient);
             AddAzureProperties(serviceClient);
             SetDefaultResponses(serviceClient);
-            AddParameterGroups(serviceClient);
             AddPageableMethod(serviceClient, codeNamer);
+            AddParameterGroups(serviceClient); //This should come after all methods have been dynamically added
         }
 
         /// <summary>
@@ -114,9 +114,7 @@ namespace Microsoft.Rest.Generator.Azure
                 }
                 else
                 {
-                    throw new NotSupportedException(
-                        string.Format(CultureInfo.InvariantCulture, 
-                        Resources.HeadMethodInvalidResponses, method.Name));
+                    Logger.LogWarning(string.Format(CultureInfo.InvariantCulture, Resources.HeadMethodPossibleIncorrectSpecification, method.Name));
                 }
             }
         }

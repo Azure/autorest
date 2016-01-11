@@ -68,3 +68,20 @@ export interface PagingGetMultiplePagesOptions {
     maxresults?: number;
     timeout?: number;
 }
+
+/**
+ * @class
+ * Initializes a new instance of the PagingGetMultiplePagesNextOptions class.
+ * @constructor
+ * Additional parameters for the getMultiplePagesNext operation.
+ * @member {number} [maxresults] Sets the maximum number of items to return in
+ * the response.
+ * 
+ * @member {number} [timeout] Sets the maximum time that the server can spend
+ * processing the request, in seconds. The default is 30 seconds.
+ * 
+ */
+export interface PagingGetMultiplePagesNextOptions {
+    maxresults?: number;
+    timeout?: number;
+}
