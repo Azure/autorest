@@ -5,6 +5,7 @@
 
 var util = require('util');
 var moment = require('moment');
+
 /**
  * Serializes the JSON Object. It serializes Buffer object to a 
  * 'base64' encoded string and a Date Object to a string 
@@ -147,6 +148,7 @@ function validateConstraints(mapper, value, objectName) {
 }
 
 function serializeSequenceType(mapper, object, objectName) {
+  /*jshint validthis: true */
   if (!util.isArray(object)) {
     throw new Error(util.format('%s must be of type Array', objectName));
   }
@@ -162,6 +164,7 @@ function serializeSequenceType(mapper, object, objectName) {
 }
 
 function serializeDictionaryType(mapper, object, objectName) {
+  /*jshint validthis: true */
   if (typeof object !== 'object') {
     throw new Error(util.format('%s must be of type object', objectName));
   }
@@ -179,6 +182,7 @@ function serializeDictionaryType(mapper, object, objectName) {
 }
 
 function serializeCompositeType(mapper, object, objectName) {
+  /*jshint validthis: true */
   //check for polymorphic discriminator
   if (mapper.type.polymorphicDiscriminator) {
     if (object === null || object === undefined) {
@@ -358,6 +362,7 @@ exports.deserialize = function (mapper, responseBody, objectName) {
 };
 
 function deserializeSequenceType(mapper, responseBody, objectName) {
+  /*jshint validthis: true */
   if (!mapper.type.element || typeof mapper.type.element !== 'object') {
     throw new Error(util.format('\'element\' metadata for an Array must be defined in the ' + 
       'mapper and it must of type \'object\' in %s', objectName));
@@ -373,6 +378,7 @@ function deserializeSequenceType(mapper, responseBody, objectName) {
 }
 
 function deserializeDictionaryType(mapper, responseBody, objectName) {
+  /*jshint validthis: true */
   if (!mapper.type.value || typeof mapper.type.value !== 'object') {
     throw new Error(util.format('\'value\' metadata for a Dictionary must be defined in the ' + 
       'mapper and it must of type \'object\' in %s', objectName));
@@ -390,6 +396,7 @@ function deserializeDictionaryType(mapper, responseBody, objectName) {
 }
 
 function deserializeCompositeType(mapper, responseBody, objectName) {
+  /*jshint validthis: true */
   //check for polymorphic discriminator
   if (mapper.type.polymorphicDiscriminator) {
     if (responseBody === null || responseBody === undefined) {
