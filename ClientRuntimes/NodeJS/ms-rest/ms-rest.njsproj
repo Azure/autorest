@@ -42,10 +42,18 @@
     <Compile Include="test\data\TestClient\lib\models\productListResult.js" />
     <Compile Include="test\data\TestClient\lib\models\subProduct.js" />
     <Compile Include="test\data\TestClient\lib\testClient.js" />
-    <Compile Include="test\logFilterTests.js" />
-    <Compile Include="test\proxyFilterTests.js" />
-    <Compile Include="test\redirectFilterTests.js" />
-    <Compile Include="test\retryPolicyTests.js" />
+    <Compile Include="test\logFilterTests.js">
+      <TestFramework>Mocha</TestFramework>
+    </Compile>
+    <Compile Include="test\proxyFilterTests.js">
+      <TestFramework>Mocha</TestFramework>
+    </Compile>
+    <Compile Include="test\redirectFilterTests.js">
+      <TestFramework>Mocha</TestFramework>
+    </Compile>
+    <Compile Include="test\retryPolicyTests.js">
+      <TestFramework>Mocha</TestFramework>
+    </Compile>
     <Compile Include="test\serializationTests.js">
       <TestFramework>Mocha</TestFramework>
     </Compile>

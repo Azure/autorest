@@ -196,8 +196,7 @@ describe('msrest', function () {
     it('should correctly serialize an array of primitives', function (done) {
       mapper = { type : { name: 'Sequence', element: { type : { name: 'String' } } } };
       var array = ['One', 'Two', 'three'];
-      var client = new msRest.ServiceClient(tokenCredentials);
-      var serializedArray = msRest.serialize(mapper, array, 'arrayObj', client);
+      var serializedArray = msRest.serialize(mapper, array, 'arrayObj');
       assert.deepEqual(array, serializedArray);
       done();
     });
@@ -219,8 +218,7 @@ describe('msrest', function () {
         }
       };
       var array = [[1], [2], [1, 2, 3]];
-      var client = new msRest.ServiceClient(tokenCredentials);
-      var serializedArray = msRest.serialize(mapper, array, 'arrayObj', client);
+      var serializedArray = msRest.serialize(mapper, array, 'arrayObj');
       assert.deepEqual(array, serializedArray);
       done();
     });
@@ -242,8 +240,7 @@ describe('msrest', function () {
         }
       };
       var array = [{ 1: true }, { 2: false }, { 1: true, 2: false, 3: true }];
-      var client = new msRest.ServiceClient(tokenCredentials);
-      var serializedArray = msRest.serialize(mapper, array, 'arrayObj', client);
+      var serializedArray = msRest.serialize(mapper, array, 'arrayObj');
       assert.deepEqual(array, serializedArray);
       done();
     });
@@ -251,8 +248,7 @@ describe('msrest', function () {
     it('should correctly serialize a dictionary of primitives', function (done) {
       mapper = { type : { name: 'Dictionary', value: { type : { name: 'String' } } } };
       var dict = { 1: 'One', 2: 'Two', 3: 'three' };
-      var client = new msRest.ServiceClient(tokenCredentials);
-      var serializedDictionary = msRest.serialize(mapper, dict, 'dictObj', client);
+      var serializedDictionary = msRest.serialize(mapper, dict, 'dictObj');
       assert.deepEqual(dict, serializedDictionary);
       done();
     });
@@ -274,8 +270,7 @@ describe('msrest', function () {
         }
       };
       var dict = { 'One': [1], 'Two': [1, 2], 'three': [1, 2, 3] };
-      var client = new msRest.ServiceClient(tokenCredentials);
-      var serializedDictionary = msRest.serialize(mapper, dict, 'dictObj', client);
+      var serializedDictionary = msRest.serialize(mapper, dict, 'dictObj');
       assert.deepEqual(dict, serializedDictionary);
       done();
     });
@@ -297,8 +292,7 @@ describe('msrest', function () {
         }
       };
       var dict = { 1: { 'One': true }, 2: { 'Two': false }, 3: { 'three': true } };
-      var client = new msRest.ServiceClient(tokenCredentials);
-      var serializedDictionary = msRest.serialize(mapper, dict, 'dictObj', client);
+      var serializedDictionary = msRest.serialize(mapper, dict, 'dictObj');
       assert.deepEqual(dict, serializedDictionary);
       done();
     });
@@ -355,7 +349,7 @@ describe('msrest', function () {
           }
         ]
       };
-      var serializedProduct = msRest.serialize(mapper, productObj, 'productObject', client);
+      var serializedProduct = client.serialize(mapper, productObj, 'productObject');
       for (var prop in serializedProduct) {
         if (prop === 'properties') {
           serializedProduct[prop].provisioningState.should.equal(productObj.provisioningState);
@@ -375,7 +369,9 @@ describe('msrest', function () {
       }
       done();
     });
+  });
 
+  describe('deserialize', function () {
     it('should correctly deserialize a composite type', function (done) {
       var client = new testClient('http://localhost:9090');
       var product = new client.models['Product']();
@@ -430,7 +426,7 @@ describe('msrest', function () {
           }
         ]
       };
-      var deserializedProduct = msRest.deserialize(mapper, responseBody, 'responseBody', client);
+      var deserializedProduct = client.deserialize(mapper, responseBody, 'responseBody', client);
       for (var prop in deserializedProduct) {
         if (prop === 'provisioningState') {
           deserializedProduct.provisioningState.should.equal(responseBody.properties.provisioningState);
@@ -450,7 +446,7 @@ describe('msrest', function () {
       }
       done();
     });
-
+    
     it('should correctly deserialize a pageable type without nextLink', function (done) {
       var client = new testClient('http://localhost:9090');
       var productListResult = new client.models['ProductListResult']();
@@ -473,7 +469,7 @@ describe('msrest', function () {
           }
         ]
       };
-      var deserializedProduct = msRest.deserialize(mapper, responseBody, 'responseBody', client);
+      var deserializedProduct = client.deserialize(mapper, responseBody, 'responseBody');
       (util.isArray(deserializedProduct)).should.be.true;
       deserializedProduct.length.should.equal(2);
       for (var i = 0; i < deserializedProduct.length; i++) {
@@ -489,7 +485,7 @@ describe('msrest', function () {
       }
       done();
     });
-
+    
     it('should correctly deserialize a pageable type with nextLink', function (done) {
       var client = new testClient('http://localhost:9090');
       var productListResultNextLink = new client.models['ProductListResultNextLink']();
@@ -513,7 +509,7 @@ describe('msrest', function () {
         ],
         nextLink: 'https://helloworld.com'
       };
-      var deserializedProduct = msRest.deserialize(mapper, responseBody, 'responseBody', client);
+      var deserializedProduct = client.deserialize(mapper, responseBody, 'responseBody');
       (util.isArray(deserializedProduct)).should.be.true;
       deserializedProduct.length.should.equal(2);
       deserializedProduct.nextLink.should.equal('https://helloworld.com');

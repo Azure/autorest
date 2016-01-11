@@ -21,20 +21,20 @@
     }
   ],
   "dependencies": {
-    "underscore": "1.4.x",
+    "underscore": "^1.4.0",
     "tunnel": "~0.0.2",
     "request": "2.52.0",
     "validator": "~3.1.0",
     "duplexer": "~0.1.1",
     "through": "~2.3.4",
-    "tough-cookie": "*"
+    "tough-cookie": "*",
+    "moment": "^2.6.0"
   },
   "devDependencies": {
     "jshint": "2.6.3",
     "xunit-file": "0.0.5",
     "mocha": "2.2.5",
-    "should": "5.2.0",
-    "moment":  "*"
+    "should": "5.2.0"
   },
   "homepage": "https://github.com/Azure/AutoRest",
   "repository": {

@@ -23,15 +23,15 @@
     "async": "0.2.7",
     "uuid": "2.0.1",
     "adal-node": "0.1.16",
-    "ms-rest": "1.2.0"
+    "ms-rest": "^1.4.0",
+    "underscore": "^1.4.0",
+    "moment": "^2.6.0"
   },
   "devDependencies": {
     "jshint": "2.6.3",
     "xunit-file": "0.0.5",
     "mocha": "2.2.5",
-    "should": "5.2.0",
-    "moment":  "*",
-    "underscore": "*"
+    "should": "5.2.0"
   },
   "homepage": "https://github.com/Azure/AutoRest",
   "repository": {

@@ -50,6 +50,7 @@ function TestClient(baseUri, options) {
     this.acceptLanguage = 'en-US';
   }
   this.models = models;
+  msRest.addSerializationMixin(this);
 }
 
 util.inherits(TestClient, ServiceClient);
