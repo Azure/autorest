@@ -17,7 +17,6 @@
 var util = require('util');
 var msRest = require('ms-rest');
 var ServiceClient = msRest.ServiceClient;
-var WebResource = msRest.WebResource;
 
 var models = require('./models');
 var operations = require('./operations');
@@ -62,7 +61,8 @@ function AutoRestRequiredOptionalTestService(requiredGlobalPath, requiredGlobalQ
 
   this.implicit = new operations.Implicit(this);
   this.explicit = new operations.Explicit(this);
-  this._models = models;
+  this.models = models;
+  msRest.addSerializationMixin(this);
 }
 
 util.inherits(AutoRestRequiredOptionalTestService, ServiceClient);

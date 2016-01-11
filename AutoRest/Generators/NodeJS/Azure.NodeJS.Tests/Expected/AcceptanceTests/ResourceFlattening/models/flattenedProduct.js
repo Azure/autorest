@@ -29,112 +29,99 @@ var util = require('util');
  * @member {string} [provisioningState]
  * 
  */
-function FlattenedProduct(parameters) {
-  FlattenedProduct['super_'].call(this, parameters);
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.pname !== undefined) {
-      this.pname = parameters.pname;
-    }
-    if (parameters.flattenedProductType !== undefined) {
-      this.flattenedProductType = parameters.flattenedProductType;
-    }
-    if (parameters.provisioningStateValues !== undefined) {
-      this.provisioningStateValues = parameters.provisioningStateValues;
-    }
-    if (parameters.provisioningState !== undefined) {
-      this.provisioningState = parameters.provisioningState;
-    }
-  }    
+function FlattenedProduct() {
+  FlattenedProduct['super_'].call(this);
 }
 
 util.inherits(FlattenedProduct, models['Resource']);
 
 /**
- * Validate the payload against the FlattenedProduct schema
+ * Defines the metadata of FlattenedProduct
  *
- * @param {JSON} payload
- *
- */
-FlattenedProduct.prototype.serialize = function () {
-  var payload = FlattenedProduct['super_'].prototype.serialize.call(this);
-  if (this['pname'] !== null && this['pname'] !== undefined) {
-    if (typeof this['pname'].valueOf() !== 'string') {
-      throw new Error('this[\'pname\'] must be of type string.');
-    }
-    if (payload['properties'] === null || payload['properties'] === undefined) {
-      payload['properties'] = {};
-    }
-    payload['properties']['pname'] = this['pname'];
-  }
-
-  if (this['flattenedProductType'] !== null && this['flattenedProductType'] !== undefined) {
-    if (typeof this['flattenedProductType'].valueOf() !== 'string') {
-      throw new Error('this[\'flattenedProductType\'] must be of type string.');
-    }
-    if (payload['properties'] === null || payload['properties'] === undefined) {
-      payload['properties'] = {};
-    }
-    payload['properties']['type'] = this['flattenedProductType'];
-  }
-
-  if (this['provisioningStateValues'] !== null && this['provisioningStateValues'] !== undefined) {
-    if (typeof this['provisioningStateValues'].valueOf() !== 'string') {
-      throw new Error('this[\'provisioningStateValues\'] must be of type string.');
-    }
-    if (payload['properties'] === null || payload['properties'] === undefined) {
-      payload['properties'] = {};
-    }
-    payload['properties']['provisioningStateValues'] = this['provisioningStateValues'];
-  }
-
-  if (this['provisioningState'] !== null && this['provisioningState'] !== undefined) {
-    if (typeof this['provisioningState'].valueOf() !== 'string') {
-      throw new Error('this[\'provisioningState\'] must be of type string.');
-    }
-    if (payload['properties'] === null || payload['properties'] === undefined) {
-      payload['properties'] = {};
-    }
-    payload['properties']['provisioningState'] = this['provisioningState'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to FlattenedProduct schema
- *
- * @param {JSON} instance
+ * @returns {object} metadata of FlattenedProduct
  *
  */
-FlattenedProduct.prototype.deserialize = function (instance) {
-  FlattenedProduct['super_'].prototype.deserialize.call(this, instance);
-  if (instance) {
-    if (instance['properties'] !== null && instance['properties'] !== undefined) {
-      if (instance['properties']['pname'] !== undefined) {
-        this['pname'] = instance['properties']['pname'];
+FlattenedProduct.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'FlattenedProduct',
+    type: {
+      name: 'Composite',
+      className: 'FlattenedProduct',
+      modelProperties: {
+        id: {
+          required: false,
+          serializedName: 'id',
+          type: {
+            name: 'String'
+          }
+        },
+        type: {
+          required: false,
+          serializedName: 'type',
+          type: {
+            name: 'String'
+          }
+        },
+        tags: {
+          required: false,
+          serializedName: 'tags',
+          type: {
+            name: 'Dictionary',
+            value: {
+                required: false,
+                serializedName: 'StringElementType',
+                type: {
+                  name: 'String'
+                }
+            }
+          }
+        },
+        location: {
+          required: false,
+          serializedName: 'location',
+          type: {
+            name: 'String'
+          }
+        },
+        name: {
+          required: false,
+          serializedName: 'name',
+          type: {
+            name: 'String'
+          }
+        },
+        pname: {
+          required: false,
+          serializedName: 'properties.pname',
+          type: {
+            name: 'String'
+          }
+        },
+        flattenedProductType: {
+          required: false,
+          serializedName: 'properties.type',
+          type: {
+            name: 'String'
+          }
+        },
+        provisioningStateValues: {
+          required: false,
+          serializedName: 'properties.provisioningStateValues',
+          type: {
+            name: 'String'
+          }
+        },
+        provisioningState: {
+          required: false,
+          serializedName: 'properties.provisioningState',
+          type: {
+            name: 'String'
+          }
+        }
       }
     }
-
-    if (instance['properties'] !== null && instance['properties'] !== undefined) {
-      if (instance['properties']['type'] !== undefined) {
-        this['flattenedProductType'] = instance['properties']['type'];
-      }
-    }
-
-    if (instance['properties'] !== null && instance['properties'] !== undefined) {
-      if (instance['properties']['provisioningStateValues'] !== undefined) {
-        this['provisioningStateValues'] = instance['properties']['provisioningStateValues'];
-      }
-    }
-
-    if (instance['properties'] !== null && instance['properties'] !== undefined) {
-      if (instance['properties']['provisioningState'] !== undefined) {
-        this['provisioningState'] = instance['properties']['provisioningState'];
-      }
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = FlattenedProduct;

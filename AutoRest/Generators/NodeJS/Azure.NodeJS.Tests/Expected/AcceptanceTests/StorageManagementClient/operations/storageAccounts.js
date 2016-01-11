@@ -121,20 +121,20 @@ StorageAccounts.prototype.checkNameAvailability = function (accountName, options
   var requestContent = null;
   var requestModel = null;
   try {
-    if (accountName) {
-      requestModel = new client._models['StorageAccountCheckNameAvailabilityParameters'](accountName);
+    if (accountName !== null && accountName !== undefined) {
+      var requestModelMapper = new client.models['StorageAccountCheckNameAvailabilityParameters']().mapper();
+      requestModel = client.serialize(requestModelMapper, accountName, 'accountName');
     }
-    if (requestModel !== null && requestModel !== undefined) {
-      requestContent = JSON.stringify(requestModel.serialize());
-    } else {
-      requestContent = JSON.stringify(requestModel);
-    }
+    requestContent = JSON.stringify(requestModel);
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
+        'payload - "%s"', error.message, util.inspect(accountName, {depth: null})));
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
+                                                    requestContent.length : 
+                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -150,16 +150,22 @@ StorageAccounts.prototype.checkNameAvailability = function (accountName, options
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
+                                                       parsedErrorResponse.error.code : 
+                                                              parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
+                                                          parsedErrorResponse.error.message : 
+                                                                 parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          error.body.deserialize(parsedErrorResponse);
+          var resultMapper = new client.models['CloudError']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+                         '- "%s" for the default response.', defaultError.message, responseBody);
         return callback(error);
       }
       return callback(error);
@@ -173,11 +179,9 @@ StorageAccounts.prototype.checkNameAvailability = function (accountName, options
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse) {
-          result = new client._models['CheckNameAvailabilityResult'](parsedResponse);
-        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          result.deserialize(parsedResponse);
+          var resultMapper = new client.models['CheckNameAvailabilityResult']().mapper();
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -269,11 +273,9 @@ StorageAccounts.prototype.create = function (resourceGroupName, accountName, par
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse) {
-          result = new client._models['StorageAccount'](parsedResponse);
-        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          result.deserialize(parsedResponse);
+          var resultMapper = new client.models['StorageAccount']().mapper();
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -400,20 +402,20 @@ StorageAccounts.prototype.beginCreate = function (resourceGroupName, accountName
   var requestContent = null;
   var requestModel = null;
   try {
-    if (parameters) {
-      requestModel = new client._models['StorageAccountCreateParameters'](parameters);
+    if (parameters !== null && parameters !== undefined) {
+      var requestModelMapper = new client.models['StorageAccountCreateParameters']().mapper();
+      requestModel = client.serialize(requestModelMapper, parameters, 'parameters');
     }
-    if (requestModel !== null && requestModel !== undefined) {
-      requestContent = JSON.stringify(requestModel.serialize());
-    } else {
-      requestContent = JSON.stringify(requestModel);
-    }
+    requestContent = JSON.stringify(requestModel);
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
+        'payload - "%s"', error.message, util.inspect(parameters, {depth: null})));
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
+                                                    requestContent.length : 
+                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -429,16 +431,22 @@ StorageAccounts.prototype.beginCreate = function (resourceGroupName, accountName
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
+                                                       parsedErrorResponse.error.code : 
+                                                              parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
+                                                          parsedErrorResponse.error.message : 
+                                                                 parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          error.body.deserialize(parsedErrorResponse);
+          var resultMapper = new client.models['CloudError']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+                         '- "%s" for the default response.', defaultError.message, responseBody);
         return callback(error);
       }
       return callback(error);
@@ -452,11 +460,9 @@ StorageAccounts.prototype.beginCreate = function (resourceGroupName, accountName
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse) {
-          result = new client._models['StorageAccount'](parsedResponse);
-        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          result.deserialize(parsedResponse);
+          var resultMapper = new client.models['StorageAccount']().mapper();
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -577,12 +583,17 @@ StorageAccounts.prototype.deleteMethod = function (resourceGroupName, accountNam
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
+                                                       parsedErrorResponse.error.code : 
+                                                              parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
+                                                          parsedErrorResponse.error.message : 
+                                                                 parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+                         '- "%s" for the default response.', defaultError.message, responseBody);
         return callback(error);
       }
       return callback(error);
@@ -705,16 +716,22 @@ StorageAccounts.prototype.getProperties = function (resourceGroupName, accountNa
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
+                                                       parsedErrorResponse.error.code : 
+                                                              parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
+                                                          parsedErrorResponse.error.message : 
+                                                                 parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          error.body.deserialize(parsedErrorResponse);
+          var resultMapper = new client.models['CloudError']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+                         '- "%s" for the default response.', defaultError.message, responseBody);
         return callback(error);
       }
       return callback(error);
@@ -728,11 +745,9 @@ StorageAccounts.prototype.getProperties = function (resourceGroupName, accountNa
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse) {
-          result = new client._models['StorageAccount'](parsedResponse);
-        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          result.deserialize(parsedResponse);
+          var resultMapper = new client.models['StorageAccount']().mapper();
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -877,20 +892,20 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
   var requestContent = null;
   var requestModel = null;
   try {
-    if (parameters) {
-      requestModel = new client._models['StorageAccountUpdateParameters'](parameters);
+    if (parameters !== null && parameters !== undefined) {
+      var requestModelMapper = new client.models['StorageAccountUpdateParameters']().mapper();
+      requestModel = client.serialize(requestModelMapper, parameters, 'parameters');
     }
-    if (requestModel !== null && requestModel !== undefined) {
-      requestContent = JSON.stringify(requestModel.serialize());
-    } else {
-      requestContent = JSON.stringify(requestModel);
-    }
+    requestContent = JSON.stringify(requestModel);
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
+        'payload - "%s"', error.message, util.inspect(parameters, {depth: null})));
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
+                                                    requestContent.length : 
+                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -906,16 +921,22 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
+                                                       parsedErrorResponse.error.code : 
+                                                              parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
+                                                          parsedErrorResponse.error.message : 
+                                                                 parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          error.body.deserialize(parsedErrorResponse);
+          var resultMapper = new client.models['CloudError']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+                         '- "%s" for the default response.', defaultError.message, responseBody);
         return callback(error);
       }
       return callback(error);
@@ -929,11 +950,9 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse) {
-          result = new client._models['StorageAccount'](parsedResponse);
-        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          result.deserialize(parsedResponse);
+          var resultMapper = new client.models['StorageAccount']().mapper();
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1052,16 +1071,22 @@ StorageAccounts.prototype.listKeys = function (resourceGroupName, accountName, o
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
+                                                       parsedErrorResponse.error.code : 
+                                                              parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
+                                                          parsedErrorResponse.error.message : 
+                                                                 parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          error.body.deserialize(parsedErrorResponse);
+          var resultMapper = new client.models['CloudError']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+                         '- "%s" for the default response.', defaultError.message, responseBody);
         return callback(error);
       }
       return callback(error);
@@ -1075,11 +1100,9 @@ StorageAccounts.prototype.listKeys = function (resourceGroupName, accountName, o
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse) {
-          result = new client._models['StorageAccountKeys'](parsedResponse);
-        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          result.deserialize(parsedResponse);
+          var resultMapper = new client.models['StorageAccountKeys']().mapper();
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1188,16 +1211,22 @@ StorageAccounts.prototype.list = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
+                                                       parsedErrorResponse.error.code : 
+                                                              parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
+                                                          parsedErrorResponse.error.message : 
+                                                                 parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          error.body.deserialize(parsedErrorResponse);
+          var resultMapper = new client.models['CloudError']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+                         '- "%s" for the default response.', defaultError.message, responseBody);
         return callback(error);
       }
       return callback(error);
@@ -1211,11 +1240,9 @@ StorageAccounts.prototype.list = function (options, callback) {
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse) {
-          result = new client._models['StorageAccountListResult'](parsedResponse);
-        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          result.deserialize(parsedResponse);
+          var resultMapper = new client.models['StorageAccountListResult']().mapper();
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1332,16 +1359,22 @@ StorageAccounts.prototype.listByResourceGroup = function (resourceGroupName, opt
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
+                                                       parsedErrorResponse.error.code : 
+                                                              parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
+                                                          parsedErrorResponse.error.message : 
+                                                                 parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          error.body.deserialize(parsedErrorResponse);
+          var resultMapper = new client.models['CloudError']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+                         '- "%s" for the default response.', defaultError.message, responseBody);
         return callback(error);
       }
       return callback(error);
@@ -1355,11 +1388,9 @@ StorageAccounts.prototype.listByResourceGroup = function (resourceGroupName, opt
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse) {
-          result = new client._models['StorageAccountListResult'](parsedResponse);
-        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          result.deserialize(parsedResponse);
+          var resultMapper = new client.models['StorageAccountListResult']().mapper();
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1443,7 +1474,7 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
   var regenerateKey;
   if ((keyName !== null && keyName !== undefined))
   {
-      regenerateKey = new client._models['StorageAccountRegenerateKeyParameters']();
+      regenerateKey = new client.models['StorageAccountRegenerateKeyParameters']();
       regenerateKey.keyName = keyName;
   }
 
@@ -1484,20 +1515,20 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
   var requestContent = null;
   var requestModel = null;
   try {
-    if (regenerateKey) {
-      requestModel = new client._models['StorageAccountRegenerateKeyParameters'](regenerateKey);
+    if (regenerateKey !== null && regenerateKey !== undefined) {
+      var requestModelMapper = new client.models['StorageAccountRegenerateKeyParameters']().mapper();
+      requestModel = client.serialize(requestModelMapper, regenerateKey, 'regenerateKey');
     }
-    if (requestModel !== null && requestModel !== undefined) {
-      requestContent = JSON.stringify(requestModel.serialize());
-    } else {
-      requestContent = JSON.stringify(requestModel);
-    }
+    requestContent = JSON.stringify(requestModel);
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
+        'payload - "%s"', error.message, util.inspect(regenerateKey, {depth: null})));
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
+                                                    requestContent.length : 
+                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1513,16 +1544,22 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
+                                                       parsedErrorResponse.error.code : 
+                                                              parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
+                                                          parsedErrorResponse.error.message : 
+                                                                 parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          error.body.deserialize(parsedErrorResponse);
+          var resultMapper = new client.models['CloudError']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+                         '- "%s" for the default response.', defaultError.message, responseBody);
         return callback(error);
       }
       return callback(error);
@@ -1536,11 +1573,9 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse) {
-          result = new client._models['StorageAccountKeys'](parsedResponse);
-        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          result.deserialize(parsedResponse);
+          var resultMapper = new client.models['StorageAccountKeys']().mapper();
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));

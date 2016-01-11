@@ -83,24 +83,40 @@ ParameterGrouping.prototype.postRequired = function (parameterGroupingPostRequir
     return callback(error);
   }
   var body;
-  if ((parameterGroupingPostRequiredParameters !== null && parameterGroupingPostRequiredParameters !== undefined))
-  {
-      body = parameterGroupingPostRequiredParameters.body;
-  }
   var customHeader;
-  if ((parameterGroupingPostRequiredParameters !== null && parameterGroupingPostRequiredParameters !== undefined))
-  {
-      customHeader = parameterGroupingPostRequiredParameters.customHeader;
-  }
   var query;
-  if ((parameterGroupingPostRequiredParameters !== null && parameterGroupingPostRequiredParameters !== undefined))
-  {
-      query = parameterGroupingPostRequiredParameters.query;
-  }
   var path;
-  if ((parameterGroupingPostRequiredParameters !== null && parameterGroupingPostRequiredParameters !== undefined))
-  {
+  try {
+    if ((parameterGroupingPostRequiredParameters !== null && parameterGroupingPostRequiredParameters !== undefined))
+    {
+      body = parameterGroupingPostRequiredParameters.body;
+      if (body === null || body === undefined || typeof body !== 'number') {
+        throw new Error('body cannot be null or undefined and it must be of type number.');
+      }
+    }
+    if ((parameterGroupingPostRequiredParameters !== null && parameterGroupingPostRequiredParameters !== undefined))
+    {
+      customHeader = parameterGroupingPostRequiredParameters.customHeader;
+      if (customHeader !== null && customHeader !== undefined && typeof customHeader.valueOf() !== 'string') {
+        throw new Error('customHeader must be of type string.');
+      }
+    }
+    if ((parameterGroupingPostRequiredParameters !== null && parameterGroupingPostRequiredParameters !== undefined))
+    {
+      query = parameterGroupingPostRequiredParameters.query;
+      if (query !== null && query !== undefined && typeof query !== 'number') {
+        throw new Error('query must be of type number.');
+      }
+    }
+    if ((parameterGroupingPostRequiredParameters !== null && parameterGroupingPostRequiredParameters !== undefined))
+    {
       path = parameterGroupingPostRequiredParameters.path;
+      if (path === null || path === undefined || typeof path.valueOf() !== 'string') {
+        throw new Error('path cannot be null or undefined and it must be of type string.');
+      }
+    }
+  } catch (error) {
+    return callback(error);
   }
 
   // Construct URL
@@ -143,17 +159,26 @@ ParameterGrouping.prototype.postRequired = function (parameterGroupingPostRequir
   var requestContent = null;
   var requestModel = null;
   try {
-    if (body === null || body === undefined || typeof body !== 'number') {
-      throw new Error('body cannot be null or undefined and it must be of type number.');
+    if (body !== null && body !== undefined) {
+      var requestModelMapper = {
+        required: true,
+        serializedName: 'body',
+        type: {
+          name: 'Number'
+        }
+      };
+      requestModel = client.serialize(requestModelMapper, body, 'body');
     }
-    requestModel = body;
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
+        'payload - "%s"', error.message, util.inspect(body, {depth: null})));
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
+                                                    requestContent.length : 
+                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -169,16 +194,22 @@ ParameterGrouping.prototype.postRequired = function (parameterGroupingPostRequir
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
+                                                       parsedErrorResponse.error.code : 
+                                                              parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
+                                                          parsedErrorResponse.error.message : 
+                                                                 parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          error.body.deserialize(parsedErrorResponse);
+          var resultMapper = new client.models['ErrorModel']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+                         '- "%s" for the default response.', defaultError.message, responseBody);
         return callback(error);
       }
       return callback(error);
@@ -239,14 +270,24 @@ ParameterGrouping.prototype.postOptional = function (options, callback) {
     return callback(error);
   }
   var customHeader;
-  if ((parameterGroupingPostOptionalParameters !== null && parameterGroupingPostOptionalParameters !== undefined))
-  {
-      customHeader = parameterGroupingPostOptionalParameters.customHeader;
-  }
   var query;
-  if ((parameterGroupingPostOptionalParameters !== null && parameterGroupingPostOptionalParameters !== undefined))
-  {
+  try {
+    if ((parameterGroupingPostOptionalParameters !== null && parameterGroupingPostOptionalParameters !== undefined))
+    {
+      customHeader = parameterGroupingPostOptionalParameters.customHeader;
+      if (customHeader !== null && customHeader !== undefined && typeof customHeader.valueOf() !== 'string') {
+        throw new Error('customHeader must be of type string.');
+      }
+    }
+    if ((parameterGroupingPostOptionalParameters !== null && parameterGroupingPostOptionalParameters !== undefined))
+    {
       query = parameterGroupingPostOptionalParameters.query;
+      if (query !== null && query !== undefined && typeof query !== 'number') {
+        throw new Error('query must be of type number.');
+      }
+    }
+  } catch (error) {
+    return callback(error);
   }
 
   // Construct URL
@@ -301,16 +342,22 @@ ParameterGrouping.prototype.postOptional = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
+                                                       parsedErrorResponse.error.code : 
+                                                              parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
+                                                          parsedErrorResponse.error.message : 
+                                                                 parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          error.body.deserialize(parsedErrorResponse);
+          var resultMapper = new client.models['ErrorModel']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+                         '- "%s" for the default response.', defaultError.message, responseBody);
         return callback(error);
       }
       return callback(error);
@@ -382,24 +429,40 @@ ParameterGrouping.prototype.postMultipleParameterGroups = function (options, cal
     return callback(error);
   }
   var headerOne;
-  if ((firstParameterGroup !== null && firstParameterGroup !== undefined))
-  {
-      headerOne = firstParameterGroup.headerOne;
-  }
   var queryOne;
-  if ((firstParameterGroup !== null && firstParameterGroup !== undefined))
-  {
-      queryOne = firstParameterGroup.queryOne;
-  }
   var headerTwo;
-  if ((parameterGroupingPostMultipleParameterGroupsSecondParameterGroup !== null && parameterGroupingPostMultipleParameterGroupsSecondParameterGroup !== undefined))
-  {
-      headerTwo = parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.headerTwo;
-  }
   var queryTwo;
-  if ((parameterGroupingPostMultipleParameterGroupsSecondParameterGroup !== null && parameterGroupingPostMultipleParameterGroupsSecondParameterGroup !== undefined))
-  {
+  try {
+    if ((firstParameterGroup !== null && firstParameterGroup !== undefined))
+    {
+      headerOne = firstParameterGroup.headerOne;
+      if (headerOne !== null && headerOne !== undefined && typeof headerOne.valueOf() !== 'string') {
+        throw new Error('headerOne must be of type string.');
+      }
+    }
+    if ((firstParameterGroup !== null && firstParameterGroup !== undefined))
+    {
+      queryOne = firstParameterGroup.queryOne;
+      if (queryOne !== null && queryOne !== undefined && typeof queryOne !== 'number') {
+        throw new Error('queryOne must be of type number.');
+      }
+    }
+    if ((parameterGroupingPostMultipleParameterGroupsSecondParameterGroup !== null && parameterGroupingPostMultipleParameterGroupsSecondParameterGroup !== undefined))
+    {
+      headerTwo = parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.headerTwo;
+      if (headerTwo !== null && headerTwo !== undefined && typeof headerTwo.valueOf() !== 'string') {
+        throw new Error('headerTwo must be of type string.');
+      }
+    }
+    if ((parameterGroupingPostMultipleParameterGroupsSecondParameterGroup !== null && parameterGroupingPostMultipleParameterGroupsSecondParameterGroup !== undefined))
+    {
       queryTwo = parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.queryTwo;
+      if (queryTwo !== null && queryTwo !== undefined && typeof queryTwo !== 'number') {
+        throw new Error('queryTwo must be of type number.');
+      }
+    }
+  } catch (error) {
+    return callback(error);
   }
 
   // Construct URL
@@ -460,16 +523,22 @@ ParameterGrouping.prototype.postMultipleParameterGroups = function (options, cal
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
+                                                       parsedErrorResponse.error.code : 
+                                                              parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
+                                                          parsedErrorResponse.error.message : 
+                                                                 parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          error.body.deserialize(parsedErrorResponse);
+          var resultMapper = new client.models['ErrorModel']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+                         '- "%s" for the default response.', defaultError.message, responseBody);
         return callback(error);
       }
       return callback(error);
@@ -529,14 +598,24 @@ ParameterGrouping.prototype.postSharedParameterGroupObject = function (options, 
     return callback(error);
   }
   var headerOne;
-  if ((firstParameterGroup !== null && firstParameterGroup !== undefined))
-  {
-      headerOne = firstParameterGroup.headerOne;
-  }
   var queryOne;
-  if ((firstParameterGroup !== null && firstParameterGroup !== undefined))
-  {
+  try {
+    if ((firstParameterGroup !== null && firstParameterGroup !== undefined))
+    {
+      headerOne = firstParameterGroup.headerOne;
+      if (headerOne !== null && headerOne !== undefined && typeof headerOne.valueOf() !== 'string') {
+        throw new Error('headerOne must be of type string.');
+      }
+    }
+    if ((firstParameterGroup !== null && firstParameterGroup !== undefined))
+    {
       queryOne = firstParameterGroup.queryOne;
+      if (queryOne !== null && queryOne !== undefined && typeof queryOne !== 'number') {
+        throw new Error('queryOne must be of type number.');
+      }
+    }
+  } catch (error) {
+    return callback(error);
   }
 
   // Construct URL
@@ -591,16 +670,22 @@ ParameterGrouping.prototype.postSharedParameterGroupObject = function (options, 
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
+                                                       parsedErrorResponse.error.code : 
+                                                              parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
+                                                          parsedErrorResponse.error.message : 
+                                                                 parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          error.body.deserialize(parsedErrorResponse);
+          var resultMapper = new client.models['ErrorModel']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+                         '- "%s" for the default response.', defaultError.message, responseBody);
         return callback(error);
       }
       return callback(error);

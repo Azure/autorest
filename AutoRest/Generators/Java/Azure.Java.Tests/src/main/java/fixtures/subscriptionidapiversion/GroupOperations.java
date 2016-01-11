@@ -32,7 +32,7 @@ public interface GroupOperations {
      * used by Retrofit to perform actually REST calls.
      */
     interface GroupService {
-        @GET("/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}")
+        @GET("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}")
         Call<ResponseBody> getSampleResourceGroup(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
 
     }

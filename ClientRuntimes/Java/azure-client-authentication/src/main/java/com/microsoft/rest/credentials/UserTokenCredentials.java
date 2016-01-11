@@ -7,7 +7,11 @@
 
 package com.microsoft.rest.credentials;
 
-import com.squareup.okhttp.OkHttpClient;
+import com.microsoft.aad.adal4j.AuthenticationContext;
+import com.microsoft.aad.adal4j.AuthenticationResult;
+
+import java.io.IOException;
+import java.util.concurrent.Executors;
 
 /**
  * Token based credentials for use with a REST Service Client.
@@ -106,7 +110,36 @@ public class UserTokenCredentials extends TokenCredentials {
     }
 
     @Override
-    public void applyCredentialsFilter(OkHttpClient client) {
-        client.interceptors().add(new UserTokenCredentialsInterceptor(this));
+    public String getToken() throws IOException {
+        if (token == null) {
+            token = acquireAccessToken();
+        }
+        return token;
+    }
+
+    @Override
+    public void refreshToken() throws IOException {
+        token = acquireAccessToken();
+    }
+
+    private String acquireAccessToken() throws IOException {
+        String authorityUrl = this.getEnvironment().getAuthenticationEndpoint() + this.getDomain();
+        AuthenticationContext context = new AuthenticationContext(authorityUrl, this.getEnvironment().isValidateAuthority(), Executors.newSingleThreadExecutor());
+        AuthenticationResult result;
+        try {
+            result = context.acquireToken(
+                    this.getEnvironment().getTokenAudience(),
+                    this.getClientId(),
+                    this.getUsername(),
+                    this.getPassword(),
+                    null).get();
+        } catch (Exception e) {
+            throw new IOException(e.getMessage(), e);
+        }
+        if (result != null && result.getAccessToken() != null) {
+            return result.getAccessToken();
+        } else {
+            throw new IOException("Failed to acquire access token");
+        }
     }
 }

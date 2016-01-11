@@ -29,10 +29,10 @@ public interface XMsClientRequestIdOperations {
      * used by Retrofit to perform actually REST calls.
      */
     interface XMsClientRequestIdService {
-        @GET("/azurespecials/overwrite/x-ms-client-request-id/method/")
+        @GET("azurespecials/overwrite/x-ms-client-request-id/method/")
         Call<ResponseBody> get(@Header("accept-language") String acceptLanguage);
 
-        @GET("/azurespecials/overwrite/x-ms-client-request-id/via-param/method/")
+        @GET("azurespecials/overwrite/x-ms-client-request-id/via-param/method/")
         Call<ResponseBody> paramGet(@Header("x-ms-client-request-id") String xMsClientRequestId, @Header("accept-language") String acceptLanguage);
 
     }

@@ -8,6 +8,7 @@ using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Generator.Azure;
 using Microsoft.Rest.Generator.NodeJS;
+using Microsoft.Rest.Generator.NodeJS.TemplateModels;
 
 namespace Microsoft.Rest.Generator.Azure.NodeJS
 {
@@ -30,6 +31,14 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
                 var sequence = (SequenceType)Properties.FirstOrDefault(p => p.Type is SequenceType).Type;
                 return sequence.ElementType as CompositeType;
             }
+        }
+
+        public override string ConstructModelMapper()
+        {
+            var modelMapper = this.ConstructMapper(SerializedName, false, null, null, true, true);
+            var builder = new IndentedStringBuilder("  ");
+            builder.AppendLine("return {{{0}}};", modelMapper);
+            return builder.ToString();
         }
     }
 }

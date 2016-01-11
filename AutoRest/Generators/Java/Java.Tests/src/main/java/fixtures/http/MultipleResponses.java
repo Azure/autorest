@@ -31,106 +31,106 @@ public interface MultipleResponses {
      * used by Retrofit to perform actually REST calls.
      */
     interface MultipleResponsesService {
-        @GET("/http/payloads/200/A/204/none/default/Error/response/200/valid")
+        @GET("http/payloads/200/A/204/none/default/Error/response/200/valid")
         Call<ResponseBody> get200Model204NoModelDefaultError200Valid();
 
-        @GET("/http/payloads/200/A/204/none/default/Error/response/204/none")
+        @GET("http/payloads/200/A/204/none/default/Error/response/204/none")
         Call<ResponseBody> get200Model204NoModelDefaultError204Valid();
 
-        @GET("/http/payloads/200/A/204/none/default/Error/response/201/valid")
+        @GET("http/payloads/200/A/204/none/default/Error/response/201/valid")
         Call<ResponseBody> get200Model204NoModelDefaultError201Invalid();
 
-        @GET("/http/payloads/200/A/204/none/default/Error/response/202/none")
+        @GET("http/payloads/200/A/204/none/default/Error/response/202/none")
         Call<ResponseBody> get200Model204NoModelDefaultError202None();
 
-        @GET("/http/payloads/200/A/204/none/default/Error/response/400/valid")
+        @GET("http/payloads/200/A/204/none/default/Error/response/400/valid")
         Call<ResponseBody> get200Model204NoModelDefaultError400Valid();
 
-        @GET("/http/payloads/200/A/201/B/default/Error/response/200/valid")
+        @GET("http/payloads/200/A/201/B/default/Error/response/200/valid")
         Call<ResponseBody> get200Model201ModelDefaultError200Valid();
 
-        @GET("/http/payloads/200/A/201/B/default/Error/response/201/valid")
+        @GET("http/payloads/200/A/201/B/default/Error/response/201/valid")
         Call<ResponseBody> get200Model201ModelDefaultError201Valid();
 
-        @GET("/http/payloads/200/A/201/B/default/Error/response/400/valid")
+        @GET("http/payloads/200/A/201/B/default/Error/response/400/valid")
         Call<ResponseBody> get200Model201ModelDefaultError400Valid();
 
-        @GET("/http/payloads/200/A/201/C/404/D/default/Error/response/200/valid")
+        @GET("http/payloads/200/A/201/C/404/D/default/Error/response/200/valid")
         Call<ResponseBody> get200ModelA201ModelC404ModelDDefaultError200Valid();
 
-        @GET("/http/payloads/200/A/201/C/404/D/default/Error/response/201/valid")
+        @GET("http/payloads/200/A/201/C/404/D/default/Error/response/201/valid")
         Call<ResponseBody> get200ModelA201ModelC404ModelDDefaultError201Valid();
 
-        @GET("/http/payloads/200/A/201/C/404/D/default/Error/response/404/valid")
+        @GET("http/payloads/200/A/201/C/404/D/default/Error/response/404/valid")
         Call<ResponseBody> get200ModelA201ModelC404ModelDDefaultError404Valid();
 
-        @GET("/http/payloads/200/A/201/C/404/D/default/Error/response/400/valid")
+        @GET("http/payloads/200/A/201/C/404/D/default/Error/response/400/valid")
         Call<ResponseBody> get200ModelA201ModelC404ModelDDefaultError400Valid();
 
-        @GET("/http/payloads/202/none/204/none/default/Error/response/202/none")
+        @GET("http/payloads/202/none/204/none/default/Error/response/202/none")
         Call<ResponseBody> get202None204NoneDefaultError202None();
 
-        @GET("/http/payloads/202/none/204/none/default/Error/response/204/none")
+        @GET("http/payloads/202/none/204/none/default/Error/response/204/none")
         Call<ResponseBody> get202None204NoneDefaultError204None();
 
-        @GET("/http/payloads/202/none/204/none/default/Error/response/400/valid")
+        @GET("http/payloads/202/none/204/none/default/Error/response/400/valid")
         Call<ResponseBody> get202None204NoneDefaultError400Valid();
 
-        @GET("/http/payloads/202/none/204/none/default/none/response/202/invalid")
+        @GET("http/payloads/202/none/204/none/default/none/response/202/invalid")
         Call<ResponseBody> get202None204NoneDefaultNone202Invalid();
 
-        @GET("/http/payloads/202/none/204/none/default/none/response/204/none")
+        @GET("http/payloads/202/none/204/none/default/none/response/204/none")
         Call<ResponseBody> get202None204NoneDefaultNone204None();
 
-        @GET("/http/payloads/202/none/204/none/default/none/response/400/none")
+        @GET("http/payloads/202/none/204/none/default/none/response/400/none")
         Call<ResponseBody> get202None204NoneDefaultNone400None();
 
-        @GET("/http/payloads/202/none/204/none/default/none/response/400/invalid")
+        @GET("http/payloads/202/none/204/none/default/none/response/400/invalid")
         Call<ResponseBody> get202None204NoneDefaultNone400Invalid();
 
-        @GET("/http/payloads/default/A/response/200/valid")
+        @GET("http/payloads/default/A/response/200/valid")
         Call<ResponseBody> getDefaultModelA200Valid();
 
-        @GET("/http/payloads/default/A/response/200/none")
+        @GET("http/payloads/default/A/response/200/none")
         Call<ResponseBody> getDefaultModelA200None();
 
-        @GET("/http/payloads/default/A/response/400/valid")
+        @GET("http/payloads/default/A/response/400/valid")
         Call<ResponseBody> getDefaultModelA400Valid();
 
-        @GET("/http/payloads/default/A/response/400/none")
+        @GET("http/payloads/default/A/response/400/none")
         Call<ResponseBody> getDefaultModelA400None();
 
-        @GET("/http/payloads/default/none/response/200/invalid")
+        @GET("http/payloads/default/none/response/200/invalid")
         Call<ResponseBody> getDefaultNone200Invalid();
 
-        @GET("/http/payloads/default/none/response/200/none")
+        @GET("http/payloads/default/none/response/200/none")
         Call<ResponseBody> getDefaultNone200None();
 
-        @GET("/http/payloads/default/none/response/400/invalid")
+        @GET("http/payloads/default/none/response/400/invalid")
         Call<ResponseBody> getDefaultNone400Invalid();
 
-        @GET("/http/payloads/default/none/response/400/none")
+        @GET("http/payloads/default/none/response/400/none")
         Call<ResponseBody> getDefaultNone400None();
 
-        @GET("/http/payloads/200/A/response/200/none")
+        @GET("http/payloads/200/A/response/200/none")
         Call<ResponseBody> get200ModelA200None();
 
-        @GET("/http/payloads/200/A/response/200/valid")
+        @GET("http/payloads/200/A/response/200/valid")
         Call<ResponseBody> get200ModelA200Valid();
 
-        @GET("/http/payloads/200/A/response/200/invalid")
+        @GET("http/payloads/200/A/response/200/invalid")
         Call<ResponseBody> get200ModelA200Invalid();
 
-        @GET("/http/payloads/200/A/response/400/none")
+        @GET("http/payloads/200/A/response/400/none")
         Call<ResponseBody> get200ModelA400None();
 
-        @GET("/http/payloads/200/A/response/400/valid")
+        @GET("http/payloads/200/A/response/400/valid")
         Call<ResponseBody> get200ModelA400Valid();
 
-        @GET("/http/payloads/200/A/response/400/invalid")
+        @GET("http/payloads/200/A/response/400/invalid")
         Call<ResponseBody> get200ModelA400Invalid();
 
-        @GET("/http/payloads/200/A/response/202/valid")
+        @GET("http/payloads/200/A/response/202/valid")
         Call<ResponseBody> get200ModelA202Valid();
 
     }

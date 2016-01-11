@@ -97,11 +97,9 @@ LROsCustomHeader.prototype.putAsyncRetrySucceeded = function (options, callback)
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse) {
-          result = new client._models['Product'](parsedResponse);
-        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          result.deserialize(parsedResponse);
+          var resultMapper = new client.models['Product']().mapper();
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -200,20 +198,20 @@ LROsCustomHeader.prototype.beginPutAsyncRetrySucceeded = function (options, call
   var requestContent = null;
   var requestModel = null;
   try {
-    if (product) {
-      requestModel = new client._models['Product'](product);
+    if (product !== null && product !== undefined) {
+      var requestModelMapper = new client.models['Product']().mapper();
+      requestModel = client.serialize(requestModelMapper, product, 'product');
     }
-    if (requestModel !== null && requestModel !== undefined) {
-      requestContent = JSON.stringify(requestModel.serialize());
-    } else {
-      requestContent = JSON.stringify(requestModel);
-    }
+    requestContent = JSON.stringify(requestModel);
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
+        'payload - "%s"', error.message, util.inspect(product, {depth: null})));
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
+                                                    requestContent.length : 
+                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -229,16 +227,22 @@ LROsCustomHeader.prototype.beginPutAsyncRetrySucceeded = function (options, call
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
+                                                       parsedErrorResponse.error.code : 
+                                                              parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
+                                                          parsedErrorResponse.error.message : 
+                                                                 parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          error.body.deserialize(parsedErrorResponse);
+          var resultMapper = new client.models['CloudError']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+                         '- "%s" for the default response.', defaultError.message, responseBody);
         return callback(error);
       }
       return callback(error);
@@ -252,11 +256,9 @@ LROsCustomHeader.prototype.beginPutAsyncRetrySucceeded = function (options, call
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse) {
-          result = new client._models['Product'](parsedResponse);
-        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          result.deserialize(parsedResponse);
+          var resultMapper = new client.models['Product']().mapper();
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -338,11 +340,9 @@ LROsCustomHeader.prototype.put201CreatingSucceeded200 = function (options, callb
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse) {
-          result = new client._models['Product'](parsedResponse);
-        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          result.deserialize(parsedResponse);
+          var resultMapper = new client.models['Product']().mapper();
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -441,20 +441,20 @@ LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (options, 
   var requestContent = null;
   var requestModel = null;
   try {
-    if (product) {
-      requestModel = new client._models['Product'](product);
+    if (product !== null && product !== undefined) {
+      var requestModelMapper = new client.models['Product']().mapper();
+      requestModel = client.serialize(requestModelMapper, product, 'product');
     }
-    if (requestModel !== null && requestModel !== undefined) {
-      requestContent = JSON.stringify(requestModel.serialize());
-    } else {
-      requestContent = JSON.stringify(requestModel);
-    }
+    requestContent = JSON.stringify(requestModel);
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
+        'payload - "%s"', error.message, util.inspect(product, {depth: null})));
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
+                                                    requestContent.length : 
+                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -470,16 +470,22 @@ LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (options, 
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
+                                                       parsedErrorResponse.error.code : 
+                                                              parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
+                                                          parsedErrorResponse.error.message : 
+                                                                 parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          error.body.deserialize(parsedErrorResponse);
+          var resultMapper = new client.models['CloudError']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+                         '- "%s" for the default response.', defaultError.message, responseBody);
         return callback(error);
       }
       return callback(error);
@@ -493,11 +499,9 @@ LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (options, 
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse) {
-          result = new client._models['Product'](parsedResponse);
-        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          result.deserialize(parsedResponse);
+          var resultMapper = new client.models['Product']().mapper();
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -512,11 +516,9 @@ LROsCustomHeader.prototype.beginPut201CreatingSucceeded200 = function (options, 
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse) {
-          result = new client._models['Product'](parsedResponse);
-        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          result.deserialize(parsedResponse);
+          var resultMapper = new client.models['Product']().mapper();
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError1 = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -681,20 +683,20 @@ LROsCustomHeader.prototype.beginPost202Retry200 = function (options, callback) {
   var requestContent = null;
   var requestModel = null;
   try {
-    if (product) {
-      requestModel = new client._models['Product'](product);
+    if (product !== null && product !== undefined) {
+      var requestModelMapper = new client.models['Product']().mapper();
+      requestModel = client.serialize(requestModelMapper, product, 'product');
     }
-    if (requestModel !== null && requestModel !== undefined) {
-      requestContent = JSON.stringify(requestModel.serialize());
-    } else {
-      requestContent = JSON.stringify(requestModel);
-    }
+    requestContent = JSON.stringify(requestModel);
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
+        'payload - "%s"', error.message, util.inspect(product, {depth: null})));
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
+                                                    requestContent.length : 
+                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -710,16 +712,22 @@ LROsCustomHeader.prototype.beginPost202Retry200 = function (options, callback) {
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
+                                                       parsedErrorResponse.error.code : 
+                                                              parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
+                                                          parsedErrorResponse.error.message : 
+                                                                 parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          error.body.deserialize(parsedErrorResponse);
+          var resultMapper = new client.models['CloudError']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+                         '- "%s" for the default response.', defaultError.message, responseBody);
         return callback(error);
       }
       return callback(error);
@@ -885,20 +893,20 @@ LROsCustomHeader.prototype.beginPostAsyncRetrySucceeded = function (options, cal
   var requestContent = null;
   var requestModel = null;
   try {
-    if (product) {
-      requestModel = new client._models['Product'](product);
+    if (product !== null && product !== undefined) {
+      var requestModelMapper = new client.models['Product']().mapper();
+      requestModel = client.serialize(requestModelMapper, product, 'product');
     }
-    if (requestModel !== null && requestModel !== undefined) {
-      requestContent = JSON.stringify(requestModel.serialize());
-    } else {
-      requestContent = JSON.stringify(requestModel);
-    }
+    requestContent = JSON.stringify(requestModel);
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
+        'payload - "%s"', error.message, util.inspect(product, {depth: null})));
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
+                                                    requestContent.length : 
+                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -914,16 +922,22 @@ LROsCustomHeader.prototype.beginPostAsyncRetrySucceeded = function (options, cal
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
+                                                       parsedErrorResponse.error.code : 
+                                                              parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
+                                                          parsedErrorResponse.error.message : 
+                                                                 parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['CloudError']();
+        error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          error.body.deserialize(parsedErrorResponse);
+          var resultMapper = new client.models['CloudError']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+                         '- "%s" for the default response.', defaultError.message, responseBody);
         return callback(error);
       }
       return callback(error);

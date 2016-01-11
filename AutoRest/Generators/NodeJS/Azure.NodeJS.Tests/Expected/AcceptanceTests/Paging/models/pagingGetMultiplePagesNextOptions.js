@@ -23,23 +23,38 @@
  * value: 30 .
  * 
  */
-function PagingGetMultiplePagesNextOptions(parameters) {
-  if (parameters === null || parameters === undefined) {
-    parameters = {};
-  }
-  if (parameters.timeout === undefined) {
-    parameters.timeout = 30;
-  }
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.maxresults !== undefined) {
-      this.maxresults = parameters.maxresults;
-    }
-    if (parameters.timeout !== undefined) {
-      this.timeout = parameters.timeout;
-    }
-  }    
+function PagingGetMultiplePagesNextOptions() {
 }
 
-
+/**
+ * Defines the metadata of PagingGetMultiplePagesNextOptions
+ *
+ * @returns {object} metadata of PagingGetMultiplePagesNextOptions
+ *
+ */
+PagingGetMultiplePagesNextOptions.prototype.mapper = function () {
+  return {
+    required: false,
+    type: {
+      name: 'Composite',
+      className: 'PagingGetMultiplePagesNextOptions',
+      modelProperties: {
+        maxresults: {
+          required: false,
+          type: {
+            name: 'Number'
+          }
+        },
+        timeout: {
+          required: false,
+          defaultValue: '30',
+          type: {
+            name: 'Number'
+          }
+        }
+      }
+    }
+  };
+};
 
 module.exports = PagingGetMultiplePagesNextOptions;

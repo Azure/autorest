@@ -17,47 +17,33 @@
  * @member {string} [statusCode]
  * 
  */
-function A(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.statusCode !== undefined) {
-      this.statusCode = parameters.statusCode;
-    }
-  }    
+function A() {
 }
 
-
 /**
- * Validate the payload against the A schema
+ * Defines the metadata of A
  *
- * @param {JSON} payload
+ * @returns {object} metadata of A
  *
  */
-A.prototype.serialize = function () {
-  var payload = {};
-  if (this['statusCode'] !== null && this['statusCode'] !== undefined) {
-    if (typeof this['statusCode'].valueOf() !== 'string') {
-      throw new Error('this[\'statusCode\'] must be of type string.');
+A.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'A',
+    type: {
+      name: 'Composite',
+      className: 'A',
+      modelProperties: {
+        statusCode: {
+          required: false,
+          serializedName: 'statusCode',
+          type: {
+            name: 'String'
+          }
+        }
+      }
     }
-    payload['statusCode'] = this['statusCode'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to A schema
- *
- * @param {JSON} instance
- *
- */
-A.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['statusCode'] !== undefined) {
-      this['statusCode'] = instance['statusCode'];
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = A;

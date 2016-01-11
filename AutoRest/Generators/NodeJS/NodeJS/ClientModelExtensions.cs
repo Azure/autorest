@@ -10,7 +10,7 @@ using System.Text.RegularExpressions;
 namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
 {
     using System.Collections.Generic;
-
+    using System.Reflection;
     public static class ClientModelExtensions
     {
         public static string GetHttpMethod(this HttpMethod method)
@@ -85,23 +85,6 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             }
         }
 
-        private static string NormalizeValueReference(this string valueReference)
-        {
-            Regex pattern = new Regex("['.\\[\\]]");
-            return pattern.Replace(valueReference, "");
-        }
-
-        private static string GetBasePropertyFromUnflattenedProperty(this string property)
-        {
-            string result = null;
-            if (property.Contains("]["))
-            {
-                result = property.Substring(0, property.IndexOf("][", StringComparison.OrdinalIgnoreCase) + 1);
-            }
-            
-            return result;
-        }
-
         /// <summary>
         /// Simple conversion of the type to string
         /// </summary>
@@ -120,7 +103,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             if (known == PrimaryType.Date)
             {
                 return string.Format(CultureInfo.InvariantCulture,
-                    "msRest.serializeObject({0}).replace(/[Tt].*[Zz]/, '')", reference);
+                    "client.serializeObject({0}).replace(/[Tt].*[Zz]/, '')", reference);
             }
 
             if (known == PrimaryType.DateTimeRfc1123)
@@ -132,7 +115,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 known == PrimaryType.ByteArray)
             {
                 return string.Format(CultureInfo.InvariantCulture,
-                    "msRest.serializeObject({0})", reference);
+                    "client.serializeObject({0})", reference);
             }
 
             if (known == PrimaryType.TimeSpan)
@@ -365,7 +348,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             return builder.ToString();
         }
 
-        private static string ValidateSequenceType(this SequenceType sequence, IScopeProvider scope, string valueReference, bool isRequired, string modelReference = "client._models")
+        private static string ValidateSequenceType(this SequenceType sequence, IScopeProvider scope, string valueReference, bool isRequired, string modelReference = "client.models")
         {
             if (scope == null)
             {
@@ -408,7 +391,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             return null;
         }
 
-        private static string ValidateDictionaryType(this DictionaryType dictionary, IScopeProvider scope, string valueReference, bool isRequired, string modelReference = "client._models")
+        private static string ValidateDictionaryType(this DictionaryType dictionary, IScopeProvider scope, string valueReference, bool isRequired, string modelReference = "client.models")
         {
             if (scope == null)
             {
@@ -459,7 +442,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
         /// <param name="isRequired">True if the parameter is required.</param>
         /// <param name="modelReference">A reference to the models array</param>
         /// <returns>The code to validate the reference of the given type</returns>
-        public static string ValidateType(this IType type, IScopeProvider scope, string valueReference, bool isRequired, string modelReference = "client._models")
+        public static string ValidateType(this IType type, IScopeProvider scope, string valueReference, bool isRequired, string modelReference = "client.models")
         {
             if (scope == null)
             {
@@ -648,748 +631,189 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             return builder;
         }
 
-        private static string SerializePrimaryType(this PrimaryType primary, IScopeProvider scope, 
-            string objectReference, string valueReference, bool isRequired, Dictionary<Constraint, string> constraints, bool serializeInnerTypes = false)
+        public static string ConstructMapper(this IType type, string serializedName, bool isRequired = false, Dictionary<Constraint, string> constraints = null, 
+            string defaultValue = null, bool isPageable = false, bool expandComposite = false)
         {
-            if (scope == null)
-            {
-                throw new ArgumentNullException("scope");
-            }
-
             var builder = new IndentedStringBuilder("  ");
-            var requiredTypeErrorMessage = "throw new Error('{0} cannot be null or undefined and it must be of type {1}.');";
-            var typeErrorMessage = "throw new Error('{0} must be of type {1}.');";
-            var lowercaseTypeName = primary.Name.ToLower(CultureInfo.InvariantCulture);
-
-            if (primary == PrimaryType.Boolean ||
-                primary == PrimaryType.Double ||
-                primary == PrimaryType.Decimal ||
-                primary == PrimaryType.Int ||
-                primary == PrimaryType.Long ||
-                primary == PrimaryType.Object)
-            {
-                if (isRequired)
-                {
-                    builder.AppendLine("if ({0} === null || {0} === undefined || typeof {0} !== '{1}') {{", 
-                        objectReference, lowercaseTypeName);
-                    builder = ConstructValidationCheck(builder, requiredTypeErrorMessage, objectReference, primary.Name);
-                    builder = primary.AppendConstraintValidations(objectReference, constraints, builder);
-                    if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
-                    return builder.AppendLine("{0} = {1};", valueReference, objectReference).ToString();
-                }
-                builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", objectReference)
-                         .Indent()
-                         .AppendLine("if (typeof {0} !== '{1}') {{", objectReference, lowercaseTypeName);
-                builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
-                builder = primary.AppendConstraintValidations(objectReference, constraints, builder);
-                if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
-                return builder.AppendLine("{0} = {1};", valueReference, objectReference)
-                            .Outdent()
-                            .AppendLine("}").ToString();
-            }
-            else if (primary == PrimaryType.Stream)
-            {
-                if (isRequired)
-                {
-                    builder.AppendLine("if ({0} === null || {0} === undefined) {{", valueReference, lowercaseTypeName);
-                    return ConstructValidationCheck(builder, requiredTypeErrorMessage, valueReference, primary.Name).ToString();
-                }
-
-                builder.AppendLine("if ({0} !== null && {0} !== undefined && typeof {0}.valueOf() !== '{1}') {{", valueReference, lowercaseTypeName);
-                return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
-            }
-            else if (primary == PrimaryType.String)
-            {
-                if (isRequired)
-                {
-                    //empty string can be a valid value hence we cannot implement the simple check if (!{0})
-                    builder.AppendLine("if ({0} === null || {0} === undefined || typeof {0}.valueOf() !== '{1}') {{",
-                        objectReference, lowercaseTypeName);
-                    builder = ConstructValidationCheck(builder, requiredTypeErrorMessage, objectReference, primary.Name);
-                    builder = primary.AppendConstraintValidations(objectReference, constraints, builder);
-                    if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
-                    return builder.AppendLine("{0} = {1};", valueReference, objectReference).ToString();
-                }
-                builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", objectReference)
-                         .Indent()
-                         .AppendLine("if (typeof {0}.valueOf() !== '{1}') {{", objectReference, lowercaseTypeName);
-                builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
-                builder = primary.AppendConstraintValidations(objectReference, constraints, builder);
-                if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
-                return builder.AppendLine("{0} = {1};", valueReference, objectReference)
-                            .Outdent()
-                            .AppendLine("}").ToString();
-            }
-            else if (primary == PrimaryType.ByteArray)
-            {
-                if (isRequired)
-                {
-                    builder.AppendLine("if (!Buffer.isBuffer({0})) {{", objectReference);
-                    builder = ConstructValidationCheck(builder, requiredTypeErrorMessage, objectReference, primary.Name);
-                    builder = primary.AppendConstraintValidations(objectReference, constraints, builder);
-                    builder = ConstructBasePropertyCheck(builder, valueReference);
-                    return builder.AppendLine("{0} = {1}.toString('base64');", valueReference, objectReference).ToString();
-                }
-                builder.AppendLine("if ({0}) {{", objectReference)
-                         .Indent()
-                         .AppendLine("if (!Buffer.isBuffer({0})) {{", objectReference);
-                builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
-                builder = primary.AppendConstraintValidations(objectReference, constraints, builder);
-                if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
-                return builder.AppendLine("{0} = {1}.toString('base64');", valueReference, objectReference)
-                            .Outdent()
-                            .AppendLine("}").ToString();
-            }
-            else if (primary == PrimaryType.Date)
-            {
-                if (isRequired)
-                {
-                    builder.AppendLine("if(!{0} || !({0} instanceof Date || (typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{", 
-                        objectReference);
-                    builder = ConstructValidationCheck(builder, requiredTypeErrorMessage, objectReference, primary.Name);
-                    builder = primary.AppendConstraintValidations(objectReference, constraints, builder);
-                    if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
-                    return builder.AppendLine("{0} = ({1} instanceof Date) ? {1}.toISOString().substring(0,10) : {1};", 
-                        valueReference, objectReference).ToString();
-                }
-
-                builder.AppendLine("if ({0}) {{", objectReference)
-                         .Indent()
-                         .AppendLine("if (!({0} instanceof Date || typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0})))) {{", 
-                         objectReference);
-                builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
-                builder = primary.AppendConstraintValidations(objectReference, constraints, builder);
-                if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
-                return builder.AppendLine("{0} = ({1} instanceof Date) ? {1}.toISOString().substring(0,10) : {1};", valueReference, objectReference)
-                                .Outdent()
-                                .AppendLine("}").ToString();
-            }
-            else if (primary == PrimaryType.DateTime)
-            {
-                if (isRequired)
-                {
-                    builder.AppendLine("if(!{0} || !({0} instanceof Date || (typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{",
-                        objectReference);
-                    builder = ConstructValidationCheck(builder, requiredTypeErrorMessage, objectReference, primary.Name);
-                    builder = primary.AppendConstraintValidations(objectReference, constraints, builder);
-                    if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
-                    return builder.AppendLine("{0} = ({1} instanceof Date) ? {1}.toISOString() : {1};",
-                        valueReference, objectReference).ToString();
-                }
-
-                builder.AppendLine("if ({0}) {{", objectReference)
-                         .Indent()
-                         .AppendLine("if (!({0} instanceof Date || typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0})))) {{",
-                         objectReference);
-                builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
-                builder = primary.AppendConstraintValidations(objectReference, constraints, builder);
-                if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
-                return builder.AppendLine("{0} = ({1} instanceof Date) ? {1}.toISOString() : {1};", valueReference, objectReference)
-                                .Outdent()
-                                .AppendLine("}").ToString();
-            }
-            else if (primary == PrimaryType.DateTimeRfc1123)
-            {
-                if (isRequired)
-                {
-                    builder.AppendLine("if(!{0} || !({0} instanceof Date || (typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{",
-                        objectReference);
-                    builder = ConstructValidationCheck(builder, requiredTypeErrorMessage, objectReference, primary.Name);
-                    builder = primary.AppendConstraintValidations(objectReference, constraints, builder);
-                    if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
-                    return builder.AppendLine("{0} = ({1} instanceof Date) ? {1}.toUTCString() : {1};",
-                        valueReference, objectReference).ToString();
-                }
-
-                builder.AppendLine("if ({0}) {{", objectReference)
-                         .Indent()
-                         .AppendLine("if (!({0} instanceof Date || typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0})))) {{",
-                         objectReference);
-                builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
-                builder = primary.AppendConstraintValidations(objectReference, constraints, builder);
-                if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
-                return builder.AppendLine("{0} = ({1} instanceof Date) ? {1}.toUTCString() : {1};", valueReference, objectReference)
-                                .Outdent()
-                                .AppendLine("}").ToString();
-            }
-            else if (primary == PrimaryType.TimeSpan)
-            {
-                if (isRequired)
-                {
-                    builder.AppendLine("if(!{0} || !moment.isDuration({0})) {{", objectReference);
-                    builder = ConstructValidationCheck(builder, requiredTypeErrorMessage, objectReference, primary.Name);
-                    builder = primary.AppendConstraintValidations(objectReference, constraints, builder);
-                    if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
-                    return builder.AppendLine("{0} = {1}.toISOString();", valueReference, objectReference).ToString();
-                }
-
-                builder.AppendLine("if ({0}) {{", objectReference)
-                         .Indent()
-                         .AppendLine("if (!moment.isDuration({0})) {{",
-                         objectReference);
-                builder = ConstructValidationCheck(builder, typeErrorMessage, objectReference, primary.Name);
-                builder = primary.AppendConstraintValidations(objectReference, constraints, builder);
-                if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
-                return builder.AppendLine("{0} = {1}.toISOString();", valueReference, objectReference)
-                                .Outdent()
-                                .AppendLine("}").ToString();
-            }
-            else
-            {
-                throw new NotImplementedException(string.Format(CultureInfo.InvariantCulture,
-                    "'{0}' not implemented", valueReference));
-            }
-        }
-
-        private static IndentedStringBuilder ConstructBasePropertyCheck(IndentedStringBuilder builder, string valueReference)
-        {
-            string baseProperty = valueReference.GetBasePropertyFromUnflattenedProperty();
-            if (baseProperty != null)
-            {
-                builder.AppendLine("if ({0} === null || {0} === undefined) {{", baseProperty)
-                         .Indent()
-                         .AppendLine("{0} = {{}};", baseProperty)
-                       .Outdent()
-                       .AppendLine("}");
-            }
-
-            return builder;
-        }
-
-        private static string SerializeEnumType(this EnumType enumType, IScopeProvider scope, 
-            string objectReference, string valueReference, bool isRequired, Dictionary<Constraint, string> constraints, bool serializeInnerTypes = false)
-        {
-            if (scope == null)
-            {
-                throw new ArgumentNullException("scope");
-            }
-
-            var builder = new IndentedStringBuilder("  ");
-            var allowedValues = scope.GetVariableName("allowedValues");
-            string tempReference = objectReference;
-            builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", objectReference).Indent();
-            builder = enumType.AppendConstraintValidations(objectReference, constraints, builder);
-            builder.AppendLine("var {0} = {1};", allowedValues, enumType.GetEnumValuesArray());
-            if (objectReference.IndexOfAny(new char[] { '.', '[', ']'}) >= 0)
-            {
-                tempReference = tempReference.NormalizeValueReference();
-                builder.AppendLine("var {0} = {1};", tempReference, objectReference);
-            }
-            builder.AppendLine("if (!{0}.some( function(item) {{ return item === {1}; }})) {{", allowedValues, tempReference)
-                        .Indent()
-                        .AppendLine("throw new Error({0} + ' is not a valid value. The valid values are: ' + {1});", objectReference, allowedValues)
-                    .Outdent()
-                    .AppendLine("}");
-            if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
-            builder.AppendLine("{0} = {1};", valueReference, objectReference);
-            if (isRequired)
-            {
-                var escapedObjectReference = objectReference.EscapeSingleQuotes();
-                builder.Outdent().AppendLine("} else {")
-                    .Indent()
-                        .AppendLine("throw new Error('{0} cannot be null or undefined.');", escapedObjectReference)
-                    .Outdent()
-                    .AppendLine("}");
-            }
-            else
-            {
-                builder.Outdent().AppendLine("}");
-            }
-            return builder.ToString();
-        }
-
-        private static string SerializeCompositeType(this CompositeType composite, IScopeProvider scope, string objectReference, 
-            string valueReference, bool isRequired, Dictionary<Constraint, string> constraints, string modelReference = "client._models", bool serializeInnerTypes = false)
-        {
-            if (scope == null)
-            {
-                throw new ArgumentNullException("scope");
-            }
-
-            var builder = new IndentedStringBuilder("  ");
-            var escapedObjectReference = objectReference.EscapeSingleQuotes();
-
-            builder.AppendLine("if ({0}) {{", objectReference).Indent();
-            builder = composite.AppendConstraintValidations(objectReference, constraints, builder);
-            if (!string.IsNullOrEmpty(composite.PolymorphicDiscriminator))
-            {
-                builder.AppendLine("if({0}['{1}'] !== null && {0}['{1}'] !== undefined && {2}.discriminators[{0}['{1}']]) {{",
-                                    objectReference,
-                                    composite.PolymorphicDiscriminator, modelReference)
-                    .Indent();
-                if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
-                builder.AppendLine("{0} = {1}.serialize();", valueReference, objectReference)
-                    .Outdent()
-                    .AppendLine("}} else {{", valueReference)
-                    .Indent()
-                        .AppendLine("throw new Error('No discriminator field \"{0}\" was found in parameter \"{1}\".');",
-                                    composite.PolymorphicDiscriminator,
-                                    escapedObjectReference)
-                    .Outdent()
-                    .AppendLine("}");
-            }
-            else
-            {
-                if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
-                builder.AppendLine("{0} = {1}.serialize();", valueReference, objectReference);
-            }
-            builder.Outdent().AppendLine("}");
-
-            if (isRequired)
-            {
-                builder.Append(" else {")
-                    .Indent()
-                        .AppendLine("throw new Error('{0} cannot be null or undefined.');", escapedObjectReference)
-                    .Outdent()
-                    .AppendLine("}");
-            }
-            return builder.ToString();
-        }
-
-        private static string SerializeSequenceType(this SequenceType sequence, IScopeProvider scope, string objectReference, 
-            string valueReference, bool isRequired, Dictionary<Constraint, string> constraints, 
-            string modelReference = "client._models", bool serializeInnerTypes = false)
-        {
-            if (scope == null)
-            {
-                throw new ArgumentNullException("scope");
-            }
-
-            var builder = new IndentedStringBuilder("  ");
-            var escapedObjectReference = objectReference.EscapeSingleQuotes();
-
-            var indexVar = scope.GetVariableName("i");
-            var innerConstraints = new Dictionary<Constraint, string>();
-            var innerSerialization = sequence.ElementType.SerializeType(scope, objectReference + "[" + indexVar + "]", valueReference + "[" + indexVar + "]", false,
-                innerConstraints, modelReference, true);
-            if (!string.IsNullOrEmpty(innerSerialization))
-            {
-                if (isRequired)
-                {
-                    builder.AppendLine("if (!util.isArray({0})) {{", objectReference)
-                             .Indent()
-                             .AppendLine("throw new Error('{0} cannot be null or undefined and it must be of type {1}.');",
-                             escapedObjectReference, sequence.Name.ToLower(CultureInfo.InvariantCulture))
-                           .Outdent()
-                           .AppendLine("}");
-                    builder = sequence.AppendConstraintValidations(objectReference, constraints, builder);
-                    if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
-                    builder.AppendLine("{0} = [];", valueReference)
-                           .AppendLine("for (var {1} = 0; {1} < {0}.length; {1}++) {{", objectReference, indexVar)
-                             .Indent()
-                             .AppendLine(innerSerialization)
-                           .Outdent()
-                           .AppendLine("}");
-                    return builder.ToString();
-                }
-
-                builder.AppendLine("if (util.isArray({0})) {{", objectReference).Indent();
-                builder = sequence.AppendConstraintValidations(objectReference, constraints, builder);
-                if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
-                builder.AppendLine("{0} = [];", valueReference)
-                       .AppendLine("for (var {1} = 0; {1} < {0}.length; {1}++) {{", objectReference, indexVar)
-                         .Indent()
-                         .AppendLine(innerSerialization)
-                       .Outdent()
-                       .AppendLine("}")
-                     .Outdent()
-                     .AppendLine("}");
-                return builder.ToString();
-            }
-
-            return null;
-        }
-
-        private static string SerializeDictionaryType(this DictionaryType dictionary, IScopeProvider scope, string objectReference, string valueReference, 
-            bool isRequired, Dictionary<Constraint, string> constraints, string modelReference = "client._models", bool serializeInnerTypes = false)
-        {
-            if (scope == null)
-            {
-                throw new ArgumentNullException("scope");
-            }
-
-            var builder = new IndentedStringBuilder("  ");
-            var escapedObjectReference = objectReference.EscapeSingleQuotes();
-            var valueVar = scope.GetVariableName("valueElement");
-            var innerConstraints = new Dictionary<Constraint, string>();
-            var innerSerialization = dictionary.ValueType.SerializeType(scope, objectReference + "[" + valueVar + "]", valueReference + "[" + valueVar + "]", false,
-                innerConstraints, modelReference, true);
-            if (!string.IsNullOrEmpty(innerSerialization))
-            {
-                if (isRequired)
-                {
-                    builder.AppendLine("if ({0} === null || {0} === undefined || typeof {0} !== 'object') {{", objectReference)
-                             .Indent()
-                             .AppendLine("throw new Error('{0} cannot be null or undefined and it must be of type {1}.');",
-                             escapedObjectReference, dictionary.Name.ToLower(CultureInfo.InvariantCulture))
-                           .Outdent()
-                           .AppendLine("}");
-                    builder = dictionary.AppendConstraintValidations(objectReference, constraints, builder);
-                    if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
-                    builder.AppendLine("{0} = {{}};", valueReference)
-                      .AppendLine("for(var {0} in {1}) {{", valueVar, objectReference)
-                        .Indent()
-                          .AppendLine(innerSerialization)
-                        .Outdent()
-                      .AppendLine("}");
-                    return builder.ToString();
-                }
-
-                builder.AppendLine("if ({0} && typeof {0} === 'object') {{", objectReference).Indent();
-                builder = dictionary.AppendConstraintValidations(objectReference, constraints, builder);
-                if (!serializeInnerTypes) builder = ConstructBasePropertyCheck(builder, valueReference);
-                builder.AppendLine("{0} = {{}};", valueReference)
-                       .AppendLine("for(var {0} in {1}) {{", valueVar, objectReference)
-                         .Indent()
-                         .AppendLine(innerSerialization)
-                         .AppendLine("else {")
-                           .Indent()
-                           .AppendLine("{0} = {1};", valueReference + "[" + valueVar + "]", objectReference + "[" + valueVar + "]")
-                         .Outdent()
-                         .AppendLine("}")
-                       .Outdent()
-                       .AppendLine("}")
-                     .Outdent()
-                     .AppendLine("}");
-                return builder.ToString();
-            }
-
-            return null;
-        }
-
-        /// <summary>
-        /// Generate code to perform serialization on a parameter or property
-        /// </summary>
-        /// <param name="type">The type to validate</param>
-        /// <param name="scope">A scope provider for generating variable names as necessary</param>
-        /// <param name="objectReference">A reference to the object being serialized</param>
-        /// <param name="valueReference">A reference to the value that will be assigned the serialized object</param>
-        /// <param name="isRequired">True if the parameter or property is required.</param>
-        /// <param name="constraints">Constraints specified on the type.</param>
-        /// <param name="modelReference">A reference to the models</param>
-        /// <param name="serializeInnerTypes">True if we serializing valueType/elementType of Dictionary/Sequence respectively</param>
-        /// <returns>The code to serialize the given type</returns>
-        public static string SerializeType(this IType type, IScopeProvider scope, string objectReference, 
-            string valueReference, bool isRequired, Dictionary<Constraint, string> constraints, string modelReference = "client._models", bool serializeInnerTypes = false)
-        {
-            if (scope == null)
-            {
-                throw new ArgumentNullException("scope");
-            }
-
             CompositeType composite = type as CompositeType;
             SequenceType sequence = type as SequenceType;
             DictionaryType dictionary = type as DictionaryType;
             PrimaryType primary = type as PrimaryType;
             EnumType enumType = type as EnumType;
+            builder.AppendLine("").Indent();
+            if (isRequired)
+            {
+                builder.AppendLine("required: true,");
+            }
+            else
+            {
+                builder.AppendLine("required: false,");
+            }
+            if (serializedName != null)
+            {
+                builder.AppendLine("serializedName: '{0}',", serializedName);
+            }
+            if (defaultValue != null)
+            {
+                builder.AppendLine("defaultValue: '{0}',", defaultValue);
+            }
+            if (constraints != null && constraints.Count > 0)
+            {
+                builder.AppendLine("constraints: {").Indent();
+                var keys = constraints.Keys.ToList<Constraint>();
+                for (int j = 0; j < keys.Count; j++)
+                {
+                    var constraintValue = constraints[keys[j]];
+                    if (keys[j] == Constraint.Pattern)
+                    {
+                        constraintValue = string.Format(CultureInfo.InvariantCulture, "'{0}'", constraintValue);
+                    }
+                    if (j != keys.Count - 1)
+                    {
+                        builder.AppendLine("{0}: {1},", keys[j], constraintValue);
+                    }
+                    else
+                    {
+                        builder.AppendLine("{0}: {1}", keys[j], constraintValue);
+                    }
+                }
+                builder.Outdent().AppendLine("},");
+            }
+            // Add type information 
             if (primary != null)
             {
-                return primary.SerializePrimaryType(scope, objectReference, valueReference, isRequired, constraints, serializeInnerTypes);
-            }
-            else if (enumType != null && enumType.Values.Any())
-            {
-                return enumType.SerializeEnumType(scope, objectReference, valueReference, isRequired, constraints, serializeInnerTypes);
-            }
-            else if (composite != null && composite.Properties.Any())
-            {
-                return composite.SerializeCompositeType(scope, objectReference, valueReference, isRequired, constraints, modelReference, serializeInnerTypes);
-            }
-            else if (sequence != null)
-            {
-                return sequence.SerializeSequenceType(scope, objectReference, valueReference, isRequired, constraints, modelReference, serializeInnerTypes);
-            }
-            else if (dictionary != null)
-            {
-                return dictionary.SerializeDictionaryType(scope, objectReference, valueReference, isRequired, constraints, modelReference, serializeInnerTypes);
-            }
-
-            return null;
-        }
-
-        /// <summary>
-        /// Generate code to perform deserialization on a parameter or property
-        /// </summary>
-        /// <param name="type">The type to deserialize</param>
-        /// <param name="scope">A scope provider for generating variable names as necessary</param>
-        /// <param name="objectReference">A reference to the object that will be assigned the deserialized value</param>
-        /// <param name="valueReference">A reference to the value being deserialized</param>
-        /// <param name="modelReference">A reference to the models</param>
-        /// <returns>The code to deserialize the given type</returns>
-        public static string DeserializeType(this IType type, IScopeProvider scope, string objectReference, string valueReference, string modelReference = "self._models")
-        {
-            if (scope == null)
-            {
-                throw new ArgumentNullException("scope");
-            }
-
-            EnumType enumType = type as EnumType;
-            CompositeType composite = type as CompositeType;
-            SequenceType sequence = type as SequenceType;
-            DictionaryType dictionary = type as DictionaryType;
-            PrimaryType primary = type as PrimaryType;
-            var builder = new IndentedStringBuilder("  ");
-            string baseProperty = valueReference.GetBasePropertyFromUnflattenedProperty();
-            if (baseProperty != null)
-            {
-                builder.AppendLine("if ({0} !== null && {0} !== undefined) {{", baseProperty).Indent();
-            }
-            if (enumType != null)
-            {
-                builder = ProcessBasicType(objectReference, valueReference, builder);
-            }
-            else if (primary != null)
-            {
-                if (primary == PrimaryType.ByteArray)
+                if (primary == PrimaryType.Boolean)
                 {
-                    builder.AppendLine("if ({0}) {{", valueReference)
-                             .Indent()
-                             .AppendLine("{1} = new Buffer({0}, 'base64');", valueReference, objectReference)
-                           .Outdent().AppendLine("}")
-                           .AppendLine("else if ({0} !== undefined) {{", valueReference)
-                             .Indent()
-                             .AppendLine("{1} = {0};", valueReference, objectReference)
-                           .Outdent()
-                           .AppendLine("}");
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'Boolean'").Outdent().AppendLine("}");
                 }
-                else if (primary == PrimaryType.DateTime || primary == PrimaryType.Date || primary == PrimaryType.DateTimeRfc1123)
+                else if(primary == PrimaryType.Int || primary == PrimaryType.Long || primary == PrimaryType.Decimal || primary == PrimaryType.Double)
                 {
-                    builder.AppendLine("if ({0}) {{", valueReference)
-                             .Indent()
-                             .AppendLine("{1} = new Date({0});", valueReference, objectReference)
-                           .Outdent()
-                           .AppendLine("}")
-                           .AppendLine("else if ({0} !== undefined) {{", valueReference)
-                             .Indent()
-                             .AppendLine("{1} = {0};", valueReference, objectReference)
-                           .Outdent()
-                           .AppendLine("}");
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'Number'").Outdent().AppendLine("}");
+                }
+                else if (primary == PrimaryType.String)
+                {
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'String'").Outdent().AppendLine("}");
+                }
+                else if (primary == PrimaryType.ByteArray)
+                {
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'ByteArray'").Outdent().AppendLine("}");
+                }
+                else if (primary == PrimaryType.Date)
+                {
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'Date'").Outdent().AppendLine("}");
+                }
+                else if (primary == PrimaryType.DateTime)
+                {
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'DateTime'").Outdent().AppendLine("}");
+                }
+                else if (primary == PrimaryType.DateTimeRfc1123)
+                {
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'DateTimeRfc1123'").Outdent().AppendLine("}");
                 }
                 else if (primary == PrimaryType.TimeSpan)
                 {
-                    builder.AppendLine("if ({0}) {{", valueReference)
-                             .Indent()
-                             .AppendLine("{1} = moment.duration({0});", valueReference, objectReference)
-                           .Outdent()
-                           .AppendLine("}")
-                           .AppendLine("else if ({0} !== undefined) {{", valueReference)
-                             .Indent()
-                             .AppendLine("{1} = {0};", valueReference, objectReference)
-                           .Outdent()
-                           .AppendLine("}");
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'TimeSpan'").Outdent().AppendLine("}");
+                }
+            }
+            else if (enumType != null)
+            {
+                builder.AppendLine("type: {")
+                         .Indent()
+                         .AppendLine("name: 'Enum',")
+                         .AppendLine("allowedValues: {0}", enumType.GetEnumValuesArray())
+                       .Outdent()
+                       .AppendLine("}");
+            }
+            else if (sequence != null)
+            {
+                builder.AppendLine("type: {")
+                         .Indent()
+                         .AppendLine("name: 'Sequence',")
+                         .AppendLine("element: {")
+                           .Indent()
+                           .AppendLine("{0}", sequence.ElementType.ConstructMapper(sequence.ElementType.Name + "ElementType"))
+                         .Outdent().AppendLine("}").Outdent().AppendLine("}");
+            }
+            else if (dictionary != null)
+            {
+                builder.AppendLine("type: {")
+                         .Indent()
+                         .AppendLine("name: 'Dictionary',")
+                         .AppendLine("value: {")
+                           .Indent()
+                           .AppendLine("{0}", dictionary.ValueType.ConstructMapper(dictionary.ValueType.Name + "ElementType"))
+                         .Outdent().AppendLine("}").Outdent().AppendLine("}");
+            }
+            else if (composite != null)
+            {
+                builder.AppendLine("type: {")
+                         .Indent()
+                         .AppendLine("name: 'Composite',");
+                if (composite.PolymorphicDiscriminator != null)
+                {
+                    builder.AppendLine("polymorphicDiscriminator: '{0}',", composite.PolymorphicDiscriminator);
+                }
+                if (!expandComposite)
+                {
+                    builder.AppendLine("className: '{0}'", composite.Name).Outdent().AppendLine("}");
                 }
                 else
                 {
-                    builder.AppendLine("if ({0} !== undefined) {{", valueReference)
-                             .Indent()
-                             .AppendLine("{1} = {0};", valueReference, objectReference)
-                           .Outdent()
-                           .AppendLine("}");
+                    builder.AppendLine("className: '{0}',", composite.Name)
+                           .AppendLine("modelProperties: {").Indent();
+                    var composedPropertyList = new List<Property>(composite.ComposedProperties);
+                    for (var i = 0; i < composedPropertyList.Count; i++)
+                    {
+                        var prop = composedPropertyList[i];
+                        var serializedPropertyName = prop.SerializedName;
+                        PropertyInfo nextLinkName = null;
+                        string nextLinkNameValue = null;
+                        if (isPageable)
+                        {
+                            var itemName = composite.GetType().GetProperty("ItemName");
+                            nextLinkName = composite.GetType().GetProperty("NextLinkName");
+                            nextLinkNameValue = (string)nextLinkName.GetValue(composite);
+                            if (itemName != null && ((string)itemName.GetValue(composite) == prop.Name))
+                            {
+                                serializedPropertyName = "";
+                            }
+
+                            if (prop.Name.Contains("nextLink") && nextLinkName != null && nextLinkNameValue == null)
+                            {
+                                continue;
+                            }
+                        }
+
+                        if (i != composedPropertyList.Count - 1)
+                        {
+                            if (!isPageable)
+                            {
+                                builder.AppendLine("{0}: {{{1}}},", prop.Name, prop.Type.ConstructMapper(serializedPropertyName, prop.IsRequired, prop.Constraints, prop.DefaultValue));
+                            }
+                            else
+                            {
+                                // if pageable and nextlink is also present then we need a comma as nextLink would be the next one to be added
+                                if (nextLinkNameValue != null)
+                                {
+                                    builder.AppendLine("{0}: {{{1}}},", prop.Name, prop.Type.ConstructMapper(serializedPropertyName, prop.IsRequired, prop.Constraints, prop.DefaultValue));
+                                }
+                                else
+                                {
+                                    builder.AppendLine("{0}: {{{1}}}", prop.Name, prop.Type.ConstructMapper(serializedPropertyName, prop.IsRequired, prop.Constraints, prop.DefaultValue));
+                                }
+                                    
+                            }   
+                        }
+                        else
+                        {
+                            builder.AppendLine("{0}: {{{1}}}", prop.Name, prop.Type.ConstructMapper(serializedPropertyName, prop.IsRequired, prop.Constraints, prop.DefaultValue));
+                        }
+                    }
+                    // end of modelProperties and type
+                    builder.Outdent().AppendLine("}").Outdent().AppendLine("}");
                 }
             }
-            else if (composite != null && composite.Properties.Any())
-            {
-                builder = composite.ProcessCompositeType(objectReference, valueReference, modelReference, builder, "DeserializeType");
-            }
-            else if (sequence != null)
-            {
-                builder = sequence.ProcessSequenceType(scope, objectReference, valueReference, modelReference, builder, "DeserializeType");
-            }
-            else if (dictionary != null)
-            {
-                builder = dictionary.ProcessDictionaryType(scope, objectReference, valueReference, modelReference, builder, "DeserializeType");
-            }
-
-            if (baseProperty != null)
-            {
-                builder.Outdent().AppendLine("}");
-            }
-
             return builder.ToString();
-        }
-
-        public static string InitializeType(this IType type, IScopeProvider scope, string objectReference, string valueReference, string modelReference = "models")
-        {
-            if (scope == null)
-            {
-                throw new ArgumentNullException("scope");
-            }
-
-            EnumType enumType = type as EnumType;
-            CompositeType composite = type as CompositeType;
-            SequenceType sequence = type as SequenceType;
-            DictionaryType dictionary = type as DictionaryType;
-            PrimaryType primary = type as PrimaryType;
-            var builder = new IndentedStringBuilder("  ");
-            if (enumType != null || primary != null)
-            {
-                builder = ProcessBasicType(objectReference, valueReference, builder);
-            }
-            else if (composite != null && composite.Properties.Any())
-            {
-                builder = composite.ProcessCompositeType(objectReference, valueReference, modelReference, builder, "InitializeType");
-            }
-            else if (sequence != null)
-            {
-                builder = sequence.ProcessSequenceType(scope, objectReference, valueReference, modelReference, builder, "InitializeType");
-            }
-            else if (dictionary != null)
-            {
-                builder = dictionary.ProcessDictionaryType(scope, objectReference, valueReference, modelReference, builder, "InitializeType");
-            }
-
-            return builder.ToString();
-        }
-
-
-        public static string InitializeSerializationType(this IType type, IScopeProvider scope, string objectReference, string valueReference, string modelReference = "models")
-        {
-            if (scope == null)
-            {
-                throw new ArgumentNullException("scope");
-            }
-
-            CompositeType composite = type as CompositeType;
-            SequenceType sequence = type as SequenceType;
-            DictionaryType dictionary = type as DictionaryType;
-            var builder = new IndentedStringBuilder("  ");
-            if (composite != null && composite.Properties.Any())
-            {
-                builder = composite.ProcessCompositeType(objectReference, valueReference, modelReference, builder, "InitializeSerializationType");
-            }
-            else if (sequence != null)
-            {
-                builder = sequence.ProcessSequenceType(scope, objectReference, valueReference, modelReference, builder, "InitializeSerializationType");
-            }
-            else if (dictionary != null)
-            {
-                builder = dictionary.ProcessDictionaryType(scope, objectReference, valueReference, modelReference, builder, "InitializeSerializationType");
-            }
-
-            return builder.ToString();
-        }
-
-        private static IndentedStringBuilder ProcessBasicType(string objectReference, string valueReference, IndentedStringBuilder builder)
-        {
-            return builder.AppendLine("if ({0} !== undefined) {{", valueReference)
-                            .Indent()
-                            .AppendLine("{0} = {1};", objectReference, valueReference)
-                          .Outdent()
-                          .AppendLine("}");
-        }
-
-        private static IndentedStringBuilder ProcessCompositeType(this CompositeType composite, string objectReference,
-            string valueReference, string modelReference, IndentedStringBuilder builder, string processType)
-        {
-            builder.AppendLine("if ({0}) {{", valueReference).Indent();
-            string discriminator = "{3} = new {2}.discriminators[{0}['{1}']]({0});";
-            string objectCreation = "{3} = new {2}['{1}']({0});";
-
-            if (processType == "DeserializeType")
-            {
-                discriminator = "{3} = new {2}.discriminators[{0}['{1}']]().deserialize({0});";
-                objectCreation = "{3} = new {2}['{1}']().deserialize({0});";
-            }
-
-            if (!string.IsNullOrEmpty(composite.PolymorphicDiscriminator))
-            {
-                builder.AppendLine(discriminator, valueReference, composite.PolymorphicDiscriminator, modelReference, objectReference);
-            }
-            else
-            {
-                builder.AppendLine(objectCreation, valueReference, composite.Name, modelReference, objectReference);
-            }
-            builder.Outdent().AppendLine("}");
-
-            return builder;
-        }
-
-        private static IndentedStringBuilder ProcessSequenceType(this SequenceType sequence, IScopeProvider scope, string objectReference, 
-            string valueReference, string modelReference, IndentedStringBuilder builder, string processType)
-        {
-            var elementVar = scope.GetVariableName("element");
-            string innerInitialization = null;
-            if (processType == null)
-            {
-                throw new ArgumentNullException("processType");
-            }
-
-            if (processType == "InitializeType")
-            {
-                innerInitialization = sequence.ElementType.InitializeType(scope, elementVar, elementVar, modelReference);
-            }
-            else if (processType == "DeserializeType")
-            {
-                innerInitialization = sequence.ElementType.DeserializeType(scope, elementVar, elementVar, modelReference);
-            }
-            else if (processType == "InitializeSerializationType")
-            {
-                innerInitialization = sequence.ElementType.InitializeSerializationType(scope, elementVar, elementVar, modelReference);
-            }
-
-            if (!string.IsNullOrEmpty(innerInitialization))
-            {
-                var arrayName = valueReference.ToPascalCase().NormalizeValueReference();
-                builder.AppendLine("if ({0}) {{", valueReference)
-                         .Indent()
-                         .AppendLine("var temp{0} = [];", arrayName)
-                         .AppendLine("{0}.forEach(function({1}) {{", valueReference, elementVar)
-                           .Indent()
-                             .AppendLine(innerInitialization)
-                             .AppendLine("temp{0}.push({1});", arrayName, elementVar)
-                           .Outdent()
-                           .AppendLine("});")
-                           .AppendLine("{0} = temp{1};", objectReference, arrayName)
-                         .Outdent()
-                         .AppendLine("}");
-            }
-
-            return builder;
-        }
-
-        private static IndentedStringBuilder ProcessDictionaryType(this DictionaryType dictionary, IScopeProvider scope, string objectReference, 
-            string valueReference, string modelReference, IndentedStringBuilder builder, string processType)
-        {
-            var valueVar = scope.GetVariableName("valueElement");
-            string innerInitialization = null;
-            if (processType == null)
-            {
-                throw new ArgumentNullException("processType");
-            }
-
-            string elementObjectReference = objectReference + "[" + valueVar + "]";
-            string elementValueReference = valueReference + "[" + valueVar + "]";
-
-            if (processType == "InitializeType")
-            {
-                innerInitialization = dictionary.ValueType.InitializeType(scope, elementObjectReference, elementValueReference, modelReference);
-            }
-            else if (processType == "DeserializeType")
-            {
-                innerInitialization = dictionary.ValueType.DeserializeType(scope, elementObjectReference, elementValueReference, modelReference);
-            }
-            else if (processType == "InitializeSerializationType")
-            {
-                innerInitialization = dictionary.ValueType.InitializeSerializationType(scope, elementObjectReference, elementValueReference, modelReference);
-            }
-
-            if (!string.IsNullOrEmpty(innerInitialization))
-            {
-                builder.AppendLine("if ({0}) {{", valueReference).Indent();
-                if (processType == "DeserializeType" || processType == "InitializeType")
-                {
-                    builder.AppendLine("{0} = {{}};", objectReference);
-                }
-                         
-                builder.AppendLine("for(var {0} in {1}) {{", valueVar, valueReference)
-                         .Indent()
-                         .AppendLine(innerInitialization)
-                       .Outdent()
-                       .AppendLine("}")
-                     .Outdent()
-                     .AppendLine("}");
-            }
-
-            return builder;
         }
 
         /// <summary>

@@ -32,9 +32,9 @@ var util = require('util');
 @foreach (var property in Model.DocumentationPropertyList)
 {
     @PageTemplateModel.ConstructPropertyDocumentation(
-                          WrapComment(" * ", "@member {" + PageTemplateModel.GetPropertyDocumentationType(property)
-                                                         + "} " + PageTemplateModel.GetPropertyDocumentationName(property)
-                                             + " " + property.Documentation))
+                              WrapComment(" * ", "@member {" + PageTemplateModel.GetPropertyDocumentationType(property)
+                                                             + "} " + PageTemplateModel.GetPropertyDocumentationName(property)
+                                                 + " " + property.Documentation))
 }
  */
 function @(Model.Name)() {
@@ -43,49 +43,13 @@ function @(Model.Name)() {
 util.inherits(@(Model.Name), Array);
 @EmptyLine
 /**
- * Deserialize the instance to @Model.Name schema
+ * Defines the metadata of @Model.Name
  *
- * @@param {JSON} instance
+ * @@returns {object} metadata of @Model.Name
  *
  */
-@(Model.Name).prototype.deserialize = function (instance) {
-@{
-var properties = Model.Properties;
-if (properties.Count > 0)
-{
-<text>
-  if (instance) {
-  @{
-  if (Model.ItemName != null)
-  {
-  <text>
-    if (instance['@(Model.ItemName)']) {
-      var deserializedInstance@(Model.ItemName) = [];
-        instance['@(Model.ItemName)'].forEach(function(element) {
-        if (element) {
-          element = new models['@(Model.ItemType.Name)']().deserialize(element);
-        }
-        deserializedInstance@(Model.ItemName).push(element);
-      });
-      Array.prototype.push.apply(this, deserializedInstance@(Model.ItemName));
-    }
-  </text>
-  }
-  if (Model.NextLinkName != null)
-  {
-  <text>
-    if (instance['@(Model.NextLinkName)'] !== undefined) {
-      this['@(Model.NextLinkName)'] = instance.@(Model.NextLinkName);
-    }
-  </text>
-  }
-  }
-  }
-</text>
-  }
-  @EmptyLine
-  @:return this;
-}
+@(Model.Name).prototype.mapper = function () {
+  @(Model.ConstructModelMapper())
 };
 @EmptyLine
 module.exports = @(Model.Name);

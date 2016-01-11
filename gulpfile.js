@@ -238,9 +238,8 @@ gulp.task('regenerate:expected:csazure', function(cb){
   }, cb);
 });
 
-gulp.task('regenerate:expected:cs', function(cb){
+gulp.task('regenerate:expected:cs', ['regenerate:expected:cswithcreds'], function(cb){
   mappings = mergeOptions({
-    'PetstoreV2': 'Swagger/swagger.2.0.example.v2.json',
     'Mirror.RecursiveTypes': 'Swagger/swagger-mirror-recursive-type.json',
     'Mirror.Primitives': 'Swagger/swagger-mirror-primitives.json',
     'Mirror.Sequences': 'Swagger/swagger-mirror-sequences.json',
@@ -255,6 +254,24 @@ gulp.task('regenerate:expected:cs', function(cb){
     'codeGenerator': 'CSharp',
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1'
+  }, cb);
+});
+ 
+gulp.task('regenerate:expected:cswithcreds', function(cb){  
+  mappings = mergeOptions(
+  {
+    'PetstoreV2': 'Swagger/swagger.2.0.example.v2.json',
+  });
+
+  regenExpected({
+    'outputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
+    'mappings': mappings,
+    'outputDir': 'Expected',
+    'codeGenerator': 'CSharp',
+    'nsPrefix': 'Fixtures',
+    'flatteningThreshold': '1',
+    'addCredentials': true
   }, cb);
 });
 
@@ -358,10 +375,13 @@ gulp.task('test:clientruntime:ruby', ['syncDependencies:runtime:ruby'], shell.ta
 gulp.task('test:clientruntime:rubyazure', ['syncDependencies:runtime:rubyazure'], shell.task('bundle exec rspec', { cwd: './ClientRuntimes/Ruby/ms-rest-azure/', verbosity: 3 }));
 gulp.task('test:clientruntime:java', shell.task(basePathOrThrow() + '/gradlew :client-runtime:check', { cwd: './', verbosity: 3 }));
 gulp.task('test:clientruntime:javaazure', shell.task(basePathOrThrow() + '/gradlew :azure-client-runtime:check', { cwd: './', verbosity: 3 }));
+gulp.task('test:clientruntime:javaauthjdk', shell.task(basePathOrThrow() + '/gradlew :azure-client-authentication:check', { cwd: './', verbosity: 3 }));
+gulp.task('test:clientruntime:javaauthandroid', shell.task(basePathOrThrow() + '/gradlew :azure-android-client-authentication:check', { cwd: './', verbosity: 3 }));
 gulp.task('test:clientruntime', function (cb) {
   runSequence('test:clientruntime:node', 'test:clientruntime:nodeazure',
     'test:clientruntime:ruby', 'test:clientruntime:rubyazure',
-    'test:clientruntime:java', 'test:clientruntime:javaazure', cb);
+    'test:clientruntime:java', 'test:clientruntime:javaazure',
+    'test:clientruntime:javaauthjdk', 'test:clientruntime:javaauthandroid', cb);
 });
 
 gulp.task('test:node', shell.task('npm test', {cwd: './AutoRest/Generators/NodeJS/NodeJS.Tests/', verbosity: 3}));

@@ -59,7 +59,8 @@ function ComplexModelClient(subscriptionId, apiVersion, baseUri, options) {
   this.subscriptionId = subscriptionId;
   this.apiVersion = apiVersion;
 
-  this._models = models;
+  this.models = models;
+  msRest.addSerializationMixin(this);
 }
 
 util.inherits(ComplexModelClient, ServiceClient);
@@ -157,16 +158,22 @@ ComplexModelClient.prototype.list = function (resourceGroupName, options, callba
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
+                                                       parsedErrorResponse.error.code : 
+                                                              parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
+                                                          parsedErrorResponse.error.message : 
+                                                                 parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          error.body.deserialize(parsedErrorResponse);
+          var resultMapper = new client.models['ErrorModel']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+                         '- "%s" for the default response.', defaultError.message, responseBody);
         return callback(error);
       }
       return callback(error);
@@ -180,11 +187,9 @@ ComplexModelClient.prototype.list = function (resourceGroupName, options, callba
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse) {
-          result = new client._models['CatalogArray'](parsedResponse);
-        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          result.deserialize(parsedResponse);
+          var resultMapper = new client.models['CatalogArray']().mapper();
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -257,7 +262,7 @@ ComplexModelClient.prototype.create = function (subscriptionId, resourceGroupNam
   var bodyParameter;
   if ((productDictionaryOfArray !== null && productDictionaryOfArray !== undefined))
   {
-      bodyParameter = new client._models['CatalogDictionaryOfArray']();
+      bodyParameter = new client.models['CatalogDictionaryOfArray']();
       bodyParameter.productDictionaryOfArray = productDictionaryOfArray;
   }
 
@@ -289,20 +294,20 @@ ComplexModelClient.prototype.create = function (subscriptionId, resourceGroupNam
   var requestContent = null;
   var requestModel = null;
   try {
-    if (bodyParameter) {
-      requestModel = new client._models['CatalogDictionaryOfArray'](bodyParameter);
+    if (bodyParameter !== null && bodyParameter !== undefined) {
+      var requestModelMapper = new client.models['CatalogDictionaryOfArray']().mapper();
+      requestModel = client.serialize(requestModelMapper, bodyParameter, 'bodyParameter');
     }
-    if (requestModel !== null && requestModel !== undefined) {
-      requestContent = JSON.stringify(requestModel.serialize());
-    } else {
-      requestContent = JSON.stringify(requestModel);
-    }
+    requestContent = JSON.stringify(requestModel);
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
+        'payload - "%s"', error.message, util.inspect(bodyParameter, {depth: null})));
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
+                                                    requestContent.length : 
+                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -318,16 +323,22 @@ ComplexModelClient.prototype.create = function (subscriptionId, resourceGroupNam
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
+                                                       parsedErrorResponse.error.code : 
+                                                              parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
+                                                          parsedErrorResponse.error.message : 
+                                                                 parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          error.body.deserialize(parsedErrorResponse);
+          var resultMapper = new client.models['ErrorModel']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+                         '- "%s" for the default response.', defaultError.message, responseBody);
         return callback(error);
       }
       return callback(error);
@@ -341,11 +352,9 @@ ComplexModelClient.prototype.create = function (subscriptionId, resourceGroupNam
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse) {
-          result = new client._models['CatalogDictionary'](parsedResponse);
-        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          result.deserialize(parsedResponse);
+          var resultMapper = new client.models['CatalogDictionary']().mapper();
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -418,7 +427,7 @@ ComplexModelClient.prototype.update = function (subscriptionId, resourceGroupNam
   var bodyParameter;
   if ((productArrayOfDictionary !== null && productArrayOfDictionary !== undefined))
   {
-      bodyParameter = new client._models['CatalogArrayOfDictionary']();
+      bodyParameter = new client.models['CatalogArrayOfDictionary']();
       bodyParameter.productArrayOfDictionary = productArrayOfDictionary;
   }
 
@@ -450,20 +459,20 @@ ComplexModelClient.prototype.update = function (subscriptionId, resourceGroupNam
   var requestContent = null;
   var requestModel = null;
   try {
-    if (bodyParameter) {
-      requestModel = new client._models['CatalogArrayOfDictionary'](bodyParameter);
+    if (bodyParameter !== null && bodyParameter !== undefined) {
+      var requestModelMapper = new client.models['CatalogArrayOfDictionary']().mapper();
+      requestModel = client.serialize(requestModelMapper, bodyParameter, 'bodyParameter');
     }
-    if (requestModel !== null && requestModel !== undefined) {
-      requestContent = JSON.stringify(requestModel.serialize());
-    } else {
-      requestContent = JSON.stringify(requestModel);
-    }
+    requestContent = JSON.stringify(requestModel);
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
+        'payload - "%s"', error.message, util.inspect(bodyParameter, {depth: null})));
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
+                                                    requestContent.length : 
+                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -479,16 +488,22 @@ ComplexModelClient.prototype.update = function (subscriptionId, resourceGroupNam
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
+                                                       parsedErrorResponse.error.code : 
+                                                              parsedErrorResponse.code;
+        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
+                                                          parsedErrorResponse.error.message : 
+                                                                 parsedErrorResponse.message;
         if (errorCode) error.code = errorCode;
         if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          error.body.deserialize(parsedErrorResponse);
+          var resultMapper = new client.models['ErrorModel']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+                         '- "%s" for the default response.', defaultError.message, responseBody);
         return callback(error);
       }
       return callback(error);
@@ -502,11 +517,9 @@ ComplexModelClient.prototype.update = function (subscriptionId, resourceGroupNam
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse) {
-          result = new client._models['CatalogArray'](parsedResponse);
-        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          result.deserialize(parsedResponse);
+          var resultMapper = new client.models['CatalogArray']().mapper();
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));

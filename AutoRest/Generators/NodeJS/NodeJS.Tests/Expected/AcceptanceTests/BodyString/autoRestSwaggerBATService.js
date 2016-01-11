@@ -17,7 +17,6 @@
 var util = require('util');
 var msRest = require('ms-rest');
 var ServiceClient = msRest.ServiceClient;
-var WebResource = msRest.WebResource;
 
 var models = require('./models');
 var operations = require('./operations');
@@ -50,7 +49,8 @@ function AutoRestSwaggerBATService(baseUri, options) {
 
   this.string = new operations.String(this);
   this.enumModel = new operations.EnumModel(this);
-  this._models = models;
+  this.models = models;
+  msRest.addSerializationMixin(this);
 }
 
 util.inherits(AutoRestSwaggerBATService, ServiceClient);

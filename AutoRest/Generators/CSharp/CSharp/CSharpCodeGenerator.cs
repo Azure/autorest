@@ -13,7 +13,7 @@ namespace Microsoft.Rest.Generator.CSharp
     public class CSharpCodeGenerator : CodeGenerator
     {
         private readonly CSharpCodeNamer _namer;
-        private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.1.9.0";
+        private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.1.8.2";
 
         public CSharpCodeGenerator(Settings settings) : base(settings)
         {
@@ -67,6 +67,7 @@ namespace Microsoft.Rest.Generator.CSharp
                     Name = "Credentials",
                     Type = PrimaryType.Credentials,
                     IsRequired = true,
+                    IsReadOnly = true,
                     Documentation = "Subscription credentials which uniquely identify client subscription."
                 });
             }

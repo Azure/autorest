@@ -52,7 +52,7 @@ public interface AutoRestReportService {
      * used by Retrofit to perform actually REST calls.
      */
     interface AutoRestReportServiceService {
-        @GET("/report")
+        @GET("report")
         Call<ResponseBody> getReport();
 
     }

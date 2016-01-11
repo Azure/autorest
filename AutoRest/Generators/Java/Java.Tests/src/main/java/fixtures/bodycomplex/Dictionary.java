@@ -31,22 +31,22 @@ public interface Dictionary {
      * used by Retrofit to perform actually REST calls.
      */
     interface DictionaryService {
-        @GET("/complex/dictionary/typed/valid")
+        @GET("complex/dictionary/typed/valid")
         Call<ResponseBody> getValid();
 
-        @PUT("/complex/dictionary/typed/valid")
+        @PUT("complex/dictionary/typed/valid")
         Call<ResponseBody> putValid(@Body DictionaryWrapper complexBody);
 
-        @GET("/complex/dictionary/typed/empty")
+        @GET("complex/dictionary/typed/empty")
         Call<ResponseBody> getEmpty();
 
-        @PUT("/complex/dictionary/typed/empty")
+        @PUT("complex/dictionary/typed/empty")
         Call<ResponseBody> putEmpty(@Body DictionaryWrapper complexBody);
 
-        @GET("/complex/dictionary/typed/null")
+        @GET("complex/dictionary/typed/null")
         Call<ResponseBody> getNull();
 
-        @GET("/complex/dictionary/typed/notprovided")
+        @GET("complex/dictionary/typed/notprovided")
         Call<ResponseBody> getNotProvided();
 
     }

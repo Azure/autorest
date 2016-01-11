@@ -21,23 +21,38 @@
  * .
  * 
  */
-function FirstParameterGroup(parameters) {
-  if (parameters === null || parameters === undefined) {
-    parameters = {};
-  }
-  if (parameters.queryOne === undefined) {
-    parameters.queryOne = 30;
-  }
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.headerOne !== undefined) {
-      this.headerOne = parameters.headerOne;
-    }
-    if (parameters.queryOne !== undefined) {
-      this.queryOne = parameters.queryOne;
-    }
-  }    
+function FirstParameterGroup() {
 }
 
-
+/**
+ * Defines the metadata of FirstParameterGroup
+ *
+ * @returns {object} metadata of FirstParameterGroup
+ *
+ */
+FirstParameterGroup.prototype.mapper = function () {
+  return {
+    required: false,
+    type: {
+      name: 'Composite',
+      className: 'FirstParameterGroup',
+      modelProperties: {
+        headerOne: {
+          required: false,
+          type: {
+            name: 'String'
+          }
+        },
+        queryOne: {
+          required: false,
+          defaultValue: '30',
+          type: {
+            name: 'Number'
+          }
+        }
+      }
+    }
+  };
+};
 
 module.exports = FirstParameterGroup;

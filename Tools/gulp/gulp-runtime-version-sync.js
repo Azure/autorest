@@ -8,37 +8,38 @@ var shell = require('gulp-shell')
 
 gulp.task('syncDependencies:runtime:cs', function () {
   gutil.log('Syncing C# client runtime version');
-  var runtimePkgPath = './ClientRuntimes/CSharp/ClientRuntime/Microsoft.Rest.ClientRuntime.nuget.proj';
-  var runtimePkgString = fs.readFileSync(runtimePkgPath).toString();
-  xml2js.parseString(runtimePkgString, function (err, pkgConfigXml) {
-    var name = pkgConfigXml['Project']['ItemGroup'][0]['SdkNuGetPackage'][0]['Name'];
-    var version = pkgConfigXml['Project']['ItemGroup'][0]['SdkNuGetPackage'][0]['PackageVersion'];
+  var runtimePkgPath = './ClientRuntimes/CSharp/Microsoft.Rest.ClientRuntime/project.json';
+  pkgJsonConfig = JSON.parse(fs.readFileSync(runtimePkgPath, 'utf8'));
+  var name = 'Microsoft.Rest.ClientRuntime';
+  var version = pkgJsonConfig.version;
 
-    var codeGeneratorPath = './AutoRest/Generators/CSharp/CSharp/CSharpCodeGenerator.cs';
-    gulp.src(codeGeneratorPath, { base: './' })
-      .pipe(replace(/string ClientRuntimePackage = "(.+)"/, 'string ClientRuntimePackage = "' + name + '.' + version + '"'))
-      .pipe(gulp.dest('.'));
+  var codeGeneratorPath = './AutoRest/Generators/CSharp/CSharp/CSharpCodeGenerator.cs';
+  gulp.src(codeGeneratorPath, { base: './' })
+    .pipe(replace(/string ClientRuntimePackage = "(.+)"/, 'string ClientRuntimePackage = "' + name + '.' + version + '"'))
+    .pipe(gulp.dest('.'));
 
-    var pkgTestConfig = './AutoRest/Generators/AcceptanceTests/NugetPackageTest/packages.config';
-    gulp.src(pkgTestConfig, { base: './' })
-      .pipe(replace(/<package id="Microsoft.Rest.ClientRuntime" version="([\.\d]+)"/, '<package id="Microsoft.Rest.ClientRuntime" version="' + version + '"'))
-      .pipe(gulp.dest('.'));
-  });
+  var pkgTestConfig = './AutoRest/NugetPackageTest/packages.config';
+  gulp.src(pkgTestConfig, { base: './' })
+    .pipe(replace(/<package id="Microsoft.Rest.ClientRuntime" version="([\.\d]+)"/, '<package id="Microsoft.Rest.ClientRuntime" version="' + version + '"'))
+    .pipe(gulp.dest('.'));
+
+  var pkgTestCsproj = './AutoRest/NugetPackageTest/NugetPackageCSharpTest.csproj';
+  gulp.src(pkgTestCsproj, { base: './' })
+    .pipe(replace(/Microsoft.Rest.ClientRuntime.([\.\d]+)/, 'Microsoft.Rest.ClientRuntime.' + version + ''))
+    .pipe(gulp.dest('.'));
 });
 
 gulp.task('syncDependencies:runtime:csazure', function () {
   gutil.log('Syncing Azure C# client runtime version');
-  var runtimePkgPath = './ClientRuntimes/CSharp/ClientRuntime.Azure/Microsoft.Rest.ClientRuntime.Azure.nuget.proj';
-  var runtimePkgString = fs.readFileSync(runtimePkgPath).toString();
-  xml2js.parseString(runtimePkgString, function (err, pkgConfigXml) {
-    var name = pkgConfigXml['Project']['ItemGroup'][0]['SdkNuGetPackage'][0]['Name'];
-    var version = pkgConfigXml['Project']['ItemGroup'][0]['SdkNuGetPackage'][0]['PackageVersion'];
+  var runtimePkgPath = './ClientRuntimes/CSharp/Microsoft.Rest.ClientRuntime.Azure/project.json';
+  pkgJsonConfig = JSON.parse(fs.readFileSync(runtimePkgPath, 'utf8'));
+  var name = 'Microsoft.Rest.ClientRuntime.Azure';
+  var version = pkgJsonConfig.version;
 
-    var codeGeneratorPath = './AutoRest/Generators/CSharp/Azure.CSharp/AzureCSharpCodeGenerator.cs';
-    gulp.src(codeGeneratorPath, { base: './' })
-      .pipe(replace(/string ClientRuntimePackage = "(.+)"/, 'string ClientRuntimePackage = "' + name + '.' + version + '"'))
-      .pipe(gulp.dest('.'));
-  });
+  var codeGeneratorPath = './AutoRest/Generators/CSharp/Azure.CSharp/AzureCSharpCodeGenerator.cs';
+  gulp.src(codeGeneratorPath, { base: './' })
+    .pipe(replace(/string ClientRuntimePackage = "(.+)"/, 'string ClientRuntimePackage = "' + name + '.' + version + '"'))
+    .pipe(gulp.dest('.'));
 });
 
 gulp.task('syncDependencies:runtime:node', function () {

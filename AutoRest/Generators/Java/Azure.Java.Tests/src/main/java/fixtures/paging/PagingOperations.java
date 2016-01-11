@@ -34,25 +34,25 @@ public interface PagingOperations {
      * used by Retrofit to perform actually REST calls.
      */
     interface PagingService {
-        @GET("/paging/single")
+        @GET("paging/single")
         Call<ResponseBody> getSinglePages(@Header("accept-language") String acceptLanguage);
 
-        @GET("/paging/multiple")
+        @GET("paging/multiple")
         Call<ResponseBody> getMultiplePages(@Header("client-request-id") String clientRequestId, @Header("accept-language") String acceptLanguage, @Header("maxresults") Integer maxresults, @Header("timeout") Integer timeout);
 
-        @GET("/paging/multiple/retryfirst")
+        @GET("paging/multiple/retryfirst")
         Call<ResponseBody> getMultiplePagesRetryFirst(@Header("accept-language") String acceptLanguage);
 
-        @GET("/paging/multiple/retrysecond")
+        @GET("paging/multiple/retrysecond")
         Call<ResponseBody> getMultiplePagesRetrySecond(@Header("accept-language") String acceptLanguage);
 
-        @GET("/paging/single/failure")
+        @GET("paging/single/failure")
         Call<ResponseBody> getSinglePagesFailure(@Header("accept-language") String acceptLanguage);
 
-        @GET("/paging/multiple/failure")
+        @GET("paging/multiple/failure")
         Call<ResponseBody> getMultiplePagesFailure(@Header("accept-language") String acceptLanguage);
 
-        @GET("/paging/multiple/failureuri")
+        @GET("paging/multiple/failureuri")
         Call<ResponseBody> getMultiplePagesFailureUri(@Header("accept-language") String acceptLanguage);
 
         @GET

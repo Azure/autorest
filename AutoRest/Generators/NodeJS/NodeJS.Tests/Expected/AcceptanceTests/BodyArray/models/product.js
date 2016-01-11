@@ -19,61 +19,40 @@
  * @member {string} [string]
  * 
  */
-function Product(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.integer !== undefined) {
-      this.integer = parameters.integer;
-    }
-    if (parameters.string !== undefined) {
-      this.string = parameters.string;
-    }
-  }    
+function Product() {
 }
 
-
 /**
- * Validate the payload against the Product schema
+ * Defines the metadata of Product
  *
- * @param {JSON} payload
+ * @returns {object} metadata of Product
  *
  */
-Product.prototype.serialize = function () {
-  var payload = {};
-  if (this['integer'] !== null && this['integer'] !== undefined) {
-    if (typeof this['integer'] !== 'number') {
-      throw new Error('this[\'integer\'] must be of type number.');
+Product.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'Product',
+    type: {
+      name: 'Composite',
+      className: 'Product',
+      modelProperties: {
+        integer: {
+          required: false,
+          serializedName: 'integer',
+          type: {
+            name: 'Number'
+          }
+        },
+        string: {
+          required: false,
+          serializedName: 'string',
+          type: {
+            name: 'String'
+          }
+        }
+      }
     }
-    payload['integer'] = this['integer'];
-  }
-
-  if (this['string'] !== null && this['string'] !== undefined) {
-    if (typeof this['string'].valueOf() !== 'string') {
-      throw new Error('this[\'string\'] must be of type string.');
-    }
-    payload['string'] = this['string'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to Product schema
- *
- * @param {JSON} instance
- *
- */
-Product.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['integer'] !== undefined) {
-      this['integer'] = instance['integer'];
-    }
-
-    if (instance['string'] !== undefined) {
-      this['string'] = instance['string'];
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = Product;

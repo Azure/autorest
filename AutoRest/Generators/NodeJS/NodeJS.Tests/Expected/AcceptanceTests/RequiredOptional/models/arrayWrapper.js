@@ -19,67 +19,40 @@ var util = require('util');
  * @member {array} value
  * 
  */
-function ArrayWrapper(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.value) {
-      var tempParametersvalue = [];
-      parameters.value.forEach(function(element) {
-        if (element !== undefined) {
-          element = element;
-        }
-        tempParametersvalue.push(element);
-      });
-      this.value = tempParametersvalue;
-    }
-  }    
+function ArrayWrapper() {
 }
 
-
 /**
- * Validate the payload against the ArrayWrapper schema
+ * Defines the metadata of ArrayWrapper
  *
- * @param {JSON} payload
+ * @returns {object} metadata of ArrayWrapper
  *
  */
-ArrayWrapper.prototype.serialize = function () {
-  var payload = {};
-  if (!util.isArray(this['value'])) {
-    throw new Error('this[\'value\'] cannot be null or undefined and it must be of type array.');
-  }
-  payload['value'] = [];
-  for (var i = 0; i < this['value'].length; i++) {
-    if (this['value'][i] !== null && this['value'][i] !== undefined) {
-      if (typeof this['value'][i].valueOf() !== 'string') {
-        throw new Error('this[\'value\'][i] must be of type string.');
-      }
-      payload['value'][i] = this['value'][i];
-    }
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to ArrayWrapper schema
- *
- * @param {JSON} instance
- *
- */
-ArrayWrapper.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['value']) {
-      var tempInstancevalue = [];
-      instance['value'].forEach(function(element1) {
-        if (element1 !== undefined) {
-          element1 = element1;
+ArrayWrapper.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'array-wrapper',
+    type: {
+      name: 'Composite',
+      className: 'ArrayWrapper',
+      modelProperties: {
+        value: {
+          required: true,
+          serializedName: 'value',
+          type: {
+            name: 'Sequence',
+            element: {
+                required: false,
+                serializedName: 'StringElementType',
+                type: {
+                  name: 'String'
+                }
+            }
+          }
         }
-        tempInstancevalue.push(element1);
-      });
-      this['value'] = tempInstancevalue;
+      }
     }
-  }
-
-  return this;
+  };
 };
 
 module.exports = ArrayWrapper;

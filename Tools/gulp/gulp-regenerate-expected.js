@@ -47,6 +47,11 @@ function gulpRegenerateExpected(options, done) {
     gutil.log('opts.flatteningThreshold not set, so setting it to "0"');
   }
 
+  if(!opts.addCredentials){
+    opts.addCredentials = false;
+    gutil.log('opts.addCredentials not set, so setting it to "false"');
+  }
+
   var promises = Object.keys(opts.mappings).map(function(key) {
     var cmd = 'mono';
     var optsMappingsValue = opts.mappings[key];
@@ -60,6 +65,10 @@ function gulpRegenerateExpected(options, done) {
       '-Input', (!!opts.inputBaseDir ? path.join(opts.inputBaseDir, mappingBaseDir) : mappingBaseDir),
       '-Header', (!!opts.header ? opts.header : 'MICROSOFT_MIT')
     ];
+
+    if (opts.addCredentials) {
+      args.push('-AddCredentials');
+    }
 
     if (!!opts.nsPrefix) {
       args.push('-Namespace');

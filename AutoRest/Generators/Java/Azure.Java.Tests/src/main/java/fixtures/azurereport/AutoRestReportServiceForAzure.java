@@ -94,7 +94,7 @@ public interface AutoRestReportServiceForAzure {
      * used by Retrofit to perform actually REST calls.
      */
     interface AutoRestReportServiceForAzureService {
-        @GET("/report/azure")
+        @GET("report/azure")
         Call<ResponseBody> getReport(@Header("accept-language") String acceptLanguage);
 
     }

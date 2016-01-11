@@ -9,15 +9,17 @@ package com.microsoft.rest.credentials;
 
 import com.squareup.okhttp.OkHttpClient;
 
+import java.io.IOException;
+
 /**
  * Token based credentials for use with a REST Service Client.
  */
 public class TokenCredentials implements ServiceClientCredentials {
     /** The authentication scheme. */
-    private String scheme;
+    protected String scheme;
 
     /** The secure token. */
-    private String token;
+    protected String token;
 
     /**
      * Initializes a new instance of the TokenCredentials.
@@ -36,10 +38,19 @@ public class TokenCredentials implements ServiceClientCredentials {
     /**
      * Get the secure token.
      *
-     * @return the secure token
+     * @return the secure token.
+     * @throws IOException exception thrown from token acquisition operations.
      */
-    public String getToken() {
+    public String getToken() throws IOException {
         return token;
+    }
+
+    /**
+     * Refresh the secure token.
+     * @throws IOException exception thrown from token acquisition operations.
+     */
+    public void refreshToken() throws IOException {
+        // do nothing
     }
 
     /**

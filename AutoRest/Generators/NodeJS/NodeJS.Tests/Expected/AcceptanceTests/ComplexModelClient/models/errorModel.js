@@ -21,75 +21,47 @@
  * @member {string} [fields]
  * 
  */
-function ErrorModel(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.code !== undefined) {
-      this.code = parameters.code;
-    }
-    if (parameters.message !== undefined) {
-      this.message = parameters.message;
-    }
-    if (parameters.fields !== undefined) {
-      this.fields = parameters.fields;
-    }
-  }    
+function ErrorModel() {
 }
 
-
 /**
- * Validate the payload against the ErrorModel schema
+ * Defines the metadata of ErrorModel
  *
- * @param {JSON} payload
+ * @returns {object} metadata of ErrorModel
  *
  */
-ErrorModel.prototype.serialize = function () {
-  var payload = {};
-  if (this['code'] !== null && this['code'] !== undefined) {
-    if (typeof this['code'] !== 'number') {
-      throw new Error('this[\'code\'] must be of type number.');
+ErrorModel.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'Error',
+    type: {
+      name: 'Composite',
+      className: 'ErrorModel',
+      modelProperties: {
+        code: {
+          required: false,
+          serializedName: 'code',
+          type: {
+            name: 'Number'
+          }
+        },
+        message: {
+          required: false,
+          serializedName: 'message',
+          type: {
+            name: 'String'
+          }
+        },
+        fields: {
+          required: false,
+          serializedName: 'fields',
+          type: {
+            name: 'String'
+          }
+        }
+      }
     }
-    payload['code'] = this['code'];
-  }
-
-  if (this['message'] !== null && this['message'] !== undefined) {
-    if (typeof this['message'].valueOf() !== 'string') {
-      throw new Error('this[\'message\'] must be of type string.');
-    }
-    payload['message'] = this['message'];
-  }
-
-  if (this['fields'] !== null && this['fields'] !== undefined) {
-    if (typeof this['fields'].valueOf() !== 'string') {
-      throw new Error('this[\'fields\'] must be of type string.');
-    }
-    payload['fields'] = this['fields'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to ErrorModel schema
- *
- * @param {JSON} instance
- *
- */
-ErrorModel.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['code'] !== undefined) {
-      this['code'] = instance['code'];
-    }
-
-    if (instance['message'] !== undefined) {
-      this['message'] = instance['message'];
-    }
-
-    if (instance['fields'] !== undefined) {
-      this['fields'] = instance['fields'];
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = ErrorModel;

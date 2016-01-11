@@ -85,9 +85,20 @@ if(!property.IsReadOnly)
      * used by Retrofit to perform actually REST calls.
      */
     interface @Model.ServiceClientServiceType {
-    @foreach (var method in Model.MethodTemplateModels)
+    @foreach (AzureMethodTemplateModel method in Model.MethodTemplateModels)
     {
-    @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url)")
+        if (method.HttpMethod == Microsoft.Rest.Generator.ClientModel.HttpMethod.Delete)
+        {
+    @:    @@HTTP(path = "@(method.Url.TrimStart('/'))", method = "DELETE", hasBody = true)
+    }
+        else if (method.IsPagingNextOperation)
+        {
+    @:    @@GET
+    }
+        else
+        {
+    @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url.TrimStart('/'))")
+    }
     @:    Call<@method.CallType> @(method.Name)(@method.MethodParameterApiDeclaration);
     @EmptyLine
     }

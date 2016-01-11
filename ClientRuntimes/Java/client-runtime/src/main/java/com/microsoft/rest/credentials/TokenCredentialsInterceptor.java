@@ -34,6 +34,15 @@ public class TokenCredentialsInterceptor implements Interceptor {
 
     @Override
     public Response intercept(Chain chain) throws IOException {
+        Response response = sendRequestWithAuthorization(chain);
+        if (response == null || response.code() == 401) {
+            credentials.refreshToken();
+            response = sendRequestWithAuthorization(chain);
+        }
+        return response;
+    }
+
+    private Response sendRequestWithAuthorization(Chain chain) throws IOException {
         Request newRequest = chain.request().newBuilder()
                 .header("Authorization", credentials.getScheme() + " " + credentials.getToken())
                 .build();

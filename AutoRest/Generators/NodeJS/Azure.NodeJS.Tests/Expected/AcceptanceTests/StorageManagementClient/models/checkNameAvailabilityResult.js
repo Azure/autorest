@@ -29,77 +29,48 @@
  * value in more detail.
  * 
  */
-function CheckNameAvailabilityResult(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.nameAvailable !== undefined) {
-      this.nameAvailable = parameters.nameAvailable;
-    }
-    if (parameters.reason !== undefined) {
-      this.reason = parameters.reason;
-    }
-    if (parameters.message !== undefined) {
-      this.message = parameters.message;
-    }
-  }    
+function CheckNameAvailabilityResult() {
 }
 
-
 /**
- * Validate the payload against the CheckNameAvailabilityResult schema
+ * Defines the metadata of CheckNameAvailabilityResult
  *
- * @param {JSON} payload
+ * @returns {object} metadata of CheckNameAvailabilityResult
  *
  */
-CheckNameAvailabilityResult.prototype.serialize = function () {
-  var payload = {};
-  if (this['nameAvailable'] !== null && this['nameAvailable'] !== undefined) {
-    if (typeof this['nameAvailable'] !== 'boolean') {
-      throw new Error('this[\'nameAvailable\'] must be of type boolean.');
+CheckNameAvailabilityResult.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'CheckNameAvailabilityResult',
+    type: {
+      name: 'Composite',
+      className: 'CheckNameAvailabilityResult',
+      modelProperties: {
+        nameAvailable: {
+          required: false,
+          serializedName: 'nameAvailable',
+          type: {
+            name: 'Boolean'
+          }
+        },
+        reason: {
+          required: false,
+          serializedName: 'reason',
+          type: {
+            name: 'Enum',
+            allowedValues: [ 'AccountNameInvalid', 'AlreadyExists' ]
+          }
+        },
+        message: {
+          required: false,
+          serializedName: 'message',
+          type: {
+            name: 'String'
+          }
+        }
+      }
     }
-    payload['nameAvailable'] = this['nameAvailable'];
-  }
-
-  if (this['reason'] !== null && this['reason'] !== undefined) {
-    var allowedValues = [ 'AccountNameInvalid', 'AlreadyExists' ];
-    var thisreason = this['reason'];
-    if (!allowedValues.some( function(item) { return item === thisreason; })) {
-      throw new Error(this['reason'] + ' is not a valid value. The valid values are: ' + allowedValues);
-    }
-    payload['reason'] = this['reason'];
-  }
-
-  if (this['message'] !== null && this['message'] !== undefined) {
-    if (typeof this['message'].valueOf() !== 'string') {
-      throw new Error('this[\'message\'] must be of type string.');
-    }
-    payload['message'] = this['message'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to CheckNameAvailabilityResult schema
- *
- * @param {JSON} instance
- *
- */
-CheckNameAvailabilityResult.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['nameAvailable'] !== undefined) {
-      this['nameAvailable'] = instance['nameAvailable'];
-    }
-
-    if (instance['reason'] !== undefined) {
-      this['reason'] = instance['reason'];
-    }
-
-    if (instance['message'] !== undefined) {
-      this['message'] = instance['message'];
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = CheckNameAvailabilityResult;

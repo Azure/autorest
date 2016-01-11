@@ -484,19 +484,23 @@ namespace Microsoft.Rest.Generator.Azure
                         }
 
                         // Copy all grouped parameters that only contain header parameters
+                        nextLinkMethod.InputParameterTransformation.Clear();
                         method.InputParameterTransformation.GroupBy(t => t.ParameterMappings[0].InputParameter)
                             .ForEach(grouping => {
                                 if (grouping.All(t => t.OutputParameter.Location == ParameterLocation.Header))
                                 {
                                     // All grouped properties were header parameters, reuse data type
                                     nextLinkMethod.Parameters.Add(grouping.Key);
+                                    grouping.ForEach(t => nextLinkMethod.InputParameterTransformation.Add(t));
                                 }
                                 else if (grouping.Any(t => t.OutputParameter.Location == ParameterLocation.Header))
                                 {
                                     // Some grouped properties were header parameters, creating new data types
-                                    grouping.Where(t => t.OutputParameter.Location != ParameterLocation.Header)
-                                        .ForEach(t => method.InputParameterTransformation.Remove(t));
-                                    nextLinkMethod.Parameters.Add(CreateParameterFromGrouping(grouping, nextLinkMethod, serviceClient));
+                                    var headerGrouping = grouping.Where(t => t.OutputParameter.Location == ParameterLocation.Header);
+                                    headerGrouping.ForEach(t => nextLinkMethod.InputParameterTransformation.Add(t));
+                                    var newGroupingParam = CreateParameterFromGrouping(headerGrouping, nextLinkMethod, serviceClient);
+                                    nextLinkMethod.Parameters.Add(newGroupingParam);
+                                    grouping.Key.Name = newGroupingParam.Name;
                                 }
                             });
 
@@ -506,7 +510,7 @@ namespace Microsoft.Rest.Generator.Azure
             }
         }
 
-        private static Parameter CreateParameterFromGrouping(IGrouping<Parameter, ParameterTransformation> grouping, Method method, ServiceClient serviceClient)
+        private static Parameter CreateParameterFromGrouping(IEnumerable<ParameterTransformation> grouping, Method method, ServiceClient serviceClient)
         {
             var properties = new List<Property>();
             string parameterGroupName = null;

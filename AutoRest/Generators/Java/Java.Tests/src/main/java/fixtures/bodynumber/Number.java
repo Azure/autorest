@@ -31,76 +31,76 @@ public interface Number {
      * used by Retrofit to perform actually REST calls.
      */
     interface NumberService {
-        @GET("/number/null")
+        @GET("number/null")
         Call<ResponseBody> getNull();
 
-        @GET("/number/invalidfloat")
+        @GET("number/invalidfloat")
         Call<ResponseBody> getInvalidFloat();
 
-        @GET("/number/invaliddouble")
+        @GET("number/invaliddouble")
         Call<ResponseBody> getInvalidDouble();
 
-        @GET("/number/invaliddecimal")
+        @GET("number/invaliddecimal")
         Call<ResponseBody> getInvalidDecimal();
 
-        @PUT("/number/big/float/3.402823e+20")
+        @PUT("number/big/float/3.402823e+20")
         Call<ResponseBody> putBigFloat(@Body double numberBody);
 
-        @GET("/number/big/float/3.402823e+20")
+        @GET("number/big/float/3.402823e+20")
         Call<ResponseBody> getBigFloat();
 
-        @PUT("/number/big/double/2.5976931e+101")
+        @PUT("number/big/double/2.5976931e+101")
         Call<ResponseBody> putBigDouble(@Body double numberBody);
 
-        @GET("/number/big/double/2.5976931e+101")
+        @GET("number/big/double/2.5976931e+101")
         Call<ResponseBody> getBigDouble();
 
-        @PUT("/number/big/double/99999999.99")
+        @PUT("number/big/double/99999999.99")
         Call<ResponseBody> putBigDoublePositiveDecimal(@Body double numberBody);
 
-        @GET("/number/big/double/99999999.99")
+        @GET("number/big/double/99999999.99")
         Call<ResponseBody> getBigDoublePositiveDecimal();
 
-        @PUT("/number/big/double/-99999999.99")
+        @PUT("number/big/double/-99999999.99")
         Call<ResponseBody> putBigDoubleNegativeDecimal(@Body double numberBody);
 
-        @GET("/number/big/double/-99999999.99")
+        @GET("number/big/double/-99999999.99")
         Call<ResponseBody> getBigDoubleNegativeDecimal();
 
-        @PUT("/number/big/decimal/2.5976931e+101")
+        @PUT("number/big/decimal/2.5976931e+101")
         Call<ResponseBody> putBigDecimal(@Body BigDecimal numberBody);
 
-        @GET("/number/big/decimal/2.5976931e+101")
+        @GET("number/big/decimal/2.5976931e+101")
         Call<ResponseBody> getBigDecimal();
 
-        @PUT("/number/big/decimal/99999999.99")
+        @PUT("number/big/decimal/99999999.99")
         Call<ResponseBody> putBigDecimalPositiveDecimal(@Body BigDecimal numberBody);
 
-        @GET("/number/big/decimal/99999999.99")
+        @GET("number/big/decimal/99999999.99")
         Call<ResponseBody> getBigDecimalPositiveDecimal();
 
-        @PUT("/number/big/decimal/-99999999.99")
+        @PUT("number/big/decimal/-99999999.99")
         Call<ResponseBody> putBigDecimalNegativeDecimal(@Body BigDecimal numberBody);
 
-        @GET("/number/big/decimal/-99999999.99")
+        @GET("number/big/decimal/-99999999.99")
         Call<ResponseBody> getBigDecimalNegativeDecimal();
 
-        @PUT("/number/small/float/3.402823e-20")
+        @PUT("number/small/float/3.402823e-20")
         Call<ResponseBody> putSmallFloat(@Body double numberBody);
 
-        @GET("/number/small/float/3.402823e-20")
+        @GET("number/small/float/3.402823e-20")
         Call<ResponseBody> getSmallFloat();
 
-        @PUT("/number/small/double/2.5976931e-101")
+        @PUT("number/small/double/2.5976931e-101")
         Call<ResponseBody> putSmallDouble(@Body double numberBody);
 
-        @GET("/number/small/double/2.5976931e-101")
+        @GET("number/small/double/2.5976931e-101")
         Call<ResponseBody> getSmallDouble();
 
-        @PUT("/number/small/decimal/2.5976931e-101")
+        @PUT("number/small/decimal/2.5976931e-101")
         Call<ResponseBody> putSmallDecimal(@Body BigDecimal numberBody);
 
-        @GET("/number/small/decimal/2.5976931e-101")
+        @GET("number/small/decimal/2.5976931e-101")
         Call<ResponseBody> getSmallDecimal();
 
     }

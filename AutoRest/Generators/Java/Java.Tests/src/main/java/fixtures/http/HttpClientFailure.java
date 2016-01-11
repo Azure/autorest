@@ -35,73 +35,73 @@ public interface HttpClientFailure {
      * used by Retrofit to perform actually REST calls.
      */
     interface HttpClientFailureService {
-        @HEAD("/http/failure/client/400")
+        @HEAD("http/failure/client/400")
         Call<Void> head400();
 
-        @GET("/http/failure/client/400")
+        @GET("http/failure/client/400")
         Call<ResponseBody> get400();
 
-        @PUT("/http/failure/client/400")
+        @PUT("http/failure/client/400")
         Call<ResponseBody> put400(@Body Boolean booleanValue);
 
-        @PATCH("/http/failure/client/400")
+        @PATCH("http/failure/client/400")
         Call<ResponseBody> patch400(@Body Boolean booleanValue);
 
-        @POST("/http/failure/client/400")
+        @POST("http/failure/client/400")
         Call<ResponseBody> post400(@Body Boolean booleanValue);
 
-        @HTTP(path = "/http/failure/client/400", method = "DELETE", hasBody = true)
+        @HTTP(path = "http/failure/client/400", method = "DELETE", hasBody = true)
         Call<ResponseBody> delete400(@Body Boolean booleanValue);
 
-        @HEAD("/http/failure/client/401")
+        @HEAD("http/failure/client/401")
         Call<Void> head401();
 
-        @GET("/http/failure/client/402")
+        @GET("http/failure/client/402")
         Call<ResponseBody> get402();
 
-        @GET("/http/failure/client/403")
+        @GET("http/failure/client/403")
         Call<ResponseBody> get403();
 
-        @PUT("/http/failure/client/404")
+        @PUT("http/failure/client/404")
         Call<ResponseBody> put404(@Body Boolean booleanValue);
 
-        @PATCH("/http/failure/client/405")
+        @PATCH("http/failure/client/405")
         Call<ResponseBody> patch405(@Body Boolean booleanValue);
 
-        @POST("/http/failure/client/406")
+        @POST("http/failure/client/406")
         Call<ResponseBody> post406(@Body Boolean booleanValue);
 
-        @HTTP(path = "/http/failure/client/407", method = "DELETE", hasBody = true)
+        @HTTP(path = "http/failure/client/407", method = "DELETE", hasBody = true)
         Call<ResponseBody> delete407(@Body Boolean booleanValue);
 
-        @PUT("/http/failure/client/409")
+        @PUT("http/failure/client/409")
         Call<ResponseBody> put409(@Body Boolean booleanValue);
 
-        @HEAD("/http/failure/client/410")
+        @HEAD("http/failure/client/410")
         Call<Void> head410();
 
-        @GET("/http/failure/client/411")
+        @GET("http/failure/client/411")
         Call<ResponseBody> get411();
 
-        @GET("/http/failure/client/412")
+        @GET("http/failure/client/412")
         Call<ResponseBody> get412();
 
-        @PUT("/http/failure/client/413")
+        @PUT("http/failure/client/413")
         Call<ResponseBody> put413(@Body Boolean booleanValue);
 
-        @PATCH("/http/failure/client/414")
+        @PATCH("http/failure/client/414")
         Call<ResponseBody> patch414(@Body Boolean booleanValue);
 
-        @POST("/http/failure/client/415")
+        @POST("http/failure/client/415")
         Call<ResponseBody> post415(@Body Boolean booleanValue);
 
-        @GET("/http/failure/client/416")
+        @GET("http/failure/client/416")
         Call<ResponseBody> get416();
 
-        @HTTP(path = "/http/failure/client/417", method = "DELETE", hasBody = true)
+        @HTTP(path = "http/failure/client/417", method = "DELETE", hasBody = true)
         Call<ResponseBody> delete417(@Body Boolean booleanValue);
 
-        @HEAD("/http/failure/client/429")
+        @HEAD("http/failure/client/429")
         Call<Void> head429();
 
     }

@@ -34,25 +34,25 @@ public interface Implicit {
      * used by Retrofit to perform actually REST calls.
      */
     interface ImplicitService {
-        @GET("/reqopt/implicit/required/path/{pathParameter}")
+        @GET("reqopt/implicit/required/path/{pathParameter}")
         Call<ResponseBody> getRequiredPath(@Path("pathParameter") String pathParameter);
 
-        @PUT("/reqopt/implicit/optional/query")
+        @PUT("reqopt/implicit/optional/query")
         Call<ResponseBody> putOptionalQuery(@Query("queryParameter") String queryParameter);
 
-        @PUT("/reqopt/implicit/optional/header")
+        @PUT("reqopt/implicit/optional/header")
         Call<ResponseBody> putOptionalHeader(@Header("queryParameter") String queryParameter);
 
-        @PUT("/reqopt/implicit/optional/body")
+        @PUT("reqopt/implicit/optional/body")
         Call<ResponseBody> putOptionalBody(@Body String bodyParameter);
 
-        @GET("/reqopt/global/required/path/{required-global-path}")
+        @GET("reqopt/global/required/path/{required-global-path}")
         Call<ResponseBody> getRequiredGlobalPath(@Path("required-global-path") String requiredGlobalPath);
 
-        @GET("/reqopt/global/required/query")
+        @GET("reqopt/global/required/query")
         Call<ResponseBody> getRequiredGlobalQuery(@Query("required-global-query") String requiredGlobalQuery);
 
-        @GET("/reqopt/global/optional/query")
+        @GET("reqopt/global/optional/query")
         Call<ResponseBody> getOptionalGlobalQuery(@Query("optional-global-query") Integer optionalGlobalQuery);
 
     }

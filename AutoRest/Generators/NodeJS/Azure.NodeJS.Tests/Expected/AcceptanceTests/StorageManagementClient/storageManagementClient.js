@@ -18,7 +18,6 @@ var util = require('util');
 var msRest = require('ms-rest');
 var msRestAzure = require('ms-rest-azure');
 var ServiceClient = msRestAzure.AzureServiceClient;
-var WebResource = msRest.WebResource;
 
 var models = require('./models');
 var operations = require('./operations');
@@ -69,7 +68,8 @@ function StorageManagementClient(credentials, subscriptionId, baseUri, options) 
   }
   this.storageAccounts = new operations.StorageAccounts(this);
   this.usageOperations = new operations.UsageOperations(this);
-  this._models = models;
+  this.models = models;
+  msRest.addSerializationMixin(this);
 }
 
 util.inherits(StorageManagementClient, ServiceClient);

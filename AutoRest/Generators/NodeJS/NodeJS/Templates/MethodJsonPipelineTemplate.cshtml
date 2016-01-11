@@ -18,8 +18,12 @@ return client.pipeline(httpRequest, function (err, response, responseBody) {
     var parsedErrorResponse;
     try {
       parsedErrorResponse = JSON.parse(responseBody);
-      var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
-      var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
+      var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? 
+                                                     parsedErrorResponse.error.code : 
+                                                            parsedErrorResponse.code;
+      var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? 
+                                                        parsedErrorResponse.error.message : 
+                                                               parsedErrorResponse.message;
       if (errorCode) error.code = errorCode;
       if (errorMessage) error.message = errorMessage;
   @if (Model.DefaultResponse.Body != null)
@@ -28,11 +32,11 @@ return client.pipeline(httpRequest, function (err, response, responseBody) {
       {
           if (!string.IsNullOrEmpty(((CompositeType)Model.DefaultResponse.Body).PolymorphicDiscriminator))
           {
-      @:error.body = new client._models.discriminators[parsedErrorResponse['@(((CompositeType)Model.DefaultResponse.Body).PolymorphicDiscriminator)']]();
+      @:error.body = new client.models.discriminators[parsedErrorResponse['@(((CompositeType)Model.DefaultResponse.Body).PolymorphicDiscriminator)']]();
           }
           else
           {
-      @:error.body = new client._models['@(Model.DefaultResponse.Body.Name)']();
+      @:error.body = new client.models['@(Model.DefaultResponse.Body.Name)']();
           }
       }
       else
@@ -49,7 +53,8 @@ return client.pipeline(httpRequest, function (err, response, responseBody) {
       }
   }
     } catch (defaultError) {
-      error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+      error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+                       '- "%s" for the default response.', defaultError.message, responseBody);
       return callback(error);
     }
     return callback(error);
