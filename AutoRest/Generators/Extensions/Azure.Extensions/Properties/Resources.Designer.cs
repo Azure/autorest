@@ -61,11 +61,11 @@ namespace Microsoft.Rest.Generator.Azure.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Head method &apos;{0}&apos; should contain only 200 level responses, or 404..
+        ///   Looks up a localized string similar to &quot;HEAD &apos;{0}&apos; method missing 404 status code section -- this might be unintentional..
         /// </summary>
-        internal static string HeadMethodInvalidResponses {
+        internal static string HeadMethodPossibleIncorrectSpecification {
             get {
-                return ResourceManager.GetString("HeadMethodInvalidResponses", resourceCulture);
+                return ResourceManager.GetString("HeadMethodPossibleIncorrectSpecification", resourceCulture);
             }
         }
         

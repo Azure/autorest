@@ -117,8 +117,8 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="HeadMethodInvalidResponses" xml:space="preserve">
-    <value>Head method '{0}' should contain only 200 level responses, or 404.</value>
+  <data name="HeadMethodPossibleIncorrectSpecification" xml:space="preserve">
+    <value>"HEAD '{0}' method missing 404 status code section -- this might be unintentional.</value>
   </data>
   <data name="MissingProperties" xml:space="preserve">
     <value>Azure resource {0} is missing required 'properties' property.</value>

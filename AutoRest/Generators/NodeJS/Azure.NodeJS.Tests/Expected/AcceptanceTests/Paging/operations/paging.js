@@ -1130,15 +1130,15 @@ Paging.prototype.getSinglePagesNext = function (nextPageLink, options, callback)
  * 
  * @param {string} [options.clientRequestId]
  * 
- * @param {object} [options.pagingGetMultiplePagesOptions] Additional
+ * @param {object} [options.pagingGetMultiplePagesNextOptions] Additional
  * parameters for the operation
  * 
- * @param {number} [options.pagingGetMultiplePagesOptions.maxresults] Sets the
- * maximum number of items to return in the response.
+ * @param {number} [options.pagingGetMultiplePagesNextOptions.maxresults] Sets
+ * the maximum number of items to return in the response.
  * 
- * @param {number} [options.pagingGetMultiplePagesOptions.timeout] Sets the
- * maximum time that the server can spend processing the request, in seconds.
- * The default is 30 seconds.
+ * @param {number} [options.pagingGetMultiplePagesNextOptions.timeout] Sets
+ * the maximum time that the server can spend processing the request, in
+ * seconds. The default is 30 seconds.
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -1166,7 +1166,7 @@ Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callbac
     throw new Error('callback cannot be null.');
   }
   var clientRequestId = (options && options.clientRequestId !== undefined) ? options.clientRequestId : undefined;
-  var pagingGetMultiplePagesOptions = (options && options.pagingGetMultiplePagesOptions !== undefined) ? options.pagingGetMultiplePagesOptions : undefined;
+  var pagingGetMultiplePagesNextOptions = (options && options.pagingGetMultiplePagesNextOptions !== undefined) ? options.pagingGetMultiplePagesNextOptions : undefined;
   // Validate
   try {
     if (nextPageLink === null || nextPageLink === undefined || typeof nextPageLink.valueOf() !== 'string') {
@@ -1184,16 +1184,16 @@ Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callbac
   var maxresults;
   var timeout;
   try {
-    if ((pagingGetMultiplePagesOptions !== null && pagingGetMultiplePagesOptions !== undefined))
+    if ((pagingGetMultiplePagesNextOptions !== null && pagingGetMultiplePagesNextOptions !== undefined))
     {
-      maxresults = pagingGetMultiplePagesOptions.maxresults;
+      maxresults = pagingGetMultiplePagesNextOptions.maxresults;
       if (maxresults !== null && maxresults !== undefined && typeof maxresults !== 'number') {
         throw new Error('maxresults must be of type number.');
       }
     }
-    if ((pagingGetMultiplePagesOptions !== null && pagingGetMultiplePagesOptions !== undefined))
+    if ((pagingGetMultiplePagesNextOptions !== null && pagingGetMultiplePagesNextOptions !== undefined))
     {
-      timeout = pagingGetMultiplePagesOptions.timeout;
+      timeout = pagingGetMultiplePagesNextOptions.timeout;
       if (timeout !== null && timeout !== undefined && typeof timeout !== 'number') {
         throw new Error('timeout must be of type number.');
       }
