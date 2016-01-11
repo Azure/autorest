@@ -6,6 +6,7 @@ addons:
   apt:
     sources:
     - debian-sid
+    - deadsnakes
     packages:
     - libunwind8
 install:
@@ -15,6 +16,7 @@ install:
   - rvm use 2.2.1 --install --binary --fuzzy
   - gem install bundler
   - bundle install
+  - pip install tox
 script:
   - dnvm install 1.0.0-rc1-final -r mono
   - dnvm install 1.0.0-rc1-final -r coreclr
