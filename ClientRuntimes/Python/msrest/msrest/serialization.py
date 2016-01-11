@@ -323,6 +323,19 @@ class Serializer(object):
         else:
             return str(output)
 
+    def multipart(self, file_name, file_data, boundary, callback):
+        """Serialize a file-like object into a streamable
+        multipart message.
+
+        :rtype: generator
+        """
+        message = "--{0}\r\nContent-Disposition: form-data; name=\"file\"; filename=\"{1}\"\r\n\r\n{2}\r\n--{0}--\r\n".format(
+            boundary, file_name, file_data.read())
+        def upload_gen(message):
+            yield message
+        return upload_gen(message)
+        #return message
+
     def serialize_data(self, data, data_type, required=False, **kwargs):
         """Serialize generic data according to supplied data type.
 

@@ -123,7 +123,7 @@ class ServiceClient(object):
         kwargs = self.config.connection()
         for opt in ['timeout', 'verify', 'cert']:
             kwargs[opt] = config.get(opt, kwargs[opt])
-        for opt in ['cookies', 'stream']:
+        for opt in ['cookies', 'stream', 'files']:
             kwargs[opt] = config.get(opt)
         kwargs['allow_redirects'] = config.get(
             'allow_redirects', bool(self.config.redirect_policy))
@@ -173,7 +173,7 @@ class ServiceClient(object):
         kwargs = self._configure_session(session, **config)
 
         request.add_headers(headers)
-        request.add_content(content)
+        request.add_content(content, config)
 
         try:
 
