@@ -15,6 +15,7 @@
 'use strict';
 
 var util = require('util');
+var msRest = require('ms-rest');
 var msRestAzure = require('ms-rest-azure');
 var ServiceClient = msRestAzure.AzureServiceClient;
 
@@ -61,6 +62,7 @@ function AutoRestLongRunningOperationTestService(credentials, baseUri, options) 
   this.lROSADs = new operations.LROSADs(this);
   this.lROsCustomHeader = new operations.LROsCustomHeader(this);
   this.models = models;
+  msRest.addSerializationMixin(this);
 }
 
 util.inherits(AutoRestLongRunningOperationTestService, ServiceClient);

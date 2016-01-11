@@ -90,6 +90,7 @@ function @(Model.Name)(@(Model.RequiredConstructorParameters), options) {
   {
   @:this.models = models;
   }
+  msRest.addSerializationMixin(this);
 }
 @EmptyLine
 util.inherits(@Model.Name, ServiceClient);

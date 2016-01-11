@@ -55,6 +55,7 @@ function AutoRestHttpInfrastructureTestService(baseUri, options) {
   this.httpRetry = new operations.HttpRetry(this);
   this.multipleResponses = new operations.MultipleResponses(this);
   this.models = models;
+  msRest.addSerializationMixin(this);
 }
 
 util.inherits(AutoRestHttpInfrastructureTestService, ServiceClient);

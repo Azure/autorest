@@ -125,7 +125,7 @@ Paging.prototype.getSinglePages = function (options, callback) {
         error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -145,7 +145,7 @@ Paging.prototype.getSinglePages = function (options, callback) {
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['ProductResult']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -301,7 +301,7 @@ Paging.prototype.getMultiplePages = function (options, callback) {
         error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -321,7 +321,7 @@ Paging.prototype.getMultiplePages = function (options, callback) {
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['ProductResult']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -432,7 +432,7 @@ Paging.prototype.getMultiplePagesRetryFirst = function (options, callback) {
         error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -452,7 +452,7 @@ Paging.prototype.getMultiplePagesRetryFirst = function (options, callback) {
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['ProductResult']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -564,7 +564,7 @@ Paging.prototype.getMultiplePagesRetrySecond = function (options, callback) {
         error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -584,7 +584,7 @@ Paging.prototype.getMultiplePagesRetrySecond = function (options, callback) {
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['ProductResult']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -694,7 +694,7 @@ Paging.prototype.getSinglePagesFailure = function (options, callback) {
         error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -714,7 +714,7 @@ Paging.prototype.getSinglePagesFailure = function (options, callback) {
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['ProductResult']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -824,7 +824,7 @@ Paging.prototype.getMultiplePagesFailure = function (options, callback) {
         error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -844,7 +844,7 @@ Paging.prototype.getMultiplePagesFailure = function (options, callback) {
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['ProductResult']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -954,7 +954,7 @@ Paging.prototype.getMultiplePagesFailureUri = function (options, callback) {
         error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -974,7 +974,7 @@ Paging.prototype.getMultiplePagesFailureUri = function (options, callback) {
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['ProductResult']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1086,7 +1086,7 @@ Paging.prototype.getSinglePagesNext = function (nextPageLink, options, callback)
         error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1106,7 +1106,7 @@ Paging.prototype.getSinglePagesNext = function (nextPageLink, options, callback)
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['ProductResult']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1264,7 +1264,7 @@ Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callbac
         error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1284,7 +1284,7 @@ Paging.prototype.getMultiplePagesNext = function (nextPageLink, options, callbac
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['ProductResult']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1397,7 +1397,7 @@ Paging.prototype.getMultiplePagesRetryFirstNext = function (nextPageLink, option
         error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1417,7 +1417,7 @@ Paging.prototype.getMultiplePagesRetryFirstNext = function (nextPageLink, option
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['ProductResult']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1531,7 +1531,7 @@ Paging.prototype.getMultiplePagesRetrySecondNext = function (nextPageLink, optio
         error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1551,7 +1551,7 @@ Paging.prototype.getMultiplePagesRetrySecondNext = function (nextPageLink, optio
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['ProductResult']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1663,7 +1663,7 @@ Paging.prototype.getSinglePagesFailureNext = function (nextPageLink, options, ca
         error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1683,7 +1683,7 @@ Paging.prototype.getSinglePagesFailureNext = function (nextPageLink, options, ca
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['ProductResult']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1795,7 +1795,7 @@ Paging.prototype.getMultiplePagesFailureNext = function (nextPageLink, options, 
         error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1815,7 +1815,7 @@ Paging.prototype.getMultiplePagesFailureNext = function (nextPageLink, options, 
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['ProductResult']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1927,7 +1927,7 @@ Paging.prototype.getMultiplePagesFailureUriNext = function (nextPageLink, option
         error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1947,7 +1947,7 @@ Paging.prototype.getMultiplePagesFailureUriNext = function (nextPageLink, option
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['ProductResult']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));

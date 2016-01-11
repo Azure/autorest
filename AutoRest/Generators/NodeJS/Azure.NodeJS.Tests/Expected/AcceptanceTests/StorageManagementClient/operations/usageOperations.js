@@ -134,7 +134,7 @@ UsageOperations.prototype.list = function (options, callback) {
         error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -154,7 +154,7 @@ UsageOperations.prototype.list = function (options, callback) {
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['UsageListResult']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));

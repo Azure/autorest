@@ -108,7 +108,7 @@ Polymorphism.prototype.getValid = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -128,7 +128,7 @@ Polymorphism.prototype.getValid = function (options, callback) {
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['Fish']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -250,7 +250,7 @@ Polymorphism.prototype.putValid = function (complexBody, options, callback) {
   try {
     if (complexBody !== null && complexBody !== undefined) {
       var requestModelMapper = new client.models['Fish']().mapper();
-      requestModel = msRest.serialize(requestModelMapper, complexBody, 'complexBody', client);
+      requestModel = client.serialize(requestModelMapper, complexBody, 'complexBody');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -288,7 +288,7 @@ Polymorphism.prototype.putValid = function (complexBody, options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -407,7 +407,7 @@ Polymorphism.prototype.putValidMissingRequired = function (complexBody, options,
   try {
     if (complexBody !== null && complexBody !== undefined) {
       var requestModelMapper = new client.models['Fish']().mapper();
-      requestModel = msRest.serialize(requestModelMapper, complexBody, 'complexBody', client);
+      requestModel = client.serialize(requestModelMapper, complexBody, 'complexBody');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -445,7 +445,7 @@ Polymorphism.prototype.putValidMissingRequired = function (complexBody, options,
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 

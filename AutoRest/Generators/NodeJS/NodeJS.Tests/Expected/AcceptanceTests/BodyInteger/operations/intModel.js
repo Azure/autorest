@@ -107,7 +107,7 @@ IntModel.prototype.getNull = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -133,7 +133,7 @@ IntModel.prototype.getNull = function (options, callback) {
               name: 'Number'
             }
           };
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -226,7 +226,7 @@ IntModel.prototype.getInvalid = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -252,7 +252,7 @@ IntModel.prototype.getInvalid = function (options, callback) {
               name: 'Number'
             }
           };
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -345,7 +345,7 @@ IntModel.prototype.getOverflowInt32 = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -371,7 +371,7 @@ IntModel.prototype.getOverflowInt32 = function (options, callback) {
               name: 'Number'
             }
           };
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -464,7 +464,7 @@ IntModel.prototype.getUnderflowInt32 = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -490,7 +490,7 @@ IntModel.prototype.getUnderflowInt32 = function (options, callback) {
               name: 'Number'
             }
           };
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -583,7 +583,7 @@ IntModel.prototype.getOverflowInt64 = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -609,7 +609,7 @@ IntModel.prototype.getOverflowInt64 = function (options, callback) {
               name: 'Number'
             }
           };
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -702,7 +702,7 @@ IntModel.prototype.getUnderflowInt64 = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -728,7 +728,7 @@ IntModel.prototype.getUnderflowInt64 = function (options, callback) {
               name: 'Number'
             }
           };
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -815,7 +815,7 @@ IntModel.prototype.putMax32 = function (intBody, options, callback) {
           name: 'Number'
         }
       };
-      requestModel = msRest.serialize(requestModelMapper, intBody, 'intBody', client);
+      requestModel = client.serialize(requestModelMapper, intBody, 'intBody');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -853,7 +853,7 @@ IntModel.prototype.putMax32 = function (intBody, options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -943,7 +943,7 @@ IntModel.prototype.putMax64 = function (intBody, options, callback) {
           name: 'Number'
         }
       };
-      requestModel = msRest.serialize(requestModelMapper, intBody, 'intBody', client);
+      requestModel = client.serialize(requestModelMapper, intBody, 'intBody');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -981,7 +981,7 @@ IntModel.prototype.putMax64 = function (intBody, options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1071,7 +1071,7 @@ IntModel.prototype.putMin32 = function (intBody, options, callback) {
           name: 'Number'
         }
       };
-      requestModel = msRest.serialize(requestModelMapper, intBody, 'intBody', client);
+      requestModel = client.serialize(requestModelMapper, intBody, 'intBody');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -1109,7 +1109,7 @@ IntModel.prototype.putMin32 = function (intBody, options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1199,7 +1199,7 @@ IntModel.prototype.putMin64 = function (intBody, options, callback) {
           name: 'Number'
         }
       };
-      requestModel = msRest.serialize(requestModelMapper, intBody, 'intBody', client);
+      requestModel = client.serialize(requestModelMapper, intBody, 'intBody');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -1237,7 +1237,7 @@ IntModel.prototype.putMin64 = function (intBody, options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 

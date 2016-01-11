@@ -49,6 +49,7 @@ function AutoRestSwaggerBATHeaderService(baseUri, options) {
 
   this.header = new operations.Header(this);
   this.models = models;
+  msRest.addSerializationMixin(this);
 }
 
 util.inherits(AutoRestSwaggerBATHeaderService, ServiceClient);

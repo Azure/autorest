@@ -107,7 +107,7 @@ Datetime.prototype.getNull = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -133,7 +133,7 @@ Datetime.prototype.getNull = function (options, callback) {
               name: 'DateTime'
             }
           };
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -226,7 +226,7 @@ Datetime.prototype.getInvalid = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -252,7 +252,7 @@ Datetime.prototype.getInvalid = function (options, callback) {
               name: 'DateTime'
             }
           };
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -345,7 +345,7 @@ Datetime.prototype.getOverflow = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -371,7 +371,7 @@ Datetime.prototype.getOverflow = function (options, callback) {
               name: 'DateTime'
             }
           };
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -464,7 +464,7 @@ Datetime.prototype.getUnderflow = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -490,7 +490,7 @@ Datetime.prototype.getUnderflow = function (options, callback) {
               name: 'DateTime'
             }
           };
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -578,7 +578,7 @@ Datetime.prototype.putUtcMaxDateTime = function (datetimeBody, options, callback
           name: 'DateTime'
         }
       };
-      requestModel = msRest.serialize(requestModelMapper, datetimeBody, 'datetimeBody', client);
+      requestModel = client.serialize(requestModelMapper, datetimeBody, 'datetimeBody');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -616,7 +616,7 @@ Datetime.prototype.putUtcMaxDateTime = function (datetimeBody, options, callback
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -712,7 +712,7 @@ Datetime.prototype.getUtcLowercaseMaxDateTime = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -738,7 +738,7 @@ Datetime.prototype.getUtcLowercaseMaxDateTime = function (options, callback) {
               name: 'DateTime'
             }
           };
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -831,7 +831,7 @@ Datetime.prototype.getUtcUppercaseMaxDateTime = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -857,7 +857,7 @@ Datetime.prototype.getUtcUppercaseMaxDateTime = function (options, callback) {
               name: 'DateTime'
             }
           };
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -946,7 +946,7 @@ Datetime.prototype.putLocalPositiveOffsetMaxDateTime = function (datetimeBody, o
           name: 'DateTime'
         }
       };
-      requestModel = msRest.serialize(requestModelMapper, datetimeBody, 'datetimeBody', client);
+      requestModel = client.serialize(requestModelMapper, datetimeBody, 'datetimeBody');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -984,7 +984,7 @@ Datetime.prototype.putLocalPositiveOffsetMaxDateTime = function (datetimeBody, o
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1081,7 +1081,7 @@ Datetime.prototype.getLocalPositiveOffsetLowercaseMaxDateTime = function (option
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1107,7 +1107,7 @@ Datetime.prototype.getLocalPositiveOffsetLowercaseMaxDateTime = function (option
               name: 'DateTime'
             }
           };
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1201,7 +1201,7 @@ Datetime.prototype.getLocalPositiveOffsetUppercaseMaxDateTime = function (option
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1227,7 +1227,7 @@ Datetime.prototype.getLocalPositiveOffsetUppercaseMaxDateTime = function (option
               name: 'DateTime'
             }
           };
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1316,7 +1316,7 @@ Datetime.prototype.putLocalNegativeOffsetMaxDateTime = function (datetimeBody, o
           name: 'DateTime'
         }
       };
-      requestModel = msRest.serialize(requestModelMapper, datetimeBody, 'datetimeBody', client);
+      requestModel = client.serialize(requestModelMapper, datetimeBody, 'datetimeBody');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -1354,7 +1354,7 @@ Datetime.prototype.putLocalNegativeOffsetMaxDateTime = function (datetimeBody, o
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1451,7 +1451,7 @@ Datetime.prototype.getLocalNegativeOffsetUppercaseMaxDateTime = function (option
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1477,7 +1477,7 @@ Datetime.prototype.getLocalNegativeOffsetUppercaseMaxDateTime = function (option
               name: 'DateTime'
             }
           };
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1571,7 +1571,7 @@ Datetime.prototype.getLocalNegativeOffsetLowercaseMaxDateTime = function (option
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1597,7 +1597,7 @@ Datetime.prototype.getLocalNegativeOffsetLowercaseMaxDateTime = function (option
               name: 'DateTime'
             }
           };
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1685,7 +1685,7 @@ Datetime.prototype.putUtcMinDateTime = function (datetimeBody, options, callback
           name: 'DateTime'
         }
       };
-      requestModel = msRest.serialize(requestModelMapper, datetimeBody, 'datetimeBody', client);
+      requestModel = client.serialize(requestModelMapper, datetimeBody, 'datetimeBody');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -1723,7 +1723,7 @@ Datetime.prototype.putUtcMinDateTime = function (datetimeBody, options, callback
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1819,7 +1819,7 @@ Datetime.prototype.getUtcMinDateTime = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1845,7 +1845,7 @@ Datetime.prototype.getUtcMinDateTime = function (options, callback) {
               name: 'DateTime'
             }
           };
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1933,7 +1933,7 @@ Datetime.prototype.putLocalPositiveOffsetMinDateTime = function (datetimeBody, o
           name: 'DateTime'
         }
       };
-      requestModel = msRest.serialize(requestModelMapper, datetimeBody, 'datetimeBody', client);
+      requestModel = client.serialize(requestModelMapper, datetimeBody, 'datetimeBody');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -1971,7 +1971,7 @@ Datetime.prototype.putLocalPositiveOffsetMinDateTime = function (datetimeBody, o
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -2067,7 +2067,7 @@ Datetime.prototype.getLocalPositiveOffsetMinDateTime = function (options, callba
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -2093,7 +2093,7 @@ Datetime.prototype.getLocalPositiveOffsetMinDateTime = function (options, callba
               name: 'DateTime'
             }
           };
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -2181,7 +2181,7 @@ Datetime.prototype.putLocalNegativeOffsetMinDateTime = function (datetimeBody, o
           name: 'DateTime'
         }
       };
-      requestModel = msRest.serialize(requestModelMapper, datetimeBody, 'datetimeBody', client);
+      requestModel = client.serialize(requestModelMapper, datetimeBody, 'datetimeBody');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -2219,7 +2219,7 @@ Datetime.prototype.putLocalNegativeOffsetMinDateTime = function (datetimeBody, o
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -2315,7 +2315,7 @@ Datetime.prototype.getLocalNegativeOffsetMinDateTime = function (options, callba
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -2341,7 +2341,7 @@ Datetime.prototype.getLocalNegativeOffsetMinDateTime = function (options, callba
               name: 'DateTime'
             }
           };
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));

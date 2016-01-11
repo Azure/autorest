@@ -60,6 +60,7 @@ function AutoRestValidationTest(subscriptionId, apiVersion, baseUri, options) {
   this.apiVersion = apiVersion;
 
   this.models = models;
+  msRest.addSerializationMixin(this);
 }
 
 util.inherits(AutoRestValidationTest, ServiceClient);
@@ -208,7 +209,7 @@ AutoRestValidationTest.prototype.validationOfMethodParameters = function (resour
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -228,7 +229,7 @@ AutoRestValidationTest.prototype.validationOfMethodParameters = function (resour
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['Product']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -375,7 +376,7 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
   try {
     if (body !== null && body !== undefined) {
       var requestModelMapper = new client.models['Product']().mapper();
-      requestModel = msRest.serialize(requestModelMapper, body, 'body', client);
+      requestModel = client.serialize(requestModelMapper, body, 'body');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -413,7 +414,7 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -433,7 +434,7 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['Product']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));

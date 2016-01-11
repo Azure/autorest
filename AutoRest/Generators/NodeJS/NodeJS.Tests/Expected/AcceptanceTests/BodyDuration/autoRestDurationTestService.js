@@ -49,6 +49,7 @@ function AutoRestDurationTestService(baseUri, options) {
 
   this.duration = new operations.Duration(this);
   this.models = models;
+  msRest.addSerializationMixin(this);
 }
 
 util.inherits(AutoRestDurationTestService, ServiceClient);

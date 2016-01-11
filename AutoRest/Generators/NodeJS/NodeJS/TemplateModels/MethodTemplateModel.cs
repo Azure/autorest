@@ -421,7 +421,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             {
                 builder.AppendLine("var resultMapper = {{{0}}};", type.ConstructMapper(responseVariable));
             }
-            builder.AppendLine("{1} = msRest.deserialize(resultMapper, {0}, '{1}', client);", responseVariable, valueReference);
+            builder.AppendLine("{1} = client.deserialize(resultMapper, {0}, '{1}');", responseVariable, valueReference);
             return builder.ToString();
         }
 
@@ -799,7 +799,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                 if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
                     transformation.OutputParameter.Type is CompositeType)
                 {
-                    builder.AppendLine("{0} = new client._models['{1}']();",
+                    builder.AppendLine("{0} = new client.models['{1}']();",
                         transformation.OutputParameter.Name,
                         transformation.OutputParameter.Type.Name);
                 }

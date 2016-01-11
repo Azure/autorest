@@ -15,6 +15,7 @@
 'use strict';
 
 var util = require('util');
+var msRest = require('ms-rest');
 var msRestAzure = require('ms-rest-azure');
 var ServiceClient = msRestAzure.AzureServiceClient;
 
@@ -67,6 +68,7 @@ function MicrosoftAzureTestUrl(credentials, subscriptionId, baseUri, options) {
   }
   this.group = new operations.Group(this);
   this.models = models;
+  msRest.addSerializationMixin(this);
 }
 
 util.inherits(MicrosoftAzureTestUrl, ServiceClient);

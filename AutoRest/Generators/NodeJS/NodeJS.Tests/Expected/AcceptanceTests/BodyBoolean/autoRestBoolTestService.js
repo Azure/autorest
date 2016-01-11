@@ -49,6 +49,7 @@ function AutoRestBoolTestService(baseUri, options) {
 
   this.bool = new operations.Bool(this);
   this.models = models;
+  msRest.addSerializationMixin(this);
 }
 
 util.inherits(AutoRestBoolTestService, ServiceClient);

@@ -49,6 +49,7 @@ function AutoRestNumberTestService(baseUri, options) {
 
   this.number = new operations.Number(this);
   this.models = models;
+  msRest.addSerializationMixin(this);
 }
 
 util.inherits(AutoRestNumberTestService, ServiceClient);

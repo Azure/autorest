@@ -17,9 +17,9 @@
 'use strict';
 @EmptyLine
 var util = require('util');
+var msRest = require('ms-rest');
 @if (Model.MethodTemplateModels.Any())
 {
-@:var msRest = require('ms-rest');
 @:var WebResource = msRest.WebResource;
 }
 var msRestAzure = require('ms-rest-azure');
@@ -92,6 +92,7 @@ function @(Model.Name)(@(Model.RequiredConstructorParameters), options) {
   {
   @:this.models = models;
   }
+  msRest.addSerializationMixin(this);
 }
 
 @EmptyLine

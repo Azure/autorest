@@ -15,6 +15,7 @@
 'use strict';
 
 var util = require('util');
+var msRest = require('ms-rest');
 var msRestAzure = require('ms-rest-azure');
 var ServiceClient = msRestAzure.AzureServiceClient;
 
@@ -58,6 +59,7 @@ function AutoRestParameterGroupingTestService(credentials, baseUri, options) {
   }
   this.parameterGrouping = new operations.ParameterGrouping(this);
   this.models = models;
+  msRest.addSerializationMixin(this);
 }
 
 util.inherits(AutoRestParameterGroupingTestService, ServiceClient);

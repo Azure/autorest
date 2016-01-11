@@ -103,7 +103,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             if (known == PrimaryType.Date)
             {
                 return string.Format(CultureInfo.InvariantCulture,
-                    "msRest.serializeObject({0}).replace(/[Tt].*[Zz]/, '')", reference);
+                    "client.serializeObject({0}).replace(/[Tt].*[Zz]/, '')", reference);
             }
 
             if (known == PrimaryType.DateTimeRfc1123)
@@ -115,7 +115,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 known == PrimaryType.ByteArray)
             {
                 return string.Format(CultureInfo.InvariantCulture,
-                    "msRest.serializeObject({0})", reference);
+                    "client.serializeObject({0})", reference);
             }
 
             if (known == PrimaryType.TimeSpan)

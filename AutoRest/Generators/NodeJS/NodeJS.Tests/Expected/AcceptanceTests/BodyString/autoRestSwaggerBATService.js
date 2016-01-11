@@ -50,6 +50,7 @@ function AutoRestSwaggerBATService(baseUri, options) {
   this.string = new operations.String(this);
   this.enumModel = new operations.EnumModel(this);
   this.models = models;
+  msRest.addSerializationMixin(this);
 }
 
 util.inherits(AutoRestSwaggerBATService, ServiceClient);

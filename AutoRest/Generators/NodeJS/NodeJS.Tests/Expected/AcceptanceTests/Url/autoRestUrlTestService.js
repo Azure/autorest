@@ -57,6 +57,7 @@ function AutoRestUrlTestService(globalStringPath, baseUri, options) {
   this.queries = new operations.Queries(this);
   this.pathItems = new operations.PathItems(this);
   this.models = models;
+  msRest.addSerializationMixin(this);
 }
 
 util.inherits(AutoRestUrlTestService, ServiceClient);

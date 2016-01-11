@@ -126,7 +126,7 @@
   try {
     if (@(Model.RequestBody.Name) !== null && @(Model.RequestBody.Name) !== undefined) {
       @(Model.ConstructRequestBodyMapper)
-      requestModel = msRest.serialize(requestModelMapper, @(Model.RequestBody.Name), '@(Model.RequestBody.Name)', client);
+      requestModel = client.serialize(requestModelMapper, @(Model.RequestBody.Name), '@(Model.RequestBody.Name)');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {

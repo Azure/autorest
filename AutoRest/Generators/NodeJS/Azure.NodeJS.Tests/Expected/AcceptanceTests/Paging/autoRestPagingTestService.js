@@ -15,6 +15,7 @@
 'use strict';
 
 var util = require('util');
+var msRest = require('ms-rest');
 var msRestAzure = require('ms-rest-azure');
 var ServiceClient = msRestAzure.AzureServiceClient;
 
@@ -58,6 +59,7 @@ function AutoRestPagingTestService(credentials, baseUri, options) {
   }
   this.paging = new operations.Paging(this);
   this.models = models;
+  msRest.addSerializationMixin(this);
 }
 
 util.inherits(AutoRestPagingTestService, ServiceClient);

@@ -55,6 +55,7 @@ function AutoRestComplexTestService(baseUri, options) {
   this.polymorphism = new operations.Polymorphism(this);
   this.polymorphicrecursive = new operations.Polymorphicrecursive(this);
   this.models = models;
+  msRest.addSerializationMixin(this);
 }
 
 util.inherits(AutoRestComplexTestService, ServiceClient);

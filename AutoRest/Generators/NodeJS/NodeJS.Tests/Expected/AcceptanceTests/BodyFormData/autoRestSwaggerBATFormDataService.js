@@ -49,6 +49,7 @@ function AutoRestSwaggerBATFormDataService(baseUri, options) {
 
   this.formdata = new operations.Formdata(this);
   this.models = models;
+  msRest.addSerializationMixin(this);
 }
 
 util.inherits(AutoRestSwaggerBATFormDataService, ServiceClient);

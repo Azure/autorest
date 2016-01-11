@@ -109,7 +109,7 @@ Primitive.prototype.getInt = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -129,7 +129,7 @@ Primitive.prototype.getInt = function (options, callback) {
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['IntWrapper']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -214,7 +214,7 @@ Primitive.prototype.putInt = function (complexBody, options, callback) {
   try {
     if (complexBody !== null && complexBody !== undefined) {
       var requestModelMapper = new client.models['IntWrapper']().mapper();
-      requestModel = msRest.serialize(requestModelMapper, complexBody, 'complexBody', client);
+      requestModel = client.serialize(requestModelMapper, complexBody, 'complexBody');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -252,7 +252,7 @@ Primitive.prototype.putInt = function (complexBody, options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -349,7 +349,7 @@ Primitive.prototype.getLong = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -369,7 +369,7 @@ Primitive.prototype.getLong = function (options, callback) {
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['LongWrapper']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -454,7 +454,7 @@ Primitive.prototype.putLong = function (complexBody, options, callback) {
   try {
     if (complexBody !== null && complexBody !== undefined) {
       var requestModelMapper = new client.models['LongWrapper']().mapper();
-      requestModel = msRest.serialize(requestModelMapper, complexBody, 'complexBody', client);
+      requestModel = client.serialize(requestModelMapper, complexBody, 'complexBody');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -492,7 +492,7 @@ Primitive.prototype.putLong = function (complexBody, options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -589,7 +589,7 @@ Primitive.prototype.getFloat = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -609,7 +609,7 @@ Primitive.prototype.getFloat = function (options, callback) {
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['FloatWrapper']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -694,7 +694,7 @@ Primitive.prototype.putFloat = function (complexBody, options, callback) {
   try {
     if (complexBody !== null && complexBody !== undefined) {
       var requestModelMapper = new client.models['FloatWrapper']().mapper();
-      requestModel = msRest.serialize(requestModelMapper, complexBody, 'complexBody', client);
+      requestModel = client.serialize(requestModelMapper, complexBody, 'complexBody');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -732,7 +732,7 @@ Primitive.prototype.putFloat = function (complexBody, options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -829,7 +829,7 @@ Primitive.prototype.getDouble = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -849,7 +849,7 @@ Primitive.prototype.getDouble = function (options, callback) {
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['DoubleWrapper']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -936,7 +936,7 @@ Primitive.prototype.putDouble = function (complexBody, options, callback) {
   try {
     if (complexBody !== null && complexBody !== undefined) {
       var requestModelMapper = new client.models['DoubleWrapper']().mapper();
-      requestModel = msRest.serialize(requestModelMapper, complexBody, 'complexBody', client);
+      requestModel = client.serialize(requestModelMapper, complexBody, 'complexBody');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -974,7 +974,7 @@ Primitive.prototype.putDouble = function (complexBody, options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1071,7 +1071,7 @@ Primitive.prototype.getBool = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1091,7 +1091,7 @@ Primitive.prototype.getBool = function (options, callback) {
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['BooleanWrapper']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1176,7 +1176,7 @@ Primitive.prototype.putBool = function (complexBody, options, callback) {
   try {
     if (complexBody !== null && complexBody !== undefined) {
       var requestModelMapper = new client.models['BooleanWrapper']().mapper();
-      requestModel = msRest.serialize(requestModelMapper, complexBody, 'complexBody', client);
+      requestModel = client.serialize(requestModelMapper, complexBody, 'complexBody');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -1214,7 +1214,7 @@ Primitive.prototype.putBool = function (complexBody, options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1311,7 +1311,7 @@ Primitive.prototype.getString = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1331,7 +1331,7 @@ Primitive.prototype.getString = function (options, callback) {
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['StringWrapper']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1418,7 +1418,7 @@ Primitive.prototype.putString = function (complexBody, options, callback) {
   try {
     if (complexBody !== null && complexBody !== undefined) {
       var requestModelMapper = new client.models['StringWrapper']().mapper();
-      requestModel = msRest.serialize(requestModelMapper, complexBody, 'complexBody', client);
+      requestModel = client.serialize(requestModelMapper, complexBody, 'complexBody');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -1456,7 +1456,7 @@ Primitive.prototype.putString = function (complexBody, options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1553,7 +1553,7 @@ Primitive.prototype.getDate = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1573,7 +1573,7 @@ Primitive.prototype.getDate = function (options, callback) {
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['DateWrapper']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1658,7 +1658,7 @@ Primitive.prototype.putDate = function (complexBody, options, callback) {
   try {
     if (complexBody !== null && complexBody !== undefined) {
       var requestModelMapper = new client.models['DateWrapper']().mapper();
-      requestModel = msRest.serialize(requestModelMapper, complexBody, 'complexBody', client);
+      requestModel = client.serialize(requestModelMapper, complexBody, 'complexBody');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -1696,7 +1696,7 @@ Primitive.prototype.putDate = function (complexBody, options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1793,7 +1793,7 @@ Primitive.prototype.getDateTime = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1813,7 +1813,7 @@ Primitive.prototype.getDateTime = function (options, callback) {
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['DatetimeWrapper']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1899,7 +1899,7 @@ Primitive.prototype.putDateTime = function (complexBody, options, callback) {
   try {
     if (complexBody !== null && complexBody !== undefined) {
       var requestModelMapper = new client.models['DatetimeWrapper']().mapper();
-      requestModel = msRest.serialize(requestModelMapper, complexBody, 'complexBody', client);
+      requestModel = client.serialize(requestModelMapper, complexBody, 'complexBody');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -1937,7 +1937,7 @@ Primitive.prototype.putDateTime = function (complexBody, options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -2035,7 +2035,7 @@ Primitive.prototype.getDateTimeRfc1123 = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -2055,7 +2055,7 @@ Primitive.prototype.getDateTimeRfc1123 = function (options, callback) {
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['Datetimerfc1123Wrapper']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -2141,7 +2141,7 @@ Primitive.prototype.putDateTimeRfc1123 = function (complexBody, options, callbac
   try {
     if (complexBody !== null && complexBody !== undefined) {
       var requestModelMapper = new client.models['Datetimerfc1123Wrapper']().mapper();
-      requestModel = msRest.serialize(requestModelMapper, complexBody, 'complexBody', client);
+      requestModel = client.serialize(requestModelMapper, complexBody, 'complexBody');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -2179,7 +2179,7 @@ Primitive.prototype.putDateTimeRfc1123 = function (complexBody, options, callbac
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -2276,7 +2276,7 @@ Primitive.prototype.getDuration = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -2296,7 +2296,7 @@ Primitive.prototype.getDuration = function (options, callback) {
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['DurationWrapper']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -2351,17 +2351,10 @@ Primitive.prototype.putDuration = function (options, callback) {
     return callback(error);
   }
   var complexBody;
-  try {
-    if ((field !== null && field !== undefined))
-    {
+  if ((field !== null && field !== undefined))
+  {
       complexBody = new client.models['DurationWrapper']();
       complexBody.field = field;
-      if (complexBody === null || complexBody === undefined) {
-        throw new Error('complexBody cannot be null or undefined.');
-      }
-    }
-  } catch (error) {
-    return callback(error);
   }
 
   // Construct URL
@@ -2391,7 +2384,7 @@ Primitive.prototype.putDuration = function (options, callback) {
   try {
     if (complexBody !== null && complexBody !== undefined) {
       var requestModelMapper = new client.models['DurationWrapper']().mapper();
-      requestModel = msRest.serialize(requestModelMapper, complexBody, 'complexBody', client);
+      requestModel = client.serialize(requestModelMapper, complexBody, 'complexBody');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -2429,7 +2422,7 @@ Primitive.prototype.putDuration = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -2526,7 +2519,7 @@ Primitive.prototype.getByte = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -2546,7 +2539,7 @@ Primitive.prototype.getByte = function (options, callback) {
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['ByteWrapper']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -2601,17 +2594,10 @@ Primitive.prototype.putByte = function (options, callback) {
     return callback(error);
   }
   var complexBody;
-  try {
-    if ((field !== null && field !== undefined))
-    {
+  if ((field !== null && field !== undefined))
+  {
       complexBody = new client.models['ByteWrapper']();
       complexBody.field = field;
-      if (complexBody === null || complexBody === undefined) {
-        throw new Error('complexBody cannot be null or undefined.');
-      }
-    }
-  } catch (error) {
-    return callback(error);
   }
 
   // Construct URL
@@ -2641,7 +2627,7 @@ Primitive.prototype.putByte = function (options, callback) {
   try {
     if (complexBody !== null && complexBody !== undefined) {
       var requestModelMapper = new client.models['ByteWrapper']().mapper();
-      requestModel = msRest.serialize(requestModelMapper, complexBody, 'complexBody', client);
+      requestModel = client.serialize(requestModelMapper, complexBody, 'complexBody');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -2679,7 +2665,7 @@ Primitive.prototype.putByte = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 

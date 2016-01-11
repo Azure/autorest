@@ -49,6 +49,7 @@ function AutoRestIntegerTestService(baseUri, options) {
 
   this.intModel = new operations.IntModel(this);
   this.models = models;
+  msRest.addSerializationMixin(this);
 }
 
 util.inherits(AutoRestIntegerTestService, ServiceClient);

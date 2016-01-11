@@ -98,7 +98,7 @@ LRORetrys.prototype.put201CreatingSucceeded200 = function (options, callback) {
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['Product']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -198,7 +198,7 @@ LRORetrys.prototype.beginPut201CreatingSucceeded200 = function (options, callbac
   try {
     if (product !== null && product !== undefined) {
       var requestModelMapper = new client.models['Product']().mapper();
-      requestModel = msRest.serialize(requestModelMapper, product, 'product', client);
+      requestModel = client.serialize(requestModelMapper, product, 'product');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -236,7 +236,7 @@ LRORetrys.prototype.beginPut201CreatingSucceeded200 = function (options, callbac
         error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -256,7 +256,7 @@ LRORetrys.prototype.beginPut201CreatingSucceeded200 = function (options, callbac
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['Product']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -273,7 +273,7 @@ LRORetrys.prototype.beginPut201CreatingSucceeded200 = function (options, callbac
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['Product']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError1 = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -356,7 +356,7 @@ LRORetrys.prototype.putAsyncRelativeRetrySucceeded = function (options, callback
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['Product']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -456,7 +456,7 @@ LRORetrys.prototype.beginPutAsyncRelativeRetrySucceeded = function (options, cal
   try {
     if (product !== null && product !== undefined) {
       var requestModelMapper = new client.models['Product']().mapper();
-      requestModel = msRest.serialize(requestModelMapper, product, 'product', client);
+      requestModel = client.serialize(requestModelMapper, product, 'product');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -494,7 +494,7 @@ LRORetrys.prototype.beginPutAsyncRelativeRetrySucceeded = function (options, cal
         error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -514,7 +514,7 @@ LRORetrys.prototype.beginPutAsyncRelativeRetrySucceeded = function (options, cal
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['Product']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -589,7 +589,7 @@ LRORetrys.prototype.deleteProvisioning202Accepted200Succeeded = function (option
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['Product']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -702,7 +702,7 @@ LRORetrys.prototype.beginDeleteProvisioning202Accepted200Succeeded = function (o
         error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -722,7 +722,7 @@ LRORetrys.prototype.beginDeleteProvisioning202Accepted200Succeeded = function (o
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['Product']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -739,7 +739,7 @@ LRORetrys.prototype.beginDeleteProvisioning202Accepted200Succeeded = function (o
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['Product']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError1 = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -909,7 +909,7 @@ LRORetrys.prototype.beginDelete202Retry200 = function (options, callback) {
         error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1082,7 +1082,7 @@ LRORetrys.prototype.beginDeleteAsyncRelativeRetrySucceeded = function (options, 
         error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1250,7 +1250,7 @@ LRORetrys.prototype.beginPost202Retry200 = function (options, callback) {
   try {
     if (product !== null && product !== undefined) {
       var requestModelMapper = new client.models['Product']().mapper();
-      requestModel = msRest.serialize(requestModelMapper, product, 'product', client);
+      requestModel = client.serialize(requestModelMapper, product, 'product');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -1288,7 +1288,7 @@ LRORetrys.prototype.beginPost202Retry200 = function (options, callback) {
         error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1458,7 +1458,7 @@ LRORetrys.prototype.beginPostAsyncRelativeRetrySucceeded = function (options, ca
   try {
     if (product !== null && product !== undefined) {
       var requestModelMapper = new client.models['Product']().mapper();
-      requestModel = msRest.serialize(requestModelMapper, product, 'product', client);
+      requestModel = client.serialize(requestModelMapper, product, 'product');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -1496,7 +1496,7 @@ LRORetrys.prototype.beginPostAsyncRelativeRetrySucceeded = function (options, ca
         error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 

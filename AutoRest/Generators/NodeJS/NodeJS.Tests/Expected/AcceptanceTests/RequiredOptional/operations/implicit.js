@@ -119,7 +119,7 @@ Implicit.prototype.getRequiredPath = function (pathParameter, options, callback)
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -137,7 +137,7 @@ Implicit.prototype.getRequiredPath = function (pathParameter, options, callback)
       result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         var resultMapper = new client.models['ErrorModel']().mapper();
-        result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+        result = client.deserialize(resultMapper, parsedResponse, 'result');
       }
     } catch (error) {
       var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -247,7 +247,7 @@ Implicit.prototype.putOptionalQuery = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -357,7 +357,7 @@ Implicit.prototype.putOptionalHeader = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -448,7 +448,7 @@ Implicit.prototype.putOptionalBody = function (options, callback) {
           name: 'String'
         }
       };
-      requestModel = msRest.serialize(requestModelMapper, bodyParameter, 'bodyParameter', client);
+      requestModel = client.serialize(requestModelMapper, bodyParameter, 'bodyParameter');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -486,7 +486,7 @@ Implicit.prototype.putOptionalBody = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -592,7 +592,7 @@ Implicit.prototype.getRequiredGlobalPath = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -610,7 +610,7 @@ Implicit.prototype.getRequiredGlobalPath = function (options, callback) {
       result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         var resultMapper = new client.models['ErrorModel']().mapper();
-        result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+        result = client.deserialize(resultMapper, parsedResponse, 'result');
       }
     } catch (error) {
       var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -716,7 +716,7 @@ Implicit.prototype.getRequiredGlobalQuery = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -734,7 +734,7 @@ Implicit.prototype.getRequiredGlobalQuery = function (options, callback) {
       result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         var resultMapper = new client.models['ErrorModel']().mapper();
-        result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+        result = client.deserialize(resultMapper, parsedResponse, 'result');
       }
     } catch (error) {
       var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -842,7 +842,7 @@ Implicit.prototype.getOptionalGlobalQuery = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -860,7 +860,7 @@ Implicit.prototype.getOptionalGlobalQuery = function (options, callback) {
       result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         var resultMapper = new client.models['ErrorModel']().mapper();
-        result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+        result = client.deserialize(resultMapper, parsedResponse, 'result');
       }
     } catch (error) {
       var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));

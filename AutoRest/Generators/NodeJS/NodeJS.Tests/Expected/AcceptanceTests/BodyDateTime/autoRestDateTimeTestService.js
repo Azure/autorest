@@ -49,6 +49,7 @@ function AutoRestDateTimeTestService(baseUri, options) {
 
   this.datetime = new operations.Datetime(this);
   this.models = models;
+  msRest.addSerializationMixin(this);
 }
 
 util.inherits(AutoRestDateTimeTestService, ServiceClient);

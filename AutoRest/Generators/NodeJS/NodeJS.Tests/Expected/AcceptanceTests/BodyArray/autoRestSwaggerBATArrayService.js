@@ -49,6 +49,7 @@ function AutoRestSwaggerBATArrayService(baseUri, options) {
 
   this.arrayModel = new operations.ArrayModel(this);
   this.models = models;
+  msRest.addSerializationMixin(this);
 }
 
 util.inherits(AutoRestSwaggerBATArrayService, ServiceClient);

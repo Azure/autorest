@@ -107,7 +107,7 @@ Number.prototype.getNull = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -133,7 +133,7 @@ Number.prototype.getNull = function (options, callback) {
               name: 'Number'
             }
           };
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -226,7 +226,7 @@ Number.prototype.getInvalidFloat = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -252,7 +252,7 @@ Number.prototype.getInvalidFloat = function (options, callback) {
               name: 'Number'
             }
           };
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -345,7 +345,7 @@ Number.prototype.getInvalidDouble = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -371,7 +371,7 @@ Number.prototype.getInvalidDouble = function (options, callback) {
               name: 'Number'
             }
           };
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -464,7 +464,7 @@ Number.prototype.getInvalidDecimal = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -490,7 +490,7 @@ Number.prototype.getInvalidDecimal = function (options, callback) {
               name: 'Number'
             }
           };
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -577,7 +577,7 @@ Number.prototype.putBigFloat = function (numberBody, options, callback) {
           name: 'Number'
         }
       };
-      requestModel = msRest.serialize(requestModelMapper, numberBody, 'numberBody', client);
+      requestModel = client.serialize(requestModelMapper, numberBody, 'numberBody');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -615,7 +615,7 @@ Number.prototype.putBigFloat = function (numberBody, options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -711,7 +711,7 @@ Number.prototype.getBigFloat = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -737,7 +737,7 @@ Number.prototype.getBigFloat = function (options, callback) {
               name: 'Number'
             }
           };
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -824,7 +824,7 @@ Number.prototype.putBigDouble = function (numberBody, options, callback) {
           name: 'Number'
         }
       };
-      requestModel = msRest.serialize(requestModelMapper, numberBody, 'numberBody', client);
+      requestModel = client.serialize(requestModelMapper, numberBody, 'numberBody');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -862,7 +862,7 @@ Number.prototype.putBigDouble = function (numberBody, options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -958,7 +958,7 @@ Number.prototype.getBigDouble = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -984,7 +984,7 @@ Number.prototype.getBigDouble = function (options, callback) {
               name: 'Number'
             }
           };
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1071,7 +1071,7 @@ Number.prototype.putBigDoublePositiveDecimal = function (numberBody, options, ca
           name: 'Number'
         }
       };
-      requestModel = msRest.serialize(requestModelMapper, numberBody, 'numberBody', client);
+      requestModel = client.serialize(requestModelMapper, numberBody, 'numberBody');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -1109,7 +1109,7 @@ Number.prototype.putBigDoublePositiveDecimal = function (numberBody, options, ca
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1205,7 +1205,7 @@ Number.prototype.getBigDoublePositiveDecimal = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1231,7 +1231,7 @@ Number.prototype.getBigDoublePositiveDecimal = function (options, callback) {
               name: 'Number'
             }
           };
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1318,7 +1318,7 @@ Number.prototype.putBigDoubleNegativeDecimal = function (numberBody, options, ca
           name: 'Number'
         }
       };
-      requestModel = msRest.serialize(requestModelMapper, numberBody, 'numberBody', client);
+      requestModel = client.serialize(requestModelMapper, numberBody, 'numberBody');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -1356,7 +1356,7 @@ Number.prototype.putBigDoubleNegativeDecimal = function (numberBody, options, ca
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1452,7 +1452,7 @@ Number.prototype.getBigDoubleNegativeDecimal = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1478,7 +1478,7 @@ Number.prototype.getBigDoubleNegativeDecimal = function (options, callback) {
               name: 'Number'
             }
           };
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1565,7 +1565,7 @@ Number.prototype.putBigDecimal = function (numberBody, options, callback) {
           name: 'Number'
         }
       };
-      requestModel = msRest.serialize(requestModelMapper, numberBody, 'numberBody', client);
+      requestModel = client.serialize(requestModelMapper, numberBody, 'numberBody');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -1603,7 +1603,7 @@ Number.prototype.putBigDecimal = function (numberBody, options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1699,7 +1699,7 @@ Number.prototype.getBigDecimal = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1725,7 +1725,7 @@ Number.prototype.getBigDecimal = function (options, callback) {
               name: 'Number'
             }
           };
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1812,7 +1812,7 @@ Number.prototype.putBigDecimalPositiveDecimal = function (numberBody, options, c
           name: 'Number'
         }
       };
-      requestModel = msRest.serialize(requestModelMapper, numberBody, 'numberBody', client);
+      requestModel = client.serialize(requestModelMapper, numberBody, 'numberBody');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -1850,7 +1850,7 @@ Number.prototype.putBigDecimalPositiveDecimal = function (numberBody, options, c
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1946,7 +1946,7 @@ Number.prototype.getBigDecimalPositiveDecimal = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1972,7 +1972,7 @@ Number.prototype.getBigDecimalPositiveDecimal = function (options, callback) {
               name: 'Number'
             }
           };
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -2059,7 +2059,7 @@ Number.prototype.putBigDecimalNegativeDecimal = function (numberBody, options, c
           name: 'Number'
         }
       };
-      requestModel = msRest.serialize(requestModelMapper, numberBody, 'numberBody', client);
+      requestModel = client.serialize(requestModelMapper, numberBody, 'numberBody');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -2097,7 +2097,7 @@ Number.prototype.putBigDecimalNegativeDecimal = function (numberBody, options, c
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -2193,7 +2193,7 @@ Number.prototype.getBigDecimalNegativeDecimal = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -2219,7 +2219,7 @@ Number.prototype.getBigDecimalNegativeDecimal = function (options, callback) {
               name: 'Number'
             }
           };
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -2306,7 +2306,7 @@ Number.prototype.putSmallFloat = function (numberBody, options, callback) {
           name: 'Number'
         }
       };
-      requestModel = msRest.serialize(requestModelMapper, numberBody, 'numberBody', client);
+      requestModel = client.serialize(requestModelMapper, numberBody, 'numberBody');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -2344,7 +2344,7 @@ Number.prototype.putSmallFloat = function (numberBody, options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -2440,7 +2440,7 @@ Number.prototype.getSmallFloat = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -2466,7 +2466,7 @@ Number.prototype.getSmallFloat = function (options, callback) {
               name: 'Number'
             }
           };
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -2553,7 +2553,7 @@ Number.prototype.putSmallDouble = function (numberBody, options, callback) {
           name: 'Number'
         }
       };
-      requestModel = msRest.serialize(requestModelMapper, numberBody, 'numberBody', client);
+      requestModel = client.serialize(requestModelMapper, numberBody, 'numberBody');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -2591,7 +2591,7 @@ Number.prototype.putSmallDouble = function (numberBody, options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -2687,7 +2687,7 @@ Number.prototype.getSmallDouble = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -2713,7 +2713,7 @@ Number.prototype.getSmallDouble = function (options, callback) {
               name: 'Number'
             }
           };
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -2800,7 +2800,7 @@ Number.prototype.putSmallDecimal = function (numberBody, options, callback) {
           name: 'Number'
         }
       };
-      requestModel = msRest.serialize(requestModelMapper, numberBody, 'numberBody', client);
+      requestModel = client.serialize(requestModelMapper, numberBody, 'numberBody');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -2838,7 +2838,7 @@ Number.prototype.putSmallDecimal = function (numberBody, options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -2934,7 +2934,7 @@ Number.prototype.getSmallDecimal = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -2960,7 +2960,7 @@ Number.prototype.getSmallDecimal = function (options, callback) {
               name: 'Number'
             }
           };
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));

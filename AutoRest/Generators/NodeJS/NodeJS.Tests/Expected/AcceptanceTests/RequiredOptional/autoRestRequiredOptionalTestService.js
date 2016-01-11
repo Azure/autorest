@@ -62,6 +62,7 @@ function AutoRestRequiredOptionalTestService(requiredGlobalPath, requiredGlobalQ
   this.implicit = new operations.Implicit(this);
   this.explicit = new operations.Explicit(this);
   this.models = models;
+  msRest.addSerializationMixin(this);
 }
 
 util.inherits(AutoRestRequiredOptionalTestService, ServiceClient);

@@ -49,6 +49,7 @@ function AutoRestSwaggerBATFileService(baseUri, options) {
 
   this.files = new operations.Files(this);
   this.models = models;
+  msRest.addSerializationMixin(this);
 }
 
 util.inherits(AutoRestSwaggerBATFileService, ServiceClient);

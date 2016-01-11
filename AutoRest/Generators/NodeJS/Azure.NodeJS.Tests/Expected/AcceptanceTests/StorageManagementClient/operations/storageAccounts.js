@@ -123,7 +123,7 @@ StorageAccounts.prototype.checkNameAvailability = function (accountName, options
   try {
     if (accountName !== null && accountName !== undefined) {
       var requestModelMapper = new client.models['StorageAccountCheckNameAvailabilityParameters']().mapper();
-      requestModel = msRest.serialize(requestModelMapper, accountName, 'accountName', client);
+      requestModel = client.serialize(requestModelMapper, accountName, 'accountName');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -161,7 +161,7 @@ StorageAccounts.prototype.checkNameAvailability = function (accountName, options
         error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -181,7 +181,7 @@ StorageAccounts.prototype.checkNameAvailability = function (accountName, options
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['CheckNameAvailabilityResult']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -275,7 +275,7 @@ StorageAccounts.prototype.create = function (resourceGroupName, accountName, par
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['StorageAccount']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -404,7 +404,7 @@ StorageAccounts.prototype.beginCreate = function (resourceGroupName, accountName
   try {
     if (parameters !== null && parameters !== undefined) {
       var requestModelMapper = new client.models['StorageAccountCreateParameters']().mapper();
-      requestModel = msRest.serialize(requestModelMapper, parameters, 'parameters', client);
+      requestModel = client.serialize(requestModelMapper, parameters, 'parameters');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -442,7 +442,7 @@ StorageAccounts.prototype.beginCreate = function (resourceGroupName, accountName
         error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -462,7 +462,7 @@ StorageAccounts.prototype.beginCreate = function (resourceGroupName, accountName
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['StorageAccount']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -727,7 +727,7 @@ StorageAccounts.prototype.getProperties = function (resourceGroupName, accountNa
         error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -747,7 +747,7 @@ StorageAccounts.prototype.getProperties = function (resourceGroupName, accountNa
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['StorageAccount']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -894,7 +894,7 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
   try {
     if (parameters !== null && parameters !== undefined) {
       var requestModelMapper = new client.models['StorageAccountUpdateParameters']().mapper();
-      requestModel = msRest.serialize(requestModelMapper, parameters, 'parameters', client);
+      requestModel = client.serialize(requestModelMapper, parameters, 'parameters');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -932,7 +932,7 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
         error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -952,7 +952,7 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['StorageAccount']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1082,7 +1082,7 @@ StorageAccounts.prototype.listKeys = function (resourceGroupName, accountName, o
         error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1102,7 +1102,7 @@ StorageAccounts.prototype.listKeys = function (resourceGroupName, accountName, o
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['StorageAccountKeys']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1222,7 +1222,7 @@ StorageAccounts.prototype.list = function (options, callback) {
         error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1242,7 +1242,7 @@ StorageAccounts.prototype.list = function (options, callback) {
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['StorageAccountListResult']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1370,7 +1370,7 @@ StorageAccounts.prototype.listByResourceGroup = function (resourceGroupName, opt
         error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1390,7 +1390,7 @@ StorageAccounts.prototype.listByResourceGroup = function (resourceGroupName, opt
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['StorageAccountListResult']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -1474,7 +1474,7 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
   var regenerateKey;
   if ((keyName !== null && keyName !== undefined))
   {
-      regenerateKey = new client._models['StorageAccountRegenerateKeyParameters']();
+      regenerateKey = new client.models['StorageAccountRegenerateKeyParameters']();
       regenerateKey.keyName = keyName;
   }
 
@@ -1517,7 +1517,7 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
   try {
     if (regenerateKey !== null && regenerateKey !== undefined) {
       var requestModelMapper = new client.models['StorageAccountRegenerateKeyParameters']().mapper();
-      requestModel = msRest.serialize(requestModelMapper, regenerateKey, 'regenerateKey', client);
+      requestModel = client.serialize(requestModelMapper, regenerateKey, 'regenerateKey');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -1555,7 +1555,7 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
         error.body = new client.models['CloudError']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['CloudError']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -1575,7 +1575,7 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['StorageAccountKeys']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));

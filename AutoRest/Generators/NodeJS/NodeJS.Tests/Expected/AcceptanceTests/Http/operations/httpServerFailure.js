@@ -108,7 +108,7 @@ HttpServerFailure.prototype.head501 = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -126,7 +126,7 @@ HttpServerFailure.prototype.head501 = function (options, callback) {
       result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         var resultMapper = new client.models['ErrorModel']().mapper();
-        result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+        result = client.deserialize(resultMapper, parsedResponse, 'result');
       }
     } catch (error) {
       var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -219,7 +219,7 @@ HttpServerFailure.prototype.get501 = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -237,7 +237,7 @@ HttpServerFailure.prototype.get501 = function (options, callback) {
       result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         var resultMapper = new client.models['ErrorModel']().mapper();
-        result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+        result = client.deserialize(resultMapper, parsedResponse, 'result');
       }
     } catch (error) {
       var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -325,7 +325,7 @@ HttpServerFailure.prototype.post505 = function (options, callback) {
           name: 'Boolean'
         }
       };
-      requestModel = msRest.serialize(requestModelMapper, booleanValue, 'booleanValue', client);
+      requestModel = client.serialize(requestModelMapper, booleanValue, 'booleanValue');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -363,7 +363,7 @@ HttpServerFailure.prototype.post505 = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -381,7 +381,7 @@ HttpServerFailure.prototype.post505 = function (options, callback) {
       result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         var resultMapper = new client.models['ErrorModel']().mapper();
-        result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+        result = client.deserialize(resultMapper, parsedResponse, 'result');
       }
     } catch (error) {
       var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -469,7 +469,7 @@ HttpServerFailure.prototype.delete505 = function (options, callback) {
           name: 'Boolean'
         }
       };
-      requestModel = msRest.serialize(requestModelMapper, booleanValue, 'booleanValue', client);
+      requestModel = client.serialize(requestModelMapper, booleanValue, 'booleanValue');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -507,7 +507,7 @@ HttpServerFailure.prototype.delete505 = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -525,7 +525,7 @@ HttpServerFailure.prototype.delete505 = function (options, callback) {
       result = JSON.parse(responseBody);
       if (parsedResponse !== null && parsedResponse !== undefined) {
         var resultMapper = new client.models['ErrorModel']().mapper();
-        result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+        result = client.deserialize(resultMapper, parsedResponse, 'result');
       }
     } catch (error) {
       var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));

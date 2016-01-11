@@ -110,7 +110,7 @@ EnumModel.prototype.getNotExpandable = function (options, callback) {
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -137,7 +137,7 @@ EnumModel.prototype.getNotExpandable = function (options, callback) {
               allowedValues: [ 'red color', 'green-color', 'blue_color' ]
             }
           };
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -232,7 +232,7 @@ EnumModel.prototype.putNotExpandable = function (stringBody, options, callback) 
           allowedValues: [ 'red color', 'green-color', 'blue_color' ]
         }
       };
-      requestModel = msRest.serialize(requestModelMapper, stringBody, 'stringBody', client);
+      requestModel = client.serialize(requestModelMapper, stringBody, 'stringBody');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -270,7 +270,7 @@ EnumModel.prototype.putNotExpandable = function (stringBody, options, callback) 
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 

@@ -49,6 +49,7 @@ function AutoRestSwaggerBATByteService(baseUri, options) {
 
   this.byteModel = new operations.ByteModel(this);
   this.models = models;
+  msRest.addSerializationMixin(this);
 }
 
 util.inherits(AutoRestSwaggerBATByteService, ServiceClient);

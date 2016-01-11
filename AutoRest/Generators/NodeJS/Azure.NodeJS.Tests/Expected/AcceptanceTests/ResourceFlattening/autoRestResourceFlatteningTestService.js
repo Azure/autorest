@@ -58,6 +58,7 @@ function AutoRestResourceFlatteningTestService(credentials, baseUri, options) {
     this.acceptLanguage = 'en-US';
   }
   this.models = models;
+  msRest.addSerializationMixin(this);
 }
 
 util.inherits(AutoRestResourceFlatteningTestService, ServiceClient);
@@ -152,7 +153,7 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (options, ca
           }
         }
       };
-      requestModel = msRest.serialize(requestModelMapper, resourceArray, 'resourceArray', client);
+      requestModel = client.serialize(requestModelMapper, resourceArray, 'resourceArray');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -190,7 +191,7 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (options, ca
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -302,7 +303,7 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -336,7 +337,7 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
               }
             }
           };
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -441,7 +442,7 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (option
           }
         }
       };
-      requestModel = msRest.serialize(requestModelMapper, resourceDictionary, 'resourceDictionary', client);
+      requestModel = client.serialize(requestModelMapper, resourceDictionary, 'resourceDictionary');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -479,7 +480,7 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (option
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -591,7 +592,7 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -625,7 +626,7 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
               }
             }
           };
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
@@ -735,7 +736,7 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
   try {
     if (resourceComplexObject !== null && resourceComplexObject !== undefined) {
       var requestModelMapper = new client.models['ResourceCollection']().mapper();
-      requestModel = msRest.serialize(requestModelMapper, resourceComplexObject, 'resourceComplexObject', client);
+      requestModel = client.serialize(requestModelMapper, resourceComplexObject, 'resourceComplexObject');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
@@ -773,7 +774,7 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -886,7 +887,7 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
         error.body = new client.models['ErrorModel']();
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
           var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = msRest.deserialize(resultMapper, parsedErrorResponse, 'error.body', client);
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
@@ -906,7 +907,7 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
         result = JSON.parse(responseBody);
         if (parsedResponse !== null && parsedResponse !== undefined) {
           var resultMapper = new client.models['ResourceCollection']().mapper();
-          result = msRest.deserialize(resultMapper, parsedResponse, 'result', client);
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));

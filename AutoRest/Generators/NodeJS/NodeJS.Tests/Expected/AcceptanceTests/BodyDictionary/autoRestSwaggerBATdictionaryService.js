@@ -49,6 +49,7 @@ function AutoRestSwaggerBATdictionaryService(baseUri, options) {
 
   this.dictionary = new operations.Dictionary(this);
   this.models = models;
+  msRest.addSerializationMixin(this);
 }
 
 util.inherits(AutoRestSwaggerBATdictionaryService, ServiceClient);

@@ -15,6 +15,7 @@
 'use strict';
 
 var util = require('util');
+var msRest = require('ms-rest');
 var msRestAzure = require('ms-rest-azure');
 var ServiceClient = msRestAzure.AzureServiceClient;
 
@@ -58,6 +59,7 @@ function AutoRestHeadTestService(credentials, baseUri, options) {
   }
   this.httpSuccess = new operations.HttpSuccess(this);
   this.models = models;
+  msRest.addSerializationMixin(this);
 }
 
 util.inherits(AutoRestHeadTestService, ServiceClient);
