@@ -190,7 +190,7 @@ class ClientRequest(requests.Request):
         query = '?' + '&'.join(query_params)
         self.url = self.url + query
 
-    def add_content(self, data, kwargs):
+    def add_content(self, data):
         """Add a body to the request.
 
         :param data: Request body data, can be a json serializable
@@ -199,11 +199,8 @@ class ClientRequest(requests.Request):
         if data is None and self.method == 'GET':
             return
 
-        #if kwargs.get('files'):
-        #    self.data = kwargs['files']
-        #    return
         try:
-            self.data = data #json.dumps(data)
+            self.data = json.dumps(data)
             self.headers['Content-Length'] = len(self.data)
         except TypeError:
             self.data = data
