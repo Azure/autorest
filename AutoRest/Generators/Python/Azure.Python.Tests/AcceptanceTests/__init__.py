@@ -24,7 +24,7 @@ if __name__ == '__main__':
 
     cwd = dirname(realpath(__file__))
 
-    server = subprocess.Popen("node ../../../../AutoRest/TestServer/server/startup/www.js")
+    server = subprocess.Popen("node ../../../../AutoRest/TestServer/server/startup/www.js", shell=True)
     try:
         runner = TextTestRunner(verbosity=2)
 
