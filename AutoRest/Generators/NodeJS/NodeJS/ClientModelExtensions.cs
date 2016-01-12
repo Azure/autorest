@@ -6,7 +6,7 @@ using System.Globalization;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
-using System.Text.RegularExpressions;
+using Microsoft.Rest.Generator.NodeJS.Properties;
 namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
 {
     using System.Collections.Generic;
@@ -714,6 +714,18 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 {
                     builder.AppendLine("type: {").Indent().AppendLine("name: 'TimeSpan'").Outdent().AppendLine("}");
                 }
+                else if (primary == PrimaryType.Object)
+                {
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'Object'").Outdent().AppendLine("}");
+                }
+                else if (primary == PrimaryType.Stream)
+                {
+                    builder.AppendLine("type: {").Indent().AppendLine("name: 'Stream'").Outdent().AppendLine("}");
+                }
+                else
+                {
+                    throw new NotImplementedException(string.Format(CultureInfo.InvariantCulture, Resources.InvalidType, primary));
+                }
             }
             else if (enumType != null)
             {
@@ -812,6 +824,10 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                     // end of modelProperties and type
                     builder.Outdent().AppendLine("}").Outdent().AppendLine("}");
                 }
+            }
+            else
+            {
+                throw new NotImplementedException(string.Format(CultureInfo.InvariantCulture, Resources.InvalidType, type));
             }
             return builder.ToString();
         }

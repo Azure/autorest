@@ -10,8 +10,6 @@
 
 'use strict';
 
-var models = require('./index');
-
 var util = require('util');
 
 /**
@@ -25,6 +23,8 @@ var util = require('util');
  */
 function ProductListResult() {
 }
+
+util.inherits(ProductListResult, Array);
 
 ProductListResult.prototype.mapper = function () {
   return {

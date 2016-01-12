@@ -17,7 +17,6 @@
 var util = require('util');
 var msRest = require('../../../../lib/msRest');
 var ServiceClient = msRest.ServiceClient;
-var WebResource = msRest.WebResource;
 
 var models = require('./models');
 

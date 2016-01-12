@@ -12,11 +12,6 @@
 @EmptyLine
 'use strict';
 @EmptyLine
-@if (Model.ContainsPropertiesInCompositeType() || Model.BaseModelType != null)
-{
-@:var models = require('./index');
-@EmptyLine
-}
 var util = require('util');
 @EmptyLine
 @if (Model.ContainsDurationProperty())
