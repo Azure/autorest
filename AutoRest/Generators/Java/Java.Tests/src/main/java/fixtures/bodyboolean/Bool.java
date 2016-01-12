@@ -18,6 +18,7 @@ import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
+import retrofit.http.Headers;
 import retrofit.http.PUT;
 
 /**
@@ -30,21 +31,27 @@ public interface Bool {
      * used by Retrofit to perform actually REST calls.
      */
     interface BoolService {
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("bool/true")
         Call<ResponseBody> getTrue();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("bool/true")
         Call<ResponseBody> putTrue(@Body boolean boolBody);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("bool/false")
         Call<ResponseBody> getFalse();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("bool/false")
         Call<ResponseBody> putFalse(@Body boolean boolBody);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("bool/null")
         Call<ResponseBody> getNull();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("bool/invalid")
         Call<ResponseBody> getInvalid();
 

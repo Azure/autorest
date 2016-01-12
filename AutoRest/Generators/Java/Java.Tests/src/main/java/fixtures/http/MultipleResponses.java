@@ -20,6 +20,7 @@ import fixtures.http.models.MyException;
 import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.GET;
+import retrofit.http.Headers;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -31,105 +32,139 @@ public interface MultipleResponses {
      * used by Retrofit to perform actually REST calls.
      */
     interface MultipleResponsesService {
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/204/none/default/Error/response/200/valid")
         Call<ResponseBody> get200Model204NoModelDefaultError200Valid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/204/none/default/Error/response/204/none")
         Call<ResponseBody> get200Model204NoModelDefaultError204Valid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/204/none/default/Error/response/201/valid")
         Call<ResponseBody> get200Model204NoModelDefaultError201Invalid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/204/none/default/Error/response/202/none")
         Call<ResponseBody> get200Model204NoModelDefaultError202None();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/204/none/default/Error/response/400/valid")
         Call<ResponseBody> get200Model204NoModelDefaultError400Valid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/201/B/default/Error/response/200/valid")
         Call<ResponseBody> get200Model201ModelDefaultError200Valid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/201/B/default/Error/response/201/valid")
         Call<ResponseBody> get200Model201ModelDefaultError201Valid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/201/B/default/Error/response/400/valid")
         Call<ResponseBody> get200Model201ModelDefaultError400Valid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/201/C/404/D/default/Error/response/200/valid")
         Call<ResponseBody> get200ModelA201ModelC404ModelDDefaultError200Valid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/201/C/404/D/default/Error/response/201/valid")
         Call<ResponseBody> get200ModelA201ModelC404ModelDDefaultError201Valid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/201/C/404/D/default/Error/response/404/valid")
         Call<ResponseBody> get200ModelA201ModelC404ModelDDefaultError404Valid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/201/C/404/D/default/Error/response/400/valid")
         Call<ResponseBody> get200ModelA201ModelC404ModelDDefaultError400Valid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/202/none/204/none/default/Error/response/202/none")
         Call<ResponseBody> get202None204NoneDefaultError202None();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/202/none/204/none/default/Error/response/204/none")
         Call<ResponseBody> get202None204NoneDefaultError204None();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/202/none/204/none/default/Error/response/400/valid")
         Call<ResponseBody> get202None204NoneDefaultError400Valid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/202/none/204/none/default/none/response/202/invalid")
         Call<ResponseBody> get202None204NoneDefaultNone202Invalid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/202/none/204/none/default/none/response/204/none")
         Call<ResponseBody> get202None204NoneDefaultNone204None();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/202/none/204/none/default/none/response/400/none")
         Call<ResponseBody> get202None204NoneDefaultNone400None();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/202/none/204/none/default/none/response/400/invalid")
         Call<ResponseBody> get202None204NoneDefaultNone400Invalid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/default/A/response/200/valid")
         Call<ResponseBody> getDefaultModelA200Valid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/default/A/response/200/none")
         Call<ResponseBody> getDefaultModelA200None();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/default/A/response/400/valid")
         Call<ResponseBody> getDefaultModelA400Valid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/default/A/response/400/none")
         Call<ResponseBody> getDefaultModelA400None();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/default/none/response/200/invalid")
         Call<ResponseBody> getDefaultNone200Invalid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/default/none/response/200/none")
         Call<ResponseBody> getDefaultNone200None();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/default/none/response/400/invalid")
         Call<ResponseBody> getDefaultNone400Invalid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/default/none/response/400/none")
         Call<ResponseBody> getDefaultNone400None();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/response/200/none")
         Call<ResponseBody> get200ModelA200None();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/response/200/valid")
         Call<ResponseBody> get200ModelA200Valid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/response/200/invalid")
         Call<ResponseBody> get200ModelA200Invalid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/response/400/none")
         Call<ResponseBody> get200ModelA400None();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/response/400/valid")
         Call<ResponseBody> get200ModelA400Valid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/response/400/invalid")
         Call<ResponseBody> get200ModelA400Invalid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/payloads/200/A/response/202/valid")
         Call<ResponseBody> get200ModelA202Valid();
 

@@ -22,6 +22,7 @@ import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
+import retrofit.http.Headers;
 import retrofit.http.Path;
 import retrofit.http.PUT;
 import retrofit.http.Query;
@@ -84,9 +85,11 @@ public interface AutoRestValidationTest {
      * used by Retrofit to perform actually REST calls.
      */
     interface AutoRestValidationTestService {
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("fakepath/{subscriptionId}/{resourceGroupName}/{id}")
         Call<ResponseBody> validationOfMethodParameters(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("id") int id, @Query("apiVersion") String apiVersion);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("fakepath/{subscriptionId}/{resourceGroupName}/{id}")
         Call<ResponseBody> validationOfBody(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("id") int id, @Body Product body, @Query("apiVersion") String apiVersion);
 

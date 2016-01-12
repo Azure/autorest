@@ -83,6 +83,7 @@ if(!property.IsReadOnly)
     interface @Model.ServiceClientServiceType {
     @foreach (var method in Model.MethodTemplateModels)
     {
+    @:    @@Headers("Content-Type: @method.RequestContentType")
     if (method.HttpMethod == Microsoft.Rest.Generator.ClientModel.HttpMethod.Delete)
     {
     @:    @@HTTP(path = "@(method.Url.TrimStart('/'))", method = "DELETE", hasBody = true)

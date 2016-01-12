@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.util.Map;
 import retrofit.Call;
 import retrofit.http.GET;
+import retrofit.http.Headers;
 
 /**
  * The interface for AutoRestReportService class.
@@ -52,6 +53,7 @@ public interface AutoRestReportService {
      * used by Retrofit to perform actually REST calls.
      */
     interface AutoRestReportServiceService {
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("report")
         Call<ResponseBody> getReport();
 

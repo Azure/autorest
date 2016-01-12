@@ -28,6 +28,7 @@ import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.Header;
+import retrofit.http.Headers;
 import retrofit.http.PUT;
 
 /**
@@ -99,21 +100,27 @@ public interface AutoRestResourceFlatteningTestService {
      * used by Retrofit to perform actually REST calls.
      */
     interface AutoRestResourceFlatteningTestServiceService {
+        @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("azure/resource-flatten/array")
         Call<ResponseBody> putArray(@Body List<Resource> resourceArray, @Header("accept-language") String acceptLanguage);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azure/resource-flatten/array")
         Call<ResponseBody> getArray(@Header("accept-language") String acceptLanguage);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("azure/resource-flatten/dictionary")
         Call<ResponseBody> putDictionary(@Body Map<String, FlattenedProduct> resourceDictionary, @Header("accept-language") String acceptLanguage);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azure/resource-flatten/dictionary")
         Call<ResponseBody> getDictionary(@Header("accept-language") String acceptLanguage);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("azure/resource-flatten/resourcecollection")
         Call<ResponseBody> putResourceCollection(@Body ResourceCollection resourceComplexObject, @Header("accept-language") String acceptLanguage);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azure/resource-flatten/resourcecollection")
         Call<ResponseBody> getResourceCollection(@Header("accept-language") String acceptLanguage);
 

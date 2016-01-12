@@ -19,6 +19,7 @@ import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.HEAD;
+import retrofit.http.Headers;
 import retrofit.http.HTTP;
 import retrofit.http.PATCH;
 import retrofit.http.POST;
@@ -34,27 +35,35 @@ public interface HttpRetry {
      * used by Retrofit to perform actually REST calls.
      */
     interface HttpRetryService {
+        @Headers("Content-Type: application/json; charset=utf-8")
         @HEAD("http/retry/408")
         Call<Void> head408();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("http/retry/500")
         Call<ResponseBody> put500(@Body Boolean booleanValue);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @PATCH("http/retry/500")
         Call<ResponseBody> patch500(@Body Boolean booleanValue);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/retry/502")
         Call<ResponseBody> get502();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @POST("http/retry/503")
         Call<ResponseBody> post503(@Body Boolean booleanValue);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @HTTP(path = "http/retry/503", method = "DELETE", hasBody = true)
         Call<ResponseBody> delete503(@Body Boolean booleanValue);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("http/retry/504")
         Call<ResponseBody> put504(@Body Boolean booleanValue);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @PATCH("http/retry/504")
         Call<ResponseBody> patch504(@Body Boolean booleanValue);
 

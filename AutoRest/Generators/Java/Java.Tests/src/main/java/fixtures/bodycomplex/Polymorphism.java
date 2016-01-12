@@ -19,6 +19,7 @@ import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
+import retrofit.http.Headers;
 import retrofit.http.PUT;
 
 /**
@@ -31,12 +32,15 @@ public interface Polymorphism {
      * used by Retrofit to perform actually REST calls.
      */
     interface PolymorphismService {
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("complex/polymorphism/valid")
         Call<ResponseBody> getValid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("complex/polymorphism/valid")
         Call<ResponseBody> putValid(@Body Fish complexBody);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("complex/polymorphism/missingrequired/invalid")
         Call<ResponseBody> putValidMissingRequired(@Body Fish complexBody);
 

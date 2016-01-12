@@ -464,6 +464,7 @@ namespace Microsoft.Rest.Generator.Java
                 HashSet<string> imports = new HashSet<string>();
                 // static imports
                 imports.Add("retrofit.Call");
+                imports.Add("retrofit.http.Headers");
                 if (this.HttpMethod != HttpMethod.Head)
                 {
                     imports.Add("com.squareup.okhttp.ResponseBody");
