@@ -25,6 +25,7 @@ import org.joda.time.Period;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
+import retrofit.http.Headers;
 import retrofit.http.PUT;
 
 /**
@@ -37,195 +38,259 @@ public interface Dictionary {
      * used by Retrofit to perform actually REST calls.
      */
     interface DictionaryService {
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/null")
         Call<ResponseBody> getNull();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/empty")
         Call<ResponseBody> getEmpty();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("dictionary/empty")
         Call<ResponseBody> putEmpty(@Body Map<String, String> arrayBody);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/nullvalue")
         Call<ResponseBody> getNullValue();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/nullkey")
         Call<ResponseBody> getNullKey();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/keyemptystring")
         Call<ResponseBody> getEmptyStringKey();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/invalid")
         Call<ResponseBody> getInvalid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/prim/boolean/tfft")
         Call<ResponseBody> getBooleanTfft();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("dictionary/prim/boolean/tfft")
         Call<ResponseBody> putBooleanTfft(@Body Map<String, Boolean> arrayBody);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/prim/boolean/true.null.false")
         Call<ResponseBody> getBooleanInvalidNull();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/prim/boolean/true.boolean.false")
         Call<ResponseBody> getBooleanInvalidString();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/prim/integer/1.-1.3.300")
         Call<ResponseBody> getIntegerValid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("dictionary/prim/integer/1.-1.3.300")
         Call<ResponseBody> putIntegerValid(@Body Map<String, Integer> arrayBody);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/prim/integer/1.null.zero")
         Call<ResponseBody> getIntInvalidNull();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/prim/integer/1.integer.0")
         Call<ResponseBody> getIntInvalidString();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/prim/long/1.-1.3.300")
         Call<ResponseBody> getLongValid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("dictionary/prim/long/1.-1.3.300")
         Call<ResponseBody> putLongValid(@Body Map<String, Long> arrayBody);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/prim/long/1.null.zero")
         Call<ResponseBody> getLongInvalidNull();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/prim/long/1.integer.0")
         Call<ResponseBody> getLongInvalidString();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/prim/float/0--0.01-1.2e20")
         Call<ResponseBody> getFloatValid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("dictionary/prim/float/0--0.01-1.2e20")
         Call<ResponseBody> putFloatValid(@Body Map<String, Double> arrayBody);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/prim/float/0.0-null-1.2e20")
         Call<ResponseBody> getFloatInvalidNull();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/prim/float/1.number.0")
         Call<ResponseBody> getFloatInvalidString();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/prim/double/0--0.01-1.2e20")
         Call<ResponseBody> getDoubleValid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("dictionary/prim/double/0--0.01-1.2e20")
         Call<ResponseBody> putDoubleValid(@Body Map<String, Double> arrayBody);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/prim/double/0.0-null-1.2e20")
         Call<ResponseBody> getDoubleInvalidNull();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/prim/double/1.number.0")
         Call<ResponseBody> getDoubleInvalidString();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/prim/string/foo1.foo2.foo3")
         Call<ResponseBody> getStringValid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("dictionary/prim/string/foo1.foo2.foo3")
         Call<ResponseBody> putStringValid(@Body Map<String, String> arrayBody);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/prim/string/foo.null.foo2")
         Call<ResponseBody> getStringWithNull();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/prim/string/foo.123.foo2")
         Call<ResponseBody> getStringWithInvalid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/prim/date/valid")
         Call<ResponseBody> getDateValid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("dictionary/prim/date/valid")
         Call<ResponseBody> putDateValid(@Body Map<String, LocalDate> arrayBody);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/prim/date/invalidnull")
         Call<ResponseBody> getDateInvalidNull();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/prim/date/invalidchars")
         Call<ResponseBody> getDateInvalidChars();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/prim/date-time/valid")
         Call<ResponseBody> getDateTimeValid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("dictionary/prim/date-time/valid")
         Call<ResponseBody> putDateTimeValid(@Body Map<String, DateTime> arrayBody);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/prim/date-time/invalidnull")
         Call<ResponseBody> getDateTimeInvalidNull();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/prim/date-time/invalidchars")
         Call<ResponseBody> getDateTimeInvalidChars();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/prim/date-time-rfc1123/valid")
         Call<ResponseBody> getDateTimeRfc1123Valid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("dictionary/prim/date-time-rfc1123/valid")
         Call<ResponseBody> putDateTimeRfc1123Valid(@Body Map<String, DateTimeRfc1123> arrayBody);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/prim/duration/valid")
         Call<ResponseBody> getDurationValid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("dictionary/prim/duration/valid")
         Call<ResponseBody> putDurationValid(@Body Map<String, Period> arrayBody);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/prim/byte/valid")
         Call<ResponseBody> getByteValid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("dictionary/prim/byte/valid")
         Call<ResponseBody> putByteValid(@Body Map<String, byte[]> arrayBody);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/prim/byte/invalidnull")
         Call<ResponseBody> getByteInvalidNull();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/complex/null")
         Call<ResponseBody> getComplexNull();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/complex/empty")
         Call<ResponseBody> getComplexEmpty();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/complex/itemnull")
         Call<ResponseBody> getComplexItemNull();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/complex/itemempty")
         Call<ResponseBody> getComplexItemEmpty();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/complex/valid")
         Call<ResponseBody> getComplexValid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("dictionary/complex/valid")
         Call<ResponseBody> putComplexValid(@Body Map<String, Widget> arrayBody);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/array/null")
         Call<ResponseBody> getArrayNull();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/array/empty")
         Call<ResponseBody> getArrayEmpty();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/array/itemnull")
         Call<ResponseBody> getArrayItemNull();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/array/itemempty")
         Call<ResponseBody> getArrayItemEmpty();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/array/valid")
         Call<ResponseBody> getArrayValid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("dictionary/array/valid")
         Call<ResponseBody> putArrayValid(@Body Map<String, List<String>> arrayBody);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/dictionary/null")
         Call<ResponseBody> getDictionaryNull();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/dictionary/empty")
         Call<ResponseBody> getDictionaryEmpty();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/dictionary/itemnull")
         Call<ResponseBody> getDictionaryItemNull();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/dictionary/itemempty")
         Call<ResponseBody> getDictionaryItemEmpty();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("dictionary/dictionary/valid")
         Call<ResponseBody> getDictionaryValid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("dictionary/dictionary/valid")
         Call<ResponseBody> putDictionaryValid(@Body Map<String, Map<String, String>> arrayBody);
 

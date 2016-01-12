@@ -408,7 +408,9 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 Assert.Throws<RestException>(() => client.Datetimerfc1123.GetInvalid());
                 Assert.Throws<RestException>(() => client.Datetimerfc1123.GetUnderflow());
                 Assert.Throws<RestException>(() => client.Datetimerfc1123.GetOverflow());
-                client.Datetimerfc1123.GetUtcLowercaseMaxDateTime();
+                DateTime? d = client.Datetimerfc1123.GetUtcLowercaseMaxDateTime();
+                Assert.Equal(DateTimeKind.Utc, d.Value.Kind);
+
                 client.Datetimerfc1123.GetUtcUppercaseMaxDateTime();
                 client.Datetimerfc1123.GetUtcMinDateTime();
 
@@ -1448,6 +1450,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                         "\"" + responseDateTimeRfc1123.Response.Headers.GetValues("value").FirstOrDefault() + "\""));
                 Assert.Equal(new DateTime(2010, 1, 1, 12, 34, 56, DateTimeKind.Utc),
                     responseDateTimeRfc1123.Headers.Value);
+                Assert.Equal(DateTimeKind.Utc, responseDateTimeRfc1123.Headers.Value.Value.Kind);
 
                 responseDateTimeRfc1123 = client.Header.ResponseDatetimeRfc1123WithHttpMessagesAsync("min").Result;
                 Assert.Equal(DateTimeOffset.MinValue,
@@ -1455,6 +1458,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                         "\"" + responseDateTimeRfc1123.Response.Headers.GetValues("value").FirstOrDefault() + "\""));
                 Assert.Equal(DateTime.MinValue,
                     responseDateTimeRfc1123.Headers.Value);
+                Assert.Equal(DateTimeKind.Utc, responseDateTimeRfc1123.Headers.Value.Value.Kind);
 
                 // POST param/prim/duration
                 client.Header.ParamDuration("valid", new TimeSpan(123, 22, 14, 12, 11));

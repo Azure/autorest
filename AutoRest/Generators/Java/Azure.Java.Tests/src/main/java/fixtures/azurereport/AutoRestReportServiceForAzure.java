@@ -24,6 +24,7 @@ import java.util.Map;
 import retrofit.Call;
 import retrofit.http.GET;
 import retrofit.http.Header;
+import retrofit.http.Headers;
 
 /**
  * The interface for AutoRestReportServiceForAzure class.
@@ -94,6 +95,7 @@ public interface AutoRestReportServiceForAzure {
      * used by Retrofit to perform actually REST calls.
      */
     interface AutoRestReportServiceForAzureService {
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("report/azure")
         Call<ResponseBody> getReport(@Header("accept-language") String acceptLanguage);
 

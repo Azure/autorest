@@ -192,12 +192,12 @@ public final class MicrosoftAzureTestUrlImpl extends AzureServiceClient implemen
     }
 
     private void initialize() {
-        if (this.credentials != null) {
-            this.credentials.applyCredentialsFilter(this.client);
-        }
         this.apiVersion = "2014-04-01-preview";
         this.acceptLanguage = "en-US";
         this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
+        if (this.credentials != null) {
+            this.credentials.applyCredentialsFilter(this.client);
+        }
         this.azureClient = new AzureClient(client, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
         this.retrofitBuilder.baseUrl(baseUri);
