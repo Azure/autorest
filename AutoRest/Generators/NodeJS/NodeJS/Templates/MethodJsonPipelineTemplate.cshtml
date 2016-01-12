@@ -18,9 +18,11 @@ return client.pipeline(httpRequest, function (err, response, responseBody) {
     var parsedErrorResponse;
     try {
       parsedErrorResponse = JSON.parse(responseBody);
-      if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
-      error.code = parsedErrorResponse.code;
-      error.message = parsedErrorResponse.message;
+      if (parsedErrorResponse) {
+        if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+        if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+        if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+      }
   @if (Model.DefaultResponse.Body != null)
   {
       var deserializeErrorBody = Model.GetDeserializationString(Model.DefaultResponse.Body, "error.body", "parsedErrorResponse");
