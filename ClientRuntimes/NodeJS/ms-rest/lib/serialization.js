@@ -5,6 +5,7 @@
 
 var util = require('util');
 var moment = require('moment');
+var stream = require('stream');
 
 /**
  * Serializes the JSON Object. It serializes Buffer object to a 
@@ -64,7 +65,7 @@ exports.serialize = function (mapper, object, objectName) {
   if (mapper.defaultValue && (object === null || object === undefined)) object = mapper.defaultValue;
   //Validate Constraints if any
   validateConstraints.call(this, mapper, object, objectName);
-  if (mapperType.match(/^(Number|String|Boolean|Object)$/ig) !== null) {
+  if (mapperType.match(/^(Number|String|Boolean|Object|Stream)$/ig) !== null) {
     payload = serializeBasicTypes.call(this, mapperType, objectName, object);
   } else if (mapperType.match(/^Enum$/ig) !== null) {
     payload = serializeEnumType.call(this, objectName, mapper.type.allowedValues, object);
@@ -269,6 +270,10 @@ function serializeBasicTypes(typeName, objectName, value) {
       if (typeof value !== 'object') {
         throw new Error(util.format('%s must be of type object.', objectName));
       }
+    }  else if (typeName.match(/^Stream$/ig) !== null) {
+      if (value instanceof stream.Stream) {
+        throw new Error(util.format('%s must be of type stream.', objectName));
+      }
     }
   }
   return value;
@@ -343,7 +348,7 @@ exports.deserialize = function (mapper, responseBody, objectName) {
   if (!objectName) objectName = objectNameFromSerializedName(mapper.serializedName);
   if (mapperType.match(/^Sequence$/ig) !== null) payload = [];
   
-  if (mapperType.match(/^(Number|String|Boolean|Enum|Object)$/ig) !== null) {
+  if (mapperType.match(/^(Number|String|Boolean|Enum|Object|Stream)$/ig) !== null) {
     payload = responseBody;
   } else if (mapperType.match(/^(Date|DateTime|DateTimeRfc1123)$/ig) !== null) {
     payload = new Date(responseBody);
