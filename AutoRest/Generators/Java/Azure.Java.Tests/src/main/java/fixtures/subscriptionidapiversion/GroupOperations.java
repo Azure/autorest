@@ -19,6 +19,7 @@ import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.GET;
 import retrofit.http.Header;
+import retrofit.http.Headers;
 import retrofit.http.Path;
 import retrofit.http.Query;
 
@@ -32,6 +33,7 @@ public interface GroupOperations {
      * used by Retrofit to perform actually REST calls.
      */
     interface GroupService {
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}")
         Call<ResponseBody> getSampleResourceGroup(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
 

@@ -18,6 +18,7 @@ import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.GET;
 import retrofit.http.Header;
+import retrofit.http.Headers;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -29,9 +30,11 @@ public interface XMsClientRequestIdOperations {
      * used by Retrofit to perform actually REST calls.
      */
     interface XMsClientRequestIdService {
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azurespecials/overwrite/x-ms-client-request-id/method/")
         Call<ResponseBody> get(@Header("accept-language") String acceptLanguage);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azurespecials/overwrite/x-ms-client-request-id/via-param/method/")
         Call<ResponseBody> paramGet(@Header("x-ms-client-request-id") String xMsClientRequestId, @Header("accept-language") String acceptLanguage);
 

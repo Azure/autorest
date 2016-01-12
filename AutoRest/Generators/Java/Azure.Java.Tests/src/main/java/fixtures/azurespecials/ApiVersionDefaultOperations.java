@@ -18,6 +18,7 @@ import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.GET;
 import retrofit.http.Header;
+import retrofit.http.Headers;
 import retrofit.http.Query;
 
 /**
@@ -30,15 +31,19 @@ public interface ApiVersionDefaultOperations {
      * used by Retrofit to perform actually REST calls.
      */
     interface ApiVersionDefaultService {
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azurespecials/apiVersion/method/string/none/query/global/2015-07-01-preview")
         Call<ResponseBody> getMethodGlobalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azurespecials/apiVersion/method/string/none/query/globalNotProvided/2015-07-01-preview")
         Call<ResponseBody> getMethodGlobalNotProvidedValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azurespecials/apiVersion/path/string/none/query/global/2015-07-01-preview")
         Call<ResponseBody> getPathGlobalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("azurespecials/apiVersion/swagger/string/none/query/global/2015-07-01-preview")
         Call<ResponseBody> getSwaggerGlobalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
 

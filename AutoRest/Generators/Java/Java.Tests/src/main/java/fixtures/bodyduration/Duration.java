@@ -19,6 +19,7 @@ import org.joda.time.Period;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
+import retrofit.http.Headers;
 import retrofit.http.PUT;
 
 /**
@@ -31,15 +32,19 @@ public interface Duration {
      * used by Retrofit to perform actually REST calls.
      */
     interface DurationService {
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("duration/null")
         Call<ResponseBody> getNull();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("duration/positiveduration")
         Call<ResponseBody> putPositiveDuration(@Body Period durationBody);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("duration/positiveduration")
         Call<ResponseBody> getPositiveDuration();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("duration/invalid")
         Call<ResponseBody> getInvalid();
 
