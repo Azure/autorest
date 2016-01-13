@@ -90,7 +90,9 @@ Header.prototype.customNamedRequestId = function (fooClientRequestId, options, c
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['foo-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
+      httpRequest.headers['foo-client-request-id'] = this.client.clientRequestId;
+  }
   if (fooClientRequestId !== undefined && fooClientRequestId !== null) {
     httpRequest.headers['foo-client-request-id'] = fooClientRequestId;
   }

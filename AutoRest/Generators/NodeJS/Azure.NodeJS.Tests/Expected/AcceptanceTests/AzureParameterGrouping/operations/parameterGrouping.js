@@ -140,7 +140,9 @@ ParameterGrouping.prototype.postRequired = function (parameterGroupingPostRequir
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
+      httpRequest.headers['x-ms-client-request-id'] = this.client.clientRequestId;
+  }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
@@ -306,7 +308,9 @@ ParameterGrouping.prototype.postOptional = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
+      httpRequest.headers['x-ms-client-request-id'] = this.client.clientRequestId;
+  }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
@@ -480,7 +484,9 @@ ParameterGrouping.prototype.postMultipleParameterGroups = function (options, cal
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
+      httpRequest.headers['x-ms-client-request-id'] = this.client.clientRequestId;
+  }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
@@ -626,7 +632,9 @@ ParameterGrouping.prototype.postSharedParameterGroupObject = function (options, 
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
+      httpRequest.headers['x-ms-client-request-id'] = this.client.clientRequestId;
+  }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }

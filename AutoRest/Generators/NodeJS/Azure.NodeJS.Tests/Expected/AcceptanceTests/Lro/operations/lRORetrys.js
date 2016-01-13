@@ -180,7 +180,9 @@ LRORetrys.prototype.beginPut201CreatingSucceeded200 = function (options, callbac
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
+      httpRequest.headers['x-ms-client-request-id'] = this.client.clientRequestId;
+  }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
@@ -434,7 +436,9 @@ LRORetrys.prototype.beginPutAsyncRelativeRetrySucceeded = function (options, cal
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
+      httpRequest.headers['x-ms-client-request-id'] = this.client.clientRequestId;
+  }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
@@ -654,7 +658,9 @@ LRORetrys.prototype.beginDeleteProvisioning202Accepted200Succeeded = function (o
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
+      httpRequest.headers['x-ms-client-request-id'] = this.client.clientRequestId;
+  }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
@@ -857,7 +863,9 @@ LRORetrys.prototype.beginDelete202Retry200 = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
+      httpRequest.headers['x-ms-client-request-id'] = this.client.clientRequestId;
+  }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
@@ -1026,7 +1034,9 @@ LRORetrys.prototype.beginDeleteAsyncRelativeRetrySucceeded = function (options, 
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
+      httpRequest.headers['x-ms-client-request-id'] = this.client.clientRequestId;
+  }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
@@ -1212,7 +1222,9 @@ LRORetrys.prototype.beginPost202Retry200 = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
+      httpRequest.headers['x-ms-client-request-id'] = this.client.clientRequestId;
+  }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
@@ -1416,7 +1428,9 @@ LRORetrys.prototype.beginPostAsyncRelativeRetrySucceeded = function (options, ca
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
+      httpRequest.headers['x-ms-client-request-id'] = this.client.clientRequestId;
+  }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
   }
