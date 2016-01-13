@@ -17,7 +17,7 @@ declare class MicrosoftAzureTestUrl {
      * Initializes a new instance of the MicrosoftAzureTestUrl class.
      * @constructor
      *
-     * @param {Credentials} credentials The management credentials for Azure.
+     * @param {Credentials} credentials Gets Azure subscription credentials.
      *
      * @param {String} subscriptionId Subscription Id.
      *
@@ -43,6 +43,8 @@ declare class MicrosoftAzureTestUrl {
     acceptLanguage: string;
 
     longRunningOperationRetryTimeout: number;
+
+    clientRequestId: string;
 
     // Operation groups
     group: operations.Group;

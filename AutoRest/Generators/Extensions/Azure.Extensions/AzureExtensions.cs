@@ -287,7 +287,7 @@ namespace Microsoft.Rest.Generator.Azure
                 Type = PrimaryType.Credentials,
                 IsRequired = true,
                 IsReadOnly = true,
-                Documentation = "The management credentials for Azure."
+                Documentation = "Gets Azure subscription credentials."
             });
 
             serviceClient.Properties.Add(new Property
@@ -295,7 +295,15 @@ namespace Microsoft.Rest.Generator.Azure
                 Name = "LongRunningOperationRetryTimeout",
                 SerializedName = "longRunningOperationRetryTimeout",
                 Type = PrimaryType.Int,
-                Documentation = "The retry timeout for Long Running Operations."
+                Documentation = "Gets or sets the retry timeout for Long Running Operations."
+            });
+
+            serviceClient.Properties.Add(new Property
+            {
+                Name = "ClientRequestId",
+                SerializedName = "x-ms-client-request-id",
+                Type = PrimaryType.String,
+                Documentation = "Gets or sets the unique x-ms-client-request-id value to be used on every request."
             });
         }
 

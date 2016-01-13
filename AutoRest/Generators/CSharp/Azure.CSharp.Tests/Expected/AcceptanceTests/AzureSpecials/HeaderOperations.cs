@@ -92,7 +92,10 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new Uri(_url);
             // Set Headers
-            _httpRequest.Headers.TryAddWithoutValidation("foo-client-request-id", Guid.NewGuid().ToString());
+            if (!string.IsNullOrEmpty(this.Client.ClientRequestId))
+            {
+                _httpRequest.Headers.TryAddWithoutValidation("foo-client-request-id", this.Client.ClientRequestId);
+            }
             if (fooClientRequestId != null)
             {
                 if (_httpRequest.Headers.Contains("foo-client-request-id"))

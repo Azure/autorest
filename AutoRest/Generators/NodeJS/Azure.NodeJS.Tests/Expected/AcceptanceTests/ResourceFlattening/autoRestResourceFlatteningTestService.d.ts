@@ -17,7 +17,7 @@ declare class AutoRestResourceFlatteningTestService {
      * Initializes a new instance of the AutoRestResourceFlatteningTestService class.
      * @constructor
      *
-     * @param {Credentials} credentials The management credentials for Azure.
+     * @param {Credentials} credentials Gets Azure subscription credentials.
      *
      * @param {string} [baseUri] - The base URI of the service.
      *
@@ -37,6 +37,8 @@ declare class AutoRestResourceFlatteningTestService {
     acceptLanguage: string;
 
     longRunningOperationRetryTimeout: number;
+
+    clientRequestId: string;
 
             /**
          * Put External Resource as an Array

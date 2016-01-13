@@ -231,8 +231,12 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             get
             {
                 var sb= new IndentedStringBuilder();
-                sb.AppendLine("_httpRequest.Headers.TryAddWithoutValidation(\"{0}\", Guid.NewGuid().ToString());", this.ClientRequestIdString)
-                  .AppendLine(base.SetDefaultHeaders);
+                sb.AppendLine("if (!string.IsNullOrEmpty({0}.ClientRequestId))", this.ClientReference)
+                   .AppendLine("{").Indent()
+                       .AppendLine("_httpRequest.Headers.TryAddWithoutValidation(\"{0}\", {1}.ClientRequestId);", 
+                           this.ClientRequestIdString, this.ClientReference).Outdent()
+                   .AppendLine("}")
+                   .AppendLine(base.SetDefaultHeaders);
                 return sb.ToString();
             }
         }

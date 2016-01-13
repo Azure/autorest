@@ -39,7 +39,7 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
         JsonSerializerSettings DeserializationSettings { get; }
 
         /// <summary>
-        /// The management credentials for Azure.
+        /// Gets Azure subscription credentials.
         /// </summary>
         ServiceClientCredentials Credentials { get; }
 
@@ -59,9 +59,15 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
         string AcceptLanguage { get; set; }
 
         /// <summary>
-        /// The retry timeout for Long Running Operations.
+        /// Gets or sets the retry timeout for Long Running Operations.
         /// </summary>
         int? LongRunningOperationRetryTimeout { get; set; }
+
+        /// <summary>
+        /// Gets or sets the unique x-ms-client-request-id value to be used on
+        /// every request.
+        /// </summary>
+        string ClientRequestId { get; set; }
 
 
         IGroupOperations Group { get; }

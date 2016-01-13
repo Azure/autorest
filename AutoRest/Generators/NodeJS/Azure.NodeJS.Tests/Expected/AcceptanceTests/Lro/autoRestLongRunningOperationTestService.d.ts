@@ -17,7 +17,7 @@ declare class AutoRestLongRunningOperationTestService {
      * Initializes a new instance of the AutoRestLongRunningOperationTestService class.
      * @constructor
      *
-     * @param {Credentials} credentials The management credentials for Azure.
+     * @param {Credentials} credentials Gets Azure subscription credentials.
      *
      * @param {string} [baseUri] - The base URI of the service.
      *
@@ -37,6 +37,8 @@ declare class AutoRestLongRunningOperationTestService {
     acceptLanguage: string;
 
     longRunningOperationRetryTimeout: number;
+
+    clientRequestId: string;
 
     // Operation groups
     lROs: operations.LROs;

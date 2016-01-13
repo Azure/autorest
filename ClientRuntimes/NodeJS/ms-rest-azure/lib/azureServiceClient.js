@@ -7,6 +7,7 @@ var async = require('async');
 var msrest = require('ms-rest');
 var PollingState = require('./pollingState');
 var LroStates = require('./constants').LongRunningOperationStates;
+var utils = require('./utils');
 var WebResource = msrest.WebResource;
 
 /**
@@ -18,8 +19,10 @@ var WebResource = msrest.WebResource;
  * 
  * @param {object} options - The parameter options used by ServiceClient
  * 
- * @param {Array} [options.longRunningOperationRetryTimeoutInSeconds] - Retry timeout
- * 
+ * @param {number} [options.longRunningOperationRetryTimeoutInSeconds] - Retry timeout
+ *
+ * @param {string} [options.clientRequestId] - The unique x-ms-client-request-id to be used in each request
+ *
  */
 function AzureServiceClient(credentials, options) {
   if (!credentials) {
@@ -30,6 +33,10 @@ function AzureServiceClient(credentials, options) {
   if (options) {
     this.longRunningOperationRetryTimeoutInSeconds = 
       options.longRunningOperationRetryTimeoutInSeconds;
+    
+    if (!options.clientRequestId) options.clientRequestId = utils.generateUuid();
+    
+    this.clientRequestId = options.clientRequestId;
   }
 }
 

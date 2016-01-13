@@ -46,7 +46,7 @@ public interface AutoRestHeadExceptionTestService {
     AzureClient getAzureClient();
 
     /**
-     * Gets The management credentials for Azure..
+     * Gets Gets Azure subscription credentials..
      *
      * @return the credentials value.
      */
@@ -67,18 +67,32 @@ public interface AutoRestHeadExceptionTestService {
     void setAcceptLanguage(String acceptLanguage);
 
     /**
-     * Gets The retry timeout for Long Running Operations..
+     * Gets Gets or sets the retry timeout for Long Running Operations..
      *
      * @return the longRunningOperationRetryTimeout value.
      */
     int getLongRunningOperationRetryTimeout();
 
     /**
-     * Sets The retry timeout for Long Running Operations..
+     * Sets Gets or sets the retry timeout for Long Running Operations..
      *
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
      */
     void setLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout);
+
+    /**
+     * Gets Gets or sets the unique x-ms-client-request-id value to be used on every request..
+     *
+     * @return the clientRequestId value.
+     */
+    String getClientRequestId();
+
+    /**
+     * Sets Gets or sets the unique x-ms-client-request-id value to be used on every request..
+     *
+     * @param clientRequestId the clientRequestId value.
+     */
+    void setClientRequestId(String clientRequestId);
 
     /**
      * Gets the HeadExceptionOperations object to access its operations.

@@ -57,11 +57,11 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
         return this.azureClient;
     }
 
-    /** The management credentials for Azure. */
+    /** Gets Azure subscription credentials. */
     private ServiceClientCredentials credentials;
 
     /**
-     * Gets The management credentials for Azure.
+     * Gets Gets Azure subscription credentials.
      *
      * @return the credentials value.
      */
@@ -90,11 +90,11 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
         this.acceptLanguage = acceptLanguage;
     }
 
-    /** The retry timeout for Long Running Operations. */
+    /** Gets or sets the retry timeout for Long Running Operations. */
     private int longRunningOperationRetryTimeout;
 
     /**
-     * Gets The retry timeout for Long Running Operations.
+     * Gets Gets or sets the retry timeout for Long Running Operations.
      *
      * @return the longRunningOperationRetryTimeout value.
      */
@@ -103,12 +103,33 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
     }
 
     /**
-     * Sets The retry timeout for Long Running Operations.
+     * Sets Gets or sets the retry timeout for Long Running Operations.
      *
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
      */
     public void setLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
+    }
+
+    /** Gets or sets the unique x-ms-client-request-id value to be used on every request. */
+    private String clientRequestId;
+
+    /**
+     * Gets Gets or sets the unique x-ms-client-request-id value to be used on every request.
+     *
+     * @return the clientRequestId value.
+     */
+    public String getClientRequestId() {
+        return this.clientRequestId;
+    }
+
+    /**
+     * Sets Gets or sets the unique x-ms-client-request-id value to be used on every request.
+     *
+     * @param clientRequestId the clientRequestId value.
+     */
+    public void setClientRequestId(String clientRequestId) {
+        this.clientRequestId = clientRequestId;
     }
 
     /**

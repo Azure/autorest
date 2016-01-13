@@ -17,7 +17,7 @@ declare class StorageManagementClient {
      * Initializes a new instance of the StorageManagementClient class.
      * @constructor
      *
-     * @param {Credentials} credentials The management credentials for Azure.
+     * @param {Credentials} credentials Gets Azure subscription credentials.
      *
      * @param {String} subscriptionId Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
      *
@@ -43,6 +43,8 @@ declare class StorageManagementClient {
     acceptLanguage: string;
 
     longRunningOperationRetryTimeout: number;
+
+    clientRequestId: string;
 
     // Operation groups
     storageAccounts: operations.StorageAccounts;

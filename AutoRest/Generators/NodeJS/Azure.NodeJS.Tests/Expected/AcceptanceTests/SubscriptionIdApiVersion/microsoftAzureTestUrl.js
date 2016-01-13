@@ -27,7 +27,7 @@ var operations = require('./operations');
  * Initializes a new instance of the MicrosoftAzureTestUrl class.
  * @constructor
  *
- * @param {Credentials} credentials The management credentials for Azure.
+ * @param {Credentials} credentials Gets Azure subscription credentials.
  *
  * @param {String} subscriptionId Subscription Id.
  *

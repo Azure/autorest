@@ -46,7 +46,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
         /// <summary>
-        /// The management credentials for Azure.
+        /// Gets Azure subscription credentials.
         /// </summary>
         public ServiceClientCredentials Credentials { get; private set; }
 
@@ -56,9 +56,15 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         public string AcceptLanguage { get; set; }
 
         /// <summary>
-        /// The retry timeout for Long Running Operations.
+        /// Gets or sets the retry timeout for Long Running Operations.
         /// </summary>
         public int? LongRunningOperationRetryTimeout { get; set; }
+
+        /// <summary>
+        /// Gets or sets the unique x-ms-client-request-id value to be used on every
+        /// request.
+        /// </summary>
+        public string ClientRequestId { get; set; }
 
         public virtual IPagingOperations Paging { get; private set; }
 
@@ -130,7 +136,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// Initializes a new instance of the AutoRestPagingTestService class.
         /// </summary>
         /// <param name='credentials'>
-        /// Required. The management credentials for Azure.
+        /// Required. Gets Azure subscription credentials.
         /// </param>
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
@@ -152,7 +158,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// Initializes a new instance of the AutoRestPagingTestService class.
         /// </summary>
         /// <param name='credentials'>
-        /// Required. The management credentials for Azure.
+        /// Required. Gets Azure subscription credentials.
         /// </param>
         /// <param name='rootHandler'>
         /// Optional. The http client handler used to handle http transport.
@@ -180,7 +186,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// Optional. The base URI of the service.
         /// </param>
         /// <param name='credentials'>
-        /// Required. The management credentials for Azure.
+        /// Required. Gets Azure subscription credentials.
         /// </param>
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
@@ -210,7 +216,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// Optional. The base URI of the service.
         /// </param>
         /// <param name='credentials'>
-        /// Required. The management credentials for Azure.
+        /// Required. Gets Azure subscription credentials.
         /// </param>
         /// <param name='rootHandler'>
         /// Optional. The http client handler used to handle http transport.
@@ -244,6 +250,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             this.Paging = new PagingOperations(this);
             this.BaseUri = new Uri("http://localhost");
             this.AcceptLanguage = "en-US";
+            this.ClientRequestId = Guid.NewGuid().ToString();
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Formatting.Indented,
