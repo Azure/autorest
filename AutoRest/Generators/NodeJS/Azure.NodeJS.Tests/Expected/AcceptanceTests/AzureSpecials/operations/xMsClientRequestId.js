@@ -119,10 +119,6 @@ XMsClientRequestId.prototype.get = function (options, callback) {
           if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
           if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
         }
-        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          var resultMapper = new client.models['ErrorModel']().mapper();
-          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
-        }
       } catch (defaultError) {
         error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
                          '- "%s" for the default response.', defaultError.message, responseBody);

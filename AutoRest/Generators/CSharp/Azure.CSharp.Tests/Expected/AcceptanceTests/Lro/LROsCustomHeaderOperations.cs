@@ -180,6 +180,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 }
                 ex.Request = _httpRequest;
                 ex.Response = _httpResponse;
+                if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                {
+                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                }
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -353,6 +357,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 }
                 ex.Request = _httpRequest;
                 ex.Response = _httpResponse;
+                if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                {
+                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                }
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -527,6 +535,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 }
                 ex.Request = _httpRequest;
                 ex.Response = _httpResponse;
+                if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                {
+                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                }
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -685,6 +697,10 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 }
                 ex.Request = _httpRequest;
                 ex.Response = _httpResponse;
+                if (_httpResponse.Headers.Contains("x-ms-request-id"))
+                {
+                    ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
+                }
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);

@@ -75,6 +75,27 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
         }
 
         /// <summary>
+        /// Get the expression for exception initialization.
+        /// </summary>
+        public override string InitializeException
+        {
+            get
+            {
+                if (OperationExceptionTypeString == "CloudException")
+                {
+                    IndentedStringBuilder sb = new IndentedStringBuilder();
+                    sb.AppendLine(base.InitializeExceptionWithMessage)
+                      .AppendLine("if (_httpResponse.Headers.Contains(\"{0}\"))", this.RequestIdString)
+                      .AppendLine("{").Indent()
+                        .AppendLine("ex.RequestId = _httpResponse.Headers.GetValues(\"{0}\").FirstOrDefault();", this.RequestIdString).Outdent()
+                      .AppendLine("}");
+                    return sb.ToString();
+                }
+                return base.InitializeExceptionWithMessage;
+            }
+        }
+
+        /// <summary>
         /// Returns true if method has x-ms-long-running-operation extension.
         /// </summary>
         public bool IsLongRunningOperation

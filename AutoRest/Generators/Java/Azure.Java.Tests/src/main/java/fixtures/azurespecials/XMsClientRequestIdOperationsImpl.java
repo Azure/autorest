@@ -12,6 +12,7 @@ package fixtures.azurespecials;
 
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.AzureServiceResponseBuilder;
+import com.microsoft.rest.CloudException;
 import com.microsoft.rest.serializer.AzureJacksonUtils;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
@@ -47,11 +48,11 @@ public final class XMsClientRequestIdOperationsImpl implements XMsClientRequestI
     /**
      * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
      *
-     * @throws ErrorException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> get() throws ErrorException, IOException {
+    public ServiceResponse<Void> get() throws CloudException, IOException {
         Call<ResponseBody> call = service.get(this.client.getAcceptLanguage());
         return getDelegate(call.execute(), null);
     }
@@ -69,7 +70,7 @@ public final class XMsClientRequestIdOperationsImpl implements XMsClientRequestI
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
                     serviceCallback.success(getDelegate(response, retrofit));
-                } catch (ErrorException | IOException exception) {
+                } catch (CloudException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
             }
@@ -77,10 +78,9 @@ public final class XMsClientRequestIdOperationsImpl implements XMsClientRequestI
         return call;
     }
 
-    private ServiceResponse<Void> getDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(new AzureJacksonUtils())
+    private ServiceResponse<Void> getDelegate(Response<ResponseBody> response, Retrofit retrofit) throws CloudException, IOException {
+        return new AzureServiceResponseBuilder<Void, CloudException>(new AzureJacksonUtils())
                 .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
                 .build(response, retrofit);
     }
 
