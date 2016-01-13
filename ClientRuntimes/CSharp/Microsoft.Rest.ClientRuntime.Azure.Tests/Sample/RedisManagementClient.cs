@@ -401,6 +401,8 @@ namespace Microsoft.Azure.Management.Redis
             set { this._longRunningOperationRetryTimeout = value; }
         }
 
+        public string ClientRequestId { get; set; }
+
         private IRedisOperations _redisOperations;
 
         public virtual IRedisOperations RedisOperations
