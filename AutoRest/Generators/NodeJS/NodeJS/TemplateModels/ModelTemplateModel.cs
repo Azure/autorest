@@ -49,11 +49,6 @@ namespace Microsoft.Rest.Generator.NodeJS
 
         public ServiceClient ServiceClient { get; set; }
 
-        public virtual IEnumerable<string> Usings
-        {
-            get { return Enumerable.Empty<string>(); }
-        }
-
         public IEnumerable<Property> SerializableProperties
         {
             get { return this.Properties.Where(p => !string.IsNullOrEmpty(p.SerializedName)); }
@@ -227,73 +222,12 @@ namespace Microsoft.Rest.Generator.NodeJS
             else return property.Name + ": " + typeString;
         }
 
-        public string InitializeProperty(string objectName, string valueName, Property property)
+        public virtual string ConstructModelMapper()
         {
-            if (property == null || property.Type == null)
-            {
-                throw new ArgumentNullException("property");
-            }
-
-            return property.Type.InitializeType(_scope, objectName + "." + property.Name, valueName + "." + property.Name);
-        }
-
-        public string AssignDefaultValues()
-        {
-            IEnumerable<Property> optionalParamsWithDefaultsList = Properties.Where(p => !p.IsRequired && !string.IsNullOrWhiteSpace(p.DefaultValue));
+            var modelMapper = this.ConstructMapper(SerializedName, false, null, null, false, true);
             var builder = new IndentedStringBuilder("  ");
-            if (optionalParamsWithDefaultsList.Count() > 0)
-            {
-                builder.AppendLine("if (parameters === null || parameters === undefined) {")
-                         .Indent()
-                         .AppendLine("parameters = {};")
-                       .Outdent()
-                       .AppendLine("}");
-                foreach (var optionalParamWithDefault in optionalParamsWithDefaultsList)
-                {
-                    builder.AppendLine("if (parameters.{0} === undefined) {{", optionalParamWithDefault.Name).Indent();
-                    if (optionalParamWithDefault.Type == PrimaryType.String || optionalParamWithDefault.Type is EnumType)
-                    {
-                        builder.AppendLine("parameters.{0} = '{1}';", optionalParamWithDefault.Name, optionalParamWithDefault.DefaultValue);
-                    }
-                    else
-                    {
-                        builder.AppendLine("parameters.{0} = {1};", optionalParamWithDefault.Name, optionalParamWithDefault.DefaultValue);
-                    }
-                             
-                    builder.Outdent().AppendLine("}");
-                }
-            }
+            builder.AppendLine("return {{{0}}};", modelMapper);
             return builder.ToString();
-        }
-
-        public string SerializeProperty(string objectName, string serializedName, Property property)
-        {
-            if (property == null || property.Type == null)
-            {
-                throw new ArgumentNullException("property");
-            }
-
-            var propertyName = string.Format(CultureInfo.InvariantCulture, 
-                "{0}['{1}']", objectName, property.Name);
-            var serializedPropertyName = string.Format(CultureInfo.InvariantCulture,
-                "{0}['{1}']", serializedName, property.SerializedName.Replace(".", "']['"));
-
-            return property.Type.SerializeType(_scope, propertyName, serializedPropertyName, property.IsRequired, property.Constraints, "models");
-        }
-
-        public string DeserializeProperty(string objectName, string valueName, Property property)
-        {
-            if (property == null || property.Type == null)
-            {
-                throw new ArgumentNullException("property");
-            }
-
-            var propertyName = string.Format(CultureInfo.InvariantCulture,
-                "{0}['{1}']", objectName, property.Name);
-            var deserializedPropertyName = string.Format(CultureInfo.InvariantCulture,
-                "{0}['{1}']", valueName, property.SerializedName.Replace(".", "']['"));
-
-            return property.Type.DeserializeType(_scope, propertyName, deserializedPropertyName, "models");
         }
 
         /// <summary>

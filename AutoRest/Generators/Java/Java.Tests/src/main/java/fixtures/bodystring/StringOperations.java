@@ -18,6 +18,7 @@ import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
+import retrofit.http.Headers;
 import retrofit.http.PUT;
 
 /**
@@ -30,30 +31,39 @@ public interface StringOperations {
      * used by Retrofit to perform actually REST calls.
      */
     interface StringService {
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("string/null")
         Call<ResponseBody> getNull();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("string/null")
         Call<ResponseBody> putNull(@Body String stringBody);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("string/empty")
         Call<ResponseBody> getEmpty();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("string/empty")
         Call<ResponseBody> putEmpty(@Body String stringBody);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("string/mbcs")
         Call<ResponseBody> getMbcs();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("string/mbcs")
         Call<ResponseBody> putMbcs(@Body String stringBody);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("string/whitespace")
         Call<ResponseBody> getWhitespace();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("string/whitespace")
         Call<ResponseBody> putWhitespace(@Body String stringBody);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("string/notProvided")
         Call<ResponseBody> getNotProvided();
 

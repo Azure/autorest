@@ -35,11 +35,28 @@
     <Compile Include="test\credentialTests.js">
       <TestFramework>Mocha</TestFramework>
     </Compile>
-    <Compile Include="test\logFilterTests.js" />
-    <Compile Include="test\proxyFilterTests.js" />
-    <Compile Include="test\redirectFilterTests.js" />
-    <Compile Include="test\retryPolicyTests.js" />
-    <Compile Include="test\serializationTests.js" />
+    <Compile Include="test\data\TestClient\lib\models\index.js" />
+    <Compile Include="test\data\TestClient\lib\models\invoice.js" />
+    <Compile Include="test\data\TestClient\lib\models\product.js" />
+    <Compile Include="test\data\TestClient\lib\models\productListResultNextLink.js" />
+    <Compile Include="test\data\TestClient\lib\models\productListResult.js" />
+    <Compile Include="test\data\TestClient\lib\models\subProduct.js" />
+    <Compile Include="test\data\TestClient\lib\testClient.js" />
+    <Compile Include="test\logFilterTests.js">
+      <TestFramework>Mocha</TestFramework>
+    </Compile>
+    <Compile Include="test\proxyFilterTests.js">
+      <TestFramework>Mocha</TestFramework>
+    </Compile>
+    <Compile Include="test\redirectFilterTests.js">
+      <TestFramework>Mocha</TestFramework>
+    </Compile>
+    <Compile Include="test\retryPolicyTests.js">
+      <TestFramework>Mocha</TestFramework>
+    </Compile>
+    <Compile Include="test\serializationTests.js">
+      <TestFramework>Mocha</TestFramework>
+    </Compile>
     <Compile Include="test\unit.js" />
     <Compile Include="lib\credentials\basicAuthenticationCredentials.js" />
     <Compile Include="lib\credentials\tokenCredentials.js" />
@@ -55,6 +72,10 @@
     <Folder Include="lib\credentials" />
     <Folder Include="lib\filters" />
     <Folder Include="test" />
+    <Folder Include="test\data\" />
+    <Folder Include="test\data\TestClient\" />
+    <Folder Include="test\data\TestClient\lib\" />
+    <Folder Include="test\data\TestClient\lib\models\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="lib\index.d.ts" />

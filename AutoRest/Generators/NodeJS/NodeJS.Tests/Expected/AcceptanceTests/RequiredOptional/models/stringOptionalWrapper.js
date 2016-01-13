@@ -17,47 +17,33 @@
  * @member {string} [value]
  * 
  */
-function StringOptionalWrapper(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.value !== undefined) {
-      this.value = parameters.value;
-    }
-  }    
+function StringOptionalWrapper() {
 }
 
-
 /**
- * Validate the payload against the StringOptionalWrapper schema
+ * Defines the metadata of StringOptionalWrapper
  *
- * @param {JSON} payload
+ * @returns {object} metadata of StringOptionalWrapper
  *
  */
-StringOptionalWrapper.prototype.serialize = function () {
-  var payload = {};
-  if (this['value'] !== null && this['value'] !== undefined) {
-    if (typeof this['value'].valueOf() !== 'string') {
-      throw new Error('this[\'value\'] must be of type string.');
+StringOptionalWrapper.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'string-optional-wrapper',
+    type: {
+      name: 'Composite',
+      className: 'StringOptionalWrapper',
+      modelProperties: {
+        value: {
+          required: false,
+          serializedName: 'value',
+          type: {
+            name: 'String'
+          }
+        }
+      }
     }
-    payload['value'] = this['value'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to StringOptionalWrapper schema
- *
- * @param {JSON} instance
- *
- */
-StringOptionalWrapper.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['value'] !== undefined) {
-      this['value'] = instance['value'];
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = StringOptionalWrapper;

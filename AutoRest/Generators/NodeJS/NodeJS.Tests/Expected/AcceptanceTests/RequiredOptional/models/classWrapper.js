@@ -23,46 +23,34 @@ var models = require('./index');
  * @member {string} [value.name]
  * 
  */
-function ClassWrapper(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.value) {
-      this.value = new models['Product'](parameters.value);
-    }
-  }    
+function ClassWrapper() {
 }
 
-
 /**
- * Validate the payload against the ClassWrapper schema
+ * Defines the metadata of ClassWrapper
  *
- * @param {JSON} payload
+ * @returns {object} metadata of ClassWrapper
  *
  */
-ClassWrapper.prototype.serialize = function () {
-  var payload = {};
-  if (this['value']) {
-    payload['value'] = this['value'].serialize();
-  }
-   else {  throw new Error('this[\'value\'] cannot be null or undefined.');
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to ClassWrapper schema
- *
- * @param {JSON} instance
- *
- */
-ClassWrapper.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['value']) {
-      this['value'] = new models['Product']().deserialize(instance['value']);
+ClassWrapper.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'class-wrapper',
+    type: {
+      name: 'Composite',
+      className: 'ClassWrapper',
+      modelProperties: {
+        value: {
+          required: true,
+          serializedName: 'value',
+          type: {
+            name: 'Composite',
+            className: 'Product'
+          }
+        }
+      }
     }
-  }
-
-  return this;
+  };
 };
 
 module.exports = ClassWrapper;

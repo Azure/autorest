@@ -19,67 +19,40 @@
  * @member {date} [now]
  * 
  */
-function DatetimeWrapper(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.field !== undefined) {
-      this.field = parameters.field;
-    }
-    if (parameters.now !== undefined) {
-      this.now = parameters.now;
-    }
-  }    
+function DatetimeWrapper() {
 }
 
-
 /**
- * Validate the payload against the DatetimeWrapper schema
+ * Defines the metadata of DatetimeWrapper
  *
- * @param {JSON} payload
+ * @returns {object} metadata of DatetimeWrapper
  *
  */
-DatetimeWrapper.prototype.serialize = function () {
-  var payload = {};
-  if (this['field']) {
-    if (!(this['field'] instanceof Date || typeof this['field'].valueOf() === 'string' && !isNaN(Date.parse(this['field'])))) {
-      throw new Error('this[\'field\'] must be of type date.');
+DatetimeWrapper.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'datetime-wrapper',
+    type: {
+      name: 'Composite',
+      className: 'DatetimeWrapper',
+      modelProperties: {
+        field: {
+          required: false,
+          serializedName: 'field',
+          type: {
+            name: 'DateTime'
+          }
+        },
+        now: {
+          required: false,
+          serializedName: 'now',
+          type: {
+            name: 'DateTime'
+          }
+        }
+      }
     }
-    payload['field'] = (this['field'] instanceof Date) ? this['field'].toISOString() : this['field'];
-  }
-
-  if (this['now']) {
-    if (!(this['now'] instanceof Date || typeof this['now'].valueOf() === 'string' && !isNaN(Date.parse(this['now'])))) {
-      throw new Error('this[\'now\'] must be of type date.');
-    }
-    payload['now'] = (this['now'] instanceof Date) ? this['now'].toISOString() : this['now'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to DatetimeWrapper schema
- *
- * @param {JSON} instance
- *
- */
-DatetimeWrapper.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['field']) {
-      this['field'] = new Date(instance['field']);
-    }
-    else if (instance['field'] !== undefined) {
-      this['field'] = instance['field'];
-    }
-
-    if (instance['now']) {
-      this['now'] = new Date(instance['now']);
-    }
-    else if (instance['now'] !== undefined) {
-      this['now'] = instance['now'];
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = DatetimeWrapper;

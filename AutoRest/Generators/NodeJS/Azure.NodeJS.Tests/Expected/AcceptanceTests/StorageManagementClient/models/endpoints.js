@@ -33,97 +33,63 @@ var models = require('./index');
  * @member {object} [fooPoint.barPoint.recursivePoint] Recursive Endpoints
  * 
  */
-function Endpoints(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.blob !== undefined) {
-      this.blob = parameters.blob;
-    }
-    if (parameters.queue !== undefined) {
-      this.queue = parameters.queue;
-    }
-    if (parameters.table !== undefined) {
-      this.table = parameters.table;
-    }
-    if (parameters.dummyEndPoint) {
-      this.dummyEndPoint = new models['Endpoints'](parameters.dummyEndPoint);
-    }
-    if (parameters.fooPoint) {
-      this.fooPoint = new models['Foo'](parameters.fooPoint);
-    }
-  }    
+function Endpoints() {
 }
 
-
 /**
- * Validate the payload against the Endpoints schema
+ * Defines the metadata of Endpoints
  *
- * @param {JSON} payload
+ * @returns {object} metadata of Endpoints
  *
  */
-Endpoints.prototype.serialize = function () {
-  var payload = {};
-  if (this['blob'] !== null && this['blob'] !== undefined) {
-    if (typeof this['blob'].valueOf() !== 'string') {
-      throw new Error('this[\'blob\'] must be of type string.');
+Endpoints.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'Endpoints',
+    type: {
+      name: 'Composite',
+      className: 'Endpoints',
+      modelProperties: {
+        blob: {
+          required: false,
+          serializedName: 'blob',
+          type: {
+            name: 'String'
+          }
+        },
+        queue: {
+          required: false,
+          serializedName: 'queue',
+          type: {
+            name: 'String'
+          }
+        },
+        table: {
+          required: false,
+          serializedName: 'table',
+          type: {
+            name: 'String'
+          }
+        },
+        dummyEndPoint: {
+          required: false,
+          serializedName: 'dummyEndPoint',
+          type: {
+            name: 'Composite',
+            className: 'Endpoints'
+          }
+        },
+        fooPoint: {
+          required: false,
+          serializedName: 'FooPoint',
+          type: {
+            name: 'Composite',
+            className: 'Foo'
+          }
+        }
+      }
     }
-    payload['blob'] = this['blob'];
-  }
-
-  if (this['queue'] !== null && this['queue'] !== undefined) {
-    if (typeof this['queue'].valueOf() !== 'string') {
-      throw new Error('this[\'queue\'] must be of type string.');
-    }
-    payload['queue'] = this['queue'];
-  }
-
-  if (this['table'] !== null && this['table'] !== undefined) {
-    if (typeof this['table'].valueOf() !== 'string') {
-      throw new Error('this[\'table\'] must be of type string.');
-    }
-    payload['table'] = this['table'];
-  }
-
-  if (this['dummyEndPoint']) {
-    payload['dummyEndPoint'] = this['dummyEndPoint'].serialize();
-  }
-
-  if (this['fooPoint']) {
-    payload['FooPoint'] = this['fooPoint'].serialize();
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to Endpoints schema
- *
- * @param {JSON} instance
- *
- */
-Endpoints.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['blob'] !== undefined) {
-      this['blob'] = instance['blob'];
-    }
-
-    if (instance['queue'] !== undefined) {
-      this['queue'] = instance['queue'];
-    }
-
-    if (instance['table'] !== undefined) {
-      this['table'] = instance['table'];
-    }
-
-    if (instance['dummyEndPoint']) {
-      this['dummyEndPoint'] = new models['Endpoints']().deserialize(instance['dummyEndPoint']);
-    }
-
-    if (instance['FooPoint']) {
-      this['fooPoint'] = new models['Foo']().deserialize(instance['FooPoint']);
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = Endpoints;

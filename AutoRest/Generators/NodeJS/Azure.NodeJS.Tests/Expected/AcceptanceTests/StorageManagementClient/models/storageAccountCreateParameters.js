@@ -24,57 +24,79 @@ var util = require('util');
  * 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'.
  * 
  */
-function StorageAccountCreateParameters(parameters) {
-  StorageAccountCreateParameters['super_'].call(this, parameters);
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.accountType !== undefined) {
-      this.accountType = parameters.accountType;
-    }
-  }    
+function StorageAccountCreateParameters() {
+  StorageAccountCreateParameters['super_'].call(this);
 }
 
 util.inherits(StorageAccountCreateParameters, models['Resource']);
 
 /**
- * Validate the payload against the StorageAccountCreateParameters schema
+ * Defines the metadata of StorageAccountCreateParameters
  *
- * @param {JSON} payload
- *
- */
-StorageAccountCreateParameters.prototype.serialize = function () {
-  var payload = StorageAccountCreateParameters['super_'].prototype.serialize.call(this);
-  if (this['accountType'] !== null && this['accountType'] !== undefined) {
-    var allowedValues = [ 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS' ];
-    var thisaccountType = this['accountType'];
-    if (!allowedValues.some( function(item) { return item === thisaccountType; })) {
-      throw new Error(this['accountType'] + ' is not a valid value. The valid values are: ' + allowedValues);
-    }
-    if (payload['properties'] === null || payload['properties'] === undefined) {
-      payload['properties'] = {};
-    }
-    payload['properties']['accountType'] = this['accountType'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to StorageAccountCreateParameters schema
- *
- * @param {JSON} instance
+ * @returns {object} metadata of StorageAccountCreateParameters
  *
  */
-StorageAccountCreateParameters.prototype.deserialize = function (instance) {
-  StorageAccountCreateParameters['super_'].prototype.deserialize.call(this, instance);
-  if (instance) {
-    if (instance['properties'] !== null && instance['properties'] !== undefined) {
-      if (instance['properties']['accountType'] !== undefined) {
-        this['accountType'] = instance['properties']['accountType'];
+StorageAccountCreateParameters.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'StorageAccountCreateParameters',
+    type: {
+      name: 'Composite',
+      className: 'StorageAccountCreateParameters',
+      modelProperties: {
+        id: {
+          required: false,
+          serializedName: 'id',
+          type: {
+            name: 'String'
+          }
+        },
+        name: {
+          required: false,
+          serializedName: 'name',
+          type: {
+            name: 'String'
+          }
+        },
+        type: {
+          required: false,
+          serializedName: 'type',
+          type: {
+            name: 'String'
+          }
+        },
+        location: {
+          required: true,
+          serializedName: 'location',
+          type: {
+            name: 'String'
+          }
+        },
+        tags: {
+          required: false,
+          serializedName: 'tags',
+          type: {
+            name: 'Dictionary',
+            value: {
+                required: false,
+                serializedName: 'StringElementType',
+                type: {
+                  name: 'String'
+                }
+            }
+          }
+        },
+        accountType: {
+          required: false,
+          serializedName: 'properties.accountType',
+          type: {
+            name: 'Enum',
+            allowedValues: [ 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS' ]
+          }
+        }
       }
     }
-  }
-
-  return this;
+  };
 };
 
 module.exports = StorageAccountCreateParameters;

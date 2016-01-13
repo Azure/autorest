@@ -21,23 +21,38 @@
  * .
  * 
  */
-function ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup(parameters) {
-  if (parameters === null || parameters === undefined) {
-    parameters = {};
-  }
-  if (parameters.queryTwo === undefined) {
-    parameters.queryTwo = 30;
-  }
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.headerTwo !== undefined) {
-      this.headerTwo = parameters.headerTwo;
-    }
-    if (parameters.queryTwo !== undefined) {
-      this.queryTwo = parameters.queryTwo;
-    }
-  }    
+function ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup() {
 }
 
-
+/**
+ * Defines the metadata of ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup
+ *
+ * @returns {object} metadata of ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup
+ *
+ */
+ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup.prototype.mapper = function () {
+  return {
+    required: false,
+    type: {
+      name: 'Composite',
+      className: 'ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup',
+      modelProperties: {
+        headerTwo: {
+          required: false,
+          type: {
+            name: 'String'
+          }
+        },
+        queryTwo: {
+          required: false,
+          defaultValue: '30',
+          type: {
+            name: 'Number'
+          }
+        }
+      }
+    }
+  };
+};
 
 module.exports = ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup;

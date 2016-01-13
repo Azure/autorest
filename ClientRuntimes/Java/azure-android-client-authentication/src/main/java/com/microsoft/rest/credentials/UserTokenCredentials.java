@@ -117,11 +117,13 @@ public class UserTokenCredentials extends TokenCredentials {
             return;
         }
         final TokenCredentials self = this;
-        context.acquireToken(activity,
+        context.acquireToken(
                 this.getEnvironment().getTokenAudience(),
                 this.getClientId(),
                 this.getClientRedirectUri(),
-                PromptBehavior.REFRESH_SESSION,
+                null,
+                PromptBehavior.Always,
+                null,
                 new AuthenticationCallback<AuthenticationResult>() {
                     @Override
                     public void onSuccess(AuthenticationResult authenticationResult) {

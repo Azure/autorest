@@ -19,6 +19,7 @@ import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
+import retrofit.http.Headers;
 import retrofit.http.PUT;
 
 /**
@@ -31,30 +32,39 @@ public interface Datetimerfc1123 {
      * used by Retrofit to perform actually REST calls.
      */
     interface Datetimerfc1123Service {
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("datetimerfc1123/null")
         Call<ResponseBody> getNull();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("datetimerfc1123/invalid")
         Call<ResponseBody> getInvalid();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("datetimerfc1123/overflow")
         Call<ResponseBody> getOverflow();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("datetimerfc1123/underflow")
         Call<ResponseBody> getUnderflow();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("datetimerfc1123/max")
         Call<ResponseBody> putUtcMaxDateTime(@Body DateTimeRfc1123 datetimeBody);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("datetimerfc1123/max/lowercase")
         Call<ResponseBody> getUtcLowercaseMaxDateTime();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("datetimerfc1123/max/uppercase")
         Call<ResponseBody> getUtcUppercaseMaxDateTime();
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("datetimerfc1123/min")
         Call<ResponseBody> putUtcMinDateTime(@Body DateTimeRfc1123 datetimeBody);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
         @GET("datetimerfc1123/min")
         Call<ResponseBody> getUtcMinDateTime();
 

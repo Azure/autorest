@@ -69,8 +69,7 @@
   </text>
   }
   }
-
-  @Model.BuildInputMappings()
+  @(Model.BuildInputMappings())
   @EmptyLine
   // Construct URL
   @if (Model.IsAbsoluteUrl)
@@ -125,29 +124,21 @@
   var requestContent = null;
   var requestModel = null;
   try {
-    @(Model.InitializeRequestBody)
-      @if (Model.RequestBody.Type is CompositeType)
-      {
-      <text>
-    if (requestModel !== null && requestModel !== undefined) {
-      requestContent = JSON.stringify(requestModel.serialize());
-    } else {
-      requestContent = JSON.stringify(requestModel);
+    if (@(Model.RequestBody.Name) !== null && @(Model.RequestBody.Name) !== undefined) {
+      @(Model.ConstructRequestBodyMapper)
+      requestModel = client.serialize(requestModelMapper, @(Model.RequestBody.Name), '@(Model.RequestBody.Name)');
     }
-      </text>
-      }
-      else
-      {
-    @:@(Model.RequestBody.Type.SerializeType(Model.Scope, Model.RequestBody.Name, "requestModel", Model.RequestBody.IsRequired, Model.RequestBody.Constraints))
-    @:requestContent = JSON.stringify(requestModel);
-      }
+    requestContent = JSON.stringify(requestModel);
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
+        'payload - "%s"', error.message, util.inspect(@(Model.RequestBody.Name), {depth: null})));
     return callback(serializationError);
   }
 
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
+                                                    requestContent.length : 
+                                  Buffer.byteLength(requestContent, 'UTF8');
   </text>
       }
   }

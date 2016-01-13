@@ -33,44 +33,34 @@ var models = require('./index');
  * @member {object} [recursivePoint.fooPoint.barPoint] Bar point
  * 
  */
-function Bar(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.recursivePoint) {
-      this.recursivePoint = new models['Endpoints'](parameters.recursivePoint);
-    }
-  }    
+function Bar() {
 }
 
-
 /**
- * Validate the payload against the Bar schema
+ * Defines the metadata of Bar
  *
- * @param {JSON} payload
+ * @returns {object} metadata of Bar
  *
  */
-Bar.prototype.serialize = function () {
-  var payload = {};
-  if (this['recursivePoint']) {
-    payload['RecursivePoint'] = this['recursivePoint'].serialize();
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to Bar schema
- *
- * @param {JSON} instance
- *
- */
-Bar.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['RecursivePoint']) {
-      this['recursivePoint'] = new models['Endpoints']().deserialize(instance['RecursivePoint']);
+Bar.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'Bar',
+    type: {
+      name: 'Composite',
+      className: 'Bar',
+      modelProperties: {
+        recursivePoint: {
+          required: false,
+          serializedName: 'RecursivePoint',
+          type: {
+            name: 'Composite',
+            className: 'Endpoints'
+          }
+        }
+      }
     }
-  }
-
-  return this;
+  };
 };
 
 module.exports = Bar;

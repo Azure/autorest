@@ -23,64 +23,80 @@ var util = require('util');
  * @member {boolean} [iswild]
  * 
  */
-function Salmon(parameters) {
-  Salmon['super_'].call(this, parameters);
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.location !== undefined) {
-      this.location = parameters.location;
-    }
-    if (parameters.iswild !== undefined) {
-      this.iswild = parameters.iswild;
-    }
-  }    
+function Salmon() {
+  Salmon['super_'].call(this);
 }
 
 util.inherits(Salmon, models['Fish']);
 
 /**
- * Validate the payload against the Salmon schema
+ * Defines the metadata of Salmon
  *
- * @param {JSON} payload
- *
- */
-Salmon.prototype.serialize = function () {
-  var payload = Salmon['super_'].prototype.serialize.call(this);
-  if (this['location'] !== null && this['location'] !== undefined) {
-    if (typeof this['location'].valueOf() !== 'string') {
-      throw new Error('this[\'location\'] must be of type string.');
-    }
-    payload['location'] = this['location'];
-  }
-
-  if (this['iswild'] !== null && this['iswild'] !== undefined) {
-    if (typeof this['iswild'] !== 'boolean') {
-      throw new Error('this[\'iswild\'] must be of type boolean.');
-    }
-    payload['iswild'] = this['iswild'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to Salmon schema
- *
- * @param {JSON} instance
+ * @returns {object} metadata of Salmon
  *
  */
-Salmon.prototype.deserialize = function (instance) {
-  Salmon['super_'].prototype.deserialize.call(this, instance);
-  if (instance) {
-    if (instance['location'] !== undefined) {
-      this['location'] = instance['location'];
+Salmon.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'salmon',
+    type: {
+      name: 'Composite',
+      className: 'Salmon',
+      modelProperties: {
+        species: {
+          required: false,
+          serializedName: 'species',
+          type: {
+            name: 'String'
+          }
+        },
+        length: {
+          required: true,
+          serializedName: 'length',
+          type: {
+            name: 'Number'
+          }
+        },
+        siblings: {
+          required: false,
+          serializedName: 'siblings',
+          type: {
+            name: 'Sequence',
+            element: {
+                required: false,
+                serializedName: 'FishElementType',
+                type: {
+                  name: 'Composite',
+                  polymorphicDiscriminator: 'fishtype',
+                  className: 'Fish'
+                }
+            }
+          }
+        },
+        fishtype: {
+          required: true,
+          serializedName: 'fishtype',
+          type: {
+            name: 'String'
+          }
+        },
+        location: {
+          required: false,
+          serializedName: 'location',
+          type: {
+            name: 'String'
+          }
+        },
+        iswild: {
+          required: false,
+          serializedName: 'iswild',
+          type: {
+            name: 'Boolean'
+          }
+        }
+      }
     }
-
-    if (instance['iswild'] !== undefined) {
-      this['iswild'] = instance['iswild'];
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = Salmon;

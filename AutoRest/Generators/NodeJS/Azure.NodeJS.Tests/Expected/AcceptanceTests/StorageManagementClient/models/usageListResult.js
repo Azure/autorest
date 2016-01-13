@@ -22,63 +22,41 @@ var util = require('util');
  * @member {array} [value] Gets or sets the list Storage Resource Usages.
  * 
  */
-function UsageListResult(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.value) {
-      var tempParametersvalue = [];
-      parameters.value.forEach(function(element) {
-        if (element) {
-          element = new models['Usage'](element);
-        }
-        tempParametersvalue.push(element);
-      });
-      this.value = tempParametersvalue;
-    }
-  }    
+function UsageListResult() {
 }
 
-
 /**
- * Validate the payload against the UsageListResult schema
+ * Defines the metadata of UsageListResult
  *
- * @param {JSON} payload
+ * @returns {object} metadata of UsageListResult
  *
  */
-UsageListResult.prototype.serialize = function () {
-  var payload = {};
-  if (util.isArray(this['value'])) {
-    payload['value'] = [];
-    for (var i = 0; i < this['value'].length; i++) {
-      if (this['value'][i]) {
-        payload['value'][i] = this['value'][i].serialize();
+UsageListResult.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'UsageListResult',
+    type: {
+      name: 'Composite',
+      className: 'UsageListResult',
+      modelProperties: {
+        value: {
+          required: false,
+          serializedName: 'value',
+          type: {
+            name: 'Sequence',
+            element: {
+                required: false,
+                serializedName: 'UsageElementType',
+                type: {
+                  name: 'Composite',
+                  className: 'Usage'
+                }
+            }
+          }
+        }
       }
     }
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to UsageListResult schema
- *
- * @param {JSON} instance
- *
- */
-UsageListResult.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['value']) {
-      var tempInstancevalue = [];
-      instance['value'].forEach(function(element1) {
-        if (element1) {
-          element1 = new models['Usage']().deserialize(element1);
-        }
-        tempInstancevalue.push(element1);
-      });
-      this['value'] = tempInstancevalue;
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = UsageListResult;

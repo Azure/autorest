@@ -17,47 +17,33 @@
  * @member {number} [value]
  * 
  */
-function IntOptionalWrapper(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.value !== undefined) {
-      this.value = parameters.value;
-    }
-  }    
+function IntOptionalWrapper() {
 }
 
-
 /**
- * Validate the payload against the IntOptionalWrapper schema
+ * Defines the metadata of IntOptionalWrapper
  *
- * @param {JSON} payload
+ * @returns {object} metadata of IntOptionalWrapper
  *
  */
-IntOptionalWrapper.prototype.serialize = function () {
-  var payload = {};
-  if (this['value'] !== null && this['value'] !== undefined) {
-    if (typeof this['value'] !== 'number') {
-      throw new Error('this[\'value\'] must be of type number.');
+IntOptionalWrapper.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'int-optional-wrapper',
+    type: {
+      name: 'Composite',
+      className: 'IntOptionalWrapper',
+      modelProperties: {
+        value: {
+          required: false,
+          serializedName: 'value',
+          type: {
+            name: 'Number'
+          }
+        }
+      }
     }
-    payload['value'] = this['value'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to IntOptionalWrapper schema
- *
- * @param {JSON} instance
- *
- */
-IntOptionalWrapper.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['value'] !== undefined) {
-      this['value'] = instance['value'];
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = IntOptionalWrapper;

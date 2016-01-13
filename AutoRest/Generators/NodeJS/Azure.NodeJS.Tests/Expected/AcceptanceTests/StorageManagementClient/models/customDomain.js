@@ -24,61 +24,40 @@
  * updates
  * 
  */
-function CustomDomain(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.name !== undefined) {
-      this.name = parameters.name;
-    }
-    if (parameters.useSubDomain !== undefined) {
-      this.useSubDomain = parameters.useSubDomain;
-    }
-  }    
+function CustomDomain() {
 }
 
-
 /**
- * Validate the payload against the CustomDomain schema
+ * Defines the metadata of CustomDomain
  *
- * @param {JSON} payload
+ * @returns {object} metadata of CustomDomain
  *
  */
-CustomDomain.prototype.serialize = function () {
-  var payload = {};
-  if (this['name'] !== null && this['name'] !== undefined) {
-    if (typeof this['name'].valueOf() !== 'string') {
-      throw new Error('this[\'name\'] must be of type string.');
+CustomDomain.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'CustomDomain',
+    type: {
+      name: 'Composite',
+      className: 'CustomDomain',
+      modelProperties: {
+        name: {
+          required: false,
+          serializedName: 'name',
+          type: {
+            name: 'String'
+          }
+        },
+        useSubDomain: {
+          required: false,
+          serializedName: 'useSubDomain',
+          type: {
+            name: 'Boolean'
+          }
+        }
+      }
     }
-    payload['name'] = this['name'];
-  }
-
-  if (this['useSubDomain'] !== null && this['useSubDomain'] !== undefined) {
-    if (typeof this['useSubDomain'] !== 'boolean') {
-      throw new Error('this[\'useSubDomain\'] must be of type boolean.');
-    }
-    payload['useSubDomain'] = this['useSubDomain'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to CustomDomain schema
- *
- * @param {JSON} instance
- *
- */
-CustomDomain.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['name'] !== undefined) {
-      this['name'] = instance['name'];
-    }
-
-    if (instance['useSubDomain'] !== undefined) {
-      this['useSubDomain'] = instance['useSubDomain'];
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = CustomDomain;

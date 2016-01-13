@@ -38,22 +38,11 @@
                                              + " " + ModelTemplateModel.GetPropertyDocumentationString(property)))
 }
  */
-function @(Model.Name)(parameters) {
+function @(Model.Name)() {
 @{
-  @:@(Model.AssignDefaultValues())
   if (Model.BaseModelType != null)
   {
-  @:@(Model.Name)['super_'].call(this, parameters);
-  }
-  var propertyList = new List<Property>(Model.Properties);
-  if (propertyList.Count > 0)
-  {
-  @:if (parameters !== null && parameters !== undefined) {
-    for (int i = 0; i < propertyList.Count; i++) 
-    {
-    @:@(Model.InitializeProperty("this", "parameters", propertyList[i]))
-    }
-  @:}    
+  @:@(Model.Name)['super_'].call(this);
   }
 }
 }
@@ -62,73 +51,17 @@ function @(Model.Name)(parameters) {
 if (Model.BaseModelType != null)
 {
 @:util.inherits(@(Model.Name), models['@(Model.BaseModelType.Name)']);
-}
-}
 @EmptyLine
-@if(Model.SerializableProperties.Any())
-{
-@:/**
-@: * Validate the payload against the @Model.Name schema
-@: *
-@: * @@param {JSON} payload
-@: *
-@: */
-@:@(Model.Name).prototype.serialize = function () {
-{
-  if (Model.BaseModelType != null)
-  {
-  @:var payload = @(Model.Name)['super_'].prototype.serialize.call(this);
-  }
-  else
-  {
-  @:var payload = {};
-  }
-  var serializationPropertyList = new List<Property>(Model.SerializableProperties);
-  for (int i = 0; i < serializationPropertyList.Count; i++)
-  {
-  @:@(Model.SerializeProperty("this", "payload", serializationPropertyList[i]))
-  if (i != serializationPropertyList.Count - 1)
-  {
-  @EmptyLine
-  }
-  }
-  @EmptyLine
-  @:return payload;
 }
-@:};
-@EmptyLine
-
-@:/**
-@: * Deserialize the instance to @Model.Name schema
-@: *
-@: * @@param {JSON} instance
-@: *
-@: */
-@:@(Model.Name).prototype.deserialize = function (instance) {
-  {
-  if (Model.BaseModelType != null)
-  {
-  @:@(Model.Name)['super_'].prototype.deserialize.call(this, instance);
-  }
-  var properties = Model.Properties;
-  if (properties.Count > 0)
-  {
-  @:if (instance) {
-    var propertiesList = new List<Property>(Model.SerializableProperties);
-    for (int i = 0; i < propertiesList.Count; i++)
-    {
-    @:@(Model.DeserializeProperty("this", "instance", propertiesList[i]))
-    if (i != propertiesList.Count - 1)
-    {
-    @EmptyLine
-    }
-    }
-  @:}
-  }
-  }
-  @EmptyLine
-  @:return this;
-@:};
 }
+/**
+ * Defines the metadata of @Model.Name
+ *
+ * @@returns {object} metadata of @Model.Name
+ *
+ */
+@(Model.Name).prototype.mapper = function () {
+  @(Model.ConstructModelMapper())
+};
 @EmptyLine
 module.exports = @(Model.Name);

@@ -17,7 +17,6 @@
 var util = require('util');
 var msRest = require('ms-rest');
 var ServiceClient = msRest.ServiceClient;
-var WebResource = msRest.WebResource;
 
 var models = require('./models');
 var operations = require('./operations');
@@ -55,7 +54,8 @@ function AutoRestHttpInfrastructureTestService(baseUri, options) {
   this.httpServerFailure = new operations.HttpServerFailure(this);
   this.httpRetry = new operations.HttpRetry(this);
   this.multipleResponses = new operations.MultipleResponses(this);
-  this._models = models;
+  this.models = models;
+  msRest.addSerializationMixin(this);
 }
 
 util.inherits(AutoRestHttpInfrastructureTestService, ServiceClient);

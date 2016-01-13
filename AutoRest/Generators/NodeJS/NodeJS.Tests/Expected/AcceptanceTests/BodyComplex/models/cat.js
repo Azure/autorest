@@ -23,80 +23,65 @@ var util = require('util');
  * @member {array} [hates]
  * 
  */
-function Cat(parameters) {
-  Cat['super_'].call(this, parameters);
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.color !== undefined) {
-      this.color = parameters.color;
-    }
-    if (parameters.hates) {
-      var tempParametershates = [];
-      parameters.hates.forEach(function(element) {
-        if (element) {
-          element = new models['Dog'](element);
-        }
-        tempParametershates.push(element);
-      });
-      this.hates = tempParametershates;
-    }
-  }    
+function Cat() {
+  Cat['super_'].call(this);
 }
 
 util.inherits(Cat, models['Pet']);
 
 /**
- * Validate the payload against the Cat schema
+ * Defines the metadata of Cat
  *
- * @param {JSON} payload
+ * @returns {object} metadata of Cat
  *
  */
-Cat.prototype.serialize = function () {
-  var payload = Cat['super_'].prototype.serialize.call(this);
-  if (this['color'] !== null && this['color'] !== undefined) {
-    if (typeof this['color'].valueOf() !== 'string') {
-      throw new Error('this[\'color\'] must be of type string.');
-    }
-    payload['color'] = this['color'];
-  }
-
-  if (util.isArray(this['hates'])) {
-    payload['hates'] = [];
-    for (var i = 0; i < this['hates'].length; i++) {
-      if (this['hates'][i]) {
-        payload['hates'][i] = this['hates'][i].serialize();
+Cat.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'cat',
+    type: {
+      name: 'Composite',
+      className: 'Cat',
+      modelProperties: {
+        id: {
+          required: false,
+          serializedName: 'id',
+          type: {
+            name: 'Number'
+          }
+        },
+        name: {
+          required: false,
+          serializedName: 'name',
+          type: {
+            name: 'String'
+          }
+        },
+        color: {
+          required: false,
+          serializedName: 'color',
+          type: {
+            name: 'String'
+          }
+        },
+        hates: {
+          required: false,
+          serializedName: 'hates',
+          type: {
+            name: 'Sequence',
+            element: {
+                required: false,
+                serializedName: 'DogElementType',
+                type: {
+                  name: 'Composite',
+                  className: 'Dog'
+                }
+            }
+          }
+        }
       }
     }
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to Cat schema
- *
- * @param {JSON} instance
- *
- */
-Cat.prototype.deserialize = function (instance) {
-  Cat['super_'].prototype.deserialize.call(this, instance);
-  if (instance) {
-    if (instance['color'] !== undefined) {
-      this['color'] = instance['color'];
-    }
-
-    if (instance['hates']) {
-      var tempInstancehates = [];
-      instance['hates'].forEach(function(element1) {
-        if (element1) {
-          element1 = new models['Dog']().deserialize(element1);
-        }
-        tempInstancehates.push(element1);
-      });
-      this['hates'] = tempInstancehates;
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = Cat;

@@ -11,6 +11,7 @@ using Fixtures.Azure.AcceptanceTestsAzureBodyDuration;
 using Fixtures.Azure.AcceptanceTestsAzureReport;
 using Fixtures.Azure.AcceptanceTestsAzureSpecials;
 using Fixtures.Azure.AcceptanceTestsHead;
+using Fixtures.Azure.AcceptanceTestsHeadExceptions;
 using Fixtures.Azure.AcceptanceTestsLro;
 using Fixtures.Azure.AcceptanceTestsLro.Models;
 using Fixtures.Azure.AcceptanceTestsPaging;
@@ -94,6 +95,22 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 Assert.True(client.HttpSuccess.Head200());
                 Assert.True(client.HttpSuccess.Head204());
                 Assert.False(client.HttpSuccess.Head404());
+            }
+        }
+
+        [Fact]
+        public void HeadExceptionTests()
+        {
+            SwaggerSpecRunner.RunTests(
+                SwaggerPath("head-exceptions.json"), ExpectedPath("HeadExceptions"), generator: "Azure.CSharp");
+
+            using (
+                var client = new AutoRestHeadExceptionTestService(Fixture.Uri,
+                    new TokenCredentials(Guid.NewGuid().ToString())))
+            {
+                client.HeadException.Head200();
+                client.HeadException.Head204();
+                Assert.Throws<CloudException>(() => client.HeadException.Head404());
             }
         }
 
