@@ -215,6 +215,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     }
         ex.Request = _httpRequest;
         ex.Response = _httpResponse;
+        @(Model.InitializeException)
         if (_shouldTrace)
         {
             ServiceClientTracing.Error(_invocationId, ex);

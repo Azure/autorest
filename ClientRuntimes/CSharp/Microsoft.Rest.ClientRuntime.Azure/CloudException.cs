@@ -27,6 +27,12 @@ namespace Microsoft.Rest.Azure
         public CloudError Body { get; set; }
 
         /// <summary>
+        /// Gets or sets the value that uniquely identifies a request 
+        /// made against the service.
+        /// </summary>
+        public string RequestId { get; set; }
+
+        /// <summary>
         /// Initializes a new instance of the CloudException class.
         /// </summary>
         public CloudException() : base()

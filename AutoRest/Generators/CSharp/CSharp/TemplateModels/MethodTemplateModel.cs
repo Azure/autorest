@@ -257,6 +257,17 @@ namespace Microsoft.Rest.Generator.CSharp
         }
 
         /// <summary>
+        /// Get the expression for exception initialization with message.
+        /// </summary>
+        public virtual string InitializeException
+        {
+            get
+            {
+                return string.Empty;
+            }
+        }
+
+        /// <summary>
         /// Gets the expression for response body initialization.
         /// </summary>
         public virtual string InitializeResponseBody

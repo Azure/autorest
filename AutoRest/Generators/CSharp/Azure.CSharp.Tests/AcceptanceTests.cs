@@ -717,6 +717,20 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
         }
 
         [Fact]
+        public void ClientRequestIdInExceptionTest()
+        {
+            var validSubscription = "1234-5678-9012-3456";
+            using (var client = new AutoRestAzureSpecialParametersTestClient(Fixture.Uri,
+                    new TokenCredentials(validSubscription, Guid.NewGuid().ToString()))
+            { SubscriptionId = validSubscription })
+            {
+                Dictionary<string, List<string>> customHeaders = new Dictionary<string, List<string>>();
+                var exception = Assert.Throws<CloudException>(() => client.XMsClientRequestId.Get());
+                Assert.Equal("123", exception.RequestId);                
+            }
+        }
+
+        [Fact]
         public void CustomNamedRequestIdTest()
         {
             SwaggerSpecRunner.RunTests(
