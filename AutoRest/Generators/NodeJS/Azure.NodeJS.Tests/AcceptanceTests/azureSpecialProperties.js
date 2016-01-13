@@ -158,6 +158,20 @@ describe('nodejs', function () {
         });
       });
     });
+
+    it('should have x-ms-request-id in the error object', function (done) {
+      var invalidClientId = '123';
+      var options = {
+        customHeaders: {
+          'x-ms-client-request-id': invalidClientId
+        }
+      };
+      testClient.xMsClientRequestId.get(options, function (error, result, request, response) {
+        should.exist(error);
+        error.response.headers['x-ms-request-id'].should.equal('123');
+        done();
+      });
+    });
     
     it('should allow custom-named request-id headers to be used', function (done) {
       testClient.header.customNamedRequestId("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0", function (error, result, request, response) {
