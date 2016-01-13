@@ -12,8 +12,10 @@
     <OutputPath>.</OutputPath>
     <Name>msrest</Name>
     <RootNamespace>msrest</RootNamespace>
-    <InterpreterId>{3c88fcfa-540d-422f-b3e1-418b6193b04f}</InterpreterId>
-    <InterpreterVersion>2.7</InterpreterVersion>
+    <InterpreterId>
+    </InterpreterId>
+    <InterpreterVersion>
+    </InterpreterVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -81,19 +83,6 @@
     <Content Include="readme.rst">
       <SubType>Code</SubType>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Interpreter Include="..\..\..\..\..\..\Users\antisch\Documents\GitHub\PythonEnv\Python27-64-ENV\">
-      <Id>{3c88fcfa-540d-422f-b3e1-418b6193b04f}</Id>
-      <BaseInterpreter>{9a7a9026-48c1-4688-9d5d-e5699d47d074}</BaseInterpreter>
-      <Version>2.7</Version>
-      <Description>Python27-64-ENV (Python 64-bit 2.7)</Description>
-      <InterpreterPath>Scripts\python.exe</InterpreterPath>
-      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
-      <LibraryPath>Lib\</LibraryPath>
-      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
-      <Architecture>Amd64</Architecture>
-    </Interpreter>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -27,11 +27,11 @@ from ..models import *
 
 class PoolManager(object):
 
-    def __init__(self, client, config, serializer, deserializer):
+    def __init__(self, client, config, serializer, derserializer):
 
         self._client = client
         self._serialize = serializer
-        self._deserialize = deserializer
+        self._deserialize = derserializer
 
         self.config = config
 

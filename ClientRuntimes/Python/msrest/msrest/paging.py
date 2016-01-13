@@ -62,6 +62,14 @@ class Paged(object):
             for i in self.next():
                 yield i
 
+    def __len__(self):
+        """Returnds length of items in current page."""
+        return len(self.items)
+
+    def __getitem__(self, index):
+        """Get indexed item on current page."""
+        return self.items[index]
+
     def _validate_url(self):
         """Validate next page URL."""
         if self.next_link:
