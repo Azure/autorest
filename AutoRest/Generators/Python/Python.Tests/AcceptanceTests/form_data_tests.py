@@ -10,7 +10,7 @@ from os.path import dirname, pardir, join, realpath, sep, pardir
 cwd = dirname(realpath(__file__))
 root = realpath(join(cwd , pardir, pardir, pardir, pardir, pardir))
 sys.path.append(join(root, "ClientRuntimes" , "Python", "msrest"))
-log_level = int(os.environ.get('PythonLogLevel', 30))
+log_level = int(os.environ.get('PythonLogLevel', 10))
 
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
 sys.path.append(join(tests, "BodyFormData"))
@@ -35,7 +35,7 @@ class FormDataTests(unittest.TestCase):
         client = AutoRestSwaggerBATFormDataService(config)
 
         test_string = "Upload file test case"
-        test_bytes = bytearray(test_string)
+        test_bytes = bytearray(test_string, encoding='utf-8')
         with io.BytesIO(test_bytes) as stream_data:
             resp = client.formdata.upload_file(stream_data, "UploadFile.txt")
             self.assertEqual(resp, test_string)
@@ -58,7 +58,7 @@ class FormDataTests(unittest.TestCase):
         client = AutoRestSwaggerBATFormDataService(config)
 
         test_string = "Upload file test case"
-        test_bytes = bytearray(test_string)
+        test_bytes = bytearray(test_string, encoding='utf-8')
         with io.BytesIO(test_bytes) as stream_data:
             resp = client.formdata.upload_file_via_body(stream_data, "UploadFile.txt")
             self.assertEqual(resp, test_string)

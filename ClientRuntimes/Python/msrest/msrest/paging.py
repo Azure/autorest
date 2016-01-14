@@ -71,7 +71,7 @@ class Paged(object):
 
     @property
     def raw(self):
-        raw = ClientRawResponse(self.items, self._response)
+        raw = ClientRawResponse(self.current_page, self._response)
         raw.add_headers(self._raw_headers)
         return raw
 
@@ -86,7 +86,7 @@ class Paged(object):
     def reset(self):
         """Reset iterator to first page."""
         self.next_link = ""
-        self.items = []
+        self.current_page = []
 
     def next(self):
         """Get next page."""
@@ -95,4 +95,4 @@ class Paged(object):
         self._validate_url()
         self._response = self._get_next(self.next_link)
         self._derserializer(self, self._response)
-        return self.items
+        return self.current_page
