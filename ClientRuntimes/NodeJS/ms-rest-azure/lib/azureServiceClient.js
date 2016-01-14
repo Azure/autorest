@@ -7,7 +7,6 @@ var async = require('async');
 var msrest = require('ms-rest');
 var PollingState = require('./pollingState');
 var LroStates = require('./constants').LongRunningOperationStates;
-var utils = require('./utils');
 var WebResource = msrest.WebResource;
 
 /**
