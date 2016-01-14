@@ -159,6 +159,28 @@ describe('nodejs', function () {
       });
     });
 
+    it('should not overwrite x-ms-client-request-id', function (done) {
+      var testClient2 = new specialsClient(credentials, dummySubscriptionId, baseUri, clientOptions);
+      testClient2.clientRequestId = null;
+      testClient2.xMsClientRequestId.get(function (error, result, request, response) {
+        should.not.exist(error);
+        response.statusCode.should.equal(200);
+        response.headers['x-ms-request-id'].should.equal('123');
+        done();
+      });
+    });
+
+    it('should overwrite x-ms-client-request-id via client', function (done) {
+      var testClient2 = new specialsClient(credentials, dummySubscriptionId, baseUri, clientOptions);
+      testClient2.clientRequestId = '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0';
+      testClient2.xMsClientRequestId.clientGet(function (error, result, request, response) {
+        should.not.exist(error);
+        response.statusCode.should.equal(200);
+        response.headers['x-ms-request-id'].should.equal('123');
+        done();
+      });
+    });
+
     it('should have x-ms-request-id in the error object', function (done) {
       var invalidClientId = '123';
       var options = {

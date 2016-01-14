@@ -52,6 +52,21 @@ export interface XMsClientRequestId {
      */
     paramGet(xMsClientRequestId: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     paramGet(xMsClientRequestId: string, callback: ServiceCallback<void>): void;
+
+    /**
+     * Get method that overwrites x-ms-client-request header with value
+     * 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    clientGet(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    clientGet(callback: ServiceCallback<void>): void;
 }
 
 /**
