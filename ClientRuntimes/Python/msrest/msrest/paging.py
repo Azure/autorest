@@ -45,17 +45,17 @@ class Paged(object):
          deserialization.
         """
         self.next_link = ""
-        self.items = []
+        self.current_page = []
         self._derserializer = Deserializer(classes)
         self._get_next = command
         self._response = None
         self._raw_headers = raw_headers
 
     def __iter__(self):
-        """Iterate over response items, automatically retrieves
-        next page.
+        """Iterate over response items in current page, automatically
+        retrieves next page.
         """
-        for i in self.items:
+        for i in self.current_page:
             yield i
 
         while self.next_link is not None:

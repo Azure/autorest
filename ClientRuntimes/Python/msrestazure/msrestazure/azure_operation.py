@@ -69,6 +69,21 @@ class OperationFinished(Exception):
     pass
 
 
+class SimpleResource:
+    """An implementation of Python 3 SimpleNamespace"""
+
+    def __init__(self, **kwargs):
+        self.__dict__.update(kwargs)
+
+    def __repr__(self):
+        keys = sorted(self.__dict__)
+        items = ("{}={!r}".format(k, self.__dict__[k]) for k in keys)
+        return "{}({})".format(type(self).__name__, ", ".join(items))
+
+    def __eq__(self, other):
+        return self.__dict__ == other.__dict__
+
+
 class LongRunningOperationMixin(object):
     """LongRunningOperation Mixin
     Provides default logic for interpreting operation responses
@@ -168,9 +183,7 @@ class LongRunningOperationMixin(object):
         state = body.get('properties', body).get('provisioningState')
 
         if self.resource is None:
-            self.resource = type("Resource", (), {})
-            for key, value in body.items():
-                setattr(self.resource, key, value)
+            self.resource = SimpleResource(**body)
         elif state:
             if hasattr(self.resource, 'provisioning_state'):
                 self.resource.provisioning_state = state
