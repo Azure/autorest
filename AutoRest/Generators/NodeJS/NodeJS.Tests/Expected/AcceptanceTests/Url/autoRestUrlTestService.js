@@ -39,7 +39,7 @@ var operations = require('./operations');
  *
  * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
  *
- * @param {string} [globalStringQuery] - should contain value null
+ * @param {string} [options.globalStringQuery] - should contain value null
  *
  */
 function AutoRestUrlTestService(globalStringPath, baseUri, options) {
@@ -56,6 +56,9 @@ function AutoRestUrlTestService(globalStringPath, baseUri, options) {
   }
   this.globalStringPath = globalStringPath;
 
+    if(options.globalStringQuery !== null && options.globalStringQuery !== undefined) { 
+    this.globalStringQuery = options.globalStringQuery;
+  }
   this.paths = new operations.Paths(this);
   this.queries = new operations.Queries(this);
   this.pathItems = new operations.PathItems(this);

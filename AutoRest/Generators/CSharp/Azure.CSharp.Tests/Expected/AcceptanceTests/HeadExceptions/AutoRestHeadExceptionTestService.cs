@@ -250,6 +250,7 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
             this.HeadException = new HeadExceptionOperations(this);
             this.BaseUri = new Uri("http://localhost");
             this.AcceptLanguage = "en-US";
+            this.LongRunningOperationRetryTimeout = 30;
             this.GenerateClientRequestId = true;
             SerializationSettings = new JsonSerializerSettings
             {

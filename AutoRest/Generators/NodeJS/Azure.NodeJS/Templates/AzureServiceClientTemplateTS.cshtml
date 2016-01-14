@@ -43,7 +43,7 @@ declare class @(Model.Name) {
      *
     @foreach (var param in optionalParameters)
     {
-    @: * @@param {@param.Type.Name.ToCamelCase()} [@param.Name] - @param.Documentation
+    @: * @@param {@param.Type.Name.ToCamelCase()} [options.@param.Name] - @param.Documentation
     @: *
     }
      */

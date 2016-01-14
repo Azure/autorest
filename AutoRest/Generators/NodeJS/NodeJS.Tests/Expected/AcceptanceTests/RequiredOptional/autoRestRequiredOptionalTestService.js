@@ -41,7 +41,7 @@ var operations = require('./operations');
  *
  * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
  *
- * @param {number} [optionalGlobalQuery] - number of items to skip
+ * @param {number} [options.optionalGlobalQuery] - number of items to skip
  *
  */
 function AutoRestRequiredOptionalTestService(requiredGlobalPath, requiredGlobalQuery, baseUri, options) {
@@ -62,6 +62,9 @@ function AutoRestRequiredOptionalTestService(requiredGlobalPath, requiredGlobalQ
   this.requiredGlobalPath = requiredGlobalPath;
   this.requiredGlobalQuery = requiredGlobalQuery;
 
+    if(options.optionalGlobalQuery !== null && options.optionalGlobalQuery !== undefined) { 
+    this.optionalGlobalQuery = options.optionalGlobalQuery;
+  }
   this.implicit = new operations.Implicit(this);
   this.explicit = new operations.Explicit(this);
   this.models = models;

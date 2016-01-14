@@ -262,6 +262,7 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
             this.BaseUri = new Uri("https://management.azure.com/");
             this.ApiVersion = "2014-04-01-preview";
             this.AcceptLanguage = "en-US";
+            this.LongRunningOperationRetryTimeout = 30;
             this.GenerateClientRequestId = true;
             SerializationSettings = new JsonSerializerSettings
             {

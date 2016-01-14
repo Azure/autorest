@@ -251,6 +251,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             this.Paging = new PagingOperations(this);
             this.BaseUri = new Uri("http://localhost");
             this.AcceptLanguage = "en-US";
+            this.LongRunningOperationRetryTimeout = 30;
             this.GenerateClientRequestId = true;
             SerializationSettings = new JsonSerializerSettings
             {

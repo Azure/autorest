@@ -181,6 +181,7 @@ public final class AutoRestParameterGroupingTestServiceImpl extends AzureService
 
     private void initialize() {
         this.acceptLanguage = "en-US";
+        this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
         this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         if (this.credentials != null) {

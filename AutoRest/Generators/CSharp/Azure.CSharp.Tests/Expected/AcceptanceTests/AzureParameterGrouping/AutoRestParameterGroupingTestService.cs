@@ -251,6 +251,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
             this.ParameterGrouping = new ParameterGroupingOperations(this);
             this.BaseUri = new Uri("https://localhost");
             this.AcceptLanguage = "en-US";
+            this.LongRunningOperationRetryTimeout = 30;
             this.GenerateClientRequestId = true;
             SerializationSettings = new JsonSerializerSettings
             {

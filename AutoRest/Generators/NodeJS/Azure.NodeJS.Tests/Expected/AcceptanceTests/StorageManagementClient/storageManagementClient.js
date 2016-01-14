@@ -42,13 +42,13 @@ var operations = require('./operations');
  *
  * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
  *
- * @param {string} [apiVersion] - Client Api Version.
+ * @param {string} [options.apiVersion] - Client Api Version.
  *
- * @param {string} [acceptLanguage] - Gets or sets the preferred language for the response.
+ * @param {string} [options.acceptLanguage] - Gets or sets the preferred language for the response.
  *
- * @param {number} [longRunningOperationRetryTimeout] - Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
+ * @param {number} [options.longRunningOperationRetryTimeout] - Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
  *
- * @param {boolean} [generateClientRequestId] - When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
+ * @param {boolean} [options.generateClientRequestId] - When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
  *
  */
 function StorageManagementClient(credentials, subscriptionId, baseUri, options) {
@@ -69,14 +69,21 @@ function StorageManagementClient(credentials, subscriptionId, baseUri, options) 
   this.credentials = credentials;
   this.subscriptionId = subscriptionId;
 
-  if(this.apiVersion !== null && this.apiVersion !== undefined) { 
-    this.apiVersion = '2015-05-01-preview';
+  this.apiVersion = '2015-05-01-preview';
+  this.acceptLanguage = 'en-US';
+  this.longRunningOperationRetryTimeout = 30;
+  this.generateClientRequestId = true;
+    if(options.apiVersion !== null && options.apiVersion !== undefined) { 
+    this.apiVersion = options.apiVersion;
   }
-  if(this.acceptLanguage !== null && this.acceptLanguage !== undefined) { 
-    this.acceptLanguage = 'en-US';
+  if(options.acceptLanguage !== null && options.acceptLanguage !== undefined) { 
+    this.acceptLanguage = options.acceptLanguage;
   }
-  if(this.generateClientRequestId !== null && this.generateClientRequestId !== undefined) { 
-    this.generateClientRequestId = true;
+  if(options.longRunningOperationRetryTimeout !== null && options.longRunningOperationRetryTimeout !== undefined) { 
+    this.longRunningOperationRetryTimeout = options.longRunningOperationRetryTimeout;
+  }
+  if(options.generateClientRequestId !== null && options.generateClientRequestId !== undefined) { 
+    this.generateClientRequestId = options.generateClientRequestId;
   }
   this.storageAccounts = new operations.StorageAccounts(this);
   this.usageOperations = new operations.UsageOperations(this);

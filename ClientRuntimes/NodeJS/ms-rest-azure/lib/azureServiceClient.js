@@ -17,11 +17,6 @@ var WebResource = msrest.WebResource;
  * UserTokenCredentials object used for authentication.  
  * 
  * @param {object} options - The parameter options used by ServiceClient
- * 
- * @param {number} [options.longRunningOperationRetryTimeoutInSeconds] - Retry timeout
- *
- * @param {boolean} [options.generateClientRequestId] - When set to true a unique x-ms-client-request-id value
- *      is generated and included in each request. Default is true.
  *
  */
 function AzureServiceClient(credentials, options) {
@@ -30,12 +25,8 @@ function AzureServiceClient(credentials, options) {
   }
   
   AzureServiceClient['super_'].call(this, credentials, options);
-  if (options) {
-    this.longRunningOperationRetryTimeoutInSeconds = 
-      options.longRunningOperationRetryTimeoutInSeconds;
-    
-    this.generateClientRequestId = true;
-  }
+ 
+  this.generateClientRequestId = true;
 }
 
 util.inherits(AzureServiceClient, msrest.ServiceClient);
@@ -69,7 +60,7 @@ AzureServiceClient.prototype.getPutOrPatchOperationResult = function (resultOfIn
   }
   var pollingState = null;
   try {
-    pollingState = new PollingState(resultOfInitialRequest, this.longRunningOperationRetryTimeoutInSeconds);
+    pollingState = new PollingState(resultOfInitialRequest, this.longRunningOperationRetryTimeout);
   } catch (error) {
     callback(error);
   }
@@ -154,7 +145,7 @@ AzureServiceClient.prototype.getPostOrDeleteOperationResult = function (resultOf
   
   var pollingState = null;
   try {
-    pollingState = new PollingState(resultOfInitialRequest, this.longRunningOperationRetryTimeoutInSeconds);
+    pollingState = new PollingState(resultOfInitialRequest, this.longRunningOperationRetryTimeout);
   } catch (error) {
     callback(error);
   }

@@ -215,6 +215,7 @@ public final class MicrosoftAzureTestUrlImpl extends AzureServiceClient implemen
     private void initialize() {
         this.apiVersion = "2014-04-01-preview";
         this.acceptLanguage = "en-US";
+        this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
         this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         if (this.credentials != null) {

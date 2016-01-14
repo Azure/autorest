@@ -32,7 +32,7 @@ declare class AutoRestRequiredOptionalTestService {
      *
      * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
      *
-     * @param {number} [optionalGlobalQuery] - number of items to skip
+     * @param {number} [options.optionalGlobalQuery] - number of items to skip
      *
      */
     constructor(requiredGlobalPath: string, requiredGlobalQuery: string, baseUri: string, options: ServiceClientOptions);

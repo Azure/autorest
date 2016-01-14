@@ -60,7 +60,7 @@ var ServiceClient = msRestAzure.AzureServiceClient;
  *
 @foreach (var param in optionalParameters)
 {
-@: * @@param {@param.Type.Name.ToCamelCase()} [@param.Name] - @param.Documentation
+@: * @@param {@param.Type.Name.ToCamelCase()} [options.@param.Name] - @param.Documentation
 @: *
 }
  */
@@ -86,8 +86,12 @@ function @(Model.Name)(@(Model.RequiredConstructorParameters), options) {
   @EmptyLine
   @foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
   {
-  @:if(this.@(property.Name) !== null && this.@(property.Name) !== undefined) { 
-  @:  this.@(property.Name) = @(property.DefaultValue);
+  @:this.@(property.Name) = @(property.DefaultValue);
+  }
+  @foreach (var property in optionalParameters)
+  { 
+  @:if(options.@(property.Name) !== null && options.@(property.Name) !== undefined) { 
+  @:  this.@(property.Name) = options.@(property.Name);
   @:}
   }
   

@@ -251,6 +251,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
             this.Duration = new DurationOperations(this);
             this.BaseUri = new Uri("https://localhost");
             this.AcceptLanguage = "en-US";
+            this.LongRunningOperationRetryTimeout = 30;
             this.GenerateClientRequestId = true;
             SerializationSettings = new JsonSerializerSettings
             {

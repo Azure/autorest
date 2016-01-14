@@ -30,7 +30,7 @@ declare class AutoRestUrlTestService {
      *
      * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
      *
-     * @param {string} [globalStringQuery] - should contain value null
+     * @param {string} [options.globalStringQuery] - should contain value null
      *
      */
     constructor(globalStringPath: string, baseUri: string, options: ServiceClientOptions);

@@ -285,6 +285,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             this.BaseUri = new Uri("http://localhost");
             this.ApiVersion = "2015-07-01-preview";
             this.AcceptLanguage = "en-US";
+            this.LongRunningOperationRetryTimeout = 30;
             this.GenerateClientRequestId = true;
             SerializationSettings = new JsonSerializerSettings
             {
