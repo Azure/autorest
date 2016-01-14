@@ -46,11 +46,13 @@ public class JacksonUtils {
         mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
                 .configure(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT, true)
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+                .configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true)
                 .setSerializationInclusion(JsonInclude.Include.NON_NULL)
                 .registerModule(new JodaModule())
                 .registerModule(ByteArraySerializer.getModule())
                 .registerModule(DateTimeSerializer.getModule())
-                .registerModule(DateTimeRfc1123Serializer.getModule());
+                .registerModule(DateTimeRfc1123Serializer.getModule())
+                .registerModule(HeadersSerializer.getModule());
     }
 
     /**
@@ -83,18 +85,15 @@ public class JacksonUtils {
      *
      * @param object the object to serialize.
      * @return the serialized string. Null if the object to serialize is null.
+     * @throws IOException exception from serialization.
      */
-    public static String serialize(Object object) {
+    public static String serialize(Object object) throws IOException {
         if (object == null) {
             return null;
         }
-        try {
-            StringWriter writer = new StringWriter();
-            new JacksonUtils().getObjectMapper().writeValue(writer, object);
-            return writer.toString();
-        } catch (Exception e) {
-            return null;
-        }
+        StringWriter writer = new StringWriter();
+        new JacksonUtils().getObjectMapper().writeValue(writer, object);
+        return writer.toString();
     }
 
     /**
@@ -108,7 +107,11 @@ public class JacksonUtils {
         if (object == null) {
             return null;
         }
-        return CharMatcher.is('"').trimFrom(serialize(object));
+        try {
+            return CharMatcher.is('"').trimFrom(serialize(object));
+        } catch (IOException ex) {
+            return null;
+        }
     }
 
     /**
