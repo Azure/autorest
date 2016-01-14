@@ -295,7 +295,7 @@ namespace Microsoft.Rest.Generator.Azure
                 Name = "LongRunningOperationRetryTimeout",
                 SerializedName = "longRunningOperationRetryTimeout",
                 Type = PrimaryType.Int,
-                Documentation = "The retry timeout for Long Running Operations."
+                Documentation = "The retry timeout for Long Running Operations in milliseconds."
             });
         }
 
