@@ -41,8 +41,8 @@ class PagingTests(unittest.TestCase):
     def test_paging_happy_path(self):
 
         pages = self.client.paging.get_single_pages()
-        self.assertIsNone(pages.next_link)
         items = [i for i in pages]
+        self.assertIsNone(pages.next_link)
         self.assertEqual(len(items), 1)
 
         self.assertEqual(items[0].properties.id, 1)
@@ -51,42 +51,56 @@ class PagingTests(unittest.TestCase):
         pages = self.client.paging.get_multiple_pages()
         self.assertIsNotNone(pages.next_link)
         items = [i for i in pages]
+        self.assertIsNone(pages.next_link)
         self.assertEqual(len(items), 10)
+
+        pages.reset()
+        more_items = [i for i in pages]
+        eq = [e for e in items if e not in more_items]
+        self.assertEqual(len(eq), 0)
+
+        with self.assertRaises(GeneratorExit):
+            pages.next()
 
         pages = self.client.paging.get_multiple_pages_retry_first()
         self.assertIsNotNone(pages.next_link)
         items = [i for i in pages]
+        self.assertIsNone(pages.next_link)
         self.assertEqual(len(items), 10)
 
         pages = self.client.paging.get_multiple_pages_retry_second()
         self.assertIsNotNone(pages.next_link)
         items = [i for i in pages]
-        self.assertEqual(len(items), 10)
-
-        pages = self.client.paging.get_single_pages(raw=True).output
         self.assertIsNone(pages.next_link)
+        self.assertEqual(len(items), 10)
+
+        pages = self.client.paging.get_single_pages(raw=True)
         items = [i for i in pages]
+        self.assertIsNone(pages.next_link)
         self.assertEqual(len(items), 1)
+        self.assertEqual(items, pages.raw.output)
 
-        pages = self.client.paging.get_multiple_pages(raw=True).output
+        pages = self.client.paging.get_multiple_pages(raw=True)
+        self.assertIsNotNone(pages.next_link)
+        items = [i for i in pages]
+        self.assertEqual(len(items), 10)
+        self.assertIsNotNone(pages.raw.response)
+
+        pages = self.client.paging.get_multiple_pages_retry_first(raw=True)
         self.assertIsNotNone(pages.next_link)
         items = [i for i in pages]
         self.assertEqual(len(items), 10)
 
-        pages = self.client.paging.get_multiple_pages_retry_first(raw=True).output
-        self.assertIsNotNone(pages.next_link)
-        items = [i for i in pages]
-        self.assertEqual(len(items), 10)
-
-        pages = self.client.paging.get_multiple_pages_retry_second(raw=True).output
+        pages = self.client.paging.get_multiple_pages_retry_second(raw=True)
         self.assertIsNotNone(pages.next_link)
         items = [i for i in pages]
         self.assertEqual(len(items), 10)
 
     def test_paging_sad_path(self):
 
+        pages = self.client.paging.get_single_pages_failure()
         with self.assertRaises(CloudError):
-            self.client.paging.get_single_pages_failure()
+            items = [i for i in pages]
         
         pages = self.client.paging.get_multiple_pages_failure()
         self.assertIsNotNone(pages.next_link)
@@ -99,16 +113,17 @@ class PagingTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             items = [i for i in pages]
 
+        pages = self.client.paging.get_single_pages_failure(raw=True)
         with self.assertRaises(CloudError):
-            self.client.paging.get_single_pages_failure(raw=True)
+            items = [i for i in pages]
         
-        pages = self.client.paging.get_multiple_pages_failure(raw=True).output
+        pages = self.client.paging.get_multiple_pages_failure(raw=True)
         self.assertIsNotNone(pages.next_link)
 
         with self.assertRaises(CloudError):
             items = [i for i in pages]
 
-        pages = self.client.paging.get_multiple_pages_failure_uri(raw=True).output
+        pages = self.client.paging.get_multiple_pages_failure_uri(raw=True)
 
         with self.assertRaises(ValueError):
             items = [i for i in pages]

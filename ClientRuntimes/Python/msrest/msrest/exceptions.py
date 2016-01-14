@@ -24,17 +24,23 @@
 #
 # --------------------------------------------------------------------------
 
-from . import logger
-from requests import RequestException
 import sys
+
+from requests import RequestException
+
+from . import logger
 
 
 def raise_with_traceback(exception, message="", *args):
+    """Raise exception with a specified traceback.
+
+    :param Exception exception: Error type to be raised.
+    :param str message: Message to include with error, empty by default.
+    :param args: Any additional args to be included with exception.
+    """
     exc_type, exc_value, exc_traceback = sys.exc_info()
-    exc_msg = " {}: {}".format(exc_type.__name__, exc_value)
-
-    error = exception(str(message) + exc_msg, *args)
-
+    exc_msg = "{}, {}: {}".format(message, exc_type.__name__, exc_value)
+    error = exception(exc_msg, *args)
     try:
         raise error.with_traceback(exc_traceback)
     except AttributeError:
@@ -45,41 +51,56 @@ def raise_with_traceback(exception, message="", *args):
 class ClientException(Exception):
 
     def __init__(self, message, inner_exception=None, *args):
+        """Base exception for all Client Runtime exceptions."""
         self.inner_exception = inner_exception
         logger.LOGGER.debug(message)
         super(ClientException, self).__init__(message, *args)
 
 
 class SerializationError(ClientException):
+    """Error raised during request serialization."""
     pass
 
 
 class DeserializationError(ClientException):
+    """Error raised during response deserialization."""
     pass
 
 
 class TokenExpiredError(ClientException):
+    """OAuth token expired, request failed."""
     pass
 
 
 class ClientRequestError(ClientException):
+    """Client request failed."""
     pass
 
 
 class AuthenticationError(ClientException):
+    """Client request failed to authentication."""
     pass
 
 
 class HttpOperationError(ClientException):
+    """Client request failed due to server-specificed HTTP operation error."""
 
     def __str__(self):
         return str(self.message)
 
     def __init__(self, deserialize, response, resp_type=None, *args):
+        """HTTP Operation Error.
+        Attempts to deserialize response into specific error object.
+
+        :param Deserializer deserialize: Deserializer with data on custom
+         error objects.
+        :param requests.Response response: Server response
+        :param str resp_type: Objects type to deserialize response.
+        :param args: Additional args to pass to exception object.
+        """
         self.error = None
         self.message = None
         self.response = response
-
         try:
             if resp_type:
                 self.error = deserialize(resp_type, response)
@@ -97,9 +118,8 @@ class HttpOperationError(ClientException):
                     self.error = err
 
                 if not self.message:
-                    msg = ("Operation returned an invalid status code "
-                           "'{}'".format(response.reason))
-                    self.message = msg
+                    msg = "Operation returned an invalid status code {!r}"
+                    self.message = msg.format(response.reason)
             else:
                 if not self.error:
                     self.error = response

@@ -24,9 +24,6 @@
 #
 # --------------------------------------------------------------------------
 
-"""
-Configuration of ServiceClient and session.
-"""
 
 try:
     import configparser
@@ -47,16 +44,19 @@ from .pipeline import (
 class Configuration(object):
 
     def __init__(self, base_url, filepath=None):
+        """Client configuration.
+
+        :param str baseurl: REST API base URL.
+        :param str filepath: Path to existing config file (optional).
+        """
         # Service
         self.base_url = base_url
 
         # Logging configuration
         self._log_name = logger.DEFAULT_LOG_NAME
         self._log_dir = None
-
         self._stream_logging = self._file_logging = \
             "%(asctime)-15s [%(levelname)s] %(module)s: %(message)s"
-
         self._level = 30
         self._log = logger.setup_logger(self)
 
@@ -83,6 +83,7 @@ class Configuration(object):
 
     @property
     def log_level(self):
+        """Current logging level (int)."""
         return self._level
 
     @log_level.setter
@@ -92,6 +93,9 @@ class Configuration(object):
 
     @property
     def stream_log(self):
+        """Format string for console logging. Set to 'None' to disable
+        console logging.
+        """
         return self._stream_logging
 
     @stream_log.setter
@@ -101,6 +105,9 @@ class Configuration(object):
 
     @property
     def file_log(self):
+        """Format string for file logging. Set to 'None' to
+        disable file logging.
+        """
         return self._file_logging
 
     @file_log.setter
@@ -110,6 +117,7 @@ class Configuration(object):
 
     @property
     def log_dir(self):
+        """Directory where log files will be stored."""
         return self._log_dir
 
     @log_dir.setter
@@ -119,25 +127,32 @@ class Configuration(object):
 
     @property
     def log_name(self):
+        """Name of the session logger."""
         return self._log_name
 
     @log_name.setter
     def log_name(self, value):
-        self._log = logger.setup_logger(self)
         self._log_name = value
+        self._log = logger.setup_logger(self)
 
     def _clear_config(self):
+        """Clearout config object in memory."""
         for section in self._config.sections():
             self._config.remove_section(section)
 
     def save(self, filepath):
+        """Save current configuration to file.
+
+        :param str filepath: Path to file where settings will be saved.
+        :raises: ValueError if supplied filepath cannot be written to.
+        :rtype: None
+        """
         sections = [
             "Logging",
             "Connection",
             "Proxies",
             "RetryPolicy",
             "RedirectPolicy"]
-
         for section in sections:
             self._config.add_section(section)
 
@@ -165,18 +180,22 @@ class Configuration(object):
         self._config.set("RedirectPolicy", "allow", self.redirect_policy.allow)
         self._config.set("RedirectPolicy", "max_redirects",
                          self.redirect_policy.max_redirects)
-
         try:
             with open(filepath, 'w') as configfile:
                 self._config.write(configfile)
-
         except (KeyError, EnvironmentError):
-            raise_with_traceback(
-                ValueError, "Supplied config filepath invalid.")
+            error = "Supplied config filepath invalid."
+            raise_with_traceback(ValueError, error)
         finally:
             self._clear_config()
 
     def load(self, filepath):
+        """Load configuration from existing file.
+
+        :param str filepath: Path to existing config file.
+        :raises: ValueError if supplied config file is invalid.
+        :rtype: None
+        """
         try:
             self._config.read(filepath)
 
@@ -218,9 +237,8 @@ class Configuration(object):
                 self._config.set("RedirectPolicy", "max_redirects")
 
             self._log = logger.setup_logger(self)
-
         except (ValueError, EnvironmentError, NoOptionError):
-            raise_with_traceback(
-                ValueError, "Supplied config file incompatible.")
+            error = "Supplied config file incompatible."
+            raise_with_traceback(ValueError, error)
         finally:
             self._clear_config()

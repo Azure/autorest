@@ -26,35 +26,35 @@
 
 import json
 import httpretty
-import requests
-import re
-import os
-
 try:
-    from http.server import HTTPServer, BaseHTTPRequestHandler
-
+    from http.server import(
+        HTTPServer,
+        BaseHTTPRequestHandler)
 except ImportError:
     from BaseHTTPServer import HTTPServer
     from BaseHTTPServer import BaseHTTPRequestHandler
-
-try:
-    import unittest2 as unittest
-except ImportError:
-    import unittest
-
+import os
+import requests
+import re
+import unittest
 try:
     from unittest import mock
 except ImportError:
     import mock
 
-from msrest.authentication import Authentication, OAuthTokenAuthentication
+from msrest.authentication import (
+    Authentication,
+    OAuthTokenAuthentication)
 from msrest.pipeline import (
     ClientHTTPAdapter,
     ClientPipelineHook,
     ClientRequest)
-
-from msrest import ServiceClient, Configuration
-from msrest.exceptions import TokenExpiredError, ClientRequestError
+from msrest import (
+    ServiceClient,
+    Configuration)
+from msrest.exceptions import (
+    TokenExpiredError,
+    ClientRequestError)
 
 
 class TestRuntime(unittest.TestCase):

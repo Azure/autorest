@@ -24,47 +24,84 @@
 #
 # --------------------------------------------------------------------------
 
-from .serialization import Deserializer
 try:
     from urlparse import urlparse
-
 except ImportError:
     from urllib.parse import urlparse
 
+from .serialization import Deserializer
+from .pipeline import ClientRawResponse
+
 
 class Paged(object):
+    """A container for paged REST responses."""
 
-    def __init__(self, response, command, classes):
+    def __init__(self, command, classes, raw_headers=None):
+        """Paged response.
+
+        :param requests.Response response: server response object.
+        :param callable command: Function to retrieve the next page of items.
+        :param dict classes: A dictionary of class dependencies for
+         deserialization.
         """
-        A collection for paged REST responses.
-        """
-        self.next_link = None
+        self.next_link = ""
         self.items = []
-
-        self.derserializer = Deserializer(classes)
-        self.derserializer(self, response)
-
-        self.command = command
+        self._derserializer = Deserializer(classes)
+        self._get_next = command
+        self._response = None
+        self._raw_headers = raw_headers
 
     def __iter__(self):
+        """Iterate over response items, automatically retrieves
+        next page.
+        """
         for i in self.items:
             yield i
 
         while self.next_link is not None:
-            self._validate_url()
-            response = self.command(self.next_link)
-            self.derserializer(self, response)
-
-            for i in self.items:
+            for i in self.next():
                 yield i
 
     def __len__(self):
+        """Returnds length of items in current page."""
         return len(self.items)
 
     def __getitem__(self, index):
+        """Get indexed item on current page."""
         return self.items[index]
 
     def _validate_url(self):
-        parsed = urlparse(self.next_link)
-        if not parsed.scheme or not parsed.netloc:
-            raise ValueError("Invalid URL: {}".format(self.next_link))
+        """Validate next page URL."""
+        if self.next_link:
+            parsed = urlparse(self.next_link)
+            if not parsed.scheme or not parsed.netloc:
+                raise ValueError("Invalid URL: " + self.next_link)
+
+    @property
+    def raw(self):
+        raw = ClientRawResponse(self.items, self._response)
+        if self._raw_headers:
+            raw.add_headers(self._raw_headers)
+        return raw
+
+    def get(self, url):
+        """Get arbitrary page.
+
+        :param str url: URL to arbitrary page results.
+        """
+        self.next_link = url
+        return self.next()
+
+    def reset(self):
+        """Reset iterator to first page."""
+        self.next_link = ""
+        self.items = []
+
+    def next(self):
+        """Get next page."""
+        if self.next_link is None:
+            raise GeneratorExit("End of paging")
+        self._validate_url()
+        self._response = self._get_next(self.next_link)
+        self._derserializer(self, self._response)
+        return self.items

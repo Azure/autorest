@@ -25,18 +25,22 @@
 # --------------------------------------------------------------------------
 
 import logging
+from logging import handlers
 import os
 import re
-import shutil
 import types
 
 DEFAULT_LOG_NAME = "ms-client-runtime"
 LOGGER = None
+STDOUT_HANDLER = None
+FILE_HANDLER = None
 
 
 def check_invalid_directory(dirname):
-    """
-    Check directory for file log.
+    """Check validity of directory for file log.
+
+    :param str dirname: Directory where log will be created.
+    :raises: ValueError if directory cannot be written to.
     """
     try:
         if not os.path.isdir(dirname):
@@ -46,77 +50,80 @@ def check_invalid_directory(dirname):
             test_file.write("All good to go!")
 
         os.remove(os.path.join(dirname, "ms_test"))
-
-    except (IOError, OSError, EnvironmentError) as exp:
-        raise ValueError("Log directory '{}' cannot be accessed:{}".format(
-            dirname, exp))
+    except (IOError, OSError, EnvironmentError) as err:
+        error = "Log directory {!r} cannot be accessed: {!r}"
+        raise ValueError(error.format(dirname, err))
 
 
 def set_stream_handler(logger, format_str):
-    """
-    Set log console handler.
-    """
+    """Set log console handler.
+    Any existing console handlers will be removed, and if format_str
+    is None, no handler will be added.
 
-    current_handlers = [
-        h for h in logger.handlers if isinstance(h, logging.StreamHandler)]
-
-    for handler in current_handlers:
-        logger.removeHandler(handler)
+    :param Logger logger: Logger object being configured.
+    :param str format_str: Log statement formatting string.
+    :returns: format_str
+    """
+    global STDOUT_HANDLER
+    if STDOUT_HANDLER:
+        logger.removeHandler(STDOUT_HANDLER)
 
     if format_str:
-        handler = logging.StreamHandler()
+        STDOUT_HANDLER = logging.StreamHandler()
         formatter = logging.Formatter(str(format_str))
-
-        handler.setFormatter(formatter)
-        logger.addHandler(handler)
-
+        STDOUT_HANDLER.setFormatter(formatter)
+        logger.addHandler(STDOUT_HANDLER)
+    else:
+        STDOUT_HANDLER = None
     return format_str
 
 
 def set_file_handler(logger, file_dir, format_str):
+    """Set log file handler.
+    Any existing console handlers will be removed, and if either
+    format_str or file_dir is None, no handler will be added.
+    If an existing log file has reached 10mb in size, it will be 'archived'
+    (renamed) and a new log file started.
+
+    :param Logger logger: Logger object being configured.
+    :param str file_dir: Directory where file log will be written.
+    :param str format_str: Log statement formatting string.
+    :returns: format_str
+    :raises: ValueError if log directory is invalid.
     """
-    Set log file handler.
-    """
+    global FILE_HANDLER
+    if FILE_HANDLER:
+        logger.removeHandler(FILE_HANDLER)
 
-    current_handlers = \
-        [h for h in logger.handlers if isinstance(h, logging.FileHandler)]
-
-    for handler in current_handlers:
-        logger.removeHandler(handler)
-
-    if not format_str or not file_dir:
-        return format_str
-
-    check_invalid_directory(file_dir)
-
-    logfile = os.path.join(file_dir, logger.name + '.log')
-
-    if os.path.isfile(logfile) and os.path.getsize(logfile) > 10485760:
-        split_log = os.path.splitext(logfile)
-        timestamp = time.strftime("%Y-%m-%d-%H-%M-%S")
-
-        shutil.move(logfile, "{root}-{date}{ext}".format(
-            root=split_log[0],
-            date=timestamp,
-            ext=split_log[1]))
-
-    handler = logging.FileHandler(logfile)
-    formatter = logging.Formatter(str(format_str))
-    handler.setFormatter(formatter)
-    logger.addHandler(handler)
+    if format_str and file_dir:
+        check_invalid_directory(file_dir)
+        logfile = os.path.join(file_dir, logger.name + '.log')
+        FILE_HANDLER = handlers.RotatingFileHandler(
+            logfile, mode='a', maxBytes=10485760, backupCount=10)
+        formatter = logging.Formatter(str(format_str))
+        FILE_HANDLER.setFormatter(formatter)
+        logger.addHandler(FILE_HANDLER)
+    else:
+        FILE_HANDLER = None
     return format_str
 
 
 def set_log_level(logger, level):
-    """
-    Set logging verbosity.
-    """
-    levels = {'debug': 10,
-              'info': 20,
-              'warning': 30,
-              'error': 40,
-              'critical': 50}
+    """Set logging verbosity.
 
+    :param Logger logger: Logger object being configured.
+    :param str/int level: Logging level, can be integer in
+     {logging.DEBUG, logging.INFO, logging.WARNING, logging.ERROR,
+     logging.CRITICAL} or a string in {'debug', 'info', 'warning',
+     'error', 'critical'}.
+    :returns: Current logging level as an int.
+    :raises: ValueError if supplied logging level is invalid.
+    """
+    levels = {'debug': logging.DEBUG,
+              'info': logging.INFO,
+              'warning': logging.WARNING,
+              'error': logging.ERROR,
+              'critical': logging.CRITICAL}
     try:
         level = levels[level.lower()]
     except (AttributeError, KeyError):
@@ -127,74 +134,76 @@ def set_log_level(logger, level):
 
 
 def setup_logger(config):
-    """
-    Create and configure new logger for client session.
+    """Create and configure new logger for client session.
+
+    :params config: Configuration object.
+    :rtype: Logger
     """
     global LOGGER
-
     if LOGGER and LOGGER.name == config.log_name:
         return LOGGER
 
     logger = logging.getLogger(config.log_name)
-
     if config.stream_log:
         set_stream_handler(logger, config.stream_log)
-
     if config.file_log:
         set_file_handler(logger, config.log_dir, config.file_log)
 
     set_log_level(logger, config.log_level)
-
     LOGGER = logger
     return logger
 
 
 def log_request(adapter, request, *args, **kwargs):
+    """Log a client request.
 
+    :param ClientHTTPAdapter adapter: Adapter making the request.
+    :param requests.Request request: The request object.
+    """
     try:
-        LOGGER.debug("Request URL: {}".format(request.url))
-        LOGGER.debug("Request method: {}".format(request.method))
+        LOGGER.debug("Request URL: %r", request.url)
+        LOGGER.debug("Request method: %r", request.method)
         LOGGER.debug("Request headers:")
         for header, value in request.headers.items():
-            LOGGER.debug("    {}: {}".format(header, value))
+            LOGGER.debug("    %r: %r", header, value)
         LOGGER.debug("Request body:")
 
-        # We don't want to log the binary data of a file upload
+        # We don't want to log the binary data of a file upload.
         if isinstance(request.body, types.GeneratorType):
             LOGGER.debug("File upload")
-
         else:
             LOGGER.debug(str(request.body))
-
     except Exception as err:
-        LOGGER.debug("Failed to log request: '{}'".format(err))
+        LOGGER.debug("Failed to log request: %r", err)
 
 
 def log_response(adapter, request, response, *args, **kwargs):
+    """Log a server response.
 
+    :param ClientHTTPAdapter adapter: Adapter making the request.
+    :param requests.Request request: The request object.
+    :param requests.Response response: The response object.
+    """
     try:
         result = kwargs['result']
-        LOGGER.debug("Response status: {}".format(result.status_code))
+        LOGGER.debug("Response status: %r", result.status_code)
         LOGGER.debug("Response headers:")
         for header, value in result.headers.items():
-            LOGGER.debug("    {}: {}".format(header, value))
+            LOGGER.debug("    %r: %r", header, value)
 
-        # We don't want to log binary data if the response is a file
+        # We don't want to log binary data if the response is a file.
         LOGGER.debug("Response content:")
-        pattern = re.compile("attachment; ?filename=[\"\w.]+", re.IGNORECASE)
+        pattern = re.compile(r'attachment; ?filename=["\w.]+', re.IGNORECASE)
         header = result.headers.get('content-disposition')
 
         if header and pattern.match(header):
-            filename = header.split('=')[1]
-            LOGGER.debug("File attachments: {}".format(filename))
-
+            filename = header.partition('=')[2]
+            LOGGER.debug("File attachments: " + filename)
         elif result.headers.get("content-type", "").startswith("image"):
             LOGGER.debug("Body contains image data.")
-
         else:
             LOGGER.debug(str(result.content))
         return result
-
     except Exception as err:
-        LOGGER.debug("Failed to log response: '{}'".format(err))
+        LOGGER.debug("Failed to log response: " + repr(err))
         return kwargs['result']

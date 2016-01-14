@@ -25,19 +25,13 @@
 #--------------------------------------------------------------------------
 
 import json
-
-try:
-    import unittest2 as unittest
-except ImportError:
-    import unittest
-
+import unittest
 try:
     from unittest import mock
 except ImportError:
     import mock
 
 from msrest import ServiceClient
-
 from msrest.authentication import OAuthTokenAuthentication
 from msrest.pipeline import (
     ClientHTTPAdapter,

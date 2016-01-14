@@ -31,18 +31,15 @@ import isodate
 from datetime import datetime
 import base64
 from base64 import b64decode
-
-try:
-    import unittest2 as unittest
-except ImportError:
-    import unittest
-
+import unittest
 try:
     from unittest import mock
 except ImportError:
     import mock
 
-from msrest.authentication import BasicAuthentication, OAuthTokenAuthentication
+from msrest.authentication import (
+    BasicAuthentication,
+    OAuthTokenAuthentication)
 
 from requests import Request
 
@@ -76,10 +73,11 @@ class TestAuthentication(unittest.TestCase):
 
     def test_token_auth(self):
 
-        token = OAuthTokenAuthentication("client_id", {"my_token":123})
-        session = token.signed_session()
+        token =  {"my_token":123}
+        auth = OAuthTokenAuthentication("client_id", token)
+        session = auth.signed_session()
 
-        self.assertEqual(session.token, {"my_token":123})
+        self.assertEqual(session.token, token)
 
         
 if __name__ == '__main__':

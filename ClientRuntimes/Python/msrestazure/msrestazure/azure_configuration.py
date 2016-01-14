@@ -26,7 +26,6 @@
 
 try:
     from configparser import NoOptionError
-
 except ImportError:
     from ConfigParser import NoOptionError
 
@@ -37,32 +36,41 @@ from msrest.exceptions import raise_with_traceback
 class AzureConfiguration(Configuration):
 
     def __init__(self, base_url, filepath=None):
+        """Azure specific client configuration.
 
+        :param str base_url: REST Service base URL.
+        :param str filepath: Path to an existing config file (optional).
+        """
         super(AzureConfiguration, self).__init__(base_url, filepath)
-
         self.long_running_operation_timeout = 30
 
     def save(self, filepath):
+        """Save current configuration to file.
 
+        :param str filepath: Path to save file to.
+        :raises: ValueError if supplied filepath cannot be written to.
+        :rtype: None
+        """
         self._config.add_section("Azure")
         self._config.set("Azure",
                          "long_running_operation_timeout",
                          self.long_running_operation_timeout)
-
         return super(AzureConfiguration, self).save(filepath)
 
     def load(self, filepath):
+        """Load configuration from existing file.
 
+        :param str filepath: Path to existing config file.
+        :raises: ValueError if supplied config file is invalid.
+        :rtype: None
+        """
         try:
             self._config.read(filepath)
             self.long_running_operation_timeout = self._config.getint(
                 "Azure", "long_running_operation_timeout")
-
         except (ValueError, EnvironmentError, NoOptionError):
             msg = "Supplied config file incompatible"
             raise_with_traceback(ValueError, msg)
-
         finally:
             self._clear_config()
-
         return super(AzureConfiguration, self).load(filepath)

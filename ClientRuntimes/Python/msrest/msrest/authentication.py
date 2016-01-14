@@ -24,69 +24,117 @@
 #
 # --------------------------------------------------------------------------
 
+import time
+
 import requests
 from requests.auth import HTTPBasicAuth
 import requests_oauthlib as oauth
-import time
 
 
 class Authentication(object):
+    """Default, simple auth object.
+    Doesn't actually add any auth headers.
+    """
 
     header = "Authorization"
 
     def signed_session(self):
+        """Create requests session with any required auth headers
+        applied.
+
+        :rtype: requests.Session.
+        """
         return requests.Session()
 
 
 class BasicAuthentication(Authentication):
+    """Implmentation of Basic Authentication."""
 
     def __init__(self, username, password):
+        """Basic Authentication.
+
+        :param str username: Authentication username.
+        :param str password: Authentication password.
+        """
         self.scheme = 'Basic'
         self.username = username
         self.password = password
 
     def signed_session(self):
+        """Create requests session with any required auth headers
+        applied.
+
+        :rtype: requests.Session.
+        """
         session = super(BasicAuthentication, self).signed_session()
         session.auth = HTTPBasicAuth(self.username, self.password)
-
         return session
 
 
 class BasicTokenAuthentication(Authentication):
+    """Simple Token Authentication.
+    Does not adhere to OAuth, simply adds provided token as a header.
+    """
 
     def __init__(self, token):
+        """Token Authentication.
+
+        :param dict token: Authentication token, must have 'access_token' key.
+        """
         self.scheme = 'Bearer'
         self.token = token
 
     def signed_session(self):
+        """Create requests session with any required auth headers
+        applied.
+
+        :rtype: requests.Session.
+        """
         session = super(BasicTokenAuthentication, self).signed_session()
         header = "{} {}".format(self.scheme, self.token['access_token'])
         session.headers['Authorization'] = header
-
         return session
 
 
 class OAuthTokenAuthentication(Authentication):
+    """OAuth Token Authentication.
+    Does not adhere to OAuth, simply adds provided token as a header.
+    """
 
     def __init__(self, client_id, token):
+        """Basic Authentication.
+
+        :param str client_id: Account Client ID.
+        :param dict token: OAuth2 token.
+        """
         self.scheme = 'Bearer'
         self.id = client_id
         self.token = token
 
     def construct_auth(self):
+        """Format token header.
+
+        :rtype: str.
+        """
         return "{} {}".format(self.scheme, self.token)
 
     def refresh_session(self):
+        """Return updated session if token has expired, attempts to
+        refresh using refresh token.
+
+        :rtype: requests.Session.
+        """
         return self.signed_session()
 
     def signed_session(self):
+        """Create requests session with any required auth headers
+        applied.
 
+        :rtype: requests.Session.
+        """
         expiry = self.token.get('expires_at')
 
         if expiry:
             countdown = float(expiry) - time.time()
             self.token['expires_in'] = countdown
-
-        session = oauth.OAuth2Session(self.id, token=self.token)
-
-        return session
+        return oauth.OAuth2Session(self.id, token=self.token)

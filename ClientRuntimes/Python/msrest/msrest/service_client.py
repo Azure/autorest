@@ -27,14 +27,13 @@
 from concurrent.futures import ThreadPoolExecutor
 import functools
 import logging
-from oauthlib import oauth2
-import requests
-
 try:
     from urlparse import urljoin, urlparse
-
 except ImportError:
     from urllib.parse import urljoin, urlparse
+
+from oauthlib import oauth2
+import requests
 
 from .authentication import Authentication
 from .pipeline import ClientHTTPAdapter, ClientRequest
@@ -46,7 +45,10 @@ from .exceptions import (
 
 
 def async_request(func):
-
+    """Wrapper for request to check whether it should
+    be made asynchronously in a separate thread.
+    This is based on whether a callback is present.
+    """
     @functools.wraps(func)
     def request(self, *args, **kwargs):
 
@@ -61,15 +63,17 @@ def async_request(func):
 
 
 class ServiceClient(object):
+    """REST Service Client.
+    Maintains client pipeline and handles all requests and responses.
+    """
+
+    _protocols = ['http://', 'https://']
 
     def __init__(self, creds, config):
-        """
-        Create service client.
+        """Create service client.
 
-        :Args:
-            - config (`.Configuration`): Service configuration.
-            - creds (`.Authentication`): Authenticated credentials.
-
+        :param Configuration config: Service configuration.
+        :param Authentication creds: Authenticated credentials.
         """
         self.config = config
         self.creds = creds if creds else Authentication()
@@ -77,26 +81,29 @@ class ServiceClient(object):
         self._log = logging.getLogger(config.log_name)
 
         self._adapter = ClientHTTPAdapter(config)
-        self._protocols = ['http://', 'https://']
         self._headers = {}
 
         self._adapter.add_hook("request", log_request)
         self._adapter.add_hook("response", log_response, precall=False)
 
     def _format_url(self, url):
+        """Format request URL with the client base URL, unless the
+        supplied URL is already absolute.
 
+        :param str url: The request URL to be formatted if necessary.
+        """
         parsed = urlparse(url)
-
         if not parsed.scheme or not parsed.netloc:
             url = url.lstrip('/')
             url = urljoin(self.config.base_url, url)
-
-            return url
-
-        else:
-            return url
+        return url
 
     def _request(self, url, params):
+        """Create ClientRequest object.
+
+        :param str url: URL for the request.
+        :param dict params: URL query parameters.
+        """
         request = ClientRequest()
 
         if url:
@@ -108,61 +115,59 @@ class ServiceClient(object):
         return request
 
     def _configure_session(self, session, **config):
-        """
-        Apply configuration to session.
-        """
+        """Apply configuration to session.
 
+        :param requests.Session session: Current request session.
+        :param config: Specific configuration overrides.
+        """
         kwargs = self.config.connection()
-        kwargs['timeout'] = config.get('timeout', kwargs['timeout'])
-        kwargs['verify'] = config.get('verify', kwargs['verify'])
-        kwargs['cert'] = config.get('verify', kwargs['cert'])
-        kwargs['cookies'] = config.get('cookies')
-        kwargs['stream'] = config.get('stream')
+        for opt in ['timeout', 'verify', 'cert']:
+            kwargs[opt] = config.get(opt, kwargs[opt])
+        for opt in ['cookies', 'stream']:
+            kwargs[opt] = config.get(opt)
         kwargs['allow_redirects'] = config.get(
             'allow_redirects', bool(self.config.redirect_policy))
 
         session.headers.update(self._headers)
         session.headers['User-Agent'] = self.config.user_agent
-
         session.max_redirects = config.get(
             'max_redirects', self.config.redirect_policy())
-
         session.proxies = config.get(
             'proxies', self.config.proxies())
-
         session.trust_env = config.get(
             'use_env_proxies', self.config.proxies.use_env_settings)
-
         redirect_logic = session.resolve_redirects
 
         def wrapped_redirect(resp, req, **kwargs):
             attempt = self.config.redirect_policy.check_redirect(resp, req)
-            if attempt:
-                return redirect_logic(resp, req, **kwargs)
-
-            return []
+            return redirect_logic(resp, req, **kwargs) if attempt else []
 
         session.resolve_redirects = wrapped_redirect
-
         self._adapter.max_retries = config.get(
             'retries', self.config.retry_policy())
-
         for protocol in self._protocols:
             session.mount(protocol, self._adapter)
 
         return kwargs
 
     def send_async(self, request_cmd, *args, **kwargs):
-        """
-        Prepare and send request object asynchronously.
+        """Prepare and send request object asynchronously.
+        Submits request object to a thread pool.
+
+        :param callable requent_cmd: Function to send the request.
+        :rtype: concurrent.futures.Future
         """
         with ThreadPoolExecutor(max_workers=1) as executor:
             future = executor.submit(request_cmd, *args, **kwargs)
             return future
 
     def send(self, request, headers={}, content=None, **config):
-        """
-        Prepare and send request object according to configuration.
+        """Prepare and send request object according to configuration.
+
+        :param ClientRequest request: The request object to be sent.
+        :param dict headers: Any headers to add to the request.
+        :param content: Any body data to add to the request.
+        :param config: Any specific config overrides
         """
         session = self.creds.signed_session()
         kwargs = self._configure_session(session, **config)
@@ -178,14 +183,12 @@ class ServiceClient(object):
                     data=request.data,
                     headers=request.headers,
                     **kwargs)
-
                 return response
 
             except (oauth2.rfc6749.errors.InvalidGrantError,
                     oauth2.rfc6749.errors.TokenExpiredError) as err:
-
-                self._log.warning(
-                    "Token expired or is invalid. Attempting to refresh.")
+                error = "Token expired or is invalid. Attempting to refresh."
+                self._log.warning(error)
 
             try:
                 session = self.creds.refresh_session()
@@ -196,18 +199,14 @@ class ServiceClient(object):
                     request.data,
                     request.headers,
                     **kwargs)
-
                 return response
-
             except (oauth2.rfc6749.errors.InvalidGrantError,
                     oauth2.rfc6749.errors.TokenExpiredError) as err:
-
                 msg = "Token expired or is invalid."
                 raise_with_traceback(TokenExpiredError, msg, err)
 
         except (requests.RequestException,
                 oauth2.rfc6749.errors.OAuth2Error) as err:
-
             msg = "Error occurred in request."
             raise_with_traceback(ClientRequestError, msg, err)
 
@@ -215,10 +214,9 @@ class ServiceClient(object):
         """
         Add event callback.
 
-        :Args:
-            - event (str): The pipeline event to hook. Currently supports
-              'request' and 'response'.
-            - hook (func): The callback function.
+        :param str event: The pipeline event to hook. Currently supports
+         'request' and 'response'.
+        :param callable hook: The callback function.
         """
         self._adapter.add_hook(event, hook, precall, overwrite)
 
@@ -226,75 +224,86 @@ class ServiceClient(object):
         """
         Remove event callback.
 
-        :Args:
-            - event (str): The pipeline event to hook. Currently supports
-              'request' and 'response'.
-            - hook (func): The callback function.
+        :param str event: The pipeline event to hook. Currently supports
+         'request' and 'response'.
+        :param callable hook: The callback function.
         """
         self._adapter.remove_hook(event, hook)
 
     def add_header(self, header, value):
-        """
-        Add a persistent header - this header will be applied to all
+        """Add a persistent header - this header will be applied to all
         requests sent during the current client session.
 
-        :Args:
-            - header (str): The header name.
-            - value (str): The header value.
+        :param str header: The header name.
+        :param str value: The header value.
         """
         self._headers[header] = value
 
     def get(self, url=None, params={}):
-        """
-        Create a GET request object.
+        """Create a GET request object.
+
+        :param str url: The request URL.
+        :param dict params: Request URL parameters.
         """
         request = self._request(url, params)
         request.method = 'GET'
         return request
 
     def put(self, url=None, params={}):
-        """
-        Create a PUT request object.
+        """Create a PUT request object.
+
+        :param str url: The request URL.
+        :param dict params: Request URL parameters.
         """
         request = self._request(url, params)
         request.method = 'PUT'
         return request
 
     def post(self, url=None, params={}):
-        """
-        Create a POST request object.
+        """Create a POST request object.
+
+        :param str url: The request URL.
+        :param dict params: Request URL parameters.
         """
         request = self._request(url, params)
         request.method = 'POST'
         return request
 
     def head(self, url=None, params={}):
-        """
-        Create a HEAD request object.
+        """Create a HEAD request object.
+
+        :param str url: The request URL.
+        :param dict params: Request URL parameters.
         """
         request = self._request(url, params)
         request.method = 'HEAD'
         return request
 
     def patch(self, url=None, params={}):
-        """
-        Create a PATCH request object.
+        """Create a PATCH request object.
+
+        :param str url: The request URL.
+        :param dict params: Request URL parameters.
         """
         request = self._request(url, params)
         request.method = 'PATCH'
         return request
 
     def delete(self, url=None, params={}):
-        """
-        Create a DELETE request object.
+        """Create a DELETE request object.
+
+        :param str url: The request URL.
+        :param dict params: Request URL parameters.
         """
         request = self._request(url, params)
         request.method = 'DELETE'
         return request
 
     def merge(self, url=None, params={}):
-        """
-        Create a MERGE request object.
+        """Create a MERGE request object.
+
+        :param str url: The request URL.
+        :param dict params: Request URL parameters.
         """
         request = self._request(url, params)
         request.method = 'MERGE'

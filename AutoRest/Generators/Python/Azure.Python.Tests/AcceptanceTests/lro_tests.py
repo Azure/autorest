@@ -21,7 +21,7 @@ sys.path.append(join(tests, "Lro"))
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
 from msrest.authentication import BasicTokenAuthentication
-from msrestazure.azure_exceptions import CloudError, CloudException
+from msrestazure.azure_exceptions import CloudError, CloudErrorData
 
 from auto_rest_long_running_operation_test_service import (
     AutoRestLongRunningOperationTestService, 
@@ -53,7 +53,7 @@ class LroTests(unittest.TestCase):
             self.assertIsNotNone(err.response)
             error = err.error
             self.assertIsNotNone(error)
-            if isinstance(error, CloudException):
+            if isinstance(error, CloudErrorData):
                 self.assertIsNone(error.error)
                 self.assertIsNotNone(error.message)
 
@@ -101,9 +101,8 @@ class LroTests(unittest.TestCase):
         process = self.client.lr_os.put_non_resource(Sku())
         self.assertEqual("100", process.result().id)
 
-        ## TODO: Not sure where the 100 comes from as it's not in the response
         process = self.client.lr_os.put_async_non_resource(Sku())
-        #self.assertEqual("100", process.result().id)
+        self.assertEqual("100", process.result().id)
 
         process = self.client.lr_os.post202_retry200(product)
         self.assertIsNone(process.result())
