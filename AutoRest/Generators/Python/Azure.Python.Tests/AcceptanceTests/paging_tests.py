@@ -56,7 +56,8 @@ class PagingTests(unittest.TestCase):
 
         pages.reset()
         more_items = [i for i in pages]
-        self.assertEqual(sorted(items), sorted(more_items))
+        eq = [e for e in items if e not in more_items]
+        self.assertEqual(len(eq), 0)
 
         with self.assertRaises(GeneratorExit):
             pages.next()
