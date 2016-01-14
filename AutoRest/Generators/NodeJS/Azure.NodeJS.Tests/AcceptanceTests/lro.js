@@ -25,7 +25,7 @@ describe('nodejs', function () {
     clientOptions.requestOptions = { jar: true };
     clientOptions.filters = [new msRest.ExponentialRetryPolicyFilter(3, 0, 0, 0)];
     clientOptions.noRetryPolicy = true;
-    clientOptions.longRunningOperationRetryTimeoutInSeconds = 0;
+    clientOptions.longRunningOperationRetryTimeout = 0;
 
     var testClient = new lroClient(credentials, baseUri, clientOptions);
     var product = { location: 'West US' };

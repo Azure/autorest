@@ -32,15 +32,16 @@ var ServiceClient = msRest.ServiceClient;
 @:var operations = require('./operations');
 }
 @EmptyLine
-@{var parameters = Model.Properties.Where(p => p.IsRequired);}
+@{var requiredParameters = Model.Properties.Where(p => p.IsRequired);}
+@{var optionalParameters = Model.Properties.Where(p => !p.IsRequired);}
 /**
  * @@class
  * Initializes a new instance of the @Model.Name class.
  * @@constructor
  *
-@foreach (var param in parameters)
+@foreach (var param in requiredParameters)
 {
-@: * @@param {@param.Type.Name} @param.Name @param.Documentation
+@: * @@param {@param.Type.Name.ToCamelCase()} @param.Name - @param.Documentation
 @: *
 }
  * @@param {string} [baseUri] - The base URI of the service.
@@ -52,10 +53,16 @@ var ServiceClient = msRest.ServiceClient;
  * @@param {object} [options.requestOptions] - Options for the underlying request object
  * {@@link https://github.com/request/request#requestoptions-callback Options doc}
  *
- * @@param {bool} [options.noRetryPolicy] - If set to true, turn off default retry policy
+ * @@param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
+ *
+@foreach (var param in optionalParameters)
+{
+@: * @@param {@param.Type.Name.ToCamelCase()} [options.@param.Name] - @param.Documentation
+@: *
+}
  */
 function @(Model.Name)(@(Model.RequiredConstructorParameters), options) {
-@foreach (var param in parameters)
+@foreach (var param in requiredParameters)
 {
 @:  if (@(param.Name) === null || @(param.Name) === undefined) {
 @:    throw new Error('\'@(param.Name)\' cannot be null.');
@@ -64,20 +71,24 @@ function @(Model.Name)(@(Model.RequiredConstructorParameters), options) {
   @EmptyLine
   if (!options) options = {};
   @EmptyLine
-  @(Model.Name)['super_'].call(this, @(parameters.Any(p => p.Type == PrimaryType.Credentials) ? "credentials" : "null"), options);
+  @(Model.Name)['super_'].call(this, @(requiredParameters.Any(p => p.Type == PrimaryType.Credentials) ? "credentials" : "null"), options);
   this.baseUri = baseUri;
   if (!this.baseUri) {
     this.baseUri = '@Model.BaseUrl';
   }
-@foreach (var param in parameters)
+@foreach (var param in requiredParameters)
 {
 @:  this.@(param.Name) = @(param.Name);
 }
   @EmptyLine
   @foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
   {
-  @:if(!this.@(property.Name)) { 
-  @:  this.@(property.Name) = @(property.DefaultValue);
+  @:this.@(property.Name) = @(property.DefaultValue);
+  }
+  @foreach (var property in optionalParameters)
+  { 
+  @:if(options.@(property.Name) !== null && options.@(property.Name) !== undefined) { 
+  @:  this.@(property.Name) = options.@(property.Name);
   @:}
   }
   

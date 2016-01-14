@@ -18,15 +18,16 @@ import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
 }
 @EmptyLine
 declare class @(Model.Name) {
-    @{var parameters = Model.Properties.Where(p => p.IsRequired);}
+    @{var requiredParameters = Model.Properties.Where(p => p.IsRequired);}
+    @{var optionalParameters = Model.Properties.Where(p => !p.IsRequired);}
     /**
      * @@class
      * Initializes a new instance of the @Model.Name class.
      * @@constructor
      *
-    @foreach (var param in parameters)
+    @foreach (var param in requiredParameters)
     {
-    @: * @@param {@param.Type.Name} @param.Name @param.Documentation
+    @: * @@param {@param.Type.Name.ToCamelCase()} @param.Name - @param.Documentation
     @: *
     }
      * @@param {string} [baseUri] - The base URI of the service.
@@ -38,7 +39,13 @@ declare class @(Model.Name) {
      * @@param {object} [options.requestOptions] - Options for the underlying request object
      * {@@link https://github.com/request/request#requestoptions-callback Options doc}
      *
-     * @@param {bool} [options.noRetryPolicy] - If set to true, turn off default retry policy
+     * @@param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
+     *
+    @foreach (var param in optionalParameters)
+    {
+    @: * @@param {@param.Type.Name.ToCamelCase()} [options.@param.Name] - @param.Documentation
+    @: *
+    }
      */
     constructor(@(Model.RequiredConstructorParametersTS), options: ServiceClientOptions);
 

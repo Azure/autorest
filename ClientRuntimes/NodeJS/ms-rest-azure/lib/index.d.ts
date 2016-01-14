@@ -2,8 +2,8 @@ import * as msRest from 'ms-rest';
 
 export interface AzureServiceClientOptions extends msRest.ServiceClientOptions {
 	// TODO: Make this property have right type
-	// 	* @param {Array} [options.longRunningOperationRetryTimeoutInSeconds] - Retry timeout
-	longRunningOperationRetryTimeoutInSeconds?: any;
+	// 	* @param {Array} [options.longRunningOperationRetryTimeout] - Retry timeout
+	longRunningOperationRetryTimeout?: any;
 }
 
 export class AzureServiceClient extends msRest.ServiceClient {
@@ -16,7 +16,7 @@ export class AzureServiceClient extends msRest.ServiceClient {
 	* 
 	* @param {object} options - The parameter options used by ServiceClient
 	* 
-	* @param {Array} [options.longRunningOperationRetryTimeoutInSeconds] - Retry timeout
+	* @param {Array} [options.longRunningOperationRetryTimeout] - Retry timeout
 	*/
 	constructor(credentials: msRest.ServiceClientCredentials, options: AzureServiceClientOptions)
 }

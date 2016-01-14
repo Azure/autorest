@@ -82,7 +82,10 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
             _httpRequest.Method = new HttpMethod("HEAD");
             _httpRequest.RequestUri = new Uri(_url);
             // Set Headers
-            _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            if (this.Client.GenerateClientRequestId != null && this.Client.GenerateClientRequestId.Value)
+            {
+                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            }
             if (this.Client.AcceptLanguage != null)
             {
                 if (_httpRequest.Headers.Contains("accept-language"))
@@ -186,7 +189,10 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
             _httpRequest.Method = new HttpMethod("HEAD");
             _httpRequest.RequestUri = new Uri(_url);
             // Set Headers
-            _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            if (this.Client.GenerateClientRequestId != null && this.Client.GenerateClientRequestId.Value)
+            {
+                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            }
             if (this.Client.AcceptLanguage != null)
             {
                 if (_httpRequest.Headers.Contains("accept-language"))
@@ -290,7 +296,10 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
             _httpRequest.Method = new HttpMethod("HEAD");
             _httpRequest.RequestUri = new Uri(_url);
             // Set Headers
-            _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            if (this.Client.GenerateClientRequestId != null && this.Client.GenerateClientRequestId.Value)
+            {
+                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
+            }
             if (this.Client.AcceptLanguage != null)
             {
                 if (_httpRequest.Headers.Contains("accept-language"))

@@ -717,6 +717,19 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
         }
 
         [Fact]
+        public void XmsRequestClientIdInClientTest()
+        {
+            var validSubscription = "1234-5678-9012-3456";
+            using (var client = new AutoRestAzureSpecialParametersTestClient(Fixture.Uri,
+                    new TokenCredentials(validSubscription, Guid.NewGuid().ToString()))
+            { SubscriptionId = validSubscription })
+            {
+                client.GenerateClientRequestId = false;
+                client.XMsClientRequestId.Get();
+            }
+        }
+
+        [Fact]
         public void ClientRequestIdInExceptionTest()
         {
             var validSubscription = "1234-5678-9012-3456";

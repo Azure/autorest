@@ -46,7 +46,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
         /// <summary>
-        /// The management credentials for Azure.
+        /// Gets Azure subscription credentials.
         /// </summary>
         public ServiceClientCredentials Credentials { get; private set; }
 
@@ -56,9 +56,16 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
         public string AcceptLanguage { get; set; }
 
         /// <summary>
-        /// The retry timeout for Long Running Operations.
+        /// Gets or sets the retry timeout in seconds for Long Running Operations.
+        /// Default value is 30.
         /// </summary>
         public int? LongRunningOperationRetryTimeout { get; set; }
+
+        /// <summary>
+        /// When set to true a unique x-ms-client-request-id value is generated and
+        /// included in each request. Default is true.
+        /// </summary>
+        public bool? GenerateClientRequestId { get; set; }
 
         public virtual IParameterGroupingOperations ParameterGrouping { get; private set; }
 
@@ -130,7 +137,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
         /// Initializes a new instance of the AutoRestParameterGroupingTestService class.
         /// </summary>
         /// <param name='credentials'>
-        /// Required. The management credentials for Azure.
+        /// Required. Gets Azure subscription credentials.
         /// </param>
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
@@ -152,7 +159,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
         /// Initializes a new instance of the AutoRestParameterGroupingTestService class.
         /// </summary>
         /// <param name='credentials'>
-        /// Required. The management credentials for Azure.
+        /// Required. Gets Azure subscription credentials.
         /// </param>
         /// <param name='rootHandler'>
         /// Optional. The http client handler used to handle http transport.
@@ -180,7 +187,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
         /// Optional. The base URI of the service.
         /// </param>
         /// <param name='credentials'>
-        /// Required. The management credentials for Azure.
+        /// Required. Gets Azure subscription credentials.
         /// </param>
         /// <param name='handlers'>
         /// Optional. The delegating handlers to add to the http client pipeline.
@@ -210,7 +217,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
         /// Optional. The base URI of the service.
         /// </param>
         /// <param name='credentials'>
-        /// Required. The management credentials for Azure.
+        /// Required. Gets Azure subscription credentials.
         /// </param>
         /// <param name='rootHandler'>
         /// Optional. The http client handler used to handle http transport.
@@ -244,6 +251,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
             this.ParameterGrouping = new ParameterGroupingOperations(this);
             this.BaseUri = new Uri("https://localhost");
             this.AcceptLanguage = "en-US";
+            this.LongRunningOperationRetryTimeout = 30;
+            this.GenerateClientRequestId = true;
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Formatting.Indented,

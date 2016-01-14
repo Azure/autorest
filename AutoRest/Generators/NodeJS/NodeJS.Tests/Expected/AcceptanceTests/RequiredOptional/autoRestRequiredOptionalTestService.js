@@ -26,9 +26,9 @@ var operations = require('./operations');
  * Initializes a new instance of the AutoRestRequiredOptionalTestService class.
  * @constructor
  *
- * @param {String} requiredGlobalPath number of items to skip
+ * @param {string} requiredGlobalPath - number of items to skip
  *
- * @param {String} requiredGlobalQuery number of items to skip
+ * @param {string} requiredGlobalQuery - number of items to skip
  *
  * @param {string} [baseUri] - The base URI of the service.
  *
@@ -39,7 +39,10 @@ var operations = require('./operations');
  * @param {object} [options.requestOptions] - Options for the underlying request object
  * {@link https://github.com/request/request#requestoptions-callback Options doc}
  *
- * @param {bool} [options.noRetryPolicy] - If set to true, turn off default retry policy
+ * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
+ *
+ * @param {number} [options.optionalGlobalQuery] - number of items to skip
+ *
  */
 function AutoRestRequiredOptionalTestService(requiredGlobalPath, requiredGlobalQuery, baseUri, options) {
   if (requiredGlobalPath === null || requiredGlobalPath === undefined) {
@@ -59,6 +62,9 @@ function AutoRestRequiredOptionalTestService(requiredGlobalPath, requiredGlobalQ
   this.requiredGlobalPath = requiredGlobalPath;
   this.requiredGlobalQuery = requiredGlobalQuery;
 
+    if(options.optionalGlobalQuery !== null && options.optionalGlobalQuery !== undefined) { 
+    this.optionalGlobalQuery = options.optionalGlobalQuery;
+  }
   this.implicit = new operations.Implicit(this);
   this.explicit = new operations.Explicit(this);
   this.models = models;

@@ -311,7 +311,7 @@ gulp.task('clean:generatedTest', function(cb) {
 gulp.task('clean', ['clean:build', 'clean:templates', 'clean:generatedTest']);
 
 gulp.task('syncDependencies:nugetProj', function() {
-  var dirs = glob.sync(path.join(basePathOrThrow(), '/**/*.nuget.proj'))
+  var dirs = glob.sync(path.join(basePathOrThrow(), '/**/project.json'))
     .map(function(filePath) {
       return path.dirname(filePath);
     });

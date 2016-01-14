@@ -87,7 +87,7 @@ describe('AzureServiceClient', function () {
       }
     };
     
-    var client = new AzureServiceClient(credentials, { longRunningOperationRetryTimeoutInSeconds : 0 });
+    var client = new AzureServiceClient(credentials, { longRunningOperationRetryTimeout : 0 });
     client._getStatus = mockedGetStatus;
 
     describe('Put', function () {
@@ -215,7 +215,7 @@ describe('AzureServiceClient', function () {
       
       it('lro put does not throw if invalid json is received on polling', function (done) {
         var badResponseBody = '{';
-        var negativeClient = new AzureServiceClient(credentials, { longRunningOperationRetryTimeoutInSeconds : 0 });
+        var negativeClient = new AzureServiceClient(credentials, { longRunningOperationRetryTimeout : 0 });
         negativeClient.addFilter(mockFilter({ statusCode: 200, body: badResponseBody }, badResponseBody));
         resultOfInitialRequest.response.headers['azure-asyncoperation'] = '';
         resultOfInitialRequest.response.headers['location'] = urlFromLocationHeader_Return200;
@@ -230,7 +230,7 @@ describe('AzureServiceClient', function () {
       
       it('lro put does not throw if invalid json with single quote is received on polling', function (done) {
         var badResponseBody = '{\'"}';
-        var negativeClient = new AzureServiceClient(credentials, { longRunningOperationRetryTimeoutInSeconds : 0 });
+        var negativeClient = new AzureServiceClient(credentials, { longRunningOperationRetryTimeout : 0 });
         negativeClient.addFilter(mockFilter({ statusCode: 200, body: badResponseBody }, badResponseBody));
         resultOfInitialRequest.response.headers['azure-asyncoperation'] = '';
         resultOfInitialRequest.response.headers['location'] = urlFromLocationHeader_Return200;
@@ -245,7 +245,7 @@ describe('AzureServiceClient', function () {
       
       it('lro put does not throw if invalid json is received with invalid status code on polling', function (done) {
         var badResponseBody = '{';
-        var negativeClient = new AzureServiceClient(credentials, { longRunningOperationRetryTimeoutInSeconds : 0 });
+        var negativeClient = new AzureServiceClient(credentials, { longRunningOperationRetryTimeout : 0 });
         negativeClient.addFilter(mockFilter({ statusCode: 203, body: badResponseBody }, badResponseBody));
         resultOfInitialRequest.response.headers['azure-asyncoperation'] = '';
         resultOfInitialRequest.response.headers['location'] = urlFromLocationHeader_Return200;
