@@ -36,7 +36,7 @@ from .pipeline import ClientRawResponse
 class Paged(object):
     """A container for paged REST responses."""
 
-    def __init__(self, command, classes, raw_headers={}):
+    def __init__(self, command, classes, raw_headers=None):
         """Paged response.
 
         :param requests.Response response: server response object.
@@ -80,7 +80,8 @@ class Paged(object):
     @property
     def raw(self):
         raw = ClientRawResponse(self.items, self._response)
-        raw.add_headers(self._raw_headers)
+        if self._raw_headers:
+            raw.add_headers(self._raw_headers)
         return raw
 
     def get(self, url):
