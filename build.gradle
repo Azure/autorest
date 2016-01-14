@@ -7,10 +7,6 @@ buildscript {
     }
 }
 
-subprojects {
-    group = 'com.microsoft.rest'
-}
-
 project(':azure-client-runtime') {
     apply plugin: 'java'
     dependencies {
