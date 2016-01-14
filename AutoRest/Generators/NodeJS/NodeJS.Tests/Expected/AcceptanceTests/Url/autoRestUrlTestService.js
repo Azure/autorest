@@ -26,7 +26,7 @@ var operations = require('./operations');
  * Initializes a new instance of the AutoRestUrlTestService class.
  * @constructor
  *
- * @param {String} globalStringPath A string value 'globalItemStringPath' that appears in the path
+ * @param {string} globalStringPath - A string value 'globalItemStringPath' that appears in the path
  *
  * @param {string} [baseUri] - The base URI of the service.
  *
@@ -37,7 +37,10 @@ var operations = require('./operations');
  * @param {object} [options.requestOptions] - Options for the underlying request object
  * {@link https://github.com/request/request#requestoptions-callback Options doc}
  *
- * @param {bool} [options.noRetryPolicy] - If set to true, turn off default retry policy
+ * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
+ *
+ * @param {string} [globalStringQuery] - should contain value null
+ *
  */
 function AutoRestUrlTestService(globalStringPath, baseUri, options) {
   if (globalStringPath === null || globalStringPath === undefined) {

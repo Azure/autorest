@@ -35,7 +35,8 @@ var operations = require('./operations');
  * @param {object} [options.requestOptions] - Options for the underlying request object
  * {@link https://github.com/request/request#requestoptions-callback Options doc}
  *
- * @param {bool} [options.noRetryPolicy] - If set to true, turn off default retry policy
+ * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
+ *
  */
 function AutoRestDateTimeTestService(baseUri, options) {
 

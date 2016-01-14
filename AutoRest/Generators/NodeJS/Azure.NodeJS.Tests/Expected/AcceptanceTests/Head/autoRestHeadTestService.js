@@ -27,7 +27,7 @@ var operations = require('./operations');
  * Initializes a new instance of the AutoRestHeadTestService class.
  * @constructor
  *
- * @param {Credentials} credentials Gets Azure subscription credentials.
+ * @param {credentials} credentials - Gets Azure subscription credentials.
  *
  * @param {string} [baseUri] - The base URI of the service.
  *
@@ -38,7 +38,14 @@ var operations = require('./operations');
  * @param {object} [options.requestOptions] - Options for the underlying request object
  * {@link https://github.com/request/request#requestoptions-callback Options doc}
  *
- * @param {bool} [options.noRetryPolicy] - If set to true, turn off default retry policy
+ * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
+ *
+ * @param {string} [acceptLanguage] - Gets or sets the preferred language for the response.
+ *
+ * @param {number} [longRunningOperationRetryTimeout] - Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
+ *
+ * @param {boolean} [generateClientRequestId] - When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
+ *
  */
 function AutoRestHeadTestService(credentials, baseUri, options) {
   if (credentials === null || credentials === undefined) {
@@ -54,10 +61,10 @@ function AutoRestHeadTestService(credentials, baseUri, options) {
   }
   this.credentials = credentials;
 
-  if(!this.acceptLanguage) {
+  if(this.acceptLanguage !== null && this.acceptLanguage !== undefined) { 
     this.acceptLanguage = 'en-US';
   }
-  if(!this.generateClientRequestId) {
+  if(this.generateClientRequestId !== null && this.generateClientRequestId !== undefined) { 
     this.generateClientRequestId = true;
   }
   this.httpSuccess = new operations.HttpSuccess(this);

@@ -26,9 +26,9 @@ var models = require('./models');
  * Initializes a new instance of the ComplexModelClient class.
  * @constructor
  *
- * @param {String} subscriptionId Subscription ID.
+ * @param {string} subscriptionId - Subscription ID.
  *
- * @param {String} apiVersion API ID.
+ * @param {string} apiVersion - API ID.
  *
  * @param {string} [baseUri] - The base URI of the service.
  *
@@ -39,7 +39,8 @@ var models = require('./models');
  * @param {object} [options.requestOptions] - Options for the underlying request object
  * {@link https://github.com/request/request#requestoptions-callback Options doc}
  *
- * @param {bool} [options.noRetryPolicy] - If set to true, turn off default retry policy
+ * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
+ *
  */
 function ComplexModelClient(subscriptionId, apiVersion, baseUri, options) {
   if (subscriptionId === null || subscriptionId === undefined) {

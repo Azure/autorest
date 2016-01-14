@@ -17,9 +17,9 @@ declare class StorageManagementClient {
      * Initializes a new instance of the StorageManagementClient class.
      * @constructor
      *
-     * @param {Credentials} credentials Gets Azure subscription credentials.
+     * @param {credentials} credentials - Gets Azure subscription credentials.
      *
-     * @param {String} subscriptionId Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
+     * @param {string} subscriptionId - Gets subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.
      *
      * @param {string} [baseUri] - The base URI of the service.
      *
@@ -30,7 +30,16 @@ declare class StorageManagementClient {
      * @param {object} [options.requestOptions] - Options for the underlying request object
      * {@link https://github.com/request/request#requestoptions-callback Options doc}
      *
-     * @param {bool} [options.noRetryPolicy] - If set to true, turn off default retry policy
+     * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
+     *
+     * @param {string} [apiVersion] - Client Api Version.
+     *
+     * @param {string} [acceptLanguage] - Gets or sets the preferred language for the response.
+     *
+     * @param {number} [longRunningOperationRetryTimeout] - Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
+     *
+     * @param {boolean} [generateClientRequestId] - When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
+     *
      */
     constructor(credentials: ServiceClientCredentials, subscriptionId: string, baseUri: string, options: ServiceClientOptions);
 

@@ -76,11 +76,11 @@ public final class AutoRestHeadTestServiceImpl extends AzureServiceClient implem
         this.acceptLanguage = acceptLanguage;
     }
 
-    /** Gets or sets the retry timeout for Long Running Operations. */
+    /** Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30. */
     private int longRunningOperationRetryTimeout;
 
     /**
-     * Gets Gets or sets the retry timeout for Long Running Operations.
+     * Gets Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
      *
      * @return the longRunningOperationRetryTimeout value.
      */
@@ -89,7 +89,7 @@ public final class AutoRestHeadTestServiceImpl extends AzureServiceClient implem
     }
 
     /**
-     * Sets Gets or sets the retry timeout for Long Running Operations.
+     * Sets Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
      *
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
      */

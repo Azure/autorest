@@ -27,9 +27,9 @@ var operations = require('./operations');
  * Initializes a new instance of the MicrosoftAzureTestUrl class.
  * @constructor
  *
- * @param {Credentials} credentials Gets Azure subscription credentials.
+ * @param {credentials} credentials - Gets Azure subscription credentials.
  *
- * @param {String} subscriptionId Subscription Id.
+ * @param {string} subscriptionId - Subscription Id.
  *
  * @param {string} [baseUri] - The base URI of the service.
  *
@@ -40,7 +40,16 @@ var operations = require('./operations');
  * @param {object} [options.requestOptions] - Options for the underlying request object
  * {@link https://github.com/request/request#requestoptions-callback Options doc}
  *
- * @param {bool} [options.noRetryPolicy] - If set to true, turn off default retry policy
+ * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
+ *
+ * @param {string} [apiVersion] - API Version with value '2014-04-01-preview'.
+ *
+ * @param {string} [acceptLanguage] - Gets or sets the preferred language for the response.
+ *
+ * @param {number} [longRunningOperationRetryTimeout] - Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
+ *
+ * @param {boolean} [generateClientRequestId] - When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
+ *
  */
 function MicrosoftAzureTestUrl(credentials, subscriptionId, baseUri, options) {
   if (credentials === null || credentials === undefined) {
@@ -60,13 +69,13 @@ function MicrosoftAzureTestUrl(credentials, subscriptionId, baseUri, options) {
   this.credentials = credentials;
   this.subscriptionId = subscriptionId;
 
-  if(!this.apiVersion) {
+  if(this.apiVersion !== null && this.apiVersion !== undefined) { 
     this.apiVersion = '2014-04-01-preview';
   }
-  if(!this.acceptLanguage) {
+  if(this.acceptLanguage !== null && this.acceptLanguage !== undefined) { 
     this.acceptLanguage = 'en-US';
   }
-  if(!this.generateClientRequestId) {
+  if(this.generateClientRequestId !== null && this.generateClientRequestId !== undefined) { 
     this.generateClientRequestId = true;
   }
   this.group = new operations.Group(this);

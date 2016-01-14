@@ -295,7 +295,7 @@ namespace Microsoft.Rest.Generator.Azure
                 Name = "LongRunningOperationRetryTimeout",
                 SerializedName = "longRunningOperationRetryTimeout",
                 Type = PrimaryType.Int,
-                Documentation = "Gets or sets the retry timeout for Long Running Operations."
+                Documentation = "Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30."
             });
 
             serviceClient.Properties.Add(new Property

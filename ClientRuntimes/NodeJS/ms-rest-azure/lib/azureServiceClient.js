@@ -20,7 +20,8 @@ var WebResource = msrest.WebResource;
  * 
  * @param {number} [options.longRunningOperationRetryTimeoutInSeconds] - Retry timeout
  *
- * @param {string} [options.clientRequestId] - The unique x-ms-client-request-id to be used in each request
+ * @param {boolean} [options.generateClientRequestId] - When set to true a unique x-ms-client-request-id value
+ *      is generated and included in each request. Default is true.
  *
  */
 function AzureServiceClient(credentials, options) {
@@ -34,8 +35,6 @@ function AzureServiceClient(credentials, options) {
       options.longRunningOperationRetryTimeoutInSeconds;
     
     this.generateClientRequestId = true;
-    
-    this.clientRequestId = options.clientRequestId;
   }
 }
 

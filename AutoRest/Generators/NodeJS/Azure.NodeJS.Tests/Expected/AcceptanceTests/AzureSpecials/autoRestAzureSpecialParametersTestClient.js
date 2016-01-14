@@ -27,9 +27,9 @@ var operations = require('./operations');
  * Initializes a new instance of the AutoRestAzureSpecialParametersTestClient class.
  * @constructor
  *
- * @param {Credentials} credentials Gets Azure subscription credentials.
+ * @param {credentials} credentials - Gets Azure subscription credentials.
  *
- * @param {String} subscriptionId The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'
+ * @param {string} subscriptionId - The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'
  *
  * @param {string} [baseUri] - The base URI of the service.
  *
@@ -40,7 +40,16 @@ var operations = require('./operations');
  * @param {object} [options.requestOptions] - Options for the underlying request object
  * {@link https://github.com/request/request#requestoptions-callback Options doc}
  *
- * @param {bool} [options.noRetryPolicy] - If set to true, turn off default retry policy
+ * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
+ *
+ * @param {string} [apiVersion] - The api version, which appears in the query, the value is always '2015-07-01-preview'
+ *
+ * @param {string} [acceptLanguage] - Gets or sets the preferred language for the response.
+ *
+ * @param {number} [longRunningOperationRetryTimeout] - Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
+ *
+ * @param {boolean} [generateClientRequestId] - When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
+ *
  */
 function AutoRestAzureSpecialParametersTestClient(credentials, subscriptionId, baseUri, options) {
   if (credentials === null || credentials === undefined) {
@@ -60,13 +69,13 @@ function AutoRestAzureSpecialParametersTestClient(credentials, subscriptionId, b
   this.credentials = credentials;
   this.subscriptionId = subscriptionId;
 
-  if(!this.apiVersion) {
+  if(this.apiVersion !== null && this.apiVersion !== undefined) { 
     this.apiVersion = '2015-07-01-preview';
   }
-  if(!this.acceptLanguage) {
+  if(this.acceptLanguage !== null && this.acceptLanguage !== undefined) { 
     this.acceptLanguage = 'en-US';
   }
-  if(!this.generateClientRequestId) {
+  if(this.generateClientRequestId !== null && this.generateClientRequestId !== undefined) { 
     this.generateClientRequestId = true;
   }
   this.xMsClientRequestId = new operations.XMsClientRequestId(this);

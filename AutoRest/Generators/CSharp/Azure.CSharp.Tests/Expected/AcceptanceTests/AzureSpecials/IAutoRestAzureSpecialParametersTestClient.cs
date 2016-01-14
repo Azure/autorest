@@ -61,7 +61,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         string AcceptLanguage { get; set; }
 
         /// <summary>
-        /// Gets or sets the retry timeout for Long Running Operations.
+        /// Gets or sets the retry timeout in seconds for Long Running
+        /// Operations. Default value is 30.
         /// </summary>
         int? LongRunningOperationRetryTimeout { get; set; }
 
