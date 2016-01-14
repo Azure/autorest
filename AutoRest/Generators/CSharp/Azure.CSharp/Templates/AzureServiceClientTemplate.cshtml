@@ -50,8 +50,6 @@ namespace @Settings.Namespace
             @:this.@(property.Name) = @(property.DefaultValue);
         }
 
-            this.ClientRequestId = Guid.NewGuid().ToString();
-
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Formatting.Indented,

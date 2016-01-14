@@ -38,7 +38,7 @@ declare class AutoRestLongRunningOperationTestService {
 
     longRunningOperationRetryTimeout: number;
 
-    clientRequestId: string;
+    generateClientRequestId: boolean;
 
     // Operation groups
     lROs: operations.LROs;

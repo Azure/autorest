@@ -58,26 +58,6 @@
         }
       }
     },
-    "/azurespecials/overwrite/x-ms-client-request-id/via-client/method/": {
-      "get": {
-        "operationId": "x-ms-client-request-id_ClientGet",
-        "description": "Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.",
-        "tags": [
-          "SubscriptionInCredentials Operations"
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully received the '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0' x-ms-client-request header"
-          },
-          "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
-          }
-        }
-      }
-    },
     "/azurespecials/subscriptionId/method/string/none/path/global/1234-5678-9012-3456/{subscriptionId}": {
       "post": {
         "operationId": "subscriptionInCredentials_postMethodGlobalValid",

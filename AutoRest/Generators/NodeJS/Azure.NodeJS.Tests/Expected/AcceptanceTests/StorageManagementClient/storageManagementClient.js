@@ -66,6 +66,9 @@ function StorageManagementClient(credentials, subscriptionId, baseUri, options) 
   if(!this.acceptLanguage) {
     this.acceptLanguage = 'en-US';
   }
+  if(!this.generateClientRequestId) {
+    this.generateClientRequestId = true;
+  }
   this.storageAccounts = new operations.StorageAccounts(this);
   this.usageOperations = new operations.UsageOperations(this);
   this.models = models;

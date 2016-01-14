@@ -57,6 +57,9 @@ function AutoRestHeadTestService(credentials, baseUri, options) {
   if(!this.acceptLanguage) {
     this.acceptLanguage = 'en-US';
   }
+  if(!this.generateClientRequestId) {
+    this.generateClientRequestId = true;
+  }
   this.httpSuccess = new operations.HttpSuccess(this);
   this.models = models;
   msRest.addSerializationMixin(this);

@@ -81,18 +81,18 @@ public interface AutoRestPagingTestService {
     void setLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout);
 
     /**
-     * Gets Gets or sets the unique x-ms-client-request-id value to be used on every request..
+     * Gets When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true..
      *
-     * @return the clientRequestId value.
+     * @return the generateClientRequestId value.
      */
-    String getClientRequestId();
+    boolean getGenerateClientRequestId();
 
     /**
-     * Sets Gets or sets the unique x-ms-client-request-id value to be used on every request..
+     * Sets When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true..
      *
-     * @param clientRequestId the clientRequestId value.
+     * @param generateClientRequestId the generateClientRequestId value.
      */
-    void setClientRequestId(String clientRequestId);
+    void setGenerateClientRequestId(boolean generateClientRequestId);
 
     /**
      * Gets the PagingOperations object to access its operations.

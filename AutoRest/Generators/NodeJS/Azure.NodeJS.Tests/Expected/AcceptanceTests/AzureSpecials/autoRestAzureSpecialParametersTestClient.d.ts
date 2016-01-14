@@ -44,7 +44,7 @@ declare class AutoRestAzureSpecialParametersTestClient {
 
     longRunningOperationRetryTimeout: number;
 
-    clientRequestId: string;
+    generateClientRequestId: boolean;
 
     // Operation groups
     xMsClientRequestId: operations.XMsClientRequestId;

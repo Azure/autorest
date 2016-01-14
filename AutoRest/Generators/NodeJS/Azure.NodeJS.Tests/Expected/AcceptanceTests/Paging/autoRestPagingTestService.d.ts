@@ -38,7 +38,7 @@ declare class AutoRestPagingTestService {
 
     longRunningOperationRetryTimeout: number;
 
-    clientRequestId: string;
+    generateClientRequestId: boolean;
 
     // Operation groups
     paging: operations.Paging;

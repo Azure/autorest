@@ -61,10 +61,10 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
         public int? LongRunningOperationRetryTimeout { get; set; }
 
         /// <summary>
-        /// Gets or sets the unique x-ms-client-request-id value to be used on every
-        /// request.
+        /// When set to true a unique x-ms-client-request-id value is generated and
+        /// included in each request. Default is true.
         /// </summary>
-        public string ClientRequestId { get; set; }
+        public bool? GenerateClientRequestId { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the AutoRestReportServiceForAzure class.
@@ -247,7 +247,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
         {
             this.BaseUri = new Uri("http://localhost");
             this.AcceptLanguage = "en-US";
-            this.ClientRequestId = Guid.NewGuid().ToString();
+            this.GenerateClientRequestId = true;
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Formatting.Indented,
@@ -311,9 +311,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
             _httpRequest.Method = new HttpMethod("GET");
             _httpRequest.RequestUri = new Uri(_url);
             // Set Headers
-            if (!string.IsNullOrEmpty(this.ClientRequestId))
+            if (this.GenerateClientRequestId != null && this.GenerateClientRequestId.Value)
             {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", this.ClientRequestId);
+                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
             }
             if (this.AcceptLanguage != null)
             {

@@ -38,7 +38,7 @@ declare class AutoRestResourceFlatteningTestService {
 
     longRunningOperationRetryTimeout: number;
 
-    clientRequestId: string;
+    generateClientRequestId: boolean;
 
             /**
          * Put External Resource as an Array

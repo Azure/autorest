@@ -57,6 +57,9 @@ function AutoRestReportServiceForAzure(credentials, baseUri, options) {
   if(!this.acceptLanguage) {
     this.acceptLanguage = 'en-US';
   }
+  if(!this.generateClientRequestId) {
+    this.generateClientRequestId = true;
+  }
   this.models = models;
   msRest.addSerializationMixin(this);
 }
@@ -118,8 +121,8 @@ AutoRestReportServiceForAzure.prototype.getReport = function (options, callback)
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (this.clientRequestId !== undefined && this.clientRequestId !== null) {
-      httpRequest.headers['x-ms-client-request-id'] = this.clientRequestId;
+  if (this.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
   if (this.acceptLanguage !== undefined && this.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.acceptLanguage;

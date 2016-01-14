@@ -57,6 +57,9 @@ function AutoRestLongRunningOperationTestService(credentials, baseUri, options) 
   if(!this.acceptLanguage) {
     this.acceptLanguage = 'en-US';
   }
+  if(!this.generateClientRequestId) {
+    this.generateClientRequestId = true;
+  }
   this.lROs = new operations.LROs(this);
   this.lRORetrys = new operations.LRORetrys(this);
   this.lROSADs = new operations.LROSADs(this);

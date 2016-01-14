@@ -44,7 +44,7 @@ declare class StorageManagementClient {
 
     longRunningOperationRetryTimeout: number;
 
-    clientRequestId: string;
+    generateClientRequestId: boolean;
 
     // Operation groups
     storageAccounts: operations.StorageAccounts;

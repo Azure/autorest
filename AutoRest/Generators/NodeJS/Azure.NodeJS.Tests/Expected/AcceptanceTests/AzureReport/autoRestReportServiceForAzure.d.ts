@@ -38,7 +38,7 @@ declare class AutoRestReportServiceForAzure {
 
     longRunningOperationRetryTimeout: number;
 
-    clientRequestId: string;
+    generateClientRequestId: boolean;
 
             /**
          * Get test coverage report

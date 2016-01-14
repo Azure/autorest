@@ -57,6 +57,9 @@ function AutoRestPagingTestService(credentials, baseUri, options) {
   if(!this.acceptLanguage) {
     this.acceptLanguage = 'en-US';
   }
+  if(!this.generateClientRequestId) {
+    this.generateClientRequestId = true;
+  }
   this.paging = new operations.Paging(this);
   this.models = models;
   msRest.addSerializationMixin(this);

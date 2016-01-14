@@ -48,16 +48,5 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// The cancellation token.
         /// </param>
         Task<AzureOperationResponse> ParamGetWithHttpMessagesAsync(string xMsClientRequestId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
-        /// <summary>
-        /// Get method that overwrites x-ms-client-request header with value
-        /// 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
-        /// </summary>
-        /// <param name='customHeaders'>
-        /// The headers that will be added to request.
-        /// </param>
-        /// <param name='cancellationToken'>
-        /// The cancellation token.
-        /// </param>
-        Task<AzureOperationResponse> ClientGetWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

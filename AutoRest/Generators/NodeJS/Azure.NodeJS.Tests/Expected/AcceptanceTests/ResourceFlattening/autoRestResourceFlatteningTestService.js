@@ -57,6 +57,9 @@ function AutoRestResourceFlatteningTestService(credentials, baseUri, options) {
   if(!this.acceptLanguage) {
     this.acceptLanguage = 'en-US';
   }
+  if(!this.generateClientRequestId) {
+    this.generateClientRequestId = true;
+  }
   this.models = models;
   msRest.addSerializationMixin(this);
 }
@@ -121,8 +124,8 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (options, ca
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (this.clientRequestId !== undefined && this.clientRequestId !== null) {
-      httpRequest.headers['x-ms-client-request-id'] = this.clientRequestId;
+  if (this.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
   if (this.acceptLanguage !== undefined && this.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.acceptLanguage;
@@ -261,8 +264,8 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (this.clientRequestId !== undefined && this.clientRequestId !== null) {
-      httpRequest.headers['x-ms-client-request-id'] = this.clientRequestId;
+  if (this.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
   if (this.acceptLanguage !== undefined && this.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.acceptLanguage;
@@ -406,8 +409,8 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (option
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (this.clientRequestId !== undefined && this.clientRequestId !== null) {
-      httpRequest.headers['x-ms-client-request-id'] = this.clientRequestId;
+  if (this.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
   if (this.acceptLanguage !== undefined && this.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.acceptLanguage;
@@ -546,8 +549,8 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (this.clientRequestId !== undefined && this.clientRequestId !== null) {
-      httpRequest.headers['x-ms-client-request-id'] = this.clientRequestId;
+  if (this.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
   if (this.acceptLanguage !== undefined && this.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.acceptLanguage;
@@ -710,8 +713,8 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (this.clientRequestId !== undefined && this.clientRequestId !== null) {
-      httpRequest.headers['x-ms-client-request-id'] = this.clientRequestId;
+  if (this.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
   if (this.acceptLanguage !== undefined && this.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.acceptLanguage;
@@ -837,8 +840,8 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (this.clientRequestId !== undefined && this.clientRequestId !== null) {
-      httpRequest.headers['x-ms-client-request-id'] = this.clientRequestId;
+  if (this.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
   if (this.acceptLanguage !== undefined && this.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.acceptLanguage;

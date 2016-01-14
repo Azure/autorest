@@ -174,8 +174,8 @@ LROSADs.prototype.beginPutNonRetry400 = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
-      httpRequest.headers['x-ms-client-request-id'] = this.client.clientRequestId;
+  if (this.client.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
@@ -426,8 +426,8 @@ LROSADs.prototype.beginPutNonRetry201Creating400 = function (options, callback) 
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
-      httpRequest.headers['x-ms-client-request-id'] = this.client.clientRequestId;
+  if (this.client.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
@@ -680,8 +680,8 @@ LROSADs.prototype.beginPutAsyncRelativeRetry400 = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
-      httpRequest.headers['x-ms-client-request-id'] = this.client.clientRequestId;
+  if (this.client.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
@@ -880,8 +880,8 @@ LROSADs.prototype.beginDeleteNonRetry400 = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
-      httpRequest.headers['x-ms-client-request-id'] = this.client.clientRequestId;
+  if (this.client.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
@@ -1047,8 +1047,8 @@ LROSADs.prototype.beginDelete202NonRetry400 = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
-      httpRequest.headers['x-ms-client-request-id'] = this.client.clientRequestId;
+  if (this.client.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
@@ -1218,8 +1218,8 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetry400 = function (options, callback
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
-      httpRequest.headers['x-ms-client-request-id'] = this.client.clientRequestId;
+  if (this.client.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
@@ -1402,8 +1402,8 @@ LROSADs.prototype.beginPostNonRetry400 = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
-      httpRequest.headers['x-ms-client-request-id'] = this.client.clientRequestId;
+  if (this.client.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
@@ -1602,8 +1602,8 @@ LROSADs.prototype.beginPost202NonRetry400 = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
-      httpRequest.headers['x-ms-client-request-id'] = this.client.clientRequestId;
+  if (this.client.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
@@ -1806,8 +1806,8 @@ LROSADs.prototype.beginPostAsyncRelativeRetry400 = function (options, callback) 
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
-      httpRequest.headers['x-ms-client-request-id'] = this.client.clientRequestId;
+  if (this.client.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
@@ -2024,8 +2024,8 @@ LROSADs.prototype.beginPutError201NoProvisioningStatePayload = function (options
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
-      httpRequest.headers['x-ms-client-request-id'] = this.client.clientRequestId;
+  if (this.client.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
@@ -2278,8 +2278,8 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatus = function (options, callba
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
-      httpRequest.headers['x-ms-client-request-id'] = this.client.clientRequestId;
+  if (this.client.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
@@ -2515,8 +2515,8 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatusPayload = function (options,
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
-      httpRequest.headers['x-ms-client-request-id'] = this.client.clientRequestId;
+  if (this.client.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
@@ -2717,8 +2717,8 @@ LROSADs.prototype.beginDelete204Succeeded = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
-      httpRequest.headers['x-ms-client-request-id'] = this.client.clientRequestId;
+  if (this.client.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
@@ -2888,8 +2888,8 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryNoStatus = function (options, cal
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
-      httpRequest.headers['x-ms-client-request-id'] = this.client.clientRequestId;
+  if (this.client.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
@@ -3074,8 +3074,8 @@ LROSADs.prototype.beginPost202NoLocation = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
-      httpRequest.headers['x-ms-client-request-id'] = this.client.clientRequestId;
+  if (this.client.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
@@ -3278,8 +3278,8 @@ LROSADs.prototype.beginPostAsyncRelativeRetryNoPayload = function (options, call
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
-      httpRequest.headers['x-ms-client-request-id'] = this.client.clientRequestId;
+  if (this.client.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
@@ -3496,8 +3496,8 @@ LROSADs.prototype.beginPut200InvalidJson = function (options, callback) {
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
-      httpRequest.headers['x-ms-client-request-id'] = this.client.clientRequestId;
+  if (this.client.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
@@ -3733,8 +3733,8 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidHeader = function (options, c
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
-      httpRequest.headers['x-ms-client-request-id'] = this.client.clientRequestId;
+  if (this.client.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
@@ -3970,8 +3970,8 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidJsonPolling = function (optio
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
-      httpRequest.headers['x-ms-client-request-id'] = this.client.clientRequestId;
+  if (this.client.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
@@ -4172,8 +4172,8 @@ LROSADs.prototype.beginDelete202RetryInvalidHeader = function (options, callback
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
-      httpRequest.headers['x-ms-client-request-id'] = this.client.clientRequestId;
+  if (this.client.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
@@ -4341,8 +4341,8 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidHeader = function (options
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
-      httpRequest.headers['x-ms-client-request-id'] = this.client.clientRequestId;
+  if (this.client.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
@@ -4512,8 +4512,8 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidJsonPolling = function (op
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
-      httpRequest.headers['x-ms-client-request-id'] = this.client.clientRequestId;
+  if (this.client.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
@@ -4698,8 +4698,8 @@ LROSADs.prototype.beginPost202RetryInvalidHeader = function (options, callback) 
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
-      httpRequest.headers['x-ms-client-request-id'] = this.client.clientRequestId;
+  if (this.client.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
@@ -4902,8 +4902,8 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidHeader = function (options, 
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
-      httpRequest.headers['x-ms-client-request-id'] = this.client.clientRequestId;
+  if (this.client.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;
@@ -5106,8 +5106,8 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidJsonPolling = function (opti
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
-      httpRequest.headers['x-ms-client-request-id'] = this.client.clientRequestId;
+  if (this.client.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;

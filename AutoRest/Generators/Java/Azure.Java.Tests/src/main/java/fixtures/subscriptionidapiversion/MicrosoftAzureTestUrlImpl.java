@@ -130,25 +130,25 @@ public final class MicrosoftAzureTestUrlImpl extends AzureServiceClient implemen
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
     }
 
-    /** Gets or sets the unique x-ms-client-request-id value to be used on every request. */
-    private String clientRequestId;
+    /** When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true. */
+    private boolean generateClientRequestId;
 
     /**
-     * Gets Gets or sets the unique x-ms-client-request-id value to be used on every request.
+     * Gets When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
      *
-     * @return the clientRequestId value.
+     * @return the generateClientRequestId value.
      */
-    public String getClientRequestId() {
-        return this.clientRequestId;
+    public boolean getGenerateClientRequestId() {
+        return this.generateClientRequestId;
     }
 
     /**
-     * Sets Gets or sets the unique x-ms-client-request-id value to be used on every request.
+     * Sets When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
      *
-     * @param clientRequestId the clientRequestId value.
+     * @param generateClientRequestId the generateClientRequestId value.
      */
-    public void setClientRequestId(String clientRequestId) {
-        this.clientRequestId = clientRequestId;
+    public void setGenerateClientRequestId(boolean generateClientRequestId) {
+        this.generateClientRequestId = generateClientRequestId;
     }
 
     /**
@@ -215,6 +215,7 @@ public final class MicrosoftAzureTestUrlImpl extends AzureServiceClient implemen
     private void initialize() {
         this.apiVersion = "2014-04-01-preview";
         this.acceptLanguage = "en-US";
+        this.generateClientRequestId = true;
         this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         if (this.credentials != null) {
             this.credentials.applyCredentialsFilter(this.client);

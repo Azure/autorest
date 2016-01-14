@@ -54,10 +54,10 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         int? LongRunningOperationRetryTimeout { get; set; }
 
         /// <summary>
-        /// Gets or sets the unique x-ms-client-request-id value to be used on
-        /// every request.
+        /// When set to true a unique x-ms-client-request-id value is
+        /// generated and included in each request. Default is true.
         /// </summary>
-        string ClientRequestId { get; set; }
+        bool? GenerateClientRequestId { get; set; }
 
 
         IPagingOperations Paging { get; }

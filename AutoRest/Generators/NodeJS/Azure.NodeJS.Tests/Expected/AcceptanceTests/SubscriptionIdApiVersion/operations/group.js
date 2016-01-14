@@ -99,8 +99,8 @@ Group.prototype.getSampleResourceGroup = function (resourceGroupName, options, c
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  if (this.client.clientRequestId !== undefined && this.client.clientRequestId !== null) {
-      httpRequest.headers['x-ms-client-request-id'] = this.client.clientRequestId;
+  if (this.client.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
   }
   if (this.client.acceptLanguage !== undefined && this.client.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.client.acceptLanguage;

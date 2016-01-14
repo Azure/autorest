@@ -44,7 +44,7 @@ declare class MicrosoftAzureTestUrl {
 
     longRunningOperationRetryTimeout: number;
 
-    clientRequestId: string;
+    generateClientRequestId: boolean;
 
     // Operation groups
     group: operations.Group;

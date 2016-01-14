@@ -134,44 +134,4 @@ public final class XMsClientRequestIdOperationsImpl implements XMsClientRequestI
                 .build(response, retrofit);
     }
 
-    /**
-     * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
-     *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the {@link ServiceResponse} object if successful.
-     */
-    public ServiceResponse<Void> clientGet() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.clientGet(this.client.getAcceptLanguage());
-        return clientGetDelegate(call.execute(), null);
-    }
-
-    /**
-     * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
-     *
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
-     */
-    public Call<ResponseBody> clientGetAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.clientGet(this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
-            @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
-                try {
-                    serviceCallback.success(clientGetDelegate(response, retrofit));
-                } catch (ErrorException | IOException exception) {
-                    serviceCallback.failure(exception);
-                }
-            }
-        });
-        return call;
-    }
-
-    private ServiceResponse<Void> clientGetDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(new AzureJacksonUtils())
-                .register(200, new TypeToken<Void>() { }.getType())
-                .registerError(ErrorException.class)
-                .build(response, retrofit);
-    }
-
 }

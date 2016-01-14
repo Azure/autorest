@@ -39,10 +39,6 @@ public interface XMsClientRequestIdOperations {
         @GET("azurespecials/overwrite/x-ms-client-request-id/via-param/method/")
         Call<ResponseBody> paramGet(@Header("x-ms-client-request-id") String xMsClientRequestId, @Header("accept-language") String acceptLanguage);
 
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("azurespecials/overwrite/x-ms-client-request-id/via-client/method/")
-        Call<ResponseBody> clientGet(@Header("accept-language") String acceptLanguage);
-
     }
     /**
      * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
@@ -80,22 +76,5 @@ public interface XMsClientRequestIdOperations {
      * @return the {@link Call} object
      */
     Call<ResponseBody> paramGetAsync(String xMsClientRequestId, final ServiceCallback<Void> serviceCallback);
-
-    /**
-     * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
-     *
-     * @throws ErrorException exception thrown from REST call
-     * @throws IOException exception thrown from serialization/deserialization
-     * @return the ServiceResponse object if successful.
-     */
-    ServiceResponse<Void> clientGet() throws ErrorException, IOException;
-
-    /**
-     * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
-     *
-     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
-     */
-    Call<ResponseBody> clientGetAsync(final ServiceCallback<Void> serviceCallback);
 
 }

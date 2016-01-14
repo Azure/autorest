@@ -93,9 +93,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new Uri(_url);
             // Set Headers
-            if (!string.IsNullOrEmpty(this.Client.ClientRequestId))
+            if (this.Client.GenerateClientRequestId != null && this.Client.GenerateClientRequestId.Value)
             {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", this.Client.ClientRequestId);
+                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
             }
             if (this.Client.AcceptLanguage != null)
             {
@@ -221,9 +221,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new Uri(_url);
             // Set Headers
-            if (!string.IsNullOrEmpty(this.Client.ClientRequestId))
+            if (this.Client.GenerateClientRequestId != null && this.Client.GenerateClientRequestId.Value)
             {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", this.Client.ClientRequestId);
+                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
             }
             if (this.Client.AcceptLanguage != null)
             {
@@ -347,9 +347,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new Uri(_url);
             // Set Headers
-            if (!string.IsNullOrEmpty(this.Client.ClientRequestId))
+            if (this.Client.GenerateClientRequestId != null && this.Client.GenerateClientRequestId.Value)
             {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", this.Client.ClientRequestId);
+                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
             }
             if (this.Client.AcceptLanguage != null)
             {
@@ -474,9 +474,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new Uri(_url);
             // Set Headers
-            if (!string.IsNullOrEmpty(this.Client.ClientRequestId))
+            if (this.Client.GenerateClientRequestId != null && this.Client.GenerateClientRequestId.Value)
             {
-                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", this.Client.ClientRequestId);
+                _httpRequest.Headers.TryAddWithoutValidation("x-ms-client-request-id", Guid.NewGuid().ToString());
             }
             if (this.Client.AcceptLanguage != null)
             {

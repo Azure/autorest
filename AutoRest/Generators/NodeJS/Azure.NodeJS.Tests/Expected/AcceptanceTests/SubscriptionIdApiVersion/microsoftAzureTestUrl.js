@@ -66,6 +66,9 @@ function MicrosoftAzureTestUrl(credentials, subscriptionId, baseUri, options) {
   if(!this.acceptLanguage) {
     this.acceptLanguage = 'en-US';
   }
+  if(!this.generateClientRequestId) {
+    this.generateClientRequestId = true;
+  }
   this.group = new operations.Group(this);
   this.models = models;
   msRest.addSerializationMixin(this);

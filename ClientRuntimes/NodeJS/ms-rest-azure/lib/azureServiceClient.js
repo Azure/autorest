@@ -34,7 +34,7 @@ function AzureServiceClient(credentials, options) {
     this.longRunningOperationRetryTimeoutInSeconds = 
       options.longRunningOperationRetryTimeoutInSeconds;
     
-    if (!options.clientRequestId) options.clientRequestId = utils.generateUuid();
+    this.generateClientRequestId = true;
     
     this.clientRequestId = options.clientRequestId;
   }

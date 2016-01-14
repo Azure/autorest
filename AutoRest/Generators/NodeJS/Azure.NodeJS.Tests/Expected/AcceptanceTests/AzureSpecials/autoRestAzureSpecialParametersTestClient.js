@@ -66,6 +66,9 @@ function AutoRestAzureSpecialParametersTestClient(credentials, subscriptionId, b
   if(!this.acceptLanguage) {
     this.acceptLanguage = 'en-US';
   }
+  if(!this.generateClientRequestId) {
+    this.generateClientRequestId = true;
+  }
   this.xMsClientRequestId = new operations.XMsClientRequestId(this);
   this.subscriptionInCredentials = new operations.SubscriptionInCredentials(this);
   this.subscriptionInMethod = new operations.SubscriptionInMethod(this);

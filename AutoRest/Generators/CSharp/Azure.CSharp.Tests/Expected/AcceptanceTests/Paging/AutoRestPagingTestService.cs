@@ -61,10 +61,10 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         public int? LongRunningOperationRetryTimeout { get; set; }
 
         /// <summary>
-        /// Gets or sets the unique x-ms-client-request-id value to be used on every
-        /// request.
+        /// When set to true a unique x-ms-client-request-id value is generated and
+        /// included in each request. Default is true.
         /// </summary>
-        public string ClientRequestId { get; set; }
+        public bool? GenerateClientRequestId { get; set; }
 
         public virtual IPagingOperations Paging { get; private set; }
 
@@ -250,7 +250,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             this.Paging = new PagingOperations(this);
             this.BaseUri = new Uri("http://localhost");
             this.AcceptLanguage = "en-US";
-            this.ClientRequestId = Guid.NewGuid().ToString();
+            this.GenerateClientRequestId = true;
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Formatting.Indented,

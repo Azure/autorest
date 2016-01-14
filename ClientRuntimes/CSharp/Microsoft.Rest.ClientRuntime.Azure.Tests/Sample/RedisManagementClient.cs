@@ -401,7 +401,7 @@ namespace Microsoft.Azure.Management.Redis
             set { this._longRunningOperationRetryTimeout = value; }
         }
 
-        public string ClientRequestId { get; set; }
+        public bool? GenerateClientRequestId { get; set; }
 
         private IRedisOperations _redisOperations;
 

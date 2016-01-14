@@ -57,6 +57,9 @@ function AutoRestParameterGroupingTestService(credentials, baseUri, options) {
   if(!this.acceptLanguage) {
     this.acceptLanguage = 'en-US';
   }
+  if(!this.generateClientRequestId) {
+    this.generateClientRequestId = true;
+  }
   this.parameterGrouping = new operations.ParameterGrouping(this);
   this.models = models;
   msRest.addSerializationMixin(this);

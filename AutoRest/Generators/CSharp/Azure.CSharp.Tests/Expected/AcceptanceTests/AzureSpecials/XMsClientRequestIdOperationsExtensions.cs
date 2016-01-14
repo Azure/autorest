@@ -81,32 +81,5 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
                 await operations.ParamGetWithHttpMessagesAsync(xMsClientRequestId, null, cancellationToken).ConfigureAwait(false);
             }
 
-            /// <summary>
-            /// Get method that overwrites x-ms-client-request header with value
-            /// 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static void ClientGet(this IXMsClientRequestIdOperations operations)
-            {
-                Task.Factory.StartNew(s => ((IXMsClientRequestIdOperations)s).ClientGetAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
-
-            /// <summary>
-            /// Get method that overwrites x-ms-client-request header with value
-            /// 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task ClientGetAsync( this IXMsClientRequestIdOperations operations, CancellationToken cancellationToken = default(CancellationToken))
-            {
-                await operations.ClientGetWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-            }
-
     }
 }

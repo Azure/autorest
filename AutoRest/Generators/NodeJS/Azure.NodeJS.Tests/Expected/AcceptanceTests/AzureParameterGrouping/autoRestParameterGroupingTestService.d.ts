@@ -38,7 +38,7 @@ declare class AutoRestParameterGroupingTestService {
 
     longRunningOperationRetryTimeout: number;
 
-    clientRequestId: string;
+    generateClientRequestId: boolean;
 
     // Operation groups
     parameterGrouping: operations.ParameterGrouping;

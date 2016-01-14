@@ -38,7 +38,7 @@ declare class AutoRestHeadTestService {
 
     longRunningOperationRetryTimeout: number;
 
-    clientRequestId: string;
+    generateClientRequestId: boolean;
 
     // Operation groups
     httpSuccess: operations.HttpSuccess;

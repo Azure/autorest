@@ -36,7 +36,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
             Assert.Equal("Page<Product>", serviceClient.Methods[0].ReturnType.Body.Name);
             Assert.Equal("object", serviceClient.Methods[1].ReturnType.Body.Name.ToLowerInvariant());
             Assert.Equal("Page1<Product>", serviceClient.Methods[1].Responses.ElementAt(0).Value.Body.Name);
-            Assert.Equal("string", serviceClient.Methods[1].Responses.ElementAt(1).Value.Body.Name);
+            Assert.Equal("string", serviceClient.Methods[1].Responses.ElementAt(1).Value.Body.Name.ToLowerInvariant());
             Assert.Equal("object", serviceClient.Methods[2].ReturnType.Body.Name.ToLowerInvariant());
             Assert.Equal("Page1<Product>", serviceClient.Methods[2].Responses.ElementAt(0).Value.Body.Name);
             Assert.Equal("Page1<Product>", serviceClient.Methods[2].Responses.ElementAt(1).Value.Body.Name);

@@ -70,8 +70,8 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
             get
             {
                 var sb = new IndentedStringBuilder();
-                sb.AppendLine("if ({0}.clientRequestId !== undefined && {0}.clientRequestId !== null) {{", this.ClientReference).Indent()
-                    .AppendLine("httpRequest.headers['{0}'] = {1}.clientRequestId;", 
+                sb.AppendLine("if ({0}.generateClientRequestId) {{", this.ClientReference).Indent()
+                    .AppendLine("httpRequest.headers['{0}'] = msRestAzure.generateUuid();", 
                         this.ClientRequestIdString, this.ClientReference).Outdent()
                   .AppendLine("}")
                   .AppendLine(base.SetDefaultHeaders);
