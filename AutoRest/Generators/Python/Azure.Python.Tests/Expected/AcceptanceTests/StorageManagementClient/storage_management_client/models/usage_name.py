@@ -13,7 +13,9 @@ from msrest.serialization import Model
 
 
 class UsageName(Model):
-    """The Usage Names."""
+    """
+    The Usage Names.
+    """
 
     _required = []
 
