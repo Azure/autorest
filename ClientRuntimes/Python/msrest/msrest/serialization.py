@@ -67,8 +67,9 @@ class Model(object):
 
     def __eq__(self, other):
         """Compare objects by comparing all attributes."""
-        return (isinstance(other, self.__class__)
-                and self.__dict__ == other.__dict__)
+        if isinstance(other, self.__class__):
+            return self.__dict__ == other.__dict__
+        return False
 
     def __ne__(self, other):
         """Compare objects by comparing all attributes."""
