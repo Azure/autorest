@@ -6,7 +6,7 @@
     "x-ms-code-generation-settings": {
       "header": "MIT",
       "internalConstructors": true
-    }
+    }    
   },
   "host": "autorestresourcesproxysite.azurewebsites.net",
   "schemes": [

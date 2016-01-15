@@ -1785,6 +1785,13 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         }
 
         [Fact]
+        public void InternalCtorTest()
+        {
+            var client = new Fixtures.InternalCtors.InternalClient("foo", new Uri("http://test/"));
+            Assert.Equal("http://test/foo", client.BaseUri.AbsoluteUri);
+        }
+
+        [Fact]
         public void RequiredOptionalTests()
         {
             SwaggerSpecRunner.RunTests(
