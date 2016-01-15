@@ -13,7 +13,9 @@ from msrest.serialization import Model
 
 
 class Product(Model):
-    """The product documentation."""
+    """
+    The product documentation.
+    """
 
     _required = []
 

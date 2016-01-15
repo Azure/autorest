@@ -13,7 +13,9 @@ from msrest.serialization import Model
 
 
 class CheckNameAvailabilityResult(Model):
-    """The CheckNameAvailability operation response."""
+    """
+    The CheckNameAvailability operation response.
+    """
 
     _required = []
 

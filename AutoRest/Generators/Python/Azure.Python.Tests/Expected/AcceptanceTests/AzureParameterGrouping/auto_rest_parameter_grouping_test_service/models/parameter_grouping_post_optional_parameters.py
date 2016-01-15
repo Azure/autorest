@@ -13,7 +13,9 @@ from msrest.serialization import Model
 
 
 class ParameterGroupingPostOptionalParameters(Model):
-    """Additional parameters for the postOptional operation."""
+    """
+    Additional parameters for the postOptional operation.
+    """
 
     _required = []
 

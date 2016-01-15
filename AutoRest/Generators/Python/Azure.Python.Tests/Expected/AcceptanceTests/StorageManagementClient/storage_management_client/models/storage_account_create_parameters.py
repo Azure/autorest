@@ -13,7 +13,9 @@ from .resource import Resource
 
 
 class StorageAccountCreateParameters(Resource):
-    """The parameters to provide for the account."""
+    """
+    The parameters to provide for the account.
+    """
 
     _required = []
 

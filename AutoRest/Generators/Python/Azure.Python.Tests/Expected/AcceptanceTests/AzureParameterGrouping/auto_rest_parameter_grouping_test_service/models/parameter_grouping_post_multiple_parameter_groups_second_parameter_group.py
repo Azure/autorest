@@ -13,7 +13,9 @@ from msrest.serialization import Model
 
 
 class ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup(Model):
-    """Additional parameters for the postMultipleParameterGroups operation."""
+    """
+    Additional parameters for the postMultipleParameterGroups operation.
+    """
 
     _required = []
 

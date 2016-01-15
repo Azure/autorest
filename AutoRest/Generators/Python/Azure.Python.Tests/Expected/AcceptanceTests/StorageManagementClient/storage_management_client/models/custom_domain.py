@@ -13,8 +13,10 @@ from msrest.serialization import Model
 
 
 class CustomDomain(Model):
-    """The custom domain assigned to this storage account. This can be set via
-    """Update."""
+    """
+    The custom domain assigned to this storage account. This can be set via
+    Update.
+    """
 
     _required = []
 

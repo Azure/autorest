@@ -13,8 +13,10 @@ from msrest.serialization import Model
 
 
 class Foo(Model):
-    """The URIs that are used to perform a retrieval of a public blob, queue
-    """or table object."""
+    """
+    The URIs that are used to perform a retrieval of a public blob, queue or
+    table object.
+    """
 
     _required = []
 
