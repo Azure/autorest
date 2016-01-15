@@ -21,7 +21,10 @@ class Sawshark(Shark):
     }
 
     def __init__(self, *args, **kwargs):
+        """Sawshark
 
+        :param bytearray picture
+        """
         self.picture = None
 
         super(Sawshark, self).__init__(*args, **kwargs)

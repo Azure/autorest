@@ -13,6 +13,8 @@ from msrest.serialization import Model
 
 
 class Bar(Model):
+    """The URIs that are used to perform a retrieval of a public blob, queue
+    """or table object."""
 
     _required = []
 
@@ -21,7 +23,10 @@ class Bar(Model):
     }
 
     def __init__(self, *args, **kwargs):
+        """Bar
 
+        :param Endpoints recursive_point: Recursive Endpoints
+        """
         self.recursive_point = None
 
         super(Bar, self).__init__(*args, **kwargs)

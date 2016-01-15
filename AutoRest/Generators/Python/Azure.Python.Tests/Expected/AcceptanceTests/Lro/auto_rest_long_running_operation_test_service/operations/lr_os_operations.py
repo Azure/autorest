@@ -9,7 +9,6 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.service_client import async_request
 from msrest.pipeline import ClientRawResponse
 from msrestazure.azure_exceptions import CloudError
 from msrestazure.azure_operation import AzureOperationPoller
@@ -20,11 +19,11 @@ from .. import models
 
 class LROsOperations(object):
 
-    def __init__(self, client, config, serializer, derserializer):
+    def __init__(self, client, config, serializer, deserializer):
 
         self._client = client
         self._serialize = serializer
-        self._deserialize = derserializer
+        self._deserialize = deserializer
 
         self.config = config
 
@@ -35,7 +34,7 @@ class LROsOperations(object):
         request, with an entity that contains ProvisioningState=’Succeeded’.
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -43,7 +42,7 @@ class LROsOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: product or (product, requests.response) or
+        :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -112,7 +111,7 @@ class LROsOperations(object):
         ProvisioningState=’Succeeded’.
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -120,7 +119,7 @@ class LROsOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: product or (product, requests.response) or
+        :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -189,7 +188,7 @@ class LROsOperations(object):
         returns a 200 and an entity that doesn't contains ProvisioningState
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -197,7 +196,7 @@ class LROsOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: product or (product, requests.response) or
+        :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -267,7 +266,7 @@ class LROsOperations(object):
         ProvisioningState=’Succeeded’
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -275,7 +274,7 @@ class LROsOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: product or (product, requests.response) or
+        :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -347,7 +346,7 @@ class LROsOperations(object):
         ProvisioningState=’Succeeded’
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -355,7 +354,7 @@ class LROsOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: product or (product, requests.response) or
+        :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -425,7 +424,7 @@ class LROsOperations(object):
         ProvisioningState=’Failed’
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -433,7 +432,7 @@ class LROsOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: product or (product, requests.response) or
+        :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -505,7 +504,7 @@ class LROsOperations(object):
         ProvisioningState=’Canceled’
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -513,7 +512,7 @@ class LROsOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: product or (product, requests.response) or
+        :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -582,7 +581,7 @@ class LROsOperations(object):
         contain location header.
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -590,7 +589,7 @@ class LROsOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: product or (product, requests.response) or
+        :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -634,6 +633,7 @@ class LROsOperations(object):
                 raise CloudError(response)
 
             deserialized = None
+            header_dict = {}
 
             if response.status_code == 202:
                 deserialized = self._deserialize('Product', response)
@@ -664,7 +664,7 @@ class LROsOperations(object):
         operation status
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -672,7 +672,7 @@ class LROsOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: product or (product, requests.response) or
+        :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -716,6 +716,7 @@ class LROsOperations(object):
                 raise CloudError(response)
 
             deserialized = None
+            header_dict = {}
 
             if response.status_code == 200:
                 deserialized = self._deserialize('Product', response)
@@ -748,7 +749,7 @@ class LROsOperations(object):
         operation status
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -756,7 +757,7 @@ class LROsOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: product or (product, requests.response) or
+        :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -800,6 +801,7 @@ class LROsOperations(object):
                 raise CloudError(response)
 
             deserialized = None
+            header_dict = {}
 
             if response.status_code == 200:
                 deserialized = self._deserialize('Product', response)
@@ -831,7 +833,7 @@ class LROsOperations(object):
         operation status
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -839,7 +841,7 @@ class LROsOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: product or (product, requests.response) or
+        :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -883,6 +885,7 @@ class LROsOperations(object):
                 raise CloudError(response)
 
             deserialized = None
+            header_dict = {}
 
             if response.status_code == 200:
                 deserialized = self._deserialize('Product', response)
@@ -915,7 +918,7 @@ class LROsOperations(object):
         operation status
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -923,7 +926,7 @@ class LROsOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: product or (product, requests.response) or
+        :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -967,6 +970,7 @@ class LROsOperations(object):
                 raise CloudError(response)
 
             deserialized = None
+            header_dict = {}
 
             if response.status_code == 200:
                 deserialized = self._deserialize('Product', response)
@@ -997,7 +1001,7 @@ class LROsOperations(object):
         status do not contain Azure-AsyncOperation header.
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -1005,7 +1009,7 @@ class LROsOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: product or (product, requests.response) or
+        :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -1049,6 +1053,7 @@ class LROsOperations(object):
                 raise CloudError(response)
 
             deserialized = None
+            header_dict = {}
 
             if response.status_code == 201:
                 deserialized = self._deserialize('Product', response)
@@ -1076,7 +1081,7 @@ class LROsOperations(object):
         Long running put request with non resource.
 
         :param sku: sku to put
-        :type sku: sku or none
+        :type sku: Sku or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -1084,7 +1089,7 @@ class LROsOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: sku or (sku, requests.response) or concurrent.futures.Future
+        :rtype: Sku or (Sku, requests.response) or concurrent.futures.Future
         """
         # Construct URL
         url = '/lro/putnonresource/202/200'
@@ -1150,7 +1155,7 @@ class LROsOperations(object):
         Long running put request with non resource.
 
         :param sku: Sku to put
-        :type sku: sku or none
+        :type sku: Sku or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -1158,7 +1163,7 @@ class LROsOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: sku or (sku, requests.response) or concurrent.futures.Future
+        :rtype: Sku or (Sku, requests.response) or concurrent.futures.Future
         """
         # Construct URL
         url = '/lro/putnonresourceasync/202/200'
@@ -1224,7 +1229,7 @@ class LROsOperations(object):
         Long running put request with sub resource.
 
         :param product: Sub Product to put
-        :type product: subproduct or none
+        :type product: SubProduct or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -1232,7 +1237,7 @@ class LROsOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: subproduct or (subproduct, requests.response) or
+        :rtype: SubProduct or (SubProduct, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -1299,7 +1304,7 @@ class LROsOperations(object):
         Long running put request with sub resource.
 
         :param product: Sub Product to put
-        :type product: subproduct or none
+        :type product: SubProduct or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -1307,7 +1312,7 @@ class LROsOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: subproduct or (subproduct, requests.response) or
+        :rtype: SubProduct or (SubProduct, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -1383,7 +1388,7 @@ class LROsOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: product or (product, requests.response) or
+        :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -1420,6 +1425,7 @@ class LROsOperations(object):
                 raise CloudError(response)
 
             deserialized = None
+            header_dict = {}
 
             if response.status_code == 200:
                 deserialized = self._deserialize('Product', response)
@@ -1463,7 +1469,7 @@ class LROsOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: product or (product, requests.response) or
+        :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -1500,6 +1506,7 @@ class LROsOperations(object):
                 raise CloudError(response)
 
             deserialized = None
+            header_dict = {}
 
             if response.status_code == 200:
                 deserialized = self._deserialize('Product', response)
@@ -1543,7 +1550,7 @@ class LROsOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: product or (product, requests.response) or
+        :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -1580,6 +1587,7 @@ class LROsOperations(object):
                 raise CloudError(response)
 
             deserialized = None
+            header_dict = {}
 
             if response.status_code == 200:
                 deserialized = self._deserialize('Product', response)
@@ -1680,7 +1688,7 @@ class LROsOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: product or (product, requests.response) or
+        :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -1717,6 +1725,7 @@ class LROsOperations(object):
                 raise CloudError(response)
 
             deserialized = None
+            header_dict = {}
 
             if response.status_code == 200:
                 deserialized = self._deserialize('Product', response)
@@ -1753,7 +1762,7 @@ class LROsOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: product or (product, requests.response) or
+        :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -1790,6 +1799,7 @@ class LROsOperations(object):
                 raise CloudError(response)
 
             deserialized = None
+            header_dict = {}
 
             if response.status_code == 200:
                 deserialized = self._deserialize('Product', response)
@@ -2212,7 +2222,7 @@ class LROsOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: sku or (sku, requests.response) or concurrent.futures.Future
+        :rtype: Sku or (Sku, requests.response) or concurrent.futures.Future
         """
         # Construct URL
         url = '/lro/post/payload/200'
@@ -2275,7 +2285,7 @@ class LROsOperations(object):
         200 with a response body after success
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -2348,7 +2358,7 @@ class LROsOperations(object):
         success
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -2356,7 +2366,7 @@ class LROsOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: product or (product, requests.response) or
+        :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -2400,6 +2410,7 @@ class LROsOperations(object):
                 raise CloudError(response)
 
             deserialized = None
+            header_dict = {}
 
             if response.status_code == 202:
                 deserialized = self._deserialize('Product', response)
@@ -2431,7 +2442,7 @@ class LROsOperations(object):
         operation status
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -2439,7 +2450,7 @@ class LROsOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: product or (product, requests.response) or
+        :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -2483,6 +2494,7 @@ class LROsOperations(object):
                 raise CloudError(response)
 
             deserialized = None
+            header_dict = {}
 
             if response.status_code == 200:
                 deserialized = self._deserialize('Product', response)
@@ -2515,7 +2527,7 @@ class LROsOperations(object):
         operation status
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -2523,7 +2535,7 @@ class LROsOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: product or (product, requests.response) or
+        :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -2567,6 +2579,7 @@ class LROsOperations(object):
                 raise CloudError(response)
 
             deserialized = None
+            header_dict = {}
 
             if response.status_code == 200:
                 deserialized = self._deserialize('Product', response)
@@ -2599,7 +2612,7 @@ class LROsOperations(object):
         operation status
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -2674,7 +2687,7 @@ class LROsOperations(object):
         operation status
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response

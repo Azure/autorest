@@ -6,7 +6,6 @@
 @using Microsoft.Rest.Generator.Python.TemplateModels
 @using Microsoft.Rest.Generator.Python.Templates
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Azure.Python.AzureMethodTemplateModel>
-    @@async_request
     def @(Model.Name.ToPythonCase())(
             self, @(Model.MethodParameterDeclaration(true))):
 @if (!String.IsNullOrEmpty(Model.Summary))
@@ -23,15 +22,13 @@ else
 }
 @EmptyLine
 @*need to fix comment here for paging function*@
-    @foreach(var parameter in Model.DocumentationParameters)
-    {
+@foreach(var parameter in Model.DocumentationParameters)
+{
 @:        @WrapComment(string.Empty, ":param " + parameter.Name + ": " + parameter.Documentation)
 @:        @WrapComment(string.Empty, ":type " + parameter.Name + ": " + MethodTemplateModel.GetDocumentationType(parameter.Type, parameter.IsRequired))
-    }
+}
         @WrapComment(string.Empty, ":param dict custom_headers: headers that will be added to the request")
         @WrapComment(string.Empty, ":param boolean raw: returns the direct response alongside the deserialized response")
-        @WrapComment(string.Empty, ":param callback: if provided, the call will run asynchronously and call the callback when complete.  When specified the function returns a concurrent.futures.Future")
-        @WrapComment(string.Empty, ":type callback: Callable[[concurrent.futures.Future], None] or None")
         @WrapComment(string.Empty, string.Format(":rtype: {0} or ({0}, requests.response) or concurrent.futures.Future", MethodTemplateModel.GetDocumentationType(Model.ReturnType.Body)))
         """
         @Model.BuildInputMappings()
@@ -41,7 +38,7 @@ else
 }
         def internal_paging(next_link=None, raw=False):
 @EmptyLine
-            if next_link is None:
+            if not next_link:
                 # Construct URL
                 url = '@(Model.Url)'
                 @(Model.BuildUrlPath("url"))
@@ -94,15 +91,12 @@ else
 @EmptyLine
             return response
 @EmptyLine
-        response = internal_paging()
-@EmptyLine
         # Deserialize response
-        deserialized = @(Model.PagedResponseClassName)(response, internal_paging, self._deserialize.dependencies)
-        @Model.AddIndividualResponseHeader(null)
+        deserialized = @(Model.PagedResponseClassName)(internal_paging, self._deserialize.dependencies)
 @EmptyLine
         if raw:
-            client_raw_response = ClientRawResponse(deserialized, response)
-            @Model.AddResponseHeader()
+            @Model.AddIndividualResponseHeader(null)
+            client_raw_response = @(Model.PagedResponseClassName)(internal_paging, self._deserialize.dependencies, header_dict)
             return client_raw_response
 @EmptyLine
         return deserialized

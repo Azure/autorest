@@ -21,7 +21,10 @@ class DictionaryWrapper(Model):
     }
 
     def __init__(self, *args, **kwargs):
+        """DictionaryWrapper
 
+        :param dict default_program
+        """
         self.default_program = None
 
         super(DictionaryWrapper, self).__init__(*args, **kwargs)

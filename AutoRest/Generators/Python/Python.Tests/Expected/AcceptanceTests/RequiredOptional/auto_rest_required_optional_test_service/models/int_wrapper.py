@@ -21,7 +21,10 @@ class IntWrapper(Model):
     }
 
     def __init__(self, *args, **kwargs):
+        """IntWrapper
 
+        :param int value
+        """
         self.value = None
 
         super(IntWrapper, self).__init__(*args, **kwargs)

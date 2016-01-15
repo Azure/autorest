@@ -13,6 +13,7 @@ from msrest.serialization import Model
 
 
 class StorageAccountKeys(Model):
+    """The access keys for the storage account."""
 
     _required = []
 
@@ -22,7 +23,11 @@ class StorageAccountKeys(Model):
     }
 
     def __init__(self, *args, **kwargs):
+        """StorageAccountKeys
 
+        :param str key1: Gets the value of key 1.
+        :param str key2: Gets the value of key 2.
+        """
         self.key1 = None
         self.key2 = None
 

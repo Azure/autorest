@@ -22,7 +22,11 @@ class OperationResultError(Model):
     }
 
     def __init__(self, *args, **kwargs):
+        """OperationResultError
 
+        :param int code: The error code for an operation failure
+        :param str message: The detailed arror message
+        """
         self.code = None
         self.message = None
 

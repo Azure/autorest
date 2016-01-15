@@ -11,7 +11,6 @@
 
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
-from msrest.service_client import async_request
 from msrest.pipeline import ClientRawResponse
 from . import models
 
@@ -48,7 +47,6 @@ class AutoRestValidationTest(object):
 
         self.config = config
 
-    @async_request
     def validation_of_method_parameters(
             self, resource_group_name, id, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -62,11 +60,7 @@ class AutoRestValidationTest(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: product or (product, requests.response) or
+        :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -106,7 +100,6 @@ class AutoRestValidationTest(object):
 
         return deserialized
 
-    @async_request
     def validation_of_body(
             self, resource_group_name, id, body=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -118,15 +111,11 @@ class AutoRestValidationTest(object):
         :param id: Required int multiple of 10 from 100 to 1000.
         :type id: int
         :param body:
-        :type body: product or none
+        :type body: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: product or (product, requests.response) or
+        :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL

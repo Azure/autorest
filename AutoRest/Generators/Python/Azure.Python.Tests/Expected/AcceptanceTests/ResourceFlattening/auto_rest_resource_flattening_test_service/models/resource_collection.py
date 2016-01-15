@@ -23,7 +23,12 @@ class ResourceCollection(Model):
     }
 
     def __init__(self, *args, **kwargs):
+        """ResourceCollection
 
+        :param FlattenedProduct productresource
+        :param list arrayofresources
+        :param dict dictionaryofresources
+        """
         self.productresource = None
         self.arrayofresources = None
         self.dictionaryofresources = None

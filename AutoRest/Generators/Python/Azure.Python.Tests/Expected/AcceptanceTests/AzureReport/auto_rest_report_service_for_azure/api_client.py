@@ -12,7 +12,6 @@
 from msrest.service_client import ServiceClient
 from msrest import Serializer, Deserializer
 from msrestazure import AzureConfiguration
-from msrest.service_client import async_request
 from msrest.pipeline import ClientRawResponse
 import uuid
 from . import models
@@ -49,7 +48,6 @@ class AutoRestReportServiceForAzure(object):
 
         self.config = config
 
-    @async_request
     def get_report(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -58,10 +56,6 @@ class AutoRestReportServiceForAzure(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: dict or (dict, requests.response) or concurrent.futures.Future
         """
         # Construct URL

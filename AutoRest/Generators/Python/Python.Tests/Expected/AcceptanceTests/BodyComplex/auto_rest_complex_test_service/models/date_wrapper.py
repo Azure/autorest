@@ -22,7 +22,11 @@ class DateWrapper(Model):
     }
 
     def __init__(self, *args, **kwargs):
+        """DateWrapper
 
+        :param date field
+        :param date leap
+        """
         self.field = None
         self.leap = None
 

@@ -22,7 +22,11 @@ class Widget(Model):
     }
 
     def __init__(self, *args, **kwargs):
+        """Widget
 
+        :param int integer
+        :param str string
+        """
         self.integer = None
         self.string = None
 

@@ -9,7 +9,6 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.service_client import async_request
 from msrest.pipeline import ClientRawResponse
 import uuid
 
@@ -18,15 +17,14 @@ from .. import models
 
 class DurationOperations(object):
 
-    def __init__(self, client, config, serializer, derserializer):
+    def __init__(self, client, config, serializer, deserializer):
 
         self._client = client
         self._serialize = serializer
-        self._deserialize = derserializer
+        self._deserialize = deserializer
 
         self.config = config
 
-    @async_request
     def get_null(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -35,10 +33,6 @@ class DurationOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: timedelta or (timedelta, requests.response) or
         concurrent.futures.Future
         """
@@ -75,7 +69,6 @@ class DurationOperations(object):
 
         return deserialized
 
-    @async_request
     def put_positive_duration(
             self, duration_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -86,10 +79,6 @@ class DurationOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -122,7 +111,6 @@ class DurationOperations(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_positive_duration(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -131,10 +119,6 @@ class DurationOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: timedelta or (timedelta, requests.response) or
         concurrent.futures.Future
         """
@@ -171,7 +155,6 @@ class DurationOperations(object):
 
         return deserialized
 
-    @async_request
     def get_invalid(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -180,10 +163,6 @@ class DurationOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: timedelta or (timedelta, requests.response) or
         concurrent.futures.Future
         """

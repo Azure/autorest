@@ -9,7 +9,6 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.service_client import async_request
 from msrest.pipeline import ClientRawResponse
 
 from .. import models
@@ -17,15 +16,14 @@ from .. import models
 
 class Files(object):
 
-    def __init__(self, client, config, serializer, derserializer):
+    def __init__(self, client, config, serializer, deserializer):
 
         self._client = client
         self._serialize = serializer
-        self._deserialize = derserializer
+        self._deserialize = deserializer
 
         self.config = config
 
-    @async_request
     def get_file(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -34,9 +32,9 @@ class Files(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
+        :param callback: if provided, the runtime will call the callback when
+        stream upload/download.  When specified the function returns a
+        concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: object or (object, requests.response) or
         concurrent.futures.Future
@@ -45,6 +43,8 @@ class Files(object):
             for data in response.iter_content(self.config.connection.data_block_size):
                 if not data:
                     break
+                if callback and callable(callback):
+                    callback(None, data=data)
                 yield data
 
         # Construct URL
@@ -77,7 +77,6 @@ class Files(object):
 
         return deserialized
 
-    @async_request
     def get_empty_file(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -86,9 +85,9 @@ class Files(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
+        :param callback: if provided, the runtime will call the callback when
+        stream upload/download.  When specified the function returns a
+        concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: object or (object, requests.response) or
         concurrent.futures.Future
@@ -97,6 +96,8 @@ class Files(object):
             for data in response.iter_content(self.config.connection.data_block_size):
                 if not data:
                     break
+                if callback and callable(callback):
+                    callback(None, data=data)
                 yield data
 
         # Construct URL

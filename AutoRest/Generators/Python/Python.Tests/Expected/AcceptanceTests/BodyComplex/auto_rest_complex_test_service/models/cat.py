@@ -22,7 +22,11 @@ class Cat(Pet):
     }
 
     def __init__(self, *args, **kwargs):
+        """Cat
 
+        :param str color
+        :param list hates
+        """
         self.color = None
         self.hates = None
 

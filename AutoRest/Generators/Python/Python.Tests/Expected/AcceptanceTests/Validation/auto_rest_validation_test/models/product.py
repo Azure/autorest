@@ -13,6 +13,7 @@ from msrest.serialization import Model
 
 
 class Product(Model):
+    """The product documentation."""
 
     _required = []
 
@@ -23,7 +24,13 @@ class Product(Model):
     }
 
     def __init__(self, *args, **kwargs):
+        """Product
 
+        :param list display_names: Non required array of unique items from 0
+        to 6 elements.
+        :param int capacity: Non required int betwen 0 and 100 exclusive.
+        :param str image: Image URL representing the product.
+        """
         self.display_names = None
         self.capacity = None
         self.image = None

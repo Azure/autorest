@@ -13,11 +13,16 @@ from msrest.serialization import Model
 
 
 class FirstParameterGroup(Model):
+    """Additional parameters for the postMultipleParameterGroups operation."""
 
     _required = []
 
     def __init__(self, *args, **kwargs):
+        """FirstParameterGroup
 
+        :param str header_one
+        :param int query_one: Query parameter with default. Default value: 30 .
+        """
         self.header_one = None
         self.query_one = None
 

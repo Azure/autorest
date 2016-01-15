@@ -13,6 +13,7 @@ from msrest.serialization import Model
 
 
 class CheckNameAvailabilityResult(Model):
+    """The CheckNameAvailability operation response."""
 
     _required = []
 
@@ -23,7 +24,19 @@ class CheckNameAvailabilityResult(Model):
     }
 
     def __init__(self, *args, **kwargs):
+        """CheckNameAvailabilityResult
 
+        :param bool name_available: Gets a boolean value that indicates
+        whether the name is available for you to use. If true, the name is
+        available. If false, the name has already been taken or invalid and
+        cannot be used.
+        :param str reason: Gets the reason that a storage account name could
+        not be used. The Reason element is only returned if NameAvailable is
+        false. Possible values for this property include:
+        'AccountNameInvalid', 'AlreadyExists'.
+        :param str message: Gets an error message explaining the Reason value
+        in more detail.
+        """
         self.name_available = None
         self.reason = None
         self.message = None

@@ -9,7 +9,6 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.service_client import async_request
 from msrest.pipeline import ClientRawResponse
 from msrestazure.azure_exceptions import CloudError
 import uuid
@@ -19,15 +18,14 @@ from .. import models
 
 class PagingOperations(object):
 
-    def __init__(self, client, config, serializer, derserializer):
+    def __init__(self, client, config, serializer, deserializer):
 
         self._client = client
         self._serialize = serializer
-        self._deserialize = derserializer
+        self._deserialize = deserializer
 
         self.config = config
 
-    @async_request
     def get_single_pages(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -36,16 +34,12 @@ class PagingOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: productpaged or (productpaged, requests.response) or
+        :rtype: ProductPaged or (ProductPaged, requests.response) or
         concurrent.futures.Future
         """
         def internal_paging(next_link=None, raw=False):
 
-            if next_link is None:
+            if not next_link:
                 # Construct URL
                 url = '/paging/single'
 
@@ -75,37 +69,31 @@ class PagingOperations(object):
 
             return response
 
-        response = internal_paging()
-
         # Deserialize response
-        deserialized = models.ProductPaged(response, internal_paging, self._deserialize.dependencies)
+        deserialized = models.ProductPaged(internal_paging, self._deserialize.dependencies)
 
         if raw:
-            client_raw_response = ClientRawResponse(deserialized, response)
+            header_dict = {}
+            client_raw_response = models.ProductPaged(internal_paging, self._deserialize.dependencies, header_dict)
             return client_raw_response
 
         return deserialized
 
-    @async_request
     def get_multiple_pages(
             self, client_request_id=None, paging_get_multiple_pages_options=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         A paging operation that includes a nextLink that has 10 pages
 
         :param client_request_id:
-        :type client_request_id: str or none
+        :type client_request_id: str or None
         :param paging_get_multiple_pages_options: Additional parameters for
         the operation
-        :type paging_get_multiple_pages_options: paginggetmultiplepagesoptions
-        or none
+        :type paging_get_multiple_pages_options: PagingGetMultiplePagesOptions
+        or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: productpaged or (productpaged, requests.response) or
+        :rtype: ProductPaged or (ProductPaged, requests.response) or
         concurrent.futures.Future
         """
         maxresults = None
@@ -117,7 +105,7 @@ class PagingOperations(object):
 
         def internal_paging(next_link=None, raw=False):
 
-            if next_link is None:
+            if not next_link:
                 # Construct URL
                 url = '/paging/multiple'
 
@@ -153,18 +141,16 @@ class PagingOperations(object):
 
             return response
 
-        response = internal_paging()
-
         # Deserialize response
-        deserialized = models.ProductPaged(response, internal_paging, self._deserialize.dependencies)
+        deserialized = models.ProductPaged(internal_paging, self._deserialize.dependencies)
 
         if raw:
-            client_raw_response = ClientRawResponse(deserialized, response)
+            header_dict = {}
+            client_raw_response = models.ProductPaged(internal_paging, self._deserialize.dependencies, header_dict)
             return client_raw_response
 
         return deserialized
 
-    @async_request
     def get_multiple_pages_retry_first(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -174,16 +160,12 @@ class PagingOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: productpaged or (productpaged, requests.response) or
+        :rtype: ProductPaged or (ProductPaged, requests.response) or
         concurrent.futures.Future
         """
         def internal_paging(next_link=None, raw=False):
 
-            if next_link is None:
+            if not next_link:
                 # Construct URL
                 url = '/paging/multiple/retryfirst'
 
@@ -213,18 +195,16 @@ class PagingOperations(object):
 
             return response
 
-        response = internal_paging()
-
         # Deserialize response
-        deserialized = models.ProductPaged(response, internal_paging, self._deserialize.dependencies)
+        deserialized = models.ProductPaged(internal_paging, self._deserialize.dependencies)
 
         if raw:
-            client_raw_response = ClientRawResponse(deserialized, response)
+            header_dict = {}
+            client_raw_response = models.ProductPaged(internal_paging, self._deserialize.dependencies, header_dict)
             return client_raw_response
 
         return deserialized
 
-    @async_request
     def get_multiple_pages_retry_second(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -235,16 +215,12 @@ class PagingOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: productpaged or (productpaged, requests.response) or
+        :rtype: ProductPaged or (ProductPaged, requests.response) or
         concurrent.futures.Future
         """
         def internal_paging(next_link=None, raw=False):
 
-            if next_link is None:
+            if not next_link:
                 # Construct URL
                 url = '/paging/multiple/retrysecond'
 
@@ -274,18 +250,16 @@ class PagingOperations(object):
 
             return response
 
-        response = internal_paging()
-
         # Deserialize response
-        deserialized = models.ProductPaged(response, internal_paging, self._deserialize.dependencies)
+        deserialized = models.ProductPaged(internal_paging, self._deserialize.dependencies)
 
         if raw:
-            client_raw_response = ClientRawResponse(deserialized, response)
+            header_dict = {}
+            client_raw_response = models.ProductPaged(internal_paging, self._deserialize.dependencies, header_dict)
             return client_raw_response
 
         return deserialized
 
-    @async_request
     def get_single_pages_failure(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -294,16 +268,12 @@ class PagingOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: productpaged or (productpaged, requests.response) or
+        :rtype: ProductPaged or (ProductPaged, requests.response) or
         concurrent.futures.Future
         """
         def internal_paging(next_link=None, raw=False):
 
-            if next_link is None:
+            if not next_link:
                 # Construct URL
                 url = '/paging/single/failure'
 
@@ -333,18 +303,16 @@ class PagingOperations(object):
 
             return response
 
-        response = internal_paging()
-
         # Deserialize response
-        deserialized = models.ProductPaged(response, internal_paging, self._deserialize.dependencies)
+        deserialized = models.ProductPaged(internal_paging, self._deserialize.dependencies)
 
         if raw:
-            client_raw_response = ClientRawResponse(deserialized, response)
+            header_dict = {}
+            client_raw_response = models.ProductPaged(internal_paging, self._deserialize.dependencies, header_dict)
             return client_raw_response
 
         return deserialized
 
-    @async_request
     def get_multiple_pages_failure(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -353,16 +321,12 @@ class PagingOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: productpaged or (productpaged, requests.response) or
+        :rtype: ProductPaged or (ProductPaged, requests.response) or
         concurrent.futures.Future
         """
         def internal_paging(next_link=None, raw=False):
 
-            if next_link is None:
+            if not next_link:
                 # Construct URL
                 url = '/paging/multiple/failure'
 
@@ -392,18 +356,16 @@ class PagingOperations(object):
 
             return response
 
-        response = internal_paging()
-
         # Deserialize response
-        deserialized = models.ProductPaged(response, internal_paging, self._deserialize.dependencies)
+        deserialized = models.ProductPaged(internal_paging, self._deserialize.dependencies)
 
         if raw:
-            client_raw_response = ClientRawResponse(deserialized, response)
+            header_dict = {}
+            client_raw_response = models.ProductPaged(internal_paging, self._deserialize.dependencies, header_dict)
             return client_raw_response
 
         return deserialized
 
-    @async_request
     def get_multiple_pages_failure_uri(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -412,16 +374,12 @@ class PagingOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: productpaged or (productpaged, requests.response) or
+        :rtype: ProductPaged or (ProductPaged, requests.response) or
         concurrent.futures.Future
         """
         def internal_paging(next_link=None, raw=False):
 
-            if next_link is None:
+            if not next_link:
                 # Construct URL
                 url = '/paging/multiple/failureuri'
 
@@ -451,13 +409,12 @@ class PagingOperations(object):
 
             return response
 
-        response = internal_paging()
-
         # Deserialize response
-        deserialized = models.ProductPaged(response, internal_paging, self._deserialize.dependencies)
+        deserialized = models.ProductPaged(internal_paging, self._deserialize.dependencies)
 
         if raw:
-            client_raw_response = ClientRawResponse(deserialized, response)
+            header_dict = {}
+            client_raw_response = models.ProductPaged(internal_paging, self._deserialize.dependencies, header_dict)
             return client_raw_response
 
         return deserialized

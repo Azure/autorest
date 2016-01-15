@@ -21,7 +21,10 @@ class Product(Model):
     }
 
     def __init__(self, *args, **kwargs):
+        """Product
 
+        :param ProductProperties properties
+        """
         self.properties = None
 
         super(Product, self).__init__(*args, **kwargs)

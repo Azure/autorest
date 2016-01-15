@@ -13,11 +13,16 @@ from msrest.serialization import Model
 
 
 class ParameterGroupingPostOptionalParameters(Model):
+    """Additional parameters for the postOptional operation."""
 
     _required = []
 
     def __init__(self, *args, **kwargs):
+        """ParameterGroupingPostOptionalParameters
 
+        :param str custom_header
+        :param int query: Query parameter with default. Default value: 30 .
+        """
         self.custom_header = None
         self.query = None
 
