@@ -21,7 +21,10 @@ class C(Model):
     }
 
     def __init__(self, *args, **kwargs):
+        """C
 
+        :param str http_code
+        """
         self.http_code = None
 
         super(C, self).__init__(*args, **kwargs)

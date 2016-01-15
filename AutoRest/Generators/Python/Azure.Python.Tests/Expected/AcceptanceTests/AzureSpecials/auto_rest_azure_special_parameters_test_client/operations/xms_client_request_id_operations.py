@@ -9,7 +9,6 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.service_client import async_request
 from msrest.pipeline import ClientRawResponse
 import uuid
 
@@ -18,15 +17,14 @@ from .. import models
 
 class XMsClientRequestIdOperations(object):
 
-    def __init__(self, client, config, serializer, derserializer):
+    def __init__(self, client, config, serializer, deserializer):
 
         self._client = client
         self._serialize = serializer
-        self._deserialize = derserializer
+        self._deserialize = deserializer
 
         self.config = config
 
-    @async_request
     def get(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -36,10 +34,6 @@ class XMsClientRequestIdOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -68,7 +62,6 @@ class XMsClientRequestIdOperations(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def param_get(
             self, x_ms_client_request_id, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -81,10 +74,6 @@ class XMsClientRequestIdOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL

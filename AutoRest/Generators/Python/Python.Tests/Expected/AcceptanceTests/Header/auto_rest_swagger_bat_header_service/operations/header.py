@@ -9,7 +9,6 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.service_client import async_request
 from msrest.pipeline import ClientRawResponse
 
 from .. import models
@@ -17,15 +16,14 @@ from .. import models
 
 class Header(object):
 
-    def __init__(self, client, config, serializer, derserializer):
+    def __init__(self, client, config, serializer, deserializer):
 
         self._client = client
         self._serialize = serializer
-        self._deserialize = derserializer
+        self._deserialize = deserializer
 
         self.config = config
 
-    @async_request
     def param_existing_key(
             self, user_agent, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -37,10 +35,6 @@ class Header(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -67,7 +61,6 @@ class Header(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def response_existing_key(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -76,10 +69,6 @@ class Header(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -108,7 +97,6 @@ class Header(object):
             })
             return client_raw_response
 
-    @async_request
     def param_protected_key(
             self, content_type, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -120,10 +108,6 @@ class Header(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -150,7 +134,6 @@ class Header(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def response_protected_key(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -159,10 +142,6 @@ class Header(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -191,7 +170,6 @@ class Header(object):
             })
             return client_raw_response
 
-    @async_request
     def param_integer(
             self, scenario, value, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -206,10 +184,6 @@ class Header(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -237,7 +211,6 @@ class Header(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def response_integer(
             self, scenario, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -249,10 +222,6 @@ class Header(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -282,7 +251,6 @@ class Header(object):
             })
             return client_raw_response
 
-    @async_request
     def param_long(
             self, scenario, value, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -297,10 +265,6 @@ class Header(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -328,7 +292,6 @@ class Header(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def response_long(
             self, scenario, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -340,10 +303,6 @@ class Header(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -373,7 +332,6 @@ class Header(object):
             })
             return client_raw_response
 
-    @async_request
     def param_float(
             self, scenario, value, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -388,10 +346,6 @@ class Header(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -419,7 +373,6 @@ class Header(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def response_float(
             self, scenario, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -431,10 +384,6 @@ class Header(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -464,7 +413,6 @@ class Header(object):
             })
             return client_raw_response
 
-    @async_request
     def param_double(
             self, scenario, value, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -479,10 +427,6 @@ class Header(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -510,7 +454,6 @@ class Header(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def response_double(
             self, scenario, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -522,10 +465,6 @@ class Header(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -555,7 +494,6 @@ class Header(object):
             })
             return client_raw_response
 
-    @async_request
     def param_bool(
             self, scenario, value, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -570,10 +508,6 @@ class Header(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -601,7 +535,6 @@ class Header(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def response_bool(
             self, scenario, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -613,10 +546,6 @@ class Header(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -646,7 +575,6 @@ class Header(object):
             })
             return client_raw_response
 
-    @async_request
     def param_string(
             self, scenario, value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -659,14 +587,10 @@ class Header(object):
         :type scenario: str
         :param value: Send a post request with header values "The quick brown
         fox jumps over the lazy dog" or null or ""
-        :type value: str or none
+        :type value: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -695,7 +619,6 @@ class Header(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def response_string(
             self, scenario, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -708,10 +631,6 @@ class Header(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -741,7 +660,6 @@ class Header(object):
             })
             return client_raw_response
 
-    @async_request
     def param_date(
             self, scenario, value, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -757,10 +675,6 @@ class Header(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -788,7 +702,6 @@ class Header(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def response_date(
             self, scenario, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -800,10 +713,6 @@ class Header(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -833,7 +742,6 @@ class Header(object):
             })
             return client_raw_response
 
-    @async_request
     def param_datetime(
             self, scenario, value, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -850,10 +758,6 @@ class Header(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -881,7 +785,6 @@ class Header(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def response_datetime(
             self, scenario, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -894,10 +797,6 @@ class Header(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -927,7 +826,6 @@ class Header(object):
             })
             return client_raw_response
 
-    @async_request
     def param_datetime_rfc1123(
             self, scenario, value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -940,14 +838,10 @@ class Header(object):
         :type scenario: str
         :param value: Send a post request with header values "Wed, 01 Jan 2010
         12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
-        :type value: datetime or none
+        :type value: datetime or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -976,7 +870,6 @@ class Header(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def response_datetime_rfc1123(
             self, scenario, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -989,10 +882,6 @@ class Header(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -1022,7 +911,6 @@ class Header(object):
             })
             return client_raw_response
 
-    @async_request
     def param_duration(
             self, scenario, value, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -1038,10 +926,6 @@ class Header(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -1069,7 +953,6 @@ class Header(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def response_duration(
             self, scenario, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -1081,10 +964,6 @@ class Header(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -1114,7 +993,6 @@ class Header(object):
             })
             return client_raw_response
 
-    @async_request
     def param_byte(
             self, scenario, value, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -1129,10 +1007,6 @@ class Header(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -1160,7 +1034,6 @@ class Header(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def response_byte(
             self, scenario, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -1172,10 +1045,6 @@ class Header(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -1205,7 +1074,6 @@ class Header(object):
             })
             return client_raw_response
 
-    @async_request
     def param_enum(
             self, scenario, value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -1217,14 +1085,10 @@ class Header(object):
         :type scenario: str
         :param value: Send a post request with header values 'GREY' . Possible
         values for this parameter include: 'White', 'black', 'GREY'
-        :type value: str or none
+        :type value: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -1253,7 +1117,6 @@ class Header(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def response_enum(
             self, scenario, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -1265,10 +1128,6 @@ class Header(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -1298,7 +1157,6 @@ class Header(object):
             })
             return client_raw_response
 
-    @async_request
     def custom_request_id(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -1308,10 +1166,6 @@ class Header(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL

@@ -1,5 +1,7 @@
 import sys
 import subprocess
+import os
+import signal
 from os.path import dirname, realpath
 from unittest import TestLoader, TextTestRunner
 
@@ -20,11 +22,26 @@ def sort_test(x, y):
         return -1
     return (x > y) - (x < y)
 
+#Ideally this would be in a common helper library shared between the tests
+def start_server_process():
+    cmd = "node ../../../../AutoRest/TestServer/server/startup/www.js"
+    if os.name == 'nt': #On windows, subprocess creation works without being in the shell
+        return subprocess.Popen(cmd)
+    
+    return subprocess.Popen(cmd, shell=True, preexec_fn=os.setsid) #On linux, have to set shell=True
+
+#Ideally this would be in a common helper library shared between the tests
+def terminate_server_process(process):
+    if os.name == 'nt':
+        process.kill()
+    else:
+        os.killpg(os.getpgid(process.pid), signal.SIGTERM)  # Send the signal to all the process groups    
+    
 if __name__ == '__main__':
 
     cwd = dirname(realpath(__file__))
 
-    server = subprocess.Popen("node ../../../../AutoRest/TestServer/server/startup/www.js")
+    server = start_server_process()
     try:
         runner = TextTestRunner(verbosity=2)
 
@@ -37,4 +54,6 @@ if __name__ == '__main__':
             sys.exit(1)
 
     finally:
-        server.kill()
+        print "Killing server"
+        terminate_server_process(server)
+        print "Done killing server"

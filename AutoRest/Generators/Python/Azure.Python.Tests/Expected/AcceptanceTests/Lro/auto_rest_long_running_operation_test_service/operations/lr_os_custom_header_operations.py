@@ -9,7 +9,6 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.service_client import async_request
 from msrest.pipeline import ClientRawResponse
 from msrestazure.azure_exceptions import CloudError
 from msrestazure.azure_operation import AzureOperationPoller
@@ -20,11 +19,11 @@ from .. import models
 
 class LROsCustomHeaderOperations(object):
 
-    def __init__(self, client, config, serializer, derserializer):
+    def __init__(self, client, config, serializer, deserializer):
 
         self._client = client
         self._serialize = serializer
-        self._deserialize = derserializer
+        self._deserialize = deserializer
 
         self.config = config
 
@@ -38,7 +37,7 @@ class LROsCustomHeaderOperations(object):
         the Azure-AsyncOperation header for operation status
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -46,7 +45,7 @@ class LROsCustomHeaderOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: product or (product, requests.response) or
+        :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -90,6 +89,7 @@ class LROsCustomHeaderOperations(object):
                 raise CloudError(response)
 
             deserialized = None
+            header_dict = {}
 
             if response.status_code == 200:
                 deserialized = self._deserialize('Product', response)
@@ -123,7 +123,7 @@ class LROsCustomHeaderOperations(object):
         the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -131,7 +131,7 @@ class LROsCustomHeaderOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: product or (product, requests.response) or
+        :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -204,7 +204,7 @@ class LROsCustomHeaderOperations(object):
         success
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -279,7 +279,7 @@ class LROsCustomHeaderOperations(object):
         the Azure-AsyncOperation header for operation status
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response

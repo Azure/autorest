@@ -25,7 +25,14 @@ class Resource(Model):
     }
 
     def __init__(self, *args, **kwargs):
+        """Resource
 
+        :param str id: Resource Id
+        :param str type: Resource Type
+        :param dict tags
+        :param str location: Resource Location
+        :param str name: Resource Name
+        """
         self.id = None
         self.type = None
         self.tags = None

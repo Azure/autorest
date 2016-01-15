@@ -9,7 +9,6 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.service_client import async_request
 from msrest.pipeline import ClientRawResponse
 
 from .. import models
@@ -17,15 +16,14 @@ from .. import models
 
 class Explicit(object):
 
-    def __init__(self, client, config, serializer, derserializer):
+    def __init__(self, client, config, serializer, deserializer):
 
         self._client = client
         self._serialize = serializer
-        self._deserialize = derserializer
+        self._deserialize = deserializer
 
         self.config = config
 
-    @async_request
     def post_required_integer_parameter(
             self, body_parameter, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -37,11 +35,7 @@ class Explicit(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: error or (error, requests.response) or
+        :rtype: Error or (Error, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -71,21 +65,16 @@ class Explicit(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def post_optional_integer_parameter(
             self, body_parameter=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Test explicitly optional integer. Please put null.
 
         :param body_parameter:
-        :type body_parameter: int or none
+        :type body_parameter: int or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -118,7 +107,6 @@ class Explicit(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def post_required_integer_property(
             self, value, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -131,11 +119,7 @@ class Explicit(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: error or (error, requests.response) or
+        :rtype: Error or (Error, requests.response) or
         concurrent.futures.Future
         """
         body_parameter = models.IntWrapper()
@@ -169,7 +153,6 @@ class Explicit(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def post_optional_integer_property(
             self, value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -177,14 +160,10 @@ class Explicit(object):
         'value' = null.
 
         :param value:
-        :type value: int or none
+        :type value: int or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         body_parameter = models.IntOptionalWrapper()
@@ -221,7 +200,6 @@ class Explicit(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def post_required_integer_header(
             self, header_parameter, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -234,11 +212,7 @@ class Explicit(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: error or (error, requests.response) or
+        :rtype: Error or (Error, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -265,7 +239,6 @@ class Explicit(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def post_optional_integer_header(
             self, header_parameter=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -273,14 +246,10 @@ class Explicit(object):
         'headerParameter' => null.
 
         :param header_parameter:
-        :type header_parameter: int or none
+        :type header_parameter: int or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -308,7 +277,6 @@ class Explicit(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def post_required_string_parameter(
             self, body_parameter, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -320,11 +288,7 @@ class Explicit(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: error or (error, requests.response) or
+        :rtype: Error or (Error, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -354,21 +318,16 @@ class Explicit(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def post_optional_string_parameter(
             self, body_parameter=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Test explicitly optional string. Please put null.
 
         :param body_parameter:
-        :type body_parameter: str or none
+        :type body_parameter: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -401,7 +360,6 @@ class Explicit(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def post_required_string_property(
             self, value, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -414,11 +372,7 @@ class Explicit(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: error or (error, requests.response) or
+        :rtype: Error or (Error, requests.response) or
         concurrent.futures.Future
         """
         body_parameter = models.StringWrapper()
@@ -452,7 +406,6 @@ class Explicit(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def post_optional_string_property(
             self, value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -460,14 +413,10 @@ class Explicit(object):
         with 'value' = null.
 
         :param value:
-        :type value: str or none
+        :type value: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         body_parameter = models.StringOptionalWrapper()
@@ -504,7 +453,6 @@ class Explicit(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def post_required_string_header(
             self, header_parameter, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -517,11 +465,7 @@ class Explicit(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: error or (error, requests.response) or
+        :rtype: Error or (Error, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -548,7 +492,6 @@ class Explicit(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def post_optional_string_header(
             self, body_parameter=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -556,14 +499,10 @@ class Explicit(object):
         => null.
 
         :param body_parameter:
-        :type body_parameter: str or none
+        :type body_parameter: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -591,7 +530,6 @@ class Explicit(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def post_required_class_parameter(
             self, body_parameter, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -599,15 +537,11 @@ class Explicit(object):
         client library should throw before the request is sent.
 
         :param body_parameter:
-        :type body_parameter: product
+        :type body_parameter: Product
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: error or (error, requests.response) or
+        :rtype: Error or (Error, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -637,21 +571,16 @@ class Explicit(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def post_optional_class_parameter(
             self, body_parameter=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Test explicitly optional complex object. Please put null.
 
         :param body_parameter:
-        :type body_parameter: product or none
+        :type body_parameter: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -684,7 +613,6 @@ class Explicit(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def post_required_class_property(
             self, value, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -693,15 +621,11 @@ class Explicit(object):
         before the request is sent.
 
         :param value:
-        :type value: product
+        :type value: Product
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: error or (error, requests.response) or
+        :rtype: Error or (Error, requests.response) or
         concurrent.futures.Future
         """
         body_parameter = models.ClassWrapper()
@@ -735,7 +659,6 @@ class Explicit(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def post_optional_class_property(
             self, value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -743,14 +666,10 @@ class Explicit(object):
         class-wrapper with 'value' = null.
 
         :param value:
-        :type value: product or none
+        :type value: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         body_parameter = models.ClassOptionalWrapper()
@@ -787,7 +706,6 @@ class Explicit(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def post_required_array_parameter(
             self, body_parameter, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -799,11 +717,7 @@ class Explicit(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: error or (error, requests.response) or
+        :rtype: Error or (Error, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -833,21 +747,16 @@ class Explicit(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def post_optional_array_parameter(
             self, body_parameter=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Test explicitly optional array. Please put null.
 
         :param body_parameter:
-        :type body_parameter: list or none
+        :type body_parameter: list or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -880,7 +789,6 @@ class Explicit(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def post_required_array_property(
             self, value, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -893,11 +801,7 @@ class Explicit(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: error or (error, requests.response) or
+        :rtype: Error or (Error, requests.response) or
         concurrent.futures.Future
         """
         body_parameter = models.ArrayWrapper()
@@ -931,7 +835,6 @@ class Explicit(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def post_optional_array_property(
             self, value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -939,14 +842,10 @@ class Explicit(object):
         'value' = null.
 
         :param value:
-        :type value: list or none
+        :type value: list or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         body_parameter = models.ArrayOptionalWrapper()
@@ -983,7 +882,6 @@ class Explicit(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def post_required_array_header(
             self, header_parameter, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -996,11 +894,7 @@ class Explicit(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: error or (error, requests.response) or
+        :rtype: Error or (Error, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -1027,7 +921,6 @@ class Explicit(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def post_optional_array_header(
             self, header_parameter=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -1035,14 +928,10 @@ class Explicit(object):
         'headerParameter' => null.
 
         :param header_parameter:
-        :type header_parameter: list or none
+        :type header_parameter: list or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL

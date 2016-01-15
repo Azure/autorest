@@ -9,7 +9,6 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.service_client import async_request
 from msrest.pipeline import ClientRawResponse
 import uuid
 
@@ -18,15 +17,14 @@ from .. import models
 
 class ParameterGroupingOperations(object):
 
-    def __init__(self, client, config, serializer, derserializer):
+    def __init__(self, client, config, serializer, deserializer):
 
         self._client = client
         self._serialize = serializer
-        self._deserialize = derserializer
+        self._deserialize = deserializer
 
         self.config = config
 
-    @async_request
     def post_required(
             self, parameter_grouping_post_required_parameters, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -35,14 +33,10 @@ class ParameterGroupingOperations(object):
         :param parameter_grouping_post_required_parameters: Additional
         parameters for the operation
         :type parameter_grouping_post_required_parameters:
-        parametergroupingpostrequiredparameters
+        ParameterGroupingPostRequiredParameters
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         body = None
@@ -96,7 +90,6 @@ class ParameterGroupingOperations(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def post_optional(
             self, parameter_grouping_post_optional_parameters=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -105,14 +98,10 @@ class ParameterGroupingOperations(object):
         :param parameter_grouping_post_optional_parameters: Additional
         parameters for the operation
         :type parameter_grouping_post_optional_parameters:
-        parametergroupingpostoptionalparameters or none
+        ParameterGroupingPostOptionalParameters or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         custom_header = None
@@ -152,28 +141,23 @@ class ParameterGroupingOperations(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def post_multiple_parameter_groups(
             self, first_parameter_group=None, parameter_grouping_post_multiple_parameter_groups_second_parameter_group=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Post parameters from multiple different parameter groups
 
         :param first_parameter_group: Additional parameters for the operation
-        :type first_parameter_group: firstparametergroup or none
+        :type first_parameter_group: FirstParameterGroup or None
         :param
         parameter_grouping_post_multiple_parameter_groups_second_parameter_group:
         Additional parameters for the operation
         :type
         parameter_grouping_post_multiple_parameter_groups_second_parameter_group:
-        parametergroupingpostmultipleparametergroupssecondparametergroup or
-        none
+        ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup or
+        None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         header_one = None
@@ -223,21 +207,16 @@ class ParameterGroupingOperations(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def post_shared_parameter_group_object(
             self, first_parameter_group=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Post parameters with a shared parameter group object
 
         :param first_parameter_group: Additional parameters for the operation
-        :type first_parameter_group: firstparametergroup or none
+        :type first_parameter_group: FirstParameterGroup or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         header_one = None

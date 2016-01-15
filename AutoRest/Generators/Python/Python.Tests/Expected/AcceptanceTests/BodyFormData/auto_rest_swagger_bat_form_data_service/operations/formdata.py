@@ -9,7 +9,6 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.service_client import async_request
 from msrest.pipeline import ClientRawResponse
 
 from .. import models
@@ -17,15 +16,14 @@ from .. import models
 
 class Formdata(object):
 
-    def __init__(self, client, config, serializer, derserializer):
+    def __init__(self, client, config, serializer, deserializer):
 
         self._client = client
         self._serialize = serializer
-        self._deserialize = derserializer
+        self._deserialize = deserializer
 
         self.config = config
 
-    @async_request
     def upload_file(
             self, file_content, file_name, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -39,9 +37,9 @@ class Formdata(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
+        :param callback: if provided, the runtime will call the callback when
+        stream upload/download.  When specified the function returns a
+        concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: object or (object, requests.response) or
         concurrent.futures.Future
@@ -50,6 +48,8 @@ class Formdata(object):
             for data in response.iter_content(self.config.connection.data_block_size):
                 if not data:
                     break
+                if callback and callable(callback):
+                    callback(None, data=data)
                 yield data
 
         # Construct URL
@@ -64,9 +64,16 @@ class Formdata(object):
         if custom_headers:
             header_parameters.update(custom_headers)
 
+        # Construct form data
+        form_data_content = {
+            'fileContent': file_content,
+            'fileName': file_name,
+        }
+
         # Construct and send request
         request = self._client.post(url, query_parameters)
-        response = self._client.send(request, header_parameters, **operation_config)
+        response = self._client.send_formdata(
+            request, header_parameters, form_data_content, **operation_config)
 
         if response.status_code not in [200]:
             raise models.ErrorException(self._deserialize, response)
@@ -82,7 +89,6 @@ class Formdata(object):
 
         return deserialized
 
-    @async_request
     def upload_file_via_body(
             self, file_content, file_name, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -96,17 +102,28 @@ class Formdata(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
+        :param callback: if provided, the runtime will call the callback when
+        stream upload/download.  When specified the function returns a
+        concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: object or (object, requests.response) or
         concurrent.futures.Future
         """
+        def upload_gen(file_handle):
+            while True:
+                data = file_handle.read(self.config.connection.data_block_size)
+                if not data:
+                    break
+                if callback and callable(callback):
+                    callback(None, data=data)
+                yield data
+
         def download_gen():
             for data in response.iter_content(self.config.connection.data_block_size):
                 if not data:
                     break
+                if callback and callable(callback):
+                    callback(None, data=data)
                 yield data
 
         # Construct URL
@@ -122,7 +139,7 @@ class Formdata(object):
             header_parameters.update(custom_headers)
 
         # Construct body
-        body_content = self._serialize.body(file_content, 'Object')
+        body_content = upload_gen(file_content)
 
         # Construct and send request
         request = self._client.put(url, query_parameters)

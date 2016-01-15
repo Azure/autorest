@@ -22,7 +22,11 @@ class FloatWrapper(Model):
     }
 
     def __init__(self, *args, **kwargs):
+        """FloatWrapper
 
+        :param float field1
+        :param float field2
+        """
         self.field1 = None
         self.field2 = None
 

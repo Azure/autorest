@@ -22,7 +22,12 @@ class DoubleWrapper(Model):
     }
 
     def __init__(self, *args, **kwargs):
+        """DoubleWrapper
 
+        :param float field1
+        :param float
+        field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose
+        """
         self.field1 = None
         self.field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose = None
 

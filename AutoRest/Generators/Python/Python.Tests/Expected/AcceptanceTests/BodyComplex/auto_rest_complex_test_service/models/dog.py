@@ -21,7 +21,10 @@ class Dog(Pet):
     }
 
     def __init__(self, *args, **kwargs):
+        """Dog
 
+        :param str food
+        """
         self.food = None
 
         super(Dog, self).__init__(*args, **kwargs)

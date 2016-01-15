@@ -24,7 +24,12 @@ class Error(Model):
     }
 
     def __init__(self, *args, **kwargs):
+        """Error
 
+        :param int code
+        :param str message
+        :param str fields
+        """
         self.code = None
         self.message = None
         self.fields = None

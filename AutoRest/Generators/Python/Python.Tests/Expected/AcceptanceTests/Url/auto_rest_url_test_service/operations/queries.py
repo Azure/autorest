@@ -9,7 +9,6 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.service_client import async_request
 from msrest.pipeline import ClientRawResponse
 
 from .. import models
@@ -17,29 +16,24 @@ from .. import models
 
 class Queries(object):
 
-    def __init__(self, client, config, serializer, derserializer):
+    def __init__(self, client, config, serializer, deserializer):
 
         self._client = client
         self._serialize = serializer
-        self._deserialize = derserializer
+        self._deserialize = deserializer
 
         self.config = config
 
-    @async_request
     def get_boolean_true(
             self, bool_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Get true Boolean value on path
 
         :param bool_query: true boolean value
-        :type bool_query: bool or none
+        :type bool_query: bool or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -67,21 +61,16 @@ class Queries(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_boolean_false(
             self, bool_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Get false Boolean value on path
 
         :param bool_query: false boolean value
-        :type bool_query: bool or none
+        :type bool_query: bool or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -109,21 +98,16 @@ class Queries(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_boolean_null(
             self, bool_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Get null Boolean value on query (query string should be absent)
 
         :param bool_query: null boolean value
-        :type bool_query: bool or none
+        :type bool_query: bool or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -151,21 +135,16 @@ class Queries(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_int_one_million(
             self, int_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Get '1000000' integer value
 
         :param int_query: '1000000' integer value
-        :type int_query: int or none
+        :type int_query: int or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -193,21 +172,16 @@ class Queries(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_int_negative_one_million(
             self, int_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Get '-1000000' integer value
 
         :param int_query: '-1000000' integer value
-        :type int_query: int or none
+        :type int_query: int or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -235,21 +209,16 @@ class Queries(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_int_null(
             self, int_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Get null integer value (no query parameter)
 
         :param int_query: null integer value
-        :type int_query: int or none
+        :type int_query: int or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -277,21 +246,16 @@ class Queries(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_ten_billion(
             self, long_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Get '10000000000' 64 bit integer value
 
         :param long_query: '10000000000' 64 bit integer value
-        :type long_query: long or none
+        :type long_query: long or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -319,21 +283,16 @@ class Queries(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_negative_ten_billion(
             self, long_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Get '-10000000000' 64 bit integer value
 
         :param long_query: '-10000000000' 64 bit integer value
-        :type long_query: long or none
+        :type long_query: long or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -361,21 +320,16 @@ class Queries(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_long_null(
             self, long_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Get 'null 64 bit integer value (no query param in uri)
 
         :param long_query: null 64 bit integer value
-        :type long_query: long or none
+        :type long_query: long or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -403,21 +357,16 @@ class Queries(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def float_scientific_positive(
             self, float_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Get '1.034E+20' numeric value
 
         :param float_query: '1.034E+20'numeric value
-        :type float_query: float or none
+        :type float_query: float or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -445,21 +394,16 @@ class Queries(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def float_scientific_negative(
             self, float_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Get '-1.034E-20' numeric value
 
         :param float_query: '-1.034E-20'numeric value
-        :type float_query: float or none
+        :type float_query: float or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -487,21 +431,16 @@ class Queries(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def float_null(
             self, float_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Get null numeric value (no query parameter)
 
         :param float_query: null numeric value
-        :type float_query: float or none
+        :type float_query: float or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -529,21 +468,16 @@ class Queries(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def double_decimal_positive(
             self, double_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Get '9999999.999' numeric value
 
         :param double_query: '9999999.999'numeric value
-        :type double_query: float or none
+        :type double_query: float or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -571,21 +505,16 @@ class Queries(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def double_decimal_negative(
             self, double_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Get '-9999999.999' numeric value
 
         :param double_query: '-9999999.999'numeric value
-        :type double_query: float or none
+        :type double_query: float or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -613,21 +542,16 @@ class Queries(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def double_null(
             self, double_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Get null numeric value (no query parameter)
 
         :param double_query: null numeric value
-        :type double_query: float or none
+        :type double_query: float or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -655,7 +579,6 @@ class Queries(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def string_unicode(
             self, string_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -663,14 +586,10 @@ class Queries(object):
 
         :param string_query: '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible
         values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
-        :type string_query: str or none
+        :type string_query: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -698,7 +617,6 @@ class Queries(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def string_url_encoded(
             self, string_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -707,14 +625,10 @@ class Queries(object):
         :param string_query: 'begin!*'();:@ &=+$,/?#[]end' url encoded string
         value. Possible values for this parameter include: 'begin!*'();:@
         &=+$,/?#[]end'
-        :type string_query: str or none
+        :type string_query: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -742,7 +656,6 @@ class Queries(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def string_empty(
             self, string_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -750,14 +663,10 @@ class Queries(object):
 
         :param string_query: '' string value. Possible values for this
         parameter include: ''
-        :type string_query: str or none
+        :type string_query: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -785,21 +694,16 @@ class Queries(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def string_null(
             self, string_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Get null (no query parameter in url)
 
         :param string_query: null string value
-        :type string_query: str or none
+        :type string_query: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -827,7 +731,6 @@ class Queries(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def enum_valid(
             self, enum_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -835,14 +738,10 @@ class Queries(object):
 
         :param enum_query: 'green color' enum value. Possible values for this
         parameter include: 'red color', 'green color', 'blue color'
-        :type enum_query: str or none
+        :type enum_query: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -870,7 +769,6 @@ class Queries(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def enum_null(
             self, enum_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -878,14 +776,10 @@ class Queries(object):
 
         :param enum_query: null string value. Possible values for this
         parameter include: 'red color', 'green color', 'blue color'
-        :type enum_query: str or none
+        :type enum_query: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -913,7 +807,6 @@ class Queries(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def byte_multi_byte(
             self, byte_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -921,14 +814,10 @@ class Queries(object):
 
         :param byte_query: '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte
         array
-        :type byte_query: bytearray or none
+        :type byte_query: bytearray or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -956,21 +845,16 @@ class Queries(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def byte_empty(
             self, byte_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Get '' as byte array
 
         :param byte_query: '' as byte array
-        :type byte_query: bytearray or none
+        :type byte_query: bytearray or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -998,21 +882,16 @@ class Queries(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def byte_null(
             self, byte_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Get null as byte array (no query parameters in uri)
 
         :param byte_query: null as byte array (no query parameters in uri)
-        :type byte_query: bytearray or none
+        :type byte_query: bytearray or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -1040,21 +919,16 @@ class Queries(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def date_valid(
             self, date_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Get '2012-01-01' as date
 
         :param date_query: '2012-01-01' as date
-        :type date_query: date or none
+        :type date_query: date or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -1082,21 +956,16 @@ class Queries(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def date_null(
             self, date_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Get null as date - this should result in no query parameters in uri
 
         :param date_query: null as date (no query parameters in uri)
-        :type date_query: date or none
+        :type date_query: date or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -1124,21 +993,16 @@ class Queries(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def date_time_valid(
             self, date_time_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Get '2012-01-01T01:01:01Z' as date-time
 
         :param date_time_query: '2012-01-01T01:01:01Z' as date-time
-        :type date_time_query: datetime or none
+        :type date_time_query: datetime or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -1166,21 +1030,16 @@ class Queries(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def date_time_null(
             self, date_time_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Get null as date-time, should result in no query parameters in uri
 
         :param date_time_query: null as date-time (no query parameters)
-        :type date_time_query: datetime or none
+        :type date_time_query: datetime or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -1208,7 +1067,6 @@ class Queries(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def array_string_csv_valid(
             self, array_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -1217,14 +1075,10 @@ class Queries(object):
 
         :param array_query: an array of string ['ArrayQuery1', 'begin!*'();:@
         &=+$,/?#[]end' , null, ''] using the csv-array format
-        :type array_query: list or none
+        :type array_query: list or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -1252,21 +1106,16 @@ class Queries(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def array_string_csv_null(
             self, array_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Get a null array of string using the csv-array format
 
         :param array_query: a null array of string using the csv-array format
-        :type array_query: list or none
+        :type array_query: list or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -1294,7 +1143,6 @@ class Queries(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def array_string_csv_empty(
             self, array_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -1302,14 +1150,10 @@ class Queries(object):
 
         :param array_query: an empty array [] of string using the csv-array
         format
-        :type array_query: list or none
+        :type array_query: list or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -1337,7 +1181,6 @@ class Queries(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def array_string_ssv_valid(
             self, array_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -1346,14 +1189,10 @@ class Queries(object):
 
         :param array_query: an array of string ['ArrayQuery1', 'begin!*'();:@
         &=+$,/?#[]end' , null, ''] using the ssv-array format
-        :type array_query: list or none
+        :type array_query: list or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -1381,7 +1220,6 @@ class Queries(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def array_string_tsv_valid(
             self, array_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -1390,14 +1228,10 @@ class Queries(object):
 
         :param array_query: an array of string ['ArrayQuery1', 'begin!*'();:@
         &=+$,/?#[]end' , null, ''] using the tsv-array format
-        :type array_query: list or none
+        :type array_query: list or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -1425,7 +1259,6 @@ class Queries(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def array_string_pipes_valid(
             self, array_query=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -1434,14 +1267,10 @@ class Queries(object):
 
         :param array_query: an array of string ['ArrayQuery1', 'begin!*'();:@
         &=+$,/?#[]end' , null, ''] using the pipes-array format
-        :type array_query: list or none
+        :type array_query: list or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL

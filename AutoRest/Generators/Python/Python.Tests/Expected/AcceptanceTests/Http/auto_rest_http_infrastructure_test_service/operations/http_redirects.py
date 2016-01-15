@@ -9,7 +9,6 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.service_client import async_request
 from msrest.pipeline import ClientRawResponse
 
 from .. import models
@@ -17,15 +16,14 @@ from .. import models
 
 class HttpRedirects(object):
 
-    def __init__(self, client, config, serializer, derserializer):
+    def __init__(self, client, config, serializer, deserializer):
 
         self._client = client
         self._serialize = serializer
-        self._deserialize = derserializer
+        self._deserialize = deserializer
 
         self.config = config
 
-    @async_request
     def head300(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -34,10 +32,6 @@ class HttpRedirects(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -66,7 +60,6 @@ class HttpRedirects(object):
             })
             return client_raw_response
 
-    @async_request
     def get300(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -75,10 +68,6 @@ class HttpRedirects(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: list or (list, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -101,6 +90,7 @@ class HttpRedirects(object):
             raise models.ErrorException(self._deserialize, response)
 
         deserialized = None
+        header_dict = {}
 
         if response.status_code == 300:
             deserialized = self._deserialize('[str]', response)
@@ -115,7 +105,6 @@ class HttpRedirects(object):
 
         return deserialized
 
-    @async_request
     def head301(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -124,10 +113,6 @@ class HttpRedirects(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -156,7 +141,6 @@ class HttpRedirects(object):
             })
             return client_raw_response
 
-    @async_request
     def get301(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -165,10 +149,6 @@ class HttpRedirects(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -197,7 +177,6 @@ class HttpRedirects(object):
             })
             return client_raw_response
 
-    @async_request
     def put301(
             self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -206,14 +185,10 @@ class HttpRedirects(object):
         to the caller for evaluation
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or none
+        :type boolean_value: bool or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -249,7 +224,6 @@ class HttpRedirects(object):
             })
             return client_raw_response
 
-    @async_request
     def head302(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -258,10 +232,6 @@ class HttpRedirects(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -290,7 +260,6 @@ class HttpRedirects(object):
             })
             return client_raw_response
 
-    @async_request
     def get302(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -299,10 +268,6 @@ class HttpRedirects(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -331,7 +296,6 @@ class HttpRedirects(object):
             })
             return client_raw_response
 
-    @async_request
     def patch302(
             self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -340,14 +304,10 @@ class HttpRedirects(object):
         to the caller for evaluation
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or none
+        :type boolean_value: bool or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -383,7 +343,6 @@ class HttpRedirects(object):
             })
             return client_raw_response
 
-    @async_request
     def post303(
             self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -392,14 +351,10 @@ class HttpRedirects(object):
         status code
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or none
+        :type boolean_value: bool or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -435,7 +390,6 @@ class HttpRedirects(object):
             })
             return client_raw_response
 
-    @async_request
     def head307(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -444,10 +398,6 @@ class HttpRedirects(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -476,7 +426,6 @@ class HttpRedirects(object):
             })
             return client_raw_response
 
-    @async_request
     def get307(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -485,10 +434,6 @@ class HttpRedirects(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -517,21 +462,16 @@ class HttpRedirects(object):
             })
             return client_raw_response
 
-    @async_request
     def put307(
             self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Put redirected with 307, resulting in a 200 after redirect
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or none
+        :type boolean_value: bool or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -567,21 +507,16 @@ class HttpRedirects(object):
             })
             return client_raw_response
 
-    @async_request
     def patch307(
             self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Patch redirected with 307, resulting in a 200 after redirect
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or none
+        :type boolean_value: bool or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -617,21 +552,16 @@ class HttpRedirects(object):
             })
             return client_raw_response
 
-    @async_request
     def post307(
             self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Post redirected with 307, resulting in a 200 after redirect
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or none
+        :type boolean_value: bool or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -667,21 +597,16 @@ class HttpRedirects(object):
             })
             return client_raw_response
 
-    @async_request
     def delete307(
             self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Delete redirected with 307, resulting in a 200 after redirect
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or none
+        :type boolean_value: bool or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL

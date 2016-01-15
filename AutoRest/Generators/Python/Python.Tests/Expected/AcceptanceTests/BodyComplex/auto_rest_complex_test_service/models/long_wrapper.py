@@ -22,7 +22,11 @@ class LongWrapper(Model):
     }
 
     def __init__(self, *args, **kwargs):
+        """LongWrapper
 
+        :param long field1
+        :param long field2
+        """
         self.field1 = None
         self.field2 = None
 

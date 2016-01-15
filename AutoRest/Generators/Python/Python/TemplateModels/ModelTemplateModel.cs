@@ -107,91 +107,39 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
-        private class PropertyWrapper
+        /// <summary>
+        /// Provides the property documentation string along with default value if any.
+        /// </summary>
+        /// <param name="property">Parameter to be documented</param>
+        /// <returns>Parameter documentation string along with default value if any 
+        /// in correct jsdoc notation</returns>
+        public static string GetPropertyDocumentationString(Property property)
         {
-            public Property Property { get; set; }
-            public List<string> RecursiveTypes { get; set; }
-
-            public PropertyWrapper() { RecursiveTypes = new List<string>(); }
-        }
-
-        public IEnumerable<Property> DocumentationPropertyList
-        {
-            get
+            if (property == null)
             {
-                var traversalStack = new Stack<PropertyWrapper>();
-                var visitedHash = new Dictionary<string, PropertyWrapper>();
-                var retValue = new Stack<Property>();
-
-                foreach (var property in Properties)
-                {
-                    var tempWrapper = new PropertyWrapper()
-                    {
-                        Property = property,
-                        RecursiveTypes = new List<string> () { Name }
-                    };
-                    traversalStack.Push(tempWrapper);
-                }
-
-                while (traversalStack.Count() != 0)
-                {
-                    var wrapper = traversalStack.Pop();
-                    if (wrapper.Property.Type is CompositeType)
-                    {
-                        if (!visitedHash.ContainsKey(wrapper.Property.Name))
-                        {
-                            if (wrapper.RecursiveTypes.Contains(wrapper.Property.Type.Name))
-                            {
-                                retValue.Push(wrapper.Property);
-                            }
-                            else
-                            {
-                                traversalStack.Push(wrapper);
-                                foreach (var subProperty in ((CompositeType)wrapper.Property.Type).Properties)
-                                {
-                                    var individualProperty = new Property();
-                                    individualProperty.Name = wrapper.Property.Name + "." + subProperty.Name;
-                                    individualProperty.Type = subProperty.Type;
-                                    individualProperty.Documentation = subProperty.Documentation;
-                                    //Adding the parent type to recursive list
-                                    var recursiveList = new List<string>() { wrapper.Property.Type.Name };
-                                    if (subProperty.Type is CompositeType)
-                                    {
-                                        //Adding parent's recursive types to the list as well
-                                        recursiveList.AddRange(wrapper.RecursiveTypes);
-                                    }
-                                    var subPropertyWrapper = new PropertyWrapper()
-                                    {
-                                        Property = individualProperty,
-                                        RecursiveTypes = recursiveList
-                                    };
-                                    
-                                    traversalStack.Push(subPropertyWrapper);
-                                }
-                            }
-
-                            visitedHash.Add(wrapper.Property.Name, wrapper);
-                        }
-                        else
-                        {
-                            retValue.Push(wrapper.Property);
-                        }
-                    }
-                    else
-                    {
-                        retValue.Push(wrapper.Property);
-                    }
-                }
-
-                return retValue.ToList();
+                throw new ArgumentNullException("property");
             }
-        }
 
-        public static string ConstructPropertyDocumentation(string propertyDocumentation)
-        {
-            var builder = new IndentedStringBuilder("    ");
-            return builder.AppendLine(propertyDocumentation)
-                          .AppendLine(" * ").ToString();
+            string docString = ":param ";
+
+            docString += ModelTemplateModel.GetPropertyDocumentationType(property);
+            docString += " " + property.Name;
+
+            string documentation = property.Documentation;
+            if (!string.IsNullOrWhiteSpace(property.DefaultValue))
+            {
+                if (documentation != null && !documentation.EndsWith(".", StringComparison.OrdinalIgnoreCase))
+                {
+                    documentation += ".";
+                }
+                documentation += " Default value: " + property.DefaultValue + " .";
+            }
+
+            if (!string.IsNullOrWhiteSpace(documentation))
+            {
+                docString += ": " + documentation;
+            }
+            return docString;
         }
 
         public IList<string> RequiredFieldsList
@@ -309,7 +257,7 @@ namespace Microsoft.Rest.Generator.Python
             return type.Name;
         }
 
-        public static string InitializePythonProperty(Property property)
+        public static string InitializeProperty(Property property)
         {
             if (property == null || property.Type == null)
             {
@@ -339,28 +287,6 @@ namespace Microsoft.Rest.Generator.Python
         }
 
         /// <summary>
-        /// Provides the property name in the correct jsdoc notation depending on 
-        /// whether it is required or optional
-        /// </summary>
-        /// <param name="property">Parameter to be documented</param>
-        /// <returns>Parameter name in the correct jsdoc notation</returns>
-        public static string GetPropertyDocumentationName(Property property)
-        {
-            if (property == null)
-            {
-                throw new ArgumentNullException("property");
-            }
-            if (property.IsRequired)
-            {
-                return property.Name;
-            }
-            else
-            {
-                return string.Format(CultureInfo.InvariantCulture, "[{0}]", property.Name);
-            }
-        }
-
-        /// <summary>
         /// Provides the type of the property
         /// </summary>
         /// <param name="property">Parameter to be documented</param>
@@ -370,23 +296,34 @@ namespace Microsoft.Rest.Generator.Python
         {
             if (property == null)
             {
-                throw new ArgumentNullException("property");
-            }
-            string typeName = PrimaryType.Object.Name;
-            if (property.Type is PrimaryType)
-            {
-                typeName = property.Type.Name;
-            }
-            else if (property.Type is SequenceType)
-            {
-                typeName = "array";
-            }
-            else if (property.Type is EnumType)
-            {
-                typeName = PrimaryType.String.Name;
+                return "property";
             }
 
-            return typeName.ToLower(CultureInfo.InvariantCulture);
-        }
+            IType type = property.Type;
+            string result = PrimaryType.Object.Name;
+
+            if (type is PrimaryType)
+            {
+                result = type.Name;
+            }
+            else if (type is SequenceType)
+            {
+                result = "list";
+            }
+            else if (type is EnumType)
+            {
+                result = PrimaryType.String.Name;
+            }
+            else if (type is DictionaryType)
+            {
+                result = "dict";
+            }
+            else if (type is CompositeType)
+            {
+                result = type.Name;
+            }
+
+            return result;
+       }
     }
 }

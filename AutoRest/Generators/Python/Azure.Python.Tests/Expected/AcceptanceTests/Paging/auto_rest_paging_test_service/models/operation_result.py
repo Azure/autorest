@@ -21,7 +21,13 @@ class OperationResult(Model):
     }
 
     def __init__(self, *args, **kwargs):
+        """OperationResult
 
+        :param str status: The status of the request. Possible values for this
+        property include: 'Succeeded', 'Failed', 'canceled', 'Accepted',
+        'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted',
+        'OK'.
+        """
         self.status = None
 
         super(OperationResult, self).__init__(*args, **kwargs)

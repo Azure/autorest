@@ -21,7 +21,10 @@ class StringWrapper(Model):
     }
 
     def __init__(self, *args, **kwargs):
+        """StringWrapper
 
+        :param str value
+        """
         self.value = None
 
         super(StringWrapper, self).__init__(*args, **kwargs)

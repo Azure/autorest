@@ -9,7 +9,6 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.service_client import async_request
 from msrest.pipeline import ClientRawResponse
 
 from .. import models
@@ -17,15 +16,14 @@ from .. import models
 
 class Inheritance(object):
 
-    def __init__(self, client, config, serializer, derserializer):
+    def __init__(self, client, config, serializer, deserializer):
 
         self._client = client
         self._serialize = serializer
-        self._deserialize = derserializer
+        self._deserialize = deserializer
 
         self.config = config
 
-    @async_request
     def get_valid(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -34,11 +32,7 @@ class Inheritance(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: siamese or (siamese, requests.response) or
+        :rtype: Siamese or (Siamese, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -71,7 +65,6 @@ class Inheritance(object):
 
         return deserialized
 
-    @async_request
     def put_valid(
             self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -81,14 +74,10 @@ class Inheritance(object):
         color=green, breed=persion, which hates 2 dogs, the 1st one named
         "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato"
         with id=-1 and food="french fries".
-        :type complex_body: siamese
+        :type complex_body: Siamese
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL

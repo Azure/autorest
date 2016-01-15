@@ -9,7 +9,6 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.service_client import async_request
 from msrest.pipeline import ClientRawResponse
 
 from .. import models
@@ -17,15 +16,14 @@ from .. import models
 
 class Dictionary(object):
 
-    def __init__(self, client, config, serializer, derserializer):
+    def __init__(self, client, config, serializer, deserializer):
 
         self._client = client
         self._serialize = serializer
-        self._deserialize = derserializer
+        self._deserialize = deserializer
 
         self.config = config
 
-    @async_request
     def get_valid(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -34,11 +32,7 @@ class Dictionary(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: dictionarywrapper or (dictionarywrapper, requests.response) or
+        :rtype: DictionaryWrapper or (DictionaryWrapper, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -71,21 +65,16 @@ class Dictionary(object):
 
         return deserialized
 
-    @async_request
     def put_valid(
             self, default_program=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Put complex types with dictionary property
 
         :param default_program:
-        :type default_program: dict or none
+        :type default_program: dict or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         complex_body = models.DictionaryWrapper()
@@ -119,7 +108,6 @@ class Dictionary(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_empty(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -128,11 +116,7 @@ class Dictionary(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: dictionarywrapper or (dictionarywrapper, requests.response) or
+        :rtype: DictionaryWrapper or (DictionaryWrapper, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -165,21 +149,16 @@ class Dictionary(object):
 
         return deserialized
 
-    @async_request
     def put_empty(
             self, default_program=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Put complex types with dictionary property which is empty
 
         :param default_program:
-        :type default_program: dict or none
+        :type default_program: dict or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         complex_body = models.DictionaryWrapper()
@@ -213,7 +192,6 @@ class Dictionary(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_null(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -222,11 +200,7 @@ class Dictionary(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: dictionarywrapper or (dictionarywrapper, requests.response) or
+        :rtype: DictionaryWrapper or (DictionaryWrapper, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -259,7 +233,6 @@ class Dictionary(object):
 
         return deserialized
 
-    @async_request
     def get_not_provided(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -269,11 +242,7 @@ class Dictionary(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: dictionarywrapper or (dictionarywrapper, requests.response) or
+        :rtype: DictionaryWrapper or (DictionaryWrapper, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL

@@ -9,7 +9,6 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.service_client import async_request
 from msrest.pipeline import ClientRawResponse
 
 from .. import models
@@ -17,15 +16,14 @@ from .. import models
 
 class DatetimeModel(object):
 
-    def __init__(self, client, config, serializer, derserializer):
+    def __init__(self, client, config, serializer, deserializer):
 
         self._client = client
         self._serialize = serializer
-        self._deserialize = derserializer
+        self._deserialize = deserializer
 
         self.config = config
 
-    @async_request
     def get_null(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -34,10 +32,6 @@ class DatetimeModel(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: datetime or (datetime, requests.response) or
         concurrent.futures.Future
         """
@@ -71,7 +65,6 @@ class DatetimeModel(object):
 
         return deserialized
 
-    @async_request
     def get_invalid(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -80,10 +73,6 @@ class DatetimeModel(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: datetime or (datetime, requests.response) or
         concurrent.futures.Future
         """
@@ -117,7 +106,6 @@ class DatetimeModel(object):
 
         return deserialized
 
-    @async_request
     def get_overflow(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -126,10 +114,6 @@ class DatetimeModel(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: datetime or (datetime, requests.response) or
         concurrent.futures.Future
         """
@@ -163,7 +147,6 @@ class DatetimeModel(object):
 
         return deserialized
 
-    @async_request
     def get_underflow(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -172,10 +155,6 @@ class DatetimeModel(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: datetime or (datetime, requests.response) or
         concurrent.futures.Future
         """
@@ -209,7 +188,6 @@ class DatetimeModel(object):
 
         return deserialized
 
-    @async_request
     def put_utc_max_date_time(
             self, datetime_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -220,10 +198,6 @@ class DatetimeModel(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -253,7 +227,6 @@ class DatetimeModel(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_utc_lowercase_max_date_time(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -262,10 +235,6 @@ class DatetimeModel(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: datetime or (datetime, requests.response) or
         concurrent.futures.Future
         """
@@ -299,7 +268,6 @@ class DatetimeModel(object):
 
         return deserialized
 
-    @async_request
     def get_utc_uppercase_max_date_time(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -308,10 +276,6 @@ class DatetimeModel(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: datetime or (datetime, requests.response) or
         concurrent.futures.Future
         """
@@ -345,7 +309,6 @@ class DatetimeModel(object):
 
         return deserialized
 
-    @async_request
     def put_local_positive_offset_max_date_time(
             self, datetime_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -357,10 +320,6 @@ class DatetimeModel(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -390,7 +349,6 @@ class DatetimeModel(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_local_positive_offset_lowercase_max_date_time(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -400,10 +358,6 @@ class DatetimeModel(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: datetime or (datetime, requests.response) or
         concurrent.futures.Future
         """
@@ -437,7 +391,6 @@ class DatetimeModel(object):
 
         return deserialized
 
-    @async_request
     def get_local_positive_offset_uppercase_max_date_time(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -447,10 +400,6 @@ class DatetimeModel(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: datetime or (datetime, requests.response) or
         concurrent.futures.Future
         """
@@ -484,7 +433,6 @@ class DatetimeModel(object):
 
         return deserialized
 
-    @async_request
     def put_local_negative_offset_max_date_time(
             self, datetime_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -496,10 +444,6 @@ class DatetimeModel(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -529,7 +473,6 @@ class DatetimeModel(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_local_negative_offset_uppercase_max_date_time(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -539,10 +482,6 @@ class DatetimeModel(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: datetime or (datetime, requests.response) or
         concurrent.futures.Future
         """
@@ -576,7 +515,6 @@ class DatetimeModel(object):
 
         return deserialized
 
-    @async_request
     def get_local_negative_offset_lowercase_max_date_time(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -586,10 +524,6 @@ class DatetimeModel(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: datetime or (datetime, requests.response) or
         concurrent.futures.Future
         """
@@ -623,7 +557,6 @@ class DatetimeModel(object):
 
         return deserialized
 
-    @async_request
     def put_utc_min_date_time(
             self, datetime_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -634,10 +567,6 @@ class DatetimeModel(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -667,7 +596,6 @@ class DatetimeModel(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_utc_min_date_time(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -676,10 +604,6 @@ class DatetimeModel(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: datetime or (datetime, requests.response) or
         concurrent.futures.Future
         """
@@ -713,7 +637,6 @@ class DatetimeModel(object):
 
         return deserialized
 
-    @async_request
     def put_local_positive_offset_min_date_time(
             self, datetime_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -724,10 +647,6 @@ class DatetimeModel(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -757,7 +676,6 @@ class DatetimeModel(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_local_positive_offset_min_date_time(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -766,10 +684,6 @@ class DatetimeModel(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: datetime or (datetime, requests.response) or
         concurrent.futures.Future
         """
@@ -803,7 +717,6 @@ class DatetimeModel(object):
 
         return deserialized
 
-    @async_request
     def put_local_negative_offset_min_date_time(
             self, datetime_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -814,10 +727,6 @@ class DatetimeModel(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -847,7 +756,6 @@ class DatetimeModel(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_local_negative_offset_min_date_time(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -856,10 +764,6 @@ class DatetimeModel(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: datetime or (datetime, requests.response) or
         concurrent.futures.Future
         """

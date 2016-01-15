@@ -33,6 +33,10 @@ else
 {
 @:class @(Model.Name)(Model):
 }
+@if (!String.IsNullOrWhiteSpace(Model.Documentation))
+{
+@:    """@WrapComment(string.Empty, Model.Documentation)"""
+}
 @{
   var requiredFieldList = Model.RequiredFieldsList;
   var requiredStr = String.Empty;
@@ -57,7 +61,7 @@ else
     {
       for (int i = 0; i < propertyList.Count; i++) 
       {
-        @:@(ModelTemplateModel.InitializePythonProperty(propertyList[i]))
+        @:@(ModelTemplateModel.InitializeProperty(propertyList[i]))
       }
     }
     @:}
@@ -74,10 +78,16 @@ else
 }
 @EmptyLine
     def __init__(self, *args, **kwargs):
+        """@(Model.Name)
 @EmptyLine
+@for (int i = 0; i < propertyList.Count; i++)
+{
+@:        @WrapComment(string.Empty, ModelTemplateModel.GetPropertyDocumentationString(propertyList[i]))
+}
+        """
 @if (propertyList.Count > 0)
 {
-  for (int i = 0; i < propertyList.Count; i++) 
+  for (int i = 0; i < propertyList.Count; i++)
   {
         @:@(ModelTemplateModel.InitializeProperty("self", propertyList[i]))
   }

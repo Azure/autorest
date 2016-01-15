@@ -23,7 +23,12 @@ class StringWrapper(Model):
     }
 
     def __init__(self, *args, **kwargs):
+        """StringWrapper
 
+        :param str field
+        :param str empty
+        :param str null
+        """
         self.field = None
         self.empty = None
         self.null = None

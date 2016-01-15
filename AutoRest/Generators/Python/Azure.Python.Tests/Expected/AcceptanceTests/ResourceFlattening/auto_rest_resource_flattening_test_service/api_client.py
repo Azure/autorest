@@ -12,7 +12,6 @@
 from msrest.service_client import ServiceClient
 from msrest import Serializer, Deserializer
 from msrestazure import AzureConfiguration
-from msrest.service_client import async_request
 from msrest.pipeline import ClientRawResponse
 import uuid
 from . import models
@@ -49,21 +48,16 @@ class AutoRestResourceFlatteningTestService(object):
 
         self.config = config
 
-    @async_request
     def put_array(
             self, resource_array=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Put External Resource as an Array
 
         :param resource_array: External Resource as an Array to put
-        :type resource_array: list or none
+        :type resource_array: list or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -99,7 +93,6 @@ class AutoRestResourceFlatteningTestService(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_array(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -108,10 +101,6 @@ class AutoRestResourceFlatteningTestService(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: list or (list, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -147,21 +136,16 @@ class AutoRestResourceFlatteningTestService(object):
 
         return deserialized
 
-    @async_request
     def put_dictionary(
             self, resource_dictionary=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Put External Resource as a Dictionary
 
         :param resource_dictionary: External Resource as a Dictionary to put
-        :type resource_dictionary: dict or none
+        :type resource_dictionary: dict or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -197,7 +181,6 @@ class AutoRestResourceFlatteningTestService(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_dictionary(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -206,10 +189,6 @@ class AutoRestResourceFlatteningTestService(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: dict or (dict, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -245,7 +224,6 @@ class AutoRestResourceFlatteningTestService(object):
 
         return deserialized
 
-    @async_request
     def put_resource_collection(
             self, resource_complex_object=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -253,14 +231,10 @@ class AutoRestResourceFlatteningTestService(object):
 
         :param resource_complex_object: External Resource as a
         ResourceCollection to put
-        :type resource_complex_object: resourcecollection or none
+        :type resource_complex_object: ResourceCollection or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -296,7 +270,6 @@ class AutoRestResourceFlatteningTestService(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_resource_collection(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -305,11 +278,7 @@ class AutoRestResourceFlatteningTestService(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: resourcecollection or (resourcecollection, requests.response)
+        :rtype: ResourceCollection or (ResourceCollection, requests.response)
         or concurrent.futures.Future
         """
         # Construct URL

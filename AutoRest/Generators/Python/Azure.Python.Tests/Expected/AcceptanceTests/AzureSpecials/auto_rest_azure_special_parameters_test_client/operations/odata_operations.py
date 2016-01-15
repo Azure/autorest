@@ -9,7 +9,6 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.service_client import async_request
 from msrest.pipeline import ClientRawResponse
 import uuid
 
@@ -18,15 +17,14 @@ from .. import models
 
 class OdataOperations(object):
 
-    def __init__(self, client, config, serializer, derserializer):
+    def __init__(self, client, config, serializer, deserializer):
 
         self._client = client
         self._serialize = serializer
-        self._deserialize = derserializer
+        self._deserialize = deserializer
 
         self.config = config
 
-    @async_request
     def get_with_filter(
             self, filter=None, top=None, orderby=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -35,18 +33,14 @@ class OdataOperations(object):
 
         :param filter: The filter parameter with value '$filter=id gt 5 and
         name eq 'foo''.
-        :type filter: odatafilter or none
+        :type filter: OdataFilter or None
         :param top: The top parameter with value 10.
-        :type top: int or none
+        :type top: int or None
         :param orderby: The orderby parameter with value id.
-        :type orderby: str or none
+        :type orderby: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL

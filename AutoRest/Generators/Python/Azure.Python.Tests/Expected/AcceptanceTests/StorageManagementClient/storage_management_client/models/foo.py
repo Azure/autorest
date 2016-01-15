@@ -13,6 +13,8 @@ from msrest.serialization import Model
 
 
 class Foo(Model):
+    """The URIs that are used to perform a retrieval of a public blob, queue
+    """or table object."""
 
     _required = []
 
@@ -21,7 +23,10 @@ class Foo(Model):
     }
 
     def __init__(self, *args, **kwargs):
+        """Foo
 
+        :param Bar bar_point: Bar point
+        """
         self.bar_point = None
 
         super(Foo, self).__init__(*args, **kwargs)
