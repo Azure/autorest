@@ -9,7 +9,6 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.service_client import async_request
 from msrest.pipeline import ClientRawResponse
 import uuid
 
@@ -18,15 +17,14 @@ from .. import models
 
 class SkipUrlEncodingOperations(object):
 
-    def __init__(self, client, config, serializer, derserializer):
+    def __init__(self, client, config, serializer, deserializer):
 
         self._client = client
         self._serialize = serializer
-        self._deserialize = derserializer
+        self._deserialize = deserializer
 
         self.config = config
 
-    @async_request
     def get_method_path_valid(
             self, unencoded_path_param, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -38,10 +36,6 @@ class SkipUrlEncodingOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -74,7 +68,6 @@ class SkipUrlEncodingOperations(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_path_path_valid(
             self, unencoded_path_param, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -86,10 +79,6 @@ class SkipUrlEncodingOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -122,7 +111,6 @@ class SkipUrlEncodingOperations(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_swagger_path_valid(
             self, unencoded_path_param, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -135,10 +123,6 @@ class SkipUrlEncodingOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -171,7 +155,6 @@ class SkipUrlEncodingOperations(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_method_query_valid(
             self, q1, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -184,10 +167,6 @@ class SkipUrlEncodingOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -217,21 +196,16 @@ class SkipUrlEncodingOperations(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_method_query_null(
             self, q1=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Get method with unencoded query parameter with value null
 
         :param q1: Unencoded query parameter with value null
-        :type q1: str or none
+        :type q1: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -262,7 +236,6 @@ class SkipUrlEncodingOperations(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_path_query_valid(
             self, q1, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -275,10 +248,6 @@ class SkipUrlEncodingOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -308,7 +277,6 @@ class SkipUrlEncodingOperations(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_swagger_query_valid(
             self, q1=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -318,14 +286,10 @@ class SkipUrlEncodingOperations(object):
         :param q1: An unencoded query parameter with value
         'value1&q2=value2&q3=value3'. Possible values for this parameter
         include: 'value1&q2=value2&q3=value3'
-        :type q1: str or none
+        :type q1: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL

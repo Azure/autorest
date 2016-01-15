@@ -9,7 +9,6 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.service_client import async_request
 from msrest.pipeline import ClientRawResponse
 from msrest.exceptions import HttpOperationError
 
@@ -18,15 +17,14 @@ from .. import models
 
 class MultipleResponses(object):
 
-    def __init__(self, client, config, serializer, derserializer):
+    def __init__(self, client, config, serializer, deserializer):
 
         self._client = client
         self._serialize = serializer
-        self._deserialize = derserializer
+        self._deserialize = deserializer
 
         self.config = config
 
-    @async_request
     def get200_model204_no_model_default_error200_valid(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -35,11 +33,7 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: a or (a, requests.response) or concurrent.futures.Future
+        :rtype: A or (A, requests.response) or concurrent.futures.Future
         """
         # Construct URL
         url = '/http/payloads/200/A/204/none/default/Error/response/200/valid'
@@ -71,7 +65,6 @@ class MultipleResponses(object):
 
         return deserialized
 
-    @async_request
     def get200_model204_no_model_default_error204_valid(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -80,11 +73,7 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: a or (a, requests.response) or concurrent.futures.Future
+        :rtype: A or (A, requests.response) or concurrent.futures.Future
         """
         # Construct URL
         url = '/http/payloads/200/A/204/none/default/Error/response/204/none'
@@ -116,7 +105,6 @@ class MultipleResponses(object):
 
         return deserialized
 
-    @async_request
     def get200_model204_no_model_default_error201_invalid(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -125,11 +113,7 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: a or (a, requests.response) or concurrent.futures.Future
+        :rtype: A or (A, requests.response) or concurrent.futures.Future
         """
         # Construct URL
         url = '/http/payloads/200/A/204/none/default/Error/response/201/valid'
@@ -161,7 +145,6 @@ class MultipleResponses(object):
 
         return deserialized
 
-    @async_request
     def get200_model204_no_model_default_error202_none(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -170,11 +153,7 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: a or (a, requests.response) or concurrent.futures.Future
+        :rtype: A or (A, requests.response) or concurrent.futures.Future
         """
         # Construct URL
         url = '/http/payloads/200/A/204/none/default/Error/response/202/none'
@@ -206,7 +185,6 @@ class MultipleResponses(object):
 
         return deserialized
 
-    @async_request
     def get200_model204_no_model_default_error400_valid(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -216,11 +194,7 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: a or (a, requests.response) or concurrent.futures.Future
+        :rtype: A or (A, requests.response) or concurrent.futures.Future
         """
         # Construct URL
         url = '/http/payloads/200/A/204/none/default/Error/response/400/valid'
@@ -252,7 +226,6 @@ class MultipleResponses(object):
 
         return deserialized
 
-    @async_request
     def get200_model201_model_default_error200_valid(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -261,11 +234,7 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: a or (a, requests.response) or concurrent.futures.Future
+        :rtype: A or (A, requests.response) or concurrent.futures.Future
         """
         # Construct URL
         url = '/http/payloads/200/A/201/B/default/Error/response/200/valid'
@@ -299,7 +268,6 @@ class MultipleResponses(object):
 
         return deserialized
 
-    @async_request
     def get200_model201_model_default_error201_valid(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -309,11 +277,7 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: a or (a, requests.response) or concurrent.futures.Future
+        :rtype: A or (A, requests.response) or concurrent.futures.Future
         """
         # Construct URL
         url = '/http/payloads/200/A/201/B/default/Error/response/201/valid'
@@ -347,7 +311,6 @@ class MultipleResponses(object):
 
         return deserialized
 
-    @async_request
     def get200_model201_model_default_error400_valid(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -357,11 +320,7 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: a or (a, requests.response) or concurrent.futures.Future
+        :rtype: A or (A, requests.response) or concurrent.futures.Future
         """
         # Construct URL
         url = '/http/payloads/200/A/201/B/default/Error/response/400/valid'
@@ -395,7 +354,6 @@ class MultipleResponses(object):
 
         return deserialized
 
-    @async_request
     def get200_model_a201_model_c404_model_ddefault_error200_valid(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -404,10 +362,6 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: object or (object, requests.response) or
         concurrent.futures.Future
         """
@@ -445,7 +399,6 @@ class MultipleResponses(object):
 
         return deserialized
 
-    @async_request
     def get200_model_a201_model_c404_model_ddefault_error201_valid(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -454,10 +407,6 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: object or (object, requests.response) or
         concurrent.futures.Future
         """
@@ -495,7 +444,6 @@ class MultipleResponses(object):
 
         return deserialized
 
-    @async_request
     def get200_model_a201_model_c404_model_ddefault_error404_valid(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -504,10 +452,6 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: object or (object, requests.response) or
         concurrent.futures.Future
         """
@@ -545,7 +489,6 @@ class MultipleResponses(object):
 
         return deserialized
 
-    @async_request
     def get200_model_a201_model_c404_model_ddefault_error400_valid(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -555,10 +498,6 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: object or (object, requests.response) or
         concurrent.futures.Future
         """
@@ -596,7 +535,6 @@ class MultipleResponses(object):
 
         return deserialized
 
-    @async_request
     def get202_none204_none_default_error202_none(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -605,10 +543,6 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -634,7 +568,6 @@ class MultipleResponses(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get202_none204_none_default_error204_none(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -643,10 +576,6 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -672,7 +601,6 @@ class MultipleResponses(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get202_none204_none_default_error400_valid(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -682,10 +610,6 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -711,7 +635,6 @@ class MultipleResponses(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get202_none204_none_default_none202_invalid(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -720,10 +643,6 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -749,7 +668,6 @@ class MultipleResponses(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get202_none204_none_default_none204_none(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -758,10 +676,6 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -787,7 +701,6 @@ class MultipleResponses(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get202_none204_none_default_none400_none(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -796,10 +709,6 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -825,7 +734,6 @@ class MultipleResponses(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get202_none204_none_default_none400_invalid(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -834,10 +742,6 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -863,7 +767,6 @@ class MultipleResponses(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_default_model_a200_valid(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -872,11 +775,7 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: a or (a, requests.response) or concurrent.futures.Future
+        :rtype: A or (A, requests.response) or concurrent.futures.Future
         """
         # Construct URL
         url = '/http/payloads/default/A/response/200/valid'
@@ -901,7 +800,6 @@ class MultipleResponses(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_default_model_a200_none(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -910,11 +808,7 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: a or (a, requests.response) or concurrent.futures.Future
+        :rtype: A or (A, requests.response) or concurrent.futures.Future
         """
         # Construct URL
         url = '/http/payloads/default/A/response/200/none'
@@ -939,7 +833,6 @@ class MultipleResponses(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_default_model_a400_valid(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -948,11 +841,7 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: a or (a, requests.response) or concurrent.futures.Future
+        :rtype: A or (A, requests.response) or concurrent.futures.Future
         """
         # Construct URL
         url = '/http/payloads/default/A/response/400/valid'
@@ -977,7 +866,6 @@ class MultipleResponses(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_default_model_a400_none(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -986,11 +874,7 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: a or (a, requests.response) or concurrent.futures.Future
+        :rtype: A or (A, requests.response) or concurrent.futures.Future
         """
         # Construct URL
         url = '/http/payloads/default/A/response/400/none'
@@ -1015,7 +899,6 @@ class MultipleResponses(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_default_none200_invalid(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -1024,10 +907,6 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -1053,7 +932,6 @@ class MultipleResponses(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_default_none200_none(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -1062,10 +940,6 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -1091,7 +965,6 @@ class MultipleResponses(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_default_none400_invalid(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -1100,10 +973,6 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -1129,7 +998,6 @@ class MultipleResponses(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_default_none400_none(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -1138,10 +1006,6 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -1167,7 +1031,6 @@ class MultipleResponses(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get200_model_a200_none(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -1177,11 +1040,7 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: a or (a, requests.response) or concurrent.futures.Future
+        :rtype: A or (A, requests.response) or concurrent.futures.Future
         """
         # Construct URL
         url = '/http/payloads/200/A/response/200/none'
@@ -1213,7 +1072,6 @@ class MultipleResponses(object):
 
         return deserialized
 
-    @async_request
     def get200_model_a200_valid(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -1222,11 +1080,7 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: a or (a, requests.response) or concurrent.futures.Future
+        :rtype: A or (A, requests.response) or concurrent.futures.Future
         """
         # Construct URL
         url = '/http/payloads/200/A/response/200/valid'
@@ -1258,7 +1112,6 @@ class MultipleResponses(object):
 
         return deserialized
 
-    @async_request
     def get200_model_a200_invalid(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -1267,11 +1120,7 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: a or (a, requests.response) or concurrent.futures.Future
+        :rtype: A or (A, requests.response) or concurrent.futures.Future
         """
         # Construct URL
         url = '/http/payloads/200/A/response/200/invalid'
@@ -1303,7 +1152,6 @@ class MultipleResponses(object):
 
         return deserialized
 
-    @async_request
     def get200_model_a400_none(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -1313,11 +1161,7 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: a or (a, requests.response) or concurrent.futures.Future
+        :rtype: A or (A, requests.response) or concurrent.futures.Future
         """
         # Construct URL
         url = '/http/payloads/200/A/response/400/none'
@@ -1349,7 +1193,6 @@ class MultipleResponses(object):
 
         return deserialized
 
-    @async_request
     def get200_model_a400_valid(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -1358,11 +1201,7 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: a or (a, requests.response) or concurrent.futures.Future
+        :rtype: A or (A, requests.response) or concurrent.futures.Future
         """
         # Construct URL
         url = '/http/payloads/200/A/response/400/valid'
@@ -1394,7 +1233,6 @@ class MultipleResponses(object):
 
         return deserialized
 
-    @async_request
     def get200_model_a400_invalid(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -1403,11 +1241,7 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: a or (a, requests.response) or concurrent.futures.Future
+        :rtype: A or (A, requests.response) or concurrent.futures.Future
         """
         # Construct URL
         url = '/http/payloads/200/A/response/400/invalid'
@@ -1439,7 +1273,6 @@ class MultipleResponses(object):
 
         return deserialized
 
-    @async_request
     def get200_model_a202_valid(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -1448,11 +1281,7 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: a or (a, requests.response) or concurrent.futures.Future
+        :rtype: A or (A, requests.response) or concurrent.futures.Future
         """
         # Construct URL
         url = '/http/payloads/200/A/response/202/valid'

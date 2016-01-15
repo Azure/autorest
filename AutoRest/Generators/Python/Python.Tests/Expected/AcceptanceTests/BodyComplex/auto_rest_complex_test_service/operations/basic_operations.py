@@ -9,7 +9,6 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.service_client import async_request
 from msrest.pipeline import ClientRawResponse
 
 from .. import models
@@ -17,15 +16,14 @@ from .. import models
 
 class BasicOperations(object):
 
-    def __init__(self, client, config, serializer, derserializer):
+    def __init__(self, client, config, serializer, deserializer):
 
         self._client = client
         self._serialize = serializer
-        self._deserialize = derserializer
+        self._deserialize = deserializer
 
         self.config = config
 
-    @async_request
     def get_valid(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -34,11 +32,7 @@ class BasicOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: basic or (basic, requests.response) or
+        :rtype: Basic or (Basic, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -71,21 +65,16 @@ class BasicOperations(object):
 
         return deserialized
 
-    @async_request
     def put_valid(
             self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Please put {id: 2, name: 'abc', color: 'Magenta'}
 
         :param complex_body: Please put {id: 2, name: 'abc', color: 'Magenta'}
-        :type complex_body: basic
+        :type complex_body: Basic
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -115,7 +104,6 @@ class BasicOperations(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_invalid(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -124,11 +112,7 @@ class BasicOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: basic or (basic, requests.response) or
+        :rtype: Basic or (Basic, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -161,7 +145,6 @@ class BasicOperations(object):
 
         return deserialized
 
-    @async_request
     def get_empty(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -170,11 +153,7 @@ class BasicOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: basic or (basic, requests.response) or
+        :rtype: Basic or (Basic, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -207,7 +186,6 @@ class BasicOperations(object):
 
         return deserialized
 
-    @async_request
     def get_null(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -216,11 +194,7 @@ class BasicOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: basic or (basic, requests.response) or
+        :rtype: Basic or (Basic, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -253,7 +227,6 @@ class BasicOperations(object):
 
         return deserialized
 
-    @async_request
     def get_not_provided(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -263,11 +236,7 @@ class BasicOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: basic or (basic, requests.response) or
+        :rtype: Basic or (Basic, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL

@@ -9,7 +9,6 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.service_client import async_request
 from msrest.pipeline import ClientRawResponse
 
 from .. import models
@@ -17,15 +16,14 @@ from .. import models
 
 class Number(object):
 
-    def __init__(self, client, config, serializer, derserializer):
+    def __init__(self, client, config, serializer, deserializer):
 
         self._client = client
         self._serialize = serializer
-        self._deserialize = derserializer
+        self._deserialize = deserializer
 
         self.config = config
 
-    @async_request
     def get_null(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -34,10 +32,6 @@ class Number(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: float or (float, requests.response) or
         concurrent.futures.Future
         """
@@ -71,7 +65,6 @@ class Number(object):
 
         return deserialized
 
-    @async_request
     def get_invalid_float(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -80,10 +73,6 @@ class Number(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: float or (float, requests.response) or
         concurrent.futures.Future
         """
@@ -117,7 +106,6 @@ class Number(object):
 
         return deserialized
 
-    @async_request
     def get_invalid_double(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -126,10 +114,6 @@ class Number(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: float or (float, requests.response) or
         concurrent.futures.Future
         """
@@ -163,7 +147,6 @@ class Number(object):
 
         return deserialized
 
-    @async_request
     def get_invalid_decimal(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -172,10 +155,6 @@ class Number(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: decimal or (decimal, requests.response) or
         concurrent.futures.Future
         """
@@ -209,7 +188,6 @@ class Number(object):
 
         return deserialized
 
-    @async_request
     def put_big_float(
             self, number_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -220,10 +198,6 @@ class Number(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -253,7 +227,6 @@ class Number(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_big_float(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -262,10 +235,6 @@ class Number(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: float or (float, requests.response) or
         concurrent.futures.Future
         """
@@ -299,7 +268,6 @@ class Number(object):
 
         return deserialized
 
-    @async_request
     def put_big_double(
             self, number_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -310,10 +278,6 @@ class Number(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -343,7 +307,6 @@ class Number(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_big_double(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -352,10 +315,6 @@ class Number(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: float or (float, requests.response) or
         concurrent.futures.Future
         """
@@ -389,7 +348,6 @@ class Number(object):
 
         return deserialized
 
-    @async_request
     def put_big_double_positive_decimal(
             self, number_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -400,10 +358,6 @@ class Number(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -433,7 +387,6 @@ class Number(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_big_double_positive_decimal(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -442,10 +395,6 @@ class Number(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: float or (float, requests.response) or
         concurrent.futures.Future
         """
@@ -479,7 +428,6 @@ class Number(object):
 
         return deserialized
 
-    @async_request
     def put_big_double_negative_decimal(
             self, number_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -490,10 +438,6 @@ class Number(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -523,7 +467,6 @@ class Number(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_big_double_negative_decimal(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -532,10 +475,6 @@ class Number(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: float or (float, requests.response) or
         concurrent.futures.Future
         """
@@ -569,7 +508,6 @@ class Number(object):
 
         return deserialized
 
-    @async_request
     def put_big_decimal(
             self, number_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -580,10 +518,6 @@ class Number(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -613,7 +547,6 @@ class Number(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_big_decimal(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -622,10 +555,6 @@ class Number(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: decimal or (decimal, requests.response) or
         concurrent.futures.Future
         """
@@ -659,7 +588,6 @@ class Number(object):
 
         return deserialized
 
-    @async_request
     def put_big_decimal_positive_decimal(
             self, number_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -670,10 +598,6 @@ class Number(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -703,7 +627,6 @@ class Number(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_big_decimal_positive_decimal(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -712,10 +635,6 @@ class Number(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: decimal or (decimal, requests.response) or
         concurrent.futures.Future
         """
@@ -749,7 +668,6 @@ class Number(object):
 
         return deserialized
 
-    @async_request
     def put_big_decimal_negative_decimal(
             self, number_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -760,10 +678,6 @@ class Number(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -793,7 +707,6 @@ class Number(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_big_decimal_negative_decimal(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -802,10 +715,6 @@ class Number(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: decimal or (decimal, requests.response) or
         concurrent.futures.Future
         """
@@ -839,7 +748,6 @@ class Number(object):
 
         return deserialized
 
-    @async_request
     def put_small_float(
             self, number_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -850,10 +758,6 @@ class Number(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -883,7 +787,6 @@ class Number(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_small_float(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -892,10 +795,6 @@ class Number(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: float or (float, requests.response) or
         concurrent.futures.Future
         """
@@ -929,7 +828,6 @@ class Number(object):
 
         return deserialized
 
-    @async_request
     def put_small_double(
             self, number_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -940,10 +838,6 @@ class Number(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -973,7 +867,6 @@ class Number(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_small_double(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -982,10 +875,6 @@ class Number(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: float or (float, requests.response) or
         concurrent.futures.Future
         """
@@ -1019,7 +908,6 @@ class Number(object):
 
         return deserialized
 
-    @async_request
     def put_small_decimal(
             self, number_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -1030,10 +918,6 @@ class Number(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -1063,7 +947,6 @@ class Number(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_small_decimal(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -1072,10 +955,6 @@ class Number(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: decimal or (decimal, requests.response) or
         concurrent.futures.Future
         """

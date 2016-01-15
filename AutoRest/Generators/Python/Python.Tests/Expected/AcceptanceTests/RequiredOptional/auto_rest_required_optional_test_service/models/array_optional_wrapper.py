@@ -21,7 +21,10 @@ class ArrayOptionalWrapper(Model):
     }
 
     def __init__(self, *args, **kwargs):
+        """ArrayOptionalWrapper
 
+        :param list value
+        """
         self.value = None
 
         super(ArrayOptionalWrapper, self).__init__(*args, **kwargs)

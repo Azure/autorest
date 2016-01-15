@@ -28,7 +28,13 @@ class Fish(Model):
     }
 
     def __init__(self, *args, **kwargs):
+        """Fish
 
+        :param str species
+        :param float length
+        :param list siblings
+        :param str fishtype: Polymorhpic Discriminator
+        """
         self.species = None
         self.length = None
         self.siblings = None

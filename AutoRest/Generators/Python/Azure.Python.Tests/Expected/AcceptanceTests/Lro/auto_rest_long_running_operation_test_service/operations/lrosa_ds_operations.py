@@ -9,7 +9,6 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.service_client import async_request
 from msrest.pipeline import ClientRawResponse
 from msrestazure.azure_exceptions import CloudError
 from msrestazure.azure_operation import AzureOperationPoller
@@ -20,11 +19,11 @@ from .. import models
 
 class LROSADsOperations(object):
 
-    def __init__(self, client, config, serializer, derserializer):
+    def __init__(self, client, config, serializer, deserializer):
 
         self._client = client
         self._serialize = serializer
-        self._deserialize = derserializer
+        self._deserialize = deserializer
 
         self.config = config
 
@@ -34,7 +33,7 @@ class LROSADsOperations(object):
         Long running put request, service returns a 400 to the initial request
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -42,7 +41,7 @@ class LROSADsOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: product or (product, requests.response) or
+        :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -112,7 +111,7 @@ class LROSADsOperations(object):
         'ProvisioningState' = 'Creating' and 201 response code
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -120,7 +119,7 @@ class LROSADsOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: product or (product, requests.response) or
+        :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -191,7 +190,7 @@ class LROSADsOperations(object):
         Azure-AsyncOperation header for operation status
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -199,7 +198,7 @@ class LROSADsOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: product or (product, requests.response) or
+        :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -243,6 +242,7 @@ class LROSADsOperations(object):
                 raise CloudError(response)
 
             deserialized = None
+            header_dict = {}
 
             if response.status_code == 200:
                 deserialized = self._deserialize('Product', response)
@@ -462,7 +462,7 @@ class LROSADsOperations(object):
         Long running post request, service returns a 400 with no error body
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -533,7 +533,7 @@ class LROSADsOperations(object):
         Long running post request, service returns a 202 with a location header
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -606,7 +606,7 @@ class LROSADsOperations(object):
         header for operation status
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -679,7 +679,7 @@ class LROSADsOperations(object):
         with no payload
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -687,7 +687,7 @@ class LROSADsOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: product or (product, requests.response) or
+        :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -759,7 +759,7 @@ class LROSADsOperations(object):
         operation status
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -767,7 +767,7 @@ class LROSADsOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: product or (product, requests.response) or
+        :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -811,6 +811,7 @@ class LROSADsOperations(object):
                 raise CloudError(response)
 
             deserialized = None
+            header_dict = {}
 
             if response.status_code == 200:
                 deserialized = self._deserialize('Product', response)
@@ -843,7 +844,7 @@ class LROSADsOperations(object):
         operation status
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -851,7 +852,7 @@ class LROSADsOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: product or (product, requests.response) or
+        :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -895,6 +896,7 @@ class LROSADsOperations(object):
                 raise CloudError(response)
 
             deserialized = None
+            header_dict = {}
 
             if response.status_code == 200:
                 deserialized = self._deserialize('Product', response)
@@ -1049,7 +1051,7 @@ class LROSADsOperations(object):
         request, without a location header.
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -1123,7 +1125,7 @@ class LROSADsOperations(object):
         operation status
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -1196,7 +1198,7 @@ class LROSADsOperations(object):
         request, with an entity that is not a valid json
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -1204,7 +1206,7 @@ class LROSADsOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: product or (product, requests.response) or
+        :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -1273,7 +1275,7 @@ class LROSADsOperations(object):
         The endpoint indicated in the Azure-AsyncOperation header is invalid.
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -1281,7 +1283,7 @@ class LROSADsOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: product or (product, requests.response) or
+        :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -1325,6 +1327,7 @@ class LROSADsOperations(object):
                 raise CloudError(response)
 
             deserialized = None
+            header_dict = {}
 
             if response.status_code == 200:
                 deserialized = self._deserialize('Product', response)
@@ -1357,7 +1360,7 @@ class LROSADsOperations(object):
         operation status
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -1365,7 +1368,7 @@ class LROSADsOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: product or (product, requests.response) or
+        :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -1409,6 +1412,7 @@ class LROSADsOperations(object):
                 raise CloudError(response)
 
             deserialized = None
+            header_dict = {}
 
             if response.status_code == 200:
                 deserialized = self._deserialize('Product', response)
@@ -1633,7 +1637,7 @@ class LROSADsOperations(object):
         request, with invalid 'Location' and 'Retry-After' headers.
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -1706,7 +1710,7 @@ class LROSADsOperations(object):
         The endpoint indicated in the Azure-AsyncOperation header is invalid.
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -1781,7 +1785,7 @@ class LROSADsOperations(object):
         operation status
 
         :param product: Product to put
-        :type product: product or none
+        :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response

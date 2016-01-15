@@ -22,7 +22,11 @@ class Salmon(Fish):
     }
 
     def __init__(self, *args, **kwargs):
+        """Salmon
 
+        :param str location
+        :param bool iswild
+        """
         self.location = None
         self.iswild = None
 

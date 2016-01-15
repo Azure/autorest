@@ -69,6 +69,18 @@ namespace Microsoft.Rest.Generator.Azure.Python
             }
         }
 
+        public override bool NeedsCallback
+        {
+            get
+            {
+                if (IsLongRunningOperation)
+                {
+                    return true;
+                }
+                return base.NeedsCallback;
+            }
+        }
+
         /// <summary>
         /// Gets the expression for default header setting. 
         /// </summary>

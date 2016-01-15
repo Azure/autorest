@@ -21,7 +21,10 @@ class IntOptionalWrapper(Model):
     }
 
     def __init__(self, *args, **kwargs):
+        """IntOptionalWrapper
 
+        :param int value
+        """
         self.value = None
 
         super(IntOptionalWrapper, self).__init__(*args, **kwargs)

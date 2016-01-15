@@ -9,7 +9,6 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.service_client import async_request
 from msrest.pipeline import ClientRawResponse
 
 from .. import models
@@ -17,15 +16,14 @@ from .. import models
 
 class IntModel(object):
 
-    def __init__(self, client, config, serializer, derserializer):
+    def __init__(self, client, config, serializer, deserializer):
 
         self._client = client
         self._serialize = serializer
-        self._deserialize = derserializer
+        self._deserialize = deserializer
 
         self.config = config
 
-    @async_request
     def get_null(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -34,10 +32,6 @@ class IntModel(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: int or (int, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -70,7 +64,6 @@ class IntModel(object):
 
         return deserialized
 
-    @async_request
     def get_invalid(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -79,10 +72,6 @@ class IntModel(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: int or (int, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -115,7 +104,6 @@ class IntModel(object):
 
         return deserialized
 
-    @async_request
     def get_overflow_int32(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -124,10 +112,6 @@ class IntModel(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: int or (int, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -160,7 +144,6 @@ class IntModel(object):
 
         return deserialized
 
-    @async_request
     def get_underflow_int32(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -169,10 +152,6 @@ class IntModel(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: int or (int, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -205,7 +184,6 @@ class IntModel(object):
 
         return deserialized
 
-    @async_request
     def get_overflow_int64(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -214,10 +192,6 @@ class IntModel(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: long or (long, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -250,7 +224,6 @@ class IntModel(object):
 
         return deserialized
 
-    @async_request
     def get_underflow_int64(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -259,10 +232,6 @@ class IntModel(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: long or (long, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -295,7 +264,6 @@ class IntModel(object):
 
         return deserialized
 
-    @async_request
     def put_max32(
             self, int_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -306,10 +274,6 @@ class IntModel(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -339,7 +303,6 @@ class IntModel(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def put_max64(
             self, int_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -350,10 +313,6 @@ class IntModel(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -383,7 +342,6 @@ class IntModel(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def put_min32(
             self, int_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -394,10 +352,6 @@ class IntModel(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -427,7 +381,6 @@ class IntModel(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def put_min64(
             self, int_body, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -438,10 +391,6 @@ class IntModel(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL

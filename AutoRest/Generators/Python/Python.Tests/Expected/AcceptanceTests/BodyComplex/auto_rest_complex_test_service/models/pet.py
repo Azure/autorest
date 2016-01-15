@@ -22,7 +22,11 @@ class Pet(Model):
     }
 
     def __init__(self, *args, **kwargs):
+        """Pet
 
+        :param int id
+        :param str name
+        """
         self.id = None
         self.name = None
 

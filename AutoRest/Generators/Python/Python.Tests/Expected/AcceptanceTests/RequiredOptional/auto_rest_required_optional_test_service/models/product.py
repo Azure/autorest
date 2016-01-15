@@ -22,7 +22,11 @@ class Product(Model):
     }
 
     def __init__(self, *args, **kwargs):
+        """Product
 
+        :param int id
+        :param str name
+        """
         self.id = None
         self.name = None
 

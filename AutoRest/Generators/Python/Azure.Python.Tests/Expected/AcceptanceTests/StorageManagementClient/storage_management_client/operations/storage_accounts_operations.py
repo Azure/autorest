@@ -9,7 +9,6 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.service_client import async_request
 from msrest.pipeline import ClientRawResponse
 from msrest.exceptions import HttpOperationError
 from msrestazure.azure_exceptions import CloudError
@@ -21,15 +20,14 @@ from .. import models
 
 class StorageAccountsOperations(object):
 
-    def __init__(self, client, config, serializer, derserializer):
+    def __init__(self, client, config, serializer, deserializer):
 
         self._client = client
         self._serialize = serializer
-        self._deserialize = derserializer
+        self._deserialize = deserializer
 
         self.config = config
 
-    @async_request
     def check_name_availability(
             self, account_name, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -38,15 +36,11 @@ class StorageAccountsOperations(object):
         :param account_name: The name of the storage account within the
         specified resource group. Storage account names must be between 3 and
         24 characters in length and use numbers and lower-case letters only.
-        :type account_name: storageaccountchecknameavailabilityparameters
+        :type account_name: StorageAccountCheckNameAvailabilityParameters
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: checknameavailabilityresult or (checknameavailabilityresult,
+        :rtype: CheckNameAvailabilityResult or (CheckNameAvailabilityResult,
         requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -108,7 +102,7 @@ class StorageAccountsOperations(object):
         24 characters in length and use numbers and lower-case letters only.
         :type account_name: str
         :param parameters: The parameters to provide for the created account.
-        :type parameters: storageaccountcreateparameters
+        :type parameters: StorageAccountCreateParameters
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
@@ -116,7 +110,7 @@ class StorageAccountsOperations(object):
         call the callback when complete.  When specified the function returns
         a concurrent.futures.Future
         :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: storageaccount or (storageaccount, requests.response) or
+        :rtype: StorageAccount or (StorageAccount, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -181,7 +175,6 @@ class StorageAccountsOperations(object):
             long_running_send, get_long_running_output,
             get_long_running_status, long_running_operation_timeout, callback)
 
-    @async_request
     def delete(
             self, resource_group_name, account_name, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -197,10 +190,6 @@ class StorageAccountsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -236,7 +225,6 @@ class StorageAccountsOperations(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get_properties(
             self, resource_group_name, account_name, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -254,11 +242,7 @@ class StorageAccountsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: storageaccount or (storageaccount, requests.response) or
+        :rtype: StorageAccount or (StorageAccount, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -301,7 +285,6 @@ class StorageAccountsOperations(object):
 
         return deserialized
 
-    @async_request
     def update(
             self, resource_group_name, account_name, parameters, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -325,15 +308,11 @@ class StorageAccountsOperations(object):
         :type account_name: str
         :param parameters: The parameters to update on the account. Note that
         only one property can be changed at a time using this API.
-        :type parameters: storageaccountupdateparameters
+        :type parameters: StorageAccountUpdateParameters
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: storageaccount or (storageaccount, requests.response) or
+        :rtype: StorageAccount or (StorageAccount, requests.response) or
         concurrent.futures.Future
         """
         # Construct URL
@@ -380,7 +359,6 @@ class StorageAccountsOperations(object):
 
         return deserialized
 
-    @async_request
     def list_keys(
             self, resource_group_name, account_name, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -393,11 +371,7 @@ class StorageAccountsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: storageaccountkeys or (storageaccountkeys, requests.response)
+        :rtype: StorageAccountKeys or (StorageAccountKeys, requests.response)
         or concurrent.futures.Future
         """
         # Construct URL
@@ -440,7 +414,6 @@ class StorageAccountsOperations(object):
 
         return deserialized
 
-    @async_request
     def list(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -451,16 +424,12 @@ class StorageAccountsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: storageaccountpaged or (storageaccountpaged,
+        :rtype: StorageAccountPaged or (StorageAccountPaged,
         requests.response) or concurrent.futures.Future
         """
         def internal_paging(next_link=None, raw=False):
 
-            if next_link is None:
+            if not next_link:
                 # Construct URL
                 url = '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/storageAccounts'
                 path_format_arguments = {
@@ -495,18 +464,16 @@ class StorageAccountsOperations(object):
 
             return response
 
-        response = internal_paging()
-
         # Deserialize response
-        deserialized = models.StorageAccountPaged(response, internal_paging, self._deserialize.dependencies)
+        deserialized = models.StorageAccountPaged(internal_paging, self._deserialize.dependencies)
 
         if raw:
-            client_raw_response = ClientRawResponse(deserialized, response)
+            header_dict = {}
+            client_raw_response = models.StorageAccountPaged(internal_paging, self._deserialize.dependencies, header_dict)
             return client_raw_response
 
         return deserialized
 
-    @async_request
     def list_by_resource_group(
             self, resource_group_name, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -520,16 +487,12 @@ class StorageAccountsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: storageaccountpaged or (storageaccountpaged,
+        :rtype: StorageAccountPaged or (StorageAccountPaged,
         requests.response) or concurrent.futures.Future
         """
         def internal_paging(next_link=None, raw=False):
 
-            if next_link is None:
+            if not next_link:
                 # Construct URL
                 url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts'
                 path_format_arguments = {
@@ -565,18 +528,16 @@ class StorageAccountsOperations(object):
 
             return response
 
-        response = internal_paging()
-
         # Deserialize response
-        deserialized = models.StorageAccountPaged(response, internal_paging, self._deserialize.dependencies)
+        deserialized = models.StorageAccountPaged(internal_paging, self._deserialize.dependencies)
 
         if raw:
-            client_raw_response = ClientRawResponse(deserialized, response)
+            header_dict = {}
+            client_raw_response = models.StorageAccountPaged(internal_paging, self._deserialize.dependencies, header_dict)
             return client_raw_response
 
         return deserialized
 
-    @async_request
     def regenerate_key(
             self, resource_group_name, account_name, key_name=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -591,15 +552,11 @@ class StorageAccountsOperations(object):
         :type account_name: str
         :param key_name: Possible values for this property include: 'key1',
         'key2'.
-        :type key_name: str or none
+        :type key_name: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: storageaccountkeys or (storageaccountkeys, requests.response)
+        :rtype: StorageAccountKeys or (StorageAccountKeys, requests.response)
         or concurrent.futures.Future
         """
         regenerate_key = models.StorageAccountRegenerateKeyParameters()

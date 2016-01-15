@@ -22,7 +22,10 @@ class A(Model):
     }
 
     def __init__(self, *args, **kwargs):
+        """A
 
+        :param str status_code
+        """
         self.status_code = None
 
         super(A, self).__init__(*args, **kwargs)

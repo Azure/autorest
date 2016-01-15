@@ -41,9 +41,39 @@ namespace Microsoft.Rest.Generator.Python
 
         public List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
 
-        public bool IsResponseStream
+        public bool IsStreamResponse
         {
             get { return this.ReturnType.Body == PrimaryType.Stream; }
+        }
+
+        public bool IsStreamBody
+        {
+            get
+            {
+                foreach (var parameter in LocalParameters)
+                {
+                    if (parameter.Location == ParameterLocation.Body && parameter.Type == PrimaryType.Stream)
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
+
+        public bool IsFormData
+        {
+            get
+            {
+                foreach (var parameter in LocalParameters)
+                {
+                    if (parameter.Location == ParameterLocation.FormData)
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
         }
 
         /// <summary>
@@ -65,6 +95,21 @@ namespace Microsoft.Rest.Generator.Python
                 }
 
                 return "response.status_code < 200 or response.status_code >= 300";
+            }
+        }
+
+        public virtual bool NeedsCallback
+        {
+            get
+            {
+                if (IsStreamResponse || IsStreamBody)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 
@@ -264,7 +309,7 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
-        protected bool HasResponseHeader
+        public bool HasResponseHeader
         {
             get
             {
@@ -322,9 +367,10 @@ namespace Microsoft.Rest.Generator.Python
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "headerdict")]
         public virtual string AddIndividualResponseHeader(HttpStatusCode? code)
         {
+            IType headersType = null;
+
             if (HasResponseHeader)
             {
-                IType headersType = null;
                 if (code != null)
                 {
                     headersType = this.ReturnType.Headers;
@@ -333,23 +379,27 @@ namespace Microsoft.Rest.Generator.Python
                 {
                     headersType = this.Responses[code.Value].Headers;
                 }
-                var builder = new IndentedStringBuilder("    ");
-                if (headersType == null)
+            }
+
+            var builder = new IndentedStringBuilder("    ");
+            if (headersType == null)
+            {
+                if (code == null)
                 {
                     builder.AppendLine("header_dict = {}");
                 }
                 else
                 {
-                    builder.AppendLine("header_dict = {").Indent();
-                    AddHeaderDictionary(builder, (CompositeType)headersType);
-                    builder.Outdent().AppendLine("}");
+                    return string.Empty;
                 }
-                return builder.ToString();
             }
             else
             {
-                return string.Empty;
+                builder.AppendLine("header_dict = {").Indent();
+                AddHeaderDictionary(builder, (CompositeType)headersType);
+                builder.Outdent().AppendLine("}");
             }
+            return builder.ToString();
         }
 
         /// <summary>
@@ -401,7 +451,7 @@ namespace Microsoft.Rest.Generator.Python
 
             if (type is PrimaryType)
             {
-                result = type.Name;
+                result = type.Name.ToLower(CultureInfo.InvariantCulture);
             }
             else if (type is SequenceType)
             {
@@ -409,7 +459,7 @@ namespace Microsoft.Rest.Generator.Python
             }
             else if (type is EnumType)
             {
-                result = PrimaryType.String.Name;
+                result = PrimaryType.String.Name.ToLower(CultureInfo.InvariantCulture);
             }
             else if (type is DictionaryType)
             {
@@ -426,7 +476,7 @@ namespace Microsoft.Rest.Generator.Python
                 result += " or None";
             }
 
-            return result.ToLower(CultureInfo.InvariantCulture);
+            return result;
         }
 
         /// <summary>

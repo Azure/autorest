@@ -21,7 +21,11 @@ class StorageAccountRegenerateKeyParameters(Model):
     }
 
     def __init__(self, *args, **kwargs):
+        """StorageAccountRegenerateKeyParameters
 
+        :param str key_name: Possible values for this property include:
+        'key1', 'key2'.
+        """
         self.key_name = None
 
         super(StorageAccountRegenerateKeyParameters, self).__init__(*args, **kwargs)

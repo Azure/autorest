@@ -22,7 +22,11 @@ class SampleResourceGroup(Model):
     }
 
     def __init__(self, *args, **kwargs):
+        """SampleResourceGroup
 
+        :param str name: resource group name 'testgroup101'
+        :param str location: resource group location 'West US'
+        """
         self.name = None
         self.location = None
 

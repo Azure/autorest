@@ -13,6 +13,8 @@ from msrest.serialization import Model
 
 
 class Endpoints(Model):
+    """The URIs that are used to perform a retrieval of a public blob, queue
+    """or table object."""
 
     _required = []
 
@@ -25,7 +27,14 @@ class Endpoints(Model):
     }
 
     def __init__(self, *args, **kwargs):
+        """Endpoints
 
+        :param str blob: Gets the blob endpoint.
+        :param str queue: Gets the queue endpoint.
+        :param str table: Gets the table endpoint.
+        :param Endpoints dummy_end_point: Dummy EndPoint
+        :param Foo foo_point: Foo point
+        """
         self.blob = None
         self.queue = None
         self.table = None

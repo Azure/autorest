@@ -9,7 +9,6 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.service_client import async_request
 from msrest.pipeline import ClientRawResponse
 
 from .. import models
@@ -17,15 +16,14 @@ from .. import models
 
 class HttpSuccess(object):
 
-    def __init__(self, client, config, serializer, derserializer):
+    def __init__(self, client, config, serializer, deserializer):
 
         self._client = client
         self._serialize = serializer
-        self._deserialize = derserializer
+        self._deserialize = deserializer
 
         self.config = config
 
-    @async_request
     def head200(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -34,10 +32,6 @@ class HttpSuccess(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -63,7 +57,6 @@ class HttpSuccess(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def get200(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -72,10 +65,6 @@ class HttpSuccess(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: bool or (bool, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -108,21 +97,16 @@ class HttpSuccess(object):
 
         return deserialized
 
-    @async_request
     def put200(
             self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Put boolean value true returning 200 success
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or none
+        :type boolean_value: bool or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -155,21 +139,16 @@ class HttpSuccess(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def patch200(
             self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Patch true Boolean value in request returning 200
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or none
+        :type boolean_value: bool or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -202,21 +181,16 @@ class HttpSuccess(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def post200(
             self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Post bollean value true in request that returns a 200
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or none
+        :type boolean_value: bool or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -249,21 +223,16 @@ class HttpSuccess(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def delete200(
             self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Delete simple boolean value true returns 200
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or none
+        :type boolean_value: bool or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -296,21 +265,16 @@ class HttpSuccess(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def put201(
             self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Put true Boolean value in request returns 201
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or none
+        :type boolean_value: bool or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -343,21 +307,16 @@ class HttpSuccess(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def post201(
             self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Post true Boolean value in request returns 201 (Created)
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or none
+        :type boolean_value: bool or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -390,21 +349,16 @@ class HttpSuccess(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def put202(
             self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Put true Boolean value in request returns 202 (Accepted)
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or none
+        :type boolean_value: bool or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -437,21 +391,16 @@ class HttpSuccess(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def patch202(
             self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Patch true Boolean value in request returns 202
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or none
+        :type boolean_value: bool or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -484,21 +433,16 @@ class HttpSuccess(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def post202(
             self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Post true Boolean value in request returns 202 (Accepted)
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or none
+        :type boolean_value: bool or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -531,21 +475,16 @@ class HttpSuccess(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def delete202(
             self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Delete true Boolean value in request returns 202 (accepted)
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or none
+        :type boolean_value: bool or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -578,7 +517,6 @@ class HttpSuccess(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def head204(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -587,10 +525,6 @@ class HttpSuccess(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -616,21 +550,16 @@ class HttpSuccess(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def put204(
             self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Put true Boolean value in request returns 204 (no content)
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or none
+        :type boolean_value: bool or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -663,21 +592,16 @@ class HttpSuccess(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def patch204(
             self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Patch true Boolean value in request returns 204 (no content)
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or none
+        :type boolean_value: bool or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -710,21 +634,16 @@ class HttpSuccess(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def post204(
             self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Post true Boolean value in request returns 204 (no content)
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or none
+        :type boolean_value: bool or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -757,21 +676,16 @@ class HttpSuccess(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def delete204(
             self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
         """
         Delete true Boolean value in request returns 204 (no content)
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or none
+        :type boolean_value: bool or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -804,7 +718,6 @@ class HttpSuccess(object):
             client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
 
-    @async_request
     def head404(
             self, custom_headers={}, raw=False, callback=None, **operation_config):
         """
@@ -813,10 +726,6 @@ class HttpSuccess(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
