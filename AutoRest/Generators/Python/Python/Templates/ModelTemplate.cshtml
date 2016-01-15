@@ -35,7 +35,9 @@ else
 }
 @if (!String.IsNullOrWhiteSpace(Model.Documentation))
 {
-@:    """@WrapComment(string.Empty, Model.Documentation)"""
+@:    """
+@:    @WrapComment(string.Empty, Model.Documentation)
+@:    """
 }
 @{
   var requiredFieldList = Model.RequiredFieldsList;

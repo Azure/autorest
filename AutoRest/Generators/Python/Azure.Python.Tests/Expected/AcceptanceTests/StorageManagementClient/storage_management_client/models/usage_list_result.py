@@ -13,7 +13,9 @@ from msrest.serialization import Model
 
 
 class UsageListResult(Model):
-    """The List Usages operation response."""
+    """
+    The List Usages operation response.
+    """
 
     _required = []
 

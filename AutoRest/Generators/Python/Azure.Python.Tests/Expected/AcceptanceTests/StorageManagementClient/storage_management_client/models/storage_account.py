@@ -13,7 +13,9 @@ from .resource import Resource
 
 
 class StorageAccount(Resource):
-    """The storage account."""
+    """
+    The storage account.
+    """
 
     _required = []
 

@@ -13,7 +13,9 @@ from .resource import Resource
 
 
 class StorageAccountUpdateParameters(Resource):
-    """The parameters to update on the account."""
+    """
+    The parameters to update on the account.
+    """
 
     _required = []
 
