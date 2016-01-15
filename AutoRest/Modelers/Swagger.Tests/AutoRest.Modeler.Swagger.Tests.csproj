@@ -78,6 +78,9 @@
     <None Include="Swagger\swagger-response-headers.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Swagger\swagger-x-ms-code-generation-settings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Swagger\swagger-x-ms-paths.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -100,6 +103,10 @@
     <ProjectReference Include="..\..\AutoRest.Core\AutoRest.Core.csproj">
       <Project>{c876085f-9dc3-41f0-b7b4-17022cd84684}</Project>
       <Name>AutoRest.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Generators\CSharp\CSharp\AutoRest.Generator.CSharp.csproj">
+      <Project>{cc1eec95-41ef-44b6-8761-00fa3e647248}</Project>
+      <Name>AutoRest.Generator.CSharp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
