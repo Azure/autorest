@@ -123,7 +123,9 @@ gulp.task('regenerate:expected', function(cb){
       'regenerate:expected:ruby',
       'regenerate:expected:rubyazure',
       'regenerate:expected:java',
-      'regenerate:expected:javaazure'
+      'regenerate:expected:javaazure',
+      'regenerate:expected:python',
+      'regenerate:expected:pythonazure'
     ],
     cb);
 });
@@ -135,7 +137,9 @@ gulp.task('regenerate:delete', function(cb){
     'AutoRest/Generators/NodeJS/NodeJS.Tests/Expected',
     'AutoRest/Generators/NodeJS/Azure.NodeJS.Tests/Expected',
     'AutoRest/Generators/Java/Java.Tests/src/main/java',
-    'AutoRest/Generators/Java/Azure.Java.Tests/src/main/java'
+    'AutoRest/Generators/Java/Azure.Java.Tests/src/main/java',
+    'AutoRest/Generators/Python/Python.Tests/Expected',
+    'AutoRest/Generators/Python/Azure.Python.Tests/Expected'
   ], cb);
 });
 
@@ -164,6 +168,33 @@ gulp.task('regenerate:expected:node', function(cb){
     'mappings': nodeMappings,
     'outputDir': 'Expected',
     'codeGenerator': 'NodeJS',
+    'flatteningThreshold': '1'
+  }, cb);
+})
+
+gulp.task('regenerate:expected:python', function(cb){
+  regenExpected({
+    'outputBaseDir': 'AutoRest/Generators/Python/Python.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
+    'mappings': defaultMappings,
+    'outputDir': 'Expected',
+    'codeGenerator': 'Python',
+    'flatteningThreshold': '1'
+  }, cb);
+})
+
+gulp.task('regenerate:expected:pythonazure', function(cb){
+  mappings = mergeOptions({
+    'AcceptanceTests/AzureBodyDuration': '../../../TestServer/swagger/body-duration.json',
+    'AcceptanceTests/StorageManagementClient': '../../../TestServer/swagger/storage.json'
+  }, defaultAzureMappings);
+
+  regenExpected({
+    'outputBaseDir': 'AutoRest/Generators/Python/Azure.Python.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
+    'mappings': mappings,
+    'outputDir': 'Expected',
+    'codeGenerator': 'Azure.Python',
     'flatteningThreshold': '1'
   }, cb);
 })
@@ -356,10 +387,14 @@ gulp.task('test:clientruntime:ruby', ['syncDependencies:runtime:ruby'], shell.ta
 gulp.task('test:clientruntime:rubyazure', ['syncDependencies:runtime:rubyazure'], shell.task('bundle exec rspec', { cwd: './ClientRuntimes/Ruby/ms-rest-azure/', verbosity: 3 }));
 gulp.task('test:clientruntime:java', shell.task(basePathOrThrow() + '/gradlew :client-runtime:check', { cwd: './', verbosity: 3 }));
 gulp.task('test:clientruntime:javaazure', shell.task(basePathOrThrow() + '/gradlew :azure-client-runtime:check', { cwd: './', verbosity: 3 }));
+gulp.task('test:clientruntime:python', shell.task('tox', { cwd: './ClientRuntimes/Python/msrest/', verbosity: 3 }));
+gulp.task('test:clientruntime:pythonazure', shell.task('tox', { cwd: './ClientRuntimes/Python/msrestazure/', verbosity: 3 }));
+
 gulp.task('test:clientruntime', function (cb) {
   runSequence('test:clientruntime:node', 'test:clientruntime:nodeazure',
     'test:clientruntime:ruby', 'test:clientruntime:rubyazure',
-    'test:clientruntime:java', 'test:clientruntime:javaazure', cb);
+    'test:clientruntime:java', 'test:clientruntime:javaazure', 
+    'test:clientruntime:python', 'test:clientruntime:pythonazure', cb);
 });
 
 gulp.task('test:node', shell.task('npm test', {cwd: './AutoRest/Generators/NodeJS/NodeJS.Tests/', verbosity: 3}));
@@ -370,6 +405,9 @@ gulp.task('test:ruby:azure', ['regenerate:expected:rubyazure'], shell.task('ruby
 
 gulp.task('test:java', shell.task(basePathOrThrow() + '/gradlew :codegen-tests:check', {cwd: './', verbosity: 3}));
 gulp.task('test:java:azure', shell.task(basePathOrThrow() + '/gradlew :azure-codegen-tests:check', {cwd: './', verbosity: 3}));
+
+gulp.task('test:python', shell.task('tox', {cwd: './AutoRest/Generators/Python/Python.Tests/', verbosity: 3}));
+gulp.task('test:python:azure', shell.task('tox', {cwd: './AutoRest/Generators/Python/Azure.Python.Tests/', verbosity: 3}));
 
 var xunitTestsDlls = [
   'AutoRest/AutoRest.Core.Tests/bin/Net45-Debug/AutoRest.Core.Tests.dll',
@@ -486,6 +524,8 @@ gulp.task('test', function(cb){
       'test:ruby:azure',
       'test:java',
       'test:java:azure',
+      'test:python',
+      'test:python:azure',
       'test:nugetPackages',
       cb);
   } else {
@@ -498,6 +538,8 @@ gulp.task('test', function(cb){
       'test:ruby:azure',
       'test:java',
       'test:java:azure',
+      'test:python',
+      'test:python:azure',
       cb);
   }
 });

@@ -387,6 +387,21 @@ namespace Microsoft.Rest.Generator
         }
 
         /// <summary>
+        /// Removes invalid characters from the name. Everything but alpha-numeral, underscore.
+        /// </summary>
+        /// <param name="name">String to parse.</param>
+        /// <returns>Name with invalid characters removed.</returns>
+        public static string RemoveInvalidPythonCharacters(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, Resources.InvalidIdentifierName, name));
+            }
+
+            return GetValidName(name.Replace('-', '_'), '_');
+        }
+
+        /// <summary>
         /// Removes invalid characters from the namespace. Everything but alpha-numeral, underscore,
         /// period, and dash.
         /// </summary>

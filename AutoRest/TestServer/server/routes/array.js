@@ -328,7 +328,7 @@ var array = function(coverage) {
 
     router.put('/complex/:scenario', function(req, res, next) {
         if (req.params.scenario === 'valid') {
-            if (util.inspect(req.body) === util.inspect([{
+            if (_.isEqual(req.body, [{
                     'integer': 1,
                     'string': '2'
                 }, {
@@ -371,7 +371,7 @@ var array = function(coverage) {
 
     router.put('/array/:scenario', function(req, res, next) {
         if (req.params.scenario === 'valid') {
-            if (util.inspect(req.body) === util.inspect([
+            if (_.isEqual(req.body, [
                     ['1', '2', '3'],
                     ['4', '5', '6'],
                     ['7', '8', '9']
@@ -409,7 +409,7 @@ var array = function(coverage) {
 
     router.put('/dictionary/:scenario', function(req, res, next) {
         if (req.params.scenario === 'valid') {
-            if (util.inspect(req.body) === util.inspect([{
+            if (_.isEqual(req.body, [{
                     '1': 'one',
                     '2': 'two',
                     '3': 'three'

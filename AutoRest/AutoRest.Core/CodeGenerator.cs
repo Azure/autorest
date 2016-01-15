@@ -9,6 +9,7 @@ using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Generator.Logging;
 using Microsoft.Rest.Generator.Properties;
+using System.Collections.Generic;
 
 namespace Microsoft.Rest.Generator
 {
@@ -49,6 +50,17 @@ namespace Microsoft.Rest.Generator
         /// Gets or sets boolean value indicating if code generation language supports all the code to be generated in a single file.
         /// </summary>
         public bool IsSingleFileGenerationSupported { get; set; }
+
+        /// <summary>
+        /// Check the customized setting name is valid.
+        /// </summary>
+        /// <param name="settingName">the setting name</param>
+        /// <returns></returns>
+        public virtual bool IsSettingSupported(string settingName)
+        {
+            // Don't support any customized setting
+            return false;
+        }
 
         /// <summary>
         /// Normalizes service model by updating names and types to be language specific.

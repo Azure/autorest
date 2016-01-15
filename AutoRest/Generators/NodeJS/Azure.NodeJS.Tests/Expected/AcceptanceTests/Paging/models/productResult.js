@@ -36,15 +36,15 @@ util.inherits(ProductResult, Array);
  */
 ProductResult.prototype.deserialize = function (instance) {
   if (instance) {
-    if (instance['value']) {
-      var deserializedInstancevalue = [];
-        instance['value'].forEach(function(element) {
+    if (instance['values']) {
+      var deserializedInstancevalues = [];
+        instance['values'].forEach(function(element) {
         if (element) {
           element = new models['Product']().deserialize(element);
         }
-        deserializedInstancevalue.push(element);
+        deserializedInstancevalues.push(element);
       });
-      Array.prototype.push.apply(this, deserializedInstancevalue);
+      Array.prototype.push.apply(this, deserializedInstancevalues);
     }
     if (instance['nextLink'] !== undefined) {
       this['nextLink'] = instance.nextLink;

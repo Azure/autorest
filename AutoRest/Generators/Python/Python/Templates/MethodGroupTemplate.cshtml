@@ -1,0 +1,36 @@
+﻿@using Microsoft.Rest.Generator.Python
+@using Microsoft.Rest.Generator.Python.TemplateModels
+@using Microsoft.Rest.Generator.Python.Templates
+@using System.Linq;
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.MethodGroupTemplateModel>
+# coding=utf-8
+# --------------------------------------------------------------------------
+@Header("# ").TrimMultilineHeader()
+# --------------------------------------------------------------------------
+@EmptyLine
+from msrest.pipeline import ClientRawResponse
+@if (Model.HasAnyDefaultExceptions)
+{
+@:from msrest.exceptions import HttpOperationError
+}
+@if (Model.HasAnyModel)
+{
+@EmptyLine
+@:from .. import models
+}
+@EmptyLine
+@EmptyLine
+class @(Model.MethodGroupType)(object):
+@EmptyLine
+    def __init__(self, client, config, serializer, deserializer):
+@EmptyLine
+        self._client = client
+        self._serialize = serializer
+        self._deserialize = deserializer
+@EmptyLine
+        self.config = config
+@foreach (var method in Model.MethodTemplateModels)
+{
+@EmptyLine
+@:@(Include(new MethodTemplate(), method))
+}
