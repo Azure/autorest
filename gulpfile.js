@@ -244,6 +244,7 @@ gulp.task('regenerate:expected:cs', ['regenerate:expected:cswithcreds'], functio
     'Mirror.Primitives': 'Swagger/swagger-mirror-primitives.json',
     'Mirror.Sequences': 'Swagger/swagger-mirror-sequences.json',
     'Mirror.Polymorphic': 'Swagger/swagger-mirror-polymorphic.json',
+    'Internal.Ctors': 'Swagger/swagger-internal-ctors.json',
   }, defaultMappings);
 
   regenExpected({

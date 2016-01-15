@@ -21,6 +21,13 @@ namespace Microsoft.Rest.Generator.CSharp
             IsSingleFileGenerationSupported = true;
         }
 
+        /// <summary>
+        /// Indicates whether ctor needs to be generated with internal protection level.
+        /// </summary>
+        [SettingsInfo("The namespace to use for generated code.")]
+        [SettingsAlias("internal")]
+        public bool InternalConstructors { get; set; }
+
         public override string Name
         {
             get { return "CSharp"; }
@@ -83,7 +90,7 @@ namespace Microsoft.Rest.Generator.CSharp
             // Service client
             var serviceClientTemplate = new ServiceClientTemplate
             {
-                Model = new ServiceClientTemplateModel(serviceClient),
+                Model = new ServiceClientTemplateModel(serviceClient, InternalConstructors),
             };
             await Write(serviceClientTemplate, serviceClient.Name + ".cs");
 
@@ -97,7 +104,7 @@ namespace Microsoft.Rest.Generator.CSharp
             // Service client interface
             var serviceClientInterfaceTemplate = new ServiceClientInterfaceTemplate
             {
-                Model = new ServiceClientTemplateModel(serviceClient),
+                Model = new ServiceClientTemplateModel(serviceClient, InternalConstructors),
             };
             await Write(serviceClientInterfaceTemplate, "I" + serviceClient.Name + ".cs");
 

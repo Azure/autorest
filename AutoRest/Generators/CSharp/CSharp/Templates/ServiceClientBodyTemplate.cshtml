@@ -46,7 +46,7 @@ public JsonSerializerSettings DeserializationSettings { get; private set; }
 /// <param name='handlers'>
 /// Optional. The delegating handlers to add to the http client pipeline.
 /// </param>
-@(Model.ContainsCredentials ? "protected" : "public") @(Model.Name)(params DelegatingHandler[] handlers) : base(handlers)
+@(Model.ContainsCredentials ? "protected" : Model.ConstructorVisibility) @(Model.Name)(params DelegatingHandler[] handlers) : base(handlers)
 {
     this.Initialize();
 }
@@ -61,7 +61,7 @@ public JsonSerializerSettings DeserializationSettings { get; private set; }
 /// <param name='handlers'>
 /// Optional. The delegating handlers to add to the http client pipeline.
 /// </param>
-@(Model.ContainsCredentials ? "protected" : "public") @(Model.Name)(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
+@(Model.ContainsCredentials ? "protected" : Model.ConstructorVisibility) @(Model.Name)(HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : base(rootHandler, handlers)
 {
     this.Initialize();
 }
@@ -76,7 +76,7 @@ public JsonSerializerSettings DeserializationSettings { get; private set; }
 /// <param name='handlers'>
 /// Optional. The delegating handlers to add to the http client pipeline.
 /// </param>
-@(Model.ContainsCredentials ? "protected" : "public") @(Model.Name)(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
+@(Model.ContainsCredentials ? "protected" : Model.ConstructorVisibility) @(Model.Name)(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
 {
     if (baseUri == null)
     {
@@ -99,7 +99,7 @@ public JsonSerializerSettings DeserializationSettings { get; private set; }
 /// <param name='handlers'>
 /// Optional. The delegating handlers to add to the http client pipeline.
 /// </param>
-@(Model.ContainsCredentials ? "protected" : "public") @(Model.Name)(Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+@(Model.ContainsCredentials ? "protected" : Model.ConstructorVisibility) @(Model.Name)(Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
 {
     if (baseUri == null)
     {
@@ -125,7 +125,7 @@ foreach (var param in parameters)
 @:/// <param name='handlers'>
 @:/// Optional. The delegating handlers to add to the http client pipeline.
 @:/// </param>
-@:public @(Model.Name)(@(Model.RequiredConstructorParameters), params DelegatingHandler[] handlers) : this(handlers)
+@:@(Model.ConstructorVisibility) @(Model.Name)(@(Model.RequiredConstructorParameters), params DelegatingHandler[] handlers) : this(handlers)
 @:{
 foreach (var param in parameters)
 {
@@ -163,7 +163,7 @@ foreach (var param in parameters)
 @:/// <param name='handlers'>
 @:/// Optional. The delegating handlers to add to the http client pipeline.
 @:/// </param>
-@:public @(Model.Name)(@(Model.RequiredConstructorParameters), HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+@:@(Model.ConstructorVisibility) @(Model.Name)(@(Model.RequiredConstructorParameters), HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
 @:{
 foreach (var param in parameters)
 {
@@ -201,7 +201,7 @@ foreach (var param in parameters)
 @:/// <param name='handlers'>
 @:/// Optional. The delegating handlers to add to the http client pipeline.
 @:/// </param>
-@:public @(Model.Name)(Uri baseUri, @(Model.RequiredConstructorParameters), params DelegatingHandler[] handlers) : this(handlers)
+@:@(Model.ConstructorVisibility) @(Model.Name)(Uri baseUri, @(Model.RequiredConstructorParameters), params DelegatingHandler[] handlers) : this(handlers)
 @:{
 @:    if (baseUri == null)
 @:    {
@@ -248,7 +248,7 @@ foreach (var param in parameters)
 @:/// <param name='handlers'>
 @:/// Optional. The delegating handlers to add to the http client pipeline.
 @:/// </param>
-@:public @(Model.Name)(Uri baseUri, @(Model.RequiredConstructorParameters), HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+@:@(Model.ConstructorVisibility) @(Model.Name)(Uri baseUri, @(Model.RequiredConstructorParameters), HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
 @:{
 @:    if (baseUri == null)
 @:    {

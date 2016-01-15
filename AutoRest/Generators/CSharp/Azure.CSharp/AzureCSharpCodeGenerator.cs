@@ -90,7 +90,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             // Service client
             var serviceClientTemplate = new AzureServiceClientTemplate
             {
-                Model = new AzureServiceClientTemplateModel(serviceClient),
+                Model = new AzureServiceClientTemplateModel(serviceClient, InternalConstructors),
             };
             await Write(serviceClientTemplate, serviceClient.Name + ".cs");
 
@@ -104,7 +104,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             // Service client interface
             var serviceClientInterfaceTemplate = new ServiceClientInterfaceTemplate
             {
-                Model = new AzureServiceClientTemplateModel(serviceClient),
+                Model = new AzureServiceClientTemplateModel(serviceClient, InternalConstructors),
             };
             await Write(serviceClientInterfaceTemplate, "I" + serviceClient.Name + ".cs");
 

@@ -2,12 +2,13 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
 using Microsoft.Rest.Generator;
 using Microsoft.Rest.Generator.ClientModel;
+using Microsoft.Rest.Generator.CSharp;
+using Microsoft.Rest.Generator.Extensibility;
 using Xunit;
 
 namespace Microsoft.Rest.Modeler.Swagger.Tests
@@ -486,6 +487,26 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.Equal(3, clientModel.Methods.Count);
             Assert.True(clientModel.Methods.All(m => m.Url == "/values/foo"));
 
+        }
+
+        [Fact]
+        public void TestSettingsFromSwagger()
+        {
+            var settings = new Settings
+            {
+                Namespace = "Test",
+                Modeler = "Swagger",
+                CodeGenerator = "CSharp",
+                Input = Path.Combine("Swagger", "swagger-x-ms-code-generation-settings.json"),
+                Header = "NONE"
+            };
+            var modeler = ExtensionsLoader.GetModeler(settings);
+            var client = modeler.Build();
+            var codeGenerator = ExtensionsLoader.GetCodeGenerator(settings) as CSharpCodeGenerator;
+            settings.Validate();
+
+            Assert.Equal("MIT", settings.Header);
+            Assert.Equal(true, codeGenerator.InternalConstructors);
         }
     }
 }

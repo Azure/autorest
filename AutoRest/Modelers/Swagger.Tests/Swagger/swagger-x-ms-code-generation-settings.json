@@ -1,0 +1,31 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.13",
+    "title": "Swagger Custom Paths",
+    "x-ms-code-generation-settings": {
+      "header": "MIT",
+      "internalConstructors": true
+    }    
+  },
+  "host": "autorestresourcesproxysite.azurewebsites.net",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/values/foo": {
+      "get": {
+        "tags": [
+          "Values"
+        ],
+        "operationId": "Values_Get",
+        "consumes": [ "application/json" ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  }
+}
