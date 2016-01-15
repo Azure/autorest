@@ -74,12 +74,12 @@
   // Construct URL
   @if (Model.IsAbsoluteUrl)
   {
-  @:var requestUrl = '@(Model.Url)';
+  @:var requestUrl = '@(Model.Url.EscapeSingleQuotes())';
   }
   else
   {
   @:var requestUrl = @(Model.ClientReference).baseUri +
-  @:                 '/@(Model.Url)';
+  @:                 '/@(Model.Url.EscapeSingleQuotes())';
   }
   @(Model.BuildUrl("requestUrl"))
   @(Model.RemoveDuplicateForwardSlashes("requestUrl"))
