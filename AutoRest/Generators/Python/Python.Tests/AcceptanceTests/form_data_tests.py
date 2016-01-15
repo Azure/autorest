@@ -1,4 +1,30 @@
-﻿import unittest
+﻿# --------------------------------------------------------------------------
+#
+# Copyright (c) Microsoft Corporation. All rights reserved.
+#
+# The MIT License (MIT)
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the ""Software""), to
+# deal in the Software without restriction, including without limitation the
+# rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+# sell copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+# IN THE SOFTWARE.
+#
+# --------------------------------------------------------------------------
+
+import unittest
 import subprocess
 import sys
 import io
@@ -36,9 +62,12 @@ class FormDataTests(unittest.TestCase):
 
         test_string = "Upload file test case"
         test_bytes = bytearray(test_string, encoding='utf-8')
+        result = io.BytesIO()
         with io.BytesIO(test_bytes) as stream_data:
             resp = client.formdata.upload_file(stream_data, "UploadFile.txt")
-            self.assertEqual(resp, test_string)
+            for r in resp:
+                result.write(r)
+            self.assertEqual(result.getvalue().decode(), test_string)
 
     def test_file_upload_file_stream(self):
 
@@ -47,9 +76,12 @@ class FormDataTests(unittest.TestCase):
         client = AutoRestSwaggerBATFormDataService(config)
 
         name = os.path.basename(self.dummy_file)
+        result = io.BytesIO()
         with open(self.dummy_file, 'rb') as upload_data:
             resp = client.formdata.upload_file(upload_data, name)
-            self.assertEqual(resp, "Test file")
+            for r in resp:
+                result.write(r)
+            self.assertEqual(result.getvalue().decode(), "Test file")
 
     def test_file_body_upload(self):
 
@@ -59,14 +91,20 @@ class FormDataTests(unittest.TestCase):
 
         test_string = "Upload file test case"
         test_bytes = bytearray(test_string, encoding='utf-8')
+        result = io.BytesIO()
         with io.BytesIO(test_bytes) as stream_data:
             resp = client.formdata.upload_file_via_body(stream_data, "UploadFile.txt")
-            self.assertEqual(resp, test_string)
+            for r in resp:
+                result.write(r)
+            self.assertEqual(result.getvalue().decode(), test_string)
 
         name = os.path.basename(self.dummy_file)
+        result = io.BytesIO()
         with open(self.dummy_file, 'rb') as upload_data:
             resp = client.formdata.upload_file_via_body(upload_data, name)
-            self.assertEqual(resp, "Test file")
+            for r in resp:
+                result.write(r)
+            self.assertEqual(result.getvalue().decode(), "Test file")
 
     def tearDown(self):
         os.remove(self.dummy_file)

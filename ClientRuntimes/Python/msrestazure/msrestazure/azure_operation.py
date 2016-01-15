@@ -475,8 +475,7 @@ class AzureOperationPoller(object):
                   'POST': PostDeleteOperation,
                   'DELETE': PostDeleteOperation}
 
-    def __init__(self, send_cmd, output_cmd, update_cmd,
-                 timeout=30, callback=None):
+    def __init__(self, send_cmd, output_cmd, update_cmd, timeout=30):
         """Initiates long running operation and polls status in separate
         thread.
 
@@ -495,8 +494,6 @@ class AzureOperationPoller(object):
         self._operation = None
         self._exception = None
         self._callbacks = []
-        if callback:
-            self._callbacks.append(callback)
         self._done = threading.Event()
         self._thread = threading.Thread(
             target=self._start, args=(send_cmd, update_cmd, output_cmd))

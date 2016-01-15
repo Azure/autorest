@@ -1,4 +1,30 @@
-﻿import unittest
+﻿# --------------------------------------------------------------------------
+#
+# Copyright (c) Microsoft Corporation. All rights reserved.
+#
+# The MIT License (MIT)
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the ""Software""), to
+# deal in the Software without restriction, including without limitation the
+# rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+# sell copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+# IN THE SOFTWARE.
+#
+# --------------------------------------------------------------------------
+
+import unittest
 import subprocess
 import sys
 import isodate
@@ -27,13 +53,19 @@ class FileTests(unittest.TestCase):
 
         config = AutoRestSwaggerBATFileServiceConfiguration(base_url="http://localhost:3000")
         config.log_level = log_level
+        config.connection.data_block_size = 10
         client = AutoRestSwaggerBATFileService(config)
+
+        def test_callback(data, response):
+            self.assertTrue(len(data) > 0)
+            print("calling...")
+            self.assertIsNotNone(response)
 
         temp_file = tempfile.mktemp()
         file_length = 0
         with open(temp_file, mode='wb') as file_handle:
 
-            stream = client.files.get_file()
+            stream = client.files.get_file(callback=test_callback)
 
             for data in stream:
                 file_length += len(data)
@@ -58,7 +90,7 @@ class FileTests(unittest.TestCase):
         file_length = 0
         with open(temp_file, mode='wb') as file_handle:
 
-            stream = client.files.get_empty_file()
+            stream = client.files.get_empty_file(callback=test_callback)
 
             for data in stream:
                 file_length += len(data)
