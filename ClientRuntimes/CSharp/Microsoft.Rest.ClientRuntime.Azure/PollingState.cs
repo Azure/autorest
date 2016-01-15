@@ -31,7 +31,7 @@ namespace Microsoft.Rest.Azure
             Resource = response.Body;
             ResourceHeaders = response.Headers;
 
-            string raw = response.Response.Content.ReadAsStringAsync().ConfigureAwait(false)
+            string raw = response.Response.Content == null ? null : response.Response.Content.ReadAsStringAsync().ConfigureAwait(false)
                 .GetAwaiter().GetResult();
 
             JObject resource = null;
