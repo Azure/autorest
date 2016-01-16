@@ -24,6 +24,7 @@
 #
 # --------------------------------------------------------------------------
 
+import contextlib
 import logging
 import os
 try:
@@ -196,7 +197,7 @@ class ServiceClient(object):
 
             try:
                 session = self.creds.refresh_session()
-                self._configure_session(session)
+                kwargs = self._configure_session(session)
 
                 response = session.request(
                     request.method, request.url,
@@ -213,6 +214,45 @@ class ServiceClient(object):
                 oauth2.rfc6749.errors.OAuth2Error) as err:
             msg = "Error occurred in request."
             raise_with_traceback(ClientRequestError, msg, err)
+        finally:
+            session.close()
+
+    def stream_download(self, data, callback):
+        """Generator for streaming request body data.
+
+        :param data: A response object to be streamed.
+        :param callback: Custom callback for monitoring progress.
+        """
+        if not data._content_consumed:
+            with contextlib.closing(data) as response:
+                for chunk in response.iter_content(self.config.connection.data_block_size):
+                    if not chunk:
+                        break
+                    if callback and callable(callback):
+                        callback(chunk, response=response)
+                    yield chunk
+        else:
+            for chunk in data.iter_content(self.config.connection.data_block_size):
+                if not chunk:
+                    break
+                if callback and callable(callback):
+                    callback(chunk, response=data)
+                yield chunk
+        data.close()
+
+    def stream_upload(self, data, callback):
+        """Generator for streaming request body data.
+
+        :param data: A file-like object to be streamed.
+        :param callback: Custom callback for monitoring progress.
+        """
+        while True:
+            chunk = data.read(self.config.connection.data_block_size)
+            if not chunk:
+                break
+            if callback and callable(callback):
+                callback(chunk, response=None)
+            yield chunk
 
     def add_hook(self, event, hook, precall=True, overwrite=False):
         """

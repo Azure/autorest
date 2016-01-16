@@ -56,34 +56,130 @@ class FormDataTests(unittest.TestCase):
 
     def test_file_upload_stream(self):
 
+        def test_callback(data, response, progress = [0]):
+            self.assertTrue(len(data) > 0)
+            progress[0] += len(data)
+            total = float(response.headers.get('Content-Length', 100))
+            print("Progress... {}%".format(int(progress[0]*100/total)))
+            self.assertIsNotNone(response)
+
         config = AutoRestSwaggerBATFormDataServiceConfiguration(base_url="http://localhost:3000")
         config.log_level = log_level
+        config.connection.data_block_size = 2
         client = AutoRestSwaggerBATFormDataService(config)
 
         test_string = "Upload file test case"
         test_bytes = bytearray(test_string, encoding='utf-8')
         result = io.BytesIO()
         with io.BytesIO(test_bytes) as stream_data:
-            resp = client.formdata.upload_file(stream_data, "UploadFile.txt")
+            resp = client.formdata.upload_file(stream_data, "UploadFile.txt", callback=test_callback)
             for r in resp:
+                result.write(r)
+            self.assertEqual(result.getvalue().decode(), test_string)
+
+    def test_file_upload_stream_raw(self):
+
+        def test_callback(data, response, progress = [0]):
+            self.assertTrue(len(data) > 0)
+            progress[0] += len(data)
+            total = float(response.headers['Content-Length'])
+            print("Progress... {}%".format(int(progress[0]*100/total)))
+            self.assertIsNotNone(response)
+
+        config = AutoRestSwaggerBATFormDataServiceConfiguration(base_url="http://localhost:3000")
+        config.log_level = log_level
+        config.connection.data_block_size = 2
+        client = AutoRestSwaggerBATFormDataService(config)
+
+        test_string = "Upload file test case"
+        test_bytes = bytearray(test_string, encoding='utf-8')
+        result = io.BytesIO()
+        with io.BytesIO(test_bytes) as stream_data:
+            resp = client.formdata.upload_file(stream_data, "UploadFile.txt", raw=True)
+            for r in resp.output:
                 result.write(r)
             self.assertEqual(result.getvalue().decode(), test_string)
 
     def test_file_upload_file_stream(self):
 
+        def test_callback(data, response, progress = [0]):
+            self.assertTrue(len(data) > 0)
+            progress[0] += len(data)
+            total = float(response.headers.get('Content-Length', 100))
+            print("Progress... {}%".format(int(progress[0]*100/total)))
+            self.assertIsNotNone(response)
+
         config = AutoRestSwaggerBATFormDataServiceConfiguration(base_url="http://localhost:3000")
         config.log_level = log_level
+        config.connection.data_block_size = 2
         client = AutoRestSwaggerBATFormDataService(config)
 
         name = os.path.basename(self.dummy_file)
         result = io.BytesIO()
         with open(self.dummy_file, 'rb') as upload_data:
-            resp = client.formdata.upload_file(upload_data, name)
+            resp = client.formdata.upload_file(upload_data, name, callback=test_callback)
             for r in resp:
                 result.write(r)
             self.assertEqual(result.getvalue().decode(), "Test file")
 
+    def test_file_upload_file_stream_raw(self):
+
+        def test_callback(data, response, progress = [0]):
+            self.assertTrue(len(data) > 0)
+            progress[0] += len(data)
+            total = float(response.headers['Content-Length'])
+            print("Progress... {}%".format(int(progress[0]*100/total)))
+            self.assertIsNotNone(response)
+
+        config = AutoRestSwaggerBATFormDataServiceConfiguration(base_url="http://localhost:3000")
+        config.log_level = log_level
+        config.connection.data_block_size = 2
+        client = AutoRestSwaggerBATFormDataService(config)
+
+        name = os.path.basename(self.dummy_file)
+        result = io.BytesIO()
+        with open(self.dummy_file, 'rb') as upload_data:
+            resp = client.formdata.upload_file(upload_data, name, raw=True, callback=test_callback)
+            for r in resp.output:
+                result.write(r)
+            self.assertEqual(result.getvalue().decode(), "Test file")
+
     def test_file_body_upload(self):
+
+        test_string = "Upload file test case"
+        test_bytes = bytearray(test_string, encoding='utf-8')
+
+        def test_callback(data, response, progress = [0]):
+            self.assertTrue(len(data) > 0)
+            progress[0] += len(data)
+            total = float(len(test_bytes))
+            if response:
+                print("Downloading... {}%".format(int(progress[0]*100/total)))
+            else:
+                print("Uploading... {}%".format(int(progress[0]*100/total)))
+
+        config = AutoRestSwaggerBATFormDataServiceConfiguration(base_url="http://localhost:3000")
+        config.log_level = log_level
+        config.connection.data_block_size = 2
+        client = AutoRestSwaggerBATFormDataService(config)
+        
+        result = io.BytesIO()
+        with io.BytesIO(test_bytes) as stream_data:
+            resp = client.formdata.upload_file_via_body(stream_data, "UploadFile.txt", callback=test_callback)
+            for r in resp:
+                result.write(r)
+            self.assertEqual(result.getvalue().decode(), test_string)
+
+        name = os.path.basename(self.dummy_file)
+        result = io.BytesIO()
+        with open(self.dummy_file, 'rb') as upload_data:
+            resp = client.formdata.upload_file_via_body(upload_data, name, callback=test_callback)
+            for r in resp:
+                print(r)
+                result.write(r)
+            self.assertEqual(result.getvalue().decode(), "Test file")
+
+    def test_file_body_upload_raw(self):
 
         config = AutoRestSwaggerBATFormDataServiceConfiguration(base_url="http://localhost:3000")
         config.log_level = log_level
@@ -101,8 +197,8 @@ class FormDataTests(unittest.TestCase):
         name = os.path.basename(self.dummy_file)
         result = io.BytesIO()
         with open(self.dummy_file, 'rb') as upload_data:
-            resp = client.formdata.upload_file_via_body(upload_data, name)
-            for r in resp:
+            resp = client.formdata.upload_file_via_body(upload_data, name, raw=True)
+            for r in resp.output:
                 result.write(r)
             self.assertEqual(result.getvalue().decode(), "Test file")
 
