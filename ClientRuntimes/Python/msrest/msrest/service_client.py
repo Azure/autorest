@@ -223,16 +223,17 @@ class ServiceClient(object):
         :param data: A response object to be streamed.
         :param callback: Custom callback for monitoring progress.
         """
+        block = self.config.connection.data_block_size
         if not data._content_consumed:
             with contextlib.closing(data) as response:
-                for chunk in response.iter_content(self.config.connection.data_block_size):
+                for chunk in response.iter_content(block):
                     if not chunk:
                         break
                     if callback and callable(callback):
                         callback(chunk, response=response)
                     yield chunk
         else:
-            for chunk in data.iter_content(self.config.connection.data_block_size):
+            for chunk in data.iter_content(block):
                 if not chunk:
                     break
                 if callback and callable(callback):
