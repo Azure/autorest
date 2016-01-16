@@ -50,13 +50,6 @@ class CloudErrorData(object):
         self.data = None
         super(CloudErrorData, self).__init__(*args)
 
-    def __setattr__(self, attr, value):
-        """Custom setattr to further deserialize 'message' attribute."""
-        if attr == 'message':
-            self._set_message(value)
-        else:
-            super(CloudErrorData, self).__setattr__(attr, value)
-
     def __str__(self):
         """Cloud error message."""
         return str(self._message)
@@ -66,7 +59,8 @@ class CloudErrorData(object):
         """Cloud error message."""
         return self._message
 
-    def _set_message(self, value):
+    @message.setter
+    def message(self, value):
         """Attempt to deconstruct error message to retrieve further
         error data.
         """

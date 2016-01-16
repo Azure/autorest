@@ -199,8 +199,12 @@ def log_response(adapter, request, response, *args, **kwargs):
         if header and pattern.match(header):
             filename = header.partition('=')[2]
             LOGGER.debug("File attachments: " + filename)
+        elif result.headers.get("content-type", "").endswith("octet-stream"):
+            LOGGER.debug("Body contains binary data.")
         elif result.headers.get("content-type", "").startswith("image"):
             LOGGER.debug("Body contains image data.")
+        #elif result.headers.get("transfer-encoding") == 'chunked':
+        #    LOGGER.debug("Body contains chunked data.")
         else:
             LOGGER.debug(str(result.content))
         return result

@@ -24,12 +24,16 @@
 #
 #--------------------------------------------------------------------------
 
+import io
 import json
 import unittest
 try:
     from unittest import mock
 except ImportError:
     import mock
+
+import requests
+from oauthlib import oauth2
 
 from msrest import ServiceClient
 from msrest.authentication import OAuthTokenAuthentication
@@ -39,14 +43,15 @@ from msrest.pipeline import (
     ClientRequest)
 
 from msrest import Configuration
+from msrest.exceptions import ClientRequestError, TokenExpiredError
+from msrest.pipeline import ClientRequest
 
 
 class TestServiceClient(unittest.TestCase):
 
     def setUp(self):
-        self.cfg = mock.create_autospec(Configuration)
+        self.cfg = Configuration("https://my_endpoint.com")
         self.cfg.log_name = "test_log_name"
-        self.cfg.base_url = "https://my_endpoint.com"
         self.creds = mock.create_autospec(OAuthTokenAuthentication)
         return super(TestServiceClient, self).setUp()
 
@@ -130,6 +135,84 @@ class TestServiceClient(unittest.TestCase):
         url = "test"
         formatted = ServiceClient._format_url(mock_client, url)
         self.assertEqual(formatted, "http://localhost:3000/test")
+
+    def test_client_send(self):
+
+        mock_client = mock.create_autospec(ServiceClient)
+        mock_client.config = self.cfg
+        mock_client.creds = self.creds
+        mock_client._log = self.cfg._log
+        mock_client._configure_session.return_value = {}
+        session = mock.create_autospec(requests.Session)
+        mock_client.creds.signed_session.return_value = session
+        mock_client.creds.refresh_session.return_value = session
+
+        request = ClientRequest('GET')
+        ServiceClient.send(mock_client, request)
+        session.request.call_count = 0
+        mock_client._configure_session.assert_called_with(session)
+        session.request.assert_called_with('GET', None, data=[], headers={})
+        session.close.assert_called_with()
+
+        ServiceClient.send(mock_client, request, headers={'id':'1234'}, content={'Test':'Data'})
+        mock_client._configure_session.assert_called_with(session)
+        session.request.assert_called_with('GET', None, data='{"Test": "Data"}', headers={'Content-Length': 16, 'id':'1234'})
+        self.assertEqual(session.request.call_count, 1)
+        session.request.call_count = 0
+        session.close.assert_called_with()
+
+        session.request.side_effect = requests.RequestException("test")
+        with self.assertRaises(ClientRequestError):
+            ServiceClient.send(mock_client, request, headers={'id':'1234'}, content={'Test':'Data'}, test='value')
+        mock_client._configure_session.assert_called_with(session, test='value')
+        session.request.assert_called_with('GET', None, data='{"Test": "Data"}', headers={'Content-Length': 16, 'id':'1234'})
+        self.assertEqual(session.request.call_count, 1)
+        session.request.call_count = 0
+        session.close.assert_called_with()
+
+        session.request.side_effect = oauth2.rfc6749.errors.InvalidGrantError("test")
+        with self.assertRaises(TokenExpiredError):
+            ServiceClient.send(mock_client, request, headers={'id':'1234'}, content={'Test':'Data'}, test='value')
+        self.assertEqual(session.request.call_count, 2)
+        session.request.call_count = 0
+        session.close.assert_called_with()
+
+        session.request.side_effect = ValueError("test")
+        with self.assertRaises(ValueError):
+            ServiceClient.send(mock_client, request, headers={'id':'1234'}, content={'Test':'Data'}, test='value')
+        session.close.assert_called_with()
+
+    def test_client_formdata_send(self):
+
+        mock_client = mock.create_autospec(ServiceClient)
+        mock_client._format_data.return_value = "formatted"
+        request = ClientRequest('GET')
+        ServiceClient.send_formdata(mock_client, request)
+        mock_client.send.assert_called_with(request, {}, None, files={})
+
+        ServiceClient.send_formdata(mock_client, request, {'id':'1234'}, {'Test':'Data'})
+        mock_client.send.assert_called_with(request, {'id':'1234'}, None, files={'Test':'formatted'})
+
+        ServiceClient.send_formdata(mock_client, request, {'Content-Type':'1234'}, {'1':'1', '2':'2'})
+        mock_client.send.assert_called_with(request, {}, None, files={'1':'formatted', '2':'formatted'})
+
+    def test_format_data(self):
+
+        mock_client = mock.create_autospec(ServiceClient)
+        data = ServiceClient._format_data(mock_client, None)
+        self.assertEqual(data, (None, None))
+
+        data = ServiceClient._format_data(mock_client, "Test")
+        self.assertEqual(data, (None, "Test"))
+
+        mock_stream = mock.create_autospec(io.BytesIO)
+        data = ServiceClient._format_data(mock_client, mock_stream)
+        self.assertEqual(data, (None, mock_stream, "application/octet-stream"))
+
+        mock_stream.name = "file_name"
+        data = ServiceClient._format_data(mock_client, mock_stream)
+        self.assertEqual(data, ("file_name", mock_stream, "application/octet-stream"))
+
 
 if __name__ == '__main__':
     unittest.main()
