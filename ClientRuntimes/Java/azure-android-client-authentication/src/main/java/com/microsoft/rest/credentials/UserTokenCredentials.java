@@ -122,7 +122,7 @@ public class UserTokenCredentials extends TokenCredentials {
                 this.getClientId(),
                 this.getClientRedirectUri(),
                 null,
-                PromptBehavior.Always,
+                PromptBehavior.Auto,
                 null,
                 new AuthenticationCallback<AuthenticationResult>() {
                     @Override
