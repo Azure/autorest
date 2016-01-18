@@ -12,6 +12,7 @@ import android.app.Activity;
 import com.microsoft.aad.adal.AuthenticationCallback;
 import com.microsoft.aad.adal.AuthenticationContext;
 import com.microsoft.aad.adal.AuthenticationResult;
+import com.microsoft.aad.adal.DefaultTokenCacheStore;
 import com.microsoft.aad.adal.PromptBehavior;
 
 import java.io.IOException;
@@ -36,6 +37,8 @@ public class UserTokenCredentials extends TokenCredentials {
     private Activity activity;
     /** The count down latch to synchronize token acquisition. */
     private CountDownLatch signal = new CountDownLatch(1);
+    /** The static token cache. */
+    private static DefaultTokenCacheStore tokenCacheStore;
 
     /**
      * Initializes a new instance of the UserTokenCredentials.
@@ -57,6 +60,20 @@ public class UserTokenCredentials extends TokenCredentials {
             this.environment = environment;
         }
         this.activity = activity;
+        if (tokenCacheStore == null) {
+            try {
+                tokenCacheStore = new DefaultTokenCacheStore(activity);
+            } catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
+                tokenCacheStore = null;
+            }
+        }
+    }
+
+    /**
+     * Clear the items stored in token cache.
+     */
+    public static void clearTokenCache() {
+        tokenCacheStore.removeAll();
     }
 
     /**
@@ -110,19 +127,14 @@ public class UserTokenCredentials extends TokenCredentials {
 
     private void acquireAccessToken() throws IOException {
         String authorityUrl = this.getEnvironment().getAuthenticationEndpoint() + this.getDomain();
-        AuthenticationContext context;
-        try {
-            context = new AuthenticationContext(activity, authorityUrl, true);
-        } catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
-            return;
-        }
+        AuthenticationContext context = new AuthenticationContext(activity, authorityUrl, true, tokenCacheStore);
         final TokenCredentials self = this;
         context.acquireToken(
                 this.getEnvironment().getTokenAudience(),
                 this.getClientId(),
                 this.getClientRedirectUri(),
                 null,
-                PromptBehavior.Always,
+                PromptBehavior.Auto,
                 null,
                 new AuthenticationCallback<AuthenticationResult>() {
                     @Override
