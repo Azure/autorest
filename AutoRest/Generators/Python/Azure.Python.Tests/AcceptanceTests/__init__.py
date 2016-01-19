@@ -80,6 +80,6 @@ if __name__ == '__main__':
             sys.exit(1)
 
     finally:
-        print "Killing server"
+        print("Killing server")
         terminate_server_process(server)
-        print "Done killing server"
+        print("Done killing server")
