@@ -122,10 +122,11 @@ class ServiceClient(object):
         kwargs = self.config.connection()
         for opt in ['timeout', 'verify', 'cert']:
             kwargs[opt] = config.get(opt, kwargs[opt])
-        for opt in ['cookies', 'stream', 'files']:
+        for opt in ['cookies', 'files']:
             kwargs[opt] = config.get(opt)
         kwargs['allow_redirects'] = config.get(
             'allow_redirects', bool(self.config.redirect_policy))
+        kwargs['stream'] = True
 
         session.headers.update(self._headers)
         session.headers['User-Agent'] = self.config.user_agent
@@ -166,7 +167,7 @@ class ServiceClient(object):
             pass
         return self.send(request, headers, None, files=file_data, **config)
 
-    def send(self, request, headers={}, content=None, **config):
+    def send(self, request, headers=None, content=None, **config):
         """Prepare and send request object according to configuration.
 
         :param ClientRequest request: The request object to be sent.
@@ -177,7 +178,7 @@ class ServiceClient(object):
         session = self.creds.signed_session()
         kwargs = self._configure_session(session, **config)
 
-        request.add_headers(headers)
+        request.add_headers(headers if headers else {})
         if not kwargs.get('files'):
             request.add_content(content)
         try:
