@@ -28,7 +28,7 @@ class LROsCustomHeaderOperations(object):
         self.config = config
 
     def put_async_retry_succeeded(
-            self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, product=None, custom_headers={}, raw=False, **operation_config):
         """
         x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is
         required message header for all requests. Long running put request,
@@ -41,10 +41,6 @@ class LROsCustomHeaderOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
@@ -111,10 +107,10 @@ class LROsCustomHeaderOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def put201_creating_succeeded200(
-            self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, product=None, custom_headers={}, raw=False, **operation_config):
         """
         x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is
         required message header for all requests. Long running put request,
@@ -127,10 +123,6 @@ class LROsCustomHeaderOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
@@ -192,10 +184,10 @@ class LROsCustomHeaderOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def post202_retry200(
-            self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, product=None, custom_headers={}, raw=False, **operation_config):
         """
         x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is
         required message header for all requests. Long running post request,
@@ -208,10 +200,6 @@ class LROsCustomHeaderOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -267,10 +255,10 @@ class LROsCustomHeaderOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def post_async_retry_succeeded(
-            self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, product=None, custom_headers={}, raw=False, **operation_config):
         """
         x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is
         required message header for all requests. Long running post request,
@@ -283,10 +271,6 @@ class LROsCustomHeaderOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -343,4 +327,4 @@ class LROsCustomHeaderOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)

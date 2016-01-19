@@ -26,7 +26,7 @@ class MultipleResponses(object):
         self.config = config
 
     def get200_model204_no_model_default_error200_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Send a 200 response with valid payload: {'statusCode': '200'}
 
@@ -66,7 +66,7 @@ class MultipleResponses(object):
         return deserialized
 
     def get200_model204_no_model_default_error204_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Send a 204 response with no payload
 
@@ -106,7 +106,7 @@ class MultipleResponses(object):
         return deserialized
 
     def get200_model204_no_model_default_error201_invalid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Send a 201 response with valid payload: {'statusCode': '201'}
 
@@ -146,7 +146,7 @@ class MultipleResponses(object):
         return deserialized
 
     def get200_model204_no_model_default_error202_none(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Send a 202 response with no payload:
 
@@ -186,7 +186,7 @@ class MultipleResponses(object):
         return deserialized
 
     def get200_model204_no_model_default_error400_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Send a 400 response with valid error payload: {'status': 400,
         'message': 'client error'}
@@ -227,7 +227,7 @@ class MultipleResponses(object):
         return deserialized
 
     def get200_model201_model_default_error200_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Send a 200 response with valid payload: {'statusCode': '200'}
 
@@ -269,7 +269,7 @@ class MultipleResponses(object):
         return deserialized
 
     def get200_model201_model_default_error201_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Send a 201 response with valid payload: {'statusCode': '201',
         'textStatusCode': 'Created'}
@@ -312,7 +312,7 @@ class MultipleResponses(object):
         return deserialized
 
     def get200_model201_model_default_error400_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Send a 400 response with valid payload: {'code': '400', 'message':
         'client error'}
@@ -355,7 +355,7 @@ class MultipleResponses(object):
         return deserialized
 
     def get200_model_a201_model_c404_model_ddefault_error200_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Send a 200 response with valid payload: {'statusCode': '200'}
 
@@ -400,7 +400,7 @@ class MultipleResponses(object):
         return deserialized
 
     def get200_model_a201_model_c404_model_ddefault_error201_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Send a 200 response with valid payload: {'httpCode': '201'}
 
@@ -445,7 +445,7 @@ class MultipleResponses(object):
         return deserialized
 
     def get200_model_a201_model_c404_model_ddefault_error404_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Send a 200 response with valid payload: {'httpStatusCode': '404'}
 
@@ -490,7 +490,7 @@ class MultipleResponses(object):
         return deserialized
 
     def get200_model_a201_model_c404_model_ddefault_error400_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Send a 400 response with valid payload: {'code': '400', 'message':
         'client error'}
@@ -536,7 +536,7 @@ class MultipleResponses(object):
         return deserialized
 
     def get202_none204_none_default_error202_none(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Send a 202 response with no payload
 
@@ -569,7 +569,7 @@ class MultipleResponses(object):
             return client_raw_response
 
     def get202_none204_none_default_error204_none(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Send a 204 response with no payload
 
@@ -602,7 +602,7 @@ class MultipleResponses(object):
             return client_raw_response
 
     def get202_none204_none_default_error400_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Send a 400 response with valid payload: {'code': '400', 'message':
         'client error'}
@@ -636,7 +636,7 @@ class MultipleResponses(object):
             return client_raw_response
 
     def get202_none204_none_default_none202_invalid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Send a 202 response with an unexpected payload {'property': 'value'}
 
@@ -669,7 +669,7 @@ class MultipleResponses(object):
             return client_raw_response
 
     def get202_none204_none_default_none204_none(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Send a 204 response with no payload
 
@@ -702,7 +702,7 @@ class MultipleResponses(object):
             return client_raw_response
 
     def get202_none204_none_default_none400_none(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Send a 400 response with no payload
 
@@ -735,7 +735,7 @@ class MultipleResponses(object):
             return client_raw_response
 
     def get202_none204_none_default_none400_invalid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Send a 400 response with an unexpected payload {'property': 'value'}
 
@@ -768,7 +768,7 @@ class MultipleResponses(object):
             return client_raw_response
 
     def get_default_model_a200_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Send a 200 response with valid payload: {'statusCode': '200'}
 
@@ -801,7 +801,7 @@ class MultipleResponses(object):
             return client_raw_response
 
     def get_default_model_a200_none(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Send a 200 response with no payload
 
@@ -834,7 +834,7 @@ class MultipleResponses(object):
             return client_raw_response
 
     def get_default_model_a400_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Send a 400 response with valid payload: {'statusCode': '400'}
 
@@ -867,7 +867,7 @@ class MultipleResponses(object):
             return client_raw_response
 
     def get_default_model_a400_none(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Send a 400 response with no payload
 
@@ -900,7 +900,7 @@ class MultipleResponses(object):
             return client_raw_response
 
     def get_default_none200_invalid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Send a 200 response with invalid payload: {'statusCode': '200'}
 
@@ -933,7 +933,7 @@ class MultipleResponses(object):
             return client_raw_response
 
     def get_default_none200_none(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Send a 200 response with no payload
 
@@ -966,7 +966,7 @@ class MultipleResponses(object):
             return client_raw_response
 
     def get_default_none400_invalid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Send a 400 response with valid payload: {'statusCode': '400'}
 
@@ -999,7 +999,7 @@ class MultipleResponses(object):
             return client_raw_response
 
     def get_default_none400_none(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Send a 400 response with no payload
 
@@ -1032,7 +1032,7 @@ class MultipleResponses(object):
             return client_raw_response
 
     def get200_model_a200_none(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Send a 200 response with no payload, when a payload is expected -
         client should return a null object of thde type for model A
@@ -1073,7 +1073,7 @@ class MultipleResponses(object):
         return deserialized
 
     def get200_model_a200_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Send a 200 response with payload {'statusCode': '200'}
 
@@ -1113,7 +1113,7 @@ class MultipleResponses(object):
         return deserialized
 
     def get200_model_a200_invalid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Send a 200 response with invalid payload {'statusCodeInvalid': '200'}
 
@@ -1153,7 +1153,7 @@ class MultipleResponses(object):
         return deserialized
 
     def get200_model_a400_none(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Send a 400 response with no payload client should treat as an http
         error with no error model
@@ -1194,7 +1194,7 @@ class MultipleResponses(object):
         return deserialized
 
     def get200_model_a400_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Send a 200 response with payload {'statusCode': '400'}
 
@@ -1234,7 +1234,7 @@ class MultipleResponses(object):
         return deserialized
 
     def get200_model_a400_invalid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Send a 200 response with invalid payload {'statusCodeInvalid': '400'}
 
@@ -1274,7 +1274,7 @@ class MultipleResponses(object):
         return deserialized
 
     def get200_model_a202_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Send a 202 response with payload {'statusCode': '202'}
 

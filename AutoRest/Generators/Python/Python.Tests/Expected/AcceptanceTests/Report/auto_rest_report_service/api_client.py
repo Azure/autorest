@@ -41,7 +41,7 @@ class AutoRestReportService(object):
         self.config = config
 
     def get_report(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get test coverage report
 

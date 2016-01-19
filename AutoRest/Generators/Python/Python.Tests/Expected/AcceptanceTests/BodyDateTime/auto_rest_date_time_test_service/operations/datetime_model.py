@@ -25,7 +25,7 @@ class DatetimeModel(object):
         self.config = config
 
     def get_null(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get null datetime value
 
@@ -66,7 +66,7 @@ class DatetimeModel(object):
         return deserialized
 
     def get_invalid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get invalid datetime value
 
@@ -107,7 +107,7 @@ class DatetimeModel(object):
         return deserialized
 
     def get_overflow(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get overflow datetime value
 
@@ -148,7 +148,7 @@ class DatetimeModel(object):
         return deserialized
 
     def get_underflow(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get underflow datetime value
 
@@ -189,7 +189,7 @@ class DatetimeModel(object):
         return deserialized
 
     def put_utc_max_date_time(
-            self, datetime_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, datetime_body, custom_headers={}, raw=False, **operation_config):
         """
         Put max datetime value 9999-12-31T23:59:59.9999999Z
 
@@ -228,7 +228,7 @@ class DatetimeModel(object):
             return client_raw_response
 
     def get_utc_lowercase_max_date_time(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get max datetime value 9999-12-31t23:59:59.9999999z
 
@@ -269,7 +269,7 @@ class DatetimeModel(object):
         return deserialized
 
     def get_utc_uppercase_max_date_time(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get max datetime value 9999-12-31T23:59:59.9999999Z
 
@@ -310,7 +310,7 @@ class DatetimeModel(object):
         return deserialized
 
     def put_local_positive_offset_max_date_time(
-            self, datetime_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, datetime_body, custom_headers={}, raw=False, **operation_config):
         """
         Put max datetime value with positive numoffset
         9999-12-31t23:59:59.9999999+14:00
@@ -350,7 +350,7 @@ class DatetimeModel(object):
             return client_raw_response
 
     def get_local_positive_offset_lowercase_max_date_time(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get max datetime value with positive num offset
         9999-12-31t23:59:59.9999999+14:00
@@ -392,7 +392,7 @@ class DatetimeModel(object):
         return deserialized
 
     def get_local_positive_offset_uppercase_max_date_time(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get max datetime value with positive num offset
         9999-12-31T23:59:59.9999999+14:00
@@ -434,7 +434,7 @@ class DatetimeModel(object):
         return deserialized
 
     def put_local_negative_offset_max_date_time(
-            self, datetime_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, datetime_body, custom_headers={}, raw=False, **operation_config):
         """
         Put max datetime value with positive numoffset
         9999-12-31t23:59:59.9999999-14:00
@@ -474,7 +474,7 @@ class DatetimeModel(object):
             return client_raw_response
 
     def get_local_negative_offset_uppercase_max_date_time(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get max datetime value with positive num offset
         9999-12-31T23:59:59.9999999-14:00
@@ -516,7 +516,7 @@ class DatetimeModel(object):
         return deserialized
 
     def get_local_negative_offset_lowercase_max_date_time(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get max datetime value with positive num offset
         9999-12-31t23:59:59.9999999-14:00
@@ -558,7 +558,7 @@ class DatetimeModel(object):
         return deserialized
 
     def put_utc_min_date_time(
-            self, datetime_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, datetime_body, custom_headers={}, raw=False, **operation_config):
         """
         Put min datetime value 0001-01-01T00:00:00Z
 
@@ -597,7 +597,7 @@ class DatetimeModel(object):
             return client_raw_response
 
     def get_utc_min_date_time(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get min datetime value 0001-01-01T00:00:00Z
 
@@ -638,7 +638,7 @@ class DatetimeModel(object):
         return deserialized
 
     def put_local_positive_offset_min_date_time(
-            self, datetime_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, datetime_body, custom_headers={}, raw=False, **operation_config):
         """
         Put min datetime value 0001-01-01T00:00:00+14:00
 
@@ -677,7 +677,7 @@ class DatetimeModel(object):
             return client_raw_response
 
     def get_local_positive_offset_min_date_time(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get min datetime value 0001-01-01T00:00:00+14:00
 
@@ -718,7 +718,7 @@ class DatetimeModel(object):
         return deserialized
 
     def put_local_negative_offset_min_date_time(
-            self, datetime_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, datetime_body, custom_headers={}, raw=False, **operation_config):
         """
         Put min datetime value 0001-01-01T00:00:00-14:00
 
@@ -757,7 +757,7 @@ class DatetimeModel(object):
             return client_raw_response
 
     def get_local_negative_offset_min_date_time(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get min datetime value 0001-01-01T00:00:00-14:00
 

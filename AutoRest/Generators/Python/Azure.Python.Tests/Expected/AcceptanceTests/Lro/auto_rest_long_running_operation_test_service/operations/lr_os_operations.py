@@ -28,7 +28,7 @@ class LROsOperations(object):
         self.config = config
 
     def put200_succeeded(
-            self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, product=None, custom_headers={}, raw=False, **operation_config):
         """
         Long running put request, service returns a 200 to the initial
         request, with an entity that contains ProvisioningState=’Succeeded’.
@@ -38,10 +38,6 @@ class LROsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
@@ -101,10 +97,10 @@ class LROsOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def put200_succeeded_no_state(
-            self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, product=None, custom_headers={}, raw=False, **operation_config):
         """
         Long running put request, service returns a 200 to the initial
         request, with an entity that does not contain
@@ -115,10 +111,6 @@ class LROsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
@@ -178,10 +170,10 @@ class LROsOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def put202_retry200(
-            self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, product=None, custom_headers={}, raw=False, **operation_config):
         """
         Long running put request, service returns a 202 to the initial
         request, with a location header that points to a polling URL that
@@ -192,10 +184,6 @@ class LROsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
@@ -255,10 +243,10 @@ class LROsOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def put201_creating_succeeded200(
-            self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, product=None, custom_headers={}, raw=False, **operation_config):
         """
         Long running put request, service returns a 201 to the initial
         request, with an entity that contains ProvisioningState=’Creating’.
@@ -270,10 +258,6 @@ class LROsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
@@ -335,10 +319,10 @@ class LROsOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def put200_updating_succeeded204(
-            self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, product=None, custom_headers={}, raw=False, **operation_config):
         """
         Long running put request, service returns a 201 to the initial
         request, with an entity that contains ProvisioningState=’Updating’.
@@ -350,10 +334,6 @@ class LROsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
@@ -413,10 +393,10 @@ class LROsOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def put201_creating_failed200(
-            self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, product=None, custom_headers={}, raw=False, **operation_config):
         """
         Long running put request, service returns a 201 to the initial
         request, with an entity that contains ProvisioningState=’Created’.
@@ -428,10 +408,6 @@ class LROsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
@@ -493,10 +469,10 @@ class LROsOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def put200_acceptedcanceled200(
-            self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, product=None, custom_headers={}, raw=False, **operation_config):
         """
         Long running put request, service returns a 201 to the initial
         request, with an entity that contains ProvisioningState=’Creating’.
@@ -508,10 +484,6 @@ class LROsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
@@ -571,10 +543,10 @@ class LROsOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def put_no_header_in_retry(
-            self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, product=None, custom_headers={}, raw=False, **operation_config):
         """
         Long running put request, service returns a 202 to the initial request
         with location header. Subsequent calls to operation status do not
@@ -585,10 +557,6 @@ class LROsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
@@ -653,10 +621,10 @@ class LROsOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def put_async_retry_succeeded(
-            self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, product=None, custom_headers={}, raw=False, **operation_config):
         """
         Long running put request, service returns a 200 to the initial
         request, with an entity that contains ProvisioningState=’Creating’.
@@ -668,10 +636,6 @@ class LROsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
@@ -738,10 +702,10 @@ class LROsOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def put_async_no_retry_succeeded(
-            self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, product=None, custom_headers={}, raw=False, **operation_config):
         """
         Long running put request, service returns a 200 to the initial
         request, with an entity that contains ProvisioningState=’Creating’.
@@ -753,10 +717,6 @@ class LROsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
@@ -822,10 +782,10 @@ class LROsOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def put_async_retry_failed(
-            self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, product=None, custom_headers={}, raw=False, **operation_config):
         """
         Long running put request, service returns a 200 to the initial
         request, with an entity that contains ProvisioningState=’Creating’.
@@ -837,10 +797,6 @@ class LROsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
@@ -907,10 +863,10 @@ class LROsOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def put_async_no_retrycanceled(
-            self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, product=None, custom_headers={}, raw=False, **operation_config):
         """
         Long running put request, service returns a 200 to the initial
         request, with an entity that contains ProvisioningState=’Creating’.
@@ -922,10 +878,6 @@ class LROsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
@@ -991,10 +943,10 @@ class LROsOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def put_async_no_header_in_retry(
-            self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, product=None, custom_headers={}, raw=False, **operation_config):
         """
         Long running put request, service returns a 202 to the initial request
         with Azure-AsyncOperation header. Subsequent calls to operation
@@ -1005,10 +957,6 @@ class LROsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
@@ -1073,10 +1021,10 @@ class LROsOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def put_non_resource(
-            self, sku=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, sku=None, custom_headers={}, raw=False, **operation_config):
         """
         Long running put request with non resource.
 
@@ -1085,10 +1033,6 @@ class LROsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: Sku or (Sku, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -1147,10 +1091,10 @@ class LROsOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def put_async_non_resource(
-            self, sku=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, sku=None, custom_headers={}, raw=False, **operation_config):
         """
         Long running put request with non resource.
 
@@ -1159,10 +1103,6 @@ class LROsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: Sku or (Sku, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -1221,10 +1161,10 @@ class LROsOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def put_sub_resource(
-            self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, product=None, custom_headers={}, raw=False, **operation_config):
         """
         Long running put request with sub resource.
 
@@ -1233,10 +1173,6 @@ class LROsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: SubProduct or (SubProduct, requests.response) or
         concurrent.futures.Future
         """
@@ -1296,10 +1232,10 @@ class LROsOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def put_async_sub_resource(
-            self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, product=None, custom_headers={}, raw=False, **operation_config):
         """
         Long running put request with sub resource.
 
@@ -1308,10 +1244,6 @@ class LROsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: SubProduct or (SubProduct, requests.response) or
         concurrent.futures.Future
         """
@@ -1371,10 +1303,10 @@ class LROsOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def delete_provisioning202_accepted200_succeeded(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Long running delete request, service returns a 202 to the initial
         request, with an entity that contains ProvisioningState=’Accepted’.
@@ -1384,10 +1316,6 @@ class LROsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
@@ -1452,10 +1380,10 @@ class LROsOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def delete_provisioning202_deleting_failed200(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Long running delete request, service returns a 202 to the initial
         request, with an entity that contains ProvisioningState=’Creating’.
@@ -1465,10 +1393,6 @@ class LROsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
@@ -1533,10 +1457,10 @@ class LROsOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def delete_provisioning202_deletingcanceled200(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Long running delete request, service returns a 202 to the initial
         request, with an entity that contains ProvisioningState=’Creating’.
@@ -1546,10 +1470,6 @@ class LROsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
@@ -1614,20 +1534,16 @@ class LROsOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def delete204_succeeded(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Long running delete succeeds and returns right away
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -1672,10 +1588,10 @@ class LROsOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def delete202_retry200(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Long running delete request, service returns a 202 to the initial
         request. Polls return this value until the last poll returns a ‘200’
@@ -1684,10 +1600,6 @@ class LROsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
@@ -1746,10 +1658,10 @@ class LROsOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def delete202_no_retry204(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Long running delete request, service returns a 202 to the initial
         request. Polls return this value until the last poll returns a ‘200’
@@ -1758,10 +1670,6 @@ class LROsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
@@ -1820,10 +1728,10 @@ class LROsOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def delete_no_header_in_retry(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Long running delete request, service returns a location header in the
         initial request. Subsequent calls to operation status do not contain
@@ -1832,10 +1740,6 @@ class LROsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -1883,10 +1787,10 @@ class LROsOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def delete_async_no_header_in_retry(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Long running delete request, service returns an Azure-AsyncOperation
         header in the initial request. Subsequent calls to operation status
@@ -1895,10 +1799,6 @@ class LROsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -1946,10 +1846,10 @@ class LROsOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def delete_async_retry_succeeded(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Long running delete request, service returns a 202 to the initial
         request. Poll the endpoint indicated in the Azure-AsyncOperation
@@ -1958,10 +1858,6 @@ class LROsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -2011,10 +1907,10 @@ class LROsOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def delete_async_no_retry_succeeded(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Long running delete request, service returns a 202 to the initial
         request. Poll the endpoint indicated in the Azure-AsyncOperation
@@ -2023,10 +1919,6 @@ class LROsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -2076,10 +1968,10 @@ class LROsOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def delete_async_retry_failed(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Long running delete request, service returns a 202 to the initial
         request. Poll the endpoint indicated in the Azure-AsyncOperation
@@ -2088,10 +1980,6 @@ class LROsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -2141,10 +2029,10 @@ class LROsOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def delete_async_retrycanceled(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Long running delete request, service returns a 202 to the initial
         request. Poll the endpoint indicated in the Azure-AsyncOperation
@@ -2153,10 +2041,6 @@ class LROsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -2206,10 +2090,10 @@ class LROsOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def post200_with_payload(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Long running post request, service returns a 202 to the initial
         request, with 'Location' header. Poll returns a 200 with a response
@@ -2218,10 +2102,6 @@ class LROsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: Sku or (Sku, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -2275,10 +2155,10 @@ class LROsOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def post202_retry200(
-            self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, product=None, custom_headers={}, raw=False, **operation_config):
         """
         Long running post request, service returns a 202 to the initial
         request, with 'Location' and 'Retry-After' headers, Polls return a
@@ -2289,10 +2169,6 @@ class LROsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -2348,10 +2224,10 @@ class LROsOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def post202_no_retry204(
-            self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, product=None, custom_headers={}, raw=False, **operation_config):
         """
         Long running post request, service returns a 202 to the initial
         request, with 'Location' header, 204 with noresponse body after
@@ -2362,10 +2238,6 @@ class LROsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
@@ -2431,10 +2303,10 @@ class LROsOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def post_async_retry_succeeded(
-            self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, product=None, custom_headers={}, raw=False, **operation_config):
         """
         Long running post request, service returns a 202 to the initial
         request, with an entity that contains ProvisioningState=’Creating’.
@@ -2446,10 +2318,6 @@ class LROsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
@@ -2516,10 +2384,10 @@ class LROsOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def post_async_no_retry_succeeded(
-            self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, product=None, custom_headers={}, raw=False, **operation_config):
         """
         Long running post request, service returns a 202 to the initial
         request, with an entity that contains ProvisioningState=’Creating’.
@@ -2531,10 +2399,6 @@ class LROsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: Product or (Product, requests.response) or
         concurrent.futures.Future
         """
@@ -2601,10 +2465,10 @@ class LROsOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def post_async_retry_failed(
-            self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, product=None, custom_headers={}, raw=False, **operation_config):
         """
         Long running post request, service returns a 202 to the initial
         request, with an entity that contains ProvisioningState=’Creating’.
@@ -2616,10 +2480,6 @@ class LROsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -2676,10 +2536,10 @@ class LROsOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)
 
     def post_async_retrycanceled(
-            self, product=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, product=None, custom_headers={}, raw=False, **operation_config):
         """
         Long running post request, service returns a 202 to the initial
         request, with an entity that contains ProvisioningState=’Creating’.
@@ -2691,10 +2551,6 @@ class LROsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the call will run asynchronously and
-        call the callback when complete.  When specified the function returns
-        a concurrent.futures.Future
-        :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
@@ -2751,4 +2607,4 @@ class LROsOperations(object):
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)

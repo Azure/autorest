@@ -26,7 +26,7 @@ class ApiVersionDefaultOperations(object):
         self.config = config
 
     def get_method_global_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         GET method with api-version modeled in global settings.
 
@@ -63,7 +63,7 @@ class ApiVersionDefaultOperations(object):
             return client_raw_response
 
     def get_method_global_not_provided_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         GET method with api-version modeled in global settings.
 
@@ -100,7 +100,7 @@ class ApiVersionDefaultOperations(object):
             return client_raw_response
 
     def get_path_global_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         GET method with api-version modeled in global settings.
 
@@ -137,7 +137,7 @@ class ApiVersionDefaultOperations(object):
             return client_raw_response
 
     def get_swagger_global_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         GET method with api-version modeled in global settings.
 

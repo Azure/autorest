@@ -25,7 +25,7 @@ class Explicit(object):
         self.config = config
 
     def post_required_integer_parameter(
-            self, body_parameter, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, body_parameter, custom_headers={}, raw=False, **operation_config):
         """
         Test explicitly required integer. Please put null and the client
         library should throw before the request is sent.
@@ -66,7 +66,7 @@ class Explicit(object):
             return client_raw_response
 
     def post_optional_integer_parameter(
-            self, body_parameter=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, body_parameter=None, custom_headers={}, raw=False, **operation_config):
         """
         Test explicitly optional integer. Please put null.
 
@@ -108,7 +108,7 @@ class Explicit(object):
             return client_raw_response
 
     def post_required_integer_property(
-            self, value, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, value, custom_headers={}, raw=False, **operation_config):
         """
         Test explicitly required integer. Please put a valid int-wrapper with
         'value' = null and the client library should throw before the request
@@ -154,7 +154,7 @@ class Explicit(object):
             return client_raw_response
 
     def post_optional_integer_property(
-            self, value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, value=None, custom_headers={}, raw=False, **operation_config):
         """
         Test explicitly optional integer. Please put a valid int-wrapper with
         'value' = null.
@@ -201,7 +201,7 @@ class Explicit(object):
             return client_raw_response
 
     def post_required_integer_header(
-            self, header_parameter, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, header_parameter, custom_headers={}, raw=False, **operation_config):
         """
         Test explicitly required integer. Please put a header
         'headerParameter' => null and the client library should throw before
@@ -240,7 +240,7 @@ class Explicit(object):
             return client_raw_response
 
     def post_optional_integer_header(
-            self, header_parameter=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, header_parameter=None, custom_headers={}, raw=False, **operation_config):
         """
         Test explicitly optional integer. Please put a header
         'headerParameter' => null.
@@ -278,7 +278,7 @@ class Explicit(object):
             return client_raw_response
 
     def post_required_string_parameter(
-            self, body_parameter, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, body_parameter, custom_headers={}, raw=False, **operation_config):
         """
         Test explicitly required string. Please put null and the client
         library should throw before the request is sent.
@@ -319,7 +319,7 @@ class Explicit(object):
             return client_raw_response
 
     def post_optional_string_parameter(
-            self, body_parameter=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, body_parameter=None, custom_headers={}, raw=False, **operation_config):
         """
         Test explicitly optional string. Please put null.
 
@@ -361,7 +361,7 @@ class Explicit(object):
             return client_raw_response
 
     def post_required_string_property(
-            self, value, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, value, custom_headers={}, raw=False, **operation_config):
         """
         Test explicitly required string. Please put a valid string-wrapper
         with 'value' = null and the client library should throw before the
@@ -407,7 +407,7 @@ class Explicit(object):
             return client_raw_response
 
     def post_optional_string_property(
-            self, value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, value=None, custom_headers={}, raw=False, **operation_config):
         """
         Test explicitly optional integer. Please put a valid string-wrapper
         with 'value' = null.
@@ -454,7 +454,7 @@ class Explicit(object):
             return client_raw_response
 
     def post_required_string_header(
-            self, header_parameter, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, header_parameter, custom_headers={}, raw=False, **operation_config):
         """
         Test explicitly required string. Please put a header 'headerParameter'
         => null and the client library should throw before the request is
@@ -493,7 +493,7 @@ class Explicit(object):
             return client_raw_response
 
     def post_optional_string_header(
-            self, body_parameter=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, body_parameter=None, custom_headers={}, raw=False, **operation_config):
         """
         Test explicitly optional string. Please put a header 'headerParameter'
         => null.
@@ -531,7 +531,7 @@ class Explicit(object):
             return client_raw_response
 
     def post_required_class_parameter(
-            self, body_parameter, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, body_parameter, custom_headers={}, raw=False, **operation_config):
         """
         Test explicitly required complex object. Please put null and the
         client library should throw before the request is sent.
@@ -572,7 +572,7 @@ class Explicit(object):
             return client_raw_response
 
     def post_optional_class_parameter(
-            self, body_parameter=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, body_parameter=None, custom_headers={}, raw=False, **operation_config):
         """
         Test explicitly optional complex object. Please put null.
 
@@ -614,7 +614,7 @@ class Explicit(object):
             return client_raw_response
 
     def post_required_class_property(
-            self, value, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, value, custom_headers={}, raw=False, **operation_config):
         """
         Test explicitly required complex object. Please put a valid
         class-wrapper with 'value' = null and the client library should throw
@@ -660,7 +660,7 @@ class Explicit(object):
             return client_raw_response
 
     def post_optional_class_property(
-            self, value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, value=None, custom_headers={}, raw=False, **operation_config):
         """
         Test explicitly optional complex object. Please put a valid
         class-wrapper with 'value' = null.
@@ -707,7 +707,7 @@ class Explicit(object):
             return client_raw_response
 
     def post_required_array_parameter(
-            self, body_parameter, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, body_parameter, custom_headers={}, raw=False, **operation_config):
         """
         Test explicitly required array. Please put null and the client library
         should throw before the request is sent.
@@ -748,7 +748,7 @@ class Explicit(object):
             return client_raw_response
 
     def post_optional_array_parameter(
-            self, body_parameter=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, body_parameter=None, custom_headers={}, raw=False, **operation_config):
         """
         Test explicitly optional array. Please put null.
 
@@ -790,7 +790,7 @@ class Explicit(object):
             return client_raw_response
 
     def post_required_array_property(
-            self, value, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, value, custom_headers={}, raw=False, **operation_config):
         """
         Test explicitly required array. Please put a valid array-wrapper with
         'value' = null and the client library should throw before the request
@@ -836,7 +836,7 @@ class Explicit(object):
             return client_raw_response
 
     def post_optional_array_property(
-            self, value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, value=None, custom_headers={}, raw=False, **operation_config):
         """
         Test explicitly optional array. Please put a valid array-wrapper with
         'value' = null.
@@ -883,7 +883,7 @@ class Explicit(object):
             return client_raw_response
 
     def post_required_array_header(
-            self, header_parameter, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, header_parameter, custom_headers={}, raw=False, **operation_config):
         """
         Test explicitly required array. Please put a header 'headerParameter'
         => null and the client library should throw before the request is
@@ -922,7 +922,7 @@ class Explicit(object):
             return client_raw_response
 
     def post_optional_array_header(
-            self, header_parameter=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, header_parameter=None, custom_headers={}, raw=False, **operation_config):
         """
         Test explicitly optional integer. Please put a header
         'headerParameter' => null.

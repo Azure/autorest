@@ -26,7 +26,7 @@ class HeaderOperations(object):
         self.config = config
 
     def custom_named_request_id(
-            self, foo_client_request_id, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, foo_client_request_id, custom_headers={}, raw=False, **operation_config):
         """
         Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in
         the header of the request

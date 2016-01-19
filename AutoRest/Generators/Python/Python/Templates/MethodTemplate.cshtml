@@ -27,38 +27,11 @@
         @WrapComment(string.Empty, ":param boolean raw: returns the direct response alongside the deserialized response")
 @if (Model.NeedsCallback)
 {
-@:        @WrapComment(string.Empty, ":param callback: if provided, the runtime will call the callback when stream upload/download.  When specified the function returns a concurrent.futures.Future")
+@:        @WrapComment(string.Empty, ":param callback: if provided, the runtime will call the callback while streaming upload/download. If streaming upload, response kwarg will be None")
 @:        @WrapComment(string.Empty, ":type callback: Callable[[concurrent.futures.Future], None] or None")
 }
         @WrapComment(string.Empty, string.Format(":rtype: {0} or ({0}, requests.response) or concurrent.futures.Future", MethodTemplateModel.GetDocumentationType(Model.ReturnType.Body)))
         """
-@if (Model.IsStreamBody)
-{
-<text>
-        def upload_gen(file_handle):
-            while True:
-                data = file_handle.read(self.config.connection.data_block_size)
-                if not data:
-                    break
-                if callback and callable(callback):
-                    callback(None, data=data)
-                yield data
-</text>
-@EmptyLine
-}
-@if (Model.IsStreamResponse)
-{
-<text>
-        def download_gen():
-            for data in response.iter_content(self.config.connection.data_block_size):
-                if not data:
-                    break
-                if callback and callable(callback):
-                    callback(None, data=data)
-                yield data
-</text>
-@EmptyLine
-}
         @Model.BuildInputMappings()
 @if (Model.InputParameterTransformation.Any())
 {
@@ -81,16 +54,16 @@
 @if (Model.RequestBody != null)
 {
         @:# Construct body
-  if (Model.IsStreamBody)
+  if (Model.IsStreamRequestBody)
   {
     foreach (var parameter in Model.LocalParameters)
     {
       if (parameter.Location == ParameterLocation.Body && parameter.Type == PrimaryType.Stream)
       {
-        @:body_content = upload_gen(@parameter.Name)
+        @:body_content = self._client.stream_upload(@parameter.Name, callback)
         break;
       }
-    }
+    }   
   }
   else if (Model.RequestBody.IsRequired)
   {
@@ -124,16 +97,16 @@ else if (Model.IsFormData)
 @if (Model.RequestBody != null)
 {
         @:response = self._client.send(
-            @:request, header_parameters, body_content, **operation_config)
+            @:request, header_parameters, body_content, @Model.StreamDownloadParameter**operation_config)
 }
 else if (Model.IsFormData)
 {
         @:response = self._client.send_formdata(
-            @:request, header_parameters, form_data_content, **operation_config)
+            @:request, header_parameters, form_data_content, @Model.StreamDownloadParameter**operation_config)
 }
 else
 {
-        @:response = self._client.send(request, header_parameters, **operation_config)
+        @:response = self._client.send(request, header_parameters, @Model.StreamDownloadParameter**operation_config)
 }
 @EmptyLine
         if @Model.FailureStatusCodePredicate:
@@ -152,7 +125,7 @@ else
         @:if response.status_code == @MethodTemplateModel.GetStatusCodeReference(responsePair.Key):
     if (responsePair.Value.Body == PrimaryType.Stream)
     {
-            @:deserialized = download_gen()
+            @:deserialized = self._client.stream_download(response, callback)
     }
     else
     {

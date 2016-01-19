@@ -25,7 +25,7 @@ class Implicit(object):
         self.config = config
 
     def get_required_path(
-            self, path_parameter, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, path_parameter, custom_headers={}, raw=False, **operation_config):
         """
         Test implicitly required path parameter
 
@@ -65,7 +65,7 @@ class Implicit(object):
             return client_raw_response
 
     def put_optional_query(
-            self, query_parameter=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, query_parameter=None, custom_headers={}, raw=False, **operation_config):
         """
         Test implicitly optional query parameter
 
@@ -102,7 +102,7 @@ class Implicit(object):
             return client_raw_response
 
     def put_optional_header(
-            self, query_parameter=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, query_parameter=None, custom_headers={}, raw=False, **operation_config):
         """
         Test implicitly optional header parameter
 
@@ -139,7 +139,7 @@ class Implicit(object):
             return client_raw_response
 
     def put_optional_body(
-            self, body_parameter=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, body_parameter=None, custom_headers={}, raw=False, **operation_config):
         """
         Test implicitly optional body parameter
 
@@ -181,7 +181,7 @@ class Implicit(object):
             return client_raw_response
 
     def get_required_global_path(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Test implicitly required path parameter
 
@@ -219,7 +219,7 @@ class Implicit(object):
             return client_raw_response
 
     def get_required_global_query(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Test implicitly required query parameter
 
@@ -254,7 +254,7 @@ class Implicit(object):
             return client_raw_response
 
     def get_optional_global_query(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Test implicitly optional query parameter
 

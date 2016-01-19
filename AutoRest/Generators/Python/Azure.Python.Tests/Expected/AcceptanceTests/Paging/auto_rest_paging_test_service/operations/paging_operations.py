@@ -27,7 +27,7 @@ class PagingOperations(object):
         self.config = config
 
     def get_single_pages(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         A paging operation that finishes on the first call without a nextlink
 
@@ -80,7 +80,7 @@ class PagingOperations(object):
         return deserialized
 
     def get_multiple_pages(
-            self, client_request_id=None, paging_get_multiple_pages_options=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, client_request_id=None, paging_get_multiple_pages_options=None, custom_headers={}, raw=False, **operation_config):
         """
         A paging operation that includes a nextLink that has 10 pages
 
@@ -152,7 +152,7 @@ class PagingOperations(object):
         return deserialized
 
     def get_multiple_pages_retry_first(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         A paging operation that fails on the first call with 500 and then
         retries and then get a response including a nextLink that has 10 pages
@@ -206,7 +206,7 @@ class PagingOperations(object):
         return deserialized
 
     def get_multiple_pages_retry_second(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         A paging operation that includes a nextLink that has 10 pages, of
         which the 2nd call fails first with 500. The client should retry and
@@ -261,7 +261,7 @@ class PagingOperations(object):
         return deserialized
 
     def get_single_pages_failure(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         A paging operation that receives a 400 on the first call
 
@@ -314,7 +314,7 @@ class PagingOperations(object):
         return deserialized
 
     def get_multiple_pages_failure(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         A paging operation that receives a 400 on the second call
 
@@ -367,7 +367,7 @@ class PagingOperations(object):
         return deserialized
 
     def get_multiple_pages_failure_uri(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         A paging operation that receives an invalid nextLink
 

@@ -49,7 +49,7 @@ class AutoRestResourceFlatteningTestService(object):
         self.config = config
 
     def put_array(
-            self, resource_array=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, resource_array=None, custom_headers={}, raw=False, **operation_config):
         """
         Put External Resource as an Array
 
@@ -94,7 +94,7 @@ class AutoRestResourceFlatteningTestService(object):
             return client_raw_response
 
     def get_array(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get External Resource as an Array
 
@@ -137,7 +137,7 @@ class AutoRestResourceFlatteningTestService(object):
         return deserialized
 
     def put_dictionary(
-            self, resource_dictionary=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, resource_dictionary=None, custom_headers={}, raw=False, **operation_config):
         """
         Put External Resource as a Dictionary
 
@@ -182,7 +182,7 @@ class AutoRestResourceFlatteningTestService(object):
             return client_raw_response
 
     def get_dictionary(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get External Resource as a Dictionary
 
@@ -225,7 +225,7 @@ class AutoRestResourceFlatteningTestService(object):
         return deserialized
 
     def put_resource_collection(
-            self, resource_complex_object=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, resource_complex_object=None, custom_headers={}, raw=False, **operation_config):
         """
         Put External Resource as a ResourceCollection
 
@@ -271,7 +271,7 @@ class AutoRestResourceFlatteningTestService(object):
             return client_raw_response
 
     def get_resource_collection(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get External Resource as a ResourceCollection
 

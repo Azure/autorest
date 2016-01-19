@@ -26,7 +26,7 @@ class SubscriptionInCredentialsOperations(object):
         self.config = config
 
     def post_method_global_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         POST method with subscriptionId modeled in credentials.  Set the
         credential subscriptionId to '1234-5678-9012-3456' to succeed
@@ -67,7 +67,7 @@ class SubscriptionInCredentialsOperations(object):
             return client_raw_response
 
     def post_method_global_null(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         POST method with subscriptionId modeled in credentials.  Set the
         credential subscriptionId to null, and client-side validation should
@@ -109,7 +109,7 @@ class SubscriptionInCredentialsOperations(object):
             return client_raw_response
 
     def post_method_global_not_provided_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         POST method with subscriptionId modeled in credentials.  Set the
         credential subscriptionId to '1234-5678-9012-3456' to succeed
@@ -151,7 +151,7 @@ class SubscriptionInCredentialsOperations(object):
             return client_raw_response
 
     def post_path_global_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         POST method with subscriptionId modeled in credentials.  Set the
         credential subscriptionId to '1234-5678-9012-3456' to succeed
@@ -192,7 +192,7 @@ class SubscriptionInCredentialsOperations(object):
             return client_raw_response
 
     def post_swagger_global_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         POST method with subscriptionId modeled in credentials.  Set the
         credential subscriptionId to '1234-5678-9012-3456' to succeed

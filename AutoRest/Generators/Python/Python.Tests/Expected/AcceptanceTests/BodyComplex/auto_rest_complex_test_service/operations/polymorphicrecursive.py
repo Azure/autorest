@@ -25,7 +25,7 @@ class Polymorphicrecursive(object):
         self.config = config
 
     def get_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get complex types that are polymorphic and have recursive references
 
@@ -65,7 +65,7 @@ class Polymorphicrecursive(object):
         return deserialized
 
     def put_valid(
-            self, complex_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, complex_body, custom_headers={}, raw=False, **operation_config):
         """
         Put complex types that are polymorphic and have recursive references
 

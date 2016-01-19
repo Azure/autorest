@@ -16,7 +16,7 @@ class ProductPaged(Paged):
 
     _attribute_map = {
         'next_link': {'key': 'nextLink', 'type': 'str'},
-        'items': {'key': 'values', 'type': '[Product]'}
+        'current_page': {'key': 'values', 'type': '[Product]'}
     }
 
     def __init__(self, *args, **kwargs):

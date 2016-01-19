@@ -26,7 +26,7 @@ class GroupOperations(object):
         self.config = config
 
     def get_sample_resource_group(
-            self, resource_group_name, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, resource_group_name, custom_headers={}, raw=False, **operation_config):
         """
         Provides a resouce group with name 'testgroup101' and location 'West
         US'.

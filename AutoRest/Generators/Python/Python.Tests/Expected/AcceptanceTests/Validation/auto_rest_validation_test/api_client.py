@@ -48,7 +48,7 @@ class AutoRestValidationTest(object):
         self.config = config
 
     def validation_of_method_parameters(
-            self, resource_group_name, id, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, resource_group_name, id, custom_headers={}, raw=False, **operation_config):
         """
         Validates input parameters on the method. See swagger for details.
 
@@ -101,7 +101,7 @@ class AutoRestValidationTest(object):
         return deserialized
 
     def validation_of_body(
-            self, resource_group_name, id, body=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, resource_group_name, id, body=None, custom_headers={}, raw=False, **operation_config):
         """
         Validates body parameters on the method. See swagger for details.
 

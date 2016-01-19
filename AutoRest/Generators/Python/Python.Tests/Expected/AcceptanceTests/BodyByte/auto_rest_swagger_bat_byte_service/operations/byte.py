@@ -25,7 +25,7 @@ class Byte(object):
         self.config = config
 
     def get_null(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get null byte value
 
@@ -66,7 +66,7 @@ class Byte(object):
         return deserialized
 
     def get_empty(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get empty byte value ''
 
@@ -107,7 +107,7 @@ class Byte(object):
         return deserialized
 
     def get_non_ascii(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
 
@@ -148,7 +148,7 @@ class Byte(object):
         return deserialized
 
     def put_non_ascii(
-            self, byte_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, byte_body, custom_headers={}, raw=False, **operation_config):
         """
         Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
 
@@ -188,7 +188,7 @@ class Byte(object):
             return client_raw_response
 
     def get_invalid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get invalid byte value ':::SWAGGER::::'
 

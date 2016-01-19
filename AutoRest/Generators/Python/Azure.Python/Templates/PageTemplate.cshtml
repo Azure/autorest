@@ -18,7 +18,7 @@ class @(Model.TypeDefinitionName)(Paged):
 @EmptyLine
     _attribute_map = {
         'next_link': {'key': '@Model.NextLinkName', 'type': 'str'},
-        'items': {'key': '@Model.ItemName', 'type': '[@Model.ItemType]'}
+        'current_page': {'key': '@Model.ItemName', 'type': '[@Model.ItemType]'}
     }
 @EmptyLine
     def __init__(self, *args, **kwargs):
