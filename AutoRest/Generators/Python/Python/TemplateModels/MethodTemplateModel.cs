@@ -46,21 +46,6 @@ namespace Microsoft.Rest.Generator.Python
             get { return this.ReturnType.Body == PrimaryType.Stream; }
         }
 
-        public string StreamDownloadParameter
-        {
-            get
-            {
-                if (IsStreamResponse)
-                {
-                    return "stream=True, ";
-                }
-                else
-                {
-                    return String.Empty;
-                }
-            }
-        }
-
         public bool IsStreamRequestBody
         {
             get
