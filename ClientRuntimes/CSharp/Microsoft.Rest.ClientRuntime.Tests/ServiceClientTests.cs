@@ -97,9 +97,10 @@ namespace Microsoft.Rest.ClientRuntime.Tests
             var fakeClient = new FakeServiceClient(new FakeHttpHandler());
             int attemptsFailed = 0;
 
-            fakeClient.SetRetryPolicy(new RetryPolicy<HttpStatusCodeErrorDetectionStrategy>(2));
+            var retryPolicy = new RetryPolicy<HttpStatusCodeErrorDetectionStrategy>(2);
+            fakeClient.SetRetryPolicy(retryPolicy);
             var retryHandler = fakeClient.HttpMessageHandlers.OfType<RetryDelegatingHandler>().FirstOrDefault();
-            retryHandler.Retrying += (sender, args) => { attemptsFailed++; };
+            retryPolicy.Retrying += (sender, args) => { attemptsFailed++; };
 
             var result = fakeClient.DoStuffSync();
             Assert.Equal(HttpStatusCode.InternalServerError, result.StatusCode);
@@ -112,9 +113,10 @@ namespace Microsoft.Rest.ClientRuntime.Tests
             var fakeClient = new FakeServiceClient(new FakeHttpHandler() {NumberOfTimesToFail = 1});
             int attemptsFailed = 0;
 
-            fakeClient.SetRetryPolicy(new RetryPolicy<HttpStatusCodeErrorDetectionStrategy>(2));
+            var retryPolicy = new RetryPolicy<HttpStatusCodeErrorDetectionStrategy>(2);
+            fakeClient.SetRetryPolicy(retryPolicy);
             var retryHandler = fakeClient.HttpMessageHandlers.OfType<RetryDelegatingHandler>().FirstOrDefault();
-            retryHandler.Retrying += (sender, args) => { attemptsFailed++; };
+            retryPolicy.Retrying += (sender, args) => { attemptsFailed++; };
 
             var result = fakeClient.DoStuffSync();
             Assert.Equal(HttpStatusCode.OK, result.StatusCode);
@@ -127,9 +129,10 @@ namespace Microsoft.Rest.ClientRuntime.Tests
             var fakeClient = new FakeServiceClient(new FakeHttpHandler() {StatusCodeToReturn = HttpStatusCode.Conflict});
             int attemptsFailed = 0;
 
-            fakeClient.SetRetryPolicy(new RetryPolicy<HttpStatusCodeErrorDetectionStrategy>(2));
+            var retryPolicy = new RetryPolicy<HttpStatusCodeErrorDetectionStrategy>(2);
+            fakeClient.SetRetryPolicy(retryPolicy);
             var retryHandler = fakeClient.HttpMessageHandlers.OfType<RetryDelegatingHandler>().FirstOrDefault();
-            retryHandler.Retrying += (sender, args) => { attemptsFailed++; };
+            retryPolicy.Retrying += (sender, args) => { attemptsFailed++; };
 
             var result = fakeClient.DoStuffSync();
             Assert.Equal(HttpStatusCode.Conflict, result.StatusCode);

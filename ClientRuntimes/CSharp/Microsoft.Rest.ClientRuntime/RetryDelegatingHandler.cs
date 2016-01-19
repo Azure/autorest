@@ -99,6 +99,16 @@ namespace Microsoft.Rest
 
                     if (!responseMessage.IsSuccessStatusCode)
                     {
+                        // dispose the message unless we have stopped retrying
+                        this.Retrying += (sender, args) =>
+                        {
+                            if (responseMessage != null)
+                            {
+                                responseMessage.Dispose();
+                                responseMessage = null;
+                            }
+                        };
+
                         throw new HttpRequestWithStatusException(string.Format(
                             CultureInfo.InvariantCulture,
                             Resources.ResponseStatusCodeError,
@@ -122,11 +132,21 @@ namespace Microsoft.Rest
                     throw;
                 }
             }
+            finally
+            {
+                if (Retrying != null)
+                {
+                    foreach (EventHandler<RetryingEventArgs> d in Retrying.GetInvocationList())
+                    {
+                        Retrying -= d;
+                    }
+                }
+            }
         }
 
         /// <summary>
         /// An instance of a callback delegate that will be invoked whenever a retry condition is encountered.
         /// </summary>
-        public event EventHandler<RetryingEventArgs> Retrying;
+        private event EventHandler<RetryingEventArgs> Retrying;
     }
 }
