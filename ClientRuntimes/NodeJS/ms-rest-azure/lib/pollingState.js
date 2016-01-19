@@ -14,9 +14,12 @@ var LroStates = require('./constants').LongRunningOperationStates;
  * running operation status.
  * 
  * @param {number} retryTimeout - The timeout in seconds to retry on
- * intermediate operation results.
+ * intermediate operation results. Default Value is 30.
  */
 function PollingState(resultOfInitialRequest, retryTimeout) {
+  if (retryTimeout === null || retryTimeout === undefined) {
+    retryTimeout = 30;
+  }
   this._retryTimeout = retryTimeout;
   this.updateResponse(resultOfInitialRequest.response);
   this.request = resultOfInitialRequest.request;
