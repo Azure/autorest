@@ -58,6 +58,7 @@ class FileTests(unittest.TestCase):
         client = AutoRestSwaggerBATFileService(config)
 
         def test_callback(data, response, progress = [0]):
+            self.assertFalse(response._content_consumed)
             self.assertTrue(len(data) > 0)
             progress[0] += len(data)
             total = float(response.headers['Content-Length'])
@@ -97,6 +98,7 @@ class FileTests(unittest.TestCase):
     def test_files_raw(self):
 
         def test_callback(data, response, progress = [0]):
+            self.assertFalse(response._content_consumed)
             self.assertTrue(len(data) > 0)
             progress[0] += len(data)
             total = float(response.headers['Content-Length'])
