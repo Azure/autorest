@@ -13,12 +13,12 @@ namespace Microsoft.Rest
         /// <summary>
         /// Gets information about the associated HTTP request.
         /// </summary>
-        HttpRequestMessage Request { get; set; }
+        HttpRequestMessageWrapper Request { get; set; }
 
         /// <summary>
         /// Gets information about the associated HTTP response.
         /// </summary>
-        HttpResponseMessage Response { get; set; }
+        HttpResponseMessageWrapper Response { get; set; }
     }
 
     /// <summary>
@@ -60,12 +60,12 @@ namespace Microsoft.Rest
         /// <summary>
         /// Gets information about the associated HTTP request.
         /// </summary>
-        public HttpRequestMessage Request { get; set; }
+        public HttpRequestMessageWrapper Request { get; set; }
 
         /// <summary>
         /// Gets information about the associated HTTP response.
         /// </summary>
-        public HttpResponseMessage Response { get; set; }
+        public HttpResponseMessageWrapper Response { get; set; }
     }
 
     /// <summary>

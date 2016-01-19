@@ -342,7 +342,8 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             }
 
             // Serialize Request
-            string _requestContent = SafeJsonConvert.SerializeObject(resourceArray, this.SerializationSettings);
+            string _requestContent = null;
+            _requestContent = SafeJsonConvert.SerializeObject(resourceArray, this.SerializationSettings);
             _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
             _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -364,12 +365,13 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
                 var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.DeserializationSettings);
                     if (_errorBody != null)
                     {
@@ -380,8 +382,8 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
                 {
                     // Ignore the exception
                 }
-                ex.Request = _httpRequest;
-                ex.Response = _httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -390,12 +392,12 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             }
             // Create Result
             var _result = new AzureOperationResponse();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
+            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);
@@ -461,6 +463,8 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
                 }
             }
 
+            // Serialize Request
+            string _requestContent = null;
             // Set Credentials
             if (this.Credentials != null)
             {
@@ -480,12 +484,13 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
                 var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.DeserializationSettings);
                     if (_errorBody != null)
                     {
@@ -496,8 +501,8 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
                 {
                     // Ignore the exception
                 }
-                ex.Request = _httpRequest;
-                ex.Response = _httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -506,8 +511,6 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             }
             // Create Result
             var _result = new AzureOperationResponse<IList<FlattenedProduct>>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
@@ -517,7 +520,7 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             {
                 try
                 {
-                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     _result.Body = SafeJsonConvert.DeserializeObject<IList<FlattenedProduct>>(_responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
@@ -525,6 +528,8 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
                     throw new RestException("Unable to deserialize the response.", ex);
                 }
             }
+            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);
@@ -595,7 +600,8 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             }
 
             // Serialize Request
-            string _requestContent = SafeJsonConvert.SerializeObject(resourceDictionary, this.SerializationSettings);
+            string _requestContent = null;
+            _requestContent = SafeJsonConvert.SerializeObject(resourceDictionary, this.SerializationSettings);
             _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
             _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -617,12 +623,13 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
                 var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.DeserializationSettings);
                     if (_errorBody != null)
                     {
@@ -633,8 +640,8 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
                 {
                     // Ignore the exception
                 }
-                ex.Request = _httpRequest;
-                ex.Response = _httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -643,12 +650,12 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             }
             // Create Result
             var _result = new AzureOperationResponse();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
+            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);
@@ -714,6 +721,8 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
                 }
             }
 
+            // Serialize Request
+            string _requestContent = null;
             // Set Credentials
             if (this.Credentials != null)
             {
@@ -733,12 +742,13 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
                 var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.DeserializationSettings);
                     if (_errorBody != null)
                     {
@@ -749,8 +759,8 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
                 {
                     // Ignore the exception
                 }
-                ex.Request = _httpRequest;
-                ex.Response = _httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -759,8 +769,6 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             }
             // Create Result
             var _result = new AzureOperationResponse<IDictionary<string, FlattenedProduct>>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
@@ -770,7 +778,7 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             {
                 try
                 {
-                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, FlattenedProduct>>(_responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
@@ -778,6 +786,8 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
                     throw new RestException("Unable to deserialize the response.", ex);
                 }
             }
+            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);
@@ -848,7 +858,8 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             }
 
             // Serialize Request
-            string _requestContent = SafeJsonConvert.SerializeObject(resourceComplexObject, this.SerializationSettings);
+            string _requestContent = null;
+            _requestContent = SafeJsonConvert.SerializeObject(resourceComplexObject, this.SerializationSettings);
             _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
             _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -870,12 +881,13 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
                 var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.DeserializationSettings);
                     if (_errorBody != null)
                     {
@@ -886,8 +898,8 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
                 {
                     // Ignore the exception
                 }
-                ex.Request = _httpRequest;
-                ex.Response = _httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -896,12 +908,12 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             }
             // Create Result
             var _result = new AzureOperationResponse();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
             }
+            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);
@@ -967,6 +979,8 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
                 }
             }
 
+            // Serialize Request
+            string _requestContent = null;
             // Set Credentials
             if (this.Credentials != null)
             {
@@ -986,12 +1000,13 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
                 var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.DeserializationSettings);
                     if (_errorBody != null)
                     {
@@ -1002,8 +1017,8 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
                 {
                     // Ignore the exception
                 }
-                ex.Request = _httpRequest;
-                ex.Response = _httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -1012,8 +1027,6 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             }
             // Create Result
             var _result = new AzureOperationResponse<ResourceCollection>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
@@ -1023,7 +1036,7 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             {
                 try
                 {
-                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     _result.Body = SafeJsonConvert.DeserializeObject<ResourceCollection>(_responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
@@ -1031,6 +1044,8 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
                     throw new RestException("Unable to deserialize the response.", ex);
                 }
             }
+            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);

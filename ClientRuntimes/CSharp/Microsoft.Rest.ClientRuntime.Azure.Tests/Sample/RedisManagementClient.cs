@@ -1289,8 +1289,8 @@ namespace Microsoft.Azure.Management.Redis
                 {
                     ex = new CloudException(error.Message);
                 }
-                ex.Request = httpRequest;
-                ex.Response = httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(httpRequest, requestContent);
+                ex.Response = new HttpResponseMessageWrapper(httpResponse, responseContent);
                     
                 if (shouldTrace)
                 {
@@ -1301,8 +1301,8 @@ namespace Microsoft.Azure.Management.Redis
 
             // Create Result
             AzureOperationResponse<RedisResource> result = new AzureOperationResponse<RedisResource>();
-            result.Request = httpRequest;
-            result.Response = httpResponse;
+            result.Request = new HttpRequestMessageWrapper(httpRequest, requestContent);
+            result.Response = new HttpResponseMessageWrapper(httpResponse, responseContent);
 
             // Deserialize Response
             if (statusCode == HttpStatusCode.OK || statusCode == HttpStatusCode.Created)
@@ -1452,8 +1452,8 @@ namespace Microsoft.Azure.Management.Redis
                 {
                     ex = new CloudException(error.Message);
                 }
-                ex.Request = httpRequest;
-                ex.Response = httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(httpRequest, requestContent);
+                ex.Response = new HttpResponseMessageWrapper(httpResponse, responseContent);
 
                 if (shouldTrace)
                 {
@@ -1464,8 +1464,8 @@ namespace Microsoft.Azure.Management.Redis
 
             // Create Result
             AzureOperationResponse<Sku> result = new AzureOperationResponse<Sku>();
-            result.Request = httpRequest;
-            result.Response = httpResponse;
+            result.Request = new HttpRequestMessageWrapper(httpRequest, requestContent);
+            result.Response = new HttpResponseMessageWrapper(httpResponse, responseContent);
 
             // Deserialize Response
             if (statusCode == HttpStatusCode.OK || statusCode == HttpStatusCode.Created)
@@ -1615,8 +1615,8 @@ namespace Microsoft.Azure.Management.Redis
                 {
                     ex = new CloudException(error.Message);
                 }
-                ex.Request = httpRequest;
-                ex.Response = httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(httpRequest, requestContent);
+                ex.Response = new HttpResponseMessageWrapper(httpResponse, responseContent);
 
                 if (shouldTrace)
                 {
@@ -1627,8 +1627,8 @@ namespace Microsoft.Azure.Management.Redis
 
             // Create Result
             AzureOperationResponse<RedisSubResource> result = new AzureOperationResponse<RedisSubResource>();
-            result.Request = httpRequest;
-            result.Response = httpResponse;
+            result.Request = new HttpRequestMessageWrapper(httpRequest, requestContent);
+            result.Response = new HttpResponseMessageWrapper(httpResponse, responseContent);
 
             // Deserialize Response
             if (statusCode == HttpStatusCode.OK || statusCode == HttpStatusCode.Created)
@@ -1763,8 +1763,8 @@ namespace Microsoft.Azure.Management.Redis
                 {
                     ex = new CloudException(error.Message);
                 } 
-                ex.Request = httpRequest;
-                ex.Response = httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(httpRequest, null);
+                ex.Response = new HttpResponseMessageWrapper(httpResponse, responseContent);
                 if (shouldTrace)
                 {
                     ServiceClientTracing.Error(invocationId, ex);
@@ -1774,8 +1774,8 @@ namespace Microsoft.Azure.Management.Redis
 
             // Create Result
             AzureOperationResponse result = new AzureOperationResponse();
-            result.Request = httpRequest;
-            result.Response = httpResponse;
+            result.Request = new HttpRequestMessageWrapper(httpRequest, null);
+            result.Response = new HttpResponseMessageWrapper(httpResponse, responseContent);
 
             if (shouldTrace)
             {
@@ -1889,8 +1889,8 @@ namespace Microsoft.Azure.Management.Redis
                 {
                     ex = new CloudException(error.Message);
                 }
-                ex.Request = httpRequest;
-                ex.Response = httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(httpRequest, null);
+                ex.Response = new HttpResponseMessageWrapper(httpResponse, responseContent);
                 if (shouldTrace)
                 {
                     ServiceClientTracing.Error(invocationId, ex);
@@ -1900,8 +1900,8 @@ namespace Microsoft.Azure.Management.Redis
 
             // Create Result
             AzureOperationResponse<Sku> result = new AzureOperationResponse<Sku>();
-            result.Request = httpRequest;
-            result.Response = httpResponse;
+            result.Request = new HttpRequestMessageWrapper(httpRequest, null);
+            result.Response = new HttpResponseMessageWrapper(httpResponse, responseContent);
             result.Body = JsonConvert.DeserializeObject<Sku>(responseContent, this.Client.DeserializationSettings);
 
             if (shouldTrace)
@@ -2032,8 +2032,8 @@ namespace Microsoft.Azure.Management.Redis
                 {
                     ex = new CloudException(error.Message);
                 }
-                ex.Request = httpRequest;
-                ex.Response = httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(httpRequest, null);
+                ex.Response = new HttpResponseMessageWrapper(httpResponse, responseContent);
                 if (shouldTrace)
                 {
                     ServiceClientTracing.Error(invocationId, ex);
@@ -2043,8 +2043,8 @@ namespace Microsoft.Azure.Management.Redis
 
             // Create Result
             AzureOperationResponse<RedisResource> result = new AzureOperationResponse<RedisResource>();
-            result.Request = httpRequest;
-            result.Response = httpResponse;
+            result.Request = new HttpRequestMessageWrapper(httpRequest, null);
+            result.Response = new HttpResponseMessageWrapper(httpResponse, responseContent);
 
             // Deserialize Response
             if (statusCode == HttpStatusCode.OK)
@@ -2159,8 +2159,8 @@ namespace Microsoft.Azure.Management.Redis
                 {
                     ex = new CloudException(error.Message);
                 }
-                ex.Request = httpRequest;
-                ex.Response = httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(httpRequest, null);
+                ex.Response = new HttpResponseMessageWrapper(httpResponse, responseContent);
                 if (shouldTrace)
                 {
                     ServiceClientTracing.Error(invocationId, ex);
@@ -2170,8 +2170,8 @@ namespace Microsoft.Azure.Management.Redis
 
             // Create Result
             AzureOperationResponse<Sku> result = new AzureOperationResponse<Sku>();
-            result.Request = httpRequest;
-            result.Response = httpResponse;
+            result.Request = new HttpRequestMessageWrapper(httpRequest, null);
+            result.Response = new HttpResponseMessageWrapper(httpResponse, responseContent);
 
             // Deserialize Response
             if (statusCode == HttpStatusCode.OK)
@@ -2286,8 +2286,8 @@ namespace Microsoft.Azure.Management.Redis
                 {
                     ex = new CloudException(error.Message);
                 }
-                ex.Request = httpRequest;
-                ex.Response = httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(httpRequest, null);
+                ex.Response = new HttpResponseMessageWrapper(httpResponse, responseContent);
                 if (shouldTrace)
                 {
                     ServiceClientTracing.Error(invocationId, ex);
@@ -2297,8 +2297,8 @@ namespace Microsoft.Azure.Management.Redis
 
             // Create Result
             AzureOperationResponse<RedisSubResource> result = new AzureOperationResponse<RedisSubResource>();
-            result.Request = httpRequest;
-            result.Response = httpResponse;
+            result.Request = new HttpRequestMessageWrapper(httpRequest, null);
+            result.Response = new HttpResponseMessageWrapper(httpResponse, responseContent);
 
             // Deserialize Response
             if (statusCode == HttpStatusCode.OK)

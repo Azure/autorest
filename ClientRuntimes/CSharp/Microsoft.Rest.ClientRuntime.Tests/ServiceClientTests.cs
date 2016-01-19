@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -133,6 +134,29 @@ namespace Microsoft.Rest.ClientRuntime.Tests
             var result = fakeClient.DoStuffSync();
             Assert.Equal(HttpStatusCode.Conflict, result.StatusCode);
             Assert.Equal(0, attemptsFailed);
+        }
+
+        [Fact]
+        public void HeadersAndPayloadAreNotDisposed()
+        {
+            FakeServiceClient fakeClient = null;
+            try
+            {
+                fakeClient = new FakeServiceClient(new HttpClientHandler(),
+                     new MirrorDelegatingHandler());
+                var response = fakeClient.DoStuffAndThrowSync("Text");
+                Assert.True(false);
+            }
+            catch (HttpOperationException ex)
+            {
+                fakeClient.Dispose();
+                fakeClient = null;
+                GC.Collect();
+                Assert.NotNull(ex.Request);
+                Assert.NotNull(ex.Response);
+                Assert.Equal("2013-11-01", ex.Request.Headers["x-ms-version"].First());
+                Assert.Equal("Text", ex.Response.Content);
+            }
         }
     }
 }

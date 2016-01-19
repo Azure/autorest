@@ -142,7 +142,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
 
             // Serialize Request
-            string _requestContent = SafeJsonConvert.SerializeObject(product, this.Client.SerializationSettings);
+            string _requestContent = null;
+            _requestContent = SafeJsonConvert.SerializeObject(product, this.Client.SerializationSettings);
             _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
             _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -164,12 +165,13 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     CloudError _errorBody = SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, this.Client.DeserializationSettings);
                     if (_errorBody != null)
                     {
@@ -181,8 +183,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 {
                     // Ignore the exception
                 }
-                ex.Request = _httpRequest;
-                ex.Response = _httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_httpResponse.Headers.Contains("x-ms-request-id"))
                 {
                     ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
@@ -195,8 +197,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             // Create Result
             var _result = new AzureOperationResponse<Product,LROsCustomHeaderPutAsyncRetrySucceededHeaders>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
@@ -206,7 +206,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             {
                 try
                 {
-                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     _result.Body = SafeJsonConvert.DeserializeObject<Product>(_responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
@@ -222,6 +222,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             {
                 throw new RestException("Unable to deserialize the headers.", ex);
             }
+            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);
@@ -322,7 +324,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
 
             // Serialize Request
-            string _requestContent = SafeJsonConvert.SerializeObject(product, this.Client.SerializationSettings);
+            string _requestContent = null;
+            _requestContent = SafeJsonConvert.SerializeObject(product, this.Client.SerializationSettings);
             _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
             _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -344,12 +347,13 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 201)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     CloudError _errorBody = SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, this.Client.DeserializationSettings);
                     if (_errorBody != null)
                     {
@@ -361,8 +365,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 {
                     // Ignore the exception
                 }
-                ex.Request = _httpRequest;
-                ex.Response = _httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_httpResponse.Headers.Contains("x-ms-request-id"))
                 {
                     ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
@@ -375,8 +379,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             // Create Result
             var _result = new AzureOperationResponse<Product>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
@@ -386,7 +388,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             {
                 try
                 {
-                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     _result.Body = SafeJsonConvert.DeserializeObject<Product>(_responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
@@ -399,7 +401,7 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             {
                 try
                 {
-                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     _result.Body = SafeJsonConvert.DeserializeObject<Product>(_responseContent, this.Client.DeserializationSettings);
                 }
                 catch (JsonException ex)
@@ -407,6 +409,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                     throw new RestException("Unable to deserialize the response.", ex);
                 }
             }
+            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);
@@ -503,7 +507,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
 
             // Serialize Request
-            string _requestContent = SafeJsonConvert.SerializeObject(product, this.Client.SerializationSettings);
+            string _requestContent = null;
+            _requestContent = SafeJsonConvert.SerializeObject(product, this.Client.SerializationSettings);
             _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
             _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -525,12 +530,13 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if ((int)_statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     CloudError _errorBody = SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, this.Client.DeserializationSettings);
                     if (_errorBody != null)
                     {
@@ -542,8 +548,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 {
                     // Ignore the exception
                 }
-                ex.Request = _httpRequest;
-                ex.Response = _httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_httpResponse.Headers.Contains("x-ms-request-id"))
                 {
                     ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
@@ -556,8 +562,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             // Create Result
             var _result = new AzureOperationHeaderResponse<LROsCustomHeaderPost202Retry200Headers>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
@@ -570,6 +574,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             {
                 throw new RestException("Unable to deserialize the headers.", ex);
             }
+            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);
@@ -668,7 +674,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
 
             // Serialize Request
-            string _requestContent = SafeJsonConvert.SerializeObject(product, this.Client.SerializationSettings);
+            string _requestContent = null;
+            _requestContent = SafeJsonConvert.SerializeObject(product, this.Client.SerializationSettings);
             _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
             _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -690,12 +697,13 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if ((int)_statusCode != 202)
             {
                 var ex = new CloudException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     CloudError _errorBody = SafeJsonConvert.DeserializeObject<CloudError>(_responseContent, this.Client.DeserializationSettings);
                     if (_errorBody != null)
                     {
@@ -707,8 +715,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
                 {
                     // Ignore the exception
                 }
-                ex.Request = _httpRequest;
-                ex.Response = _httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_httpResponse.Headers.Contains("x-ms-request-id"))
                 {
                     ex.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
@@ -721,8 +729,6 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             }
             // Create Result
             var _result = new AzureOperationHeaderResponse<LROsCustomHeaderPostAsyncRetrySucceededHeaders>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
             if (_httpResponse.Headers.Contains("x-ms-request-id"))
             {
                 _result.RequestId = _httpResponse.Headers.GetValues("x-ms-request-id").FirstOrDefault();
@@ -735,6 +741,8 @@ namespace Fixtures.Azure.AcceptanceTestsLro
             {
                 throw new RestException("Unable to deserialize the headers.", ex);
             }
+            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);

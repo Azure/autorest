@@ -313,7 +313,8 @@ namespace Fixtures.PetstoreV2
             }
 
             // Serialize Request
-            string _requestContent = SafeJsonConvert.SerializeObject(body, this.SerializationSettings);
+            string _requestContent = null;
+            _requestContent = SafeJsonConvert.SerializeObject(body, this.SerializationSettings);
             _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
             _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -335,11 +336,12 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if ((int)_statusCode != 405 && (int)_statusCode != 200)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = _httpRequest;
-                ex.Response = _httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -348,14 +350,12 @@ namespace Fixtures.PetstoreV2
             }
             // Create Result
             var _result = new HttpOperationResponse<Pet>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
                 try
                 {
-                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     _result.Body = SafeJsonConvert.DeserializeObject<Pet>(_responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
@@ -363,6 +363,8 @@ namespace Fixtures.PetstoreV2
                     throw new RestException("Unable to deserialize the response.", ex);
                 }
             }
+            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);
@@ -424,7 +426,8 @@ namespace Fixtures.PetstoreV2
             }
 
             // Serialize Request
-            string _requestContent = SafeJsonConvert.SerializeObject(body, this.SerializationSettings);
+            string _requestContent = null;
+            _requestContent = SafeJsonConvert.SerializeObject(body, this.SerializationSettings);
             _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
             _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -446,11 +449,12 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if ((int)_statusCode != 400 && (int)_statusCode != 404 && (int)_statusCode != 405)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = _httpRequest;
-                ex.Response = _httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -459,8 +463,8 @@ namespace Fixtures.PetstoreV2
             }
             // Create Result
             var _result = new HttpOperationResponse();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
+            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);
@@ -527,6 +531,8 @@ namespace Fixtures.PetstoreV2
                 }
             }
 
+            // Serialize Request
+            string _requestContent = null;
             // Set Credentials
             if (this.Credentials != null)
             {
@@ -546,11 +552,12 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 400)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = _httpRequest;
-                ex.Response = _httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -559,14 +566,12 @@ namespace Fixtures.PetstoreV2
             }
             // Create Result
             var _result = new HttpOperationResponse<IList<Pet>>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
                 try
                 {
-                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     _result.Body = SafeJsonConvert.DeserializeObject<IList<Pet>>(_responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
@@ -574,6 +579,8 @@ namespace Fixtures.PetstoreV2
                     throw new RestException("Unable to deserialize the response.", ex);
                 }
             }
+            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);
@@ -641,6 +648,8 @@ namespace Fixtures.PetstoreV2
                 }
             }
 
+            // Serialize Request
+            string _requestContent = null;
             // Set Credentials
             if (this.Credentials != null)
             {
@@ -660,11 +669,12 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 400)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = _httpRequest;
-                ex.Response = _httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -673,14 +683,12 @@ namespace Fixtures.PetstoreV2
             }
             // Create Result
             var _result = new HttpOperationResponse<IList<Pet>>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
                 try
                 {
-                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     _result.Body = SafeJsonConvert.DeserializeObject<IList<Pet>>(_responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
@@ -688,6 +696,8 @@ namespace Fixtures.PetstoreV2
                     throw new RestException("Unable to deserialize the response.", ex);
                 }
             }
+            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);
@@ -746,6 +756,8 @@ namespace Fixtures.PetstoreV2
                 }
             }
 
+            // Serialize Request
+            string _requestContent = null;
             // Set Credentials
             if (this.Credentials != null)
             {
@@ -765,11 +777,12 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 400 && (int)_statusCode != 404)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = _httpRequest;
-                ex.Response = _httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -778,14 +791,12 @@ namespace Fixtures.PetstoreV2
             }
             // Create Result
             var _result = new HttpOperationResponse<Pet>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
                 try
                 {
-                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     _result.Body = SafeJsonConvert.DeserializeObject<Pet>(_responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
@@ -793,6 +804,8 @@ namespace Fixtures.PetstoreV2
                     throw new RestException("Unable to deserialize the response.", ex);
                 }
             }
+            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);
@@ -866,7 +879,8 @@ namespace Fixtures.PetstoreV2
                 }
             }
 
-            // Serialize Request 
+            // Serialize Request
+            string _requestContent = null;
             MultipartFormDataContent _multiPartContent = new MultipartFormDataContent();
             if (fileContent != null)
             {
@@ -912,11 +926,12 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if ((int)_statusCode != 405)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = _httpRequest;
-                ex.Response = _httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -925,8 +940,8 @@ namespace Fixtures.PetstoreV2
             }
             // Create Result
             var _result = new HttpOperationResponse();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
+            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);
@@ -995,6 +1010,8 @@ namespace Fixtures.PetstoreV2
                 }
             }
 
+            // Serialize Request
+            string _requestContent = null;
             // Set Credentials
             if (this.Credentials != null)
             {
@@ -1014,11 +1031,12 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if ((int)_statusCode != 400)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = _httpRequest;
-                ex.Response = _httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -1027,8 +1045,8 @@ namespace Fixtures.PetstoreV2
             }
             // Create Result
             var _result = new HttpOperationResponse();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
+            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);
@@ -1078,6 +1096,8 @@ namespace Fixtures.PetstoreV2
                 }
             }
 
+            // Serialize Request
+            string _requestContent = null;
             // Set Credentials
             if (this.Credentials != null)
             {
@@ -1097,11 +1117,12 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = _httpRequest;
-                ex.Response = _httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -1110,14 +1131,12 @@ namespace Fixtures.PetstoreV2
             }
             // Create Result
             var _result = new HttpOperationResponse<IDictionary<string, int?>>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
                 try
                 {
-                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, int?>>(_responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
@@ -1125,6 +1144,8 @@ namespace Fixtures.PetstoreV2
                     throw new RestException("Unable to deserialize the response.", ex);
                 }
             }
+            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);
@@ -1182,7 +1203,8 @@ namespace Fixtures.PetstoreV2
             }
 
             // Serialize Request
-            string _requestContent = SafeJsonConvert.SerializeObject(body, this.SerializationSettings);
+            string _requestContent = null;
+            _requestContent = SafeJsonConvert.SerializeObject(body, this.SerializationSettings);
             _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
             _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -1204,11 +1226,12 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 400)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = _httpRequest;
-                ex.Response = _httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -1217,14 +1240,12 @@ namespace Fixtures.PetstoreV2
             }
             // Create Result
             var _result = new HttpOperationResponse<Order>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
                 try
                 {
-                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     _result.Body = SafeJsonConvert.DeserializeObject<Order>(_responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
@@ -1232,6 +1253,8 @@ namespace Fixtures.PetstoreV2
                     throw new RestException("Unable to deserialize the response.", ex);
                 }
             }
+            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);
@@ -1302,6 +1325,8 @@ namespace Fixtures.PetstoreV2
                 }
             }
 
+            // Serialize Request
+            string _requestContent = null;
             // Set Credentials
             if (this.Credentials != null)
             {
@@ -1321,11 +1346,12 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 400 && (int)_statusCode != 404)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = _httpRequest;
-                ex.Response = _httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -1334,14 +1360,12 @@ namespace Fixtures.PetstoreV2
             }
             // Create Result
             var _result = new HttpOperationResponse<Order>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
                 try
                 {
-                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     _result.Body = SafeJsonConvert.DeserializeObject<Order>(_responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
@@ -1349,6 +1373,8 @@ namespace Fixtures.PetstoreV2
                     throw new RestException("Unable to deserialize the response.", ex);
                 }
             }
+            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);
@@ -1415,6 +1441,8 @@ namespace Fixtures.PetstoreV2
                 }
             }
 
+            // Serialize Request
+            string _requestContent = null;
             // Set Credentials
             if (this.Credentials != null)
             {
@@ -1434,11 +1462,12 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if ((int)_statusCode != 400 && (int)_statusCode != 404)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = _httpRequest;
-                ex.Response = _httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -1447,8 +1476,8 @@ namespace Fixtures.PetstoreV2
             }
             // Create Result
             var _result = new HttpOperationResponse();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
+            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);
@@ -1507,7 +1536,8 @@ namespace Fixtures.PetstoreV2
             }
 
             // Serialize Request
-            string _requestContent = SafeJsonConvert.SerializeObject(body, this.SerializationSettings);
+            string _requestContent = null;
+            _requestContent = SafeJsonConvert.SerializeObject(body, this.SerializationSettings);
             _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
             _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -1529,11 +1559,12 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if (!_httpResponse.IsSuccessStatusCode)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = _httpRequest;
-                ex.Response = _httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -1542,8 +1573,8 @@ namespace Fixtures.PetstoreV2
             }
             // Create Result
             var _result = new HttpOperationResponse();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
+            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);
@@ -1601,7 +1632,8 @@ namespace Fixtures.PetstoreV2
             }
 
             // Serialize Request
-            string _requestContent = SafeJsonConvert.SerializeObject(body, this.SerializationSettings);
+            string _requestContent = null;
+            _requestContent = SafeJsonConvert.SerializeObject(body, this.SerializationSettings);
             _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
             _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -1623,11 +1655,12 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if (!_httpResponse.IsSuccessStatusCode)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = _httpRequest;
-                ex.Response = _httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -1636,8 +1669,8 @@ namespace Fixtures.PetstoreV2
             }
             // Create Result
             var _result = new HttpOperationResponse();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
+            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);
@@ -1695,7 +1728,8 @@ namespace Fixtures.PetstoreV2
             }
 
             // Serialize Request
-            string _requestContent = SafeJsonConvert.SerializeObject(body, this.SerializationSettings);
+            string _requestContent = null;
+            _requestContent = SafeJsonConvert.SerializeObject(body, this.SerializationSettings);
             _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
             _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -1717,11 +1751,12 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if (!_httpResponse.IsSuccessStatusCode)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = _httpRequest;
-                ex.Response = _httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -1730,8 +1765,8 @@ namespace Fixtures.PetstoreV2
             }
             // Create Result
             var _result = new HttpOperationResponse();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
+            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);
@@ -1809,6 +1844,8 @@ namespace Fixtures.PetstoreV2
                 }
             }
 
+            // Serialize Request
+            string _requestContent = null;
             // Set Credentials
             if (this.Credentials != null)
             {
@@ -1828,11 +1865,12 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 400)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = _httpRequest;
-                ex.Response = _httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -1841,14 +1879,12 @@ namespace Fixtures.PetstoreV2
             }
             // Create Result
             var _result = new HttpOperationResponse<string,LoginUserHeaders>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
                 try
                 {
-                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     _result.Body = SafeJsonConvert.DeserializeObject<string>(_responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
@@ -1864,6 +1900,8 @@ namespace Fixtures.PetstoreV2
             {
                 throw new RestException("Unable to deserialize the headers.", ex);
             }
+            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);
@@ -1912,6 +1950,8 @@ namespace Fixtures.PetstoreV2
                 }
             }
 
+            // Serialize Request
+            string _requestContent = null;
             // Set Credentials
             if (this.Credentials != null)
             {
@@ -1931,11 +1971,12 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if (!_httpResponse.IsSuccessStatusCode)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = _httpRequest;
-                ex.Response = _httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -1944,8 +1985,8 @@ namespace Fixtures.PetstoreV2
             }
             // Create Result
             var _result = new HttpOperationResponse();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
+            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);
@@ -2003,6 +2044,8 @@ namespace Fixtures.PetstoreV2
                 }
             }
 
+            // Serialize Request
+            string _requestContent = null;
             // Set Credentials
             if (this.Credentials != null)
             {
@@ -2022,11 +2065,12 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if ((int)_statusCode != 200 && (int)_statusCode != 400 && (int)_statusCode != 404)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = _httpRequest;
-                ex.Response = _httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -2035,14 +2079,12 @@ namespace Fixtures.PetstoreV2
             }
             // Create Result
             var _result = new HttpOperationResponse<User>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
                 try
                 {
-                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     _result.Body = SafeJsonConvert.DeserializeObject<User>(_responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
@@ -2050,6 +2092,8 @@ namespace Fixtures.PetstoreV2
                     throw new RestException("Unable to deserialize the response.", ex);
                 }
             }
+            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);
@@ -2117,7 +2161,8 @@ namespace Fixtures.PetstoreV2
             }
 
             // Serialize Request
-            string _requestContent = SafeJsonConvert.SerializeObject(body, this.SerializationSettings);
+            string _requestContent = null;
+            _requestContent = SafeJsonConvert.SerializeObject(body, this.SerializationSettings);
             _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
             _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Set Credentials
@@ -2139,11 +2184,12 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if ((int)_statusCode != 400 && (int)_statusCode != 404)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = _httpRequest;
-                ex.Response = _httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -2152,8 +2198,8 @@ namespace Fixtures.PetstoreV2
             }
             // Create Result
             var _result = new HttpOperationResponse();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
+            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);
@@ -2212,6 +2258,8 @@ namespace Fixtures.PetstoreV2
                 }
             }
 
+            // Serialize Request
+            string _requestContent = null;
             // Set Credentials
             if (this.Credentials != null)
             {
@@ -2231,11 +2279,12 @@ namespace Fixtures.PetstoreV2
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if ((int)_statusCode != 400 && (int)_statusCode != 404)
             {
                 var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = _httpRequest;
-                ex.Response = _httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -2244,8 +2293,8 @@ namespace Fixtures.PetstoreV2
             }
             // Create Result
             var _result = new HttpOperationResponse();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
+            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);

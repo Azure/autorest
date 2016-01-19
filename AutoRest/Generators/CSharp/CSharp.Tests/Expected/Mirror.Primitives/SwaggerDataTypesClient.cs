@@ -198,7 +198,8 @@ namespace Fixtures.MirrorPrimitives
             }
 
             // Serialize Request
-            string _requestContent = SafeJsonConvert.SerializeObject(product, this.SerializationSettings);
+            string _requestContent = null;
+            _requestContent = SafeJsonConvert.SerializeObject(product, this.SerializationSettings);
             _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
             _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
@@ -214,12 +215,13 @@ namespace Fixtures.MirrorPrimitives
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
                 var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.DeserializationSettings);
                     if (_errorBody != null)
                     {
@@ -230,8 +232,8 @@ namespace Fixtures.MirrorPrimitives
                 {
                     // Ignore the exception
                 }
-                ex.Request = _httpRequest;
-                ex.Response = _httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -240,14 +242,12 @@ namespace Fixtures.MirrorPrimitives
             }
             // Create Result
             var _result = new HttpOperationResponse<Product>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
                 try
                 {
-                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     _result.Body = SafeJsonConvert.DeserializeObject<Product>(_responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
@@ -255,6 +255,8 @@ namespace Fixtures.MirrorPrimitives
                     throw new RestException("Unable to deserialize the response.", ex);
                 }
             }
+            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);
@@ -320,7 +322,8 @@ namespace Fixtures.MirrorPrimitives
             }
 
             // Serialize Request
-            string _requestContent = SafeJsonConvert.SerializeObject(product, this.SerializationSettings);
+            string _requestContent = null;
+            _requestContent = SafeJsonConvert.SerializeObject(product, this.SerializationSettings);
             _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
             _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
@@ -336,12 +339,13 @@ namespace Fixtures.MirrorPrimitives
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
                 var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.DeserializationSettings);
                     if (_errorBody != null)
                     {
@@ -352,8 +356,8 @@ namespace Fixtures.MirrorPrimitives
                 {
                     // Ignore the exception
                 }
-                ex.Request = _httpRequest;
-                ex.Response = _httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -362,14 +366,12 @@ namespace Fixtures.MirrorPrimitives
             }
             // Create Result
             var _result = new HttpOperationResponse<Product>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
                 try
                 {
-                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     _result.Body = SafeJsonConvert.DeserializeObject<Product>(_responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
@@ -377,6 +379,8 @@ namespace Fixtures.MirrorPrimitives
                     throw new RestException("Unable to deserialize the response.", ex);
                 }
             }
+            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);
@@ -442,7 +446,8 @@ namespace Fixtures.MirrorPrimitives
             }
 
             // Serialize Request
-            string _requestContent = SafeJsonConvert.SerializeObject(product, this.SerializationSettings);
+            string _requestContent = null;
+            _requestContent = SafeJsonConvert.SerializeObject(product, this.SerializationSettings);
             _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
             _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
@@ -458,12 +463,13 @@ namespace Fixtures.MirrorPrimitives
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
                 var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.DeserializationSettings);
                     if (_errorBody != null)
                     {
@@ -474,8 +480,8 @@ namespace Fixtures.MirrorPrimitives
                 {
                     // Ignore the exception
                 }
-                ex.Request = _httpRequest;
-                ex.Response = _httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -484,14 +490,12 @@ namespace Fixtures.MirrorPrimitives
             }
             // Create Result
             var _result = new HttpOperationResponse<Product>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
                 try
                 {
-                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     _result.Body = SafeJsonConvert.DeserializeObject<Product>(_responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
@@ -499,6 +503,8 @@ namespace Fixtures.MirrorPrimitives
                     throw new RestException("Unable to deserialize the response.", ex);
                 }
             }
+            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);
@@ -564,7 +570,8 @@ namespace Fixtures.MirrorPrimitives
             }
 
             // Serialize Request
-            string _requestContent = SafeJsonConvert.SerializeObject(product, this.SerializationSettings);
+            string _requestContent = null;
+            _requestContent = SafeJsonConvert.SerializeObject(product, this.SerializationSettings);
             _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
             _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
             // Send Request
@@ -580,12 +587,13 @@ namespace Fixtures.MirrorPrimitives
             }
             HttpStatusCode _statusCode = _httpResponse.StatusCode;
             cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
             if ((int)_statusCode != 200)
             {
                 var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.DeserializationSettings);
                     if (_errorBody != null)
                     {
@@ -596,8 +604,8 @@ namespace Fixtures.MirrorPrimitives
                 {
                     // Ignore the exception
                 }
-                ex.Request = _httpRequest;
-                ex.Response = _httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
                     ServiceClientTracing.Error(_invocationId, ex);
@@ -606,14 +614,12 @@ namespace Fixtures.MirrorPrimitives
             }
             // Create Result
             var _result = new HttpOperationResponse<Product>();
-            _result.Request = _httpRequest;
-            _result.Response = _httpResponse;
             // Deserialize Response
             if ((int)_statusCode == 200)
             {
                 try
                 {
-                    string _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                     _result.Body = SafeJsonConvert.DeserializeObject<Product>(_responseContent, this.DeserializationSettings);
                 }
                 catch (JsonException ex)
@@ -621,6 +627,8 @@ namespace Fixtures.MirrorPrimitives
                     throw new RestException("Unable to deserialize the response.", ex);
                 }
             }
+            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
             if (_shouldTrace)
             {
                 ServiceClientTracing.Exit(_invocationId, _result);
