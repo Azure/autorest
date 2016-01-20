@@ -27,7 +27,7 @@ BaseResource.prototype.mapper = function () {
       modelProperties: {
       }
     }
-  }
+  };
 };
 
 /**
