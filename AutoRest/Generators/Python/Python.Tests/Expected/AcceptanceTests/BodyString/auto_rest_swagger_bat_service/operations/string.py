@@ -25,7 +25,7 @@ class String(object):
         self.config = config
 
     def get_null(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get null string value value
 
@@ -65,7 +65,7 @@ class String(object):
         return deserialized
 
     def put_null(
-            self, string_body=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, string_body=None, custom_headers={}, raw=False, **operation_config):
         """
         Set string value null
 
@@ -107,7 +107,7 @@ class String(object):
             return client_raw_response
 
     def get_empty(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get empty string value value ''
 
@@ -147,7 +147,7 @@ class String(object):
         return deserialized
 
     def put_empty(
-            self, string_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, string_body, custom_headers={}, raw=False, **operation_config):
         """
         Set string value empty ''
 
@@ -186,7 +186,7 @@ class String(object):
             return client_raw_response
 
     def get_mbcs(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get mbcs string value
         '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
@@ -228,7 +228,7 @@ class String(object):
         return deserialized
 
     def put_mbcs(
-            self, string_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, string_body, custom_headers={}, raw=False, **operation_config):
         """
         Set string value mbcs
         '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
@@ -271,7 +271,7 @@ class String(object):
             return client_raw_response
 
     def get_whitespace(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get string value with leading and trailing whitespace
         '<tab><space><space>Now is the time for all good men to come to the
@@ -313,7 +313,7 @@ class String(object):
         return deserialized
 
     def put_whitespace(
-            self, string_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, string_body, custom_headers={}, raw=False, **operation_config):
         """
         Set String value with leading and trailing whitespace
         '<tab><space><space>Now is the time for all good men to come to the
@@ -356,7 +356,7 @@ class String(object):
             return client_raw_response
 
     def get_not_provided(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get String value when no string value is sent in response payload
 

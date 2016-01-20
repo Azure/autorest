@@ -8,14 +8,11 @@
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Azure.Python.AzureMethodTemplateModel>
     def @(Model.Name.ToPythonCase())(
             self, @(Model.MethodParameterDeclaration(Model.AddCustomHeader))):
+        """
 @*need to fix comment here for long running function*@
 @if (!String.IsNullOrEmpty(Model.Summary))
 {
-@:        """@WrapComment(string.Empty, Model.Summary)
-}
-else
-{
-@:        """
+@:        @WrapComment(string.Empty, Model.Summary)
 }
 @if (!String.IsNullOrEmpty(Model.Description))
 {
@@ -31,25 +28,11 @@ else
         @WrapComment(string.Empty, ":param boolean raw: returns the direct response alongside the deserialized response")
 @if (Model.NeedsCallback)
 {
-@:        @WrapComment(string.Empty, ":param callback: if provided, the call will run asynchronously and call the callback when complete.  When specified the function returns a concurrent.futures.Future")
+@:        @WrapComment(string.Empty, ":param callback: if provided, the runtime will call the callback while streaming upload/download. If streaming upload, response kwarg will be None")
 @:        @WrapComment(string.Empty, ":type callback: Callable[[concurrent.futures.Future], None] or None")
 }
         @WrapComment(string.Empty, string.Format(":rtype: {0} or ({0}, requests.response) or concurrent.futures.Future", MethodTemplateModel.GetDocumentationType(Model.ReturnType.Body)))
         """
-@if (Model.IsStreamBody)
-{
-<text>
-        def upload_gen(file_handle):
-            while True:
-                data = file_handle.read(self.config.connection.data_block_size)
-                if not data:
-                    break
-                if callback and callable(callback):
-                    callback(None, data=data)
-                yield data
-</text>
-@EmptyLine
-}
         @Model.BuildInputMappings()
 @if (Model.InputParameterTransformation.Any())
 {
@@ -72,7 +55,7 @@ else
 @if (Model.RequestBody != null)
 {
         @:# Construct body
-  if (Model.IsStreamBody)
+  if (Model.IsStreamRequestBody)
   {
     foreach (var parameter in Model.LocalParameters)
     {
@@ -119,15 +102,6 @@ else
 @EmptyLine
         def get_long_running_output(response):
 @EmptyLine
-@if (Model.IsStreamResponse)
-{
-            @:def download_gen():
-                @:for data in response.iter_content(self.config.connection.data_block_size):
-                    @:if not data:
-                        @:break
-                    @:yield data
-@EmptyLine
-}
             if @Model.FailureStatusCodePredicate:
                 raise @Model.RaisedException
 @EmptyLine
@@ -144,7 +118,7 @@ else
             @:if response.status_code == @MethodTemplateModel.GetStatusCodeReference(responsePair.Key):
     if (responsePair.Value.Body == PrimaryType.Stream)
     {
-                @:deserialized = download_gen()
+                @:deserialized = self._client.stream_download(response, callback)
     }
     else
     {
@@ -170,4 +144,4 @@ else
             self.config.long_running_operation_timeout)
         return AzureOperationPoller(
             long_running_send, get_long_running_output,
-            get_long_running_status, long_running_operation_timeout, callback)
+            get_long_running_status, long_running_operation_timeout)

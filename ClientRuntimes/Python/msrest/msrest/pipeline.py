@@ -198,6 +198,7 @@ class ClientRequest(requests.Request):
         """
         if data is None and self.method == 'GET':
             return
+
         try:
             self.data = json.dumps(data)
             self.headers['Content-Length'] = len(self.data)

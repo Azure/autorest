@@ -25,7 +25,7 @@ class Dictionary(object):
         self.config = config
 
     def get_null(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get null dictionary value
 
@@ -65,7 +65,7 @@ class Dictionary(object):
         return deserialized
 
     def get_empty(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get empty dictionary value {}
 
@@ -105,7 +105,7 @@ class Dictionary(object):
         return deserialized
 
     def put_empty(
-            self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, array_body, custom_headers={}, raw=False, **operation_config):
         """
         Set dictionary value empty {}
 
@@ -144,7 +144,7 @@ class Dictionary(object):
             return client_raw_response
 
     def get_null_value(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get Dictionary with null value
 
@@ -184,7 +184,7 @@ class Dictionary(object):
         return deserialized
 
     def get_null_key(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get Dictionary with null key
 
@@ -224,7 +224,7 @@ class Dictionary(object):
         return deserialized
 
     def get_empty_string_key(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get Dictionary with key as empty string
 
@@ -264,7 +264,7 @@ class Dictionary(object):
         return deserialized
 
     def get_invalid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get invalid Dictionary value
 
@@ -304,7 +304,7 @@ class Dictionary(object):
         return deserialized
 
     def get_boolean_tfft(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get boolean dictionary value {"0": true, "1": false, "2": false, "3":
         true }
@@ -345,7 +345,7 @@ class Dictionary(object):
         return deserialized
 
     def put_boolean_tfft(
-            self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, array_body, custom_headers={}, raw=False, **operation_config):
         """
         Set dictionary value empty {"0": true, "1": false, "2": false, "3":
         true }
@@ -385,7 +385,7 @@ class Dictionary(object):
             return client_raw_response
 
     def get_boolean_invalid_null(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get boolean dictionary value {"0": true, "1": null, "2": false }
 
@@ -425,7 +425,7 @@ class Dictionary(object):
         return deserialized
 
     def get_boolean_invalid_string(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'
 
@@ -465,7 +465,7 @@ class Dictionary(object):
         return deserialized
 
     def get_integer_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
 
@@ -505,7 +505,7 @@ class Dictionary(object):
         return deserialized
 
     def put_integer_valid(
-            self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, array_body, custom_headers={}, raw=False, **operation_config):
         """
         Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
 
@@ -544,7 +544,7 @@ class Dictionary(object):
             return client_raw_response
 
     def get_int_invalid_null(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get integer dictionary value {"0": 1, "1": null, "2": 0}
 
@@ -584,7 +584,7 @@ class Dictionary(object):
         return deserialized
 
     def get_int_invalid_string(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get integer dictionary value {"0": 1, "1": "integer", "2": 0}
 
@@ -624,7 +624,7 @@ class Dictionary(object):
         return deserialized
 
     def get_long_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}
 
@@ -664,7 +664,7 @@ class Dictionary(object):
         return deserialized
 
     def put_long_valid(
-            self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, array_body, custom_headers={}, raw=False, **operation_config):
         """
         Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}
 
@@ -703,7 +703,7 @@ class Dictionary(object):
             return client_raw_response
 
     def get_long_invalid_null(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get long dictionary value {"0": 1, "1": null, "2": 0}
 
@@ -743,7 +743,7 @@ class Dictionary(object):
         return deserialized
 
     def get_long_invalid_string(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get long dictionary value {"0": 1, "1": "integer", "2": 0}
 
@@ -783,7 +783,7 @@ class Dictionary(object):
         return deserialized
 
     def get_float_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
 
@@ -823,7 +823,7 @@ class Dictionary(object):
         return deserialized
 
     def put_float_valid(
-            self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, array_body, custom_headers={}, raw=False, **operation_config):
         """
         Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
 
@@ -862,7 +862,7 @@ class Dictionary(object):
             return client_raw_response
 
     def get_float_invalid_null(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
 
@@ -902,7 +902,7 @@ class Dictionary(object):
         return deserialized
 
     def get_float_invalid_string(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
 
@@ -942,7 +942,7 @@ class Dictionary(object):
         return deserialized
 
     def get_double_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
 
@@ -982,7 +982,7 @@ class Dictionary(object):
         return deserialized
 
     def put_double_valid(
-            self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, array_body, custom_headers={}, raw=False, **operation_config):
         """
         Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}
 
@@ -1021,7 +1021,7 @@ class Dictionary(object):
             return client_raw_response
 
     def get_double_invalid_null(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}
 
@@ -1061,7 +1061,7 @@ class Dictionary(object):
         return deserialized
 
     def get_double_invalid_string(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}
 
@@ -1101,7 +1101,7 @@ class Dictionary(object):
         return deserialized
 
     def get_string_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
 
@@ -1141,7 +1141,7 @@ class Dictionary(object):
         return deserialized
 
     def put_string_valid(
-            self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, array_body, custom_headers={}, raw=False, **operation_config):
         """
         Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}
 
@@ -1180,7 +1180,7 @@ class Dictionary(object):
             return client_raw_response
 
     def get_string_with_null(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}
 
@@ -1220,7 +1220,7 @@ class Dictionary(object):
         return deserialized
 
     def get_string_with_invalid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}
 
@@ -1260,7 +1260,7 @@ class Dictionary(object):
         return deserialized
 
     def get_date_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02",
         "2": "1492-10-12"}
@@ -1301,7 +1301,7 @@ class Dictionary(object):
         return deserialized
 
     def put_date_valid(
-            self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, array_body, custom_headers={}, raw=False, **operation_config):
         """
         Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2":
         "1492-10-12"}
@@ -1341,7 +1341,7 @@ class Dictionary(object):
             return client_raw_response
 
     def get_date_invalid_null(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get date dictionary value {"0": "2012-01-01", "1": null, "2":
         "1776-07-04"}
@@ -1382,7 +1382,7 @@ class Dictionary(object):
         return deserialized
 
     def get_date_invalid_chars(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get date dictionary value {"0": "2011-03-22", "1": "date"}
 
@@ -1422,7 +1422,7 @@ class Dictionary(object):
         return deserialized
 
     def get_date_time_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1":
         "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
@@ -1463,7 +1463,7 @@ class Dictionary(object):
         return deserialized
 
     def put_date_time_valid(
-            self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, array_body, custom_headers={}, raw=False, **operation_config):
         """
         Set dictionary value  {"0": "2000-12-01t00:00:01z", "1":
         "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}
@@ -1503,7 +1503,7 @@ class Dictionary(object):
             return client_raw_response
 
     def get_date_time_invalid_null(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}
 
@@ -1543,7 +1543,7 @@ class Dictionary(object):
         return deserialized
 
     def get_date_time_invalid_chars(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get date dictionary value {"0": "2000-12-01t00:00:01z", "1":
         "date-time"}
@@ -1584,7 +1584,7 @@ class Dictionary(object):
         return deserialized
 
     def get_date_time_rfc1123_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000
         00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12
@@ -1626,7 +1626,7 @@ class Dictionary(object):
         return deserialized
 
     def put_date_time_rfc1123_valid(
-            self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, array_body, custom_headers={}, raw=False, **operation_config):
         """
         Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1":
         "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}
@@ -1666,7 +1666,7 @@ class Dictionary(object):
             return client_raw_response
 
     def get_duration_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get duration dictionary value {"0": "P123DT22H14M12.011S", "1":
         "P5DT1H0M0S"}
@@ -1707,7 +1707,7 @@ class Dictionary(object):
         return deserialized
 
     def put_duration_valid(
-            self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, array_body, custom_headers={}, raw=False, **operation_config):
         """
         Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}
 
@@ -1746,7 +1746,7 @@ class Dictionary(object):
             return client_raw_response
 
     def get_byte_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03),
         "2": hex (25, 29, 43)} with each item encoded in base64
@@ -1787,7 +1787,7 @@ class Dictionary(object):
         return deserialized
 
     def put_byte_valid(
-            self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, array_body, custom_headers={}, raw=False, **operation_config):
         """
         Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03),
         "2": hex (25, 29, 43)} with each elementencoded in base 64
@@ -1827,7 +1827,7 @@ class Dictionary(object):
             return client_raw_response
 
     def get_byte_invalid_null(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the
         first item base64 encoded
@@ -1868,7 +1868,7 @@ class Dictionary(object):
         return deserialized
 
     def get_complex_null(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get dictionary of complex type null value
 
@@ -1908,7 +1908,7 @@ class Dictionary(object):
         return deserialized
 
     def get_complex_empty(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get empty dictionary of complex type {}
 
@@ -1948,7 +1948,7 @@ class Dictionary(object):
         return deserialized
 
     def get_complex_item_null(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get dictionary of complex type with null item {"0": {"integer": 1,
         "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}
@@ -1989,7 +1989,7 @@ class Dictionary(object):
         return deserialized
 
     def get_complex_item_empty(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get dictionary of complex type with empty item {"0": {"integer": 1,
         "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}
@@ -2030,7 +2030,7 @@ class Dictionary(object):
         return deserialized
 
     def get_complex_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get dictionary of complex type with {"0": {"integer": 1, "string":
         "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5,
@@ -2072,7 +2072,7 @@ class Dictionary(object):
         return deserialized
 
     def put_complex_valid(
-            self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, array_body, custom_headers={}, raw=False, **operation_config):
         """
         Put an dictionary of complex type with values {"0": {"integer": 1,
         "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer":
@@ -2113,7 +2113,7 @@ class Dictionary(object):
             return client_raw_response
 
     def get_array_null(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get a null array
 
@@ -2153,7 +2153,7 @@ class Dictionary(object):
         return deserialized
 
     def get_array_empty(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get an empty dictionary {}
 
@@ -2193,7 +2193,7 @@ class Dictionary(object):
         return deserialized
 
     def get_array_item_null(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get an dictionary of array of strings {"0": ["1", "2", "3"], "1":
         null, "2": ["7", "8", "9"]}
@@ -2234,7 +2234,7 @@ class Dictionary(object):
         return deserialized
 
     def get_array_item_empty(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2":
         ["7", "8", "9"]}
@@ -2275,7 +2275,7 @@ class Dictionary(object):
         return deserialized
 
     def get_array_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4",
         "5", "6"], "2": ["7", "8", "9"]}
@@ -2316,7 +2316,7 @@ class Dictionary(object):
         return deserialized
 
     def put_array_valid(
-            self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, array_body, custom_headers={}, raw=False, **operation_config):
         """
         Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4",
         "5", "6"], "2": ["7", "8", "9"]}
@@ -2356,7 +2356,7 @@ class Dictionary(object):
             return client_raw_response
 
     def get_dictionary_null(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get an dictionaries of dictionaries with value null
 
@@ -2396,7 +2396,7 @@ class Dictionary(object):
         return deserialized
 
     def get_dictionary_empty(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get an dictionaries of dictionaries of type <string, string> with
         value {}
@@ -2437,7 +2437,7 @@ class Dictionary(object):
         return deserialized
 
     def get_dictionary_item_null(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get an dictionaries of dictionaries of type <string, string> with
         value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2":
@@ -2479,7 +2479,7 @@ class Dictionary(object):
         return deserialized
 
     def get_dictionary_item_empty(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get an dictionaries of dictionaries of type <string, string> with
         value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2":
@@ -2521,7 +2521,7 @@ class Dictionary(object):
         return deserialized
 
     def get_dictionary_valid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get an dictionaries of dictionaries of type <string, string> with
         value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4":
@@ -2564,7 +2564,7 @@ class Dictionary(object):
         return deserialized
 
     def put_dictionary_valid(
-            self, array_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, array_body, custom_headers={}, raw=False, **operation_config):
         """
         Get an dictionaries of dictionaries of type <string, string> with
         value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4":

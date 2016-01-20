@@ -13,7 +13,9 @@ from msrest.serialization import Model
 
 
 class Usage(Model):
-    """Describes Storage Resource Usage."""
+    """
+    Describes Storage Resource Usage.
+    """
 
     _required = []
 

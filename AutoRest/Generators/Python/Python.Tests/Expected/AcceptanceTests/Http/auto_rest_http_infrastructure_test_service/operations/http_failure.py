@@ -25,7 +25,7 @@ class HttpFailure(object):
         self.config = config
 
     def get_empty_error(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get empty error form server
 

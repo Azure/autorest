@@ -45,30 +45,22 @@ class Paged(object):
          deserialization.
         """
         self.next_link = ""
-        self.items = []
+        self.current_page = []
         self._derserializer = Deserializer(classes)
         self._get_next = command
         self._response = None
         self._raw_headers = raw_headers
 
     def __iter__(self):
-        """Iterate over response items, automatically retrieves
-        next page.
+        """Iterate over response items in current page, automatically
+        retrieves next page.
         """
-        for i in self.items:
+        for i in self.current_page:
             yield i
 
         while self.next_link is not None:
             for i in self.next():
                 yield i
-
-    def __len__(self):
-        """Returnds length of items in current page."""
-        return len(self.items)
-
-    def __getitem__(self, index):
-        """Get indexed item on current page."""
-        return self.items[index]
 
     def _validate_url(self):
         """Validate next page URL."""
@@ -79,7 +71,7 @@ class Paged(object):
 
     @property
     def raw(self):
-        raw = ClientRawResponse(self.items, self._response)
+        raw = ClientRawResponse(self.current_page, self._response)
         if self._raw_headers:
             raw.add_headers(self._raw_headers)
         return raw
@@ -95,7 +87,7 @@ class Paged(object):
     def reset(self):
         """Reset iterator to first page."""
         self.next_link = ""
-        self.items = []
+        self.current_page = []
 
     def next(self):
         """Get next page."""
@@ -104,4 +96,4 @@ class Paged(object):
         self._validate_url()
         self._response = self._get_next(self.next_link)
         self._derserializer(self, self._response)
-        return self.items
+        return self.current_page

@@ -46,7 +46,7 @@ namespace Microsoft.Rest.Generator.Python
             get { return this.ReturnType.Body == PrimaryType.Stream; }
         }
 
-        public bool IsStreamBody
+        public bool IsStreamRequestBody
         {
             get
             {
@@ -102,7 +102,7 @@ namespace Microsoft.Rest.Generator.Python
         {
             get
             {
-                if (IsStreamResponse || IsStreamBody)
+                if (IsStreamResponse || IsStreamRequestBody)
                 {
                     return true;
                 }
@@ -164,7 +164,10 @@ namespace Microsoft.Rest.Generator.Python
             }
 
             declarations.Add("raw=False");
-            declarations.Add("callback=None");
+            if (this.NeedsCallback)
+            {
+                declarations.Add("callback=None");
+            }
             declarations.Add("**operation_config");
             var declaration = string.Join(", ", declarations);
             return declaration;

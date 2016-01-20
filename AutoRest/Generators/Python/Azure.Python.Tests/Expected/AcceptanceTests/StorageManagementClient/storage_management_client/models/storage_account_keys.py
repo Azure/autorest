@@ -13,7 +13,9 @@ from msrest.serialization import Model
 
 
 class StorageAccountKeys(Model):
-    """The access keys for the storage account."""
+    """
+    The access keys for the storage account.
+    """
 
     _required = []
 

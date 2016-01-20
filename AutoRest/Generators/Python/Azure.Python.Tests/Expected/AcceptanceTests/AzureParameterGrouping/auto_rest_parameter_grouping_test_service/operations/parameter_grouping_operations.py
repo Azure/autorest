@@ -26,7 +26,7 @@ class ParameterGroupingOperations(object):
         self.config = config
 
     def post_required(
-            self, parameter_grouping_post_required_parameters, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, parameter_grouping_post_required_parameters, custom_headers={}, raw=False, **operation_config):
         """
         Post a bunch of required parameters grouped
 
@@ -91,7 +91,7 @@ class ParameterGroupingOperations(object):
             return client_raw_response
 
     def post_optional(
-            self, parameter_grouping_post_optional_parameters=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, parameter_grouping_post_optional_parameters=None, custom_headers={}, raw=False, **operation_config):
         """
         Post a bunch of optional parameters grouped
 
@@ -142,7 +142,7 @@ class ParameterGroupingOperations(object):
             return client_raw_response
 
     def post_multiple_parameter_groups(
-            self, first_parameter_group=None, parameter_grouping_post_multiple_parameter_groups_second_parameter_group=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, first_parameter_group=None, parameter_grouping_post_multiple_parameter_groups_second_parameter_group=None, custom_headers={}, raw=False, **operation_config):
         """
         Post parameters from multiple different parameter groups
 
@@ -208,7 +208,7 @@ class ParameterGroupingOperations(object):
             return client_raw_response
 
     def post_shared_parameter_group_object(
-            self, first_parameter_group=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, first_parameter_group=None, custom_headers={}, raw=False, **operation_config):
         """
         Post parameters with a shared parameter group object
 

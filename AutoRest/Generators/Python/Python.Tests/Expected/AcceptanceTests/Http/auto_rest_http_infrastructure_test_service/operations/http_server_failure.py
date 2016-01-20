@@ -25,7 +25,7 @@ class HttpServerFailure(object):
         self.config = config
 
     def head501(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Return 501 status code - should be represented in the client as an
         error
@@ -60,7 +60,7 @@ class HttpServerFailure(object):
             return client_raw_response
 
     def get501(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Return 501 status code - should be represented in the client as an
         error
@@ -95,7 +95,7 @@ class HttpServerFailure(object):
             return client_raw_response
 
     def post505(
-            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
         """
         Return 505 status code - should be represented in the client as an
         error
@@ -139,7 +139,7 @@ class HttpServerFailure(object):
             return client_raw_response
 
     def delete505(
-            self, boolean_value=None, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, boolean_value=None, custom_headers={}, raw=False, **operation_config):
         """
         Return 505 status code - should be represented in the client as an
         error

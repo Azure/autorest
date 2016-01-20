@@ -13,7 +13,9 @@ from msrest.serialization import Model
 
 
 class PagingGetMultiplePagesOptions(Model):
-    """Additional parameters for the getMultiplePages operation."""
+    """
+    Additional parameters for the getMultiplePages operation.
+    """
 
     _required = []
 

@@ -32,21 +32,13 @@ class Files(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the runtime will call the callback when
-        stream upload/download.  When specified the function returns a
-        concurrent.futures.Future
+        :param callback: if provided, the runtime will call the callback while
+        streaming upload/download. If streaming upload, response kwarg will
+        be None
         :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: object or (object, requests.response) or
         concurrent.futures.Future
         """
-        def download_gen():
-            for data in response.iter_content(self.config.connection.data_block_size):
-                if not data:
-                    break
-                if callback and callable(callback):
-                    callback(None, data=data)
-                yield data
-
         # Construct URL
         url = '/files/stream/nonempty'
 
@@ -69,7 +61,7 @@ class Files(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = download_gen()
+            deserialized = self._client.stream_download(response, callback)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)
@@ -85,21 +77,13 @@ class Files(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :param callback: if provided, the runtime will call the callback when
-        stream upload/download.  When specified the function returns a
-        concurrent.futures.Future
+        :param callback: if provided, the runtime will call the callback while
+        streaming upload/download. If streaming upload, response kwarg will
+        be None
         :type callback: Callable[[concurrent.futures.Future], None] or None
         :rtype: object or (object, requests.response) or
         concurrent.futures.Future
         """
-        def download_gen():
-            for data in response.iter_content(self.config.connection.data_block_size):
-                if not data:
-                    break
-                if callback and callable(callback):
-                    callback(None, data=data)
-                yield data
-
         # Construct URL
         url = '/files/stream/empty'
 
@@ -122,7 +106,7 @@ class Files(object):
         deserialized = None
 
         if response.status_code == 200:
-            deserialized = download_gen()
+            deserialized = self._client.stream_download(response, callback)
 
         if raw:
             client_raw_response = ClientRawResponse(deserialized, response)

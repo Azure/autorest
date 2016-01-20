@@ -16,7 +16,7 @@ class StorageAccountPaged(Paged):
 
     _attribute_map = {
         'next_link': {'key': 'nextLink', 'type': 'str'},
-        'items': {'key': 'value', 'type': '[StorageAccount]'}
+        'current_page': {'key': 'value', 'type': '[StorageAccount]'}
     }
 
     def __init__(self, *args, **kwargs):

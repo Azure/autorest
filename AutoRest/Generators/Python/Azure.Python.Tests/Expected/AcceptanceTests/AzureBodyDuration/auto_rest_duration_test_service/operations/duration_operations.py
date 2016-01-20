@@ -26,7 +26,7 @@ class DurationOperations(object):
         self.config = config
 
     def get_null(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get null duration value
 
@@ -70,7 +70,7 @@ class DurationOperations(object):
         return deserialized
 
     def put_positive_duration(
-            self, duration_body, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, duration_body, custom_headers={}, raw=False, **operation_config):
         """
         Put a positive duration value
 
@@ -112,7 +112,7 @@ class DurationOperations(object):
             return client_raw_response
 
     def get_positive_duration(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get a positive duration value
 
@@ -156,7 +156,7 @@ class DurationOperations(object):
         return deserialized
 
     def get_invalid(
-            self, custom_headers={}, raw=False, callback=None, **operation_config):
+            self, custom_headers={}, raw=False, **operation_config):
         """
         Get an invalid duration value
 
