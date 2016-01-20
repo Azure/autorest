@@ -4,10 +4,10 @@
 
 var util = require('util');
 var async = require('async');
-var msrest = require('ms-rest');
+var msRest = require('ms-rest');
 var PollingState = require('./pollingState');
 var LroStates = require('./constants').LongRunningOperationStates;
-var WebResource = msrest.WebResource;
+var WebResource = msRest.WebResource;
 
 /**
  * @class
@@ -54,7 +54,7 @@ function AzureServiceClient(credentials, options) {
   }
 }
 
-util.inherits(AzureServiceClient, msrest.ServiceClient);
+util.inherits(AzureServiceClient, msRest.ServiceClient);
 
 /**
  * Poll Azure long running PUT operation.
@@ -366,8 +366,8 @@ AzureServiceClient.prototype._getStatus = function (operationUrl, callback) {
       var error = new Error(util.format('Invalid status code with response body "%s" occurred ' + 
         'when polling for operation status.', responseBody));
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       try {
         error.body = JSON.parse(responseBody);
@@ -380,7 +380,7 @@ AzureServiceClient.prototype._getStatus = function (operationUrl, callback) {
       return callback(error);
     }
     // Create Result
-    var result = new msrest.HttpOperationResponse();
+    var result = new msRest.HttpOperationResponse();
     result.request = httpRequest;
     result.response = response;
     if (responseBody === '') responseBody = null;
@@ -390,8 +390,8 @@ AzureServiceClient.prototype._getStatus = function (operationUrl, callback) {
       } catch (deserializationError) {
         var parseError = new Error(util.format('Error "%s" occurred in deserializing the response body - "%s" -' + 
         ' when polling for operation status.', deserializationError, responseBody));
-        parseError.request = httpRequest;
-        parseError.response = response;
+        parseError.request = msRest.stripRequest(httpRequest);
+        parseError.response = msRest.stripResponse(response);
         parseError.body = responseBody;
         return callback(parseError);
       }

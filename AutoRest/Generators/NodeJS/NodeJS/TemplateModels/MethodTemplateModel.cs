@@ -358,8 +358,8 @@ namespace Microsoft.Rest.Generator.NodeJS
                 var errorVariable = this.Scope.GetVariableName("deserializationError");
                 return builder.AppendLine("var {0} = new Error(util.format('Error \"%s\" occurred in " +
                     "deserializing the responseBody - \"%s\"', error, responseBody));", errorVariable)
-                    .AppendLine("{0}.request = httpRequest;", errorVariable)
-                    .AppendLine("{0}.response = response;", errorVariable)
+                    .AppendLine("{0}.request = msRest.stripRequest(httpRequest);", errorVariable)
+                    .AppendLine("{0}.response = msRest.stripResponse(response);", errorVariable)
                     .AppendLine("return callback({0});", errorVariable).ToString();
             }
         }

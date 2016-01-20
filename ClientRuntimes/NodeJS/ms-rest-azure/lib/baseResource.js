@@ -12,13 +12,32 @@ function BaseResource() {
 }
 
 /**
+ * Defines the metadata of BaseResource
+ *
+ * @returns {object} metadata of BaseResource
+ *
+ */
+BaseResource.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'BaseResource',
+    type: {
+      name: 'Composite',
+      className: 'BaseResource',
+      modelProperties: {
+      }
+    }
+  }
+};
+
+/**
  * Validate the payload against the Resource schema
  *
  * @param {JSON} payload
  *
  */
 BaseResource.prototype.serialize = function () {
-	return {};
+  return {};
 };
 
 /**
@@ -28,7 +47,7 @@ BaseResource.prototype.serialize = function () {
  *
  */
 BaseResource.prototype.deserialize = function (instance) {
-	return instance;
+  return instance;
 };
 
 module.exports = BaseResource;
