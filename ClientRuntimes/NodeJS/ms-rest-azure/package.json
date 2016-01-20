@@ -23,7 +23,7 @@
     "async": "0.2.7",
     "uuid": "2.0.1",
     "adal-node": "0.1.16",
-    "ms-rest": "^1.8.0",
+    "ms-rest": "^1.7.0",
     "underscore": "^1.4.0",
     "moment": "^2.6.0"
   },
