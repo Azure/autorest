@@ -13,6 +13,7 @@ package fixtures.http;
 import java.util.List;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
+import com.microsoft.rest.serializer.JacksonMapperAdapter;
 
 /**
  * The interface for AutoRestHttpInfrastructureTestService class.
@@ -38,6 +39,14 @@ public interface AutoRestHttpInfrastructureTestService {
      * @param logLevel the logging level enum.
      */
     void setLogLevel(Level logLevel);
+
+    /**
+     * Gets the adapter for {@link com.fasterxml.jackson.databind.ObjectMapper} for serialization
+     * and deserialization operations..
+     *
+     * @return the adapter.
+     */
+    JacksonMapperAdapter getMapperAdapter();
 
     /**
      * Gets the HttpFailure object to access its operations.

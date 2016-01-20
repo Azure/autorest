@@ -99,4 +99,14 @@ public abstract class ServiceClient {
         loggingInterceptor.setLevel(logLevel);
         this.getClientInterceptors().add(loggingInterceptor);
     }
+
+    /**
+     * Gets the adapter for {@link com.fasterxml.jackson.databind.ObjectMapper} for serialization
+     * and deserialization operations..
+     *
+     * @return the adapter.
+     */
+    public JacksonMapperAdapter getMapperAdapter() {
+        return this.mapperAdapter;
+    }
 }

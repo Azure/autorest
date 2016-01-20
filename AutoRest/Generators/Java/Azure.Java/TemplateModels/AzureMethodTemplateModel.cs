@@ -162,14 +162,6 @@ namespace Microsoft.Rest.Generator.Java.Azure
             }
         }
 
-        public override string ServiceResponseBuilderArgs
-        {
-            get
-            {
-                return "new AzureJacksonMapperAdapter()";
-            }
-        }
-
         public override List<string> InterfaceImports
         {
             get

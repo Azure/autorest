@@ -26,8 +26,9 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
         /// </summary>
         /// <param name="parameter">The parameter to convert</param>
         /// <param name="reference">a reference to an instance of the type</param>
+        /// <param name="clientReference">a reference to the service client</param>
         /// <returns></returns>
-        public static string ToString(this Parameter parameter, string reference)
+        public static string ToString(this Parameter parameter, string reference, string clientReference)
         {
             if (parameter == null)
             {
@@ -49,12 +50,12 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
             }
             else if (sequence != null)
             {
-                return "new JacksonMapperAdapter().serializeList(" + reference +
+                return clientReference + ".getMapperAdapter().serializeList(" + reference +
                     ", CollectionFormat." + parameter.CollectionFormat.ToString().ToUpper(CultureInfo.InvariantCulture) + ")";
             }
             else
             {
-                return "new JacksonMapperAdapter().serializeRaw(" + reference + ")";
+                return clientReference + ".getMapperAdapter().serializeRaw(" + reference + ")";
             }
         }
 
@@ -194,14 +195,6 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
                     type.Name == "ByteArray")
                 {
                     imports.Add("org.apache.commons.codec.binary.Base64");
-                }
-                if (type.Name == "LocalDate" ||
-                    type.Name == "DateTime" ||
-                    type is CompositeType ||
-                    sequenceType != null ||
-                    type is DictionaryType)
-                {
-                    imports.Add("com.microsoft.rest.serializer.JacksonMapperAdapter");
                 }
                 if (sequenceType != null)
                 {

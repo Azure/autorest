@@ -16,6 +16,8 @@ namespace Microsoft.Rest.Generator.Java
     {
         private readonly IScopeProvider _scopeProvider = new ScopeProvider();
 
+        private string clientReference;
+
         public MethodTemplateModel(Method source, ServiceClient serviceClient)
         {
             this.LoadFrom(source);
@@ -26,10 +28,12 @@ namespace Microsoft.Rest.Generator.Java
             if (source.Group != null)
             {
                 OperationName = source.Group.ToPascalCase();
+                clientReference = "this.client";
             }
             else
             {
                 OperationName = serviceClient.Name;
+                clientReference = "this";
             }
         }
 
@@ -132,7 +136,7 @@ namespace Microsoft.Rest.Generator.Java
                     if ((parameter.Location != ParameterLocation.Body)
                          && parameter.Type.NeedsSpecialSerialization())
                     {
-                        declarations.Add(parameter.ToString(parameter.Name));
+                        declarations.Add(parameter.ToString(parameter.Name, clientReference));
                     }
                     else
                     {
@@ -169,7 +173,7 @@ namespace Microsoft.Rest.Generator.Java
                     if ((parameter.Location != ParameterLocation.Body)
                          && parameter.Type.NeedsSpecialSerialization())
                     {
-                        declarations.Add(parameter.ToString(parameter.Name));
+                        declarations.Add(parameter.ToString(parameter.Name, clientReference));
                     }
                     else
                     {
@@ -446,14 +450,6 @@ namespace Microsoft.Rest.Generator.Java
             get
             {
                 return "ServiceResponseBuilder";
-            }
-        }
-
-        public virtual string ServiceResponseBuilderArgs
-        {
-            get
-            {
-                return "";
             }
         }
 
