@@ -5,9 +5,10 @@
  *
  */
 
-package com.microsoft.rest.serializer;
+package com.microsoft.azure.serializer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.microsoft.rest.serializer.JacksonMapperAdapter;
 
 /**
  * A serialization helper class overriding {@link JacksonMapperAdapter} with extra

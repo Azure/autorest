@@ -1,7 +1,7 @@
 package fixtures.lro;
 
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.serializer.AzureJacksonMapperAdapter;
+import com.microsoft.azure.serializer.AzureJacksonMapperAdapter;
 import com.squareup.okhttp.OkHttpClient;
 import fixtures.lro.models.Product;
 import org.junit.Assert;

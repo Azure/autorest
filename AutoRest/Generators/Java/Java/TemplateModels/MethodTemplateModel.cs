@@ -453,6 +453,14 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
+        public virtual string RuntimeBasePackage
+        {
+            get
+            {
+                return "com.microsoft.rest";
+            }
+        }
+
         public virtual List<string> InterfaceImports
         {
             get
@@ -509,7 +517,7 @@ namespace Microsoft.Rest.Generator.Java
                     imports.Add("com.squareup.okhttp.ResponseBody");
                 }
                 imports.Add("com.microsoft.rest." + OperationResponseType);
-                imports.Add("com.microsoft.rest." + ResponseBuilder);
+                imports.Add(RuntimeBasePackage + "." + ResponseBuilder);
                 imports.Add("com.microsoft.rest.ServiceCallback");
 
                 // response type conversion

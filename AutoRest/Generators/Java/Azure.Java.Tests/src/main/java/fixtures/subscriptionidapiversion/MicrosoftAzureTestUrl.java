@@ -10,7 +10,7 @@
 
 package fixtures.subscriptionidapiversion;
 
-import com.microsoft.rest.AzureClient;
+import com.microsoft.azure.AzureClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.serializer.JacksonMapperAdapter;
 import com.squareup.okhttp.Interceptor;

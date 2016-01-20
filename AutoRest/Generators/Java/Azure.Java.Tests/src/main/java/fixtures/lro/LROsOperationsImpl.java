@@ -11,7 +11,7 @@
 package fixtures.lro;
 
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.CloudException;
+import com.microsoft.azure.CloudException;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseWithHeaders;

@@ -5,10 +5,10 @@
  *
  */
 
-package com.microsoft.rest;
+package com.microsoft.azure;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.microsoft.rest.serializer.AzureJacksonMapperAdapter;
+import com.microsoft.azure.serializer.AzureJacksonMapperAdapter;
 import com.squareup.okhttp.ResponseBody;
 import retrofit.Response;
 

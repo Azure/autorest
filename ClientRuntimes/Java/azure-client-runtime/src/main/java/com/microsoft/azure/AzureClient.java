@@ -5,10 +5,15 @@
  *
  */
 
-package com.microsoft.rest;
+package com.microsoft.azure;
 
+import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceException;
+import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.ServiceResponseCallback;
+import com.microsoft.rest.ServiceResponseWithHeaders;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
-import com.microsoft.rest.serializer.AzureJacksonMapperAdapter;
+import com.microsoft.azure.serializer.AzureJacksonMapperAdapter;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.ResponseBody;
 

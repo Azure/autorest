@@ -5,7 +5,7 @@
  *
  */
 
-package com.microsoft.rest.serializer;
+package com.microsoft.azure.serializer;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonFactory;
@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.deser.ResolvableDeserializer;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.microsoft.rest.BaseResource;
+import com.microsoft.azure.BaseResource;
 
 import java.io.IOException;
 import java.lang.reflect.Field;

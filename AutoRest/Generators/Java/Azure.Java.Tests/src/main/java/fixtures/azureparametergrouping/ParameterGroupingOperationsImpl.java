@@ -11,7 +11,7 @@
 package fixtures.azureparametergrouping;
 
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.AzureServiceResponseBuilder;
+import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;

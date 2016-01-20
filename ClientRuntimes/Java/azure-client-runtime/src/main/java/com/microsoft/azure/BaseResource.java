@@ -5,7 +5,7 @@
  *
  */
 
-package com.microsoft.rest;
+package com.microsoft.azure;
 
 /**
  * Defines Azure resource.

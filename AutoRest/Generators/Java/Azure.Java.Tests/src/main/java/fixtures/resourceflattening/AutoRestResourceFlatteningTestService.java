@@ -10,7 +10,7 @@
 
 package fixtures.resourceflattening;
 
-import com.microsoft.rest.AzureClient;
+import com.microsoft.azure.AzureClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.serializer.JacksonMapperAdapter;
 import com.microsoft.rest.ServiceCallback;

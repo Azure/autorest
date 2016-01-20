@@ -11,11 +11,11 @@
 package fixtures.azurereport;
 
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.AzureClient;
-import com.microsoft.rest.AzureServiceClient;
-import com.microsoft.rest.AzureServiceResponseBuilder;
+import com.microsoft.azure.AzureClient;
+import com.microsoft.azure.AzureServiceClient;
+import com.microsoft.azure.AzureServiceResponseBuilder;
+import com.microsoft.azure.CustomHeaderInterceptor;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
-import com.microsoft.rest.CustomHeaderInterceptor;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;

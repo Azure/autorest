@@ -5,7 +5,7 @@
  *
  */
 
-package com.microsoft.rest.serializer;
+package com.microsoft.azure.serializer;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -23,7 +23,8 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.ser.BeanSerializerModifier;
 import com.fasterxml.jackson.databind.ser.ResolvableSerializer;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
-import com.microsoft.rest.BaseResource;
+import com.microsoft.azure.BaseResource;
+import com.microsoft.rest.serializer.JacksonMapperAdapter;
 
 import java.io.IOException;
 import java.util.Iterator;

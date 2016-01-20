@@ -162,6 +162,14 @@ namespace Microsoft.Rest.Generator.Java.Azure
             }
         }
 
+        public override string RuntimeBasePackage
+        {
+            get
+            {
+                return "com.microsoft.azure";
+            }
+        }
+
         public override List<string> InterfaceImports
         {
             get
@@ -185,7 +193,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 {
                     imports.Remove("com.microsoft.rest.ServiceResponseEmptyCallback");
                     imports.Remove("com.microsoft.rest.ServiceResponseCallback");
-                    imports.Remove("com.microsoft.rest.AzureServiceResponseBuilder");
+                    imports.Remove("com.microsoft.azure.AzureServiceResponseBuilder");
                     imports.Add("retrofit.Callback");
                     this.Responses.Select(r => r.Value.Body).Concat(new IType[]{ DefaultResponse.Body })
                         .SelectMany(t => t.ImportFrom(ServiceClient.Namespace))

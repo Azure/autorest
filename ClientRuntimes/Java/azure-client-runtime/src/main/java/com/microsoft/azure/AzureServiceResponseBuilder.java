@@ -5,10 +5,13 @@
  *
  */
 
-package com.microsoft.rest;
+package com.microsoft.azure;
 
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.serializer.AzureJacksonMapperAdapter;
+import com.microsoft.rest.AutoRestException;
+import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.ServiceResponseBuilder;
+import com.microsoft.azure.serializer.AzureJacksonMapperAdapter;
 import com.microsoft.rest.serializer.JacksonMapperAdapter;
 
 import retrofit.Response;

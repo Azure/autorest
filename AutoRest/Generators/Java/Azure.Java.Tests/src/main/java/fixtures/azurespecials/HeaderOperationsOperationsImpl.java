@@ -11,7 +11,7 @@
 package fixtures.azurespecials;
 
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.AzureServiceResponseBuilder;
+import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.ServiceResponseWithHeaders;

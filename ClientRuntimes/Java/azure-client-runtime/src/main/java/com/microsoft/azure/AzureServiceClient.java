@@ -5,9 +5,10 @@
  *
  */
 
-package com.microsoft.rest;
+package com.microsoft.azure;
 
-import com.microsoft.rest.serializer.AzureJacksonMapperAdapter;
+import com.microsoft.rest.ServiceClient;
+import com.microsoft.azure.serializer.AzureJacksonMapperAdapter;
 import com.squareup.okhttp.OkHttpClient;
 import retrofit.Retrofit;
 
