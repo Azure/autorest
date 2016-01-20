@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
 using System.Net.Http;
 
 namespace Microsoft.Rest
@@ -13,12 +14,12 @@ namespace Microsoft.Rest
         /// <summary>
         /// Gets information about the associated HTTP request.
         /// </summary>
-        HttpRequestMessageWrapper Request { get; set; }
+        HttpRequestMessage Request { get; set; }
 
         /// <summary>
         /// Gets information about the associated HTTP response.
         /// </summary>
-        HttpResponseMessageWrapper Response { get; set; }
+        HttpResponseMessage Response { get; set; }
     }
 
     /// <summary>
@@ -55,17 +56,55 @@ namespace Microsoft.Rest
     /// <summary>
     /// Represents the base return type of all ServiceClient REST operations without response body.
     /// </summary>
-    public class HttpOperationResponse : IHttpOperationResponse
+    public class HttpOperationResponse : IHttpOperationResponse, IDisposable
     {
+        /// <summary>
+        /// Indicates whether the HttpOperationResponse has been disposed. 
+        /// </summary>
+        private bool _disposed;
+
         /// <summary>
         /// Gets information about the associated HTTP request.
         /// </summary>
-        public HttpRequestMessageWrapper Request { get; set; }
+        public HttpRequestMessage Request { get; set; }
 
         /// <summary>
         /// Gets information about the associated HTTP response.
         /// </summary>
-        public HttpResponseMessageWrapper Response { get; set; }
+        public HttpResponseMessage Response { get; set; }
+
+        /// <summary>
+        /// Dispose the HttpOperationResponse.
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Dispose the HttpClient and Handlers.
+        /// </summary>
+        /// <param name="disposing">True to release both managed and unmanaged resources; false to releases only unmanaged resources.</param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposed)
+            {
+                _disposed = true;
+
+                // Dispose the request and response
+                if (Request != null)
+                {
+                    Request.Dispose();
+                }
+                if (Response != null)
+                {
+                    Response.Dispose();
+                }
+                Request = null;
+                Response = null;
+            }
+        }
     }
 
     /// <summary>

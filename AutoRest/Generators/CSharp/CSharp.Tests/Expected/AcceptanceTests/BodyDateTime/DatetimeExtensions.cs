@@ -40,8 +40,10 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static async Task<DateTime?> GetNullAsync( this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -66,8 +68,10 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static async Task<DateTime?> GetInvalidAsync( this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -92,8 +96,10 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static async Task<DateTime?> GetOverflowAsync( this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetOverflowWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetOverflowWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -118,8 +124,10 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static async Task<DateTime?> GetUnderflowAsync( this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetUnderflowWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetUnderflowWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -173,8 +181,10 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static async Task<DateTime?> GetUtcLowercaseMaxDateTimeAsync( this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetUtcLowercaseMaxDateTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetUtcLowercaseMaxDateTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -199,8 +209,10 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static async Task<DateTime?> GetUtcUppercaseMaxDateTimeAsync( this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetUtcUppercaseMaxDateTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetUtcUppercaseMaxDateTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -258,8 +270,10 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static async Task<DateTime?> GetLocalPositiveOffsetLowercaseMaxDateTimeAsync( this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetLocalPositiveOffsetLowercaseMaxDateTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetLocalPositiveOffsetLowercaseMaxDateTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -286,8 +300,10 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static async Task<DateTime?> GetLocalPositiveOffsetUppercaseMaxDateTimeAsync( this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetLocalPositiveOffsetUppercaseMaxDateTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetLocalPositiveOffsetUppercaseMaxDateTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -345,8 +361,10 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static async Task<DateTime?> GetLocalNegativeOffsetUppercaseMaxDateTimeAsync( this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetLocalNegativeOffsetUppercaseMaxDateTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetLocalNegativeOffsetUppercaseMaxDateTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -373,8 +391,10 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static async Task<DateTime?> GetLocalNegativeOffsetLowercaseMaxDateTimeAsync( this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetLocalNegativeOffsetLowercaseMaxDateTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetLocalNegativeOffsetLowercaseMaxDateTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -428,8 +448,10 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static async Task<DateTime?> GetUtcMinDateTimeAsync( this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetUtcMinDateTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetUtcMinDateTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -483,8 +505,10 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static async Task<DateTime?> GetLocalPositiveOffsetMinDateTimeAsync( this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetLocalPositiveOffsetMinDateTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetLocalPositiveOffsetMinDateTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -538,8 +562,10 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
             /// </param>
             public static async Task<DateTime?> GetLocalNegativeOffsetMinDateTimeAsync( this IDatetime operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetLocalNegativeOffsetMinDateTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetLocalNegativeOffsetMinDateTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
     }

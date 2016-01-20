@@ -52,8 +52,10 @@ namespace Fixtures.AcceptanceTestsValidation
             /// </param>
             public static async Task<Product> ValidationOfMethodParametersAsync( this IAutoRestValidationTest operations, string resourceGroupName, int? id, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.ValidationOfMethodParametersWithHttpMessagesAsync(resourceGroupName, id, null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.ValidationOfMethodParametersWithHttpMessagesAsync(resourceGroupName, id, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -94,8 +96,10 @@ namespace Fixtures.AcceptanceTestsValidation
             /// </param>
             public static async Task<Product> ValidationOfBodyAsync( this IAutoRestValidationTest operations, string resourceGroupName, int? id, Product body = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.ValidationOfBodyWithHttpMessagesAsync(resourceGroupName, id, body, null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.ValidationOfBodyWithHttpMessagesAsync(resourceGroupName, id, body, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
     }

@@ -41,7 +41,8 @@ namespace Fixtures.AcceptanceTestsBodyFile
             public static async Task<System.IO.Stream> GetFileAsync( this IFiles operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 var _result = await operations.GetFileWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                _result.Request.Dispose();
+                return new HttpResponseMessageStream(_result.Response, _result.Body);
             }
 
             /// <summary>
@@ -67,7 +68,8 @@ namespace Fixtures.AcceptanceTestsBodyFile
             public static async Task<System.IO.Stream> GetEmptyFileAsync( this IFiles operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 var _result = await operations.GetEmptyFileWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                _result.Request.Dispose();
+                return new HttpResponseMessageStream(_result.Response, _result.Body);
             }
 
     }

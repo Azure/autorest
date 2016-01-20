@@ -49,8 +49,10 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </param>
             public static async Task<HeaderCustomNamedRequestIdHeaders> CustomNamedRequestIdAsync( this IHeaderOperations operations, string fooClientRequestId, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.CustomNamedRequestIdWithHttpMessagesAsync(fooClientRequestId, null, cancellationToken).ConfigureAwait(false);
-                return _result.Headers;
+                using (var _result = await operations.CustomNamedRequestIdWithHttpMessagesAsync(fooClientRequestId, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Headers;
+                }
             }
 
     }

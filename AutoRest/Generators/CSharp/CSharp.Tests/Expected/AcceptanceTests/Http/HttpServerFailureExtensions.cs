@@ -40,8 +40,10 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static async Task<Error> Head501Async( this IHttpServerFailure operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.Head501WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.Head501WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -66,8 +68,10 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static async Task<Error> Get501Async( this IHttpServerFailure operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.Get501WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.Get501WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -98,8 +102,10 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static async Task<Error> Post505Async( this IHttpServerFailure operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.Post505WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.Post505WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -130,8 +136,10 @@ namespace Fixtures.AcceptanceTestsHttp
             /// </param>
             public static async Task<Error> Delete505Async( this IHttpServerFailure operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.Delete505WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.Delete505WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
     }

@@ -82,79 +82,92 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             _url = _url.Replace("{pathParameter}", Uri.EscapeDataString(pathParameter));
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
-            _httpRequest.Method = new HttpMethod("GET");
-            _httpRequest.RequestUri = new Uri(_url);
-            // Set Headers
-            if (customHeaders != null)
+            HttpResponseMessage _httpResponse = null;
+            try
             {
-                foreach(var _header in customHeaders)
+                _httpRequest.Method = new HttpMethod("GET");
+                _httpRequest.RequestUri = new Uri(_url);
+                // Set Headers
+                if (customHeaders != null)
                 {
-                    if (_httpRequest.Headers.Contains(_header.Key))
+                    foreach(var _header in customHeaders)
                     {
-                        _httpRequest.Headers.Remove(_header.Key);
+                        if (_httpRequest.Headers.Contains(_header.Key))
+                        {
+                            _httpRequest.Headers.Remove(_header.Key);
+                        }
+                        _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                     }
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
-            }
 
-            // Serialize Request
-            string _requestContent = null;
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if (!_httpResponse.IsSuccessStatusCode)
-            {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                // Serialize Request
+                string _requestContent = null;
+                // Send Request
                 if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
                 }
-                throw ex;
+                cancellationToken.ThrowIfCancellationRequested();
+                _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                }
+                HttpStatusCode _statusCode = _httpResponse.StatusCode;
+                cancellationToken.ThrowIfCancellationRequested();
+                string _responseContent = null;
+                if (!_httpResponse.IsSuccessStatusCode)
+                {
+                    var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                        if (_errorBody != null)
+                        {
+                            ex.Body = _errorBody;
+                        }
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                    ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                    ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
+                // Create Result
+                var _result = new HttpOperationResponse<Error>();
+                _result.Request = _httpRequest;
+                _result.Response = _httpResponse;
+                        try
+                {
+                    string _defaultResponseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _result.Body = SafeJsonConvert.DeserializeObject<Error>(_defaultResponseContent, this.Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.Exit(_invocationId, _result);
+                }
+                return _result;
             }
-            // Create Result
-            var _result = new HttpOperationResponse<Error>();
-                try
+            catch
             {
-                string _defaultResponseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                _result.Body = SafeJsonConvert.DeserializeObject<Error>(_defaultResponseContent, this.Client.DeserializationSettings);
-            }
-            catch (JsonException ex)
-            {
-                throw new RestException("Unable to deserialize the response.", ex);
-            }
-            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw;
+            }    
         }
 
         /// <summary>
@@ -195,70 +208,83 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             }
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
-            _httpRequest.Method = new HttpMethod("PUT");
-            _httpRequest.RequestUri = new Uri(_url);
-            // Set Headers
-            if (customHeaders != null)
+            HttpResponseMessage _httpResponse = null;
+            try
             {
-                foreach(var _header in customHeaders)
+                _httpRequest.Method = new HttpMethod("PUT");
+                _httpRequest.RequestUri = new Uri(_url);
+                // Set Headers
+                if (customHeaders != null)
                 {
-                    if (_httpRequest.Headers.Contains(_header.Key))
+                    foreach(var _header in customHeaders)
                     {
-                        _httpRequest.Headers.Remove(_header.Key);
+                        if (_httpRequest.Headers.Contains(_header.Key))
+                        {
+                            _httpRequest.Headers.Remove(_header.Key);
+                        }
+                        _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                     }
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
-            }
 
-            // Serialize Request
-            string _requestContent = null;
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 200)
-            {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                // Serialize Request
+                string _requestContent = null;
+                // Send Request
                 if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
                 }
-                throw ex;
+                cancellationToken.ThrowIfCancellationRequested();
+                _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                }
+                HttpStatusCode _statusCode = _httpResponse.StatusCode;
+                cancellationToken.ThrowIfCancellationRequested();
+                string _responseContent = null;
+                if ((int)_statusCode != 200)
+                {
+                    var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                        if (_errorBody != null)
+                        {
+                            ex.Body = _errorBody;
+                        }
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                    ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                    ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
+                // Create Result
+                var _result = new HttpOperationResponse();
+                _result.Request = _httpRequest;
+                _result.Response = _httpResponse;
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.Exit(_invocationId, _result);
+                }
+                return _result;
             }
-            // Create Result
-            var _result = new HttpOperationResponse();
-            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            if (_shouldTrace)
+            catch
             {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw;
+            }    
         }
 
         /// <summary>
@@ -290,78 +316,91 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reqopt/implicit/optional/header").ToString();
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
-            _httpRequest.Method = new HttpMethod("PUT");
-            _httpRequest.RequestUri = new Uri(_url);
-            // Set Headers
-            if (queryParameter != null)
+            HttpResponseMessage _httpResponse = null;
+            try
             {
-                if (_httpRequest.Headers.Contains("queryParameter"))
+                _httpRequest.Method = new HttpMethod("PUT");
+                _httpRequest.RequestUri = new Uri(_url);
+                // Set Headers
+                if (queryParameter != null)
                 {
-                    _httpRequest.Headers.Remove("queryParameter");
-                }
-                _httpRequest.Headers.TryAddWithoutValidation("queryParameter", queryParameter);
-            }
-            if (customHeaders != null)
-            {
-                foreach(var _header in customHeaders)
-                {
-                    if (_httpRequest.Headers.Contains(_header.Key))
+                    if (_httpRequest.Headers.Contains("queryParameter"))
                     {
-                        _httpRequest.Headers.Remove(_header.Key);
+                        _httpRequest.Headers.Remove("queryParameter");
                     }
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
+                    _httpRequest.Headers.TryAddWithoutValidation("queryParameter", queryParameter);
                 }
-            }
+                if (customHeaders != null)
+                {
+                    foreach(var _header in customHeaders)
+                    {
+                        if (_httpRequest.Headers.Contains(_header.Key))
+                        {
+                            _httpRequest.Headers.Remove(_header.Key);
+                        }
+                        _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
+                    }
+                }
 
-            // Serialize Request
-            string _requestContent = null;
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 200)
-            {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                // Serialize Request
+                string _requestContent = null;
+                // Send Request
                 if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
                 }
-                throw ex;
+                cancellationToken.ThrowIfCancellationRequested();
+                _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                }
+                HttpStatusCode _statusCode = _httpResponse.StatusCode;
+                cancellationToken.ThrowIfCancellationRequested();
+                string _responseContent = null;
+                if ((int)_statusCode != 200)
+                {
+                    var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                        if (_errorBody != null)
+                        {
+                            ex.Body = _errorBody;
+                        }
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                    ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                    ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
+                // Create Result
+                var _result = new HttpOperationResponse();
+                _result.Request = _httpRequest;
+                _result.Response = _httpResponse;
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.Exit(_invocationId, _result);
+                }
+                return _result;
             }
-            // Create Result
-            var _result = new HttpOperationResponse();
-            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            if (_shouldTrace)
+            catch
             {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw;
+            }    
         }
 
         /// <summary>
@@ -393,73 +432,86 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reqopt/implicit/optional/body").ToString();
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
-            _httpRequest.Method = new HttpMethod("PUT");
-            _httpRequest.RequestUri = new Uri(_url);
-            // Set Headers
-            if (customHeaders != null)
+            HttpResponseMessage _httpResponse = null;
+            try
             {
-                foreach(var _header in customHeaders)
+                _httpRequest.Method = new HttpMethod("PUT");
+                _httpRequest.RequestUri = new Uri(_url);
+                // Set Headers
+                if (customHeaders != null)
                 {
-                    if (_httpRequest.Headers.Contains(_header.Key))
+                    foreach(var _header in customHeaders)
                     {
-                        _httpRequest.Headers.Remove(_header.Key);
+                        if (_httpRequest.Headers.Contains(_header.Key))
+                        {
+                            _httpRequest.Headers.Remove(_header.Key);
+                        }
+                        _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                     }
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
-            }
 
-            // Serialize Request
-            string _requestContent = null;
-            _requestContent = SafeJsonConvert.SerializeObject(bodyParameter, this.Client.SerializationSettings);
-            _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
-            _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 200)
-            {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                // Serialize Request
+                string _requestContent = null;
+                _requestContent = SafeJsonConvert.SerializeObject(bodyParameter, this.Client.SerializationSettings);
+                _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
+                _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+                // Send Request
                 if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
                 }
-                throw ex;
+                cancellationToken.ThrowIfCancellationRequested();
+                _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                }
+                HttpStatusCode _statusCode = _httpResponse.StatusCode;
+                cancellationToken.ThrowIfCancellationRequested();
+                string _responseContent = null;
+                if ((int)_statusCode != 200)
+                {
+                    var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                        if (_errorBody != null)
+                        {
+                            ex.Body = _errorBody;
+                        }
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                    ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                    ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
+                // Create Result
+                var _result = new HttpOperationResponse();
+                _result.Request = _httpRequest;
+                _result.Response = _httpResponse;
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.Exit(_invocationId, _result);
+                }
+                return _result;
             }
-            // Create Result
-            var _result = new HttpOperationResponse();
-            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            if (_shouldTrace)
+            catch
             {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw;
+            }    
         }
 
         /// <summary>
@@ -493,79 +545,92 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             _url = _url.Replace("{required-global-path}", Uri.EscapeDataString(this.Client.RequiredGlobalPath));
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
-            _httpRequest.Method = new HttpMethod("GET");
-            _httpRequest.RequestUri = new Uri(_url);
-            // Set Headers
-            if (customHeaders != null)
+            HttpResponseMessage _httpResponse = null;
+            try
             {
-                foreach(var _header in customHeaders)
+                _httpRequest.Method = new HttpMethod("GET");
+                _httpRequest.RequestUri = new Uri(_url);
+                // Set Headers
+                if (customHeaders != null)
                 {
-                    if (_httpRequest.Headers.Contains(_header.Key))
+                    foreach(var _header in customHeaders)
                     {
-                        _httpRequest.Headers.Remove(_header.Key);
+                        if (_httpRequest.Headers.Contains(_header.Key))
+                        {
+                            _httpRequest.Headers.Remove(_header.Key);
+                        }
+                        _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                     }
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
-            }
 
-            // Serialize Request
-            string _requestContent = null;
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if (!_httpResponse.IsSuccessStatusCode)
-            {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                // Serialize Request
+                string _requestContent = null;
+                // Send Request
                 if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
                 }
-                throw ex;
+                cancellationToken.ThrowIfCancellationRequested();
+                _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                }
+                HttpStatusCode _statusCode = _httpResponse.StatusCode;
+                cancellationToken.ThrowIfCancellationRequested();
+                string _responseContent = null;
+                if (!_httpResponse.IsSuccessStatusCode)
+                {
+                    var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                        if (_errorBody != null)
+                        {
+                            ex.Body = _errorBody;
+                        }
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                    ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                    ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
+                // Create Result
+                var _result = new HttpOperationResponse<Error>();
+                _result.Request = _httpRequest;
+                _result.Response = _httpResponse;
+                        try
+                {
+                    string _defaultResponseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _result.Body = SafeJsonConvert.DeserializeObject<Error>(_defaultResponseContent, this.Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.Exit(_invocationId, _result);
+                }
+                return _result;
             }
-            // Create Result
-            var _result = new HttpOperationResponse<Error>();
-                try
+            catch
             {
-                string _defaultResponseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                _result.Body = SafeJsonConvert.DeserializeObject<Error>(_defaultResponseContent, this.Client.DeserializationSettings);
-            }
-            catch (JsonException ex)
-            {
-                throw new RestException("Unable to deserialize the response.", ex);
-            }
-            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw;
+            }    
         }
 
         /// <summary>
@@ -607,79 +672,92 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             }
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
-            _httpRequest.Method = new HttpMethod("GET");
-            _httpRequest.RequestUri = new Uri(_url);
-            // Set Headers
-            if (customHeaders != null)
+            HttpResponseMessage _httpResponse = null;
+            try
             {
-                foreach(var _header in customHeaders)
+                _httpRequest.Method = new HttpMethod("GET");
+                _httpRequest.RequestUri = new Uri(_url);
+                // Set Headers
+                if (customHeaders != null)
                 {
-                    if (_httpRequest.Headers.Contains(_header.Key))
+                    foreach(var _header in customHeaders)
                     {
-                        _httpRequest.Headers.Remove(_header.Key);
+                        if (_httpRequest.Headers.Contains(_header.Key))
+                        {
+                            _httpRequest.Headers.Remove(_header.Key);
+                        }
+                        _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                     }
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
-            }
 
-            // Serialize Request
-            string _requestContent = null;
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if (!_httpResponse.IsSuccessStatusCode)
-            {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                // Serialize Request
+                string _requestContent = null;
+                // Send Request
                 if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
                 }
-                throw ex;
+                cancellationToken.ThrowIfCancellationRequested();
+                _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                }
+                HttpStatusCode _statusCode = _httpResponse.StatusCode;
+                cancellationToken.ThrowIfCancellationRequested();
+                string _responseContent = null;
+                if (!_httpResponse.IsSuccessStatusCode)
+                {
+                    var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                        if (_errorBody != null)
+                        {
+                            ex.Body = _errorBody;
+                        }
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                    ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                    ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
+                // Create Result
+                var _result = new HttpOperationResponse<Error>();
+                _result.Request = _httpRequest;
+                _result.Response = _httpResponse;
+                        try
+                {
+                    string _defaultResponseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _result.Body = SafeJsonConvert.DeserializeObject<Error>(_defaultResponseContent, this.Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.Exit(_invocationId, _result);
+                }
+                return _result;
             }
-            // Create Result
-            var _result = new HttpOperationResponse<Error>();
-                try
+            catch
             {
-                string _defaultResponseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                _result.Body = SafeJsonConvert.DeserializeObject<Error>(_defaultResponseContent, this.Client.DeserializationSettings);
-            }
-            catch (JsonException ex)
-            {
-                throw new RestException("Unable to deserialize the response.", ex);
-            }
-            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw;
+            }    
         }
 
         /// <summary>
@@ -717,79 +795,92 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             }
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
-            _httpRequest.Method = new HttpMethod("GET");
-            _httpRequest.RequestUri = new Uri(_url);
-            // Set Headers
-            if (customHeaders != null)
+            HttpResponseMessage _httpResponse = null;
+            try
             {
-                foreach(var _header in customHeaders)
+                _httpRequest.Method = new HttpMethod("GET");
+                _httpRequest.RequestUri = new Uri(_url);
+                // Set Headers
+                if (customHeaders != null)
                 {
-                    if (_httpRequest.Headers.Contains(_header.Key))
+                    foreach(var _header in customHeaders)
                     {
-                        _httpRequest.Headers.Remove(_header.Key);
+                        if (_httpRequest.Headers.Contains(_header.Key))
+                        {
+                            _httpRequest.Headers.Remove(_header.Key);
+                        }
+                        _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                     }
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
-            }
 
-            // Serialize Request
-            string _requestContent = null;
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if (!_httpResponse.IsSuccessStatusCode)
-            {
-                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                try
-                {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
-                    if (_errorBody != null)
-                    {
-                        ex.Body = _errorBody;
-                    }
-                }
-                catch (JsonException)
-                {
-                    // Ignore the exception
-                }
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                // Serialize Request
+                string _requestContent = null;
+                // Send Request
                 if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
                 }
-                throw ex;
+                cancellationToken.ThrowIfCancellationRequested();
+                _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                }
+                HttpStatusCode _statusCode = _httpResponse.StatusCode;
+                cancellationToken.ThrowIfCancellationRequested();
+                string _responseContent = null;
+                if (!_httpResponse.IsSuccessStatusCode)
+                {
+                    var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                        if (_errorBody != null)
+                        {
+                            ex.Body = _errorBody;
+                        }
+                    }
+                    catch (JsonException)
+                    {
+                        // Ignore the exception
+                    }
+                    ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                    ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
+                // Create Result
+                var _result = new HttpOperationResponse<Error>();
+                _result.Request = _httpRequest;
+                _result.Response = _httpResponse;
+                        try
+                {
+                    string _defaultResponseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    _result.Body = SafeJsonConvert.DeserializeObject<Error>(_defaultResponseContent, this.Client.DeserializationSettings);
+                }
+                catch (JsonException ex)
+                {
+                    throw new RestException("Unable to deserialize the response.", ex);
+                }
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.Exit(_invocationId, _result);
+                }
+                return _result;
             }
-            // Create Result
-            var _result = new HttpOperationResponse<Error>();
-                try
+            catch
             {
-                string _defaultResponseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                _result.Body = SafeJsonConvert.DeserializeObject<Error>(_defaultResponseContent, this.Client.DeserializationSettings);
-            }
-            catch (JsonException ex)
-            {
-                throw new RestException("Unable to deserialize the response.", ex);
-            }
-            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw;
+            }    
         }
 
     }

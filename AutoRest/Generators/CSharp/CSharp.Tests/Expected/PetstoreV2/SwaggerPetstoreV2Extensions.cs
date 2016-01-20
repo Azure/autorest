@@ -46,8 +46,10 @@ namespace Fixtures.PetstoreV2
             /// </param>
             public static async Task<Pet> AddPetAsync( this ISwaggerPetstoreV2 operations, Pet body, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.AddPetWithHttpMessagesAsync(body, null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.AddPetWithHttpMessagesAsync(body, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -111,8 +113,10 @@ namespace Fixtures.PetstoreV2
             /// </param>
             public static async Task<IList<Pet>> FindPetsByStatusAsync( this ISwaggerPetstoreV2 operations, IList<string> status, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.FindPetsByStatusWithHttpMessagesAsync(status, null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.FindPetsByStatusWithHttpMessagesAsync(status, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -147,8 +151,10 @@ namespace Fixtures.PetstoreV2
             /// </param>
             public static async Task<IList<Pet>> FindPetsByTagsAsync( this ISwaggerPetstoreV2 operations, IList<string> tags, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.FindPetsByTagsWithHttpMessagesAsync(tags, null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.FindPetsByTagsWithHttpMessagesAsync(tags, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -181,8 +187,10 @@ namespace Fixtures.PetstoreV2
             /// </param>
             public static async Task<Pet> GetPetByIdAsync( this ISwaggerPetstoreV2 operations, long? petId, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetPetByIdWithHttpMessagesAsync(petId, null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetPetByIdWithHttpMessagesAsync(petId, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -293,8 +301,10 @@ namespace Fixtures.PetstoreV2
             /// </param>
             public static async Task<IDictionary<string, int?>> GetInventoryAsync( this ISwaggerPetstoreV2 operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetInventoryWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetInventoryWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -325,8 +335,10 @@ namespace Fixtures.PetstoreV2
             /// </param>
             public static async Task<Order> PlaceOrderAsync( this ISwaggerPetstoreV2 operations, Order body, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.PlaceOrderWithHttpMessagesAsync(body, null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.PlaceOrderWithHttpMessagesAsync(body, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -361,8 +373,10 @@ namespace Fixtures.PetstoreV2
             /// </param>
             public static async Task<Order> GetOrderByIdAsync( this ISwaggerPetstoreV2 operations, string orderId, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetOrderByIdWithHttpMessagesAsync(orderId, null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetOrderByIdWithHttpMessagesAsync(orderId, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -529,8 +543,10 @@ namespace Fixtures.PetstoreV2
             /// </param>
             public static async Task<string> LoginUserAsync( this ISwaggerPetstoreV2 operations, string username, string password, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.LoginUserWithHttpMessagesAsync(username, password, null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.LoginUserWithHttpMessagesAsync(username, password, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -586,8 +602,10 @@ namespace Fixtures.PetstoreV2
             /// </param>
             public static async Task<User> GetUserByNameAsync( this ISwaggerPetstoreV2 operations, string username, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetUserByNameWithHttpMessagesAsync(username, null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetUserByNameWithHttpMessagesAsync(username, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>

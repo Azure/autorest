@@ -1,5 +1,6 @@
 @using System.Text
 @using System
+@using Microsoft.Rest.Generator.ClientModel
 @using Microsoft.Rest.Generator.CSharp
 @using Microsoft.Rest.Generator.CSharp.Templates
 @using Microsoft.Rest.Generator.CSharp.TemplateModels
@@ -67,13 +68,26 @@ foreach (var parameter in Model.LocalParameters)
 @:{
     if (Model.ReturnType.Body != null)
     {
+        if (Model.ReturnType.Body == PrimaryType.Stream)
+        {
     @:var _result = await operations.@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("null"))).ConfigureAwait(false);
-    @:return _result.Body;
+    @:_result.Request.Dispose();
+    @:return new HttpResponseMessageStream(_result.Response, _result.Body);
+        }
+        else
+        {
+    @:using (var _result = await operations.@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("null"))).ConfigureAwait(false))
+    @:{
+    @:    return _result.Body;
+    @:}
+        }
     }
     else if (Model.ReturnType.Headers != null)
     {
-    @:var _result = await operations.@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("null"))).ConfigureAwait(false);
-    @:return _result.Headers;
+    @:using (var _result = await operations.@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("null"))).ConfigureAwait(false))
+    @:{
+    @:    return _result.Headers;
+    @:}
     }
     else
     {

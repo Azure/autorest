@@ -480,7 +480,7 @@ namespace Microsoft.Rest.Azure
             {
                 //Try to de-serialize to the response model. (Not required for "PutOrPatch" 
                 //which has the fallback of invoking generic "resource get".)
-                string responseContent = pollingState.Response.Content;
+                string responseContent = await pollingState.Response.Content.ReadAsStringAsync();
                 var responseHeaders = pollingState.Response.Headers.ToJson();
                 try
                 {
@@ -624,8 +624,8 @@ namespace Microsoft.Rest.Azure
 
             return new AzureOperationResponse<JObject, JObject>
             {
-                Request = new HttpRequestMessageWrapper(httpRequest, null),
-                Response = new HttpResponseMessageWrapper(httpResponse, responseContent),
+                Request = httpRequest,
+                Response = httpResponse,
                 Body = body,
                 Headers = httpResponse.Headers.ToJson()
             };

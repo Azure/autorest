@@ -297,79 +297,92 @@ namespace Fixtures.PetstoreV2
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "pet").ToString();
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new Uri(_url);
-            // Set Headers
-            if (customHeaders != null)
+            HttpResponseMessage _httpResponse = null;
+            try
             {
-                foreach(var _header in customHeaders)
+                _httpRequest.Method = new HttpMethod("POST");
+                _httpRequest.RequestUri = new Uri(_url);
+                // Set Headers
+                if (customHeaders != null)
                 {
-                    if (_httpRequest.Headers.Contains(_header.Key))
+                    foreach(var _header in customHeaders)
                     {
-                        _httpRequest.Headers.Remove(_header.Key);
+                        if (_httpRequest.Headers.Contains(_header.Key))
+                        {
+                            _httpRequest.Headers.Remove(_header.Key);
+                        }
+                        _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                     }
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
-            }
 
-            // Serialize Request
-            string _requestContent = null;
-            _requestContent = SafeJsonConvert.SerializeObject(body, this.SerializationSettings);
-            _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
-            _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
-            // Set Credentials
-            if (this.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 405 && (int)_statusCode != 200)
-            {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                // Serialize Request
+                string _requestContent = null;
+                _requestContent = SafeJsonConvert.SerializeObject(body, this.SerializationSettings);
+                _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
+                _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+                // Set Credentials
+                if (this.Credentials != null)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                }
+                // Send Request
                 if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
                 }
-                throw ex;
-            }
-            // Create Result
-            var _result = new HttpOperationResponse<Pet>();
-            // Deserialize Response
-            if ((int)_statusCode == 200)
-            {
-                try
+                cancellationToken.ThrowIfCancellationRequested();
+                _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                if (_shouldTrace)
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    _result.Body = SafeJsonConvert.DeserializeObject<Pet>(_responseContent, this.DeserializationSettings);
+                    ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
                 }
-                catch (JsonException ex)
+                HttpStatusCode _statusCode = _httpResponse.StatusCode;
+                cancellationToken.ThrowIfCancellationRequested();
+                string _responseContent = null;
+                if ((int)_statusCode != 405 && (int)_statusCode != 200)
                 {
-                    throw new RestException("Unable to deserialize the response.", ex);
+                    var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                    ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                    ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
+                // Create Result
+                var _result = new HttpOperationResponse<Pet>();
+                _result.Request = _httpRequest;
+                _result.Response = _httpResponse;
+                // Deserialize Response
+                if ((int)_statusCode == 200)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        _result.Body = SafeJsonConvert.DeserializeObject<Pet>(_responseContent, this.DeserializationSettings);
+                    }
+                    catch (JsonException ex)
+                    {
+                        throw new RestException("Unable to deserialize the response.", ex);
+                    }
+                }
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.Exit(_invocationId, _result);
+                }
+                return _result;
             }
-            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            if (_shouldTrace)
+            catch
             {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw;
+            }    
         }
 
         /// <summary>
@@ -410,66 +423,79 @@ namespace Fixtures.PetstoreV2
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "pet").ToString();
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
-            _httpRequest.Method = new HttpMethod("PUT");
-            _httpRequest.RequestUri = new Uri(_url);
-            // Set Headers
-            if (customHeaders != null)
+            HttpResponseMessage _httpResponse = null;
+            try
             {
-                foreach(var _header in customHeaders)
+                _httpRequest.Method = new HttpMethod("PUT");
+                _httpRequest.RequestUri = new Uri(_url);
+                // Set Headers
+                if (customHeaders != null)
                 {
-                    if (_httpRequest.Headers.Contains(_header.Key))
+                    foreach(var _header in customHeaders)
                     {
-                        _httpRequest.Headers.Remove(_header.Key);
+                        if (_httpRequest.Headers.Contains(_header.Key))
+                        {
+                            _httpRequest.Headers.Remove(_header.Key);
+                        }
+                        _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                     }
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
-            }
 
-            // Serialize Request
-            string _requestContent = null;
-            _requestContent = SafeJsonConvert.SerializeObject(body, this.SerializationSettings);
-            _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
-            _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
-            // Set Credentials
-            if (this.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 400 && (int)_statusCode != 404 && (int)_statusCode != 405)
-            {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                // Serialize Request
+                string _requestContent = null;
+                _requestContent = SafeJsonConvert.SerializeObject(body, this.SerializationSettings);
+                _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
+                _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+                // Set Credentials
+                if (this.Credentials != null)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                }
+                // Send Request
                 if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
                 }
-                throw ex;
+                cancellationToken.ThrowIfCancellationRequested();
+                _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                }
+                HttpStatusCode _statusCode = _httpResponse.StatusCode;
+                cancellationToken.ThrowIfCancellationRequested();
+                string _responseContent = null;
+                if ((int)_statusCode != 400 && (int)_statusCode != 404 && (int)_statusCode != 405)
+                {
+                    var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                    ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                    ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
+                // Create Result
+                var _result = new HttpOperationResponse();
+                _result.Request = _httpRequest;
+                _result.Response = _httpResponse;
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.Exit(_invocationId, _result);
+                }
+                return _result;
             }
-            // Create Result
-            var _result = new HttpOperationResponse();
-            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            if (_shouldTrace)
+            catch
             {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw;
+            }    
         }
 
         /// <summary>
@@ -516,76 +542,89 @@ namespace Fixtures.PetstoreV2
             }
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
-            _httpRequest.Method = new HttpMethod("GET");
-            _httpRequest.RequestUri = new Uri(_url);
-            // Set Headers
-            if (customHeaders != null)
+            HttpResponseMessage _httpResponse = null;
+            try
             {
-                foreach(var _header in customHeaders)
+                _httpRequest.Method = new HttpMethod("GET");
+                _httpRequest.RequestUri = new Uri(_url);
+                // Set Headers
+                if (customHeaders != null)
                 {
-                    if (_httpRequest.Headers.Contains(_header.Key))
+                    foreach(var _header in customHeaders)
                     {
-                        _httpRequest.Headers.Remove(_header.Key);
+                        if (_httpRequest.Headers.Contains(_header.Key))
+                        {
+                            _httpRequest.Headers.Remove(_header.Key);
+                        }
+                        _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                     }
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
-            }
 
-            // Serialize Request
-            string _requestContent = null;
-            // Set Credentials
-            if (this.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 200 && (int)_statusCode != 400)
-            {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                // Serialize Request
+                string _requestContent = null;
+                // Set Credentials
+                if (this.Credentials != null)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                }
+                // Send Request
                 if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
                 }
-                throw ex;
-            }
-            // Create Result
-            var _result = new HttpOperationResponse<IList<Pet>>();
-            // Deserialize Response
-            if ((int)_statusCode == 200)
-            {
-                try
+                cancellationToken.ThrowIfCancellationRequested();
+                _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                if (_shouldTrace)
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    _result.Body = SafeJsonConvert.DeserializeObject<IList<Pet>>(_responseContent, this.DeserializationSettings);
+                    ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
                 }
-                catch (JsonException ex)
+                HttpStatusCode _statusCode = _httpResponse.StatusCode;
+                cancellationToken.ThrowIfCancellationRequested();
+                string _responseContent = null;
+                if ((int)_statusCode != 200 && (int)_statusCode != 400)
                 {
-                    throw new RestException("Unable to deserialize the response.", ex);
+                    var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                    ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                    ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
+                // Create Result
+                var _result = new HttpOperationResponse<IList<Pet>>();
+                _result.Request = _httpRequest;
+                _result.Response = _httpResponse;
+                // Deserialize Response
+                if ((int)_statusCode == 200)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        _result.Body = SafeJsonConvert.DeserializeObject<IList<Pet>>(_responseContent, this.DeserializationSettings);
+                    }
+                    catch (JsonException ex)
+                    {
+                        throw new RestException("Unable to deserialize the response.", ex);
+                    }
+                }
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.Exit(_invocationId, _result);
+                }
+                return _result;
             }
-            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            if (_shouldTrace)
+            catch
             {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw;
+            }    
         }
 
         /// <summary>
@@ -633,76 +672,89 @@ namespace Fixtures.PetstoreV2
             }
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
-            _httpRequest.Method = new HttpMethod("GET");
-            _httpRequest.RequestUri = new Uri(_url);
-            // Set Headers
-            if (customHeaders != null)
+            HttpResponseMessage _httpResponse = null;
+            try
             {
-                foreach(var _header in customHeaders)
+                _httpRequest.Method = new HttpMethod("GET");
+                _httpRequest.RequestUri = new Uri(_url);
+                // Set Headers
+                if (customHeaders != null)
                 {
-                    if (_httpRequest.Headers.Contains(_header.Key))
+                    foreach(var _header in customHeaders)
                     {
-                        _httpRequest.Headers.Remove(_header.Key);
+                        if (_httpRequest.Headers.Contains(_header.Key))
+                        {
+                            _httpRequest.Headers.Remove(_header.Key);
+                        }
+                        _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                     }
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
-            }
 
-            // Serialize Request
-            string _requestContent = null;
-            // Set Credentials
-            if (this.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 200 && (int)_statusCode != 400)
-            {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                // Serialize Request
+                string _requestContent = null;
+                // Set Credentials
+                if (this.Credentials != null)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                }
+                // Send Request
                 if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
                 }
-                throw ex;
-            }
-            // Create Result
-            var _result = new HttpOperationResponse<IList<Pet>>();
-            // Deserialize Response
-            if ((int)_statusCode == 200)
-            {
-                try
+                cancellationToken.ThrowIfCancellationRequested();
+                _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                if (_shouldTrace)
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    _result.Body = SafeJsonConvert.DeserializeObject<IList<Pet>>(_responseContent, this.DeserializationSettings);
+                    ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
                 }
-                catch (JsonException ex)
+                HttpStatusCode _statusCode = _httpResponse.StatusCode;
+                cancellationToken.ThrowIfCancellationRequested();
+                string _responseContent = null;
+                if ((int)_statusCode != 200 && (int)_statusCode != 400)
                 {
-                    throw new RestException("Unable to deserialize the response.", ex);
+                    var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                    ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                    ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
+                // Create Result
+                var _result = new HttpOperationResponse<IList<Pet>>();
+                _result.Request = _httpRequest;
+                _result.Response = _httpResponse;
+                // Deserialize Response
+                if ((int)_statusCode == 200)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        _result.Body = SafeJsonConvert.DeserializeObject<IList<Pet>>(_responseContent, this.DeserializationSettings);
+                    }
+                    catch (JsonException ex)
+                    {
+                        throw new RestException("Unable to deserialize the response.", ex);
+                    }
+                }
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.Exit(_invocationId, _result);
+                }
+                return _result;
             }
-            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            if (_shouldTrace)
+            catch
             {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw;
+            }    
         }
 
         /// <summary>
@@ -741,76 +793,89 @@ namespace Fixtures.PetstoreV2
             _url = _url.Replace("{petId}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(petId, this.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
-            _httpRequest.Method = new HttpMethod("GET");
-            _httpRequest.RequestUri = new Uri(_url);
-            // Set Headers
-            if (customHeaders != null)
+            HttpResponseMessage _httpResponse = null;
+            try
             {
-                foreach(var _header in customHeaders)
+                _httpRequest.Method = new HttpMethod("GET");
+                _httpRequest.RequestUri = new Uri(_url);
+                // Set Headers
+                if (customHeaders != null)
                 {
-                    if (_httpRequest.Headers.Contains(_header.Key))
+                    foreach(var _header in customHeaders)
                     {
-                        _httpRequest.Headers.Remove(_header.Key);
+                        if (_httpRequest.Headers.Contains(_header.Key))
+                        {
+                            _httpRequest.Headers.Remove(_header.Key);
+                        }
+                        _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                     }
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
-            }
 
-            // Serialize Request
-            string _requestContent = null;
-            // Set Credentials
-            if (this.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 200 && (int)_statusCode != 400 && (int)_statusCode != 404)
-            {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                // Serialize Request
+                string _requestContent = null;
+                // Set Credentials
+                if (this.Credentials != null)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                }
+                // Send Request
                 if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
                 }
-                throw ex;
-            }
-            // Create Result
-            var _result = new HttpOperationResponse<Pet>();
-            // Deserialize Response
-            if ((int)_statusCode == 200)
-            {
-                try
+                cancellationToken.ThrowIfCancellationRequested();
+                _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                if (_shouldTrace)
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    _result.Body = SafeJsonConvert.DeserializeObject<Pet>(_responseContent, this.DeserializationSettings);
+                    ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
                 }
-                catch (JsonException ex)
+                HttpStatusCode _statusCode = _httpResponse.StatusCode;
+                cancellationToken.ThrowIfCancellationRequested();
+                string _responseContent = null;
+                if ((int)_statusCode != 200 && (int)_statusCode != 400 && (int)_statusCode != 404)
                 {
-                    throw new RestException("Unable to deserialize the response.", ex);
+                    var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                    ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                    ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
+                // Create Result
+                var _result = new HttpOperationResponse<Pet>();
+                _result.Request = _httpRequest;
+                _result.Response = _httpResponse;
+                // Deserialize Response
+                if ((int)_statusCode == 200)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        _result.Body = SafeJsonConvert.DeserializeObject<Pet>(_responseContent, this.DeserializationSettings);
+                    }
+                    catch (JsonException ex)
+                    {
+                        throw new RestException("Unable to deserialize the response.", ex);
+                    }
+                }
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.Exit(_invocationId, _result);
+                }
+                return _result;
             }
-            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            if (_shouldTrace)
+            catch
             {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw;
+            }    
         }
 
         /// <summary>
@@ -864,89 +929,102 @@ namespace Fixtures.PetstoreV2
             _url = _url.Replace("{petId}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(petId, this.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new Uri(_url);
-            // Set Headers
-            if (customHeaders != null)
+            HttpResponseMessage _httpResponse = null;
+            try
             {
-                foreach(var _header in customHeaders)
+                _httpRequest.Method = new HttpMethod("POST");
+                _httpRequest.RequestUri = new Uri(_url);
+                // Set Headers
+                if (customHeaders != null)
                 {
-                    if (_httpRequest.Headers.Contains(_header.Key))
+                    foreach(var _header in customHeaders)
                     {
-                        _httpRequest.Headers.Remove(_header.Key);
+                        if (_httpRequest.Headers.Contains(_header.Key))
+                        {
+                            _httpRequest.Headers.Remove(_header.Key);
+                        }
+                        _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                     }
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
-            }
 
-            // Serialize Request
-            string _requestContent = null;
-            MultipartFormDataContent _multiPartContent = new MultipartFormDataContent();
-            if (fileContent != null)
-            {
-                StreamContent _fileContent = new StreamContent(fileContent);
-                _fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
-                System.IO.FileStream _fileContentAsFileStream = fileContent as System.IO.FileStream;
-                if (_fileContentAsFileStream != null)
+                // Serialize Request
+                string _requestContent = null;
+                MultipartFormDataContent _multiPartContent = new MultipartFormDataContent();
+                if (fileContent != null)
                 {
-                    ContentDispositionHeaderValue _contentDispositionHeaderValue = new ContentDispositionHeaderValue("form-data");
-                    _contentDispositionHeaderValue.Name = "fileContent";
-                    _contentDispositionHeaderValue.FileName = _fileContentAsFileStream.Name;
-                    _fileContent.Headers.ContentDisposition = _contentDispositionHeaderValue;        
-                }    
-                _multiPartContent.Add(_fileContent, "fileContent");
-            }
-            if (fileName != null)
-            {
-                StringContent _fileName = new StringContent(fileName, Encoding.UTF8);
-                _multiPartContent.Add(_fileName, "fileName");
-            }
-            if (status != null)
-            {
-                StringContent _status = new StringContent(status, Encoding.UTF8);
-                _multiPartContent.Add(_status, "status");
-            }
-            _httpRequest.Content = _multiPartContent;
-            // Set Credentials
-            if (this.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 405)
-            {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                    StreamContent _fileContent = new StreamContent(fileContent);
+                    _fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+                    System.IO.FileStream _fileContentAsFileStream = fileContent as System.IO.FileStream;
+                    if (_fileContentAsFileStream != null)
+                    {
+                        ContentDispositionHeaderValue _contentDispositionHeaderValue = new ContentDispositionHeaderValue("form-data");
+                        _contentDispositionHeaderValue.Name = "fileContent";
+                        _contentDispositionHeaderValue.FileName = _fileContentAsFileStream.Name;
+                        _fileContent.Headers.ContentDisposition = _contentDispositionHeaderValue;        
+                    }    
+                    _multiPartContent.Add(_fileContent, "fileContent");
+                }
+                if (fileName != null)
+                {
+                    StringContent _fileName = new StringContent(fileName, Encoding.UTF8);
+                    _multiPartContent.Add(_fileName, "fileName");
+                }
+                if (status != null)
+                {
+                    StringContent _status = new StringContent(status, Encoding.UTF8);
+                    _multiPartContent.Add(_status, "status");
+                }
+                _httpRequest.Content = _multiPartContent;
+                // Set Credentials
+                if (this.Credentials != null)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                }
+                // Send Request
                 if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
                 }
-                throw ex;
+                cancellationToken.ThrowIfCancellationRequested();
+                _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                }
+                HttpStatusCode _statusCode = _httpResponse.StatusCode;
+                cancellationToken.ThrowIfCancellationRequested();
+                string _responseContent = null;
+                if ((int)_statusCode != 405)
+                {
+                    var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                    ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                    ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
+                // Create Result
+                var _result = new HttpOperationResponse();
+                _result.Request = _httpRequest;
+                _result.Response = _httpResponse;
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.Exit(_invocationId, _result);
+                }
+                return _result;
             }
-            // Create Result
-            var _result = new HttpOperationResponse();
-            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            if (_shouldTrace)
+            catch
             {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw;
+            }    
         }
 
         /// <summary>
@@ -987,71 +1065,84 @@ namespace Fixtures.PetstoreV2
             _url = _url.Replace("{petId}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(petId, this.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
-            _httpRequest.Method = new HttpMethod("DELETE");
-            _httpRequest.RequestUri = new Uri(_url);
-            // Set Headers
-            if (apiKey != null)
+            HttpResponseMessage _httpResponse = null;
+            try
             {
-                if (_httpRequest.Headers.Contains("api_key"))
+                _httpRequest.Method = new HttpMethod("DELETE");
+                _httpRequest.RequestUri = new Uri(_url);
+                // Set Headers
+                if (apiKey != null)
                 {
-                    _httpRequest.Headers.Remove("api_key");
-                }
-                _httpRequest.Headers.TryAddWithoutValidation("api_key", apiKey);
-            }
-            if (customHeaders != null)
-            {
-                foreach(var _header in customHeaders)
-                {
-                    if (_httpRequest.Headers.Contains(_header.Key))
+                    if (_httpRequest.Headers.Contains("api_key"))
                     {
-                        _httpRequest.Headers.Remove(_header.Key);
+                        _httpRequest.Headers.Remove("api_key");
                     }
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
+                    _httpRequest.Headers.TryAddWithoutValidation("api_key", apiKey);
                 }
-            }
+                if (customHeaders != null)
+                {
+                    foreach(var _header in customHeaders)
+                    {
+                        if (_httpRequest.Headers.Contains(_header.Key))
+                        {
+                            _httpRequest.Headers.Remove(_header.Key);
+                        }
+                        _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
+                    }
+                }
 
-            // Serialize Request
-            string _requestContent = null;
-            // Set Credentials
-            if (this.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 400)
-            {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                // Serialize Request
+                string _requestContent = null;
+                // Set Credentials
+                if (this.Credentials != null)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                }
+                // Send Request
                 if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
                 }
-                throw ex;
+                cancellationToken.ThrowIfCancellationRequested();
+                _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                }
+                HttpStatusCode _statusCode = _httpResponse.StatusCode;
+                cancellationToken.ThrowIfCancellationRequested();
+                string _responseContent = null;
+                if ((int)_statusCode != 400)
+                {
+                    var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                    ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                    ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
+                // Create Result
+                var _result = new HttpOperationResponse();
+                _result.Request = _httpRequest;
+                _result.Response = _httpResponse;
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.Exit(_invocationId, _result);
+                }
+                return _result;
             }
-            // Create Result
-            var _result = new HttpOperationResponse();
-            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            if (_shouldTrace)
+            catch
             {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw;
+            }    
         }
 
         /// <summary>
@@ -1081,76 +1172,89 @@ namespace Fixtures.PetstoreV2
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "store/inventory").ToString();
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
-            _httpRequest.Method = new HttpMethod("GET");
-            _httpRequest.RequestUri = new Uri(_url);
-            // Set Headers
-            if (customHeaders != null)
+            HttpResponseMessage _httpResponse = null;
+            try
             {
-                foreach(var _header in customHeaders)
+                _httpRequest.Method = new HttpMethod("GET");
+                _httpRequest.RequestUri = new Uri(_url);
+                // Set Headers
+                if (customHeaders != null)
                 {
-                    if (_httpRequest.Headers.Contains(_header.Key))
+                    foreach(var _header in customHeaders)
                     {
-                        _httpRequest.Headers.Remove(_header.Key);
+                        if (_httpRequest.Headers.Contains(_header.Key))
+                        {
+                            _httpRequest.Headers.Remove(_header.Key);
+                        }
+                        _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                     }
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
-            }
 
-            // Serialize Request
-            string _requestContent = null;
-            // Set Credentials
-            if (this.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 200)
-            {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                // Serialize Request
+                string _requestContent = null;
+                // Set Credentials
+                if (this.Credentials != null)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                }
+                // Send Request
                 if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
                 }
-                throw ex;
-            }
-            // Create Result
-            var _result = new HttpOperationResponse<IDictionary<string, int?>>();
-            // Deserialize Response
-            if ((int)_statusCode == 200)
-            {
-                try
+                cancellationToken.ThrowIfCancellationRequested();
+                _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                if (_shouldTrace)
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, int?>>(_responseContent, this.DeserializationSettings);
+                    ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
                 }
-                catch (JsonException ex)
+                HttpStatusCode _statusCode = _httpResponse.StatusCode;
+                cancellationToken.ThrowIfCancellationRequested();
+                string _responseContent = null;
+                if ((int)_statusCode != 200)
                 {
-                    throw new RestException("Unable to deserialize the response.", ex);
+                    var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                    ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                    ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
+                // Create Result
+                var _result = new HttpOperationResponse<IDictionary<string, int?>>();
+                _result.Request = _httpRequest;
+                _result.Response = _httpResponse;
+                // Deserialize Response
+                if ((int)_statusCode == 200)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, int?>>(_responseContent, this.DeserializationSettings);
+                    }
+                    catch (JsonException ex)
+                    {
+                        throw new RestException("Unable to deserialize the response.", ex);
+                    }
+                }
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.Exit(_invocationId, _result);
+                }
+                return _result;
             }
-            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            if (_shouldTrace)
+            catch
             {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw;
+            }    
         }
 
         /// <summary>
@@ -1187,79 +1291,92 @@ namespace Fixtures.PetstoreV2
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "store/order").ToString();
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new Uri(_url);
-            // Set Headers
-            if (customHeaders != null)
+            HttpResponseMessage _httpResponse = null;
+            try
             {
-                foreach(var _header in customHeaders)
+                _httpRequest.Method = new HttpMethod("POST");
+                _httpRequest.RequestUri = new Uri(_url);
+                // Set Headers
+                if (customHeaders != null)
                 {
-                    if (_httpRequest.Headers.Contains(_header.Key))
+                    foreach(var _header in customHeaders)
                     {
-                        _httpRequest.Headers.Remove(_header.Key);
+                        if (_httpRequest.Headers.Contains(_header.Key))
+                        {
+                            _httpRequest.Headers.Remove(_header.Key);
+                        }
+                        _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                     }
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
-            }
 
-            // Serialize Request
-            string _requestContent = null;
-            _requestContent = SafeJsonConvert.SerializeObject(body, this.SerializationSettings);
-            _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
-            _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
-            // Set Credentials
-            if (this.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 200 && (int)_statusCode != 400)
-            {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                // Serialize Request
+                string _requestContent = null;
+                _requestContent = SafeJsonConvert.SerializeObject(body, this.SerializationSettings);
+                _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
+                _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+                // Set Credentials
+                if (this.Credentials != null)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                }
+                // Send Request
                 if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
                 }
-                throw ex;
-            }
-            // Create Result
-            var _result = new HttpOperationResponse<Order>();
-            // Deserialize Response
-            if ((int)_statusCode == 200)
-            {
-                try
+                cancellationToken.ThrowIfCancellationRequested();
+                _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                if (_shouldTrace)
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    _result.Body = SafeJsonConvert.DeserializeObject<Order>(_responseContent, this.DeserializationSettings);
+                    ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
                 }
-                catch (JsonException ex)
+                HttpStatusCode _statusCode = _httpResponse.StatusCode;
+                cancellationToken.ThrowIfCancellationRequested();
+                string _responseContent = null;
+                if ((int)_statusCode != 200 && (int)_statusCode != 400)
                 {
-                    throw new RestException("Unable to deserialize the response.", ex);
+                    var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                    ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                    ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
+                // Create Result
+                var _result = new HttpOperationResponse<Order>();
+                _result.Request = _httpRequest;
+                _result.Response = _httpResponse;
+                // Deserialize Response
+                if ((int)_statusCode == 200)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        _result.Body = SafeJsonConvert.DeserializeObject<Order>(_responseContent, this.DeserializationSettings);
+                    }
+                    catch (JsonException ex)
+                    {
+                        throw new RestException("Unable to deserialize the response.", ex);
+                    }
+                }
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.Exit(_invocationId, _result);
+                }
+                return _result;
             }
-            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            if (_shouldTrace)
+            catch
             {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw;
+            }    
         }
 
         /// <summary>
@@ -1310,76 +1427,89 @@ namespace Fixtures.PetstoreV2
             _url = _url.Replace("{orderId}", Uri.EscapeDataString(orderId));
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
-            _httpRequest.Method = new HttpMethod("GET");
-            _httpRequest.RequestUri = new Uri(_url);
-            // Set Headers
-            if (customHeaders != null)
+            HttpResponseMessage _httpResponse = null;
+            try
             {
-                foreach(var _header in customHeaders)
+                _httpRequest.Method = new HttpMethod("GET");
+                _httpRequest.RequestUri = new Uri(_url);
+                // Set Headers
+                if (customHeaders != null)
                 {
-                    if (_httpRequest.Headers.Contains(_header.Key))
+                    foreach(var _header in customHeaders)
                     {
-                        _httpRequest.Headers.Remove(_header.Key);
+                        if (_httpRequest.Headers.Contains(_header.Key))
+                        {
+                            _httpRequest.Headers.Remove(_header.Key);
+                        }
+                        _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                     }
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
-            }
 
-            // Serialize Request
-            string _requestContent = null;
-            // Set Credentials
-            if (this.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 200 && (int)_statusCode != 400 && (int)_statusCode != 404)
-            {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                // Serialize Request
+                string _requestContent = null;
+                // Set Credentials
+                if (this.Credentials != null)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                }
+                // Send Request
                 if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
                 }
-                throw ex;
-            }
-            // Create Result
-            var _result = new HttpOperationResponse<Order>();
-            // Deserialize Response
-            if ((int)_statusCode == 200)
-            {
-                try
+                cancellationToken.ThrowIfCancellationRequested();
+                _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                if (_shouldTrace)
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    _result.Body = SafeJsonConvert.DeserializeObject<Order>(_responseContent, this.DeserializationSettings);
+                    ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
                 }
-                catch (JsonException ex)
+                HttpStatusCode _statusCode = _httpResponse.StatusCode;
+                cancellationToken.ThrowIfCancellationRequested();
+                string _responseContent = null;
+                if ((int)_statusCode != 200 && (int)_statusCode != 400 && (int)_statusCode != 404)
                 {
-                    throw new RestException("Unable to deserialize the response.", ex);
+                    var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                    ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                    ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
+                // Create Result
+                var _result = new HttpOperationResponse<Order>();
+                _result.Request = _httpRequest;
+                _result.Response = _httpResponse;
+                // Deserialize Response
+                if ((int)_statusCode == 200)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        _result.Body = SafeJsonConvert.DeserializeObject<Order>(_responseContent, this.DeserializationSettings);
+                    }
+                    catch (JsonException ex)
+                    {
+                        throw new RestException("Unable to deserialize the response.", ex);
+                    }
+                }
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.Exit(_invocationId, _result);
+                }
+                return _result;
             }
-            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            if (_shouldTrace)
+            catch
             {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw;
+            }    
         }
 
         /// <summary>
@@ -1426,63 +1556,76 @@ namespace Fixtures.PetstoreV2
             _url = _url.Replace("{orderId}", Uri.EscapeDataString(orderId));
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
-            _httpRequest.Method = new HttpMethod("DELETE");
-            _httpRequest.RequestUri = new Uri(_url);
-            // Set Headers
-            if (customHeaders != null)
+            HttpResponseMessage _httpResponse = null;
+            try
             {
-                foreach(var _header in customHeaders)
+                _httpRequest.Method = new HttpMethod("DELETE");
+                _httpRequest.RequestUri = new Uri(_url);
+                // Set Headers
+                if (customHeaders != null)
                 {
-                    if (_httpRequest.Headers.Contains(_header.Key))
+                    foreach(var _header in customHeaders)
                     {
-                        _httpRequest.Headers.Remove(_header.Key);
+                        if (_httpRequest.Headers.Contains(_header.Key))
+                        {
+                            _httpRequest.Headers.Remove(_header.Key);
+                        }
+                        _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                     }
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
-            }
 
-            // Serialize Request
-            string _requestContent = null;
-            // Set Credentials
-            if (this.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 400 && (int)_statusCode != 404)
-            {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                // Serialize Request
+                string _requestContent = null;
+                // Set Credentials
+                if (this.Credentials != null)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                }
+                // Send Request
                 if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
                 }
-                throw ex;
+                cancellationToken.ThrowIfCancellationRequested();
+                _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                }
+                HttpStatusCode _statusCode = _httpResponse.StatusCode;
+                cancellationToken.ThrowIfCancellationRequested();
+                string _responseContent = null;
+                if ((int)_statusCode != 400 && (int)_statusCode != 404)
+                {
+                    var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                    ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                    ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
+                // Create Result
+                var _result = new HttpOperationResponse();
+                _result.Request = _httpRequest;
+                _result.Response = _httpResponse;
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.Exit(_invocationId, _result);
+                }
+                return _result;
             }
-            // Create Result
-            var _result = new HttpOperationResponse();
-            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            if (_shouldTrace)
+            catch
             {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw;
+            }    
         }
 
         /// <summary>
@@ -1520,66 +1663,79 @@ namespace Fixtures.PetstoreV2
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "user").ToString();
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new Uri(_url);
-            // Set Headers
-            if (customHeaders != null)
+            HttpResponseMessage _httpResponse = null;
+            try
             {
-                foreach(var _header in customHeaders)
+                _httpRequest.Method = new HttpMethod("POST");
+                _httpRequest.RequestUri = new Uri(_url);
+                // Set Headers
+                if (customHeaders != null)
                 {
-                    if (_httpRequest.Headers.Contains(_header.Key))
+                    foreach(var _header in customHeaders)
                     {
-                        _httpRequest.Headers.Remove(_header.Key);
+                        if (_httpRequest.Headers.Contains(_header.Key))
+                        {
+                            _httpRequest.Headers.Remove(_header.Key);
+                        }
+                        _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                     }
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
-            }
 
-            // Serialize Request
-            string _requestContent = null;
-            _requestContent = SafeJsonConvert.SerializeObject(body, this.SerializationSettings);
-            _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
-            _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
-            // Set Credentials
-            if (this.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if (!_httpResponse.IsSuccessStatusCode)
-            {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                // Serialize Request
+                string _requestContent = null;
+                _requestContent = SafeJsonConvert.SerializeObject(body, this.SerializationSettings);
+                _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
+                _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+                // Set Credentials
+                if (this.Credentials != null)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                }
+                // Send Request
                 if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
                 }
-                throw ex;
+                cancellationToken.ThrowIfCancellationRequested();
+                _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                }
+                HttpStatusCode _statusCode = _httpResponse.StatusCode;
+                cancellationToken.ThrowIfCancellationRequested();
+                string _responseContent = null;
+                if (!_httpResponse.IsSuccessStatusCode)
+                {
+                    var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                    ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                    ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
+                // Create Result
+                var _result = new HttpOperationResponse();
+                _result.Request = _httpRequest;
+                _result.Response = _httpResponse;
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.Exit(_invocationId, _result);
+                }
+                return _result;
             }
-            // Create Result
-            var _result = new HttpOperationResponse();
-            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            if (_shouldTrace)
+            catch
             {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw;
+            }    
         }
 
         /// <summary>
@@ -1616,66 +1772,79 @@ namespace Fixtures.PetstoreV2
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "user/createWithArray").ToString();
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new Uri(_url);
-            // Set Headers
-            if (customHeaders != null)
+            HttpResponseMessage _httpResponse = null;
+            try
             {
-                foreach(var _header in customHeaders)
+                _httpRequest.Method = new HttpMethod("POST");
+                _httpRequest.RequestUri = new Uri(_url);
+                // Set Headers
+                if (customHeaders != null)
                 {
-                    if (_httpRequest.Headers.Contains(_header.Key))
+                    foreach(var _header in customHeaders)
                     {
-                        _httpRequest.Headers.Remove(_header.Key);
+                        if (_httpRequest.Headers.Contains(_header.Key))
+                        {
+                            _httpRequest.Headers.Remove(_header.Key);
+                        }
+                        _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                     }
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
-            }
 
-            // Serialize Request
-            string _requestContent = null;
-            _requestContent = SafeJsonConvert.SerializeObject(body, this.SerializationSettings);
-            _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
-            _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
-            // Set Credentials
-            if (this.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if (!_httpResponse.IsSuccessStatusCode)
-            {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                // Serialize Request
+                string _requestContent = null;
+                _requestContent = SafeJsonConvert.SerializeObject(body, this.SerializationSettings);
+                _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
+                _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+                // Set Credentials
+                if (this.Credentials != null)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                }
+                // Send Request
                 if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
                 }
-                throw ex;
+                cancellationToken.ThrowIfCancellationRequested();
+                _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                }
+                HttpStatusCode _statusCode = _httpResponse.StatusCode;
+                cancellationToken.ThrowIfCancellationRequested();
+                string _responseContent = null;
+                if (!_httpResponse.IsSuccessStatusCode)
+                {
+                    var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                    ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                    ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
+                // Create Result
+                var _result = new HttpOperationResponse();
+                _result.Request = _httpRequest;
+                _result.Response = _httpResponse;
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.Exit(_invocationId, _result);
+                }
+                return _result;
             }
-            // Create Result
-            var _result = new HttpOperationResponse();
-            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            if (_shouldTrace)
+            catch
             {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw;
+            }    
         }
 
         /// <summary>
@@ -1712,66 +1881,79 @@ namespace Fixtures.PetstoreV2
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "user/createWithList").ToString();
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
-            _httpRequest.Method = new HttpMethod("POST");
-            _httpRequest.RequestUri = new Uri(_url);
-            // Set Headers
-            if (customHeaders != null)
+            HttpResponseMessage _httpResponse = null;
+            try
             {
-                foreach(var _header in customHeaders)
+                _httpRequest.Method = new HttpMethod("POST");
+                _httpRequest.RequestUri = new Uri(_url);
+                // Set Headers
+                if (customHeaders != null)
                 {
-                    if (_httpRequest.Headers.Contains(_header.Key))
+                    foreach(var _header in customHeaders)
                     {
-                        _httpRequest.Headers.Remove(_header.Key);
+                        if (_httpRequest.Headers.Contains(_header.Key))
+                        {
+                            _httpRequest.Headers.Remove(_header.Key);
+                        }
+                        _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                     }
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
-            }
 
-            // Serialize Request
-            string _requestContent = null;
-            _requestContent = SafeJsonConvert.SerializeObject(body, this.SerializationSettings);
-            _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
-            _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
-            // Set Credentials
-            if (this.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if (!_httpResponse.IsSuccessStatusCode)
-            {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                // Serialize Request
+                string _requestContent = null;
+                _requestContent = SafeJsonConvert.SerializeObject(body, this.SerializationSettings);
+                _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
+                _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+                // Set Credentials
+                if (this.Credentials != null)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                }
+                // Send Request
                 if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
                 }
-                throw ex;
+                cancellationToken.ThrowIfCancellationRequested();
+                _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                }
+                HttpStatusCode _statusCode = _httpResponse.StatusCode;
+                cancellationToken.ThrowIfCancellationRequested();
+                string _responseContent = null;
+                if (!_httpResponse.IsSuccessStatusCode)
+                {
+                    var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                    ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                    ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
+                // Create Result
+                var _result = new HttpOperationResponse();
+                _result.Request = _httpRequest;
+                _result.Response = _httpResponse;
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.Exit(_invocationId, _result);
+                }
+                return _result;
             }
-            // Create Result
-            var _result = new HttpOperationResponse();
-            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            if (_shouldTrace)
+            catch
             {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw;
+            }    
         }
 
         /// <summary>
@@ -1829,84 +2011,97 @@ namespace Fixtures.PetstoreV2
             }
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
-            _httpRequest.Method = new HttpMethod("GET");
-            _httpRequest.RequestUri = new Uri(_url);
-            // Set Headers
-            if (customHeaders != null)
+            HttpResponseMessage _httpResponse = null;
+            try
             {
-                foreach(var _header in customHeaders)
+                _httpRequest.Method = new HttpMethod("GET");
+                _httpRequest.RequestUri = new Uri(_url);
+                // Set Headers
+                if (customHeaders != null)
                 {
-                    if (_httpRequest.Headers.Contains(_header.Key))
+                    foreach(var _header in customHeaders)
                     {
-                        _httpRequest.Headers.Remove(_header.Key);
+                        if (_httpRequest.Headers.Contains(_header.Key))
+                        {
+                            _httpRequest.Headers.Remove(_header.Key);
+                        }
+                        _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                     }
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
-            }
 
-            // Serialize Request
-            string _requestContent = null;
-            // Set Credentials
-            if (this.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 200 && (int)_statusCode != 400)
-            {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                // Serialize Request
+                string _requestContent = null;
+                // Set Credentials
+                if (this.Credentials != null)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                }
+                // Send Request
                 if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
                 }
-                throw ex;
-            }
-            // Create Result
-            var _result = new HttpOperationResponse<string,LoginUserHeaders>();
-            // Deserialize Response
-            if ((int)_statusCode == 200)
-            {
+                cancellationToken.ThrowIfCancellationRequested();
+                _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                }
+                HttpStatusCode _statusCode = _httpResponse.StatusCode;
+                cancellationToken.ThrowIfCancellationRequested();
+                string _responseContent = null;
+                if ((int)_statusCode != 200 && (int)_statusCode != 400)
+                {
+                    var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                    ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                    ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
+                // Create Result
+                var _result = new HttpOperationResponse<string,LoginUserHeaders>();
+                _result.Request = _httpRequest;
+                _result.Response = _httpResponse;
+                // Deserialize Response
+                if ((int)_statusCode == 200)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        _result.Body = SafeJsonConvert.DeserializeObject<string>(_responseContent, this.DeserializationSettings);
+                    }
+                    catch (JsonException ex)
+                    {
+                        throw new RestException("Unable to deserialize the response.", ex);
+                    }
+                }
                 try
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    _result.Body = SafeJsonConvert.DeserializeObject<string>(_responseContent, this.DeserializationSettings);
+                    _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LoginUserHeaders>(JsonSerializer.Create(this.DeserializationSettings));
                 }
                 catch (JsonException ex)
                 {
-                    throw new RestException("Unable to deserialize the response.", ex);
+                    throw new RestException("Unable to deserialize the headers.", ex);
                 }
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.Exit(_invocationId, _result);
+                }
+                return _result;
             }
-            try
+            catch
             {
-                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<LoginUserHeaders>(JsonSerializer.Create(this.DeserializationSettings));
-            }
-            catch (JsonException ex)
-            {
-                throw new RestException("Unable to deserialize the headers.", ex);
-            }
-            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw;
+            }    
         }
 
         /// <summary>
@@ -1935,63 +2130,76 @@ namespace Fixtures.PetstoreV2
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "user/logout").ToString();
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
-            _httpRequest.Method = new HttpMethod("GET");
-            _httpRequest.RequestUri = new Uri(_url);
-            // Set Headers
-            if (customHeaders != null)
+            HttpResponseMessage _httpResponse = null;
+            try
             {
-                foreach(var _header in customHeaders)
+                _httpRequest.Method = new HttpMethod("GET");
+                _httpRequest.RequestUri = new Uri(_url);
+                // Set Headers
+                if (customHeaders != null)
                 {
-                    if (_httpRequest.Headers.Contains(_header.Key))
+                    foreach(var _header in customHeaders)
                     {
-                        _httpRequest.Headers.Remove(_header.Key);
+                        if (_httpRequest.Headers.Contains(_header.Key))
+                        {
+                            _httpRequest.Headers.Remove(_header.Key);
+                        }
+                        _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                     }
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
-            }
 
-            // Serialize Request
-            string _requestContent = null;
-            // Set Credentials
-            if (this.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if (!_httpResponse.IsSuccessStatusCode)
-            {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                // Serialize Request
+                string _requestContent = null;
+                // Set Credentials
+                if (this.Credentials != null)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                }
+                // Send Request
                 if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
                 }
-                throw ex;
+                cancellationToken.ThrowIfCancellationRequested();
+                _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                }
+                HttpStatusCode _statusCode = _httpResponse.StatusCode;
+                cancellationToken.ThrowIfCancellationRequested();
+                string _responseContent = null;
+                if (!_httpResponse.IsSuccessStatusCode)
+                {
+                    var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                    ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                    ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
+                // Create Result
+                var _result = new HttpOperationResponse();
+                _result.Request = _httpRequest;
+                _result.Response = _httpResponse;
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.Exit(_invocationId, _result);
+                }
+                return _result;
             }
-            // Create Result
-            var _result = new HttpOperationResponse();
-            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            if (_shouldTrace)
+            catch
             {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw;
+            }    
         }
 
         /// <summary>
@@ -2029,76 +2237,89 @@ namespace Fixtures.PetstoreV2
             _url = _url.Replace("{username}", Uri.EscapeDataString(username));
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
-            _httpRequest.Method = new HttpMethod("GET");
-            _httpRequest.RequestUri = new Uri(_url);
-            // Set Headers
-            if (customHeaders != null)
+            HttpResponseMessage _httpResponse = null;
+            try
             {
-                foreach(var _header in customHeaders)
+                _httpRequest.Method = new HttpMethod("GET");
+                _httpRequest.RequestUri = new Uri(_url);
+                // Set Headers
+                if (customHeaders != null)
                 {
-                    if (_httpRequest.Headers.Contains(_header.Key))
+                    foreach(var _header in customHeaders)
                     {
-                        _httpRequest.Headers.Remove(_header.Key);
+                        if (_httpRequest.Headers.Contains(_header.Key))
+                        {
+                            _httpRequest.Headers.Remove(_header.Key);
+                        }
+                        _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                     }
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
-            }
 
-            // Serialize Request
-            string _requestContent = null;
-            // Set Credentials
-            if (this.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 200 && (int)_statusCode != 400 && (int)_statusCode != 404)
-            {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                // Serialize Request
+                string _requestContent = null;
+                // Set Credentials
+                if (this.Credentials != null)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                }
+                // Send Request
                 if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
                 }
-                throw ex;
-            }
-            // Create Result
-            var _result = new HttpOperationResponse<User>();
-            // Deserialize Response
-            if ((int)_statusCode == 200)
-            {
-                try
+                cancellationToken.ThrowIfCancellationRequested();
+                _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                if (_shouldTrace)
                 {
-                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                    _result.Body = SafeJsonConvert.DeserializeObject<User>(_responseContent, this.DeserializationSettings);
+                    ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
                 }
-                catch (JsonException ex)
+                HttpStatusCode _statusCode = _httpResponse.StatusCode;
+                cancellationToken.ThrowIfCancellationRequested();
+                string _responseContent = null;
+                if ((int)_statusCode != 200 && (int)_statusCode != 400 && (int)_statusCode != 404)
                 {
-                    throw new RestException("Unable to deserialize the response.", ex);
+                    var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                    ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                    ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
                 }
+                // Create Result
+                var _result = new HttpOperationResponse<User>();
+                _result.Request = _httpRequest;
+                _result.Response = _httpResponse;
+                // Deserialize Response
+                if ((int)_statusCode == 200)
+                {
+                    try
+                    {
+                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                        _result.Body = SafeJsonConvert.DeserializeObject<User>(_responseContent, this.DeserializationSettings);
+                    }
+                    catch (JsonException ex)
+                    {
+                        throw new RestException("Unable to deserialize the response.", ex);
+                    }
+                }
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.Exit(_invocationId, _result);
+                }
+                return _result;
             }
-            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            if (_shouldTrace)
+            catch
             {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw;
+            }    
         }
 
         /// <summary>
@@ -2145,66 +2366,79 @@ namespace Fixtures.PetstoreV2
             _url = _url.Replace("{username}", Uri.EscapeDataString(username));
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
-            _httpRequest.Method = new HttpMethod("PUT");
-            _httpRequest.RequestUri = new Uri(_url);
-            // Set Headers
-            if (customHeaders != null)
+            HttpResponseMessage _httpResponse = null;
+            try
             {
-                foreach(var _header in customHeaders)
+                _httpRequest.Method = new HttpMethod("PUT");
+                _httpRequest.RequestUri = new Uri(_url);
+                // Set Headers
+                if (customHeaders != null)
                 {
-                    if (_httpRequest.Headers.Contains(_header.Key))
+                    foreach(var _header in customHeaders)
                     {
-                        _httpRequest.Headers.Remove(_header.Key);
+                        if (_httpRequest.Headers.Contains(_header.Key))
+                        {
+                            _httpRequest.Headers.Remove(_header.Key);
+                        }
+                        _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                     }
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
-            }
 
-            // Serialize Request
-            string _requestContent = null;
-            _requestContent = SafeJsonConvert.SerializeObject(body, this.SerializationSettings);
-            _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
-            _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
-            // Set Credentials
-            if (this.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 400 && (int)_statusCode != 404)
-            {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                // Serialize Request
+                string _requestContent = null;
+                _requestContent = SafeJsonConvert.SerializeObject(body, this.SerializationSettings);
+                _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
+                _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+                // Set Credentials
+                if (this.Credentials != null)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                }
+                // Send Request
                 if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
                 }
-                throw ex;
+                cancellationToken.ThrowIfCancellationRequested();
+                _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                }
+                HttpStatusCode _statusCode = _httpResponse.StatusCode;
+                cancellationToken.ThrowIfCancellationRequested();
+                string _responseContent = null;
+                if ((int)_statusCode != 400 && (int)_statusCode != 404)
+                {
+                    var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                    ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                    ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
+                // Create Result
+                var _result = new HttpOperationResponse();
+                _result.Request = _httpRequest;
+                _result.Response = _httpResponse;
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.Exit(_invocationId, _result);
+                }
+                return _result;
             }
-            // Create Result
-            var _result = new HttpOperationResponse();
-            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            if (_shouldTrace)
+            catch
             {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw;
+            }    
         }
 
         /// <summary>
@@ -2243,63 +2477,76 @@ namespace Fixtures.PetstoreV2
             _url = _url.Replace("{username}", Uri.EscapeDataString(username));
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
-            _httpRequest.Method = new HttpMethod("DELETE");
-            _httpRequest.RequestUri = new Uri(_url);
-            // Set Headers
-            if (customHeaders != null)
+            HttpResponseMessage _httpResponse = null;
+            try
             {
-                foreach(var _header in customHeaders)
+                _httpRequest.Method = new HttpMethod("DELETE");
+                _httpRequest.RequestUri = new Uri(_url);
+                // Set Headers
+                if (customHeaders != null)
                 {
-                    if (_httpRequest.Headers.Contains(_header.Key))
+                    foreach(var _header in customHeaders)
                     {
-                        _httpRequest.Headers.Remove(_header.Key);
+                        if (_httpRequest.Headers.Contains(_header.Key))
+                        {
+                            _httpRequest.Headers.Remove(_header.Key);
+                        }
+                        _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                     }
-                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
-            }
 
-            // Serialize Request
-            string _requestContent = null;
-            // Set Credentials
-            if (this.Credentials != null)
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-                await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            }
-            // Send Request
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-            }
-            cancellationToken.ThrowIfCancellationRequested();
-            HttpResponseMessage _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-            if (_shouldTrace)
-            {
-                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-            }
-            HttpStatusCode _statusCode = _httpResponse.StatusCode;
-            cancellationToken.ThrowIfCancellationRequested();
-            string _responseContent = null;
-            if ((int)_statusCode != 400 && (int)_statusCode != 404)
-            {
-                var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                // Serialize Request
+                string _requestContent = null;
+                // Set Credentials
+                if (this.Credentials != null)
+                {
+                    cancellationToken.ThrowIfCancellationRequested();
+                    await this.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                }
+                // Send Request
                 if (_shouldTrace)
                 {
-                    ServiceClientTracing.Error(_invocationId, ex);
+                    ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
                 }
-                throw ex;
+                cancellationToken.ThrowIfCancellationRequested();
+                _httpResponse = await this.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+                }
+                HttpStatusCode _statusCode = _httpResponse.StatusCode;
+                cancellationToken.ThrowIfCancellationRequested();
+                string _responseContent = null;
+                if ((int)_statusCode != 400 && (int)_statusCode != 404)
+                {
+                    var ex = new HttpOperationException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                    ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                    ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                    if (_shouldTrace)
+                    {
+                        ServiceClientTracing.Error(_invocationId, ex);
+                    }
+                    throw ex;
+                }
+                // Create Result
+                var _result = new HttpOperationResponse();
+                _result.Request = _httpRequest;
+                _result.Response = _httpResponse;
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.Exit(_invocationId, _result);
+                }
+                return _result;
             }
-            // Create Result
-            var _result = new HttpOperationResponse();
-            _result.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-            _result.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-            if (_shouldTrace)
+            catch
             {
-                ServiceClientTracing.Exit(_invocationId, _result);
-            }
-            return _result;
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw;
+            }    
         }
 
     }

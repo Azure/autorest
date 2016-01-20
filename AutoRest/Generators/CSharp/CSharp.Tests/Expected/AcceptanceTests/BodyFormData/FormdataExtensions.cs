@@ -53,7 +53,8 @@ namespace Fixtures.AcceptanceTestsBodyFormData
             public static async Task<System.IO.Stream> UploadFileAsync( this IFormdata operations, System.IO.Stream fileContent, string fileName, CancellationToken cancellationToken = default(CancellationToken))
             {
                 var _result = await operations.UploadFileWithHttpMessagesAsync(fileContent, fileName, null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                _result.Request.Dispose();
+                return new HttpResponseMessageStream(_result.Response, _result.Body);
             }
 
             /// <summary>
@@ -91,7 +92,8 @@ namespace Fixtures.AcceptanceTestsBodyFormData
             public static async Task<System.IO.Stream> UploadFileViaBodyAsync( this IFormdata operations, System.IO.Stream fileContent, string fileName, CancellationToken cancellationToken = default(CancellationToken))
             {
                 var _result = await operations.UploadFileViaBodyWithHttpMessagesAsync(fileContent, fileName, null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                _result.Request.Dispose();
+                return new HttpResponseMessageStream(_result.Response, _result.Body);
             }
 
     }

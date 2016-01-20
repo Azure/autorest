@@ -40,8 +40,10 @@ namespace Fixtures.AcceptanceTestsBodyDate
             /// </param>
             public static async Task<DateTime?> GetNullAsync( this IDate operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -66,8 +68,10 @@ namespace Fixtures.AcceptanceTestsBodyDate
             /// </param>
             public static async Task<DateTime?> GetInvalidDateAsync( this IDate operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetInvalidDateWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetInvalidDateWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -92,8 +96,10 @@ namespace Fixtures.AcceptanceTestsBodyDate
             /// </param>
             public static async Task<DateTime?> GetOverflowDateAsync( this IDate operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetOverflowDateWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetOverflowDateWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -118,8 +124,10 @@ namespace Fixtures.AcceptanceTestsBodyDate
             /// </param>
             public static async Task<DateTime?> GetUnderflowDateAsync( this IDate operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetUnderflowDateWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetUnderflowDateWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -173,8 +181,10 @@ namespace Fixtures.AcceptanceTestsBodyDate
             /// </param>
             public static async Task<DateTime?> GetMaxDateAsync( this IDate operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetMaxDateWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetMaxDateWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -228,8 +238,10 @@ namespace Fixtures.AcceptanceTestsBodyDate
             /// </param>
             public static async Task<DateTime?> GetMinDateAsync( this IDate operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetMinDateWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetMinDateWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
     }

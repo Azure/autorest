@@ -52,8 +52,10 @@ namespace Fixtures.MirrorPrimitives
             /// </param>
             public static async Task<Product> GetProductAsync( this ISwaggerDataTypesClient operations, string responseCode = default(string), Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetProductWithHttpMessagesAsync(responseCode, product, null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetProductWithHttpMessagesAsync(responseCode, product, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -90,8 +92,10 @@ namespace Fixtures.MirrorPrimitives
             /// </param>
             public static async Task<Product> PutProductAsync( this ISwaggerDataTypesClient operations, string responseCode = default(string), Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.PutProductWithHttpMessagesAsync(responseCode, product, null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.PutProductWithHttpMessagesAsync(responseCode, product, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -128,8 +132,10 @@ namespace Fixtures.MirrorPrimitives
             /// </param>
             public static async Task<Product> PostProductAsync( this ISwaggerDataTypesClient operations, string responseCode = default(string), Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.PostProductWithHttpMessagesAsync(responseCode, product, null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.PostProductWithHttpMessagesAsync(responseCode, product, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -166,8 +172,10 @@ namespace Fixtures.MirrorPrimitives
             /// </param>
             public static async Task<Product> PatchProductAsync( this ISwaggerDataTypesClient operations, string responseCode = default(string), Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.PatchProductWithHttpMessagesAsync(responseCode, product, null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.PatchProductWithHttpMessagesAsync(responseCode, product, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
     }

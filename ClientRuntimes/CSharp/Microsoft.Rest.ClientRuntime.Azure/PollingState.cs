@@ -31,7 +31,7 @@ namespace Microsoft.Rest.Azure
             Resource = response.Body;
             ResourceHeaders = response.Headers;
 
-            string raw = response.Response.Content == null ? null : response.Response.Content;
+            string raw = response.Response.Content == null ? null : response.Response.Content.AsString();
 
             JObject resource = null;
             if (!string.IsNullOrEmpty(raw))
@@ -102,12 +102,12 @@ namespace Microsoft.Rest.Azure
         /// </summary>
         public string LocationHeaderLink { get; set; }
 
-        private HttpResponseMessageWrapper _response;
+        private HttpResponseMessage _response;
 
         /// <summary>
         /// Gets or sets last operation response. 
         /// </summary>
-        public HttpResponseMessageWrapper Response
+        public HttpResponseMessage Response
         {
             get { return _response; }
             set
@@ -115,14 +115,14 @@ namespace Microsoft.Rest.Azure
                 _response = value;
                 if (_response != null)
                 {
-                    if (_response.Headers.ContainsKey("Azure-AsyncOperation"))
+                    if (_response.Headers.Contains("Azure-AsyncOperation"))
                     {
-                        AzureAsyncOperationHeaderLink = _response.Headers["Azure-AsyncOperation"].FirstOrDefault();
+                        AzureAsyncOperationHeaderLink = _response.Headers.GetValues("Azure-AsyncOperation").FirstOrDefault();
                     }
 
-                    if (_response.Headers.ContainsKey("Location"))
+                    if (_response.Headers.Contains("Location"))
                     {
-                        LocationHeaderLink = _response.Headers["Location"].FirstOrDefault();
+                        LocationHeaderLink = _response.Headers.GetValues("Location").FirstOrDefault();
                     }
                 }
             }
@@ -131,7 +131,7 @@ namespace Microsoft.Rest.Azure
         /// <summary>
         /// Gets or sets last operation request.
         /// </summary>
-        public HttpRequestMessageWrapper Request { get; set; }
+        public HttpRequestMessage Request { get; set; }
 
         /// <summary>
         /// Gets or sets cloud error.
@@ -161,9 +161,9 @@ namespace Microsoft.Rest.Azure
                 {
                     return _retryTimeout.Value * 1000;
                 }
-                if (Response != null && Response.Headers.ContainsKey("Retry-After"))
+                if (Response != null && Response.Headers.Contains("Retry-After"))
                 {
-                    return int.Parse(Response.Headers["Retry-After"].FirstOrDefault(),
+                    return int.Parse(Response.Headers.GetValues("Retry-After").FirstOrDefault(),
                         CultureInfo.InvariantCulture) * 1000;
                 }
                 return AzureAsyncOperation.DefaultDelay * 1000;
@@ -181,8 +181,8 @@ namespace Microsoft.Rest.Azure
                     Resources.LongRunningOperationFailed, Status))
                 {
                     Body = Error,
-                    Request = Request,
-                    Response = Response
+                    Request = new HttpRequestMessageWrapper(Request, Request.Content.AsString()),
+                    Response = new HttpResponseMessageWrapper(Response, Response.Content.AsString())
                 };
             }
         }

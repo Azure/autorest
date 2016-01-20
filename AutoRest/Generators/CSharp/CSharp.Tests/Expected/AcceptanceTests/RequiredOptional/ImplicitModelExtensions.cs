@@ -44,8 +44,10 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static async Task<Error> GetRequiredPathAsync( this IImplicitModel operations, string pathParameter, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetRequiredPathWithHttpMessagesAsync(pathParameter, null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetRequiredPathWithHttpMessagesAsync(pathParameter, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -157,8 +159,10 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static async Task<Error> GetRequiredGlobalPathAsync( this IImplicitModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetRequiredGlobalPathWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetRequiredGlobalPathWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -183,8 +187,10 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static async Task<Error> GetRequiredGlobalQueryAsync( this IImplicitModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetRequiredGlobalQueryWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetRequiredGlobalQueryWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -209,8 +215,10 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             /// </param>
             public static async Task<Error> GetOptionalGlobalQueryAsync( this IImplicitModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetOptionalGlobalQueryWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetOptionalGlobalQueryWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
     }

@@ -41,8 +41,10 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
             /// </param>
             public static async Task<TimeSpan?> GetNullAsync( this IDurationOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -96,8 +98,10 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
             /// </param>
             public static async Task<TimeSpan?> GetPositiveDurationAsync( this IDurationOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetPositiveDurationWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetPositiveDurationWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -122,8 +126,10 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
             /// </param>
             public static async Task<TimeSpan?> GetInvalidAsync( this IDurationOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
     }

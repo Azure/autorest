@@ -40,8 +40,10 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
             /// </param>
             public static async Task<bool?> GetTrueAsync( this IBoolModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetTrueWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetTrueWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -95,8 +97,10 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
             /// </param>
             public static async Task<bool?> GetFalseAsync( this IBoolModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetFalseWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetFalseWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -150,8 +154,10 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
             /// </param>
             public static async Task<bool?> GetNullAsync( this IBoolModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -176,8 +182,10 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
             /// </param>
             public static async Task<bool?> GetInvalidAsync( this IBoolModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
     }

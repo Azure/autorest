@@ -71,8 +71,10 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static async Task<HeaderResponseExistingKeyHeaders> ResponseExistingKeyAsync( this IHeader operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.ResponseExistingKeyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Headers;
+                using (var _result = await operations.ResponseExistingKeyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Headers;
+                }
             }
 
             /// <summary>
@@ -128,8 +130,10 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static async Task<HeaderResponseProtectedKeyHeaders> ResponseProtectedKeyAsync( this IHeader operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.ResponseProtectedKeyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Headers;
+                using (var _result = await operations.ResponseProtectedKeyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Headers;
+                }
             }
 
             /// <summary>
@@ -199,8 +203,10 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static async Task<HeaderResponseIntegerHeaders> ResponseIntegerAsync( this IHeader operations, string scenario, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.ResponseIntegerWithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false);
-                return _result.Headers;
+                using (var _result = await operations.ResponseIntegerWithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Headers;
+                }
             }
 
             /// <summary>
@@ -270,8 +276,10 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static async Task<HeaderResponseLongHeaders> ResponseLongAsync( this IHeader operations, string scenario, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.ResponseLongWithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false);
-                return _result.Headers;
+                using (var _result = await operations.ResponseLongWithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Headers;
+                }
             }
 
             /// <summary>
@@ -341,8 +349,10 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static async Task<HeaderResponseFloatHeaders> ResponseFloatAsync( this IHeader operations, string scenario, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.ResponseFloatWithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false);
-                return _result.Headers;
+                using (var _result = await operations.ResponseFloatWithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Headers;
+                }
             }
 
             /// <summary>
@@ -412,8 +422,10 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static async Task<HeaderResponseDoubleHeaders> ResponseDoubleAsync( this IHeader operations, string scenario, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.ResponseDoubleWithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false);
-                return _result.Headers;
+                using (var _result = await operations.ResponseDoubleWithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Headers;
+                }
             }
 
             /// <summary>
@@ -483,8 +495,10 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static async Task<HeaderResponseBoolHeaders> ResponseBoolAsync( this IHeader operations, string scenario, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.ResponseBoolWithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false);
-                return _result.Headers;
+                using (var _result = await operations.ResponseBoolWithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Headers;
+                }
             }
 
             /// <summary>
@@ -564,8 +578,10 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static async Task<HeaderResponseStringHeaders> ResponseStringAsync( this IHeader operations, string scenario, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.ResponseStringWithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false);
-                return _result.Headers;
+                using (var _result = await operations.ResponseStringWithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Headers;
+                }
             }
 
             /// <summary>
@@ -635,8 +651,10 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static async Task<HeaderResponseDateHeaders> ResponseDateAsync( this IHeader operations, string scenario, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.ResponseDateWithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false);
-                return _result.Headers;
+                using (var _result = await operations.ResponseDateWithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Headers;
+                }
             }
 
             /// <summary>
@@ -712,8 +730,10 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static async Task<HeaderResponseDatetimeHeaders> ResponseDatetimeAsync( this IHeader operations, string scenario, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.ResponseDatetimeWithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false);
-                return _result.Headers;
+                using (var _result = await operations.ResponseDatetimeWithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Headers;
+                }
             }
 
             /// <summary>
@@ -789,8 +809,10 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static async Task<HeaderResponseDatetimeRfc1123Headers> ResponseDatetimeRfc1123Async( this IHeader operations, string scenario, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.ResponseDatetimeRfc1123WithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false);
-                return _result.Headers;
+                using (var _result = await operations.ResponseDatetimeRfc1123WithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Headers;
+                }
             }
 
             /// <summary>
@@ -860,8 +882,10 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static async Task<HeaderResponseDurationHeaders> ResponseDurationAsync( this IHeader operations, string scenario, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.ResponseDurationWithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false);
-                return _result.Headers;
+                using (var _result = await operations.ResponseDurationWithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Headers;
+                }
             }
 
             /// <summary>
@@ -931,8 +955,10 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static async Task<HeaderResponseByteHeaders> ResponseByteAsync( this IHeader operations, string scenario, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.ResponseByteWithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false);
-                return _result.Headers;
+                using (var _result = await operations.ResponseByteWithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Headers;
+                }
             }
 
             /// <summary>
@@ -1008,8 +1034,10 @@ namespace Fixtures.AcceptanceTestsHeader
             /// </param>
             public static async Task<HeaderResponseEnumHeaders> ResponseEnumAsync( this IHeader operations, string scenario, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.ResponseEnumWithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false);
-                return _result.Headers;
+                using (var _result = await operations.ResponseEnumWithHttpMessagesAsync(scenario, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Headers;
+                }
             }
 
             /// <summary>
