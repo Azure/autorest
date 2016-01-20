@@ -67,7 +67,7 @@ exports.stripResponse = function (response) {
   strippedResponse.headers = response.headers;
   strippedResponse.statusCode = response.statusCode;
   return strippedResponse;
-}
+};
 
 /**
  * Returns a stripped version of the Http Request that does not contain the 
@@ -89,8 +89,8 @@ exports.stripRequest = function (request) {
     err.message = util.format('Error - "%s" occured while creating a stripped version of the request object - "%s".', errMsg, request);
     return err;
   }
-
+  
   return strippedRequest;
-}
+};
 
 exports = module.exports;
