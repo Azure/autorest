@@ -101,8 +101,8 @@ Paths.prototype.getBooleanTrue = function (boolPath, options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -204,8 +204,8 @@ Paths.prototype.getBooleanFalse = function (boolPath, options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -307,8 +307,8 @@ Paths.prototype.getIntOneMillion = function (intPath, options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -410,8 +410,8 @@ Paths.prototype.getIntNegativeOneMillion = function (intPath, options, callback)
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -513,8 +513,8 @@ Paths.prototype.getTenBillion = function (longPath, options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -616,8 +616,8 @@ Paths.prototype.getNegativeTenBillion = function (longPath, options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -719,8 +719,8 @@ Paths.prototype.floatScientificPositive = function (floatPath, options, callback
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -822,8 +822,8 @@ Paths.prototype.floatScientificNegative = function (floatPath, options, callback
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -925,8 +925,8 @@ Paths.prototype.doubleDecimalPositive = function (doublePath, options, callback)
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -1028,8 +1028,8 @@ Paths.prototype.doubleDecimalNegative = function (doublePath, options, callback)
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -1132,8 +1132,8 @@ Paths.prototype.stringUnicode = function (stringPath, options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -1237,8 +1237,8 @@ Paths.prototype.stringUrlEncoded = function (stringPath, options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -1341,8 +1341,8 @@ Paths.prototype.stringEmpty = function (stringPath, options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -1444,8 +1444,8 @@ Paths.prototype.stringNull = function (stringPath, options, callback) {
     if (statusCode !== 400) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -1553,8 +1553,8 @@ Paths.prototype.enumValid = function (enumPath, options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -1662,8 +1662,8 @@ Paths.prototype.enumNull = function (enumPath, options, callback) {
     if (statusCode !== 400) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -1766,8 +1766,8 @@ Paths.prototype.byteMultiByte = function (bytePath, options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -1869,8 +1869,8 @@ Paths.prototype.byteEmpty = function (bytePath, options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -1972,8 +1972,8 @@ Paths.prototype.byteNull = function (bytePath, options, callback) {
     if (statusCode !== 400) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -2076,8 +2076,8 @@ Paths.prototype.dateValid = function (datePath, options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -2181,8 +2181,8 @@ Paths.prototype.dateNull = function (datePath, options, callback) {
     if (statusCode !== 400) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -2285,8 +2285,8 @@ Paths.prototype.dateTimeValid = function (dateTimePath, options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -2390,8 +2390,8 @@ Paths.prototype.dateTimeNull = function (dateTimePath, options, callback) {
     if (statusCode !== 400) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {

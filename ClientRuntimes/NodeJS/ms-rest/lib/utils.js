@@ -53,4 +53,44 @@ exports.encodeUri = function (uri) {
     .replace(/\*/g, '%2A');
 };
 
+/**
+ * Returns a stripped version of the Http Response which only contains body, 
+ * headers and the statusCode.
+ * 
+ * @param {stream} response - The Http Response
+ * 
+ * @return {object} strippedResponse - The stripped version of Http Response.
+ */
+exports.stripResponse = function (response) {
+  var strippedResponse = {};
+  strippedResponse.body = response.body;
+  strippedResponse.headers = response.headers;
+  strippedResponse.statusCode = response.statusCode;
+  return strippedResponse;
+};
+
+/**
+ * Returns a stripped version of the Http Request that does not contain the 
+ * Authorization header.
+ * 
+ * @param {object} request - The Http Request object
+ * 
+ * @return {object} strippedRequest - The stripped version of Http Request.
+ */
+exports.stripRequest = function (request) {
+  var strippedRequest = {};
+  try {
+    strippedRequest = JSON.parse(JSON.stringify(request));
+    if (strippedRequest.headers && strippedRequest.headers.Authorization) {
+      delete strippedRequest.headers.Authorization;
+    }
+  } catch (err) {
+    var errMsg = err.message;
+    err.message = util.format('Error - "%s" occured while creating a stripped version of the request object - "%s".', errMsg, request);
+    return err;
+  }
+  
+  return strippedRequest;
+};
+
 exports = module.exports;

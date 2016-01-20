@@ -91,8 +91,8 @@ ArrayModel.prototype.getNull = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -141,8 +141,8 @@ ArrayModel.prototype.getNull = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -213,8 +213,8 @@ ArrayModel.prototype.getInvalid = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -263,8 +263,8 @@ ArrayModel.prototype.getInvalid = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -335,8 +335,8 @@ ArrayModel.prototype.getEmpty = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -385,8 +385,8 @@ ArrayModel.prototype.getEmpty = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -501,8 +501,8 @@ ArrayModel.prototype.putEmpty = function (arrayBody, options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -593,8 +593,8 @@ ArrayModel.prototype.getBooleanTfft = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -643,8 +643,8 @@ ArrayModel.prototype.getBooleanTfft = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -759,8 +759,8 @@ ArrayModel.prototype.putBooleanTfft = function (arrayBody, options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -851,8 +851,8 @@ ArrayModel.prototype.getBooleanInvalidNull = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -901,8 +901,8 @@ ArrayModel.prototype.getBooleanInvalidNull = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -973,8 +973,8 @@ ArrayModel.prototype.getBooleanInvalidString = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -1023,8 +1023,8 @@ ArrayModel.prototype.getBooleanInvalidString = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -1095,8 +1095,8 @@ ArrayModel.prototype.getIntegerValid = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -1145,8 +1145,8 @@ ArrayModel.prototype.getIntegerValid = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -1261,8 +1261,8 @@ ArrayModel.prototype.putIntegerValid = function (arrayBody, options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -1353,8 +1353,8 @@ ArrayModel.prototype.getIntInvalidNull = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -1403,8 +1403,8 @@ ArrayModel.prototype.getIntInvalidNull = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -1475,8 +1475,8 @@ ArrayModel.prototype.getIntInvalidString = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -1525,8 +1525,8 @@ ArrayModel.prototype.getIntInvalidString = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -1597,8 +1597,8 @@ ArrayModel.prototype.getLongValid = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -1647,8 +1647,8 @@ ArrayModel.prototype.getLongValid = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -1763,8 +1763,8 @@ ArrayModel.prototype.putLongValid = function (arrayBody, options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -1855,8 +1855,8 @@ ArrayModel.prototype.getLongInvalidNull = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -1905,8 +1905,8 @@ ArrayModel.prototype.getLongInvalidNull = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -1977,8 +1977,8 @@ ArrayModel.prototype.getLongInvalidString = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -2027,8 +2027,8 @@ ArrayModel.prototype.getLongInvalidString = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -2099,8 +2099,8 @@ ArrayModel.prototype.getFloatValid = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -2149,8 +2149,8 @@ ArrayModel.prototype.getFloatValid = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -2265,8 +2265,8 @@ ArrayModel.prototype.putFloatValid = function (arrayBody, options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -2357,8 +2357,8 @@ ArrayModel.prototype.getFloatInvalidNull = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -2407,8 +2407,8 @@ ArrayModel.prototype.getFloatInvalidNull = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -2479,8 +2479,8 @@ ArrayModel.prototype.getFloatInvalidString = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -2529,8 +2529,8 @@ ArrayModel.prototype.getFloatInvalidString = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -2601,8 +2601,8 @@ ArrayModel.prototype.getDoubleValid = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -2651,8 +2651,8 @@ ArrayModel.prototype.getDoubleValid = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -2767,8 +2767,8 @@ ArrayModel.prototype.putDoubleValid = function (arrayBody, options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -2859,8 +2859,8 @@ ArrayModel.prototype.getDoubleInvalidNull = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -2909,8 +2909,8 @@ ArrayModel.prototype.getDoubleInvalidNull = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -2981,8 +2981,8 @@ ArrayModel.prototype.getDoubleInvalidString = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -3031,8 +3031,8 @@ ArrayModel.prototype.getDoubleInvalidString = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -3103,8 +3103,8 @@ ArrayModel.prototype.getStringValid = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -3153,8 +3153,8 @@ ArrayModel.prototype.getStringValid = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -3269,8 +3269,8 @@ ArrayModel.prototype.putStringValid = function (arrayBody, options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -3361,8 +3361,8 @@ ArrayModel.prototype.getStringWithNull = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -3411,8 +3411,8 @@ ArrayModel.prototype.getStringWithNull = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -3483,8 +3483,8 @@ ArrayModel.prototype.getStringWithInvalid = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -3533,8 +3533,8 @@ ArrayModel.prototype.getStringWithInvalid = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -3605,8 +3605,8 @@ ArrayModel.prototype.getDateValid = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -3655,8 +3655,8 @@ ArrayModel.prototype.getDateValid = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -3772,8 +3772,8 @@ ArrayModel.prototype.putDateValid = function (arrayBody, options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -3864,8 +3864,8 @@ ArrayModel.prototype.getDateInvalidNull = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -3914,8 +3914,8 @@ ArrayModel.prototype.getDateInvalidNull = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -3986,8 +3986,8 @@ ArrayModel.prototype.getDateInvalidChars = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -4036,8 +4036,8 @@ ArrayModel.prototype.getDateInvalidChars = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -4109,8 +4109,8 @@ ArrayModel.prototype.getDateTimeValid = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -4159,8 +4159,8 @@ ArrayModel.prototype.getDateTimeValid = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -4277,8 +4277,8 @@ ArrayModel.prototype.putDateTimeValid = function (arrayBody, options, callback) 
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -4369,8 +4369,8 @@ ArrayModel.prototype.getDateTimeInvalidNull = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -4419,8 +4419,8 @@ ArrayModel.prototype.getDateTimeInvalidNull = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -4491,8 +4491,8 @@ ArrayModel.prototype.getDateTimeInvalidChars = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -4541,8 +4541,8 @@ ArrayModel.prototype.getDateTimeInvalidChars = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -4614,8 +4614,8 @@ ArrayModel.prototype.getDateTimeRfc1123Valid = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -4664,8 +4664,8 @@ ArrayModel.prototype.getDateTimeRfc1123Valid = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -4782,8 +4782,8 @@ ArrayModel.prototype.putDateTimeRfc1123Valid = function (arrayBody, options, cal
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -4874,8 +4874,8 @@ ArrayModel.prototype.getDurationValid = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -4924,8 +4924,8 @@ ArrayModel.prototype.getDurationValid = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -5040,8 +5040,8 @@ ArrayModel.prototype.putDurationValid = function (arrayBody, options, callback) 
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -5133,8 +5133,8 @@ ArrayModel.prototype.getByteValid = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -5183,8 +5183,8 @@ ArrayModel.prototype.getByteValid = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -5300,8 +5300,8 @@ ArrayModel.prototype.putByteValid = function (arrayBody, options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -5393,8 +5393,8 @@ ArrayModel.prototype.getByteInvalidNull = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -5443,8 +5443,8 @@ ArrayModel.prototype.getByteInvalidNull = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -5515,8 +5515,8 @@ ArrayModel.prototype.getComplexNull = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -5566,8 +5566,8 @@ ArrayModel.prototype.getComplexNull = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -5638,8 +5638,8 @@ ArrayModel.prototype.getComplexEmpty = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -5689,8 +5689,8 @@ ArrayModel.prototype.getComplexEmpty = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -5762,8 +5762,8 @@ ArrayModel.prototype.getComplexItemNull = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -5813,8 +5813,8 @@ ArrayModel.prototype.getComplexItemNull = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -5886,8 +5886,8 @@ ArrayModel.prototype.getComplexItemEmpty = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -5937,8 +5937,8 @@ ArrayModel.prototype.getComplexItemEmpty = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -6010,8 +6010,8 @@ ArrayModel.prototype.getComplexValid = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -6061,8 +6061,8 @@ ArrayModel.prototype.getComplexValid = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -6166,8 +6166,8 @@ ArrayModel.prototype.putComplexValid = function (arrayBody, options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -6258,8 +6258,8 @@ ArrayModel.prototype.getArrayNull = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -6315,8 +6315,8 @@ ArrayModel.prototype.getArrayNull = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -6387,8 +6387,8 @@ ArrayModel.prototype.getArrayEmpty = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -6444,8 +6444,8 @@ ArrayModel.prototype.getArrayEmpty = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -6516,8 +6516,8 @@ ArrayModel.prototype.getArrayItemNull = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -6573,8 +6573,8 @@ ArrayModel.prototype.getArrayItemNull = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -6645,8 +6645,8 @@ ArrayModel.prototype.getArrayItemEmpty = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -6702,8 +6702,8 @@ ArrayModel.prototype.getArrayItemEmpty = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -6775,8 +6775,8 @@ ArrayModel.prototype.getArrayValid = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -6832,8 +6832,8 @@ ArrayModel.prototype.getArrayValid = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -6960,8 +6960,8 @@ ArrayModel.prototype.putArrayValid = function (arrayBody, options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -7052,8 +7052,8 @@ ArrayModel.prototype.getDictionaryNull = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -7109,8 +7109,8 @@ ArrayModel.prototype.getDictionaryNull = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -7181,8 +7181,8 @@ ArrayModel.prototype.getDictionaryEmpty = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -7238,8 +7238,8 @@ ArrayModel.prototype.getDictionaryEmpty = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -7312,8 +7312,8 @@ ArrayModel.prototype.getDictionaryItemNull = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -7369,8 +7369,8 @@ ArrayModel.prototype.getDictionaryItemNull = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -7443,8 +7443,8 @@ ArrayModel.prototype.getDictionaryItemEmpty = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -7500,8 +7500,8 @@ ArrayModel.prototype.getDictionaryItemEmpty = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -7574,8 +7574,8 @@ ArrayModel.prototype.getDictionaryValid = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -7631,8 +7631,8 @@ ArrayModel.prototype.getDictionaryValid = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -7760,8 +7760,8 @@ ArrayModel.prototype.putDictionaryValid = function (arrayBody, options, callback
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {

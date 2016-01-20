@@ -109,8 +109,8 @@ HeadException.prototype.head200 = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -215,8 +215,8 @@ HeadException.prototype.head204 = function (options, callback) {
     if (statusCode !== 204) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -321,8 +321,8 @@ HeadException.prototype.head404 = function (options, callback) {
     if (statusCode !== 204) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {

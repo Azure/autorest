@@ -190,8 +190,8 @@ ParameterGrouping.prototype.postRequired = function (parameterGroupingPostRequir
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -336,8 +336,8 @@ ParameterGrouping.prototype.postOptional = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -515,8 +515,8 @@ ParameterGrouping.prototype.postMultipleParameterGroups = function (options, cal
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -660,8 +660,8 @@ ParameterGrouping.prototype.postSharedParameterGroupObject = function (options, 
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {

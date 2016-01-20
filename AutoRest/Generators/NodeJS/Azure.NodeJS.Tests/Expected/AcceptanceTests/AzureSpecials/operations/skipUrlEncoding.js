@@ -116,8 +116,8 @@ SkipUrlEncoding.prototype.getMethodPathValid = function (unencodedPathParam, opt
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -233,8 +233,8 @@ SkipUrlEncoding.prototype.getPathPathValid = function (unencodedPathParam, optio
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -351,8 +351,8 @@ SkipUrlEncoding.prototype.getSwaggerPathValid = function (unencodedPathParam, op
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -469,8 +469,8 @@ SkipUrlEncoding.prototype.getMethodQueryValid = function (q1, options, callback)
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -588,8 +588,8 @@ SkipUrlEncoding.prototype.getMethodQueryNull = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -706,8 +706,8 @@ SkipUrlEncoding.prototype.getPathQueryValid = function (q1, options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -828,8 +828,8 @@ SkipUrlEncoding.prototype.getSwaggerQueryValid = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {

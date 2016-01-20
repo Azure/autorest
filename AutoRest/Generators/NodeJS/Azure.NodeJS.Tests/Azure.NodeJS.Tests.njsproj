@@ -91,6 +91,9 @@
     <Folder Include="Expected\AcceptanceTests\AzureSpecials\" />
     <Folder Include="Expected\AcceptanceTests\AzureSpecials\models\" />
     <Folder Include="Expected\AcceptanceTests\AzureSpecials\operations\" />
+    <Folder Include="Expected\AcceptanceTests\HeadExceptions\" />
+    <Folder Include="Expected\AcceptanceTests\HeadExceptions\models\" />
+    <Folder Include="Expected\AcceptanceTests\HeadExceptions\operations\" />
     <Folder Include="Expected\AcceptanceTests\Head\" />
     <Folder Include="Expected\AcceptanceTests\Head\models\" />
     <Folder Include="Expected\AcceptanceTests\Head\operations\" />

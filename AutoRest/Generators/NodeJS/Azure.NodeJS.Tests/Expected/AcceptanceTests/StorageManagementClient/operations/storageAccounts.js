@@ -146,8 +146,8 @@ StorageAccounts.prototype.checkNameAvailability = function (accountName, options
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -183,8 +183,8 @@ StorageAccounts.prototype.checkNameAvailability = function (accountName, options
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -277,8 +277,8 @@ StorageAccounts.prototype.create = function (resourceGroupName, accountName, par
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
 
@@ -425,8 +425,8 @@ StorageAccounts.prototype.beginCreate = function (resourceGroupName, accountName
     if (statusCode !== 200 && statusCode !== 202) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -462,8 +462,8 @@ StorageAccounts.prototype.beginCreate = function (resourceGroupName, accountName
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -575,8 +575,8 @@ StorageAccounts.prototype.deleteMethod = function (resourceGroupName, accountNam
     if (statusCode !== 200 && statusCode !== 204) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -707,8 +707,8 @@ StorageAccounts.prototype.getProperties = function (resourceGroupName, accountNa
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -744,8 +744,8 @@ StorageAccounts.prototype.getProperties = function (resourceGroupName, accountNa
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -910,8 +910,8 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -947,8 +947,8 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -1058,8 +1058,8 @@ StorageAccounts.prototype.listKeys = function (resourceGroupName, accountName, o
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -1095,8 +1095,8 @@ StorageAccounts.prototype.listKeys = function (resourceGroupName, accountName, o
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -1196,8 +1196,8 @@ StorageAccounts.prototype.list = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -1233,8 +1233,8 @@ StorageAccounts.prototype.list = function (options, callback) {
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -1342,8 +1342,8 @@ StorageAccounts.prototype.listByResourceGroup = function (resourceGroupName, opt
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -1379,8 +1379,8 @@ StorageAccounts.prototype.listByResourceGroup = function (resourceGroupName, opt
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -1525,8 +1525,8 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -1562,8 +1562,8 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
