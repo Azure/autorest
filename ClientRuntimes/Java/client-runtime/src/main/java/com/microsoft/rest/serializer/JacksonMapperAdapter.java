@@ -25,7 +25,7 @@ import java.util.List;
 /**
  * A serialization helper class wrapped around {@link JacksonConverterFactory} and {@link ObjectMapper}.
  */
-public class JacksonUtils {
+public class JacksonMapperAdapter {
     /**
      * An instance of {@link ObjectMapper} to serialize/deserialize objects.
      */
@@ -37,7 +37,7 @@ public class JacksonUtils {
     private static JacksonConverterFactory converterFactory;
 
     /**
-     * Initializes an instance of JacksonUtils with default configurations
+     * Initializes an instance of JacksonMapperAdapter with default configurations
      * applied to the object mapper.
      *
      * @param mapper the object mapper to use.
@@ -87,12 +87,12 @@ public class JacksonUtils {
      * @return the serialized string. Null if the object to serialize is null.
      * @throws IOException exception from serialization.
      */
-    public static String serialize(Object object) throws IOException {
+    public String serialize(Object object) throws IOException {
         if (object == null) {
             return null;
         }
         StringWriter writer = new StringWriter();
-        new JacksonUtils().getObjectMapper().writeValue(writer, object);
+        getObjectMapper().writeValue(writer, object);
         return writer.toString();
     }
 
@@ -103,7 +103,7 @@ public class JacksonUtils {
      * @param object the object to serialize.
      * @return the serialized string. Null if the object to serialize is null.
      */
-    public static String serializeRaw(Object object) {
+    public String serializeRaw(Object object) {
         if (object == null) {
             return null;
         }
@@ -123,11 +123,11 @@ public class JacksonUtils {
      * @param format the Swagger collection format.
      * @return the serialized string
      */
-    public static String serializeList(List<?> list, CollectionFormat format) {
+    public String serializeList(List<?> list, CollectionFormat format) {
         if (list == null) {
             return null;
         }
-        List<String> serialized = new ArrayList<String>();
+        List<String> serialized = new ArrayList<>();
         for (Object element : list) {
             String raw = serializeRaw(element);
             serialized.add(raw != null ? raw : "");

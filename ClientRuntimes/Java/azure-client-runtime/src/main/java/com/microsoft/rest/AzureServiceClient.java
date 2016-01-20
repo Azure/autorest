@@ -7,7 +7,7 @@
 
 package com.microsoft.rest;
 
-import com.microsoft.rest.serializer.AzureJacksonUtils;
+import com.microsoft.rest.serializer.AzureJacksonMapperAdapter;
 import com.squareup.okhttp.OkHttpClient;
 import retrofit.Retrofit;
 
@@ -31,8 +31,9 @@ public abstract class AzureServiceClient extends ServiceClient {
         this.client.setCookieHandler(cookieManager);
 
         Executor executor = Executors.newCachedThreadPool();
+        this.mapperAdapter = new AzureJacksonMapperAdapter();
         this.retrofitBuilder
-                .addConverterFactory(new AzureJacksonUtils().getConverterFactory())
+                .addConverterFactory(mapperAdapter.getConverterFactory())
                 .callbackExecutor(executor);
     }
 

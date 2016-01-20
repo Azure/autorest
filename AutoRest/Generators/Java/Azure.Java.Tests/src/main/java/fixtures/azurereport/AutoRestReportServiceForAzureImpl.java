@@ -16,7 +16,6 @@ import com.microsoft.rest.AzureServiceClient;
 import com.microsoft.rest.AzureServiceResponseBuilder;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.CustomHeaderInterceptor;
-import com.microsoft.rest.serializer.AzureJacksonUtils;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
@@ -233,7 +232,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
     }
 
     private ServiceResponse<Map<String, Integer>> getReportDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Map<String, Integer>, ErrorException>(new AzureJacksonUtils())
+        return new AzureServiceResponseBuilder<Map<String, Integer>, ErrorException>()
                 .register(200, new TypeToken<Map<String, Integer>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response, retrofit);

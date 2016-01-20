@@ -12,7 +12,6 @@ package fixtures.subscriptionidapiversion;
 
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.AzureServiceResponseBuilder;
-import com.microsoft.rest.serializer.AzureJacksonUtils;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
@@ -103,7 +102,7 @@ public final class GroupOperationsImpl implements GroupOperations {
     }
 
     private ServiceResponse<SampleResourceGroup> getSampleResourceGroupDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<SampleResourceGroup, ErrorException>(new AzureJacksonUtils())
+        return new AzureServiceResponseBuilder<SampleResourceGroup, ErrorException>()
                 .register(200, new TypeToken<SampleResourceGroup>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response, retrofit);

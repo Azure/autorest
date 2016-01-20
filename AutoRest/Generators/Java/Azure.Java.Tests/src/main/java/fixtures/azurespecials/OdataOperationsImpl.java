@@ -12,8 +12,7 @@ package fixtures.azurespecials;
 
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.AzureServiceResponseBuilder;
-import com.microsoft.rest.serializer.AzureJacksonUtils;
-import com.microsoft.rest.serializer.JacksonUtils;
+import com.microsoft.rest.serializer.JacksonMapperAdapter;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
@@ -57,7 +56,7 @@ public final class OdataOperationsImpl implements OdataOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> getWithFilter(OdataFilter filter, Integer top, String orderby) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getWithFilter(JacksonUtils.serializeRaw(filter), top, orderby, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getWithFilter(new JacksonMapperAdapter().serializeRaw(filter), top, orderby, this.client.getAcceptLanguage());
         return getWithFilterDelegate(call.execute(), null);
     }
 
@@ -71,7 +70,7 @@ public final class OdataOperationsImpl implements OdataOperations {
      * @return the {@link Call} object
      */
     public Call<ResponseBody> getWithFilterAsync(OdataFilter filter, Integer top, String orderby, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.getWithFilter(JacksonUtils.serializeRaw(filter), top, orderby, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getWithFilter(new JacksonMapperAdapter().serializeRaw(filter), top, orderby, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -86,7 +85,7 @@ public final class OdataOperationsImpl implements OdataOperations {
     }
 
     private ServiceResponse<Void> getWithFilterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(new AzureJacksonUtils())
+        return new AzureServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response, retrofit);

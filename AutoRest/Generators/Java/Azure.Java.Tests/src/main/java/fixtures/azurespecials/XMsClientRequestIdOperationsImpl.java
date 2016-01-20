@@ -13,7 +13,6 @@ package fixtures.azurespecials;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.AzureServiceResponseBuilder;
 import com.microsoft.rest.CloudException;
-import com.microsoft.rest.serializer.AzureJacksonUtils;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
@@ -79,7 +78,7 @@ public final class XMsClientRequestIdOperationsImpl implements XMsClientRequestI
     }
 
     private ServiceResponse<Void> getDelegate(Response<ResponseBody> response, Retrofit retrofit) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>(new AzureJacksonUtils())
+        return new AzureServiceResponseBuilder<Void, CloudException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .build(response, retrofit);
     }
@@ -128,7 +127,7 @@ public final class XMsClientRequestIdOperationsImpl implements XMsClientRequestI
     }
 
     private ServiceResponse<Void> paramGetDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(new AzureJacksonUtils())
+        return new AzureServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response, retrofit);

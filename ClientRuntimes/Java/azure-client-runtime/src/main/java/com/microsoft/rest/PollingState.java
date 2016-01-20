@@ -8,7 +8,7 @@
 package com.microsoft.rest;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.microsoft.rest.serializer.AzureJacksonUtils;
+import com.microsoft.rest.serializer.AzureJacksonMapperAdapter;
 import com.squareup.okhttp.ResponseBody;
 import retrofit.Response;
 
@@ -37,6 +37,8 @@ public class PollingState<T> {
     private Type resourceType;
     /** The error during the polling operations. */
     private CloudError error;
+    /** The adapter for {@link com.fasterxml.jackson.databind.ObjectMapper}. */
+    private AzureJacksonMapperAdapter mapperAdapter;
 
     /**
      * Initializes an instance of {@link PollingState}.
@@ -50,6 +52,7 @@ public class PollingState<T> {
         this.retryTimeout = retryTimeout;
         this.setResponse(response);
         this.resourceType = resourceType;
+        this.mapperAdapter = new AzureJacksonMapperAdapter();
 
         String responseContent = null;
         PollingResource resource = null;
@@ -57,8 +60,8 @@ public class PollingState<T> {
             responseContent = response.body().string();
         }
         if (responseContent != null && !responseContent.isEmpty()) {
-            this.resource = new AzureJacksonUtils().deserialize(responseContent, resourceType);
-            resource = new AzureJacksonUtils().deserialize(responseContent, PollingResource.class);
+            this.resource = mapperAdapter.deserialize(responseContent, resourceType);
+            resource = mapperAdapter.deserialize(responseContent, PollingResource.class);
         }
         if (resource != null && resource.getProperties() != null
                 && resource.getProperties().getProvisioningState() != null) {
@@ -98,7 +101,7 @@ public class PollingState<T> {
             throw exception;
         }
 
-        PollingResource resource = new AzureJacksonUtils().deserialize(responseContent, PollingResource.class);
+        PollingResource resource = mapperAdapter.deserialize(responseContent, PollingResource.class);
         if (resource != null && resource.getProperties() != null && resource.getProperties().getProvisioningState() != null) {
             this.setStatus(resource.getProperties().getProvisioningState());
         } else {
@@ -110,7 +113,7 @@ public class PollingState<T> {
         error.setCode(this.getStatus());
         error.setMessage("Long running operation failed");
         this.setResponse(response);
-        this.setResource(new AzureJacksonUtils().<T>deserialize(responseContent, resourceType));
+        this.setResource(mapperAdapter.<T>deserialize(responseContent, resourceType));
     }
 
     /**
@@ -126,7 +129,7 @@ public class PollingState<T> {
         if (response.body() != null) {
             responseContent = response.body().string();
         }
-        this.setResource(new AzureJacksonUtils().<T>deserialize(responseContent, resourceType));
+        this.setResource(mapperAdapter.<T>deserialize(responseContent, resourceType));
         setStatus(AzureAsyncOperation.SUCCESS_STATUS);
     }
 

@@ -12,7 +12,7 @@ package fixtures.header;
 
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.DateTimeRfc1123;
-import com.microsoft.rest.serializer.JacksonUtils;
+import com.microsoft.rest.serializer.JacksonMapperAdapter;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
@@ -874,7 +874,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         if (value == null) {
             throw new IllegalArgumentException("Parameter value is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.paramDate(scenario, JacksonUtils.serializeRaw(value));
+        Call<ResponseBody> call = service.paramDate(scenario, new JacksonMapperAdapter().serializeRaw(value));
         return paramDateDelegate(call.execute(), null);
     }
 
@@ -895,7 +895,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter value is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.paramDate(scenario, JacksonUtils.serializeRaw(value));
+        Call<ResponseBody> call = service.paramDate(scenario, new JacksonMapperAdapter().serializeRaw(value));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -983,7 +983,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         if (value == null) {
             throw new IllegalArgumentException("Parameter value is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.paramDatetime(scenario, JacksonUtils.serializeRaw(value));
+        Call<ResponseBody> call = service.paramDatetime(scenario, new JacksonMapperAdapter().serializeRaw(value));
         return paramDatetimeDelegate(call.execute(), null);
     }
 
@@ -1004,7 +1004,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter value is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.paramDatetime(scenario, JacksonUtils.serializeRaw(value));
+        Call<ResponseBody> call = service.paramDatetime(scenario, new JacksonMapperAdapter().serializeRaw(value));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -1409,7 +1409,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.paramEnum(scenario, JacksonUtils.serializeRaw(value));
+        Call<ResponseBody> call = service.paramEnum(scenario, new JacksonMapperAdapter().serializeRaw(value));
         return paramEnumDelegate(call.execute(), null);
     }
 
@@ -1426,7 +1426,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.paramEnum(scenario, JacksonUtils.serializeRaw(value));
+        Call<ResponseBody> call = service.paramEnum(scenario, new JacksonMapperAdapter().serializeRaw(value));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {

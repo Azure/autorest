@@ -3,7 +3,7 @@ package fixtures.lro;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.microsoft.rest.CloudException;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.serializer.AzureJacksonUtils;
+import com.microsoft.rest.serializer.AzureJacksonMapperAdapter;
 import com.squareup.okhttp.OkHttpClient;
 import fixtures.lro.models.Product;
 import org.junit.Assert;
@@ -31,7 +31,7 @@ public class LROSADsTests {
         httpClient.setCookieHandler(cookieManager);
         Executor executor = Executors.newCachedThreadPool();
         Retrofit.Builder builder = new Retrofit.Builder()
-                .addConverterFactory(JacksonConverterFactory.create(new AzureJacksonUtils().getObjectMapper()))
+                .addConverterFactory(JacksonConverterFactory.create(new AzureJacksonMapperAdapter().getObjectMapper()))
                 .callbackExecutor(executor);
 
         client = new AutoRestLongRunningOperationTestServiceImpl("http://localhost.:3000", null, httpClient, builder);

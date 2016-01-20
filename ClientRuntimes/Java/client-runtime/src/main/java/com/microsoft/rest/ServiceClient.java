@@ -8,7 +8,7 @@
 package com.microsoft.rest;
 
 import com.microsoft.rest.retry.RetryHandler;
-import com.microsoft.rest.serializer.JacksonUtils;
+import com.microsoft.rest.serializer.JacksonMapperAdapter;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.logging.HttpLoggingInterceptor;
@@ -36,6 +36,12 @@ public abstract class ServiceClient {
     protected final Retrofit.Builder retrofitBuilder;
 
     /**
+     * The adapter for {@link com.fasterxml.jackson.databind.ObjectMapper} for serialization
+     * and deserialization operations.
+     */
+    protected JacksonMapperAdapter mapperAdapter;
+
+    /**
      * Initializes a new instance of the ServiceClient class.
      */
     protected ServiceClient() {
@@ -46,8 +52,9 @@ public abstract class ServiceClient {
         this.client.setCookieHandler(cookieManager);
 
         Executor executor = Executors.newCachedThreadPool();
+        this.mapperAdapter = new JacksonMapperAdapter();
         this.retrofitBuilder
-                .addConverterFactory(new JacksonUtils().getConverterFactory())
+                .addConverterFactory(mapperAdapter.getConverterFactory())
                 .callbackExecutor(executor);
     }
 

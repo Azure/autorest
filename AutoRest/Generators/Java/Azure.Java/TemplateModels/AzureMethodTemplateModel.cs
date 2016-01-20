@@ -166,7 +166,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
         {
             get
             {
-                return "new AzureJacksonUtils()";
+                return "new AzureJacksonMapperAdapter()";
             }
         }
 
@@ -201,10 +201,6 @@ namespace Microsoft.Rest.Generator.Java.Azure
                         .ForEach(i => imports.Remove(i));
                     // return type may have been removed as a side effect
                     imports.AddRange(this.ReturnType.Body.ImportFrom(ServiceClient.Namespace));
-                }
-                else
-                {
-                    imports.Add("com.microsoft.rest.serializer.AzureJacksonUtils");
                 }
                 return imports;
             }

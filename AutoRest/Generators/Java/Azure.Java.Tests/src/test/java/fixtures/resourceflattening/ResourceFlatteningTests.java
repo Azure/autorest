@@ -1,7 +1,7 @@
 package fixtures.resourceflattening;
 
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.serializer.AzureJacksonUtils;
+import com.microsoft.rest.serializer.AzureJacksonMapperAdapter;
 import com.squareup.okhttp.OkHttpClient;
 import fixtures.resourceflattening.models.FlattenedProduct;
 import fixtures.resourceflattening.models.Resource;
@@ -32,7 +32,7 @@ public class ResourceFlatteningTests {
         httpClient.setCookieHandler(cookieManager);
         Executor executor = Executors.newCachedThreadPool();
         Retrofit.Builder builder = new Retrofit.Builder()
-                .addConverterFactory(JacksonConverterFactory.create(new AzureJacksonUtils().getObjectMapper()))
+                .addConverterFactory(JacksonConverterFactory.create(new AzureJacksonMapperAdapter().getObjectMapper()))
                 .callbackExecutor(executor);
 
         client = new AutoRestResourceFlatteningTestServiceImpl("http://localhost.:3000", null, httpClient, builder);

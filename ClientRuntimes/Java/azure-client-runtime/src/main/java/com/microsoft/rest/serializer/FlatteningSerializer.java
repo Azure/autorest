@@ -41,7 +41,7 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 public class FlatteningSerializer<T> extends StdSerializer<T> implements ResolvableSerializer {
     /**
-     * The default deserializer for the current type.
+     * The default mapperAdapter for the current type.
      */
     private final JsonSerializer<?> defaultSerializer;
 
@@ -83,7 +83,7 @@ public class FlatteningSerializer<T> extends StdSerializer<T> implements Resolva
         }
 
         // BFS for all collapsed properties
-        ObjectMapper mapper = new JacksonUtils().getObjectMapper();
+        ObjectMapper mapper = new JacksonMapperAdapter().getObjectMapper();
         ObjectNode root = mapper.valueToTree(value);
         ObjectNode res = root.deepCopy();
         Queue<ObjectNode> source = new LinkedBlockingQueue<ObjectNode>();
