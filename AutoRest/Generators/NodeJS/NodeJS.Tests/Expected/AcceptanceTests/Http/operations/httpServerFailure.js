@@ -91,8 +91,8 @@ HttpServerFailure.prototype.head501 = function (options, callback) {
     if (statusCode < 200 || statusCode >= 300) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -126,8 +126,8 @@ HttpServerFailure.prototype.head501 = function (options, callback) {
       }
     } catch (error) {
       var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-      deserializationError.request = httpRequest;
-      deserializationError.response = response;
+      deserializationError.request = msRest.stripRequest(httpRequest);
+      deserializationError.response = msRest.stripResponse(response);
       return callback(deserializationError);
     }
 
@@ -198,8 +198,8 @@ HttpServerFailure.prototype.get501 = function (options, callback) {
     if (statusCode < 200 || statusCode >= 300) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -233,8 +233,8 @@ HttpServerFailure.prototype.get501 = function (options, callback) {
       }
     } catch (error) {
       var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-      deserializationError.request = httpRequest;
-      deserializationError.response = response;
+      deserializationError.request = msRest.stripRequest(httpRequest);
+      deserializationError.response = msRest.stripResponse(response);
       return callback(deserializationError);
     }
 
@@ -338,8 +338,8 @@ HttpServerFailure.prototype.post505 = function (options, callback) {
     if (statusCode < 200 || statusCode >= 300) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -373,8 +373,8 @@ HttpServerFailure.prototype.post505 = function (options, callback) {
       }
     } catch (error) {
       var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-      deserializationError.request = httpRequest;
-      deserializationError.response = response;
+      deserializationError.request = msRest.stripRequest(httpRequest);
+      deserializationError.response = msRest.stripResponse(response);
       return callback(deserializationError);
     }
 
@@ -478,8 +478,8 @@ HttpServerFailure.prototype.delete505 = function (options, callback) {
     if (statusCode < 200 || statusCode >= 300) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -513,8 +513,8 @@ HttpServerFailure.prototype.delete505 = function (options, callback) {
       }
     } catch (error) {
       var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-      deserializationError.request = httpRequest;
-      deserializationError.response = response;
+      deserializationError.request = msRest.stripRequest(httpRequest);
+      deserializationError.response = msRest.stripResponse(response);
       return callback(deserializationError);
     }
 

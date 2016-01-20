@@ -131,6 +131,12 @@ PollingState.prototype.getCloudError = function (err) {
     return error;
   }
   
+  if (err && err.message) {
+    errMsg = util.format('Long running operation failed with error: \'%s\'.', err.message);
+  } else {
+    errMsg = util.format('Long running operation failed with status: \'%s\'.', this.status);
+  }
+
   if (parsedResponse) {
     if (parsedResponse.error && parsedResponse.error.message) {
       errMsg = util.format('Long running operation failed with error: \'%s\'.', parsedResponse.error.message);
@@ -138,12 +144,8 @@ PollingState.prototype.getCloudError = function (err) {
     if (parsedResponse.error && parsedResponse.error.code) {
       errCode = parsedResponse.error.code;
     }
-  } else if (err && err.message) {
-    errMsg = util.format('Long running operation failed with error: \'%s\'.', err.message);  
-  } else {
-    errMsg = util.format('Long running operation failed with status: \'%s\'.', this.status);
   }
-  
+
   error.message = errMsg;
   if (errCode) error.code = errCode;
   error.body = parsedResponse;

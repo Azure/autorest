@@ -102,8 +102,8 @@ Implicit.prototype.getRequiredPath = function (pathParameter, options, callback)
     if (statusCode < 200 || statusCode >= 300) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -137,8 +137,8 @@ Implicit.prototype.getRequiredPath = function (pathParameter, options, callback)
       }
     } catch (error) {
       var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-      deserializationError.request = httpRequest;
-      deserializationError.response = response;
+      deserializationError.request = msRest.stripRequest(httpRequest);
+      deserializationError.response = msRest.stripResponse(response);
       return callback(deserializationError);
     }
 
@@ -226,8 +226,8 @@ Implicit.prototype.putOptionalQuery = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -332,8 +332,8 @@ Implicit.prototype.putOptionalHeader = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -457,8 +457,8 @@ Implicit.prototype.putOptionalBody = function (options, callback) {
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -559,8 +559,8 @@ Implicit.prototype.getRequiredGlobalPath = function (options, callback) {
     if (statusCode < 200 || statusCode >= 300) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -594,8 +594,8 @@ Implicit.prototype.getRequiredGlobalPath = function (options, callback) {
       }
     } catch (error) {
       var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-      deserializationError.request = httpRequest;
-      deserializationError.response = response;
+      deserializationError.request = msRest.stripRequest(httpRequest);
+      deserializationError.response = msRest.stripResponse(response);
       return callback(deserializationError);
     }
 
@@ -679,8 +679,8 @@ Implicit.prototype.getRequiredGlobalQuery = function (options, callback) {
     if (statusCode < 200 || statusCode >= 300) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -714,8 +714,8 @@ Implicit.prototype.getRequiredGlobalQuery = function (options, callback) {
       }
     } catch (error) {
       var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-      deserializationError.request = httpRequest;
-      deserializationError.response = response;
+      deserializationError.request = msRest.stripRequest(httpRequest);
+      deserializationError.response = msRest.stripResponse(response);
       return callback(deserializationError);
     }
 
@@ -801,8 +801,8 @@ Implicit.prototype.getOptionalGlobalQuery = function (options, callback) {
     if (statusCode < 200 || statusCode >= 300) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -836,8 +836,8 @@ Implicit.prototype.getOptionalGlobalQuery = function (options, callback) {
       }
     } catch (error) {
       var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-      deserializationError.request = httpRequest;
-      deserializationError.response = response;
+      deserializationError.request = msRest.stripRequest(httpRequest);
+      deserializationError.response = msRest.stripResponse(response);
       return callback(deserializationError);
     }
 

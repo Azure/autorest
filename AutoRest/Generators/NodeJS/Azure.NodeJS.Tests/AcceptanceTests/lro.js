@@ -309,8 +309,8 @@ describe('nodejs', function () {
     it('should work with PostAsyncRetryFailed', function (done) {
       testClient.lROs.postAsyncRetryFailed(product, function (error, result) {
         should.exist(error);
-        error.message.should.containEql('Long running operation failed with status: \'Failed\'');
-        var errObject = JSON.parse(error.body);
+        error.message.should.containEql('Long running operation failed with error: \'Internal Server Error\'.');
+        var errObject = error.body;
         errObject.error.code.should.be.exactly(500);
         errObject.error.message.should.be.exactly('Internal Server Error');
         done();
