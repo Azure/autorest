@@ -49,45 +49,45 @@ public interface AutoRestHttpInfrastructureTestService {
     JacksonMapperAdapter getMapperAdapter();
 
     /**
-     * Gets the HttpFailure object to access its operations.
-     * @return the httpFailure value.
+     * Gets the HttpFailureOperations object to access its operations.
+     * @return the HttpFailureOperations object.
      */
-    HttpFailure getHttpFailure();
+    HttpFailureOperations getHttpFailureOperations();
 
     /**
-     * Gets the HttpSuccess object to access its operations.
-     * @return the httpSuccess value.
+     * Gets the HttpSuccessOperations object to access its operations.
+     * @return the HttpSuccessOperations object.
      */
-    HttpSuccess getHttpSuccess();
+    HttpSuccessOperations getHttpSuccessOperations();
 
     /**
-     * Gets the HttpRedirects object to access its operations.
-     * @return the httpRedirects value.
+     * Gets the HttpRedirectsOperations object to access its operations.
+     * @return the HttpRedirectsOperations object.
      */
-    HttpRedirects getHttpRedirects();
+    HttpRedirectsOperations getHttpRedirectsOperations();
 
     /**
-     * Gets the HttpClientFailure object to access its operations.
-     * @return the httpClientFailure value.
+     * Gets the HttpClientFailureOperations object to access its operations.
+     * @return the HttpClientFailureOperations object.
      */
-    HttpClientFailure getHttpClientFailure();
+    HttpClientFailureOperations getHttpClientFailureOperations();
 
     /**
-     * Gets the HttpServerFailure object to access its operations.
-     * @return the httpServerFailure value.
+     * Gets the HttpServerFailureOperations object to access its operations.
+     * @return the HttpServerFailureOperations object.
      */
-    HttpServerFailure getHttpServerFailure();
+    HttpServerFailureOperations getHttpServerFailureOperations();
 
     /**
-     * Gets the HttpRetry object to access its operations.
-     * @return the httpRetry value.
+     * Gets the HttpRetryOperations object to access its operations.
+     * @return the HttpRetryOperations object.
      */
-    HttpRetry getHttpRetry();
+    HttpRetryOperations getHttpRetryOperations();
 
     /**
-     * Gets the MultipleResponses object to access its operations.
-     * @return the multipleResponses value.
+     * Gets the MultipleResponsesOperations object to access its operations.
+     * @return the MultipleResponsesOperations object.
      */
-    MultipleResponses getMultipleResponses();
+    MultipleResponsesOperations getMultipleResponsesOperations();
 
 }

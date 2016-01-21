@@ -33,58 +33,58 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
 
     /**
      * Gets the BasicOperations object to access its operations.
-     * @return the basicOperations value.
+     * @return the BasicOperations object.
      */
     public BasicOperations getBasicOperations() {
         return new BasicOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
-     * Gets the Primitive object to access its operations.
-     * @return the primitive value.
+     * Gets the PrimitiveOperations object to access its operations.
+     * @return the PrimitiveOperations object.
      */
-    public Primitive getPrimitive() {
-        return new PrimitiveImpl(this.retrofitBuilder.build(), this);
+    public PrimitiveOperations getPrimitiveOperations() {
+        return new PrimitiveOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
-     * Gets the Array object to access its operations.
-     * @return the array value.
+     * Gets the ArrayOperations object to access its operations.
+     * @return the ArrayOperations object.
      */
-    public Array getArray() {
-        return new ArrayImpl(this.retrofitBuilder.build(), this);
+    public ArrayOperations getArrayOperations() {
+        return new ArrayOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
-     * Gets the Dictionary object to access its operations.
-     * @return the dictionary value.
+     * Gets the DictionaryOperations object to access its operations.
+     * @return the DictionaryOperations object.
      */
-    public Dictionary getDictionary() {
-        return new DictionaryImpl(this.retrofitBuilder.build(), this);
+    public DictionaryOperations getDictionaryOperations() {
+        return new DictionaryOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
-     * Gets the Inheritance object to access its operations.
-     * @return the inheritance value.
+     * Gets the InheritanceOperations object to access its operations.
+     * @return the InheritanceOperations object.
      */
-    public Inheritance getInheritance() {
-        return new InheritanceImpl(this.retrofitBuilder.build(), this);
+    public InheritanceOperations getInheritanceOperations() {
+        return new InheritanceOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
-     * Gets the Polymorphism object to access its operations.
-     * @return the polymorphism value.
+     * Gets the PolymorphismOperations object to access its operations.
+     * @return the PolymorphismOperations object.
      */
-    public Polymorphism getPolymorphism() {
-        return new PolymorphismImpl(this.retrofitBuilder.build(), this);
+    public PolymorphismOperations getPolymorphismOperations() {
+        return new PolymorphismOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
-     * Gets the Polymorphicrecursive object to access its operations.
-     * @return the polymorphicrecursive value.
+     * Gets the PolymorphicrecursiveOperations object to access its operations.
+     * @return the PolymorphicrecursiveOperations object.
      */
-    public Polymorphicrecursive getPolymorphicrecursive() {
-        return new PolymorphicrecursiveImpl(this.retrofitBuilder.build(), this);
+    public PolymorphicrecursiveOperations getPolymorphicrecursiveOperations() {
+        return new PolymorphicrecursiveOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**

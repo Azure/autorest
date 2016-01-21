@@ -50,7 +50,7 @@ public interface AutoRestIntegerTestService {
 
     /**
      * Gets the IntOperations object to access its operations.
-     * @return the intOperations value.
+     * @return the IntOperations object.
      */
     IntOperations getIntOperations();
 

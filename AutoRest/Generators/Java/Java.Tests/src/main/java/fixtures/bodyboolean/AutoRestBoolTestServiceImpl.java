@@ -32,11 +32,11 @@ public final class AutoRestBoolTestServiceImpl extends ServiceClient implements 
     }
 
     /**
-     * Gets the Bool object to access its operations.
-     * @return the bool value.
+     * Gets the BoolOperations object to access its operations.
+     * @return the BoolOperations object.
      */
-    public Bool getBool() {
-        return new BoolImpl(this.retrofitBuilder.build(), this);
+    public BoolOperations getBoolOperations() {
+        return new BoolOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**

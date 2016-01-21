@@ -33,7 +33,7 @@ public final class AutoRestSwaggerBATServiceImpl extends ServiceClient implement
 
     /**
      * Gets the StringOperations object to access its operations.
-     * @return the stringOperations value.
+     * @return the StringOperations object.
      */
     public StringOperations getStringOperations() {
         return new StringOperationsImpl(this.retrofitBuilder.build(), this);
@@ -41,7 +41,7 @@ public final class AutoRestSwaggerBATServiceImpl extends ServiceClient implement
 
     /**
      * Gets the EnumOperations object to access its operations.
-     * @return the enumOperations value.
+     * @return the EnumOperations object.
      */
     public EnumOperations getEnumOperations() {
         return new EnumOperationsImpl(this.retrofitBuilder.build(), this);

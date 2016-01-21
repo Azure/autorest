@@ -50,7 +50,7 @@ public interface AutoRestSwaggerBATByteService {
 
     /**
      * Gets the ByteOperations object to access its operations.
-     * @return the byteOperations value.
+     * @return the ByteOperations object.
      */
     ByteOperations getByteOperations();
 

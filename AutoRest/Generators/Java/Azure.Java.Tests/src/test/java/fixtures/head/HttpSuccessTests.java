@@ -14,16 +14,16 @@ public class HttpSuccessTests {
 
     @Test
     public void head200() throws Exception {
-        Assert.assertTrue(client.getHttpSuccess().head200().getBody());
+        Assert.assertTrue(client.getHttpSuccessOperations().head200().getBody());
     }
 
     @Test
     public void head204() throws Exception {
-        Assert.assertTrue(client.getHttpSuccess().head204().getBody());
+        Assert.assertTrue(client.getHttpSuccessOperations().head204().getBody());
     }
 
     @Test
     public void head404() throws Exception {
-        Assert.assertFalse(client.getHttpSuccess().head404().getBody());
+        Assert.assertFalse(client.getHttpSuccessOperations().head404().getBody());
     }
 }

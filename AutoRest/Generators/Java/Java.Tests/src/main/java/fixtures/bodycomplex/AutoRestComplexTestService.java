@@ -50,44 +50,44 @@ public interface AutoRestComplexTestService {
 
     /**
      * Gets the BasicOperations object to access its operations.
-     * @return the basicOperations value.
+     * @return the BasicOperations object.
      */
     BasicOperations getBasicOperations();
 
     /**
-     * Gets the Primitive object to access its operations.
-     * @return the primitive value.
+     * Gets the PrimitiveOperations object to access its operations.
+     * @return the PrimitiveOperations object.
      */
-    Primitive getPrimitive();
+    PrimitiveOperations getPrimitiveOperations();
 
     /**
-     * Gets the Array object to access its operations.
-     * @return the array value.
+     * Gets the ArrayOperations object to access its operations.
+     * @return the ArrayOperations object.
      */
-    Array getArray();
+    ArrayOperations getArrayOperations();
 
     /**
-     * Gets the Dictionary object to access its operations.
-     * @return the dictionary value.
+     * Gets the DictionaryOperations object to access its operations.
+     * @return the DictionaryOperations object.
      */
-    Dictionary getDictionary();
+    DictionaryOperations getDictionaryOperations();
 
     /**
-     * Gets the Inheritance object to access its operations.
-     * @return the inheritance value.
+     * Gets the InheritanceOperations object to access its operations.
+     * @return the InheritanceOperations object.
      */
-    Inheritance getInheritance();
+    InheritanceOperations getInheritanceOperations();
 
     /**
-     * Gets the Polymorphism object to access its operations.
-     * @return the polymorphism value.
+     * Gets the PolymorphismOperations object to access its operations.
+     * @return the PolymorphismOperations object.
      */
-    Polymorphism getPolymorphism();
+    PolymorphismOperations getPolymorphismOperations();
 
     /**
-     * Gets the Polymorphicrecursive object to access its operations.
-     * @return the polymorphicrecursive value.
+     * Gets the PolymorphicrecursiveOperations object to access its operations.
+     * @return the PolymorphicrecursiveOperations object.
      */
-    Polymorphicrecursive getPolymorphicrecursive();
+    PolymorphicrecursiveOperations getPolymorphicrecursiveOperations();
 
 }

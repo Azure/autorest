@@ -50,7 +50,7 @@ public interface AutoRestSwaggerBATHeaderService {
 
     /**
      * Gets the HeaderOperations object to access its operations.
-     * @return the headerOperations value.
+     * @return the HeaderOperations object.
      */
     HeaderOperations getHeaderOperations();
 

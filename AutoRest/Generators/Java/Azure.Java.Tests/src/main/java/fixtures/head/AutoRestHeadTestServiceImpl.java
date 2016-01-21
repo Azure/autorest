@@ -120,9 +120,9 @@ public final class AutoRestHeadTestServiceImpl extends AzureServiceClient implem
 
     /**
      * Gets the HttpSuccessOperations object to access its operations.
-     * @return the httpSuccess value.
+     * @return the HttpSuccessOperations object.
      */
-    public HttpSuccessOperations getHttpSuccess() {
+    public HttpSuccessOperations getHttpSuccessOperations() {
         return new HttpSuccessOperationsImpl(this.retrofitBuilder.build(), this);
     }
 

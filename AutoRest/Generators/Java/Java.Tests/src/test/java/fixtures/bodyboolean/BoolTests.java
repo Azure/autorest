@@ -15,13 +15,13 @@ public class BoolTests {
 
     @Test
     public void getNull() throws Exception {
-        Assert.assertNull(client.getBool().getNull().getBody());
+        Assert.assertNull(client.getBoolOperations().getNull().getBody());
     }
 
     @Test
     public void getInvalid() throws Exception {
         try {
-            client.getBool().getInvalid();
+            client.getBoolOperations().getInvalid();
             Assert.assertTrue(false);
         } catch (Exception exception) {
             // expected
@@ -31,23 +31,23 @@ public class BoolTests {
 
     @Test
     public void getTrue() throws Exception {
-        boolean result = client.getBool().getTrue().getBody();
+        boolean result = client.getBoolOperations().getTrue().getBody();
         Assert.assertTrue(result);
     }
 
     @Test
     public void getFalse() throws Exception {
-        boolean result = client.getBool().getFalse().getBody();
+        boolean result = client.getBoolOperations().getFalse().getBody();
         Assert.assertFalse(result);
     }
 
     @Test
     public void putTrue() throws Exception {
-        client.getBool().putTrue(true);
+        client.getBoolOperations().putTrue(true);
     }
 
     @Test
     public void putFalse() throws Exception {
-        client.getBool().putFalse(false);
+        client.getBoolOperations().putFalse(false);
     }
 }

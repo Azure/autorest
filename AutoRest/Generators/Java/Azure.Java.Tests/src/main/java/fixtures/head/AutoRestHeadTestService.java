@@ -105,8 +105,8 @@ public interface AutoRestHeadTestService {
 
     /**
      * Gets the HttpSuccessOperations object to access its operations.
-     * @return the httpSuccess value.
+     * @return the HttpSuccessOperations object.
      */
-    HttpSuccessOperations getHttpSuccess();
+    HttpSuccessOperations getHttpSuccessOperations();
 
 }

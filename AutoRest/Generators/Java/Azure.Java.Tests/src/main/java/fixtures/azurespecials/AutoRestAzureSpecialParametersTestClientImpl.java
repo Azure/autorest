@@ -153,66 +153,66 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
 
     /**
      * Gets the XMsClientRequestIdOperations object to access its operations.
-     * @return the xMsClientRequestId value.
+     * @return the XMsClientRequestIdOperations object.
      */
-    public XMsClientRequestIdOperations getXMsClientRequestId() {
+    public XMsClientRequestIdOperations getXMsClientRequestIdOperations() {
         return new XMsClientRequestIdOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
      * Gets the SubscriptionInCredentialsOperations object to access its operations.
-     * @return the subscriptionInCredentials value.
+     * @return the SubscriptionInCredentialsOperations object.
      */
-    public SubscriptionInCredentialsOperations getSubscriptionInCredentials() {
+    public SubscriptionInCredentialsOperations getSubscriptionInCredentialsOperations() {
         return new SubscriptionInCredentialsOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
      * Gets the SubscriptionInMethodOperations object to access its operations.
-     * @return the subscriptionInMethod value.
+     * @return the SubscriptionInMethodOperations object.
      */
-    public SubscriptionInMethodOperations getSubscriptionInMethod() {
+    public SubscriptionInMethodOperations getSubscriptionInMethodOperations() {
         return new SubscriptionInMethodOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
      * Gets the ApiVersionDefaultOperations object to access its operations.
-     * @return the apiVersionDefault value.
+     * @return the ApiVersionDefaultOperations object.
      */
-    public ApiVersionDefaultOperations getApiVersionDefault() {
+    public ApiVersionDefaultOperations getApiVersionDefaultOperations() {
         return new ApiVersionDefaultOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
      * Gets the ApiVersionLocalOperations object to access its operations.
-     * @return the apiVersionLocal value.
+     * @return the ApiVersionLocalOperations object.
      */
-    public ApiVersionLocalOperations getApiVersionLocal() {
+    public ApiVersionLocalOperations getApiVersionLocalOperations() {
         return new ApiVersionLocalOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
      * Gets the SkipUrlEncodingOperations object to access its operations.
-     * @return the skipUrlEncoding value.
+     * @return the SkipUrlEncodingOperations object.
      */
-    public SkipUrlEncodingOperations getSkipUrlEncoding() {
+    public SkipUrlEncodingOperations getSkipUrlEncodingOperations() {
         return new SkipUrlEncodingOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
      * Gets the OdataOperations object to access its operations.
-     * @return the odata value.
+     * @return the OdataOperations object.
      */
-    public OdataOperations getOdata() {
+    public OdataOperations getOdataOperations() {
         return new OdataOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
-     * Gets the HeaderOperationsOperations object to access its operations.
-     * @return the headerOperations value.
+     * Gets the HeaderOperations object to access its operations.
+     * @return the HeaderOperations object.
      */
-    public HeaderOperationsOperations getHeaderOperations() {
-        return new HeaderOperationsOperationsImpl(this.retrofitBuilder.build(), this);
+    public HeaderOperations getHeaderOperations() {
+        return new HeaderOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**

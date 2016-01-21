@@ -50,7 +50,7 @@ public interface AutoRestDateTestService {
 
     /**
      * Gets the DateOperations object to access its operations.
-     * @return the dateOperations value.
+     * @return the DateOperations object.
      */
     DateOperations getDateOperations();
 

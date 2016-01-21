@@ -50,13 +50,13 @@ public interface AutoRestSwaggerBATService {
 
     /**
      * Gets the StringOperations object to access its operations.
-     * @return the stringOperations value.
+     * @return the StringOperations object.
      */
     StringOperations getStringOperations();
 
     /**
      * Gets the EnumOperations object to access its operations.
-     * @return the enumOperations value.
+     * @return the EnumOperations object.
      */
     EnumOperations getEnumOperations();
 

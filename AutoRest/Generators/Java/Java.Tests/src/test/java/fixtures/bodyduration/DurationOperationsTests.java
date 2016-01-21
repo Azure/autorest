@@ -16,13 +16,13 @@ public class DurationOperationsTests {
 
     @Test
     public void getNull() throws Exception {
-        Assert.assertNull(client.getDuration().getNull().getBody());
+        Assert.assertNull(client.getDurationOperations().getNull().getBody());
     }
 
     @Test
     public void getInvalid() throws Exception {
         try {
-            client.getDuration().getInvalid();
+            client.getDurationOperations().getInvalid();
             Assert.fail(); //Should not reach here
         }
         catch (IllegalArgumentException e) {
@@ -32,11 +32,11 @@ public class DurationOperationsTests {
 
     @Test
     public void getPositiveDuration() throws Exception {
-        client.getDuration().getPositiveDuration();
+        client.getDurationOperations().getPositiveDuration();
     }
 
     @Test
     public void putPositiveDuration() throws Exception {
-        client.getDuration().putPositiveDuration(new Period(0, 0, 0, 123, 22, 14, 12, 11));
+        client.getDurationOperations().putPositiveDuration(new Period(0, 0, 0, 123, 22, 14, 12, 11));
     }
 }

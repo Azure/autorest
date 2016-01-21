@@ -49,9 +49,9 @@ public interface AutoRestBoolTestService {
     JacksonMapperAdapter getMapperAdapter();
 
     /**
-     * Gets the Bool object to access its operations.
-     * @return the bool value.
+     * Gets the BoolOperations object to access its operations.
+     * @return the BoolOperations object.
      */
-    Bool getBool();
+    BoolOperations getBoolOperations();
 
 }

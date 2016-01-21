@@ -120,33 +120,33 @@ public final class AutoRestLongRunningOperationTestServiceImpl extends AzureServ
 
     /**
      * Gets the LROsOperations object to access its operations.
-     * @return the lROs value.
+     * @return the LROsOperations object.
      */
-    public LROsOperations getLROs() {
+    public LROsOperations getLROsOperations() {
         return new LROsOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
      * Gets the LRORetrysOperations object to access its operations.
-     * @return the lRORetrys value.
+     * @return the LRORetrysOperations object.
      */
-    public LRORetrysOperations getLRORetrys() {
+    public LRORetrysOperations getLRORetrysOperations() {
         return new LRORetrysOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
      * Gets the LROSADsOperations object to access its operations.
-     * @return the lROSADs value.
+     * @return the LROSADsOperations object.
      */
-    public LROSADsOperations getLROSADs() {
+    public LROSADsOperations getLROSADsOperations() {
         return new LROSADsOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
      * Gets the LROsCustomHeaderOperations object to access its operations.
-     * @return the lROsCustomHeader value.
+     * @return the LROsCustomHeaderOperations object.
      */
-    public LROsCustomHeaderOperations getLROsCustomHeader() {
+    public LROsCustomHeaderOperations getLROsCustomHeaderOperations() {
         return new LROsCustomHeaderOperationsImpl(this.retrofitBuilder.build(), this);
     }
 

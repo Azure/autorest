@@ -120,9 +120,9 @@ public final class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClie
 
     /**
      * Gets the HeadExceptionOperations object to access its operations.
-     * @return the headException value.
+     * @return the HeadExceptionOperations object.
      */
-    public HeadExceptionOperations getHeadException() {
+    public HeadExceptionOperations getHeadExceptionOperations() {
         return new HeadExceptionOperationsImpl(this.retrofitBuilder.build(), this);
     }
 

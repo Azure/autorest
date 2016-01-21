@@ -49,9 +49,9 @@ public interface AutoRestSwaggerBATFileService {
     JacksonMapperAdapter getMapperAdapter();
 
     /**
-     * Gets the Files object to access its operations.
-     * @return the files value.
+     * Gets the FilesOperations object to access its operations.
+     * @return the FilesOperations object.
      */
-    Files getFiles();
+    FilesOperations getFilesOperations();
 
 }

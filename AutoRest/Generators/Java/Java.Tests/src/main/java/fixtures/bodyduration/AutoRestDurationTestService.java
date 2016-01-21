@@ -49,9 +49,9 @@ public interface AutoRestDurationTestService {
     JacksonMapperAdapter getMapperAdapter();
 
     /**
-     * Gets the Duration object to access its operations.
-     * @return the duration value.
+     * Gets the DurationOperations object to access its operations.
+     * @return the DurationOperations object.
      */
-    Duration getDuration();
+    DurationOperations getDurationOperations();
 
 }

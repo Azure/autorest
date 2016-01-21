@@ -28,7 +28,7 @@ public class XMsClientRequestIdTests {
         }
         CustomHeaderInterceptor interceptor = new CustomHeaderInterceptor("x-ms-client-request-id", "9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
         client.getClientInterceptors().add(interceptor);
-        ServiceResponse<Void> response = client.getXMsClientRequestId().get();
+        ServiceResponse<Void> response = client.getXMsClientRequestIdOperations().get();
         client.getClientInterceptors().remove(interceptor);
         Assert.assertEquals(200, response.getResponse().code());
     }
@@ -40,7 +40,7 @@ public class XMsClientRequestIdTests {
                 ((CustomHeaderInterceptor) i).removeHeader("x-ms-client-request-id");
             }
         }
-        ServiceResponse<Void> response = client.getXMsClientRequestId().paramGet("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
+        ServiceResponse<Void> response = client.getXMsClientRequestIdOperations().paramGet("9C4D50EE-2D56-4CD3-8152-34347DC9F2B0");
         Assert.assertEquals(200, response.getResponse().code());
     }
 }

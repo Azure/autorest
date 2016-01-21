@@ -49,9 +49,9 @@ public interface AutoRestSwaggerBATFormDataService {
     JacksonMapperAdapter getMapperAdapter();
 
     /**
-     * Gets the Formdata object to access its operations.
-     * @return the formdata value.
+     * Gets the FormdataOperations object to access its operations.
+     * @return the FormdataOperations object.
      */
-    Formdata getFormdata();
+    FormdataOperations getFormdataOperations();
 
 }

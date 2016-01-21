@@ -52,7 +52,7 @@ public class LROsCustomHeaderTests {
     public void putAsyncRetrySucceeded() throws Exception {
         Product product = new Product();
         product.setLocation("West US");
-        ServiceResponse<Product> response = client.getLROsCustomHeader().putAsyncRetrySucceeded(product);
+        ServiceResponse<Product> response = client.getLROsCustomHeaderOperations().putAsyncRetrySucceeded(product);
         Assert.assertEquals(200, response.getResponse().code());
         Assert.assertEquals("Succeeded", response.getBody().getProvisioningState());
     }
@@ -61,7 +61,7 @@ public class LROsCustomHeaderTests {
     public void put201CreatingSucceeded200() throws Exception {
         Product product = new Product();
         product.setLocation("West US");
-        ServiceResponse<Product> response = client.getLROsCustomHeader().put201CreatingSucceeded200(product);
+        ServiceResponse<Product> response = client.getLROsCustomHeaderOperations().put201CreatingSucceeded200(product);
         Assert.assertEquals(200, response.getResponse().code());
         Assert.assertEquals("Succeeded", response.getBody().getProvisioningState());
     }
@@ -70,7 +70,7 @@ public class LROsCustomHeaderTests {
     public void post202Retry200() throws Exception {
         Product product = new Product();
         product.setLocation("West US");
-        ServiceResponse<Void> response = client.getLROsCustomHeader().post202Retry200(product);
+        ServiceResponse<Void> response = client.getLROsCustomHeaderOperations().post202Retry200(product);
         Assert.assertEquals(200, response.getResponse().code());
     }
 
@@ -78,7 +78,7 @@ public class LROsCustomHeaderTests {
     public void postAsyncRetrySucceeded() throws Exception {
         Product product = new Product();
         product.setLocation("West US");
-        ServiceResponse<Void> response = client.getLROsCustomHeader().postAsyncRetrySucceeded(product);
+        ServiceResponse<Void> response = client.getLROsCustomHeaderOperations().postAsyncRetrySucceeded(product);
         Assert.assertEquals(200, response.getResponse().code());
     }
 }
