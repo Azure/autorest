@@ -103,7 +103,7 @@ else
         def get_long_running_output(response):
 @EmptyLine
             if @Model.FailureStatusCodePredicate:
-                raise @Model.RaisedException
+                @Model.RaisedException
 @EmptyLine
 @if (Model.HasAnyResponse)
 {

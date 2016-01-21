@@ -121,18 +121,18 @@ namespace Microsoft.Rest.Generator.Python
 
                 if (body == null)
                 {
-                    return "HttpOperationError(self._deserialize, response)";
+                    return "raise HttpOperationError(self._deserialize, response)";
                 }
                 else
                 {
                     CompositeType compType = body as CompositeType;
                     if (compType != null)
                     {
-                        return string.Format(CultureInfo.InvariantCulture, "models.{0}(self._deserialize, response)", compType.GetExceptionDefineType());
+                        return string.Format(CultureInfo.InvariantCulture, "raise models.{0}(self._deserialize, response)", compType.GetExceptionDefineType());
                     }
                     else
                     {
-                        return string.Format(CultureInfo.InvariantCulture, "HttpOperationError(self._deserialize, response, '{0}')", body.ToPythonRuntimeTypeString());
+                        return string.Format(CultureInfo.InvariantCulture, "raise HttpOperationError(self._deserialize, response, '{0}')", body.ToPythonRuntimeTypeString());
                     }
                 }
             }

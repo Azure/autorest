@@ -51,7 +51,8 @@ class SkipUrlEncodingOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -94,7 +95,8 @@ class SkipUrlEncodingOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -138,7 +140,8 @@ class SkipUrlEncodingOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -179,7 +182,8 @@ class SkipUrlEncodingOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -219,7 +223,8 @@ class SkipUrlEncodingOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -260,7 +265,8 @@ class SkipUrlEncodingOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -303,7 +309,8 @@ class SkipUrlEncodingOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:

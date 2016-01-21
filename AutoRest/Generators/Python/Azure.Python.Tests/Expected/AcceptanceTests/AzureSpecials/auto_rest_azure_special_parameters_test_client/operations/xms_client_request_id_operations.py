@@ -10,6 +10,7 @@
 # --------------------------------------------------------------------------
 
 from msrest.pipeline import ClientRawResponse
+from msrestazure.azure_exceptions import CloudError
 import uuid
 
 from .. import models
@@ -45,7 +46,8 @@ class XMsClientRequestIdOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -56,7 +58,9 @@ class XMsClientRequestIdOperations(object):
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
-            raise models.ErrorException(self._deserialize, response)
+            exp = CloudError(response)
+            exp.request_id = response.headers.get('x-ms-request-id')
+            raise exp
 
         if raw:
             client_raw_response = ClientRawResponse(None, response)
@@ -85,7 +89,8 @@ class XMsClientRequestIdOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         header_parameters['x-ms-client-request-id'] = self._serialize.header("x_ms_client_request_id", x_ms_client_request_id, 'str')

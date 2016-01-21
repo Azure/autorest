@@ -14,7 +14,7 @@ from msrestazure.azure_exceptions import CloudError
 import uuid
 
 
-class HttpSuccessOperations(object):
+class HeadExceptionOperations(object):
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -32,7 +32,7 @@ class HttpSuccessOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :rtype: bool or (bool, requests.response) or concurrent.futures.Future
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
         url = '/http/success/200'
@@ -54,16 +54,14 @@ class HttpSuccessOperations(object):
         request = self._client.head(url, query_parameters)
         response = self._client.send(request, header_parameters, **operation_config)
 
-        if response.status_code not in [200, 404]:
+        if response.status_code not in [200]:
             exp = CloudError(response)
             exp.request_id = response.headers.get('x-ms-request-id')
             raise exp
 
-        deserialized = (response.status_code == 200)
         if raw:
-            client_raw_response = ClientRawResponse(deserialized, response)
+            client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
-        return deserialized
 
     def head204(
             self, custom_headers={}, raw=False, **operation_config):
@@ -73,7 +71,7 @@ class HttpSuccessOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :rtype: bool or (bool, requests.response) or concurrent.futures.Future
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
         url = '/http/success/204'
@@ -95,16 +93,14 @@ class HttpSuccessOperations(object):
         request = self._client.head(url, query_parameters)
         response = self._client.send(request, header_parameters, **operation_config)
 
-        if response.status_code not in [204, 404]:
+        if response.status_code not in [204]:
             exp = CloudError(response)
             exp.request_id = response.headers.get('x-ms-request-id')
             raise exp
 
-        deserialized = (response.status_code == 204)
         if raw:
-            client_raw_response = ClientRawResponse(deserialized, response)
+            client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
-        return deserialized
 
     def head404(
             self, custom_headers={}, raw=False, **operation_config):
@@ -114,7 +110,7 @@ class HttpSuccessOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
         deserialized response
-        :rtype: bool or (bool, requests.response) or concurrent.futures.Future
+        :rtype: None or (None, requests.response) or concurrent.futures.Future
         """
         # Construct URL
         url = '/http/success/404'
@@ -136,13 +132,11 @@ class HttpSuccessOperations(object):
         request = self._client.head(url, query_parameters)
         response = self._client.send(request, header_parameters, **operation_config)
 
-        if response.status_code not in [204, 404]:
+        if response.status_code not in [204]:
             exp = CloudError(response)
             exp.request_id = response.headers.get('x-ms-request-id')
             raise exp
 
-        deserialized = (response.status_code == 204)
         if raw:
-            client_raw_response = ClientRawResponse(deserialized, response)
+            client_raw_response = ClientRawResponse(None, response)
             return client_raw_response
-        return deserialized

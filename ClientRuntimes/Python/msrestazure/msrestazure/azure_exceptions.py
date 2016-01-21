@@ -99,6 +99,7 @@ class CloudError(ClientException):
         self.message = None
         self.response = response
         self.status_code = self.response.status_code
+        self.request_id = None
 
         if error:
             self.message = error

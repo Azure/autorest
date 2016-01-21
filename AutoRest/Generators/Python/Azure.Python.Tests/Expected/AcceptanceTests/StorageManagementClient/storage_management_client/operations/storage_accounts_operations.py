@@ -10,7 +10,6 @@
 # --------------------------------------------------------------------------
 
 from msrest.pipeline import ClientRawResponse
-from msrest.exceptions import HttpOperationError
 from msrestazure.azure_exceptions import CloudError
 from msrestazure.azure_operation import AzureOperationPoller
 import uuid
@@ -57,7 +56,8 @@ class StorageAccountsOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -72,7 +72,9 @@ class StorageAccountsOperations(object):
             request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
-            raise CloudError(response)
+            exp = CloudError(response)
+            exp.request_id = response.headers.get('x-ms-request-id')
+            raise exp
 
         deserialized = None
 
@@ -125,7 +127,8 @@ class StorageAccountsOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -151,7 +154,9 @@ class StorageAccountsOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [200, 202]:
-                raise CloudError(response)
+                exp = CloudError(response)
+                exp.request_id = response.headers.get('x-ms-request-id')
+                raise exp
 
             deserialized = None
 
@@ -204,7 +209,8 @@ class StorageAccountsOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -215,7 +221,9 @@ class StorageAccountsOperations(object):
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200, 204]:
-            raise HttpOperationError(self._deserialize, response)
+            exp = CloudError(response)
+            exp.request_id = response.headers.get('x-ms-request-id')
+            raise exp
 
         if raw:
             client_raw_response = ClientRawResponse(None, response)
@@ -257,7 +265,8 @@ class StorageAccountsOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -268,7 +277,9 @@ class StorageAccountsOperations(object):
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
-            raise CloudError(response)
+            exp = CloudError(response)
+            exp.request_id = response.headers.get('x-ms-request-id')
+            raise exp
 
         deserialized = None
 
@@ -327,7 +338,8 @@ class StorageAccountsOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -342,7 +354,9 @@ class StorageAccountsOperations(object):
             request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
-            raise CloudError(response)
+            exp = CloudError(response)
+            exp.request_id = response.headers.get('x-ms-request-id')
+            raise exp
 
         deserialized = None
 
@@ -386,7 +400,8 @@ class StorageAccountsOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -397,7 +412,9 @@ class StorageAccountsOperations(object):
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200]:
-            raise CloudError(response)
+            exp = CloudError(response)
+            exp.request_id = response.headers.get('x-ms-request-id')
+            raise exp
 
         deserialized = None
 
@@ -444,7 +461,8 @@ class StorageAccountsOperations(object):
             # Construct headers
             header_parameters = {}
             header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+            if self.config.generate_client_request_id:
+                header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
             if custom_headers:
                 header_parameters.update(custom_headers)
             if self.config.accept_language is not None:
@@ -456,7 +474,9 @@ class StorageAccountsOperations(object):
                 request, header_parameters, **operation_config)
 
             if response.status_code not in [200]:
-                raise CloudError(response)
+                exp = CloudError(response)
+                exp.request_id = response.headers.get('x-ms-request-id')
+                raise exp
 
             return response
 
@@ -508,7 +528,8 @@ class StorageAccountsOperations(object):
             # Construct headers
             header_parameters = {}
             header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+            if self.config.generate_client_request_id:
+                header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
             if custom_headers:
                 header_parameters.update(custom_headers)
             if self.config.accept_language is not None:
@@ -520,7 +541,9 @@ class StorageAccountsOperations(object):
                 request, header_parameters, **operation_config)
 
             if response.status_code not in [200]:
-                raise CloudError(response)
+                exp = CloudError(response)
+                exp.request_id = response.headers.get('x-ms-request-id')
+                raise exp
 
             return response
 
@@ -575,7 +598,8 @@ class StorageAccountsOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -590,7 +614,9 @@ class StorageAccountsOperations(object):
             request, header_parameters, body_content, **operation_config)
 
         if response.status_code not in [200]:
-            raise CloudError(response)
+            exp = CloudError(response)
+            exp.request_id = response.headers.get('x-ms-request-id')
+            raise exp
 
         deserialized = None
 

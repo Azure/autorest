@@ -12,10 +12,10 @@
 from msrest.service_client import ServiceClient
 from msrest import Serializer, Deserializer
 from msrestazure import AzureConfiguration
-from .operations.http_success_operations import HttpSuccessOperations
+from .operations.head_exception_operations import HeadExceptionOperations
 
 
-class AutoRestHeadTestServiceConfiguration(AzureConfiguration):
+class AutoRestHeadExceptionTestServiceConfiguration(AzureConfiguration):
 
     def __init__(
             self, credentials, accept_language='en-US', long_running_operation_retry_timeout=30, generate_client_request_id=True, base_url=None, filepath=None):
@@ -25,9 +25,9 @@ class AutoRestHeadTestServiceConfiguration(AzureConfiguration):
         if not base_url:
             base_url = 'http://localhost'
 
-        super(AutoRestHeadTestServiceConfiguration, self).__init__(base_url, filepath)
+        super(AutoRestHeadExceptionTestServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.user_agent = 'auto_rest_head_test_service/1.0.0'
+        self.user_agent = 'auto_rest_head_exception_test_service/1.0.0'
 
         self.credentials = credentials
         self.accept_language = accept_language
@@ -35,7 +35,7 @@ class AutoRestHeadTestServiceConfiguration(AzureConfiguration):
         self.generate_client_request_id = generate_client_request_id
 
 
-class AutoRestHeadTestService(object):
+class AutoRestHeadExceptionTestService(object):
 
     def __init__(self, config):
 
@@ -46,5 +46,5 @@ class AutoRestHeadTestService(object):
         self._deserialize = Deserializer(client_models)
 
         self.config = config
-        self.http_success = HttpSuccessOperations(
+        self.head_exception = HeadExceptionOperations(
             self._client, self.config, self._serialize, self._deserialize)
