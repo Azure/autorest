@@ -109,8 +109,8 @@ HttpSuccess.prototype.head200 = function (options, callback) {
     if (statusCode !== 200 && statusCode !== 404) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -220,8 +220,8 @@ HttpSuccess.prototype.head204 = function (options, callback) {
     if (statusCode !== 204 && statusCode !== 404) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
@@ -331,8 +331,8 @@ HttpSuccess.prototype.head404 = function (options, callback) {
     if (statusCode !== 204 && statusCode !== 404) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {

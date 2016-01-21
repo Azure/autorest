@@ -16,7 +16,14 @@ export class AzureServiceClient extends msRest.ServiceClient {
 	* 
 	* @param {object} options - The parameter options used by ServiceClient
 	* 
-	* @param {Array} [options.longRunningOperationRetryTimeout] - Retry timeout
+	* @param {string} [options.acceptLanguage] - Gets or sets the preferred language for the response. 
+    * Default value is: 'en-US'.
+    *  
+    * @param {boolean} [options.generateClientRequestId] - When set to true a unique x-ms-client-request-id value 
+    * is generated and included in each request. Default is true.
+    * 
+    * @param {number} [options.longRunningOperationRetryTimeout] - Gets or sets the retry timeout in seconds for 
+    * Long Running Operations. Default value is 30.
 	*/
 	constructor(credentials: msRest.ServiceClientCredentials, options: AzureServiceClientOptions)
 }
