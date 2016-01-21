@@ -162,11 +162,11 @@ namespace Microsoft.Rest.Generator.Java.Azure
             }
         }
 
-        public override string ServiceResponseBuilderArgs
+        public override string RuntimeBasePackage
         {
             get
             {
-                return "new AzureJacksonUtils()";
+                return "com.microsoft.azure";
             }
         }
 
@@ -193,7 +193,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 {
                     imports.Remove("com.microsoft.rest.ServiceResponseEmptyCallback");
                     imports.Remove("com.microsoft.rest.ServiceResponseCallback");
-                    imports.Remove("com.microsoft.rest.AzureServiceResponseBuilder");
+                    imports.Remove("com.microsoft.azure.AzureServiceResponseBuilder");
                     imports.Add("retrofit.Callback");
                     this.Responses.Select(r => r.Value.Body).Concat(new IType[]{ DefaultResponse.Body })
                         .SelectMany(t => t.ImportFrom(ServiceClient.Namespace))
@@ -201,10 +201,6 @@ namespace Microsoft.Rest.Generator.Java.Azure
                         .ForEach(i => imports.Remove(i));
                     // return type may have been removed as a side effect
                     imports.AddRange(this.ReturnType.Body.ImportFrom(ServiceClient.Namespace));
-                }
-                else
-                {
-                    imports.Add("com.microsoft.rest.serializer.AzureJacksonUtils");
                 }
                 return imports;
             }

@@ -5,7 +5,7 @@
  *
  */
 
-package com.microsoft.rest;
+package com.microsoft.azure;
 
 import java.util.ArrayList;
 import java.util.List;

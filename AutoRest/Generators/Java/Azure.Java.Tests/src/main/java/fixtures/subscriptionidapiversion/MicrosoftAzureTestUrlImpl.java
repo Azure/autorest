@@ -10,10 +10,10 @@
 
 package fixtures.subscriptionidapiversion;
 
-import com.microsoft.rest.AzureClient;
-import com.microsoft.rest.AzureServiceClient;
+import com.microsoft.azure.AzureClient;
+import com.microsoft.azure.AzureServiceClient;
+import com.microsoft.azure.CustomHeaderInterceptor;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
-import com.microsoft.rest.CustomHeaderInterceptor;
 import com.squareup.okhttp.OkHttpClient;
 import java.util.UUID;
 import retrofit.Retrofit;

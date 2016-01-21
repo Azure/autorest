@@ -11,8 +11,7 @@
 package fixtures.azurespecials;
 
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.AzureServiceResponseBuilder;
-import com.microsoft.rest.serializer.AzureJacksonUtils;
+import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
@@ -86,7 +85,7 @@ public final class ApiVersionDefaultOperationsImpl implements ApiVersionDefaultO
     }
 
     private ServiceResponse<Void> getMethodGlobalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(new AzureJacksonUtils())
+        return new AzureServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response, retrofit);
@@ -134,7 +133,7 @@ public final class ApiVersionDefaultOperationsImpl implements ApiVersionDefaultO
     }
 
     private ServiceResponse<Void> getMethodGlobalNotProvidedValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(new AzureJacksonUtils())
+        return new AzureServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response, retrofit);
@@ -182,7 +181,7 @@ public final class ApiVersionDefaultOperationsImpl implements ApiVersionDefaultO
     }
 
     private ServiceResponse<Void> getPathGlobalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(new AzureJacksonUtils())
+        return new AzureServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response, retrofit);
@@ -230,7 +229,7 @@ public final class ApiVersionDefaultOperationsImpl implements ApiVersionDefaultO
     }
 
     private ServiceResponse<Void> getSwaggerGlobalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>(new AzureJacksonUtils())
+        return new AzureServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response, retrofit);

@@ -10,8 +10,9 @@
 
 package fixtures.lro;
 
-import com.microsoft.rest.AzureClient;
+import com.microsoft.azure.AzureClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
+import com.microsoft.rest.serializer.JacksonMapperAdapter;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
 import java.util.List;
@@ -38,6 +39,14 @@ public interface AutoRestLongRunningOperationTestService {
      * @param logLevel the logging level enum.
      */
     void setLogLevel(Level logLevel);
+
+    /**
+     * Gets the adapter for {@link com.fasterxml.jackson.databind.ObjectMapper} for serialization
+     * and deserialization operations..
+     *
+     * @return the adapter.
+     */
+    JacksonMapperAdapter getMapperAdapter();
 
     /**
      * Gets the {@link AzureClient} used for long running operations.

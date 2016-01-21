@@ -5,10 +5,12 @@
  *
  */
 
-package com.microsoft.rest.credentials;
+package com.microsoft.azure.credentials;
 
 import com.microsoft.aad.adal4j.AuthenticationContext;
 import com.microsoft.aad.adal4j.AuthenticationResult;
+import com.microsoft.aad.adal4j.ClientCredential;
+import com.microsoft.rest.credentials.TokenCredentials;
 
 import java.io.IOException;
 import java.util.concurrent.Executors;
@@ -16,17 +18,13 @@ import java.util.concurrent.Executors;
 /**
  * Token based credentials for use with a REST Service Client.
  */
-public class UserTokenCredentials extends TokenCredentials {
-    /** The Active Directory application client id. */
+public class ApplicationTokenCredentials extends TokenCredentials {
+    /** The active directory application client id. */
     private String clientId;
-    /** The domain or tenant id containing this application. */
+    /** The tenant or domain the containing the application. */
     private String domain;
-    /** The user name for the Organization Id account. */
-    private String username;
-    /** The password for the Organization Id account. */
-    private String password;
-    /** The Uri where the user will be redirected after authenticating with AD. */
-    private String clientRedirectUri;
+    /** The authentication secret for the application. */
+    private String secret;
     /** The Azure environment to authenticate with. */
     private AzureEnvironment environment;
 
@@ -35,19 +33,15 @@ public class UserTokenCredentials extends TokenCredentials {
      *
      * @param clientId the active directory application client id.
      * @param domain the domain or tenant id containing this application.
-     * @param username the user name for the Organization Id account.
-     * @param password the password for the Organization Id account.
-     * @param clientRedirectUri the Uri where the user will be redirected after authenticating with AD.
+     * @param secret the authentication secret for the application.
      * @param environment the Azure environment to authenticate with.
      *                    If null is provided, AzureEnvironment.AZURE will be used.
      */
-    public UserTokenCredentials(String clientId, String domain, String username, String password, String clientRedirectUri, AzureEnvironment environment) {
+    public ApplicationTokenCredentials(String clientId, String domain, String secret, AzureEnvironment environment) {
         super(null, null); // defer token acquisition
         this.clientId = clientId;
         this.domain = domain;
-        this.username = username;
-        this.password = password;
-        this.clientRedirectUri = clientRedirectUri;
+        this.secret = secret;
         if (environment == null) {
             this.environment = AzureEnvironment.AZURE;
         } else {
@@ -74,30 +68,12 @@ public class UserTokenCredentials extends TokenCredentials {
     }
 
     /**
-     * Gets the user name for the Organization Id account.
+     * Gets the authentication secret for the application.
      *
-     * @return the user name.
+     * @return the authentication secret for the application.
      */
-    public String getUsername() {
-        return username;
-    }
-
-    /**
-     * Gets the password for the Organization Id account.
-     *
-     * @return the password.
-     */
-    public String getPassword() {
-        return password;
-    }
-
-    /**
-     * Gets the Uri where the user will be redirected after authenticating with AD.
-     *
-     * @return the redirecting Uri.
-     */
-    public String getClientRedirectUri() {
-        return clientRedirectUri;
+    public String getSecret() {
+        return secret;
     }
 
     /**
@@ -129,9 +105,7 @@ public class UserTokenCredentials extends TokenCredentials {
         try {
             result = context.acquireToken(
                     this.getEnvironment().getTokenAudience(),
-                    this.getClientId(),
-                    this.getUsername(),
-                    this.getPassword(),
+                    new ClientCredential(this.getClientId(), this.getSecret()),
                     null).get();
         } catch (Exception e) {
             throw new IOException(e.getMessage(), e);

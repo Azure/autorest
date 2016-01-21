@@ -13,6 +13,7 @@ package fixtures.validation;
 import java.util.List;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
+import com.microsoft.rest.serializer.JacksonMapperAdapter;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
@@ -51,6 +52,14 @@ public interface AutoRestValidationTest {
      * @param logLevel the logging level enum.
      */
     void setLogLevel(Level logLevel);
+
+    /**
+     * Gets the adapter for {@link com.fasterxml.jackson.databind.ObjectMapper} for serialization
+     * and deserialization operations..
+     *
+     * @return the adapter.
+     */
+    JacksonMapperAdapter getMapperAdapter();
 
     /**
      * Gets Subscription ID..

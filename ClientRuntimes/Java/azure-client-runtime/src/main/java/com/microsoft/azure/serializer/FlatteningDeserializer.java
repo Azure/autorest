@@ -5,7 +5,7 @@
  *
  */
 
-package com.microsoft.rest.serializer;
+package com.microsoft.azure.serializer;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonFactory;
@@ -21,7 +21,7 @@ import com.fasterxml.jackson.databind.deser.ResolvableDeserializer;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.microsoft.rest.BaseResource;
+import com.microsoft.azure.BaseResource;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -35,14 +35,14 @@ import java.lang.reflect.Field;
  */
 public class FlatteningDeserializer<T> extends StdDeserializer<T> implements ResolvableDeserializer {
     /**
-     * The default deserializer for the current type.
+     * The default mapperAdapter for the current type.
      */
     private final JsonDeserializer<?> defaultDeserializer;
 
     /**
      * Creates an instance of FlatteningDeserializer.
      * @param vc handled type
-     * @param defaultDeserializer the default JSON deserializer
+     * @param defaultDeserializer the default JSON mapperAdapter
      */
     protected FlatteningDeserializer(Class<?> vc, JsonDeserializer<?> defaultDeserializer) {
         super(vc);
@@ -73,7 +73,7 @@ public class FlatteningDeserializer<T> extends StdDeserializer<T> implements Res
     @SuppressWarnings("unchecked")
     @Override
     public T deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
-        JsonNode root = new AzureJacksonUtils().getObjectMapper().readTree(jp);
+        JsonNode root = new AzureJacksonMapperAdapter().getObjectMapper().readTree(jp);
         final Class<?> tClass = this.defaultDeserializer.handledType();
         for (Field field : tClass.getDeclaredFields()) {
             JsonNode node = root;

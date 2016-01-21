@@ -10,7 +10,7 @@
 
 package fixtures.lro.models;
 
-import com.microsoft.rest.BaseResource;
+import com.microsoft.azure.BaseResource;
 
 /**
  * The SubResource model.

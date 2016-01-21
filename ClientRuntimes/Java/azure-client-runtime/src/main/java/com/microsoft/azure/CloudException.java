@@ -5,8 +5,9 @@
  *
  */
 
-package com.microsoft.rest;
+package com.microsoft.azure;
 
+import com.microsoft.rest.AutoRestException;
 import retrofit.Response;
 
 /**

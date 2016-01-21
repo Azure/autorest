@@ -170,7 +170,7 @@ foreach (var transformation in Model.InputParameterTransformation.Where(t => t.P
 }
 @EmptyLine
 private @Model.OperationResponseReturnTypeString @(Model.Name)Delegate(Response<@Model.CallType> response, Retrofit retrofit) throws @Model.ExceptionString {
-    return new @Model.ResponseBuilder<@Model.GenericReturnTypeString, @Model.OperationExceptionTypeString>(@Model.ServiceResponseBuilderArgs)
+    return new @Model.ResponseBuilder<@Model.GenericReturnTypeString, @Model.OperationExceptionTypeString>()
 @foreach (var response in Model.Responses)
 {
 

@@ -1,8 +1,8 @@
 package fixtures.lro;
 
-import com.microsoft.rest.CustomHeaderInterceptor;
+import com.microsoft.azure.CustomHeaderInterceptor;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.serializer.AzureJacksonUtils;
+import com.microsoft.azure.serializer.AzureJacksonMapperAdapter;
 import com.squareup.okhttp.OkHttpClient;
 import fixtures.lro.models.Product;
 import org.junit.AfterClass;
@@ -32,7 +32,7 @@ public class LROsCustomHeaderTests {
         httpClient.setCookieHandler(cookieManager);
         Executor executor = Executors.newCachedThreadPool();
         Retrofit.Builder builder = new Retrofit.Builder()
-                .addConverterFactory(JacksonConverterFactory.create(new AzureJacksonUtils().getObjectMapper()))
+                .addConverterFactory(JacksonConverterFactory.create(new AzureJacksonMapperAdapter().getObjectMapper()))
                 .callbackExecutor(executor);
 
         client = new AutoRestLongRunningOperationTestServiceImpl("http://localhost.:3000", null, httpClient, builder);

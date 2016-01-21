@@ -425,7 +425,7 @@ namespace Microsoft.Rest.Generator.Java
                 case "ServiceException":
                     return "com.microsoft.rest.ServiceException";
                 case "CloudException":
-                    return "com.microsoft.rest.CloudException";
+                    return "com.microsoft.azure.CloudException";
                 case "AutoRestException":
                     return "com.microsoft.rest.AutoRestException";
                 case "IllegalArgumentException":

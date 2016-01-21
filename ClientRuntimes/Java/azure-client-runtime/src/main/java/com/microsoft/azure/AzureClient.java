@@ -5,17 +5,17 @@
  *
  */
 
-package com.microsoft.rest;
+package com.microsoft.azure;
 
+import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceException;
+import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.ServiceResponseCallback;
+import com.microsoft.rest.ServiceResponseWithHeaders;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
-import com.microsoft.rest.serializer.AzureJacksonUtils;
+import com.microsoft.azure.serializer.AzureJacksonMapperAdapter;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.ResponseBody;
-import retrofit.Call;
-import retrofit.Response;
-import retrofit.Retrofit;
-import retrofit.http.GET;
-import retrofit.http.Url;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -24,6 +24,12 @@ import java.net.URL;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+
+import retrofit.Call;
+import retrofit.Response;
+import retrofit.Retrofit;
+import retrofit.http.GET;
+import retrofit.http.Url;
 
 /**
  * An instance of this class defines a ServiceClient that handles polling and
@@ -59,6 +65,7 @@ public class AzureClient extends AzureServiceClient {
      */
     public AzureClient(OkHttpClient client, Retrofit.Builder retrofitBuilder) {
         super(client, retrofitBuilder);
+        this.mapperAdapter = new AzureJacksonMapperAdapter();
     }
 
     /**
@@ -89,7 +96,7 @@ public class AzureClient extends AzureServiceClient {
             CloudException exception = new CloudException(statusCode + " is not a valid polling status code");
             exception.setResponse(response);
             if (responseBody != null) {
-                exception.setBody((CloudError) new AzureJacksonUtils().deserialize(responseBody.string(), CloudError.class));
+                exception.setBody((CloudError) mapperAdapter.deserialize(responseBody.string(), CloudError.class));
             }
             throw exception;
         }
@@ -141,7 +148,7 @@ public class AzureClient extends AzureServiceClient {
         ServiceResponse<T> bodyResponse = getPutOrPatchResult(response, resourceType);
         return new ServiceResponseWithHeaders<>(
                 bodyResponse.getBody(),
-                new AzureJacksonUtils().<THeader>deserialize(AzureJacksonUtils.serialize(bodyResponse.getResponse().headers()), headerType),
+                mapperAdapter.<THeader>deserialize(mapperAdapter.serialize(bodyResponse.getResponse().headers()), headerType),
                 bodyResponse.getResponse()
         );
     }
@@ -175,7 +182,7 @@ public class AzureClient extends AzureServiceClient {
             exception.setResponse(response);
             try {
                 if (responseBody != null) {
-                    exception.setBody((CloudError) new AzureJacksonUtils().deserialize(responseBody.string(), CloudError.class));
+                    exception.setBody((CloudError) mapperAdapter.deserialize(responseBody.string(), CloudError.class));
                 }
             } catch (Exception e) { /* ignore serialization errors on top of service errors */ }
             callback.failure(exception);
@@ -222,7 +229,7 @@ public class AzureClient extends AzureServiceClient {
                 try {
                     callback.success(new ServiceResponseWithHeaders<>(
                             result.getBody(),
-                            new AzureJacksonUtils().<THeader>deserialize(AzureJacksonUtils.serialize(result.getResponse().headers()), headerType),
+                            mapperAdapter.<THeader>deserialize(mapperAdapter.serialize(result.getResponse().headers()), headerType),
                             result.getResponse()
                     ));
                 } catch (IOException e) {
@@ -260,7 +267,7 @@ public class AzureClient extends AzureServiceClient {
             CloudException exception = new CloudException(statusCode + " is not a valid polling status code");
             exception.setResponse(response);
             if (responseBody != null) {
-                exception.setBody((CloudError) new AzureJacksonUtils().deserialize(responseBody.string(), CloudError.class));
+                exception.setBody((CloudError) mapperAdapter.deserialize(responseBody.string(), CloudError.class));
             }
             throw exception;
         }
@@ -311,7 +318,7 @@ public class AzureClient extends AzureServiceClient {
         ServiceResponse<T> bodyResponse = getPostOrDeleteResult(response, resourceType);
         return new ServiceResponseWithHeaders<>(
                 bodyResponse.getBody(),
-                new AzureJacksonUtils().<THeader>deserialize(AzureJacksonUtils.serialize(bodyResponse.getResponse().headers()), headerType),
+                mapperAdapter.<THeader>deserialize(mapperAdapter.serialize(bodyResponse.getResponse().headers()), headerType),
                 bodyResponse.getResponse()
         );
     }
@@ -345,7 +352,7 @@ public class AzureClient extends AzureServiceClient {
             exception.setResponse(response);
             try {
                 if (responseBody != null) {
-                    exception.setBody((CloudError) new AzureJacksonUtils().deserialize(responseBody.string(), CloudError.class));
+                    exception.setBody((CloudError) mapperAdapter.deserialize(responseBody.string(), CloudError.class));
                 }
             } catch (Exception e) { /* ignore serialization errors on top of service errors */ }
             callback.failure(exception);
@@ -391,7 +398,7 @@ public class AzureClient extends AzureServiceClient {
                 try {
                     callback.success(new ServiceResponseWithHeaders<>(
                             result.getBody(),
-                            new AzureJacksonUtils().<THeader>deserialize(AzureJacksonUtils.serialize(result.getResponse().headers()), headerType),
+                            mapperAdapter.<THeader>deserialize(mapperAdapter.serialize(result.getResponse().headers()), headerType),
                             result.getResponse()
                     ));
                 } catch (IOException e) {
@@ -567,14 +574,14 @@ public class AzureClient extends AzureServiceClient {
 
         AzureAsyncOperation body = null;
         if (response.body() != null) {
-            body = new AzureJacksonUtils().deserialize(response.body().string(), AzureAsyncOperation.class);
+            body = mapperAdapter.deserialize(response.body().string(), AzureAsyncOperation.class);
         }
 
         if (body == null || body.getStatus() == null) {
             CloudException exception = new CloudException("no body");
             exception.setResponse(response);
             if (response.errorBody() != null) {
-                exception.setBody((CloudError) new AzureJacksonUtils().deserialize(response.errorBody().string(), CloudError.class));
+                exception.setBody((CloudError) mapperAdapter.deserialize(response.errorBody().string(), CloudError.class));
             }
             throw exception;
         }
@@ -605,13 +612,13 @@ public class AzureClient extends AzureServiceClient {
                 try {
                     AzureAsyncOperation body = null;
                     if (result.getBody() != null) {
-                        body = new AzureJacksonUtils().deserialize(result.getBody().string(), AzureAsyncOperation.class);
+                        body = mapperAdapter.deserialize(result.getBody().string(), AzureAsyncOperation.class);
                     }
                     if (body == null || body.getStatus() == null) {
                         CloudException exception = new CloudException("no body");
                         exception.setResponse(result.getResponse());
                         if (result.getResponse().errorBody() != null) {
-                            exception.setBody((CloudError) new AzureJacksonUtils().deserialize(result.getResponse().errorBody().string(), CloudError.class));
+                            exception.setBody((CloudError) mapperAdapter.deserialize(result.getResponse().errorBody().string(), CloudError.class));
                         }
                         failure(exception);
                     } else {
@@ -650,9 +657,9 @@ public class AzureClient extends AzureServiceClient {
             CloudException exception = new CloudException(statusCode + " is not a valid polling status code");
             exception.setResponse(response);
             if (response.body() != null) {
-                exception.setBody((CloudError) new AzureJacksonUtils().deserialize(response.body().string(), CloudError.class));
+                exception.setBody((CloudError) mapperAdapter.deserialize(response.body().string(), CloudError.class));
             } else if (response.errorBody() != null) {
-                exception.setBody((CloudError) new AzureJacksonUtils().deserialize(response.errorBody().string(), CloudError.class));
+                exception.setBody((CloudError) mapperAdapter.deserialize(response.errorBody().string(), CloudError.class));
             }
             throw exception;
         }
@@ -690,9 +697,9 @@ public class AzureClient extends AzureServiceClient {
                         CloudException exception = new CloudException(statusCode + " is not a valid polling status code");
                         exception.setResponse(response);
                         if (response.body() != null) {
-                            exception.setBody((CloudError) new AzureJacksonUtils().deserialize(response.body().string(), CloudError.class));
+                            exception.setBody((CloudError) mapperAdapter.deserialize(response.body().string(), CloudError.class));
                         } else if (response.errorBody() != null) {
-                            exception.setBody((CloudError) new AzureJacksonUtils().deserialize(response.errorBody().string(), CloudError.class));
+                            exception.setBody((CloudError) mapperAdapter.deserialize(response.errorBody().string(), CloudError.class));
                         }
                         callback.failure(exception);
                         return;

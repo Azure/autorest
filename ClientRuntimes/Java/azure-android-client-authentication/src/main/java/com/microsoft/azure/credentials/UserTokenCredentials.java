@@ -5,7 +5,7 @@
  *
  */
 
-package com.microsoft.rest.credentials;
+package com.microsoft.azure.credentials;
 
 import android.app.Activity;
 
@@ -14,6 +14,7 @@ import com.microsoft.aad.adal.AuthenticationContext;
 import com.microsoft.aad.adal.AuthenticationResult;
 import com.microsoft.aad.adal.DefaultTokenCacheStore;
 import com.microsoft.aad.adal.PromptBehavior;
+import com.microsoft.rest.credentials.TokenCredentials;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;

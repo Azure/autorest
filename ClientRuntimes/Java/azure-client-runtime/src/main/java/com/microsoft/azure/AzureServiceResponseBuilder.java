@@ -5,10 +5,15 @@
  *
  */
 
-package com.microsoft.rest;
+package com.microsoft.azure;
 
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.serializer.JacksonUtils;
+import com.microsoft.rest.AutoRestException;
+import com.microsoft.rest.ServiceResponse;
+import com.microsoft.rest.ServiceResponseBuilder;
+import com.microsoft.azure.serializer.AzureJacksonMapperAdapter;
+import com.microsoft.rest.serializer.JacksonMapperAdapter;
+
 import retrofit.Response;
 import retrofit.Retrofit;
 
@@ -29,7 +34,7 @@ public class AzureServiceResponseBuilder<T, E extends AutoRestException> extends
      * Create a ServiceResponseBuilder instance.
      */
     public AzureServiceResponseBuilder() {
-        this(new JacksonUtils());
+        this(new AzureJacksonMapperAdapter());
     }
 
     /**
@@ -37,7 +42,7 @@ public class AzureServiceResponseBuilder<T, E extends AutoRestException> extends
      *
      * @param deserializer the serialization utils to use for deserialization operations
      */
-    public AzureServiceResponseBuilder(JacksonUtils deserializer) {
+    public AzureServiceResponseBuilder(JacksonMapperAdapter deserializer) {
         this(deserializer, new HashMap<Integer, Type>());
     }
 
@@ -47,7 +52,7 @@ public class AzureServiceResponseBuilder<T, E extends AutoRestException> extends
      * @param deserializer the serialization utils to use for deserialization operations
      * @param responseTypes a mapping of response status codes and response destination types.
      */
-    public AzureServiceResponseBuilder(JacksonUtils deserializer, Map<Integer, Type> responseTypes) {
+    public AzureServiceResponseBuilder(JacksonMapperAdapter deserializer, Map<Integer, Type> responseTypes) {
         super(deserializer, responseTypes);
     }
 

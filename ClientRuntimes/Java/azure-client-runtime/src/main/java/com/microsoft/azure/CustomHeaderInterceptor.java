@@ -5,7 +5,7 @@
  *
  */
 
-package com.microsoft.rest;
+package com.microsoft.azure;
 
 import com.squareup.okhttp.Headers;
 import com.squareup.okhttp.Interceptor;

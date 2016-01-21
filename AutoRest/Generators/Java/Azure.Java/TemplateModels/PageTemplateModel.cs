@@ -30,7 +30,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
             get
             {
                 List<string> imports = new List<string>();
-                imports.Add("com.microsoft.rest.Page");
+                imports.Add("com.microsoft.azure.Page");
                 imports.Add("java.util.List");
                 imports.Add("com.fasterxml.jackson.annotation.JsonProperty");
                 return imports.OrderBy(i => i).Distinct();

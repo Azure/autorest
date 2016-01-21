@@ -5,7 +5,7 @@
  *
  */
 
-package com.microsoft.rest.credentials;
+package com.microsoft.azure.credentials;
 
 /**
  * An instance of this class describes an environment in Azure.
