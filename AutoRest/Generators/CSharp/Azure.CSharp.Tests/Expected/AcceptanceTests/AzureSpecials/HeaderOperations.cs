@@ -90,120 +90,118 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
-            try
+            _httpRequest.Method = new HttpMethod("POST");
+            _httpRequest.RequestUri = new Uri(_url);
+            // Set Headers
+            if (this.Client.GenerateClientRequestId != null && this.Client.GenerateClientRequestId.Value)
             {
-                _httpRequest.Method = new HttpMethod("POST");
-                _httpRequest.RequestUri = new Uri(_url);
-                // Set Headers
-                if (this.Client.GenerateClientRequestId != null && this.Client.GenerateClientRequestId.Value)
+                _httpRequest.Headers.TryAddWithoutValidation("foo-client-request-id", Guid.NewGuid().ToString());
+            }
+            if (fooClientRequestId != null)
+            {
+                if (_httpRequest.Headers.Contains("foo-client-request-id"))
                 {
-                    _httpRequest.Headers.TryAddWithoutValidation("foo-client-request-id", Guid.NewGuid().ToString());
+                    _httpRequest.Headers.Remove("foo-client-request-id");
                 }
-                if (fooClientRequestId != null)
+                _httpRequest.Headers.TryAddWithoutValidation("foo-client-request-id", fooClientRequestId);
+            }
+            if (this.Client.AcceptLanguage != null)
+            {
+                if (_httpRequest.Headers.Contains("accept-language"))
                 {
-                    if (_httpRequest.Headers.Contains("foo-client-request-id"))
+                    _httpRequest.Headers.Remove("accept-language");
+                }
+                _httpRequest.Headers.TryAddWithoutValidation("accept-language", this.Client.AcceptLanguage);
+            }
+            if (customHeaders != null)
+            {
+                foreach(var _header in customHeaders)
+                {
+                    if (_httpRequest.Headers.Contains(_header.Key))
                     {
-                        _httpRequest.Headers.Remove("foo-client-request-id");
+                        _httpRequest.Headers.Remove(_header.Key);
                     }
-                    _httpRequest.Headers.TryAddWithoutValidation("foo-client-request-id", fooClientRequestId);
+                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
-                if (this.Client.AcceptLanguage != null)
-                {
-                    if (_httpRequest.Headers.Contains("accept-language"))
-                    {
-                        _httpRequest.Headers.Remove("accept-language");
-                    }
-                    _httpRequest.Headers.TryAddWithoutValidation("accept-language", this.Client.AcceptLanguage);
-                }
-                if (customHeaders != null)
-                {
-                    foreach(var _header in customHeaders)
-                    {
-                        if (_httpRequest.Headers.Contains(_header.Key))
-                        {
-                            _httpRequest.Headers.Remove(_header.Key);
-                        }
-                        _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
-                    }
-                }
+            }
 
-                // Serialize Request
-                string _requestContent = null;
-                // Set Credentials
-                if (this.Client.Credentials != null)
-                {
-                    cancellationToken.ThrowIfCancellationRequested();
-                    await this.Client.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-                }
-                // Send Request
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-                }
+            // Serialize Request
+            string _requestContent = null;
+            // Set Credentials
+            if (this.Client.Credentials != null)
+            {
                 cancellationToken.ThrowIfCancellationRequested();
-                _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-                }
-                HttpStatusCode _statusCode = _httpResponse.StatusCode;
-                cancellationToken.ThrowIfCancellationRequested();
-                string _responseContent = null;
-                if ((int)_statusCode != 200)
-                {
-                    var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                    try
-                    {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
-                        if (_errorBody != null)
-                        {
-                            ex.Body = _errorBody;
-                        }
-                    }
-                    catch (JsonException)
-                    {
-                        // Ignore the exception
-                    }
-                    ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                    ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                    if (_shouldTrace)
-                    {
-                        ServiceClientTracing.Error(_invocationId, ex);
-                    }
-                    throw ex;
-                }
-                // Create Result
-                var _result = new AzureOperationHeaderResponse<HeaderCustomNamedRequestIdHeaders>();
-                _result.Request = _httpRequest;
-                _result.Response = _httpResponse;
-                if (_httpResponse.Headers.Contains("foo-request-id"))
-                {
-                    _result.RequestId = _httpResponse.Headers.GetValues("foo-request-id").FirstOrDefault();
-                }
+                await this.Client.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            }
+            // Send Request
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+            }
+            cancellationToken.ThrowIfCancellationRequested();
+            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+            }
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
+            if ((int)_statusCode != 200)
+            {
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
                 try
                 {
-                    _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderCustomNamedRequestIdHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    if (_errorBody != null)
+                    {
+                        ex.Body = _errorBody;
+                    }
                 }
-                catch (JsonException ex)
+                catch (JsonException)
                 {
-                    throw new RestException("Unable to deserialize the headers.", ex);
+                    // Ignore the exception
                 }
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
                 if (_shouldTrace)
                 {
-                    ServiceClientTracing.Exit(_invocationId, _result);
+                    ServiceClientTracing.Error(_invocationId, ex);
                 }
-                return _result;
+                _httpRequest.Dispose();
+                if (_httpResponse != null)
+                {
+                    _httpResponse.Dispose();
+                }
+                throw ex;
             }
-            catch
+            // Create Result
+            var _result = new AzureOperationHeaderResponse<HeaderCustomNamedRequestIdHeaders>();
+            _result.Request = _httpRequest;
+            _result.Response = _httpResponse;
+            if (_httpResponse.Headers.Contains("foo-request-id"))
+            {
+                _result.RequestId = _httpResponse.Headers.GetValues("foo-request-id").FirstOrDefault();
+            }
+            try
+            {
+                _result.Headers = _httpResponse.GetHeadersAsJson().ToObject<HeaderCustomNamedRequestIdHeaders>(JsonSerializer.Create(this.Client.DeserializationSettings));
+            }
+            catch (JsonException ex)
             {
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
                 {
                     _httpResponse.Dispose();
                 }
-                throw;
-            }    
+                throw new SerializationException("Unable to deserialize the headers.", _httpResponse.GetHeadersAsJson().ToString(), ex);
+            }
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.Exit(_invocationId, _result);
+            }
+            return _result;
         }
 
     }

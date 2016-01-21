@@ -163,7 +163,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             client.BoolModel.PutTrue(true);
             client.BoolModel.PutFalse(false);
             client.BoolModel.GetNull();
-            Assert.Throws<RestException>(() => client.BoolModel.GetInvalid());
+            Assert.Throws<SerializationException>(() => client.BoolModel.GetInvalid());
         }
 
         [Fact]
@@ -178,11 +178,11 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             client.IntModel.PutMax64(Int64.MaxValue);
             client.IntModel.PutMin64(Int64.MinValue);
             client.IntModel.GetNull();
-            Assert.Throws<RestException>(() => client.IntModel.GetInvalid());
-            Assert.Throws<RestException>(() => client.IntModel.GetOverflowInt32());
-            Assert.Throws<RestException>(() => client.IntModel.GetOverflowInt64());
-            Assert.Throws<RestException>(() => client.IntModel.GetUnderflowInt32());
-            Assert.Throws<RestException>(() => client.IntModel.GetUnderflowInt64());
+            Assert.Throws<SerializationException>(() => client.IntModel.GetInvalid());
+            Assert.Throws<SerializationException>(() => client.IntModel.GetOverflowInt32());
+            Assert.Throws<SerializationException>(() => client.IntModel.GetOverflowInt64());
+            Assert.Throws<SerializationException>(() => client.IntModel.GetUnderflowInt32());
+            Assert.Throws<SerializationException>(() => client.IntModel.GetUnderflowInt64());
         }
 
         [Fact]
@@ -204,8 +204,8 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             Assert.Equal(2.5976931e-101, client.Number.GetSmallDouble());
             Assert.Equal(-99999999.99, client.Number.GetBigDoubleNegativeDecimal());
             Assert.Equal(99999999.99, client.Number.GetBigDoublePositiveDecimal());
-            Assert.Throws<RestException>(() => client.Number.GetInvalidDouble());
-            Assert.Throws<RestException>(() => client.Number.GetInvalidFloat());
+            Assert.Throws<SerializationException>(() => client.Number.GetInvalidDouble());
+            Assert.Throws<SerializationException>(() => client.Number.GetInvalidFloat());
         }
 
         [Fact]
@@ -369,7 +369,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 client.Datetime.GetUtcMinDateTime();
                 client.Datetime.GetLocalNegativeOffsetMinDateTime();
                 //overflow-for-dotnet
-                Assert.Throws<RestException>(() => client.Datetime.GetLocalNegativeOffsetLowercaseMaxDateTime());
+                Assert.Throws<SerializationException>(() => client.Datetime.GetLocalNegativeOffsetLowercaseMaxDateTime());
                 client.Datetime.GetLocalNegativeOffsetUppercaseMaxDateTime();
                 //underflow-for-dotnet
                 client.Datetime.GetLocalPositiveOffsetMinDateTime();
@@ -377,8 +377,8 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 client.Datetime.GetLocalPositiveOffsetUppercaseMaxDateTime();
                 client.Datetime.GetNull();
                 client.Datetime.GetOverflow();
-                Assert.Throws<RestException>(() => client.Datetime.GetInvalid());
-                Assert.Throws<RestException>(() => client.Datetime.GetUnderflow());
+                Assert.Throws<SerializationException>(() => client.Datetime.GetInvalid());
+                Assert.Throws<SerializationException>(() => client.Datetime.GetUnderflow());
                 //The following two calls fail as datetimeoffset are always sent as local time i.e (+00:00) and not Z
                 client.Datetime.PutUtcMaxDateTime(DateTime.MaxValue.ToUniversalTime());
                 client.Datetime.PutUtcMinDateTime(DateTime.Parse("0001-01-01T00:00:00Z",
@@ -405,9 +405,9 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             using (var client = new AutoRestRFC1123DateTimeTestService(Fixture.Uri))
             {
                 Assert.Null(client.Datetimerfc1123.GetNull());
-                Assert.Throws<RestException>(() => client.Datetimerfc1123.GetInvalid());
-                Assert.Throws<RestException>(() => client.Datetimerfc1123.GetUnderflow());
-                Assert.Throws<RestException>(() => client.Datetimerfc1123.GetOverflow());
+                Assert.Throws<SerializationException>(() => client.Datetimerfc1123.GetInvalid());
+                Assert.Throws<SerializationException>(() => client.Datetimerfc1123.GetUnderflow());
+                Assert.Throws<SerializationException>(() => client.Datetimerfc1123.GetOverflow());
                 DateTime? d = client.Datetimerfc1123.GetUtcLowercaseMaxDateTime();
                 Assert.Equal(DateTimeKind.Utc, d.Value.Kind);
 
@@ -559,17 +559,17 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                     new DictionaryEqualityComparer<string>()));
 
                 Assert.Null(client.Array.GetArrayNull());
-                Assert.Throws<RestException>(() => client.Array.GetInvalid());
+                Assert.Throws<SerializationException>(() => client.Array.GetInvalid());
                 Assert.True(client.Array.GetBooleanInvalidNull().SequenceEqual(new List<bool?> {true, null, false}));
-                Assert.Throws<RestException>(() => client.Array.GetBooleanInvalidString());
+                Assert.Throws<SerializationException>(() => client.Array.GetBooleanInvalidString());
                 Assert.True(client.Array.GetIntInvalidNull().SequenceEqual(new List<int?> {1, null, 0}));
-                Assert.Throws<RestException>(() => client.Array.GetIntInvalidString());
+                Assert.Throws<SerializationException>(() => client.Array.GetIntInvalidString());
                 Assert.True(client.Array.GetLongInvalidNull().SequenceEqual(new List<long?> {1, null, 0}));
-                Assert.Throws<RestException>(() => client.Array.GetLongInvalidString());
+                Assert.Throws<SerializationException>(() => client.Array.GetLongInvalidString());
                 Assert.True(client.Array.GetFloatInvalidNull().SequenceEqual(new List<double?> {0.0, null, -1.2e20}));
-                Assert.Throws<RestException>(() => client.Array.GetFloatInvalidString());
+                Assert.Throws<SerializationException>(() => client.Array.GetFloatInvalidString());
                 Assert.True(client.Array.GetDoubleInvalidNull().SequenceEqual(new List<double?> {0.0, null, -1.2e20}));
-                Assert.Throws<RestException>(() => client.Array.GetDoubleInvalidString());
+                Assert.Throws<SerializationException>(() => client.Array.GetDoubleInvalidString());
                 Assert.True(client.Array.GetStringWithInvalid().SequenceEqual(new List<string> {"foo", "123", "foo2"}));
                 var dateNullArray = client.Array.GetDateInvalidNull();
                 Assert.True(dateNullArray.SequenceEqual(new List<DateTime?>
@@ -579,7 +579,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                     null,
                     DateTime.Parse("1776-07-04", CultureInfo.InvariantCulture)
                 }));
-                Assert.Throws<RestException>(() => client.Array.GetDateInvalidChars());
+                Assert.Throws<SerializationException>(() => client.Array.GetDateInvalidChars());
                 var dateTimeNullArray = client.Array.GetDateTimeInvalidNull();
                 Assert.True(dateTimeNullArray.SequenceEqual(new List<DateTime?>
                 {
@@ -587,7 +587,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                         CultureInfo.InvariantCulture).ToUniversalTime(),
                     null
                 }));
-                Assert.Throws<RestException>(() => client.Array.GetDateTimeInvalidChars());
+                Assert.Throws<SerializationException>(() => client.Array.GetDateTimeInvalidChars());
             }
         }
 
@@ -769,7 +769,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             };
 
             Assert.Equal(invalidNullDict, client.Dictionary.GetBooleanInvalidNull());
-            Assert.Throws<RestException>(() => client.Dictionary.GetBooleanInvalidString());
+            Assert.Throws<SerializationException>(() => client.Dictionary.GetBooleanInvalidString());
             var intValid = new Dictionary<string, int?> {{"0", 1}, {"1", -1}, {"2", 3}, {"3", 300}};
             // GET prim/integer/1.-1.3.300
             Assert.Equal(intValid, client.Dictionary.GetIntegerValid());
@@ -777,7 +777,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             client.Dictionary.PutIntegerValid(intValid);
             var intNullDict = new Dictionary<string, int?> {{"0", 1}, {"1", null}, {"2", 0}};
             Assert.Equal(intNullDict, client.Dictionary.GetIntInvalidNull());
-            Assert.Throws<RestException>(() => client.Dictionary.GetIntInvalidString());
+            Assert.Throws<SerializationException>(() => client.Dictionary.GetIntInvalidString());
 
             var longValid = new Dictionary<string, long?> {{"0", 1L}, {"1", -1}, {"2", 3}, {"3", 300}};
             // GET prim/long/1.-1.3.300
@@ -786,7 +786,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             client.Dictionary.PutLongValid(longValid);
             var longNullDict = new Dictionary<string, long?> {{"0", 1}, {"1", null}, {"2", 0}};
             Assert.Equal(longNullDict, client.Dictionary.GetLongInvalidNull());
-            Assert.Throws<RestException>(() => client.Dictionary.GetLongInvalidString());
+            Assert.Throws<SerializationException>(() => client.Dictionary.GetLongInvalidString());
 
             var floatValid = new Dictionary<string, double?> {{"0", 0}, {"1", -0.01}, {"2", -1.2e20}};
             // GET prim/float/0--0.01-1.2e20
@@ -795,7 +795,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             client.Dictionary.PutFloatValid(floatValid);
             var floatNullDict = new Dictionary<string, double?> {{"0", 0.0}, {"1", null}, {"2", -1.2e20}};
             Assert.Equal(floatNullDict, client.Dictionary.GetFloatInvalidNull());
-            Assert.Throws<RestException>(() => client.Dictionary.GetFloatInvalidString());
+            Assert.Throws<SerializationException>(() => client.Dictionary.GetFloatInvalidString());
             var doubleValid = new Dictionary<string, double?> {{"0", 0}, {"1", -0.01}, {"2", -1.2e20}};
             // GET prim/double/0--0.01-1.2e20
             Assert.Equal(doubleValid, client.Dictionary.GetDoubleValid());
@@ -803,7 +803,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             client.Dictionary.PutDoubleValid(doubleValid);
             floatNullDict = new Dictionary<string, double?> {{"0", 0.0}, {"1", null}, {"2", -1.2e20}};
             Assert.Equal(floatNullDict, client.Dictionary.GetDoubleInvalidNull());
-            Assert.Throws<RestException>(() => client.Dictionary.GetDoubleInvalidString());
+            Assert.Throws<SerializationException>(() => client.Dictionary.GetDoubleInvalidString());
             var stringValid = new Dictionary<string, string> {{"0", "foo1"}, {"1", "foo2"}, {"2", "foo3"}};
             // GET prim/string/foo1.foo2.foo3
             Assert.Equal(stringValid, client.Dictionary.GetStringValid());
@@ -842,7 +842,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 {"2", new DateTime(1776, 7, 4, 0, 0, 0, DateTimeKind.Utc)}
             };
             Assert.Equal(dateNullDict, client.Dictionary.GetDateInvalidNull());
-            Assert.Throws<RestException>(() => client.Dictionary.GetDateInvalidChars());
+            Assert.Throws<SerializationException>(() => client.Dictionary.GetDateInvalidChars());
             // GET prim/datetime/valid
             Assert.Equal(new Dictionary<string, DateTime?> {{"0", datetime1}, {"1", datetime2}, {"2", datetime3}},
                 client.Dictionary.GetDateTimeValid());
@@ -858,7 +858,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 {"1", null}
             };
             Assert.Equal(datetimeNullDict, client.Dictionary.GetDateTimeInvalidNull());
-            Assert.Throws<RestException>(() => client.Dictionary.GetDateTimeInvalidChars());
+            Assert.Throws<SerializationException>(() => client.Dictionary.GetDateTimeInvalidChars());
             // GET prim/datetimerfc1123/valid
             Assert.Equal(new Dictionary<string, DateTime?> { { "0", rfcDatetime1 }, { "1", rfcDatetime2 }, { "2", rfcDatetime3 } },
                 client.Dictionary.GetDateTimeRfc1123Valid());
@@ -908,7 +908,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             // GET null
             Assert.Null(client.Dictionary.GetNull());
             // GET invalid
-            Assert.Throws<RestException>(() => client.Dictionary.GetInvalid());
+            Assert.Throws<SerializationException>(() => client.Dictionary.GetInvalid());
             // GET nullkey
             Assert.Equal(new Dictionary<string, string> {{"null", "val1"}}, client.Dictionary.GetNullKey());
             // GET nullvalue
@@ -947,7 +947,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 Assert.Equal(null, basicResult.Id);
                 Assert.Equal(null, basicResult.Name);
                 // GET basic/invalid
-                Assert.Throws<RestException>(() => client.BasicOperations.GetInvalid());
+                Assert.Throws<SerializationException>(() => client.BasicOperations.GetInvalid());
 
                 /* COMPLEX TYPE WITH PRIMITIVE PROPERTIES */
                 // GET primitive/integer

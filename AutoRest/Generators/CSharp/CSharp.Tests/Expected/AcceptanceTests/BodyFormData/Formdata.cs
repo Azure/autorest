@@ -91,108 +91,101 @@ namespace Fixtures.AcceptanceTestsBodyFormData
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
-            try
+            _httpRequest.Method = new HttpMethod("POST");
+            _httpRequest.RequestUri = new Uri(_url);
+            // Set Headers
+            if (customHeaders != null)
             {
-                _httpRequest.Method = new HttpMethod("POST");
-                _httpRequest.RequestUri = new Uri(_url);
-                // Set Headers
-                if (customHeaders != null)
+                foreach(var _header in customHeaders)
                 {
-                    foreach(var _header in customHeaders)
+                    if (_httpRequest.Headers.Contains(_header.Key))
                     {
-                        if (_httpRequest.Headers.Contains(_header.Key))
-                        {
-                            _httpRequest.Headers.Remove(_header.Key);
-                        }
-                        _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
+                        _httpRequest.Headers.Remove(_header.Key);
                     }
+                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
-
-                // Serialize Request
-                string _requestContent = null;
-                MultipartFormDataContent _multiPartContent = new MultipartFormDataContent();
-                if (fileContent != null)
-                {
-                    StreamContent _fileContent = new StreamContent(fileContent);
-                    _fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
-                    System.IO.FileStream _fileContentAsFileStream = fileContent as System.IO.FileStream;
-                    if (_fileContentAsFileStream != null)
-                    {
-                        ContentDispositionHeaderValue _contentDispositionHeaderValue = new ContentDispositionHeaderValue("form-data");
-                        _contentDispositionHeaderValue.Name = "fileContent";
-                        _contentDispositionHeaderValue.FileName = _fileContentAsFileStream.Name;
-                        _fileContent.Headers.ContentDisposition = _contentDispositionHeaderValue;        
-                    }    
-                    _multiPartContent.Add(_fileContent, "fileContent");
-                }
-                if (fileName != null)
-                {
-                    StringContent _fileName = new StringContent(fileName, Encoding.UTF8);
-                    _multiPartContent.Add(_fileName, "fileName");
-                }
-                _httpRequest.Content = _multiPartContent;
-                // Send Request
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-                }
-                cancellationToken.ThrowIfCancellationRequested();
-                _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-                }
-                HttpStatusCode _statusCode = _httpResponse.StatusCode;
-                cancellationToken.ThrowIfCancellationRequested();
-                string _responseContent = null;
-                if ((int)_statusCode != 200)
-                {
-                    var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                    try
-                    {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
-                        if (_errorBody != null)
-                        {
-                            ex.Body = _errorBody;
-                        }
-                    }
-                    catch (JsonException)
-                    {
-                        // Ignore the exception
-                    }
-                    ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                    ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                    if (_shouldTrace)
-                    {
-                        ServiceClientTracing.Error(_invocationId, ex);
-                    }
-                    throw ex;
-                }
-                // Create Result
-                var _result = new HttpOperationResponse<System.IO.Stream>();
-                _result.Request = _httpRequest;
-                _result.Response = _httpResponse;
-                // Deserialize Response
-                if ((int)_statusCode == 200)
-                {
-                    _result.Body = await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Exit(_invocationId, _result);
-                }
-                return _result;
             }
-            catch
+
+            // Serialize Request
+            string _requestContent = null;
+            MultipartFormDataContent _multiPartContent = new MultipartFormDataContent();
+            if (fileContent != null)
             {
+                StreamContent _fileContent = new StreamContent(fileContent);
+                _fileContent.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+                System.IO.FileStream _fileContentAsFileStream = fileContent as System.IO.FileStream;
+                if (_fileContentAsFileStream != null)
+                {
+                    ContentDispositionHeaderValue _contentDispositionHeaderValue = new ContentDispositionHeaderValue("form-data");
+                    _contentDispositionHeaderValue.Name = "fileContent";
+                    _contentDispositionHeaderValue.FileName = _fileContentAsFileStream.Name;
+                    _fileContent.Headers.ContentDisposition = _contentDispositionHeaderValue;        
+                }    
+                _multiPartContent.Add(_fileContent, "fileContent");
+            }
+            if (fileName != null)
+            {
+                StringContent _fileName = new StringContent(fileName, Encoding.UTF8);
+                _multiPartContent.Add(_fileName, "fileName");
+            }
+            _httpRequest.Content = _multiPartContent;
+            // Send Request
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+            }
+            cancellationToken.ThrowIfCancellationRequested();
+            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+            }
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
+            if ((int)_statusCode != 200)
+            {
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    if (_errorBody != null)
+                    {
+                        ex.Body = _errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.Error(_invocationId, ex);
+                }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
                 {
                     _httpResponse.Dispose();
                 }
-                throw;
-            }    
+                throw ex;
+            }
+            // Create Result
+            var _result = new HttpOperationResponse<System.IO.Stream>();
+            _result.Request = _httpRequest;
+            _result.Response = _httpResponse;
+            // Deserialize Response
+            if ((int)_statusCode == 200)
+            {
+                _result.Body = await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            }
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.Exit(_invocationId, _result);
+            }
+            return _result;
         }
 
         /// <summary>
@@ -238,90 +231,83 @@ namespace Fixtures.AcceptanceTestsBodyFormData
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
-            try
+            _httpRequest.Method = new HttpMethod("PUT");
+            _httpRequest.RequestUri = new Uri(_url);
+            // Set Headers
+            if (customHeaders != null)
             {
-                _httpRequest.Method = new HttpMethod("PUT");
-                _httpRequest.RequestUri = new Uri(_url);
-                // Set Headers
-                if (customHeaders != null)
+                foreach(var _header in customHeaders)
                 {
-                    foreach(var _header in customHeaders)
+                    if (_httpRequest.Headers.Contains(_header.Key))
                     {
-                        if (_httpRequest.Headers.Contains(_header.Key))
-                        {
-                            _httpRequest.Headers.Remove(_header.Key);
-                        }
-                        _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
+                        _httpRequest.Headers.Remove(_header.Key);
                     }
+                    _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
-
-                // Serialize Request
-                string _requestContent = null;
-                StreamContent _fileStreamContent = new StreamContent(fileContent);
-                _httpRequest.Content = _fileStreamContent;
-                _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/octet-stream");
-                // Send Request
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
-                }
-                cancellationToken.ThrowIfCancellationRequested();
-                _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
-                }
-                HttpStatusCode _statusCode = _httpResponse.StatusCode;
-                cancellationToken.ThrowIfCancellationRequested();
-                string _responseContent = null;
-                if ((int)_statusCode != 200)
-                {
-                    var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
-                    try
-                    {
-                        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
-                        Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
-                        if (_errorBody != null)
-                        {
-                            ex.Body = _errorBody;
-                        }
-                    }
-                    catch (JsonException)
-                    {
-                        // Ignore the exception
-                    }
-                    ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
-                    ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
-                    if (_shouldTrace)
-                    {
-                        ServiceClientTracing.Error(_invocationId, ex);
-                    }
-                    throw ex;
-                }
-                // Create Result
-                var _result = new HttpOperationResponse<System.IO.Stream>();
-                _result.Request = _httpRequest;
-                _result.Response = _httpResponse;
-                // Deserialize Response
-                if ((int)_statusCode == 200)
-                {
-                    _result.Body = await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                }
-                if (_shouldTrace)
-                {
-                    ServiceClientTracing.Exit(_invocationId, _result);
-                }
-                return _result;
             }
-            catch
+
+            // Serialize Request
+            string _requestContent = null;
+            StreamContent _fileStreamContent = new StreamContent(fileContent);
+            _httpRequest.Content = _fileStreamContent;
+            _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/octet-stream");
+            // Send Request
+            if (_shouldTrace)
             {
+                ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
+            }
+            cancellationToken.ThrowIfCancellationRequested();
+            _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.ReceiveResponse(_invocationId, _httpResponse);
+            }
+            HttpStatusCode _statusCode = _httpResponse.StatusCode;
+            cancellationToken.ThrowIfCancellationRequested();
+            string _responseContent = null;
+            if ((int)_statusCode != 200)
+            {
+                var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+                try
+                {
+                    _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                    Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+                    if (_errorBody != null)
+                    {
+                        ex.Body = _errorBody;
+                    }
+                }
+                catch (JsonException)
+                {
+                    // Ignore the exception
+                }
+                ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+                ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+                if (_shouldTrace)
+                {
+                    ServiceClientTracing.Error(_invocationId, ex);
+                }
                 _httpRequest.Dispose();
                 if (_httpResponse != null)
                 {
                     _httpResponse.Dispose();
                 }
-                throw;
-            }    
+                throw ex;
+            }
+            // Create Result
+            var _result = new HttpOperationResponse<System.IO.Stream>();
+            _result.Request = _httpRequest;
+            _result.Response = _httpResponse;
+            // Deserialize Response
+            if ((int)_statusCode == 200)
+            {
+                _result.Body = await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
+            }
+            if (_shouldTrace)
+            {
+                ServiceClientTracing.Exit(_invocationId, _result);
+            }
+            return _result;
         }
 
     }
