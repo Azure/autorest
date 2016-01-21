@@ -19,50 +19,33 @@ var moment = require('moment');
  * @member {moment.duration} [field]
  * 
  */
-function DurationWrapper(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.field !== undefined) {
-      this.field = parameters.field;
-    }
-  }    
+function DurationWrapper() {
 }
 
-
 /**
- * Validate the payload against the DurationWrapper schema
+ * Defines the metadata of DurationWrapper
  *
- * @param {JSON} payload
+ * @returns {object} metadata of DurationWrapper
  *
  */
-DurationWrapper.prototype.serialize = function () {
-  var payload = {};
-  if (this['field']) {
-    if (!moment.isDuration(this['field'])) {
-      throw new Error('this[\'field\'] must be of type moment.duration.');
+DurationWrapper.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'duration-wrapper',
+    type: {
+      name: 'Composite',
+      className: 'DurationWrapper',
+      modelProperties: {
+        field: {
+          required: false,
+          serializedName: 'field',
+          type: {
+            name: 'TimeSpan'
+          }
+        }
+      }
     }
-    payload['field'] = this['field'].toISOString();
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to DurationWrapper schema
- *
- * @param {JSON} instance
- *
- */
-DurationWrapper.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['field']) {
-      this['field'] = moment.duration(instance['field']);
-    }
-    else if (instance['field'] !== undefined) {
-      this['field'] = instance['field'];
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = DurationWrapper;

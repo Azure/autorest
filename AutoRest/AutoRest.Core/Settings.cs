@@ -237,13 +237,14 @@ Licensed under the MIT License. See License.txt in the project root for license 
         public static Settings Create(IDictionary<string, string> settings)
         {
             var autoRestSettings = new Settings();
-            var unmatchedSettings = PopulateSettings(autoRestSettings, settings);
             if (settings == null || settings.Count > 0)
             {
                 autoRestSettings.ShowHelp = true;
             }
 
-            autoRestSettings.CustomSettings = unmatchedSettings;
+            PopulateSettings(autoRestSettings, settings);
+
+            autoRestSettings.CustomSettings = settings;
             return autoRestSettings;
         }
 
@@ -251,12 +252,10 @@ Licensed under the MIT License. See License.txt in the project root for license 
         /// Sets object properties from the dictionary matching keys to property names or aliases.
         /// </summary>
         /// <param name="entityToPopulate">Object to populate from dictionary.</param>
-        /// <param name="settings">Dictionary of settings.</param>
+        /// <param name="settings">Dictionary of settings.Settings that are populated get removed from the dictionary.</param>
         /// <returns>Dictionary of settings that were not matched.</returns>
-        public static IDictionary<string, string> PopulateSettings(object entityToPopulate, IDictionary<string, string> settings)
+        public static void PopulateSettings(object entityToPopulate, IDictionary<string, string> settings)
         {
-            Dictionary<string, string> unmatchedSettings = new Dictionary<string, string>();
-
             if (entityToPopulate == null)
             {
                 throw new ArgumentNullException("entityToPopulate");
@@ -265,7 +264,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
             if (settings != null && settings.Count > 0)
             {
                 // Setting property value from dictionary
-                foreach (var setting in settings)
+                foreach (var setting in settings.ToArray())
                 {
                     PropertyInfo property = entityToPopulate.GetType().GetProperties()
                         .FirstOrDefault(p => setting.Key.Equals(p.Name, StringComparison.OrdinalIgnoreCase) ||
@@ -285,6 +284,8 @@ Licensed under the MIT License. See License.txt in the project root for license 
                                 property.SetValue(entityToPopulate,
                                     Convert.ChangeType(setting.Value, property.PropertyType, CultureInfo.InvariantCulture), null);
                             }
+
+                            settings.Remove(setting.Key);
                         }
                         catch (Exception exception)
                         {
@@ -292,14 +293,8 @@ Licensed under the MIT License. See License.txt in the project root for license 
                                 setting.Key, property.GetType().Name), exception);
                         }
                     }
-                    else
-                    {
-                        unmatchedSettings[setting.Key] = setting.Value;
-                    }
                 }
             }
-
-            return unmatchedSettings;
         }
 
         public void Validate(CodeGenerator codeGenerator)

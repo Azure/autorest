@@ -18,6 +18,7 @@ import java.io.InputStream;
 import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.GET;
+import retrofit.http.Headers;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -29,10 +30,12 @@ public interface Files {
      * used by Retrofit to perform actually REST calls.
      */
     interface FilesService {
-        @GET("/files/stream/nonempty")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("files/stream/nonempty")
         Call<ResponseBody> getFile();
 
-        @GET("/files/stream/empty")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("files/stream/empty")
         Call<ResponseBody> getEmptyFile();
 
     }

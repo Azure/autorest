@@ -17,7 +17,6 @@
 var util = require('util');
 var msRest = require('ms-rest');
 var ServiceClient = msRest.ServiceClient;
-var WebResource = msRest.WebResource;
 
 var models = require('./models');
 var operations = require('./operations');
@@ -36,7 +35,8 @@ var operations = require('./operations');
  * @param {object} [options.requestOptions] - Options for the underlying request object
  * {@link https://github.com/request/request#requestoptions-callback Options doc}
  *
- * @param {bool} [options.noRetryPolicy] - If set to true, turn off default retry policy
+ * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
+ *
  */
 function AutoRestHttpInfrastructureTestService(baseUri, options) {
 
@@ -55,7 +55,8 @@ function AutoRestHttpInfrastructureTestService(baseUri, options) {
   this.httpServerFailure = new operations.HttpServerFailure(this);
   this.httpRetry = new operations.HttpRetry(this);
   this.multipleResponses = new operations.MultipleResponses(this);
-  this._models = models;
+  this.models = models;
+  msRest.addSerializationMixin(this);
 }
 
 util.inherits(AutoRestHttpInfrastructureTestService, ServiceClient);

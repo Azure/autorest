@@ -21,63 +21,41 @@ var util = require('util');
  * @member {array} [productArray] Array of products
  * 
  */
-function CatalogArray(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.productArray) {
-      var tempParametersproductArray = [];
-      parameters.productArray.forEach(function(element) {
-        if (element) {
-          element = new models['Product'](element);
-        }
-        tempParametersproductArray.push(element);
-      });
-      this.productArray = tempParametersproductArray;
-    }
-  }    
+function CatalogArray() {
 }
 
-
 /**
- * Validate the payload against the CatalogArray schema
+ * Defines the metadata of CatalogArray
  *
- * @param {JSON} payload
+ * @returns {object} metadata of CatalogArray
  *
  */
-CatalogArray.prototype.serialize = function () {
-  var payload = {};
-  if (util.isArray(this['productArray'])) {
-    payload['productArray'] = [];
-    for (var i = 0; i < this['productArray'].length; i++) {
-      if (this['productArray'][i]) {
-        payload['productArray'][i] = this['productArray'][i].serialize();
+CatalogArray.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'CatalogArray',
+    type: {
+      name: 'Composite',
+      className: 'CatalogArray',
+      modelProperties: {
+        productArray: {
+          required: false,
+          serializedName: 'productArray',
+          type: {
+            name: 'Sequence',
+            element: {
+                required: false,
+                serializedName: 'ProductElementType',
+                type: {
+                  name: 'Composite',
+                  className: 'Product'
+                }
+            }
+          }
+        }
       }
     }
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to CatalogArray schema
- *
- * @param {JSON} instance
- *
- */
-CatalogArray.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['productArray']) {
-      var tempInstanceproductArray = [];
-      instance['productArray'].forEach(function(element1) {
-        if (element1) {
-          element1 = new models['Product']().deserialize(element1);
-        }
-        tempInstanceproductArray.push(element1);
-      });
-      this['productArray'] = tempInstanceproductArray;
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = CatalogArray;

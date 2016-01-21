@@ -26,6 +26,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
             }
             
             this.ClientRequestIdString = AzureExtensions.GetClientRequestIdString(source);
+            this.RequestIdString = AzureExtensions.GetRequestIdString(source);
         }
 
         public bool IsPagingMethod
@@ -48,6 +49,8 @@ namespace Microsoft.Rest.Generator.Azure.Python
 
         public string ClientRequestIdString { get; private set; }
 
+        public string RequestIdString { get; private set; }
+
         /// <summary>
         /// Returns true if method has x-ms-long-running-operation extension.
         /// </summary>
@@ -56,13 +59,18 @@ namespace Microsoft.Rest.Generator.Azure.Python
             get { return Extensions.ContainsKey(AzureExtensions.LongRunningExtension); }
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "exp"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "CloudError")]
         public override string RaisedException
         {
             get
             {
-                if (DefaultResponse.Body != null && DefaultResponse.Body.Name == "CloudError")
+                if (DefaultResponse.Body == null || DefaultResponse.Body.Name == "CloudError")
                 {
-                    return "CloudError(response)";
+                    var sb = new IndentedStringBuilder();
+                    sb.AppendLine("exp = CloudError(response)");
+                    sb.AppendLine("exp.request_id = response.headers.get('{0}')", this.RequestIdString);
+                    sb.AppendLine("raise exp");
+                    return sb.ToString();
                 }
 
                 return base.RaisedException;
@@ -77,7 +85,8 @@ namespace Microsoft.Rest.Generator.Azure.Python
             get
             {
                 var sb = new IndentedStringBuilder();
-                sb.AppendLine("header_parameters['{0}'] = str(uuid.uuid1())", this.ClientRequestIdString).Append(base.SetDefaultHeaders);
+                sb.AppendLine("if self.config.generate_client_request_id:", this.ClientRequestIdString).Indent();
+                sb.AppendLine("header_parameters['{0}'] = str(uuid.uuid1())", this.ClientRequestIdString).Outdent().Append(base.SetDefaultHeaders);
                 return sb.ToString();
             }
         }
@@ -87,7 +96,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
         {
             get
             {
-                if (this.HttpMethod == HttpMethod.Head)
+                if (this.HttpMethod == HttpMethod.Head && this.ReturnType.Body == PrimaryType.Boolean)
                 {
                     HttpStatusCode code = this.Responses.Keys.FirstOrDefault(AzureExtensions.HttpHeadStatusCodeSuccessFunc);
                     var builder = new IndentedStringBuilder("    ");

@@ -19,61 +19,40 @@
  * @member {boolean} [fieldFalse]
  * 
  */
-function BooleanWrapper(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.fieldTrue !== undefined) {
-      this.fieldTrue = parameters.fieldTrue;
-    }
-    if (parameters.fieldFalse !== undefined) {
-      this.fieldFalse = parameters.fieldFalse;
-    }
-  }    
+function BooleanWrapper() {
 }
 
-
 /**
- * Validate the payload against the BooleanWrapper schema
+ * Defines the metadata of BooleanWrapper
  *
- * @param {JSON} payload
+ * @returns {object} metadata of BooleanWrapper
  *
  */
-BooleanWrapper.prototype.serialize = function () {
-  var payload = {};
-  if (this['fieldTrue'] !== null && this['fieldTrue'] !== undefined) {
-    if (typeof this['fieldTrue'] !== 'boolean') {
-      throw new Error('this[\'fieldTrue\'] must be of type boolean.');
+BooleanWrapper.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'boolean-wrapper',
+    type: {
+      name: 'Composite',
+      className: 'BooleanWrapper',
+      modelProperties: {
+        fieldTrue: {
+          required: false,
+          serializedName: 'field_true',
+          type: {
+            name: 'Boolean'
+          }
+        },
+        fieldFalse: {
+          required: false,
+          serializedName: 'field_false',
+          type: {
+            name: 'Boolean'
+          }
+        }
+      }
     }
-    payload['field_true'] = this['fieldTrue'];
-  }
-
-  if (this['fieldFalse'] !== null && this['fieldFalse'] !== undefined) {
-    if (typeof this['fieldFalse'] !== 'boolean') {
-      throw new Error('this[\'fieldFalse\'] must be of type boolean.');
-    }
-    payload['field_false'] = this['fieldFalse'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to BooleanWrapper schema
- *
- * @param {JSON} instance
- *
- */
-BooleanWrapper.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['field_true'] !== undefined) {
-      this['fieldTrue'] = instance['field_true'];
-    }
-
-    if (instance['field_false'] !== undefined) {
-      this['fieldFalse'] = instance['field_false'];
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = BooleanWrapper;

@@ -18,6 +18,7 @@ import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeaders;
 import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.Header;
+import retrofit.http.Headers;
 import retrofit.http.POST;
 
 /**
@@ -30,7 +31,8 @@ public interface HeaderOperationsOperations {
      * used by Retrofit to perform actually REST calls.
      */
     interface HeaderOperationsService {
-        @POST("/azurespecials/customNamedRequestId")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("azurespecials/customNamedRequestId")
         Call<ResponseBody> customNamedRequestId(@Header("foo-client-request-id") String fooClientRequestId, @Header("accept-language") String acceptLanguage);
 
     }

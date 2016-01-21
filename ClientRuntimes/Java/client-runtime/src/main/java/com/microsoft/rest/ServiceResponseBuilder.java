@@ -8,7 +8,7 @@
 package com.microsoft.rest;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.microsoft.rest.serializer.JacksonUtils;
+import com.microsoft.rest.serializer.JacksonMapperAdapter;
 import com.squareup.okhttp.ResponseBody;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -39,34 +39,34 @@ public class ServiceResponseBuilder<T, E extends AutoRestException> {
     protected Class<? extends AutoRestException> exceptionType;
 
     /**
-     * The deserializer used for deserializing the response.
+     * The mapperAdapter used for deserializing the response.
      */
-    protected JacksonUtils deserializer;
+    protected JacksonMapperAdapter mapperAdapter;
 
     /**
      * Create a ServiceResponseBuilder instance.
      */
     public ServiceResponseBuilder() {
-        this(new JacksonUtils());
+        this(new JacksonMapperAdapter());
     }
 
     /**
      * Create a ServiceResponseBuilder instance.
      *
-     * @param deserializer the serialization utils to use for deserialization operations
+     * @param mapperAdapter the serialization utils to use for deserialization operations
      */
-    public ServiceResponseBuilder(JacksonUtils deserializer) {
-        this(deserializer, new HashMap<Integer, Type>());
+    public ServiceResponseBuilder(JacksonMapperAdapter mapperAdapter) {
+        this(mapperAdapter, new HashMap<Integer, Type>());
     }
 
     /**
      * Create a ServiceResponseBuilder instance.
      *
-     * @param deserializer the serialization utils to use for deserialization operations
+     * @param mapperAdapter the serialization utils to use for deserialization operations
      * @param responseTypes a mapping of response status codes and response destination types
      */
-    public ServiceResponseBuilder(JacksonUtils deserializer, Map<Integer, Type> responseTypes) {
-        this.deserializer = deserializer;
+    public ServiceResponseBuilder(JacksonMapperAdapter mapperAdapter, Map<Integer, Type> responseTypes) {
+        this.mapperAdapter = mapperAdapter;
         this.responseTypes = responseTypes;
         this.exceptionType = ServiceException.class;
         this.responseTypes.put(0, Object.class);
@@ -220,8 +220,8 @@ public class ServiceResponseBuilder<T, E extends AutoRestException> {
      */
     public <THeader> ServiceResponseWithHeaders<T, THeader> buildWithHeaders(Response<ResponseBody> response, Retrofit retrofit, Class<THeader> headerType) throws E, IOException {
         ServiceResponse<T> bodyResponse = build(response, retrofit);
-        THeader headers = deserializer.deserialize(
-                JacksonUtils.serialize(response.headers()),
+        THeader headers = mapperAdapter.deserialize(
+                mapperAdapter.serialize(response.headers()),
                 headerType);
         return new ServiceResponseWithHeaders<>(bodyResponse.getBody(), headers, bodyResponse.getResponse());
     }
@@ -246,8 +246,8 @@ public class ServiceResponseBuilder<T, E extends AutoRestException> {
      */
     public <THeader> ServiceResponseWithHeaders<T, THeader> buildEmptyWithHeaders(Response<Void> response, Retrofit retrofit, Class<THeader> headerType) throws E, IOException {
         ServiceResponse<T> bodyResponse = buildEmpty(response, retrofit);
-        THeader headers = deserializer.deserialize(
-                JacksonUtils.serialize(response.headers()),
+        THeader headers = mapperAdapter.deserialize(
+                mapperAdapter.serialize(response.headers()),
                 headerType);
         return new ServiceResponseWithHeaders<>(headers, bodyResponse.getHeadResponse());
     }
@@ -289,7 +289,7 @@ public class ServiceResponseBuilder<T, E extends AutoRestException> {
             if (responseContent.length() <= 0) {
                 return null;
             }
-            return deserializer.deserialize(responseContent, type);
+            return mapperAdapter.deserialize(responseContent, type);
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
     {
         private readonly AzureCSharpCodeNamer _namer;
 
-        private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.Azure.2.6.0";
+        private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.Azure.3.0.0";
 
         // page extensions class dictionary.
         private IDictionary<KeyValuePair<string, string>, string> pageClasses;
@@ -90,7 +90,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             // Service client
             var serviceClientTemplate = new AzureServiceClientTemplate
             {
-                Model = new AzureServiceClientTemplateModel(serviceClient),
+                Model = new AzureServiceClientTemplateModel(serviceClient, InternalConstructors),
             };
             await Write(serviceClientTemplate, serviceClient.Name + ".cs");
 
@@ -104,7 +104,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             // Service client interface
             var serviceClientInterfaceTemplate = new ServiceClientInterfaceTemplate
             {
-                Model = new AzureServiceClientTemplateModel(serviceClient),
+                Model = new AzureServiceClientTemplateModel(serviceClient, InternalConstructors),
             };
             await Write(serviceClientInterfaceTemplate, "I" + serviceClient.Name + ".cs");
 

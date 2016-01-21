@@ -72,6 +72,9 @@
     <Folder Include="Expected\AcceptanceTests\AzureSpecials\auto_rest_azure_special_parameters_test_client\" />
     <Folder Include="Expected\AcceptanceTests\AzureSpecials\auto_rest_azure_special_parameters_test_client\models\" />
     <Folder Include="Expected\AcceptanceTests\AzureSpecials\auto_rest_azure_special_parameters_test_client\operations\" />
+    <Folder Include="Expected\AcceptanceTests\HeadExceptions\" />
+    <Folder Include="Expected\AcceptanceTests\HeadExceptions\auto_rest_head_exception_test_service\" />
+    <Folder Include="Expected\AcceptanceTests\HeadExceptions\auto_rest_head_exception_test_service\operations\" />
     <Folder Include="Expected\AcceptanceTests\Head\" />
     <Folder Include="Expected\AcceptanceTests\Head\auto_rest_head_test_service\" />
     <Folder Include="Expected\AcceptanceTests\Head\auto_rest_head_test_service\operations\" />

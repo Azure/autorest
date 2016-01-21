@@ -89,6 +89,7 @@ namespace Microsoft.Rest.Generator.Java
                 classes.Add("java.util.List");
                 classes.Add("com.squareup.okhttp.Interceptor");
                 classes.Add("com.squareup.okhttp.logging.HttpLoggingInterceptor.Level");
+                classes.Add("com.microsoft.rest.serializer.JacksonMapperAdapter");
                 if (this.Properties.Any(p => p.Type == PrimaryType.Credentials))
                 {
                     classes.Add("com.microsoft.rest.credentials.ServiceClientCredentials");

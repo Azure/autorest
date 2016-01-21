@@ -12,8 +12,8 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
 {
     public class AzureServiceClientTemplateModel : ServiceClientTemplateModel
     {
-        public AzureServiceClientTemplateModel(ServiceClient serviceClient)
-            : base(serviceClient)
+        public AzureServiceClientTemplateModel(ServiceClient serviceClient, bool internalConstructors)
+            : base(serviceClient, internalConstructors)
         {
             // TODO: Initialized in the base constructor. Why Clear it?
             MethodTemplateModels.Clear();

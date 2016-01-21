@@ -19,61 +19,40 @@
  * @member {string} [id]
  * 
  */
-function Sku(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.name !== undefined) {
-      this.name = parameters.name;
-    }
-    if (parameters.id !== undefined) {
-      this.id = parameters.id;
-    }
-  }    
+function Sku() {
 }
 
-
 /**
- * Validate the payload against the Sku schema
+ * Defines the metadata of Sku
  *
- * @param {JSON} payload
+ * @returns {object} metadata of Sku
  *
  */
-Sku.prototype.serialize = function () {
-  var payload = {};
-  if (this['name'] !== null && this['name'] !== undefined) {
-    if (typeof this['name'].valueOf() !== 'string') {
-      throw new Error('this[\'name\'] must be of type string.');
+Sku.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'Sku',
+    type: {
+      name: 'Composite',
+      className: 'Sku',
+      modelProperties: {
+        name: {
+          required: false,
+          serializedName: 'name',
+          type: {
+            name: 'String'
+          }
+        },
+        id: {
+          required: false,
+          serializedName: 'id',
+          type: {
+            name: 'String'
+          }
+        }
+      }
     }
-    payload['name'] = this['name'];
-  }
-
-  if (this['id'] !== null && this['id'] !== undefined) {
-    if (typeof this['id'].valueOf() !== 'string') {
-      throw new Error('this[\'id\'] must be of type string.');
-    }
-    payload['id'] = this['id'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to Sku schema
- *
- * @param {JSON} instance
- *
- */
-Sku.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['name'] !== undefined) {
-      this['name'] = instance['name'];
-    }
-
-    if (instance['id'] !== undefined) {
-      this['id'] = instance['id'];
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = Sku;

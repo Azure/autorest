@@ -18,7 +18,6 @@ var util = require('util');
 var msRest = require('ms-rest');
 var msRestAzure = require('ms-rest-azure');
 var ServiceClient = msRestAzure.AzureServiceClient;
-var WebResource = msRest.WebResource;
 
 var models = require('./models');
 var operations = require('./operations');
@@ -28,9 +27,9 @@ var operations = require('./operations');
  * Initializes a new instance of the AutoRestAzureSpecialParametersTestClient class.
  * @constructor
  *
- * @param {Credentials} credentials The management credentials for Azure.
+ * @param {credentials} credentials - Gets Azure subscription credentials.
  *
- * @param {String} subscriptionId The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'
+ * @param {string} subscriptionId - The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'
  *
  * @param {string} [baseUri] - The base URI of the service.
  *
@@ -41,7 +40,16 @@ var operations = require('./operations');
  * @param {object} [options.requestOptions] - Options for the underlying request object
  * {@link https://github.com/request/request#requestoptions-callback Options doc}
  *
- * @param {bool} [options.noRetryPolicy] - If set to true, turn off default retry policy
+ * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
+ *
+ * @param {string} [options.apiVersion] - The api version, which appears in the query, the value is always '2015-07-01-preview'
+ *
+ * @param {string} [options.acceptLanguage] - Gets or sets the preferred language for the response.
+ *
+ * @param {number} [options.longRunningOperationRetryTimeout] - Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
+ *
+ * @param {boolean} [options.generateClientRequestId] - When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
+ *
  */
 function AutoRestAzureSpecialParametersTestClient(credentials, subscriptionId, baseUri, options) {
   if (credentials === null || credentials === undefined) {
@@ -61,11 +69,21 @@ function AutoRestAzureSpecialParametersTestClient(credentials, subscriptionId, b
   this.credentials = credentials;
   this.subscriptionId = subscriptionId;
 
-  if(!this.apiVersion) {
-    this.apiVersion = '2015-07-01-preview';
+  this.apiVersion = '2015-07-01-preview';
+  this.acceptLanguage = 'en-US';
+  this.longRunningOperationRetryTimeout = 30;
+  this.generateClientRequestId = true;
+    if(options.apiVersion !== null && options.apiVersion !== undefined) { 
+    this.apiVersion = options.apiVersion;
   }
-  if(!this.acceptLanguage) {
-    this.acceptLanguage = 'en-US';
+  if(options.acceptLanguage !== null && options.acceptLanguage !== undefined) { 
+    this.acceptLanguage = options.acceptLanguage;
+  }
+  if(options.longRunningOperationRetryTimeout !== null && options.longRunningOperationRetryTimeout !== undefined) { 
+    this.longRunningOperationRetryTimeout = options.longRunningOperationRetryTimeout;
+  }
+  if(options.generateClientRequestId !== null && options.generateClientRequestId !== undefined) { 
+    this.generateClientRequestId = options.generateClientRequestId;
   }
   this.xMsClientRequestId = new operations.XMsClientRequestId(this);
   this.subscriptionInCredentials = new operations.SubscriptionInCredentials(this);
@@ -75,7 +93,8 @@ function AutoRestAzureSpecialParametersTestClient(credentials, subscriptionId, b
   this.skipUrlEncoding = new operations.SkipUrlEncoding(this);
   this.odata = new operations.Odata(this);
   this.header = new operations.Header(this);
-  this._models = models;
+  this.models = models;
+  msRest.addSerializationMixin(this);
 }
 
 util.inherits(AutoRestAzureSpecialParametersTestClient, ServiceClient);

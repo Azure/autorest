@@ -21,81 +21,48 @@ var util = require('util');
  * @member {array} [productArrayOfDictionary] Array of dictionary of products
  * 
  */
-function CatalogArrayOfDictionary(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.productArrayOfDictionary) {
-      var tempParametersproductArrayOfDictionary = [];
-      parameters.productArrayOfDictionary.forEach(function(element) {
-        if (element) {
-          element = {};
-          for(var valueElement in element) {
-            if (element[valueElement]) {
-              element[valueElement] = new models['Product'](element[valueElement]);
-            }
-          }
-        }
-        tempParametersproductArrayOfDictionary.push(element);
-      });
-      this.productArrayOfDictionary = tempParametersproductArrayOfDictionary;
-    }
-  }    
+function CatalogArrayOfDictionary() {
 }
 
-
 /**
- * Validate the payload against the CatalogArrayOfDictionary schema
+ * Defines the metadata of CatalogArrayOfDictionary
  *
- * @param {JSON} payload
+ * @returns {object} metadata of CatalogArrayOfDictionary
  *
  */
-CatalogArrayOfDictionary.prototype.serialize = function () {
-  var payload = {};
-  if (util.isArray(this['productArrayOfDictionary'])) {
-    payload['productArrayOfDictionary'] = [];
-    for (var i = 0; i < this['productArrayOfDictionary'].length; i++) {
-      if (this['productArrayOfDictionary'][i] && typeof this['productArrayOfDictionary'][i] === 'object') {
-        payload['productArrayOfDictionary'][i] = {};
-        for(var valueElement1 in this['productArrayOfDictionary'][i]) {
-          if (this['productArrayOfDictionary'][i][valueElement1]) {
-            payload['productArrayOfDictionary'][i][valueElement1] = this['productArrayOfDictionary'][i][valueElement1].serialize();
-          }
-          else {
-            payload['productArrayOfDictionary'][i][valueElement1] = this['productArrayOfDictionary'][i][valueElement1];
+CatalogArrayOfDictionary.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'CatalogArrayOfDictionary',
+    type: {
+      name: 'Composite',
+      className: 'CatalogArrayOfDictionary',
+      modelProperties: {
+        productArrayOfDictionary: {
+          required: false,
+          serializedName: 'productArrayOfDictionary',
+          type: {
+            name: 'Sequence',
+            element: {
+                required: false,
+                serializedName: 'ObjectElementType',
+                type: {
+                  name: 'Dictionary',
+                  value: {
+                      required: false,
+                      serializedName: 'ProductElementType',
+                      type: {
+                        name: 'Composite',
+                        className: 'Product'
+                      }
+                  }
+                }
+            }
           }
         }
       }
     }
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to CatalogArrayOfDictionary schema
- *
- * @param {JSON} instance
- *
- */
-CatalogArrayOfDictionary.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['productArrayOfDictionary']) {
-      var tempInstanceproductArrayOfDictionary = [];
-      instance['productArrayOfDictionary'].forEach(function(element1) {
-        if (element1) {
-          element1 = {};
-          for(var valueElement2 in element1) {
-            if (element1[valueElement2]) {
-              element1[valueElement2] = new models['Product']().deserialize(element1[valueElement2]);
-            }
-          }
-        }
-        tempInstanceproductArrayOfDictionary.push(element1);
-      });
-      this['productArrayOfDictionary'] = tempInstanceproductArrayOfDictionary;
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = CatalogArrayOfDictionary;

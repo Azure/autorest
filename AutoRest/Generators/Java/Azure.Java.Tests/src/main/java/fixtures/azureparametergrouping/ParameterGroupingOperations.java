@@ -22,6 +22,7 @@ import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.Header;
+import retrofit.http.Headers;
 import retrofit.http.Path;
 import retrofit.http.POST;
 import retrofit.http.Query;
@@ -36,16 +37,20 @@ public interface ParameterGroupingOperations {
      * used by Retrofit to perform actually REST calls.
      */
     interface ParameterGroupingService {
-        @POST("/parameterGrouping/postRequired/{path}")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("parameterGrouping/postRequired/{path}")
         Call<ResponseBody> postRequired(@Path("path") String path, @Header("accept-language") String acceptLanguage, @Body int body, @Header("customHeader") String customHeader, @Query("query") Integer query);
 
-        @POST("/parameterGrouping/postOptional")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("parameterGrouping/postOptional")
         Call<ResponseBody> postOptional(@Header("accept-language") String acceptLanguage, @Header("customHeader") String customHeader, @Query("query") Integer query);
 
-        @POST("/parameterGrouping/postMultipleParameterGroups")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("parameterGrouping/postMultipleParameterGroups")
         Call<ResponseBody> postMultipleParameterGroups(@Header("accept-language") String acceptLanguage, @Header("header-one") String headerOne, @Query("query-one") Integer queryOne, @Header("header-two") String headerTwo, @Query("query-two") Integer queryTwo);
 
-        @POST("/parameterGrouping/sharedParameterGroupObject")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("parameterGrouping/sharedParameterGroupObject")
         Call<ResponseBody> postSharedParameterGroupObject(@Header("accept-language") String acceptLanguage, @Header("header-one") String headerOne, @Query("query-one") Integer queryOne);
 
     }

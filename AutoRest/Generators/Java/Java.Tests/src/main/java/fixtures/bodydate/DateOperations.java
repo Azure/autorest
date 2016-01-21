@@ -19,6 +19,7 @@ import org.joda.time.LocalDate;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
+import retrofit.http.Headers;
 import retrofit.http.PUT;
 
 /**
@@ -31,28 +32,36 @@ public interface DateOperations {
      * used by Retrofit to perform actually REST calls.
      */
     interface DateService {
-        @GET("/date/null")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("date/null")
         Call<ResponseBody> getNull();
 
-        @GET("/date/invaliddate")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("date/invaliddate")
         Call<ResponseBody> getInvalidDate();
 
-        @GET("/date/overflowdate")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("date/overflowdate")
         Call<ResponseBody> getOverflowDate();
 
-        @GET("/date/underflowdate")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("date/underflowdate")
         Call<ResponseBody> getUnderflowDate();
 
-        @PUT("/date/max")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("date/max")
         Call<ResponseBody> putMaxDate(@Body LocalDate dateBody);
 
-        @GET("/date/max")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("date/max")
         Call<ResponseBody> getMaxDate();
 
-        @PUT("/date/min")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("date/min")
         Call<ResponseBody> putMinDate(@Body LocalDate dateBody);
 
-        @GET("/date/min")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("date/min")
         Call<ResponseBody> getMinDate();
 
     }

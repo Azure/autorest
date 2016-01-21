@@ -102,250 +102,155 @@ var util = require('util');
  * Recursive Endpoints
  * 
  */
-function StorageAccount(parameters) {
-  StorageAccount['super_'].call(this, parameters);
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.provisioningState !== undefined) {
-      this.provisioningState = parameters.provisioningState;
-    }
-    if (parameters.accountType !== undefined) {
-      this.accountType = parameters.accountType;
-    }
-    if (parameters.primaryEndpoints) {
-      this.primaryEndpoints = new models['Endpoints'](parameters.primaryEndpoints);
-    }
-    if (parameters.primaryLocation !== undefined) {
-      this.primaryLocation = parameters.primaryLocation;
-    }
-    if (parameters.statusOfPrimary !== undefined) {
-      this.statusOfPrimary = parameters.statusOfPrimary;
-    }
-    if (parameters.lastGeoFailoverTime !== undefined) {
-      this.lastGeoFailoverTime = parameters.lastGeoFailoverTime;
-    }
-    if (parameters.secondaryLocation !== undefined) {
-      this.secondaryLocation = parameters.secondaryLocation;
-    }
-    if (parameters.statusOfSecondary !== undefined) {
-      this.statusOfSecondary = parameters.statusOfSecondary;
-    }
-    if (parameters.creationTime !== undefined) {
-      this.creationTime = parameters.creationTime;
-    }
-    if (parameters.customDomain) {
-      this.customDomain = new models['CustomDomain'](parameters.customDomain);
-    }
-    if (parameters.secondaryEndpoints) {
-      this.secondaryEndpoints = new models['Endpoints'](parameters.secondaryEndpoints);
-    }
-  }    
+function StorageAccount() {
+  StorageAccount['super_'].call(this);
 }
 
 util.inherits(StorageAccount, models['Resource']);
 
 /**
- * Validate the payload against the StorageAccount schema
+ * Defines the metadata of StorageAccount
  *
- * @param {JSON} payload
- *
- */
-StorageAccount.prototype.serialize = function () {
-  var payload = StorageAccount['super_'].prototype.serialize.call(this);
-  if (this['provisioningState'] !== null && this['provisioningState'] !== undefined) {
-    var allowedValues = [ 'Creating', 'ResolvingDNS', 'Succeeded' ];
-    var thisprovisioningState = this['provisioningState'];
-    if (!allowedValues.some( function(item) { return item === thisprovisioningState; })) {
-      throw new Error(this['provisioningState'] + ' is not a valid value. The valid values are: ' + allowedValues);
-    }
-    if (payload['properties'] === null || payload['properties'] === undefined) {
-      payload['properties'] = {};
-    }
-    payload['properties']['provisioningState'] = this['provisioningState'];
-  }
-
-  if (this['accountType'] !== null && this['accountType'] !== undefined) {
-    var allowedValues1 = [ 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS' ];
-    var thisaccountType = this['accountType'];
-    if (!allowedValues1.some( function(item) { return item === thisaccountType; })) {
-      throw new Error(this['accountType'] + ' is not a valid value. The valid values are: ' + allowedValues1);
-    }
-    if (payload['properties'] === null || payload['properties'] === undefined) {
-      payload['properties'] = {};
-    }
-    payload['properties']['accountType'] = this['accountType'];
-  }
-
-  if (this['primaryEndpoints']) {
-    if (payload['properties'] === null || payload['properties'] === undefined) {
-      payload['properties'] = {};
-    }
-    payload['properties']['primaryEndpoints'] = this['primaryEndpoints'].serialize();
-  }
-
-  if (this['primaryLocation'] !== null && this['primaryLocation'] !== undefined) {
-    if (typeof this['primaryLocation'].valueOf() !== 'string') {
-      throw new Error('this[\'primaryLocation\'] must be of type string.');
-    }
-    if (payload['properties'] === null || payload['properties'] === undefined) {
-      payload['properties'] = {};
-    }
-    payload['properties']['primaryLocation'] = this['primaryLocation'];
-  }
-
-  if (this['statusOfPrimary'] !== null && this['statusOfPrimary'] !== undefined) {
-    var allowedValues2 = [ 'Available', 'Unavailable' ];
-    var thisstatusOfPrimary = this['statusOfPrimary'];
-    if (!allowedValues2.some( function(item) { return item === thisstatusOfPrimary; })) {
-      throw new Error(this['statusOfPrimary'] + ' is not a valid value. The valid values are: ' + allowedValues2);
-    }
-    if (payload['properties'] === null || payload['properties'] === undefined) {
-      payload['properties'] = {};
-    }
-    payload['properties']['statusOfPrimary'] = this['statusOfPrimary'];
-  }
-
-  if (this['lastGeoFailoverTime']) {
-    if (!(this['lastGeoFailoverTime'] instanceof Date || typeof this['lastGeoFailoverTime'].valueOf() === 'string' && !isNaN(Date.parse(this['lastGeoFailoverTime'])))) {
-      throw new Error('this[\'lastGeoFailoverTime\'] must be of type date.');
-    }
-    if (payload['properties'] === null || payload['properties'] === undefined) {
-      payload['properties'] = {};
-    }
-    payload['properties']['lastGeoFailoverTime'] = (this['lastGeoFailoverTime'] instanceof Date) ? this['lastGeoFailoverTime'].toISOString() : this['lastGeoFailoverTime'];
-  }
-
-  if (this['secondaryLocation'] !== null && this['secondaryLocation'] !== undefined) {
-    if (typeof this['secondaryLocation'].valueOf() !== 'string') {
-      throw new Error('this[\'secondaryLocation\'] must be of type string.');
-    }
-    if (payload['properties'] === null || payload['properties'] === undefined) {
-      payload['properties'] = {};
-    }
-    payload['properties']['secondaryLocation'] = this['secondaryLocation'];
-  }
-
-  if (this['statusOfSecondary'] !== null && this['statusOfSecondary'] !== undefined) {
-    var allowedValues3 = [ 'Available', 'Unavailable' ];
-    var thisstatusOfSecondary = this['statusOfSecondary'];
-    if (!allowedValues3.some( function(item) { return item === thisstatusOfSecondary; })) {
-      throw new Error(this['statusOfSecondary'] + ' is not a valid value. The valid values are: ' + allowedValues3);
-    }
-    if (payload['properties'] === null || payload['properties'] === undefined) {
-      payload['properties'] = {};
-    }
-    payload['properties']['statusOfSecondary'] = this['statusOfSecondary'];
-  }
-
-  if (this['creationTime']) {
-    if (!(this['creationTime'] instanceof Date || typeof this['creationTime'].valueOf() === 'string' && !isNaN(Date.parse(this['creationTime'])))) {
-      throw new Error('this[\'creationTime\'] must be of type date.');
-    }
-    if (payload['properties'] === null || payload['properties'] === undefined) {
-      payload['properties'] = {};
-    }
-    payload['properties']['creationTime'] = (this['creationTime'] instanceof Date) ? this['creationTime'].toISOString() : this['creationTime'];
-  }
-
-  if (this['customDomain']) {
-    if (payload['properties'] === null || payload['properties'] === undefined) {
-      payload['properties'] = {};
-    }
-    payload['properties']['customDomain'] = this['customDomain'].serialize();
-  }
-
-  if (this['secondaryEndpoints']) {
-    if (payload['properties'] === null || payload['properties'] === undefined) {
-      payload['properties'] = {};
-    }
-    payload['properties']['secondaryEndpoints'] = this['secondaryEndpoints'].serialize();
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to StorageAccount schema
- *
- * @param {JSON} instance
+ * @returns {object} metadata of StorageAccount
  *
  */
-StorageAccount.prototype.deserialize = function (instance) {
-  StorageAccount['super_'].prototype.deserialize.call(this, instance);
-  if (instance) {
-    if (instance['properties'] !== null && instance['properties'] !== undefined) {
-      if (instance['properties']['provisioningState'] !== undefined) {
-        this['provisioningState'] = instance['properties']['provisioningState'];
+StorageAccount.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'StorageAccount',
+    type: {
+      name: 'Composite',
+      className: 'StorageAccount',
+      modelProperties: {
+        id: {
+          required: false,
+          serializedName: 'id',
+          type: {
+            name: 'String'
+          }
+        },
+        name: {
+          required: false,
+          serializedName: 'name',
+          type: {
+            name: 'String'
+          }
+        },
+        type: {
+          required: false,
+          serializedName: 'type',
+          type: {
+            name: 'String'
+          }
+        },
+        location: {
+          required: true,
+          serializedName: 'location',
+          type: {
+            name: 'String'
+          }
+        },
+        tags: {
+          required: false,
+          serializedName: 'tags',
+          type: {
+            name: 'Dictionary',
+            value: {
+                required: false,
+                serializedName: 'StringElementType',
+                type: {
+                  name: 'String'
+                }
+            }
+          }
+        },
+        provisioningState: {
+          required: false,
+          serializedName: 'properties.provisioningState',
+          type: {
+            name: 'Enum',
+            allowedValues: [ 'Creating', 'ResolvingDNS', 'Succeeded' ]
+          }
+        },
+        accountType: {
+          required: false,
+          serializedName: 'properties.accountType',
+          type: {
+            name: 'Enum',
+            allowedValues: [ 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS' ]
+          }
+        },
+        primaryEndpoints: {
+          required: false,
+          serializedName: 'properties.primaryEndpoints',
+          type: {
+            name: 'Composite',
+            className: 'Endpoints'
+          }
+        },
+        primaryLocation: {
+          required: false,
+          serializedName: 'properties.primaryLocation',
+          type: {
+            name: 'String'
+          }
+        },
+        statusOfPrimary: {
+          required: false,
+          serializedName: 'properties.statusOfPrimary',
+          type: {
+            name: 'Enum',
+            allowedValues: [ 'Available', 'Unavailable' ]
+          }
+        },
+        lastGeoFailoverTime: {
+          required: false,
+          serializedName: 'properties.lastGeoFailoverTime',
+          type: {
+            name: 'DateTime'
+          }
+        },
+        secondaryLocation: {
+          required: false,
+          serializedName: 'properties.secondaryLocation',
+          type: {
+            name: 'String'
+          }
+        },
+        statusOfSecondary: {
+          required: false,
+          serializedName: 'properties.statusOfSecondary',
+          type: {
+            name: 'Enum',
+            allowedValues: [ 'Available', 'Unavailable' ]
+          }
+        },
+        creationTime: {
+          required: false,
+          serializedName: 'properties.creationTime',
+          type: {
+            name: 'DateTime'
+          }
+        },
+        customDomain: {
+          required: false,
+          serializedName: 'properties.customDomain',
+          type: {
+            name: 'Composite',
+            className: 'CustomDomain'
+          }
+        },
+        secondaryEndpoints: {
+          required: false,
+          serializedName: 'properties.secondaryEndpoints',
+          type: {
+            name: 'Composite',
+            className: 'Endpoints'
+          }
+        }
       }
     }
-
-    if (instance['properties'] !== null && instance['properties'] !== undefined) {
-      if (instance['properties']['accountType'] !== undefined) {
-        this['accountType'] = instance['properties']['accountType'];
-      }
-    }
-
-    if (instance['properties'] !== null && instance['properties'] !== undefined) {
-      if (instance['properties']['primaryEndpoints']) {
-        this['primaryEndpoints'] = new models['Endpoints']().deserialize(instance['properties']['primaryEndpoints']);
-      }
-    }
-
-    if (instance['properties'] !== null && instance['properties'] !== undefined) {
-      if (instance['properties']['primaryLocation'] !== undefined) {
-        this['primaryLocation'] = instance['properties']['primaryLocation'];
-      }
-    }
-
-    if (instance['properties'] !== null && instance['properties'] !== undefined) {
-      if (instance['properties']['statusOfPrimary'] !== undefined) {
-        this['statusOfPrimary'] = instance['properties']['statusOfPrimary'];
-      }
-    }
-
-    if (instance['properties'] !== null && instance['properties'] !== undefined) {
-      if (instance['properties']['lastGeoFailoverTime']) {
-        this['lastGeoFailoverTime'] = new Date(instance['properties']['lastGeoFailoverTime']);
-      }
-      else if (instance['properties']['lastGeoFailoverTime'] !== undefined) {
-        this['lastGeoFailoverTime'] = instance['properties']['lastGeoFailoverTime'];
-      }
-    }
-
-    if (instance['properties'] !== null && instance['properties'] !== undefined) {
-      if (instance['properties']['secondaryLocation'] !== undefined) {
-        this['secondaryLocation'] = instance['properties']['secondaryLocation'];
-      }
-    }
-
-    if (instance['properties'] !== null && instance['properties'] !== undefined) {
-      if (instance['properties']['statusOfSecondary'] !== undefined) {
-        this['statusOfSecondary'] = instance['properties']['statusOfSecondary'];
-      }
-    }
-
-    if (instance['properties'] !== null && instance['properties'] !== undefined) {
-      if (instance['properties']['creationTime']) {
-        this['creationTime'] = new Date(instance['properties']['creationTime']);
-      }
-      else if (instance['properties']['creationTime'] !== undefined) {
-        this['creationTime'] = instance['properties']['creationTime'];
-      }
-    }
-
-    if (instance['properties'] !== null && instance['properties'] !== undefined) {
-      if (instance['properties']['customDomain']) {
-        this['customDomain'] = new models['CustomDomain']().deserialize(instance['properties']['customDomain']);
-      }
-    }
-
-    if (instance['properties'] !== null && instance['properties'] !== undefined) {
-      if (instance['properties']['secondaryEndpoints']) {
-        this['secondaryEndpoints'] = new models['Endpoints']().deserialize(instance['properties']['secondaryEndpoints']);
-      }
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = StorageAccount;

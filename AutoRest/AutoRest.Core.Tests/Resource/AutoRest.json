@@ -5,6 +5,12 @@
     },
     "CSharp": {
       "type": "CSharpCodeGenerator, AutoRest.Generator.CSharp"
+    },
+    "NodeJS": {
+      "type": "NodeJSCodeGenerator, AutoRest.Generator.NodeJS",
+      "settings": {
+        "disableTypeScriptGeneration": true
+      }
     }
   },
   "modelers": {

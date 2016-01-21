@@ -21,50 +21,36 @@ var util = require('util');
  * @member {string} [id] Resource Id
  * 
  */
-function SubResource(parameters) {
-  SubResource['super_'].call(this, parameters);
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.id !== undefined) {
-      this.id = parameters.id;
-    }
-  }    
+function SubResource() {
+  SubResource['super_'].call(this);
 }
 
 util.inherits(SubResource, models['BaseResource']);
 
 /**
- * Validate the payload against the SubResource schema
+ * Defines the metadata of SubResource
  *
- * @param {JSON} payload
- *
- */
-SubResource.prototype.serialize = function () {
-  var payload = SubResource['super_'].prototype.serialize.call(this);
-  if (this['id'] !== null && this['id'] !== undefined) {
-    if (typeof this['id'].valueOf() !== 'string') {
-      throw new Error('this[\'id\'] must be of type string.');
-    }
-    payload['id'] = this['id'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to SubResource schema
- *
- * @param {JSON} instance
+ * @returns {object} metadata of SubResource
  *
  */
-SubResource.prototype.deserialize = function (instance) {
-  SubResource['super_'].prototype.deserialize.call(this, instance);
-  if (instance) {
-    if (instance['id'] !== undefined) {
-      this['id'] = instance['id'];
+SubResource.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'SubResource',
+    type: {
+      name: 'Composite',
+      className: 'SubResource',
+      modelProperties: {
+        id: {
+          required: false,
+          serializedName: 'id',
+          type: {
+            name: 'String'
+          }
+        }
+      }
     }
-  }
-
-  return this;
+  };
 };
 
 module.exports = SubResource;

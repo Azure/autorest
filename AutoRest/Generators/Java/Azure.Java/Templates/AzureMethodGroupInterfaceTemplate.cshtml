@@ -30,17 +30,18 @@ public interface @Model.MethodGroupType {
     interface @Model.MethodGroupServiceType {
     @foreach (AzureMethodTemplateModel method in Model.MethodTemplateModels)
     {
-        if (method.HttpMethod == Microsoft.Rest.Generator.ClientModel.HttpMethod.Delete)
-        {
-    @:    @@HTTP(path = "@(method.Url)", method = "DELETE", hasBody = true)
+    @:    @@Headers("Content-Type: @method.RequestContentType")
+    if (method.HttpMethod == Microsoft.Rest.Generator.ClientModel.HttpMethod.Delete)
+    {
+    @:    @@HTTP(path = "@(method.Url.TrimStart('/'))", method = "DELETE", hasBody = true)
     }
-        else if (method.IsPagingNextOperation)
-        {
+    else if (method.IsPagingNextOperation)
+    {
     @:    @@GET
     }
-        else
-        {
-    @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url)")
+    else
+    {
+    @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url.TrimStart('/'))")
     }
     @:    Call<@method.CallType> @(method.Name)(@method.MethodParameterApiDeclaration);
     @EmptyLine

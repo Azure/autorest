@@ -91,6 +91,7 @@ var defaultAzureMappings = {
   'AcceptanceTests/AzureParameterGrouping': '../../../TestServer/swagger/azure-parameter-grouping.json',
   'AcceptanceTests/ResourceFlattening': '../../../TestServer/swagger/resource-flattening.json',
   'AcceptanceTests/Head': '../../../TestServer/swagger/head.json',
+  'AcceptanceTests/HeadExceptions': '../../../TestServer/swagger/head-exceptions.json',
   'AcceptanceTests/SubscriptionIdApiVersion': '../../../TestServer/swagger/subscriptionId-apiVersion.json',
   'AcceptanceTests/AzureSpecials': '../../../TestServer/swagger/azure-special-properties.json'
 };
@@ -105,6 +106,7 @@ var nodeMappings = {
 
 var rubyAzureMappings = {
   'head':['../../../TestServer/swagger/head.json', 'HeadModule'],
+  'head_exceptions':['../../../TestServer/swagger/head-exceptions.json', 'HeadExceptionsModule'],
   'paging':['../../../TestServer/swagger/paging.json', 'PagingModule'],
   'resource_flattening':['../../../TestServer/swagger/resource-flattening.json', 'ResourceFlatteningModule'],
   'lro':['../../../TestServer/swagger/lro.json', 'LroModule'],
@@ -267,13 +269,13 @@ gulp.task('regenerate:expected:csazure', function(cb){
   }, cb);
 });
 
-gulp.task('regenerate:expected:cs', function(cb){
+gulp.task('regenerate:expected:cs', ['regenerate:expected:cswithcreds'], function(cb){
   mappings = mergeOptions({
-    'PetstoreV2': 'Swagger/swagger.2.0.example.v2.json',
     'Mirror.RecursiveTypes': 'Swagger/swagger-mirror-recursive-type.json',
     'Mirror.Primitives': 'Swagger/swagger-mirror-primitives.json',
     'Mirror.Sequences': 'Swagger/swagger-mirror-sequences.json',
     'Mirror.Polymorphic': 'Swagger/swagger-mirror-polymorphic.json',
+    'Internal.Ctors': 'Swagger/swagger-internal-ctors.json',
   }, defaultMappings);
 
   regenExpected({
@@ -284,6 +286,24 @@ gulp.task('regenerate:expected:cs', function(cb){
     'codeGenerator': 'CSharp',
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1'
+  }, cb);
+});
+ 
+gulp.task('regenerate:expected:cswithcreds', function(cb){  
+  mappings = mergeOptions(
+  {
+    'PetstoreV2': 'Swagger/swagger.2.0.example.v2.json',
+  });
+
+  regenExpected({
+    'outputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
+    'mappings': mappings,
+    'outputDir': 'Expected',
+    'codeGenerator': 'CSharp',
+    'nsPrefix': 'Fixtures',
+    'flatteningThreshold': '1',
+    'addCredentials': true
   }, cb);
 });
 
@@ -323,7 +343,7 @@ gulp.task('clean:generatedTest', function(cb) {
 gulp.task('clean', ['clean:build', 'clean:templates', 'clean:generatedTest']);
 
 gulp.task('syncDependencies:nugetProj', function() {
-  var dirs = glob.sync(path.join(basePathOrThrow(), '/**/*.nuget.proj'))
+  var dirs = glob.sync(path.join(basePathOrThrow(), '/**/project.json'))
     .map(function(filePath) {
       return path.dirname(filePath);
     });
@@ -390,11 +410,14 @@ gulp.task('test:clientruntime:javaazure', shell.task(basePathOrThrow() + '/gradl
 gulp.task('test:clientruntime:python', shell.task('tox', { cwd: './ClientRuntimes/Python/msrest/', verbosity: 3 }));
 gulp.task('test:clientruntime:pythonazure', shell.task('tox', { cwd: './ClientRuntimes/Python/msrestazure/', verbosity: 3 }));
 
+gulp.task('test:clientruntime:javaauthjdk', shell.task(basePathOrThrow() + '/gradlew :azure-client-authentication:check', { cwd: './', verbosity: 3 }));
+gulp.task('test:clientruntime:javaauthandroid', shell.task(basePathOrThrow() + '/gradlew :azure-android-client-authentication:check', { cwd: './', verbosity: 3 }));
 gulp.task('test:clientruntime', function (cb) {
   runSequence('test:clientruntime:node', 'test:clientruntime:nodeazure',
     'test:clientruntime:ruby', 'test:clientruntime:rubyazure',
-    'test:clientruntime:java', 'test:clientruntime:javaazure', 
-    'test:clientruntime:python', 'test:clientruntime:pythonazure', cb);
+    'test:clientruntime:python', 'test:clientruntime:pythonazure',
+    'test:clientruntime:java', 'test:clientruntime:javaazure',
+    'test:clientruntime:javaauthjdk', 'test:clientruntime:javaauthandroid', cb);
 });
 
 gulp.task('test:node', shell.task('npm test', {cwd: './AutoRest/Generators/NodeJS/NodeJS.Tests/', verbosity: 3}));

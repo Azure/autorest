@@ -19,66 +19,40 @@ var util = require('util');
  * @member {array} [value]
  * 
  */
-function ArrayOptionalWrapper(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.value) {
-      var tempParametersvalue = [];
-      parameters.value.forEach(function(element) {
-        if (element !== undefined) {
-          element = element;
-        }
-        tempParametersvalue.push(element);
-      });
-      this.value = tempParametersvalue;
-    }
-  }    
+function ArrayOptionalWrapper() {
 }
 
-
 /**
- * Validate the payload against the ArrayOptionalWrapper schema
+ * Defines the metadata of ArrayOptionalWrapper
  *
- * @param {JSON} payload
+ * @returns {object} metadata of ArrayOptionalWrapper
  *
  */
-ArrayOptionalWrapper.prototype.serialize = function () {
-  var payload = {};
-  if (util.isArray(this['value'])) {
-    payload['value'] = [];
-    for (var i = 0; i < this['value'].length; i++) {
-      if (this['value'][i] !== null && this['value'][i] !== undefined) {
-        if (typeof this['value'][i].valueOf() !== 'string') {
-          throw new Error('this[\'value\'][i] must be of type string.');
+ArrayOptionalWrapper.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'array-optional-wrapper',
+    type: {
+      name: 'Composite',
+      className: 'ArrayOptionalWrapper',
+      modelProperties: {
+        value: {
+          required: false,
+          serializedName: 'value',
+          type: {
+            name: 'Sequence',
+            element: {
+                required: false,
+                serializedName: 'StringElementType',
+                type: {
+                  name: 'String'
+                }
+            }
+          }
         }
-        payload['value'][i] = this['value'][i];
       }
     }
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to ArrayOptionalWrapper schema
- *
- * @param {JSON} instance
- *
- */
-ArrayOptionalWrapper.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['value']) {
-      var tempInstancevalue = [];
-      instance['value'].forEach(function(element1) {
-        if (element1 !== undefined) {
-          element1 = element1;
-        }
-        tempInstancevalue.push(element1);
-      });
-      this['value'] = tempInstancevalue;
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = ArrayOptionalWrapper;

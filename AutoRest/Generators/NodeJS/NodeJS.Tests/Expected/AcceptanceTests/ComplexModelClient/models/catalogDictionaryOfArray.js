@@ -21,83 +21,48 @@ var util = require('util');
  * @member {object} [productDictionaryOfArray] Dictionary of Array of product
  * 
  */
-function CatalogDictionaryOfArray(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.productDictionaryOfArray) {
-      this.productDictionaryOfArray = {};
-      for(var valueElement in parameters.productDictionaryOfArray) {
-        if (parameters.productDictionaryOfArray[valueElement]) {
-          var tempParametersproductDictionaryOfArrayvalueElement = [];
-          parameters.productDictionaryOfArray[valueElement].forEach(function(element) {
-            if (element) {
-              element = new models['Product'](element);
-            }
-            tempParametersproductDictionaryOfArrayvalueElement.push(element);
-          });
-          this.productDictionaryOfArray[valueElement] = tempParametersproductDictionaryOfArrayvalueElement;
-        }
-      }
-    }
-  }    
+function CatalogDictionaryOfArray() {
 }
 
-
 /**
- * Validate the payload against the CatalogDictionaryOfArray schema
+ * Defines the metadata of CatalogDictionaryOfArray
  *
- * @param {JSON} payload
+ * @returns {object} metadata of CatalogDictionaryOfArray
  *
  */
-CatalogDictionaryOfArray.prototype.serialize = function () {
-  var payload = {};
-  if (this['productDictionaryOfArray'] && typeof this['productDictionaryOfArray'] === 'object') {
-    payload['productDictionaryOfArray'] = {};
-    for(var valueElement1 in this['productDictionaryOfArray']) {
-      if (util.isArray(this['productDictionaryOfArray'][valueElement1])) {
-        payload['productDictionaryOfArray'][valueElement1] = [];
-        for (var i = 0; i < this['productDictionaryOfArray'][valueElement1].length; i++) {
-          if (this['productDictionaryOfArray'][valueElement1][i]) {
-            payload['productDictionaryOfArray'][valueElement1][i] = this['productDictionaryOfArray'][valueElement1][i].serialize();
-          }
-        }
-      }
-      else {
-        payload['productDictionaryOfArray'][valueElement1] = this['productDictionaryOfArray'][valueElement1];
-      }
-    }
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to CatalogDictionaryOfArray schema
- *
- * @param {JSON} instance
- *
- */
-CatalogDictionaryOfArray.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['productDictionaryOfArray']) {
-      this['productDictionaryOfArray'] = {};
-      for(var valueElement2 in instance['productDictionaryOfArray']) {
-        if (instance['productDictionaryOfArray'] !== null && instance['productDictionaryOfArray'] !== undefined) {
-          if (instance['productDictionaryOfArray'][valueElement2]) {
-            var tempInstanceproductDictionaryOfArrayvalueElement2 = [];
-            instance['productDictionaryOfArray'][valueElement2].forEach(function(element1) {
-              if (element1) {
-                element1 = new models['Product']().deserialize(element1);
-              }
-              tempInstanceproductDictionaryOfArrayvalueElement2.push(element1);
-            });
-            this['productDictionaryOfArray'][valueElement2] = tempInstanceproductDictionaryOfArrayvalueElement2;
+CatalogDictionaryOfArray.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'CatalogDictionaryOfArray',
+    type: {
+      name: 'Composite',
+      className: 'CatalogDictionaryOfArray',
+      modelProperties: {
+        productDictionaryOfArray: {
+          required: false,
+          serializedName: 'productDictionaryOfArray',
+          type: {
+            name: 'Dictionary',
+            value: {
+                required: false,
+                serializedName: 'ArrayElementType',
+                type: {
+                  name: 'Sequence',
+                  element: {
+                      required: false,
+                      serializedName: 'ProductElementType',
+                      type: {
+                        name: 'Composite',
+                        className: 'Product'
+                      }
+                  }
+                }
+            }
           }
         }
       }
     }
-  }
-
-  return this;
+  };
 };
 
 module.exports = CatalogDictionaryOfArray;

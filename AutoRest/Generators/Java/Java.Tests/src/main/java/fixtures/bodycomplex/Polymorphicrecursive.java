@@ -19,6 +19,7 @@ import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
+import retrofit.http.Headers;
 import retrofit.http.PUT;
 
 /**
@@ -31,10 +32,12 @@ public interface Polymorphicrecursive {
      * used by Retrofit to perform actually REST calls.
      */
     interface PolymorphicrecursiveService {
-        @GET("/complex/polymorphicrecursive/valid")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/polymorphicrecursive/valid")
         Call<ResponseBody> getValid();
 
-        @PUT("/complex/polymorphicrecursive/valid")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("complex/polymorphicrecursive/valid")
         Call<ResponseBody> putValid(@Body Fish complexBody);
 
     }

@@ -19,61 +19,40 @@
  * @member {string} [message]
  * 
  */
-function ErrorModel(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.status !== undefined) {
-      this.status = parameters.status;
-    }
-    if (parameters.message !== undefined) {
-      this.message = parameters.message;
-    }
-  }    
+function ErrorModel() {
 }
 
-
 /**
- * Validate the payload against the ErrorModel schema
+ * Defines the metadata of ErrorModel
  *
- * @param {JSON} payload
+ * @returns {object} metadata of ErrorModel
  *
  */
-ErrorModel.prototype.serialize = function () {
-  var payload = {};
-  if (this['status'] !== null && this['status'] !== undefined) {
-    if (typeof this['status'] !== 'number') {
-      throw new Error('this[\'status\'] must be of type number.');
+ErrorModel.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'Error',
+    type: {
+      name: 'Composite',
+      className: 'ErrorModel',
+      modelProperties: {
+        status: {
+          required: false,
+          serializedName: 'status',
+          type: {
+            name: 'Number'
+          }
+        },
+        message: {
+          required: false,
+          serializedName: 'message',
+          type: {
+            name: 'String'
+          }
+        }
+      }
     }
-    payload['status'] = this['status'];
-  }
-
-  if (this['message'] !== null && this['message'] !== undefined) {
-    if (typeof this['message'].valueOf() !== 'string') {
-      throw new Error('this[\'message\'] must be of type string.');
-    }
-    payload['message'] = this['message'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to ErrorModel schema
- *
- * @param {JSON} instance
- *
- */
-ErrorModel.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['status'] !== undefined) {
-      this['status'] = instance['status'];
-    }
-
-    if (instance['message'] !== undefined) {
-      this['message'] = instance['message'];
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = ErrorModel;

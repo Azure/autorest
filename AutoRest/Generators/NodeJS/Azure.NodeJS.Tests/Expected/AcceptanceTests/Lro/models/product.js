@@ -25,74 +25,85 @@ var util = require('util');
  * 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'.
  * 
  */
-function Product(parameters) {
-  Product['super_'].call(this, parameters);
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.provisioningState !== undefined) {
-      this.provisioningState = parameters.provisioningState;
-    }
-    if (parameters.provisioningStateValues !== undefined) {
-      this.provisioningStateValues = parameters.provisioningStateValues;
-    }
-  }    
+function Product() {
+  Product['super_'].call(this);
 }
 
 util.inherits(Product, models['Resource']);
 
 /**
- * Validate the payload against the Product schema
+ * Defines the metadata of Product
  *
- * @param {JSON} payload
- *
- */
-Product.prototype.serialize = function () {
-  var payload = Product['super_'].prototype.serialize.call(this);
-  if (this['provisioningState'] !== null && this['provisioningState'] !== undefined) {
-    if (typeof this['provisioningState'].valueOf() !== 'string') {
-      throw new Error('this[\'provisioningState\'] must be of type string.');
-    }
-    if (payload['properties'] === null || payload['properties'] === undefined) {
-      payload['properties'] = {};
-    }
-    payload['properties']['provisioningState'] = this['provisioningState'];
-  }
-
-  if (this['provisioningStateValues'] !== null && this['provisioningStateValues'] !== undefined) {
-    if (typeof this['provisioningStateValues'].valueOf() !== 'string') {
-      throw new Error('this[\'provisioningStateValues\'] must be of type string.');
-    }
-    if (payload['properties'] === null || payload['properties'] === undefined) {
-      payload['properties'] = {};
-    }
-    payload['properties']['provisioningStateValues'] = this['provisioningStateValues'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to Product schema
- *
- * @param {JSON} instance
+ * @returns {object} metadata of Product
  *
  */
-Product.prototype.deserialize = function (instance) {
-  Product['super_'].prototype.deserialize.call(this, instance);
-  if (instance) {
-    if (instance['properties'] !== null && instance['properties'] !== undefined) {
-      if (instance['properties']['provisioningState'] !== undefined) {
-        this['provisioningState'] = instance['properties']['provisioningState'];
+Product.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'Product',
+    type: {
+      name: 'Composite',
+      className: 'Product',
+      modelProperties: {
+        id: {
+          required: false,
+          serializedName: 'id',
+          type: {
+            name: 'String'
+          }
+        },
+        type: {
+          required: false,
+          serializedName: 'type',
+          type: {
+            name: 'String'
+          }
+        },
+        tags: {
+          required: false,
+          serializedName: 'tags',
+          type: {
+            name: 'Dictionary',
+            value: {
+                required: false,
+                serializedName: 'StringElementType',
+                type: {
+                  name: 'String'
+                }
+            }
+          }
+        },
+        location: {
+          required: false,
+          serializedName: 'location',
+          type: {
+            name: 'String'
+          }
+        },
+        name: {
+          required: false,
+          serializedName: 'name',
+          type: {
+            name: 'String'
+          }
+        },
+        provisioningState: {
+          required: false,
+          serializedName: 'properties.provisioningState',
+          type: {
+            name: 'String'
+          }
+        },
+        provisioningStateValues: {
+          required: false,
+          serializedName: 'properties.provisioningStateValues',
+          type: {
+            name: 'String'
+          }
+        }
       }
     }
-
-    if (instance['properties'] !== null && instance['properties'] !== undefined) {
-      if (instance['properties']['provisioningStateValues'] !== undefined) {
-        this['provisioningStateValues'] = instance['properties']['provisioningStateValues'];
-      }
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = Product;

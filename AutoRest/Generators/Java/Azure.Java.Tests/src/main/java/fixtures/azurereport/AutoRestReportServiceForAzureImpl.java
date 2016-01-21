@@ -11,12 +11,11 @@
 package fixtures.azurereport;
 
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.AzureClient;
-import com.microsoft.rest.AzureServiceClient;
-import com.microsoft.rest.AzureServiceResponseBuilder;
+import com.microsoft.azure.AzureClient;
+import com.microsoft.azure.AzureServiceClient;
+import com.microsoft.azure.AzureServiceResponseBuilder;
+import com.microsoft.azure.CustomHeaderInterceptor;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
-import com.microsoft.rest.CustomHeaderInterceptor;
-import com.microsoft.rest.serializer.AzureJacksonUtils;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
@@ -57,11 +56,11 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
         return this.azureClient;
     }
 
-    /** The management credentials for Azure. */
+    /** Gets Azure subscription credentials. */
     private ServiceClientCredentials credentials;
 
     /**
-     * Gets The management credentials for Azure.
+     * Gets Gets Azure subscription credentials.
      *
      * @return the credentials value.
      */
@@ -90,11 +89,11 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
         this.acceptLanguage = acceptLanguage;
     }
 
-    /** The retry timeout for Long Running Operations. */
+    /** Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30. */
     private int longRunningOperationRetryTimeout;
 
     /**
-     * Gets The retry timeout for Long Running Operations.
+     * Gets Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
      *
      * @return the longRunningOperationRetryTimeout value.
      */
@@ -103,12 +102,33 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
     }
 
     /**
-     * Sets The retry timeout for Long Running Operations.
+     * Sets Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
      *
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
      */
     public void setLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
+    }
+
+    /** When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true. */
+    private boolean generateClientRequestId;
+
+    /**
+     * Gets When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
+     *
+     * @return the generateClientRequestId value.
+     */
+    public boolean getGenerateClientRequestId() {
+        return this.generateClientRequestId;
+    }
+
+    /**
+     * Sets When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
+     *
+     * @param generateClientRequestId the generateClientRequestId value.
+     */
+    public void setGenerateClientRequestId(boolean generateClientRequestId) {
+        this.generateClientRequestId = generateClientRequestId;
     }
 
     /**
@@ -165,11 +185,13 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
     }
 
     private void initialize() {
+        this.acceptLanguage = "en-US";
+        this.longRunningOperationRetryTimeout = 30;
+        this.generateClientRequestId = true;
+        this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         if (this.credentials != null) {
             this.credentials.applyCredentialsFilter(this.client);
         }
-        this.acceptLanguage = "en-US";
-        this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         this.azureClient = new AzureClient(client, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
         this.retrofitBuilder.baseUrl(baseUri);
@@ -210,7 +232,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
     }
 
     private ServiceResponse<Map<String, Integer>> getReportDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Map<String, Integer>, ErrorException>(new AzureJacksonUtils())
+        return new AzureServiceResponseBuilder<Map<String, Integer>, ErrorException>()
                 .register(200, new TypeToken<Map<String, Integer>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response, retrofit);

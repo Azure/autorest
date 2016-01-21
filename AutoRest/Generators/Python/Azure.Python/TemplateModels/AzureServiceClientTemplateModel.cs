@@ -47,7 +47,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
         {
             get
             {
-                return this.MethodTemplateModels.Any(item => item.DefaultResponse.Body != null && item.DefaultResponse.Body.Name == "CloudError");
+                return this.MethodTemplateModels.Any(item => item.DefaultResponse.Body == null || item.DefaultResponse.Body.Name == "CloudError");
             }
         }
 
@@ -74,7 +74,27 @@ namespace Microsoft.Rest.Generator.Azure.Python
                     }
                     else
                     {
-                        requireParams.Add(string.Format(CultureInfo.InvariantCulture, "{0}={1}", property.Name.ToPythonCase(), property.DefaultValue ?? "None"));
+                        string defaultValue = "None";
+                        if (property.DefaultValue != null && property.Type is PrimaryType)
+                        {
+                            PrimaryType type = property.Type as PrimaryType;
+                            if (type == PrimaryType.Double || type == PrimaryType.Int || type == PrimaryType.Long || type == PrimaryType.String)
+                            {
+                                defaultValue = property.DefaultValue;
+                            }
+                            else if (type == PrimaryType.Boolean)
+                            {
+                                if (property.DefaultValue == "true")
+                                {
+                                    defaultValue = "True";
+                                }
+                                else
+                                {
+                                    defaultValue = "False";
+                                }
+                            }
+                        }
+                        requireParams.Add(string.Format(CultureInfo.InvariantCulture, "{0}={1}", property.Name.ToPythonCase(), defaultValue));
                     }
                 }
                 //requireParams.Add("baseUri");

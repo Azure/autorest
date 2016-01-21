@@ -21,75 +21,47 @@
  * @member {string} [null]
  * 
  */
-function StringWrapper(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.field !== undefined) {
-      this.field = parameters.field;
-    }
-    if (parameters.empty !== undefined) {
-      this.empty = parameters.empty;
-    }
-    if (parameters.null !== undefined) {
-      this.null = parameters.null;
-    }
-  }    
+function StringWrapper() {
 }
 
-
 /**
- * Validate the payload against the StringWrapper schema
+ * Defines the metadata of StringWrapper
  *
- * @param {JSON} payload
+ * @returns {object} metadata of StringWrapper
  *
  */
-StringWrapper.prototype.serialize = function () {
-  var payload = {};
-  if (this['field'] !== null && this['field'] !== undefined) {
-    if (typeof this['field'].valueOf() !== 'string') {
-      throw new Error('this[\'field\'] must be of type string.');
+StringWrapper.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'string-wrapper',
+    type: {
+      name: 'Composite',
+      className: 'StringWrapper',
+      modelProperties: {
+        field: {
+          required: false,
+          serializedName: 'field',
+          type: {
+            name: 'String'
+          }
+        },
+        empty: {
+          required: false,
+          serializedName: 'empty',
+          type: {
+            name: 'String'
+          }
+        },
+        null: {
+          required: false,
+          serializedName: 'null',
+          type: {
+            name: 'String'
+          }
+        }
+      }
     }
-    payload['field'] = this['field'];
-  }
-
-  if (this['empty'] !== null && this['empty'] !== undefined) {
-    if (typeof this['empty'].valueOf() !== 'string') {
-      throw new Error('this[\'empty\'] must be of type string.');
-    }
-    payload['empty'] = this['empty'];
-  }
-
-  if (this['null'] !== null && this['null'] !== undefined) {
-    if (typeof this['null'].valueOf() !== 'string') {
-      throw new Error('this[\'null\'] must be of type string.');
-    }
-    payload['null'] = this['null'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to StringWrapper schema
- *
- * @param {JSON} instance
- *
- */
-StringWrapper.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['field'] !== undefined) {
-      this['field'] = instance['field'];
-    }
-
-    if (instance['empty'] !== undefined) {
-      this['empty'] = instance['empty'];
-    }
-
-    if (instance['null'] !== undefined) {
-      this['null'] = instance['null'];
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = StringWrapper;

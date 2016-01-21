@@ -42,6 +42,14 @@ public interface @Model.Name {
     void setLogLevel(Level logLevel);
 @EmptyLine
     /**
+     * Gets the adapter for {@@link com.fasterxml.jackson.databind.ObjectMapper} for serialization
+     * and deserialization operations..
+     *
+     * @@return the adapter.
+     */
+    JacksonMapperAdapter getMapperAdapter();
+@EmptyLine
+    /**
      * Gets the {@@link AzureClient} used for long running operations.
      * @@return the azure client;
      */
@@ -85,9 +93,21 @@ if(!property.IsReadOnly)
      * used by Retrofit to perform actually REST calls.
      */
     interface @Model.ServiceClientServiceType {
-    @foreach (var method in Model.MethodTemplateModels)
+    @foreach (AzureMethodTemplateModel method in Model.MethodTemplateModels)
     {
-    @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url)")
+    @:    @@Headers("Content-Type: @method.RequestContentType")
+    if (method.HttpMethod == Microsoft.Rest.Generator.ClientModel.HttpMethod.Delete)
+    {
+    @:    @@HTTP(path = "@(method.Url.TrimStart('/'))", method = "DELETE", hasBody = true)
+    }
+    else if (method.IsPagingNextOperation)
+    {
+    @:    @@GET
+    }
+    else
+    {
+    @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url.TrimStart('/'))")
+    }
     @:    Call<@method.CallType> @(method.Name)(@method.MethodParameterApiDeclaration);
     @EmptyLine
     }

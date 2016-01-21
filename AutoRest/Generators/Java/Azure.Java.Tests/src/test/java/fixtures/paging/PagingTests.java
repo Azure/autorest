@@ -1,7 +1,7 @@
 package fixtures.paging;
 
-import com.microsoft.rest.CloudException;
-import com.microsoft.rest.Page;
+import com.microsoft.azure.CloudException;
+import com.microsoft.azure.Page;
 import fixtures.paging.models.Product;
 import org.junit.Assert;
 import org.junit.BeforeClass;

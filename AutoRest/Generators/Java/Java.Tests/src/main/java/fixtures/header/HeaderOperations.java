@@ -37,6 +37,7 @@ import org.joda.time.LocalDate;
 import org.joda.time.Period;
 import retrofit.Call;
 import retrofit.http.Header;
+import retrofit.http.Headers;
 import retrofit.http.POST;
 
 /**
@@ -49,91 +50,120 @@ public interface HeaderOperations {
      * used by Retrofit to perform actually REST calls.
      */
     interface HeaderService {
-        @POST("/header/param/existingkey")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("header/param/existingkey")
         Call<ResponseBody> paramExistingKey(@Header("User-Agent") String userAgent);
 
-        @POST("/header/response/existingkey")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("header/response/existingkey")
         Call<ResponseBody> responseExistingKey();
 
-        @POST("/header/param/protectedkey")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("header/param/protectedkey")
         Call<ResponseBody> paramProtectedKey(@Header("Content-Type") String contentType);
 
-        @POST("/header/response/protectedkey")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("header/response/protectedkey")
         Call<ResponseBody> responseProtectedKey();
 
-        @POST("/header/param/prim/integer")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("header/param/prim/integer")
         Call<ResponseBody> paramInteger(@Header("scenario") String scenario, @Header("value") int value);
 
-        @POST("/header/response/prim/integer")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("header/response/prim/integer")
         Call<ResponseBody> responseInteger(@Header("scenario") String scenario);
 
-        @POST("/header/param/prim/long")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("header/param/prim/long")
         Call<ResponseBody> paramLong(@Header("scenario") String scenario, @Header("value") long value);
 
-        @POST("/header/response/prim/long")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("header/response/prim/long")
         Call<ResponseBody> responseLong(@Header("scenario") String scenario);
 
-        @POST("/header/param/prim/float")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("header/param/prim/float")
         Call<ResponseBody> paramFloat(@Header("scenario") String scenario, @Header("value") double value);
 
-        @POST("/header/response/prim/float")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("header/response/prim/float")
         Call<ResponseBody> responseFloat(@Header("scenario") String scenario);
 
-        @POST("/header/param/prim/double")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("header/param/prim/double")
         Call<ResponseBody> paramDouble(@Header("scenario") String scenario, @Header("value") double value);
 
-        @POST("/header/response/prim/double")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("header/response/prim/double")
         Call<ResponseBody> responseDouble(@Header("scenario") String scenario);
 
-        @POST("/header/param/prim/bool")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("header/param/prim/bool")
         Call<ResponseBody> paramBool(@Header("scenario") String scenario, @Header("value") boolean value);
 
-        @POST("/header/response/prim/bool")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("header/response/prim/bool")
         Call<ResponseBody> responseBool(@Header("scenario") String scenario);
 
-        @POST("/header/param/prim/string")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("header/param/prim/string")
         Call<ResponseBody> paramString(@Header("scenario") String scenario, @Header("value") String value);
 
-        @POST("/header/response/prim/string")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("header/response/prim/string")
         Call<ResponseBody> responseString(@Header("scenario") String scenario);
 
-        @POST("/header/param/prim/date")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("header/param/prim/date")
         Call<ResponseBody> paramDate(@Header("scenario") String scenario, @Header("value") String value);
 
-        @POST("/header/response/prim/date")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("header/response/prim/date")
         Call<ResponseBody> responseDate(@Header("scenario") String scenario);
 
-        @POST("/header/param/prim/datetime")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("header/param/prim/datetime")
         Call<ResponseBody> paramDatetime(@Header("scenario") String scenario, @Header("value") String value);
 
-        @POST("/header/response/prim/datetime")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("header/response/prim/datetime")
         Call<ResponseBody> responseDatetime(@Header("scenario") String scenario);
 
-        @POST("/header/param/prim/datetimerfc1123")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("header/param/prim/datetimerfc1123")
         Call<ResponseBody> paramDatetimeRfc1123(@Header("scenario") String scenario, @Header("value") DateTimeRfc1123 value);
 
-        @POST("/header/response/prim/datetimerfc1123")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("header/response/prim/datetimerfc1123")
         Call<ResponseBody> responseDatetimeRfc1123(@Header("scenario") String scenario);
 
-        @POST("/header/param/prim/duration")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("header/param/prim/duration")
         Call<ResponseBody> paramDuration(@Header("scenario") String scenario, @Header("value") Period value);
 
-        @POST("/header/response/prim/duration")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("header/response/prim/duration")
         Call<ResponseBody> responseDuration(@Header("scenario") String scenario);
 
-        @POST("/header/param/prim/byte")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("header/param/prim/byte")
         Call<ResponseBody> paramByte(@Header("scenario") String scenario, @Header("value") String value);
 
-        @POST("/header/response/prim/byte")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("header/response/prim/byte")
         Call<ResponseBody> responseByte(@Header("scenario") String scenario);
 
-        @POST("/header/param/prim/enum")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("header/param/prim/enum")
         Call<ResponseBody> paramEnum(@Header("scenario") String scenario, @Header("value") String value);
 
-        @POST("/header/response/prim/enum")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("header/response/prim/enum")
         Call<ResponseBody> responseEnum(@Header("scenario") String scenario);
 
-        @POST("/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0")
         Call<ResponseBody> customRequestId();
 
     }

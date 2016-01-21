@@ -10,13 +10,14 @@
 
 package fixtures.head;
 
-import com.microsoft.rest.CloudException;
+import com.microsoft.azure.CloudException;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.HEAD;
 import retrofit.http.Header;
+import retrofit.http.Headers;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -28,13 +29,16 @@ public interface HttpSuccessOperations {
      * used by Retrofit to perform actually REST calls.
      */
     interface HttpSuccessService {
-        @HEAD("/http/success/200")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HEAD("http/success/200")
         Call<Void> head200(@Header("accept-language") String acceptLanguage);
 
-        @HEAD("/http/success/204")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HEAD("http/success/204")
         Call<Void> head204(@Header("accept-language") String acceptLanguage);
 
-        @HEAD("/http/success/404")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HEAD("http/success/404")
         Call<Void> head404(@Header("accept-language") String acceptLanguage);
 
     }

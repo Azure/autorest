@@ -18,6 +18,7 @@ import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
+import retrofit.http.Headers;
 import retrofit.http.PUT;
 
 /**
@@ -30,19 +31,24 @@ public interface ByteOperations {
      * used by Retrofit to perform actually REST calls.
      */
     interface ByteService {
-        @GET("/byte/null")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("byte/null")
         Call<ResponseBody> getNull();
 
-        @GET("/byte/empty")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("byte/empty")
         Call<ResponseBody> getEmpty();
 
-        @GET("/byte/nonAscii")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("byte/nonAscii")
         Call<ResponseBody> getNonAscii();
 
-        @PUT("/byte/nonAscii")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("byte/nonAscii")
         Call<ResponseBody> putNonAscii(@Body byte[] byteBody);
 
-        @GET("/byte/invalid")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("byte/invalid")
         Call<ResponseBody> getInvalid();
 
     }

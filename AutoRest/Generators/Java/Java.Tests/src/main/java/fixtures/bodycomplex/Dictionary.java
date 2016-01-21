@@ -19,6 +19,7 @@ import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
+import retrofit.http.Headers;
 import retrofit.http.PUT;
 
 /**
@@ -31,22 +32,28 @@ public interface Dictionary {
      * used by Retrofit to perform actually REST calls.
      */
     interface DictionaryService {
-        @GET("/complex/dictionary/typed/valid")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/dictionary/typed/valid")
         Call<ResponseBody> getValid();
 
-        @PUT("/complex/dictionary/typed/valid")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("complex/dictionary/typed/valid")
         Call<ResponseBody> putValid(@Body DictionaryWrapper complexBody);
 
-        @GET("/complex/dictionary/typed/empty")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/dictionary/typed/empty")
         Call<ResponseBody> getEmpty();
 
-        @PUT("/complex/dictionary/typed/empty")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("complex/dictionary/typed/empty")
         Call<ResponseBody> putEmpty(@Body DictionaryWrapper complexBody);
 
-        @GET("/complex/dictionary/typed/null")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/dictionary/typed/null")
         Call<ResponseBody> getNull();
 
-        @GET("/complex/dictionary/typed/notprovided")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/dictionary/typed/notprovided")
         Call<ResponseBody> getNotProvided();
 
     }

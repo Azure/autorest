@@ -43,15 +43,20 @@ log_level = int(os.environ.get('PythonLogLevel', 30))
 
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
 sys.path.append(join(tests, "Head"))
+sys.path.append(join(tests, "HeadExceptions"))
 
 from msrest.serialization import Deserializer
-from msrest.exceptions import DeserializationError
+from msrest.exceptions import DeserializationError, HttpOperationError
 from msrest.authentication import BasicTokenAuthentication
+from msrestazure.azure_exceptions import CloudError, CloudErrorData
 
 from auto_rest_head_test_service import (
     AutoRestHeadTestService, 
     AutoRestHeadTestServiceConfiguration)
 
+from auto_rest_head_exception_test_service import (
+    AutoRestHeadExceptionTestService, 
+    AutoRestHeadExceptionTestServiceConfiguration)
 
 class HeadTests(unittest.TestCase):
 
@@ -66,6 +71,21 @@ class HeadTests(unittest.TestCase):
         self.assertTrue(client.http_success.head200())
         self.assertTrue(client.http_success.head204())
         self.assertFalse(client.http_success.head404())
+
+class HeadExceptionTest(unittest.TestCase):
+
+    def test_head_exception(self):
+
+        cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
+        config = AutoRestHeadExceptionTestServiceConfiguration(cred, base_url="http://localhost:3000")
+
+        config.log_level = log_level
+        client = AutoRestHeadExceptionTestService(config)
+
+        client.head_exception.head200()
+        client.head_exception.head204()
+        with self.assertRaises(CloudError):
+            client.head_exception.head404()
 
 
 if __name__ == '__main__':

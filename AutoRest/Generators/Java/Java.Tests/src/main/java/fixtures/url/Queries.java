@@ -21,6 +21,7 @@ import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import retrofit.Call;
 import retrofit.http.GET;
+import retrofit.http.Headers;
 import retrofit.http.Query;
 
 /**
@@ -33,106 +34,140 @@ public interface Queries {
      * used by Retrofit to perform actually REST calls.
      */
     interface QueriesService {
-        @GET("/queries/bool/true")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("queries/bool/true")
         Call<ResponseBody> getBooleanTrue(@Query("boolQuery") Boolean boolQuery);
 
-        @GET("/queries/bool/false")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("queries/bool/false")
         Call<ResponseBody> getBooleanFalse(@Query("boolQuery") Boolean boolQuery);
 
-        @GET("/queries/bool/null")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("queries/bool/null")
         Call<ResponseBody> getBooleanNull(@Query("boolQuery") Boolean boolQuery);
 
-        @GET("/queries/int/1000000")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("queries/int/1000000")
         Call<ResponseBody> getIntOneMillion(@Query("intQuery") Integer intQuery);
 
-        @GET("/queries/int/-1000000")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("queries/int/-1000000")
         Call<ResponseBody> getIntNegativeOneMillion(@Query("intQuery") Integer intQuery);
 
-        @GET("/queries/int/null")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("queries/int/null")
         Call<ResponseBody> getIntNull(@Query("intQuery") Integer intQuery);
 
-        @GET("/queries/long/10000000000")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("queries/long/10000000000")
         Call<ResponseBody> getTenBillion(@Query("longQuery") Long longQuery);
 
-        @GET("/queries/long/-10000000000")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("queries/long/-10000000000")
         Call<ResponseBody> getNegativeTenBillion(@Query("longQuery") Long longQuery);
 
-        @GET("/queries/long/null")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("queries/long/null")
         Call<ResponseBody> getLongNull(@Query("longQuery") Long longQuery);
 
-        @GET("/queries/float/1.034E+20")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("queries/float/1.034E+20")
         Call<ResponseBody> floatScientificPositive(@Query("floatQuery") Double floatQuery);
 
-        @GET("/queries/float/-1.034E-20")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("queries/float/-1.034E-20")
         Call<ResponseBody> floatScientificNegative(@Query("floatQuery") Double floatQuery);
 
-        @GET("/queries/float/null")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("queries/float/null")
         Call<ResponseBody> floatNull(@Query("floatQuery") Double floatQuery);
 
-        @GET("/queries/double/9999999.999")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("queries/double/9999999.999")
         Call<ResponseBody> doubleDecimalPositive(@Query("doubleQuery") Double doubleQuery);
 
-        @GET("/queries/double/-9999999.999")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("queries/double/-9999999.999")
         Call<ResponseBody> doubleDecimalNegative(@Query("doubleQuery") Double doubleQuery);
 
-        @GET("/queries/double/null")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("queries/double/null")
         Call<ResponseBody> doubleNull(@Query("doubleQuery") Double doubleQuery);
 
-        @GET("/queries/string/unicode/")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("queries/string/unicode/")
         Call<ResponseBody> stringUnicode(@Query("stringQuery") String stringQuery);
 
-        @GET("/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend")
         Call<ResponseBody> stringUrlEncoded(@Query("stringQuery") String stringQuery);
 
-        @GET("/queries/string/empty")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("queries/string/empty")
         Call<ResponseBody> stringEmpty(@Query("stringQuery") String stringQuery);
 
-        @GET("/queries/string/null")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("queries/string/null")
         Call<ResponseBody> stringNull(@Query("stringQuery") String stringQuery);
 
-        @GET("/queries/enum/green%20color")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("queries/enum/green%20color")
         Call<ResponseBody> enumValid(@Query("enumQuery") String enumQuery);
 
-        @GET("/queries/enum/null")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("queries/enum/null")
         Call<ResponseBody> enumNull(@Query("enumQuery") String enumQuery);
 
-        @GET("/queries/byte/multibyte")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("queries/byte/multibyte")
         Call<ResponseBody> byteMultiByte(@Query("byteQuery") String byteQuery);
 
-        @GET("/queries/byte/empty")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("queries/byte/empty")
         Call<ResponseBody> byteEmpty(@Query("byteQuery") String byteQuery);
 
-        @GET("/queries/byte/null")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("queries/byte/null")
         Call<ResponseBody> byteNull(@Query("byteQuery") String byteQuery);
 
-        @GET("/queries/date/2012-01-01")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("queries/date/2012-01-01")
         Call<ResponseBody> dateValid(@Query("dateQuery") String dateQuery);
 
-        @GET("/queries/date/null")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("queries/date/null")
         Call<ResponseBody> dateNull(@Query("dateQuery") String dateQuery);
 
-        @GET("/queries/datetime/2012-01-01T01%3A01%3A01Z")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("queries/datetime/2012-01-01T01%3A01%3A01Z")
         Call<ResponseBody> dateTimeValid(@Query("dateTimeQuery") String dateTimeQuery);
 
-        @GET("/queries/datetime/null")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("queries/datetime/null")
         Call<ResponseBody> dateTimeNull(@Query("dateTimeQuery") String dateTimeQuery);
 
-        @GET("/queries/array/csv/string/valid")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("queries/array/csv/string/valid")
         Call<ResponseBody> arrayStringCsvValid(@Query("arrayQuery") String arrayQuery);
 
-        @GET("/queries/array/csv/string/null")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("queries/array/csv/string/null")
         Call<ResponseBody> arrayStringCsvNull(@Query("arrayQuery") String arrayQuery);
 
-        @GET("/queries/array/csv/string/empty")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("queries/array/csv/string/empty")
         Call<ResponseBody> arrayStringCsvEmpty(@Query("arrayQuery") String arrayQuery);
 
-        @GET("/queries/array/ssv/string/valid")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("queries/array/ssv/string/valid")
         Call<ResponseBody> arrayStringSsvValid(@Query("arrayQuery") String arrayQuery);
 
-        @GET("/queries/array/tsv/string/valid")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("queries/array/tsv/string/valid")
         Call<ResponseBody> arrayStringTsvValid(@Query("arrayQuery") String arrayQuery);
 
-        @GET("/queries/array/pipes/string/valid")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("queries/array/pipes/string/valid")
         Call<ResponseBody> arrayStringPipesValid(@Query("arrayQuery") String arrayQuery);
 
     }

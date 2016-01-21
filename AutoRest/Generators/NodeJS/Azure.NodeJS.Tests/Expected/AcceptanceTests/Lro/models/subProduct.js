@@ -25,74 +25,50 @@ var util = require('util');
  * 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'.
  * 
  */
-function SubProduct(parameters) {
-  SubProduct['super_'].call(this, parameters);
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.provisioningState !== undefined) {
-      this.provisioningState = parameters.provisioningState;
-    }
-    if (parameters.provisioningStateValues !== undefined) {
-      this.provisioningStateValues = parameters.provisioningStateValues;
-    }
-  }    
+function SubProduct() {
+  SubProduct['super_'].call(this);
 }
 
 util.inherits(SubProduct, models['SubResource']);
 
 /**
- * Validate the payload against the SubProduct schema
+ * Defines the metadata of SubProduct
  *
- * @param {JSON} payload
- *
- */
-SubProduct.prototype.serialize = function () {
-  var payload = SubProduct['super_'].prototype.serialize.call(this);
-  if (this['provisioningState'] !== null && this['provisioningState'] !== undefined) {
-    if (typeof this['provisioningState'].valueOf() !== 'string') {
-      throw new Error('this[\'provisioningState\'] must be of type string.');
-    }
-    if (payload['properties'] === null || payload['properties'] === undefined) {
-      payload['properties'] = {};
-    }
-    payload['properties']['provisioningState'] = this['provisioningState'];
-  }
-
-  if (this['provisioningStateValues'] !== null && this['provisioningStateValues'] !== undefined) {
-    if (typeof this['provisioningStateValues'].valueOf() !== 'string') {
-      throw new Error('this[\'provisioningStateValues\'] must be of type string.');
-    }
-    if (payload['properties'] === null || payload['properties'] === undefined) {
-      payload['properties'] = {};
-    }
-    payload['properties']['provisioningStateValues'] = this['provisioningStateValues'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to SubProduct schema
- *
- * @param {JSON} instance
+ * @returns {object} metadata of SubProduct
  *
  */
-SubProduct.prototype.deserialize = function (instance) {
-  SubProduct['super_'].prototype.deserialize.call(this, instance);
-  if (instance) {
-    if (instance['properties'] !== null && instance['properties'] !== undefined) {
-      if (instance['properties']['provisioningState'] !== undefined) {
-        this['provisioningState'] = instance['properties']['provisioningState'];
+SubProduct.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'SubProduct',
+    type: {
+      name: 'Composite',
+      className: 'SubProduct',
+      modelProperties: {
+        id: {
+          required: false,
+          serializedName: 'id',
+          type: {
+            name: 'String'
+          }
+        },
+        provisioningState: {
+          required: false,
+          serializedName: 'properties.provisioningState',
+          type: {
+            name: 'String'
+          }
+        },
+        provisioningStateValues: {
+          required: false,
+          serializedName: 'properties.provisioningStateValues',
+          type: {
+            name: 'String'
+          }
+        }
       }
     }
-
-    if (instance['properties'] !== null && instance['properties'] !== undefined) {
-      if (instance['properties']['provisioningStateValues'] !== undefined) {
-        this['provisioningStateValues'] = instance['properties']['provisioningStateValues'];
-      }
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = SubProduct;

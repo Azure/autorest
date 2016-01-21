@@ -19,65 +19,41 @@
  * @member {string} [type]  Default value: Microsoft.Storage/storageAccounts .
  * 
  */
-function StorageAccountCheckNameAvailabilityParameters(parameters) {
-  if (parameters === null || parameters === undefined) {
-    parameters = {};
-  }
-  if (parameters.type === undefined) {
-    parameters.type = 'Microsoft.Storage/storageAccounts';
-  }
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.name !== undefined) {
-      this.name = parameters.name;
-    }
-    if (parameters.type !== undefined) {
-      this.type = parameters.type;
-    }
-  }    
+function StorageAccountCheckNameAvailabilityParameters() {
 }
 
-
 /**
- * Validate the payload against the StorageAccountCheckNameAvailabilityParameters schema
+ * Defines the metadata of StorageAccountCheckNameAvailabilityParameters
  *
- * @param {JSON} payload
+ * @returns {object} metadata of StorageAccountCheckNameAvailabilityParameters
  *
  */
-StorageAccountCheckNameAvailabilityParameters.prototype.serialize = function () {
-  var payload = {};
-  if (this['name'] === null || this['name'] === undefined || typeof this['name'].valueOf() !== 'string') {
-    throw new Error('this[\'name\'] cannot be null or undefined and it must be of type string.');
-  }
-  payload['name'] = this['name'];
-
-  if (this['type'] !== null && this['type'] !== undefined) {
-    if (typeof this['type'].valueOf() !== 'string') {
-      throw new Error('this[\'type\'] must be of type string.');
+StorageAccountCheckNameAvailabilityParameters.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'StorageAccountCheckNameAvailabilityParameters',
+    type: {
+      name: 'Composite',
+      className: 'StorageAccountCheckNameAvailabilityParameters',
+      modelProperties: {
+        name: {
+          required: true,
+          serializedName: 'name',
+          type: {
+            name: 'String'
+          }
+        },
+        type: {
+          required: false,
+          serializedName: 'type',
+          defaultValue: 'Microsoft.Storage/storageAccounts',
+          type: {
+            name: 'String'
+          }
+        }
+      }
     }
-    payload['type'] = this['type'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to StorageAccountCheckNameAvailabilityParameters schema
- *
- * @param {JSON} instance
- *
- */
-StorageAccountCheckNameAvailabilityParameters.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['name'] !== undefined) {
-      this['name'] = instance['name'];
-    }
-
-    if (instance['type'] !== undefined) {
-      this['type'] = instance['type'];
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = StorageAccountCheckNameAvailabilityParameters;

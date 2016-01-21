@@ -27,105 +27,64 @@ var util = require('util');
  * @member {string} fishtype Polymorhpic Discriminator
  * 
  */
-function Fish(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.species !== undefined) {
-      this.species = parameters.species;
-    }
-    if (parameters.length !== undefined) {
-      this.length = parameters.length;
-    }
-    if (parameters.siblings) {
-      var tempParameterssiblings = [];
-      parameters.siblings.forEach(function(element) {
-        if (element) {
-          element = new models.discriminators[element['fishtype']](element);
-        }
-        tempParameterssiblings.push(element);
-      });
-      this.siblings = tempParameterssiblings;
-    }
-    if (parameters.fishtype !== undefined) {
-      this.fishtype = parameters.fishtype;
-    }
-  }    
+function Fish() {
 }
 
-
 /**
- * Validate the payload against the Fish schema
+ * Defines the metadata of Fish
  *
- * @param {JSON} payload
+ * @returns {object} metadata of Fish
  *
  */
-Fish.prototype.serialize = function () {
-  var payload = {};
-  if (this['species'] !== null && this['species'] !== undefined) {
-    if (typeof this['species'].valueOf() !== 'string') {
-      throw new Error('this[\'species\'] must be of type string.');
-    }
-    payload['species'] = this['species'];
-  }
-
-  if (this['length'] === null || this['length'] === undefined || typeof this['length'] !== 'number') {
-    throw new Error('this[\'length\'] cannot be null or undefined and it must be of type number.');
-  }
-  payload['length'] = this['length'];
-
-  if (util.isArray(this['siblings'])) {
-    payload['siblings'] = [];
-    for (var i = 0; i < this['siblings'].length; i++) {
-      if (this['siblings'][i]) {
-        if(this['siblings'][i]['fishtype'] !== null && this['siblings'][i]['fishtype'] !== undefined && models.discriminators[this['siblings'][i]['fishtype']]) {
-          payload['siblings'][i] = this['siblings'][i].serialize();
-        } else {
-          throw new Error('No discriminator field "fishtype" was found in parameter "this[\'siblings\'][i]".');
+Fish.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'Fish',
+    type: {
+      name: 'Composite',
+      polymorphicDiscriminator: 'fishtype',
+      className: 'Fish',
+      modelProperties: {
+        species: {
+          required: false,
+          serializedName: 'species',
+          type: {
+            name: 'String'
+          }
+        },
+        length: {
+          required: true,
+          serializedName: 'length',
+          type: {
+            name: 'Number'
+          }
+        },
+        siblings: {
+          required: false,
+          serializedName: 'siblings',
+          type: {
+            name: 'Sequence',
+            element: {
+                required: false,
+                serializedName: 'FishElementType',
+                type: {
+                  name: 'Composite',
+                  polymorphicDiscriminator: 'fishtype',
+                  className: 'Fish'
+                }
+            }
+          }
+        },
+        fishtype: {
+          required: true,
+          serializedName: 'fishtype',
+          type: {
+            name: 'String'
+          }
         }
       }
     }
-  }
-
-  if (this['fishtype'] === null || this['fishtype'] === undefined || typeof this['fishtype'].valueOf() !== 'string') {
-    throw new Error('this[\'fishtype\'] cannot be null or undefined and it must be of type string.');
-  }
-  payload['fishtype'] = this['fishtype'];
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to Fish schema
- *
- * @param {JSON} instance
- *
- */
-Fish.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['species'] !== undefined) {
-      this['species'] = instance['species'];
-    }
-
-    if (instance['length'] !== undefined) {
-      this['length'] = instance['length'];
-    }
-
-    if (instance['siblings']) {
-      var tempInstancesiblings = [];
-      instance['siblings'].forEach(function(element1) {
-        if (element1) {
-          element1 = new models.discriminators[element1['fishtype']]().deserialize(element1);
-        }
-        tempInstancesiblings.push(element1);
-      });
-      this['siblings'] = tempInstancesiblings;
-    }
-
-    if (instance['fishtype'] !== undefined) {
-      this['fishtype'] = instance['fishtype'];
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = Fish;

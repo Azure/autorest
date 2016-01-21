@@ -24,29 +24,50 @@
  * @member {string} path Path parameter
  * 
  */
-function ParameterGroupingPostRequiredParameters(parameters) {
-  if (parameters === null || parameters === undefined) {
-    parameters = {};
-  }
-  if (parameters.query === undefined) {
-    parameters.query = 30;
-  }
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.body !== undefined) {
-      this.body = parameters.body;
-    }
-    if (parameters.customHeader !== undefined) {
-      this.customHeader = parameters.customHeader;
-    }
-    if (parameters.query !== undefined) {
-      this.query = parameters.query;
-    }
-    if (parameters.path !== undefined) {
-      this.path = parameters.path;
-    }
-  }    
+function ParameterGroupingPostRequiredParameters() {
 }
 
-
+/**
+ * Defines the metadata of ParameterGroupingPostRequiredParameters
+ *
+ * @returns {object} metadata of ParameterGroupingPostRequiredParameters
+ *
+ */
+ParameterGroupingPostRequiredParameters.prototype.mapper = function () {
+  return {
+    required: false,
+    type: {
+      name: 'Composite',
+      className: 'ParameterGroupingPostRequiredParameters',
+      modelProperties: {
+        body: {
+          required: true,
+          type: {
+            name: 'Number'
+          }
+        },
+        customHeader: {
+          required: false,
+          type: {
+            name: 'String'
+          }
+        },
+        query: {
+          required: false,
+          defaultValue: '30',
+          type: {
+            name: 'Number'
+          }
+        },
+        path: {
+          required: true,
+          type: {
+            name: 'String'
+          }
+        }
+      }
+    }
+  };
+};
 
 module.exports = ParameterGroupingPostRequiredParameters;
