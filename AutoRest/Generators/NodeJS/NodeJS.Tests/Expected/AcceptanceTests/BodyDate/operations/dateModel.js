@@ -551,7 +551,7 @@ DateModel.prototype.putMaxDate = function (dateBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (dateBody !== null && dateBody !== undefined) {
@@ -791,7 +791,7 @@ DateModel.prototype.putMinDate = function (dateBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (dateBody !== null && dateBody !== undefined) {

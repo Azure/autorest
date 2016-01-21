@@ -207,7 +207,7 @@ String.prototype.putNull = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (stringBody !== null && stringBody !== undefined) {
@@ -446,7 +446,7 @@ String.prototype.putEmpty = function (stringBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (stringBody !== null && stringBody !== undefined) {
@@ -688,7 +688,7 @@ String.prototype.putMbcs = function (stringBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (stringBody !== null && stringBody !== undefined) {
@@ -933,7 +933,7 @@ String.prototype.putWhitespace = function (stringBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (stringBody !== null && stringBody !== undefined) {

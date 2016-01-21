@@ -216,7 +216,7 @@ EnumModel.prototype.putNotExpandable = function (stringBody, options, callback) 
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (stringBody !== null && stringBody !== undefined) {

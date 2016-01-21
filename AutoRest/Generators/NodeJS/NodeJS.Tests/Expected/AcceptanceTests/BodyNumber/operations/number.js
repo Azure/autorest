@@ -550,7 +550,7 @@ Number.prototype.putBigFloat = function (numberBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (numberBody !== null && numberBody !== undefined) {
@@ -789,7 +789,7 @@ Number.prototype.putBigDouble = function (numberBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (numberBody !== null && numberBody !== undefined) {
@@ -1028,7 +1028,7 @@ Number.prototype.putBigDoublePositiveDecimal = function (numberBody, options, ca
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (numberBody !== null && numberBody !== undefined) {
@@ -1267,7 +1267,7 @@ Number.prototype.putBigDoubleNegativeDecimal = function (numberBody, options, ca
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (numberBody !== null && numberBody !== undefined) {
@@ -1506,7 +1506,7 @@ Number.prototype.putBigDecimal = function (numberBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (numberBody !== null && numberBody !== undefined) {
@@ -1745,7 +1745,7 @@ Number.prototype.putBigDecimalPositiveDecimal = function (numberBody, options, c
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (numberBody !== null && numberBody !== undefined) {
@@ -1984,7 +1984,7 @@ Number.prototype.putBigDecimalNegativeDecimal = function (numberBody, options, c
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (numberBody !== null && numberBody !== undefined) {
@@ -2223,7 +2223,7 @@ Number.prototype.putSmallFloat = function (numberBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (numberBody !== null && numberBody !== undefined) {
@@ -2462,7 +2462,7 @@ Number.prototype.putSmallDouble = function (numberBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (numberBody !== null && numberBody !== undefined) {
@@ -2701,7 +2701,7 @@ Number.prototype.putSmallDecimal = function (numberBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (numberBody !== null && numberBody !== undefined) {

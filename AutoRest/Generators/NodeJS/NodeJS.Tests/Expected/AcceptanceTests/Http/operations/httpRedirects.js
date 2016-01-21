@@ -491,7 +491,7 @@ HttpRedirects.prototype.put301 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (booleanValue !== null && booleanValue !== undefined) {
@@ -802,7 +802,7 @@ HttpRedirects.prototype.patch302 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (booleanValue !== null && booleanValue !== undefined) {
@@ -929,7 +929,7 @@ HttpRedirects.prototype.post303 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (booleanValue !== null && booleanValue !== undefined) {
@@ -1238,7 +1238,7 @@ HttpRedirects.prototype.put307 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (booleanValue !== null && booleanValue !== undefined) {
@@ -1363,7 +1363,7 @@ HttpRedirects.prototype.patch307 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (booleanValue !== null && booleanValue !== undefined) {
@@ -1488,7 +1488,7 @@ HttpRedirects.prototype.post307 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (booleanValue !== null && booleanValue !== undefined) {
@@ -1613,7 +1613,7 @@ HttpRedirects.prototype.delete307 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (booleanValue !== null && booleanValue !== undefined) {

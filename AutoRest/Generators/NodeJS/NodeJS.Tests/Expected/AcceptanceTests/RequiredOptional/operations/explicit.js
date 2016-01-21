@@ -92,7 +92,7 @@ Explicit.prototype.postRequiredIntegerParameter = function (bodyParameter, optio
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (bodyParameter !== null && bodyParameter !== undefined) {
@@ -231,7 +231,7 @@ Explicit.prototype.postOptionalIntegerParameter = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (bodyParameter !== null && bodyParameter !== undefined) {
@@ -364,7 +364,7 @@ Explicit.prototype.postRequiredIntegerProperty = function (value, options, callb
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (bodyParameter !== null && bodyParameter !== undefined) {
@@ -504,7 +504,7 @@ Explicit.prototype.postOptionalIntegerProperty = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (bodyParameter !== null && bodyParameter !== undefined) {
@@ -852,7 +852,7 @@ Explicit.prototype.postRequiredStringParameter = function (bodyParameter, option
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (bodyParameter !== null && bodyParameter !== undefined) {
@@ -991,7 +991,7 @@ Explicit.prototype.postOptionalStringParameter = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (bodyParameter !== null && bodyParameter !== undefined) {
@@ -1124,7 +1124,7 @@ Explicit.prototype.postRequiredStringProperty = function (value, options, callba
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (bodyParameter !== null && bodyParameter !== undefined) {
@@ -1264,7 +1264,7 @@ Explicit.prototype.postOptionalStringProperty = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (bodyParameter !== null && bodyParameter !== undefined) {
@@ -1616,7 +1616,7 @@ Explicit.prototype.postRequiredClassParameter = function (bodyParameter, options
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (bodyParameter !== null && bodyParameter !== undefined) {
@@ -1745,7 +1745,7 @@ Explicit.prototype.postOptionalClassParameter = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (bodyParameter !== null && bodyParameter !== undefined) {
@@ -1876,7 +1876,7 @@ Explicit.prototype.postRequiredClassProperty = function (value, options, callbac
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (bodyParameter !== null && bodyParameter !== undefined) {
@@ -2012,7 +2012,7 @@ Explicit.prototype.postOptionalClassProperty = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (bodyParameter !== null && bodyParameter !== undefined) {
@@ -2137,7 +2137,7 @@ Explicit.prototype.postRequiredArrayParameter = function (bodyParameter, options
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (bodyParameter !== null && bodyParameter !== undefined) {
@@ -2287,7 +2287,7 @@ Explicit.prototype.postOptionalArrayParameter = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (bodyParameter !== null && bodyParameter !== undefined) {
@@ -2432,7 +2432,7 @@ Explicit.prototype.postRequiredArrayProperty = function (value, options, callbac
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (bodyParameter !== null && bodyParameter !== undefined) {
@@ -2576,7 +2576,7 @@ Explicit.prototype.postOptionalArrayProperty = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (bodyParameter !== null && bodyParameter !== undefined) {

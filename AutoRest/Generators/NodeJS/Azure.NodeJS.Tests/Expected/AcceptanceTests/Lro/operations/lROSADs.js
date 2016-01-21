@@ -189,7 +189,7 @@ LROSADs.prototype.beginPutNonRetry400 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -441,7 +441,7 @@ LROSADs.prototype.beginPutNonRetry201Creating400 = function (options, callback) 
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -695,7 +695,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetry400 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -1417,7 +1417,7 @@ LROSADs.prototype.beginPostNonRetry400 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -1617,7 +1617,7 @@ LROSADs.prototype.beginPost202NonRetry400 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -1821,7 +1821,7 @@ LROSADs.prototype.beginPostAsyncRelativeRetry400 = function (options, callback) 
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -2039,7 +2039,7 @@ LROSADs.prototype.beginPutError201NoProvisioningStatePayload = function (options
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -2293,7 +2293,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatus = function (options, callba
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -2530,7 +2530,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryNoStatusPayload = function (options,
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -3089,7 +3089,7 @@ LROSADs.prototype.beginPost202NoLocation = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -3293,7 +3293,7 @@ LROSADs.prototype.beginPostAsyncRelativeRetryNoPayload = function (options, call
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -3511,7 +3511,7 @@ LROSADs.prototype.beginPut200InvalidJson = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -3748,7 +3748,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidHeader = function (options, c
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -3985,7 +3985,7 @@ LROSADs.prototype.beginPutAsyncRelativeRetryInvalidJsonPolling = function (optio
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -4713,7 +4713,7 @@ LROSADs.prototype.beginPost202RetryInvalidHeader = function (options, callback) 
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -4917,7 +4917,7 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidHeader = function (options, 
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -5121,7 +5121,7 @@ LROSADs.prototype.beginPostAsyncRelativeRetryInvalidJsonPolling = function (opti
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {

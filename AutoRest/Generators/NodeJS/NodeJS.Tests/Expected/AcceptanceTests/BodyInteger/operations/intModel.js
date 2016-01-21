@@ -780,7 +780,7 @@ IntModel.prototype.putMax32 = function (intBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (intBody !== null && intBody !== undefined) {
@@ -904,7 +904,7 @@ IntModel.prototype.putMax64 = function (intBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (intBody !== null && intBody !== undefined) {
@@ -1028,7 +1028,7 @@ IntModel.prototype.putMin32 = function (intBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (intBody !== null && intBody !== undefined) {
@@ -1152,7 +1152,7 @@ IntModel.prototype.putMin64 = function (intBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (intBody !== null && intBody !== undefined) {

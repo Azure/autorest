@@ -436,7 +436,7 @@ ByteModel.prototype.putNonAscii = function (byteBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (byteBody !== null && byteBody !== undefined) {

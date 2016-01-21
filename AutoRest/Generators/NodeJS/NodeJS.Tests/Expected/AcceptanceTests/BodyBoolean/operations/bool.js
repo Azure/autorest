@@ -205,7 +205,7 @@ Bool.prototype.putTrue = function (boolBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (boolBody !== null && boolBody !== undefined) {
@@ -444,7 +444,7 @@ Bool.prototype.putFalse = function (boolBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (boolBody !== null && boolBody !== undefined) {

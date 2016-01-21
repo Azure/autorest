@@ -235,7 +235,7 @@ describe('nodejs', function () {
       it('should support valid null value', function (done) {
         testClient.string.getNull(function (error, result) {
           should.not.exist(result);
-          testClient.string.putNull({ stringBody: null }, function (error, result) {
+          testClient.string.putNull(function (error, result) {
             should.not.exist(error);
             done();
           });

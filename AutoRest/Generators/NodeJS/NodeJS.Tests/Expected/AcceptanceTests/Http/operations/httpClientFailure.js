@@ -306,7 +306,7 @@ HttpClientFailure.prototype.put400 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (booleanValue !== null && booleanValue !== undefined) {
@@ -446,7 +446,7 @@ HttpClientFailure.prototype.patch400 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (booleanValue !== null && booleanValue !== undefined) {
@@ -586,7 +586,7 @@ HttpClientFailure.prototype.post400 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (booleanValue !== null && booleanValue !== undefined) {
@@ -726,7 +726,7 @@ HttpClientFailure.prototype.delete400 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (booleanValue !== null && booleanValue !== undefined) {
@@ -1187,7 +1187,7 @@ HttpClientFailure.prototype.put404 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (booleanValue !== null && booleanValue !== undefined) {
@@ -1327,7 +1327,7 @@ HttpClientFailure.prototype.patch405 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (booleanValue !== null && booleanValue !== undefined) {
@@ -1467,7 +1467,7 @@ HttpClientFailure.prototype.post406 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (booleanValue !== null && booleanValue !== undefined) {
@@ -1607,7 +1607,7 @@ HttpClientFailure.prototype.delete407 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (booleanValue !== null && booleanValue !== undefined) {
@@ -1747,7 +1747,7 @@ HttpClientFailure.prototype.put409 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (booleanValue !== null && booleanValue !== undefined) {
@@ -2208,7 +2208,7 @@ HttpClientFailure.prototype.put413 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (booleanValue !== null && booleanValue !== undefined) {
@@ -2348,7 +2348,7 @@ HttpClientFailure.prototype.patch414 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (booleanValue !== null && booleanValue !== undefined) {
@@ -2488,7 +2488,7 @@ HttpClientFailure.prototype.post415 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (booleanValue !== null && booleanValue !== undefined) {
@@ -2735,7 +2735,7 @@ HttpClientFailure.prototype.delete417 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (booleanValue !== null && booleanValue !== undefined) {

@@ -195,7 +195,7 @@ LRORetrys.prototype.beginPut201CreatingSucceeded200 = function (options, callbac
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -451,7 +451,7 @@ LRORetrys.prototype.beginPutAsyncRelativeRetrySucceeded = function (options, cal
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -1237,7 +1237,7 @@ LRORetrys.prototype.beginPost202Retry200 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -1443,7 +1443,7 @@ LRORetrys.prototype.beginPostAsyncRelativeRetrySucceeded = function (options, ca
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {

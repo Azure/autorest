@@ -120,7 +120,7 @@ StorageAccounts.prototype.checkNameAvailability = function (accountName, options
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (accountName !== null && accountName !== undefined) {
@@ -399,7 +399,7 @@ StorageAccounts.prototype.beginCreate = function (resourceGroupName, accountName
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (parameters !== null && parameters !== undefined) {
@@ -884,7 +884,7 @@ StorageAccounts.prototype.update = function (resourceGroupName, accountName, par
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (parameters !== null && parameters !== undefined) {
@@ -1499,7 +1499,7 @@ StorageAccounts.prototype.regenerateKey = function (resourceGroupName, accountNa
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (regenerateKey !== null && regenerateKey !== undefined) {
