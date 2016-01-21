@@ -183,7 +183,7 @@ HttpRetry.prototype.put500 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (booleanValue !== null && booleanValue !== undefined) {
@@ -308,7 +308,7 @@ HttpRetry.prototype.patch500 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (booleanValue !== null && booleanValue !== undefined) {
@@ -525,7 +525,7 @@ HttpRetry.prototype.post503 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (booleanValue !== null && booleanValue !== undefined) {
@@ -650,7 +650,7 @@ HttpRetry.prototype.delete503 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (booleanValue !== null && booleanValue !== undefined) {
@@ -775,7 +775,7 @@ HttpRetry.prototype.put504 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (booleanValue !== null && booleanValue !== undefined) {
@@ -900,7 +900,7 @@ HttpRetry.prototype.patch504 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (booleanValue !== null && booleanValue !== undefined) {

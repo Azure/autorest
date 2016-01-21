@@ -152,7 +152,7 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (options, ca
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (resourceArray !== null && resourceArray !== undefined) {
@@ -437,7 +437,7 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (option
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (resourceDictionary !== null && resourceDictionary !== undefined) {
@@ -741,7 +741,7 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (resourceComplexObject !== null && resourceComplexObject !== undefined) {

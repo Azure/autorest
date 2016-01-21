@@ -260,7 +260,7 @@ Polymorphicrecursive.prototype.putValid = function (complexBody, options, callba
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (complexBody !== null && complexBody !== undefined) {

@@ -551,7 +551,7 @@ Datetime.prototype.putUtcMaxDateTime = function (datetimeBody, options, callback
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (datetimeBody !== null && datetimeBody !== undefined) {
@@ -907,7 +907,7 @@ Datetime.prototype.putLocalPositiveOffsetMaxDateTime = function (datetimeBody, o
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (datetimeBody !== null && datetimeBody !== undefined) {
@@ -1265,7 +1265,7 @@ Datetime.prototype.putLocalNegativeOffsetMaxDateTime = function (datetimeBody, o
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (datetimeBody !== null && datetimeBody !== undefined) {
@@ -1622,7 +1622,7 @@ Datetime.prototype.putUtcMinDateTime = function (datetimeBody, options, callback
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (datetimeBody !== null && datetimeBody !== undefined) {
@@ -1862,7 +1862,7 @@ Datetime.prototype.putLocalPositiveOffsetMinDateTime = function (datetimeBody, o
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (datetimeBody !== null && datetimeBody !== undefined) {
@@ -2102,7 +2102,7 @@ Datetime.prototype.putLocalNegativeOffsetMinDateTime = function (datetimeBody, o
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (datetimeBody !== null && datetimeBody !== undefined) {

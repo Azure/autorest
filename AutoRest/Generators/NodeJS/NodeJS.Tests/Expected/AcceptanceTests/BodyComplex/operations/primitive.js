@@ -205,7 +205,7 @@ Primitive.prototype.putInt = function (complexBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (complexBody !== null && complexBody !== undefined) {
@@ -437,7 +437,7 @@ Primitive.prototype.putLong = function (complexBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (complexBody !== null && complexBody !== undefined) {
@@ -669,7 +669,7 @@ Primitive.prototype.putFloat = function (complexBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (complexBody !== null && complexBody !== undefined) {
@@ -903,7 +903,7 @@ Primitive.prototype.putDouble = function (complexBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (complexBody !== null && complexBody !== undefined) {
@@ -1135,7 +1135,7 @@ Primitive.prototype.putBool = function (complexBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (complexBody !== null && complexBody !== undefined) {
@@ -1369,7 +1369,7 @@ Primitive.prototype.putString = function (complexBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (complexBody !== null && complexBody !== undefined) {
@@ -1601,7 +1601,7 @@ Primitive.prototype.putDate = function (complexBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (complexBody !== null && complexBody !== undefined) {
@@ -1834,7 +1834,7 @@ Primitive.prototype.putDateTime = function (complexBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (complexBody !== null && complexBody !== undefined) {
@@ -2068,7 +2068,7 @@ Primitive.prototype.putDateTimeRfc1123 = function (complexBody, options, callbac
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (complexBody !== null && complexBody !== undefined) {
@@ -2303,7 +2303,7 @@ Primitive.prototype.putDuration = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (complexBody !== null && complexBody !== undefined) {
@@ -2538,7 +2538,7 @@ Primitive.prototype.putByte = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (complexBody !== null && complexBody !== undefined) {

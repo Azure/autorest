@@ -48,7 +48,7 @@ describe('nodejs', function () {
         });
       });
       it('should accept null values for optional body parameters', function (done) {
-        testClient.implicit.putOptionalBody({ bodyParameter: null }, function (error, result, request, response) {
+        testClient.implicit.putOptionalBody(function (error, result, request, response) {
           should.not.exist(error);
           response.statusCode.should.equal(200);
           done();

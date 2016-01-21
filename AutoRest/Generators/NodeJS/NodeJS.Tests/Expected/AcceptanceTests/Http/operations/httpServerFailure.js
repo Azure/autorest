@@ -306,7 +306,7 @@ HttpServerFailure.prototype.post505 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (booleanValue !== null && booleanValue !== undefined) {
@@ -446,7 +446,7 @@ HttpServerFailure.prototype.delete505 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (booleanValue !== null && booleanValue !== undefined) {

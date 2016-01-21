@@ -191,7 +191,7 @@ LROs.prototype.beginPut200Succeeded = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -426,7 +426,7 @@ LROs.prototype.beginPut200SucceededNoState = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -663,7 +663,7 @@ LROs.prototype.beginPut202Retry200 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -902,7 +902,7 @@ LROs.prototype.beginPut201CreatingSucceeded200 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -1158,7 +1158,7 @@ LROs.prototype.beginPut200UpdatingSucceeded204 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -1397,7 +1397,7 @@ LROs.prototype.beginPut201CreatingFailed200 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -1653,7 +1653,7 @@ LROs.prototype.beginPut200Acceptedcanceled200 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -1890,7 +1890,7 @@ LROs.prototype.beginPutNoHeaderInRetry = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -2127,7 +2127,7 @@ LROs.prototype.beginPutAsyncRetrySucceeded = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -2364,7 +2364,7 @@ LROs.prototype.beginPutAsyncNoRetrySucceeded = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -2601,7 +2601,7 @@ LROs.prototype.beginPutAsyncRetryFailed = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -2838,7 +2838,7 @@ LROs.prototype.beginPutAsyncNoRetrycanceled = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -3075,7 +3075,7 @@ LROs.prototype.beginPutAsyncNoHeaderInRetry = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -3304,7 +3304,7 @@ LROs.prototype.beginPutNonResource = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (sku !== null && sku !== undefined) {
@@ -3533,7 +3533,7 @@ LROs.prototype.beginPutAsyncNonResource = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (sku !== null && sku !== undefined) {
@@ -3758,7 +3758,7 @@ LROs.prototype.beginPutSubResource = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -3983,7 +3983,7 @@ LROs.prototype.beginPutAsyncSubResource = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -6695,7 +6695,7 @@ LROs.prototype.beginPost202Retry200 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -6913,7 +6913,7 @@ LROs.prototype.beginPost202NoRetry204 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -7150,7 +7150,7 @@ LROs.prototype.beginPostAsyncRetrySucceeded = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -7387,7 +7387,7 @@ LROs.prototype.beginPostAsyncNoRetrySucceeded = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -7608,7 +7608,7 @@ LROs.prototype.beginPostAsyncRetryFailed = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {
@@ -7812,7 +7812,7 @@ LROs.prototype.beginPostAsyncRetrycanceled = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (product !== null && product !== undefined) {

@@ -340,7 +340,7 @@ Dictionary.prototype.putEmpty = function (arrayBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (arrayBody !== null && arrayBody !== undefined) {
@@ -1086,7 +1086,7 @@ Dictionary.prototype.putBooleanTfft = function (arrayBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (arrayBody !== null && arrayBody !== undefined) {
@@ -1588,7 +1588,7 @@ Dictionary.prototype.putIntegerValid = function (arrayBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (arrayBody !== null && arrayBody !== undefined) {
@@ -2090,7 +2090,7 @@ Dictionary.prototype.putLongValid = function (arrayBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (arrayBody !== null && arrayBody !== undefined) {
@@ -2592,7 +2592,7 @@ Dictionary.prototype.putFloatValid = function (arrayBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (arrayBody !== null && arrayBody !== undefined) {
@@ -3094,7 +3094,7 @@ Dictionary.prototype.putDoubleValid = function (arrayBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (arrayBody !== null && arrayBody !== undefined) {
@@ -3596,7 +3596,7 @@ Dictionary.prototype.putStringValid = function (arrayBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (arrayBody !== null && arrayBody !== undefined) {
@@ -4101,7 +4101,7 @@ Dictionary.prototype.putDateValid = function (arrayBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (arrayBody !== null && arrayBody !== undefined) {
@@ -4606,7 +4606,7 @@ Dictionary.prototype.putDateTimeValid = function (arrayBody, options, callback) 
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (arrayBody !== null && arrayBody !== undefined) {
@@ -5112,7 +5112,7 @@ Dictionary.prototype.putDateTimeRfc1123Valid = function (arrayBody, options, cal
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (arrayBody !== null && arrayBody !== undefined) {
@@ -5371,7 +5371,7 @@ Dictionary.prototype.putDurationValid = function (arrayBody, options, callback) 
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (arrayBody !== null && arrayBody !== undefined) {
@@ -5631,7 +5631,7 @@ Dictionary.prototype.putByteValid = function (arrayBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (arrayBody !== null && arrayBody !== undefined) {
@@ -6497,7 +6497,7 @@ Dictionary.prototype.putComplexValid = function (arrayBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (arrayBody !== null && arrayBody !== undefined) {
@@ -7287,7 +7287,7 @@ Dictionary.prototype.putArrayValid = function (arrayBody, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (arrayBody !== null && arrayBody !== undefined) {
@@ -8087,7 +8087,7 @@ Dictionary.prototype.putDictionaryValid = function (arrayBody, options, callback
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   // Serialize Request
-  var requestContent = null;
+  var requestContent = '';
   var requestModel = null;
   try {
     if (arrayBody !== null && arrayBody !== undefined) {
