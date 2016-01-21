@@ -18,6 +18,7 @@ import java.io.InputStream;
 import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.Body;
+import retrofit.http.Headers;
 import retrofit.http.POST;
 import retrofit.http.PUT;
 
@@ -31,10 +32,12 @@ public interface Formdata {
      * used by Retrofit to perform actually REST calls.
      */
     interface FormdataService {
-        @POST("/formdata/stream/uploadfile")
+        @Headers("Content-Type: multipart/form-data")
+        @POST("formdata/stream/uploadfile")
         Call<ResponseBody> uploadFile(InputStream fileContent, String fileName);
 
-        @PUT("/formdata/stream/uploadfile")
+        @Headers("Content-Type: application/octet-stream")
+        @PUT("formdata/stream/uploadfile")
         Call<ResponseBody> uploadFileViaBody(@Body InputStream fileContent, String fileName);
 
     }

@@ -40,13 +40,17 @@ Install DNVM using [these steps](https://docs.asp.net/en/latest/getting-started/
 ### Node.js
 Install the latest from [nodejs.org](https://nodejs.org/). Then from the project root run `npm install`.
 
-### Java / Java Development Kit
+### Java / Android
 Install the latest Java SE Development Kit from [Java SE Downloads](http://www.oracle.com/technetwork/java/javase/downloads/index.html).
 Ensure that the JDK binaries are in your `PATH`.
 >set PATH=PATH;C:\Program Files\java\jdk1.8.0_45\bin
 
 Ensure that your environment includes the `JAVA_HOME`.
 >set JAVA_HOME=C:\Program Files\java\jdk1.8.0_45
+
+Install the latest Android environment from http://developer.android.com/sdk/index.html. You can either install Android Studio if you want to do actual development work in Android, or simply install the [SDK tools](http://developer.android.com/sdk/index.html#Other) that is minimally requried to build the Android code. 
+
+In SDK Manager, make sure that build tools >23.0.1, Android Support Repository, and Google Repository are installed. Make sure ANDROID_HOME is in your environment variable. If you installed Android Studio, you can find it out from Android Studio settings. If you installed SDK tools, its default location is `C:\Program Files (x86)\Android\android-sdk` on Windows.
 
 #### Gradle
 Install the `Gradle build system` from [Gradle downloads](http://gradle.org/gradle-download/).

@@ -19,6 +19,7 @@ import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
+import retrofit.http.Headers;
 import retrofit.http.PUT;
 
 /**
@@ -31,19 +32,24 @@ public interface Array {
      * used by Retrofit to perform actually REST calls.
      */
     interface ArrayService {
-        @GET("/complex/array/valid")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/array/valid")
         Call<ResponseBody> getValid();
 
-        @PUT("/complex/array/valid")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("complex/array/valid")
         Call<ResponseBody> putValid(@Body ArrayWrapper complexBody);
 
-        @GET("/complex/array/empty")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/array/empty")
         Call<ResponseBody> getEmpty();
 
-        @PUT("/complex/array/empty")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("complex/array/empty")
         Call<ResponseBody> putEmpty(@Body ArrayWrapper complexBody);
 
-        @GET("/complex/array/notprovided")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/array/notprovided")
         Call<ResponseBody> getNotProvided();
 
     }

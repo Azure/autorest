@@ -11,7 +11,7 @@
 package fixtures.lro.models;
 
 import java.util.Map;
-import com.microsoft.rest.BaseResource;
+import com.microsoft.azure.BaseResource;
 
 /**
  * The Resource model.

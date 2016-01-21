@@ -21,61 +21,40 @@
  * resource name.
  * 
  */
-function UsageName(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.value !== undefined) {
-      this.value = parameters.value;
-    }
-    if (parameters.localizedValue !== undefined) {
-      this.localizedValue = parameters.localizedValue;
-    }
-  }    
+function UsageName() {
 }
 
-
 /**
- * Validate the payload against the UsageName schema
+ * Defines the metadata of UsageName
  *
- * @param {JSON} payload
+ * @returns {object} metadata of UsageName
  *
  */
-UsageName.prototype.serialize = function () {
-  var payload = {};
-  if (this['value'] !== null && this['value'] !== undefined) {
-    if (typeof this['value'].valueOf() !== 'string') {
-      throw new Error('this[\'value\'] must be of type string.');
+UsageName.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'UsageName',
+    type: {
+      name: 'Composite',
+      className: 'UsageName',
+      modelProperties: {
+        value: {
+          required: false,
+          serializedName: 'value',
+          type: {
+            name: 'String'
+          }
+        },
+        localizedValue: {
+          required: false,
+          serializedName: 'localizedValue',
+          type: {
+            name: 'String'
+          }
+        }
+      }
     }
-    payload['value'] = this['value'];
-  }
-
-  if (this['localizedValue'] !== null && this['localizedValue'] !== undefined) {
-    if (typeof this['localizedValue'].valueOf() !== 'string') {
-      throw new Error('this[\'localizedValue\'] must be of type string.');
-    }
-    payload['localizedValue'] = this['localizedValue'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to UsageName schema
- *
- * @param {JSON} instance
- *
- */
-UsageName.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['value'] !== undefined) {
-      this['value'] = instance['value'];
-    }
-
-    if (instance['localizedValue'] !== undefined) {
-      this['localizedValue'] = instance['localizedValue'];
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = UsageName;

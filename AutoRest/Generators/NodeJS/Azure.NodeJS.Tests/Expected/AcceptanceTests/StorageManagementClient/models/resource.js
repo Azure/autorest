@@ -29,124 +29,71 @@ var util = require('util');
  * @member {object} [tags] Resource tags
  * 
  */
-function Resource(parameters) {
-  Resource['super_'].call(this, parameters);
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.id !== undefined) {
-      this.id = parameters.id;
-    }
-    if (parameters.name !== undefined) {
-      this.name = parameters.name;
-    }
-    if (parameters.type !== undefined) {
-      this.type = parameters.type;
-    }
-    if (parameters.location !== undefined) {
-      this.location = parameters.location;
-    }
-    if (parameters.tags) {
-      this.tags = {};
-      for(var valueElement in parameters.tags) {
-        if (parameters.tags[valueElement] !== undefined) {
-          this.tags[valueElement] = parameters.tags[valueElement];
-        }
-      }
-    }
-  }    
+function Resource() {
+  Resource['super_'].call(this);
 }
 
 util.inherits(Resource, models['BaseResource']);
 
 /**
- * Validate the payload against the Resource schema
+ * Defines the metadata of Resource
  *
- * @param {JSON} payload
- *
- */
-Resource.prototype.serialize = function () {
-  var payload = Resource['super_'].prototype.serialize.call(this);
-  if (this['id'] !== null && this['id'] !== undefined) {
-    if (typeof this['id'].valueOf() !== 'string') {
-      throw new Error('this[\'id\'] must be of type string.');
-    }
-    payload['id'] = this['id'];
-  }
-
-  if (this['name'] !== null && this['name'] !== undefined) {
-    if (typeof this['name'].valueOf() !== 'string') {
-      throw new Error('this[\'name\'] must be of type string.');
-    }
-    payload['name'] = this['name'];
-  }
-
-  if (this['type'] !== null && this['type'] !== undefined) {
-    if (typeof this['type'].valueOf() !== 'string') {
-      throw new Error('this[\'type\'] must be of type string.');
-    }
-    payload['type'] = this['type'];
-  }
-
-  if (this['location'] === null || this['location'] === undefined || typeof this['location'].valueOf() !== 'string') {
-    throw new Error('this[\'location\'] cannot be null or undefined and it must be of type string.');
-  }
-  payload['location'] = this['location'];
-
-  if (this['tags'] && typeof this['tags'] === 'object') {
-    payload['tags'] = {};
-    for(var valueElement1 in this['tags']) {
-      if (this['tags'][valueElement1] !== null && this['tags'][valueElement1] !== undefined) {
-        if (typeof this['tags'][valueElement1].valueOf() !== 'string') {
-          throw new Error('this[\'tags\'][valueElement1] must be of type string.');
-        }
-        payload['tags'][valueElement1] = this['tags'][valueElement1];
-      }
-      else {
-        payload['tags'][valueElement1] = this['tags'][valueElement1];
-      }
-    }
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to Resource schema
- *
- * @param {JSON} instance
+ * @returns {object} metadata of Resource
  *
  */
-Resource.prototype.deserialize = function (instance) {
-  Resource['super_'].prototype.deserialize.call(this, instance);
-  if (instance) {
-    if (instance['id'] !== undefined) {
-      this['id'] = instance['id'];
-    }
-
-    if (instance['name'] !== undefined) {
-      this['name'] = instance['name'];
-    }
-
-    if (instance['type'] !== undefined) {
-      this['type'] = instance['type'];
-    }
-
-    if (instance['location'] !== undefined) {
-      this['location'] = instance['location'];
-    }
-
-    if (instance['tags']) {
-      this['tags'] = {};
-      for(var valueElement2 in instance['tags']) {
-        if (instance['tags'] !== null && instance['tags'] !== undefined) {
-          if (instance['tags'][valueElement2] !== undefined) {
-            this['tags'][valueElement2] = instance['tags'][valueElement2];
+Resource.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'Resource',
+    type: {
+      name: 'Composite',
+      className: 'Resource',
+      modelProperties: {
+        id: {
+          required: false,
+          serializedName: 'id',
+          type: {
+            name: 'String'
+          }
+        },
+        name: {
+          required: false,
+          serializedName: 'name',
+          type: {
+            name: 'String'
+          }
+        },
+        type: {
+          required: false,
+          serializedName: 'type',
+          type: {
+            name: 'String'
+          }
+        },
+        location: {
+          required: true,
+          serializedName: 'location',
+          type: {
+            name: 'String'
+          }
+        },
+        tags: {
+          required: false,
+          serializedName: 'tags',
+          type: {
+            name: 'Dictionary',
+            value: {
+                required: false,
+                serializedName: 'StringElementType',
+                type: {
+                  name: 'String'
+                }
+            }
           }
         }
       }
     }
-  }
-
-  return this;
+  };
 };
 
 module.exports = Resource;

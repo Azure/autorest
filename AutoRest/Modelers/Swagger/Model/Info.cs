@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using Newtonsoft.Json;
 
 namespace Microsoft.Rest.Modeler.Swagger.Model
 {
@@ -24,5 +25,8 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
         public License License { get; set; }
 
         public string Version { get; set; }
+
+        [JsonProperty("x-ms-code-generation-settings")]
+        public CodeGenerationSettings CodeGenerationSettings { get; set; }
     }
 }

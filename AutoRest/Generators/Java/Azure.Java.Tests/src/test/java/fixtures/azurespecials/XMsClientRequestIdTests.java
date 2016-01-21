@@ -1,6 +1,6 @@
 package fixtures.azurespecials;
 
-import com.microsoft.rest.CustomHeaderInterceptor;
+import com.microsoft.azure.CustomHeaderInterceptor;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.credentials.TokenCredentials;
 import com.squareup.okhttp.Interceptor;

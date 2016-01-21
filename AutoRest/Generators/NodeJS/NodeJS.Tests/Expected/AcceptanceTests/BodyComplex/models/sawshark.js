@@ -21,53 +21,87 @@ var util = require('util');
  * @member {buffer} [picture]
  * 
  */
-function Sawshark(parameters) {
-  Sawshark['super_'].call(this, parameters);
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.picture !== undefined) {
-      this.picture = parameters.picture;
-    }
-  }    
+function Sawshark() {
+  Sawshark['super_'].call(this);
 }
 
 util.inherits(Sawshark, models['Shark']);
 
 /**
- * Validate the payload against the Sawshark schema
+ * Defines the metadata of Sawshark
  *
- * @param {JSON} payload
- *
- */
-Sawshark.prototype.serialize = function () {
-  var payload = Sawshark['super_'].prototype.serialize.call(this);
-  if (this['picture']) {
-    if (!Buffer.isBuffer(this['picture'])) {
-      throw new Error('this[\'picture\'] must be of type buffer.');
-    }
-    payload['picture'] = this['picture'].toString('base64');
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to Sawshark schema
- *
- * @param {JSON} instance
+ * @returns {object} metadata of Sawshark
  *
  */
-Sawshark.prototype.deserialize = function (instance) {
-  Sawshark['super_'].prototype.deserialize.call(this, instance);
-  if (instance) {
-    if (instance['picture']) {
-      this['picture'] = new Buffer(instance['picture'], 'base64');
+Sawshark.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'sawshark',
+    type: {
+      name: 'Composite',
+      className: 'Sawshark',
+      modelProperties: {
+        species: {
+          required: false,
+          serializedName: 'species',
+          type: {
+            name: 'String'
+          }
+        },
+        length: {
+          required: true,
+          serializedName: 'length',
+          type: {
+            name: 'Number'
+          }
+        },
+        siblings: {
+          required: false,
+          serializedName: 'siblings',
+          type: {
+            name: 'Sequence',
+            element: {
+                required: false,
+                serializedName: 'FishElementType',
+                type: {
+                  name: 'Composite',
+                  polymorphicDiscriminator: 'fishtype',
+                  className: 'Fish'
+                }
+            }
+          }
+        },
+        fishtype: {
+          required: true,
+          serializedName: 'fishtype',
+          type: {
+            name: 'String'
+          }
+        },
+        age: {
+          required: false,
+          serializedName: 'age',
+          type: {
+            name: 'Number'
+          }
+        },
+        birthday: {
+          required: true,
+          serializedName: 'birthday',
+          type: {
+            name: 'DateTime'
+          }
+        },
+        picture: {
+          required: false,
+          serializedName: 'picture',
+          type: {
+            name: 'ByteArray'
+          }
+        }
+      }
     }
-    else if (instance['picture'] !== undefined) {
-      this['picture'] = instance['picture'];
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = Sawshark;

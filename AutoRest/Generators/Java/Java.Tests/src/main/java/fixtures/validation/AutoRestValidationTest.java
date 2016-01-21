@@ -13,6 +13,7 @@ package fixtures.validation;
 import java.util.List;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
+import com.microsoft.rest.serializer.JacksonMapperAdapter;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
@@ -22,6 +23,7 @@ import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
+import retrofit.http.Headers;
 import retrofit.http.Path;
 import retrofit.http.PUT;
 import retrofit.http.Query;
@@ -50,6 +52,14 @@ public interface AutoRestValidationTest {
      * @param logLevel the logging level enum.
      */
     void setLogLevel(Level logLevel);
+
+    /**
+     * Gets the adapter for {@link com.fasterxml.jackson.databind.ObjectMapper} for serialization
+     * and deserialization operations..
+     *
+     * @return the adapter.
+     */
+    JacksonMapperAdapter getMapperAdapter();
 
     /**
      * Gets Subscription ID..
@@ -84,10 +94,12 @@ public interface AutoRestValidationTest {
      * used by Retrofit to perform actually REST calls.
      */
     interface AutoRestValidationTestService {
-        @GET("/fakepath/{subscriptionId}/{resourceGroupName}/{id}")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("fakepath/{subscriptionId}/{resourceGroupName}/{id}")
         Call<ResponseBody> validationOfMethodParameters(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("id") int id, @Query("apiVersion") String apiVersion);
 
-        @PUT("/fakepath/{subscriptionId}/{resourceGroupName}/{id}")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("fakepath/{subscriptionId}/{resourceGroupName}/{id}")
         Call<ResponseBody> validationOfBody(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("id") int id, @Body Product body, @Query("apiVersion") String apiVersion);
 
     }

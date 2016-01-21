@@ -19,67 +19,40 @@
  * @member {date} [now]
  * 
  */
-function Datetimerfc1123Wrapper(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.field !== undefined) {
-      this.field = parameters.field;
-    }
-    if (parameters.now !== undefined) {
-      this.now = parameters.now;
-    }
-  }    
+function Datetimerfc1123Wrapper() {
 }
 
-
 /**
- * Validate the payload against the Datetimerfc1123Wrapper schema
+ * Defines the metadata of Datetimerfc1123Wrapper
  *
- * @param {JSON} payload
+ * @returns {object} metadata of Datetimerfc1123Wrapper
  *
  */
-Datetimerfc1123Wrapper.prototype.serialize = function () {
-  var payload = {};
-  if (this['field']) {
-    if (!(this['field'] instanceof Date || typeof this['field'].valueOf() === 'string' && !isNaN(Date.parse(this['field'])))) {
-      throw new Error('this[\'field\'] must be of type date.');
+Datetimerfc1123Wrapper.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'datetimerfc1123-wrapper',
+    type: {
+      name: 'Composite',
+      className: 'Datetimerfc1123Wrapper',
+      modelProperties: {
+        field: {
+          required: false,
+          serializedName: 'field',
+          type: {
+            name: 'DateTimeRfc1123'
+          }
+        },
+        now: {
+          required: false,
+          serializedName: 'now',
+          type: {
+            name: 'DateTimeRfc1123'
+          }
+        }
+      }
     }
-    payload['field'] = (this['field'] instanceof Date) ? this['field'].toUTCString() : this['field'];
-  }
-
-  if (this['now']) {
-    if (!(this['now'] instanceof Date || typeof this['now'].valueOf() === 'string' && !isNaN(Date.parse(this['now'])))) {
-      throw new Error('this[\'now\'] must be of type date.');
-    }
-    payload['now'] = (this['now'] instanceof Date) ? this['now'].toUTCString() : this['now'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to Datetimerfc1123Wrapper schema
- *
- * @param {JSON} instance
- *
- */
-Datetimerfc1123Wrapper.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['field']) {
-      this['field'] = new Date(instance['field']);
-    }
-    else if (instance['field'] !== undefined) {
-      this['field'] = instance['field'];
-    }
-
-    if (instance['now']) {
-      this['now'] = new Date(instance['now']);
-    }
-    else if (instance['now'] !== undefined) {
-      this['now'] = instance['now'];
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = Datetimerfc1123Wrapper;

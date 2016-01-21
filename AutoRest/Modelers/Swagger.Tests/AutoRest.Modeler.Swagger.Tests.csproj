@@ -78,6 +78,9 @@
     <None Include="Swagger\swagger-response-headers.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="Swagger\swagger-x-ms-code-generation-settings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="Swagger\swagger-x-ms-paths.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -100,6 +103,10 @@
     <ProjectReference Include="..\..\AutoRest.Core\AutoRest.Core.csproj">
       <Project>{c876085f-9dc3-41f0-b7b4-17022cd84684}</Project>
       <Name>AutoRest.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Generators\CSharp\CSharp\AutoRest.Generator.CSharp.csproj">
+      <Project>{cc1eec95-41ef-44b6-8761-00fa3e647248}</Project>
+      <Name>AutoRest.Generator.CSharp</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -131,7 +138,11 @@
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <ProjectExtensions />
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties Swagger_4swagger-x-ms-code-generation-settings_1json__JSONSchema="..\..\..\..\schema\swagger-extensions.json" />
+    </VisualStudio>
+  </ProjectExtensions>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>

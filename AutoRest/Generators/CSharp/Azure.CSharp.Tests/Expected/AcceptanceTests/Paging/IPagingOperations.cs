@@ -124,7 +124,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// </param>
         /// <param name='clientRequestId'>
         /// </param>
-        /// <param name='pagingGetMultiplePagesOptions'>
+        /// <param name='pagingGetMultiplePagesNextOptions'>
         /// Additional parameters for the operation
         /// </param>
         /// <param name='customHeaders'>
@@ -133,7 +133,7 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<AzureOperationResponse<IPage<Product>>> GetMultiplePagesNextWithHttpMessagesAsync(string nextPageLink, string clientRequestId = default(string), PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = default(PagingGetMultiplePagesOptions), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse<IPage<Product>>> GetMultiplePagesNextWithHttpMessagesAsync(string nextPageLink, string clientRequestId = default(string), PagingGetMultiplePagesNextOptions pagingGetMultiplePagesNextOptions = default(PagingGetMultiplePagesNextOptions), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// A paging operation that fails on the first call with 500 and then
         /// retries and then get a response including a nextLink that has 10

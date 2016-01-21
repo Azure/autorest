@@ -17,6 +17,7 @@ import fixtures.azurespecials.models.ErrorException;
 import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.Header;
+import retrofit.http.Headers;
 import retrofit.http.Path;
 import retrofit.http.POST;
 
@@ -30,16 +31,20 @@ public interface SubscriptionInMethodOperations {
      * used by Retrofit to perform actually REST calls.
      */
     interface SubscriptionInMethodService {
-        @POST("/azurespecials/subscriptionId/method/string/none/path/local/1234-5678-9012-3456/{subscriptionId}")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("azurespecials/subscriptionId/method/string/none/path/local/1234-5678-9012-3456/{subscriptionId}")
         Call<ResponseBody> postMethodLocalValid(@Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage);
 
-        @POST("/azurespecials/subscriptionId/method/string/none/path/local/null/{subscriptionId}")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("azurespecials/subscriptionId/method/string/none/path/local/null/{subscriptionId}")
         Call<ResponseBody> postMethodLocalNull(@Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage);
 
-        @POST("/azurespecials/subscriptionId/path/string/none/path/local/1234-5678-9012-3456/{subscriptionId}")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("azurespecials/subscriptionId/path/string/none/path/local/1234-5678-9012-3456/{subscriptionId}")
         Call<ResponseBody> postPathLocalValid(@Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage);
 
-        @POST("/azurespecials/subscriptionId/swagger/string/none/path/local/1234-5678-9012-3456/{subscriptionId}")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("azurespecials/subscriptionId/swagger/string/none/path/local/1234-5678-9012-3456/{subscriptionId}")
         Call<ResponseBody> postSwaggerLocalValid(@Path("subscriptionId") String subscriptionId, @Header("accept-language") String acceptLanguage);
 
     }

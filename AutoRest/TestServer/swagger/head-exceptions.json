@@ -1,0 +1,67 @@
+﻿{
+    "swagger": "2.0",
+    "info": {
+        "title": "AutoRest Head Exception Test Service",
+        "description": "Test Infrastructure for AutoRest",
+        "version": "1.0.0"
+    },
+    "host": "localhost",
+    "schemes": [
+        "http"
+    ],
+    "produces": [ "application/json" ],
+    "consumes": [ "application/json" ],
+    "paths": {
+       "/http/success/200": {
+            "head": {
+                "operationId": "headException_head200",
+                "description": "Return 200 status code if successful",
+                "tags": [
+                    "HttpSuccess Operations"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successfully returns the true boolean value"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }
+       },
+       "/http/success/204": {
+            "head": {
+                "operationId": "headException_head204",
+                "description": "Return 204 status code if successful",
+                "tags": [
+                    "HttpSuccess Operations"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successfully returns the true boolean value"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }
+       },
+       "/http/success/404": {
+            "head": {
+                "operationId": "headException_head404",
+                "description": "Return 404 status code if successful",
+                "tags": [
+                    "HttpSuccess Operations"
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Successfully returns the true boolean value"
+                    },
+                    "default": {
+                        "description": "Unexpected error"
+                    }
+                }
+            }
+       }
+    }
+}

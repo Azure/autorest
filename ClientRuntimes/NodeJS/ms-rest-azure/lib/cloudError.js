@@ -52,6 +52,60 @@ function CloudError(parameters) {
 util.inherits(CloudError, Error);
 
 /**
+ * Defines the metadata of CloudError
+ *
+ * @returns {object} metadata of CloudError
+ *
+ */
+CloudError.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'CloudError',
+    type: {
+      name: 'Composite',
+      className: 'CloudError',
+      modelProperties: {
+        code: {
+          required: false,
+          serializedName: 'code',
+          type: {
+            name: 'String'
+          }
+        },
+        message: {
+          required: false,
+          serializedName: 'message',
+          type: {
+            name: 'String'
+          }
+        },
+        target: {
+          required: false,
+          serializedName: 'target',
+          type: {
+            name: 'String'
+          }
+        },
+        details: {
+          required: false,
+          serializedName: 'details',
+          type: {
+            name: 'Sequence',
+            element: {
+              required: false,
+              serializedName: 'CloudErrorElementType',
+              type: {
+                name: 'Composite',
+                className: 'CloudError'
+              }
+            }
+          }
+        }
+      }
+    }
+  };
+};
+/**
  * Serialize the instance to CloudError schema
  *
  * @param {JSON} instance

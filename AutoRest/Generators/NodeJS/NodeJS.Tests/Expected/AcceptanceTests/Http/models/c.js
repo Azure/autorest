@@ -17,47 +17,33 @@
  * @member {string} [httpCode]
  * 
  */
-function C(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.httpCode !== undefined) {
-      this.httpCode = parameters.httpCode;
-    }
-  }    
+function C() {
 }
 
-
 /**
- * Validate the payload against the C schema
+ * Defines the metadata of C
  *
- * @param {JSON} payload
+ * @returns {object} metadata of C
  *
  */
-C.prototype.serialize = function () {
-  var payload = {};
-  if (this['httpCode'] !== null && this['httpCode'] !== undefined) {
-    if (typeof this['httpCode'].valueOf() !== 'string') {
-      throw new Error('this[\'httpCode\'] must be of type string.');
+C.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'C',
+    type: {
+      name: 'Composite',
+      className: 'C',
+      modelProperties: {
+        httpCode: {
+          required: false,
+          serializedName: 'httpCode',
+          type: {
+            name: 'String'
+          }
+        }
+      }
     }
-    payload['httpCode'] = this['httpCode'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to C schema
- *
- * @param {JSON} instance
- *
- */
-C.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['httpCode'] !== undefined) {
-      this['httpCode'] = instance['httpCode'];
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = C;

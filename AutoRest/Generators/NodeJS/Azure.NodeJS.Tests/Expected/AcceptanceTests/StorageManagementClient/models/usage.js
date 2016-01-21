@@ -35,88 +35,56 @@ var models = require('./index');
  * the resource name.
  * 
  */
-function Usage(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.unit !== undefined) {
-      this.unit = parameters.unit;
-    }
-    if (parameters.currentValue !== undefined) {
-      this.currentValue = parameters.currentValue;
-    }
-    if (parameters.limit !== undefined) {
-      this.limit = parameters.limit;
-    }
-    if (parameters.name) {
-      this.name = new models['UsageName'](parameters.name);
-    }
-  }    
+function Usage() {
 }
 
-
 /**
- * Validate the payload against the Usage schema
+ * Defines the metadata of Usage
  *
- * @param {JSON} payload
+ * @returns {object} metadata of Usage
  *
  */
-Usage.prototype.serialize = function () {
-  var payload = {};
-  if (this['unit'] !== null && this['unit'] !== undefined) {
-    var allowedValues = [ 'Count', 'Bytes', 'Seconds', 'Percent', 'CountsPerSecond', 'BytesPerSecond' ];
-    var thisunit = this['unit'];
-    if (!allowedValues.some( function(item) { return item === thisunit; })) {
-      throw new Error(this['unit'] + ' is not a valid value. The valid values are: ' + allowedValues);
+Usage.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'Usage',
+    type: {
+      name: 'Composite',
+      className: 'Usage',
+      modelProperties: {
+        unit: {
+          required: false,
+          serializedName: 'unit',
+          type: {
+            name: 'Enum',
+            allowedValues: [ 'Count', 'Bytes', 'Seconds', 'Percent', 'CountsPerSecond', 'BytesPerSecond' ]
+          }
+        },
+        currentValue: {
+          required: false,
+          serializedName: 'currentValue',
+          type: {
+            name: 'Number'
+          }
+        },
+        limit: {
+          required: false,
+          serializedName: 'limit',
+          type: {
+            name: 'Number'
+          }
+        },
+        name: {
+          required: false,
+          serializedName: 'name',
+          type: {
+            name: 'Composite',
+            className: 'UsageName'
+          }
+        }
+      }
     }
-    payload['unit'] = this['unit'];
-  }
-
-  if (this['currentValue'] !== null && this['currentValue'] !== undefined) {
-    if (typeof this['currentValue'] !== 'number') {
-      throw new Error('this[\'currentValue\'] must be of type number.');
-    }
-    payload['currentValue'] = this['currentValue'];
-  }
-
-  if (this['limit'] !== null && this['limit'] !== undefined) {
-    if (typeof this['limit'] !== 'number') {
-      throw new Error('this[\'limit\'] must be of type number.');
-    }
-    payload['limit'] = this['limit'];
-  }
-
-  if (this['name']) {
-    payload['name'] = this['name'].serialize();
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to Usage schema
- *
- * @param {JSON} instance
- *
- */
-Usage.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['unit'] !== undefined) {
-      this['unit'] = instance['unit'];
-    }
-
-    if (instance['currentValue'] !== undefined) {
-      this['currentValue'] = instance['currentValue'];
-    }
-
-    if (instance['limit'] !== undefined) {
-      this['limit'] = instance['limit'];
-    }
-
-    if (instance['name']) {
-      this['name'] = new models['UsageName']().deserialize(instance['name']);
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = Usage;

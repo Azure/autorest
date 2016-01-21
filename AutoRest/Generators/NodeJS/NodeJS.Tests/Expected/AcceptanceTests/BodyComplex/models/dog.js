@@ -21,50 +21,50 @@ var util = require('util');
  * @member {string} [food]
  * 
  */
-function Dog(parameters) {
-  Dog['super_'].call(this, parameters);
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.food !== undefined) {
-      this.food = parameters.food;
-    }
-  }    
+function Dog() {
+  Dog['super_'].call(this);
 }
 
 util.inherits(Dog, models['Pet']);
 
 /**
- * Validate the payload against the Dog schema
+ * Defines the metadata of Dog
  *
- * @param {JSON} payload
- *
- */
-Dog.prototype.serialize = function () {
-  var payload = Dog['super_'].prototype.serialize.call(this);
-  if (this['food'] !== null && this['food'] !== undefined) {
-    if (typeof this['food'].valueOf() !== 'string') {
-      throw new Error('this[\'food\'] must be of type string.');
-    }
-    payload['food'] = this['food'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to Dog schema
- *
- * @param {JSON} instance
+ * @returns {object} metadata of Dog
  *
  */
-Dog.prototype.deserialize = function (instance) {
-  Dog['super_'].prototype.deserialize.call(this, instance);
-  if (instance) {
-    if (instance['food'] !== undefined) {
-      this['food'] = instance['food'];
+Dog.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'dog',
+    type: {
+      name: 'Composite',
+      className: 'Dog',
+      modelProperties: {
+        id: {
+          required: false,
+          serializedName: 'id',
+          type: {
+            name: 'Number'
+          }
+        },
+        name: {
+          required: false,
+          serializedName: 'name',
+          type: {
+            name: 'String'
+          }
+        },
+        food: {
+          required: false,
+          serializedName: 'food',
+          type: {
+            name: 'String'
+          }
+        }
+      }
     }
-  }
-
-  return this;
+  };
 };
 
 module.exports = Dog;

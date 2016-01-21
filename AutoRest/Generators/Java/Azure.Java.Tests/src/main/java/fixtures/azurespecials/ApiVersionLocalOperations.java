@@ -18,6 +18,7 @@ import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.GET;
 import retrofit.http.Header;
+import retrofit.http.Headers;
 import retrofit.http.Query;
 
 /**
@@ -30,16 +31,20 @@ public interface ApiVersionLocalOperations {
      * used by Retrofit to perform actually REST calls.
      */
     interface ApiVersionLocalService {
-        @GET("/azurespecials/apiVersion/method/string/none/query/local/2.0")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("azurespecials/apiVersion/method/string/none/query/local/2.0")
         Call<ResponseBody> getMethodLocalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
 
-        @GET("/azurespecials/apiVersion/method/string/none/query/local/null")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("azurespecials/apiVersion/method/string/none/query/local/null")
         Call<ResponseBody> getMethodLocalNull(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
 
-        @GET("/azurespecials/apiVersion/path/string/none/query/local/2.0")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("azurespecials/apiVersion/path/string/none/query/local/2.0")
         Call<ResponseBody> getPathLocalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
 
-        @GET("/azurespecials/apiVersion/swagger/string/none/query/local/2.0")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("azurespecials/apiVersion/swagger/string/none/query/local/2.0")
         Call<ResponseBody> getSwaggerLocalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
 
     }

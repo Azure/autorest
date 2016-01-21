@@ -10,8 +10,6 @@
 
 'use strict';
 
-var models = require('./index');
-
 var util = require('util');
 
 /**
@@ -29,29 +27,44 @@ function ProductResult() {
 util.inherits(ProductResult, Array);
 
 /**
- * Deserialize the instance to ProductResult schema
+ * Defines the metadata of ProductResult
  *
- * @param {JSON} instance
+ * @returns {object} metadata of ProductResult
  *
  */
-ProductResult.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['values']) {
-      var deserializedInstancevalues = [];
-        instance['values'].forEach(function(element) {
-        if (element) {
-          element = new models['Product']().deserialize(element);
+ProductResult.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'ProductResult',
+    type: {
+      name: 'Composite',
+      className: 'ProductResult',
+      modelProperties: {
+        values: {
+          required: false,
+          serializedName: 'values',
+          type: {
+            name: 'Sequence',
+            element: {
+                required: false,
+                serializedName: 'ProductElementType',
+                type: {
+                  name: 'Composite',
+                  className: 'Product'
+                }
+            }
+          }
+        },
+        nextLink: {
+          required: false,
+          serializedName: 'nextLink',
+          type: {
+            name: 'String'
+          }
         }
-        deserializedInstancevalues.push(element);
-      });
-      Array.prototype.push.apply(this, deserializedInstancevalues);
+      }
     }
-    if (instance['nextLink'] !== undefined) {
-      this['nextLink'] = instance.nextLink;
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = ProductResult;

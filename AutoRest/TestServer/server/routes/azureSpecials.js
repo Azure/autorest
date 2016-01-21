@@ -31,7 +31,9 @@ var specials = function (coverage) {
   coverage['AzureMethodQueryUrlEncodingNull'] = 0;
   coverage['AzureXmsRequestClientOverwrite'] = 0;
   coverage['AzureXmsRequestClientOverwriteViaParameter'] = 0;
+  coverage['AzureXmsRequestClientIdNull'] = 0;
   coverage['AzureXmsCustomNamedRequestId'] = 0;
+  coverage['AzureRequestClientIdInError'] = 0;
   coverage['AzureODataFilter'] = 0;
 
   router.post('/subscriptionId/:location/string/none/path/:scope/:scenario/:subscription', function (req, res, next) {
@@ -192,8 +194,12 @@ var specials = function (coverage) {
         var headers = {
           'x-ms-request-id': '123'
         };
-        if (req.get("x-ms-client-request-id") !== '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0') {
-          utils.send400(res, next, "Header x-ms-client-request-id must be set to 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.");
+        if (!req.headers["x-ms-client-request-id"]) {
+          coverage['AzureXmsRequestClientIdNull']++;
+          res.set(headers).status(200).end();
+        } else if (req.headers["x-ms-client-request-id"] !== '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0') {
+          coverage['AzureRequestClientIdInError']++;
+          res.set(headers).status(400).end();
         } else {
           coverage['AzureXmsRequestClientOverwrite']++;
           res.set(headers).status(200).end();

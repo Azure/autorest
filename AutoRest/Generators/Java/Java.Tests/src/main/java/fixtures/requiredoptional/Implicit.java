@@ -20,6 +20,7 @@ import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.Header;
+import retrofit.http.Headers;
 import retrofit.http.Path;
 import retrofit.http.PUT;
 import retrofit.http.Query;
@@ -34,25 +35,32 @@ public interface Implicit {
      * used by Retrofit to perform actually REST calls.
      */
     interface ImplicitService {
-        @GET("/reqopt/implicit/required/path/{pathParameter}")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("reqopt/implicit/required/path/{pathParameter}")
         Call<ResponseBody> getRequiredPath(@Path("pathParameter") String pathParameter);
 
-        @PUT("/reqopt/implicit/optional/query")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("reqopt/implicit/optional/query")
         Call<ResponseBody> putOptionalQuery(@Query("queryParameter") String queryParameter);
 
-        @PUT("/reqopt/implicit/optional/header")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("reqopt/implicit/optional/header")
         Call<ResponseBody> putOptionalHeader(@Header("queryParameter") String queryParameter);
 
-        @PUT("/reqopt/implicit/optional/body")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("reqopt/implicit/optional/body")
         Call<ResponseBody> putOptionalBody(@Body String bodyParameter);
 
-        @GET("/reqopt/global/required/path/{required-global-path}")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("reqopt/global/required/path/{required-global-path}")
         Call<ResponseBody> getRequiredGlobalPath(@Path("required-global-path") String requiredGlobalPath);
 
-        @GET("/reqopt/global/required/query")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("reqopt/global/required/query")
         Call<ResponseBody> getRequiredGlobalQuery(@Query("required-global-query") String requiredGlobalQuery);
 
-        @GET("/reqopt/global/optional/query")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("reqopt/global/optional/query")
         Call<ResponseBody> getOptionalGlobalQuery(@Query("optional-global-query") Integer optionalGlobalQuery);
 
     }

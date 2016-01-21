@@ -35,6 +35,7 @@ import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.HEAD;
+import retrofit.http.Headers;
 import retrofit.http.HTTP;
 import retrofit.http.PATCH;
 import retrofit.http.POST;
@@ -50,49 +51,64 @@ public interface HttpRedirects {
      * used by Retrofit to perform actually REST calls.
      */
     interface HttpRedirectsService {
-        @HEAD("/http/redirect/300")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HEAD("http/redirect/300")
         Call<Void> head300();
 
-        @GET("/http/redirect/300")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/redirect/300")
         Call<ResponseBody> get300();
 
-        @HEAD("/http/redirect/301")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HEAD("http/redirect/301")
         Call<Void> head301();
 
-        @GET("/http/redirect/301")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/redirect/301")
         Call<ResponseBody> get301();
 
-        @PUT("/http/redirect/301")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("http/redirect/301")
         Call<ResponseBody> put301(@Body Boolean booleanValue);
 
-        @HEAD("/http/redirect/302")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HEAD("http/redirect/302")
         Call<Void> head302();
 
-        @GET("/http/redirect/302")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/redirect/302")
         Call<ResponseBody> get302();
 
-        @PATCH("/http/redirect/302")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PATCH("http/redirect/302")
         Call<ResponseBody> patch302(@Body Boolean booleanValue);
 
-        @POST("/http/redirect/303")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("http/redirect/303")
         Call<ResponseBody> post303(@Body Boolean booleanValue);
 
-        @HEAD("/http/redirect/307")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HEAD("http/redirect/307")
         Call<Void> head307();
 
-        @GET("/http/redirect/307")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/redirect/307")
         Call<ResponseBody> get307();
 
-        @PUT("/http/redirect/307")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("http/redirect/307")
         Call<ResponseBody> put307(@Body Boolean booleanValue);
 
-        @PATCH("/http/redirect/307")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PATCH("http/redirect/307")
         Call<ResponseBody> patch307(@Body Boolean booleanValue);
 
-        @POST("/http/redirect/307")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("http/redirect/307")
         Call<ResponseBody> post307(@Body Boolean booleanValue);
 
-        @HTTP(path = "/http/redirect/307", method = "DELETE", hasBody = true)
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "http/redirect/307", method = "DELETE", hasBody = true)
         Call<ResponseBody> delete307(@Body Boolean booleanValue);
 
     }

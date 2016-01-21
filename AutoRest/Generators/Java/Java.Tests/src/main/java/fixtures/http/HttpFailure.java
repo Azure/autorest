@@ -17,6 +17,7 @@ import fixtures.http.models.ErrorException;
 import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.GET;
+import retrofit.http.Headers;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -28,7 +29,8 @@ public interface HttpFailure {
      * used by Retrofit to perform actually REST calls.
      */
     interface HttpFailureService {
-        @GET("/http/failure/emptybody/error")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/failure/emptybody/error")
         Call<ResponseBody> getEmptyError();
 
     }

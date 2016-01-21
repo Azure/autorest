@@ -21,50 +21,87 @@ var util = require('util');
  * @member {number} [jawsize]
  * 
  */
-function Goblinshark(parameters) {
-  Goblinshark['super_'].call(this, parameters);
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.jawsize !== undefined) {
-      this.jawsize = parameters.jawsize;
-    }
-  }    
+function Goblinshark() {
+  Goblinshark['super_'].call(this);
 }
 
 util.inherits(Goblinshark, models['Shark']);
 
 /**
- * Validate the payload against the Goblinshark schema
+ * Defines the metadata of Goblinshark
  *
- * @param {JSON} payload
- *
- */
-Goblinshark.prototype.serialize = function () {
-  var payload = Goblinshark['super_'].prototype.serialize.call(this);
-  if (this['jawsize'] !== null && this['jawsize'] !== undefined) {
-    if (typeof this['jawsize'] !== 'number') {
-      throw new Error('this[\'jawsize\'] must be of type number.');
-    }
-    payload['jawsize'] = this['jawsize'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to Goblinshark schema
- *
- * @param {JSON} instance
+ * @returns {object} metadata of Goblinshark
  *
  */
-Goblinshark.prototype.deserialize = function (instance) {
-  Goblinshark['super_'].prototype.deserialize.call(this, instance);
-  if (instance) {
-    if (instance['jawsize'] !== undefined) {
-      this['jawsize'] = instance['jawsize'];
+Goblinshark.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'goblin',
+    type: {
+      name: 'Composite',
+      className: 'Goblinshark',
+      modelProperties: {
+        species: {
+          required: false,
+          serializedName: 'species',
+          type: {
+            name: 'String'
+          }
+        },
+        length: {
+          required: true,
+          serializedName: 'length',
+          type: {
+            name: 'Number'
+          }
+        },
+        siblings: {
+          required: false,
+          serializedName: 'siblings',
+          type: {
+            name: 'Sequence',
+            element: {
+                required: false,
+                serializedName: 'FishElementType',
+                type: {
+                  name: 'Composite',
+                  polymorphicDiscriminator: 'fishtype',
+                  className: 'Fish'
+                }
+            }
+          }
+        },
+        fishtype: {
+          required: true,
+          serializedName: 'fishtype',
+          type: {
+            name: 'String'
+          }
+        },
+        age: {
+          required: false,
+          serializedName: 'age',
+          type: {
+            name: 'Number'
+          }
+        },
+        birthday: {
+          required: true,
+          serializedName: 'birthday',
+          type: {
+            name: 'DateTime'
+          }
+        },
+        jawsize: {
+          required: false,
+          serializedName: 'jawsize',
+          type: {
+            name: 'Number'
+          }
+        }
+      }
     }
-  }
-
-  return this;
+  };
 };
 
 module.exports = Goblinshark;

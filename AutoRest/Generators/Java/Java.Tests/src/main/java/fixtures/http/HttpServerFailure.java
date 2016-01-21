@@ -20,6 +20,7 @@ import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.HEAD;
+import retrofit.http.Headers;
 import retrofit.http.HTTP;
 import retrofit.http.POST;
 
@@ -33,16 +34,20 @@ public interface HttpServerFailure {
      * used by Retrofit to perform actually REST calls.
      */
     interface HttpServerFailureService {
-        @HEAD("/http/failure/server/501")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HEAD("http/failure/server/501")
         Call<Void> head501();
 
-        @GET("/http/failure/server/501")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/failure/server/501")
         Call<ResponseBody> get501();
 
-        @POST("/http/failure/server/505")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("http/failure/server/505")
         Call<ResponseBody> post505(@Body Boolean booleanValue);
 
-        @HTTP(path = "/http/failure/server/505", method = "DELETE", hasBody = true)
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "http/failure/server/505", method = "DELETE", hasBody = true)
         Call<ResponseBody> delete505(@Body Boolean booleanValue);
 
     }

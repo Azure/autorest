@@ -16,6 +16,8 @@ namespace Microsoft.Rest.Generator.Java
     {
         private readonly IScopeProvider _scopeProvider = new ScopeProvider();
 
+        private string clientReference;
+
         public MethodTemplateModel(Method source, ServiceClient serviceClient)
         {
             this.LoadFrom(source);
@@ -26,10 +28,12 @@ namespace Microsoft.Rest.Generator.Java
             if (source.Group != null)
             {
                 OperationName = source.Group.ToPascalCase();
+                clientReference = "this.client";
             }
             else
             {
                 OperationName = serviceClient.Name;
+                clientReference = "this";
             }
         }
 
@@ -132,7 +136,7 @@ namespace Microsoft.Rest.Generator.Java
                     if ((parameter.Location != ParameterLocation.Body)
                          && parameter.Type.NeedsSpecialSerialization())
                     {
-                        declarations.Add(parameter.ToString(parameter.Name));
+                        declarations.Add(parameter.ToString(parameter.Name, clientReference));
                     }
                     else
                     {
@@ -169,7 +173,7 @@ namespace Microsoft.Rest.Generator.Java
                     if ((parameter.Location != ParameterLocation.Body)
                          && parameter.Type.NeedsSpecialSerialization())
                     {
-                        declarations.Add(parameter.ToString(parameter.Name));
+                        declarations.Add(parameter.ToString(parameter.Name, clientReference));
                     }
                     else
                     {
@@ -449,11 +453,11 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public virtual string ServiceResponseBuilderArgs
+        public virtual string RuntimeBasePackage
         {
             get
             {
-                return "";
+                return "com.microsoft.rest";
             }
         }
 
@@ -464,6 +468,7 @@ namespace Microsoft.Rest.Generator.Java
                 HashSet<string> imports = new HashSet<string>();
                 // static imports
                 imports.Add("retrofit.Call");
+                imports.Add("retrofit.http.Headers");
                 if (this.HttpMethod != HttpMethod.Head)
                 {
                     imports.Add("com.squareup.okhttp.ResponseBody");
@@ -471,7 +476,8 @@ namespace Microsoft.Rest.Generator.Java
                 imports.Add("com.microsoft.rest." + OperationResponseType);
                 imports.Add("com.microsoft.rest.ServiceCallback");
                 // parameter types
-                this.Parameters.ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace)));
+                this.Parameters.Concat(this.LogicalParameters)
+                    .ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace)));
                 // parameter locations
                 this.LogicalParameters.ForEach(p =>
                 {
@@ -511,7 +517,7 @@ namespace Microsoft.Rest.Generator.Java
                     imports.Add("com.squareup.okhttp.ResponseBody");
                 }
                 imports.Add("com.microsoft.rest." + OperationResponseType);
-                imports.Add("com.microsoft.rest." + ResponseBuilder);
+                imports.Add(RuntimeBasePackage + "." + ResponseBuilder);
                 imports.Add("com.microsoft.rest.ServiceCallback");
 
                 // response type conversion
@@ -534,9 +540,11 @@ namespace Microsoft.Rest.Generator.Java
                     imports.Add("com.microsoft.rest.ServiceResponseCallback");
                 }
                 // parameter types
-                this.LocalParameters.ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace)));
+                this.LocalParameters.Concat(this.LogicalParameters)
+                    .ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace)));
                 // parameter utils
-                this.LocalParameters.ForEach(p => imports.AddRange(p.ImportFrom()));
+                this.LocalParameters.Concat(this.LogicalParameters)
+                    .ForEach(p => imports.AddRange(p.ImportFrom()));
                 // return type
                 imports.AddRange(this.ReturnType.Body.ImportFrom(ServiceClient.Namespace));
                 // response type (can be different from return type)

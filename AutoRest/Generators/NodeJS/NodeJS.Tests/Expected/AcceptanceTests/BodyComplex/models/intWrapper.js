@@ -19,61 +19,40 @@
  * @member {number} [field2]
  * 
  */
-function IntWrapper(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.field1 !== undefined) {
-      this.field1 = parameters.field1;
-    }
-    if (parameters.field2 !== undefined) {
-      this.field2 = parameters.field2;
-    }
-  }    
+function IntWrapper() {
 }
 
-
 /**
- * Validate the payload against the IntWrapper schema
+ * Defines the metadata of IntWrapper
  *
- * @param {JSON} payload
+ * @returns {object} metadata of IntWrapper
  *
  */
-IntWrapper.prototype.serialize = function () {
-  var payload = {};
-  if (this['field1'] !== null && this['field1'] !== undefined) {
-    if (typeof this['field1'] !== 'number') {
-      throw new Error('this[\'field1\'] must be of type number.');
+IntWrapper.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'int-wrapper',
+    type: {
+      name: 'Composite',
+      className: 'IntWrapper',
+      modelProperties: {
+        field1: {
+          required: false,
+          serializedName: 'field1',
+          type: {
+            name: 'Number'
+          }
+        },
+        field2: {
+          required: false,
+          serializedName: 'field2',
+          type: {
+            name: 'Number'
+          }
+        }
+      }
     }
-    payload['field1'] = this['field1'];
-  }
-
-  if (this['field2'] !== null && this['field2'] !== undefined) {
-    if (typeof this['field2'] !== 'number') {
-      throw new Error('this[\'field2\'] must be of type number.');
-    }
-    payload['field2'] = this['field2'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to IntWrapper schema
- *
- * @param {JSON} instance
- *
- */
-IntWrapper.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['field1'] !== undefined) {
-      this['field1'] = instance['field1'];
-    }
-
-    if (instance['field2'] !== undefined) {
-      this['field2'] = instance['field2'];
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = IntWrapper;

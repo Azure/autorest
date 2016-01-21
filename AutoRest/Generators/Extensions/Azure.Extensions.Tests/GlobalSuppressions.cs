@@ -34,4 +34,5 @@
     Justification = "Test methods must not be static to allow suite-level fixtures")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "Microsoft.Rest.Generator.Azure.Extensions.Tests.AzureServiceClientNormalizerTests.#FlatteningTest()")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "Microsoft.Rest.Generator.CSharp.Azure.Tests.CSharpAzureCodeNamingFrameworkTests.#ConvertsPageResultsToPageTypeTest()")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Scope = "member", Target = "Microsoft.Rest.Generator.CSharp.Azure.Tests.CSharpAzureCodeNamingFrameworkTests.#ConvertsPageResultsToPageTypeTest()")]
 

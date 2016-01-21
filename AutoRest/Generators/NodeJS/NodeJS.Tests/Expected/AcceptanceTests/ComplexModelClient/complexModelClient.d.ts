@@ -17,9 +17,9 @@ declare class ComplexModelClient {
      * Initializes a new instance of the ComplexModelClient class.
      * @constructor
      *
-     * @param {String} subscriptionId Subscription ID.
+     * @param {string} subscriptionId - Subscription ID.
      *
-     * @param {String} apiVersion API ID.
+     * @param {string} apiVersion - API ID.
      *
      * @param {string} [baseUri] - The base URI of the service.
      *
@@ -30,7 +30,8 @@ declare class ComplexModelClient {
      * @param {object} [options.requestOptions] - Options for the underlying request object
      * {@link https://github.com/request/request#requestoptions-callback Options doc}
      *
-     * @param {bool} [options.noRetryPolicy] - If set to true, turn off default retry policy
+     * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
+     *
      */
     constructor(subscriptionId: string, apiVersion: string, baseUri: string, options: ServiceClientOptions);
 
