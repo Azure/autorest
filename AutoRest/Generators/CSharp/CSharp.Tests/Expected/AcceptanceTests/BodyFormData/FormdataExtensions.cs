@@ -54,7 +54,7 @@ namespace Fixtures.AcceptanceTestsBodyFormData
             {
                 var _result = await operations.UploadFileWithHttpMessagesAsync(fileContent, fileName, null, cancellationToken).ConfigureAwait(false);
                 _result.Request.Dispose();
-                return new HttpResponseMessageStream(_result.Response, _result.Body);
+                return _result.Body;
             }
 
             /// <summary>
@@ -93,7 +93,7 @@ namespace Fixtures.AcceptanceTestsBodyFormData
             {
                 var _result = await operations.UploadFileViaBodyWithHttpMessagesAsync(fileContent, fileName, null, cancellationToken).ConfigureAwait(false);
                 _result.Request.Dispose();
-                return new HttpResponseMessageStream(_result.Response, _result.Body);
+                return _result.Body;
             }
 
     }

@@ -42,7 +42,7 @@ namespace Fixtures.AcceptanceTestsBodyFile
             {
                 var _result = await operations.GetFileWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 _result.Request.Dispose();
-                return new HttpResponseMessageStream(_result.Response, _result.Body);
+                return _result.Body;
             }
 
             /// <summary>
@@ -69,7 +69,7 @@ namespace Fixtures.AcceptanceTestsBodyFile
             {
                 var _result = await operations.GetEmptyFileWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 _result.Request.Dispose();
-                return new HttpResponseMessageStream(_result.Response, _result.Body);
+                return _result.Body;
             }
 
     }
