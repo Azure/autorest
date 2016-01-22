@@ -21,7 +21,7 @@ namespace Microsoft.Rest.Generator.Java
             // changed in derived classes
             MethodGroupName = methodGroupName;
             MethodGroupType = methodGroupName.ToPascalCase();
-            if (!methodGroupName.EndsWith("Operations"))
+            if (MethodGroupType != null && !MethodGroupType.EndsWith("Operations", StringComparison.Ordinal))
             {
                 MethodGroupType += "Operations";
             }
