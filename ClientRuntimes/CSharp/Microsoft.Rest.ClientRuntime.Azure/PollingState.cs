@@ -31,8 +31,7 @@ namespace Microsoft.Rest.Azure
             Resource = response.Body;
             ResourceHeaders = response.Headers;
 
-            string raw = response.Response.Content == null ? null : response.Response.Content.ReadAsStringAsync().ConfigureAwait(false)
-                .GetAwaiter().GetResult();
+            string raw = response.Response.Content == null ? null : response.Response.Content.AsString();
 
             JObject resource = null;
             if (!string.IsNullOrEmpty(raw))
@@ -118,8 +117,7 @@ namespace Microsoft.Rest.Azure
                 {
                     if (_response.Headers.Contains("Azure-AsyncOperation"))
                     {
-                        AzureAsyncOperationHeaderLink = _response.Headers
-                            .GetValues("Azure-AsyncOperation").FirstOrDefault();
+                        AzureAsyncOperationHeaderLink = _response.Headers.GetValues("Azure-AsyncOperation").FirstOrDefault();
                     }
 
                     if (_response.Headers.Contains("Location"))
@@ -183,8 +181,8 @@ namespace Microsoft.Rest.Azure
                     Resources.LongRunningOperationFailed, Status))
                 {
                     Body = Error,
-                    Request = Request,
-                    Response = Response
+                    Request = new HttpRequestMessageWrapper(Request, Request.Content.AsString()),
+                    Response = new HttpResponseMessageWrapper(Response, Response.Content.AsString())
                 };
             }
         }

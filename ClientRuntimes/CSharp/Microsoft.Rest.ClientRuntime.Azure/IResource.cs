@@ -8,5 +8,9 @@ namespace Microsoft.Rest.Azure
     /// </summary>
     public interface IResource
     {
+        /// <summary>
+        /// Resource Id
+        /// </summary>
+        string Id { get; }
     }
 }

@@ -40,8 +40,10 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static async Task<string> GetNullAsync( this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -97,8 +99,10 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static async Task<string> GetEmptyAsync( this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -156,8 +160,10 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static async Task<string> GetMbcsAsync( this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetMbcsWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetMbcsWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -221,8 +227,10 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static async Task<string> GetWhitespaceAsync( this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetWhitespaceWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetWhitespaceWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -284,8 +292,10 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// </param>
             public static async Task<string> GetNotProvidedAsync( this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetNotProvidedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetNotProvidedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
     }

@@ -40,8 +40,10 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static async Task<double?> GetNullAsync( this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -66,8 +68,10 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static async Task<double?> GetInvalidFloatAsync( this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetInvalidFloatWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetInvalidFloatWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -92,8 +96,10 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static async Task<double?> GetInvalidDoubleAsync( this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetInvalidDoubleWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetInvalidDoubleWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -118,8 +124,10 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static async Task<decimal?> GetInvalidDecimalAsync( this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetInvalidDecimalWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetInvalidDecimalWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -173,8 +181,10 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static async Task<double?> GetBigFloatAsync( this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetBigFloatWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetBigFloatWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -228,8 +238,10 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static async Task<double?> GetBigDoubleAsync( this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetBigDoubleWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetBigDoubleWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -283,8 +295,10 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static async Task<double?> GetBigDoublePositiveDecimalAsync( this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetBigDoublePositiveDecimalWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetBigDoublePositiveDecimalWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -338,8 +352,10 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static async Task<double?> GetBigDoubleNegativeDecimalAsync( this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetBigDoubleNegativeDecimalWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetBigDoubleNegativeDecimalWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -393,8 +409,10 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static async Task<decimal?> GetBigDecimalAsync( this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetBigDecimalWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetBigDecimalWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -448,8 +466,10 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static async Task<decimal?> GetBigDecimalPositiveDecimalAsync( this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetBigDecimalPositiveDecimalWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetBigDecimalPositiveDecimalWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -503,8 +523,10 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static async Task<decimal?> GetBigDecimalNegativeDecimalAsync( this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetBigDecimalNegativeDecimalWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetBigDecimalNegativeDecimalWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -558,8 +580,10 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static async Task<double?> GetSmallFloatAsync( this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetSmallFloatWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetSmallFloatWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -613,8 +637,10 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static async Task<double?> GetSmallDoubleAsync( this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetSmallDoubleWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetSmallDoubleWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -668,8 +694,10 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             public static async Task<decimal?> GetSmallDecimalAsync( this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetSmallDecimalWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetSmallDecimalWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
     }

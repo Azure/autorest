@@ -480,7 +480,7 @@ namespace Microsoft.Rest.Azure
             {
                 //Try to de-serialize to the response model. (Not required for "PutOrPatch" 
                 //which has the fallback of invoking generic "resource get".)
-                string responseContent = await pollingState.Response.Content.ReadAsStringAsync().ConfigureAwait(false);
+                string responseContent = await pollingState.Response.Content.ReadAsStringAsync();
                 var responseHeaders = pollingState.Response.Headers.ToJson();
                 try
                 {
@@ -604,8 +604,8 @@ namespace Microsoft.Rest.Azure
                     Resources.LongRunningOperationFailed, statusCode))
                 {
                     Body = errorBody,
-                    Request = httpRequest,
-                    Response = httpResponse
+                    Request = new HttpRequestMessageWrapper(httpRequest, null),
+                    Response = new HttpResponseMessageWrapper(httpResponse, responseContent)
                 };
             }
 

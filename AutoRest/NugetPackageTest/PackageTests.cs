@@ -30,7 +30,7 @@ namespace NugetPackageTest
         {
             var client = new AutoRestNumberTestService(Fixture.Uri);
             Assert.Equal(3.402823e+20, client.Number.GetBigFloat());
-            Assert.Throws<RestException>(() => client.Number.GetInvalidFloat());
+            Assert.Throws<SerializationException>(() => client.Number.GetInvalidFloat());
         }
     }
 }

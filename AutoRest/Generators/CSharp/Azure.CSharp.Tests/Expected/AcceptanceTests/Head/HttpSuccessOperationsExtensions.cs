@@ -40,8 +40,10 @@ namespace Fixtures.Azure.AcceptanceTestsHead
             /// </param>
             public static async Task<bool?> Head200Async( this IHttpSuccessOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.Head200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.Head200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -66,8 +68,10 @@ namespace Fixtures.Azure.AcceptanceTestsHead
             /// </param>
             public static async Task<bool?> Head204Async( this IHttpSuccessOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.Head204WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.Head204WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -92,8 +96,10 @@ namespace Fixtures.Azure.AcceptanceTestsHead
             /// </param>
             public static async Task<bool?> Head404Async( this IHttpSuccessOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.Head404WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.Head404WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
     }

@@ -1289,8 +1289,8 @@ namespace Microsoft.Azure.Management.Redis
                 {
                     ex = new CloudException(error.Message);
                 }
-                ex.Request = httpRequest;
-                ex.Response = httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(httpRequest, requestContent);
+                ex.Response = new HttpResponseMessageWrapper(httpResponse, responseContent);
                     
                 if (shouldTrace)
                 {
@@ -1452,8 +1452,8 @@ namespace Microsoft.Azure.Management.Redis
                 {
                     ex = new CloudException(error.Message);
                 }
-                ex.Request = httpRequest;
-                ex.Response = httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(httpRequest, requestContent);
+                ex.Response = new HttpResponseMessageWrapper(httpResponse, responseContent);
 
                 if (shouldTrace)
                 {
@@ -1615,8 +1615,8 @@ namespace Microsoft.Azure.Management.Redis
                 {
                     ex = new CloudException(error.Message);
                 }
-                ex.Request = httpRequest;
-                ex.Response = httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(httpRequest, requestContent);
+                ex.Response = new HttpResponseMessageWrapper(httpResponse, responseContent);
 
                 if (shouldTrace)
                 {
@@ -1763,8 +1763,8 @@ namespace Microsoft.Azure.Management.Redis
                 {
                     ex = new CloudException(error.Message);
                 } 
-                ex.Request = httpRequest;
-                ex.Response = httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(httpRequest, null);
+                ex.Response = new HttpResponseMessageWrapper(httpResponse, responseContent);
                 if (shouldTrace)
                 {
                     ServiceClientTracing.Error(invocationId, ex);
@@ -1889,8 +1889,8 @@ namespace Microsoft.Azure.Management.Redis
                 {
                     ex = new CloudException(error.Message);
                 }
-                ex.Request = httpRequest;
-                ex.Response = httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(httpRequest, null);
+                ex.Response = new HttpResponseMessageWrapper(httpResponse, responseContent);
                 if (shouldTrace)
                 {
                     ServiceClientTracing.Error(invocationId, ex);
@@ -2032,8 +2032,8 @@ namespace Microsoft.Azure.Management.Redis
                 {
                     ex = new CloudException(error.Message);
                 }
-                ex.Request = httpRequest;
-                ex.Response = httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(httpRequest, null);
+                ex.Response = new HttpResponseMessageWrapper(httpResponse, responseContent);
                 if (shouldTrace)
                 {
                     ServiceClientTracing.Error(invocationId, ex);
@@ -2159,8 +2159,8 @@ namespace Microsoft.Azure.Management.Redis
                 {
                     ex = new CloudException(error.Message);
                 }
-                ex.Request = httpRequest;
-                ex.Response = httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(httpRequest, null);
+                ex.Response = new HttpResponseMessageWrapper(httpResponse, responseContent);
                 if (shouldTrace)
                 {
                     ServiceClientTracing.Error(invocationId, ex);
@@ -2286,8 +2286,8 @@ namespace Microsoft.Azure.Management.Redis
                 {
                     ex = new CloudException(error.Message);
                 }
-                ex.Request = httpRequest;
-                ex.Response = httpResponse;
+                ex.Request = new HttpRequestMessageWrapper(httpRequest, null);
+                ex.Response = new HttpResponseMessageWrapper(httpResponse, responseContent);
                 if (shouldTrace)
                 {
                     ServiceClientTracing.Error(invocationId, ex);

@@ -40,8 +40,10 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// </param>
             public static async Task<int?> GetNullAsync( this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -66,8 +68,10 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// </param>
             public static async Task<int?> GetInvalidAsync( this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -92,8 +96,10 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// </param>
             public static async Task<int?> GetOverflowInt32Async( this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetOverflowInt32WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetOverflowInt32WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -118,8 +124,10 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// </param>
             public static async Task<int?> GetUnderflowInt32Async( this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetUnderflowInt32WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetUnderflowInt32WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -144,8 +152,10 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// </param>
             public static async Task<long?> GetOverflowInt64Async( this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetOverflowInt64WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetOverflowInt64WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -170,8 +180,10 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// </param>
             public static async Task<long?> GetUnderflowInt64Async( this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetUnderflowInt64WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetUnderflowInt64WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>

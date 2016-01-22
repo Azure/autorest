@@ -149,6 +149,23 @@ namespace Microsoft.Rest
             }
             else
             {
+                return headers.ToDictionary(h => h.Key, h => h.Value).ToJson();
+            }
+        }
+
+        /// <summary>
+        /// Serializes header dictionary as Json dictionary.
+        /// </summary>
+        /// <param name="headers">Dictionary</param>
+        /// <returns>Json string</returns>
+        public static JObject ToJson(this IDictionary<string, IEnumerable<string>> headers)
+        {
+            if (headers == null || !headers.Any())
+            {
+                return new JObject();
+            }
+            else
+            {
                 var jObject = new JObject();
                 foreach (var httpResponseHeader in headers)
                 {

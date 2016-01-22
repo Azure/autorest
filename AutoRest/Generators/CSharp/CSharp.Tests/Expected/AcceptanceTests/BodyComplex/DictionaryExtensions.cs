@@ -40,8 +40,10 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task<DictionaryWrapper> GetValidAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -95,8 +97,10 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task<DictionaryWrapper> GetEmptyAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -150,8 +154,10 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task<DictionaryWrapper> GetNullAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
             /// <summary>
@@ -178,8 +184,10 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// </param>
             public static async Task<DictionaryWrapper> GetNotProvidedAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                var _result = await operations.GetNotProvidedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
-                return _result.Body;
+                using (var _result = await operations.GetNotProvidedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
     }
