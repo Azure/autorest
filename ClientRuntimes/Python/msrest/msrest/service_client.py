@@ -122,6 +122,7 @@ class ServiceClient(object):
             kwargs[opt] = config.get(opt, kwargs[opt])
         for opt in ['cookies', 'files']:
             kwargs[opt] = config.get(opt)
+        kwargs['stream'] = True
         kwargs['allow_redirects'] = config.get(
             'allow_redirects', bool(self.config.redirect_policy))
         kwargs['stream'] = True

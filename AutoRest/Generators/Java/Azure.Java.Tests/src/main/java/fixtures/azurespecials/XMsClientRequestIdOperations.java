@@ -10,6 +10,7 @@
 
 package fixtures.azurespecials;
 
+import com.microsoft.azure.CloudException;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
@@ -18,6 +19,7 @@ import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.GET;
 import retrofit.http.Header;
+import retrofit.http.Headers;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -29,21 +31,23 @@ public interface XMsClientRequestIdOperations {
      * used by Retrofit to perform actually REST calls.
      */
     interface XMsClientRequestIdService {
-        @GET("/azurespecials/overwrite/x-ms-client-request-id/method/")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("azurespecials/overwrite/x-ms-client-request-id/method/")
         Call<ResponseBody> get(@Header("accept-language") String acceptLanguage);
 
-        @GET("/azurespecials/overwrite/x-ms-client-request-id/via-param/method/")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("azurespecials/overwrite/x-ms-client-request-id/via-param/method/")
         Call<ResponseBody> paramGet(@Header("x-ms-client-request-id") String xMsClientRequestId, @Header("accept-language") String acceptLanguage);
 
     }
     /**
      * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
      *
-     * @throws ErrorException exception thrown from REST call
+     * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the ServiceResponse object if successful.
      */
-    ServiceResponse<Void> get() throws ErrorException, IOException;
+    ServiceResponse<Void> get() throws CloudException, IOException;
 
     /**
      * Get method that overwrites x-ms-client-request header with value 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.

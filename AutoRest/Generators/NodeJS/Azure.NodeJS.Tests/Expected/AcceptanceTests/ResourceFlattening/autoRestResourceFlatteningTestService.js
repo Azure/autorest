@@ -27,7 +27,7 @@ var models = require('./models');
  * Initializes a new instance of the AutoRestResourceFlatteningTestService class.
  * @constructor
  *
- * @param {Credentials} credentials The management credentials for Azure.
+ * @param {credentials} credentials - Gets Azure subscription credentials.
  *
  * @param {string} [baseUri] - The base URI of the service.
  *
@@ -38,7 +38,14 @@ var models = require('./models');
  * @param {object} [options.requestOptions] - Options for the underlying request object
  * {@link https://github.com/request/request#requestoptions-callback Options doc}
  *
- * @param {bool} [options.noRetryPolicy] - If set to true, turn off default retry policy
+ * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
+ *
+ * @param {string} [options.acceptLanguage] - Gets or sets the preferred language for the response.
+ *
+ * @param {number} [options.longRunningOperationRetryTimeout] - Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
+ *
+ * @param {boolean} [options.generateClientRequestId] - When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
+ *
  */
 function AutoRestResourceFlatteningTestService(credentials, baseUri, options) {
   if (credentials === null || credentials === undefined) {
@@ -54,10 +61,20 @@ function AutoRestResourceFlatteningTestService(credentials, baseUri, options) {
   }
   this.credentials = credentials;
 
-  if(!this.acceptLanguage) {
-    this.acceptLanguage = 'en-US';
+  this.acceptLanguage = 'en-US';
+  this.longRunningOperationRetryTimeout = 30;
+  this.generateClientRequestId = true;
+    if(options.acceptLanguage !== null && options.acceptLanguage !== undefined) { 
+    this.acceptLanguage = options.acceptLanguage;
   }
-  this._models = models;
+  if(options.longRunningOperationRetryTimeout !== null && options.longRunningOperationRetryTimeout !== undefined) { 
+    this.longRunningOperationRetryTimeout = options.longRunningOperationRetryTimeout;
+  }
+  if(options.generateClientRequestId !== null && options.generateClientRequestId !== undefined) { 
+    this.generateClientRequestId = options.generateClientRequestId;
+  }
+  this.models = models;
+  msRest.addSerializationMixin(this);
 }
 
 util.inherits(AutoRestResourceFlatteningTestService, ServiceClient);
@@ -120,7 +137,9 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (options, ca
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  }
   if (this.acceptLanguage !== undefined && this.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.acceptLanguage;
   }
@@ -136,31 +155,34 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (options, ca
   var requestContent = null;
   var requestModel = null;
   try {
-    if (resourceArray) {
-      var tempResourceArray = [];
-      resourceArray.forEach(function(element) {
-        if (element) {
-          element = new client._models['Resource'](element);
+    if (resourceArray !== null && resourceArray !== undefined) {
+      var requestModelMapper = {
+        required: false,
+        serializedName: 'ResourceArray',
+        type: {
+          name: 'Sequence',
+          element: {
+              required: false,
+              serializedName: 'ResourceElementType',
+              type: {
+                name: 'Composite',
+                className: 'Resource'
+              }
+          }
         }
-        tempResourceArray.push(element);
-      });
-      resourceArray = tempResourceArray;
-    }
-    if (util.isArray(resourceArray)) {
-      requestModel = [];
-      for (var i1 = 0; i1 < resourceArray.length; i1++) {
-        if (resourceArray[i1]) {
-          requestModel[i1] = resourceArray[i1].serialize();
-        }
-      }
+      };
+      requestModel = client.serialize(requestModelMapper, resourceArray, 'resourceArray');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
+        'payload - "%s"', error.message, util.inspect(resourceArray, {depth: null})));
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
+                                                    requestContent.length : 
+                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -170,22 +192,24 @@ AutoRestResourceFlatteningTestService.prototype.putArray = function (options, ca
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse) {
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+        }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          error.body.deserialize(parsedErrorResponse);
+          var resultMapper = new client.models['ErrorModel']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+                         '- "%s" for the default response.', defaultError.message, responseBody);
         return callback(error);
       }
       return callback(error);
@@ -253,7 +277,9 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  }
   if (this.acceptLanguage !== undefined && this.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.acceptLanguage;
   }
@@ -276,22 +302,24 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse) {
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+        }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          error.body.deserialize(parsedErrorResponse);
+          var resultMapper = new client.models['ErrorModel']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+                         '- "%s" for the default response.', defaultError.message, responseBody);
         return callback(error);
       }
       return callback(error);
@@ -305,27 +333,28 @@ AutoRestResourceFlatteningTestService.prototype.getArray = function (options, ca
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse) {
-          var tempParsedResponse = [];
-          parsedResponse.forEach(function(element) {
-            if (element) {
-              element = new client._models['FlattenedProduct'](element);
-            }
-            tempParsedResponse.push(element);
-          });
-          result = tempParsedResponse;
-        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          for (var i = 0; i < result.length; i++) {
-            if (result[i] !== null && result[i] !== undefined) {
-              result[i].deserialize(parsedResponse[i]);
+          var resultMapper = {
+            required: false,
+            serializedName: 'parsedResponse',
+            type: {
+              name: 'Sequence',
+              element: {
+                  required: false,
+                  serializedName: 'FlattenedProductElementType',
+                  type: {
+                    name: 'Composite',
+                    className: 'FlattenedProduct'
+                  }
+              }
             }
-          }
+          };
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -393,7 +422,9 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (option
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  }
   if (this.acceptLanguage !== undefined && this.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.acceptLanguage;
   }
@@ -409,31 +440,34 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (option
   var requestContent = null;
   var requestModel = null;
   try {
-    if (resourceDictionary) {
-      for(var valueElement1 in resourceDictionary) {
-        if (resourceDictionary[valueElement1]) {
-          resourceDictionary[valueElement1] = new client._models['FlattenedProduct'](resourceDictionary[valueElement1]);
+    if (resourceDictionary !== null && resourceDictionary !== undefined) {
+      var requestModelMapper = {
+        required: false,
+        serializedName: 'ResourceDictionary',
+        type: {
+          name: 'Dictionary',
+          value: {
+              required: false,
+              serializedName: 'FlattenedProductElementType',
+              type: {
+                name: 'Composite',
+                className: 'FlattenedProduct'
+              }
+          }
         }
-      }
-    }
-    if (resourceDictionary && typeof resourceDictionary === 'object') {
-      requestModel = {};
-      for(var valueElement2 in resourceDictionary) {
-        if (resourceDictionary[valueElement2]) {
-          requestModel[valueElement2] = resourceDictionary[valueElement2].serialize();
-        }
-        else {
-          requestModel[valueElement2] = resourceDictionary[valueElement2];
-        }
-      }
+      };
+      requestModel = client.serialize(requestModelMapper, resourceDictionary, 'resourceDictionary');
     }
     requestContent = JSON.stringify(requestModel);
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
+        'payload - "%s"', error.message, util.inspect(resourceDictionary, {depth: null})));
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
+                                                    requestContent.length : 
+                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -443,22 +477,24 @@ AutoRestResourceFlatteningTestService.prototype.putDictionary = function (option
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse) {
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+        }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          error.body.deserialize(parsedErrorResponse);
+          var resultMapper = new client.models['ErrorModel']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+                         '- "%s" for the default response.', defaultError.message, responseBody);
         return callback(error);
       }
       return callback(error);
@@ -526,7 +562,9 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  }
   if (this.acceptLanguage !== undefined && this.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.acceptLanguage;
   }
@@ -549,22 +587,24 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse) {
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+        }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          error.body.deserialize(parsedErrorResponse);
+          var resultMapper = new client.models['ErrorModel']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+                         '- "%s" for the default response.', defaultError.message, responseBody);
         return callback(error);
       }
       return callback(error);
@@ -578,24 +618,28 @@ AutoRestResourceFlatteningTestService.prototype.getDictionary = function (option
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse) {
-          for(var valueElement in parsedResponse) {
-            if (parsedResponse[valueElement]) {
-              result[valueElement] = new client._models['FlattenedProduct'](parsedResponse[valueElement]);
-            }
-          }
-        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          for (var property in result) {
-            if (result[property] !== null && result[property] !== undefined) {
-              result[property].deserialize(parsedResponse[property]);
+          var resultMapper = {
+            required: false,
+            serializedName: 'parsedResponse',
+            type: {
+              name: 'Dictionary',
+              value: {
+                  required: false,
+                  serializedName: 'FlattenedProductElementType',
+                  type: {
+                    name: 'Composite',
+                    className: 'FlattenedProduct'
+                  }
+              }
             }
-          }
+          };
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }
@@ -682,7 +726,9 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  }
   if (this.acceptLanguage !== undefined && this.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.acceptLanguage;
   }
@@ -698,20 +744,20 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
   var requestContent = null;
   var requestModel = null;
   try {
-    if (resourceComplexObject) {
-      requestModel = new client._models['ResourceCollection'](resourceComplexObject);
+    if (resourceComplexObject !== null && resourceComplexObject !== undefined) {
+      var requestModelMapper = new client.models['ResourceCollection']().mapper();
+      requestModel = client.serialize(requestModelMapper, resourceComplexObject, 'resourceComplexObject');
     }
-    if (requestModel !== null && requestModel !== undefined) {
-      requestContent = JSON.stringify(requestModel.serialize());
-    } else {
-      requestContent = JSON.stringify(requestModel);
-    }
+    requestContent = JSON.stringify(requestModel);
   } catch (error) {
-    var serializationError = new Error(util.format('Error "%s" occurred in serializing the payload - "%s"', error, util.inspect(requestModel, {depth: null})));
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
+        'payload - "%s"', error.message, util.inspect(resourceComplexObject, {depth: null})));
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? requestContent.length : Buffer.byteLength(requestContent, 'UTF8');
+  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
+                                                    requestContent.length : 
+                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -721,22 +767,24 @@ AutoRestResourceFlatteningTestService.prototype.putResourceCollection = function
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse) {
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+        }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          error.body.deserialize(parsedErrorResponse);
+          var resultMapper = new client.models['ErrorModel']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+                         '- "%s" for the default response.', defaultError.message, responseBody);
         return callback(error);
       }
       return callback(error);
@@ -805,7 +853,9 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
   httpRequest.headers = {};
   httpRequest.url = requestUrl;
   // Set Headers
-  httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  if (this.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  }
   if (this.acceptLanguage !== undefined && this.acceptLanguage !== null) {
     httpRequest.headers['accept-language'] = this.acceptLanguage;
   }
@@ -828,22 +878,24 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
     if (statusCode !== 200) {
       var error = new Error(responseBody);
       error.statusCode = response.statusCode;
-      error.request = httpRequest;
-      error.response = response;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
       if (responseBody === '') responseBody = null;
       var parsedErrorResponse;
       try {
         parsedErrorResponse = JSON.parse(responseBody);
-        var errorCode = (parsedErrorResponse.error && parsedErrorResponse.error.code) ? parsedErrorResponse.error.code : parsedErrorResponse.code;
-        var errorMessage = (parsedErrorResponse.error && parsedErrorResponse.error.message) ? parsedErrorResponse.error.message : parsedErrorResponse.message;
-        if (errorCode) error.code = errorCode;
-        if (errorMessage) error.message = errorMessage;
-        error.body = new client._models['ErrorModel']();
+        if (parsedErrorResponse) {
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+        }
         if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
-          error.body.deserialize(parsedErrorResponse);
+          var resultMapper = new client.models['ErrorModel']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
         }
       } catch (defaultError) {
-        error.message = util.format('Error "%s" occurred in deserializing the responseBody - "%s" for the default response.', defaultError, responseBody);
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+                         '- "%s" for the default response.', defaultError.message, responseBody);
         return callback(error);
       }
       return callback(error);
@@ -857,16 +909,14 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
       try {
         parsedResponse = JSON.parse(responseBody);
         result = JSON.parse(responseBody);
-        if (parsedResponse) {
-          result = new client._models['ResourceCollection'](parsedResponse);
-        }
         if (parsedResponse !== null && parsedResponse !== undefined) {
-          result.deserialize(parsedResponse);
+          var resultMapper = new client.models['ResourceCollection']().mapper();
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
         }
       } catch (error) {
         var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
-        deserializationError.request = httpRequest;
-        deserializationError.response = response;
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
         return callback(deserializationError);
       }
     }

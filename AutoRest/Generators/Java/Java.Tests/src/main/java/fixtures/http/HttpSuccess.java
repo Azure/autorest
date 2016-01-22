@@ -19,6 +19,7 @@ import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.HEAD;
+import retrofit.http.Headers;
 import retrofit.http.HTTP;
 import retrofit.http.PATCH;
 import retrofit.http.POST;
@@ -34,58 +35,76 @@ public interface HttpSuccess {
      * used by Retrofit to perform actually REST calls.
      */
     interface HttpSuccessService {
-        @HEAD("/http/success/200")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HEAD("http/success/200")
         Call<Void> head200();
 
-        @GET("/http/success/200")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/success/200")
         Call<ResponseBody> get200();
 
-        @PUT("/http/success/200")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("http/success/200")
         Call<ResponseBody> put200(@Body Boolean booleanValue);
 
-        @PATCH("/http/success/200")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PATCH("http/success/200")
         Call<ResponseBody> patch200(@Body Boolean booleanValue);
 
-        @POST("/http/success/200")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("http/success/200")
         Call<ResponseBody> post200(@Body Boolean booleanValue);
 
-        @HTTP(path = "/http/success/200", method = "DELETE", hasBody = true)
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "http/success/200", method = "DELETE", hasBody = true)
         Call<ResponseBody> delete200(@Body Boolean booleanValue);
 
-        @PUT("/http/success/201")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("http/success/201")
         Call<ResponseBody> put201(@Body Boolean booleanValue);
 
-        @POST("/http/success/201")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("http/success/201")
         Call<ResponseBody> post201(@Body Boolean booleanValue);
 
-        @PUT("/http/success/202")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("http/success/202")
         Call<ResponseBody> put202(@Body Boolean booleanValue);
 
-        @PATCH("/http/success/202")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PATCH("http/success/202")
         Call<ResponseBody> patch202(@Body Boolean booleanValue);
 
-        @POST("/http/success/202")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("http/success/202")
         Call<ResponseBody> post202(@Body Boolean booleanValue);
 
-        @HTTP(path = "/http/success/202", method = "DELETE", hasBody = true)
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "http/success/202", method = "DELETE", hasBody = true)
         Call<ResponseBody> delete202(@Body Boolean booleanValue);
 
-        @HEAD("/http/success/204")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HEAD("http/success/204")
         Call<Void> head204();
 
-        @PUT("/http/success/204")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("http/success/204")
         Call<ResponseBody> put204(@Body Boolean booleanValue);
 
-        @PATCH("/http/success/204")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PATCH("http/success/204")
         Call<ResponseBody> patch204(@Body Boolean booleanValue);
 
-        @POST("/http/success/204")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("http/success/204")
         Call<ResponseBody> post204(@Body Boolean booleanValue);
 
-        @HTTP(path = "/http/success/204", method = "DELETE", hasBody = true)
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "http/success/204", method = "DELETE", hasBody = true)
         Call<ResponseBody> delete204(@Body Boolean booleanValue);
 
-        @HEAD("/http/success/404")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HEAD("http/success/404")
         Call<Void> head404();
 
     }

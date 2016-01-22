@@ -23,44 +23,34 @@ var models = require('./index');
  * @member {string} [properties.name]
  * 
  */
-function Product(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.properties) {
-      this.properties = new models['ProductProperties'](parameters.properties);
-    }
-  }    
+function Product() {
 }
 
-
 /**
- * Validate the payload against the Product schema
+ * Defines the metadata of Product
  *
- * @param {JSON} payload
+ * @returns {object} metadata of Product
  *
  */
-Product.prototype.serialize = function () {
-  var payload = {};
-  if (this['properties']) {
-    payload['properties'] = this['properties'].serialize();
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to Product schema
- *
- * @param {JSON} instance
- *
- */
-Product.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['properties']) {
-      this['properties'] = new models['ProductProperties']().deserialize(instance['properties']);
+Product.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'Product',
+    type: {
+      name: 'Composite',
+      className: 'Product',
+      modelProperties: {
+        properties: {
+          required: false,
+          serializedName: 'properties',
+          type: {
+            name: 'Composite',
+            className: 'ProductProperties'
+          }
+        }
+      }
     }
-  }
-
-  return this;
+  };
 };
 
 module.exports = Product;

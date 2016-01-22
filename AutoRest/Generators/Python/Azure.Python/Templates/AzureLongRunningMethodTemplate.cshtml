@@ -86,11 +86,11 @@
 @if (Model.RequestBody != null)
 {
             @:return self._client.send(
-                @:request, header_parameters, body_content, @(Model.StreamDownloadParameter)**operation_config)
+                @:request, header_parameters, body_content, **operation_config)
 }
 else
 {
-            @:return self._client.send(request, header_parameters, @(Model.StreamDownloadParameter)**operation_config)
+            @:return self._client.send(request, header_parameters, **operation_config)
 }
 @EmptyLine
         def get_long_running_status(status_link, headers={}):
@@ -103,7 +103,7 @@ else
         def get_long_running_output(response):
 @EmptyLine
             if @Model.FailureStatusCodePredicate:
-                raise @Model.RaisedException
+                @Model.RaisedException
 @EmptyLine
 @if (Model.HasAnyResponse)
 {

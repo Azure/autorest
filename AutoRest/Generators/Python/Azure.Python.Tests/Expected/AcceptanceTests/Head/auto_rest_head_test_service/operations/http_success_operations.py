@@ -43,7 +43,8 @@ class HttpSuccessOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -54,7 +55,9 @@ class HttpSuccessOperations(object):
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [200, 404]:
-            raise CloudError(response)
+            exp = CloudError(response)
+            exp.request_id = response.headers.get('x-ms-request-id')
+            raise exp
 
         deserialized = (response.status_code == 200)
         if raw:
@@ -81,7 +84,8 @@ class HttpSuccessOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -92,7 +96,9 @@ class HttpSuccessOperations(object):
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [204, 404]:
-            raise CloudError(response)
+            exp = CloudError(response)
+            exp.request_id = response.headers.get('x-ms-request-id')
+            raise exp
 
         deserialized = (response.status_code == 204)
         if raw:
@@ -119,7 +125,8 @@ class HttpSuccessOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -130,7 +137,9 @@ class HttpSuccessOperations(object):
         response = self._client.send(request, header_parameters, **operation_config)
 
         if response.status_code not in [204, 404]:
-            raise CloudError(response)
+            exp = CloudError(response)
+            exp.request_id = response.headers.get('x-ms-request-id')
+            raise exp
 
         deserialized = (response.status_code == 204)
         if raw:

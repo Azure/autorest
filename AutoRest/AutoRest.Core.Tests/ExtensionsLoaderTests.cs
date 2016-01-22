@@ -30,9 +30,25 @@ namespace Microsoft.Rest.Generator.Test
         }
 
         [Fact]
+        public void LanguageWithSettingsLoadsFromJsonFile()
+        {
+            var settings = new Settings
+            {
+                CodeGenerator = "NodeJS",
+                FileSystem = _fileSystem,
+                Input = "X:\\RedisResource.json",
+                OutputDirectory = "X:\\Output"
+            };
+            CodeGenerator language = ExtensionsLoader.GetCodeGenerator(settings);
+            settings.Validate(language);
+
+            Assert.Equal("NodeJS", language.Name);
+        }
+
+        [Fact]
         public void LanguageLoadsFromJsonFile()
         {
-            var settings = new Settings {CodeGenerator = "CSharp", FileSystem = _fileSystem};
+            var settings = new Settings { CodeGenerator = "CSharp", FileSystem = _fileSystem };
             CodeGenerator language = ExtensionsLoader.GetCodeGenerator(settings);
 
             Assert.Equal("CSharp", language.Name);

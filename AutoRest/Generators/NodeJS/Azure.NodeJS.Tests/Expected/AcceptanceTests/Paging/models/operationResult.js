@@ -19,47 +19,33 @@
  * 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'.
  * 
  */
-function OperationResult(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.status !== undefined) {
-      this.status = parameters.status;
-    }
-  }    
+function OperationResult() {
 }
 
-
 /**
- * Validate the payload against the OperationResult schema
+ * Defines the metadata of OperationResult
  *
- * @param {JSON} payload
+ * @returns {object} metadata of OperationResult
  *
  */
-OperationResult.prototype.serialize = function () {
-  var payload = {};
-  if (this['status'] !== null && this['status'] !== undefined) {
-    if (typeof this['status'].valueOf() !== 'string') {
-      throw new Error('this[\'status\'] must be of type string.');
+OperationResult.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'OperationResult',
+    type: {
+      name: 'Composite',
+      className: 'OperationResult',
+      modelProperties: {
+        status: {
+          required: false,
+          serializedName: 'status',
+          type: {
+            name: 'String'
+          }
+        }
+      }
     }
-    payload['status'] = this['status'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to OperationResult schema
- *
- * @param {JSON} instance
- *
- */
-OperationResult.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['status'] !== undefined) {
-      this['status'] = instance['status'];
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = OperationResult;

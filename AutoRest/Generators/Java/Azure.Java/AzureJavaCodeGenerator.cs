@@ -67,8 +67,8 @@ namespace Microsoft.Rest.Generator.Java.Azure
             AzureExtensions.FlattenResourceProperties(serviceClient);
             AzureExtensions.AddAzureProperties(serviceClient);
             AzureExtensions.SetDefaultResponses(serviceClient);
-            AzureExtensions.AddParameterGroups(serviceClient);
             AzureExtensions.AddPageableMethod(serviceClient, _namer);
+            AzureExtensions.AddParameterGroups(serviceClient); //This should come after all methods have been dynamically added
             _namer.NormalizeClientModel(serviceClient);
             _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");

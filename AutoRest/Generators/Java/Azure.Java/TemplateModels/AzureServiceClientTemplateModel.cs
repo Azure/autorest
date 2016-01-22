@@ -46,7 +46,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
             get
             {
                 var imports = base.InterfaceImports;
-                imports.Add("com.microsoft.rest.AzureClient");
+                imports.Add("com.microsoft.azure.AzureClient");
                 return imports.OrderBy(i => i).ToList();
             }
         }
@@ -56,11 +56,11 @@ namespace Microsoft.Rest.Generator.Java.Azure
             get
             {
                 var imports = base.ImplImports.ToList();
-                imports.Add("com.microsoft.rest.AzureClient");
-                imports.Add("com.microsoft.rest.CustomHeaderInterceptor");
+                imports.Add("com.microsoft.azure.AzureClient");
+                imports.Add("com.microsoft.azure.CustomHeaderInterceptor");
                 imports.Add("java.util.UUID");
                 imports.Remove("com.microsoft.rest.ServiceClient");
-                imports.Add("com.microsoft.rest.AzureServiceClient");
+                imports.Add("com.microsoft.azure.AzureServiceClient");
                 return imports.OrderBy(i => i).ToList();
             }
         }

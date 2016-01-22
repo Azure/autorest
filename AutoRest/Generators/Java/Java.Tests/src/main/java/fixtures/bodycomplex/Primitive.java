@@ -29,6 +29,7 @@ import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
+import retrofit.http.Headers;
 import retrofit.http.PUT;
 
 /**
@@ -41,70 +42,92 @@ public interface Primitive {
      * used by Retrofit to perform actually REST calls.
      */
     interface PrimitiveService {
-        @GET("/complex/primitive/integer")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/primitive/integer")
         Call<ResponseBody> getInt();
 
-        @PUT("/complex/primitive/integer")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("complex/primitive/integer")
         Call<ResponseBody> putInt(@Body IntWrapper complexBody);
 
-        @GET("/complex/primitive/long")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/primitive/long")
         Call<ResponseBody> getLong();
 
-        @PUT("/complex/primitive/long")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("complex/primitive/long")
         Call<ResponseBody> putLong(@Body LongWrapper complexBody);
 
-        @GET("/complex/primitive/float")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/primitive/float")
         Call<ResponseBody> getFloat();
 
-        @PUT("/complex/primitive/float")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("complex/primitive/float")
         Call<ResponseBody> putFloat(@Body FloatWrapper complexBody);
 
-        @GET("/complex/primitive/double")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/primitive/double")
         Call<ResponseBody> getDouble();
 
-        @PUT("/complex/primitive/double")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("complex/primitive/double")
         Call<ResponseBody> putDouble(@Body DoubleWrapper complexBody);
 
-        @GET("/complex/primitive/bool")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/primitive/bool")
         Call<ResponseBody> getBool();
 
-        @PUT("/complex/primitive/bool")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("complex/primitive/bool")
         Call<ResponseBody> putBool(@Body BooleanWrapper complexBody);
 
-        @GET("/complex/primitive/string")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/primitive/string")
         Call<ResponseBody> getString();
 
-        @PUT("/complex/primitive/string")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("complex/primitive/string")
         Call<ResponseBody> putString(@Body StringWrapper complexBody);
 
-        @GET("/complex/primitive/date")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/primitive/date")
         Call<ResponseBody> getDate();
 
-        @PUT("/complex/primitive/date")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("complex/primitive/date")
         Call<ResponseBody> putDate(@Body DateWrapper complexBody);
 
-        @GET("/complex/primitive/datetime")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/primitive/datetime")
         Call<ResponseBody> getDateTime();
 
-        @PUT("/complex/primitive/datetime")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("complex/primitive/datetime")
         Call<ResponseBody> putDateTime(@Body DatetimeWrapper complexBody);
 
-        @GET("/complex/primitive/datetimerfc1123")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/primitive/datetimerfc1123")
         Call<ResponseBody> getDateTimeRfc1123();
 
-        @PUT("/complex/primitive/datetimerfc1123")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("complex/primitive/datetimerfc1123")
         Call<ResponseBody> putDateTimeRfc1123(@Body Datetimerfc1123Wrapper complexBody);
 
-        @GET("/complex/primitive/duration")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/primitive/duration")
         Call<ResponseBody> getDuration();
 
-        @PUT("/complex/primitive/duration")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("complex/primitive/duration")
         Call<ResponseBody> putDuration(@Body DurationWrapper complexBody);
 
-        @GET("/complex/primitive/byte")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/primitive/byte")
         Call<ResponseBody> getByte();
 
-        @PUT("/complex/primitive/byte")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("complex/primitive/byte")
         Call<ResponseBody> putByte(@Body ByteWrapper complexBody);
 
     }

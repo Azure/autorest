@@ -23,7 +23,7 @@
       "description": "The Swagger version of this document."
     },
     "info": {
-      "$ref": "http://json.schemastore.org/swagger-2.0#/definitions/info"
+      "$ref": "#/definitions/info"
     },
     "host": {
       "type": "string",
@@ -114,6 +114,9 @@
         },
         "license": {
           "$ref": "#/definitions/license"
+        },
+        "x-ms-code-generation-settings": {
+          "$ref": "#/definitions/xmsCodeGenerationSettings"
         }
       }
     },
@@ -1733,6 +1736,9 @@
     },
     "xmsClientRequestId": {
       "type": "boolean"
+    },
+    "xmsCodeGenerationSettings": {
+      "additionalProperties": true
     }
   }
 }

@@ -11,9 +11,8 @@
 package fixtures.head;
 
 import com.google.common.reflect.TypeToken;
-import com.microsoft.rest.AzureServiceResponseBuilder;
-import com.microsoft.rest.CloudException;
-import com.microsoft.rest.serializer.AzureJacksonUtils;
+import com.microsoft.azure.AzureServiceResponseBuilder;
+import com.microsoft.azure.CloudException;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseEmptyCallback;
@@ -77,7 +76,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
     }
 
     private ServiceResponse<Boolean> head200Delegate(Response<Void> response, Retrofit retrofit) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Boolean, CloudException>(new AzureJacksonUtils())
+        return new AzureServiceResponseBuilder<Boolean, CloudException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(404, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
@@ -118,7 +117,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
     }
 
     private ServiceResponse<Boolean> head204Delegate(Response<Void> response, Retrofit retrofit) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Boolean, CloudException>(new AzureJacksonUtils())
+        return new AzureServiceResponseBuilder<Boolean, CloudException>()
                 .register(204, new TypeToken<Void>() { }.getType())
                 .register(404, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
@@ -159,7 +158,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
     }
 
     private ServiceResponse<Boolean> head404Delegate(Response<Void> response, Retrofit retrofit) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Boolean, CloudException>(new AzureJacksonUtils())
+        return new AzureServiceResponseBuilder<Boolean, CloudException>()
                 .register(204, new TypeToken<Void>() { }.getType())
                 .register(404, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)

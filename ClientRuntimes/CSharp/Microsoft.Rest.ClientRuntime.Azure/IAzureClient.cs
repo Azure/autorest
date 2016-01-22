@@ -12,9 +12,7 @@ namespace Microsoft.Rest.Azure
     public interface IAzureClient
     {
         /// <summary>
-        /// Gets subscription credentials which uniquely identify Microsoft
-        /// Azure subscription. The subscription ID forms part of the URI for
-        /// every service call.
+        /// Gets Azure subscription credentials.
         /// </summary>
         ServiceClientCredentials Credentials { get; }
 
@@ -24,18 +22,24 @@ namespace Microsoft.Rest.Azure
         HttpClient HttpClient { get; }
         
         /// <summary>
-        /// Gets the retry timeout for Long Running Operations.
+        /// Gets or sets the retry timeout for Long Running Operations.
         /// </summary>
-        int? LongRunningOperationRetryTimeout { get; }
+        int? LongRunningOperationRetryTimeout { get; set; }
         
         /// <summary>
-        /// Gets or sets json serialization settings.
+        /// Gets json serialization settings.
         /// </summary>
         JsonSerializerSettings SerializationSettings { get; }
 
         /// <summary>
-        /// Gets or sets json deserialization settings.
+        /// Gets json deserialization settings.
         /// </summary>
-        JsonSerializerSettings DeserializationSettings { get; }        
+        JsonSerializerSettings DeserializationSettings { get; }
+
+        /// <summary>
+        /// When set to true a unique x-ms-client-request-id value
+        /// is generated and included in each request. Default is true.
+        /// </summary>
+        bool? GenerateClientRequestId { get; set; }        
     }
 }

@@ -19,6 +19,7 @@ import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.GET;
 import retrofit.http.Header;
+import retrofit.http.Headers;
 import retrofit.http.Query;
 
 /**
@@ -31,7 +32,8 @@ public interface OdataOperations {
      * used by Retrofit to perform actually REST calls.
      */
     interface OdataService {
-        @GET("/azurespecials/odata/filter")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("azurespecials/odata/filter")
         Call<ResponseBody> getWithFilter(@Query("$filter") String filter, @Query("$top") Integer top, @Query("$orderby") String orderby, @Header("accept-language") String acceptLanguage);
 
     }

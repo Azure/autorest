@@ -19,64 +19,41 @@ var models = require('./index');
  * @member {object} [productDictionary] Dictionary of products
  * 
  */
-function CatalogDictionary(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.productDictionary) {
-      this.productDictionary = {};
-      for(var valueElement in parameters.productDictionary) {
-        if (parameters.productDictionary[valueElement]) {
-          this.productDictionary[valueElement] = new models['Product'](parameters.productDictionary[valueElement]);
-        }
-      }
-    }
-  }    
+function CatalogDictionary() {
 }
 
-
 /**
- * Validate the payload against the CatalogDictionary schema
+ * Defines the metadata of CatalogDictionary
  *
- * @param {JSON} payload
+ * @returns {object} metadata of CatalogDictionary
  *
  */
-CatalogDictionary.prototype.serialize = function () {
-  var payload = {};
-  if (this['productDictionary'] && typeof this['productDictionary'] === 'object') {
-    payload['productDictionary'] = {};
-    for(var valueElement1 in this['productDictionary']) {
-      if (this['productDictionary'][valueElement1]) {
-        payload['productDictionary'][valueElement1] = this['productDictionary'][valueElement1].serialize();
-      }
-      else {
-        payload['productDictionary'][valueElement1] = this['productDictionary'][valueElement1];
-      }
-    }
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to CatalogDictionary schema
- *
- * @param {JSON} instance
- *
- */
-CatalogDictionary.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['productDictionary']) {
-      this['productDictionary'] = {};
-      for(var valueElement2 in instance['productDictionary']) {
-        if (instance['productDictionary'] !== null && instance['productDictionary'] !== undefined) {
-          if (instance['productDictionary'][valueElement2]) {
-            this['productDictionary'][valueElement2] = new models['Product']().deserialize(instance['productDictionary'][valueElement2]);
+CatalogDictionary.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'CatalogDictionary',
+    type: {
+      name: 'Composite',
+      className: 'CatalogDictionary',
+      modelProperties: {
+        productDictionary: {
+          required: false,
+          serializedName: 'productDictionary',
+          type: {
+            name: 'Dictionary',
+            value: {
+                required: false,
+                serializedName: 'ProductElementType',
+                type: {
+                  name: 'Composite',
+                  className: 'Product'
+                }
+            }
           }
         }
       }
     }
-  }
-
-  return this;
+  };
 };
 
 module.exports = CatalogDictionary;

@@ -23,65 +23,80 @@ var util = require('util');
  * @member {date} birthday
  * 
  */
-function Shark(parameters) {
-  Shark['super_'].call(this, parameters);
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.age !== undefined) {
-      this.age = parameters.age;
-    }
-    if (parameters.birthday !== undefined) {
-      this.birthday = parameters.birthday;
-    }
-  }    
+function Shark() {
+  Shark['super_'].call(this);
 }
 
 util.inherits(Shark, models['Fish']);
 
 /**
- * Validate the payload against the Shark schema
+ * Defines the metadata of Shark
  *
- * @param {JSON} payload
- *
- */
-Shark.prototype.serialize = function () {
-  var payload = Shark['super_'].prototype.serialize.call(this);
-  if (this['age'] !== null && this['age'] !== undefined) {
-    if (typeof this['age'] !== 'number') {
-      throw new Error('this[\'age\'] must be of type number.');
-    }
-    payload['age'] = this['age'];
-  }
-
-  if(!this['birthday'] || !(this['birthday'] instanceof Date || (typeof this['birthday'].valueOf() === 'string' && !isNaN(Date.parse(this['birthday']))))) {
-    throw new Error('this[\'birthday\'] cannot be null or undefined and it must be of type date.');
-  }
-  payload['birthday'] = (this['birthday'] instanceof Date) ? this['birthday'].toISOString() : this['birthday'];
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to Shark schema
- *
- * @param {JSON} instance
+ * @returns {object} metadata of Shark
  *
  */
-Shark.prototype.deserialize = function (instance) {
-  Shark['super_'].prototype.deserialize.call(this, instance);
-  if (instance) {
-    if (instance['age'] !== undefined) {
-      this['age'] = instance['age'];
+Shark.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'shark',
+    type: {
+      name: 'Composite',
+      className: 'Shark',
+      modelProperties: {
+        species: {
+          required: false,
+          serializedName: 'species',
+          type: {
+            name: 'String'
+          }
+        },
+        length: {
+          required: true,
+          serializedName: 'length',
+          type: {
+            name: 'Number'
+          }
+        },
+        siblings: {
+          required: false,
+          serializedName: 'siblings',
+          type: {
+            name: 'Sequence',
+            element: {
+                required: false,
+                serializedName: 'FishElementType',
+                type: {
+                  name: 'Composite',
+                  polymorphicDiscriminator: 'fishtype',
+                  className: 'Fish'
+                }
+            }
+          }
+        },
+        fishtype: {
+          required: true,
+          serializedName: 'fishtype',
+          type: {
+            name: 'String'
+          }
+        },
+        age: {
+          required: false,
+          serializedName: 'age',
+          type: {
+            name: 'Number'
+          }
+        },
+        birthday: {
+          required: true,
+          serializedName: 'birthday',
+          type: {
+            name: 'DateTime'
+          }
+        }
+      }
     }
-
-    if (instance['birthday']) {
-      this['birthday'] = new Date(instance['birthday']);
-    }
-    else if (instance['birthday'] !== undefined) {
-      this['birthday'] = instance['birthday'];
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = Shark;

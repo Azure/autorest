@@ -20,61 +20,40 @@
  * @member {string} [key2] Gets the value of key 2.
  * 
  */
-function StorageAccountKeys(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.key1 !== undefined) {
-      this.key1 = parameters.key1;
-    }
-    if (parameters.key2 !== undefined) {
-      this.key2 = parameters.key2;
-    }
-  }    
+function StorageAccountKeys() {
 }
 
-
 /**
- * Validate the payload against the StorageAccountKeys schema
+ * Defines the metadata of StorageAccountKeys
  *
- * @param {JSON} payload
+ * @returns {object} metadata of StorageAccountKeys
  *
  */
-StorageAccountKeys.prototype.serialize = function () {
-  var payload = {};
-  if (this['key1'] !== null && this['key1'] !== undefined) {
-    if (typeof this['key1'].valueOf() !== 'string') {
-      throw new Error('this[\'key1\'] must be of type string.');
+StorageAccountKeys.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'StorageAccountKeys',
+    type: {
+      name: 'Composite',
+      className: 'StorageAccountKeys',
+      modelProperties: {
+        key1: {
+          required: false,
+          serializedName: 'key1',
+          type: {
+            name: 'String'
+          }
+        },
+        key2: {
+          required: false,
+          serializedName: 'key2',
+          type: {
+            name: 'String'
+          }
+        }
+      }
     }
-    payload['key1'] = this['key1'];
-  }
-
-  if (this['key2'] !== null && this['key2'] !== undefined) {
-    if (typeof this['key2'].valueOf() !== 'string') {
-      throw new Error('this[\'key2\'] must be of type string.');
-    }
-    payload['key2'] = this['key2'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to StorageAccountKeys schema
- *
- * @param {JSON} instance
- *
- */
-StorageAccountKeys.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['key1'] !== undefined) {
-      this['key1'] = instance['key1'];
-    }
-
-    if (instance['key2'] !== undefined) {
-      this['key2'] = instance['key2'];
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = StorageAccountKeys;

@@ -18,6 +18,7 @@ import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
+import retrofit.http.Headers;
 import retrofit.http.PUT;
 
 /**
@@ -30,34 +31,44 @@ public interface IntOperations {
      * used by Retrofit to perform actually REST calls.
      */
     interface IntService {
-        @GET("/int/null")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("int/null")
         Call<ResponseBody> getNull();
 
-        @GET("/int/invalid")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("int/invalid")
         Call<ResponseBody> getInvalid();
 
-        @GET("/int/overflowint32")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("int/overflowint32")
         Call<ResponseBody> getOverflowInt32();
 
-        @GET("/int/underflowint32")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("int/underflowint32")
         Call<ResponseBody> getUnderflowInt32();
 
-        @GET("/int/overflowint64")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("int/overflowint64")
         Call<ResponseBody> getOverflowInt64();
 
-        @GET("/int/underflowint64")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("int/underflowint64")
         Call<ResponseBody> getUnderflowInt64();
 
-        @PUT("/int/max/32")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("int/max/32")
         Call<ResponseBody> putMax32(@Body int intBody);
 
-        @PUT("/int/max/64")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("int/max/64")
         Call<ResponseBody> putMax64(@Body long intBody);
 
-        @PUT("/int/min/32")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("int/min/32")
         Call<ResponseBody> putMin32(@Body int intBody);
 
-        @PUT("/int/min/64")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("int/min/64")
         Call<ResponseBody> putMin64(@Body long intBody);
 
     }

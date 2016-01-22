@@ -19,6 +19,7 @@ import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
+import retrofit.http.Headers;
 import retrofit.http.PUT;
 
 /**
@@ -31,22 +32,28 @@ public interface BasicOperations {
      * used by Retrofit to perform actually REST calls.
      */
     interface BasicService {
-        @GET("/complex/basic/valid")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/basic/valid")
         Call<ResponseBody> getValid();
 
-        @PUT("/complex/basic/valid")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("complex/basic/valid")
         Call<ResponseBody> putValid(@Body Basic complexBody);
 
-        @GET("/complex/basic/invalid")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/basic/invalid")
         Call<ResponseBody> getInvalid();
 
-        @GET("/complex/basic/empty")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/basic/empty")
         Call<ResponseBody> getEmpty();
 
-        @GET("/complex/basic/null")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/basic/null")
         Call<ResponseBody> getNull();
 
-        @GET("/complex/basic/notprovided")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/basic/notprovided")
         Call<ResponseBody> getNotProvided();
 
     }

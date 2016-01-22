@@ -17,47 +17,33 @@
  * @member {string} [httpStatusCode]
  * 
  */
-function D(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.httpStatusCode !== undefined) {
-      this.httpStatusCode = parameters.httpStatusCode;
-    }
-  }    
+function D() {
 }
 
-
 /**
- * Validate the payload against the D schema
+ * Defines the metadata of D
  *
- * @param {JSON} payload
+ * @returns {object} metadata of D
  *
  */
-D.prototype.serialize = function () {
-  var payload = {};
-  if (this['httpStatusCode'] !== null && this['httpStatusCode'] !== undefined) {
-    if (typeof this['httpStatusCode'].valueOf() !== 'string') {
-      throw new Error('this[\'httpStatusCode\'] must be of type string.');
+D.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'D',
+    type: {
+      name: 'Composite',
+      className: 'D',
+      modelProperties: {
+        httpStatusCode: {
+          required: false,
+          serializedName: 'httpStatusCode',
+          type: {
+            name: 'String'
+          }
+        }
+      }
     }
-    payload['httpStatusCode'] = this['httpStatusCode'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to D schema
- *
- * @param {JSON} instance
- *
- */
-D.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['httpStatusCode'] !== undefined) {
-      this['httpStatusCode'] = instance['httpStatusCode'];
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = D;

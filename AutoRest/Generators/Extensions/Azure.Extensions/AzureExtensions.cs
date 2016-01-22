@@ -86,8 +86,8 @@ namespace Microsoft.Rest.Generator.Azure
             AddLongRunningOperations(serviceClient);
             AddAzureProperties(serviceClient);
             SetDefaultResponses(serviceClient);
-            AddParameterGroups(serviceClient);
             AddPageableMethod(serviceClient, codeNamer);
+            AddParameterGroups(serviceClient); //This should come after all methods have been dynamically added
         }
 
         /// <summary>
@@ -114,9 +114,7 @@ namespace Microsoft.Rest.Generator.Azure
                 }
                 else
                 {
-                    throw new NotSupportedException(
-                        string.Format(CultureInfo.InvariantCulture, 
-                        Resources.HeadMethodInvalidResponses, method.Name));
+                    Logger.LogWarning(string.Format(CultureInfo.InvariantCulture, Resources.HeadMethodPossibleIncorrectSpecification, method.Name));
                 }
             }
         }
@@ -289,7 +287,7 @@ namespace Microsoft.Rest.Generator.Azure
                 Type = PrimaryType.Credentials,
                 IsRequired = true,
                 IsReadOnly = true,
-                Documentation = "The management credentials for Azure."
+                Documentation = "Gets Azure subscription credentials."
             });
 
             serviceClient.Properties.Add(new Property
@@ -297,7 +295,17 @@ namespace Microsoft.Rest.Generator.Azure
                 Name = "LongRunningOperationRetryTimeout",
                 SerializedName = "longRunningOperationRetryTimeout",
                 Type = PrimaryType.Int,
-                Documentation = "The retry timeout for Long Running Operations."
+                Documentation = "Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.",
+                DefaultValue = "30"
+            });
+
+            serviceClient.Properties.Add(new Property
+            {
+                Name = "GenerateClientRequestId",
+                SerializedName = "generateClientRequestId",
+                Type = PrimaryType.Boolean,
+                Documentation = "When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.",
+                DefaultValue = "true"
             });
         }
 
@@ -486,19 +494,23 @@ namespace Microsoft.Rest.Generator.Azure
                         }
 
                         // Copy all grouped parameters that only contain header parameters
+                        nextLinkMethod.InputParameterTransformation.Clear();
                         method.InputParameterTransformation.GroupBy(t => t.ParameterMappings[0].InputParameter)
                             .ForEach(grouping => {
                                 if (grouping.All(t => t.OutputParameter.Location == ParameterLocation.Header))
                                 {
                                     // All grouped properties were header parameters, reuse data type
                                     nextLinkMethod.Parameters.Add(grouping.Key);
+                                    grouping.ForEach(t => nextLinkMethod.InputParameterTransformation.Add(t));
                                 }
                                 else if (grouping.Any(t => t.OutputParameter.Location == ParameterLocation.Header))
                                 {
                                     // Some grouped properties were header parameters, creating new data types
-                                    grouping.Where(t => t.OutputParameter.Location != ParameterLocation.Header)
-                                        .ForEach(t => method.InputParameterTransformation.Remove(t));
-                                    nextLinkMethod.Parameters.Add(CreateParameterFromGrouping(grouping, nextLinkMethod, serviceClient));
+                                    var headerGrouping = grouping.Where(t => t.OutputParameter.Location == ParameterLocation.Header);
+                                    headerGrouping.ForEach(t => nextLinkMethod.InputParameterTransformation.Add(t));
+                                    var newGroupingParam = CreateParameterFromGrouping(headerGrouping, nextLinkMethod, serviceClient);
+                                    nextLinkMethod.Parameters.Add(newGroupingParam);
+                                    grouping.Key.Name = newGroupingParam.Name;
                                 }
                             });
 
@@ -508,7 +520,7 @@ namespace Microsoft.Rest.Generator.Azure
             }
         }
 
-        private static Parameter CreateParameterFromGrouping(IGrouping<Parameter, ParameterTransformation> grouping, Method method, ServiceClient serviceClient)
+        private static Parameter CreateParameterFromGrouping(IEnumerable<ParameterTransformation> grouping, Method method, ServiceClient serviceClient)
         {
             var properties = new List<Property>();
             string parameterGroupName = null;

@@ -17,67 +17,40 @@
  * @member {object} [defaultProgram]
  * 
  */
-function DictionaryWrapper(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.defaultProgram) {
-      this.defaultProgram = {};
-      for(var valueElement in parameters.defaultProgram) {
-        if (parameters.defaultProgram[valueElement] !== undefined) {
-          this.defaultProgram[valueElement] = parameters.defaultProgram[valueElement];
-        }
-      }
-    }
-  }    
+function DictionaryWrapper() {
 }
 
-
 /**
- * Validate the payload against the DictionaryWrapper schema
+ * Defines the metadata of DictionaryWrapper
  *
- * @param {JSON} payload
+ * @returns {object} metadata of DictionaryWrapper
  *
  */
-DictionaryWrapper.prototype.serialize = function () {
-  var payload = {};
-  if (this['defaultProgram'] && typeof this['defaultProgram'] === 'object') {
-    payload['defaultProgram'] = {};
-    for(var valueElement1 in this['defaultProgram']) {
-      if (this['defaultProgram'][valueElement1] !== null && this['defaultProgram'][valueElement1] !== undefined) {
-        if (typeof this['defaultProgram'][valueElement1].valueOf() !== 'string') {
-          throw new Error('this[\'defaultProgram\'][valueElement1] must be of type string.');
-        }
-        payload['defaultProgram'][valueElement1] = this['defaultProgram'][valueElement1];
-      }
-      else {
-        payload['defaultProgram'][valueElement1] = this['defaultProgram'][valueElement1];
-      }
-    }
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to DictionaryWrapper schema
- *
- * @param {JSON} instance
- *
- */
-DictionaryWrapper.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['defaultProgram']) {
-      this['defaultProgram'] = {};
-      for(var valueElement2 in instance['defaultProgram']) {
-        if (instance['defaultProgram'] !== null && instance['defaultProgram'] !== undefined) {
-          if (instance['defaultProgram'][valueElement2] !== undefined) {
-            this['defaultProgram'][valueElement2] = instance['defaultProgram'][valueElement2];
+DictionaryWrapper.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'dictionary-wrapper',
+    type: {
+      name: 'Composite',
+      className: 'DictionaryWrapper',
+      modelProperties: {
+        defaultProgram: {
+          required: false,
+          serializedName: 'defaultProgram',
+          type: {
+            name: 'Dictionary',
+            value: {
+                required: false,
+                serializedName: 'StringElementType',
+                type: {
+                  name: 'String'
+                }
+            }
           }
         }
       }
     }
-  }
-
-  return this;
+  };
 };
 
 module.exports = DictionaryWrapper;

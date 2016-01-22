@@ -9,10 +9,6 @@
 # --------------------------------------------------------------------------
 @EmptyLine
 from msrest.pipeline import ClientRawResponse
-@if (Model.HasAnyDefaultExceptions)
-{
-@:from msrest.exceptions import HttpOperationError
-}
 @if (Model.HasAnyCloudErrors)
 {
 @:from msrestazure.azure_exceptions import CloudError

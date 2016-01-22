@@ -1,0 +1,34 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Internal Client",
+    "description": "A sample API that uses a petstore as an example to demonstrate features in the swagger-2.0 specification",
+    "termsOfService": "n/a",
+    "license": {
+      "name": "MIT",
+      "url": "http://github.com/gruntjs/grunt/blob/master/LICENSE-MIT"
+    },
+    "x-ms-code-generation-settings": {
+      "internalConstructors": true
+    }
+  },
+  "host": "petstore.swagger.wordnik.com",
+  "basePath": "/api",
+  "schemes": [ "http" ],
+  "consumes": [ "application/json" ],
+  "produces": [ "application/json" ],
+  "paths": {
+    "/pets": {
+      "get": {
+        "description": "Gets a pet from the store",
+        "operationId": "Pets_Get",
+        "responses": {
+          "200": {
+            "description": "pet response"
+          }
+        }
+      }
+    }
+  }
+}

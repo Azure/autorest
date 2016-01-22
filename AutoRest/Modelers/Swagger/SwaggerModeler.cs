@@ -64,6 +64,9 @@ namespace Microsoft.Rest.Modeler.Swagger
             Logger.LogInfo(Resources.ParsingSwagger);
             ServiceDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
             Logger.LogInfo(Resources.GeneratingClient);
+            // Update settings
+            UpdateSettings();
+
             InitializeClientModel();
             BuildCompositeTypes();
 
@@ -130,7 +133,19 @@ namespace Microsoft.Rest.Modeler.Swagger
             }
 
             return ServiceClient;
-        }        
+        }
+
+        private void UpdateSettings()
+        {
+            if (ServiceDefinition.Info.CodeGenerationSettings != null)
+            {
+                foreach (var key in ServiceDefinition.Info.CodeGenerationSettings.Extensions.Keys)
+                {
+                    this.Settings.CustomSettings[key] = ServiceDefinition.Info.CodeGenerationSettings.Extensions[key].ToString();
+                }
+                Settings.PopulateSettings(this.Settings, this.Settings.CustomSettings);
+            }
+        }
 
         /// <summary>
         /// Initialize the base service and populate global service properties

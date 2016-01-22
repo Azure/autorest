@@ -47,6 +47,7 @@ sys.path.append(join(tests, "AzureSpecials"))
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
 from msrest.authentication import BasicTokenAuthentication
+from msrestazure.azure_exceptions import CloudError, CloudErrorData
 
 from auto_rest_azure_special_parameters_test_client import AutoRestAzureSpecialParametersTestClient, AutoRestAzureSpecialParametersTestClientConfiguration
     
@@ -83,8 +84,35 @@ class XmsRequestClientIdTests(unittest.TestCase):
         client = AutoRestAzureSpecialParametersTestClient(config)
 
         response = client.header.custom_named_request_id(expectedRequestId, raw=True)
-        #TODO: should update swagger spec include the response header
         self.assertEqual("123", response.response.headers.get("foo-request-id"))
+
+    def test_client_request_id_in_exception(self):
+        validSubscription = '1234-5678-9012-3456'
+        expectedRequestId = '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
+
+        cred = BasicTokenAuthentication({"access_token":123})
+        config = AutoRestAzureSpecialParametersTestClientConfiguration(cred, validSubscription, base_url="http://localhost:3000")
+        config.log_level = log_level
+        client = AutoRestAzureSpecialParametersTestClient(config)
+
+        try:
+            client.xms_client_request_id.get()
+            self.fail("CloudError wasn't raised as expected")
+
+        except CloudError as err:
+            self.assertEqual("123", err.request_id)
+
+    def test_xms_request_client_id_in_client(self):
+        validSubscription = '1234-5678-9012-3456'
+        expectedRequestId = '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
+
+        cred = BasicTokenAuthentication({"access_token":123})
+        config = AutoRestAzureSpecialParametersTestClientConfiguration(cred, validSubscription, base_url="http://localhost:3000")
+        config.log_level = log_level
+        config.generate_client_request_id = False
+        client = AutoRestAzureSpecialParametersTestClient(config)
+        client.xms_client_request_id.get()
+
 
 if __name__ == '__main__':
     unittest.main()

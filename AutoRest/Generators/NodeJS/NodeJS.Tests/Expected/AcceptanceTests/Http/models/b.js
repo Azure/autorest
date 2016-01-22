@@ -21,50 +21,43 @@ var util = require('util');
  * @member {string} [textStatusCode]
  * 
  */
-function B(parameters) {
-  B['super_'].call(this, parameters);
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.textStatusCode !== undefined) {
-      this.textStatusCode = parameters.textStatusCode;
-    }
-  }    
+function B() {
+  B['super_'].call(this);
 }
 
 util.inherits(B, models['A']);
 
 /**
- * Validate the payload against the B schema
+ * Defines the metadata of B
  *
- * @param {JSON} payload
- *
- */
-B.prototype.serialize = function () {
-  var payload = B['super_'].prototype.serialize.call(this);
-  if (this['textStatusCode'] !== null && this['textStatusCode'] !== undefined) {
-    if (typeof this['textStatusCode'].valueOf() !== 'string') {
-      throw new Error('this[\'textStatusCode\'] must be of type string.');
-    }
-    payload['textStatusCode'] = this['textStatusCode'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to B schema
- *
- * @param {JSON} instance
+ * @returns {object} metadata of B
  *
  */
-B.prototype.deserialize = function (instance) {
-  B['super_'].prototype.deserialize.call(this, instance);
-  if (instance) {
-    if (instance['textStatusCode'] !== undefined) {
-      this['textStatusCode'] = instance['textStatusCode'];
+B.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'B',
+    type: {
+      name: 'Composite',
+      className: 'B',
+      modelProperties: {
+        statusCode: {
+          required: false,
+          serializedName: 'statusCode',
+          type: {
+            name: 'String'
+          }
+        },
+        textStatusCode: {
+          required: false,
+          serializedName: 'textStatusCode',
+          type: {
+            name: 'String'
+          }
+        }
+      }
     }
-  }
-
-  return this;
+  };
 };
 
 module.exports = B;

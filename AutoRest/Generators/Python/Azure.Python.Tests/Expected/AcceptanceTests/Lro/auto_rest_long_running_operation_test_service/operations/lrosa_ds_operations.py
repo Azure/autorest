@@ -49,7 +49,8 @@ class LROSADsOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -78,7 +79,9 @@ class LROSADsOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [200, 201]:
-                raise CloudError(response)
+                exp = CloudError(response)
+                exp.request_id = response.headers.get('x-ms-request-id')
+                raise exp
 
             deserialized = None
 
@@ -123,7 +126,8 @@ class LROSADsOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -152,7 +156,9 @@ class LROSADsOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [200, 201]:
-                raise CloudError(response)
+                exp = CloudError(response)
+                exp.request_id = response.headers.get('x-ms-request-id')
+                raise exp
 
             deserialized = None
 
@@ -198,7 +204,8 @@ class LROSADsOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -227,7 +234,9 @@ class LROSADsOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [200]:
-                raise CloudError(response)
+                exp = CloudError(response)
+                exp.request_id = response.headers.get('x-ms-request-id')
+                raise exp
 
             deserialized = None
             header_dict = {}
@@ -273,7 +282,8 @@ class LROSADsOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -295,7 +305,9 @@ class LROSADsOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [202]:
-                raise CloudError(response)
+                exp = CloudError(response)
+                exp.request_id = response.headers.get('x-ms-request-id')
+                raise exp
 
             if raw:
                 client_raw_response = ClientRawResponse(None, response)
@@ -332,7 +344,8 @@ class LROSADsOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -354,7 +367,9 @@ class LROSADsOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [202]:
-                raise CloudError(response)
+                exp = CloudError(response)
+                exp.request_id = response.headers.get('x-ms-request-id')
+                raise exp
 
             if raw:
                 client_raw_response = ClientRawResponse(None, response)
@@ -392,7 +407,8 @@ class LROSADsOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -414,7 +430,9 @@ class LROSADsOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [202]:
-                raise CloudError(response)
+                exp = CloudError(response)
+                exp.request_id = response.headers.get('x-ms-request-id')
+                raise exp
 
             if raw:
                 client_raw_response = ClientRawResponse(None, response)
@@ -453,7 +471,8 @@ class LROSADsOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -482,7 +501,9 @@ class LROSADsOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [202]:
-                raise CloudError(response)
+                exp = CloudError(response)
+                exp.request_id = response.headers.get('x-ms-request-id')
+                raise exp
 
             if raw:
                 client_raw_response = ClientRawResponse(None, response)
@@ -520,7 +541,8 @@ class LROSADsOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -549,7 +571,9 @@ class LROSADsOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [202]:
-                raise CloudError(response)
+                exp = CloudError(response)
+                exp.request_id = response.headers.get('x-ms-request-id')
+                raise exp
 
             if raw:
                 client_raw_response = ClientRawResponse(None, response)
@@ -589,7 +613,8 @@ class LROSADsOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -618,7 +643,9 @@ class LROSADsOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [202]:
-                raise CloudError(response)
+                exp = CloudError(response)
+                exp.request_id = response.headers.get('x-ms-request-id')
+                raise exp
 
             if raw:
                 client_raw_response = ClientRawResponse(None, response)
@@ -659,7 +686,8 @@ class LROSADsOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -688,7 +716,9 @@ class LROSADsOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [200, 201]:
-                raise CloudError(response)
+                exp = CloudError(response)
+                exp.request_id = response.headers.get('x-ms-request-id')
+                raise exp
 
             deserialized = None
 
@@ -735,7 +765,8 @@ class LROSADsOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -764,7 +795,9 @@ class LROSADsOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [200]:
-                raise CloudError(response)
+                exp = CloudError(response)
+                exp.request_id = response.headers.get('x-ms-request-id')
+                raise exp
 
             deserialized = None
             header_dict = {}
@@ -816,7 +849,8 @@ class LROSADsOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -845,7 +879,9 @@ class LROSADsOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [200]:
-                raise CloudError(response)
+                exp = CloudError(response)
+                exp.request_id = response.headers.get('x-ms-request-id')
+                raise exp
 
             deserialized = None
             header_dict = {}
@@ -892,7 +928,8 @@ class LROSADsOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -914,7 +951,9 @@ class LROSADsOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [204]:
-                raise CloudError(response)
+                exp = CloudError(response)
+                exp.request_id = response.headers.get('x-ms-request-id')
+                raise exp
 
             if raw:
                 client_raw_response = ClientRawResponse(None, response)
@@ -948,7 +987,8 @@ class LROSADsOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -970,7 +1010,9 @@ class LROSADsOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [202]:
-                raise CloudError(response)
+                exp = CloudError(response)
+                exp.request_id = response.headers.get('x-ms-request-id')
+                raise exp
 
             if raw:
                 client_raw_response = ClientRawResponse(None, response)
@@ -1010,7 +1052,8 @@ class LROSADsOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -1039,7 +1082,9 @@ class LROSADsOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [202]:
-                raise CloudError(response)
+                exp = CloudError(response)
+                exp.request_id = response.headers.get('x-ms-request-id')
+                raise exp
 
             if raw:
                 client_raw_response = ClientRawResponse(None, response)
@@ -1080,7 +1125,8 @@ class LROSADsOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -1109,7 +1155,9 @@ class LROSADsOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [202]:
-                raise CloudError(response)
+                exp = CloudError(response)
+                exp.request_id = response.headers.get('x-ms-request-id')
+                raise exp
 
             if raw:
                 client_raw_response = ClientRawResponse(None, response)
@@ -1150,7 +1198,8 @@ class LROSADsOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -1179,7 +1228,9 @@ class LROSADsOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [200, 204]:
-                raise CloudError(response)
+                exp = CloudError(response)
+                exp.request_id = response.headers.get('x-ms-request-id')
+                raise exp
 
             deserialized = None
 
@@ -1223,7 +1274,8 @@ class LROSADsOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -1252,7 +1304,9 @@ class LROSADsOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [200]:
-                raise CloudError(response)
+                exp = CloudError(response)
+                exp.request_id = response.headers.get('x-ms-request-id')
+                raise exp
 
             deserialized = None
             header_dict = {}
@@ -1304,7 +1358,8 @@ class LROSADsOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -1333,7 +1388,9 @@ class LROSADsOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [200]:
-                raise CloudError(response)
+                exp = CloudError(response)
+                exp.request_id = response.headers.get('x-ms-request-id')
+                raise exp
 
             deserialized = None
             header_dict = {}
@@ -1381,7 +1438,8 @@ class LROSADsOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -1403,7 +1461,9 @@ class LROSADsOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [202]:
-                raise CloudError(response)
+                exp = CloudError(response)
+                exp.request_id = response.headers.get('x-ms-request-id')
+                raise exp
 
             if raw:
                 client_raw_response = ClientRawResponse(None, response)
@@ -1441,7 +1501,8 @@ class LROSADsOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -1463,7 +1524,9 @@ class LROSADsOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [202]:
-                raise CloudError(response)
+                exp = CloudError(response)
+                exp.request_id = response.headers.get('x-ms-request-id')
+                raise exp
 
             if raw:
                 client_raw_response = ClientRawResponse(None, response)
@@ -1502,7 +1565,8 @@ class LROSADsOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -1524,7 +1588,9 @@ class LROSADsOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [202]:
-                raise CloudError(response)
+                exp = CloudError(response)
+                exp.request_id = response.headers.get('x-ms-request-id')
+                raise exp
 
             if raw:
                 client_raw_response = ClientRawResponse(None, response)
@@ -1564,7 +1630,8 @@ class LROSADsOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -1593,7 +1660,9 @@ class LROSADsOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [202]:
-                raise CloudError(response)
+                exp = CloudError(response)
+                exp.request_id = response.headers.get('x-ms-request-id')
+                raise exp
 
             if raw:
                 client_raw_response = ClientRawResponse(None, response)
@@ -1633,7 +1702,8 @@ class LROSADsOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -1662,7 +1732,9 @@ class LROSADsOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [202]:
-                raise CloudError(response)
+                exp = CloudError(response)
+                exp.request_id = response.headers.get('x-ms-request-id')
+                raise exp
 
             if raw:
                 client_raw_response = ClientRawResponse(None, response)
@@ -1704,7 +1776,8 @@ class LROSADsOperations(object):
         # Construct headers
         header_parameters = {}
         header_parameters['Content-Type'] = 'application/json; charset=utf-8'
-        header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
         if custom_headers:
             header_parameters.update(custom_headers)
         if self.config.accept_language is not None:
@@ -1733,7 +1806,9 @@ class LROSADsOperations(object):
         def get_long_running_output(response):
 
             if response.status_code not in [202]:
-                raise CloudError(response)
+                exp = CloudError(response)
+                exp.request_id = response.headers.get('x-ms-request-id')
+                raise exp
 
             if raw:
                 client_raw_response = ClientRawResponse(None, response)

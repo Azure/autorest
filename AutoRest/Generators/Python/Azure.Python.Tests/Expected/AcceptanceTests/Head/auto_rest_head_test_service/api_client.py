@@ -18,7 +18,7 @@ from .operations.http_success_operations import HttpSuccessOperations
 class AutoRestHeadTestServiceConfiguration(AzureConfiguration):
 
     def __init__(
-            self, credentials, accept_language='en-US', long_running_operation_retry_timeout=None, base_url=None, filepath=None):
+            self, credentials, accept_language='en-US', long_running_operation_retry_timeout=30, generate_client_request_id=True, base_url=None, filepath=None):
 
         if credentials is None:
             raise ValueError('credentials must not be None.')
@@ -32,6 +32,7 @@ class AutoRestHeadTestServiceConfiguration(AzureConfiguration):
         self.credentials = credentials
         self.accept_language = accept_language
         self.long_running_operation_retry_timeout = long_running_operation_retry_timeout
+        self.generate_client_request_id = generate_client_request_id
 
 
 class AutoRestHeadTestService(object):

@@ -13,6 +13,7 @@ package fixtures.report;
 import java.util.List;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
+import com.microsoft.rest.serializer.JacksonMapperAdapter;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
@@ -21,6 +22,7 @@ import java.io.IOException;
 import java.util.Map;
 import retrofit.Call;
 import retrofit.http.GET;
+import retrofit.http.Headers;
 
 /**
  * The interface for AutoRestReportService class.
@@ -48,11 +50,20 @@ public interface AutoRestReportService {
     void setLogLevel(Level logLevel);
 
     /**
+     * Gets the adapter for {@link com.fasterxml.jackson.databind.ObjectMapper} for serialization
+     * and deserialization operations..
+     *
+     * @return the adapter.
+     */
+    JacksonMapperAdapter getMapperAdapter();
+
+    /**
      * The interface defining all the services for AutoRestReportService to be
      * used by Retrofit to perform actually REST calls.
      */
     interface AutoRestReportServiceService {
-        @GET("/report")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("report")
         Call<ResponseBody> getReport();
 
     }

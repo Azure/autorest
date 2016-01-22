@@ -101,7 +101,7 @@ describe('nodejs', function () {
       it('should test the MaxItems constraint on displayNames', function (done) {
         testClient.validationOfBody("123", 150, { body: { displayNames: ["item1", "item2", "item3", "item4", "item5", "item6", "item7"] } }, function (err, result) {
           should.exist(err);
-          err.message.should.match(/.*displayNames.*constraint.*MaxItems.*6.*/ig);
+          err.message.should.match(/.*display_names.*constraint.*MaxItems.*6.*/ig);
           done();
         });
       });

@@ -17,7 +17,7 @@ declare class AutoRestHeadTestService {
      * Initializes a new instance of the AutoRestHeadTestService class.
      * @constructor
      *
-     * @param {Credentials} credentials The management credentials for Azure.
+     * @param {credentials} credentials - Gets Azure subscription credentials.
      *
      * @param {string} [baseUri] - The base URI of the service.
      *
@@ -28,7 +28,14 @@ declare class AutoRestHeadTestService {
      * @param {object} [options.requestOptions] - Options for the underlying request object
      * {@link https://github.com/request/request#requestoptions-callback Options doc}
      *
-     * @param {bool} [options.noRetryPolicy] - If set to true, turn off default retry policy
+     * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
+     *
+     * @param {string} [options.acceptLanguage] - Gets or sets the preferred language for the response.
+     *
+     * @param {number} [options.longRunningOperationRetryTimeout] - Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
+     *
+     * @param {boolean} [options.generateClientRequestId] - When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
+     *
      */
     constructor(credentials: ServiceClientCredentials, baseUri: string, options: ServiceClientOptions);
 
@@ -37,6 +44,8 @@ declare class AutoRestHeadTestService {
     acceptLanguage: string;
 
     longRunningOperationRetryTimeout: number;
+
+    generateClientRequestId: boolean;
 
     // Operation groups
     httpSuccess: operations.HttpSuccess;

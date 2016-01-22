@@ -75,6 +75,27 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
         }
 
         /// <summary>
+        /// Get the expression for exception initialization.
+        /// </summary>
+        public override string InitializeException
+        {
+            get
+            {
+                if (OperationExceptionTypeString == "CloudException")
+                {
+                    IndentedStringBuilder sb = new IndentedStringBuilder();
+                    sb.AppendLine(base.InitializeExceptionWithMessage)
+                      .AppendLine("if (_httpResponse.Headers.Contains(\"{0}\"))", this.RequestIdString)
+                      .AppendLine("{").Indent()
+                        .AppendLine("ex.RequestId = _httpResponse.Headers.GetValues(\"{0}\").FirstOrDefault();", this.RequestIdString).Outdent()
+                      .AppendLine("}");
+                    return sb.ToString();
+                }
+                return base.InitializeExceptionWithMessage;
+            }
+        }
+
+        /// <summary>
         /// Returns true if method has x-ms-long-running-operation extension.
         /// </summary>
         public bool IsLongRunningOperation
@@ -210,8 +231,12 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
             get
             {
                 var sb= new IndentedStringBuilder();
-                sb.AppendLine("_httpRequest.Headers.TryAddWithoutValidation(\"{0}\", Guid.NewGuid().ToString());", this.ClientRequestIdString)
-                  .AppendLine(base.SetDefaultHeaders);
+                sb.AppendLine("if ({0}.GenerateClientRequestId != null && {0}.GenerateClientRequestId.Value)", this.ClientReference)
+                   .AppendLine("{").Indent()
+                       .AppendLine("_httpRequest.Headers.TryAddWithoutValidation(\"{0}\", Guid.NewGuid().ToString());", 
+                           this.ClientRequestIdString, this.ClientReference).Outdent()
+                   .AppendLine("}")
+                   .AppendLine(base.SetDefaultHeaders);
                 return sb.ToString();
             }
         }

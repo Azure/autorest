@@ -13,6 +13,7 @@ package fixtures.url;
 import java.util.List;
 import com.squareup.okhttp.Interceptor;
 import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
+import com.microsoft.rest.serializer.JacksonMapperAdapter;
 
 /**
  * The interface for AutoRestUrlTestService class.
@@ -38,6 +39,14 @@ public interface AutoRestUrlTestService {
      * @param logLevel the logging level enum.
      */
     void setLogLevel(Level logLevel);
+
+    /**
+     * Gets the adapter for {@link com.fasterxml.jackson.databind.ObjectMapper} for serialization
+     * and deserialization operations..
+     *
+     * @return the adapter.
+     */
+    JacksonMapperAdapter getMapperAdapter();
 
     /**
      * Gets A string value 'globalItemStringPath' that appears in the path.

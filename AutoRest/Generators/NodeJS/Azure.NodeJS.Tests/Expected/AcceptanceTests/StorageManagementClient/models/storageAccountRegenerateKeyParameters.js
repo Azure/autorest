@@ -18,49 +18,34 @@
  * 'key1', 'key2'.
  * 
  */
-function StorageAccountRegenerateKeyParameters(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.keyName !== undefined) {
-      this.keyName = parameters.keyName;
-    }
-  }    
+function StorageAccountRegenerateKeyParameters() {
 }
 
-
 /**
- * Validate the payload against the StorageAccountRegenerateKeyParameters schema
+ * Defines the metadata of StorageAccountRegenerateKeyParameters
  *
- * @param {JSON} payload
+ * @returns {object} metadata of StorageAccountRegenerateKeyParameters
  *
  */
-StorageAccountRegenerateKeyParameters.prototype.serialize = function () {
-  var payload = {};
-  if (this['keyName'] !== null && this['keyName'] !== undefined) {
-    var allowedValues = [ 'key1', 'key2' ];
-    var thiskeyName = this['keyName'];
-    if (!allowedValues.some( function(item) { return item === thiskeyName; })) {
-      throw new Error(this['keyName'] + ' is not a valid value. The valid values are: ' + allowedValues);
+StorageAccountRegenerateKeyParameters.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'StorageAccountRegenerateKeyParameters',
+    type: {
+      name: 'Composite',
+      className: 'StorageAccountRegenerateKeyParameters',
+      modelProperties: {
+        keyName: {
+          required: false,
+          serializedName: 'keyName',
+          type: {
+            name: 'Enum',
+            allowedValues: [ 'key1', 'key2' ]
+          }
+        }
+      }
     }
-    payload['keyName'] = this['keyName'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to StorageAccountRegenerateKeyParameters schema
- *
- * @param {JSON} instance
- *
- */
-StorageAccountRegenerateKeyParameters.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['keyName'] !== undefined) {
-      this['keyName'] = instance['keyName'];
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = StorageAccountRegenerateKeyParameters;

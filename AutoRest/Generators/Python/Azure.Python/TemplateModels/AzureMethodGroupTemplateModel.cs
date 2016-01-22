@@ -45,7 +45,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
         {
             get
             {
-                return this.MethodTemplateModels.Any(item => item.DefaultResponse.Body != null && item.DefaultResponse.Body.Name == "CloudError");
+                return this.MethodTemplateModels.Any(item => item.DefaultResponse.Body == null || item.DefaultResponse.Body.Name == "CloudError");
             }
         }
 

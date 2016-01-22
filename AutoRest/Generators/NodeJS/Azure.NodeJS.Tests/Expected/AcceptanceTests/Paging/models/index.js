@@ -22,4 +22,5 @@ exports.Product = require('./product');
 exports.ProductProperties = require('./productProperties');
 exports.OperationResult = require('./operationResult');
 exports.PagingGetMultiplePagesOptions = require('./pagingGetMultiplePagesOptions');
+exports.PagingGetMultiplePagesNextOptions = require('./pagingGetMultiplePagesNextOptions');
 exports.ProductResult = require('./productResult');

@@ -19,6 +19,7 @@ import java.math.BigDecimal;
 import retrofit.Call;
 import retrofit.http.Body;
 import retrofit.http.GET;
+import retrofit.http.Headers;
 import retrofit.http.PUT;
 
 /**
@@ -31,76 +32,100 @@ public interface Number {
      * used by Retrofit to perform actually REST calls.
      */
     interface NumberService {
-        @GET("/number/null")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("number/null")
         Call<ResponseBody> getNull();
 
-        @GET("/number/invalidfloat")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("number/invalidfloat")
         Call<ResponseBody> getInvalidFloat();
 
-        @GET("/number/invaliddouble")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("number/invaliddouble")
         Call<ResponseBody> getInvalidDouble();
 
-        @GET("/number/invaliddecimal")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("number/invaliddecimal")
         Call<ResponseBody> getInvalidDecimal();
 
-        @PUT("/number/big/float/3.402823e+20")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("number/big/float/3.402823e+20")
         Call<ResponseBody> putBigFloat(@Body double numberBody);
 
-        @GET("/number/big/float/3.402823e+20")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("number/big/float/3.402823e+20")
         Call<ResponseBody> getBigFloat();
 
-        @PUT("/number/big/double/2.5976931e+101")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("number/big/double/2.5976931e+101")
         Call<ResponseBody> putBigDouble(@Body double numberBody);
 
-        @GET("/number/big/double/2.5976931e+101")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("number/big/double/2.5976931e+101")
         Call<ResponseBody> getBigDouble();
 
-        @PUT("/number/big/double/99999999.99")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("number/big/double/99999999.99")
         Call<ResponseBody> putBigDoublePositiveDecimal(@Body double numberBody);
 
-        @GET("/number/big/double/99999999.99")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("number/big/double/99999999.99")
         Call<ResponseBody> getBigDoublePositiveDecimal();
 
-        @PUT("/number/big/double/-99999999.99")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("number/big/double/-99999999.99")
         Call<ResponseBody> putBigDoubleNegativeDecimal(@Body double numberBody);
 
-        @GET("/number/big/double/-99999999.99")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("number/big/double/-99999999.99")
         Call<ResponseBody> getBigDoubleNegativeDecimal();
 
-        @PUT("/number/big/decimal/2.5976931e+101")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("number/big/decimal/2.5976931e+101")
         Call<ResponseBody> putBigDecimal(@Body BigDecimal numberBody);
 
-        @GET("/number/big/decimal/2.5976931e+101")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("number/big/decimal/2.5976931e+101")
         Call<ResponseBody> getBigDecimal();
 
-        @PUT("/number/big/decimal/99999999.99")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("number/big/decimal/99999999.99")
         Call<ResponseBody> putBigDecimalPositiveDecimal(@Body BigDecimal numberBody);
 
-        @GET("/number/big/decimal/99999999.99")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("number/big/decimal/99999999.99")
         Call<ResponseBody> getBigDecimalPositiveDecimal();
 
-        @PUT("/number/big/decimal/-99999999.99")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("number/big/decimal/-99999999.99")
         Call<ResponseBody> putBigDecimalNegativeDecimal(@Body BigDecimal numberBody);
 
-        @GET("/number/big/decimal/-99999999.99")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("number/big/decimal/-99999999.99")
         Call<ResponseBody> getBigDecimalNegativeDecimal();
 
-        @PUT("/number/small/float/3.402823e-20")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("number/small/float/3.402823e-20")
         Call<ResponseBody> putSmallFloat(@Body double numberBody);
 
-        @GET("/number/small/float/3.402823e-20")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("number/small/float/3.402823e-20")
         Call<ResponseBody> getSmallFloat();
 
-        @PUT("/number/small/double/2.5976931e-101")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("number/small/double/2.5976931e-101")
         Call<ResponseBody> putSmallDouble(@Body double numberBody);
 
-        @GET("/number/small/double/2.5976931e-101")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("number/small/double/2.5976931e-101")
         Call<ResponseBody> getSmallDouble();
 
-        @PUT("/number/small/decimal/2.5976931e-101")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("number/small/decimal/2.5976931e-101")
         Call<ResponseBody> putSmallDecimal(@Body BigDecimal numberBody);
 
-        @GET("/number/small/decimal/2.5976931e-101")
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("number/small/decimal/2.5976931e-101")
         Call<ResponseBody> getSmallDecimal();
 
     }

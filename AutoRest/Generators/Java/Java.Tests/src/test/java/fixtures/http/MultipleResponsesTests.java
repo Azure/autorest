@@ -3,7 +3,8 @@ package fixtures.http;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.serializer.JacksonUtils;
+import com.microsoft.rest.serializer.JacksonMapperAdapter;
+
 import fixtures.http.models.A;
 import fixtures.http.models.C;
 import fixtures.http.models.D;
@@ -89,7 +90,7 @@ public class MultipleResponsesTests {
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
-            Error model = new JacksonUtils().getObjectMapper().convertValue(
+            Error model = new JacksonMapperAdapter().getObjectMapper().convertValue(
                     ex.getBody(), Error.class);
             Assert.assertEquals(400, model.getStatus().intValue());
             Assert.assertEquals("client error", model.getMessage());
@@ -124,7 +125,7 @@ public class MultipleResponsesTests {
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
-            Error model = new JacksonUtils().getObjectMapper().convertValue(
+            Error model = new JacksonMapperAdapter().getObjectMapper().convertValue(
                     ex.getBody(), Error.class);
             Assert.assertEquals(400, model.getStatus().intValue());
             Assert.assertEquals("client error", model.getMessage());
@@ -172,7 +173,7 @@ public class MultipleResponsesTests {
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
-            Error model = new JacksonUtils().getObjectMapper().convertValue(
+            Error model = new JacksonMapperAdapter().getObjectMapper().convertValue(
                     ex.getBody(), Error.class);
             Assert.assertEquals(400, model.getStatus().intValue());
             Assert.assertEquals("client error", model.getMessage());
@@ -228,7 +229,7 @@ public class MultipleResponsesTests {
             fail();
         } catch (MyException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
-            A model = new JacksonUtils().getObjectMapper().convertValue(
+            A model = new JacksonMapperAdapter().getObjectMapper().convertValue(
                     ex.getBody(), A.class);
             Assert.assertEquals("400", model.getStatusCode());
         }

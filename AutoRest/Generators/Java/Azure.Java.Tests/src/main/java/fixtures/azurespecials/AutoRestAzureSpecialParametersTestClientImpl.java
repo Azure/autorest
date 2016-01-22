@@ -10,10 +10,10 @@
 
 package fixtures.azurespecials;
 
-import com.microsoft.rest.AzureClient;
-import com.microsoft.rest.AzureServiceClient;
+import com.microsoft.azure.AzureClient;
+import com.microsoft.azure.AzureServiceClient;
+import com.microsoft.azure.CustomHeaderInterceptor;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
-import com.microsoft.rest.CustomHeaderInterceptor;
 import com.squareup.okhttp.OkHttpClient;
 import java.util.UUID;
 import retrofit.Retrofit;
@@ -43,11 +43,11 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
         return this.azureClient;
     }
 
-    /** The management credentials for Azure. */
+    /** Gets Azure subscription credentials. */
     private ServiceClientCredentials credentials;
 
     /**
-     * Gets The management credentials for Azure.
+     * Gets Gets Azure subscription credentials.
      *
      * @return the credentials value.
      */
@@ -109,11 +109,11 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
         this.acceptLanguage = acceptLanguage;
     }
 
-    /** The retry timeout for Long Running Operations. */
+    /** Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30. */
     private int longRunningOperationRetryTimeout;
 
     /**
-     * Gets The retry timeout for Long Running Operations.
+     * Gets Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
      *
      * @return the longRunningOperationRetryTimeout value.
      */
@@ -122,12 +122,33 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
     }
 
     /**
-     * Sets The retry timeout for Long Running Operations.
+     * Sets Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.
      *
      * @param longRunningOperationRetryTimeout the longRunningOperationRetryTimeout value.
      */
     public void setLongRunningOperationRetryTimeout(int longRunningOperationRetryTimeout) {
         this.longRunningOperationRetryTimeout = longRunningOperationRetryTimeout;
+    }
+
+    /** When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true. */
+    private boolean generateClientRequestId;
+
+    /**
+     * Gets When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
+     *
+     * @return the generateClientRequestId value.
+     */
+    public boolean getGenerateClientRequestId() {
+        return this.generateClientRequestId;
+    }
+
+    /**
+     * Sets When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.
+     *
+     * @param generateClientRequestId the generateClientRequestId value.
+     */
+    public void setGenerateClientRequestId(boolean generateClientRequestId) {
+        this.generateClientRequestId = generateClientRequestId;
     }
 
     /**
@@ -248,12 +269,14 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
     }
 
     private void initialize() {
+        this.apiVersion = "2015-07-01-preview";
+        this.acceptLanguage = "en-US";
+        this.longRunningOperationRetryTimeout = 30;
+        this.generateClientRequestId = true;
+        this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         if (this.credentials != null) {
             this.credentials.applyCredentialsFilter(this.client);
         }
-        this.apiVersion = "2015-07-01-preview";
-        this.acceptLanguage = "en-US";
-        this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         this.azureClient = new AzureClient(client, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
         this.retrofitBuilder.baseUrl(baseUri);

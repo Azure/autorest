@@ -19,67 +19,40 @@
  * @member {date} [leap]
  * 
  */
-function DateWrapper(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.field !== undefined) {
-      this.field = parameters.field;
-    }
-    if (parameters.leap !== undefined) {
-      this.leap = parameters.leap;
-    }
-  }    
+function DateWrapper() {
 }
 
-
 /**
- * Validate the payload against the DateWrapper schema
+ * Defines the metadata of DateWrapper
  *
- * @param {JSON} payload
+ * @returns {object} metadata of DateWrapper
  *
  */
-DateWrapper.prototype.serialize = function () {
-  var payload = {};
-  if (this['field']) {
-    if (!(this['field'] instanceof Date || typeof this['field'].valueOf() === 'string' && !isNaN(Date.parse(this['field'])))) {
-      throw new Error('this[\'field\'] must be of type date.');
+DateWrapper.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'date-wrapper',
+    type: {
+      name: 'Composite',
+      className: 'DateWrapper',
+      modelProperties: {
+        field: {
+          required: false,
+          serializedName: 'field',
+          type: {
+            name: 'Date'
+          }
+        },
+        leap: {
+          required: false,
+          serializedName: 'leap',
+          type: {
+            name: 'Date'
+          }
+        }
+      }
     }
-    payload['field'] = (this['field'] instanceof Date) ? this['field'].toISOString().substring(0,10) : this['field'];
-  }
-
-  if (this['leap']) {
-    if (!(this['leap'] instanceof Date || typeof this['leap'].valueOf() === 'string' && !isNaN(Date.parse(this['leap'])))) {
-      throw new Error('this[\'leap\'] must be of type date.');
-    }
-    payload['leap'] = (this['leap'] instanceof Date) ? this['leap'].toISOString().substring(0,10) : this['leap'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to DateWrapper schema
- *
- * @param {JSON} instance
- *
- */
-DateWrapper.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['field']) {
-      this['field'] = new Date(instance['field']);
-    }
-    else if (instance['field'] !== undefined) {
-      this['field'] = instance['field'];
-    }
-
-    if (instance['leap']) {
-      this['leap'] = new Date(instance['leap']);
-    }
-    else if (instance['leap'] !== undefined) {
-      this['leap'] = instance['leap'];
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = DateWrapper;

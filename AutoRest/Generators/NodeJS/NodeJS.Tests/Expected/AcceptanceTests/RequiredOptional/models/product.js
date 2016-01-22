@@ -19,59 +19,40 @@
  * @member {string} [name]
  * 
  */
-function Product(parameters) {
-  if (parameters !== null && parameters !== undefined) {
-    if (parameters.id !== undefined) {
-      this.id = parameters.id;
-    }
-    if (parameters.name !== undefined) {
-      this.name = parameters.name;
-    }
-  }    
+function Product() {
 }
 
-
 /**
- * Validate the payload against the Product schema
+ * Defines the metadata of Product
  *
- * @param {JSON} payload
+ * @returns {object} metadata of Product
  *
  */
-Product.prototype.serialize = function () {
-  var payload = {};
-  if (this['id'] === null || this['id'] === undefined || typeof this['id'] !== 'number') {
-    throw new Error('this[\'id\'] cannot be null or undefined and it must be of type number.');
-  }
-  payload['id'] = this['id'];
-
-  if (this['name'] !== null && this['name'] !== undefined) {
-    if (typeof this['name'].valueOf() !== 'string') {
-      throw new Error('this[\'name\'] must be of type string.');
+Product.prototype.mapper = function () {
+  return {
+    required: false,
+    serializedName: 'product',
+    type: {
+      name: 'Composite',
+      className: 'Product',
+      modelProperties: {
+        id: {
+          required: true,
+          serializedName: 'id',
+          type: {
+            name: 'Number'
+          }
+        },
+        name: {
+          required: false,
+          serializedName: 'name',
+          type: {
+            name: 'String'
+          }
+        }
+      }
     }
-    payload['name'] = this['name'];
-  }
-
-  return payload;
-};
-
-/**
- * Deserialize the instance to Product schema
- *
- * @param {JSON} instance
- *
- */
-Product.prototype.deserialize = function (instance) {
-  if (instance) {
-    if (instance['id'] !== undefined) {
-      this['id'] = instance['id'];
-    }
-
-    if (instance['name'] !== undefined) {
-      this['name'] = instance['name'];
-    }
-  }
-
-  return this;
+  };
 };
 
 module.exports = Product;

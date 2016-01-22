@@ -97,20 +97,20 @@ else if (Model.IsFormData)
 @if (Model.RequestBody != null)
 {
         @:response = self._client.send(
-            @:request, header_parameters, body_content, @Model.StreamDownloadParameter**operation_config)
+            @:request, header_parameters, body_content, **operation_config)
 }
 else if (Model.IsFormData)
 {
         @:response = self._client.send_formdata(
-            @:request, header_parameters, form_data_content, @Model.StreamDownloadParameter**operation_config)
+            @:request, header_parameters, form_data_content, **operation_config)
 }
 else
 {
-        @:response = self._client.send(request, header_parameters, @Model.StreamDownloadParameter**operation_config)
+        @:response = self._client.send(request, header_parameters, **operation_config)
 }
 @EmptyLine
         if @Model.FailureStatusCodePredicate:
-            raise @Model.RaisedException
+            @Model.RaisedException
 @EmptyLine
 @if (Model.HasAnyResponse)
 {

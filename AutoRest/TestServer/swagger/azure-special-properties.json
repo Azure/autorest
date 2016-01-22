@@ -24,10 +24,7 @@
             "description": "Successfully received the '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0' x-ms-client-request header"
           },
           "default": {
-            "description": "Unexpected error",
-            "schema": {
-              "$ref": "#/definitions/Error"
-            }
+            "description": "Unexpected error"
           }
         }
       }
