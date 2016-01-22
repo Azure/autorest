@@ -95,9 +95,9 @@ def _https(uri, *extra):
 class AADMixin(object):
     """Mixin for Authentication object.
     Provides some AAD functionality:
-        - State validation
-        - Token caching and retrieval
-        - Default AAD configuration
+    - State validation
+    - Token caching and retrieval
+    - Default AAD configuration
     """
     _auth_endpoint = "//login.microsoftonline.com"
     _china_auth_endpoint = "//login.chinacloudapi.cn"
@@ -365,9 +365,9 @@ class InteractiveCredentials(OAuthTokenAuthentication, AADMixin):
          is 'False'.
         :param additional_args: Set and additional kwargs for requrired AAD
          configuration: msdn.microsoft.com/en-us/library/azure/dn645542.aspx
-         :rtype: Tuple
-         :returns: The URL for authentication (str), and state code that will
-          be verified in the response (str).
+        :rtype: Tuple
+        :returns: The URL for authentication (str), and state code that will
+         be verified in the response (str).
         """
         if msa:
             additional_args['domain_hint'] = 'live.com'

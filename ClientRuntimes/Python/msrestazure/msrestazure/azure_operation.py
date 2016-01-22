@@ -70,7 +70,10 @@ class OperationFinished(Exception):
 
 
 class SimpleResource:
-    """An implementation of Python 3 SimpleNamespace"""
+    """An implementation of Python 3 SimpleNamespace. 
+    Used to deserialize resource objects from response bodies where
+    no particular object type has been specified.
+    """
 
     def __init__(self, **kwargs):
         self.__dict__.update(kwargs)

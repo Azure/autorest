@@ -24,7 +24,7 @@
 #
 # --------------------------------------------------------------------------
 
-from distutils.core import setup
+from setuptools import setup
 
 setup(
     name='msrestazure',
@@ -49,12 +49,5 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Topic :: Software Development'],
     install_requires=[
-        "msrest>=0.0.1",
-        "requests>=2.7.0",
-        "keyring>=5.6",
-        "requests_oauthlib>=0.5.0",
-        "isodate>=0.5.4",
-        "certifi>=2015.9.6.2",
-        "futures>=3.0.3",
-        "enum34>=1.0.4"],
+        "msrest>=0.0.1"],
 )

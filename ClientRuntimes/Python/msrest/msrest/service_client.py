@@ -47,16 +47,14 @@ from .exceptions import (
 class ServiceClient(object):
     """REST Service Client.
     Maintains client pipeline and handles all requests and responses.
+
+    :param Configuration config: Service configuration.
+    :param Authentication creds: Authenticated credentials.
     """
 
     _protocols = ['http://', 'https://']
 
     def __init__(self, creds, config):
-        """Create service client.
-
-        :param Configuration config: Service configuration.
-        :param Authentication creds: Authenticated credentials.
-        """
         self.config = config
         self.creds = creds if creds else Authentication()
 
