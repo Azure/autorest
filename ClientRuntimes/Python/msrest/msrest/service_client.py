@@ -125,7 +125,6 @@ class ServiceClient(object):
         kwargs['stream'] = True
         kwargs['allow_redirects'] = config.get(
             'allow_redirects', bool(self.config.redirect_policy))
-        kwargs['stream'] = True
 
         session.headers.update(self._headers)
         session.headers['User-Agent'] = self.config.user_agent
