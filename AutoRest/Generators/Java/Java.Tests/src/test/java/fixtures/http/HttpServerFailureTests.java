@@ -16,7 +16,7 @@ public class HttpServerFailureTests {
     @Test
     public void head501() throws Exception {
         try {
-            client.getHttpServerFailure().head501();
+            client.getHttpServerFailureOperations().head501();
         } catch (ErrorException ex) {
             Assert.assertEquals(501, ex.getResponse().code());
         }
@@ -25,7 +25,7 @@ public class HttpServerFailureTests {
     @Test
     public void get501() throws Exception {
         try {
-            client.getHttpServerFailure().get501();
+            client.getHttpServerFailureOperations().get501();
         } catch (ErrorException ex) {
             Assert.assertEquals(501, ex.getResponse().code());
         }
@@ -34,7 +34,7 @@ public class HttpServerFailureTests {
     @Test
     public void post505() throws Exception {
         try {
-            client.getHttpServerFailure().post505(true);
+            client.getHttpServerFailureOperations().post505(true);
         } catch (ErrorException ex) {
             Assert.assertEquals(505, ex.getResponse().code());
         }
@@ -43,7 +43,7 @@ public class HttpServerFailureTests {
     @Test
     public void delete505() throws Exception {
         try {
-            client.getHttpServerFailure().delete505(true);
+            client.getHttpServerFailureOperations().delete505(true);
         } catch (ErrorException ex) {
             Assert.assertEquals(505, ex.getResponse().code());
         }

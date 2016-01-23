@@ -8,11 +8,71 @@ buildscript {
 }
 
 subprojects {
+    apply plugin: 'maven'
+
+    configurations {
+        deployerJars
+    }
+
+    repositories {
+        mavenCentral()
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    }
+
+    dependencies {
+        deployerJars "org.apache.maven.wagon:wagon-ftp:2.10"
+    }
+
+    username = rootProject.property("username")
+    password = rootProject.property("password")
+
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                configuration = configurations.deployerJars
+                snapshotRepository(url: "ftp://waws-prod-bay-005.ftp.azurewebsites.windows.net/site/wwwroot/") {
+                    authentication(userName: username, password: password)
+                }
+                pom.project {
+                    url 'https://github.com/Azure/autorest'
+
+                    scm {
+                        url 'scm:git:https://github.com/Azure/AutoRest'
+                        connection 'scm:git:git://github.com/Azure/AutoRest.git'
+                    }
+
+                    licenses {
+                        license {
+                            name 'The MIT License (MIT)'
+                            url 'http://opensource.org/licenses/MIT'
+                            distribution 'repo'
+                        }
+                    }
+
+                    developers {
+                        developer {
+                            id 'microsoft'
+                            name 'Microsoft'
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+project(':client-runtime') {
+    apply plugin: 'java'
     group = 'com.microsoft.rest'
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
 }
 
 project(':azure-client-runtime') {
     apply plugin: 'java'
+    group = 'com.microsoft.azure'
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
     dependencies {
         compile project(':client-runtime')
     }
@@ -20,6 +80,9 @@ project(':azure-client-runtime') {
 
 project(':azure-client-authentication') {
     apply plugin: 'java'
+    group = 'com.microsoft.azure'
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
     dependencies {
         compile project(':client-runtime')
     }
@@ -27,6 +90,7 @@ project(':azure-client-authentication') {
 
 project(':azure-android-client-authentication') {
     apply plugin: 'com.android.library'
+    group = 'com.microsoft.azure'
     dependencies {
         compile project(':client-runtime')
     }
@@ -34,6 +98,8 @@ project(':azure-android-client-authentication') {
 
 project(':codegen-tests') {
     apply plugin: 'java'
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
     dependencies {
         compile project(':client-runtime')
     }
@@ -41,6 +107,8 @@ project(':codegen-tests') {
 
 project(':azure-codegen-tests') {
     apply plugin: 'java'
+    sourceCompatibility = 1.7
+    targetCompatibility = 1.7
     dependencies {
         compile project(':client-runtime')
         compile project(':azure-client-runtime')

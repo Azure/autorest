@@ -105,26 +105,26 @@ public interface AutoRestLongRunningOperationTestService {
 
     /**
      * Gets the LROsOperations object to access its operations.
-     * @return the lROs value.
+     * @return the LROsOperations object.
      */
-    LROsOperations getLROs();
+    LROsOperations getLROsOperations();
 
     /**
      * Gets the LRORetrysOperations object to access its operations.
-     * @return the lRORetrys value.
+     * @return the LRORetrysOperations object.
      */
-    LRORetrysOperations getLRORetrys();
+    LRORetrysOperations getLRORetrysOperations();
 
     /**
      * Gets the LROSADsOperations object to access its operations.
-     * @return the lROSADs value.
+     * @return the LROSADsOperations object.
      */
-    LROSADsOperations getLROSADs();
+    LROSADsOperations getLROSADsOperations();
 
     /**
      * Gets the LROsCustomHeaderOperations object to access its operations.
-     * @return the lROsCustomHeader value.
+     * @return the LROsCustomHeaderOperations object.
      */
-    LROsCustomHeaderOperations getLROsCustomHeader();
+    LROsCustomHeaderOperations getLROsCustomHeaderOperations();
 
 }

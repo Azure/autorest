@@ -102,11 +102,6 @@ namespace Microsoft.Rest.Generator.Java
         
         public override string GetMethodGroupName(string name)
         {
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                return name;
-            }
-            name = GetEscapedReservedName(name, "Operations");
             return PascalCase(name);
         }
 

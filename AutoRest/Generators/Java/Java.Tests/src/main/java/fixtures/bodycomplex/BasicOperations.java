@@ -31,7 +31,7 @@ public interface BasicOperations {
      * The interface defining all the services for BasicOperations to be
      * used by Retrofit to perform actually REST calls.
      */
-    interface BasicService {
+    interface BasicOperationsService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("complex/basic/valid")
         Call<ResponseBody> getValid();

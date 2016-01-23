@@ -77,21 +77,21 @@ public interface AutoRestUrlTestService {
     void setGlobalStringQuery(String globalStringQuery);
 
     /**
-     * Gets the Paths object to access its operations.
-     * @return the paths value.
+     * Gets the PathsOperations object to access its operations.
+     * @return the PathsOperations object.
      */
-    Paths getPaths();
+    PathsOperations getPathsOperations();
 
     /**
-     * Gets the Queries object to access its operations.
-     * @return the queries value.
+     * Gets the QueriesOperations object to access its operations.
+     * @return the QueriesOperations object.
      */
-    Queries getQueries();
+    QueriesOperations getQueriesOperations();
 
     /**
-     * Gets the PathItems object to access its operations.
-     * @return the pathItems value.
+     * Gets the PathItemsOperations object to access its operations.
+     * @return the PathItemsOperations object.
      */
-    PathItems getPathItems();
+    PathItemsOperations getPathItemsOperations();
 
 }

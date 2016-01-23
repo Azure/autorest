@@ -1,18 +1,8 @@
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
-    }
-}
-
 apply plugin: 'java'
-apply plugin: 'com.bmuschko.nexus'
 apply plugin: 'checkstyle'
 
-group = 'com.microsoft.rest'
-version = '0.0.1-SNAPSHOT'
+group = 'com.microsoft.azure'
+version = '1.0.0-SNAPSHOT'
 
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
@@ -21,8 +11,6 @@ tasks.withType(JavaCompile) {
 repositories {
     mavenCentral()
     maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-    maven { url "../../../../ClientRuntimes/Java/client-runtime/build/repo-snapshots/"}
-    maven { url "../../../../ClientRuntimes/Java/azure-client-runtime/build/repo-snapshots/"}
 }
 
 checkstyle {
@@ -35,8 +23,8 @@ checkstyle {
 dependencies {
     compile 'commons-codec:commons-codec:1.10'
     compile 'com.squareup.okhttp:okhttp:2.3.0'
-    compile 'com.microsoft.rest:client-runtime:0.0.2-SNAPSHOT'
-    compile 'com.microsoft.rest:azure-client-runtime:0.0.2-SNAPSHOT'
+    compile 'com.microsoft.rest:client-runtime:1.0.0-SNAPSHOT'
+    compile 'com.microsoft.azure:azure-client-runtime:1.0.0-SNAPSHOT'
     compile 'com.squareup.retrofit:retrofit:1.9.0'
     compile 'joda-time:joda-time:2.8.2'
     compile 'javax.validation:validation-api:1.1.0.Final'
@@ -45,39 +33,15 @@ dependencies {
     testCompile 'commons-io:commons-io:2.4'
 }
 
-modifyPom {
-    setArtifactId 'azure-java-code-gen-tests'
-    project {
-        name 'Microsoft AutoRest Azure Java Code Generator Tests'
-        description 'This is the Basic Acceptance Tests for Azure Java Code Gen.'
-        url 'https://github.com/Azure/autorest'
-
-        scm {
-            url 'scm:git:https://github.com/Azure/AutoRest'
-            connection 'scm:git:git://github.com/Azure/AutoRest.git'
-        }
-
-        licenses {
-            license {
-                name 'The MIT License (MIT)'
-                url 'http://opensource.org/licenses/MIT'
-                distribution 'repo'
-            }
-        }
-
-        developers {
-            developer {
-                id 'microsoft'
-                name 'Microsoft'
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            pom.project {
+                name 'Microsoft AutoRest Azure Java Code Generator Tests'
+                description 'This is the Basic Acceptance Tests for Azure Java Code Gen.'
             }
         }
     }
-}
-
-nexus {
-    sign = true
-    repositoryUrl = "file://$buildDir/repo"
-    snapshotRepositoryUrl = "file://$buildDir/repo-snapshots"
 }
 
 test {

@@ -126,50 +126,50 @@ public interface AutoRestAzureSpecialParametersTestClient {
 
     /**
      * Gets the XMsClientRequestIdOperations object to access its operations.
-     * @return the xMsClientRequestId value.
+     * @return the XMsClientRequestIdOperations object.
      */
-    XMsClientRequestIdOperations getXMsClientRequestId();
+    XMsClientRequestIdOperations getXMsClientRequestIdOperations();
 
     /**
      * Gets the SubscriptionInCredentialsOperations object to access its operations.
-     * @return the subscriptionInCredentials value.
+     * @return the SubscriptionInCredentialsOperations object.
      */
-    SubscriptionInCredentialsOperations getSubscriptionInCredentials();
+    SubscriptionInCredentialsOperations getSubscriptionInCredentialsOperations();
 
     /**
      * Gets the SubscriptionInMethodOperations object to access its operations.
-     * @return the subscriptionInMethod value.
+     * @return the SubscriptionInMethodOperations object.
      */
-    SubscriptionInMethodOperations getSubscriptionInMethod();
+    SubscriptionInMethodOperations getSubscriptionInMethodOperations();
 
     /**
      * Gets the ApiVersionDefaultOperations object to access its operations.
-     * @return the apiVersionDefault value.
+     * @return the ApiVersionDefaultOperations object.
      */
-    ApiVersionDefaultOperations getApiVersionDefault();
+    ApiVersionDefaultOperations getApiVersionDefaultOperations();
 
     /**
      * Gets the ApiVersionLocalOperations object to access its operations.
-     * @return the apiVersionLocal value.
+     * @return the ApiVersionLocalOperations object.
      */
-    ApiVersionLocalOperations getApiVersionLocal();
+    ApiVersionLocalOperations getApiVersionLocalOperations();
 
     /**
      * Gets the SkipUrlEncodingOperations object to access its operations.
-     * @return the skipUrlEncoding value.
+     * @return the SkipUrlEncodingOperations object.
      */
-    SkipUrlEncodingOperations getSkipUrlEncoding();
+    SkipUrlEncodingOperations getSkipUrlEncodingOperations();
 
     /**
      * Gets the OdataOperations object to access its operations.
-     * @return the odata value.
+     * @return the OdataOperations object.
      */
-    OdataOperations getOdata();
+    OdataOperations getOdataOperations();
 
     /**
-     * Gets the HeaderOperationsOperations object to access its operations.
-     * @return the headerOperations value.
+     * Gets the HeaderOperations object to access its operations.
+     * @return the HeaderOperations object.
      */
-    HeaderOperationsOperations getHeaderOperations();
+    HeaderOperations getHeaderOperations();
 
 }

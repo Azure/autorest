@@ -49,9 +49,9 @@ public interface AutoRestSwaggerBATdictionaryService {
     JacksonMapperAdapter getMapperAdapter();
 
     /**
-     * Gets the Dictionary object to access its operations.
-     * @return the dictionary value.
+     * Gets the DictionaryOperations object to access its operations.
+     * @return the DictionaryOperations object.
      */
-    Dictionary getDictionary();
+    DictionaryOperations getDictionaryOperations();
 
 }

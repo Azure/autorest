@@ -47,7 +47,7 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                return JavaCodeNamer.GetServiceName(Name);
+                return JavaCodeNamer.GetServiceName(Name.ToPascalCase());
             }
         }
 

@@ -33,7 +33,7 @@ public final class AutoRestIntegerTestServiceImpl extends ServiceClient implemen
 
     /**
      * Gets the IntOperations object to access its operations.
-     * @return the intOperations value.
+     * @return the IntOperations object.
      */
     public IntOperations getIntOperations() {
         return new IntOperationsImpl(this.retrofitBuilder.build(), this);

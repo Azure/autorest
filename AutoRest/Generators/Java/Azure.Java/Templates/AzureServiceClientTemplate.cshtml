@@ -81,9 +81,9 @@ if(!property.IsReadOnly)
 @EmptyLine
 @:    /**
 @:     * Gets the @(operation.MethodGroupType) object to access its operations.
-@:     * @@return the @(operation.MethodGroupName) value.
+@:     * @@return the @(operation.MethodGroupType) object.
 @:     */
-@:    public @(operation.MethodGroupType) get@(operation.MethodGroupName.ToPascalCase())() {
+@:    public @(operation.MethodGroupType) get@(operation.MethodGroupType)() {
 @:        return new @(operation.MethodGroupType)Impl(this.retrofitBuilder.build(), this);
 @:    }
 }

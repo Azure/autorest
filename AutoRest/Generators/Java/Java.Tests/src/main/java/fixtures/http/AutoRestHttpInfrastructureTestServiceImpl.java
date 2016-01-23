@@ -32,59 +32,59 @@ public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClie
     }
 
     /**
-     * Gets the HttpFailure object to access its operations.
-     * @return the httpFailure value.
+     * Gets the HttpFailureOperations object to access its operations.
+     * @return the HttpFailureOperations object.
      */
-    public HttpFailure getHttpFailure() {
-        return new HttpFailureImpl(this.retrofitBuilder.build(), this);
+    public HttpFailureOperations getHttpFailureOperations() {
+        return new HttpFailureOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
-     * Gets the HttpSuccess object to access its operations.
-     * @return the httpSuccess value.
+     * Gets the HttpSuccessOperations object to access its operations.
+     * @return the HttpSuccessOperations object.
      */
-    public HttpSuccess getHttpSuccess() {
-        return new HttpSuccessImpl(this.retrofitBuilder.build(), this);
+    public HttpSuccessOperations getHttpSuccessOperations() {
+        return new HttpSuccessOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
-     * Gets the HttpRedirects object to access its operations.
-     * @return the httpRedirects value.
+     * Gets the HttpRedirectsOperations object to access its operations.
+     * @return the HttpRedirectsOperations object.
      */
-    public HttpRedirects getHttpRedirects() {
-        return new HttpRedirectsImpl(this.retrofitBuilder.build(), this);
+    public HttpRedirectsOperations getHttpRedirectsOperations() {
+        return new HttpRedirectsOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
-     * Gets the HttpClientFailure object to access its operations.
-     * @return the httpClientFailure value.
+     * Gets the HttpClientFailureOperations object to access its operations.
+     * @return the HttpClientFailureOperations object.
      */
-    public HttpClientFailure getHttpClientFailure() {
-        return new HttpClientFailureImpl(this.retrofitBuilder.build(), this);
+    public HttpClientFailureOperations getHttpClientFailureOperations() {
+        return new HttpClientFailureOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
-     * Gets the HttpServerFailure object to access its operations.
-     * @return the httpServerFailure value.
+     * Gets the HttpServerFailureOperations object to access its operations.
+     * @return the HttpServerFailureOperations object.
      */
-    public HttpServerFailure getHttpServerFailure() {
-        return new HttpServerFailureImpl(this.retrofitBuilder.build(), this);
+    public HttpServerFailureOperations getHttpServerFailureOperations() {
+        return new HttpServerFailureOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
-     * Gets the HttpRetry object to access its operations.
-     * @return the httpRetry value.
+     * Gets the HttpRetryOperations object to access its operations.
+     * @return the HttpRetryOperations object.
      */
-    public HttpRetry getHttpRetry() {
-        return new HttpRetryImpl(this.retrofitBuilder.build(), this);
+    public HttpRetryOperations getHttpRetryOperations() {
+        return new HttpRetryOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**
-     * Gets the MultipleResponses object to access its operations.
-     * @return the multipleResponses value.
+     * Gets the MultipleResponsesOperations object to access its operations.
+     * @return the MultipleResponsesOperations object.
      */
-    public MultipleResponses getMultipleResponses() {
-        return new MultipleResponsesImpl(this.retrofitBuilder.build(), this);
+    public MultipleResponsesOperations getMultipleResponsesOperations() {
+        return new MultipleResponsesOperationsImpl(this.retrofitBuilder.build(), this);
     }
 
     /**

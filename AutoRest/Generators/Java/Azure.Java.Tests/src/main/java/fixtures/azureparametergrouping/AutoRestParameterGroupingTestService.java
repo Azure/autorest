@@ -105,8 +105,8 @@ public interface AutoRestParameterGroupingTestService {
 
     /**
      * Gets the ParameterGroupingOperations object to access its operations.
-     * @return the parameterGrouping value.
+     * @return the ParameterGroupingOperations object.
      */
-    ParameterGroupingOperations getParameterGrouping();
+    ParameterGroupingOperations getParameterGroupingOperations();
 
 }

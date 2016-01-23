@@ -18,7 +18,7 @@ public class HttpFailureTests {
     @Test
     public void getEmptyError() throws Exception {
         try {
-            client.getHttpFailure().getEmptyError();
+            client.getHttpFailureOperations().getEmptyError();
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(400, ex.getResponse().code());

@@ -18,7 +18,6 @@ namespace Microsoft.Rest.Generator.Java.Azure
         public AzureMethodGroupTemplateModel(ServiceClient serviceClient, string methodGroupName)
             : base(serviceClient, methodGroupName)
         {
-            MethodGroupType = MethodGroupName.ToPascalCase() + "Operations";
             // Clear base initialized MethodTemplateModels and re-populate with
             // AzureMethodTemplateModel
             MethodTemplateModels.Clear();

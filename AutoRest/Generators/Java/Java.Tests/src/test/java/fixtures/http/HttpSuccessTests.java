@@ -22,7 +22,7 @@ public class HttpSuccessTests {
 
     @Test
     public void head200() throws Exception {
-        client.getHttpSuccess().head200Async(new ServiceCallback<Void>() {
+        client.getHttpSuccessOperations().head200Async(new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -39,7 +39,7 @@ public class HttpSuccessTests {
 
     @Test
     public void get200() throws Exception {
-        client.getHttpSuccess().get200Async(new ServiceCallback<Boolean>() {
+        client.getHttpSuccessOperations().get200Async(new ServiceCallback<Boolean>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -56,7 +56,7 @@ public class HttpSuccessTests {
 
     @Test
     public void put200() throws Exception {
-        client.getHttpSuccess().put200Async(true, new ServiceCallback<Void>() {
+        client.getHttpSuccessOperations().put200Async(true, new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -73,7 +73,7 @@ public class HttpSuccessTests {
 
     @Test
     public void patch200() throws Exception {
-        client.getHttpSuccess().patch200Async(true, new ServiceCallback<Void>() {
+        client.getHttpSuccessOperations().patch200Async(true, new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -90,7 +90,7 @@ public class HttpSuccessTests {
 
     @Test
     public void post200() throws Exception {
-        client.getHttpSuccess().post200Async(true, new ServiceCallback<Void>() {
+        client.getHttpSuccessOperations().post200Async(true, new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -107,7 +107,7 @@ public class HttpSuccessTests {
 
     @Test
     public void delete200() throws Exception {
-        client.getHttpSuccess().delete200Async(true, new ServiceCallback<Void>() {
+        client.getHttpSuccessOperations().delete200Async(true, new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -124,7 +124,7 @@ public class HttpSuccessTests {
 
     @Test
     public void put201() throws Exception {
-        client.getHttpSuccess().put201Async(true, new ServiceCallback<Void>() {
+        client.getHttpSuccessOperations().put201Async(true, new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -141,7 +141,7 @@ public class HttpSuccessTests {
 
     @Test
     public void post201() throws Exception {
-        client.getHttpSuccess().post201Async(true, new ServiceCallback<Void>() {
+        client.getHttpSuccessOperations().post201Async(true, new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -158,7 +158,7 @@ public class HttpSuccessTests {
 
     @Test
     public void put202() throws Exception {
-        client.getHttpSuccess().put202Async(true, new ServiceCallback<Void>() {
+        client.getHttpSuccessOperations().put202Async(true, new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -175,7 +175,7 @@ public class HttpSuccessTests {
 
     @Test
     public void patch202() throws Exception {
-        client.getHttpSuccess().patch202Async(true, new ServiceCallback<Void>() {
+        client.getHttpSuccessOperations().patch202Async(true, new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -192,7 +192,7 @@ public class HttpSuccessTests {
 
     @Test
     public void post202() throws Exception {
-        client.getHttpSuccess().post202Async(true, new ServiceCallback<Void>() {
+        client.getHttpSuccessOperations().post202Async(true, new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -209,7 +209,7 @@ public class HttpSuccessTests {
 
     @Test
     public void delete202() throws Exception {
-        client.getHttpSuccess().delete202Async(true, new ServiceCallback<Void>() {
+        client.getHttpSuccessOperations().delete202Async(true, new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -226,7 +226,7 @@ public class HttpSuccessTests {
 
     @Test
     public void head204() throws Exception {
-        client.getHttpSuccess().head204Async(new ServiceCallback<Void>() {
+        client.getHttpSuccessOperations().head204Async(new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -243,7 +243,7 @@ public class HttpSuccessTests {
 
     @Test
     public void put204() throws Exception {
-        client.getHttpSuccess().put204Async(true, new ServiceCallback<Void>() {
+        client.getHttpSuccessOperations().put204Async(true, new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -260,7 +260,7 @@ public class HttpSuccessTests {
 
     @Test
     public void patch204() throws Exception {
-        client.getHttpSuccess().patch204Async(true, new ServiceCallback<Void>() {
+        client.getHttpSuccessOperations().patch204Async(true, new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -277,7 +277,7 @@ public class HttpSuccessTests {
 
     @Test
     public void post204() throws Exception {
-        client.getHttpSuccess().post204Async(true, new ServiceCallback<Void>() {
+        client.getHttpSuccessOperations().post204Async(true, new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -294,7 +294,7 @@ public class HttpSuccessTests {
 
     @Test
     public void delete204() throws Exception {
-        client.getHttpSuccess().delete204Async(true, new ServiceCallback<Void>() {
+        client.getHttpSuccessOperations().delete204Async(true, new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
@@ -311,7 +311,7 @@ public class HttpSuccessTests {
 
     @Test
     public void head404() throws Exception {
-        client.getHttpSuccess().head404Async(new ServiceCallback<Void>() {
+        client.getHttpSuccessOperations().head404Async(new ServiceCallback<Void>() {
             @Override
             public void failure(Throwable t) {
                 fail();
