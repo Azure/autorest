@@ -34,13 +34,13 @@ from msrest.exceptions import raise_with_traceback
 
 
 class AzureConfiguration(Configuration):
+    """Azure specific client configuration.
+
+    :param str base_url: REST Service base URL.
+    :param str filepath: Path to an existing config file (optional).
+    """
 
     def __init__(self, base_url, filepath=None):
-        """Azure specific client configuration.
-
-        :param str base_url: REST Service base URL.
-        :param str filepath: Path to an existing config file (optional).
-        """
         super(AzureConfiguration, self).__init__(base_url, filepath)
         self.long_running_operation_timeout = 30
 

@@ -24,7 +24,7 @@
 #
 # --------------------------------------------------------------------------
 
-from distutils.core import setup
+from setuptools import setup
 
 setup(
     name='msrest',
@@ -53,6 +53,6 @@ setup(
         "requests_oauthlib>=0.5.0",
         "isodate>=0.5.4",
         "certifi>=2015.9.6.2",
-        "futures>=3.0.3",
+        "chardet>=2.3.0",
         "enum34>=1.0.4"],
 )

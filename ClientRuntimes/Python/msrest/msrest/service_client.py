@@ -47,16 +47,14 @@ from .exceptions import (
 class ServiceClient(object):
     """REST Service Client.
     Maintains client pipeline and handles all requests and responses.
+
+    :param Configuration config: Service configuration.
+    :param Authentication creds: Authenticated credentials.
     """
 
     _protocols = ['http://', 'https://']
 
     def __init__(self, creds, config):
-        """Create service client.
-
-        :param Configuration config: Service configuration.
-        :param Authentication creds: Authenticated credentials.
-        """
         self.config = config
         self.creds = creds if creds else Authentication()
 
@@ -167,7 +165,7 @@ class ServiceClient(object):
             pass
         return self.send(request, headers, None, files=file_data, **config)
 
-    def send(self, request, headers={}, content=None, **config):
+    def send(self, request, headers=None, content=None, **config):
         """Prepare and send request object according to configuration.
 
         :param ClientRequest request: The request object to be sent.
@@ -178,7 +176,7 @@ class ServiceClient(object):
         session = self.creds.signed_session()
         kwargs = self._configure_session(session, **config)
 
-        request.add_headers(headers)
+        request.add_headers(headers if headers else {})
         if not kwargs.get('files'):
             request.add_content(content)
         try:

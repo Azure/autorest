@@ -70,7 +70,10 @@ class OperationFinished(Exception):
 
 
 class SimpleResource:
-    """An implementation of Python 3 SimpleNamespace"""
+    """An implementation of Python 3 SimpleNamespace.
+    Used to deserialize resource objects from response bodies where
+    no particular object type has been specified.
+    """
 
     def __init__(self, **kwargs):
         self.__dict__.update(kwargs)
@@ -296,13 +299,13 @@ class LongRunningOperationMixin(object):
 
 
 class PostDeleteOperation(LongRunningOperationMixin):
+    """LongRunningOperation object for a POST or DELETE request.
+
+    :param requests.Response response: initial REST call response.
+    :param callable outputs: Function to deserialize operation resource.
+    """
 
     def __init__(self, response, outputs):
-        """LongRunningOperation object for a POST or DELETE request.
-
-        :param requests.Response response: initial REST call response.
-        :param callable outputs: Function to deserialize operation resource.
-        """
         self.method = response.request.method
         self.status = ""
         self.resource = None
@@ -385,13 +388,13 @@ class PostDeleteOperation(LongRunningOperationMixin):
 
 
 class PutPatchOperation(LongRunningOperationMixin):
+    """LongRunningOperation object for a PUT or PATCH request.
+
+    :param requests.Response response: initial REST call response.
+    :param callable outputs: Function to deserialize operation resource.
+    """
 
     def __init__(self, response, outputs):
-        """LongRunningOperation object for a PUT or PATCH request.
-
-        :param requests.Response response: initial REST call response.
-        :param callable outputs: Function to deserialize operation resource.
-        """
         self.status = ""
         self.resource = None
         self.get_outputs = outputs
@@ -469,6 +472,19 @@ class PutPatchOperation(LongRunningOperationMixin):
 
 
 class AzureOperationPoller(object):
+    """Initiates long running operation and polls status in separate
+    thread.
+
+    :param callable send_cmd: The API request to initiate the operation.
+    :param callable update_cmd: The API reuqest to check the status of
+        the operation.
+    :param callable output_cmd: The function to deserialize the resource
+        of the operation.
+    :param int timeout: Time in seconds to wait between status calls,
+        default is 30.
+    :param callable func: Callback function that takes at least one
+        argument, a completed LongRunningOperation (optional).
+    """
 
     operations = {'PUT': PutPatchOperation,
                   'PATCH': PutPatchOperation,
@@ -476,19 +492,6 @@ class AzureOperationPoller(object):
                   'DELETE': PostDeleteOperation}
 
     def __init__(self, send_cmd, output_cmd, update_cmd, timeout=30):
-        """Initiates long running operation and polls status in separate
-        thread.
-
-        :param callable send_cmd: The API request to initiate the operation.
-        :param callable update_cmd: The API reuqest to check the status of
-         the operation.
-        :param callable output_cmd: The function to deserialize the resource
-         of the operation.
-        :param int timeout: Time in seconds to wait between status calls,
-         default is 30.
-        :param callable func: Callback function that takes at least one
-         argument, a completed LongRunningOperation (optional).
-        """
         self._timeout = timeout
         self._response = None
         self._operation = None

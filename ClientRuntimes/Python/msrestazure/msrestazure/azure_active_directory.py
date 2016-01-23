@@ -95,9 +95,9 @@ def _https(uri, *extra):
 class AADMixin(object):
     """Mixin for Authentication object.
     Provides some AAD functionality:
-        - State validation
-        - Token caching and retrieval
-        - Default AAD configuration
+    - State validation
+    - Token caching and retrieval
+    - Default AAD configuration
     """
     _auth_endpoint = "//login.microsoftonline.com"
     _china_auth_endpoint = "//login.chinacloudapi.cn"
@@ -192,29 +192,27 @@ class UserPassCredentials(OAuthTokenAuthentication, AADMixin):
     Headless Auth requires an AAD login (no a Live ID) that already has
     permission to access the resource e.g. an organization account, and
     that 2-factor auth be disabled.
+
+    Optional kwargs may include:
+    - china (bool): Configure auth for China-based service,
+      default is 'False'.
+    - tenant (str): Alternative tenant, default is 'common'.
+    - auth_uri (str): Alternative authentication endpoint.
+    - token_uri (str): Alternative token retrieval endpoint.
+    - resource (str): Alternative authentication resource, default
+      is 'https://management.core.windows.net/'.
+    - verify (bool): Verify secure connection, default is 'True'.
+    - keyring (str): Name of local token cache, default is 'AzureAAD'.
+
+    :param str username: Account username.
+    :param str password: Account password.
+    :param str client_id: Client ID, if not set, Xplat Client ID
+     will be used.
+    :param str secret: Client secret, only if required by server.
     """
 
     def __init__(self, username, password,
                  client_id=None, secret=None, **kwargs):
-        """UserPassCredentials
-
-        Optional kwargs may include:
-            - china (bool): Configure auth for China-based service,
-              default is 'False'.
-            - tenant (str): Alternative tenant, default is 'common'.
-            - auth_uri (str): Alternative authentication endpoint.
-            - token_uri (str): Alternative token retrieval endpoint.
-            - resource (str): Alternative authentication resource, default
-              is 'https://management.core.windows.net/'.
-            - verify (bool): Verify secure connection, default is 'True'.
-            - keyring (str): Name of local token cache, default is 'AzureAAD'.
-
-        :param str username: Account username.
-        :param str password: Account password.
-        :param str client_id: Client ID, if not set, Xplat Client ID
-         will be used.
-        :param str secret: Client secret, only if required by server.
-        """
         if not client_id:
             # Default to Xplat Client ID.
             client_id = '04b07795-8ddb-461a-bbee-02f9e1bf7b46'
@@ -258,24 +256,22 @@ class UserPassCredentials(OAuthTokenAuthentication, AADMixin):
 class ServicePrincipalCredentials(OAuthTokenAuthentication, AADMixin):
     """Credentials object for Service Principle Authentication.
     Authenticates via a Client ID and Secret.
+
+    Optional kwargs may include:
+    - china (bool): Configure auth for China-based service,
+      default is 'False'.
+    - tenant (str): Alternative tenant, default is 'common'.
+    - auth_uri (str): Alternative authentication endpoint.
+    - token_uri (str): Alternative token retrieval endpoint.
+    - resource (str): Alternative authentication resource, default
+      is 'https://management.core.windows.net/'.
+    - verify (bool): Verify secure connection, default is 'True'.
+    - keyring (str): Name of local token cache, default is 'AzureAAD'.
+
+    :param str client_id: Client ID.
+    :param str secret: Client secret.
     """
     def __init__(self, client_id, secret, **kwargs):
-        """ServicePrincipalCredentials
-
-        Optional kwargs may include:
-            - china (bool): Configure auth for China-based service,
-              default is 'False'.
-            - tenant (str): Alternative tenant, default is 'common'.
-            - auth_uri (str): Alternative authentication endpoint.
-            - token_uri (str): Alternative token retrieval endpoint.
-            - resource (str): Alternative authentication resource, default
-              is 'https://management.core.windows.net/'.
-            - verify (bool): Verify secure connection, default is 'True'.
-            - keyring (str): Name of local token cache, default is 'AzureAAD'.
-
-        :param str client_id: Client ID.
-        :param str secret: Client secret.
-        """
         super(ServicePrincipalCredentials, self).__init__(client_id, None)
         self._configure(**kwargs)
 
@@ -311,25 +307,23 @@ class ServicePrincipalCredentials(OAuthTokenAuthentication, AADMixin):
 class InteractiveCredentials(OAuthTokenAuthentication, AADMixin):
     """Credentials object for Interactive/Web App Authentication.
     Requires that an AAD Client be configured with a redirect URL.
+
+    Optional kwargs may include:
+    - china (bool): Configure auth for China-based service,
+      default is 'False'.
+    - tenant (str): Alternative tenant, default is 'common'.
+    - auth_uri (str): Alternative authentication endpoint.
+    - token_uri (str): Alternative token retrieval endpoint.
+    - resource (str): Alternative authentication resource, default
+      is 'https://management.core.windows.net/'.
+    - verify (bool): Verify secure connection, default is 'True'.
+    - keyring (str): Name of local token cache, default is 'AzureAAD'.
+
+    :param str client_id: Client ID.
+    :param str redirect: Redirect URL.
     """
 
     def __init__(self, client_id, redirect, **kwargs):
-        """InteractiveCredentials
-
-        Optional kwargs may include:
-            - china (bool): Configure auth for China-based service,
-              default is 'False'.
-            - tenant (str): Alternative tenant, default is 'common'.
-            - auth_uri (str): Alternative authentication endpoint.
-            - token_uri (str): Alternative token retrieval endpoint.
-            - resource (str): Alternative authentication resource, default
-              is 'https://management.core.windows.net/'.
-            - verify (bool): Verify secure connection, default is 'True'.
-            - keyring (str): Name of local token cache, default is 'AzureAAD'.
-
-        :param str client_id: Client ID.
-        :param str redirect: Redirect URL.
-        """
         super(InteractiveCredentials, self).__init__(client_id, None)
         self._configure(**kwargs)
 
@@ -365,9 +359,9 @@ class InteractiveCredentials(OAuthTokenAuthentication, AADMixin):
          is 'False'.
         :param additional_args: Set and additional kwargs for requrired AAD
          configuration: msdn.microsoft.com/en-us/library/azure/dn645542.aspx
-         :rtype: Tuple
-         :returns: The URL for authentication (str), and state code that will
-          be verified in the response (str).
+        :rtype: Tuple
+        :returns: The URL for authentication (str), and state code that will
+         be verified in the response (str).
         """
         if msa:
             additional_args['domain_hint'] = 'live.com'
