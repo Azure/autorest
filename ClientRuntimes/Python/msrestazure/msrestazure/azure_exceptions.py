@@ -32,6 +32,9 @@ from msrest.exceptions import DeserializationError
 
 
 class CloudErrorData(object):
+    """Cloud Error Data object, deserialized from error data returned
+    during a failed REST API call.
+    """
 
     _attribute_map = {
         'error': {'key': 'code', 'type': 'str'},
@@ -40,9 +43,6 @@ class CloudErrorData(object):
         }
 
     def __init__(self, *args, **kwargs):
-        """Cloud Error Data object, deserialized from error data returned
-        during a failed REST API call.
-        """
         self.error = None
         self._message = None
         self.request_id = None
@@ -85,15 +85,15 @@ class CloudErrorData(object):
 
 
 class CloudError(ClientException):
+    """ClientError, exception raised for failed Azure REST call.
+    Will attempt to deserialize response into meaningful error
+    data.
+
+    :param requests.Response response: Response object.
+    :param str error: Optional error message.
+    """
 
     def __init__(self, response, error=None, *args):
-        """ClientError, exception raised for failed Azure REST call.
-        Will attempt to deserialize response into meaningful error
-        data.
-
-        :param requests.Response response: Response object.
-        :param str error: Optional error message.
-        """
         deserialize = Deserializer()
         self.error = None
         self.message = None

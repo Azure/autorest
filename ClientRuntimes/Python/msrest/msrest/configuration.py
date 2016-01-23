@@ -42,13 +42,13 @@ from .pipeline import (
 
 
 class Configuration(object):
+    """Client configuration.
+
+    :param str baseurl: REST API base URL.
+    :param str filepath: Path to existing config file (optional).
+    """
 
     def __init__(self, base_url, filepath=None):
-        """Client configuration.
-
-        :param str baseurl: REST API base URL.
-        :param str filepath: Path to existing config file (optional).
-        """
         # Service
         self.base_url = base_url
 
