@@ -1,4 +1,4 @@
-##2016.01.26 Version 0.14.0
+##2016.01.25 Version 0.14.0
 * Implemented FormData support including File upload and download in C# and NodeJS (#562)
 * Added support for paths with query parameters via x-ms-paths extension (#569)
 * Published [Microsoft.Rest.ClientRuntime 2.0.0](https://www.nuget.org/packages/Microsoft.Rest.ClientRuntime/2.0.0), [Microsoft.Rest.ClientRuntime.Azure 3.0.0](https://www.nuget.org/packages/Microsoft.Rest.ClientRuntime.Azure/3.0.0), [ms-rest 1.8.0] (https://www.npmjs.com/package/ms-rest), and [ms-rest-azure 1.8.0](https://www.npmjs.com/package/ms-rest-azure)
