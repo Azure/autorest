@@ -28,7 +28,7 @@
     },
     "net45": {
       "dependencies": {
-        "Microsoft.IdentityModel.Clients.ActiveDirectory": "2.18.206251556"
+        "Microsoft.IdentityModel.Clients.ActiveDirectory": "[2.18.206251556]"
       }
     }
   }
