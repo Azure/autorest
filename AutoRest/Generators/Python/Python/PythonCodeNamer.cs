@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Microsoft.Rest.Generator.Python.Properties;
 
 namespace Microsoft.Rest.Generator.Python
 {
@@ -112,6 +113,21 @@ namespace Microsoft.Rest.Generator.Python
             //most likely means one single word. 
             int nextNonUpperCaseCharLocation = m.Index + matchedStr.Length;
             return matchedStr.Length > 2 && nextNonUpperCaseCharLocation < name.Length && char.IsLetter(name[nextNonUpperCaseCharLocation]);
+        }
+
+        /// <summary>
+        /// Removes invalid characters from the name. Everything but alpha-numeral, underscore.
+        /// </summary>
+        /// <param name="name">String to parse.</param>
+        /// <returns>Name with invalid characters removed.</returns>
+        public static string RemoveInvalidPythonCharacters(string name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, Resources.InvalidIdentifierName, name));
+            }
+
+            return GetValidName(name.Replace('-', '_'), '_');
         }
 
         private string GetValidPythonName(string name, string padString)

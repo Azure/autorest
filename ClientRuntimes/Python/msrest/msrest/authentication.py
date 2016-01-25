@@ -48,14 +48,13 @@ class Authentication(object):
 
 
 class BasicAuthentication(Authentication):
-    """Implmentation of Basic Authentication."""
+    """Implmentation of Basic Authentication.
+
+    :param str username: Authentication username.
+    :param str password: Authentication password.
+    """
 
     def __init__(self, username, password):
-        """Basic Authentication.
-
-        :param str username: Authentication username.
-        :param str password: Authentication password.
-        """
         self.scheme = 'Basic'
         self.username = username
         self.password = password
@@ -74,13 +73,11 @@ class BasicAuthentication(Authentication):
 class BasicTokenAuthentication(Authentication):
     """Simple Token Authentication.
     Does not adhere to OAuth, simply adds provided token as a header.
+
+    :param dict token: Authentication token, must have 'access_token' key.
     """
 
     def __init__(self, token):
-        """Token Authentication.
-
-        :param dict token: Authentication token, must have 'access_token' key.
-        """
         self.scheme = 'Bearer'
         self.token = token
 
@@ -98,15 +95,13 @@ class BasicTokenAuthentication(Authentication):
 
 class OAuthTokenAuthentication(Authentication):
     """OAuth Token Authentication.
-    Does not adhere to OAuth, simply adds provided token as a header.
+    Requires that supplied token contains an expires_in field.
+
+    :param str client_id: Account Client ID.
+    :param dict token: OAuth2 token.
     """
 
     def __init__(self, client_id, token):
-        """Basic Authentication.
-
-        :param str client_id: Account Client ID.
-        :param dict token: OAuth2 token.
-        """
         self.scheme = 'Bearer'
         self.id = client_id
         self.token = token

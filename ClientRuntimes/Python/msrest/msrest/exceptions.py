@@ -49,9 +49,9 @@ def raise_with_traceback(exception, message="", *args):
 
 
 class ClientException(Exception):
+    """Base exception for all Client Runtime exceptions."""
 
     def __init__(self, message, inner_exception=None, *args):
-        """Base exception for all Client Runtime exceptions."""
         self.inner_exception = inner_exception
         logger.LOGGER.debug(message)
         super(ClientException, self).__init__(message, *args)
@@ -83,21 +83,20 @@ class AuthenticationError(ClientException):
 
 
 class HttpOperationError(ClientException):
-    """Client request failed due to server-specificed HTTP operation error."""
+    """Client request failed due to server-specificed HTTP operation error.
+    Attempts to deserialize response into specific error object.
+
+    :param Deserializer deserialize: Deserializer with data on custom
+     error objects.
+    :param requests.Response response: Server response
+    :param str resp_type: Objects type to deserialize response.
+    :param args: Additional args to pass to exception object.
+    """
 
     def __str__(self):
         return str(self.message)
 
     def __init__(self, deserialize, response, resp_type=None, *args):
-        """HTTP Operation Error.
-        Attempts to deserialize response into specific error object.
-
-        :param Deserializer deserialize: Deserializer with data on custom
-         error objects.
-        :param requests.Response response: Server response
-        :param str resp_type: Objects type to deserialize response.
-        :param args: Additional args to pass to exception object.
-        """
         self.error = None
         self.message = None
         self.response = response

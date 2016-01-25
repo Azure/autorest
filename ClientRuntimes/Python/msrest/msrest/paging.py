@@ -34,16 +34,15 @@ from .pipeline import ClientRawResponse
 
 
 class Paged(object):
-    """A container for paged REST responses."""
+    """A container for paged REST responses.
+
+    :param requests.Response response: server response object.
+    :param callable command: Function to retrieve the next page of items.
+    :param dict classes: A dictionary of class dependencies for
+     deserialization.
+    """
 
     def __init__(self, command, classes, raw_headers=None):
-        """Paged response.
-
-        :param requests.Response response: server response object.
-        :param callable command: Function to retrieve the next page of items.
-        :param dict classes: A dictionary of class dependencies for
-         deserialization.
-        """
         self.next_link = ""
         self.current_page = []
         self._derserializer = Deserializer(classes)

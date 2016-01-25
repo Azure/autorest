@@ -50,7 +50,7 @@ namespace Microsoft.Rest.Generator
                 throw ErrorManager.CreateError(exception, Resources.ErrorGeneratingClientModel, exception.Message);
             }
             CodeGenerator codeGenerator = ExtensionsLoader.GetCodeGenerator(settings);
-            settings.Validate(codeGenerator);
+            settings.Validate();
             try
             {
                 codeGenerator.NormalizeClientModel(serviceClient);

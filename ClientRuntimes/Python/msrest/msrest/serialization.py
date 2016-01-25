@@ -132,6 +132,7 @@ class Model(object):
 
 
 class Serializer(object):
+    """Request object model serializer."""
 
     basic_types = {str: 'str', int: 'int', bool: 'bool', float: 'float'}
     days = {0: "Mon", 1: "Tue", 2: "Wed", 3: "Thu",
@@ -140,7 +141,6 @@ class Serializer(object):
               7: "Jul", 8: "Aug", 9: "Sep", 10: "Oct", 11: "Nov", 12: "Dec"}
 
     def __init__(self):
-        """Serializer."""
         self.serialize_type = {
             'iso-8601': Serializer.serialize_iso,
             'rfc-1123': Serializer.serialize_rfc,
@@ -551,6 +551,11 @@ class Serializer(object):
 
 
 class Deserializer(object):
+    """Response object model deserializer.
+
+    :param dict classes: Class type dictionary for deserializing
+     complex types.
+    """
 
     basic_types = {str: 'str', int: 'int', bool: 'bool', float: 'float'}
     valid_date = re.compile(
@@ -558,11 +563,6 @@ class Deserializer(object):
         '\.?\d*Z?[-+]?[\d{2}]?:?[\d{2}]?')
 
     def __init__(self, classes={}):
-        """Deserializer.
-
-        :param dict classes: Class type dictionary for deserializing
-         complex types.
-        """
         self.deserialize_type = {
             'iso-8601': Deserializer.deserialize_iso,
             'rfc-1123': Deserializer.deserialize_rfc,

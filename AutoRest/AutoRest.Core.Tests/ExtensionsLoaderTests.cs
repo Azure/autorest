@@ -40,7 +40,7 @@ namespace Microsoft.Rest.Generator.Test
                 OutputDirectory = "X:\\Output"
             };
             CodeGenerator language = ExtensionsLoader.GetCodeGenerator(settings);
-            settings.Validate(language);
+            settings.Validate();
 
             Assert.Equal("NodeJS", language.Name);
         }

@@ -588,7 +588,7 @@ namespace Microsoft.Rest.Generator.Azure
             }
             
             string clientRequestIdName = "x-ms-client-request-id";
-            foreach (Parameter parameter in method.LogicalParameters)
+            foreach (Parameter parameter in method.Parameters)
             {
                 if (parameter.Extensions.ContainsKey(ClientRequestIdExtension))
                 {

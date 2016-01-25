@@ -42,7 +42,6 @@ class ClientHTTPAdapter(requests.adapters.HTTPAdapter):
     """
 
     def __init__(self, config):
-
         self._log = logging.getLogger(config.log_name)
         self._client_hooks = {
             'request': ClientPipelineHook(),
@@ -127,13 +126,12 @@ class ClientHTTPAdapter(requests.adapters.HTTPAdapter):
 
 
 class ClientPipelineHook(object):
-    """Pipeline hook to wrap a specific event."""
+    """Pipeline hook to wrap a specific event.
+
+    :param bool overwrite: Whether to overwrite the original event.
+    """
 
     def __init__(self, overwrite=False):
-        """Pipeline event hook.
-
-        :param bool overwrite: Whether to overwrite the original event.
-        """
         self.precalls = []
         self.postcalls = []
         self.overwrite_call = overwrite
@@ -211,14 +209,12 @@ class ClientRawResponse(object):
     This allows for additional data to be gathereded from the response,
     for example deserialized headers.
     It also allows the raw response object to be passed back to the user.
+
+    :param output: Deserialized response object.
+    :param response: Raw response object.
     """
 
     def __init__(self, output, response):
-        """Client raw response.
-
-        :param output: Deserialized response object.
-        :param response: Raw response object.
-        """
         self.response = response
         self.output = output
         self.headers = {}
@@ -237,13 +233,12 @@ class ClientRawResponse(object):
 
 
 class ClientRetry(Retry):
-    """Wrapper for urllib3 Retry object."""
+    """Wrapper for urllib3 Retry object.
+
+    :param str log_name: Name of the client session logger.
+    """
 
     def __init__(self, log_name=None, **kwargs):
-        """Retry policy.
-
-        :param str log_name: Name of the client session logger.
-        """
         self.retry_cookie = None
         self._log = logging.getLogger(log_name)
 
@@ -273,16 +268,15 @@ class ClientRetry(Retry):
 
 
 class ClientRetryPolicy(object):
-    """Retry configuration settings."""
+    """Retry configuration settings.
+    Container for retry policy object.
+
+    :param str log_name: Name of the client session logger.
+    """
 
     safe_codes = [i for i in range(500) if i != 408] + [501, 505]
 
     def __init__(self, log_name):
-        """Retry configuration.
-        Container for retry policy object.
-
-        :param str log_name: Name of the client session logger.
-        """
         self._log = logging.getLogger(log_name)
         self.policy = ClientRetry(log_name)
         self.policy.total = 3
@@ -335,13 +329,12 @@ class ClientRetryPolicy(object):
 
 
 class ClientRedirectPolicy(object):
-    """Redirect configuration settings."""
+    """Redirect configuration settings.
+
+    :param str log_name: Name of the client session logger.
+    """
 
     def __init__(self, log_name):
-        """Redirect configuration.
-
-        :param str log_name: Name of the client session logger.
-        """
         self._log = logging.getLogger(log_name)
         self.allow = True
         self.max_redirects = 30
@@ -365,15 +358,14 @@ class ClientRedirectPolicy(object):
 
 
 class ClientProxies(object):
-    """Proxy configuration settings."""
+    """Proxy configuration settings.
+    Proxies can also be configured using HTTP_PROXY and HTTPS_PROXY
+    environment variables, in which case set use_env_settings to True.
+
+    :param str log_name: Name of the client session logger.
+    """
 
     def __init__(self, log_name):
-        """Proxy configuration.
-        Proxies can also be configured using HTTP_PROXY and HTTPS_PROXY
-        environment variables, in which case set use_env_settings to True.
-
-        :param str log_name: Name of the client session logger.
-        """
         self._log = logging.getLogger(log_name)
         self.proxies = {}
         self.use_env_settings = True
@@ -400,13 +392,12 @@ class ClientProxies(object):
 
 
 class ClientConnection(object):
-    """Request connection configuration settings."""
+    """Request connection configuration settings.
+
+    :param str log_name: Name of the client session logger.
+    """
 
     def __init__(self, log_name):
-        """Connection configuration.
-
-        :param str log_name: Name of the client session logger.
-        """
         self._log = logging.getLogger(log_name)
         self.timeout = 100
         self.verify = True

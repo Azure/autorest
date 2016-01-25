@@ -36,6 +36,9 @@ namespace Microsoft.Rest.Generator.Python
             get { return "Python for Http Client Libraries"; }
         }
 
+        [SettingsInfo("The SDK version for generated setup.py.")]
+        public string Version { get; set; }
+
         public override string UsageInstructions
         {
             get
@@ -48,19 +51,6 @@ namespace Microsoft.Rest.Generator.Python
         public override string ImplementationFileExtension
         {
             get { return ".py"; }
-        }
-
-        /// <summary>
-        /// Check the customized setting name is valid.
-        /// </summary>
-        /// <param name="settingName">the setting name</param>
-        /// <returns></returns>
-        public override bool IsSettingSupported(string settingName)
-        {
-            if (settingName == "Version")
-                return true;
-
-            return false;
         }
 
         /// <summary>
@@ -103,9 +93,9 @@ namespace Microsoft.Rest.Generator.Python
         {
             var serviceClientTemplateModel = new ServiceClientTemplateModel(serviceClient);
 
-            if (Settings.CustomSettings.ContainsKey("Version"))
+            if (!string.IsNullOrWhiteSpace(Version))
             {
-                serviceClientTemplateModel.Version = Settings.CustomSettings["Version"];
+                serviceClientTemplateModel.Version = Version;
             }
 
             // Service client
