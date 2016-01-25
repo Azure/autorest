@@ -70,7 +70,7 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The {0} npm package is required to execute the generated code..
+        ///   Looks up a localized string similar to The {0} or higher npm package is required to execute the generated code..
         /// </summary>
         internal static string UsageInformation {
             get {
