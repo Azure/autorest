@@ -121,6 +121,6 @@
     <value>{0} is not a supported Type.</value>
   </data>
   <data name="UsageInformation" xml:space="preserve">
-    <value>The {0} npm package is required to execute the generated code.</value>
+    <value>The {0} or higher npm package is required to execute the generated code.</value>
   </data>
 </root>
