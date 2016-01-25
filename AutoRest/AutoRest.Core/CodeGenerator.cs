@@ -52,17 +52,6 @@ namespace Microsoft.Rest.Generator
         public bool IsSingleFileGenerationSupported { get; set; }
 
         /// <summary>
-        /// Check the customized setting name is valid.
-        /// </summary>
-        /// <param name="settingName">the setting name</param>
-        /// <returns></returns>
-        public virtual bool IsSettingSupported(string settingName)
-        {
-            // Don't support any customized setting
-            return false;
-        }
-
-        /// <summary>
         /// Normalizes service model by updating names and types to be language specific.
         /// </summary>
         /// <param name="serviceClient"></param>

@@ -503,7 +503,7 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             var modeler = ExtensionsLoader.GetModeler(settings);
             var client = modeler.Build();
             var codeGenerator = ExtensionsLoader.GetCodeGenerator(settings) as CSharpCodeGenerator;
-            settings.Validate(codeGenerator);
+            settings.Validate();
 
             Assert.Equal("MIT", settings.Header);
             Assert.Equal(true, codeGenerator.InternalConstructors);

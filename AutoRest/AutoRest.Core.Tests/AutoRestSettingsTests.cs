@@ -93,7 +93,7 @@ namespace Microsoft.Rest.Generator.Test
             try
             {
                 var codeGenerator = new SampleCodeGenerator(settings);
-                settings.Validate(codeGenerator);
+                settings.Validate();
                 Assert.True(false);
             }
             catch (CodeGenerationException e)
