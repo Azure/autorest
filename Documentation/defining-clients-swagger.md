@@ -43,27 +43,15 @@ Generates C# client model type:
 ```csharp
 public partial class Pet
 {
-    private int? _age;
+    /// <summary>
+    /// Optional.
+    /// </summary>
+    public int? Age { get; set; }
 
     /// <summary>
     /// Optional.
     /// </summary>
-    public int? Age
-    {
-        get { return this._age; }
-        set { this._age = value; }
-    }
-
-    private string _name;
-
-    /// <summary>
-    /// Optional.
-    /// </summary>
-    public string Name
-    {
-        get { return this._name; }
-        set { this._name = value; }
-    }
+    public string Name { get; set; }
 
     /// <summary>
     /// Initializes a new instance of the Pet class.
@@ -112,49 +100,25 @@ Generates C# client model type:
 ```csharp
 public partial class Pet
 {
-    private int? _age;
+    /// <summary>
+    /// Optional.
+    /// </summary>
+    public int? Age { get; set; }
 
     /// <summary>
     /// Optional.
     /// </summary>
-    public int? Age
-    {
-        get { return this._age; }
-        set { this._age = value; }
-    }
-
-    private DateTimeOffset? _birthday;
+    public DateTimeOffset? Birthday { get; set; }
 
     /// <summary>
     /// Optional.
     /// </summary>
-    public DateTimeOffset? Birthday
-    {
-        get { return this._birthday; }
-        set { this._birthday = value; }
-    }
-
-    private byte[] _name;
+    public byte[] Name { get; set; }
 
     /// <summary>
     /// Optional.
     /// </summary>
-    public byte[] Name
-    {
-        get { return this._name; }
-        set { this._name = value; }
-    }
-
-    private long? _number;
-
-    /// <summary>
-    /// Optional.
-    /// </summary>
-    public long? Number
-    {
-        get { return this._number; }
-        set { this._number = value; }
-    }
+    public long? Number { get; set; }
 
     /// <summary>
     /// Initializes a new instance of the Pet class.
@@ -184,23 +148,16 @@ Generates C# client model type
 ```csharp
 public partial class Pet
 {
-    private IList<string> _names;
-
     /// <summary>
     /// Optional.
     /// </summary>
-    public IList<string> Names
-    {
-        get { return this._names; }
-        set { this._names = value; }
-    }
+    public IList<string> Names { get; set; }
 
     /// <summary>
     /// Initializes a new instance of the Pet class.
     /// </summary>
     public Pet()
     {
-        this.Names = new LazyList<string>();
     }
 }
 ```
@@ -218,23 +175,48 @@ The following definition
 ```
 will generate C# client library
 ```csharp
-public static partial class StringDictionary
+public partial class Pet
 {
     /// <summary>
-    /// Deserialize the object
+    /// Optional.
     /// </summary>
-    public static IDictionary<string, string> DeserializeJson(JToken inputObject)
+    public IDictionary<string, string> StringDictionary { get; set; }
+
+    /// <summary>
+    /// Initializes a new instance of the Pet class.
+    /// </summary>
+    public Pet()
     {
-        IDictionary<string, string> deserializedObject = new Dictionary<string, string>();
-        foreach (JProperty property in inputObject)
-        {
-            deserializedObject.Add(((string)property.Name), ((string)property.Value));
-        }
-        return deserializedObject;
     }
 }
 ```
-In the example for Sequences, the `Pet` is a POCO model while in this example the `StringDictionary` only generates a static class helper for deserialization. A model type is generated if the corresponding Swagger schema is of type 'object' or has one or more 'properties'. A static helper class is generated if the corresponding Swagger schema specifies a primitive type or 'array'. This rule applies to all schemas in both parameters and responses.
+
+Swagger and AutoRest also support Dictionary in Dictionary and Array in Dictionary. For example
+```json
+"additionalProperties": {
+   "type": "object",
+   "additionalProperties": {
+     "type": "string"
+   }
+}
+```
+becomes
+```csharp
+public partial class Pet
+{
+    /// <summary>
+    /// Optional.
+    /// </summary>
+    public IDictionary<string, IDictionary<string, string>> CompositeDictionary { get; set; }
+
+    /// <summary>
+    /// Initializes a new instance of the Pet class.
+    /// </summary>
+    public Pet()
+    {
+    }
+}
+```
 
 ### Inheritance and Polymorphism
 #### Inheritance
@@ -261,121 +243,60 @@ AutoRest builds inheritance between types if an `allOf` field is specified in a 
   }
 }
 ```
+
 will generate C# model types
+
 ```csharp
 public partial class Cat : Pet
 {
-    private string _color;
-
     /// <summary>
-    /// Optional. cat color
+    /// Initializes a new instance of the Cat class.
     /// </summary>
-    public string Color
-    {
-        get { return this._color; }
-        set { this._color = value; }
-    }
+    public Cat() { }
 
     /// <summary>
     /// Initializes a new instance of the Cat class.
     /// </summary>
-    public Cat()
+    public Cat(int? id = default(int?), string name = default(string), string color = default(string))
+        : base(id, name)
     {
+        Color = color;
     }
 
     /// <summary>
-    /// Serialize the object
     /// </summary>
-    /// <returns>
-    /// Returns the json model for the type Cat
-    /// </returns>
-    public override JToken SerializeJson(JToken outputObject)
-    {
-        outputObject = base.SerializeJson(outputObject);
-        if (outputObject == null)
-        {
-            outputObject = new JObject();
-        }
-        if (this.Color != null)
-        {
-            outputObject["color"] = this.Color;
-        }
-        return outputObject;
-    }
-
-    /// <summary>
-    /// Deserialize the object
-    /// </summary>
-    public override void DeserializeJson(JToken inputObject)
-    {
-        base.DeserializeJson(inputObject);
-        if (inputObject != null && inputObject.Type != JTokenType.Null)
-        {
-            JToken colorValue = inputObject["color"];
-            if (colorValue != null && colorValue.Type != JTokenType.Null)
-            {
-                this.Color = ((string)colorValue);
-            }
-        }
-    }
+    [JsonProperty(PropertyName = "color")]
+    public string Color { get; set; }
 }
 
 public partial class Pet
 {
-    private string _name;
-
     /// <summary>
-    /// Optional.
+    /// Initializes a new instance of the Pet class.
     /// </summary>
-    public string Name
-    {
-        get { return this._name; }
-        set { this._name = value; }
-    }
+    public Pet() { }
 
     /// <summary>
     /// Initializes a new instance of the Pet class.
     /// </summary>
-    public Pet()
+    public Pet(int? id = default(int?), string name = default(string))
     {
+        Id = id;
+        Name = name;
     }
 
     /// <summary>
-    /// Serialize the object
     /// </summary>
-    /// <returns>
-    /// Returns the json model for the type Pet
-    /// </returns>
-    public virtual JToken SerializeJson(JToken outputObject)
-    {
-        if (outputObject == null)
-        {
-            outputObject = new JObject();
-        }
-        if (this.Name != null)
-        {
-            outputObject["name"] = this.Name;
-        }
-        return outputObject;
-    }
+    [JsonProperty(PropertyName = "id")]
+    public int? Id { get; set; }
 
     /// <summary>
-    /// Deserialize the object
     /// </summary>
-    public virtual void DeserializeJson(JToken inputObject)
-    {
-        if (inputObject != null && inputObject.Type != JTokenType.Null)
-        {
-            JToken nameValue = inputObject["name"];
-            if (nameValue != null && nameValue.Type != JTokenType.Null)
-            {
-                this.Name = ((string)nameValue);
-            }
-        }
-    }
+    [JsonProperty(PropertyName = "name")]
+    public string Name { get; set; }
+
 }
 ```
-In `Cat`'s serialization and deserialization methods, `Pet`'s corresponding methods are called first to build all the properties of `Pet`.
 
 #### Polymorphism
 To describe polymorphic inheritance between types, Swagger uses an extra "discriminator" field to indicate the exact serialization of the object on the wire. To make a set of classes polymorphic, use 'allOf' with a schema reference to indicate inheritance from a base schema and a discriminator field to the base schema. In the example above, adding a discriminator field named `objectType` to `Pet` will make the genereated set of classes polymorphic:
@@ -395,61 +316,23 @@ To describe polymorphic inheritance between types, Swagger uses an extra "discri
   }
 }
 ```
-The generated models in C# code are nearly identical, but the base serialization and deserialization methods are changed as follows:
+The generated models in C# code are nearly identical, with `objectType` property excluded and a special `JsonConverter` added in the client `Initialize` method:
+
 ```csharp
-public async Task<HttpOperationResponse<Pet>> GetPolymorphicPetsWithOperationResponseAsync(CancellationToken cancellationToken)
+public partial class MyClient : ServiceClient<AutoRestComplexTestService>, IAutoRestComplexTestService
 {
-
-............
-
-	// Serialize Request
-	string requestContent = null;
-	JToken requestDoc = petCreateOrUpdateParameter.SerializeJson(null);
-	if (petCreateOrUpdateParameter is Cat)
-	{
-	    requestDoc["ObjectType"] = "Cat";
-	}
-	else if (petCreateOrUpdateParameter is Dog)
-	{
-	    requestDoc["ObjectType"] = "Dog";
-	}
-	else
-	{
-	    requestDoc["ObjectType"] = "Pet";
-	}
-
-............
-
-	// Deserialize Response
-	if (statusCode == HttpStatusCode.OK)
-	{
-	    Pet resultModel = new Pet();
-	    JToken responseDoc = null;
-	    if (string.IsNullOrEmpty(responseContent) == false)
-	    {
-	        responseDoc = JToken.Parse(responseContent);
-	    }
-	    if (responseDoc != null)
-	    {
-	        string typeName = ((string)responseDoc["ObjectType"]);
-	        if (typeName == "Cat")
-	        {
-	            resultModel = new Cat();
-	        }
-	        else if (typeName == "Dog")
-	        {
-	            resultModel = new Dog();
-	        }
-	        else
-	        {
-	            resultModel = new Pet();
-	        }
-	        resultModel.DeserializeJson(responseDoc);
-	    }
-	    result.Body = resultModel;
-	}
-
-............
+    ...
+    
+    /// <summary>
+    /// Initializes client properties.
+    /// </summary>
+    private void Initialize()
+    {
+        ...
+        SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<Pet>("objectType"));
+        DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<Pet>("objectType"));
+    } 
+}
 ```
 
 ### Type Name Generation
@@ -601,7 +484,7 @@ Parameters in the 'path' or 'body' are **always** required. Parameters may also 
 ```
 Generates C# client side method of
 ```csharp
-public async Task<HttpOperationResponse<Product>> ListWithOperationResponseAsync(int subscriptionId, string resourceGroupName, int? apiVersion, CancellationToken cancellationToken)
+public async Task<HttpOperationResponse<Product>> ListWithOperationResponseAsync(int? subscriptionId, string resourceGroupName, int? apiVersion, CancellationToken cancellationToken)
 {
     // Validate
     if (resourceGroupName == null)
@@ -610,7 +493,6 @@ public async Task<HttpOperationResponse<Product>> ListWithOperationResponseAsync
     }
 ............
 ```
-where a non-nullable type is changed into its nullable wrapper if the corresponding parameter is optional and a validation is added if a nullable type is marked as required.
 
 > Note that parameters that have field `in` as path are always required and the `required` field will be ignored.
 
@@ -672,25 +554,32 @@ together with its definition
 ```
 Generates the following error handling code:
 ```csharp
-if (statusCode != HttpStatusCode.OK) // and more if more acceptable status codes
+if ((int)_statusCode != 200)
 {
-    Error errorModel = new Error();
-    JToken responseDoc = null;
-    if (string.IsNullOrEmpty(responseContent) == false)
+    var ex = new ErrorException(string.Format("Operation returned an invalid status code '{0}'", _statusCode));
+    try
     {
-        responseDoc = JToken.Parse(responseContent);
+        _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+        Error _errorBody = SafeJsonConvert.DeserializeObject<Error>(_responseContent, this.Client.DeserializationSettings);
+        if (_errorBody != null)
+        {
+            ex.Body = _errorBody;
+        }
     }
-    if (responseDoc != null)
+    catch (JsonException)
     {
-        errorModel.DeserializeJson(responseDoc);
+        // Ignore the exception
     }
-    HttpOperationException<Error> ex = new HttpOperationException<Error>();
-    ex.Request = httpRequest;
-    ex.Response = httpResponse;
-    ex.Body = errorModel;
-    if (shouldTrace)
+    ex.Request = new HttpRequestMessageWrapper(_httpRequest, _requestContent);
+    ex.Response = new HttpResponseMessageWrapper(_httpResponse, _responseContent);
+    if (_shouldTrace)
     {
-        ServiceClientTracing.Error(invocationId, ex);
+        ServiceClientTracing.Error(_invocationId, ex);
+    }
+    _httpRequest.Dispose();
+    if (_httpResponse != null)
+    {
+        _httpResponse.Dispose();
     }
     throw ex;
 }
