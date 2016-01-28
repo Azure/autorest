@@ -16,6 +16,11 @@ from . import models
 
 
 class AutoRestDateTestServiceConfiguration(Configuration):
+    """Configuration for AutoRestDateTestService
+
+    :param str base_url: Service URL
+    :param str filepath: Existing config
+    """
 
     def __init__(
             self, base_url=None, filepath=None):
@@ -29,6 +34,11 @@ class AutoRestDateTestServiceConfiguration(Configuration):
 
 
 class AutoRestDateTestService(object):
+    """Test Infrastructure for AutoRest
+
+    :param config: Configuration for client.
+    :type config: AutoRestDateTestServiceConfiguration
+    """
 
     def __init__(self, config):
 

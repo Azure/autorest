@@ -16,6 +16,11 @@ from . import models
 
 
 class AutoRestReportServiceConfiguration(Configuration):
+    """Configuration for AutoRestReportService
+
+    :param str base_url: Service URL
+    :param str filepath: Existing config
+    """
 
     def __init__(
             self, base_url=None, filepath=None):
@@ -29,6 +34,11 @@ class AutoRestReportServiceConfiguration(Configuration):
 
 
 class AutoRestReportService(object):
+    """Test Infrastructure for AutoRest
+
+    :param config: Configuration for client.
+    :type config: AutoRestReportServiceConfiguration
+    """
 
     def __init__(self, config):
 
@@ -47,8 +57,8 @@ class AutoRestReportService(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/report'

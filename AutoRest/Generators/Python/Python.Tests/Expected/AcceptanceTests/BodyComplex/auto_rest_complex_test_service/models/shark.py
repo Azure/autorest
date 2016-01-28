@@ -13,6 +13,11 @@ from .fish import Fish
 
 
 class Shark(Fish):
+    """Shark
+
+    :param int age
+    :param datetime birthday
+    """
 
     _required = ['birthday']
 
@@ -26,11 +31,6 @@ class Shark(Fish):
     }
 
     def __init__(self, *args, **kwargs):
-        """Shark
-
-        :param int age
-        :param datetime birthday
-        """
         self.age = None
         self.birthday = None
 

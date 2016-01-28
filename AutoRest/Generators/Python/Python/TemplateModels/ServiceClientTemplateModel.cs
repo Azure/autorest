@@ -112,6 +112,14 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
+        public IEnumerable<Property> DocumentationParameters
+        {
+            get
+            {
+                return this.Properties;
+            }
+        }
+
         public virtual string UserAgent
         {
             get

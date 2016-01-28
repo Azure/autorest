@@ -15,6 +15,13 @@ from .. import models
 
 
 class PathItems(object):
+    """PathItems operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -36,18 +43,18 @@ class PathItems(object):
 
         :param local_string_path: should contain value 'localStringPath'
         :type local_string_path: str
-        :param path_item_string_path: A string value 'pathItemStringPath' that
-        appears in the path
+        :param path_item_string_path: A string value 'pathItemStringPath'
+         that appears in the path
         :type path_item_string_path: str
         :param local_string_query: should contain value 'localStringQuery'
         :type local_string_query: str or None
         :param path_item_string_query: A string value 'pathItemStringQuery'
-        that appears as a query parameter
+         that appears as a query parameter
         :type path_item_string_query: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/pathItemStringQuery/localStringQuery'
@@ -95,18 +102,18 @@ class PathItems(object):
 
         :param local_string_path: should contain value 'localStringPath'
         :type local_string_path: str
-        :param path_item_string_path: A string value 'pathItemStringPath' that
-        appears in the path
+        :param path_item_string_path: A string value 'pathItemStringPath'
+         that appears in the path
         :type path_item_string_path: str
         :param local_string_query: should contain value 'localStringQuery'
         :type local_string_query: str or None
         :param path_item_string_query: A string value 'pathItemStringQuery'
-        that appears as a query parameter
+         that appears as a query parameter
         :type path_item_string_query: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/localStringQuery'
@@ -153,18 +160,18 @@ class PathItems(object):
 
         :param local_string_path: should contain value 'localStringPath'
         :type local_string_path: str
-        :param path_item_string_path: A string value 'pathItemStringPath' that
-        appears in the path
+        :param path_item_string_path: A string value 'pathItemStringPath'
+         that appears in the path
         :type path_item_string_path: str
         :param local_string_query: should contain null value
         :type local_string_query: str or None
         :param path_item_string_query: A string value 'pathItemStringQuery'
-        that appears as a query parameter
+         that appears as a query parameter
         :type path_item_string_query: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/null/pathItemStringQuery/null'
@@ -212,8 +219,8 @@ class PathItems(object):
 
         :param local_string_path: should contain value 'localStringPath'
         :type local_string_path: str
-        :param path_item_string_path: A string value 'pathItemStringPath' that
-        appears in the path
+        :param path_item_string_path: A string value 'pathItemStringPath'
+         that appears in the path
         :type path_item_string_path: str
         :param local_string_query: should contain value null
         :type local_string_query: str or None
@@ -221,8 +228,8 @@ class PathItems(object):
         :type path_item_string_query: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/pathitem/nullable/globalStringPath/{globalStringPath}/pathItemStringPath/{pathItemStringPath}/localStringPath/{localStringPath}/globalStringQuery/null/null'

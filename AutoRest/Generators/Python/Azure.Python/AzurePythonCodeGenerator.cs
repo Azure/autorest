@@ -82,35 +82,6 @@ namespace Microsoft.Rest.Generator.Azure.Python
                 .ForEach(p => p.DefaultValue = p.DefaultValue.Replace("\"", "'"));
         }
 
-        /// <summary>
-        /// Creates long running operation methods.
-        /// </summary>
-        /// <param name="serviceClient"></param>
-        public void AddLongRunningOperations(ServiceClient serviceClient)
-        {
-            if (serviceClient == null)
-            {
-                throw new ArgumentNullException("serviceClient");
-            }
-
-            for (int i = 0; i < serviceClient.Methods.Count; i++)
-            {
-                var method = serviceClient.Methods[i];
-                if (method.Extensions.ContainsKey(AzureExtensions.LongRunningExtension))
-                {
-                    var isLongRunning = method.Extensions[AzureExtensions.LongRunningExtension];
-                    if (isLongRunning is bool && (bool)isLongRunning)
-                    {
-                        serviceClient.Methods.Insert(i, (Method)method.Clone());
-                        method.Name = "begin" + Namer.GetMethodName(method.Name.ToPascalCase());
-                        i++;
-                    }
-
-                    method.Extensions.Remove(AzureExtensions.LongRunningExtension);
-                }
-            }
-        }
-
         private string GetPagingSetting(Dictionary<string, object> extensions, string valueTypeName)
         {
             var ext = extensions[AzureExtensions.PageableExtension] as Newtonsoft.Json.Linq.JContainer;

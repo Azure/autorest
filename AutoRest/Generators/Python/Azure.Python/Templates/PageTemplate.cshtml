@@ -15,6 +15,9 @@ from msrest.paging import Paged
 @EmptyLine
 @EmptyLine
 class @(Model.TypeDefinitionName)(Paged):
+    """
+    A paging container for iterating over a list of @Model.ItemType object
+    """
 @EmptyLine
     _attribute_map = {
         'next_link': {'key': '@Model.NextLinkName', 'type': 'str'},

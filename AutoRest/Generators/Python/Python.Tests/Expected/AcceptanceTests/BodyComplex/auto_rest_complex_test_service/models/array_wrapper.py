@@ -13,6 +13,10 @@ from msrest.serialization import Model
 
 
 class ArrayWrapper(Model):
+    """ArrayWrapper
+
+    :param list array
+    """
 
     _required = []
 
@@ -21,10 +25,6 @@ class ArrayWrapper(Model):
     }
 
     def __init__(self, *args, **kwargs):
-        """ArrayWrapper
-
-        :param list array
-        """
         self.array = None
 
         super(ArrayWrapper, self).__init__(*args, **kwargs)

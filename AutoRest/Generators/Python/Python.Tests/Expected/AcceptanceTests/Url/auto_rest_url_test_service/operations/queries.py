@@ -15,6 +15,13 @@ from .. import models
 
 
 class Queries(object):
+    """Queries operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -33,8 +40,8 @@ class Queries(object):
         :type bool_query: bool or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/queries/bool/true'
@@ -70,8 +77,8 @@ class Queries(object):
         :type bool_query: bool or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/queries/bool/false'
@@ -107,8 +114,8 @@ class Queries(object):
         :type bool_query: bool or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/queries/bool/null'
@@ -144,8 +151,8 @@ class Queries(object):
         :type int_query: int or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/queries/int/1000000'
@@ -181,8 +188,8 @@ class Queries(object):
         :type int_query: int or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/queries/int/-1000000'
@@ -218,8 +225,8 @@ class Queries(object):
         :type int_query: int or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/queries/int/null'
@@ -255,8 +262,8 @@ class Queries(object):
         :type long_query: long or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/queries/long/10000000000'
@@ -292,8 +299,8 @@ class Queries(object):
         :type long_query: long or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/queries/long/-10000000000'
@@ -329,8 +336,8 @@ class Queries(object):
         :type long_query: long or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/queries/long/null'
@@ -366,8 +373,8 @@ class Queries(object):
         :type float_query: float or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/queries/float/1.034E+20'
@@ -403,8 +410,8 @@ class Queries(object):
         :type float_query: float or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/queries/float/-1.034E-20'
@@ -440,8 +447,8 @@ class Queries(object):
         :type float_query: float or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/queries/float/null'
@@ -477,8 +484,8 @@ class Queries(object):
         :type double_query: float or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/queries/double/9999999.999'
@@ -514,8 +521,8 @@ class Queries(object):
         :type double_query: float or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/queries/double/-9999999.999'
@@ -551,8 +558,8 @@ class Queries(object):
         :type double_query: float or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/queries/double/null'
@@ -585,12 +592,12 @@ class Queries(object):
         Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
 
         :param string_query: '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible
-        values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
+         values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
         :type string_query: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/queries/string/unicode/'
@@ -623,13 +630,13 @@ class Queries(object):
         Get 'begin!*'();:@ &=+$,/?#[]end
 
         :param string_query: 'begin!*'();:@ &=+$,/?#[]end' url encoded string
-        value. Possible values for this parameter include: 'begin!*'();:@
-        &=+$,/?#[]end'
+         value. Possible values for this parameter include: 'begin!*'();:@
+         &=+$,/?#[]end'
         :type string_query: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend'
@@ -662,12 +669,12 @@ class Queries(object):
         Get ''
 
         :param string_query: '' string value. Possible values for this
-        parameter include: ''
+         parameter include: ''
         :type string_query: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/queries/string/empty'
@@ -703,8 +710,8 @@ class Queries(object):
         :type string_query: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/queries/string/null'
@@ -737,12 +744,12 @@ class Queries(object):
         Get using uri with query parameter 'green color'
 
         :param enum_query: 'green color' enum value. Possible values for this
-        parameter include: 'red color', 'green color', 'blue color'
+         parameter include: 'red color', 'green color', 'blue color'
         :type enum_query: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/queries/enum/green%20color'
@@ -775,12 +782,12 @@ class Queries(object):
         Get null (no query parameter in url)
 
         :param enum_query: null string value. Possible values for this
-        parameter include: 'red color', 'green color', 'blue color'
+         parameter include: 'red color', 'green color', 'blue color'
         :type enum_query: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/queries/enum/null'
@@ -813,12 +820,12 @@ class Queries(object):
         Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
 
         :param byte_query: '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte
-        array
+         array
         :type byte_query: bytearray or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/queries/byte/multibyte'
@@ -854,8 +861,8 @@ class Queries(object):
         :type byte_query: bytearray or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/queries/byte/empty'
@@ -891,8 +898,8 @@ class Queries(object):
         :type byte_query: bytearray or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/queries/byte/null'
@@ -928,8 +935,8 @@ class Queries(object):
         :type date_query: date or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/queries/date/2012-01-01'
@@ -965,8 +972,8 @@ class Queries(object):
         :type date_query: date or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/queries/date/null'
@@ -1002,8 +1009,8 @@ class Queries(object):
         :type date_time_query: datetime or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/queries/datetime/2012-01-01T01%3A01%3A01Z'
@@ -1039,8 +1046,8 @@ class Queries(object):
         :type date_time_query: datetime or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/queries/datetime/null'
@@ -1074,12 +1081,12 @@ class Queries(object):
         null, ''] using the csv-array format
 
         :param array_query: an array of string ['ArrayQuery1', 'begin!*'();:@
-        &=+$,/?#[]end' , null, ''] using the csv-array format
+         &=+$,/?#[]end' , null, ''] using the csv-array format
         :type array_query: list or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/queries/array/csv/string/valid'
@@ -1115,8 +1122,8 @@ class Queries(object):
         :type array_query: list or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/queries/array/csv/string/null'
@@ -1149,12 +1156,12 @@ class Queries(object):
         Get an empty array [] of string using the csv-array format
 
         :param array_query: an empty array [] of string using the csv-array
-        format
+         format
         :type array_query: list or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/queries/array/csv/string/empty'
@@ -1188,12 +1195,12 @@ class Queries(object):
         null, ''] using the ssv-array format
 
         :param array_query: an array of string ['ArrayQuery1', 'begin!*'();:@
-        &=+$,/?#[]end' , null, ''] using the ssv-array format
+         &=+$,/?#[]end' , null, ''] using the ssv-array format
         :type array_query: list or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/queries/array/ssv/string/valid'
@@ -1227,12 +1234,12 @@ class Queries(object):
         null, ''] using the tsv-array format
 
         :param array_query: an array of string ['ArrayQuery1', 'begin!*'();:@
-        &=+$,/?#[]end' , null, ''] using the tsv-array format
+         &=+$,/?#[]end' , null, ''] using the tsv-array format
         :type array_query: list or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/queries/array/tsv/string/valid'
@@ -1266,12 +1273,12 @@ class Queries(object):
         null, ''] using the pipes-array format
 
         :param array_query: an array of string ['ArrayQuery1', 'begin!*'();:@
-        &=+$,/?#[]end' , null, ''] using the pipes-array format
+         &=+$,/?#[]end' , null, ''] using the pipes-array format
         :type array_query: list or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/queries/array/pipes/string/valid'

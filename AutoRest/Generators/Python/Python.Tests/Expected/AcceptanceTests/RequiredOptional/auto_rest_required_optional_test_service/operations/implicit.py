@@ -15,6 +15,13 @@ from .. import models
 
 
 class Implicit(object):
+    """Implicit operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -33,9 +40,8 @@ class Implicit(object):
         :type path_parameter: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Error or (Error, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Error or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/reqopt/implicit/required/path/{pathParameter}'
@@ -73,8 +79,8 @@ class Implicit(object):
         :type query_parameter: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/reqopt/implicit/optional/query'
@@ -110,8 +116,8 @@ class Implicit(object):
         :type query_parameter: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/reqopt/implicit/optional/header'
@@ -147,8 +153,8 @@ class Implicit(object):
         :type body_parameter: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/reqopt/implicit/optional/body'
@@ -187,9 +193,8 @@ class Implicit(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Error or (Error, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Error or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/reqopt/global/required/path/{required-global-path}'
@@ -225,9 +230,8 @@ class Implicit(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Error or (Error, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Error or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/reqopt/global/required/query'
@@ -260,9 +264,8 @@ class Implicit(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Error or (Error, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Error or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/reqopt/global/optional/query'

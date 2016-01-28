@@ -13,6 +13,11 @@ from msrest.serialization import Model
 
 
 class Widget(Model):
+    """Widget
+
+    :param int integer
+    :param str string
+    """
 
     _required = []
 
@@ -22,11 +27,6 @@ class Widget(Model):
     }
 
     def __init__(self, *args, **kwargs):
-        """Widget
-
-        :param int integer
-        :param str string
-        """
         self.integer = None
         self.string = None
 

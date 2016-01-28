@@ -15,6 +15,13 @@ from .. import models
 
 
 class Dictionary(object):
+    """Dictionary operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -31,9 +38,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: DictionaryWrapper or (DictionaryWrapper, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: DictionaryWrapper or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/complex/dictionary/typed/valid'
@@ -74,8 +80,8 @@ class Dictionary(object):
         :type default_program: dict or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         complex_body = models.DictionaryWrapper()
         if default_program is not None:
@@ -115,9 +121,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: DictionaryWrapper or (DictionaryWrapper, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: DictionaryWrapper or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/complex/dictionary/typed/empty'
@@ -158,8 +163,8 @@ class Dictionary(object):
         :type default_program: dict or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         complex_body = models.DictionaryWrapper()
         if default_program is not None:
@@ -199,9 +204,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: DictionaryWrapper or (DictionaryWrapper, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: DictionaryWrapper or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/complex/dictionary/typed/null'
@@ -241,9 +245,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: DictionaryWrapper or (DictionaryWrapper, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: DictionaryWrapper or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/complex/dictionary/typed/notprovided'

@@ -16,6 +16,15 @@ from . import models
 
 
 class AutoRestValidationTestConfiguration(Configuration):
+    """Configuration for AutoRestValidationTest
+
+    :param subscription_id: Subscription ID.
+    :type subscription_id: str
+    :param api_version: Required string following pattern \\d{2}-\\d{2}-\\d{4}
+    :type api_version: str
+    :param str base_url: Service URL
+    :param str filepath: Existing config
+    """
 
     def __init__(
             self, subscription_id, api_version, base_url=None, filepath=None):
@@ -36,6 +45,11 @@ class AutoRestValidationTestConfiguration(Configuration):
 
 
 class AutoRestValidationTest(object):
+    """Test Infrastructure for AutoRest. No server backend exists for these tests.
+
+    :param config: Configuration for client.
+    :type config: AutoRestValidationTestConfiguration
+    """
 
     def __init__(self, config):
 
@@ -53,15 +67,14 @@ class AutoRestValidationTest(object):
         Validates input parameters on the method. See swagger for details.
 
         :param resource_group_name: Required string between 3 and 10 chars
-        with pattern [a-zA-Z0-9]+.
+         with pattern [a-zA-Z0-9]+.
         :type resource_group_name: str
         :param id: Required int multiple of 10 from 100 to 1000.
         :type id: int
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Product or (Product, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/fakepath/{subscriptionId}/{resourceGroupName}/{id}'
@@ -106,7 +119,7 @@ class AutoRestValidationTest(object):
         Validates body parameters on the method. See swagger for details.
 
         :param resource_group_name: Required string between 3 and 10 chars
-        with pattern [a-zA-Z0-9]+.
+         with pattern [a-zA-Z0-9]+.
         :type resource_group_name: str
         :param id: Required int multiple of 10 from 100 to 1000.
         :type id: int
@@ -114,9 +127,8 @@ class AutoRestValidationTest(object):
         :type body: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Product or (Product, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/fakepath/{subscriptionId}/{resourceGroupName}/{id}'

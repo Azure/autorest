@@ -13,6 +13,10 @@ from msrest.serialization import Model
 
 
 class DictionaryWrapper(Model):
+    """DictionaryWrapper
+
+    :param dict default_program
+    """
 
     _required = []
 
@@ -21,10 +25,6 @@ class DictionaryWrapper(Model):
     }
 
     def __init__(self, *args, **kwargs):
-        """DictionaryWrapper
-
-        :param dict default_program
-        """
         self.default_program = None
 
         super(DictionaryWrapper, self).__init__(*args, **kwargs)

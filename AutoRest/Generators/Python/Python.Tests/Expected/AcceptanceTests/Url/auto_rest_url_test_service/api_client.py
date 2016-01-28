@@ -18,6 +18,16 @@ from . import models
 
 
 class AutoRestUrlTestServiceConfiguration(Configuration):
+    """Configuration for AutoRestUrlTestService
+
+    :param global_string_path: A string value 'globalItemStringPath' that
+     appears in the path
+    :type global_string_path: str
+    :param global_string_query: should contain value null
+    :type global_string_query: str or None
+    :param str base_url: Service URL
+    :param str filepath: Existing config
+    """
 
     def __init__(
             self, global_string_path, global_string_query=None, base_url=None, filepath=None):
@@ -36,6 +46,11 @@ class AutoRestUrlTestServiceConfiguration(Configuration):
 
 
 class AutoRestUrlTestService(object):
+    """Test Infrastructure for AutoRest
+
+    :param config: Configuration for client.
+    :type config: AutoRestUrlTestServiceConfiguration
+    """
 
     def __init__(self, config):
 

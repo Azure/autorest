@@ -4,7 +4,7 @@
 @using Microsoft.Rest.Generator.Python.Templates
 @using Microsoft.Rest.Generator.Utilities
 @using System.Linq
-@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.ServiceClientTemplateModel>
+@inherits Microsoft.Rest.Generator.Python.PythonTemplate<Microsoft.Rest.Generator.Python.ServiceClientTemplateModel>
 # coding=utf-8
 # --------------------------------------------------------------------------
 @Header("# ").TrimMultilineHeader()
@@ -32,6 +32,16 @@ from msrest.pipeline import ClientRawResponse
 @EmptyLine
 @EmptyLine
 class @(Model.Name)Configuration(Configuration):
+    """Configuration for @(Model.Name)
+@EmptyLine
+@foreach(var parameter in Model.DocumentationParameters)
+{
+@:    @ParameterWrapComment(string.Empty, ":param " + parameter.Name + ": " + parameter.Documentation)
+@:    @ParameterWrapComment(string.Empty, ":type " + parameter.Name + ": " + MethodTemplateModel.GetDocumentationType(parameter.Type, parameter.IsRequired))
+}
+    :param str base_url: Service URL
+    :param str filepath: Existing config
+    """
 @EmptyLine
     def __init__(
             self, @(Model.RequiredConstructorParameters)base_url=None, filepath=None):
@@ -54,6 +64,11 @@ class @(Model.Name)Configuration(Configuration):
 @EmptyLine
 @EmptyLine
 class @(Model.Name)(object):
+    """@Model.Documentation.EscapeXmlComment()
+@EmptyLine
+    :param config: Configuration for client.
+    :type config: @(Model.Name)Configuration
+    """
 @EmptyLine
     def __init__(self, config):
 @EmptyLine

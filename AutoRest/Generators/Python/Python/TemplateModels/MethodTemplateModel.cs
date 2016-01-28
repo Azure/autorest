@@ -454,7 +454,14 @@ namespace Microsoft.Rest.Generator.Python
 
             if (type is PrimaryType)
             {
-                result = type.Name.ToLower(CultureInfo.InvariantCulture);
+                if (type == PrimaryType.Stream)
+                {
+                    result = "Generator";
+                }
+                else
+                {
+                    result = type.Name.ToLower(CultureInfo.InvariantCulture);
+                }
             }
             else if (type is SequenceType)
             {

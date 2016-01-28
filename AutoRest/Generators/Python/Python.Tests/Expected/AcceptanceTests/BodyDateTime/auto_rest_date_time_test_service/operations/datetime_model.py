@@ -15,6 +15,13 @@ from .. import models
 
 
 class DatetimeModel(object):
+    """DatetimeModel operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -31,9 +38,8 @@ class DatetimeModel(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: datetime or (datetime, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: datetime or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/datetime/null'
@@ -72,9 +78,8 @@ class DatetimeModel(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: datetime or (datetime, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: datetime or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/datetime/invalid'
@@ -113,9 +118,8 @@ class DatetimeModel(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: datetime or (datetime, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: datetime or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/datetime/overflow'
@@ -154,9 +158,8 @@ class DatetimeModel(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: datetime or (datetime, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: datetime or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/datetime/underflow'
@@ -197,8 +200,8 @@ class DatetimeModel(object):
         :type datetime_body: datetime
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/datetime/max/utc'
@@ -234,9 +237,8 @@ class DatetimeModel(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: datetime or (datetime, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: datetime or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/datetime/max/utc/lowercase'
@@ -275,9 +277,8 @@ class DatetimeModel(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: datetime or (datetime, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: datetime or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/datetime/max/utc/uppercase'
@@ -319,8 +320,8 @@ class DatetimeModel(object):
         :type datetime_body: datetime
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/datetime/max/localpositiveoffset'
@@ -357,9 +358,8 @@ class DatetimeModel(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: datetime or (datetime, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: datetime or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/datetime/max/localpositiveoffset/lowercase'
@@ -399,9 +399,8 @@ class DatetimeModel(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: datetime or (datetime, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: datetime or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/datetime/max/localpositiveoffset/uppercase'
@@ -443,8 +442,8 @@ class DatetimeModel(object):
         :type datetime_body: datetime
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/datetime/max/localnegativeoffset'
@@ -481,9 +480,8 @@ class DatetimeModel(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: datetime or (datetime, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: datetime or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/datetime/max/localnegativeoffset/uppercase'
@@ -523,9 +521,8 @@ class DatetimeModel(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: datetime or (datetime, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: datetime or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/datetime/max/localnegativeoffset/lowercase'
@@ -566,8 +563,8 @@ class DatetimeModel(object):
         :type datetime_body: datetime
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/datetime/min/utc'
@@ -603,9 +600,8 @@ class DatetimeModel(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: datetime or (datetime, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: datetime or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/datetime/min/utc'
@@ -646,8 +642,8 @@ class DatetimeModel(object):
         :type datetime_body: datetime
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/datetime/min/localpositiveoffset'
@@ -683,9 +679,8 @@ class DatetimeModel(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: datetime or (datetime, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: datetime or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/datetime/min/localpositiveoffset'
@@ -726,8 +721,8 @@ class DatetimeModel(object):
         :type datetime_body: datetime
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/datetime/min/localnegativeoffset'
@@ -763,9 +758,8 @@ class DatetimeModel(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: datetime or (datetime, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: datetime or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/datetime/min/localnegativeoffset'

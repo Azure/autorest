@@ -17,6 +17,23 @@ from . import models
 
 
 class AutoRestDurationTestServiceConfiguration(AzureConfiguration):
+    """Configuration for AutoRestDurationTestService
+
+    :param credentials: Gets Azure subscription credentials.
+    :type credentials: credentials
+    :param accept_language: Gets or sets the preferred language for the
+     response.
+    :type accept_language: str or None
+    :param long_running_operation_retry_timeout: Gets or sets the retry
+     timeout in seconds for Long Running Operations. Default value is 30.
+    :type long_running_operation_retry_timeout: int or None
+    :param generate_client_request_id: When set to true a unique
+     x-ms-client-request-id value is generated and included in each request.
+     Default is true.
+    :type generate_client_request_id: bool or None
+    :param str base_url: Service URL
+    :param str filepath: Existing config
+    """
 
     def __init__(
             self, credentials, accept_language='en-US', long_running_operation_retry_timeout=30, generate_client_request_id=True, base_url=None, filepath=None):
@@ -37,6 +54,11 @@ class AutoRestDurationTestServiceConfiguration(AzureConfiguration):
 
 
 class AutoRestDurationTestService(object):
+    """Test Infrastructure for AutoRest
+
+    :param config: Configuration for client.
+    :type config: AutoRestDurationTestServiceConfiguration
+    """
 
     def __init__(self, config):
 
