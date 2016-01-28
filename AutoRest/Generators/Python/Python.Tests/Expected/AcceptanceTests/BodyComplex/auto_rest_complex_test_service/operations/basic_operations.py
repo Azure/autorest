@@ -15,6 +15,13 @@ from .. import models
 
 
 class BasicOperations(object):
+    """BasicOperations operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -31,9 +38,8 @@ class BasicOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Basic or (Basic, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Basic or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/complex/basic/valid'
@@ -74,8 +80,8 @@ class BasicOperations(object):
         :type complex_body: Basic
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/complex/basic/valid'
@@ -111,9 +117,8 @@ class BasicOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Basic or (Basic, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Basic or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/complex/basic/invalid'
@@ -152,9 +157,8 @@ class BasicOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Basic or (Basic, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Basic or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/complex/basic/empty'
@@ -193,9 +197,8 @@ class BasicOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Basic or (Basic, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Basic or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/complex/basic/null'
@@ -235,9 +238,8 @@ class BasicOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Basic or (Basic, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Basic or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/complex/basic/notprovided'

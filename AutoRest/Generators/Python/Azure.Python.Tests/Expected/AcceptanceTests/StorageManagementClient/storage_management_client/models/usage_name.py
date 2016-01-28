@@ -15,6 +15,10 @@ from msrest.serialization import Model
 class UsageName(Model):
     """
     The Usage Names.
+
+    :param str value: Gets a string describing the resource name.
+    :param str localized_value: Gets a localized string describing the
+     resource name.
     """
 
     _required = []
@@ -25,12 +29,6 @@ class UsageName(Model):
     }
 
     def __init__(self, *args, **kwargs):
-        """UsageName
-
-        :param str value: Gets a string describing the resource name.
-        :param str localized_value: Gets a localized string describing the
-        resource name.
-        """
         self.value = None
         self.localized_value = None
 

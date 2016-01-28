@@ -13,6 +13,11 @@ from msrest.serialization import Model
 
 
 class Sku(Model):
+    """Sku
+
+    :param str name
+    :param str id
+    """
 
     _required = []
 
@@ -22,11 +27,6 @@ class Sku(Model):
     }
 
     def __init__(self, *args, **kwargs):
-        """Sku
-
-        :param str name
-        :param str id
-        """
         self.name = None
         self.id = None
 

@@ -15,6 +15,13 @@ from .. import models
 
 
 class Dictionary(object):
+    """Dictionary operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -31,8 +38,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/null'
@@ -71,8 +78,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/empty'
@@ -113,8 +120,8 @@ class Dictionary(object):
         :type array_body: dict
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/empty'
@@ -150,8 +157,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/nullvalue'
@@ -190,8 +197,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/nullkey'
@@ -230,8 +237,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/keyemptystring'
@@ -270,8 +277,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/invalid'
@@ -311,8 +318,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/boolean/tfft'
@@ -354,8 +361,8 @@ class Dictionary(object):
         :type array_body: dict
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/boolean/tfft'
@@ -391,8 +398,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/boolean/true.null.false'
@@ -431,8 +438,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/boolean/true.boolean.false'
@@ -471,8 +478,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/integer/1.-1.3.300'
@@ -513,8 +520,8 @@ class Dictionary(object):
         :type array_body: dict
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/integer/1.-1.3.300'
@@ -550,8 +557,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/integer/1.null.zero'
@@ -590,8 +597,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/integer/1.integer.0'
@@ -630,8 +637,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/long/1.-1.3.300'
@@ -672,8 +679,8 @@ class Dictionary(object):
         :type array_body: dict
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/long/1.-1.3.300'
@@ -709,8 +716,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/long/1.null.zero'
@@ -749,8 +756,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/long/1.integer.0'
@@ -789,8 +796,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/float/0--0.01-1.2e20'
@@ -831,8 +838,8 @@ class Dictionary(object):
         :type array_body: dict
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/float/0--0.01-1.2e20'
@@ -868,8 +875,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/float/0.0-null-1.2e20'
@@ -908,8 +915,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/float/1.number.0'
@@ -948,8 +955,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/double/0--0.01-1.2e20'
@@ -990,8 +997,8 @@ class Dictionary(object):
         :type array_body: dict
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/double/0--0.01-1.2e20'
@@ -1027,8 +1034,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/double/0.0-null-1.2e20'
@@ -1067,8 +1074,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/double/1.number.0'
@@ -1107,8 +1114,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/string/foo1.foo2.foo3'
@@ -1149,8 +1156,8 @@ class Dictionary(object):
         :type array_body: dict
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/string/foo1.foo2.foo3'
@@ -1186,8 +1193,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/string/foo.null.foo2'
@@ -1226,8 +1233,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/string/foo.123.foo2'
@@ -1267,8 +1274,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/date/valid'
@@ -1310,8 +1317,8 @@ class Dictionary(object):
         :type array_body: dict
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/date/valid'
@@ -1348,8 +1355,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/date/invalidnull'
@@ -1388,8 +1395,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/date/invalidchars'
@@ -1429,8 +1436,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/date-time/valid'
@@ -1472,8 +1479,8 @@ class Dictionary(object):
         :type array_body: dict
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/date-time/valid'
@@ -1509,8 +1516,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/date-time/invalidnull'
@@ -1550,8 +1557,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/date-time/invalidchars'
@@ -1592,8 +1599,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/date-time-rfc1123/valid'
@@ -1635,8 +1642,8 @@ class Dictionary(object):
         :type array_body: dict
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/date-time-rfc1123/valid'
@@ -1673,8 +1680,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/duration/valid'
@@ -1715,8 +1722,8 @@ class Dictionary(object):
         :type array_body: dict
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/duration/valid'
@@ -1753,8 +1760,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/byte/valid'
@@ -1796,8 +1803,8 @@ class Dictionary(object):
         :type array_body: dict
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/byte/valid'
@@ -1834,8 +1841,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/prim/byte/invalidnull'
@@ -1874,8 +1881,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/complex/null'
@@ -1914,8 +1921,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/complex/empty'
@@ -1955,8 +1962,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/complex/itemnull'
@@ -1996,8 +2003,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/complex/itemempty'
@@ -2038,8 +2045,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/complex/valid'
@@ -2082,8 +2089,8 @@ class Dictionary(object):
         :type array_body: dict
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/complex/valid'
@@ -2119,8 +2126,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/array/null'
@@ -2159,8 +2166,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/array/empty'
@@ -2200,8 +2207,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/array/itemnull'
@@ -2241,8 +2248,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/array/itemempty'
@@ -2282,8 +2289,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/array/valid'
@@ -2325,8 +2332,8 @@ class Dictionary(object):
         :type array_body: dict
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/array/valid'
@@ -2362,8 +2369,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/dictionary/null'
@@ -2403,8 +2410,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/dictionary/empty'
@@ -2445,8 +2452,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/dictionary/itemnull'
@@ -2487,8 +2494,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/dictionary/itemempty'
@@ -2530,8 +2537,8 @@ class Dictionary(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/dictionary/valid'
@@ -2575,8 +2582,8 @@ class Dictionary(object):
         :type array_body: dict
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/dictionary/dictionary/valid'

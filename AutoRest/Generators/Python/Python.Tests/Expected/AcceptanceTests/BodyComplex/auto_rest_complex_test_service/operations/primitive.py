@@ -15,6 +15,13 @@ from .. import models
 
 
 class Primitive(object):
+    """Primitive operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -31,9 +38,8 @@ class Primitive(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: IntWrapper or (IntWrapper, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: IntWrapper or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/complex/primitive/integer'
@@ -74,8 +80,8 @@ class Primitive(object):
         :type complex_body: IntWrapper
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/complex/primitive/integer'
@@ -111,9 +117,8 @@ class Primitive(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: LongWrapper or (LongWrapper, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: LongWrapper or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/complex/primitive/long'
@@ -154,8 +159,8 @@ class Primitive(object):
         :type complex_body: LongWrapper
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/complex/primitive/long'
@@ -191,9 +196,8 @@ class Primitive(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: FloatWrapper or (FloatWrapper, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: FloatWrapper or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/complex/primitive/float'
@@ -234,8 +238,8 @@ class Primitive(object):
         :type complex_body: FloatWrapper
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/complex/primitive/float'
@@ -271,9 +275,8 @@ class Primitive(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: DoubleWrapper or (DoubleWrapper, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: DoubleWrapper or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/complex/primitive/double'
@@ -311,12 +314,12 @@ class Primitive(object):
         Put complex types with double properties
 
         :param complex_body: Please put 3e-100 and
-        -0.000000000000000000000000000000000000000000000000000000005
+         -0.000000000000000000000000000000000000000000000000000000005
         :type complex_body: DoubleWrapper
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/complex/primitive/double'
@@ -352,9 +355,8 @@ class Primitive(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: BooleanWrapper or (BooleanWrapper, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: BooleanWrapper or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/complex/primitive/bool'
@@ -395,8 +397,8 @@ class Primitive(object):
         :type complex_body: BooleanWrapper
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/complex/primitive/bool'
@@ -432,9 +434,8 @@ class Primitive(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: StringWrapper or (StringWrapper, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: StringWrapper or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/complex/primitive/string'
@@ -475,8 +476,8 @@ class Primitive(object):
         :type complex_body: StringWrapper
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/complex/primitive/string'
@@ -512,9 +513,8 @@ class Primitive(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: DateWrapper or (DateWrapper, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: DateWrapper or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/complex/primitive/date'
@@ -555,8 +555,8 @@ class Primitive(object):
         :type complex_body: DateWrapper
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/complex/primitive/date'
@@ -592,9 +592,8 @@ class Primitive(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: DatetimeWrapper or (DatetimeWrapper, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: DatetimeWrapper or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/complex/primitive/datetime'
@@ -632,12 +631,12 @@ class Primitive(object):
         Put complex types with datetime properties
 
         :param complex_body: Please put '0001-01-01T12:00:00-04:00' and
-        '2015-05-18T11:38:00-08:00'
+         '2015-05-18T11:38:00-08:00'
         :type complex_body: DatetimeWrapper
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/complex/primitive/datetime'
@@ -673,9 +672,8 @@ class Primitive(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Datetimerfc1123Wrapper or (Datetimerfc1123Wrapper,
-        requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: Datetimerfc1123Wrapper or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/complex/primitive/datetimerfc1123'
@@ -713,12 +711,12 @@ class Primitive(object):
         Put complex types with datetimeRfc1123 properties
 
         :param complex_body: Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and
-        'Mon, 18 May 2015 11:38:00 GMT'
+         'Mon, 18 May 2015 11:38:00 GMT'
         :type complex_body: Datetimerfc1123Wrapper
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/complex/primitive/datetimerfc1123'
@@ -754,9 +752,8 @@ class Primitive(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: DurationWrapper or (DurationWrapper, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: DurationWrapper or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/complex/primitive/duration'
@@ -797,8 +794,8 @@ class Primitive(object):
         :type field: timedelta or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         complex_body = models.DurationWrapper()
         if field is not None:
@@ -838,9 +835,8 @@ class Primitive(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: ByteWrapper or (ByteWrapper, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: ByteWrapper or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/complex/primitive/byte'
@@ -881,8 +877,8 @@ class Primitive(object):
         :type field: bytearray or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         complex_body = models.ByteWrapper()
         if field is not None:

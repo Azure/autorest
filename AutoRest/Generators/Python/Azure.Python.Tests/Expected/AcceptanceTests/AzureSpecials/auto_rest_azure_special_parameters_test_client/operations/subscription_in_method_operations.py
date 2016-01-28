@@ -16,6 +16,13 @@ from .. import models
 
 
 class SubscriptionInMethodOperations(object):
+    """SubscriptionInMethodOperations operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -32,12 +39,12 @@ class SubscriptionInMethodOperations(object):
         subscription id = '1234-5678-9012-3456' to succeed
 
         :param subscription_id: This should appear as a method parameter, use
-        value '1234-5678-9012-3456'
+         value '1234-5678-9012-3456'
         :type subscription_id: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/azurespecials/subscriptionId/method/string/none/path/local/1234-5678-9012-3456/{subscriptionId}'
@@ -78,12 +85,12 @@ class SubscriptionInMethodOperations(object):
         from making this call
 
         :param subscription_id: This should appear as a method parameter, use
-        value null, client-side validation should prvenet the call
+         value null, client-side validation should prvenet the call
         :type subscription_id: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/azurespecials/subscriptionId/method/string/none/path/local/null/{subscriptionId}'
@@ -122,13 +129,13 @@ class SubscriptionInMethodOperations(object):
         POST method with subscriptionId modeled in the method.  pass in
         subscription id = '1234-5678-9012-3456' to succeed
 
-        :param subscription_id: Should appear as a method parameter -use value
-        '1234-5678-9012-3456'
+        :param subscription_id: Should appear as a method parameter -use
+         value '1234-5678-9012-3456'
         :type subscription_id: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/azurespecials/subscriptionId/path/string/none/path/local/1234-5678-9012-3456/{subscriptionId}'
@@ -167,13 +174,13 @@ class SubscriptionInMethodOperations(object):
         POST method with subscriptionId modeled in the method.  pass in
         subscription id = '1234-5678-9012-3456' to succeed
 
-        :param subscription_id: The subscriptionId, which appears in the path,
-        the value is always '1234-5678-9012-3456'
+        :param subscription_id: The subscriptionId, which appears in the
+         path, the value is always '1234-5678-9012-3456'
         :type subscription_id: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/azurespecials/subscriptionId/swagger/string/none/path/local/1234-5678-9012-3456/{subscriptionId}'

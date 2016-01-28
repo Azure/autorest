@@ -18,6 +18,13 @@ from .. import models
 
 
 class StorageAccountsOperations(object):
+    """StorageAccountsOperations operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -33,14 +40,15 @@ class StorageAccountsOperations(object):
         Checks that account name is valid and is not in use.
 
         :param account_name: The name of the storage account within the
-        specified resource group. Storage account names must be between 3 and
-        24 characters in length and use numbers and lower-case letters only.
+         specified resource group. Storage account names must be between 3
+         and 24 characters in length and use numbers and lower-case letters
+         only.
         :type account_name: StorageAccountCheckNameAvailabilityParameters
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: CheckNameAvailabilityResult or (CheckNameAvailabilityResult,
-        requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: CheckNameAvailabilityResult or
+         msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability'
@@ -97,19 +105,19 @@ class StorageAccountsOperations(object):
         set of properties, then HTTP 200 would be returned.
 
         :param resource_group_name: The name of the resource group within the
-        user’s subscription.
+         user’s subscription.
         :type resource_group_name: str
         :param account_name: The name of the storage account within the
-        specified resource group. Storage account names must be between 3 and
-        24 characters in length and use numbers and lower-case letters only.
+         specified resource group. Storage account names must be between 3
+         and 24 characters in length and use numbers and lower-case letters
+         only.
         :type account_name: str
         :param parameters: The parameters to provide for the created account.
         :type parameters: StorageAccountCreateParameters
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: StorageAccount or (StorageAccount, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: StorageAccount or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
@@ -182,16 +190,17 @@ class StorageAccountsOperations(object):
         Deletes a storage account in Microsoft Azure.
 
         :param resource_group_name: The name of the resource group within the
-        user’s subscription.
+         user’s subscription.
         :type resource_group_name: str
         :param account_name: The name of the storage account within the
-        specified resource group. Storage account names must be between 3 and
-        24 characters in length and use numbers and lower-case letters only.
+         specified resource group. Storage account names must be between 3
+         and 24 characters in length and use numbers and lower-case letters
+         only.
         :type account_name: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
@@ -237,17 +246,17 @@ class StorageAccountsOperations(object):
         ListKeys operation should be used to retrieve storage keys.
 
         :param resource_group_name: The name of the resource group within the
-        user’s subscription.
+         user’s subscription.
         :type resource_group_name: str
         :param account_name: The name of the storage account within the
-        specified resource group. Storage account names must be between 3 and
-        24 characters in length and use numbers and lower-case letters only.
+         specified resource group. Storage account names must be between 3
+         and 24 characters in length and use numbers and lower-case letters
+         only.
         :type account_name: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: StorageAccount or (StorageAccount, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: StorageAccount or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
@@ -307,20 +316,20 @@ class StorageAccountsOperations(object):
         creation.
 
         :param resource_group_name: The name of the resource group within the
-        user’s subscription.
+         user’s subscription.
         :type resource_group_name: str
         :param account_name: The name of the storage account within the
-        specified resource group. Storage account names must be between 3 and
-        24 characters in length and use numbers and lower-case letters only.
+         specified resource group. Storage account names must be between 3
+         and 24 characters in length and use numbers and lower-case letters
+         only.
         :type account_name: str
         :param parameters: The parameters to update on the account. Note that
-        only one property can be changed at a time using this API.
+         only one property can be changed at a time using this API.
         :type parameters: StorageAccountUpdateParameters
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: StorageAccount or (StorageAccount, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: StorageAccount or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
@@ -380,9 +389,8 @@ class StorageAccountsOperations(object):
         :type account_name: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: StorageAccountKeys or (StorageAccountKeys, requests.response)
-        or concurrent.futures.Future
+         deserialized response
+        :rtype: StorageAccountKeys or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys'
@@ -436,9 +444,8 @@ class StorageAccountsOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: StorageAccountPaged or (StorageAccountPaged,
-        requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: StorageAccountPaged or msrest.pipeline.ClientRawResponse
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -498,13 +505,12 @@ class StorageAccountsOperations(object):
         operation for this.
 
         :param resource_group_name: The name of the resource group within the
-        user’s subscription.
+         user’s subscription.
         :type resource_group_name: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: StorageAccountPaged or (StorageAccountPaged,
-        requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: StorageAccountPaged or msrest.pipeline.ClientRawResponse
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -563,20 +569,20 @@ class StorageAccountsOperations(object):
         Regenerates the access keys for the specified storage account.
 
         :param resource_group_name: The name of the resource group within the
-        user’s subscription.
+         user’s subscription.
         :type resource_group_name: str
         :param account_name: The name of the storage account within the
-        specified resource group. Storage account names must be between 3 and
-        24 characters in length and use numbers and lower-case letters only.
+         specified resource group. Storage account names must be between 3
+         and 24 characters in length and use numbers and lower-case letters
+         only.
         :type account_name: str
         :param key_name: Possible values for this property include: 'key1',
-        'key2'.
+         'key2'.
         :type key_name: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: StorageAccountKeys or (StorageAccountKeys, requests.response)
-        or concurrent.futures.Future
+         deserialized response
+        :rtype: StorageAccountKeys or msrest.pipeline.ClientRawResponse
         """
         regenerate_key = models.StorageAccountRegenerateKeyParameters()
         if key_name is not None:

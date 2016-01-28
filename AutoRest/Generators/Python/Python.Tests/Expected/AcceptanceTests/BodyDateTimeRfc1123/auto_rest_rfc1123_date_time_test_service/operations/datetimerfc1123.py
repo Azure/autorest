@@ -15,6 +15,13 @@ from .. import models
 
 
 class Datetimerfc1123(object):
+    """Datetimerfc1123 operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -31,9 +38,8 @@ class Datetimerfc1123(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: datetime or (datetime, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: datetime or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/datetimerfc1123/null'
@@ -72,9 +78,8 @@ class Datetimerfc1123(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: datetime or (datetime, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: datetime or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/datetimerfc1123/invalid'
@@ -113,9 +118,8 @@ class Datetimerfc1123(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: datetime or (datetime, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: datetime or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/datetimerfc1123/overflow'
@@ -154,9 +158,8 @@ class Datetimerfc1123(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: datetime or (datetime, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: datetime or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/datetimerfc1123/underflow'
@@ -197,8 +200,8 @@ class Datetimerfc1123(object):
         :type datetime_body: datetime
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/datetimerfc1123/max'
@@ -234,9 +237,8 @@ class Datetimerfc1123(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: datetime or (datetime, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: datetime or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/datetimerfc1123/max/lowercase'
@@ -275,9 +277,8 @@ class Datetimerfc1123(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: datetime or (datetime, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: datetime or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/datetimerfc1123/max/uppercase'
@@ -318,8 +319,8 @@ class Datetimerfc1123(object):
         :type datetime_body: datetime
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/datetimerfc1123/min'
@@ -355,9 +356,8 @@ class Datetimerfc1123(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: datetime or (datetime, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: datetime or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/datetimerfc1123/min'

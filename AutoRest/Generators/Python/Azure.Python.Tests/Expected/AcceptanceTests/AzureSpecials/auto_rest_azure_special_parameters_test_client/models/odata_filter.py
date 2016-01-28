@@ -13,6 +13,11 @@ from msrest.serialization import Model
 
 
 class OdataFilter(Model):
+    """OdataFilter
+
+    :param int id
+    :param str name
+    """
 
     _required = []
 
@@ -22,11 +27,6 @@ class OdataFilter(Model):
     }
 
     def __init__(self, *args, **kwargs):
-        """OdataFilter
-
-        :param int id
-        :param str name
-        """
         self.id = None
         self.name = None
 

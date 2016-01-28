@@ -16,6 +16,13 @@ from .. import models
 
 
 class DurationOperations(object):
+    """DurationOperations operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -32,9 +39,8 @@ class DurationOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: timedelta or (timedelta, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: timedelta or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/duration/null'
@@ -79,8 +85,8 @@ class DurationOperations(object):
         :type duration_body: timedelta
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/duration/positiveduration'
@@ -120,9 +126,8 @@ class DurationOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: timedelta or (timedelta, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: timedelta or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/duration/positiveduration'
@@ -165,9 +170,8 @@ class DurationOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: timedelta or (timedelta, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: timedelta or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/duration/invalid'

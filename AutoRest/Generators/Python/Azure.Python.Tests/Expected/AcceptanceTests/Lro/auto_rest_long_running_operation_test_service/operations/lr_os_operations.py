@@ -18,6 +18,13 @@ from .. import models
 
 
 class LROsOperations(object):
+    """LROsOperations operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -37,9 +44,8 @@ class LROsOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Product or (Product, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/put/200/succeeded'
@@ -113,9 +119,8 @@ class LROsOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Product or (Product, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/put/200/succeeded/nostate'
@@ -189,9 +194,8 @@ class LROsOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Product or (Product, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/put/202/retry/200'
@@ -266,9 +270,8 @@ class LROsOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Product or (Product, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/put/201/creating/succeeded/200'
@@ -345,9 +348,8 @@ class LROsOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Product or (Product, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/put/200/updating/succeeded/200'
@@ -422,9 +424,8 @@ class LROsOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Product or (Product, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/put/201/created/failed/200'
@@ -501,9 +502,8 @@ class LROsOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Product or (Product, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/put/200/accepted/canceled/200'
@@ -577,9 +577,8 @@ class LROsOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Product or (Product, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/put/noheader/202/200'
@@ -659,9 +658,8 @@ class LROsOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Product or (Product, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/putasync/retry/succeeded'
@@ -743,9 +741,8 @@ class LROsOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Product or (Product, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/putasync/noretry/succeeded'
@@ -826,9 +823,8 @@ class LROsOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Product or (Product, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/putasync/retry/failed'
@@ -910,9 +906,8 @@ class LROsOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Product or (Product, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/putasync/noretry/canceled'
@@ -992,9 +987,8 @@ class LROsOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Product or (Product, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/putasync/noheader/201/200'
@@ -1071,8 +1065,8 @@ class LROsOperations(object):
         :type sku: Sku or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Sku or (Sku, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: Sku or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/putnonresource/202/200'
@@ -1144,8 +1138,8 @@ class LROsOperations(object):
         :type sku: Sku or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Sku or (Sku, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: Sku or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/putnonresourceasync/202/200'
@@ -1217,9 +1211,8 @@ class LROsOperations(object):
         :type product: SubProduct or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: SubProduct or (SubProduct, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: SubProduct or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/putsubresource/202/200'
@@ -1291,9 +1284,8 @@ class LROsOperations(object):
         :type product: SubProduct or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: SubProduct or (SubProduct, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: SubProduct or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/putsubresourceasync/202/200'
@@ -1366,9 +1358,8 @@ class LROsOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Product or (Product, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/delete/provisioning/202/accepted/200/succeeded'
@@ -1446,9 +1437,8 @@ class LROsOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Product or (Product, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/delete/provisioning/202/deleting/200/failed'
@@ -1526,9 +1516,8 @@ class LROsOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Product or (Product, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/delete/provisioning/202/deleting/200/canceled'
@@ -1603,8 +1592,8 @@ class LROsOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/delete/204/succeeded'
@@ -1662,9 +1651,8 @@ class LROsOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Product or (Product, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/delete/202/retry/200'
@@ -1735,9 +1723,8 @@ class LROsOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Product or (Product, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/delete/202/noretry/204'
@@ -1808,8 +1795,8 @@ class LROsOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/delete/noheader'
@@ -1870,8 +1857,8 @@ class LROsOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/deleteasync/noheader/202/204'
@@ -1932,8 +1919,8 @@ class LROsOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/deleteasync/retry/succeeded'
@@ -1996,8 +1983,8 @@ class LROsOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/deleteasync/noretry/succeeded'
@@ -2060,8 +2047,8 @@ class LROsOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/deleteasync/retry/failed'
@@ -2124,8 +2111,8 @@ class LROsOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/deleteasync/retry/canceled'
@@ -2188,8 +2175,8 @@ class LROsOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Sku or (Sku, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: Sku or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/post/payload/200'
@@ -2258,8 +2245,8 @@ class LROsOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/post/202/retry/200'
@@ -2330,9 +2317,8 @@ class LROsOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Product or (Product, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/post/202/noretry/204'
@@ -2413,9 +2399,8 @@ class LROsOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Product or (Product, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/postasync/retry/succeeded'
@@ -2497,9 +2482,8 @@ class LROsOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Product or (Product, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/postasync/noretry/succeeded'
@@ -2581,8 +2565,8 @@ class LROsOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/postasync/retry/failed'
@@ -2655,8 +2639,8 @@ class LROsOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/postasync/retry/canceled'

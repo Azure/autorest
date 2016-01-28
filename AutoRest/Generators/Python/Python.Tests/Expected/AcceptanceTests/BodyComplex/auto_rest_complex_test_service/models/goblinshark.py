@@ -13,6 +13,10 @@ from .shark import Shark
 
 
 class Goblinshark(Shark):
+    """Goblinshark
+
+    :param int jawsize
+    """
 
     _required = []
 
@@ -21,10 +25,6 @@ class Goblinshark(Shark):
     }
 
     def __init__(self, *args, **kwargs):
-        """Goblinshark
-
-        :param int jawsize
-        """
         self.jawsize = None
 
         super(Goblinshark, self).__init__(*args, **kwargs)

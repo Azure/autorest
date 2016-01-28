@@ -13,6 +13,10 @@ from .shark import Shark
 
 
 class Sawshark(Shark):
+    """Sawshark
+
+    :param bytearray picture
+    """
 
     _required = []
 
@@ -21,10 +25,6 @@ class Sawshark(Shark):
     }
 
     def __init__(self, *args, **kwargs):
-        """Sawshark
-
-        :param bytearray picture
-        """
         self.picture = None
 
         super(Sawshark, self).__init__(*args, **kwargs)

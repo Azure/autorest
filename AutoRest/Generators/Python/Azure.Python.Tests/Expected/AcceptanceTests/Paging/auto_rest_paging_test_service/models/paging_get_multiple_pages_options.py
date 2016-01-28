@@ -15,19 +15,17 @@ from msrest.serialization import Model
 class PagingGetMultiplePagesOptions(Model):
     """
     Additional parameters for the getMultiplePages operation.
+
+    :param int maxresults: Sets the maximum number of items to return in the
+     response.
+    :param int timeout: Sets the maximum time that the server can spend
+     processing the request, in seconds. The default is 30 seconds. Default
+     value: 30 .
     """
 
     _required = []
 
     def __init__(self, *args, **kwargs):
-        """PagingGetMultiplePagesOptions
-
-        :param int maxresults: Sets the maximum number of items to return in
-        the response.
-        :param int timeout: Sets the maximum time that the server can spend
-        processing the request, in seconds. The default is 30 seconds.
-        Default value: 30 .
-        """
         self.maxresults = None
         self.timeout = None
 

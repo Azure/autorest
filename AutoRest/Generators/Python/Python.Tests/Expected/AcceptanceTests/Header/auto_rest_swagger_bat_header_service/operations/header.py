@@ -15,6 +15,13 @@ from .. import models
 
 
 class Header(object):
+    """Header operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -29,13 +36,13 @@ class Header(object):
         """
         Send a post request with header value "User-Agent": "overwrite"
 
-        :param user_agent: Send a post request with header value "User-Agent":
-        "overwrite"
+        :param user_agent: Send a post request with header value
+         "User-Agent": "overwrite"
         :type user_agent: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/header/param/existingkey'
@@ -68,8 +75,8 @@ class Header(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/header/response/existingkey'
@@ -103,12 +110,12 @@ class Header(object):
         Send a post request with header value "Content-Type": "text/html"
 
         :param content_type: Send a post request with header value
-        "Content-Type": "text/html"
+         "Content-Type": "text/html"
         :type content_type: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/header/param/protectedkey'
@@ -141,8 +148,8 @@ class Header(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/header/response/protectedkey'
@@ -177,14 +184,14 @@ class Header(object):
         "value": 1 or "scenario": "negative", "value": -2
 
         :param scenario: Send a post request with header values "scenario":
-        "positive" or "negative"
+         "positive" or "negative"
         :type scenario: str
         :param value: Send a post request with header values 1 or -2
         :type value: int
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/header/param/prim/integer'
@@ -217,12 +224,12 @@ class Header(object):
         Get a response with header value "value": 1 or -2
 
         :param scenario: Send a post request with header values "scenario":
-        "positive" or "negative"
+         "positive" or "negative"
         :type scenario: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/header/response/prim/integer'
@@ -258,14 +265,14 @@ class Header(object):
         "value": 105 or "scenario": "negative", "value": -2
 
         :param scenario: Send a post request with header values "scenario":
-        "positive" or "negative"
+         "positive" or "negative"
         :type scenario: str
         :param value: Send a post request with header values 105 or -2
         :type value: long
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/header/param/prim/long'
@@ -298,12 +305,12 @@ class Header(object):
         Get a response with header value "value": 105 or -2
 
         :param scenario: Send a post request with header values "scenario":
-        "positive" or "negative"
+         "positive" or "negative"
         :type scenario: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/header/response/prim/long'
@@ -339,14 +346,14 @@ class Header(object):
         "value": 0.07 or "scenario": "negative", "value": -3.0
 
         :param scenario: Send a post request with header values "scenario":
-        "positive" or "negative"
+         "positive" or "negative"
         :type scenario: str
         :param value: Send a post request with header values 0.07 or -3.0
         :type value: float
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/header/param/prim/float'
@@ -379,12 +386,12 @@ class Header(object):
         Get a response with header value "value": 0.07 or -3.0
 
         :param scenario: Send a post request with header values "scenario":
-        "positive" or "negative"
+         "positive" or "negative"
         :type scenario: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/header/response/prim/float'
@@ -420,14 +427,14 @@ class Header(object):
         "value": 7e120 or "scenario": "negative", "value": -3.0
 
         :param scenario: Send a post request with header values "scenario":
-        "positive" or "negative"
+         "positive" or "negative"
         :type scenario: str
         :param value: Send a post request with header values 7e120 or -3.0
         :type value: float
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/header/param/prim/double'
@@ -460,12 +467,12 @@ class Header(object):
         Get a response with header value "value": 7e120 or -3.0
 
         :param scenario: Send a post request with header values "scenario":
-        "positive" or "negative"
+         "positive" or "negative"
         :type scenario: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/header/response/prim/double'
@@ -501,14 +508,14 @@ class Header(object):
         true or "scenario": "false", "value": false
 
         :param scenario: Send a post request with header values "scenario":
-        "true" or "false"
+         "true" or "false"
         :type scenario: str
         :param value: Send a post request with header values true or false
         :type value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/header/param/prim/bool'
@@ -541,12 +548,12 @@ class Header(object):
         Get a response with header value "value": true or false
 
         :param scenario: Send a post request with header values "scenario":
-        "true" or "false"
+         "true" or "false"
         :type scenario: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/header/response/prim/bool'
@@ -583,15 +590,15 @@ class Header(object):
         "value": null or "scenario": "empty", "value": ""
 
         :param scenario: Send a post request with header values "scenario":
-        "valid" or "null" or "empty"
+         "valid" or "null" or "empty"
         :type scenario: str
         :param value: Send a post request with header values "The quick brown
-        fox jumps over the lazy dog" or null or ""
+         fox jumps over the lazy dog" or null or ""
         :type value: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/header/param/prim/string'
@@ -626,12 +633,12 @@ class Header(object):
         lazy dog" or null or ""
 
         :param scenario: Send a post request with header values "scenario":
-        "valid" or "null" or "empty"
+         "valid" or "null" or "empty"
         :type scenario: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/header/response/prim/string'
@@ -667,15 +674,15 @@ class Header(object):
         "2010-01-01" or "scenario": "min", "value": "0001-01-01"
 
         :param scenario: Send a post request with header values "scenario":
-        "valid" or "min"
+         "valid" or "min"
         :type scenario: str
         :param value: Send a post request with header values "2010-01-01" or
-        "0001-01-01"
+         "0001-01-01"
         :type value: date
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/header/param/prim/date'
@@ -708,12 +715,12 @@ class Header(object):
         Get a response with header values "2010-01-01" or "0001-01-01"
 
         :param scenario: Send a post request with header values "scenario":
-        "valid" or "min"
+         "valid" or "min"
         :type scenario: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/header/response/prim/date'
@@ -750,15 +757,15 @@ class Header(object):
         "0001-01-01T00:00:00Z"
 
         :param scenario: Send a post request with header values "scenario":
-        "valid" or "min"
+         "valid" or "min"
         :type scenario: str
         :param value: Send a post request with header values
-        "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
+         "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
         :type value: datetime
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/header/param/prim/datetime'
@@ -792,12 +799,12 @@ class Header(object):
         "0001-01-01T00:00:00Z"
 
         :param scenario: Send a post request with header values "scenario":
-        "valid" or "min"
+         "valid" or "min"
         :type scenario: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/header/response/prim/datetime'
@@ -834,15 +841,15 @@ class Header(object):
         01 Jan 0001 00:00:00 GMT"
 
         :param scenario: Send a post request with header values "scenario":
-        "valid" or "min"
+         "valid" or "min"
         :type scenario: str
-        :param value: Send a post request with header values "Wed, 01 Jan 2010
-        12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
+        :param value: Send a post request with header values "Wed, 01 Jan
+         2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
         :type value: datetime or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/header/param/prim/datetimerfc1123'
@@ -877,12 +884,12 @@ class Header(object):
         "Mon, 01 Jan 0001 00:00:00 GMT"
 
         :param scenario: Send a post request with header values "scenario":
-        "valid" or "min"
+         "valid" or "min"
         :type scenario: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/header/response/prim/datetimerfc1123'
@@ -918,15 +925,15 @@ class Header(object):
         "P123DT22H14M12.011S"
 
         :param scenario: Send a post request with header values "scenario":
-        "valid"
+         "valid"
         :type scenario: str
         :param value: Send a post request with header values
-        "P123DT22H14M12.011S"
+         "P123DT22H14M12.011S"
         :type value: timedelta
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/header/param/prim/duration'
@@ -959,12 +966,12 @@ class Header(object):
         Get a response with header values "P123DT22H14M12.011S"
 
         :param scenario: Send a post request with header values "scenario":
-        "valid"
+         "valid"
         :type scenario: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/header/response/prim/duration'
@@ -1000,14 +1007,14 @@ class Header(object):
         "啊齄丂狛狜隣郎隣兀﨩"
 
         :param scenario: Send a post request with header values "scenario":
-        "valid"
+         "valid"
         :type scenario: str
         :param value: Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
         :type value: bytearray
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/header/param/prim/byte'
@@ -1040,12 +1047,12 @@ class Header(object):
         Get a response with header values "啊齄丂狛狜隣郎隣兀﨩"
 
         :param scenario: Send a post request with header values "scenario":
-        "valid"
+         "valid"
         :type scenario: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/header/response/prim/byte'
@@ -1081,15 +1088,15 @@ class Header(object):
         "GREY" or "scenario": "null", "value": null
 
         :param scenario: Send a post request with header values "scenario":
-        "valid" or "null" or "empty"
+         "valid" or "null" or "empty"
         :type scenario: str
-        :param value: Send a post request with header values 'GREY' . Possible
-        values for this parameter include: 'White', 'black', 'GREY'
+        :param value: Send a post request with header values 'GREY' .
+         Possible values for this parameter include: 'White', 'black', 'GREY'
         :type value: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/header/param/prim/enum'
@@ -1123,12 +1130,12 @@ class Header(object):
         Get a response with header values "GREY" or null
 
         :param scenario: Send a post request with header values "scenario":
-        "valid" or "null" or "empty"
+         "valid" or "null" or "empty"
         :type scenario: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/header/response/prim/enum'
@@ -1165,8 +1172,8 @@ class Header(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'

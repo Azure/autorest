@@ -14,6 +14,12 @@ from msrest.exceptions import HttpOperationError
 
 
 class Error(Model):
+    """Error
+
+    :param int code
+    :param str message
+    :param str fields
+    """
 
     _required = []
 
@@ -24,12 +30,6 @@ class Error(Model):
     }
 
     def __init__(self, *args, **kwargs):
-        """Error
-
-        :param int code
-        :param str message
-        :param str fields
-        """
         self.code = None
         self.message = None
         self.fields = None
@@ -38,6 +38,11 @@ class Error(Model):
 
 
 class ErrorException(HttpOperationError):
+    """Server responsed with exception of type: 'Error'.
+
+    :param deserialize: A deserializer
+    :param response: Server response to be deserialized.
+    """
 
     def __init__(self, deserialize, response, *args):
 

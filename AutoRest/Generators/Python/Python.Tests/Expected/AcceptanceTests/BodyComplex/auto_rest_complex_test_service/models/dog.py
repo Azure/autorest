@@ -13,6 +13,10 @@ from .pet import Pet
 
 
 class Dog(Pet):
+    """Dog
+
+    :param str food
+    """
 
     _required = []
 
@@ -21,10 +25,6 @@ class Dog(Pet):
     }
 
     def __init__(self, *args, **kwargs):
-        """Dog
-
-        :param str food
-        """
         self.food = None
 
         super(Dog, self).__init__(*args, **kwargs)

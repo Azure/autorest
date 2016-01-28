@@ -17,6 +17,13 @@ from .. import models
 
 
 class XMsClientRequestIdOperations(object):
+    """XMsClientRequestIdOperations operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -34,8 +41,8 @@ class XMsClientRequestIdOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/azurespecials/overwrite/x-ms-client-request-id/method/'
@@ -73,12 +80,12 @@ class XMsClientRequestIdOperations(object):
         9C4D50EE-2D56-4CD3-8152-34347DC9F2B0.
 
         :param x_ms_client_request_id: This should appear as a method
-        parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
+         parameter, use value '9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
         :type x_ms_client_request_id: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/azurespecials/overwrite/x-ms-client-request-id/via-param/method/'

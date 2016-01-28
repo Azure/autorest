@@ -18,6 +18,29 @@ from . import models
 
 
 class StorageManagementClientConfiguration(AzureConfiguration):
+    """Configuration for StorageManagementClient
+
+    :param credentials: Gets Azure subscription credentials.
+    :type credentials: credentials
+    :param subscription_id: Gets subscription credentials which uniquely
+     identify Microsoft Azure subscription. The subscription ID forms part of
+     the URI for every service call.
+    :type subscription_id: str
+    :param api_version: Client Api Version.
+    :type api_version: str or None
+    :param accept_language: Gets or sets the preferred language for the
+     response.
+    :type accept_language: str or None
+    :param long_running_operation_retry_timeout: Gets or sets the retry
+     timeout in seconds for Long Running Operations. Default value is 30.
+    :type long_running_operation_retry_timeout: int or None
+    :param generate_client_request_id: When set to true a unique
+     x-ms-client-request-id value is generated and included in each request.
+     Default is true.
+    :type generate_client_request_id: bool or None
+    :param str base_url: Service URL
+    :param str filepath: Existing config
+    """
 
     def __init__(
             self, credentials, subscription_id, api_version='2015-05-01-preview', accept_language='en-US', long_running_operation_retry_timeout=30, generate_client_request_id=True, base_url=None, filepath=None):
@@ -42,6 +65,11 @@ class StorageManagementClientConfiguration(AzureConfiguration):
 
 
 class StorageManagementClient(object):
+    """
+
+    :param config: Configuration for client.
+    :type config: StorageManagementClientConfiguration
+    """
 
     def __init__(self, config):
 
