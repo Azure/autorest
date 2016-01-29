@@ -27,6 +27,8 @@ public class ApplicationTokenCredentials extends TokenCredentials {
     private String secret;
     /** The Azure environment to authenticate with. */
     private AzureEnvironment environment;
+    /** The current authentication result. */
+    private AuthenticationResult authenticationResult;
 
     /**
      * Initializes a new instance of the UserTokenCredentials.
@@ -87,33 +89,27 @@ public class ApplicationTokenCredentials extends TokenCredentials {
 
     @Override
     public String getToken() throws IOException {
-        if (token == null) {
-            token = acquireAccessToken();
+        if (authenticationResult.getAccessToken() == null) {
+            acquireAccessToken();
         }
-        return token;
+        return authenticationResult.getAccessToken();
     }
 
     @Override
     public void refreshToken() throws IOException {
-        token = acquireAccessToken();
+        acquireAccessToken();
     }
 
-    private String acquireAccessToken() throws IOException {
+    private void acquireAccessToken() throws IOException {
         String authorityUrl = this.getEnvironment().getAuthenticationEndpoint() + this.getDomain();
         AuthenticationContext context = new AuthenticationContext(authorityUrl, this.getEnvironment().isValidateAuthority(), Executors.newSingleThreadExecutor());
-        AuthenticationResult result;
         try {
-            result = context.acquireToken(
+            authenticationResult = context.acquireToken(
                     this.getEnvironment().getTokenAudience(),
                     new ClientCredential(this.getClientId(), this.getSecret()),
                     null).get();
         } catch (Exception e) {
             throw new IOException(e.getMessage(), e);
-        }
-        if (result != null && result.getAccessToken() != null) {
-            return result.getAccessToken();
-        } else {
-            throw new IOException("Failed to acquire access token");
         }
     }
 }
