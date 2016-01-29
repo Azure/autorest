@@ -115,8 +115,8 @@ public class UserTokenCredentials extends TokenCredentials {
 
     @Override
     public String getToken() throws IOException {
-        if (authenticationResult != null &&
-            authenticationResult.getExpiresOnDate().before(new Date())) {
+        if (authenticationResult != null
+            && authenticationResult.getExpiresOnDate().before(new Date())) {
                 acquireAccessTokenFromRefreshToken();
         } else {
             acquireAccessToken();
@@ -151,7 +151,7 @@ public class UserTokenCredentials extends TokenCredentials {
             authenticationResult = context.acquireTokenByRefreshToken(
                     authenticationResult.getRefreshToken(),
                     this.getClientId(),
-                    null,null).get();
+                    null, null).get();
         } catch (Exception e) {
             throw new IOException(e.getMessage(), e);
         }

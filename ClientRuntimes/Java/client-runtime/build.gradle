@@ -27,7 +27,7 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:2.6.0'
     compile 'com.squareup.okhttp:logging-interceptor:2.6.0'
     compile 'com.squareup.retrofit:converter-jackson:2.0.0-beta2'
-    compile 'com.fasterxml.jackson.datatype:jackson-datatype-joda:2.1.1'
+    compile 'com.fasterxml.jackson.datatype:jackson-datatype-joda:2.7.0'
     testCompile 'junit:junit:4.11'
     testCompile 'junit:junit-dep:4.11'
 }

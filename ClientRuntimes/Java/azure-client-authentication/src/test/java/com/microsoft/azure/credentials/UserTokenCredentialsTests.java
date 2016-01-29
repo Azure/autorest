@@ -17,7 +17,7 @@ import java.io.IOException;
 import java.util.Date;
 
 public class UserTokenCredentialsTests {
-    MockUserTokenCredentials credentials = new MockUserTokenCredentials(
+    private static MockUserTokenCredentials credentials = new MockUserTokenCredentials(
             "clientId",
             "domain",
             "username",
@@ -34,7 +34,7 @@ public class UserTokenCredentialsTests {
         Assert.assertEquals("token2", credentials.getToken());
     }
 
-    public class MockUserTokenCredentials extends UserTokenCredentials {
+    public static class MockUserTokenCredentials extends UserTokenCredentials {
         private AuthenticationResult authenticationResult;
 
         public MockUserTokenCredentials(String clientId, String domain, String username, String password, String clientRedirectUri, AzureEnvironment environment) {
@@ -43,8 +43,8 @@ public class UserTokenCredentialsTests {
 
         @Override
         public String getToken() throws IOException {
-            if (authenticationResult != null &&
-                    authenticationResult.getExpiresOnDate().before(new Date())) {
+            if (authenticationResult != null
+                && authenticationResult.getExpiresOnDate().before(new Date())) {
                 acquireAccessTokenFromRefreshToken();
             } else {
                 acquireAccessToken();
