@@ -35,17 +35,6 @@ dependencies {
     testCompile 'commons-io:commons-io:2.4'
 }
 
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            pom.project {
-                name 'Microsoft AutoRest Java Code Generator Tests'
-                description 'This is the Basic Acceptance Tests for Java Code Gen.'
-            }
-        }
-    }
-}
-
 test {
     testLogging {
         events "passed", "skipped", "failed", "standardError"
