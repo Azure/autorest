@@ -30,15 +30,40 @@ dependencies {
     compile 'com.fasterxml.jackson.datatype:jackson-datatype-joda:2.1.1'
     testCompile 'junit:junit:4.11'
     testCompile 'junit:junit-dep:4.11'
+    deployerJars "org.apache.maven.wagon:wagon-ftp:2.10"
 }
 
 uploadArchives {
     repositories {
         mavenDeployer {
-            pom.setArtifactId "client-runtime"
+            configuration = configurations.deployerJars
+            snapshotRepository(url: "ftp://waws-prod-bay-005.ftp.azurewebsites.windows.net/site/wwwroot/") {
+                authentication(userName: username, password: password)
+            }
             pom.project {
                 name 'Microsoft AutoRest Runtime for Java'
                 description 'This is the client runtime for AutoRest generated Java clients.'
+                url 'https://github.com/Azure/autorest'
+
+                scm {
+                    url 'scm:git:https://github.com/Azure/AutoRest'
+                    connection 'scm:git:git://github.com/Azure/AutoRest.git'
+                }
+
+                licenses {
+                    license {
+                        name 'The MIT License (MIT)'
+                        url 'http://opensource.org/licenses/MIT'
+                        distribution 'repo'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'microsoft'
+                        name 'Microsoft'
+                    }
+                }
             }
         }
     }

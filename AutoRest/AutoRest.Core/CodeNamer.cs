@@ -401,11 +401,11 @@ namespace Microsoft.Rest.Generator
         /// Gets valid name for the identifier.
         /// </summary>
         /// <param name="name">String to parse.</param>
-        /// <param name="allowerCharacters">Allowed characters.</param>
+        /// <param name="allowedCharacters">Allowed characters.</param>
         /// <returns>Name with invalid characters removed.</returns>
-        private static string GetValidName(string name, params char[] allowerCharacters)
+        protected static string GetValidName(string name, params char[] allowedCharacters)
         {
-            var correctName = RemoveInvalidCharacters(name, allowerCharacters);
+            var correctName = RemoveInvalidCharacters(name, allowedCharacters);
 
             // here we have only letters and digits or an empty string
             if (string.IsNullOrEmpty(correctName) ||
@@ -423,7 +423,7 @@ namespace Microsoft.Rest.Generator
                         sb.Append(symbol);
                     }
                 }
-                correctName = RemoveInvalidCharacters(sb.ToString(), allowerCharacters);
+                correctName = RemoveInvalidCharacters(sb.ToString(), allowedCharacters);
             }
 
             // if it is still empty string, throw

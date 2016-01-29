@@ -309,6 +309,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
                         Resources.ParameterValueIsMissing, property.Name);
                 }
             }
+
             if (CustomSettings != null)
             {
                 foreach (var unmatchedSetting in CustomSettings.Keys)
