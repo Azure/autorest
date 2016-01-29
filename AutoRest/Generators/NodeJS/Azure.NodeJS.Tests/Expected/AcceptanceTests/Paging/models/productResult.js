@@ -42,7 +42,7 @@ ProductResult.prototype.mapper = function () {
       modelProperties: {
         values: {
           required: false,
-          serializedName: 'values',
+          serializedName: '',
           type: {
             name: 'Sequence',
             element: {

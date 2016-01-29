@@ -4,6 +4,8 @@ mono:
   - beta
 addons:
   apt:
+    sources:
+    - deadsnakes
     packages:
     # Packages required for android build
     - libc6-i386
@@ -26,6 +28,7 @@ install:
   - rvm use 2.2.1 --install --binary --fuzzy
   - gem install bundler
   - bundle install
+  - pip install --user tox
   # Install android SDK
   - mkdir android
   - wget -qO- "http://dl.google.com/android/android-sdk_r23.0.2-linux.tgz" | tar -zxv -C ./android

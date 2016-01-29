@@ -1,0 +1,93 @@
+﻿@using Microsoft.Rest.Generator.ClientModel
+@using Microsoft.Rest.Generator.Python
+@using Microsoft.Rest.Generator.Python.Templates
+@using Microsoft.Rest.Generator.Python.TemplateModels
+@using Microsoft.Rest.Generator.Utilities
+@using System.Linq
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Azure.Python.AzureServiceClientTemplateModel>
+# coding=utf-8
+# --------------------------------------------------------------------------
+@Header("# ").TrimMultilineHeader()
+# --------------------------------------------------------------------------
+@EmptyLine
+from msrest.service_client import ServiceClient
+from msrest import Serializer, Deserializer
+from msrestazure import AzureConfiguration
+@if (Model.MethodTemplateModels.Any())
+{
+<text>
+from msrest.pipeline import ClientRawResponse
+@if(Model.HasAnyCloudErrors)
+{
+@:from msrestazure.azure_exceptions import CloudError
+}
+@if (Model.HasAnyLongRunOperation)
+{
+@:from msrestazure.azure_operation import AzureOperationPoller
+}
+import uuid
+</text>
+}
+@if (Model.MethodGroupModels.Any())
+{
+  foreach (var modelGroupType in Model.MethodGroupModels)
+  {
+@:from .operations.@(modelGroupType.MethodGroupType.ToPythonCase()) import @modelGroupType.MethodGroupType
+  }
+}
+@if (Model.HasAnyModel)
+{
+@:from . import models
+}
+@EmptyLine
+@EmptyLine
+class @(Model.Name)Configuration(AzureConfiguration):
+@EmptyLine
+    def __init__(
+            self, @(Model.RequiredConstructorParameters)base_url=None, filepath=None):
+@EmptyLine
+        @Model.ValidateRequiredParameters
+        if not base_url:
+            base_url = '@Model.BaseUrl'
+@EmptyLine
+        super(@(Model.Name)Configuration, self).__init__(base_url, filepath)
+@EmptyLine
+        self.user_agent = '@Model.UserAgent'
+@if (Model.Properties.Any())
+{
+@EmptyLine
+  foreach (var property in Model.Properties)
+  {
+        @:self.@(property.Name) = @(property.Name)
+  }
+}
+@EmptyLine
+@EmptyLine
+class @(Model.Name)(object):
+@EmptyLine
+    def __init__(self, config):
+@EmptyLine
+        self._client = ServiceClient(@(Model.Properties.Any(p => p.Type == PrimaryType.Credentials) ? "config.credentials" : "None"), config)
+@EmptyLine
+@if (Model.ModelTemplateModels.Any())
+{
+        @:client_models = {k: v for k, v in models.__dict__.items() if isinstance(v, type)}
+}
+else
+{
+        @:client_models = {}
+}
+        self._serialize = Serializer()
+        self._deserialize = Deserializer(client_models)
+@EmptyLine
+        self.config = config
+@foreach (var methodGroup in Model.MethodGroupModels)
+{
+        @:self.@(methodGroup.MethodGroupName.ToPythonCase()) = @(methodGroup.MethodGroupType)(
+            @:self._client, self.config, self._serialize, self._deserialize)
+}
+@foreach (var method in Model.MethodTemplateModels)
+{
+@EmptyLine
+@(Include(new AzureMethodTemplate(), (AzureMethodTemplateModel)method))
+}

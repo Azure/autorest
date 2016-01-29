@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>312b07bc-a830-4289-91b4-c53a2ec37d58</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>AcceptanceTests\__init__.py</StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <Name>Python.Tests</Name>
+    <RootNamespace>Python.Tests</RootNamespace>
+    <InterpreterId>
+    </InterpreterId>
+    <InterpreterVersion>
+    </InterpreterVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="AcceptanceTests\form_data_tests.py" />
+    <Compile Include="AcceptanceTests\zzz_tests.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AcceptanceTests\array_tests.py" />
+    <Compile Include="AcceptanceTests\bool_tests.py" />
+    <Compile Include="AcceptanceTests\byte_tests.py" />
+    <Compile Include="AcceptanceTests\complex_tests.py" />
+    <Compile Include="AcceptanceTests\datetime_rfc_tests.py" />
+    <Compile Include="AcceptanceTests\datetime_tests.py" />
+    <Compile Include="AcceptanceTests\date_tests.py" />
+    <Compile Include="AcceptanceTests\dictionary_tests.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AcceptanceTests\duration_tests.py" />
+    <Compile Include="AcceptanceTests\file_tests.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AcceptanceTests\header_tests.py" />
+    <Compile Include="AcceptanceTests\http_tests.py" />
+    <Compile Include="AcceptanceTests\integer_tests.py" />
+    <Compile Include="AcceptanceTests\number_tests.py" />
+    <Compile Include="AcceptanceTests\required_optional_tests.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AcceptanceTests\string_tests.py" />
+    <Compile Include="AcceptanceTests\url_tests.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AcceptanceTests\__init__.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Expected\AcceptanceTests\**\*.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AcceptanceTests\" />
+    <Folder Include="Expected\" />
+    <Folder Include="Expected\AcceptanceTests\" />
+    <Folder Include="Expected\AcceptanceTests\BodyArray\" />
+    <Folder Include="Expected\AcceptanceTests\BodyArray\auto_rest_swagger_bat_array_service\" />
+    <Folder Include="Expected\AcceptanceTests\BodyArray\auto_rest_swagger_bat_array_service\models\" />
+    <Folder Include="Expected\AcceptanceTests\BodyArray\auto_rest_swagger_bat_array_service\operations\" />
+    <Folder Include="Expected\AcceptanceTests\BodyBoolean\" />
+    <Folder Include="Expected\AcceptanceTests\BodyBoolean\auto_rest_bool_test_service\" />
+    <Folder Include="Expected\AcceptanceTests\BodyBoolean\auto_rest_bool_test_service\models\" />
+    <Folder Include="Expected\AcceptanceTests\BodyBoolean\auto_rest_bool_test_service\operations\" />
+    <Folder Include="Expected\AcceptanceTests\BodyByte\" />
+    <Folder Include="Expected\AcceptanceTests\BodyByte\auto_rest_swagger_bat_byte_service\" />
+    <Folder Include="Expected\AcceptanceTests\BodyByte\auto_rest_swagger_bat_byte_service\models\" />
+    <Folder Include="Expected\AcceptanceTests\BodyByte\auto_rest_swagger_bat_byte_service\operations\" />
+    <Folder Include="Expected\AcceptanceTests\BodyComplex\" />
+    <Folder Include="Expected\AcceptanceTests\BodyComplex\auto_rest_complex_test_service\" />
+    <Folder Include="Expected\AcceptanceTests\BodyComplex\auto_rest_complex_test_service\models\" />
+    <Folder Include="Expected\AcceptanceTests\BodyComplex\auto_rest_complex_test_service\operations\" />
+    <Folder Include="Expected\AcceptanceTests\BodyDateTimeRfc1123\" />
+    <Folder Include="Expected\AcceptanceTests\BodyDateTimeRfc1123\auto_rest_rfc1123_date_time_test_service\" />
+    <Folder Include="Expected\AcceptanceTests\BodyDateTimeRfc1123\auto_rest_rfc1123_date_time_test_service\models\" />
+    <Folder Include="Expected\AcceptanceTests\BodyDateTimeRfc1123\auto_rest_rfc1123_date_time_test_service\operations\" />
+    <Folder Include="Expected\AcceptanceTests\BodyDateTime\" />
+    <Folder Include="Expected\AcceptanceTests\BodyDateTime\auto_rest_date_time_test_service\" />
+    <Folder Include="Expected\AcceptanceTests\BodyDateTime\auto_rest_date_time_test_service\models\" />
+    <Folder Include="Expected\AcceptanceTests\BodyDateTime\auto_rest_date_time_test_service\operations\" />
+    <Folder Include="Expected\AcceptanceTests\BodyDate\" />
+    <Folder Include="Expected\AcceptanceTests\BodyDate\auto_rest_date_test_service\" />
+    <Folder Include="Expected\AcceptanceTests\BodyDate\auto_rest_date_test_service\models\" />
+    <Folder Include="Expected\AcceptanceTests\BodyDate\auto_rest_date_test_service\operations\" />
+    <Folder Include="Expected\AcceptanceTests\BodyDictionary\" />
+    <Folder Include="Expected\AcceptanceTests\BodyDictionary\auto_rest_swagger_ba_tdictionary_service\" />
+    <Folder Include="Expected\AcceptanceTests\BodyDictionary\auto_rest_swagger_ba_tdictionary_service\models\" />
+    <Folder Include="Expected\AcceptanceTests\BodyDictionary\auto_rest_swagger_ba_tdictionary_service\operations\" />
+    <Folder Include="Expected\AcceptanceTests\BodyDuration\" />
+    <Folder Include="Expected\AcceptanceTests\BodyDuration\auto_rest_duration_test_service\" />
+    <Folder Include="Expected\AcceptanceTests\BodyDuration\auto_rest_duration_test_service\models\" />
+    <Folder Include="Expected\AcceptanceTests\BodyDuration\auto_rest_duration_test_service\operations\" />
+    <Folder Include="Expected\AcceptanceTests\BodyFile\" />
+    <Folder Include="Expected\AcceptanceTests\BodyFile\auto_rest_swagger_bat_file_service\" />
+    <Folder Include="Expected\AcceptanceTests\BodyFile\auto_rest_swagger_bat_file_service\models\" />
+    <Folder Include="Expected\AcceptanceTests\BodyFile\auto_rest_swagger_bat_file_service\operations\" />
+    <Folder Include="Expected\AcceptanceTests\BodyFormData\" />
+    <Folder Include="Expected\AcceptanceTests\BodyFormData\auto_rest_swagger_bat_form_data_service\" />
+    <Folder Include="Expected\AcceptanceTests\BodyFormData\auto_rest_swagger_bat_form_data_service\models\" />
+    <Folder Include="Expected\AcceptanceTests\BodyFormData\auto_rest_swagger_bat_form_data_service\operations\" />
+    <Folder Include="Expected\AcceptanceTests\BodyInteger\" />
+    <Folder Include="Expected\AcceptanceTests\BodyInteger\auto_rest_integer_test_service\" />
+    <Folder Include="Expected\AcceptanceTests\BodyInteger\auto_rest_integer_test_service\models\" />
+    <Folder Include="Expected\AcceptanceTests\BodyInteger\auto_rest_integer_test_service\operations\" />
+    <Folder Include="Expected\AcceptanceTests\BodyNumber\" />
+    <Folder Include="Expected\AcceptanceTests\BodyNumber\auto_rest_number_test_service\" />
+    <Folder Include="Expected\AcceptanceTests\BodyNumber\auto_rest_number_test_service\models\" />
+    <Folder Include="Expected\AcceptanceTests\BodyNumber\auto_rest_number_test_service\operations\" />
+    <Folder Include="Expected\AcceptanceTests\BodyString\" />
+    <Folder Include="Expected\AcceptanceTests\BodyString\auto_rest_swagger_bat_service\" />
+    <Folder Include="Expected\AcceptanceTests\BodyString\auto_rest_swagger_bat_service\models\" />
+    <Folder Include="Expected\AcceptanceTests\BodyString\auto_rest_swagger_bat_service\operations\" />
+    <Folder Include="Expected\AcceptanceTests\Header\" />
+    <Folder Include="Expected\AcceptanceTests\Header\auto_rest_swagger_bat_header_service\" />
+    <Folder Include="Expected\AcceptanceTests\Header\auto_rest_swagger_bat_header_service\models\" />
+    <Folder Include="Expected\AcceptanceTests\Header\auto_rest_swagger_bat_header_service\operations\" />
+    <Folder Include="Expected\AcceptanceTests\Http\" />
+    <Folder Include="Expected\AcceptanceTests\Http\auto_rest_http_infrastructure_test_service\" />
+    <Folder Include="Expected\AcceptanceTests\Http\auto_rest_http_infrastructure_test_service\models\" />
+    <Folder Include="Expected\AcceptanceTests\Http\auto_rest_http_infrastructure_test_service\operations\" />
+    <Folder Include="Expected\AcceptanceTests\Report\" />
+    <Folder Include="Expected\AcceptanceTests\Report\auto_rest_report_service\" />
+    <Folder Include="Expected\AcceptanceTests\Report\auto_rest_report_service\models\" />
+    <Folder Include="Expected\AcceptanceTests\RequiredOptional\" />
+    <Folder Include="Expected\AcceptanceTests\RequiredOptional\auto_rest_required_optional_test_service\" />
+    <Folder Include="Expected\AcceptanceTests\RequiredOptional\auto_rest_required_optional_test_service\models\" />
+    <Folder Include="Expected\AcceptanceTests\RequiredOptional\auto_rest_required_optional_test_service\operations\" />
+    <Folder Include="Expected\AcceptanceTests\Url\" />
+    <Folder Include="Expected\AcceptanceTests\Url\auto_rest_url_test_service\" />
+    <Folder Include="Expected\AcceptanceTests\Url\auto_rest_url_test_service\models\" />
+    <Folder Include="Expected\AcceptanceTests\Url\auto_rest_url_test_service\operations\" />
+    <Folder Include="Expected\AcceptanceTests\Validation\" />
+    <Folder Include="Expected\AcceptanceTests\Validation\auto_rest_validation_test\" />
+    <Folder Include="Expected\AcceptanceTests\Validation\auto_rest_validation_test\models\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <PtvsTargetsFile>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets</PtvsTargetsFile>
+  </PropertyGroup>
+  <Import Condition="Exists($(PtvsTargetsFile))" Project="$(PtvsTargetsFile)" />
+  <Import Condition="!Exists($(PtvsTargetsFile))" Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
+  <!-- Uncomment the CoreCompile target to enable the Build command in
+       Visual Studio and specify your pre- and post-build commands in
+       the BeforeBuild and AfterBuild targets below. -->
+  <!--<Target Name="CoreCompile" />-->
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+</Project>

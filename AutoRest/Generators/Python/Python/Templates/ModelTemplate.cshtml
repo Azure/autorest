@@ -1,0 +1,114 @@
+﻿@using System;
+@using System.Linq
+@using System.Collections.Generic
+@using Microsoft.Rest.Generator.ClientModel
+@using Microsoft.Rest.Generator.Python
+@using Microsoft.Rest.Generator.Python.TemplateModels
+@using Microsoft.Rest.Generator.Utilities
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.ModelTemplateModel>
+# coding=utf-8
+# --------------------------------------------------------------------------
+@Header("# ").TrimMultilineHeader()
+# --------------------------------------------------------------------------
+@EmptyLine
+@if (Model.BaseModelType != null)
+{
+@:from .@Model.BaseModelType.Name.ToPythonCase() import @Model.BaseModelType.Name
+}
+else
+{
+@:from msrest.serialization import Model
+}
+@if (Model.IsException)
+{
+@:from msrest.exceptions import HttpOperationError
+}
+@EmptyLine
+@EmptyLine
+@if (Model.BaseModelType != null)
+{
+@:class @(Model.Name)(@Model.BaseModelType.Name):
+}
+else
+{
+@:class @(Model.Name)(Model):
+}
+@if (!String.IsNullOrWhiteSpace(Model.Documentation))
+{
+@:    """
+@:    @WrapComment(string.Empty, Model.Documentation)
+@:    """
+}
+@{
+  var requiredFieldList = Model.RequiredFieldsList;
+  var requiredStr = String.Empty;
+  if (requiredFieldList.Count > 0)
+  {
+    for (int i = 0; i < requiredFieldList.Count; i++) 
+    {
+      requiredFieldList[i] = "'" + requiredFieldList[i] + "'";
+    }
+    requiredStr = string.Join(", ", requiredFieldList);
+  }
+@EmptyLine
+    @:_required = [@requiredStr]
+}
+@{
+  var propertyList = new List<Property>(Model.Properties);
+  if (!Model.IsParameterGroup)
+  {
+@EmptyLine
+    @:_attribute_map = {
+    if (propertyList.Count > 0)
+    {
+      for (int i = 0; i < propertyList.Count; i++) 
+      {
+        @:@(ModelTemplateModel.InitializeProperty(propertyList[i]))
+      }
+    }
+    @:}
+  }
+}
+@if (Model.SubModelTypes.Any())
+{
+<text>
+@EmptyLine
+    _subtype_map = {
+        '@Model.BasePolymorphicDiscriminator': {@Model.SubModelTypeList}
+    }
+</text>
+}
+@EmptyLine
+    def __init__(self, *args, **kwargs):
+        """@(Model.Name)
+@EmptyLine
+@for (int i = 0; i < propertyList.Count; i++)
+{
+@:        @WrapComment(string.Empty, ModelTemplateModel.GetPropertyDocumentationString(propertyList[i]))
+}
+        """
+@if (propertyList.Count > 0)
+{
+  for (int i = 0; i < propertyList.Count; i++)
+  {
+        @:@(ModelTemplateModel.InitializeProperty("self", propertyList[i]))
+  }
+@EmptyLine
+}
+        super(@(Model.Name), self).__init__(*args, **kwargs)
+@if (Model.NeedsPolymorphicConverter)
+{
+@EmptyLine
+        @:self.@Model.BasePolymorphicDiscriminator = '@Model.SerializedName'
+}
+@if (Model.IsException)
+{
+@EmptyLine
+@EmptyLine
+@:class @(Model.ExceptionTypeDefinitionName)(HttpOperationError):
+@EmptyLine
+    @:def __init__(self, deserialize, response, *args):
+@EmptyLine
+        @:super(@(Model.ExceptionTypeDefinitionName), self).__init__(deserialize, response, '@(Model.Name)', *args)
+}
+

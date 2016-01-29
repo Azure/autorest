@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Rest.Generator.Logging;
 using Xunit;
+using Microsoft.Rest.Generator.Test.Resource;
 
 namespace Microsoft.Rest.Generator.Test
 {
@@ -91,6 +92,7 @@ namespace Microsoft.Rest.Generator.Test
             var settings = Settings.Create(new[] {"-Modeler", "foo"});
             try
             {
+                var codeGenerator = new SampleCodeGenerator(settings);
                 settings.Validate();
                 Assert.True(false);
             }

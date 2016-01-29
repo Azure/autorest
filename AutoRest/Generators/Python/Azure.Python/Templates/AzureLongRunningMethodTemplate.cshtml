@@ -1,0 +1,147 @@
+@using System;
+@using System.Linq;
+@using Microsoft.Rest.Generator.ClientModel
+@using Microsoft.Rest.Generator.Utilities
+@using Microsoft.Rest.Generator.Python
+@using Microsoft.Rest.Generator.Python.TemplateModels
+@using Microsoft.Rest.Generator.Python.Templates
+@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Azure.Python.AzureMethodTemplateModel>
+    def @(Model.Name.ToPythonCase())(
+            self, @(Model.MethodParameterDeclaration(Model.AddCustomHeader))):
+        """
+@*need to fix comment here for long running function*@
+@if (!String.IsNullOrEmpty(Model.Summary))
+{
+@:        @WrapComment(string.Empty, Model.Summary)
+}
+@if (!String.IsNullOrEmpty(Model.Description))
+{
+@:        @WrapComment(string.Empty, Model.Description)
+}
+@EmptyLine
+@foreach(var parameter in Model.DocumentationParameters)
+{
+@:        @WrapComment(string.Empty, ":param " + parameter.Name + ": " + parameter.Documentation)
+@:        @WrapComment(string.Empty, ":type " + parameter.Name + ": " + MethodTemplateModel.GetDocumentationType(parameter.Type, parameter.IsRequired))
+}
+        @WrapComment(string.Empty, ":param dict custom_headers: headers that will be added to the request")
+        @WrapComment(string.Empty, ":param boolean raw: returns the direct response alongside the deserialized response")
+@if (Model.NeedsCallback)
+{
+@:        @WrapComment(string.Empty, ":param callback: if provided, the runtime will call the callback while streaming upload/download. If streaming upload, response kwarg will be None")
+@:        @WrapComment(string.Empty, ":type callback: Callable[[concurrent.futures.Future], None] or None")
+}
+        @WrapComment(string.Empty, string.Format(":rtype: {0} or ({0}, requests.response) or concurrent.futures.Future", MethodTemplateModel.GetDocumentationType(Model.ReturnType.Body)))
+        """
+        @Model.BuildInputMappings()
+@if (Model.InputParameterTransformation.Any())
+{
+@EmptyLine
+}
+        # Construct URL
+        url = '@(Model.Url)'
+        @(Model.BuildUrlPath("url"))
+@EmptyLine
+        # Construct parameters
+        query_parameters = {}
+        @(Model.BuildUrlQuery("query_parameters"))
+@EmptyLine
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = '@(Model.RequestContentType)'
+        @(Model.SetDefaultHeaders)
+        @(Model.BuildHeaders("header_parameters"))
+@EmptyLine
+@if (Model.RequestBody != null)
+{
+        @:# Construct body
+  if (Model.IsStreamRequestBody)
+  {
+    foreach (var parameter in Model.LocalParameters)
+    {
+      if (parameter.Location == ParameterLocation.Body && parameter.Type == PrimaryType.Stream)
+      {
+        @:body_content = upload_gen(@parameter.Name)
+        break;
+      }
+    }
+  }
+  else if (Model.RequestBody.IsRequired)
+  {
+        @:body_content = self._serialize.body(@Model.RequestBody.Name, '@(Model.RequestBody.Type.ToPythonRuntimeTypeString())')
+  }
+  else
+  {
+        @:if @Model.RequestBody.Name is not None:
+            @:body_content = self._serialize.body(@Model.RequestBody.Name, '@(Model.RequestBody.Type.ToPythonRuntimeTypeString())')
+        @:else:
+            @:body_content = None
+  }
+@EmptyLine
+}
+        # Construct and send request
+        def long_running_send():
+@EmptyLine
+            request = self._client.@(MethodTemplateModel.GetHttpFunction(Model.HttpMethod))(url, query_parameters)
+@if (Model.RequestBody != null)
+{
+            @:return self._client.send(
+                @:request, header_parameters, body_content, **operation_config)
+}
+else
+{
+            @:return self._client.send(request, header_parameters, **operation_config)
+}
+@EmptyLine
+        def get_long_running_status(status_link, headers={}):
+@EmptyLine
+            request = self._client.get(status_link)
+            request.headers.update(headers)
+            return self._client.send(
+                request, header_parameters, **operation_config)
+@EmptyLine
+        def get_long_running_output(response):
+@EmptyLine
+            if @Model.FailureStatusCodePredicate:
+                @Model.RaisedException
+@EmptyLine
+@if (Model.HasAnyResponse)
+{
+            @:deserialized = None
+  if (Model.HasResponseHeader)
+  {
+            @:header_dict = {}
+  }
+@EmptyLine
+  foreach (var responsePair in Model.Responses.Where(r => r.Value.Body != null))
+  {
+            @:if response.status_code == @MethodTemplateModel.GetStatusCodeReference(responsePair.Key):
+    if (responsePair.Value.Body == PrimaryType.Stream)
+    {
+                @:deserialized = self._client.stream_download(response, callback)
+    }
+    else
+    {
+                @:deserialized = self._deserialize('@responsePair.Value.Body.ToPythonRuntimeTypeString()', response)
+    }
+                @:@Model.AddIndividualResponseHeader(responsePair.Key)
+  }
+@EmptyLine
+            @:if raw:
+                @:client_raw_response = ClientRawResponse(deserialized, response)
+                @:@Model.AddResponseHeader()
+                @:return client_raw_response
+@EmptyLine
+            @:return deserialized
+}
+else
+{
+            @:@Model.ReturnEmptyResponse
+}
+@EmptyLine
+        long_running_operation_timeout = operation_config.get(
+            'long_running_operation_timeout',
+            self.config.long_running_operation_timeout)
+        return AzureOperationPoller(
+            long_running_send, get_long_running_output,
+            get_long_running_status, long_running_operation_timeout)
