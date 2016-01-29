@@ -9,7 +9,6 @@ using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Generator.Logging;
 using Microsoft.Rest.Generator.Properties;
-using System.Collections.Generic;
 
 namespace Microsoft.Rest.Generator
 {

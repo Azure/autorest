@@ -5,7 +5,7 @@
 @using Microsoft.Rest.Generator.Python
 @using Microsoft.Rest.Generator.Python.TemplateModels
 @using Microsoft.Rest.Generator.Python.Templates
-@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Azure.Python.AzureMethodTemplateModel>
+@inherits Microsoft.Rest.Generator.Python.PythonTemplate<Microsoft.Rest.Generator.Azure.Python.AzureMethodTemplateModel>
     def @(Model.Name.ToPythonCase())(
             self, @(Model.MethodParameterDeclaration(true))):
         """
@@ -21,12 +21,12 @@
 @*need to fix comment here for paging function*@
 @foreach(var parameter in Model.DocumentationParameters)
 {
-@:        @WrapComment(string.Empty, ":param " + parameter.Name + ": " + parameter.Documentation)
-@:        @WrapComment(string.Empty, ":type " + parameter.Name + ": " + MethodTemplateModel.GetDocumentationType(parameter.Type, parameter.IsRequired))
+@:        @ParameterWrapComment(string.Empty, ":param " + parameter.Name + ": " + parameter.Documentation)
+@:        @ParameterWrapComment(string.Empty, ":type " + parameter.Name + ": " + MethodTemplateModel.GetDocumentationType(parameter.Type, parameter.IsRequired))
 }
-        @WrapComment(string.Empty, ":param dict custom_headers: headers that will be added to the request")
-        @WrapComment(string.Empty, ":param boolean raw: returns the direct response alongside the deserialized response")
-        @WrapComment(string.Empty, string.Format(":rtype: {0} or ({0}, requests.response) or concurrent.futures.Future", MethodTemplateModel.GetDocumentationType(Model.ReturnType.Body)))
+        @ParameterWrapComment(string.Empty, ":param dict custom_headers: headers that will be added to the request")
+        @ParameterWrapComment(string.Empty, ":param boolean raw: returns the direct response alongside the deserialized response")
+        @ParameterWrapComment(string.Empty, string.Format(":rtype: {0} or msrest.pipeline.ClientRawResponse", MethodTemplateModel.GetDocumentationType(Model.ReturnType.Body)))
         """
         @Model.BuildInputMappings()
 @if (Model.InputParameterTransformation.Any())

@@ -5,7 +5,7 @@
 @using Microsoft.Rest.Generator.Python
 @using Microsoft.Rest.Generator.Python.TemplateModels
 @using Microsoft.Rest.Generator.Utilities
-@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Python.ModelTemplateModel>
+@inherits Microsoft.Rest.Generator.Python.PythonTemplate<Microsoft.Rest.Generator.Python.ModelTemplateModel>
 # coding=utf-8
 # --------------------------------------------------------------------------
 @Header("# ").TrimMultilineHeader()
@@ -37,8 +37,20 @@ else
 {
 @:    """
 @:    @WrapComment(string.Empty, Model.Documentation)
-@:    """
 }
+else
+{
+@:    """@(Model.Name)
+}
+@if (Model.Properties.Any())
+{
+@EmptyLine
+  @foreach (var property in Model.Properties)
+  {
+@:    @ParameterWrapComment(string.Empty, ModelTemplateModel.GetPropertyDocumentationString(property))
+  }
+}
+    """
 @{
   var requiredFieldList = Model.RequiredFieldsList;
   var requiredStr = String.Empty;
@@ -80,13 +92,6 @@ else
 }
 @EmptyLine
     def __init__(self, *args, **kwargs):
-        """@(Model.Name)
-@EmptyLine
-@for (int i = 0; i < propertyList.Count; i++)
-{
-@:        @WrapComment(string.Empty, ModelTemplateModel.GetPropertyDocumentationString(propertyList[i]))
-}
-        """
 @if (propertyList.Count > 0)
 {
   for (int i = 0; i < propertyList.Count; i++)
@@ -106,6 +111,11 @@ else
 @EmptyLine
 @EmptyLine
 @:class @(Model.ExceptionTypeDefinitionName)(HttpOperationError):
+@:    """Server responsed with exception of type: '@(Model.Name)'.
+@EmptyLine
+@:    :param deserialize: A deserializer
+@:    :param response: Server response to be deserialized.
+@:    """
 @EmptyLine
     @:def __init__(self, deserialize, response, *args):
 @EmptyLine
