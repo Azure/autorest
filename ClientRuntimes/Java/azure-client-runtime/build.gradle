@@ -21,6 +21,7 @@ checkstyle {
 
 dependencies {
     compile 'com.microsoft.rest:client-runtime:1.0.0-SNAPSHOT'
+    compile 'com.fasterxml.jackson.core:jackson-databind:2.7.0'
     testCompile 'junit:junit:4.11'
     testCompile 'junit:junit-dep:4.11'
     deployerJars "org.apache.maven.wagon:wagon-ftp:2.10"
