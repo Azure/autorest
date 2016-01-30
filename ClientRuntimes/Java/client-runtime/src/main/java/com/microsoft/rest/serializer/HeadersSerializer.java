@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Custom serializer for serializing {@link Byte[]} objects into Base64 strings.
+ * Custom serializer for serializing {@link Headers} objects.
  */
 public class HeadersSerializer extends JsonSerializer<Headers> {
     /**

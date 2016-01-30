@@ -89,7 +89,8 @@ public class ApplicationTokenCredentials extends TokenCredentials {
 
     @Override
     public String getToken() throws IOException {
-        if (authenticationResult.getAccessToken() == null) {
+        if (authenticationResult == null
+            || authenticationResult.getAccessToken() == null) {
             acquireAccessToken();
         }
         return authenticationResult.getAccessToken();
