@@ -2,6 +2,8 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Globalization;
+using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -49,9 +51,11 @@ namespace Microsoft.Rest.Azure
             }
 
             JObject jObject = JObject.Load(reader);
-            if (jObject.Property(ErrorNode) != null)
+            JProperty errorObject = jObject.Properties().FirstOrDefault(p => 
+                ErrorNode.Equals(p.Name, StringComparison.OrdinalIgnoreCase));
+            if (errorObject != null)
             {
-                jObject = jObject[ErrorNode] as JObject;
+                jObject = errorObject.Value as JObject;
             }
             return jObject.ToObject<CloudError>(serializer.WithoutConverter(this));
         }
