@@ -1,14 +1,7 @@
 language: csharp
-sudo: required
-dist: trusty
-env:
-  matrix:
-  - DNX_VERSION=1.0.0-rc1-final DNX_USER_HOME=~/.dnx
+sudo: false
 mono:
-- 4.0.5
-os:
-- linux
-- osx
+  - beta
 addons:
   apt:
     sources:
@@ -20,19 +13,13 @@ addons:
     - lib32gcc1
     - lib32ncurses5
     - lib32z1
-    # Packages for DNX    - gettext
-    - libcurl4-openssl-dev
-    - libicu-dev
-    - libssl-dev
-    - libunwind8
-    - zlib1g
 install:
-  # Install DNVM
-  - curl -sSL https://raw.githubusercontent.com/aspnet/Home/dev/dnvminstall.sh | DNX_USER_HOME=$DNX_USER_HOME
-    DNX_BRANCH=v$DNX_VERSION sh
-  - source $DNX_USER_HOME/dnvm/dnvm.sh
-  - dnvm install $DNX_VERSION -r coreclr -alias default
-  - dnvm alias default | xargs -i ln -s $DNX_USER_HOME/runtimes/{} $DNX_USER_HOME/runtimes/default
+  # Install libunwind required for DNX
+  - wget http://download.savannah.gnu.org/releases/libunwind/libunwind-1.1.tar.gz
+  - tar xzvf libunwind-1.1.tar.gz
+  - libunwind-1.1/configure --prefix=$HOME/.local
+  - make && make install
+  - export LD_LIBRARY_PATH=$HOME/.local/lib/:$LD_LIBRARY_PATH
   # Install npm
   - curl -sSL https://raw.githubusercontent.com/aspnet/Home/dev/dnvminstall.sh | sh && source ~/.dnx/dnvm/dnvm.sh && dnvm upgrade
   - npm install -g npm@'>=1.4.3'
@@ -48,6 +35,9 @@ install:
   - echo y | ./android/android-sdk-linux/tools/android update sdk --all --filter platform-tools,android-23,build-tools-23.0.1,extra-android-support,extra-android-m2repository,extra-google-m2repository --no-ui --force
   - export ANDROID_HOME=`pwd`/android/android-sdk-linux
 script:
+  - dnvm install 1.0.0-rc1-final -r mono
+  - dnvm install 1.0.0-rc1-final -r coreclr
+  - dnvm use 1.0.0-rc1-final -r coreclr -persistent
   - gulp
 after_script:
   - echo "========== Server log: ============"
