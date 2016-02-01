@@ -511,7 +511,6 @@
             "description": "'啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array",
             "type": "string",
             "format": "byte",
-            "enum": [ "啊齄丂狛狜隣郎隣兀﨩" ],
             "required": true
           }
         ],
@@ -753,7 +752,7 @@
             "in": "query",
             "description": "false boolean value",
             "type": "boolean",
-            "enum": [ true ]
+            "enum": [ false ]
           }
         ],
         "responses": {
@@ -1335,8 +1334,7 @@
             "in": "query",
             "description": "'啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array",
             "type": "string",
-            "format": "byte",
-            "enum": [ "啊齄丂狛狜隣郎隣兀﨩" ]
+            "format": "byte"
           }
         ],
         "responses": {

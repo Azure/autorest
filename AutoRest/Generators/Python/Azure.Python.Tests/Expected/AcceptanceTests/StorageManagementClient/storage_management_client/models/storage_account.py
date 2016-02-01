@@ -37,11 +37,11 @@ class StorageAccount(Resource):
         """StorageAccount
 
         :param str provisioning_state: Gets the status of the storage account
-        at the time the operation was called. Possible values for this
-        property include: 'Creating', 'ResolvingDNS', 'Succeeded'.
+        at the time the operation was called. Possible values include:
+        'Creating', 'ResolvingDNS', 'Succeeded'
         :param str account_type: Gets the type of the storage account.
-        Possible values for this property include: 'Standard_LRS',
-        'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'.
+        Possible values include: 'Standard_LRS', 'Standard_ZRS',
+        'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
         :param Endpoints primary_endpoints: Gets the URLs that are used to
         perform a retrieval of a public blob, queue or table object.Note that
         StandardZRS and PremiumLRS accounts only return the blob endpoint.
@@ -49,7 +49,7 @@ class StorageAccount(Resource):
         storage account.
         :param str status_of_primary: Gets the status indicating whether the
         primary location of the storage account is available or unavailable.
-        Possible values for this property include: 'Available', 'Unavailable'.
+        Possible values include: 'Available', 'Unavailable'
         :param datetime last_geo_failover_time: Gets the timestamp of the most
         recent instance of a failover to the secondary location. Only the
         most recent timestamp is retained. This element is not returned if
@@ -61,8 +61,7 @@ class StorageAccount(Resource):
         :param str status_of_secondary: Gets the status indicating whether the
         secondary location of the storage account is available or
         unavailable. Only available if the accountType is StandardGRS or
-        StandardRAGRS. Possible values for this property include:
-        'Available', 'Unavailable'.
+        StandardRAGRS. Possible values include: 'Available', 'Unavailable'
         :param datetime creation_time: Gets the creation date and time of the
         storage account in UTC.
         :param CustomDomain custom_domain: Gets the user assigned custom

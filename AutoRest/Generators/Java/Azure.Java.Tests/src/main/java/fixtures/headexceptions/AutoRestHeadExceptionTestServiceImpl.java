@@ -180,7 +180,7 @@ public final class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClie
     }
 
     private void initialize() {
-        this.acceptLanguage = "en-US";
+        this.acceptLanguage = en-US;
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
         this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));

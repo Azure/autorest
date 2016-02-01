@@ -27,8 +27,8 @@ class StorageAccountCreateParameters(Resource):
         """StorageAccountCreateParameters
 
         :param str account_type: Gets or sets the account type. Possible
-        values for this property include: 'Standard_LRS', 'Standard_ZRS',
-        'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'.
+        values include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
+        'Standard_RAGRS', 'Premium_LRS'
         """
         self.account_type = None
 

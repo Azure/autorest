@@ -69,8 +69,8 @@ function StorageManagementClient(credentials, subscriptionId, baseUri, options) 
   this.credentials = credentials;
   this.subscriptionId = subscriptionId;
 
-  this.apiVersion = '2015-05-01-preview';
-  this.acceptLanguage = 'en-US';
+  this.apiVersion = 2015-05-01-preview;
+  this.acceptLanguage = en-US;
   this.longRunningOperationRetryTimeout = 30;
   this.generateClientRequestId = true;
     if(options.apiVersion !== null && options.apiVersion !== undefined) { 

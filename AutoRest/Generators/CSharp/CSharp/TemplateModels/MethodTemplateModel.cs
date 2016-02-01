@@ -76,15 +76,7 @@ namespace Microsoft.Rest.Generator.CSharp
                     string defaultValue = string.Format(CultureInfo.InvariantCulture, "default({0})", parameter.DeclarationExpression);
                     if (parameter.DefaultValue != null && parameter.Type is PrimaryType)
                     {
-                        PrimaryType type = parameter.Type as PrimaryType;
-                        if (type == PrimaryType.Boolean || type == PrimaryType.Double || type == PrimaryType.Int || type == PrimaryType.Long)
-                        {
-                            defaultValue = parameter.DefaultValue;
-                        }
-                        else if (type == PrimaryType.String)
-                        {
-                            defaultValue = "\"" + parameter.DefaultValue + "\"";
-                        }
+                        defaultValue = parameter.DefaultValue;
                     }
                     declarations.Add(string.Format(CultureInfo.InvariantCulture,
                         format, parameter.DeclarationExpression, parameter.Name, defaultValue ));
@@ -160,7 +152,7 @@ namespace Microsoft.Rest.Generator.CSharp
             {
                 return
                     ParameterTemplateModels.Where(
-                        p => p != null && p.ClientProperty == null && !string.IsNullOrWhiteSpace(p.Name))
+                        p => p != null && p.ClientProperty == null && !string.IsNullOrWhiteSpace(p.Name) && !p.IsConstant)
                         .OrderBy(item => !item.IsRequired);
             }
         }

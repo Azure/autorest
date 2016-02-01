@@ -71,8 +71,8 @@ class Enum(object):
         Sends value 'red color' from enumeration of 'red color',
         'green-color', 'blue_color'
 
-        :param string_body: Possible values for this parameter include: 'red
-        color', 'green-color', 'blue_color'
+        :param string_body: Possible values include: 'red color',
+        'green-color', 'blue_color'
         :type string_body: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the

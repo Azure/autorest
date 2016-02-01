@@ -34,6 +34,18 @@ public class Product {
     private String image;
 
     /**
+     * Constant int.
+     */
+    @JsonProperty(required = true)
+    private int constInt;
+
+    /**
+     * Constant string.
+     */
+    @JsonProperty(required = true)
+    private String constString;
+
+    /**
      * Get the displayNames value.
      *
      * @return the displayNames value
@@ -85,6 +97,42 @@ public class Product {
      */
     public void setImage(String image) {
         this.image = image;
+    }
+
+    /**
+     * Get the constInt value.
+     *
+     * @return the constInt value
+     */
+    public int getConstInt() {
+        return this.constInt;
+    }
+
+    /**
+     * Set the constInt value.
+     *
+     * @param constInt the constInt value to set
+     */
+    public void setConstInt(int constInt) {
+        this.constInt = constInt;
+    }
+
+    /**
+     * Get the constString value.
+     *
+     * @return the constString value
+     */
+    public String getConstString() {
+        return this.constString;
+    }
+
+    /**
+     * Set the constString value.
+     *
+     * @param constString the constString value to set
+     */
+    public void setConstString(String constString) {
+        this.constString = constString;
     }
 
 }

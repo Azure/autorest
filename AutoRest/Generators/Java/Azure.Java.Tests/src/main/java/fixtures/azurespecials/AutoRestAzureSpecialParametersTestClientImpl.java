@@ -269,8 +269,8 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
     }
 
     private void initialize() {
-        this.apiVersion = "2015-07-01-preview";
-        this.acceptLanguage = "en-US";
+        this.apiVersion = 2015-07-01-preview;
+        this.acceptLanguage = en-US;
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
         this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));

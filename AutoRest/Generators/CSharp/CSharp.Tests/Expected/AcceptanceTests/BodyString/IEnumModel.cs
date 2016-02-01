@@ -37,8 +37,7 @@ namespace Fixtures.AcceptanceTestsBodyString
         /// 'green-color', 'blue_color'
         /// </summary>
         /// <param name='stringBody'>
-        /// Possible values for this parameter include: 'red color',
-        /// 'green-color', 'blue_color'
+        /// Possible values include: 'red color', 'green-color', 'blue_color'
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.

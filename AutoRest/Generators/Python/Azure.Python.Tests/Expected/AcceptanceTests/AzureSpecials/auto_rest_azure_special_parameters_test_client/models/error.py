@@ -15,10 +15,11 @@ from msrest.exceptions import HttpOperationError
 
 class Error(Model):
 
-    _required = []
+    _required = ['constant_id']
 
     _attribute_map = {
         'status': {'key': 'status', 'type': 'int'},
+        'constant_id': {'key': 'constantId', 'type': 'int'},
         'message': {'key': 'message', 'type': 'str'},
     }
 
@@ -26,9 +27,11 @@ class Error(Model):
         """Error
 
         :param int status
+        :param int constant_id:  Default value: 1 .
         :param str message
         """
         self.status = None
+        self.constant_id = None
         self.message = None
 
         super(Error, self).__init__(*args, **kwargs)

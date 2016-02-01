@@ -1084,7 +1084,7 @@ class Header(object):
         "valid" or "null" or "empty"
         :type scenario: str
         :param value: Send a post request with header values 'GREY' . Possible
-        values for this parameter include: 'White', 'black', 'GREY'
+        values include: 'White', 'black', 'GREY'
         :type value: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the

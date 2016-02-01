@@ -14,8 +14,7 @@
  * @class
  * Initializes a new instance of the StorageAccountRegenerateKeyParameters class.
  * @constructor
- * @member {string} [keyName] Possible values for this property include:
- * 'key1', 'key2'.
+ * @member {string} [keyName] Possible values include: 'key1', 'key2'
  * 
  */
 function StorageAccountRegenerateKeyParameters() {

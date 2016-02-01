@@ -419,8 +419,7 @@ class Paths(object):
         """
         Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
 
-        :param string_path: '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible
-        values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
+        :param string_path: '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value
         :type string_path: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
@@ -460,8 +459,7 @@ class Paths(object):
         Get 'begin!*'();:@ &=+$,/?#[]end
 
         :param string_path: 'begin!*'();:@ &=+$,/?#[]end' url encoded string
-        value. Possible values for this parameter include: 'begin!*'();:@
-        &=+$,/?#[]end'
+        value
         :type string_path: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
@@ -500,8 +498,7 @@ class Paths(object):
         """
         Get ''
 
-        :param string_path: '' string value. Possible values for this
-        parameter include: ''
+        :param string_path: '' string value
         :type string_path: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
@@ -579,8 +576,8 @@ class Paths(object):
         """
         Get using uri with 'green color' in path parameter
 
-        :param enum_path: send the value green. Possible values for this
-        parameter include: 'red color', 'green color', 'blue color'
+        :param enum_path: send the value green. Possible values include: 'red
+        color', 'green color', 'blue color'
         :type enum_path: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
@@ -620,8 +617,8 @@ class Paths(object):
         Get null (should throw on the client before the request is sent on
         wire)
 
-        :param enum_path: send null should throw. Possible values for this
-        parameter include: 'red color', 'green color', 'blue color'
+        :param enum_path: send null should throw. Possible values include:
+        'red color', 'green color', 'blue color'
         :type enum_path: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the

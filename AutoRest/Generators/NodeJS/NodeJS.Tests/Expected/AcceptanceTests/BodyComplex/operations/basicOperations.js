@@ -148,8 +148,8 @@ BasicOperations.prototype.getValid = function (options, callback) {
  * 
  * @param {string} [complexBody.name]
  * 
- * @param {string} [complexBody.color] Possible values for this property
- * include: 'cyan', 'Magenta', 'YELLOW', 'blacK'.
+ * @param {string} [complexBody.color] Possible values include: 'cyan',
+ * 'Magenta', 'YELLOW', 'blacK'
  * 
  * @param {object} [options] Optional Parameters.
  * 

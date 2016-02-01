@@ -34,7 +34,7 @@ function ApiVersionLocal(client) {
  * '2.0' to succeed
  *
  * @param {string} apiVersion This should appear as a method parameter, use
- * value '2.0'. Possible values for this parameter include: '2.0'
+ * value '2.0'
  * 
  * @param {object} [options] Optional Parameters.
  * 
@@ -273,7 +273,7 @@ ApiVersionLocal.prototype.getMethodLocalNull = function (options, callback) {
  * '2.0' to succeed
  *
  * @param {string} apiVersion This should appear as a method parameter, use
- * value '2.0'. Possible values for this parameter include: '2.0'
+ * value '2.0'
  * 
  * @param {object} [options] Optional Parameters.
  * 
@@ -391,7 +391,7 @@ ApiVersionLocal.prototype.getPathLocalValid = function (apiVersion, options, cal
  * '2.0' to succeed
  *
  * @param {string} apiVersion The api version, which appears in the query, the
- * value is always '2.0'. Possible values for this parameter include: '2.0'
+ * value is always '2.0'
  * 
  * @param {object} [options] Optional Parameters.
  * 

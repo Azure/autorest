@@ -442,6 +442,37 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.Equal(2, clientModel.ModelTypes.First(m => m.Name == "Product").Properties[3].Constraints.Count);
             Assert.Equal("100", clientModel.ModelTypes.First(m => m.Name == "Product").Properties[3].Constraints[Constraint.ExclusiveMaximum]);
             Assert.Equal("0", clientModel.ModelTypes.First(m => m.Name == "Product").Properties[3].Constraints[Constraint.ExclusiveMinimum]);
+	    }
+
+        [Fact]
+        public void TestConstants()
+        {
+            var modeler = new SwaggerModeler(new Settings
+            {
+                Namespace = "Test",
+                Input = @"Swagger\swagger-validation.json"
+            });
+            var clientModel = modeler.Build();
+
+            Assert.Equal("myintconst", clientModel.Methods[0].Parameters[4].Name);
+            Assert.Equal(PrimaryType.Int, clientModel.Methods[0].Parameters[4].Type);
+            Assert.Equal(true, clientModel.Methods[0].Parameters[4].IsConstant);
+            Assert.Equal("0", clientModel.Methods[0].Parameters[4].DefaultValue);
+
+            Assert.Equal("mystrconst", clientModel.Methods[0].Parameters[5].Name);
+            Assert.Equal(PrimaryType.String, clientModel.Methods[0].Parameters[5].Type);
+            Assert.Equal(true, clientModel.Methods[0].Parameters[5].IsConstant);
+            Assert.Equal("constant", clientModel.Methods[0].Parameters[5].DefaultValue);
+
+            Assert.Equal("myintconst", clientModel.ModelTypes.First(m => m.Name == "Product").Properties[5].Name);
+            Assert.Equal(PrimaryType.Int, clientModel.ModelTypes.First(m => m.Name == "Product").Properties[5].Type);
+            Assert.Equal(true, clientModel.ModelTypes.First(m => m.Name == "Product").Properties[5].IsConstant);
+            Assert.Equal("0", clientModel.ModelTypes.First(m => m.Name == "Product").Properties[5].DefaultValue);
+
+            Assert.Equal("mystrconst", clientModel.ModelTypes.First(m => m.Name == "Product").Properties[6].Name);
+            Assert.Equal(PrimaryType.String, clientModel.ModelTypes.First(m => m.Name == "Product").Properties[6].Type);
+            Assert.Equal(true, clientModel.ModelTypes.First(m => m.Name == "Product").Properties[6].IsConstant);
+            Assert.Equal("constant", clientModel.ModelTypes.First(m => m.Name == "Product").Properties[6].DefaultValue);
         }
 
         [Fact]

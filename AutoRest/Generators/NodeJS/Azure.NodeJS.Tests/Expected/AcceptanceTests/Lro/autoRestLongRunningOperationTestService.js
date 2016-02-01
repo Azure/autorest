@@ -61,7 +61,7 @@ function AutoRestLongRunningOperationTestService(credentials, baseUri, options) 
   }
   this.credentials = credentials;
 
-  this.acceptLanguage = 'en-US';
+  this.acceptLanguage = en-US;
   this.longRunningOperationRetryTimeout = 30;
   this.generateClientRequestId = true;
     if(options.acceptLanguage !== null && options.acceptLanguage !== undefined) { 

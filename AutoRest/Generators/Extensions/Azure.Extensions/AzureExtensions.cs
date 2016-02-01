@@ -243,7 +243,7 @@ namespace Microsoft.Rest.Generator.Azure
                 .FirstOrDefault(p => ApiVersion.Equals(p.SerializedName, StringComparison.OrdinalIgnoreCase));
             if (apiVersion != null)
             {
-                apiVersion.DefaultValue = "\"" + serviceClient.ApiVersion + "\"";
+                apiVersion.DefaultValue = serviceClient.ApiVersion;
                 apiVersion.IsReadOnly = true;
                 apiVersion.IsRequired = false;
             }
@@ -265,7 +265,7 @@ namespace Microsoft.Rest.Generator.Azure
                     Name = AcceptLanguage,
                     Documentation = "Gets or sets the preferred language for the response.",
                     SerializedName = AcceptLanguage,
-                    DefaultValue = "\"en-US\""
+                    DefaultValue = "en-US"
                 };
                 serviceClient.Properties.Add(acceptLanguage);
             }

@@ -16,9 +16,9 @@ package fixtures.paging.models;
  */
 public class OperationResult {
     /**
-     * The status of the request. Possible values for this property include:
-     * 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created',
-     * 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'.
+     * The status of the request. Possible values include: 'Succeeded',
+     * 'Failed', 'canceled', 'Accepted', 'Creating', 'Created', 'Updating',
+     * 'Updated', 'Deleting', 'Deleted', 'OK'.
      */
     private String status;
 

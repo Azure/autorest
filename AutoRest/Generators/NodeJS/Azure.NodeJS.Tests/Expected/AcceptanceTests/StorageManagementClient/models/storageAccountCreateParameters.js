@@ -20,8 +20,8 @@ var util = require('util');
  * @constructor
  * The parameters to provide for the account.
  * @member {string} [accountType] Gets or sets the account type. Possible
- * values for this property include: 'Standard_LRS', 'Standard_ZRS',
- * 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'.
+ * values include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
+ * 'Standard_RAGRS', 'Premium_LRS'
  * 
  */
 function StorageAccountCreateParameters() {

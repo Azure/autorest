@@ -1061,8 +1061,7 @@ Paths.prototype.doubleDecimalNegative = function (doublePath, options, callback)
 /**
  * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
  *
- * @param {string} stringPath '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible
- * values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
+ * @param {string} stringPath '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value
  * 
  * @param {object} [options] Optional Parameters.
  * 
@@ -1166,8 +1165,7 @@ Paths.prototype.stringUnicode = function (stringPath, options, callback) {
  * Get 'begin!*'();:@ &=+$,/?#[]end
  *
  * @param {string} stringPath 'begin!*'();:@ &=+$,/?#[]end' url encoded string
- * value. Possible values for this parameter include: 'begin!*'();:@
- * &=+$,/?#[]end'
+ * value
  * 
  * @param {object} [options] Optional Parameters.
  * 
@@ -1270,8 +1268,7 @@ Paths.prototype.stringUrlEncoded = function (stringPath, options, callback) {
 /**
  * Get ''
  *
- * @param {string} stringPath '' string value. Possible values for this
- * parameter include: ''
+ * @param {string} stringPath '' string value
  * 
  * @param {object} [options] Optional Parameters.
  * 
@@ -1477,8 +1474,8 @@ Paths.prototype.stringNull = function (stringPath, options, callback) {
 /**
  * Get using uri with 'green color' in path parameter
  *
- * @param {string} enumPath send the value green. Possible values for this
- * parameter include: 'red color', 'green color', 'blue color'
+ * @param {string} enumPath send the value green. Possible values include:
+ * 'red color', 'green color', 'blue color'
  * 
  * @param {object} [options] Optional Parameters.
  * 
@@ -1586,8 +1583,8 @@ Paths.prototype.enumValid = function (enumPath, options, callback) {
 /**
  * Get null (should throw on the client before the request is sent on wire)
  *
- * @param {string} enumPath send null should throw. Possible values for this
- * parameter include: 'red color', 'green color', 'blue color'
+ * @param {string} enumPath send null should throw. Possible values include:
+ * 'red color', 'green color', 'blue color'
  * 
  * @param {object} [options] Optional Parameters.
  * 

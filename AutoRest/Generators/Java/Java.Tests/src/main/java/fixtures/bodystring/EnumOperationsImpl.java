@@ -87,7 +87,7 @@ public final class EnumOperationsImpl implements EnumOperations {
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @param stringBody Possible values for this parameter include: 'red color', 'green-color', 'blue_color'
+     * @param stringBody Possible values include: 'red color', 'green-color', 'blue_color'
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
@@ -104,7 +104,7 @@ public final class EnumOperationsImpl implements EnumOperations {
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
-     * @param stringBody Possible values for this parameter include: 'red color', 'green-color', 'blue_color'
+     * @param stringBody Possible values include: 'red color', 'green-color', 'blue_color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */

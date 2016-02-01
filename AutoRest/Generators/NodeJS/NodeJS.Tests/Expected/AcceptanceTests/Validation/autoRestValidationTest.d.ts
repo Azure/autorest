@@ -78,6 +78,10 @@ declare class AutoRestValidationTest {
          * 
          * @param {string} [options.body.image] Image URL representing the product.
          * 
+         * @param {number} [options.body.constInt] Constant int
+         * 
+         * @param {string} [options.body.constString] Constant string
+         * 
          * @param {object} [options.customHeaders] Headers that will be added to the
          * request
          * 
@@ -86,6 +90,48 @@ declare class AutoRestValidationTest {
          */
         validationOfBody(resourceGroupName: string, id: number, options: { body? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
         validationOfBody(resourceGroupName: string, id: number, callback: ServiceCallback<models.Product>): void;
+
+        /**
+         * @param {string} constantParam
+         * 
+         * @param {object} [options] Optional Parameters.
+         * 
+         * @param {object} [options.customHeaders] Headers that will be added to the
+         * request
+         * 
+         * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+         * doc in ms-rest index.d.ts for details
+         */
+        getWithConstantInPath(constantParam: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+        getWithConstantInPath(constantParam: string, callback: ServiceCallback<void>): void;
+
+        /**
+         * @param {string} constantParam
+         * 
+         * @param {object} [options] Optional Parameters.
+         * 
+         * @param {object} [options.body]
+         * 
+         * @param {array} [options.body.displayNames] Non required array of unique
+         * items from 0 to 6 elements.
+         * 
+         * @param {number} [options.body.capacity] Non required int betwen 0 and 100
+         * exclusive.
+         * 
+         * @param {string} [options.body.image] Image URL representing the product.
+         * 
+         * @param {number} [options.body.constInt] Constant int
+         * 
+         * @param {string} [options.body.constString] Constant string
+         * 
+         * @param {object} [options.customHeaders] Headers that will be added to the
+         * request
+         * 
+         * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+         * doc in ms-rest index.d.ts for details
+         */
+        postWithConstantInBody(constantParam: string, options: { body? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
+        postWithConstantInBody(constantParam: string, callback: ServiceCallback<models.Product>): void;
 }
 
 export = AutoRestValidationTest;

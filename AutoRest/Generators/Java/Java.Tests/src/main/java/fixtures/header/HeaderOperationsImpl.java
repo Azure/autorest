@@ -1398,7 +1398,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
-     * @param value Send a post request with header values 'GREY' . Possible values for this parameter include: 'White', 'black', 'GREY'
+     * @param value Send a post request with header values 'GREY' . Possible values include: 'White', 'black', 'GREY'
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
@@ -1416,7 +1416,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
-     * @param value Send a post request with header values 'GREY' . Possible values for this parameter include: 'White', 'black', 'GREY'
+     * @param value Send a post request with header values 'GREY' . Possible values include: 'White', 'black', 'GREY'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */

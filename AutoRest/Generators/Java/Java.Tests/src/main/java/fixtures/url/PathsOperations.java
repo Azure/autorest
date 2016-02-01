@@ -319,7 +319,7 @@ public interface PathsOperations {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @param stringPath '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
+     * @param stringPath '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
@@ -330,7 +330,7 @@ public interface PathsOperations {
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
      *
-     * @param stringPath '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
+     * @param stringPath '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
@@ -339,7 +339,7 @@ public interface PathsOperations {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @param stringPath 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible values for this parameter include: 'begin!*'();:@ &amp;=+$,/?#[]end'
+     * @param stringPath 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
@@ -350,7 +350,7 @@ public interface PathsOperations {
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
      *
-     * @param stringPath 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible values for this parameter include: 'begin!*'();:@ &amp;=+$,/?#[]end'
+     * @param stringPath 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
@@ -359,7 +359,7 @@ public interface PathsOperations {
     /**
      * Get ''.
      *
-     * @param stringPath '' string value. Possible values for this parameter include: ''
+     * @param stringPath '' string value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
@@ -370,7 +370,7 @@ public interface PathsOperations {
     /**
      * Get ''.
      *
-     * @param stringPath '' string value. Possible values for this parameter include: ''
+     * @param stringPath '' string value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
@@ -399,7 +399,7 @@ public interface PathsOperations {
     /**
      * Get using uri with 'green color' in path parameter.
      *
-     * @param enumPath send the value green. Possible values for this parameter include: 'red color', 'green color', 'blue color'
+     * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
@@ -410,7 +410,7 @@ public interface PathsOperations {
     /**
      * Get using uri with 'green color' in path parameter.
      *
-     * @param enumPath send the value green. Possible values for this parameter include: 'red color', 'green color', 'blue color'
+     * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
@@ -419,7 +419,7 @@ public interface PathsOperations {
     /**
      * Get null (should throw on the client before the request is sent on wire).
      *
-     * @param enumPath send null should throw. Possible values for this parameter include: 'red color', 'green color', 'blue color'
+     * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
@@ -430,7 +430,7 @@ public interface PathsOperations {
     /**
      * Get null (should throw on the client before the request is sent on wire).
      *
-     * @param enumPath send null should throw. Possible values for this parameter include: 'red color', 'green color', 'blue color'
+     * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */

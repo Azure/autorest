@@ -44,5 +44,17 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
         [JsonProperty(PropertyName = "message")]
         public string Message { get; set; }
 
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "constantId")]
+        public static int? ConstantId { get { return 1; } }
+
+        /// <summary>
+        /// Validate the object. Throws ValidationException if validation fails.
+        /// </summary>
+        public virtual void Validate()
+        {
+            //Nothing to validate
+        }
     }
 }

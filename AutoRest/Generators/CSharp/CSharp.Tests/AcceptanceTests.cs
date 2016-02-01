@@ -145,6 +145,21 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         }
 
         [Fact]
+        public void ConstantValuesTests()
+        {
+            SwaggerSpecRunner.RunTests(
+                SwaggerPath("validation.json"),
+                ExpectedPath("Validation"));
+
+            var client = new AutoRestValidationTest(Fixture.Uri);
+            client.SubscriptionId = "abc123";
+            client.ApiVersion = "12-34-5678";
+            client.GetWithConstantInPath();
+            var product = client.PostWithConstantInBody(new Fixtures.AcceptanceTestsValidation.Models.Product());
+            Assert.NotNull(product);
+        }
+
+        [Fact]
         public void ConstructorWithCredentialsTests()
         {
             var client = new SwaggerPetstoreV2(new TokenCredentials("123"));
@@ -1267,26 +1282,26 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 SwaggerPath("url.json"), ExpectedPath("Url"));
             using (var client = new AutoRestUrlTestService(Fixture.Uri))
             {
-                client.Paths.ByteEmpty(new byte[0]);
+                client.Paths.ByteEmpty();
                 Assert.Throws<ValidationException>(() => client.Paths.ByteNull(null));
                 client.Paths.ByteMultiByte(Encoding.UTF8.GetBytes("啊齄丂狛狜隣郎隣兀﨩"));
                 // appropriately disallowed:client.Paths.DateNull(null);
                 // appropriately disallowed: client.Paths.DateTimeNull(null);
-                client.Paths.DateTimeValid(new DateTime(2012, 1, 1, 1, 1, 1, DateTimeKind.Utc));
-                client.Paths.DateValid(new DateTime(2012, 1, 1, 0, 0, 0, DateTimeKind.Utc));
-                client.Paths.DoubleDecimalNegative(-9999999.999);
-                client.Paths.DoubleDecimalPositive(9999999.999);
-                client.Paths.FloatScientificNegative(-1.034e-20);
-                client.Paths.FloatScientificPositive(1.034e+20);
-                client.Paths.GetBooleanFalse(false);
-                client.Paths.GetBooleanTrue(true);
-                client.Paths.GetIntNegativeOneMillion(-1000000);
-                client.Paths.GetIntOneMillion(1000000);
-                client.Paths.GetNegativeTenBillion(-10000000000);
-                client.Paths.GetTenBillion(10000000000);
-                client.Paths.StringEmpty("");
+                client.Paths.DateTimeValid();
+                client.Paths.DateValid();
+                client.Paths.DoubleDecimalNegative();
+                client.Paths.DoubleDecimalPositive();
+                client.Paths.FloatScientificNegative();
+                client.Paths.FloatScientificPositive();
+                client.Paths.GetBooleanFalse();
+                client.Paths.GetBooleanTrue();
+                client.Paths.GetIntNegativeOneMillion();
+                client.Paths.GetIntOneMillion();
+                client.Paths.GetNegativeTenBillion();
+                client.Paths.GetTenBillion();
+                client.Paths.StringEmpty();
                 Assert.Throws<ValidationException>(() => client.Paths.StringNull(null));
-                client.Paths.StringUrlEncoded(@"begin!*'();:@ &=+$,/?#[]end");
+                client.Paths.StringUrlEncoded();
                 client.Paths.EnumValid(UriColor.Greencolor);
                 Assert.Throws<ValidationException>(() => client.Paths.EnumNull(null));
             }
@@ -1517,31 +1532,31 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 SwaggerPath("url.json"), ExpectedPath("Url"));
             using (var client = new AutoRestUrlTestService(Fixture.Uri))
             {
-                client.Queries.ByteEmpty(new byte[0]);
+                client.Queries.ByteEmpty();
                 client.Queries.ByteMultiByte(Encoding.UTF8.GetBytes("啊齄丂狛狜隣郎隣兀﨩"));
                 client.Queries.ByteNull();
                 client.Queries.DateNull();
                 client.Queries.DateTimeNull();
-                client.Queries.DateTimeValid(new DateTime(2012, 1, 1, 1, 1, 1, DateTimeKind.Utc));
-                client.Queries.DateValid(new DateTime(2012, 1, 1, 0, 0, 0, DateTimeKind.Utc));
+                client.Queries.DateTimeValid();
+                client.Queries.DateValid();
                 client.Queries.DoubleNull();
-                client.Queries.DoubleDecimalNegative(-9999999.999);
-                client.Queries.DoubleDecimalPositive(9999999.999);
-                client.Queries.FloatScientificNegative(-1.034e-20);
-                client.Queries.FloatScientificPositive(1.034e20);
+                client.Queries.DoubleDecimalNegative();
+                client.Queries.DoubleDecimalPositive();
+                client.Queries.FloatScientificNegative();
+                client.Queries.FloatScientificPositive();
                 client.Queries.FloatNull();
-                client.Queries.GetBooleanFalse(false);
-                client.Queries.GetBooleanTrue(true);
+                client.Queries.GetBooleanFalse();
+                client.Queries.GetBooleanTrue();
                 client.Queries.GetBooleanNull();
-                client.Queries.GetIntNegativeOneMillion(-1000000);
-                client.Queries.GetIntOneMillion(1000000);
+                client.Queries.GetIntNegativeOneMillion();
+                client.Queries.GetIntOneMillion();
                 client.Queries.GetIntNull();
-                client.Queries.GetNegativeTenBillion(-10000000000);
-                client.Queries.GetTenBillion(10000000000);
+                client.Queries.GetNegativeTenBillion();
+                client.Queries.GetTenBillion();
                 client.Queries.GetLongNull();
-                client.Queries.StringEmpty("");
+                client.Queries.StringEmpty();
                 client.Queries.StringNull();
-                client.Queries.StringUrlEncoded("begin!*'();:@ &=+$,/?#[]end");
+                client.Queries.StringUrlEncoded();
                 client.Queries.EnumValid(UriColor.Greencolor);
                 client.Queries.EnumNull();
                 client.Queries.ArrayStringCsvEmpty(new List<string>(0));

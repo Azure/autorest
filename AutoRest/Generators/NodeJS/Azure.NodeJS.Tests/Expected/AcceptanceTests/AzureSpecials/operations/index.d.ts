@@ -299,7 +299,7 @@ export interface ApiVersionLocal {
      * '2.0' to succeed
      *
      * @param {string} apiVersion This should appear as a method parameter, use
-     * value '2.0'. Possible values for this parameter include: '2.0'
+     * value '2.0'
      * 
      * @param {object} [options] Optional Parameters.
      * 
@@ -335,7 +335,7 @@ export interface ApiVersionLocal {
      * '2.0' to succeed
      *
      * @param {string} apiVersion This should appear as a method parameter, use
-     * value '2.0'. Possible values for this parameter include: '2.0'
+     * value '2.0'
      * 
      * @param {object} [options] Optional Parameters.
      * 
@@ -353,7 +353,7 @@ export interface ApiVersionLocal {
      * '2.0' to succeed
      *
      * @param {string} apiVersion The api version, which appears in the query, the
-     * value is always '2.0'. Possible values for this parameter include: '2.0'
+     * value is always '2.0'
      * 
      * @param {object} [options] Optional Parameters.
      * 
@@ -413,7 +413,6 @@ export interface SkipUrlEncoding {
      * Get method with unencoded path parameter with value 'path1/path2/path3'
      *
      * @param {string} unencodedPathParam An unencoded path parameter with value
-     * 'path1/path2/path3'. Possible values for this parameter include:
      * 'path1/path2/path3'
      * 
      * @param {object} [options] Optional Parameters.
@@ -483,11 +482,10 @@ export interface SkipUrlEncoding {
      * Get method with unencoded query parameter with value
      * 'value1&q2=value2&q3=value3'
      *
-     * @param {object} [options] Optional Parameters.
-     * 
-     * @param {string} [options.q1] An unencoded query parameter with value
-     * 'value1&q2=value2&q3=value3'. Possible values for this parameter include:
+     * @param {string} q1 An unencoded query parameter with value
      * 'value1&q2=value2&q3=value3'
+     * 
+     * @param {object} [options] Optional Parameters.
      * 
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
@@ -495,8 +493,8 @@ export interface SkipUrlEncoding {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getSwaggerQueryValid(options: { q1? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    getSwaggerQueryValid(callback: ServiceCallback<void>): void;
+    getSwaggerQueryValid(q1: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    getSwaggerQueryValid(q1: string, callback: ServiceCallback<void>): void;
 }
 
 /**

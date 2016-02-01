@@ -16,11 +16,14 @@
  * @constructor
  * @member {number} [status]
  * 
+ * @member {number} constantId
+ * 
  * @member {string} [message]
  * 
  */
 export interface ErrorModel {
     status?: number;
+    constantId: number;
     message?: string;
 }
 

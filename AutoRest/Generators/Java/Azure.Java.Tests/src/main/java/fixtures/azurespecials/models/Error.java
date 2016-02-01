@@ -10,6 +10,7 @@
 
 package fixtures.azurespecials.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The Error model.
@@ -19,6 +20,12 @@ public class Error {
      * The status property.
      */
     private Integer status;
+
+    /**
+     * The constantId property.
+     */
+    @JsonProperty(required = true)
+    private int constantId;
 
     /**
      * The message property.
@@ -41,6 +48,24 @@ public class Error {
      */
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    /**
+     * Get the constantId value.
+     *
+     * @return the constantId value
+     */
+    public int getConstantId() {
+        return this.constantId;
+    }
+
+    /**
+     * Set the constantId value.
+     *
+     * @param constantId the constantId value to set
+     */
+    public void setConstantId(int constantId) {
+        this.constantId = constantId;
     }
 
     /**

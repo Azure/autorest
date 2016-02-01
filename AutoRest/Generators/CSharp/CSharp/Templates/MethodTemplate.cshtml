@@ -31,7 +31,7 @@
 /// </param>
 public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
 {
-    @foreach (var parameter in Model.ParameterTemplateModels)
+    @foreach (ParameterTemplateModel parameter in Model.ParameterTemplateModels.Where(p => !p.IsConstant))
     {
         if (parameter.IsRequired)
         {
@@ -45,6 +45,11 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
         {
     @:@(parameter.Type.ValidateType(Model.Scope, parameter.Name, parameter.Constraints))
         }
+    }
+
+    @foreach (ParameterTemplateModel parameter in Model.ParameterTemplateModels.Where(p => p.IsConstant))
+    {
+    @:@(parameter.Type.Name) @(parameter.Name) = @(parameter.DefaultValue);
     }
     @Model.BuildInputMappings()
     // Tracing

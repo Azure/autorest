@@ -56,8 +56,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// The operations group for this extension method.
             /// </param>
             /// <param name='stringBody'>
-            /// Possible values for this parameter include: 'red color', 'green-color',
-            /// 'blue_color'
+            /// Possible values include: 'red color', 'green-color', 'blue_color'
             /// </param>
             public static void PutNotExpandable(this IEnumModel operations, Colors? stringBody)
             {
@@ -72,8 +71,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// The operations group for this extension method.
             /// </param>
             /// <param name='stringBody'>
-            /// Possible values for this parameter include: 'red color', 'green-color',
-            /// 'blue_color'
+            /// Possible values include: 'red color', 'green-color', 'blue_color'
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.

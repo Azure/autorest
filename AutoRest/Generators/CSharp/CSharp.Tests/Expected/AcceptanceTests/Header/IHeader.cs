@@ -429,7 +429,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// </param>
         /// <param name='value'>
         /// Send a post request with header values 'GREY' . Possible values
-        /// for this parameter include: 'White', 'black', 'GREY'
+        /// include: 'White', 'black', 'GREY'
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.

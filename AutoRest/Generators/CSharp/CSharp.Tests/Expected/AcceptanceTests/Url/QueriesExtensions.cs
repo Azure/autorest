@@ -24,12 +24,9 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='boolQuery'>
-            /// true boolean value
-            /// </param>
-            public static void GetBooleanTrue(this IQueries operations, bool? boolQuery = default(bool?))
+            public static void GetBooleanTrue(this IQueries operations)
             {
-                Task.Factory.StartNew(s => ((IQueries)s).GetBooleanTrueAsync(boolQuery), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).GetBooleanTrueAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -38,15 +35,12 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='boolQuery'>
-            /// true boolean value
-            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task GetBooleanTrueAsync( this IQueries operations, bool? boolQuery = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task GetBooleanTrueAsync( this IQueries operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetBooleanTrueWithHttpMessagesAsync(boolQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.GetBooleanTrueWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -55,12 +49,9 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='boolQuery'>
-            /// false boolean value
-            /// </param>
-            public static void GetBooleanFalse(this IQueries operations, bool? boolQuery = default(bool?))
+            public static void GetBooleanFalse(this IQueries operations)
             {
-                Task.Factory.StartNew(s => ((IQueries)s).GetBooleanFalseAsync(boolQuery), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).GetBooleanFalseAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -69,15 +60,12 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='boolQuery'>
-            /// false boolean value
-            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task GetBooleanFalseAsync( this IQueries operations, bool? boolQuery = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task GetBooleanFalseAsync( this IQueries operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetBooleanFalseWithHttpMessagesAsync(boolQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.GetBooleanFalseWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -117,12 +105,9 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='intQuery'>
-            /// '1000000' integer value
-            /// </param>
-            public static void GetIntOneMillion(this IQueries operations, int? intQuery = default(int?))
+            public static void GetIntOneMillion(this IQueries operations)
             {
-                Task.Factory.StartNew(s => ((IQueries)s).GetIntOneMillionAsync(intQuery), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).GetIntOneMillionAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -131,15 +116,12 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='intQuery'>
-            /// '1000000' integer value
-            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task GetIntOneMillionAsync( this IQueries operations, int? intQuery = default(int?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task GetIntOneMillionAsync( this IQueries operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetIntOneMillionWithHttpMessagesAsync(intQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.GetIntOneMillionWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -148,12 +130,9 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='intQuery'>
-            /// '-1000000' integer value
-            /// </param>
-            public static void GetIntNegativeOneMillion(this IQueries operations, int? intQuery = default(int?))
+            public static void GetIntNegativeOneMillion(this IQueries operations)
             {
-                Task.Factory.StartNew(s => ((IQueries)s).GetIntNegativeOneMillionAsync(intQuery), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).GetIntNegativeOneMillionAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -162,15 +141,12 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='intQuery'>
-            /// '-1000000' integer value
-            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task GetIntNegativeOneMillionAsync( this IQueries operations, int? intQuery = default(int?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task GetIntNegativeOneMillionAsync( this IQueries operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetIntNegativeOneMillionWithHttpMessagesAsync(intQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.GetIntNegativeOneMillionWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -210,12 +186,9 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='longQuery'>
-            /// '10000000000' 64 bit integer value
-            /// </param>
-            public static void GetTenBillion(this IQueries operations, long? longQuery = default(long?))
+            public static void GetTenBillion(this IQueries operations)
             {
-                Task.Factory.StartNew(s => ((IQueries)s).GetTenBillionAsync(longQuery), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).GetTenBillionAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -224,15 +197,12 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='longQuery'>
-            /// '10000000000' 64 bit integer value
-            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task GetTenBillionAsync( this IQueries operations, long? longQuery = default(long?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task GetTenBillionAsync( this IQueries operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetTenBillionWithHttpMessagesAsync(longQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.GetTenBillionWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -241,12 +211,9 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='longQuery'>
-            /// '-10000000000' 64 bit integer value
-            /// </param>
-            public static void GetNegativeTenBillion(this IQueries operations, long? longQuery = default(long?))
+            public static void GetNegativeTenBillion(this IQueries operations)
             {
-                Task.Factory.StartNew(s => ((IQueries)s).GetNegativeTenBillionAsync(longQuery), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).GetNegativeTenBillionAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -255,15 +222,12 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='longQuery'>
-            /// '-10000000000' 64 bit integer value
-            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task GetNegativeTenBillionAsync( this IQueries operations, long? longQuery = default(long?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task GetNegativeTenBillionAsync( this IQueries operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetNegativeTenBillionWithHttpMessagesAsync(longQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.GetNegativeTenBillionWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -303,12 +267,9 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='floatQuery'>
-            /// '1.034E+20'numeric value
-            /// </param>
-            public static void FloatScientificPositive(this IQueries operations, double? floatQuery = default(double?))
+            public static void FloatScientificPositive(this IQueries operations)
             {
-                Task.Factory.StartNew(s => ((IQueries)s).FloatScientificPositiveAsync(floatQuery), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).FloatScientificPositiveAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -317,15 +278,12 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='floatQuery'>
-            /// '1.034E+20'numeric value
-            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task FloatScientificPositiveAsync( this IQueries operations, double? floatQuery = default(double?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task FloatScientificPositiveAsync( this IQueries operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.FloatScientificPositiveWithHttpMessagesAsync(floatQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.FloatScientificPositiveWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -334,12 +292,9 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='floatQuery'>
-            /// '-1.034E-20'numeric value
-            /// </param>
-            public static void FloatScientificNegative(this IQueries operations, double? floatQuery = default(double?))
+            public static void FloatScientificNegative(this IQueries operations)
             {
-                Task.Factory.StartNew(s => ((IQueries)s).FloatScientificNegativeAsync(floatQuery), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).FloatScientificNegativeAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -348,15 +303,12 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='floatQuery'>
-            /// '-1.034E-20'numeric value
-            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task FloatScientificNegativeAsync( this IQueries operations, double? floatQuery = default(double?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task FloatScientificNegativeAsync( this IQueries operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.FloatScientificNegativeWithHttpMessagesAsync(floatQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.FloatScientificNegativeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -396,12 +348,9 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='doubleQuery'>
-            /// '9999999.999'numeric value
-            /// </param>
-            public static void DoubleDecimalPositive(this IQueries operations, double? doubleQuery = default(double?))
+            public static void DoubleDecimalPositive(this IQueries operations)
             {
-                Task.Factory.StartNew(s => ((IQueries)s).DoubleDecimalPositiveAsync(doubleQuery), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).DoubleDecimalPositiveAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -410,15 +359,12 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='doubleQuery'>
-            /// '9999999.999'numeric value
-            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task DoubleDecimalPositiveAsync( this IQueries operations, double? doubleQuery = default(double?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DoubleDecimalPositiveAsync( this IQueries operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.DoubleDecimalPositiveWithHttpMessagesAsync(doubleQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.DoubleDecimalPositiveWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -427,12 +373,9 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='doubleQuery'>
-            /// '-9999999.999'numeric value
-            /// </param>
-            public static void DoubleDecimalNegative(this IQueries operations, double? doubleQuery = default(double?))
+            public static void DoubleDecimalNegative(this IQueries operations)
             {
-                Task.Factory.StartNew(s => ((IQueries)s).DoubleDecimalNegativeAsync(doubleQuery), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).DoubleDecimalNegativeAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -441,15 +384,12 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='doubleQuery'>
-            /// '-9999999.999'numeric value
-            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task DoubleDecimalNegativeAsync( this IQueries operations, double? doubleQuery = default(double?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DoubleDecimalNegativeAsync( this IQueries operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.DoubleDecimalNegativeWithHttpMessagesAsync(doubleQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.DoubleDecimalNegativeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -489,13 +429,9 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='stringQuery'>
-            /// '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter
-            /// include: '啊齄丂狛狜隣郎隣兀﨩'
-            /// </param>
-            public static void StringUnicode(this IQueries operations, string stringQuery = default(string))
+            public static void StringUnicode(this IQueries operations)
             {
-                Task.Factory.StartNew(s => ((IQueries)s).StringUnicodeAsync(stringQuery), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).StringUnicodeAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -504,16 +440,12 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='stringQuery'>
-            /// '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible values for this parameter
-            /// include: '啊齄丂狛狜隣郎隣兀﨩'
-            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task StringUnicodeAsync( this IQueries operations, string stringQuery = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task StringUnicodeAsync( this IQueries operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.StringUnicodeWithHttpMessagesAsync(stringQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.StringUnicodeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -522,13 +454,9 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='stringQuery'>
-            /// 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible
-            /// values for this parameter include: 'begin!*'();:@ &amp;=+$,/?#[]end'
-            /// </param>
-            public static void StringUrlEncoded(this IQueries operations, string stringQuery = default(string))
+            public static void StringUrlEncoded(this IQueries operations)
             {
-                Task.Factory.StartNew(s => ((IQueries)s).StringUrlEncodedAsync(stringQuery), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).StringUrlEncodedAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -537,16 +465,12 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='stringQuery'>
-            /// 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value. Possible
-            /// values for this parameter include: 'begin!*'();:@ &amp;=+$,/?#[]end'
-            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task StringUrlEncodedAsync( this IQueries operations, string stringQuery = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task StringUrlEncodedAsync( this IQueries operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.StringUrlEncodedWithHttpMessagesAsync(stringQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.StringUrlEncodedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -555,12 +479,9 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='stringQuery'>
-            /// '' string value. Possible values for this parameter include: ''
-            /// </param>
-            public static void StringEmpty(this IQueries operations, string stringQuery = default(string))
+            public static void StringEmpty(this IQueries operations)
             {
-                Task.Factory.StartNew(s => ((IQueries)s).StringEmptyAsync(stringQuery), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).StringEmptyAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -569,15 +490,12 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='stringQuery'>
-            /// '' string value. Possible values for this parameter include: ''
-            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task StringEmptyAsync( this IQueries operations, string stringQuery = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task StringEmptyAsync( this IQueries operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.StringEmptyWithHttpMessagesAsync(stringQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.StringEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -618,8 +536,8 @@ namespace Fixtures.AcceptanceTestsUrl
             /// The operations group for this extension method.
             /// </param>
             /// <param name='enumQuery'>
-            /// 'green color' enum value. Possible values for this parameter include: 'red
-            /// color', 'green color', 'blue color'
+            /// 'green color' enum value. Possible values include: 'red color', 'green
+            /// color', 'blue color'
             /// </param>
             public static void EnumValid(this IQueries operations, UriColor? enumQuery = default(UriColor?))
             {
@@ -633,8 +551,8 @@ namespace Fixtures.AcceptanceTestsUrl
             /// The operations group for this extension method.
             /// </param>
             /// <param name='enumQuery'>
-            /// 'green color' enum value. Possible values for this parameter include: 'red
-            /// color', 'green color', 'blue color'
+            /// 'green color' enum value. Possible values include: 'red color', 'green
+            /// color', 'blue color'
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
@@ -651,8 +569,8 @@ namespace Fixtures.AcceptanceTestsUrl
             /// The operations group for this extension method.
             /// </param>
             /// <param name='enumQuery'>
-            /// null string value. Possible values for this parameter include: 'red
-            /// color', 'green color', 'blue color'
+            /// null string value. Possible values include: 'red color', 'green color',
+            /// 'blue color'
             /// </param>
             public static void EnumNull(this IQueries operations, UriColor? enumQuery = default(UriColor?))
             {
@@ -666,8 +584,8 @@ namespace Fixtures.AcceptanceTestsUrl
             /// The operations group for this extension method.
             /// </param>
             /// <param name='enumQuery'>
-            /// null string value. Possible values for this parameter include: 'red
-            /// color', 'green color', 'blue color'
+            /// null string value. Possible values include: 'red color', 'green color',
+            /// 'blue color'
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
@@ -714,12 +632,9 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='byteQuery'>
-            /// '' as byte array
-            /// </param>
-            public static void ByteEmpty(this IQueries operations, byte[] byteQuery = default(byte[]))
+            public static void ByteEmpty(this IQueries operations)
             {
-                Task.Factory.StartNew(s => ((IQueries)s).ByteEmptyAsync(byteQuery), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).ByteEmptyAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -728,15 +643,12 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='byteQuery'>
-            /// '' as byte array
-            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task ByteEmptyAsync( this IQueries operations, byte[] byteQuery = default(byte[]), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task ByteEmptyAsync( this IQueries operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.ByteEmptyWithHttpMessagesAsync(byteQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.ByteEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -776,12 +688,9 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='dateQuery'>
-            /// '2012-01-01' as date
-            /// </param>
-            public static void DateValid(this IQueries operations, DateTime? dateQuery = default(DateTime?))
+            public static void DateValid(this IQueries operations)
             {
-                Task.Factory.StartNew(s => ((IQueries)s).DateValidAsync(dateQuery), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).DateValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -790,15 +699,12 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='dateQuery'>
-            /// '2012-01-01' as date
-            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task DateValidAsync( this IQueries operations, DateTime? dateQuery = default(DateTime?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DateValidAsync( this IQueries operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.DateValidWithHttpMessagesAsync(dateQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.DateValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -838,12 +744,9 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='dateTimeQuery'>
-            /// '2012-01-01T01:01:01Z' as date-time
-            /// </param>
-            public static void DateTimeValid(this IQueries operations, DateTime? dateTimeQuery = default(DateTime?))
+            public static void DateTimeValid(this IQueries operations)
             {
-                Task.Factory.StartNew(s => ((IQueries)s).DateTimeValidAsync(dateTimeQuery), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IQueries)s).DateTimeValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -852,15 +755,12 @@ namespace Fixtures.AcceptanceTestsUrl
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='dateTimeQuery'>
-            /// '2012-01-01T01:01:01Z' as date-time
-            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task DateTimeValidAsync( this IQueries operations, DateTime? dateTimeQuery = default(DateTime?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task DateTimeValidAsync( this IQueries operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.DateTimeValidWithHttpMessagesAsync(dateTimeQuery, null, cancellationToken).ConfigureAwait(false);
+                await operations.DateTimeValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>

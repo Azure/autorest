@@ -51,6 +51,17 @@ namespace Microsoft.Rest.Generator.CSharp
             }
 
             base.NormalizeClientModel(client);
+
+            foreach (var clientProperty in client.Properties)
+            {
+                QuoteParameter(clientProperty);
+            }
+
+            foreach (var modelType in client.ModelTypes)
+            {
+                modelType.Properties.ForEach(p => QuoteParameter(p));
+            }
+
             foreach (var method in client.Methods)
             {
                 var scope = new ScopeProvider();
@@ -67,7 +78,37 @@ namespace Microsoft.Rest.Generator.CSharp
                     {
                         parameter.Name = scope.GetVariableName(parameter.Name);
                     }
-                }                
+
+                    QuoteParameter(parameter);
+                }
+            }
+        }
+
+        private static void QuoteParameter(IParameter parameter)
+        {
+            if (parameter.DefaultValue != null)
+            {
+                if (parameter.Type == PrimaryType.String)
+                {
+                    parameter.DefaultValue = CodeNamer.QuoteValue(parameter.DefaultValue);
+                }
+                else if (parameter.Type == PrimaryType.Boolean)
+                {
+                    parameter.DefaultValue = parameter.DefaultValue.ToLowerInvariant();
+                }
+                else
+                {
+                    if (parameter.Type == PrimaryType.Date ||
+                        parameter.Type == PrimaryType.DateTime ||
+                        parameter.Type == PrimaryType.DateTimeRfc1123 ||
+                        parameter.Type == PrimaryType.TimeSpan ||
+                        parameter.Type == PrimaryType.ByteArray)
+                    {
+
+                        parameter.DefaultValue = "SafeJsonConvert.DeserializeObject<" + parameter.Type.Name.TrimEnd('?') +
+                            ">(" + CodeNamer.QuoteValue("\"" + parameter.DefaultValue + "\"") + ", this.Client.SerializationSettings)";
+                    }
+                }
             }
         }
 

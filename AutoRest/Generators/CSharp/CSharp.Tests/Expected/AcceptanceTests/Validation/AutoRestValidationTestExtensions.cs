@@ -102,5 +102,50 @@ namespace Fixtures.AcceptanceTestsValidation
                 }
             }
 
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static void GetWithConstantInPath(this IAutoRestValidationTest operations)
+            {
+                Task.Factory.StartNew(s => ((IAutoRestValidationTest)s).GetWithConstantInPathAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task GetWithConstantInPathAsync( this IAutoRestValidationTest operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                await operations.GetWithConstantInPathWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='body'>
+            /// </param>
+            public static Product PostWithConstantInBody(this IAutoRestValidationTest operations, Product body = default(Product))
+            {
+                return Task.Factory.StartNew(s => ((IAutoRestValidationTest)s).PostWithConstantInBodyAsync(body), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='body'>
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<Product> PostWithConstantInBodyAsync( this IAutoRestValidationTest operations, Product body = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.PostWithConstantInBodyWithHttpMessagesAsync(body, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
     }
 }

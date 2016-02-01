@@ -68,6 +68,29 @@ namespace Microsoft.Rest.Generator
         }
 
         /// <summary>
+        /// Wraps value in quotes and escapes quotes inside.
+        /// </summary>
+        /// <param name="value">String to quote</param>
+        /// <param name="quoteChar">Quote character</param>
+        /// <param name="escapeChar">Escape character</param>
+        public static string QuoteValue(string value, string quoteChar = "\"", string escapeChar = "\\")
+        {
+            if (quoteChar == null)
+            {
+                throw new ArgumentNullException("quoteChar");
+            }
+            if (escapeChar == null)
+            {
+                throw new ArgumentNullException("escapeChar");
+            }
+            if (value == null)
+            {
+                value = string.Empty;
+            }
+            return quoteChar + value.Replace(quoteChar, escapeChar + quoteChar) + quoteChar;
+        }
+
+        /// <summary>
         /// Recursively normalizes names in the client model
         /// </summary>
         /// <param name="client"></param>

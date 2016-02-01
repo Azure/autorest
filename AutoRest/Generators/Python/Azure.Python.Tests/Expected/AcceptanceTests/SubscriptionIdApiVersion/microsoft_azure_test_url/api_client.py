@@ -19,7 +19,7 @@ from . import models
 class MicrosoftAzureTestUrlConfiguration(AzureConfiguration):
 
     def __init__(
-            self, credentials, subscription_id, api_version='2014-04-01-preview', accept_language='en-US', long_running_operation_retry_timeout=30, generate_client_request_id=True, base_url=None, filepath=None):
+            self, credentials, subscription_id, api_version=2014-04-01-preview, accept_language=en-US, long_running_operation_retry_timeout=30, generate_client_request_id=True, base_url=None, filepath=None):
 
         if credentials is None:
             raise ValueError('credentials must not be None.')

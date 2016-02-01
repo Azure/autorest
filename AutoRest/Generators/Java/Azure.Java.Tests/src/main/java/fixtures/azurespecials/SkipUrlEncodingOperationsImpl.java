@@ -146,7 +146,7 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
-     * @param unencodedPathParam An unencoded path parameter with value 'path1/path2/path3'. Possible values for this parameter include: 'path1/path2/path3'
+     * @param unencodedPathParam An unencoded path parameter with value 'path1/path2/path3'
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
@@ -163,7 +163,7 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'.
      *
-     * @param unencodedPathParam An unencoded path parameter with value 'path1/path2/path3'. Possible values for this parameter include: 'path1/path2/path3'
+     * @param unencodedPathParam An unencoded path parameter with value 'path1/path2/path3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
@@ -338,12 +338,16 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
-     * @param q1 An unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'. Possible values for this parameter include: 'value1&amp;q2=value2&amp;q3=value3'
+     * @param q1 An unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getSwaggerQueryValid(String q1) throws ErrorException, IOException {
+    public ServiceResponse<Void> getSwaggerQueryValid(String q1) throws ErrorException, IOException, IllegalArgumentException {
+        if (q1 == null) {
+            throw new IllegalArgumentException("Parameter q1 is required and cannot be null.");
+        }
         Call<ResponseBody> call = service.getSwaggerQueryValid(q1, this.client.getAcceptLanguage());
         return getSwaggerQueryValidDelegate(call.execute(), null);
     }
@@ -351,11 +355,15 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
     /**
      * Get method with unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'.
      *
-     * @param q1 An unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'. Possible values for this parameter include: 'value1&amp;q2=value2&amp;q3=value3'
+     * @param q1 An unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
     public Call<ResponseBody> getSwaggerQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback) {
+        if (q1 == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter q1 is required and cannot be null."));
+            return null;
+        }
         Call<ResponseBody> call = service.getSwaggerQueryValid(q1, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -370,7 +378,7 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
         return call;
     }
 
-    private ServiceResponse<Void> getSwaggerQueryValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> getSwaggerQueryValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)

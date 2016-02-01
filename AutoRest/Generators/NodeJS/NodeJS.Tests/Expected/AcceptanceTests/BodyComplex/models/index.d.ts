@@ -31,8 +31,8 @@ export interface ErrorModel {
  * 
  * @member {string} [name]
  * 
- * @member {string} [color] Possible values for this property include: 'cyan',
- * 'Magenta', 'YELLOW', 'blacK'.
+ * @member {string} [color] Possible values include: 'cyan', 'Magenta',
+ * 'YELLOW', 'blacK'
  * 
  */
 export interface Basic {
