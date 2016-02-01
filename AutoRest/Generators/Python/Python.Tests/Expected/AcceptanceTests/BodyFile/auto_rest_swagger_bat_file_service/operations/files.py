@@ -15,6 +15,13 @@ from .. import models
 
 
 class Files(object):
+    """Files operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -31,13 +38,13 @@ class Files(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :param callback: if provided, the runtime will call the callback while
-        streaming upload/download. If streaming upload, response kwarg will
-        be None
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: object or (object, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :param callback: When specified, will be called with each chunk of
+         data that is streamed. The callback should take two arguments, the
+         bytes of the current chunk of data and the response object. If the
+         data is uploading, response will be None.
+        :type callback: Callable[Bytes, response=None]
+        :rtype: Generator or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/files/stream/nonempty'
@@ -76,13 +83,13 @@ class Files(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :param callback: if provided, the runtime will call the callback while
-        streaming upload/download. If streaming upload, response kwarg will
-        be None
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: object or (object, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :param callback: When specified, will be called with each chunk of
+         data that is streamed. The callback should take two arguments, the
+         bytes of the current chunk of data and the response object. If the
+         data is uploading, response will be None.
+        :type callback: Callable[Bytes, response=None]
+        :rtype: Generator or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/files/stream/empty'

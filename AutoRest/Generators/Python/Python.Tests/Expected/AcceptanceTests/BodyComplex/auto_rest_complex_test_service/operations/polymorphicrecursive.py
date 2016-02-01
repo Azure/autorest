@@ -15,6 +15,13 @@ from .. import models
 
 
 class Polymorphicrecursive(object):
+    """Polymorphicrecursive operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -31,8 +38,8 @@ class Polymorphicrecursive(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Fish or (Fish, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: Fish or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/complex/polymorphicrecursive/valid'
@@ -70,63 +77,63 @@ class Polymorphicrecursive(object):
         Put complex types that are polymorphic and have recursive references
 
         :param complex_body: Please put a salmon that looks like this:
-        {
-        "fishtype": "salmon",
-        "species": "king",
-        "length": 1,
-        "age": 1,
-        "location": "alaska",
-        "iswild": true,
-        "siblings": [
-        {
-        "fishtype": "shark",
-        "species": "predator",
-        "length": 20,
-        "age": 6,
-        "siblings": [
-        {
-        "fishtype": "salmon",
-        "species": "coho",
-        "length": 2,
-        "age": 2,
-        "location": "atlantic",
-        "iswild": true,
-        "siblings": [
-        {
-        "fishtype": "shark",
-        "species": "predator",
-        "length": 20,
-        "age": 6
-        },
-        {
-        "fishtype": "sawshark",
-        "species": "dangerous",
-        "length": 10,
-        "age": 105
-        }
-        ]
-        },
-        {
-        "fishtype": "sawshark",
-        "species": "dangerous",
-        "length": 10,
-        "age": 105
-        }
-        ]
-        },
-        {
-        "fishtype": "sawshark",
-        "species": "dangerous",
-        "length": 10,
-        "age": 105
-        }
-        ]
-        }
+         {
+         "fishtype": "salmon",
+         "species": "king",
+         "length": 1,
+         "age": 1,
+         "location": "alaska",
+         "iswild": true,
+         "siblings": [
+         {
+         "fishtype": "shark",
+         "species": "predator",
+         "length": 20,
+         "age": 6,
+         "siblings": [
+         {
+         "fishtype": "salmon",
+         "species": "coho",
+         "length": 2,
+         "age": 2,
+         "location": "atlantic",
+         "iswild": true,
+         "siblings": [
+         {
+         "fishtype": "shark",
+         "species": "predator",
+         "length": 20,
+         "age": 6
+         },
+         {
+         "fishtype": "sawshark",
+         "species": "dangerous",
+         "length": 10,
+         "age": 105
+         }
+         ]
+         },
+         {
+         "fishtype": "sawshark",
+         "species": "dangerous",
+         "length": 10,
+         "age": 105
+         }
+         ]
+         },
+         {
+         "fishtype": "sawshark",
+         "species": "dangerous",
+         "length": 10,
+         "age": 105
+         }
+         ]
+         }
         :type complex_body: Fish
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/complex/polymorphicrecursive/valid'

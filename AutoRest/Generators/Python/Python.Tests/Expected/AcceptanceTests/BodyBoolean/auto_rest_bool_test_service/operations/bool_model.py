@@ -15,6 +15,13 @@ from .. import models
 
 
 class BoolModel(object):
+    """BoolModel operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -31,8 +38,8 @@ class BoolModel(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: bool or (bool, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: bool or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/bool/true'
@@ -73,8 +80,8 @@ class BoolModel(object):
         :type bool_body: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/bool/true'
@@ -110,8 +117,8 @@ class BoolModel(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: bool or (bool, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: bool or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/bool/false'
@@ -152,8 +159,8 @@ class BoolModel(object):
         :type bool_body: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/bool/false'
@@ -189,8 +196,8 @@ class BoolModel(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: bool or (bool, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: bool or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/bool/null'
@@ -229,8 +236,8 @@ class BoolModel(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: bool or (bool, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: bool or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/bool/invalid'

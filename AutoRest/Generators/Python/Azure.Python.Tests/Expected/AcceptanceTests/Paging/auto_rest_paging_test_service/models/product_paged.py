@@ -13,6 +13,9 @@ from msrest.paging import Paged
 
 
 class ProductPaged(Paged):
+    """
+    A paging container for iterating over a list of Product object
+    """
 
     _attribute_map = {
         'next_link': {'key': 'nextLink', 'type': 'str'},

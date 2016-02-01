@@ -13,6 +13,10 @@ from msrest.serialization import Model
 
 
 class DurationWrapper(Model):
+    """DurationWrapper
+
+    :param timedelta field
+    """
 
     _required = []
 
@@ -21,10 +25,6 @@ class DurationWrapper(Model):
     }
 
     def __init__(self, *args, **kwargs):
-        """DurationWrapper
-
-        :param timedelta field
-        """
         self.field = None
 
         super(DurationWrapper, self).__init__(*args, **kwargs)

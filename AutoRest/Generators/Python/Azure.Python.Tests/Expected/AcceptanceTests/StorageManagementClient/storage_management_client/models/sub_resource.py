@@ -13,6 +13,10 @@ from msrest.serialization import Model
 
 
 class SubResource(Model):
+    """SubResource
+
+    :param str id: Resource Id
+    """
 
     _required = []
 
@@ -21,10 +25,6 @@ class SubResource(Model):
     }
 
     def __init__(self, *args, **kwargs):
-        """SubResource
-
-        :param str id: Resource Id
-        """
         self.id = None
 
         super(SubResource, self).__init__(*args, **kwargs)

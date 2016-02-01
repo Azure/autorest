@@ -13,6 +13,15 @@ from .resource import Resource
 
 
 class FlattenedProduct(Resource):
+    """FlattenedProduct
+
+    :param str pname
+    :param str flattened_product_type
+    :param str provisioning_state_values: Possible values for this property
+     include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating',
+     'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'.
+    :param str provisioning_state
+    """
 
     _required = []
 
@@ -24,16 +33,6 @@ class FlattenedProduct(Resource):
     }
 
     def __init__(self, *args, **kwargs):
-        """FlattenedProduct
-
-        :param str pname
-        :param str flattened_product_type
-        :param str provisioning_state_values: Possible values for this
-        property include: 'Succeeded', 'Failed', 'canceled', 'Accepted',
-        'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted',
-        'OK'.
-        :param str provisioning_state
-        """
         self.pname = None
         self.flattened_product_type = None
         self.provisioning_state_values = None

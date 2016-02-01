@@ -13,6 +13,11 @@ from msrest.serialization import Model
 
 
 class Datetimerfc1123Wrapper(Model):
+    """Datetimerfc1123Wrapper
+
+    :param datetime field
+    :param datetime now
+    """
 
     _required = []
 
@@ -22,11 +27,6 @@ class Datetimerfc1123Wrapper(Model):
     }
 
     def __init__(self, *args, **kwargs):
-        """Datetimerfc1123Wrapper
-
-        :param datetime field
-        :param datetime now
-        """
         self.field = None
         self.now = None
 

@@ -15,16 +15,14 @@ from msrest.serialization import Model
 class ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup(Model):
     """
     Additional parameters for the postMultipleParameterGroups operation.
+
+    :param str header_two
+    :param int query_two: Query parameter with default. Default value: 30 .
     """
 
     _required = []
 
     def __init__(self, *args, **kwargs):
-        """ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup
-
-        :param str header_two
-        :param int query_two: Query parameter with default. Default value: 30 .
-        """
         self.header_two = None
         self.query_two = None
 

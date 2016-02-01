@@ -16,6 +16,13 @@ from .. import models
 
 
 class GroupOperations(object):
+    """GroupOperations operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -35,9 +42,8 @@ class GroupOperations(object):
         :type resource_group_name: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: SampleResourceGroup or (SampleResourceGroup,
-        requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: SampleResourceGroup or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}'

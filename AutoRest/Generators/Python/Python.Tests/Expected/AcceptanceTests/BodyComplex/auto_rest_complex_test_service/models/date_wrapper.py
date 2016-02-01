@@ -13,6 +13,11 @@ from msrest.serialization import Model
 
 
 class DateWrapper(Model):
+    """DateWrapper
+
+    :param date field
+    :param date leap
+    """
 
     _required = []
 
@@ -22,11 +27,6 @@ class DateWrapper(Model):
     }
 
     def __init__(self, *args, **kwargs):
-        """DateWrapper
-
-        :param date field
-        :param date leap
-        """
         self.field = None
         self.leap = None
 

@@ -18,6 +18,13 @@ from .. import models
 
 
 class LROsCustomHeaderOperations(object):
+    """LROsCustomHeaderOperations operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -40,9 +47,8 @@ class LROsCustomHeaderOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Product or (Product, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/customheader/putasync/retry/succeeded'
@@ -125,9 +131,8 @@ class LROsCustomHeaderOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Product or (Product, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/customheader/put/201/creating/succeeded/200'
@@ -205,8 +210,8 @@ class LROsCustomHeaderOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/customheader/post/202/retry/200'
@@ -279,8 +284,8 @@ class LROsCustomHeaderOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/customheader/postasync/retry/succeeded'

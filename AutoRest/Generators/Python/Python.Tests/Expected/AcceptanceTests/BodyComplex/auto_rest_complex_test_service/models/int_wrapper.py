@@ -13,6 +13,11 @@ from msrest.serialization import Model
 
 
 class IntWrapper(Model):
+    """IntWrapper
+
+    :param int field1
+    :param int field2
+    """
 
     _required = []
 
@@ -22,11 +27,6 @@ class IntWrapper(Model):
     }
 
     def __init__(self, *args, **kwargs):
-        """IntWrapper
-
-        :param int field1
-        :param int field2
-        """
         self.field1 = None
         self.field2 = None
 

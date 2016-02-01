@@ -15,6 +15,13 @@ from .. import models
 
 
 class HttpServerFailure(object):
+    """HttpServerFailure operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -32,9 +39,8 @@ class HttpServerFailure(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Error or (Error, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Error or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/http/failure/server/501'
@@ -67,9 +73,8 @@ class HttpServerFailure(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Error or (Error, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Error or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/http/failure/server/501'
@@ -104,9 +109,8 @@ class HttpServerFailure(object):
         :type boolean_value: bool or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Error or (Error, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Error or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/http/failure/server/505'
@@ -148,9 +152,8 @@ class HttpServerFailure(object):
         :type boolean_value: bool or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Error or (Error, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Error or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/http/failure/server/505'

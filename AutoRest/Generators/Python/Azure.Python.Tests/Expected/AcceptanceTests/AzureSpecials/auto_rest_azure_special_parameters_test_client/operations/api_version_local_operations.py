@@ -16,6 +16,13 @@ from .. import models
 
 
 class ApiVersionLocalOperations(object):
+    """ApiVersionLocalOperations operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -32,12 +39,12 @@ class ApiVersionLocalOperations(object):
         api-version = '2.0' to succeed
 
         :param api_version: This should appear as a method parameter, use
-        value '2.0'. Possible values for this parameter include: '2.0'
+         value '2.0'. Possible values for this parameter include: '2.0'
         :type api_version: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/azurespecials/apiVersion/method/string/none/query/local/2.0'
@@ -74,12 +81,12 @@ class ApiVersionLocalOperations(object):
         api-version = null to succeed
 
         :param api_version: This should appear as a method parameter, use
-        value null, this should result in no serialized parameter
+         value null, this should result in no serialized parameter
         :type api_version: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/azurespecials/apiVersion/method/string/none/query/local/null'
@@ -117,12 +124,12 @@ class ApiVersionLocalOperations(object):
         api-version = '2.0' to succeed
 
         :param api_version: This should appear as a method parameter, use
-        value '2.0'. Possible values for this parameter include: '2.0'
+         value '2.0'. Possible values for this parameter include: '2.0'
         :type api_version: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/azurespecials/apiVersion/path/string/none/query/local/2.0'
@@ -159,13 +166,13 @@ class ApiVersionLocalOperations(object):
         api-version = '2.0' to succeed
 
         :param api_version: The api version, which appears in the query, the
-        value is always '2.0'. Possible values for this parameter include:
-        '2.0'
+         value is always '2.0'. Possible values for this parameter include:
+         '2.0'
         :type api_version: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/azurespecials/apiVersion/swagger/string/none/query/local/2.0'
