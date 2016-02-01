@@ -51,7 +51,8 @@ namespace Microsoft.Rest.Azure
             }
 
             JObject jObject = JObject.Load(reader);
-            JProperty errorObject = jObject.Properties().FirstOrDefault(p => ErrorNode.Equals(p.Name, StringComparison.OrdinalIgnoreCase));
+            JProperty errorObject = jObject.Properties().FirstOrDefault(p => 
+                ErrorNode.Equals(p.Name, StringComparison.OrdinalIgnoreCase));
             if (errorObject != null)
             {
                 jObject = errorObject.Value as JObject;
