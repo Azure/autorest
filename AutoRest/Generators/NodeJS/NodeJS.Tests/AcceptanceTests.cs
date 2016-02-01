@@ -36,7 +36,7 @@ namespace Microsoft.Rest.Generator.NodeJS.Tests
                 {
                     Input = SwaggerPath("body-complex.json"),
                     OutputDirectory = "X:\\Output",
-                    Header = "MICROSOFT_MIT",
+                    Header = "MICROSOFT_MIT_NO_VERSION",
                     Modeler = "Swagger",
                     CodeGenerator = "NodeJS",
                     PayloadFlatteningThreshold = 1
@@ -51,7 +51,7 @@ namespace Microsoft.Rest.Generator.NodeJS.Tests
                 {
                     Input = SwaggerPath("complex-model.json"),
                     OutputDirectory = "X:\\Output",
-                    Header = "MICROSOFT_MIT",
+                    Header = "MICROSOFT_MIT_NO_VERSION",
                     Modeler = "Swagger",
                     CodeGenerator = "NodeJS",
                     PayloadFlatteningThreshold = 1
