@@ -16,7 +16,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             {
                 Input = specFile,
                 OutputDirectory = "X:\\Output",
-                Header = "MICROSOFT_MIT",
+                Header = "MICROSOFT_MIT_NO_VERSION",
                 Modeler = modeler,
                 CodeGenerator = generator,
                 PayloadFlatteningThreshold = 1

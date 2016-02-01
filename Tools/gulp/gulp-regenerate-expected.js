@@ -63,7 +63,7 @@ function gulpRegenerateExpected(options, done) {
       '-PayloadFlatteningThreshold', opts.flatteningThreshold,
       '-OutputDirectory', path.join(opts.outputDir, key),
       '-Input', (!!opts.inputBaseDir ? path.join(opts.inputBaseDir, mappingBaseDir) : mappingBaseDir),
-      '-Header', (!!opts.header ? opts.header : 'MICROSOFT_MIT')
+      '-Header', (!!opts.header ? opts.header : 'MICROSOFT_MIT_NO_VERSION')
     ];
 
     if (opts.addCredentials) {
