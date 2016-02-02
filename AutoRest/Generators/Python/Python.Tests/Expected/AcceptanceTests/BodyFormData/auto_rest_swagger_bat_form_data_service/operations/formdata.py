@@ -15,6 +15,13 @@ from .. import models
 
 
 class Formdata(object):
+    """Formdata operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -30,19 +37,19 @@ class Formdata(object):
         Upload file
 
         :param file_content: File to upload.
-        :type file_content: object
+        :type file_content: Generator
         :param file_name: File name to upload. Name has to be spelled exactly
-        as written here.
+         as written here.
         :type file_name: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :param callback: if provided, the runtime will call the callback while
-        streaming upload/download. If streaming upload, response kwarg will
-        be None
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: object or (object, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :param callback: When specified, will be called with each chunk of
+         data that is streamed. The callback should take two arguments, the
+         bytes of the current chunk of data and the response object. If the
+         data is uploading, response will be None.
+        :type callback: Callable[Bytes, response=None]
+        :rtype: Generator or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/formdata/stream/uploadfile'
@@ -87,19 +94,19 @@ class Formdata(object):
         Upload file
 
         :param file_content: File to upload.
-        :type file_content: object
+        :type file_content: Generator
         :param file_name: File name to upload. Name has to be spelled exactly
-        as written here.
+         as written here.
         :type file_name: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :param callback: if provided, the runtime will call the callback while
-        streaming upload/download. If streaming upload, response kwarg will
-        be None
-        :type callback: Callable[[concurrent.futures.Future], None] or None
-        :rtype: object or (object, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :param callback: When specified, will be called with each chunk of
+         data that is streamed. The callback should take two arguments, the
+         bytes of the current chunk of data and the response object. If the
+         data is uploading, response will be None.
+        :type callback: Callable[Bytes, response=None]
+        :rtype: Generator or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/formdata/stream/uploadfile'

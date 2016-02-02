@@ -15,6 +15,16 @@ from .resource import Resource
 class StorageAccountUpdateParameters(Resource):
     """
     The parameters to update on the account.
+
+    :param str account_type: Gets or sets the account type. Note that
+     StandardZRS and PremiumLRS accounts cannot be changed to other account
+     types, and other account types cannot be changed to StandardZRS or
+     PremiumLRS. Possible values include: 'Standard_LRS', 'Standard_ZRS',
+     'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
+    :param CustomDomain custom_domain: User domain assigned to the storage
+     account. Name is the CNAME source. Only one custom domain is supported
+     per storage account at this time. To clear the existing custom domain,
+     use an empty string for the custom domain name property.
     """
 
     _required = []
@@ -25,19 +35,6 @@ class StorageAccountUpdateParameters(Resource):
     }
 
     def __init__(self, *args, **kwargs):
-        """StorageAccountUpdateParameters
-
-        :param str account_type: Gets or sets the account type. Note that
-        StandardZRS and PremiumLRS accounts cannot be changed to other
-        account types, and other account types cannot be changed to
-        StandardZRS or PremiumLRS. Possible values include: 'Standard_LRS',
-        'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
-        :param CustomDomain custom_domain: User domain assigned to the storage
-        account. Name is the CNAME source. Only one custom domain is
-        supported per storage account at this time. To clear the existing
-        custom domain, use an empty string for the custom domain name
-        property.
-        """
         self.account_type = None
         self.custom_domain = None
 

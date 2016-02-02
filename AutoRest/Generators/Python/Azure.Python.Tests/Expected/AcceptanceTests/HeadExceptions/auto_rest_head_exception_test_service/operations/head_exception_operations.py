@@ -15,6 +15,13 @@ import uuid
 
 
 class HeadExceptionOperations(object):
+    """HeadExceptionOperations operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -31,8 +38,8 @@ class HeadExceptionOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/http/success/200'
@@ -70,8 +77,8 @@ class HeadExceptionOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/http/success/204'
@@ -109,8 +116,8 @@ class HeadExceptionOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/http/success/404'

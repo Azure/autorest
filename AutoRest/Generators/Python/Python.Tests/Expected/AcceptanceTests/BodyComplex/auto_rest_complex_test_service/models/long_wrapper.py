@@ -13,6 +13,11 @@ from msrest.serialization import Model
 
 
 class LongWrapper(Model):
+    """LongWrapper
+
+    :param long field1
+    :param long field2
+    """
 
     _required = []
 
@@ -22,11 +27,6 @@ class LongWrapper(Model):
     }
 
     def __init__(self, *args, **kwargs):
-        """LongWrapper
-
-        :param long field1
-        :param long field2
-        """
         self.field1 = None
         self.field2 = None
 

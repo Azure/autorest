@@ -15,6 +15,13 @@ from .. import models
 
 
 class String(object):
+    """String operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -31,8 +38,8 @@ class String(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: str or (str, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: str or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/string/null'
@@ -73,8 +80,8 @@ class String(object):
         :type string_body: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/string/null'
@@ -113,8 +120,8 @@ class String(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: str or (str, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: str or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/string/empty'
@@ -155,8 +162,8 @@ class String(object):
         :type string_body: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/string/empty'
@@ -194,8 +201,8 @@ class String(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: str or (str, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: str or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/string/mbcs'
@@ -238,8 +245,8 @@ class String(object):
         :type string_body: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/string/mbcs'
@@ -277,8 +284,8 @@ class String(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: str or (str, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: str or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/string/whitespace'
@@ -321,8 +328,8 @@ class String(object):
         :type string_body: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/string/whitespace'
@@ -358,8 +365,8 @@ class String(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: str or (str, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: str or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/string/notProvided'

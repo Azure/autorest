@@ -15,6 +15,10 @@ from .resource import Resource
 class StorageAccountCreateParameters(Resource):
     """
     The parameters to provide for the account.
+
+    :param str account_type: Gets or sets the account type. Possible values
+     include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
+     'Standard_RAGRS', 'Premium_LRS'
     """
 
     _required = []
@@ -24,12 +28,6 @@ class StorageAccountCreateParameters(Resource):
     }
 
     def __init__(self, *args, **kwargs):
-        """StorageAccountCreateParameters
-
-        :param str account_type: Gets or sets the account type. Possible
-        values include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
-        'Standard_RAGRS', 'Premium_LRS'
-        """
         self.account_type = None
 
         super(StorageAccountCreateParameters, self).__init__(*args, **kwargs)

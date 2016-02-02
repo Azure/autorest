@@ -15,6 +15,15 @@ from msrest.serialization import Model
 class Usage(Model):
     """
     Describes Storage Resource Usage.
+
+    :param str unit: Gets the unit of measurement. Possible values include:
+     'Count', 'Bytes', 'Seconds', 'Percent', 'CountsPerSecond',
+     'BytesPerSecond'
+    :param int current_value: Gets the current count of the allocated
+     resources in the subscription.
+    :param int limit: Gets the maximum count of the resources that can be
+     allocated in the subscription.
+    :param UsageName name: Gets the name of the type of usage.
     """
 
     _required = []
@@ -27,17 +36,6 @@ class Usage(Model):
     }
 
     def __init__(self, *args, **kwargs):
-        """Usage
-
-        :param str unit: Gets the unit of measurement. Possible values
-        include: 'Count', 'Bytes', 'Seconds', 'Percent', 'CountsPerSecond',
-        'BytesPerSecond'
-        :param int current_value: Gets the current count of the allocated
-        resources in the subscription.
-        :param int limit: Gets the maximum count of the resources that can be
-        allocated in the subscription.
-        :param UsageName name: Gets the name of the type of usage.
-        """
         self.unit = None
         self.current_value = None
         self.limit = None

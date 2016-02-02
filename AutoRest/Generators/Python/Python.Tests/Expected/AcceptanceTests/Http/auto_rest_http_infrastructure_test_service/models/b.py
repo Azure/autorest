@@ -13,6 +13,10 @@ from .a import A
 
 
 class B(A):
+    """B
+
+    :param str text_status_code
+    """
 
     _required = []
 
@@ -21,10 +25,6 @@ class B(A):
     }
 
     def __init__(self, *args, **kwargs):
-        """B
-
-        :param str text_status_code
-        """
         self.text_status_code = None
 
         super(B, self).__init__(*args, **kwargs)

@@ -17,6 +17,17 @@ from . import models
 
 
 class AutoRestRequiredOptionalTestServiceConfiguration(Configuration):
+    """Configuration for AutoRestRequiredOptionalTestService
+
+    :param required_global_path: number of items to skip
+    :type required_global_path: str
+    :param required_global_query: number of items to skip
+    :type required_global_query: str
+    :param optional_global_query: number of items to skip
+    :type optional_global_query: int or None
+    :param str base_url: Service URL
+    :param str filepath: Existing config
+    """
 
     def __init__(
             self, required_global_path, required_global_query, optional_global_query=None, base_url=None, filepath=None):
@@ -38,6 +49,11 @@ class AutoRestRequiredOptionalTestServiceConfiguration(Configuration):
 
 
 class AutoRestRequiredOptionalTestService(object):
+    """Test Infrastructure for AutoRest
+
+    :param config: Configuration for client.
+    :type config: AutoRestRequiredOptionalTestServiceConfiguration
+    """
 
     def __init__(self, config):
 

@@ -15,6 +15,13 @@ from .. import models
 
 
 class Enum(object):
+    """Enum operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -32,8 +39,8 @@ class Enum(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: str or (str, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: str or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/string/enum/notExpandable'
@@ -72,12 +79,12 @@ class Enum(object):
         'green-color', 'blue_color'
 
         :param string_body: Possible values include: 'red color',
-        'green-color', 'blue_color'
+         'green-color', 'blue_color'
         :type string_body: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/string/enum/notExpandable'

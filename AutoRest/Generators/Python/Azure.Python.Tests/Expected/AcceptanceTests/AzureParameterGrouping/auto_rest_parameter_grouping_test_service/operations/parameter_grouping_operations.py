@@ -16,6 +16,13 @@ from .. import models
 
 
 class ParameterGroupingOperations(object):
+    """ParameterGroupingOperations operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -31,13 +38,13 @@ class ParameterGroupingOperations(object):
         Post a bunch of required parameters grouped
 
         :param parameter_grouping_post_required_parameters: Additional
-        parameters for the operation
+         parameters for the operation
         :type parameter_grouping_post_required_parameters:
-        ParameterGroupingPostRequiredParameters
+         ParameterGroupingPostRequiredParameters
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         body = None
         if parameter_grouping_post_required_parameters is not None:
@@ -97,13 +104,13 @@ class ParameterGroupingOperations(object):
         Post a bunch of optional parameters grouped
 
         :param parameter_grouping_post_optional_parameters: Additional
-        parameters for the operation
+         parameters for the operation
         :type parameter_grouping_post_optional_parameters:
-        ParameterGroupingPostOptionalParameters or None
+         ParameterGroupingPostOptionalParameters or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         custom_header = None
         if parameter_grouping_post_optional_parameters is not None:
@@ -151,16 +158,16 @@ class ParameterGroupingOperations(object):
         :param first_parameter_group: Additional parameters for the operation
         :type first_parameter_group: FirstParameterGroup or None
         :param
-        parameter_grouping_post_multiple_parameter_groups_second_parameter_group:
-        Additional parameters for the operation
+         parameter_grouping_post_multiple_parameter_groups_second_parameter_group:
+         Additional parameters for the operation
         :type
-        parameter_grouping_post_multiple_parameter_groups_second_parameter_group:
-        ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup or
-        None
+         parameter_grouping_post_multiple_parameter_groups_second_parameter_group:
+         ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup or
+         None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         header_one = None
         if first_parameter_group is not None:
@@ -219,8 +226,8 @@ class ParameterGroupingOperations(object):
         :type first_parameter_group: FirstParameterGroup or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         header_one = None
         if first_parameter_group is not None:

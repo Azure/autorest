@@ -13,6 +13,13 @@ from .resource import Resource
 
 
 class Product(Resource):
+    """Product
+
+    :param str provisioning_state
+    :param str provisioning_state_values: Possible values include:
+     'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created',
+     'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
+    """
 
     _required = []
 
@@ -22,13 +29,6 @@ class Product(Resource):
     }
 
     def __init__(self, *args, **kwargs):
-        """Product
-
-        :param str provisioning_state
-        :param str provisioning_state_values: Possible values include:
-        'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created',
-        'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
-        """
         self.provisioning_state = None
         self.provisioning_state_values = None
 

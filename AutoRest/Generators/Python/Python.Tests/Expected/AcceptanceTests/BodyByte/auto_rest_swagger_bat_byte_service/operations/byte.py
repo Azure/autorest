@@ -15,6 +15,13 @@ from .. import models
 
 
 class Byte(object):
+    """Byte operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -31,9 +38,8 @@ class Byte(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: bytearray or (bytearray, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: bytearray or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/byte/null'
@@ -72,9 +78,8 @@ class Byte(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: bytearray or (bytearray, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: bytearray or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/byte/empty'
@@ -113,9 +118,8 @@ class Byte(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: bytearray or (bytearray, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: bytearray or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/byte/nonAscii'
@@ -152,13 +156,13 @@ class Byte(object):
         """
         Put non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6)
 
-        :param byte_body: Base64-encoded non-ascii byte string hex(FF FE FD FC
-        FB FA F9 F8 F7 F6)
+        :param byte_body: Base64-encoded non-ascii byte string hex(FF FE FD
+         FC FB FA F9 F8 F7 F6)
         :type byte_body: bytearray
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/byte/nonAscii'
@@ -194,9 +198,8 @@ class Byte(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: bytearray or (bytearray, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: bytearray or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/byte/invalid'

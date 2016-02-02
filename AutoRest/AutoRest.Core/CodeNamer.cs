@@ -73,6 +73,7 @@ namespace Microsoft.Rest.Generator
         /// <param name="value">String to quote</param>
         /// <param name="quoteChar">Quote character</param>
         /// <param name="escapeChar">Escape character</param>
+        /// <exception cref="System.ArgumentNullException">Throw when either quoteChar or escapeChar are null.</exception>
         [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
         public static string QuoteValue(string value, string quoteChar = "\"", string escapeChar = "\\")
         {

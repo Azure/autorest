@@ -15,6 +15,13 @@ from .. import models
 
 
 class Array(object):
+    """Array operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -31,9 +38,8 @@ class Array(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: ArrayWrapper or (ArrayWrapper, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: ArrayWrapper or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/complex/array/valid'
@@ -74,8 +80,8 @@ class Array(object):
         :type array: list or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         complex_body = models.ArrayWrapper()
         if array is not None:
@@ -115,9 +121,8 @@ class Array(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: ArrayWrapper or (ArrayWrapper, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: ArrayWrapper or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/complex/array/empty'
@@ -158,8 +163,8 @@ class Array(object):
         :type array: list or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         complex_body = models.ArrayWrapper()
         if array is not None:
@@ -200,9 +205,8 @@ class Array(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: ArrayWrapper or (ArrayWrapper, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: ArrayWrapper or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/complex/array/notprovided'

@@ -157,22 +157,6 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
 
             return type.Name;
         }
-        /// <summary>
-        /// Returns a Javascript Array containing the values in a string enum type
-        /// </summary>
-        /// <param name="type">EnumType to model as Javascript Array</param>
-        /// <returns>The Javascript Array as a string</returns>
-        public static string GetEnumValuesArray(this EnumType type)
-        {
-            if (type == null)
-            {
-                throw new ArgumentNullException("type");
-            }
-
-            return string.Format(CultureInfo.InvariantCulture,
-                "[ {0} ]", string.Join(", ",
-                type.Values.Select(p => string.Format(CultureInfo.InvariantCulture, "'{0}'", p.Name))));
-        }
 
         /// <summary>
         /// Determine whether URL encoding should be skipped for this parameter
