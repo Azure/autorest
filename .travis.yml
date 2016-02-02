@@ -13,6 +13,8 @@ addons:
     - lib32gcc1
     - lib32ncurses5
     - lib32z1
+    # packages for python
+    - python3.5
 install:
   # Install libunwind required for DNX
   - wget http://download.savannah.gnu.org/releases/libunwind/libunwind-1.1.tar.gz
@@ -25,7 +27,7 @@ install:
   - npm install -g npm@'>=1.4.3'
   - npm install
   # Install ruby dependencies
-  - rvm use 2.2.1 --install --binary --fuzzy
+  - rvm use 2.3.0 --install --binary --fuzzy
   - gem install bundler
   - bundle install
   - pip install --user tox
