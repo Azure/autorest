@@ -482,10 +482,10 @@ export interface SkipUrlEncoding {
      * Get method with unencoded query parameter with value
      * 'value1&q2=value2&q3=value3'
      *
-     * @param {string} q1 An unencoded query parameter with value
-     * 'value1&q2=value2&q3=value3'
-     * 
      * @param {object} [options] Optional Parameters.
+     * 
+     * @param {string} [options.q1] An unencoded query parameter with value
+     * 'value1&q2=value2&q3=value3'
      * 
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
@@ -493,8 +493,8 @@ export interface SkipUrlEncoding {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getSwaggerQueryValid(q1: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    getSwaggerQueryValid(q1: string, callback: ServiceCallback<void>): void;
+    getSwaggerQueryValid(options: { q1? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    getSwaggerQueryValid(callback: ServiceCallback<void>): void;
 }
 
 /**

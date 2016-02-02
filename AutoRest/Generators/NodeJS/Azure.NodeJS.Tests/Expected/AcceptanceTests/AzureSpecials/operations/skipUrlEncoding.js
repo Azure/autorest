@@ -739,10 +739,10 @@ SkipUrlEncoding.prototype.getPathQueryValid = function (q1, options, callback) {
  * Get method with unencoded query parameter with value
  * 'value1&q2=value2&q3=value3'
  *
- * @param {string} q1 An unencoded query parameter with value
- * 'value1&q2=value2&q3=value3'
- * 
  * @param {object} [options] Optional Parameters.
+ * 
+ * @param {string} [options.q1] An unencoded query parameter with value
+ * 'value1&q2=value2&q3=value3'
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -759,7 +759,7 @@ SkipUrlEncoding.prototype.getPathQueryValid = function (q1, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-SkipUrlEncoding.prototype.getSwaggerQueryValid = function (q1, options, callback) {
+SkipUrlEncoding.prototype.getSwaggerQueryValid = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -768,10 +768,11 @@ SkipUrlEncoding.prototype.getSwaggerQueryValid = function (q1, options, callback
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var q1 = (options && options.q1 !== undefined) ? options.q1 : 'value1&q2=value2&q3=value3';
   // Validate
   try {
-    if (q1 === null || q1 === undefined || typeof q1.valueOf() !== 'string') {
-      throw new Error('q1 cannot be null or undefined and it must be of type string.');
+    if (q1 !== null && q1 !== undefined && typeof q1.valueOf() !== 'string') {
+      throw new Error('q1 must be of type string.');
     }
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
@@ -784,7 +785,9 @@ SkipUrlEncoding.prototype.getSwaggerQueryValid = function (q1, options, callback
   var requestUrl = this.client.baseUri +
                    '//azurespecials/skipUrlEncoding/swagger/query/valid';
   var queryParameters = [];
-  queryParameters.push('q1=' + q1);
+  if (q1 !== null && q1 !== undefined) {
+    queryParameters.push('q1=' + q1);
+  }
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }

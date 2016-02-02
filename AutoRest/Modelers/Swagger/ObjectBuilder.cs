@@ -158,7 +158,6 @@ namespace Microsoft.Rest.Modeler.Swagger
             {
                 parameter.DefaultValue = swaggerObject.Enum[0];
                 parameter.IsConstant = true;
-                parameter.IsRequired = true;
             }
 
             parameter.Documentation = swaggerObject.Description;

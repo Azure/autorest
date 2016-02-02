@@ -341,13 +341,9 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
      * @param q1 An unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getSwaggerQueryValid(String q1) throws ErrorException, IOException, IllegalArgumentException {
-        if (q1 == null) {
-            throw new IllegalArgumentException("Parameter q1 is required and cannot be null.");
-        }
+    public ServiceResponse<Void> getSwaggerQueryValid(String q1) throws ErrorException, IOException {
         Call<ResponseBody> call = service.getSwaggerQueryValid(q1, this.client.getAcceptLanguage());
         return getSwaggerQueryValidDelegate(call.execute(), null);
     }
@@ -360,10 +356,6 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
      * @return the {@link Call} object
      */
     public Call<ResponseBody> getSwaggerQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback) {
-        if (q1 == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter q1 is required and cannot be null."));
-            return null;
-        }
         Call<ResponseBody> call = service.getSwaggerQueryValid(q1, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -378,7 +370,7 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
         return call;
     }
 
-    private ServiceResponse<Void> getSwaggerQueryValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> getSwaggerQueryValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
         return new AzureServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)

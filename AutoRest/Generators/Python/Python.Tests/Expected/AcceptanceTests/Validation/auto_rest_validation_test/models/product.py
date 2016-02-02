@@ -17,7 +17,7 @@ class Product(Model):
     The product documentation.
     """
 
-    _required = ['const_int', 'const_string']
+    _required = []
 
     _attribute_map = {
         'display_names': {'key': 'display_names', 'type': '[str]'},

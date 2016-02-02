@@ -15,7 +15,7 @@ from msrest.exceptions import HttpOperationError
 
 class Error(Model):
 
-    _required = ['constant_id']
+    _required = []
 
     _attribute_map = {
         'status': {'key': 'status', 'type': 'int'},

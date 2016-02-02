@@ -31,9 +31,9 @@ function Queries(client) {
 /**
  * Get true Boolean value on path
  *
- * @param {boolean} boolQuery true boolean value
- * 
  * @param {object} [options] Optional Parameters.
+ * 
+ * @param {boolean} [options.boolQuery] true boolean value
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -50,7 +50,7 @@ function Queries(client) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.getBooleanTrue = function (boolQuery, options, callback) {
+Queries.prototype.getBooleanTrue = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -59,10 +59,11 @@ Queries.prototype.getBooleanTrue = function (boolQuery, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var boolQuery = (options && options.boolQuery !== undefined) ? options.boolQuery : true;
   // Validate
   try {
-    if (boolQuery === null || boolQuery === undefined || typeof boolQuery !== 'boolean') {
-      throw new Error('boolQuery cannot be null or undefined and it must be of type boolean.');
+    if (boolQuery !== null && boolQuery !== undefined && typeof boolQuery !== 'boolean') {
+      throw new Error('boolQuery must be of type boolean.');
     }
   } catch (error) {
     return callback(error);
@@ -72,7 +73,9 @@ Queries.prototype.getBooleanTrue = function (boolQuery, options, callback) {
   var requestUrl = this.client.baseUri +
                    '//queries/bool/true';
   var queryParameters = [];
-  queryParameters.push('boolQuery=' + encodeURIComponent(boolQuery.toString()));
+  if (boolQuery !== null && boolQuery !== undefined) {
+    queryParameters.push('boolQuery=' + encodeURIComponent(boolQuery.toString()));
+  }
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -138,9 +141,9 @@ Queries.prototype.getBooleanTrue = function (boolQuery, options, callback) {
 /**
  * Get false Boolean value on path
  *
- * @param {boolean} boolQuery false boolean value
- * 
  * @param {object} [options] Optional Parameters.
+ * 
+ * @param {boolean} [options.boolQuery] false boolean value
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -157,7 +160,7 @@ Queries.prototype.getBooleanTrue = function (boolQuery, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.getBooleanFalse = function (boolQuery, options, callback) {
+Queries.prototype.getBooleanFalse = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -166,10 +169,11 @@ Queries.prototype.getBooleanFalse = function (boolQuery, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var boolQuery = (options && options.boolQuery !== undefined) ? options.boolQuery : false;
   // Validate
   try {
-    if (boolQuery === null || boolQuery === undefined || typeof boolQuery !== 'boolean') {
-      throw new Error('boolQuery cannot be null or undefined and it must be of type boolean.');
+    if (boolQuery !== null && boolQuery !== undefined && typeof boolQuery !== 'boolean') {
+      throw new Error('boolQuery must be of type boolean.');
     }
   } catch (error) {
     return callback(error);
@@ -179,7 +183,9 @@ Queries.prototype.getBooleanFalse = function (boolQuery, options, callback) {
   var requestUrl = this.client.baseUri +
                    '//queries/bool/false';
   var queryParameters = [];
-  queryParameters.push('boolQuery=' + encodeURIComponent(boolQuery.toString()));
+  if (boolQuery !== null && boolQuery !== undefined) {
+    queryParameters.push('boolQuery=' + encodeURIComponent(boolQuery.toString()));
+  }
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -355,9 +361,9 @@ Queries.prototype.getBooleanNull = function (options, callback) {
 /**
  * Get '1000000' integer value
  *
- * @param {number} intQuery '1000000' integer value
- * 
  * @param {object} [options] Optional Parameters.
+ * 
+ * @param {number} [options.intQuery] '1000000' integer value
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -374,7 +380,7 @@ Queries.prototype.getBooleanNull = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.getIntOneMillion = function (intQuery, options, callback) {
+Queries.prototype.getIntOneMillion = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -383,10 +389,11 @@ Queries.prototype.getIntOneMillion = function (intQuery, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var intQuery = (options && options.intQuery !== undefined) ? options.intQuery : 1000000;
   // Validate
   try {
-    if (intQuery === null || intQuery === undefined || typeof intQuery !== 'number') {
-      throw new Error('intQuery cannot be null or undefined and it must be of type number.');
+    if (intQuery !== null && intQuery !== undefined && typeof intQuery !== 'number') {
+      throw new Error('intQuery must be of type number.');
     }
   } catch (error) {
     return callback(error);
@@ -396,7 +403,9 @@ Queries.prototype.getIntOneMillion = function (intQuery, options, callback) {
   var requestUrl = this.client.baseUri +
                    '//queries/int/1000000';
   var queryParameters = [];
-  queryParameters.push('intQuery=' + encodeURIComponent(intQuery.toString()));
+  if (intQuery !== null && intQuery !== undefined) {
+    queryParameters.push('intQuery=' + encodeURIComponent(intQuery.toString()));
+  }
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -462,9 +471,9 @@ Queries.prototype.getIntOneMillion = function (intQuery, options, callback) {
 /**
  * Get '-1000000' integer value
  *
- * @param {number} intQuery '-1000000' integer value
- * 
  * @param {object} [options] Optional Parameters.
+ * 
+ * @param {number} [options.intQuery] '-1000000' integer value
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -481,7 +490,7 @@ Queries.prototype.getIntOneMillion = function (intQuery, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.getIntNegativeOneMillion = function (intQuery, options, callback) {
+Queries.prototype.getIntNegativeOneMillion = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -490,10 +499,11 @@ Queries.prototype.getIntNegativeOneMillion = function (intQuery, options, callba
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var intQuery = (options && options.intQuery !== undefined) ? options.intQuery : -1000000;
   // Validate
   try {
-    if (intQuery === null || intQuery === undefined || typeof intQuery !== 'number') {
-      throw new Error('intQuery cannot be null or undefined and it must be of type number.');
+    if (intQuery !== null && intQuery !== undefined && typeof intQuery !== 'number') {
+      throw new Error('intQuery must be of type number.');
     }
   } catch (error) {
     return callback(error);
@@ -503,7 +513,9 @@ Queries.prototype.getIntNegativeOneMillion = function (intQuery, options, callba
   var requestUrl = this.client.baseUri +
                    '//queries/int/-1000000';
   var queryParameters = [];
-  queryParameters.push('intQuery=' + encodeURIComponent(intQuery.toString()));
+  if (intQuery !== null && intQuery !== undefined) {
+    queryParameters.push('intQuery=' + encodeURIComponent(intQuery.toString()));
+  }
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -679,9 +691,9 @@ Queries.prototype.getIntNull = function (options, callback) {
 /**
  * Get '10000000000' 64 bit integer value
  *
- * @param {number} longQuery '10000000000' 64 bit integer value
- * 
  * @param {object} [options] Optional Parameters.
+ * 
+ * @param {number} [options.longQuery] '10000000000' 64 bit integer value
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -698,7 +710,7 @@ Queries.prototype.getIntNull = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.getTenBillion = function (longQuery, options, callback) {
+Queries.prototype.getTenBillion = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -707,10 +719,11 @@ Queries.prototype.getTenBillion = function (longQuery, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var longQuery = (options && options.longQuery !== undefined) ? options.longQuery : 10000000000;
   // Validate
   try {
-    if (longQuery === null || longQuery === undefined || typeof longQuery !== 'number') {
-      throw new Error('longQuery cannot be null or undefined and it must be of type number.');
+    if (longQuery !== null && longQuery !== undefined && typeof longQuery !== 'number') {
+      throw new Error('longQuery must be of type number.');
     }
   } catch (error) {
     return callback(error);
@@ -720,7 +733,9 @@ Queries.prototype.getTenBillion = function (longQuery, options, callback) {
   var requestUrl = this.client.baseUri +
                    '//queries/long/10000000000';
   var queryParameters = [];
-  queryParameters.push('longQuery=' + encodeURIComponent(longQuery.toString()));
+  if (longQuery !== null && longQuery !== undefined) {
+    queryParameters.push('longQuery=' + encodeURIComponent(longQuery.toString()));
+  }
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -786,9 +801,9 @@ Queries.prototype.getTenBillion = function (longQuery, options, callback) {
 /**
  * Get '-10000000000' 64 bit integer value
  *
- * @param {number} longQuery '-10000000000' 64 bit integer value
- * 
  * @param {object} [options] Optional Parameters.
+ * 
+ * @param {number} [options.longQuery] '-10000000000' 64 bit integer value
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -805,7 +820,7 @@ Queries.prototype.getTenBillion = function (longQuery, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.getNegativeTenBillion = function (longQuery, options, callback) {
+Queries.prototype.getNegativeTenBillion = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -814,10 +829,11 @@ Queries.prototype.getNegativeTenBillion = function (longQuery, options, callback
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var longQuery = (options && options.longQuery !== undefined) ? options.longQuery : -10000000000;
   // Validate
   try {
-    if (longQuery === null || longQuery === undefined || typeof longQuery !== 'number') {
-      throw new Error('longQuery cannot be null or undefined and it must be of type number.');
+    if (longQuery !== null && longQuery !== undefined && typeof longQuery !== 'number') {
+      throw new Error('longQuery must be of type number.');
     }
   } catch (error) {
     return callback(error);
@@ -827,7 +843,9 @@ Queries.prototype.getNegativeTenBillion = function (longQuery, options, callback
   var requestUrl = this.client.baseUri +
                    '//queries/long/-10000000000';
   var queryParameters = [];
-  queryParameters.push('longQuery=' + encodeURIComponent(longQuery.toString()));
+  if (longQuery !== null && longQuery !== undefined) {
+    queryParameters.push('longQuery=' + encodeURIComponent(longQuery.toString()));
+  }
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -1003,9 +1021,9 @@ Queries.prototype.getLongNull = function (options, callback) {
 /**
  * Get '1.034E+20' numeric value
  *
- * @param {number} floatQuery '1.034E+20'numeric value
- * 
  * @param {object} [options] Optional Parameters.
+ * 
+ * @param {number} [options.floatQuery] '1.034E+20'numeric value
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -1022,7 +1040,7 @@ Queries.prototype.getLongNull = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.floatScientificPositive = function (floatQuery, options, callback) {
+Queries.prototype.floatScientificPositive = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1031,10 +1049,11 @@ Queries.prototype.floatScientificPositive = function (floatQuery, options, callb
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var floatQuery = (options && options.floatQuery !== undefined) ? options.floatQuery : 1.034E+20;
   // Validate
   try {
-    if (floatQuery === null || floatQuery === undefined || typeof floatQuery !== 'number') {
-      throw new Error('floatQuery cannot be null or undefined and it must be of type number.');
+    if (floatQuery !== null && floatQuery !== undefined && typeof floatQuery !== 'number') {
+      throw new Error('floatQuery must be of type number.');
     }
   } catch (error) {
     return callback(error);
@@ -1044,7 +1063,9 @@ Queries.prototype.floatScientificPositive = function (floatQuery, options, callb
   var requestUrl = this.client.baseUri +
                    '//queries/float/1.034E+20';
   var queryParameters = [];
-  queryParameters.push('floatQuery=' + encodeURIComponent(floatQuery.toString()));
+  if (floatQuery !== null && floatQuery !== undefined) {
+    queryParameters.push('floatQuery=' + encodeURIComponent(floatQuery.toString()));
+  }
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -1110,9 +1131,9 @@ Queries.prototype.floatScientificPositive = function (floatQuery, options, callb
 /**
  * Get '-1.034E-20' numeric value
  *
- * @param {number} floatQuery '-1.034E-20'numeric value
- * 
  * @param {object} [options] Optional Parameters.
+ * 
+ * @param {number} [options.floatQuery] '-1.034E-20'numeric value
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -1129,7 +1150,7 @@ Queries.prototype.floatScientificPositive = function (floatQuery, options, callb
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.floatScientificNegative = function (floatQuery, options, callback) {
+Queries.prototype.floatScientificNegative = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1138,10 +1159,11 @@ Queries.prototype.floatScientificNegative = function (floatQuery, options, callb
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var floatQuery = (options && options.floatQuery !== undefined) ? options.floatQuery : -1.034E-20;
   // Validate
   try {
-    if (floatQuery === null || floatQuery === undefined || typeof floatQuery !== 'number') {
-      throw new Error('floatQuery cannot be null or undefined and it must be of type number.');
+    if (floatQuery !== null && floatQuery !== undefined && typeof floatQuery !== 'number') {
+      throw new Error('floatQuery must be of type number.');
     }
   } catch (error) {
     return callback(error);
@@ -1151,7 +1173,9 @@ Queries.prototype.floatScientificNegative = function (floatQuery, options, callb
   var requestUrl = this.client.baseUri +
                    '//queries/float/-1.034E-20';
   var queryParameters = [];
-  queryParameters.push('floatQuery=' + encodeURIComponent(floatQuery.toString()));
+  if (floatQuery !== null && floatQuery !== undefined) {
+    queryParameters.push('floatQuery=' + encodeURIComponent(floatQuery.toString()));
+  }
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -1327,9 +1351,9 @@ Queries.prototype.floatNull = function (options, callback) {
 /**
  * Get '9999999.999' numeric value
  *
- * @param {number} doubleQuery '9999999.999'numeric value
- * 
  * @param {object} [options] Optional Parameters.
+ * 
+ * @param {number} [options.doubleQuery] '9999999.999'numeric value
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -1346,7 +1370,7 @@ Queries.prototype.floatNull = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.doubleDecimalPositive = function (doubleQuery, options, callback) {
+Queries.prototype.doubleDecimalPositive = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1355,10 +1379,11 @@ Queries.prototype.doubleDecimalPositive = function (doubleQuery, options, callba
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var doubleQuery = (options && options.doubleQuery !== undefined) ? options.doubleQuery : 9999999.999;
   // Validate
   try {
-    if (doubleQuery === null || doubleQuery === undefined || typeof doubleQuery !== 'number') {
-      throw new Error('doubleQuery cannot be null or undefined and it must be of type number.');
+    if (doubleQuery !== null && doubleQuery !== undefined && typeof doubleQuery !== 'number') {
+      throw new Error('doubleQuery must be of type number.');
     }
   } catch (error) {
     return callback(error);
@@ -1368,7 +1393,9 @@ Queries.prototype.doubleDecimalPositive = function (doubleQuery, options, callba
   var requestUrl = this.client.baseUri +
                    '//queries/double/9999999.999';
   var queryParameters = [];
-  queryParameters.push('doubleQuery=' + encodeURIComponent(doubleQuery.toString()));
+  if (doubleQuery !== null && doubleQuery !== undefined) {
+    queryParameters.push('doubleQuery=' + encodeURIComponent(doubleQuery.toString()));
+  }
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -1434,9 +1461,9 @@ Queries.prototype.doubleDecimalPositive = function (doubleQuery, options, callba
 /**
  * Get '-9999999.999' numeric value
  *
- * @param {number} doubleQuery '-9999999.999'numeric value
- * 
  * @param {object} [options] Optional Parameters.
+ * 
+ * @param {number} [options.doubleQuery] '-9999999.999'numeric value
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -1453,7 +1480,7 @@ Queries.prototype.doubleDecimalPositive = function (doubleQuery, options, callba
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.doubleDecimalNegative = function (doubleQuery, options, callback) {
+Queries.prototype.doubleDecimalNegative = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1462,10 +1489,11 @@ Queries.prototype.doubleDecimalNegative = function (doubleQuery, options, callba
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var doubleQuery = (options && options.doubleQuery !== undefined) ? options.doubleQuery : -9999999.999;
   // Validate
   try {
-    if (doubleQuery === null || doubleQuery === undefined || typeof doubleQuery !== 'number') {
-      throw new Error('doubleQuery cannot be null or undefined and it must be of type number.');
+    if (doubleQuery !== null && doubleQuery !== undefined && typeof doubleQuery !== 'number') {
+      throw new Error('doubleQuery must be of type number.');
     }
   } catch (error) {
     return callback(error);
@@ -1475,7 +1503,9 @@ Queries.prototype.doubleDecimalNegative = function (doubleQuery, options, callba
   var requestUrl = this.client.baseUri +
                    '//queries/double/-9999999.999';
   var queryParameters = [];
-  queryParameters.push('doubleQuery=' + encodeURIComponent(doubleQuery.toString()));
+  if (doubleQuery !== null && doubleQuery !== undefined) {
+    queryParameters.push('doubleQuery=' + encodeURIComponent(doubleQuery.toString()));
+  }
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -1651,9 +1681,9 @@ Queries.prototype.doubleNull = function (options, callback) {
 /**
  * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
  *
- * @param {string} stringQuery '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value
- * 
  * @param {object} [options] Optional Parameters.
+ * 
+ * @param {string} [options.stringQuery] '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -1670,7 +1700,7 @@ Queries.prototype.doubleNull = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.stringUnicode = function (stringQuery, options, callback) {
+Queries.prototype.stringUnicode = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1679,10 +1709,11 @@ Queries.prototype.stringUnicode = function (stringQuery, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var stringQuery = (options && options.stringQuery !== undefined) ? options.stringQuery : '啊齄丂狛狜隣郎隣兀﨩';
   // Validate
   try {
-    if (stringQuery === null || stringQuery === undefined || typeof stringQuery.valueOf() !== 'string') {
-      throw new Error('stringQuery cannot be null or undefined and it must be of type string.');
+    if (stringQuery !== null && stringQuery !== undefined && typeof stringQuery.valueOf() !== 'string') {
+      throw new Error('stringQuery must be of type string.');
     }
   } catch (error) {
     return callback(error);
@@ -1692,7 +1723,9 @@ Queries.prototype.stringUnicode = function (stringQuery, options, callback) {
   var requestUrl = this.client.baseUri +
                    '//queries/string/unicode/';
   var queryParameters = [];
-  queryParameters.push('stringQuery=' + encodeURIComponent(stringQuery));
+  if (stringQuery !== null && stringQuery !== undefined) {
+    queryParameters.push('stringQuery=' + encodeURIComponent(stringQuery));
+  }
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -1758,10 +1791,10 @@ Queries.prototype.stringUnicode = function (stringQuery, options, callback) {
 /**
  * Get 'begin!*'();:@ &=+$,/?#[]end
  *
- * @param {string} stringQuery 'begin!*'();:@ &=+$,/?#[]end' url encoded
- * string value
- * 
  * @param {object} [options] Optional Parameters.
+ * 
+ * @param {string} [options.stringQuery] 'begin!*'();:@ &=+$,/?#[]end' url
+ * encoded string value
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -1778,7 +1811,7 @@ Queries.prototype.stringUnicode = function (stringQuery, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.stringUrlEncoded = function (stringQuery, options, callback) {
+Queries.prototype.stringUrlEncoded = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1787,10 +1820,11 @@ Queries.prototype.stringUrlEncoded = function (stringQuery, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var stringQuery = (options && options.stringQuery !== undefined) ? options.stringQuery : 'begin!*\'();:@ &=+$,/?#[]end';
   // Validate
   try {
-    if (stringQuery === null || stringQuery === undefined || typeof stringQuery.valueOf() !== 'string') {
-      throw new Error('stringQuery cannot be null or undefined and it must be of type string.');
+    if (stringQuery !== null && stringQuery !== undefined && typeof stringQuery.valueOf() !== 'string') {
+      throw new Error('stringQuery must be of type string.');
     }
   } catch (error) {
     return callback(error);
@@ -1800,7 +1834,9 @@ Queries.prototype.stringUrlEncoded = function (stringQuery, options, callback) {
   var requestUrl = this.client.baseUri +
                    '//queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend';
   var queryParameters = [];
-  queryParameters.push('stringQuery=' + encodeURIComponent(stringQuery));
+  if (stringQuery !== null && stringQuery !== undefined) {
+    queryParameters.push('stringQuery=' + encodeURIComponent(stringQuery));
+  }
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -1866,9 +1902,9 @@ Queries.prototype.stringUrlEncoded = function (stringQuery, options, callback) {
 /**
  * Get ''
  *
- * @param {string} stringQuery '' string value
- * 
  * @param {object} [options] Optional Parameters.
+ * 
+ * @param {string} [options.stringQuery] '' string value
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -1885,7 +1921,7 @@ Queries.prototype.stringUrlEncoded = function (stringQuery, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.stringEmpty = function (stringQuery, options, callback) {
+Queries.prototype.stringEmpty = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1894,10 +1930,11 @@ Queries.prototype.stringEmpty = function (stringQuery, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var stringQuery = (options && options.stringQuery !== undefined) ? options.stringQuery : '';
   // Validate
   try {
-    if (stringQuery === null || stringQuery === undefined || typeof stringQuery.valueOf() !== 'string') {
-      throw new Error('stringQuery cannot be null or undefined and it must be of type string.');
+    if (stringQuery !== null && stringQuery !== undefined && typeof stringQuery.valueOf() !== 'string') {
+      throw new Error('stringQuery must be of type string.');
     }
   } catch (error) {
     return callback(error);
@@ -1907,7 +1944,9 @@ Queries.prototype.stringEmpty = function (stringQuery, options, callback) {
   var requestUrl = this.client.baseUri +
                    '//queries/string/empty';
   var queryParameters = [];
-  queryParameters.push('stringQuery=' + encodeURIComponent(stringQuery));
+  if (stringQuery !== null && stringQuery !== undefined) {
+    queryParameters.push('stringQuery=' + encodeURIComponent(stringQuery));
+  }
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -2422,9 +2461,9 @@ Queries.prototype.byteMultiByte = function (options, callback) {
 /**
  * Get '' as byte array
  *
- * @param {buffer} byteQuery '' as byte array
- * 
  * @param {object} [options] Optional Parameters.
+ * 
+ * @param {buffer} [options.byteQuery] '' as byte array
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -2441,7 +2480,7 @@ Queries.prototype.byteMultiByte = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.byteEmpty = function (byteQuery, options, callback) {
+Queries.prototype.byteEmpty = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2450,10 +2489,11 @@ Queries.prototype.byteEmpty = function (byteQuery, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var byteQuery = (options && options.byteQuery !== undefined) ? options.byteQuery : new Buffer('');
   // Validate
   try {
-    if (!Buffer.isBuffer(byteQuery)) {
-      throw new Error('byteQuery cannot be null or undefined and it must be of type buffer.');
+    if (byteQuery && !Buffer.isBuffer(byteQuery)) {
+      throw new Error('byteQuery must be of type buffer.');
     }
   } catch (error) {
     return callback(error);
@@ -2463,7 +2503,9 @@ Queries.prototype.byteEmpty = function (byteQuery, options, callback) {
   var requestUrl = this.client.baseUri +
                    '//queries/byte/empty';
   var queryParameters = [];
-  queryParameters.push('byteQuery=' + encodeURIComponent(client.serializeObject(byteQuery)));
+  if (byteQuery !== null && byteQuery !== undefined) {
+    queryParameters.push('byteQuery=' + encodeURIComponent(client.serializeObject(byteQuery)));
+  }
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -2640,9 +2682,9 @@ Queries.prototype.byteNull = function (options, callback) {
 /**
  * Get '2012-01-01' as date
  *
- * @param {date} dateQuery '2012-01-01' as date
- * 
  * @param {object} [options] Optional Parameters.
+ * 
+ * @param {date} [options.dateQuery] '2012-01-01' as date
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -2659,7 +2701,7 @@ Queries.prototype.byteNull = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.dateValid = function (dateQuery, options, callback) {
+Queries.prototype.dateValid = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2668,11 +2710,12 @@ Queries.prototype.dateValid = function (dateQuery, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var dateQuery = (options && options.dateQuery !== undefined) ? options.dateQuery : new Date('2012-01-01');
   // Validate
   try {
-    if(!dateQuery || !(dateQuery instanceof Date || 
+    if (dateQuery && !(dateQuery instanceof Date || 
         (typeof dateQuery.valueOf() === 'string' && !isNaN(Date.parse(dateQuery))))) {
-          throw new Error('dateQuery cannot be null or undefined and it must be of type date.');
+          throw new Error('dateQuery must be of type date.');
         }
   } catch (error) {
     return callback(error);
@@ -2682,7 +2725,9 @@ Queries.prototype.dateValid = function (dateQuery, options, callback) {
   var requestUrl = this.client.baseUri +
                    '//queries/date/2012-01-01';
   var queryParameters = [];
-  queryParameters.push('dateQuery=' + encodeURIComponent(client.serializeObject(dateQuery).replace(/[Tt].*[Zz]/, '')));
+  if (dateQuery !== null && dateQuery !== undefined) {
+    queryParameters.push('dateQuery=' + encodeURIComponent(client.serializeObject(dateQuery).replace(/[Tt].*[Zz]/, '')));
+  }
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -2859,9 +2904,9 @@ Queries.prototype.dateNull = function (options, callback) {
 /**
  * Get '2012-01-01T01:01:01Z' as date-time
  *
- * @param {date} dateTimeQuery '2012-01-01T01:01:01Z' as date-time
- * 
  * @param {object} [options] Optional Parameters.
+ * 
+ * @param {date} [options.dateTimeQuery] '2012-01-01T01:01:01Z' as date-time
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -2878,7 +2923,7 @@ Queries.prototype.dateNull = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Queries.prototype.dateTimeValid = function (dateTimeQuery, options, callback) {
+Queries.prototype.dateTimeValid = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2887,11 +2932,12 @@ Queries.prototype.dateTimeValid = function (dateTimeQuery, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var dateTimeQuery = (options && options.dateTimeQuery !== undefined) ? options.dateTimeQuery : new Date('2012-01-01T01:01:01Z');
   // Validate
   try {
-    if(!dateTimeQuery || !(dateTimeQuery instanceof Date || 
+    if (dateTimeQuery && !(dateTimeQuery instanceof Date || 
         (typeof dateTimeQuery.valueOf() === 'string' && !isNaN(Date.parse(dateTimeQuery))))) {
-          throw new Error('dateTimeQuery cannot be null or undefined and it must be of type date.');
+          throw new Error('dateTimeQuery must be of type date.');
         }
   } catch (error) {
     return callback(error);
@@ -2901,7 +2947,9 @@ Queries.prototype.dateTimeValid = function (dateTimeQuery, options, callback) {
   var requestUrl = this.client.baseUri +
                    '//queries/datetime/2012-01-01T01%3A01%3A01Z';
   var queryParameters = [];
-  queryParameters.push('dateTimeQuery=' + encodeURIComponent(client.serializeObject(dateTimeQuery)));
+  if (dateTimeQuery !== null && dateTimeQuery !== undefined) {
+    queryParameters.push('dateTimeQuery=' + encodeURIComponent(client.serializeObject(dateTimeQuery)));
+  }
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }

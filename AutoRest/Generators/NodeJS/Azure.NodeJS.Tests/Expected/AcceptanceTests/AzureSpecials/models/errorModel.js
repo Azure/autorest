@@ -16,7 +16,7 @@
  * @constructor
  * @member {number} [status]
  * 
- * @member {number} constantId  Default value: 1 .
+ * @member {number} [constantId]  Default value: 1 .
  * 
  * @member {string} [message]
  * 
@@ -46,7 +46,7 @@ ErrorModel.prototype.mapper = function () {
           }
         },
         constantId: {
-          required: true,
+          required: false,
           serializedName: 'constantId',
           defaultValue: 1,
           type: {

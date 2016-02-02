@@ -36,13 +36,11 @@ public class Product {
     /**
      * Constant int.
      */
-    @JsonProperty(required = true)
-    private int constInt;
+    private Integer constInt;
 
     /**
      * Constant string.
      */
-    @JsonProperty(required = true)
     private String constString;
 
     /**
@@ -104,7 +102,7 @@ public class Product {
      *
      * @return the constInt value
      */
-    public int getConstInt() {
+    public Integer getConstInt() {
         return this.constInt;
     }
 
@@ -113,7 +111,7 @@ public class Product {
      *
      * @param constInt the constInt value to set
      */
-    public void setConstInt(int constInt) {
+    public void setConstInt(Integer constInt) {
         this.constInt = constInt;
     }
 

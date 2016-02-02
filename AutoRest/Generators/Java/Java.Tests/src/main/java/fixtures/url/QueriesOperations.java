@@ -36,11 +36,11 @@ public interface QueriesOperations {
     interface QueriesService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("queries/bool/true")
-        Call<ResponseBody> getBooleanTrue(@Query("boolQuery") boolean boolQuery);
+        Call<ResponseBody> getBooleanTrue(@Query("boolQuery") Boolean boolQuery);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("queries/bool/false")
-        Call<ResponseBody> getBooleanFalse(@Query("boolQuery") boolean boolQuery);
+        Call<ResponseBody> getBooleanFalse(@Query("boolQuery") Boolean boolQuery);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("queries/bool/null")
@@ -48,11 +48,11 @@ public interface QueriesOperations {
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("queries/int/1000000")
-        Call<ResponseBody> getIntOneMillion(@Query("intQuery") int intQuery);
+        Call<ResponseBody> getIntOneMillion(@Query("intQuery") Integer intQuery);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("queries/int/-1000000")
-        Call<ResponseBody> getIntNegativeOneMillion(@Query("intQuery") int intQuery);
+        Call<ResponseBody> getIntNegativeOneMillion(@Query("intQuery") Integer intQuery);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("queries/int/null")
@@ -60,11 +60,11 @@ public interface QueriesOperations {
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("queries/long/10000000000")
-        Call<ResponseBody> getTenBillion(@Query("longQuery") long longQuery);
+        Call<ResponseBody> getTenBillion(@Query("longQuery") Long longQuery);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("queries/long/-10000000000")
-        Call<ResponseBody> getNegativeTenBillion(@Query("longQuery") long longQuery);
+        Call<ResponseBody> getNegativeTenBillion(@Query("longQuery") Long longQuery);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("queries/long/null")
@@ -72,11 +72,11 @@ public interface QueriesOperations {
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("queries/float/1.034E+20")
-        Call<ResponseBody> floatScientificPositive(@Query("floatQuery") double floatQuery);
+        Call<ResponseBody> floatScientificPositive(@Query("floatQuery") Double floatQuery);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("queries/float/-1.034E-20")
-        Call<ResponseBody> floatScientificNegative(@Query("floatQuery") double floatQuery);
+        Call<ResponseBody> floatScientificNegative(@Query("floatQuery") Double floatQuery);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("queries/float/null")
@@ -84,11 +84,11 @@ public interface QueriesOperations {
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("queries/double/9999999.999")
-        Call<ResponseBody> doubleDecimalPositive(@Query("doubleQuery") double doubleQuery);
+        Call<ResponseBody> doubleDecimalPositive(@Query("doubleQuery") Double doubleQuery);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("queries/double/-9999999.999")
-        Call<ResponseBody> doubleDecimalNegative(@Query("doubleQuery") double doubleQuery);
+        Call<ResponseBody> doubleDecimalNegative(@Query("doubleQuery") Double doubleQuery);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("queries/double/null")
@@ -179,7 +179,7 @@ public interface QueriesOperations {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getBooleanTrue(boolean boolQuery) throws ErrorException, IOException;
+    ServiceResponse<Void> getBooleanTrue(Boolean boolQuery) throws ErrorException, IOException;
 
     /**
      * Get true Boolean value on path.
@@ -188,7 +188,7 @@ public interface QueriesOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    Call<ResponseBody> getBooleanTrueAsync(boolean boolQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> getBooleanTrueAsync(Boolean boolQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get false Boolean value on path.
@@ -198,7 +198,7 @@ public interface QueriesOperations {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getBooleanFalse(boolean boolQuery) throws ErrorException, IOException;
+    ServiceResponse<Void> getBooleanFalse(Boolean boolQuery) throws ErrorException, IOException;
 
     /**
      * Get false Boolean value on path.
@@ -207,7 +207,7 @@ public interface QueriesOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    Call<ResponseBody> getBooleanFalseAsync(boolean boolQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> getBooleanFalseAsync(Boolean boolQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null Boolean value on query (query string should be absent).
@@ -236,7 +236,7 @@ public interface QueriesOperations {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getIntOneMillion(int intQuery) throws ErrorException, IOException;
+    ServiceResponse<Void> getIntOneMillion(Integer intQuery) throws ErrorException, IOException;
 
     /**
      * Get '1000000' integer value.
@@ -245,7 +245,7 @@ public interface QueriesOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    Call<ResponseBody> getIntOneMillionAsync(int intQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> getIntOneMillionAsync(Integer intQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '-1000000' integer value.
@@ -255,7 +255,7 @@ public interface QueriesOperations {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getIntNegativeOneMillion(int intQuery) throws ErrorException, IOException;
+    ServiceResponse<Void> getIntNegativeOneMillion(Integer intQuery) throws ErrorException, IOException;
 
     /**
      * Get '-1000000' integer value.
@@ -264,7 +264,7 @@ public interface QueriesOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    Call<ResponseBody> getIntNegativeOneMillionAsync(int intQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> getIntNegativeOneMillionAsync(Integer intQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null integer value (no query parameter).
@@ -293,7 +293,7 @@ public interface QueriesOperations {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getTenBillion(long longQuery) throws ErrorException, IOException;
+    ServiceResponse<Void> getTenBillion(Long longQuery) throws ErrorException, IOException;
 
     /**
      * Get '10000000000' 64 bit integer value.
@@ -302,7 +302,7 @@ public interface QueriesOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    Call<ResponseBody> getTenBillionAsync(long longQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> getTenBillionAsync(Long longQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '-10000000000' 64 bit integer value.
@@ -312,7 +312,7 @@ public interface QueriesOperations {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getNegativeTenBillion(long longQuery) throws ErrorException, IOException;
+    ServiceResponse<Void> getNegativeTenBillion(Long longQuery) throws ErrorException, IOException;
 
     /**
      * Get '-10000000000' 64 bit integer value.
@@ -321,7 +321,7 @@ public interface QueriesOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    Call<ResponseBody> getNegativeTenBillionAsync(long longQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> getNegativeTenBillionAsync(Long longQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
@@ -350,7 +350,7 @@ public interface QueriesOperations {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> floatScientificPositive(double floatQuery) throws ErrorException, IOException;
+    ServiceResponse<Void> floatScientificPositive(Double floatQuery) throws ErrorException, IOException;
 
     /**
      * Get '1.034E+20' numeric value.
@@ -359,7 +359,7 @@ public interface QueriesOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    Call<ResponseBody> floatScientificPositiveAsync(double floatQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> floatScientificPositiveAsync(Double floatQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '-1.034E-20' numeric value.
@@ -369,7 +369,7 @@ public interface QueriesOperations {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> floatScientificNegative(double floatQuery) throws ErrorException, IOException;
+    ServiceResponse<Void> floatScientificNegative(Double floatQuery) throws ErrorException, IOException;
 
     /**
      * Get '-1.034E-20' numeric value.
@@ -378,7 +378,7 @@ public interface QueriesOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    Call<ResponseBody> floatScientificNegativeAsync(double floatQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> floatScientificNegativeAsync(Double floatQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null numeric value (no query parameter).
@@ -407,7 +407,7 @@ public interface QueriesOperations {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> doubleDecimalPositive(double doubleQuery) throws ErrorException, IOException;
+    ServiceResponse<Void> doubleDecimalPositive(Double doubleQuery) throws ErrorException, IOException;
 
     /**
      * Get '9999999.999' numeric value.
@@ -416,7 +416,7 @@ public interface QueriesOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    Call<ResponseBody> doubleDecimalPositiveAsync(double doubleQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> doubleDecimalPositiveAsync(Double doubleQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '-9999999.999' numeric value.
@@ -426,7 +426,7 @@ public interface QueriesOperations {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> doubleDecimalNegative(double doubleQuery) throws ErrorException, IOException;
+    ServiceResponse<Void> doubleDecimalNegative(Double doubleQuery) throws ErrorException, IOException;
 
     /**
      * Get '-9999999.999' numeric value.
@@ -435,7 +435,7 @@ public interface QueriesOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    Call<ResponseBody> doubleDecimalNegativeAsync(double doubleQuery, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> doubleDecimalNegativeAsync(Double doubleQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null numeric value (no query parameter).
@@ -462,10 +462,9 @@ public interface QueriesOperations {
      * @param stringQuery '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> stringUnicode(String stringQuery) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<Void> stringUnicode(String stringQuery) throws ErrorException, IOException;
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
@@ -482,10 +481,9 @@ public interface QueriesOperations {
      * @param stringQuery 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> stringUrlEncoded(String stringQuery) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<Void> stringUrlEncoded(String stringQuery) throws ErrorException, IOException;
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
@@ -502,10 +500,9 @@ public interface QueriesOperations {
      * @param stringQuery '' string value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> stringEmpty(String stringQuery) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<Void> stringEmpty(String stringQuery) throws ErrorException, IOException;
 
     /**
      * Get ''.
@@ -598,10 +595,9 @@ public interface QueriesOperations {
      * @param byteQuery '' as byte array
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> byteEmpty(byte[] byteQuery) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<Void> byteEmpty(byte[] byteQuery) throws ErrorException, IOException;
 
     /**
      * Get '' as byte array.
@@ -637,10 +633,9 @@ public interface QueriesOperations {
      * @param dateQuery '2012-01-01' as date
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> dateValid(LocalDate dateQuery) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<Void> dateValid(LocalDate dateQuery) throws ErrorException, IOException;
 
     /**
      * Get '2012-01-01' as date.
@@ -676,10 +671,9 @@ public interface QueriesOperations {
      * @param dateTimeQuery '2012-01-01T01:01:01Z' as date-time
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> dateTimeValid(DateTime dateTimeQuery) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<Void> dateTimeValid(DateTime dateTimeQuery) throws ErrorException, IOException;
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.

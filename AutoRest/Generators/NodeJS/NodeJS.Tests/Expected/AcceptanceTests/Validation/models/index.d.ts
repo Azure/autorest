@@ -21,17 +21,17 @@
  * 
  * @member {string} [image] Image URL representing the product.
  * 
- * @member {number} constInt Constant int
+ * @member {number} [constInt] Constant int
  * 
- * @member {string} constString Constant string
+ * @member {string} [constString] Constant string
  * 
  */
 export interface Product {
     displayNames?: string[];
     capacity?: number;
     image?: string;
-    constInt: number;
-    constString: string;
+    constInt?: number;
+    constString?: string;
 }
 
 /**
