@@ -894,11 +894,6 @@ namespace Microsoft.Rest.Generator.NodeJS
                 if (!string.IsNullOrWhiteSpace(optionalParam.DefaultValue))
                 {
                     defaultValue = optionalParam.DefaultValue;
-                    if (optionalParam.Type == PrimaryType.String || optionalParam.Type is EnumType)
-                    {
-                        defaultValue = string.Format(CultureInfo.InvariantCulture, 
-                            "'{0}'", optionalParam.DefaultValue);
-                    }
                 }
                 builder.AppendLine("var {0} = ({1} && {1}.{2} !== undefined) ? {1}.{2} : {3};", 
                     optionalParam.Name, OptionsParameterTemplateModel.Name, optionalParam.Name, defaultValue);

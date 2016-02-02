@@ -20,6 +20,11 @@ var util = require('util');
 var msRest = require('ms-rest');
 var msRestAzure = require('ms-rest-azure');
 var ServiceClient = msRestAzure.AzureServiceClient;
+@if (Model.ContainsDurationProperty())
+{
+@:var moment = require('moment');
+@EmptyLine
+}
 @if (Model.MethodTemplateModels.Any())
 {
 @:var WebResource = msRest.WebResource;

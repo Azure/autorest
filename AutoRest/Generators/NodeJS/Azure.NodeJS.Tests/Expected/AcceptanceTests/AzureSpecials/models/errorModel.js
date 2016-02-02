@@ -48,7 +48,7 @@ ErrorModel.prototype.mapper = function () {
         constantId: {
           required: true,
           serializedName: 'constantId',
-          defaultValue: '1',
+          defaultValue: 1,
           type: {
             name: 'Number'
           }

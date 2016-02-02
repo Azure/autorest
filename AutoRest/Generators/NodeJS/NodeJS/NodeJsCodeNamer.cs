@@ -338,5 +338,43 @@ namespace Microsoft.Rest.Generator.NodeJS
             dictionaryType.NameFormat = "Object";
             return dictionaryType;
         }
+
+        public override string QuoteString(string value, IType type)
+        {
+            if (type == null)
+            {
+                throw new ArgumentNullException("type");
+            }
+
+            if (value != null)
+            {
+                if (type == PrimaryType.String)
+                {
+                    return CodeNamer.QuoteValue(value, quoteChar: "'");
+                }
+                else if (type == PrimaryType.Boolean)
+                {
+                    return value.ToLowerInvariant();
+                }
+                else
+                {
+                    if (type == PrimaryType.Date ||
+                        type == PrimaryType.DateTime ||
+                        type == PrimaryType.DateTimeRfc1123)
+                    {
+                        return "new Date('" + value + "')";
+                    }
+                    else if (type == PrimaryType.TimeSpan)
+                    {
+                        return "moment.duration('" + value + "')";
+                    }
+                    else if (type == PrimaryType.ByteArray)
+                    {
+                        return "new Buffer('" + value + "')";
+                    }
+                }
+            }
+            return value;
+        }
     }
 }

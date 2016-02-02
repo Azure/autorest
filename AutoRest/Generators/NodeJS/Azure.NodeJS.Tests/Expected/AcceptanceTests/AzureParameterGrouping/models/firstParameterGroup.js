@@ -45,7 +45,7 @@ FirstParameterGroup.prototype.mapper = function () {
         },
         queryOne: {
           required: false,
-          defaultValue: '30',
+          defaultValue: 30,
           type: {
             name: 'Number'
           }

@@ -339,5 +339,41 @@ namespace Microsoft.Rest.Generator.Python
             dictionaryType.NameFormat = "dict";
             return dictionaryType;
         }
+
+        public override string QuoteString(string value, IType type)
+        {
+            if (type == null)
+            {
+                throw new ArgumentNullException("type");
+            }
+
+            if (value != null)
+            {
+                if (type == PrimaryType.String)
+                {
+                    return CodeNamer.QuoteValue(value);
+                }
+                else if (type == PrimaryType.Boolean)
+                {
+                    return value;
+                }
+                else
+                {
+                    if (type == PrimaryType.Date ||
+                        type == PrimaryType.DateTime ||
+                        type == PrimaryType.DateTimeRfc1123 ||
+                        type == PrimaryType.TimeSpan)
+                    {
+                        return "isodate.parse_date(\"" + value + "\")";
+                    }
+
+                    if (type == PrimaryType.ByteArray)
+                    {
+                        return "bytearray(\"" + value + "\", encoding=\"utf-8\")";
+                    }
+                }
+            }
+            return value;
+        }
     }
 }

@@ -655,7 +655,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             }
             if (defaultValue != null)
             {
-                builder.AppendLine("defaultValue: '{0}',", defaultValue);
+                builder.AppendLine("defaultValue: {0},", defaultValue);
             }
             if (constraints != null && constraints.Count > 0)
             {

@@ -107,12 +107,14 @@ namespace Microsoft.Rest.Generator
             {
                 property.Name = GetPropertyName(property.Name);
                 property.Type = NormalizeTypeReference(property.Type);
+                QuoteParameter(property);
             }
 
             var normalizedModels = new List<CompositeType>();
             foreach (var modelType in client.ModelTypes)
             {
                 normalizedModels.Add(NormalizeTypeDeclaration(modelType) as CompositeType);
+                modelType.Properties.ForEach(p => QuoteParameter(p));
             }
             client.ModelTypes.Clear();
             normalizedModels.ForEach( (item) => client.ModelTypes.Add(item));
@@ -180,12 +182,15 @@ namespace Microsoft.Rest.Generator
             {
                 parameter.Name = GetParameterName(parameter.Name);
                 parameter.Type = NormalizeTypeReference(parameter.Type);
+                QuoteParameter(parameter);
             }
 
             foreach (var parameterTransformation in method.InputParameterTransformation)
             {
                 parameterTransformation.OutputParameter.Name = GetParameterName(parameterTransformation.OutputParameter.Name);
                 parameterTransformation.OutputParameter.Type = NormalizeTypeReference(parameterTransformation.OutputParameter.Type);
+
+                QuoteParameter(parameterTransformation.OutputParameter);
 
                 foreach (var parameterMapping in parameterTransformation.ParameterMappings)
                 {
@@ -205,6 +210,25 @@ namespace Microsoft.Rest.Generator
                 }
             }
         }
+
+        /// <summary>
+        /// Quotes default value of the parameter.
+        /// </summary>
+        /// <param name="parameter"></param>
+        protected void QuoteParameter(IParameter parameter)
+        {
+            if (parameter != null)
+            {
+                parameter.DefaultValue = QuoteString(parameter.DefaultValue, parameter.Type);
+            }            
+        }
+
+        /// <summary>
+        /// Returns a quoted string for the given language if applicable.
+        /// </summary>
+        /// <param name="value">Value to quote.</param>
+        /// <param name="type">Data type.</param>
+        public abstract string QuoteString(string value, IType type);
 
         /// <summary>
         /// Formats a string for naming members of an enum using Pascal case by default.

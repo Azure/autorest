@@ -25,7 +25,7 @@ class StorageAccountCheckNameAvailabilityParameters(Model):
         """StorageAccountCheckNameAvailabilityParameters
 
         :param str name
-        :param str type:  Default value: Microsoft.Storage/storageAccounts .
+        :param str type:  Default value: "Microsoft.Storage/storageAccounts" .
         """
         self.name = None
         self.type = None

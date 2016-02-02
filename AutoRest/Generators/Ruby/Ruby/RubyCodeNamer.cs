@@ -333,5 +333,41 @@ namespace Microsoft.Rest.Generator.Ruby
             dictionaryType.NameFormat = "Hash";
             return dictionaryType;
         }
+
+        public override string QuoteString(string value, IType type)
+        {
+            if (type == null)
+            {
+                throw new ArgumentNullException("type");
+            }
+
+            if (value != null)
+            {
+                if (type == PrimaryType.String)
+                {
+                    return CodeNamer.QuoteValue(value, quoteChar: "'");
+                }
+                else if (type == PrimaryType.Boolean)
+                {
+                    return value.ToLowerInvariant();
+                }
+                else
+                {
+                    if (type == PrimaryType.Date ||
+                        type == PrimaryType.DateTime ||
+                        type == PrimaryType.DateTimeRfc1123 ||
+                        type == PrimaryType.TimeSpan)
+                    {
+                        return "Date.parse('" + value + "')";
+                    }
+
+                    if (type == PrimaryType.ByteArray)
+                    {
+                        return "'" + value + "'.bytes.to_a";
+                    }
+                }
+            }
+            return value;
+        }
     }
 }

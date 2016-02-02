@@ -45,7 +45,7 @@ ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup.prototype.mappe
         },
         queryTwo: {
           required: false,
-          defaultValue: '30',
+          defaultValue: 30,
           type: {
             name: 'Number'
           }
