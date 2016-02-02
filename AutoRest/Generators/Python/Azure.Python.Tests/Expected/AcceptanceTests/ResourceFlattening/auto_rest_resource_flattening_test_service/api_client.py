@@ -18,6 +18,23 @@ from . import models
 
 
 class AutoRestResourceFlatteningTestServiceConfiguration(AzureConfiguration):
+    """Configuration for AutoRestResourceFlatteningTestService
+
+    :param credentials: Gets Azure subscription credentials.
+    :type credentials: credentials
+    :param accept_language: Gets or sets the preferred language for the
+     response.
+    :type accept_language: str or None
+    :param long_running_operation_retry_timeout: Gets or sets the retry
+     timeout in seconds for Long Running Operations. Default value is 30.
+    :type long_running_operation_retry_timeout: int or None
+    :param generate_client_request_id: When set to true a unique
+     x-ms-client-request-id value is generated and included in each request.
+     Default is true.
+    :type generate_client_request_id: bool or None
+    :param str base_url: Service URL
+    :param str filepath: Existing config
+    """
 
     def __init__(
             self, credentials, accept_language='en-US', long_running_operation_retry_timeout=30, generate_client_request_id=True, base_url=None, filepath=None):
@@ -38,6 +55,11 @@ class AutoRestResourceFlatteningTestServiceConfiguration(AzureConfiguration):
 
 
 class AutoRestResourceFlatteningTestService(object):
+    """Resource Flattening for AutoRest
+
+    :param config: Configuration for client.
+    :type config: AutoRestResourceFlatteningTestServiceConfiguration
+    """
 
     def __init__(self, config):
 
@@ -58,8 +80,8 @@ class AutoRestResourceFlatteningTestService(object):
         :type resource_array: list or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/azure/resource-flatten/array'
@@ -102,8 +124,8 @@ class AutoRestResourceFlatteningTestService(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: list or (list, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: list or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/azure/resource-flatten/array'
@@ -148,8 +170,8 @@ class AutoRestResourceFlatteningTestService(object):
         :type resource_dictionary: dict or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/azure/resource-flatten/dictionary'
@@ -192,8 +214,8 @@ class AutoRestResourceFlatteningTestService(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: dict or (dict, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: dict or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/azure/resource-flatten/dictionary'
@@ -235,12 +257,12 @@ class AutoRestResourceFlatteningTestService(object):
         Put External Resource as a ResourceCollection
 
         :param resource_complex_object: External Resource as a
-        ResourceCollection to put
+         ResourceCollection to put
         :type resource_complex_object: ResourceCollection or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/azure/resource-flatten/resourcecollection'
@@ -283,9 +305,8 @@ class AutoRestResourceFlatteningTestService(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: ResourceCollection or (ResourceCollection, requests.response)
-        or concurrent.futures.Future
+         deserialized response
+        :rtype: ResourceCollection or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/azure/resource-flatten/resourcecollection'

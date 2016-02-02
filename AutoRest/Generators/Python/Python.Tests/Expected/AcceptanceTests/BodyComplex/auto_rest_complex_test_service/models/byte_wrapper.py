@@ -13,6 +13,10 @@ from msrest.serialization import Model
 
 
 class ByteWrapper(Model):
+    """ByteWrapper
+
+    :param bytearray field
+    """
 
     _required = []
 
@@ -21,10 +25,6 @@ class ByteWrapper(Model):
     }
 
     def __init__(self, *args, **kwargs):
-        """ByteWrapper
-
-        :param bytearray field
-        """
         self.field = None
 
         super(ByteWrapper, self).__init__(*args, **kwargs)

@@ -13,6 +13,11 @@ from msrest.serialization import Model
 
 
 class BooleanWrapper(Model):
+    """BooleanWrapper
+
+    :param bool field_true
+    :param bool field_false
+    """
 
     _required = []
 
@@ -22,11 +27,6 @@ class BooleanWrapper(Model):
     }
 
     def __init__(self, *args, **kwargs):
-        """BooleanWrapper
-
-        :param bool field_true
-        :param bool field_false
-        """
         self.field_true = None
         self.field_false = None
 

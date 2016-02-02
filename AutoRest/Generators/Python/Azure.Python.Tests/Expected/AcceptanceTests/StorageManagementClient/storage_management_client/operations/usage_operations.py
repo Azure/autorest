@@ -17,6 +17,13 @@ from .. import models
 
 
 class UsageOperations(object):
+    """UsageOperations operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -34,9 +41,8 @@ class UsageOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: UsageListResult or (UsageListResult, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: UsageListResult or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages'

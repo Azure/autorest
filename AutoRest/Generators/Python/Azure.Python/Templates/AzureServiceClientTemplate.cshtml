@@ -4,7 +4,7 @@
 @using Microsoft.Rest.Generator.Python.TemplateModels
 @using Microsoft.Rest.Generator.Utilities
 @using System.Linq
-@inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Azure.Python.AzureServiceClientTemplateModel>
+@inherits Microsoft.Rest.Generator.Python.PythonTemplate<Microsoft.Rest.Generator.Azure.Python.AzureServiceClientTemplateModel>
 # coding=utf-8
 # --------------------------------------------------------------------------
 @Header("# ").TrimMultilineHeader()
@@ -42,6 +42,15 @@ import uuid
 @EmptyLine
 @EmptyLine
 class @(Model.Name)Configuration(AzureConfiguration):
+    """Configuration for @(Model.Name)
+@EmptyLine
+@foreach(var property in Model.Properties)
+{
+@:    @ParameterWrapComment(string.Empty, ":param " + property.Name + ": " + property.Documentation)
+@:    @ParameterWrapComment(string.Empty, ":type " + property.Name + ": " + MethodTemplateModel.GetDocumentationType(property.Type, property.IsRequired))
+}    :param str base_url: Service URL
+    :param str filepath: Existing config
+    """
 @EmptyLine
     def __init__(
             self, @(Model.RequiredConstructorParameters)base_url=None, filepath=None):
@@ -64,6 +73,11 @@ class @(Model.Name)Configuration(AzureConfiguration):
 @EmptyLine
 @EmptyLine
 class @(Model.Name)(object):
+    """@Model.Documentation.EscapeXmlComment()
+@EmptyLine
+    :param config: Configuration for client.
+    :type config: @(Model.Name)Configuration
+    """
 @EmptyLine
     def __init__(self, config):
 @EmptyLine

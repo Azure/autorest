@@ -18,6 +18,13 @@ from .. import models
 
 
 class LRORetrysOperations(object):
+    """LRORetrysOperations operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -39,9 +46,8 @@ class LRORetrysOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Product or (Product, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/retryerror/put/201/creating/succeeded/200'
@@ -118,9 +124,8 @@ class LRORetrysOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Product or (Product, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/retryerror/putasync/retry/succeeded'
@@ -200,9 +205,8 @@ class LRORetrysOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Product or (Product, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/retryerror/delete/provisioning/202/accepted/200/succeeded'
@@ -279,8 +283,8 @@ class LRORetrysOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/retryerror/delete/202/retry/200'
@@ -342,8 +346,8 @@ class LRORetrysOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/retryerror/deleteasync/retry/succeeded'
@@ -408,8 +412,8 @@ class LRORetrysOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/retryerror/post/202/retry/200'
@@ -481,8 +485,8 @@ class LRORetrysOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/retryerror/postasync/retry/succeeded'

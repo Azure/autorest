@@ -13,6 +13,10 @@ from msrest.serialization import Model
 
 
 class D(Model):
+    """D
+
+    :param str http_status_code
+    """
 
     _required = []
 
@@ -21,10 +25,6 @@ class D(Model):
     }
 
     def __init__(self, *args, **kwargs):
-        """D
-
-        :param str http_status_code
-        """
         self.http_status_code = None
 
         super(D, self).__init__(*args, **kwargs)

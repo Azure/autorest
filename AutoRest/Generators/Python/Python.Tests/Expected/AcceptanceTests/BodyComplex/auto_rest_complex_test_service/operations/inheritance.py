@@ -15,6 +15,13 @@ from .. import models
 
 
 class Inheritance(object):
+    """Inheritance operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -31,9 +38,8 @@ class Inheritance(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Siamese or (Siamese, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Siamese or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/complex/inheritance/valid'
@@ -71,14 +77,14 @@ class Inheritance(object):
         Put complex types that extend others
 
         :param complex_body: Please put a siamese with id=2, name="Siameee",
-        color=green, breed=persion, which hates 2 dogs, the 1st one named
-        "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato"
-        with id=-1 and food="french fries".
+         color=green, breed=persion, which hates 2 dogs, the 1st one named
+         "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato"
+         with id=-1 and food="french fries".
         :type complex_body: Siamese
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/complex/inheritance/valid'

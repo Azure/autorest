@@ -13,6 +13,10 @@ from .cat import Cat
 
 
 class Siamese(Cat):
+    """Siamese
+
+    :param str breed
+    """
 
     _required = []
 
@@ -21,10 +25,6 @@ class Siamese(Cat):
     }
 
     def __init__(self, *args, **kwargs):
-        """Siamese
-
-        :param str breed
-        """
         self.breed = None
 
         super(Siamese, self).__init__(*args, **kwargs)

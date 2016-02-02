@@ -18,6 +18,13 @@ from .. import models
 
 
 class LROSADsOperations(object):
+    """LROSADsOperations operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -36,9 +43,8 @@ class LROSADsOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Product or (Product, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/nonretryerror/put/400'
@@ -113,9 +119,8 @@ class LROSADsOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Product or (Product, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/nonretryerror/put/201/creating/400'
@@ -191,9 +196,8 @@ class LROSADsOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Product or (Product, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/nonretryerror/putasync/retry/400'
@@ -270,8 +274,8 @@ class LROSADsOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/nonretryerror/delete/400'
@@ -332,8 +336,8 @@ class LROSADsOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/nonretryerror/delete/202/retry/400'
@@ -395,8 +399,8 @@ class LROSADsOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/nonretryerror/deleteasync/retry/400'
@@ -459,8 +463,8 @@ class LROSADsOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/nonretryerror/post/400'
@@ -529,8 +533,8 @@ class LROSADsOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/nonretryerror/post/202/retry/400'
@@ -601,8 +605,8 @@ class LROSADsOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/nonretryerror/postasync/retry/400'
@@ -673,9 +677,8 @@ class LROSADsOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Product or (Product, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/error/put/201/noprovisioningstatepayload'
@@ -752,9 +755,8 @@ class LROSADsOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Product or (Product, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/error/putasync/retry/nostatus'
@@ -836,9 +838,8 @@ class LROSADsOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Product or (Product, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/error/putasync/retry/nostatuspayload'
@@ -916,8 +917,8 @@ class LROSADsOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/error/delete/204/nolocation'
@@ -975,8 +976,8 @@ class LROSADsOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/error/deleteasync/retry/nostatus'
@@ -1040,8 +1041,8 @@ class LROSADsOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/error/post/202/nolocation'
@@ -1113,8 +1114,8 @@ class LROSADsOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/error/postasync/retry/nopayload'
@@ -1185,9 +1186,8 @@ class LROSADsOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Product or (Product, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/error/put/200/invalidjson'
@@ -1261,9 +1261,8 @@ class LROSADsOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Product or (Product, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/error/putasync/retry/invalidheader'
@@ -1345,9 +1344,8 @@ class LROSADsOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: Product or (Product, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/error/putasync/retry/invalidjsonpolling'
@@ -1426,8 +1424,8 @@ class LROSADsOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/error/delete/202/retry/invalidheader'
@@ -1489,8 +1487,8 @@ class LROSADsOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/error/deleteasync/retry/invalidheader'
@@ -1553,8 +1551,8 @@ class LROSADsOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/error/deleteasync/retry/invalidjsonpolling'
@@ -1618,8 +1616,8 @@ class LROSADsOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/error/post/202/retry/invalidheader'
@@ -1690,8 +1688,8 @@ class LROSADsOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/error/postasync/retry/invalidheader'
@@ -1764,8 +1762,8 @@ class LROSADsOperations(object):
         :type product: Product or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/lro/error/postasync/retry/invalidjsonpolling'

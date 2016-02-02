@@ -13,6 +13,13 @@ from msrest.serialization import Model
 
 
 class Basic(Model):
+    """Basic
+
+    :param int id
+    :param str name
+    :param str color: Possible values for this property include: 'cyan',
+     'Magenta', 'YELLOW', 'blacK'.
+    """
 
     _required = []
 
@@ -23,13 +30,6 @@ class Basic(Model):
     }
 
     def __init__(self, *args, **kwargs):
-        """Basic
-
-        :param int id
-        :param str name
-        :param str color: Possible values for this property include: 'cyan',
-        'Magenta', 'YELLOW', 'blacK'.
-        """
         self.id = None
         self.name = None
         self.color = None

@@ -15,6 +15,13 @@ from .. import models
 
 
 class IntModel(object):
+    """IntModel operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -31,8 +38,8 @@ class IntModel(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: int or (int, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: int or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/int/null'
@@ -71,8 +78,8 @@ class IntModel(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: int or (int, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: int or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/int/invalid'
@@ -111,8 +118,8 @@ class IntModel(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: int or (int, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: int or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/int/overflowint32'
@@ -151,8 +158,8 @@ class IntModel(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: int or (int, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: int or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/int/underflowint32'
@@ -191,8 +198,8 @@ class IntModel(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: long or (long, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: long or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/int/overflowint64'
@@ -231,8 +238,8 @@ class IntModel(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: long or (long, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: long or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/int/underflowint64'
@@ -273,8 +280,8 @@ class IntModel(object):
         :type int_body: int
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/int/max/32'
@@ -312,8 +319,8 @@ class IntModel(object):
         :type int_body: long
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/int/max/64'
@@ -351,8 +358,8 @@ class IntModel(object):
         :type int_body: int
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/int/min/32'
@@ -390,8 +397,8 @@ class IntModel(object):
         :type int_body: long
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/int/min/64'

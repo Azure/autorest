@@ -17,6 +17,13 @@ from .. import models
 
 
 class PagingOperations(object):
+    """PagingOperations operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -33,9 +40,8 @@ class PagingOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: ProductPaged or (ProductPaged, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: ProductPaged or msrest.pipeline.ClientRawResponse
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -90,14 +96,13 @@ class PagingOperations(object):
         :param client_request_id:
         :type client_request_id: str or None
         :param paging_get_multiple_pages_options: Additional parameters for
-        the operation
-        :type paging_get_multiple_pages_options: PagingGetMultiplePagesOptions
-        or None
+         the operation
+        :type paging_get_multiple_pages_options:
+         PagingGetMultiplePagesOptions or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: ProductPaged or (ProductPaged, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: ProductPaged or msrest.pipeline.ClientRawResponse
         """
         maxresults = None
         if paging_get_multiple_pages_options is not None:
@@ -165,9 +170,8 @@ class PagingOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: ProductPaged or (ProductPaged, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: ProductPaged or msrest.pipeline.ClientRawResponse
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -223,9 +227,8 @@ class PagingOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: ProductPaged or (ProductPaged, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: ProductPaged or msrest.pipeline.ClientRawResponse
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -279,9 +282,8 @@ class PagingOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: ProductPaged or (ProductPaged, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: ProductPaged or msrest.pipeline.ClientRawResponse
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -335,9 +337,8 @@ class PagingOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: ProductPaged or (ProductPaged, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: ProductPaged or msrest.pipeline.ClientRawResponse
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -391,9 +392,8 @@ class PagingOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: ProductPaged or (ProductPaged, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: ProductPaged or msrest.pipeline.ClientRawResponse
         """
         def internal_paging(next_link=None, raw=False):
 

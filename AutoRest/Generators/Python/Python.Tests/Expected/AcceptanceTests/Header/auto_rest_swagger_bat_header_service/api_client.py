@@ -16,6 +16,11 @@ from . import models
 
 
 class AutoRestSwaggerBATHeaderServiceConfiguration(Configuration):
+    """Configuration for AutoRestSwaggerBATHeaderService
+
+    :param str base_url: Service URL
+    :param str filepath: Existing config
+    """
 
     def __init__(
             self, base_url=None, filepath=None):
@@ -29,6 +34,11 @@ class AutoRestSwaggerBATHeaderServiceConfiguration(Configuration):
 
 
 class AutoRestSwaggerBATHeaderService(object):
+    """Test Infrastructure for AutoRest
+
+    :param config: Configuration for client.
+    :type config: AutoRestSwaggerBATHeaderServiceConfiguration
+    """
 
     def __init__(self, config):
 

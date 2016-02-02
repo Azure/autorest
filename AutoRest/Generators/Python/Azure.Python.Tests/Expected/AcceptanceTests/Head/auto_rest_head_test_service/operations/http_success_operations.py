@@ -15,6 +15,13 @@ import uuid
 
 
 class HttpSuccessOperations(object):
+    """HttpSuccessOperations operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -31,8 +38,8 @@ class HttpSuccessOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: bool or (bool, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: bool or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/http/success/200'
@@ -72,8 +79,8 @@ class HttpSuccessOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: bool or (bool, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: bool or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/http/success/204'
@@ -113,8 +120,8 @@ class HttpSuccessOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: bool or (bool, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: bool or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/http/success/404'

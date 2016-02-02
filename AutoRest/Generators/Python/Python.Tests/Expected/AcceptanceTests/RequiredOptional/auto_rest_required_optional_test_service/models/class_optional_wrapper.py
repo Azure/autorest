@@ -13,6 +13,10 @@ from msrest.serialization import Model
 
 
 class ClassOptionalWrapper(Model):
+    """ClassOptionalWrapper
+
+    :param Product value
+    """
 
     _required = []
 
@@ -21,10 +25,6 @@ class ClassOptionalWrapper(Model):
     }
 
     def __init__(self, *args, **kwargs):
-        """ClassOptionalWrapper
-
-        :param Product value
-        """
         self.value = None
 
         super(ClassOptionalWrapper, self).__init__(*args, **kwargs)

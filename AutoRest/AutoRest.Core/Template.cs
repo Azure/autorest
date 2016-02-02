@@ -90,7 +90,7 @@ namespace Microsoft.Rest.Generator
             // Add indentation for multi-line replacements
             if (!string.IsNullOrEmpty(value) && value.Contains("\n"))
             {
-                _indentation = GetIndentation();
+                _indentation = Indentation;
                 WriteTo(TextWriter, IndentedStringBuilder.IndentMultilineString(value, _indentation));
             }
             else
@@ -202,25 +202,28 @@ namespace Microsoft.Rest.Generator
 
             int available =
                 MaximumCommentColumn - // Maximum desired width
-                GetIndentation().Length - // - Space used for indent
+                Indentation.Length - // - Space used for indent
                 prefix.Length - // - Prefix //'s length
                 1; // - Extra space between prefix and text
             return string.Join(Environment.NewLine, comment.WordWrap(available)
                 .Select(s => string.Format(CultureInfo.InvariantCulture, "{0}{1}", prefix, s)));
         }
 
-        private string GetIndentation()
+        protected string Indentation
         {
-            int lineStart = 0;
-            for (int i = _lastLiteral.Length - 1; i >= 0; i--)
+            get
             {
-                if (_lastLiteral[i] == '\r' || _lastLiteral[i] == '\n')
+                int lineStart = 0;
+                for (int i = _lastLiteral.Length - 1; i >= 0; i--)
                 {
-                    lineStart = i + 1;
-                    break;
+                    if (_lastLiteral[i] == '\r' || _lastLiteral[i] == '\n')
+                    {
+                        lineStart = i + 1;
+                        break;
+                    }
                 }
+                return _lastLiteral.Substring(lineStart, _lastLiteral.Length - lineStart);
             }
-            return _lastLiteral.Substring(lineStart, _lastLiteral.Length - lineStart);
         }
 
         /// <summary>

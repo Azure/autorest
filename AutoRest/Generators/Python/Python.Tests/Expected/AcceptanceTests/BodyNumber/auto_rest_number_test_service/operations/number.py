@@ -15,6 +15,13 @@ from .. import models
 
 
 class Number(object):
+    """Number operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -31,9 +38,8 @@ class Number(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: float or (float, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: float or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/number/null'
@@ -72,9 +78,8 @@ class Number(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: float or (float, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: float or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/number/invalidfloat'
@@ -113,9 +118,8 @@ class Number(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: float or (float, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: float or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/number/invaliddouble'
@@ -154,9 +158,8 @@ class Number(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: decimal or (decimal, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: decimal or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/number/invaliddecimal'
@@ -197,8 +200,8 @@ class Number(object):
         :type number_body: float
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/number/big/float/3.402823e+20'
@@ -234,9 +237,8 @@ class Number(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: float or (float, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: float or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/number/big/float/3.402823e+20'
@@ -277,8 +279,8 @@ class Number(object):
         :type number_body: float
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/number/big/double/2.5976931e+101'
@@ -314,9 +316,8 @@ class Number(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: float or (float, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: float or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/number/big/double/2.5976931e+101'
@@ -357,8 +358,8 @@ class Number(object):
         :type number_body: float
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/number/big/double/99999999.99'
@@ -394,9 +395,8 @@ class Number(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: float or (float, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: float or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/number/big/double/99999999.99'
@@ -437,8 +437,8 @@ class Number(object):
         :type number_body: float
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/number/big/double/-99999999.99'
@@ -474,9 +474,8 @@ class Number(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: float or (float, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: float or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/number/big/double/-99999999.99'
@@ -517,8 +516,8 @@ class Number(object):
         :type number_body: decimal
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/number/big/decimal/2.5976931e+101'
@@ -554,9 +553,8 @@ class Number(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: decimal or (decimal, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: decimal or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/number/big/decimal/2.5976931e+101'
@@ -597,8 +595,8 @@ class Number(object):
         :type number_body: decimal
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/number/big/decimal/99999999.99'
@@ -634,9 +632,8 @@ class Number(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: decimal or (decimal, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: decimal or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/number/big/decimal/99999999.99'
@@ -677,8 +674,8 @@ class Number(object):
         :type number_body: decimal
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/number/big/decimal/-99999999.99'
@@ -714,9 +711,8 @@ class Number(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: decimal or (decimal, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: decimal or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/number/big/decimal/-99999999.99'
@@ -757,8 +753,8 @@ class Number(object):
         :type number_body: float
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/number/small/float/3.402823e-20'
@@ -794,9 +790,8 @@ class Number(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: float or (float, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: float or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/number/small/float/3.402823e-20'
@@ -837,8 +832,8 @@ class Number(object):
         :type number_body: float
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/number/small/double/2.5976931e-101'
@@ -874,9 +869,8 @@ class Number(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: float or (float, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: float or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/number/small/double/2.5976931e-101'
@@ -917,8 +911,8 @@ class Number(object):
         :type number_body: decimal
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/number/small/decimal/2.5976931e-101'
@@ -954,9 +948,8 @@ class Number(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: decimal or (decimal, requests.response) or
-        concurrent.futures.Future
+         deserialized response
+        :rtype: decimal or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/number/small/decimal/2.5976931e-101'

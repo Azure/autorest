@@ -16,6 +16,13 @@ from .. import models
 
 
 class ApiVersionDefaultOperations(object):
+    """ApiVersionDefaultOperations operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -32,8 +39,8 @@ class ApiVersionDefaultOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/azurespecials/apiVersion/method/string/none/query/global/2015-07-01-preview'
@@ -70,8 +77,8 @@ class ApiVersionDefaultOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/azurespecials/apiVersion/method/string/none/query/globalNotProvided/2015-07-01-preview'
@@ -108,8 +115,8 @@ class ApiVersionDefaultOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/azurespecials/apiVersion/path/string/none/query/global/2015-07-01-preview'
@@ -146,8 +153,8 @@ class ApiVersionDefaultOperations(object):
 
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/azurespecials/apiVersion/swagger/string/none/query/global/2015-07-01-preview'

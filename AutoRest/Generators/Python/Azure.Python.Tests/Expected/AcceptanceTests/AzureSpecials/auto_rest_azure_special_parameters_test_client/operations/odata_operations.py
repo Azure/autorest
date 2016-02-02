@@ -16,6 +16,13 @@ from .. import models
 
 
 class OdataOperations(object):
+    """OdataOperations operations.
+
+    :param client: Client for service requests.
+    :param config: Configuration of service client.
+    :param serializer: An object model serializer.
+    :param deserializer: An objec model deserializer.
+    """
 
     def __init__(self, client, config, serializer, deserializer):
 
@@ -32,7 +39,7 @@ class OdataOperations(object):
         'foo'&$orderby=id&$top=10'
 
         :param filter: The filter parameter with value '$filter=id gt 5 and
-        name eq 'foo''.
+         name eq 'foo''.
         :type filter: OdataFilter or None
         :param top: The top parameter with value 10.
         :type top: int or None
@@ -40,8 +47,8 @@ class OdataOperations(object):
         :type orderby: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
-        deserialized response
-        :rtype: None or (None, requests.response) or concurrent.futures.Future
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
         """
         # Construct URL
         url = '/azurespecials/odata/filter'

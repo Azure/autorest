@@ -13,13 +13,12 @@ from .shark import Shark
 
 
 class Cookiecuttershark(Shark):
+    """Cookiecuttershark
+    """
 
     _required = []
 
     def __init__(self, *args, **kwargs):
-        """Cookiecuttershark
-
-        """
         super(Cookiecuttershark, self).__init__(*args, **kwargs)
 
         self.fishtype = 'cookiecuttershark'
