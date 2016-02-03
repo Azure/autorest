@@ -48,8 +48,8 @@ from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
 from msrest.authentication import BasicTokenAuthentication
 
-from auto_rest_resource_flattening_test_service import AutoRestResourceFlatteningTestService, AutoRestResourceFlatteningTestServiceConfiguration
-from auto_rest_resource_flattening_test_service.models import FlattenedProduct, ErrorException, ResourceCollection
+from autorestresourceflatteningtestservice import AutoRestResourceFlatteningTestService, AutoRestResourceFlatteningTestServiceConfiguration
+from autorestresourceflatteningtestservice.models import FlattenedProduct, ErrorException, ResourceCollection
 
 
 class ResourceFlatteningTests(unittest.TestCase):

@@ -45,11 +45,11 @@ sys.path.append(join(tests, "BodyBoolean"))
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
 
-from auto_rest_bool_test_service import (
+from autorestbooltestservice import (
     AutoRestBoolTestService, 
     AutoRestBoolTestServiceConfiguration)
 
-from auto_rest_bool_test_service.models import ErrorException
+from autorestbooltestservice.models import ErrorException
 
 class BoolTests(unittest.TestCase):
 

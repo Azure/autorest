@@ -116,7 +116,7 @@ namespace Microsoft.Rest.Generator.Python
         {
             get
             {
-                return string.Format(CultureInfo.InvariantCulture, "{0}/{1}", this.Name.ToPythonCase(), this.Version);
+                return string.Format(CultureInfo.InvariantCulture, "{0}/{1}", this.PackageName, this.Version);
             }
         }
 
@@ -129,5 +129,13 @@ namespace Microsoft.Rest.Generator.Python
         }
 
         public string Version { get; set; }
+
+        public string PackageName
+        {
+            get
+            {
+                return this.Name.ToPythonCase().Replace("_", "");
+            }
+        }
     }
 }

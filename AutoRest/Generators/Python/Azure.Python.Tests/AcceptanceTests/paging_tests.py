@@ -49,7 +49,7 @@ from msrest.exceptions import DeserializationError
 from msrestazure.azure_exceptions import CloudError
 from msrest.authentication import BasicTokenAuthentication
 
-from auto_rest_paging_test_service import (
+from autorestpagingtestservice import (
     AutoRestPagingTestService, 
     AutoRestPagingTestServiceConfiguration)
 

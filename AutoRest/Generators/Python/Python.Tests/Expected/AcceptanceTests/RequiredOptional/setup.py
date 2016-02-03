@@ -12,7 +12,7 @@
 
 from setuptools import setup, find_packages
 
-NAME = "auto_rest_required_optional_test_service"
+NAME = "autorestrequiredoptionaltestservice"
 VERSION = "1.0.0"
 
 # To install the library, run the following

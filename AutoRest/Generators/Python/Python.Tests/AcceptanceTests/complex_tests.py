@@ -45,11 +45,11 @@ sys.path.append(join(tests, "BodyComplex"))
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError, SerializationError
 
-from auto_rest_complex_test_service import (
+from autorestcomplextestservice import (
     AutoRestComplexTestService,
     AutoRestComplexTestServiceConfiguration)
 
-from auto_rest_complex_test_service.models import *
+from autorestcomplextestservice.models import *
 
 class UTC(tzinfo): 
     def utcoffset(self,dt): 

@@ -41,7 +41,7 @@ tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
 sys.path.append(join(tests, "Report"))
 
 
-from auto_rest_report_service import (
+from autorestreportservice import (
     AutoRestReportService, 
     AutoRestReportServiceConfiguration)
 

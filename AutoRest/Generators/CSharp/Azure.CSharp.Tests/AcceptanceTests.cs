@@ -832,25 +832,25 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                     HeaderOne = headerParameter,
                     QueryOne = queryParameter
                 };
-                var secondGroup = new ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup
+                var secondGroup = new ParameterGroupingPostMultiParamGroupsSecondParamGroup
                 {
                     HeaderTwo = "header2",
                     QueryTwo = 42
                 };
 
-                client.ParameterGrouping.PostMultipleParameterGroups(firstGroup, secondGroup);
+                client.ParameterGrouping.PostMultiParamGroups(firstGroup, secondGroup);
 
                 //Multiple grouped parameters -- some optional parameters omitted
                 firstGroup = new FirstParameterGroup
                 {
                     HeaderOne = headerParameter
                 };
-                secondGroup = new ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup
+                secondGroup = new ParameterGroupingPostMultiParamGroupsSecondParamGroup
                 {
                     QueryTwo = 42
                 };
 
-                client.ParameterGrouping.PostMultipleParameterGroups(firstGroup, secondGroup);
+                client.ParameterGrouping.PostMultiParamGroups(firstGroup, secondGroup);
 
                 client.ParameterGrouping.PostSharedParameterGroupObject(firstGroup);
             }

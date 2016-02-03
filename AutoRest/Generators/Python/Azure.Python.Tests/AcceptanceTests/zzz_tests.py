@@ -47,13 +47,13 @@ sys.path.append(join(tests, "AzureReport"))
 
 from msrest.exceptions import DeserializationError
 
-from auto_rest_parameter_grouping_test_service import AutoRestParameterGroupingTestServiceConfiguration, AutoRestParameterGroupingTestService
-from microsoft_azure_test_url import MicrosoftAzureTestUrl, MicrosoftAzureTestUrlConfiguration
-from auto_rest_report_service_for_azure import AutoRestReportServiceForAzureConfiguration, AutoRestReportServiceForAzure
-from auto_rest_duration_test_service import AutoRestDurationTestService, AutoRestDurationTestServiceConfiguration 
-from auto_rest_azure_special_parameters_test_client import AutoRestAzureSpecialParametersTestClient, AutoRestAzureSpecialParametersTestClientConfiguration
+from autorestparametergroupingtestservice import AutoRestParameterGroupingTestServiceConfiguration, AutoRestParameterGroupingTestService
+from microsoftazuretesturl import MicrosoftAzureTestUrl, MicrosoftAzureTestUrlConfiguration
+from autorestreportserviceforazure import AutoRestReportServiceForAzureConfiguration, AutoRestReportServiceForAzure
+from autorestdurationtestservice import AutoRestDurationTestService, AutoRestDurationTestServiceConfiguration 
+from autorestazurespecialparameterstestclient import AutoRestAzureSpecialParametersTestClient, AutoRestAzureSpecialParametersTestClientConfiguration
 
-from auto_rest_parameter_grouping_test_service.models import ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup, ParameterGroupingPostOptionalParameters, ParameterGroupingPostRequiredParameters, FirstParameterGroup
+from autorestparametergroupingtestservice.models import ParameterGroupingPostMultiParamGroupsSecondParamGroup, ParameterGroupingPostOptionalParameters, ParameterGroupingPostRequiredParameters, FirstParameterGroup
 
 from msrest.authentication import BasicTokenAuthentication
 
@@ -97,15 +97,15 @@ class AcceptanceTests(unittest.TestCase):
 
         #Multiple grouped parameters
         firstGroup = FirstParameterGroup(header_one = headerParameter, query_one = queryParameter)
-        secondGroup = ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup(header_two = "header2", query_two = 42)
+        secondGroup = ParameterGroupingPostMultiParamGroupsSecondParamGroup(header_two = "header2", query_two = 42)
 
-        client.parameter_grouping.post_multiple_parameter_groups(firstGroup, secondGroup)
+        client.parameter_grouping.post_multi_param_groups(firstGroup, secondGroup)
 
         #Multiple grouped parameters -- some optional parameters omitted
         firstGroup = FirstParameterGroup(header_one = headerParameter)
-        secondGroup = ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup(query_two = 42)
+        secondGroup = ParameterGroupingPostMultiParamGroupsSecondParamGroup(query_two = 42)
 
-        client.parameter_grouping.post_multiple_parameter_groups(firstGroup, secondGroup)
+        client.parameter_grouping.post_multi_param_groups(firstGroup, secondGroup)
         client.parameter_grouping.post_shared_parameter_group_object(firstGroup)
 
     def test_azure_special_parameters(self):

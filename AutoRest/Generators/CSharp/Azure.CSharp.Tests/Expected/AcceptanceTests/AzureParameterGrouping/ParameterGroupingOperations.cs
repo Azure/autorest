@@ -383,7 +383,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
         /// <param name='firstParameterGroup'>
         /// Additional parameters for the operation
         /// </param>
-        /// <param name='parameterGroupingPostMultipleParameterGroupsSecondParameterGroup'>
+        /// <param name='parameterGroupingPostMultiParamGroupsSecondParamGroup'>
         /// Additional parameters for the operation
         /// </param>
         /// <param name='customHeaders'>
@@ -392,7 +392,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> PostMultipleParameterGroupsWithHttpMessagesAsync(FirstParameterGroup firstParameterGroup = default(FirstParameterGroup), ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup parameterGroupingPostMultipleParameterGroupsSecondParameterGroup = default(ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> PostMultiParamGroupsWithHttpMessagesAsync(FirstParameterGroup firstParameterGroup = default(FirstParameterGroup), ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup = default(ParameterGroupingPostMultiParamGroupsSecondParamGroup), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             string headerOne = null;
             if (firstParameterGroup != null)
@@ -405,14 +405,14 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
                 queryOne = firstParameterGroup.QueryOne;
             }
             string headerTwo = null;
-            if (parameterGroupingPostMultipleParameterGroupsSecondParameterGroup != null)
+            if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null)
             {
-                headerTwo = parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.HeaderTwo;
+                headerTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.HeaderTwo;
             }
             int? queryTwo = null;
-            if (parameterGroupingPostMultipleParameterGroupsSecondParameterGroup != null)
+            if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null)
             {
-                queryTwo = parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.QueryTwo;
+                queryTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.QueryTwo;
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -426,7 +426,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
                 tracingParameters.Add("headerTwo", headerTwo);
                 tracingParameters.Add("queryTwo", queryTwo);
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "PostMultipleParameterGroups", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "PostMultiParamGroups", tracingParameters);
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;

@@ -48,7 +48,7 @@ from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
 from msrest.authentication import BasicTokenAuthentication
 
-from auto_rest_duration_test_service import (
+from autorestdurationtestservice import (
     AutoRestDurationTestService, 
     AutoRestDurationTestServiceConfiguration)
 

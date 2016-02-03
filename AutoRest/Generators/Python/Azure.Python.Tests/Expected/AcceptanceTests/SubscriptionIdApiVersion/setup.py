@@ -12,7 +12,7 @@
 
 from setuptools import setup, find_packages
 
-NAME = "microsoft_azure_test_url"
+NAME = "microsoftazuretesturl"
 VERSION = "2014-04-01-preview"
 
 # To install the library, run the following
