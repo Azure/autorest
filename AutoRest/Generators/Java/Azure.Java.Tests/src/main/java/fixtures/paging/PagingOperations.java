@@ -11,6 +11,7 @@
 package fixtures.paging;
 
 import com.microsoft.azure.CloudException;
+import com.microsoft.azure.ListOperationCallback;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
@@ -19,6 +20,8 @@ import fixtures.paging.models.PagingGetMultiplePagesNextOptions;
 import fixtures.paging.models.PagingGetMultiplePagesOptions;
 import fixtures.paging.models.Product;
 import java.io.IOException;
+import java.util.List;
+
 import retrofit.Call;
 import retrofit.http.GET;
 import retrofit.http.Header;
@@ -118,7 +121,7 @@ public interface PagingOperations {
      * @throws IOException exception thrown from serialization/deserialization
      * @return the PageImpl&lt;Product&gt; object wrapped in ServiceResponse if successful.
      */
-    ServiceResponse<PageImpl<Product>> getMultiplePages(String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) throws CloudException, IOException;
+    ServiceResponse<List<Product>> getMultiplePages(String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) throws CloudException, IOException;
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
@@ -128,7 +131,7 @@ public interface PagingOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    Call<ResponseBody> getMultiplePagesAsync(String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, final ServiceCallback<PageImpl<Product>> serviceCallback);
+    Call<ResponseBody> getMultiplePagesAsync(String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, final ListOperationCallback<Product> serviceCallback);
 
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
@@ -257,7 +260,7 @@ public interface PagingOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    Call<ResponseBody> getMultiplePagesNextAsync(String nextPageLink, String clientRequestId, PagingGetMultiplePagesNextOptions pagingGetMultiplePagesNextOptions, final ServiceCallback<PageImpl<Product>> serviceCallback);
+    Call<ResponseBody> getMultiplePagesNextAsync(String nextPageLink, String clientRequestId, PagingGetMultiplePagesNextOptions pagingGetMultiplePagesNextOptions, final ListOperationCallback<Product> serviceCallback);
 
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.

@@ -2,10 +2,17 @@ package fixtures.paging;
 
 import com.microsoft.azure.CloudException;
 import com.microsoft.azure.Page;
+import com.microsoft.azure.ListOperationCallback;
+import com.microsoft.rest.ServiceResponse;
+
 import fixtures.paging.models.Product;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.fail;
 
@@ -25,14 +32,36 @@ public class PagingTests {
 
     @Test
     public void getMultiplePages() throws Exception {
-        Page<Product> response = client.getPagingOperations().getMultiplePages("client-id", null).getBody();
-        Assert.assertNotNull(response.getNextPageLink());
-        int count = 1;
-        while (response.getNextPageLink() != null) {
-            response = client.getPagingOperations().getMultiplePagesNext(response.getNextPageLink(), "client-id", null).getBody();
-            count++;
-        }
-        Assert.assertEquals(10, count);
+        List<Product> response = client.getPagingOperations().getMultiplePages("client-id", null).getBody();
+        Assert.assertEquals(10, response.size());
+    }
+
+    @Test
+    public void getMultiplePagesAsync() throws Exception {
+        final CountDownLatch lock = new CountDownLatch(1);
+        client.getPagingOperations().getMultiplePagesAsync("client-id", null, new ListOperationCallback<Product>() {
+            @Override
+            public void failure(Throwable t) {
+                fail();
+            }
+
+            @Override
+            public void success(ServiceResponse<List<Product>> result) {
+                System.out.println(result.getBody().size());
+                lock.countDown();
+            }
+
+            @Override
+            public PagingBahavior progress(List<Product> partial) {
+                System.out.println(partial.get(0).getProperties().getId());
+                if (pageCount() == 7) {
+                    return PagingBahavior.STOP;
+                } else {
+                    return PagingBahavior.CONTINUE;
+                }
+            }
+        });
+        Assert.assertTrue(lock.await(10000, TimeUnit.MILLISECONDS));
     }
 
     @Test

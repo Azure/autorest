@@ -28,6 +28,7 @@ dependencies {
     compile 'com.squareup.okhttp:logging-interceptor:2.6.0'
     compile 'com.squareup.retrofit:converter-jackson:2.0.0-beta2'
     compile 'com.fasterxml.jackson.datatype:jackson-datatype-joda:2.7.0'
+    compile 'org.apache.commons:commons-lang3:3.4'
     testCompile 'junit:junit:4.11'
     testCompile 'junit:junit-dep:4.11'
     deployerJars "org.apache.maven.wagon:wagon-ftp:2.10"
@@ -100,3 +101,5 @@ test {
 }
 
 tasks.compileJava.dependsOn 'clean'
+
+println sourceSets.main.runtimeClasspath.asPath
