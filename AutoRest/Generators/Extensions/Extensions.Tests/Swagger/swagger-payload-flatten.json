@@ -6,6 +6,20 @@
     "version": "2014-04-01-preview"
   },
   "host": "management.azure.com",
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{accountName}.contoso.com",
+    "parameters": [
+      {
+        "name": "accountName",
+        "description": "Account Name",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "$ref": "#/parameters/ApiVersionParameter"
+      }
+    ]
+  },
   "schemes": [
     "https"
   ],

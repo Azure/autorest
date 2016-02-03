@@ -87,6 +87,7 @@ namespace Microsoft.Rest.Generator.Azure
             AddAzureProperties(serviceClient);
             SetDefaultResponses(serviceClient);
             AddPageableMethod(serviceClient, codeNamer);
+            ProcessParameterizedHost(serviceClient, settings);
             AddParameterGroups(serviceClient); //This should come after all methods have been dynamically added
         }
 

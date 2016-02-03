@@ -1,0 +1,85 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "title": "AutoRest Url Test Service",
+    "description": "Test Infrastructure for AutoRest",
+    "version": "1.0.0"
+  },
+  "host": "badhost",
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{accountName}{host}",
+    "parameters": [
+      {
+        "name": "accountName",
+        "description": "Account Name",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "$ref": "#/parameters/host"
+      }
+    ]
+  },
+  "produces": [ "application/json" ],
+  "consumes": [ "application/json" ],
+  "paths": {
+    "/example": {
+      "get": {
+        "operationId": "paths_getBooleanTrue",
+        "description": "Get true Boolean value on path",
+        "tags": [
+          "Path Operations"
+        ],
+        "parameters": [
+          {
+            "name": "boolPath",
+            "in": "path",
+            "description": "true boolean value",
+            "type": "boolean",
+            "enum": [ true ],
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully received the true boolean value"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }   
+    }
+  },
+    "parameters": {
+        "globalStringPath": {
+            "name": "globalStringPath",
+            "in": "path",
+            "description": "A string value 'globalItemStringPath' that appears in the path",
+            "type": "string",
+            "required": true
+        },
+        "globalStringQuery": {
+            "name": "globalStringQuery",
+            "in": "query",
+            "description": "should contain value null",
+            "type": "string"
+        }
+    },
+    "definitions": {
+        "Error": {
+            "properties": {
+                "status": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

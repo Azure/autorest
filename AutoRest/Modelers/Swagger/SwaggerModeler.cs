@@ -191,6 +191,9 @@ namespace Microsoft.Rest.Modeler.Swagger
             ServiceClient.BaseUrl = string.Format(CultureInfo.InvariantCulture, "{0}://{1}{2}",
                 ServiceDefinition.Schemes[0].ToString().ToLower(CultureInfo.InvariantCulture),
                 ServiceDefinition.Host, ServiceDefinition.BasePath);
+
+            // Copy extensions
+            ServiceDefinition.Extensions.ForEach(extention => ServiceClient.Extensions.Add(extention.Key, extention.Value));
         }
 
         /// <summary>

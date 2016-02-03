@@ -59,7 +59,8 @@ var defaultMappings = {
   'AcceptanceTests/Report': '../../../TestServer/swagger/report.json',
   'AcceptanceTests/RequiredOptional': '../../../TestServer/swagger/required-optional.json',
   'AcceptanceTests/Url': '../../../TestServer/swagger/url.json',
-  'AcceptanceTests/Validation': '../../../TestServer/swagger/validation.json'
+  'AcceptanceTests/Validation': '../../../TestServer/swagger/validation.json',
+  'AcceptanceTests/CustomBaseUri': '../../../TestServer/swagger/custom-baseUrl.json'
 };
 
 var rubyMappings = {

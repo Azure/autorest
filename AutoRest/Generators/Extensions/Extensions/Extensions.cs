@@ -7,6 +7,9 @@ using System.Globalization;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
+using Microsoft.Rest.Modeler.Swagger;
+using Microsoft.Rest.Modeler.Swagger.Model;
+using Newtonsoft.Json.Linq;
 
 namespace Microsoft.Rest.Generator
 {
@@ -19,6 +22,7 @@ namespace Microsoft.Rest.Generator
         public const string SkipUrlEncodingExtension = "x-ms-skip-url-encoding";
         public const string NameOverrideExtension = "x-ms-client-name";
         public const string ParameterGroupExtension = "x-ms-parameter-grouping";
+        public const string ParameterizedHostExtension = "x-ms-parameterized-host";
         
         /// <summary>
         /// Normalizes client model using generic extensions.
@@ -30,6 +34,32 @@ namespace Microsoft.Rest.Generator
         {
             FlattenRequestPayload(serviceClient, settings);
             AddParameterGroups(serviceClient);
+            ProcessParameterizedHost(serviceClient, settings);
+        }
+
+        public static void ProcessParameterizedHost(ServiceClient serviceClient, Settings settings)
+        {
+            SwaggerModeler modeler = new SwaggerModeler(settings);
+
+            var hostExtension = serviceClient.Extensions[ParameterizedHostExtension] as JObject;
+            if (hostExtension != null)
+            {
+                var hostTemplate = (string)hostExtension["hostTemplate"];
+                var jArrayParameters = hostExtension["parameters"] as JArray;
+                
+                foreach (JObject jObjectParameter in jArrayParameters)
+                {
+                    SwaggerParameter swaggerParameter = jObjectParameter.ToObject<SwaggerParameter>();
+                    // Build parameter
+                    ParameterBuilder parameterBuilder = new ParameterBuilder(swaggerParameter, modeler);
+                    Parameter parameter = parameterBuilder.Build();
+                    // Make BaseUri internal
+                    foreach (var method in serviceClient.Methods)
+                    {
+                        // method.Parameters.Add(...)
+                    }
+                }
+            }
         }
 
         /// <summary>

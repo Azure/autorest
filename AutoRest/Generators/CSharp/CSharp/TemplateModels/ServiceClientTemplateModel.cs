@@ -18,7 +18,13 @@ namespace Microsoft.Rest.Generator.CSharp
             Methods.Where(m => m.Group == null)
                 .ForEach(m => MethodTemplateModels.Add(new MethodTemplateModel(m, serviceClient)));
             ConstructorVisibility = internalConstructors ? "internal" : "public";
+            if (serviceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension))
+            {
+                IsCustomBaseUri = true;
+            }
         }
+
+        public bool IsCustomBaseUri { get; private set; }
 
         public List<MethodTemplateModel> MethodTemplateModels { get; private set; }
 
