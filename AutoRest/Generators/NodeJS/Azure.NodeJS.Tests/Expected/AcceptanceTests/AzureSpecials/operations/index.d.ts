@@ -298,9 +298,6 @@ export interface ApiVersionLocal {
      * Get method with api-version modeled in the method.  pass in api-version =
      * '2.0' to succeed
      *
-     * @param {string} apiVersion This should appear as a method parameter, use
-     * value '2.0'
-     * 
      * @param {object} [options] Optional Parameters.
      * 
      * @param {object} [options.customHeaders] Headers that will be added to the
@@ -309,8 +306,8 @@ export interface ApiVersionLocal {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getMethodLocalValid(apiVersion: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    getMethodLocalValid(apiVersion: string, callback: ServiceCallback<void>): void;
+    getMethodLocalValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    getMethodLocalValid(callback: ServiceCallback<void>): void;
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version =
@@ -334,9 +331,6 @@ export interface ApiVersionLocal {
      * Get method with api-version modeled in the method.  pass in api-version =
      * '2.0' to succeed
      *
-     * @param {string} apiVersion This should appear as a method parameter, use
-     * value '2.0'
-     * 
      * @param {object} [options] Optional Parameters.
      * 
      * @param {object} [options.customHeaders] Headers that will be added to the
@@ -345,16 +339,13 @@ export interface ApiVersionLocal {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getPathLocalValid(apiVersion: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    getPathLocalValid(apiVersion: string, callback: ServiceCallback<void>): void;
+    getPathLocalValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    getPathLocalValid(callback: ServiceCallback<void>): void;
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version =
      * '2.0' to succeed
      *
-     * @param {string} apiVersion The api version, which appears in the query, the
-     * value is always '2.0'
-     * 
      * @param {object} [options] Optional Parameters.
      * 
      * @param {object} [options.customHeaders] Headers that will be added to the
@@ -363,8 +354,8 @@ export interface ApiVersionLocal {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getSwaggerLocalValid(apiVersion: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    getSwaggerLocalValid(apiVersion: string, callback: ServiceCallback<void>): void;
+    getSwaggerLocalValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    getSwaggerLocalValid(callback: ServiceCallback<void>): void;
 }
 
 /**
@@ -412,9 +403,6 @@ export interface SkipUrlEncoding {
     /**
      * Get method with unencoded path parameter with value 'path1/path2/path3'
      *
-     * @param {string} unencodedPathParam An unencoded path parameter with value
-     * 'path1/path2/path3'
-     * 
      * @param {object} [options] Optional Parameters.
      * 
      * @param {object} [options.customHeaders] Headers that will be added to the
@@ -423,8 +411,8 @@ export interface SkipUrlEncoding {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getSwaggerPathValid(unencodedPathParam: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    getSwaggerPathValid(unencodedPathParam: string, callback: ServiceCallback<void>): void;
+    getSwaggerPathValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    getSwaggerPathValid(callback: ServiceCallback<void>): void;
 
     /**
      * Get method with unencoded query parameter with value
@@ -484,16 +472,13 @@ export interface SkipUrlEncoding {
      *
      * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [options.q1] An unencoded query parameter with value
-     * 'value1&q2=value2&q3=value3'
-     * 
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
      * 
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getSwaggerQueryValid(options: { q1? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    getSwaggerQueryValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     getSwaggerQueryValid(callback: ServiceCallback<void>): void;
 }
 

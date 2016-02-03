@@ -266,9 +266,6 @@ SkipUrlEncoding.prototype.getPathPathValid = function (unencodedPathParam, optio
 /**
  * Get method with unencoded path parameter with value 'path1/path2/path3'
  *
- * @param {string} unencodedPathParam An unencoded path parameter with value
- * 'path1/path2/path3'
- * 
  * @param {object} [options] Optional Parameters.
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
@@ -286,7 +283,7 @@ SkipUrlEncoding.prototype.getPathPathValid = function (unencodedPathParam, optio
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-SkipUrlEncoding.prototype.getSwaggerPathValid = function (unencodedPathParam, options, callback) {
+SkipUrlEncoding.prototype.getSwaggerPathValid = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -295,6 +292,7 @@ SkipUrlEncoding.prototype.getSwaggerPathValid = function (unencodedPathParam, op
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var unencodedPathParam = 'path1/path2/path3';
   // Validate
   try {
     if (unencodedPathParam === null || unencodedPathParam === undefined || typeof unencodedPathParam.valueOf() !== 'string') {
@@ -741,9 +739,6 @@ SkipUrlEncoding.prototype.getPathQueryValid = function (q1, options, callback) {
  *
  * @param {object} [options] Optional Parameters.
  * 
- * @param {string} [options.q1] An unencoded query parameter with value
- * 'value1&q2=value2&q3=value3'
- * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  * 
@@ -768,7 +763,7 @@ SkipUrlEncoding.prototype.getSwaggerQueryValid = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var q1 = (options && options.q1 !== undefined) ? options.q1 : 'value1&q2=value2&q3=value3';
+  var q1 = 'value1&q2=value2&q3=value3';
   // Validate
   try {
     if (q1 !== null && q1 !== undefined && typeof q1.valueOf() !== 'string') {

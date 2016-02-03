@@ -88,6 +88,7 @@ Product.prototype.mapper = function () {
         },
         constInt: {
           required: false,
+          isConstant: true,
           serializedName: 'constInt',
           defaultValue: 0,
           type: {
@@ -96,6 +97,7 @@ Product.prototype.mapper = function () {
         },
         constString: {
           required: false,
+          isConstant: true,
           serializedName: 'constString',
           defaultValue: 'constant',
           type: {

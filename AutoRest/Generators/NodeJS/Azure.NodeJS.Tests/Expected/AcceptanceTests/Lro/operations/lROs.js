@@ -205,9 +205,6 @@ LROs.prototype.beginPut200Succeeded = function (options, callback) {
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
-                                                    requestContent.length : 
-                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -440,9 +437,6 @@ LROs.prototype.beginPut200SucceededNoState = function (options, callback) {
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
-                                                    requestContent.length : 
-                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -677,9 +671,6 @@ LROs.prototype.beginPut202Retry200 = function (options, callback) {
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
-                                                    requestContent.length : 
-                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -916,9 +907,6 @@ LROs.prototype.beginPut201CreatingSucceeded200 = function (options, callback) {
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
-                                                    requestContent.length : 
-                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1172,9 +1160,6 @@ LROs.prototype.beginPut200UpdatingSucceeded204 = function (options, callback) {
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
-                                                    requestContent.length : 
-                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1411,9 +1396,6 @@ LROs.prototype.beginPut201CreatingFailed200 = function (options, callback) {
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
-                                                    requestContent.length : 
-                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1667,9 +1649,6 @@ LROs.prototype.beginPut200Acceptedcanceled200 = function (options, callback) {
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
-                                                    requestContent.length : 
-                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1904,9 +1883,6 @@ LROs.prototype.beginPutNoHeaderInRetry = function (options, callback) {
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
-                                                    requestContent.length : 
-                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2141,9 +2117,6 @@ LROs.prototype.beginPutAsyncRetrySucceeded = function (options, callback) {
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
-                                                    requestContent.length : 
-                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2378,9 +2351,6 @@ LROs.prototype.beginPutAsyncNoRetrySucceeded = function (options, callback) {
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
-                                                    requestContent.length : 
-                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2615,9 +2585,6 @@ LROs.prototype.beginPutAsyncRetryFailed = function (options, callback) {
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
-                                                    requestContent.length : 
-                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2852,9 +2819,6 @@ LROs.prototype.beginPutAsyncNoRetrycanceled = function (options, callback) {
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
-                                                    requestContent.length : 
-                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -3089,9 +3053,6 @@ LROs.prototype.beginPutAsyncNoHeaderInRetry = function (options, callback) {
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
-                                                    requestContent.length : 
-                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -3318,9 +3279,6 @@ LROs.prototype.beginPutNonResource = function (options, callback) {
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
-                                                    requestContent.length : 
-                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -3547,9 +3505,6 @@ LROs.prototype.beginPutAsyncNonResource = function (options, callback) {
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
-                                                    requestContent.length : 
-                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -3772,9 +3727,6 @@ LROs.prototype.beginPutSubResource = function (options, callback) {
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
-                                                    requestContent.length : 
-                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -3997,9 +3949,6 @@ LROs.prototype.beginPutAsyncSubResource = function (options, callback) {
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
-                                                    requestContent.length : 
-                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -6709,9 +6658,6 @@ LROs.prototype.beginPost202Retry200 = function (options, callback) {
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
-                                                    requestContent.length : 
-                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -6927,9 +6873,6 @@ LROs.prototype.beginPost202NoRetry204 = function (options, callback) {
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
-                                                    requestContent.length : 
-                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -7164,9 +7107,6 @@ LROs.prototype.beginPostAsyncRetrySucceeded = function (options, callback) {
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
-                                                    requestContent.length : 
-                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -7401,9 +7341,6 @@ LROs.prototype.beginPostAsyncNoRetrySucceeded = function (options, callback) {
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
-                                                    requestContent.length : 
-                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -7622,9 +7559,6 @@ LROs.prototype.beginPostAsyncRetryFailed = function (options, callback) {
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
-                                                    requestContent.length : 
-                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -7826,9 +7760,6 @@ LROs.prototype.beginPostAsyncRetrycanceled = function (options, callback) {
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
-                                                    requestContent.length : 
-                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {

@@ -92,8 +92,6 @@ declare class AutoRestValidationTest {
         validationOfBody(resourceGroupName: string, id: number, callback: ServiceCallback<models.Product>): void;
 
         /**
-         * @param {string} constantParam
-         * 
          * @param {object} [options] Optional Parameters.
          * 
          * @param {object} [options.customHeaders] Headers that will be added to the
@@ -102,12 +100,10 @@ declare class AutoRestValidationTest {
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
-        getWithConstantInPath(constantParam: string, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-        getWithConstantInPath(constantParam: string, callback: ServiceCallback<void>): void;
+        getWithConstantInPath(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+        getWithConstantInPath(callback: ServiceCallback<void>): void;
 
         /**
-         * @param {string} constantParam
-         * 
          * @param {object} [options] Optional Parameters.
          * 
          * @param {object} [options.body]
@@ -130,8 +126,8 @@ declare class AutoRestValidationTest {
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
-        postWithConstantInBody(constantParam: string, options: { body? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
-        postWithConstantInBody(constantParam: string, callback: ServiceCallback<models.Product>): void;
+        postWithConstantInBody(options: { body? : models.Product, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.Product>): void;
+        postWithConstantInBody(callback: ServiceCallback<models.Product>): void;
 }
 
 export = AutoRestValidationTest;

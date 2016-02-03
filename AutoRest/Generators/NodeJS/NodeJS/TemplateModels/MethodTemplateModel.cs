@@ -237,14 +237,14 @@ namespace Microsoft.Rest.Generator.NodeJS
 
         /// <summary>
         /// Get the parameters that are actually method parameters in the order they appear in the method signature
-        /// exclude global parameters.
+        /// exclude global parameters and constants.
         /// </summary>
         internal IEnumerable<ParameterTemplateModel> LocalParameters
         {
             get
             {
                 return ParameterTemplateModels.Where(
-                    p => p != null && p.ClientProperty == null && !string.IsNullOrWhiteSpace(p.Name))
+                    p => p != null && p.ClientProperty == null && !string.IsNullOrWhiteSpace(p.Name) && !p.IsConstant)
                     .OrderBy(item => !item.IsRequired);
             }
         }
@@ -419,7 +419,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
             else
             {
-                builder.AppendLine("var resultMapper = {{{0}}};", type.ConstructMapper(responseVariable));
+                builder.AppendLine("var resultMapper = {{{0}}};", type.ConstructMapper(responseVariable, null, false, false));
             }
             builder.AppendLine("{1} = client.deserialize(resultMapper, {0}, '{1}');", responseVariable, valueReference);
             return builder.ToString();
@@ -653,8 +653,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                 else
                 {
                     builder.AppendLine("var requestModelMapper = {{{0}}};",
-                        RequestBody.Type.ConstructMapper(RequestBody.SerializedName, RequestBody.IsRequired,
-                        RequestBody.Constraints, RequestBody.DefaultValue));
+                        RequestBody.Type.ConstructMapper(RequestBody.SerializedName, RequestBody, false, false));
                 }
                 return builder.ToString();
             }

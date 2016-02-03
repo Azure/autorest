@@ -386,9 +386,6 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
-                                                    requestContent.length : 
-                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -446,8 +443,6 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
 };
 
 /**
- * @param {string} constantParam
- * 
  * @param {object} [options] Optional Parameters.
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
@@ -465,7 +460,7 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-AutoRestValidationTest.prototype.getWithConstantInPath = function (constantParam, options, callback) {
+AutoRestValidationTest.prototype.getWithConstantInPath = function (options, callback) {
   var client = this;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -474,6 +469,7 @@ AutoRestValidationTest.prototype.getWithConstantInPath = function (constantParam
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var constantParam = 'constant';
   // Validate
   try {
     if (constantParam === null || constantParam === undefined || typeof constantParam.valueOf() !== 'string') {
@@ -543,8 +539,6 @@ AutoRestValidationTest.prototype.getWithConstantInPath = function (constantParam
 };
 
 /**
- * @param {string} constantParam
- * 
  * @param {object} [options] Optional Parameters.
  * 
  * @param {object} [options.body]
@@ -577,7 +571,7 @@ AutoRestValidationTest.prototype.getWithConstantInPath = function (constantParam
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-AutoRestValidationTest.prototype.postWithConstantInBody = function (constantParam, options, callback) {
+AutoRestValidationTest.prototype.postWithConstantInBody = function (options, callback) {
   var client = this;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -586,6 +580,7 @@ AutoRestValidationTest.prototype.postWithConstantInBody = function (constantPara
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var constantParam = 'constant';
   var body = (options && options.body !== undefined) ? options.body : undefined;
   // Validate
   try {
@@ -633,9 +628,6 @@ AutoRestValidationTest.prototype.postWithConstantInBody = function (constantPara
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
-                                                    requestContent.length : 
-                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {

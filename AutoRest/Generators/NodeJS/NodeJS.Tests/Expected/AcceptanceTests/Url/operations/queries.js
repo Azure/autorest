@@ -33,8 +33,6 @@ function Queries(client) {
  *
  * @param {object} [options] Optional Parameters.
  * 
- * @param {boolean} [options.boolQuery] true boolean value
- * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  * 
@@ -59,7 +57,7 @@ Queries.prototype.getBooleanTrue = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var boolQuery = (options && options.boolQuery !== undefined) ? options.boolQuery : true;
+  var boolQuery = true;
   // Validate
   try {
     if (boolQuery !== null && boolQuery !== undefined && typeof boolQuery !== 'boolean') {
@@ -143,8 +141,6 @@ Queries.prototype.getBooleanTrue = function (options, callback) {
  *
  * @param {object} [options] Optional Parameters.
  * 
- * @param {boolean} [options.boolQuery] false boolean value
- * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  * 
@@ -169,7 +165,7 @@ Queries.prototype.getBooleanFalse = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var boolQuery = (options && options.boolQuery !== undefined) ? options.boolQuery : false;
+  var boolQuery = false;
   // Validate
   try {
     if (boolQuery !== null && boolQuery !== undefined && typeof boolQuery !== 'boolean') {
@@ -363,8 +359,6 @@ Queries.prototype.getBooleanNull = function (options, callback) {
  *
  * @param {object} [options] Optional Parameters.
  * 
- * @param {number} [options.intQuery] '1000000' integer value
- * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  * 
@@ -389,7 +383,7 @@ Queries.prototype.getIntOneMillion = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var intQuery = (options && options.intQuery !== undefined) ? options.intQuery : 1000000;
+  var intQuery = 1000000;
   // Validate
   try {
     if (intQuery !== null && intQuery !== undefined && typeof intQuery !== 'number') {
@@ -473,8 +467,6 @@ Queries.prototype.getIntOneMillion = function (options, callback) {
  *
  * @param {object} [options] Optional Parameters.
  * 
- * @param {number} [options.intQuery] '-1000000' integer value
- * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  * 
@@ -499,7 +491,7 @@ Queries.prototype.getIntNegativeOneMillion = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var intQuery = (options && options.intQuery !== undefined) ? options.intQuery : -1000000;
+  var intQuery = -1000000;
   // Validate
   try {
     if (intQuery !== null && intQuery !== undefined && typeof intQuery !== 'number') {
@@ -693,8 +685,6 @@ Queries.prototype.getIntNull = function (options, callback) {
  *
  * @param {object} [options] Optional Parameters.
  * 
- * @param {number} [options.longQuery] '10000000000' 64 bit integer value
- * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  * 
@@ -719,7 +709,7 @@ Queries.prototype.getTenBillion = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var longQuery = (options && options.longQuery !== undefined) ? options.longQuery : 10000000000;
+  var longQuery = 10000000000;
   // Validate
   try {
     if (longQuery !== null && longQuery !== undefined && typeof longQuery !== 'number') {
@@ -803,8 +793,6 @@ Queries.prototype.getTenBillion = function (options, callback) {
  *
  * @param {object} [options] Optional Parameters.
  * 
- * @param {number} [options.longQuery] '-10000000000' 64 bit integer value
- * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  * 
@@ -829,7 +817,7 @@ Queries.prototype.getNegativeTenBillion = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var longQuery = (options && options.longQuery !== undefined) ? options.longQuery : -10000000000;
+  var longQuery = -10000000000;
   // Validate
   try {
     if (longQuery !== null && longQuery !== undefined && typeof longQuery !== 'number') {
@@ -1023,8 +1011,6 @@ Queries.prototype.getLongNull = function (options, callback) {
  *
  * @param {object} [options] Optional Parameters.
  * 
- * @param {number} [options.floatQuery] '1.034E+20'numeric value
- * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  * 
@@ -1049,7 +1035,7 @@ Queries.prototype.floatScientificPositive = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var floatQuery = (options && options.floatQuery !== undefined) ? options.floatQuery : 1.034E+20;
+  var floatQuery = 1.034E+20;
   // Validate
   try {
     if (floatQuery !== null && floatQuery !== undefined && typeof floatQuery !== 'number') {
@@ -1133,8 +1119,6 @@ Queries.prototype.floatScientificPositive = function (options, callback) {
  *
  * @param {object} [options] Optional Parameters.
  * 
- * @param {number} [options.floatQuery] '-1.034E-20'numeric value
- * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  * 
@@ -1159,7 +1143,7 @@ Queries.prototype.floatScientificNegative = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var floatQuery = (options && options.floatQuery !== undefined) ? options.floatQuery : -1.034E-20;
+  var floatQuery = -1.034E-20;
   // Validate
   try {
     if (floatQuery !== null && floatQuery !== undefined && typeof floatQuery !== 'number') {
@@ -1353,8 +1337,6 @@ Queries.prototype.floatNull = function (options, callback) {
  *
  * @param {object} [options] Optional Parameters.
  * 
- * @param {number} [options.doubleQuery] '9999999.999'numeric value
- * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  * 
@@ -1379,7 +1361,7 @@ Queries.prototype.doubleDecimalPositive = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var doubleQuery = (options && options.doubleQuery !== undefined) ? options.doubleQuery : 9999999.999;
+  var doubleQuery = 9999999.999;
   // Validate
   try {
     if (doubleQuery !== null && doubleQuery !== undefined && typeof doubleQuery !== 'number') {
@@ -1463,8 +1445,6 @@ Queries.prototype.doubleDecimalPositive = function (options, callback) {
  *
  * @param {object} [options] Optional Parameters.
  * 
- * @param {number} [options.doubleQuery] '-9999999.999'numeric value
- * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  * 
@@ -1489,7 +1469,7 @@ Queries.prototype.doubleDecimalNegative = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var doubleQuery = (options && options.doubleQuery !== undefined) ? options.doubleQuery : -9999999.999;
+  var doubleQuery = -9999999.999;
   // Validate
   try {
     if (doubleQuery !== null && doubleQuery !== undefined && typeof doubleQuery !== 'number') {
@@ -1683,8 +1663,6 @@ Queries.prototype.doubleNull = function (options, callback) {
  *
  * @param {object} [options] Optional Parameters.
  * 
- * @param {string} [options.stringQuery] '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value
- * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  * 
@@ -1709,7 +1687,7 @@ Queries.prototype.stringUnicode = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var stringQuery = (options && options.stringQuery !== undefined) ? options.stringQuery : '啊齄丂狛狜隣郎隣兀﨩';
+  var stringQuery = '啊齄丂狛狜隣郎隣兀﨩';
   // Validate
   try {
     if (stringQuery !== null && stringQuery !== undefined && typeof stringQuery.valueOf() !== 'string') {
@@ -1793,9 +1771,6 @@ Queries.prototype.stringUnicode = function (options, callback) {
  *
  * @param {object} [options] Optional Parameters.
  * 
- * @param {string} [options.stringQuery] 'begin!*'();:@ &=+$,/?#[]end' url
- * encoded string value
- * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  * 
@@ -1820,7 +1795,7 @@ Queries.prototype.stringUrlEncoded = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var stringQuery = (options && options.stringQuery !== undefined) ? options.stringQuery : 'begin!*\'();:@ &=+$,/?#[]end';
+  var stringQuery = 'begin!*\'();:@ &=+$,/?#[]end';
   // Validate
   try {
     if (stringQuery !== null && stringQuery !== undefined && typeof stringQuery.valueOf() !== 'string') {
@@ -1904,8 +1879,6 @@ Queries.prototype.stringUrlEncoded = function (options, callback) {
  *
  * @param {object} [options] Optional Parameters.
  * 
- * @param {string} [options.stringQuery] '' string value
- * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  * 
@@ -1930,7 +1903,7 @@ Queries.prototype.stringEmpty = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var stringQuery = (options && options.stringQuery !== undefined) ? options.stringQuery : '';
+  var stringQuery = '';
   // Validate
   try {
     if (stringQuery !== null && stringQuery !== undefined && typeof stringQuery.valueOf() !== 'string') {
@@ -2463,8 +2436,6 @@ Queries.prototype.byteMultiByte = function (options, callback) {
  *
  * @param {object} [options] Optional Parameters.
  * 
- * @param {buffer} [options.byteQuery] '' as byte array
- * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  * 
@@ -2489,7 +2460,7 @@ Queries.prototype.byteEmpty = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var byteQuery = (options && options.byteQuery !== undefined) ? options.byteQuery : new Buffer('');
+  var byteQuery = new Buffer('');
   // Validate
   try {
     if (byteQuery && !Buffer.isBuffer(byteQuery)) {
@@ -2684,8 +2655,6 @@ Queries.prototype.byteNull = function (options, callback) {
  *
  * @param {object} [options] Optional Parameters.
  * 
- * @param {date} [options.dateQuery] '2012-01-01' as date
- * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  * 
@@ -2710,7 +2679,7 @@ Queries.prototype.dateValid = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var dateQuery = (options && options.dateQuery !== undefined) ? options.dateQuery : new Date('2012-01-01');
+  var dateQuery = new Date('2012-01-01');
   // Validate
   try {
     if (dateQuery && !(dateQuery instanceof Date || 
@@ -2906,8 +2875,6 @@ Queries.prototype.dateNull = function (options, callback) {
  *
  * @param {object} [options] Optional Parameters.
  * 
- * @param {date} [options.dateTimeQuery] '2012-01-01T01:01:01Z' as date-time
- * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
  * 
@@ -2932,7 +2899,7 @@ Queries.prototype.dateTimeValid = function (options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var dateTimeQuery = (options && options.dateTimeQuery !== undefined) ? options.dateTimeQuery : new Date('2012-01-01T01:01:01Z');
+  var dateTimeQuery = new Date('2012-01-01T01:01:01Z');
   // Validate
   try {
     if (dateTimeQuery && !(dateTimeQuery instanceof Date || 

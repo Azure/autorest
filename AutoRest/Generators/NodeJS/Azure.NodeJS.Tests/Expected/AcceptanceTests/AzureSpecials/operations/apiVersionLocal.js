@@ -33,9 +33,6 @@ function ApiVersionLocal(client) {
  * Get method with api-version modeled in the method.  pass in api-version =
  * '2.0' to succeed
  *
- * @param {string} apiVersion This should appear as a method parameter, use
- * value '2.0'
- * 
  * @param {object} [options] Optional Parameters.
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
@@ -53,7 +50,7 @@ function ApiVersionLocal(client) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-ApiVersionLocal.prototype.getMethodLocalValid = function (apiVersion, options, callback) {
+ApiVersionLocal.prototype.getMethodLocalValid = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -62,6 +59,7 @@ ApiVersionLocal.prototype.getMethodLocalValid = function (apiVersion, options, c
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var apiVersion = '2.0';
   // Validate
   try {
     if (apiVersion === null || apiVersion === undefined || typeof apiVersion.valueOf() !== 'string') {
@@ -272,9 +270,6 @@ ApiVersionLocal.prototype.getMethodLocalNull = function (options, callback) {
  * Get method with api-version modeled in the method.  pass in api-version =
  * '2.0' to succeed
  *
- * @param {string} apiVersion This should appear as a method parameter, use
- * value '2.0'
- * 
  * @param {object} [options] Optional Parameters.
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
@@ -292,7 +287,7 @@ ApiVersionLocal.prototype.getMethodLocalNull = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-ApiVersionLocal.prototype.getPathLocalValid = function (apiVersion, options, callback) {
+ApiVersionLocal.prototype.getPathLocalValid = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -301,6 +296,7 @@ ApiVersionLocal.prototype.getPathLocalValid = function (apiVersion, options, cal
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var apiVersion = '2.0';
   // Validate
   try {
     if (apiVersion === null || apiVersion === undefined || typeof apiVersion.valueOf() !== 'string') {
@@ -390,9 +386,6 @@ ApiVersionLocal.prototype.getPathLocalValid = function (apiVersion, options, cal
  * Get method with api-version modeled in the method.  pass in api-version =
  * '2.0' to succeed
  *
- * @param {string} apiVersion The api version, which appears in the query, the
- * value is always '2.0'
- * 
  * @param {object} [options] Optional Parameters.
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
@@ -410,7 +403,7 @@ ApiVersionLocal.prototype.getPathLocalValid = function (apiVersion, options, cal
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-ApiVersionLocal.prototype.getSwaggerLocalValid = function (apiVersion, options, callback) {
+ApiVersionLocal.prototype.getSwaggerLocalValid = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -419,6 +412,7 @@ ApiVersionLocal.prototype.getSwaggerLocalValid = function (apiVersion, options, 
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var apiVersion = '2.0';
   // Validate
   try {
     if (apiVersion === null || apiVersion === undefined || typeof apiVersion.valueOf() !== 'string') {

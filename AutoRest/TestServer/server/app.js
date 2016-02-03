@@ -455,7 +455,7 @@ app.use('/azurespecials', new azureSpecial(azurecoverage).router);
 app.use('/report', new report(coverage, azurecoverage).router);
 app.use('/subscriptions', new azureUrl(azurecoverage).router);
 app.use('/parameterGrouping', new parameterGrouping(azurecoverage).router);
-app.use('/validation', new validation(azurecoverage).router);
+app.use('/validation', new validation(coverage).router);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
