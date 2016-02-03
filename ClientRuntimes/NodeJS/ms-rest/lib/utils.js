@@ -83,6 +83,8 @@ exports.stripRequest = function (request) {
     strippedRequest = JSON.parse(JSON.stringify(request));
     if (strippedRequest.headers && strippedRequest.headers.Authorization) {
       delete strippedRequest.headers.Authorization;
+    } else if (strippedRequest.headers && strippedRequest.headers.authorization) {
+      delete strippedRequest.headers.authorization;
     }
   } catch (err) {
     var errMsg = err.message;
