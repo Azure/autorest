@@ -265,7 +265,7 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public string MethodParameterDeclarationWithCallback
+        public virtual string MethodParameterDeclarationWithCallback
         {
             get
             {

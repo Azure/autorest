@@ -70,12 +70,13 @@ namespace Microsoft.Rest.Generator.Java
                 throw new ArgumentNullException("serviceClient");
             }
 
-            var convertedTypes = new Dictionary<IType, CompositeType>();
+            var convertedTypes = new Dictionary<IType, IType>();
 
             foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension)))
             {
                 string nextLinkString;
                 string pageClassName = GetPagingSetting(method.Extensions, pageClasses, out nextLinkString);
+                string listClassName = "List";
                 if (string.IsNullOrEmpty(pageClassName))
                 {
                     continue;
@@ -93,15 +94,14 @@ namespace Microsoft.Rest.Generator.Java
                        compositType.Properties.Count == 2 &&
                        compositType.Properties.Any(p => p.SerializedName.Equals(nextLinkString, StringComparison.OrdinalIgnoreCase)))
                     {
-                        var pagableTypeName = string.Format(CultureInfo.InvariantCulture, pageTypeFormat, pageClassName, sequenceType.ElementType.Name);
+                        var pagableTypeName = string.Format(CultureInfo.InvariantCulture, pageTypeFormat, listClassName, sequenceType.ElementType.Name);
                         var ipagableTypeName = string.Format(CultureInfo.InvariantCulture, ipageTypeFormat, sequenceType.ElementType.Name);
 
-                        CompositeType pagedResult = new CompositeType
+                        SequenceType pagedResult = new SequenceType
                         {
-                            Name = pagableTypeName
-                        };
-                        pagedResult.Extensions[AzureExtensions.ExternalExtension] = true;
-                        pagedResult.Extensions[AzureExtensions.PageableExtension] = ipagableTypeName;
+                            ElementType = sequenceType.ElementType,
+                            NameFormat = "List<{0}>"
+                    };
 
                         convertedTypes[method.Responses[responseStatus].Body] = pagedResult;
                         method.Responses[responseStatus] = new Response(pagedResult, method.Responses[responseStatus].Headers);

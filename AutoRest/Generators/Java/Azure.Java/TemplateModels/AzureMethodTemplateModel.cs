@@ -90,6 +90,31 @@ namespace Microsoft.Rest.Generator.Java.Azure
             }
         }
 
+        public override string MethodParameterDeclarationWithCallback
+        {
+            get
+            {
+                var parameters = MethodParameterDeclaration;
+                if (!parameters.IsNullOrEmpty())
+                {
+                    parameters += ", ";
+                }
+                if (this.Extensions.ContainsKey(AzureExtensions.PageableExtension))
+                {
+                    SequenceType sequenceType = (SequenceType)ReturnType.Body;
+                    parameters += string.Format(CultureInfo.InvariantCulture, "final ListOperationCallback<{0}> serviceCallback",
+                    sequenceType != null ? JavaCodeNamer.WrapPrimitiveType(sequenceType.ElementType).ToString() : "Void");
+                }
+                else
+                {
+                    parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCallback<{0}> serviceCallback",
+                    ReturnType.Body != null ? JavaCodeNamer.WrapPrimitiveType(ReturnType.Body).ToString() : "Void");
+                }
+                
+                return parameters;
+            }
+        }
+
         public override IEnumerable<string> Exceptions
         {
             get
