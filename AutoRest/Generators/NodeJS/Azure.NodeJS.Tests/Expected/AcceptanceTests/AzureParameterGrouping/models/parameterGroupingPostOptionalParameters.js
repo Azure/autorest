@@ -44,7 +44,7 @@ ParameterGroupingPostOptionalParameters.prototype.mapper = function () {
         },
         query: {
           required: false,
-          defaultValue: '30',
+          defaultValue: 30,
           type: {
             name: 'Number'
           }

@@ -432,5 +432,43 @@ namespace Microsoft.Rest.Generator.Java
                         + ".models." + exception;
             }
         }
+
+        public override string QuoteString(string value, IType type)
+        {
+            if (type == null)
+            {
+                throw new ArgumentNullException("type");
+            }
+
+            if (value != null)
+            {
+                if (type == PrimaryType.String)
+                {
+                    return CodeNamer.QuoteValue(value);
+                }
+                else if (type == PrimaryType.Boolean)
+                {
+                    return value.ToLowerInvariant();
+                }
+                else
+                {
+                    if (type == PrimaryType.Date ||
+                        type == PrimaryType.DateTime ||
+                        type == PrimaryType.DateTimeRfc1123)
+                    {
+                        return "DateTime.parse(\"" + value + "\")";
+                    }
+                    else if (type == PrimaryType.TimeSpan)
+                    {
+                        return "Period.parse(\"" + value + "\")";
+                    }
+                    else if (type == PrimaryType.ByteArray)
+                    {
+                        return "\"" + value + "\".getBytes()";
+                    }
+                }
+            }
+            return value;
+        }
     }
 }

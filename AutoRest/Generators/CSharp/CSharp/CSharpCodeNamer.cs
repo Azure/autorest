@@ -51,6 +51,7 @@ namespace Microsoft.Rest.Generator.CSharp
             }
 
             base.NormalizeClientModel(client);
+
             foreach (var method in client.Methods)
             {
                 var scope = new ScopeProvider();
@@ -67,7 +68,7 @@ namespace Microsoft.Rest.Generator.CSharp
                     {
                         parameter.Name = scope.GetVariableName(parameter.Name);
                     }
-                }                
+                }
             }
         }
 
@@ -222,6 +223,40 @@ namespace Microsoft.Rest.Generator.CSharp
             dictionaryType.ValueType = NormalizeTypeReference(dictionaryType.ValueType);
             dictionaryType.NameFormat = "IDictionary<string, {0}>";
             return dictionaryType;
+        }
+
+        public override string QuoteString(string value, IType type)
+        {
+            if (type == null)
+            {
+                throw new ArgumentNullException("type");
+            }
+
+            if (value != null)
+            {
+                if (type == PrimaryType.String)
+                {
+                    return CodeNamer.QuoteValue(value);
+                }
+                else if (type == PrimaryType.Boolean)
+                {
+                    return value.ToLowerInvariant();
+                }
+                else
+                {
+                    if (type == PrimaryType.Date ||
+                        type == PrimaryType.DateTime ||
+                        type == PrimaryType.DateTimeRfc1123 ||
+                        type == PrimaryType.TimeSpan ||
+                        type == PrimaryType.ByteArray)
+                    {
+
+                        return "SafeJsonConvert.DeserializeObject<" + type.Name.TrimEnd('?') +
+                            ">(" + CodeNamer.QuoteValue("\"" + value + "\"") + ", this.Client.SerializationSettings)";
+                    }
+                }
+            }
+            return value;
         }
     }
 }

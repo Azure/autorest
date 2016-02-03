@@ -92,30 +92,10 @@ namespace Microsoft.Rest.Modeler.Swagger
                             Name = name,
                             SerializedName = name,
                             Type = propertyType,
-                            IsRequired = property.Value.IsRequired,
-                            IsReadOnly = property.Value.ReadOnly,
-                            DefaultValue = property.Value.Default
+                            IsReadOnly = property.Value.ReadOnly
                         };
-                        SetConstraints(propertyObj.Constraints, property.Value);
-
-                        //propertyObj.Type = objectType;
-                        propertyObj.Documentation = property.Value.Description;
-                        var enumType = propertyType as EnumType;
-                        if (enumType != null)
-                        {
-                            if (propertyObj.Documentation == null)
-                            {
-                                propertyObj.Documentation = string.Empty;
-                            }
-                            else
-                            {
-                                propertyObj.Documentation = propertyObj.Documentation.TrimEnd('.') + ". ";
-                            }
-                            propertyObj.Documentation += "Possible values for this property include: " +
-                                                       string.Join(", ", enumType.Values.Select(v =>
-                                                           string.Format(CultureInfo.InvariantCulture, 
-                                                           "'{0}'", v.Name))) + ".";
-                        }
+                        PopulateParameter(propertyObj, property.Value);
+                        
                         objectType.Properties.Add(propertyObj);
                     }
                     else

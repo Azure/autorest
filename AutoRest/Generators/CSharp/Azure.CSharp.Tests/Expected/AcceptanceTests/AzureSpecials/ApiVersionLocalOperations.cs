@@ -53,22 +53,15 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// Get method with api-version modeled in the method.  pass in api-version =
         /// '2.0' to succeed
         /// </summary>
-        /// <param name='apiVersion'>
-        /// This should appear as a method parameter, use value '2.0'. Possible values
-        /// for this parameter include: '2.0'
-        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> GetMethodLocalValidWithHttpMessagesAsync(string apiVersion, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> GetMethodLocalValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (apiVersion == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "apiVersion");
-            }
+            string apiVersion = "2.0";
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -327,22 +320,15 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// Get method with api-version modeled in the method.  pass in api-version =
         /// '2.0' to succeed
         /// </summary>
-        /// <param name='apiVersion'>
-        /// This should appear as a method parameter, use value '2.0'. Possible values
-        /// for this parameter include: '2.0'
-        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> GetPathLocalValidWithHttpMessagesAsync(string apiVersion, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> GetPathLocalValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (apiVersion == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "apiVersion");
-            }
+            string apiVersion = "2.0";
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -466,22 +452,15 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// Get method with api-version modeled in the method.  pass in api-version =
         /// '2.0' to succeed
         /// </summary>
-        /// <param name='apiVersion'>
-        /// The api version, which appears in the query, the value is always '2.0'.
-        /// Possible values for this parameter include: '2.0'
-        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> GetSwaggerLocalValidWithHttpMessagesAsync(string apiVersion, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> GetSwaggerLocalValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (apiVersion == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "apiVersion");
-            }
+            string apiVersion = "2.0";
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;

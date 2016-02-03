@@ -173,3 +173,95 @@ class AutoRestValidationTest(object):
             return client_raw_response
 
         return deserialized
+
+    def get_with_constant_in_path(
+            self, constant_param, custom_headers={}, raw=False, **operation_config):
+        """
+
+        :param constant_param:
+        :type constant_param: str
+        :param dict custom_headers: headers that will be added to the request
+        :param boolean raw: returns the direct response alongside the
+         deserialized response
+        :rtype: None or msrest.pipeline.ClientRawResponse
+        """
+        # Construct URL
+        url = '/validation/constantsInPath/{constantParam}/value'
+        path_format_arguments = {
+            'constantParam': self._serialize.url("constant_param", constant_param, 'str')
+        }
+        url = url.format(**path_format_arguments)
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct and send request
+        request = self._client.get(url, query_parameters)
+        response = self._client.send(request, header_parameters, **operation_config)
+
+        if response.status_code not in [200]:
+            raise HttpOperationError(self._deserialize, response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(None, response)
+            return client_raw_response
+
+    def post_with_constant_in_body(
+            self, constant_param, body=None, custom_headers={}, raw=False, **operation_config):
+        """
+
+        :param constant_param:
+        :type constant_param: str
+        :param body:
+        :type body: Product or None
+        :param dict custom_headers: headers that will be added to the request
+        :param boolean raw: returns the direct response alongside the
+         deserialized response
+        :rtype: Product or msrest.pipeline.ClientRawResponse
+        """
+        # Construct URL
+        url = '/validation/constantsInPath/{constantParam}/value'
+        path_format_arguments = {
+            'constantParam': self._serialize.url("constant_param", constant_param, 'str')
+        }
+        url = url.format(**path_format_arguments)
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if custom_headers:
+            header_parameters.update(custom_headers)
+
+        # Construct body
+        if body is not None:
+            body_content = self._serialize.body(body, 'Product')
+        else:
+            body_content = None
+
+        # Construct and send request
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
+
+        if response.status_code not in [200]:
+            raise HttpOperationError(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('Product', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized

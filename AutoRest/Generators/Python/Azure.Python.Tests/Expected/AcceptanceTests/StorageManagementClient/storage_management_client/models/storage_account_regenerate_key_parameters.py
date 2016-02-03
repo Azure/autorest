@@ -15,8 +15,7 @@ from msrest.serialization import Model
 class StorageAccountRegenerateKeyParameters(Model):
     """StorageAccountRegenerateKeyParameters
 
-    :param str key_name: Possible values for this property include: 'key1',
-     'key2'.
+    :param str key_name: Possible values include: 'key1', 'key2'
     """
 
     _required = []

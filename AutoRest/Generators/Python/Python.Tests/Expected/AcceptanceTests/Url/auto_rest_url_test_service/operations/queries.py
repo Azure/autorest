@@ -591,8 +591,7 @@ class Queries(object):
         """
         Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
 
-        :param string_query: '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible
-         values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
+        :param string_query: '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value
         :type string_query: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
@@ -630,8 +629,7 @@ class Queries(object):
         Get 'begin!*'();:@ &=+$,/?#[]end
 
         :param string_query: 'begin!*'();:@ &=+$,/?#[]end' url encoded string
-         value. Possible values for this parameter include: 'begin!*'();:@
-         &=+$,/?#[]end'
+         value
         :type string_query: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
@@ -668,8 +666,7 @@ class Queries(object):
         """
         Get ''
 
-        :param string_query: '' string value. Possible values for this
-         parameter include: ''
+        :param string_query: '' string value
         :type string_query: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
@@ -743,8 +740,8 @@ class Queries(object):
         """
         Get using uri with query parameter 'green color'
 
-        :param enum_query: 'green color' enum value. Possible values for this
-         parameter include: 'red color', 'green color', 'blue color'
+        :param enum_query: 'green color' enum value. Possible values include:
+         'red color', 'green color', 'blue color'
         :type enum_query: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
@@ -781,8 +778,8 @@ class Queries(object):
         """
         Get null (no query parameter in url)
 
-        :param enum_query: null string value. Possible values for this
-         parameter include: 'red color', 'green color', 'blue color'
+        :param enum_query: null string value. Possible values include: 'red
+         color', 'green color', 'blue color'
         :type enum_query: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the

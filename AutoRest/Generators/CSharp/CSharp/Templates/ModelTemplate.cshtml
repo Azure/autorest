@@ -45,14 +45,14 @@ namespace @(Settings.Namespace).Models
             @:@(Model.BaseConstructorCall)
             }
         @:{
-            foreach (var property in Model.Properties)
+            foreach (var property in Model.Properties.Where(p => !p.IsConstant))
             {
             @:@(property.Name) = @(CodeNamer.CamelCase(property.Name));
             }
         @:}
         }
         @EmptyLine
-        @foreach (var property in Model.PropertyTemplateModels)
+        @foreach (var property in Model.PropertyTemplateModels.Where(p => !p.IsConstant))
         {
         @:/// <summary>
         @:@WrapComment("/// ", property.Documentation.EscapeXmlComment())
@@ -67,6 +67,24 @@ namespace @(Settings.Namespace).Models
             }
         @:[JsonProperty(PropertyName = "@property.SerializedName")]
         @:public @property.Type.Name @property.Name { get; @(property.IsReadOnly ? "private " : "")set; }
+        @EmptyLine
+        }
+
+        @foreach (var property in Model.PropertyTemplateModels.Where(p => p.IsConstant))
+        {
+        @:/// <summary>
+        @:@WrapComment("/// ", property.Documentation.EscapeXmlComment())
+        @:/// </summary>
+            if (property.Type == PrimaryType.Date)
+            {
+        @:[JsonConverter(typeof(DateJsonConverter))]
+            }
+            if (property.Type == PrimaryType.DateTimeRfc1123)
+            {
+        @:[JsonConverter(typeof(DateTimeRfc1123JsonConverter))]
+            }
+        @:[JsonProperty(PropertyName = "@property.SerializedName")]
+        @:public static @property.Type.Name @property.Name { get { return @(property.DefaultValue); } }
         @EmptyLine
         }
 @if(@Model.ShouldValidateChain())
@@ -84,7 +102,7 @@ namespace @(Settings.Namespace).Models
             @:base.Validate();
             }
 
-            foreach (var property in Model.Properties.Where(p => p.IsRequired && !p.IsReadOnly))
+            foreach (var property in Model.Properties.Where(p => p.IsRequired && !p.IsReadOnly && !p.IsConstant))
             {
                 anythingToValidate = true;
             @:if (@property.Name == null)

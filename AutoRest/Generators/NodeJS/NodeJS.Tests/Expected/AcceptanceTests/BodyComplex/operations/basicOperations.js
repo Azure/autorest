@@ -148,8 +148,8 @@ BasicOperations.prototype.getValid = function (options, callback) {
  * 
  * @param {string} [complexBody.name]
  * 
- * @param {string} [complexBody.color] Possible values for this property
- * include: 'cyan', 'Magenta', 'YELLOW', 'blacK'.
+ * @param {string} [complexBody.color] Possible values include: 'cyan',
+ * 'Magenta', 'YELLOW', 'blacK'
  * 
  * @param {object} [options] Optional Parameters.
  * 
@@ -222,9 +222,6 @@ BasicOperations.prototype.putValid = function (complexBody, options, callback) {
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
-                                                    requestContent.length : 
-                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {

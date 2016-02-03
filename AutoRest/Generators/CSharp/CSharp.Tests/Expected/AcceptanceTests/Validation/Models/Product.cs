@@ -54,6 +54,18 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         public string Image { get; set; }
 
         /// <summary>
+        /// Constant int
+        /// </summary>
+        [JsonProperty(PropertyName = "constInt")]
+        public static int? ConstInt { get { return 0; } }
+
+        /// <summary>
+        /// Constant string
+        /// </summary>
+        [JsonProperty(PropertyName = "constString")]
+        public static string ConstString { get { return "constant"; } }
+
+        /// <summary>
         /// Validate the object. Throws ValidationException if validation fails.
         /// </summary>
         public virtual void Validate()

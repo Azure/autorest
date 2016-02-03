@@ -60,6 +60,10 @@ class AcceptanceTests(unittest.TestCase):
         report['getDateInvalid']=1
         report['getDictionaryNullkey']=1
         report['HttpRedirect300Get']=1
+        
+        # TODO: Implement constants support in Python
+        report['ConstantsInPath']=1
+        report['ConstantsInBody']=1
 
         # BUG!!! Need implement these test cases
         #report['StreamUploadFile']=1

@@ -39,7 +39,7 @@ class ApiVersionLocalOperations(object):
         api-version = '2.0' to succeed
 
         :param api_version: This should appear as a method parameter, use
-         value '2.0'. Possible values for this parameter include: '2.0'
+         value '2.0'
         :type api_version: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
@@ -124,7 +124,7 @@ class ApiVersionLocalOperations(object):
         api-version = '2.0' to succeed
 
         :param api_version: This should appear as a method parameter, use
-         value '2.0'. Possible values for this parameter include: '2.0'
+         value '2.0'
         :type api_version: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
@@ -166,8 +166,7 @@ class ApiVersionLocalOperations(object):
         api-version = '2.0' to succeed
 
         :param api_version: The api version, which appears in the query, the
-         value is always '2.0'. Possible values for this parameter include:
-         '2.0'
+         value is always '2.0'
         :type api_version: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the

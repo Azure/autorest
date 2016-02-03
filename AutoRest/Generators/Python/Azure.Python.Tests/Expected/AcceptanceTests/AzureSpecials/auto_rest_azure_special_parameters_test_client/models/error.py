@@ -17,6 +17,7 @@ class Error(Model):
     """Error
 
     :param int status
+    :param int constant_id:  Default value: 1 .
     :param str message
     """
 
@@ -24,11 +25,13 @@ class Error(Model):
 
     _attribute_map = {
         'status': {'key': 'status', 'type': 'int'},
+        'constant_id': {'key': 'constantId', 'type': 'int'},
         'message': {'key': 'message', 'type': 'str'},
     }
 
     def __init__(self, *args, **kwargs):
         self.status = None
+        self.constant_id = None
         self.message = None
 
         super(Error, self).__init__(*args, **kwargs)

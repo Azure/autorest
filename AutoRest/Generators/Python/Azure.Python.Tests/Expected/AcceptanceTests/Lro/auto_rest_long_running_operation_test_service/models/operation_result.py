@@ -15,10 +15,9 @@ from msrest.serialization import Model
 class OperationResult(Model):
     """OperationResult
 
-    :param str status: The status of the request. Possible values for this
-     property include: 'Succeeded', 'Failed', 'canceled', 'Accepted',
-     'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted',
-     'OK'.
+    :param str status: The status of the request. Possible values include:
+     'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created',
+     'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
     :param OperationResultError error
     """
 

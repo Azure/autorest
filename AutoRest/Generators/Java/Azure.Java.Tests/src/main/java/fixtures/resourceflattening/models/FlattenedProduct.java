@@ -29,9 +29,9 @@ public class FlattenedProduct extends Resource {
     private String flattenedProductType;
 
     /**
-     * Possible values for this property include: 'Succeeded', 'Failed',
-     * 'canceled', 'Accepted', 'Creating', 'Created', 'Updating', 'Updated',
-     * 'Deleting', 'Deleted', 'OK'.
+     * Possible values include: 'Succeeded', 'Failed', 'canceled', 'Accepted',
+     * 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted',
+     * 'OK'.
      */
     @JsonProperty(value = "properties.provisioningStateValues")
     private String provisioningStateValues;

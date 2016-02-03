@@ -20,9 +20,9 @@ var util = require('util');
  * @constructor
  * @member {string} [provisioningState]
  * 
- * @member {string} [provisioningStateValues] Possible values for this
- * property include: 'Succeeded', 'Failed', 'canceled', 'Accepted',
- * 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'.
+ * @member {string} [provisioningStateValues] Possible values include:
+ * 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created',
+ * 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
  * 
  */
 function SubProduct() {

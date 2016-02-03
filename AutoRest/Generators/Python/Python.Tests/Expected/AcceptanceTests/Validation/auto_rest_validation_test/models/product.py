@@ -20,6 +20,8 @@ class Product(Model):
      elements.
     :param int capacity: Non required int betwen 0 and 100 exclusive.
     :param str image: Image URL representing the product.
+    :param int const_int: Constant int. Default value: 0 .
+    :param str const_string: Constant string. Default value: "constant" .
     """
 
     _required = []
@@ -28,11 +30,15 @@ class Product(Model):
         'display_names': {'key': 'display_names', 'type': '[str]'},
         'capacity': {'key': 'capacity', 'type': 'int'},
         'image': {'key': 'image', 'type': 'str'},
+        'const_int': {'key': 'constInt', 'type': 'int'},
+        'const_string': {'key': 'constString', 'type': 'str'},
     }
 
     def __init__(self, *args, **kwargs):
         self.display_names = None
         self.capacity = None
         self.image = None
+        self.const_int = None
+        self.const_string = None
 
         super(Product, self).__init__(*args, **kwargs)

@@ -17,8 +17,8 @@ class Basic(Model):
 
     :param int id
     :param str name
-    :param str color: Possible values for this property include: 'cyan',
-     'Magenta', 'YELLOW', 'blacK'.
+    :param str color: Possible values include: 'cyan', 'Magenta', 'YELLOW',
+     'blacK'
     """
 
     _required = []

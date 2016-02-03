@@ -24,6 +24,10 @@ var util = require('util');
  * 
  * @member {string} [image] Image URL representing the product.
  * 
+ * @member {number} [constInt] Constant int. Default value: 0 .
+ * 
+ * @member {string} [constString] Constant string. Default value: 'constant' .
+ * 
  */
 function Product() {
 }
@@ -78,6 +82,24 @@ Product.prototype.mapper = function () {
           constraints: {
             Pattern: 'http://\w+'
           },
+          type: {
+            name: 'String'
+          }
+        },
+        constInt: {
+          required: false,
+          isConstant: true,
+          serializedName: 'constInt',
+          defaultValue: 0,
+          type: {
+            name: 'Number'
+          }
+        },
+        constString: {
+          required: false,
+          isConstant: true,
+          serializedName: 'constString',
+          defaultValue: 'constant',
           type: {
             name: 'String'
           }

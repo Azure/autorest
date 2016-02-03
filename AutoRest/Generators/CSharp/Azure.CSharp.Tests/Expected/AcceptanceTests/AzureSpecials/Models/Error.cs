@@ -44,5 +44,10 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
         [JsonProperty(PropertyName = "message")]
         public string Message { get; set; }
 
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "constantId")]
+        public static int? ConstantId { get { return 1; } }
+
     }
 }

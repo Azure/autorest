@@ -106,5 +106,21 @@ describe('nodejs', function () {
         });
       });
     });
+
+    describe('Constants', function () {
+      it('should work in path', function (done) {
+        testClient.getWithConstantInPath(function (err, result) {
+          should.not.exist(err);
+          done();
+        });
+      });
+
+      it('should work in body', function (done) {
+        testClient.postWithConstantInBody({body: {}}, function (err, result) {
+          should.not.exist(err);
+          done();
+        });
+      });
+    });
   });
 });

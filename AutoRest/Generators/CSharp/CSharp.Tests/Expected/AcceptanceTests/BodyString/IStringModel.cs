@@ -35,7 +35,6 @@ namespace Fixtures.AcceptanceTestsBodyString
         /// Set string value null
         /// </summary>
         /// <param name='stringBody'>
-        /// Possible values for this parameter include: ''
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -58,7 +57,6 @@ namespace Fixtures.AcceptanceTestsBodyString
         /// Set string value empty ''
         /// </summary>
         /// <param name='stringBody'>
-        /// Possible values for this parameter include: ''
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -85,9 +83,6 @@ namespace Fixtures.AcceptanceTestsBodyString
         /// '
         /// </summary>
         /// <param name='stringBody'>
-        /// Possible values for this parameter include:
-        /// '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
-        /// '
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -116,8 +111,6 @@ namespace Fixtures.AcceptanceTestsBodyString
         /// country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'
         /// </summary>
         /// <param name='stringBody'>
-        /// Possible values for this parameter include: '    Now is the time
-        /// for all good men to come to the aid of their country    '
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.

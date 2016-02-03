@@ -60,8 +60,8 @@ export interface StorageAccounts {
      * account.
      * 
      * @param {string} [parameters.accountType] Gets or sets the account type.
-     * Possible values for this property include: 'Standard_LRS', 'Standard_ZRS',
-     * 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'.
+     * Possible values include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
+     * 'Standard_RAGRS', 'Premium_LRS'
      * 
      * @param {string} [parameters.location] Resource location
      * 
@@ -96,8 +96,8 @@ export interface StorageAccounts {
      * account.
      * 
      * @param {string} [parameters.accountType] Gets or sets the account type.
-     * Possible values for this property include: 'Standard_LRS', 'Standard_ZRS',
-     * 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'.
+     * Possible values include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
+     * 'Standard_RAGRS', 'Premium_LRS'
      * 
      * @param {string} [parameters.location] Resource location
      * 
@@ -182,8 +182,8 @@ export interface StorageAccounts {
      * @param {string} [parameters.accountType] Gets or sets the account type.
      * Note that StandardZRS and PremiumLRS accounts cannot be changed to other
      * account types, and other account types cannot be changed to StandardZRS or
-     * PremiumLRS. Possible values for this property include: 'Standard_LRS',
-     * 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'.
+     * PremiumLRS. Possible values include: 'Standard_LRS', 'Standard_ZRS',
+     * 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'
      * 
      * @param {object} [parameters.customDomain] User domain assigned to the
      * storage account. Name is the CNAME source. Only one custom domain is
@@ -276,8 +276,7 @@ export interface StorageAccounts {
      * 
      * @param {object} [options] Optional Parameters.
      * 
-     * @param {string} [options.keyName] Possible values for this property
-     * include: 'key1', 'key2'.
+     * @param {string} [options.keyName] Possible values include: 'key1', 'key2'
      * 
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request

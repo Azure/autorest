@@ -120,6 +120,48 @@
           }
         }
       }
+    },
+    "/validation/constantsInPath/{constantParam}/value": {
+      "get": {
+        "operationId": "getWithConstantInPath",
+        "parameters": [
+          {
+            "name": "constantParam",
+            "type": "string",
+            "enum": [ "constant" ],
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "post": {
+        "operationId": "postWithConstantInBody",
+        "parameters": [
+          {
+            "name": "constantParam",
+            "type": "string",
+            "enum": [ "constant" ],
+            "in": "path",
+            "required": true
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": { "$ref": "#/definitions/Product" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/Product" }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -148,6 +190,16 @@
           "type": "string",
           "description": "Image URL representing the product.",
           "pattern": "http://\\w+"
+        },
+        "constInt": {
+          "type": "integer",
+          "description": "Constant int",
+          "enum": [ 0 ]
+        },
+        "constString": {
+          "type": "string",
+          "description": "Constant string",
+          "enum": [ "constant" ]
         }
       }
     },

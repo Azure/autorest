@@ -47,6 +47,15 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
         }
 
+        public bool ContainsDurationProperty()
+        {
+            Property prop = Properties.FirstOrDefault(p =>
+                (p.Type is PrimaryType && (p.Type as PrimaryType) == PrimaryType.TimeSpan) ||
+                (p.Type is SequenceType && (p.Type as SequenceType).ElementType == PrimaryType.TimeSpan) ||
+                (p.Type is DictionaryType && (p.Type as DictionaryType).ValueType == PrimaryType.TimeSpan));
+            return prop != null;
+        }
+
         private void constructOrderedList(ModelTemplateModel model, List<ModelTemplateModel> orderedList)
         {
             if (model == null)

@@ -320,22 +320,15 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// <summary>
         /// Get method with unencoded path parameter with value 'path1/path2/path3'
         /// </summary>
-        /// <param name='unencodedPathParam'>
-        /// An unencoded path parameter with value 'path1/path2/path3'. Possible
-        /// values for this parameter include: 'path1/path2/path3'
-        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> GetSwaggerPathValidWithHttpMessagesAsync(string unencodedPathParam, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> GetSwaggerPathValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (unencodedPathParam == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "unencodedPathParam");
-            }
+            string unencodedPathParam = "path1/path2/path3";
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -865,19 +858,15 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// Get method with unencoded query parameter with value
         /// 'value1&amp;q2=value2&amp;q3=value3'
         /// </summary>
-        /// <param name='q1'>
-        /// An unencoded query parameter with value
-        /// 'value1&amp;q2=value2&amp;q3=value3'. Possible values for this parameter
-        /// include: 'value1&amp;q2=value2&amp;q3=value3'
-        /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
         /// </param>
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> GetSwaggerQueryValidWithHttpMessagesAsync(string q1 = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> GetSwaggerQueryValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
+            string q1 = "value1&q2=value2&q3=value3";
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;

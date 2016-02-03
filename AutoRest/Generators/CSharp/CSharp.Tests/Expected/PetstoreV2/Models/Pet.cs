@@ -81,8 +81,8 @@ namespace Fixtures.PetstoreV2.Models
         public IDictionary<string, Category> Dictionary { get; set; }
 
         /// <summary>
-        /// pet status in the store. Possible values for this property
-        /// include: 'available', 'pending', 'sold'.
+        /// pet status in the store. Possible values include: 'available',
+        /// 'pending', 'sold'
         /// </summary>
         [JsonProperty(PropertyName = "status")]
         public string Status { get; set; }

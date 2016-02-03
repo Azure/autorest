@@ -126,7 +126,6 @@ class SkipUrlEncodingOperations(object):
         Get method with unencoded path parameter with value 'path1/path2/path3'
 
         :param unencoded_path_param: An unencoded path parameter with value
-         'path1/path2/path3'. Possible values for this parameter include:
          'path1/path2/path3'
         :type unencoded_path_param: str
         :param dict custom_headers: headers that will be added to the request
@@ -297,8 +296,7 @@ class SkipUrlEncodingOperations(object):
         'value1&q2=value2&q3=value3'
 
         :param q1: An unencoded query parameter with value
-         'value1&q2=value2&q3=value3'. Possible values for this parameter
-         include: 'value1&q2=value2&q3=value3'
+         'value1&q2=value2&q3=value3'
         :type q1: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the

@@ -26,13 +26,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='apiVersion'>
-            /// This should appear as a method parameter, use value '2.0'. Possible values
-            /// for this parameter include: '2.0'
-            /// </param>
-            public static void GetMethodLocalValid(this IApiVersionLocalOperations operations, string apiVersion)
+            public static void GetMethodLocalValid(this IApiVersionLocalOperations operations)
             {
-                Task.Factory.StartNew(s => ((IApiVersionLocalOperations)s).GetMethodLocalValidAsync(apiVersion), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IApiVersionLocalOperations)s).GetMethodLocalValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -42,16 +38,12 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='apiVersion'>
-            /// This should appear as a method parameter, use value '2.0'. Possible values
-            /// for this parameter include: '2.0'
-            /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task GetMethodLocalValidAsync( this IApiVersionLocalOperations operations, string apiVersion, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task GetMethodLocalValidAsync( this IApiVersionLocalOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetMethodLocalValidWithHttpMessagesAsync(apiVersion, null, cancellationToken).ConfigureAwait(false);
+                await operations.GetMethodLocalValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -96,13 +88,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='apiVersion'>
-            /// This should appear as a method parameter, use value '2.0'. Possible values
-            /// for this parameter include: '2.0'
-            /// </param>
-            public static void GetPathLocalValid(this IApiVersionLocalOperations operations, string apiVersion)
+            public static void GetPathLocalValid(this IApiVersionLocalOperations operations)
             {
-                Task.Factory.StartNew(s => ((IApiVersionLocalOperations)s).GetPathLocalValidAsync(apiVersion), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IApiVersionLocalOperations)s).GetPathLocalValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -111,17 +99,13 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
-            /// </param>
-            /// <param name='apiVersion'>
-            /// This should appear as a method parameter, use value '2.0'. Possible values
-            /// for this parameter include: '2.0'
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task GetPathLocalValidAsync( this IApiVersionLocalOperations operations, string apiVersion, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task GetPathLocalValidAsync( this IApiVersionLocalOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetPathLocalValidWithHttpMessagesAsync(apiVersion, null, cancellationToken).ConfigureAwait(false);
+                await operations.GetPathLocalValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>
@@ -131,13 +115,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='operations'>
             /// The operations group for this extension method.
             /// </param>
-            /// <param name='apiVersion'>
-            /// The api version, which appears in the query, the value is always '2.0'.
-            /// Possible values for this parameter include: '2.0'
-            /// </param>
-            public static void GetSwaggerLocalValid(this IApiVersionLocalOperations operations, string apiVersion)
+            public static void GetSwaggerLocalValid(this IApiVersionLocalOperations operations)
             {
-                Task.Factory.StartNew(s => ((IApiVersionLocalOperations)s).GetSwaggerLocalValidAsync(apiVersion), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IApiVersionLocalOperations)s).GetSwaggerLocalValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -146,17 +126,13 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
-            /// </param>
-            /// <param name='apiVersion'>
-            /// The api version, which appears in the query, the value is always '2.0'.
-            /// Possible values for this parameter include: '2.0'
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task GetSwaggerLocalValidAsync( this IApiVersionLocalOperations operations, string apiVersion, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task GetSwaggerLocalValidAsync( this IApiVersionLocalOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetSwaggerLocalValidWithHttpMessagesAsync(apiVersion, null, cancellationToken).ConfigureAwait(false);
+                await operations.GetSwaggerLocalValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
 
     }

@@ -973,8 +973,8 @@ namespace Fixtures.AcceptanceTestsHeader
             /// "empty"
             /// </param>
             /// <param name='value'>
-            /// Send a post request with header values 'GREY' . Possible values for this
-            /// parameter include: 'White', 'black', 'GREY'
+            /// Send a post request with header values 'GREY' . Possible values include:
+            /// 'White', 'black', 'GREY'
             /// </param>
             public static void ParamEnum(this IHeader operations, string scenario, GreyscaleColors? value = default(GreyscaleColors?))
             {
@@ -993,8 +993,8 @@ namespace Fixtures.AcceptanceTestsHeader
             /// "empty"
             /// </param>
             /// <param name='value'>
-            /// Send a post request with header values 'GREY' . Possible values for this
-            /// parameter include: 'White', 'black', 'GREY'
+            /// Send a post request with header values 'GREY' . Possible values include:
+            /// 'White', 'black', 'GREY'
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.

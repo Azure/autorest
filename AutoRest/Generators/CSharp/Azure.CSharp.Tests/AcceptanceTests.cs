@@ -660,17 +660,17 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 client.ApiVersionDefault.GetMethodGlobalValid();
                 client.ApiVersionDefault.GetPathGlobalValid();
                 client.ApiVersionDefault.GetSwaggerGlobalValid();
-                client.ApiVersionLocal.GetMethodLocalValid(validApiVersion);
+                client.ApiVersionLocal.GetMethodLocalValid();
                 client.ApiVersionLocal.GetMethodLocalNull(null);
-                client.ApiVersionLocal.GetPathLocalValid(validApiVersion);
-                client.ApiVersionLocal.GetSwaggerLocalValid(validApiVersion);
+                client.ApiVersionLocal.GetPathLocalValid();
+                client.ApiVersionLocal.GetSwaggerLocalValid();
 
                 client.SkipUrlEncoding.GetMethodPathValid(unencodedPath);
                 client.SkipUrlEncoding.GetPathPathValid(unencodedPath);
-                client.SkipUrlEncoding.GetSwaggerPathValid(unencodedPath);
+                client.SkipUrlEncoding.GetSwaggerPathValid();
                 client.SkipUrlEncoding.GetMethodQueryValid(unencodedQuery);
                 client.SkipUrlEncoding.GetPathQueryValid(unencodedQuery);
-                client.SkipUrlEncoding.GetSwaggerQueryValid(unencodedQuery);
+                client.SkipUrlEncoding.GetSwaggerQueryValid();
                 client.SkipUrlEncoding.GetMethodQueryNull();
                 client.SkipUrlEncoding.GetMethodQueryNull(null);
             }

@@ -21,6 +21,11 @@ public class Error {
     private Integer status;
 
     /**
+     * The constantId property.
+     */
+    private Integer constantId;
+
+    /**
      * The message property.
      */
     private String message;
@@ -41,6 +46,24 @@ public class Error {
      */
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    /**
+     * Get the constantId value.
+     *
+     * @return the constantId value
+     */
+    public Integer getConstantId() {
+        return this.constantId;
+    }
+
+    /**
+     * Set the constantId value.
+     *
+     * @param constantId the constantId value to set
+     */
+    public void setConstantId(Integer constantId) {
+        this.constantId = constantId;
     }
 
     /**

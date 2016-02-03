@@ -148,8 +148,7 @@ String.prototype.getNull = function (options, callback) {
  *
  * @param {object} [options] Optional Parameters.
  * 
- * @param {string} [options.stringBody] Possible values for this parameter
- * include: ''
+ * @param {string} [options.stringBody]
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -227,9 +226,6 @@ String.prototype.putNull = function (options, callback) {
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
-                                                    requestContent.length : 
-                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -387,7 +383,7 @@ String.prototype.getEmpty = function (options, callback) {
 /**
  * Set string value empty ''
  *
- * @param {string} stringBody Possible values for this parameter include: ''
+ * @param {string} stringBody
  * 
  * @param {object} [options] Optional Parameters.
  * 
@@ -466,9 +462,6 @@ String.prototype.putEmpty = function (stringBody, options, callback) {
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
-                                                    requestContent.length : 
-                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -628,8 +621,7 @@ String.prototype.getMbcs = function (options, callback) {
  * Set string value mbcs
  * '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
  *
- * @param {string} stringBody Possible values for this parameter include:
- * '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '
+ * @param {string} stringBody
  * 
  * @param {object} [options] Optional Parameters.
  * 
@@ -708,9 +700,6 @@ String.prototype.putMbcs = function (stringBody, options, callback) {
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
-                                                    requestContent.length : 
-                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -872,9 +861,7 @@ String.prototype.getWhitespace = function (options, callback) {
  * '<tab><space><space>Now is the time for all good men to come to the aid of
  * their country<tab><space><space>'
  *
- * @param {string} stringBody Possible values for this parameter include: '
- * Now is the time for all good men to come to the aid of their country
- * '
+ * @param {string} stringBody
  * 
  * @param {object} [options] Optional Parameters.
  * 
@@ -953,9 +940,6 @@ String.prototype.putWhitespace = function (stringBody, options, callback) {
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
-                                                    requestContent.length : 
-                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {

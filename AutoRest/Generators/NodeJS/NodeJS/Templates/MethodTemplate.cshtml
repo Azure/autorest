@@ -50,6 +50,12 @@
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+
+  @foreach(var parameter in Model.ParameterTemplateModels.Where(p => p.IsConstant))
+  {
+  @:var @(parameter.Name) = @(parameter.DefaultValue);
+  }
+
   @if (((CompositeType)Model.OptionsParameterTemplateModel.Type).Properties.Count > 1)
   {
   @:@(Model.BuildOptionalMappings())
@@ -136,9 +142,6 @@
   }
 
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
-                                                    requestContent.length : 
-                                  Buffer.byteLength(requestContent, 'UTF8');
   </text>
       }
   }

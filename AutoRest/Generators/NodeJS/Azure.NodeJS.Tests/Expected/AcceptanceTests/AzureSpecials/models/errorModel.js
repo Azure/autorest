@@ -16,6 +16,8 @@
  * @constructor
  * @member {number} [status]
  * 
+ * @member {number} [constantId]  Default value: 1 .
+ * 
  * @member {string} [message]
  * 
  */
@@ -39,6 +41,15 @@ ErrorModel.prototype.mapper = function () {
         status: {
           required: false,
           serializedName: 'status',
+          type: {
+            name: 'Number'
+          }
+        },
+        constantId: {
+          required: false,
+          isConstant: true,
+          serializedName: 'constantId',
+          defaultValue: 1,
           type: {
             name: 'Number'
           }

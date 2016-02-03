@@ -151,8 +151,8 @@ EnumModel.prototype.getNotExpandable = function (options, callback) {
  * Sends value 'red color' from enumeration of 'red color', 'green-color',
  * 'blue_color'
  *
- * @param {string} stringBody Possible values for this parameter include: 'red
- * color', 'green-color', 'blue_color'
+ * @param {string} stringBody Possible values include: 'red color',
+ * 'green-color', 'blue_color'
  * 
  * @param {object} [options] Optional Parameters.
  * 
@@ -237,9 +237,6 @@ EnumModel.prototype.putNotExpandable = function (stringBody, options, callback) 
     return callback(serializationError);
   }
   httpRequest.body = requestContent;
-  httpRequest.headers['Content-Length'] = Buffer.isBuffer(requestContent) ? 
-                                                    requestContent.length : 
-                                  Buffer.byteLength(requestContent, 'UTF8');
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {

@@ -46,7 +46,9 @@ namespace Microsoft.Rest.Modeler.Swagger
             {
                 type = PrimaryType.Stream;
             }
-            if (SwaggerObject.Enum != null && SwaggerObject.Enum.Any() && type == PrimaryType.String)
+            if (SwaggerObject.Enum != null && 
+                type == PrimaryType.String &&
+                (SwaggerObject.Enum.Count > 1 || IsExpandableEnum(SwaggerObject)))
             {
                 var enumType = new EnumType();
                 SwaggerObject.Enum.ForEach(v => enumType.Values.Add(new EnumValue { Name = v, SerializedName = v }));
@@ -135,6 +137,66 @@ namespace Microsoft.Rest.Modeler.Swagger
             }
 
             return type;
+        }
+
+        public static void PopulateParameter(IParameter parameter, SwaggerObject swaggerObject)
+        {
+            if (swaggerObject == null)
+            {
+                throw new ArgumentNullException("swaggerObject");
+            }
+            if (parameter == null)
+            {
+                throw new ArgumentNullException("parameter");
+            }
+            parameter.IsRequired = swaggerObject.IsRequired;
+            parameter.DefaultValue = swaggerObject.Default;
+
+            if (swaggerObject.Enum != null 
+                && swaggerObject.Enum.Count == 1 
+                && !IsExpandableEnum(swaggerObject))
+            {
+                parameter.DefaultValue = swaggerObject.Enum[0];
+                parameter.IsConstant = true;
+            }
+
+            parameter.Documentation = swaggerObject.Description;
+            parameter.CollectionFormat = swaggerObject.CollectionFormat;
+            var enumType = parameter.Type as EnumType;
+            if (enumType != null)
+            {
+                if (parameter.Documentation == null)
+                {
+                    parameter.Documentation = string.Empty;
+                }
+                else
+                {
+                    parameter.Documentation = parameter.Documentation.TrimEnd('.') + ". ";
+                }
+                parameter.Documentation += "Possible values include: " +
+                                           string.Join(", ", enumType.Values.Select(v =>
+                                               string.Format(CultureInfo.InvariantCulture,
+                                               "'{0}'", v.Name)));
+            }
+            swaggerObject.Extensions.ForEach(e => parameter.Extensions[e.Key] = e.Value);
+
+            SetConstraints(parameter.Constraints, swaggerObject);
+        }
+
+        private static bool IsExpandableEnum(SwaggerObject swaggerObject)
+        {
+            if (swaggerObject.Extensions.ContainsKey(CodeGenerator.EnumObject))
+            {
+                var enumObject = swaggerObject.Extensions[CodeGenerator.EnumObject] as Newtonsoft.Json.Linq.JContainer;
+                if (enumObject != null)
+                {
+                    if (enumObject["modelAsString"] != null)
+                    {
+                        return bool.Parse(enumObject["modelAsString"].ToString());
+                    }
+                }
+            }
+            return false;
         }
 
         public static void SetConstraints(Dictionary<Constraint, string> constraints, SwaggerObject swaggerObject)

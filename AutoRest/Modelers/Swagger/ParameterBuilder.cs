@@ -51,39 +51,16 @@ namespace Microsoft.Rest.Modeler.Swagger
                 Name = unwrappedParameter.Name,
                 SerializedName = unwrappedParameter.Name,
                 Type = parameterType,
-                IsRequired = unwrappedParameter.IsRequired,
-                DefaultValue = unwrappedParameter.Default,
                 Location = (Generator.ClientModel.ParameterLocation)Enum.Parse(typeof(Generator.ClientModel.ParameterLocation), unwrappedParameter.In.ToString())
             };
             parameter.IsRequired = parameter.IsRequired || parameter.Location == Generator.ClientModel.ParameterLocation.Path;
-            SetConstraints(parameter.Constraints, unwrappedParameter);
-
-            parameter.CollectionFormat = unwrappedParameter.CollectionFormat;
-            parameter.Documentation = unwrappedParameter.Description;
+            PopulateParameter(parameter, unwrappedParameter);
 
             if (_swaggerParameter.Reference != null)
             {
                 var clientProperty = Modeler.ServiceClient.Properties.First(p => p.Name == unwrappedParameter.Name);
                 parameter.ClientProperty = clientProperty;
             }
-
-            var enumType = parameterType as EnumType;
-            if (enumType != null)
-            {
-                if (parameter.Documentation == null)
-                {
-                    parameter.Documentation = string.Empty;
-                }
-                else
-                {
-                    parameter.Documentation = parameter.Documentation.TrimEnd('.') + ". ";
-                }
-                parameter.Documentation += "Possible values for this parameter include: " +
-                                           string.Join(", ", enumType.Values.Select(v =>
-                                               string.Format(CultureInfo.InvariantCulture,
-                                               "'{0}'", v.Name)));
-            }
-            unwrappedParameter.Extensions.ForEach(e => parameter.Extensions[e.Key] = e.Value);
 
             return parameter;
         }

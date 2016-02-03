@@ -45,8 +45,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         public string Name { get; set; }
 
         /// <summary>
-        /// Possible values for this property include: 'cyan', 'Magenta',
-        /// 'YELLOW', 'blacK'.
+        /// Possible values include: 'cyan', 'Magenta', 'YELLOW', 'blacK'
         /// </summary>
         [JsonProperty(PropertyName = "color")]
         public string Color { get; set; }

@@ -31,8 +31,6 @@ function Paths(client) {
 /**
  * Get true Boolean value on path
  *
- * @param {boolean} boolPath true boolean value
- * 
  * @param {object} [options] Optional Parameters.
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
@@ -50,7 +48,7 @@ function Paths(client) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paths.prototype.getBooleanTrue = function (boolPath, options, callback) {
+Paths.prototype.getBooleanTrue = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -59,6 +57,7 @@ Paths.prototype.getBooleanTrue = function (boolPath, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var boolPath = true;
   // Validate
   try {
     if (boolPath === null || boolPath === undefined || typeof boolPath !== 'boolean') {
@@ -134,8 +133,6 @@ Paths.prototype.getBooleanTrue = function (boolPath, options, callback) {
 /**
  * Get false Boolean value on path
  *
- * @param {boolean} boolPath false boolean value
- * 
  * @param {object} [options] Optional Parameters.
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
@@ -153,7 +150,7 @@ Paths.prototype.getBooleanTrue = function (boolPath, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paths.prototype.getBooleanFalse = function (boolPath, options, callback) {
+Paths.prototype.getBooleanFalse = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -162,6 +159,7 @@ Paths.prototype.getBooleanFalse = function (boolPath, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var boolPath = false;
   // Validate
   try {
     if (boolPath === null || boolPath === undefined || typeof boolPath !== 'boolean') {
@@ -237,8 +235,6 @@ Paths.prototype.getBooleanFalse = function (boolPath, options, callback) {
 /**
  * Get '1000000' integer value
  *
- * @param {number} intPath '1000000' integer value
- * 
  * @param {object} [options] Optional Parameters.
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
@@ -256,7 +252,7 @@ Paths.prototype.getBooleanFalse = function (boolPath, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paths.prototype.getIntOneMillion = function (intPath, options, callback) {
+Paths.prototype.getIntOneMillion = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -265,6 +261,7 @@ Paths.prototype.getIntOneMillion = function (intPath, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var intPath = 1000000;
   // Validate
   try {
     if (intPath === null || intPath === undefined || typeof intPath !== 'number') {
@@ -340,8 +337,6 @@ Paths.prototype.getIntOneMillion = function (intPath, options, callback) {
 /**
  * Get '-1000000' integer value
  *
- * @param {number} intPath '-1000000' integer value
- * 
  * @param {object} [options] Optional Parameters.
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
@@ -359,7 +354,7 @@ Paths.prototype.getIntOneMillion = function (intPath, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paths.prototype.getIntNegativeOneMillion = function (intPath, options, callback) {
+Paths.prototype.getIntNegativeOneMillion = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -368,6 +363,7 @@ Paths.prototype.getIntNegativeOneMillion = function (intPath, options, callback)
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var intPath = -1000000;
   // Validate
   try {
     if (intPath === null || intPath === undefined || typeof intPath !== 'number') {
@@ -443,8 +439,6 @@ Paths.prototype.getIntNegativeOneMillion = function (intPath, options, callback)
 /**
  * Get '10000000000' 64 bit integer value
  *
- * @param {number} longPath '10000000000' 64 bit integer value
- * 
  * @param {object} [options] Optional Parameters.
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
@@ -462,7 +456,7 @@ Paths.prototype.getIntNegativeOneMillion = function (intPath, options, callback)
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paths.prototype.getTenBillion = function (longPath, options, callback) {
+Paths.prototype.getTenBillion = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -471,6 +465,7 @@ Paths.prototype.getTenBillion = function (longPath, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var longPath = 10000000000;
   // Validate
   try {
     if (longPath === null || longPath === undefined || typeof longPath !== 'number') {
@@ -546,8 +541,6 @@ Paths.prototype.getTenBillion = function (longPath, options, callback) {
 /**
  * Get '-10000000000' 64 bit integer value
  *
- * @param {number} longPath '-10000000000' 64 bit integer value
- * 
  * @param {object} [options] Optional Parameters.
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
@@ -565,7 +558,7 @@ Paths.prototype.getTenBillion = function (longPath, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paths.prototype.getNegativeTenBillion = function (longPath, options, callback) {
+Paths.prototype.getNegativeTenBillion = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -574,6 +567,7 @@ Paths.prototype.getNegativeTenBillion = function (longPath, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var longPath = -10000000000;
   // Validate
   try {
     if (longPath === null || longPath === undefined || typeof longPath !== 'number') {
@@ -649,8 +643,6 @@ Paths.prototype.getNegativeTenBillion = function (longPath, options, callback) {
 /**
  * Get '1.034E+20' numeric value
  *
- * @param {number} floatPath '1.034E+20'numeric value
- * 
  * @param {object} [options] Optional Parameters.
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
@@ -668,7 +660,7 @@ Paths.prototype.getNegativeTenBillion = function (longPath, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paths.prototype.floatScientificPositive = function (floatPath, options, callback) {
+Paths.prototype.floatScientificPositive = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -677,6 +669,7 @@ Paths.prototype.floatScientificPositive = function (floatPath, options, callback
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var floatPath = 1.034E+20;
   // Validate
   try {
     if (floatPath === null || floatPath === undefined || typeof floatPath !== 'number') {
@@ -752,8 +745,6 @@ Paths.prototype.floatScientificPositive = function (floatPath, options, callback
 /**
  * Get '-1.034E-20' numeric value
  *
- * @param {number} floatPath '-1.034E-20'numeric value
- * 
  * @param {object} [options] Optional Parameters.
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
@@ -771,7 +762,7 @@ Paths.prototype.floatScientificPositive = function (floatPath, options, callback
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paths.prototype.floatScientificNegative = function (floatPath, options, callback) {
+Paths.prototype.floatScientificNegative = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -780,6 +771,7 @@ Paths.prototype.floatScientificNegative = function (floatPath, options, callback
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var floatPath = -1.034E-20;
   // Validate
   try {
     if (floatPath === null || floatPath === undefined || typeof floatPath !== 'number') {
@@ -855,8 +847,6 @@ Paths.prototype.floatScientificNegative = function (floatPath, options, callback
 /**
  * Get '9999999.999' numeric value
  *
- * @param {number} doublePath '9999999.999'numeric value
- * 
  * @param {object} [options] Optional Parameters.
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
@@ -874,7 +864,7 @@ Paths.prototype.floatScientificNegative = function (floatPath, options, callback
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paths.prototype.doubleDecimalPositive = function (doublePath, options, callback) {
+Paths.prototype.doubleDecimalPositive = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -883,6 +873,7 @@ Paths.prototype.doubleDecimalPositive = function (doublePath, options, callback)
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var doublePath = 9999999.999;
   // Validate
   try {
     if (doublePath === null || doublePath === undefined || typeof doublePath !== 'number') {
@@ -958,8 +949,6 @@ Paths.prototype.doubleDecimalPositive = function (doublePath, options, callback)
 /**
  * Get '-9999999.999' numeric value
  *
- * @param {number} doublePath '-9999999.999'numeric value
- * 
  * @param {object} [options] Optional Parameters.
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
@@ -977,7 +966,7 @@ Paths.prototype.doubleDecimalPositive = function (doublePath, options, callback)
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paths.prototype.doubleDecimalNegative = function (doublePath, options, callback) {
+Paths.prototype.doubleDecimalNegative = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -986,6 +975,7 @@ Paths.prototype.doubleDecimalNegative = function (doublePath, options, callback)
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var doublePath = -9999999.999;
   // Validate
   try {
     if (doublePath === null || doublePath === undefined || typeof doublePath !== 'number') {
@@ -1061,9 +1051,6 @@ Paths.prototype.doubleDecimalNegative = function (doublePath, options, callback)
 /**
  * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
  *
- * @param {string} stringPath '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value. Possible
- * values for this parameter include: '啊齄丂狛狜隣郎隣兀﨩'
- * 
  * @param {object} [options] Optional Parameters.
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
@@ -1081,7 +1068,7 @@ Paths.prototype.doubleDecimalNegative = function (doublePath, options, callback)
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paths.prototype.stringUnicode = function (stringPath, options, callback) {
+Paths.prototype.stringUnicode = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1090,6 +1077,7 @@ Paths.prototype.stringUnicode = function (stringPath, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var stringPath = '啊齄丂狛狜隣郎隣兀﨩';
   // Validate
   try {
     if (stringPath === null || stringPath === undefined || typeof stringPath.valueOf() !== 'string') {
@@ -1165,10 +1153,6 @@ Paths.prototype.stringUnicode = function (stringPath, options, callback) {
 /**
  * Get 'begin!*'();:@ &=+$,/?#[]end
  *
- * @param {string} stringPath 'begin!*'();:@ &=+$,/?#[]end' url encoded string
- * value. Possible values for this parameter include: 'begin!*'();:@
- * &=+$,/?#[]end'
- * 
  * @param {object} [options] Optional Parameters.
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
@@ -1186,7 +1170,7 @@ Paths.prototype.stringUnicode = function (stringPath, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paths.prototype.stringUrlEncoded = function (stringPath, options, callback) {
+Paths.prototype.stringUrlEncoded = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1195,6 +1179,7 @@ Paths.prototype.stringUrlEncoded = function (stringPath, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var stringPath = 'begin!*\'();:@ &=+$,/?#[]end';
   // Validate
   try {
     if (stringPath === null || stringPath === undefined || typeof stringPath.valueOf() !== 'string') {
@@ -1270,9 +1255,6 @@ Paths.prototype.stringUrlEncoded = function (stringPath, options, callback) {
 /**
  * Get ''
  *
- * @param {string} stringPath '' string value. Possible values for this
- * parameter include: ''
- * 
  * @param {object} [options] Optional Parameters.
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
@@ -1290,7 +1272,7 @@ Paths.prototype.stringUrlEncoded = function (stringPath, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paths.prototype.stringEmpty = function (stringPath, options, callback) {
+Paths.prototype.stringEmpty = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1299,6 +1281,7 @@ Paths.prototype.stringEmpty = function (stringPath, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var stringPath = '';
   // Validate
   try {
     if (stringPath === null || stringPath === undefined || typeof stringPath.valueOf() !== 'string') {
@@ -1477,8 +1460,8 @@ Paths.prototype.stringNull = function (stringPath, options, callback) {
 /**
  * Get using uri with 'green color' in path parameter
  *
- * @param {string} enumPath send the value green. Possible values for this
- * parameter include: 'red color', 'green color', 'blue color'
+ * @param {string} enumPath send the value green. Possible values include:
+ * 'red color', 'green color', 'blue color'
  * 
  * @param {object} [options] Optional Parameters.
  * 
@@ -1586,8 +1569,8 @@ Paths.prototype.enumValid = function (enumPath, options, callback) {
 /**
  * Get null (should throw on the client before the request is sent on wire)
  *
- * @param {string} enumPath send null should throw. Possible values for this
- * parameter include: 'red color', 'green color', 'blue color'
+ * @param {string} enumPath send null should throw. Possible values include:
+ * 'red color', 'green color', 'blue color'
  * 
  * @param {object} [options] Optional Parameters.
  * 
@@ -1799,8 +1782,6 @@ Paths.prototype.byteMultiByte = function (bytePath, options, callback) {
 /**
  * Get '' as byte array
  *
- * @param {buffer} bytePath '' as byte array
- * 
  * @param {object} [options] Optional Parameters.
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
@@ -1818,7 +1799,7 @@ Paths.prototype.byteMultiByte = function (bytePath, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paths.prototype.byteEmpty = function (bytePath, options, callback) {
+Paths.prototype.byteEmpty = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -1827,6 +1808,7 @@ Paths.prototype.byteEmpty = function (bytePath, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var bytePath = new Buffer('');
   // Validate
   try {
     if (!Buffer.isBuffer(bytePath)) {
@@ -2005,8 +1987,6 @@ Paths.prototype.byteNull = function (bytePath, options, callback) {
 /**
  * Get '2012-01-01' as date
  *
- * @param {date} datePath '2012-01-01' as date
- * 
  * @param {object} [options] Optional Parameters.
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
@@ -2024,7 +2004,7 @@ Paths.prototype.byteNull = function (bytePath, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paths.prototype.dateValid = function (datePath, options, callback) {
+Paths.prototype.dateValid = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2033,6 +2013,7 @@ Paths.prototype.dateValid = function (datePath, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var datePath = new Date('2012-01-01');
   // Validate
   try {
     if(!datePath || !(datePath instanceof Date || 
@@ -2214,8 +2195,6 @@ Paths.prototype.dateNull = function (datePath, options, callback) {
 /**
  * Get '2012-01-01T01:01:01Z' as date-time
  *
- * @param {date} dateTimePath '2012-01-01T01:01:01Z' as date-time
- * 
  * @param {object} [options] Optional Parameters.
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
@@ -2233,7 +2212,7 @@ Paths.prototype.dateNull = function (datePath, options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-Paths.prototype.dateTimeValid = function (dateTimePath, options, callback) {
+Paths.prototype.dateTimeValid = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -2242,6 +2221,7 @@ Paths.prototype.dateTimeValid = function (dateTimePath, options, callback) {
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var dateTimePath = new Date('2012-01-01T01:01:01Z');
   // Validate
   try {
     if(!dateTimePath || !(dateTimePath instanceof Date || 

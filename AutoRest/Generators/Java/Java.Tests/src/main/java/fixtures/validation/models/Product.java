@@ -34,6 +34,16 @@ public class Product {
     private String image;
 
     /**
+     * Constant int.
+     */
+    private Integer constInt;
+
+    /**
+     * Constant string.
+     */
+    private String constString;
+
+    /**
      * Get the displayNames value.
      *
      * @return the displayNames value
@@ -85,6 +95,42 @@ public class Product {
      */
     public void setImage(String image) {
         this.image = image;
+    }
+
+    /**
+     * Get the constInt value.
+     *
+     * @return the constInt value
+     */
+    public Integer getConstInt() {
+        return this.constInt;
+    }
+
+    /**
+     * Set the constInt value.
+     *
+     * @param constInt the constInt value to set
+     */
+    public void setConstInt(Integer constInt) {
+        this.constInt = constInt;
+    }
+
+    /**
+     * Get the constString value.
+     *
+     * @return the constString value
+     */
+    public String getConstString() {
+        return this.constString;
+    }
+
+    /**
+     * Set the constString value.
+     *
+     * @param constString the constString value to set
+     */
+    public void setConstString(String constString) {
+        this.constString = constString;
     }
 
 }

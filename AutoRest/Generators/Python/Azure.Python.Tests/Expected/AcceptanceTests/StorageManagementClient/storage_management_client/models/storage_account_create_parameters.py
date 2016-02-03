@@ -17,8 +17,8 @@ class StorageAccountCreateParameters(Resource):
     The parameters to provide for the account.
 
     :param str account_type: Gets or sets the account type. Possible values
-     for this property include: 'Standard_LRS', 'Standard_ZRS',
-     'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'.
+     include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
+     'Standard_RAGRS', 'Premium_LRS'
     """
 
     _required = []

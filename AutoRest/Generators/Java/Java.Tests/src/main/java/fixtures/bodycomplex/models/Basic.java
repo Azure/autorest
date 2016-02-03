@@ -26,8 +26,7 @@ public class Basic {
     private String name;
 
     /**
-     * Possible values for this property include: 'cyan', 'Magenta', 'YELLOW',
-     * 'blacK'.
+     * Possible values include: 'cyan', 'Magenta', 'YELLOW', 'blacK'.
      */
     private String color;
 

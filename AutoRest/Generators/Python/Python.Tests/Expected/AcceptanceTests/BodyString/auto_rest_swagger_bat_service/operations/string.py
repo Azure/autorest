@@ -76,7 +76,7 @@ class String(object):
         """
         Set string value null
 
-        :param string_body: Possible values for this parameter include: ''
+        :param string_body:
         :type string_body: str or None
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
@@ -158,7 +158,7 @@ class String(object):
         """
         Set string value empty ''
 
-        :param string_body: Possible values for this parameter include: ''
+        :param string_body:
         :type string_body: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
@@ -241,9 +241,7 @@ class String(object):
         '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
         '
 
-        :param string_body: Possible values for this parameter include:
-         '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€
-         '
+        :param string_body:
         :type string_body: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
@@ -326,9 +324,7 @@ class String(object):
         '<tab><space><space>Now is the time for all good men to come to the
         aid of their country<tab><space><space>'
 
-        :param string_body: Possible values for this parameter include: '
-         Now is the time for all good men to come to the aid of their
-         country    '
+        :param string_body:
         :type string_body: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the

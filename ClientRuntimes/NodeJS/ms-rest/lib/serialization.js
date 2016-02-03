@@ -58,11 +58,12 @@ exports.serialize = function (mapper, object, objectName) {
   if (!objectName) objectName = objectNameFromSerializedName(mapper.serializedName);
   if (mapperType.match(/^Sequence$/ig) !== null) payload = [];
   //Throw if required and object is null or undefined
-  if (mapper.required && (object === null || object === undefined)) {
+  if (mapper.required && (object === null || object === undefined) && !mapper.isConstant) {
     throw new Error(util.format('\'%s\' cannot be null or undefined.'), objectName);
   }
   //Set Defaults
   if (mapper.defaultValue && (object === null || object === undefined)) object = mapper.defaultValue;
+  if (mapper.isConstant) object = mapper.defaultValue;
   //Validate Constraints if any
   validateConstraints.call(this, mapper, object, objectName);
   if (mapperType.match(/^(Number|String|Boolean|Object|Stream)$/ig) !== null) {
@@ -239,7 +240,7 @@ function serializeCompositeType(mapper, object, objectName) {
           }
         }
         //serialize the property if it is present in the provided object instance
-        if (object[key] !== null && object[key] !== undefined) {
+        if (modelProps[key].isConstant || (object[key] !== null && object[key] !== undefined)) {
           var propertyObjectName = objectName + '.' + objectNameFromSerializedName(modelProps[key].serializedName);
           var propertyMapper = modelProps[key];
           var serializedValue = exports.serialize.call(this, propertyMapper, object[key], propertyObjectName);
@@ -363,6 +364,9 @@ exports.deserialize = function (mapper, responseBody, objectName) {
   } else if (mapperType.match(/^Composite$/ig) !== null) {
     payload = deserializeCompositeType.call(this, mapper, responseBody, objectName);
   }
+
+  if (mapper.isConstant) payload = mapper.defaultValue;
+  
   return payload;
 };
 

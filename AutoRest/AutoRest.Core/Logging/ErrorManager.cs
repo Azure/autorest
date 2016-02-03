@@ -31,16 +31,34 @@ namespace Microsoft.Rest.Generator.Logging
 
             var errors =
                 Logger.Entries.Where(e => e.Severity == LogEntrySeverity.Error).Select(e => e.Exception).ToList();
-            Logger.Entries.Add(new LogEntry(LogEntrySeverity.Fatal, string.Format(CultureInfo.CurrentCulture, message, args))
+            Logger.Entries.Add(new LogEntry(LogEntrySeverity.Fatal, FormatMessageString(message, args))
             {
                 Exception = exception
             });
             if (exception != null)
             {
                 errors.Insert(0, exception);
-                return new CodeGenerationException(string.Format(CultureInfo.CurrentCulture, message, args), errors.ToArray());
+                return new CodeGenerationException(FormatMessageString(message, args), errors.ToArray());
             }
-            return new CodeGenerationException(string.Format(CultureInfo.CurrentCulture, message, args), errors.ToArray());
+            return new CodeGenerationException(FormatMessageString(message, args), errors.ToArray());
+        }
+
+        /// <summary>
+        /// Applies string formatting on message if args are not empty.
+        /// </summary>
+        /// <param name="message">Message</param>
+        /// <param name="args">Arguments</param>
+        /// <returns>Formatted string</returns>
+        private static string FormatMessageString(string message, object[] args)
+        {
+            if (args != null && args.Length > 0)
+            {
+                return string.Format(CultureInfo.CurrentCulture, message, args);
+            }
+            else
+            {
+                return message;
+            }
         }
 
         /// <summary>

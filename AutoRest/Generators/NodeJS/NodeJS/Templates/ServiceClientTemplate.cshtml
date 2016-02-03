@@ -17,6 +17,11 @@
 var util = require('util');
 var msRest = require('ms-rest');
 var ServiceClient = msRest.ServiceClient;
+@if (Model.ContainsDurationProperty())
+{
+@:var moment = require('moment');
+@EmptyLine
+}
 @if (Model.MethodTemplateModels.Any())
 {
 @:var WebResource = msRest.WebResource;

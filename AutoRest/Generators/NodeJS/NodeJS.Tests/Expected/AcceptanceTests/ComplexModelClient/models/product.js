@@ -24,7 +24,7 @@
  * @member {string} [displayName] Display name of product.
  * 
  * @member {string} [capacity] Capacity of product. For example, 4 people.
- * Default value: 100 .
+ * Default value: '100' .
  * 
  * @member {string} [image] Image URL representing the product.
  * 

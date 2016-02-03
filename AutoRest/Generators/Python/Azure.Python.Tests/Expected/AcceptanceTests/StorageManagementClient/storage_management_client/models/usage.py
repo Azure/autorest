@@ -16,9 +16,9 @@ class Usage(Model):
     """
     Describes Storage Resource Usage.
 
-    :param str unit: Gets the unit of measurement. Possible values for this
-     property include: 'Count', 'Bytes', 'Seconds', 'Percent',
-     'CountsPerSecond', 'BytesPerSecond'.
+    :param str unit: Gets the unit of measurement. Possible values include:
+     'Count', 'Bytes', 'Seconds', 'Percent', 'CountsPerSecond',
+     'BytesPerSecond'
     :param int current_value: Gets the current count of the allocated
      resources in the subscription.
     :param int limit: Gets the maximum count of the resources that can be

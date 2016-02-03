@@ -16,9 +16,9 @@ class SubProduct(SubResource):
     """SubProduct
 
     :param str provisioning_state
-    :param str provisioning_state_values: Possible values for this property
-     include: 'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating',
-     'Created', 'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'.
+    :param str provisioning_state_values: Possible values include:
+     'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created',
+     'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
     """
 
     _required = []

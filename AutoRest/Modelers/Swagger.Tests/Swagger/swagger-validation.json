@@ -44,6 +44,22 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "myintconst",
+            "in": "query",
+            "description": "Constant query param.",
+            "required": true,
+            "type": "integer",
+            "enum": [ 0 ]
+          },
+          {
+            "name": "mystrconst",
+            "in": "query",
+            "description": "Constant query param.",
+            "required": true,
+            "type": "string",
+            "enum": [ "constant" ]
           }
         ],
         "tags": [
@@ -100,6 +116,16 @@
           "type": "string",
           "description": "Image URL representing the product.",
           "pattern": "http://\\w+"
+        },
+        "myintconst": {
+          "type": "integer",
+          "description": "Constant int.",
+          "enum": [ 0 ]
+        },
+        "mystrconst": {
+          "type": "string",
+          "description": "Constant string.",
+          "enum": [ "constant" ]
         }
       },
       "example": {
