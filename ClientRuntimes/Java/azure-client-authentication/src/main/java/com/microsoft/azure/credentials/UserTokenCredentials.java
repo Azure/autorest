@@ -12,6 +12,7 @@ import com.microsoft.aad.adal4j.AuthenticationResult;
 import com.microsoft.rest.credentials.TokenCredentials;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.concurrent.Executors;
 
 /**
@@ -30,6 +31,8 @@ public class UserTokenCredentials extends TokenCredentials {
     private String clientRedirectUri;
     /** The Azure environment to authenticate with. */
     private AzureEnvironment environment;
+    /** The current authentication result. */
+    private AuthenticationResult authenticationResult;
 
     /**
      * Initializes a new instance of the UserTokenCredentials.
@@ -112,23 +115,25 @@ public class UserTokenCredentials extends TokenCredentials {
 
     @Override
     public String getToken() throws IOException {
-        if (token == null) {
-            token = acquireAccessToken();
+        if (authenticationResult != null
+            && authenticationResult.getExpiresOnDate().before(new Date())) {
+                acquireAccessTokenFromRefreshToken();
+        } else {
+            acquireAccessToken();
         }
-        return token;
+        return authenticationResult.getAccessToken();
     }
 
     @Override
     public void refreshToken() throws IOException {
-        token = acquireAccessToken();
+        acquireAccessToken();
     }
 
-    private String acquireAccessToken() throws IOException {
+    private void acquireAccessToken() throws IOException {
         String authorityUrl = this.getEnvironment().getAuthenticationEndpoint() + this.getDomain();
         AuthenticationContext context = new AuthenticationContext(authorityUrl, this.getEnvironment().isValidateAuthority(), Executors.newSingleThreadExecutor());
-        AuthenticationResult result;
         try {
-            result = context.acquireToken(
+            authenticationResult = context.acquireToken(
                     this.getEnvironment().getTokenAudience(),
                     this.getClientId(),
                     this.getUsername(),
@@ -137,10 +142,18 @@ public class UserTokenCredentials extends TokenCredentials {
         } catch (Exception e) {
             throw new IOException(e.getMessage(), e);
         }
-        if (result != null && result.getAccessToken() != null) {
-            return result.getAccessToken();
-        } else {
-            throw new IOException("Failed to acquire access token");
+    }
+
+    private void acquireAccessTokenFromRefreshToken() throws IOException {
+        String authorityUrl = this.getEnvironment().getAuthenticationEndpoint() + this.getDomain();
+        AuthenticationContext context = new AuthenticationContext(authorityUrl, this.getEnvironment().isValidateAuthority(), Executors.newSingleThreadExecutor());
+        try {
+            authenticationResult = context.acquireTokenByRefreshToken(
+                    authenticationResult.getRefreshToken(),
+                    this.getClientId(),
+                    null, null).get();
+        } catch (Exception e) {
+            throw new IOException(e.getMessage(), e);
         }
     }
 }

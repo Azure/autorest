@@ -1745,67 +1745,67 @@ describe('nodejs', function () {
         });
       });
       it('should work when query has bool', function (done) {
-        testClient.queries.getBooleanTrue({ boolQuery : true }, function (error, result) {
+        testClient.queries.getBooleanTrue(function (error, result) {
           should.not.exist(error);
-          testClient.queries.getBooleanFalse({ boolQuery : false }, function (error, result) {
+          testClient.queries.getBooleanFalse(function (error, result) {
             should.not.exist(error);
             done();
           });
         });
       });
       it('should work when query has double values', function (done) {
-        testClient.queries.doubleDecimalNegative({ doubleQuery: -9999999.999 }, function (error, result) {
+        testClient.queries.doubleDecimalNegative(function (error, result) {
           should.not.exist(error);
-          testClient.queries.doubleDecimalPositive({ doubleQuery: 9999999.999 }, function (error, result) {
+          testClient.queries.doubleDecimalPositive(function (error, result) {
             should.not.exist(error);
             done();
           });
         });
       });
       it('should work when query has float values', function (done) {
-        testClient.queries.floatScientificNegative({ floatQuery: -1.034e-20 }, function (error, result) {
+        testClient.queries.floatScientificNegative(function (error, result) {
           should.not.exist(error);
-          testClient.queries.floatScientificPositive({ floatQuery: 1.034e20 }, function (error, result) {
+          testClient.queries.floatScientificPositive(function (error, result) {
             should.not.exist(error);
             done();
           });
         });
       });
       it('should work when query has int values', function (done) {
-        testClient.queries.getIntNegativeOneMillion({ intQuery: -1000000 }, function (error, result) {
+        testClient.queries.getIntNegativeOneMillion(function (error, result) {
           should.not.exist(error);
-          testClient.queries.getIntOneMillion({ intQuery: 1000000 }, function (error, result) {
+          testClient.queries.getIntOneMillion(function (error, result) {
             should.not.exist(error);
             done();
           });
         });
       });
       it('should work when query has billion values', function (done) {
-        testClient.queries.getNegativeTenBillion({ longQuery: -10000000000 }, function (error, result) {
+        testClient.queries.getNegativeTenBillion(function (error, result) {
           should.not.exist(error);
-          testClient.queries.getTenBillion({ longQuery: 10000000000 }, function (error, result) {
+          testClient.queries.getTenBillion(function (error, result) {
             should.not.exist(error);
             done();
           });
         });
       });
       it('should work when query has string values', function (done) {
-        testClient.queries.stringEmpty({ stringQuery: '' }, function (error, result) {
+        testClient.queries.stringEmpty(function (error, result) {
           should.not.exist(error);
-          testClient.queries.stringUrlEncoded({ stringQuery: 'begin!*\'();:@ &=+$,/?#[]end' }, function (error, result) {
+          testClient.queries.stringUrlEncoded(function (error, result) {
             should.not.exist(error);
             done();
           });
         });
       });
       it('should work when query has datetime', function (done) {
-        testClient.queries.dateTimeValid({ dateTimeQuery: new Date('2012-01-01T01:01:01Z') }, function (error, result) {
+        testClient.queries.dateTimeValid(function (error, result) {
           should.not.exist(error);
           done();
         });
       });
       it('should work when query has byte values', function (done) {
-        testClient.queries.byteEmpty({ byteQuery: new Buffer('') }, function (error, result) {
+        testClient.queries.byteEmpty(function (error, result) {
           should.not.exist(error);
           testClient.queries.byteMultiByte({ byteQuery: new Buffer('啊齄丂狛狜隣郎隣兀﨩') }, function (error, result) {
             should.not.exist(error);

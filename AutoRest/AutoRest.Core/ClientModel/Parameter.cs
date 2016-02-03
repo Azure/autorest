@@ -9,7 +9,7 @@ namespace Microsoft.Rest.Generator.ClientModel
     /// <summary>
     /// Defines an HTTP method parameter.
     /// </summary>
-    public class Parameter
+    public class Parameter : IParameter
     {
         /// <summary>
         /// Creates a new instance of Parameter class.
@@ -45,6 +45,11 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// Indicates whether the parameter is required.
         /// </summary>
         public bool IsRequired { get; set; }
+
+        /// <summary>
+        /// Indicates whether the parameter value is constant. If true, default value can not be null.
+        /// </summary>
+        public bool IsConstant { get; set; }
 
         /// <summary>
         /// Reference to the global Property that provides value for the parameter.

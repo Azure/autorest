@@ -631,10 +631,20 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             return builder;
         }
 
-        public static string ConstructMapper(this IType type, string serializedName, bool isRequired = false, Dictionary<Constraint, string> constraints = null, 
-            string defaultValue = null, bool isPageable = false, bool expandComposite = false)
+        public static string ConstructMapper(this IType type, string serializedName, IParameter parameter, bool isPageable, bool expandComposite)
         {
             var builder = new IndentedStringBuilder("  ");
+			string defaultValue = null;
+			bool isRequired = false;
+			bool isConstant = false;
+            Dictionary<Constraint, string> constraints = null;
+            if (parameter != null)
+            {
+                defaultValue = parameter.DefaultValue;
+                isRequired = parameter.IsRequired;
+                isConstant = parameter.IsConstant;
+                constraints = parameter.Constraints;
+            }
             CompositeType composite = type as CompositeType;
             SequenceType sequence = type as SequenceType;
             DictionaryType dictionary = type as DictionaryType;
@@ -649,13 +659,17 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             {
                 builder.AppendLine("required: false,");
             }
+            if (isConstant)
+            {
+                builder.AppendLine("isConstant: true,");
+            }
             if (serializedName != null)
             {
                 builder.AppendLine("serializedName: '{0}',", serializedName);
             }
             if (defaultValue != null)
             {
-                builder.AppendLine("defaultValue: '{0}',", defaultValue);
+                builder.AppendLine("defaultValue: {0},", defaultValue);
             }
             if (constraints != null && constraints.Count > 0)
             {
@@ -743,7 +757,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                          .AppendLine("name: 'Sequence',")
                          .AppendLine("element: {")
                            .Indent()
-                           .AppendLine("{0}", sequence.ElementType.ConstructMapper(sequence.ElementType.Name + "ElementType"))
+                           .AppendLine("{0}", sequence.ElementType.ConstructMapper(sequence.ElementType.Name + "ElementType", null, false, false))
                          .Outdent().AppendLine("}").Outdent().AppendLine("}");
             }
             else if (dictionary != null)
@@ -753,7 +767,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                          .AppendLine("name: 'Dictionary',")
                          .AppendLine("value: {")
                            .Indent()
-                           .AppendLine("{0}", dictionary.ValueType.ConstructMapper(dictionary.ValueType.Name + "ElementType"))
+                           .AppendLine("{0}", dictionary.ValueType.ConstructMapper(dictionary.ValueType.Name + "ElementType", null, false, false))
                          .Outdent().AppendLine("}").Outdent().AppendLine("}");
             }
             else if (composite != null)
@@ -800,25 +814,25 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                         {
                             if (!isPageable)
                             {
-                                builder.AppendLine("{0}: {{{1}}},", prop.Name, prop.Type.ConstructMapper(serializedPropertyName, prop.IsRequired, prop.Constraints, prop.DefaultValue));
+                                builder.AppendLine("{0}: {{{1}}},", prop.Name, prop.Type.ConstructMapper(serializedPropertyName, prop, false, false));
                             }
                             else
                             {
                                 // if pageable and nextlink is also present then we need a comma as nextLink would be the next one to be added
                                 if (nextLinkNameValue != null)
                                 {
-                                    builder.AppendLine("{0}: {{{1}}},", prop.Name, prop.Type.ConstructMapper(serializedPropertyName, prop.IsRequired, prop.Constraints, prop.DefaultValue));
+                                    builder.AppendLine("{0}: {{{1}}},", prop.Name, prop.Type.ConstructMapper(serializedPropertyName, prop, false, false));
                                 }
                                 else
                                 {
-                                    builder.AppendLine("{0}: {{{1}}}", prop.Name, prop.Type.ConstructMapper(serializedPropertyName, prop.IsRequired, prop.Constraints, prop.DefaultValue));
+                                    builder.AppendLine("{0}: {{{1}}}", prop.Name, prop.Type.ConstructMapper(serializedPropertyName, prop, false, false));
                                 }
                                     
                             }   
                         }
                         else
                         {
-                            builder.AppendLine("{0}: {{{1}}}", prop.Name, prop.Type.ConstructMapper(serializedPropertyName, prop.IsRequired, prop.Constraints, prop.DefaultValue));
+                            builder.AppendLine("{0}: {{{1}}}", prop.Name, prop.Type.ConstructMapper(serializedPropertyName, prop, false, false));
                         }
                     }
                     // end of modelProperties and type

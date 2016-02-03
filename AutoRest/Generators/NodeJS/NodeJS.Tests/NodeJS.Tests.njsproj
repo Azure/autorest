@@ -329,6 +329,15 @@
     <Folder Include="obj\Net45-Debug\TempPE" />
     <Folder Include="Swagger" />
   </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="AcceptanceTests\acceptanceTests.ts" />
+    <TypeScriptCompile Include="AcceptanceTests\complexTypesTests.ts" />
+    <TypeScriptCompile Include="AcceptanceTests\coverageTest.ts" />
+    <TypeScriptCompile Include="AcceptanceTests\headerTests.ts" />
+    <TypeScriptCompile Include="AcceptanceTests\requiredOptionalTests.ts" />
+    <TypeScriptCompile Include="AcceptanceTests\startServer.ts" />
+    <TypeScriptCompile Include="AcceptanceTests\validationTests.ts" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <!--Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them.-->
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />

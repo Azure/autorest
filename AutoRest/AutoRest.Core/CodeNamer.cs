@@ -68,6 +68,31 @@ namespace Microsoft.Rest.Generator
         }
 
         /// <summary>
+        /// Wraps value in quotes and escapes quotes inside.
+        /// </summary>
+        /// <param name="value">String to quote</param>
+        /// <param name="quoteChar">Quote character</param>
+        /// <param name="escapeChar">Escape character</param>
+        /// <exception cref="System.ArgumentNullException">Throw when either quoteChar or escapeChar are null.</exception>
+        [SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed")]
+        public static string QuoteValue(string value, string quoteChar = "\"", string escapeChar = "\\")
+        {
+            if (quoteChar == null)
+            {
+                throw new ArgumentNullException("quoteChar");
+            }
+            if (escapeChar == null)
+            {
+                throw new ArgumentNullException("escapeChar");
+            }
+            if (value == null)
+            {
+                value = string.Empty;
+            }
+            return quoteChar + value.Replace(quoteChar, escapeChar + quoteChar) + quoteChar;
+        }
+
+        /// <summary>
         /// Recursively normalizes names in the client model
         /// </summary>
         /// <param name="client"></param>
@@ -84,12 +109,14 @@ namespace Microsoft.Rest.Generator
             {
                 property.Name = GetPropertyName(property.Name);
                 property.Type = NormalizeTypeReference(property.Type);
+                QuoteParameter(property);
             }
 
             var normalizedModels = new List<CompositeType>();
             foreach (var modelType in client.ModelTypes)
             {
                 normalizedModels.Add(NormalizeTypeDeclaration(modelType) as CompositeType);
+                modelType.Properties.ForEach(p => QuoteParameter(p));
             }
             client.ModelTypes.Clear();
             normalizedModels.ForEach( (item) => client.ModelTypes.Add(item));
@@ -157,12 +184,15 @@ namespace Microsoft.Rest.Generator
             {
                 parameter.Name = GetParameterName(parameter.Name);
                 parameter.Type = NormalizeTypeReference(parameter.Type);
+                QuoteParameter(parameter);
             }
 
             foreach (var parameterTransformation in method.InputParameterTransformation)
             {
                 parameterTransformation.OutputParameter.Name = GetParameterName(parameterTransformation.OutputParameter.Name);
                 parameterTransformation.OutputParameter.Type = NormalizeTypeReference(parameterTransformation.OutputParameter.Type);
+
+                QuoteParameter(parameterTransformation.OutputParameter);
 
                 foreach (var parameterMapping in parameterTransformation.ParameterMappings)
                 {
@@ -182,6 +212,25 @@ namespace Microsoft.Rest.Generator
                 }
             }
         }
+
+        /// <summary>
+        /// Quotes default value of the parameter.
+        /// </summary>
+        /// <param name="parameter"></param>
+        protected void QuoteParameter(IParameter parameter)
+        {
+            if (parameter != null)
+            {
+                parameter.DefaultValue = QuoteString(parameter.DefaultValue, parameter.Type);
+            }            
+        }
+
+        /// <summary>
+        /// Returns a quoted string for the given language if applicable.
+        /// </summary>
+        /// <param name="value">Value to quote.</param>
+        /// <param name="type">Data type.</param>
+        public abstract string QuoteString(string value, IType type);
 
         /// <summary>
         /// Formats a string for naming members of an enum using Pascal case by default.
@@ -401,11 +450,11 @@ namespace Microsoft.Rest.Generator
         /// Gets valid name for the identifier.
         /// </summary>
         /// <param name="name">String to parse.</param>
-        /// <param name="allowerCharacters">Allowed characters.</param>
+        /// <param name="allowedCharacters">Allowed characters.</param>
         /// <returns>Name with invalid characters removed.</returns>
-        private static string GetValidName(string name, params char[] allowerCharacters)
+        protected static string GetValidName(string name, params char[] allowedCharacters)
         {
-            var correctName = RemoveInvalidCharacters(name, allowerCharacters);
+            var correctName = RemoveInvalidCharacters(name, allowedCharacters);
 
             // here we have only letters and digits or an empty string
             if (string.IsNullOrEmpty(correctName) ||
@@ -423,7 +472,7 @@ namespace Microsoft.Rest.Generator
                         sb.Append(symbol);
                     }
                 }
-                correctName = RemoveInvalidCharacters(sb.ToString(), allowerCharacters);
+                correctName = RemoveInvalidCharacters(sb.ToString(), allowedCharacters);
             }
 
             // if it is still empty string, throw

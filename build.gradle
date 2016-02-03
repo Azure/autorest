@@ -18,47 +18,6 @@ subprojects {
         mavenCentral()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     }
-
-    dependencies {
-        deployerJars "org.apache.maven.wagon:wagon-ftp:2.10"
-    }
-
-    username = rootProject.property("username")
-    password = rootProject.property("password")
-
-    uploadArchives {
-        repositories {
-            mavenDeployer {
-                configuration = configurations.deployerJars
-                snapshotRepository(url: "ftp://waws-prod-bay-005.ftp.azurewebsites.windows.net/site/wwwroot/") {
-                    authentication(userName: username, password: password)
-                }
-                pom.project {
-                    url 'https://github.com/Azure/autorest'
-
-                    scm {
-                        url 'scm:git:https://github.com/Azure/AutoRest'
-                        connection 'scm:git:git://github.com/Azure/AutoRest.git'
-                    }
-
-                    licenses {
-                        license {
-                            name 'The MIT License (MIT)'
-                            url 'http://opensource.org/licenses/MIT'
-                            distribution 'repo'
-                        }
-                    }
-
-                    developers {
-                        developer {
-                            id 'microsoft'
-                            name 'Microsoft'
-                        }
-                    }
-                }
-            }
-        }
-    }
 }
 
 project(':client-runtime') {

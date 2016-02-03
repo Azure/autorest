@@ -34,6 +34,7 @@ var resourceFlatten = require('./routes/resource-flatten');
 var azureUrl = require('./routes/azureUrl');
 var azureSpecial = require('./routes/azureSpecials');
 var parameterGrouping = require('./routes/azureParameterGrouping.js');
+var validation = require('./routes/validation.js');
 var util = require('util');
 
 var app = express();
@@ -409,7 +410,9 @@ var coverage = {
   "HeaderResponseBytesValid": 0,
   "HeaderResponseDurationValid": 0,
   "FormdataStreamUploadFile": 0,
-  "StreamUploadFile": 0
+  "StreamUploadFile": 0,
+  "ConstantsInPath": 0,
+  "ConstantsInBody": 0
 };
 
 // view engine setup
@@ -452,6 +455,7 @@ app.use('/azurespecials', new azureSpecial(azurecoverage).router);
 app.use('/report', new report(coverage, azurecoverage).router);
 app.use('/subscriptions', new azureUrl(azurecoverage).router);
 app.use('/parameterGrouping', new parameterGrouping(azurecoverage).router);
+app.use('/validation', new validation(coverage).router);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

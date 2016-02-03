@@ -92,4 +92,13 @@ public class CloudException extends AutoRestException {
     public void setBody(CloudError body) {
         this.body = body;
     }
+
+    @Override
+    public String toString() {
+        String message = super.toString();
+        if (body.getMessage() != null) {
+            message = message + ": " + body.getMessage();
+        }
+        return message;
+    }
 }

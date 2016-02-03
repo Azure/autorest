@@ -129,3 +129,5 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed", Scope = "member", Target = "Microsoft.Rest.Generator.Java.PackageInfoTemplateModel.#.ctor(Microsoft.Rest.Generator.ClientModel.ServiceClient,System.String,System.Boolean)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Scope = "member", Target = "Microsoft.Rest.Generator.Java.JavaCodeNamer.#GetJavaException(System.String,Microsoft.Rest.Generator.ClientModel.ServiceClient)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1062:Validate arguments of public methods", MessageId = "1", Scope = "member", Target = "Microsoft.Rest.Generator.Java.JavaCodeNamer.#GetJavaException(System.String,Microsoft.Rest.Generator.ClientModel.ServiceClient)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Scope = "member", Target = "Microsoft.Rest.Generator.Java.JavaCodeNamer.#QuoteString(System.String,Microsoft.Rest.Generator.ClientModel.IType)")]
+

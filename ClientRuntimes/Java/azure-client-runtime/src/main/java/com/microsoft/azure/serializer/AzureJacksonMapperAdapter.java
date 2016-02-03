@@ -27,7 +27,8 @@ public final class AzureJacksonMapperAdapter extends JacksonMapperAdapter {
             initializeObjectMapper(azureObjectMapper);
             azureObjectMapper
                     .registerModule(FlatteningDeserializer.getModule())
-                    .registerModule(FlatteningSerializer.getModule());
+                    .registerModule(FlatteningSerializer.getModule())
+                    .registerModule(CloudErrorDeserializer.getModule());
         }
         return azureObjectMapper;
     }

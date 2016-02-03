@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System;
+using Microsoft.Rest.Generator.ClientModel;
 using Xunit;
 
 namespace Microsoft.Rest.Generator.Test
@@ -15,6 +17,11 @@ namespace Microsoft.Rest.Generator.Test
         public override ClientModel.IType NormalizeTypeDeclaration(ClientModel.IType type)
         {
             throw new System.NotImplementedException();
+        }
+
+        public override string QuoteString(string value, IType type)
+        {
+            throw new NotImplementedException();
         }
     }
 
