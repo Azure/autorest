@@ -325,8 +325,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
             {
                 foreach (var unmatchedSetting in CustomSettings.Keys)
                 {
-                    Logger.LogError(new ArgumentException(unmatchedSetting),
-                        Resources.ParameterIsNotValid, unmatchedSetting);
+                    Logger.LogWarning(Resources.ParameterIsNotValid, unmatchedSetting);
                 }
             }
             ErrorManager.ThrowErrors();
