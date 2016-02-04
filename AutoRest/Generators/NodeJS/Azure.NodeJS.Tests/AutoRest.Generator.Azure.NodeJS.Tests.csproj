@@ -110,6 +110,7 @@
     <Content Include="AcceptanceTests\head.js" />
     <Content Include="AcceptanceTests\lro.js" />
     <Content Include="AcceptanceTests\paging.js" />
+    <Content Include="AcceptanceTests\parameterGrouping.js" />
     <Content Include="AcceptanceTests\resourceFlattening.js" />
     <Content Include="AcceptanceTests\startServer.js" />
     <Content Include="AcceptanceTests\subscriptionIdApiVersion.js" />

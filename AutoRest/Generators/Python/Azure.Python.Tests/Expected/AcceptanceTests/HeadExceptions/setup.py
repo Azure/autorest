@@ -12,7 +12,7 @@
 
 from setuptools import setup, find_packages
 
-NAME = "auto_rest_head_exception_test_service"
+NAME = "autorestheadexceptiontestservice"
 VERSION = "1.0.0"
 
 # To install the library, run the following

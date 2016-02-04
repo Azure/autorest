@@ -109,13 +109,13 @@ namespace Microsoft.Rest.Generator.Python
             {
                 Model = serviceClientTemplateModel
             };
-            await Write(serviceClientInitTemplate, Path.Combine(serviceClient.Name.ToPythonCase(), "__init__.py"));
+            await Write(serviceClientInitTemplate, Path.Combine(serviceClientTemplateModel.PackageName, "__init__.py"));
 
             var serviceClientTemplate = new ServiceClientTemplate
             {
                 Model = serviceClientTemplateModel,
             };
-            await Write(serviceClientTemplate, Path.Combine(serviceClient.Name.ToPythonCase(), "api_client.py"));
+            await Write(serviceClientTemplate, Path.Combine(serviceClientTemplateModel.PackageName, "api_client.py"));
 
             //Models
             if (serviceClient.ModelTypes.Any())
@@ -124,7 +124,7 @@ namespace Microsoft.Rest.Generator.Python
                 {
                     Model = new ModelInitTemplateModel(serviceClient)
                 };
-                await Write(modelInitTemplate, Path.Combine(serviceClient.Name.ToPythonCase(), "models", "__init__.py"));
+                await Write(modelInitTemplate, Path.Combine(serviceClientTemplateModel.PackageName, "models", "__init__.py"));
 
                 foreach (var modelType in serviceClientTemplateModel.ModelTemplateModels)
                 {
@@ -132,7 +132,7 @@ namespace Microsoft.Rest.Generator.Python
                     {
                         Model = modelType
                     };
-                    await Write(modelTemplate, Path.Combine(serviceClient.Name.ToPythonCase(), "models", modelType.Name.ToPythonCase() + ".py"));
+                    await Write(modelTemplate, Path.Combine(serviceClientTemplateModel.PackageName, "models", modelType.Name.ToPythonCase() + ".py"));
                 }
             }
 
@@ -143,7 +143,7 @@ namespace Microsoft.Rest.Generator.Python
                 {
                     Model = serviceClientTemplateModel
                 };
-                await Write(methodGroupIndexTemplate, Path.Combine(serviceClient.Name.ToPythonCase(), "operations", "__init__.py"));
+                await Write(methodGroupIndexTemplate, Path.Combine(serviceClientTemplateModel.PackageName, "operations", "__init__.py"));
 
                 foreach (var methodGroupModel in serviceClientTemplateModel.MethodGroupModels)
                 {
@@ -151,7 +151,7 @@ namespace Microsoft.Rest.Generator.Python
                     {
                         Model = methodGroupModel
                     };
-                    await Write(methodGroupTemplate, Path.Combine(serviceClient.Name.ToPythonCase(), "operations", methodGroupModel.MethodGroupType.ToPythonCase() + ".py"));
+                    await Write(methodGroupTemplate, Path.Combine(serviceClientTemplateModel.PackageName, "operations", methodGroupModel.MethodGroupType.ToPythonCase() + ".py"));
                 }
             }
 
@@ -162,7 +162,7 @@ namespace Microsoft.Rest.Generator.Python
                 {
                     Model = new EnumTemplateModel(serviceClient.EnumTypes),
                 };
-                await Write(enumTemplate, Path.Combine(serviceClient.Name.ToPythonCase(), "models", "enums.py"));
+                await Write(enumTemplate, Path.Combine(serviceClientTemplateModel.PackageName, "models", "enums.py"));
             }
         }
     }

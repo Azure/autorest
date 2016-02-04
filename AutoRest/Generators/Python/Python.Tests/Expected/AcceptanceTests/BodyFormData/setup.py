@@ -12,7 +12,7 @@
 
 from setuptools import setup, find_packages
 
-NAME = "auto_rest_swagger_bat_form_data_service"
+NAME = "autorestswaggerbatformdataservice"
 VERSION = "1.0.0"
 
 # To install the library, run the following

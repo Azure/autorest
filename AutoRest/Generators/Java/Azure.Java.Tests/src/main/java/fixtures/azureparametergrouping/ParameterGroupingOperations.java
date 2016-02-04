@@ -15,7 +15,7 @@ import com.microsoft.rest.ServiceResponse;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.azureparametergrouping.models.ErrorException;
 import fixtures.azureparametergrouping.models.FirstParameterGroup;
-import fixtures.azureparametergrouping.models.ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup;
+import fixtures.azureparametergrouping.models.ParameterGroupingPostMultiParamGroupsSecondParamGroup;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostOptionalParameters;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostRequiredParameters;
 import java.io.IOException;
@@ -47,7 +47,7 @@ public interface ParameterGroupingOperations {
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("parameterGrouping/postMultipleParameterGroups")
-        Call<ResponseBody> postMultipleParameterGroups(@Header("accept-language") String acceptLanguage, @Header("header-one") String headerOne, @Query("query-one") Integer queryOne, @Header("header-two") String headerTwo, @Query("query-two") Integer queryTwo);
+        Call<ResponseBody> postMultiParamGroups(@Header("accept-language") String acceptLanguage, @Header("header-one") String headerOne, @Query("query-one") Integer queryOne, @Header("header-two") String headerTwo, @Query("query-two") Integer queryTwo);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("parameterGrouping/sharedParameterGroupObject")
@@ -97,22 +97,22 @@ public interface ParameterGroupingOperations {
      * Post parameters from multiple different parameter groups.
      *
      * @param firstParameterGroup Additional parameters for the operation
-     * @param parameterGroupingPostMultipleParameterGroupsSecondParameterGroup Additional parameters for the operation
+     * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the ServiceResponse object if successful.
      */
-    ServiceResponse<Void> postMultipleParameterGroups(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup parameterGroupingPostMultipleParameterGroupsSecondParameterGroup) throws ErrorException, IOException;
+    ServiceResponse<Void> postMultiParamGroups(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup) throws ErrorException, IOException;
 
     /**
      * Post parameters from multiple different parameter groups.
      *
      * @param firstParameterGroup Additional parameters for the operation
-     * @param parameterGroupingPostMultipleParameterGroupsSecondParameterGroup Additional parameters for the operation
+     * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    Call<ResponseBody> postMultipleParameterGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup parameterGroupingPostMultipleParameterGroupsSecondParameterGroup, final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Post parameters with a shared parameter group object.

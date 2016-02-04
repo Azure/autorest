@@ -123,7 +123,7 @@ namespace Microsoft.Rest.Generator.Python
             string docString = ":param ";
 
             docString += ModelTemplateModel.GetPropertyDocumentationType(property);
-            docString += " " + property.Name;
+            docString += " " + property.Name + ":";
 
             string documentation = property.Documentation;
             if (!string.IsNullOrWhiteSpace(property.DefaultValue))
@@ -137,7 +137,7 @@ namespace Microsoft.Rest.Generator.Python
 
             if (!string.IsNullOrWhiteSpace(documentation))
             {
-                docString += ": " + documentation;
+                docString += " " + documentation;
             }
             return docString;
         }

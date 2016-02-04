@@ -21,7 +21,7 @@
 @*need to fix comment here for paging function*@
 @foreach(var parameter in Model.DocumentationParameters)
 {
-@:        @ParameterWrapComment(string.Empty, ":param " + parameter.Name + ": " + parameter.Documentation)
+@:        @ParameterWrapComment(string.Empty, MethodTemplateModel.GetParameterDocumentationString(parameter))
 @:        @ParameterWrapComment(string.Empty, ":type " + parameter.Name + ": " + MethodTemplateModel.GetDocumentationType(parameter.Type, parameter.IsRequired))
 }
         @ParameterWrapComment(string.Empty, ":param dict custom_headers: headers that will be added to the request")

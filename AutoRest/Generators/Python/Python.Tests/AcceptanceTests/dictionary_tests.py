@@ -42,8 +42,8 @@ sys.path.append(join(tests, "BodyDictionary"))
 
 from msrest.exceptions import DeserializationError
 
-from auto_rest_swagger_ba_tdictionary_service import AutoRestSwaggerBATdictionaryService, AutoRestSwaggerBATdictionaryServiceConfiguration
-from auto_rest_swagger_ba_tdictionary_service.models import Widget, ErrorException
+from autorestswaggerbatdictionaryservice import AutoRestSwaggerBATdictionaryService, AutoRestSwaggerBATdictionaryServiceConfiguration
+from autorestswaggerbatdictionaryservice.models import Widget, ErrorException
 
 
 class DictionaryTests(unittest.TestCase):
