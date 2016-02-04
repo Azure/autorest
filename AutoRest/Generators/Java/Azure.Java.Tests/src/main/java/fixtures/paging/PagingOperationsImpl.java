@@ -61,7 +61,7 @@ public final class PagingOperationsImpl implements PagingOperations {
         ServiceResponse<PageImpl<Product>> response = getSinglePagesDelegate(call.execute(), null);
         List<Product> result = response.getBody().getItems();
         while (response.getBody().getNextPageLink() != null) {
-            response = this.client.getPagingOperations().getSinglePagesNext(response.getBody().getNextPageLink(), nextPageLink);
+            response = getSinglePagesNext(response.getBody().getNextPageLink());
             result.addAll(response.getBody().getItems());
         }
         return new ServiceResponse<>(result, response.getResponse());
@@ -79,7 +79,14 @@ public final class PagingOperationsImpl implements PagingOperations {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getSinglePagesDelegate(response, retrofit));
+                    ServiceResponse<PageImpl<Product>> result = getSinglePagesDelegate(response, retrofit);
+                    serviceCallback.load(result.getBody().getItems());
+                    if (result.getBody().getNextPageLink() != null && 
+                            serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                        getSinglePagesNextAsync(result.getBody().getNextPageLink(), serviceCallback);
+                    } else {
+                        serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
+                        }
                 } catch (CloudException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -121,7 +128,7 @@ public final class PagingOperationsImpl implements PagingOperations {
                 pagingGetMultiplePagesNextOptions.setMaxresults(pagingGetMultiplePagesOptions.getMaxresults());
                 pagingGetMultiplePagesNextOptions.setTimeout(pagingGetMultiplePagesOptions.getTimeout());
             }
-            response = this.client.getPagingOperations().getMultiplePagesNext(response.getBody().getNextPageLink(), clientRequestId, pagingGetMultiplePagesNextOptions);
+            response = getMultiplePagesNext(response.getBody().getNextPageLink(), clientRequestId, pagingGetMultiplePagesNextOptions);
             result.addAll(response.getBody().getItems());
         }
         return new ServiceResponse<>(result, response.getResponse());
@@ -147,7 +154,20 @@ public final class PagingOperationsImpl implements PagingOperations {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getMultiplePagesDelegate(response, retrofit));
+                    ServiceResponse<PageImpl<Product>> result = getMultiplePagesDelegate(response, retrofit);
+                    serviceCallback.load(result.getBody().getItems());
+                    if (result.getBody().getNextPageLink() != null && 
+                            serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                        PagingGetMultiplePagesNextOptions pagingGetMultiplePagesNextOptions = null;
+                        if (pagingGetMultiplePagesOptions != null) {
+                            pagingGetMultiplePagesNextOptions = new PagingGetMultiplePagesNextOptions();
+                            pagingGetMultiplePagesNextOptions.setMaxresults(pagingGetMultiplePagesOptions.getMaxresults());
+                            pagingGetMultiplePagesNextOptions.setTimeout(pagingGetMultiplePagesOptions.getTimeout());
+                        }
+                        getMultiplePagesNextAsync(result.getBody().getNextPageLink(), clientRequestId, pagingGetMultiplePagesNextOptions, serviceCallback);
+                    } else {
+                        serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
+                        }
                 } catch (CloudException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -175,7 +195,7 @@ public final class PagingOperationsImpl implements PagingOperations {
         ServiceResponse<PageImpl<Product>> response = getMultiplePagesRetryFirstDelegate(call.execute(), null);
         List<Product> result = response.getBody().getItems();
         while (response.getBody().getNextPageLink() != null) {
-            response = this.client.getPagingOperations().getMultiplePagesRetryFirstNext(response.getBody().getNextPageLink(), nextPageLink);
+            response = getMultiplePagesRetryFirstNext(response.getBody().getNextPageLink());
             result.addAll(response.getBody().getItems());
         }
         return new ServiceResponse<>(result, response.getResponse());
@@ -193,7 +213,14 @@ public final class PagingOperationsImpl implements PagingOperations {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getMultiplePagesRetryFirstDelegate(response, retrofit));
+                    ServiceResponse<PageImpl<Product>> result = getMultiplePagesRetryFirstDelegate(response, retrofit);
+                    serviceCallback.load(result.getBody().getItems());
+                    if (result.getBody().getNextPageLink() != null && 
+                            serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                        getMultiplePagesRetryFirstNextAsync(result.getBody().getNextPageLink(), serviceCallback);
+                    } else {
+                        serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
+                        }
                 } catch (CloudException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -221,7 +248,7 @@ public final class PagingOperationsImpl implements PagingOperations {
         ServiceResponse<PageImpl<Product>> response = getMultiplePagesRetrySecondDelegate(call.execute(), null);
         List<Product> result = response.getBody().getItems();
         while (response.getBody().getNextPageLink() != null) {
-            response = this.client.getPagingOperations().getMultiplePagesRetrySecondNext(response.getBody().getNextPageLink(), nextPageLink);
+            response = getMultiplePagesRetrySecondNext(response.getBody().getNextPageLink());
             result.addAll(response.getBody().getItems());
         }
         return new ServiceResponse<>(result, response.getResponse());
@@ -239,7 +266,14 @@ public final class PagingOperationsImpl implements PagingOperations {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getMultiplePagesRetrySecondDelegate(response, retrofit));
+                    ServiceResponse<PageImpl<Product>> result = getMultiplePagesRetrySecondDelegate(response, retrofit);
+                    serviceCallback.load(result.getBody().getItems());
+                    if (result.getBody().getNextPageLink() != null && 
+                            serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                        getMultiplePagesRetrySecondNextAsync(result.getBody().getNextPageLink(), serviceCallback);
+                    } else {
+                        serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
+                        }
                 } catch (CloudException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -267,7 +301,7 @@ public final class PagingOperationsImpl implements PagingOperations {
         ServiceResponse<PageImpl<Product>> response = getSinglePagesFailureDelegate(call.execute(), null);
         List<Product> result = response.getBody().getItems();
         while (response.getBody().getNextPageLink() != null) {
-            response = this.client.getPagingOperations().getSinglePagesFailureNext(response.getBody().getNextPageLink(), nextPageLink);
+            response = getSinglePagesFailureNext(response.getBody().getNextPageLink());
             result.addAll(response.getBody().getItems());
         }
         return new ServiceResponse<>(result, response.getResponse());
@@ -285,7 +319,14 @@ public final class PagingOperationsImpl implements PagingOperations {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getSinglePagesFailureDelegate(response, retrofit));
+                    ServiceResponse<PageImpl<Product>> result = getSinglePagesFailureDelegate(response, retrofit);
+                    serviceCallback.load(result.getBody().getItems());
+                    if (result.getBody().getNextPageLink() != null && 
+                            serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                        getSinglePagesFailureNextAsync(result.getBody().getNextPageLink(), serviceCallback);
+                    } else {
+                        serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
+                        }
                 } catch (CloudException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -313,7 +354,7 @@ public final class PagingOperationsImpl implements PagingOperations {
         ServiceResponse<PageImpl<Product>> response = getMultiplePagesFailureDelegate(call.execute(), null);
         List<Product> result = response.getBody().getItems();
         while (response.getBody().getNextPageLink() != null) {
-            response = this.client.getPagingOperations().getMultiplePagesFailureNext(response.getBody().getNextPageLink(), nextPageLink);
+            response = getMultiplePagesFailureNext(response.getBody().getNextPageLink());
             result.addAll(response.getBody().getItems());
         }
         return new ServiceResponse<>(result, response.getResponse());
@@ -331,7 +372,14 @@ public final class PagingOperationsImpl implements PagingOperations {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getMultiplePagesFailureDelegate(response, retrofit));
+                    ServiceResponse<PageImpl<Product>> result = getMultiplePagesFailureDelegate(response, retrofit);
+                    serviceCallback.load(result.getBody().getItems());
+                    if (result.getBody().getNextPageLink() != null && 
+                            serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                        getMultiplePagesFailureNextAsync(result.getBody().getNextPageLink(), serviceCallback);
+                    } else {
+                        serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
+                        }
                 } catch (CloudException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -359,7 +407,7 @@ public final class PagingOperationsImpl implements PagingOperations {
         ServiceResponse<PageImpl<Product>> response = getMultiplePagesFailureUriDelegate(call.execute(), null);
         List<Product> result = response.getBody().getItems();
         while (response.getBody().getNextPageLink() != null) {
-            response = this.client.getPagingOperations().getMultiplePagesFailureUriNext(response.getBody().getNextPageLink(), nextPageLink);
+            response = getMultiplePagesFailureUriNext(response.getBody().getNextPageLink());
             result.addAll(response.getBody().getItems());
         }
         return new ServiceResponse<>(result, response.getResponse());
@@ -377,7 +425,14 @@ public final class PagingOperationsImpl implements PagingOperations {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getMultiplePagesFailureUriDelegate(response, retrofit));
+                    ServiceResponse<PageImpl<Product>> result = getMultiplePagesFailureUriDelegate(response, retrofit);
+                    serviceCallback.load(result.getBody().getItems());
+                    if (result.getBody().getNextPageLink() != null && 
+                            serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                        getMultiplePagesFailureUriNextAsync(result.getBody().getNextPageLink(), serviceCallback);
+                    } else {
+                        serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
+                        }
                 } catch (CloudException | IOException exception) {
                     serviceCallback.failure(exception);
                 }

@@ -26,12 +26,12 @@ namespace Microsoft.Rest.Generator.Java
             if (source.Group != null)
             {
                 OperationName = source.Group.ToPascalCase();
-                ClientReference = "this.client";
+                ClientReference = "client";
             }
             else
             {
                 OperationName = serviceClient.Name;
-                ClientReference = "this";
+                ClientReference = "";
             }
         }
 
@@ -291,6 +291,20 @@ namespace Microsoft.Rest.Generator.Java
                 }
                 parameters += string.Format(CultureInfo.InvariantCulture, "final ServiceCallback<{0}> serviceCallback",
                     ReturnType.Body != null ? JavaCodeNamer.WrapPrimitiveType(ReturnType.Body).ToString() : "Void");
+                return parameters;
+            }
+        }
+
+        public virtual string MethodParameterInvocationWithCallback
+        {
+            get
+            {
+                var parameters = MethodParameterInvocation;
+                if (!parameters.IsNullOrEmpty())
+                {
+                    parameters += ", ";
+                }
+                parameters += "serviceCallback";
                 return parameters;
             }
         }

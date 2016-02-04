@@ -189,9 +189,10 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     string invocation;
                     AzureMethodTemplateModel nextMethod = GetPagingNextMethod(out invocation);
                     TransformPagingGroupedParameter(builder, nextMethod);
-                    builder.AppendLine("response = {0}(response.getBody().getNextPageLink(), {1});",
+                    var nextCall = string.Format(CultureInfo.InvariantCulture, "response = {0}(response.getBody().getNextPageLink(), {1});",
                         invocation,
-                        nextMethod.MethodParameterInvocation.Replace("nextPageLink, ", ""));
+                        nextMethod.MethodParameterInvocation);
+                    builder.AppendLine(nextCall.Replace(", nextPageLink", ""));
                     builder.AppendLine("result.addAll(response.getBody().getItems());");
                     builder.Outdent().AppendLine("}");
                     return builder.ToString();
@@ -218,7 +219,35 @@ namespace Microsoft.Rest.Generator.Java.Azure
             }
         }
 
-        private AzureMethodTemplateModel GetPagingNextMethod(out string invocation)
+        public override string SuccessCallback
+        {
+            get
+            {
+                if (!this.IsPagingOperation)
+                {
+                    return base.SuccessCallback;
+                }
+                var builder = new IndentedStringBuilder();
+                builder.AppendLine("ServiceResponse<PageImpl<{0}>> result = {1}Delegate(response, retrofit);",
+                    ((SequenceType)ReturnType.Body).ElementType.Name, this.Name);
+                builder.AppendLine("serviceCallback.load(result.getBody().getItems());");
+                builder.AppendLine("if (result.getBody().getNextPageLink() != null && ").Indent().Indent()
+                    .AppendLine("serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {").Outdent();
+                string invocation;
+                AzureMethodTemplateModel nextMethod = GetPagingNextMethod(out invocation, true);
+                TransformPagingGroupedParameter(builder, nextMethod);
+                var nextCall = string.Format(CultureInfo.InvariantCulture, "{0}(result.getBody().getNextPageLink(), {1});",
+                    invocation,
+                    nextMethod.MethodParameterInvocationWithCallback);
+                builder.AppendLine(nextCall.Replace(", nextPageLink", "")).Outdent();
+                builder.AppendLine("} else {").Indent();
+                builder.AppendLine("serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));");
+                builder.AppendLine("}").Outdent();
+                return builder.ToString();
+            }
+        }
+
+        private AzureMethodTemplateModel GetPagingNextMethod(out string invocation, bool async = false)
         {
             string name = (string)this.Extensions["nextMethodName"];
             string group = (string)this.Extensions["nextMethodGroup"];
@@ -227,7 +256,11 @@ namespace Microsoft.Rest.Generator.Java.Azure
             {
                 group += "Operations";
             }
-            if (group == null || this.OperationName == group)
+            if (async)
+            {
+                name = name + "Async";
+            }
+            if (group == null || this.OperationName == methodModel.OperationName)
             {
                 invocation = name;
             }
