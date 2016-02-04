@@ -167,6 +167,7 @@
   "definitions": {
     "Product": {
       "description": "The product documentation.",
+      "required": ["constString", "constInt"],
       "properties": {
         "display_names": {
           "type": "array",
@@ -194,6 +195,9 @@
         "child": {
           "$ref": "#/definitions/ChildProduct"
         },
+        "constChild": {
+          "$ref": "#/definitions/ConstantProduct"
+        },
         "constInt": {
           "type": "integer",
           "description": "Constant int",
@@ -218,6 +222,22 @@
         "count": {
           "type": "integer",
           "description": "Count"
+        }
+      }
+    },
+    "ConstantProduct": {
+      "description": "The product documentation.",
+      "required": [ "constProperty" ],
+      "properties": {
+        "constProperty": {
+          "type": "string",
+          "description": "Constant string",
+          "enum": [ "constant" ]
+        },
+        "constProperty2": {
+          "type": "string",
+          "description": "Constant string2",
+          "enum": [ "constant2" ]
         }
       }
     },

@@ -54,9 +54,14 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     @:@(parameter.Type.Name) @(parameter.Name) = @(parameter.DefaultValue);
         }
 
-        if (parameter.Type is CompositeType && ((CompositeType)parameter.Type).ComposedProperties.Any(p => p.IsConstant))
+        if (parameter.Type is CompositeType
+            && !parameter.IsConstant
+            && ((CompositeType)parameter.Type).ComposedProperties.Any(p => p.IsConstant))
         {
-    @:@(parameter.Type.Name) @(parameter.Name) = new @(parameter.Type.Name)();
+    @:if (@(parameter.Name) == null)
+    @:{
+    @:    @(parameter.Name) = new @(parameter.Type.Name)();
+    @:}
         }
 
     }

@@ -26,20 +26,29 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         public Product()
         {
             this.Child = new ChildProduct();
+            this.ConstChild = new ConstantProduct();
         }
 
         /// <summary>
         /// Initializes a new instance of the Product class.
         /// </summary>
-        public Product(IList<string> displayNames = default(IList<string>), int? capacity = default(int?), string image = default(string), ChildProduct child = default(ChildProduct), int? constInt = default(int?), string constString = default(string))
+        public Product(IList<string> displayNames = default(IList<string>), int? capacity = default(int?), string image = default(string), ChildProduct child = default(ChildProduct), ConstantProduct constChild = default(ConstantProduct))
         {
             DisplayNames = displayNames;
             Capacity = capacity;
             Image = image;
             Child = child;
-            ConstInt = constInt;
-            ConstString = constString;
+            ConstChild = constChild;
             Child = new ChildProduct();
+            ConstChild = new ConstantProduct();
+        }
+        /// <summary>
+        /// Static constructor for Product class.
+        /// </summary>
+        static Product()
+        {
+            ConstInt = 0;
+            ConstString = "constant";
         }
 
         /// <summary>
@@ -66,16 +75,21 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         public ChildProduct Child { get; set; }
 
         /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "constChild")]
+        public ConstantProduct ConstChild { get; set; }
+
+        /// <summary>
         /// Constant int
         /// </summary>
         [JsonProperty(PropertyName = "constInt")]
-        public int? ConstInt { get; set; }
+        public static int? ConstInt { get; private set; }
 
         /// <summary>
         /// Constant string
         /// </summary>
         [JsonProperty(PropertyName = "constString")]
-        public string ConstString { get; set; }
+        public static string ConstString { get; private set; }
 
         /// <summary>
         /// Validate the object. Throws ValidationException if validation fails.
@@ -118,6 +132,10 @@ namespace Fixtures.AcceptanceTestsValidation.Models
             if (this.Child != null)
             {
                 this.Child.Validate();
+            }
+            if (this.ConstChild != null)
+            {
+                this.ConstChild.Validate();
             }
         }
     }

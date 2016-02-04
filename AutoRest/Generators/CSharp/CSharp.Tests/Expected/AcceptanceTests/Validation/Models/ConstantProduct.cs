@@ -18,33 +18,33 @@ namespace Fixtures.AcceptanceTestsValidation.Models
     /// <summary>
     /// The product documentation.
     /// </summary>
-    public partial class ChildProduct
+    public partial class ConstantProduct
     {
         /// <summary>
-        /// Initializes a new instance of the ChildProduct class.
+        /// Initializes a new instance of the ConstantProduct class.
         /// </summary>
-        public ChildProduct() { }
+        public ConstantProduct() { }
 
         /// <summary>
-        /// Initializes a new instance of the ChildProduct class.
+        /// Initializes a new instance of the ConstantProduct class.
         /// </summary>
-        public ChildProduct(int? count = default(int?))
+        public ConstantProduct(string constProperty2 = default(string))
         {
-            Count = count;
+            ConstProperty2 = constProperty2;
         }
         /// <summary>
-        /// Static constructor for ChildProduct class.
+        /// Static constructor for ConstantProduct class.
         /// </summary>
-        static ChildProduct()
+        static ConstantProduct()
         {
             ConstProperty = "constant";
         }
 
         /// <summary>
-        /// Count
+        /// Constant string2
         /// </summary>
-        [JsonProperty(PropertyName = "count")]
-        public int? Count { get; set; }
+        [JsonProperty(PropertyName = "constProperty2")]
+        public string ConstProperty2 { get; set; }
 
         /// <summary>
         /// Constant string

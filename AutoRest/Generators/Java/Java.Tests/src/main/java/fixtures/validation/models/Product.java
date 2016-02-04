@@ -39,13 +39,20 @@ public class Product {
     private ChildProduct child;
 
     /**
+     * The constChild property.
+     */
+    private ConstantProduct constChild;
+
+    /**
      * Constant int.
      */
-    private Integer constInt;
+    @JsonProperty(required = true)
+    private int constInt;
 
     /**
      * Constant string.
      */
+    @JsonProperty(required = true)
     private String constString;
 
     /**
@@ -121,11 +128,29 @@ public class Product {
     }
 
     /**
+     * Get the constChild value.
+     *
+     * @return the constChild value
+     */
+    public ConstantProduct getConstChild() {
+        return this.constChild;
+    }
+
+    /**
+     * Set the constChild value.
+     *
+     * @param constChild the constChild value to set
+     */
+    public void setConstChild(ConstantProduct constChild) {
+        this.constChild = constChild;
+    }
+
+    /**
      * Get the constInt value.
      *
      * @return the constInt value
      */
-    public Integer getConstInt() {
+    public int getConstInt() {
         return this.constInt;
     }
 
@@ -134,7 +159,7 @@ public class Product {
      *
      * @param constInt the constInt value to set
      */
-    public void setConstInt(Integer constInt) {
+    public void setConstInt(int constInt) {
         this.constInt = constInt;
     }
 

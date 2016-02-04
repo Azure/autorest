@@ -161,6 +161,12 @@ namespace Microsoft.Rest.Modeler.Swagger
                 parameter.IsConstant = true;
             }
 
+            var compositeType = parameter.Type as CompositeType;
+            if (compositeType != null && compositeType.ComposedProperties.All(p => p.IsConstant))
+            {
+                parameter.IsConstant = true;
+            }
+
             parameter.Documentation = swaggerObject.Description;
             parameter.CollectionFormat = swaggerObject.CollectionFormat;
             var enumType = parameter.Type as EnumType;

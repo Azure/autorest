@@ -242,6 +242,10 @@ namespace Microsoft.Rest.Generator.CSharp
                 {
                     return value.ToLowerInvariant();
                 }
+                else if (type is CompositeType)
+                {
+                    return "new " + type.Name + "()";
+                }
                 else
                 {
                     if (type == PrimaryType.Date ||

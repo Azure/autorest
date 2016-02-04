@@ -21,17 +21,19 @@ class Product(Model):
     :param int capacity: Non required int betwen 0 and 100 exclusive.
     :param str image: Image URL representing the product.
     :param ChildProduct child
-    :param int const_int: Constant int
-    :param str const_string: Constant string
+    :param ConstantProduct const_child
+    :param int const_int: Constant int. Default value: 0 .
+    :param str const_string: Constant string. Default value: "constant" .
     """
 
-    _required = []
+    _required = ['const_int', 'const_string']
 
     _attribute_map = {
         'display_names': {'key': 'display_names', 'type': '[str]'},
         'capacity': {'key': 'capacity', 'type': 'int'},
         'image': {'key': 'image', 'type': 'str'},
         'child': {'key': 'child', 'type': 'ChildProduct'},
+        'const_child': {'key': 'constChild', 'type': 'ConstantProduct'},
         'const_int': {'key': 'constInt', 'type': 'int'},
         'const_string': {'key': 'constString', 'type': 'str'},
     }
@@ -41,6 +43,7 @@ class Product(Model):
         self.capacity = None
         self.image = None
         self.child = None
+        self.const_child = None
         self.const_int = None
         self.const_string = None
 
