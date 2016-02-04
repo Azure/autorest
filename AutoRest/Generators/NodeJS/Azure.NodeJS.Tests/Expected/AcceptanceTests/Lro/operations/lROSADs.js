@@ -886,7 +886,6 @@ LROSADs.prototype.beginDeleteNonRetry400 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1053,7 +1052,6 @@ LROSADs.prototype.beginDelete202NonRetry400 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1224,7 +1222,6 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetry400 = function (options, callback
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2705,7 +2702,6 @@ LROSADs.prototype.beginDelete204Succeeded = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2876,7 +2872,6 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryNoStatus = function (options, cal
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -4145,7 +4140,6 @@ LROSADs.prototype.beginDelete202RetryInvalidHeader = function (options, callback
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -4314,7 +4308,6 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidHeader = function (options
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -4485,7 +4478,6 @@ LROSADs.prototype.beginDeleteAsyncRelativeRetryInvalidJsonPolling = function (op
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {

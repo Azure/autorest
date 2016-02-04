@@ -80,7 +80,6 @@ Number.prototype.getNull = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -195,7 +194,6 @@ Number.prototype.getInvalidFloat = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -310,7 +308,6 @@ Number.prototype.getInvalidDouble = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -425,7 +422,6 @@ Number.prototype.getInvalidDecimal = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -661,7 +657,6 @@ Number.prototype.getBigFloat = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -897,7 +892,6 @@ Number.prototype.getBigDouble = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1133,7 +1127,6 @@ Number.prototype.getBigDoublePositiveDecimal = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1369,7 +1362,6 @@ Number.prototype.getBigDoubleNegativeDecimal = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1605,7 +1597,6 @@ Number.prototype.getBigDecimal = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1841,7 +1832,6 @@ Number.prototype.getBigDecimalPositiveDecimal = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2077,7 +2067,6 @@ Number.prototype.getBigDecimalNegativeDecimal = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2313,7 +2302,6 @@ Number.prototype.getSmallFloat = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2549,7 +2537,6 @@ Number.prototype.getSmallDouble = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2785,7 +2772,6 @@ Number.prototype.getSmallDecimal = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {

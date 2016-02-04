@@ -667,7 +667,6 @@ LRORetrys.prototype.beginDeleteProvisioning202Accepted200Succeeded = function (o
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -872,7 +871,6 @@ LRORetrys.prototype.beginDelete202Retry200 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1043,7 +1041,6 @@ LRORetrys.prototype.beginDeleteAsyncRelativeRetrySucceeded = function (options, 
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {

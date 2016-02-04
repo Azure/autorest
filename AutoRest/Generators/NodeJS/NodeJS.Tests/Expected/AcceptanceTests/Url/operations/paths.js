@@ -90,7 +90,6 @@ Paths.prototype.getBooleanTrue = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -192,7 +191,6 @@ Paths.prototype.getBooleanFalse = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -294,7 +292,6 @@ Paths.prototype.getIntOneMillion = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -396,7 +393,6 @@ Paths.prototype.getIntNegativeOneMillion = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -498,7 +494,6 @@ Paths.prototype.getTenBillion = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -600,7 +595,6 @@ Paths.prototype.getNegativeTenBillion = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -702,7 +696,6 @@ Paths.prototype.floatScientificPositive = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -804,7 +797,6 @@ Paths.prototype.floatScientificNegative = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -906,7 +898,6 @@ Paths.prototype.doubleDecimalPositive = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1008,7 +999,6 @@ Paths.prototype.doubleDecimalNegative = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1110,7 +1100,6 @@ Paths.prototype.stringUnicode = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1212,7 +1201,6 @@ Paths.prototype.stringUrlEncoded = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1314,7 +1302,6 @@ Paths.prototype.stringEmpty = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1417,7 +1404,6 @@ Paths.prototype.stringNull = function (stringPath, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1526,7 +1512,6 @@ Paths.prototype.enumValid = function (enumPath, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1635,7 +1620,6 @@ Paths.prototype.enumNull = function (enumPath, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1739,7 +1723,6 @@ Paths.prototype.byteMultiByte = function (bytePath, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1841,7 +1824,6 @@ Paths.prototype.byteEmpty = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -1944,7 +1926,6 @@ Paths.prototype.byteNull = function (bytePath, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2047,7 +2028,6 @@ Paths.prototype.dateValid = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2152,7 +2132,6 @@ Paths.prototype.dateNull = function (datePath, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2255,7 +2234,6 @@ Paths.prototype.dateTimeValid = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -2360,7 +2338,6 @@ Paths.prototype.dateTimeNull = function (dateTimePath, options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {

@@ -4154,7 +4154,6 @@ LROs.prototype.beginDeleteProvisioning202Accepted200Succeeded = function (option
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -4377,7 +4376,6 @@ LROs.prototype.beginDeleteProvisioning202DeletingFailed200 = function (options, 
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -4600,7 +4598,6 @@ LROs.prototype.beginDeleteProvisioning202Deletingcanceled200 = function (options
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -4801,7 +4798,6 @@ LROs.prototype.beginDelete204Succeeded = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -4988,7 +4984,6 @@ LROs.prototype.beginDelete202Retry200 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -5192,7 +5187,6 @@ LROs.prototype.beginDelete202NoRetry204 = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -5380,7 +5374,6 @@ LROs.prototype.beginDeleteNoHeaderInRetry = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -5551,7 +5544,6 @@ LROs.prototype.beginDeleteAsyncNoHeaderInRetry = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -5722,7 +5714,6 @@ LROs.prototype.beginDeleteAsyncRetrySucceeded = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -5893,7 +5884,6 @@ LROs.prototype.beginDeleteAsyncNoRetrySucceeded = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -6064,7 +6054,6 @@ LROs.prototype.beginDeleteAsyncRetryFailed = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -6235,7 +6224,6 @@ LROs.prototype.beginDeleteAsyncRetrycanceled = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -6422,7 +6410,6 @@ LROs.prototype.beginPost200WithPayload = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
