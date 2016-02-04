@@ -49,11 +49,11 @@ from msrest.exceptions import DeserializationError
 from msrest.authentication import BasicTokenAuthentication
 from msrestazure.azure_exceptions import CloudError, CloudErrorData
 
-from auto_rest_long_running_operation_test_service import (
+from autorestlongrunningoperationtestservice import (
     AutoRestLongRunningOperationTestService, 
     AutoRestLongRunningOperationTestServiceConfiguration)
 
-from auto_rest_long_running_operation_test_service.models import *
+from autorestlongrunningoperationtestservice.models import *
 
 class LroTests(unittest.TestCase):
 

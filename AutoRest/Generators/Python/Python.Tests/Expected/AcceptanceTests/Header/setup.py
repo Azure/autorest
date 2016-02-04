@@ -12,7 +12,7 @@
 
 from setuptools import setup, find_packages
 
-NAME = "auto_rest_swagger_bat_header_service"
+NAME = "autorestswaggerbatheaderservice"
 VERSION = "1.0.0"
 
 # To install the library, run the following

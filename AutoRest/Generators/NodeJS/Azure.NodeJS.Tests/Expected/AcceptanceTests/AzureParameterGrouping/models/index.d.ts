@@ -64,7 +64,7 @@ export interface ParameterGroupingPostOptionalParameters {
  * @class
  * Initializes a new instance of the FirstParameterGroup class.
  * @constructor
- * Additional parameters for the postMultipleParameterGroups operation.
+ * Additional parameters for the postMultiParamGroups operation.
  * @member {string} [headerOne]
  * 
  * @member {number} [queryOne] Query parameter with default
@@ -77,15 +77,15 @@ export interface FirstParameterGroup {
 
 /**
  * @class
- * Initializes a new instance of the ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup class.
+ * Initializes a new instance of the ParameterGroupingPostMultiParamGroupsSecondParamGroup class.
  * @constructor
- * Additional parameters for the postMultipleParameterGroups operation.
+ * Additional parameters for the postMultiParamGroups operation.
  * @member {string} [headerTwo]
  * 
  * @member {number} [queryTwo] Query parameter with default
  * 
  */
-export interface ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup {
+export interface ParameterGroupingPostMultiParamGroupsSecondParamGroup {
     headerTwo?: string;
     queryTwo?: number;
 }

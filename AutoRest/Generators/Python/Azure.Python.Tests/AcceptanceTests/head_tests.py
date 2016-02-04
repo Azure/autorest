@@ -50,11 +50,11 @@ from msrest.exceptions import DeserializationError, HttpOperationError
 from msrest.authentication import BasicTokenAuthentication
 from msrestazure.azure_exceptions import CloudError, CloudErrorData
 
-from auto_rest_head_test_service import (
+from autorestheadtestservice import (
     AutoRestHeadTestService, 
     AutoRestHeadTestServiceConfiguration)
 
-from auto_rest_head_exception_test_service import (
+from autorestheadexceptiontestservice import (
     AutoRestHeadExceptionTestService, 
     AutoRestHeadExceptionTestServiceConfiguration)
 

@@ -12,7 +12,7 @@
 
 from setuptools import setup, find_packages
 
-NAME = "auto_rest_azure_special_parameters_test_client"
+NAME = "autorestazurespecialparameterstestclient"
 VERSION = "2015-07-01-preview"
 
 # To install the library, run the following

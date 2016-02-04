@@ -19,7 +19,7 @@ import com.microsoft.rest.Validator;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.azureparametergrouping.models.ErrorException;
 import fixtures.azureparametergrouping.models.FirstParameterGroup;
-import fixtures.azureparametergrouping.models.ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup;
+import fixtures.azureparametergrouping.models.ParameterGroupingPostMultiParamGroupsSecondParamGroup;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostOptionalParameters;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostRequiredParameters;
 import java.io.IOException;
@@ -166,12 +166,12 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
      * Post parameters from multiple different parameter groups.
      *
      * @param firstParameterGroup Additional parameters for the operation
-     * @param parameterGroupingPostMultipleParameterGroupsSecondParameterGroup Additional parameters for the operation
+     * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> postMultipleParameterGroups(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup parameterGroupingPostMultipleParameterGroupsSecondParameterGroup) throws ErrorException, IOException {
+    public ServiceResponse<Void> postMultiParamGroups(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup) throws ErrorException, IOException {
         String headerOne = null;
         Integer queryOne = null;
         if (firstParameterGroup != null) {
@@ -180,23 +180,23 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
         }
         String headerTwo = null;
         Integer queryTwo = null;
-        if (parameterGroupingPostMultipleParameterGroupsSecondParameterGroup != null) {
-            headerTwo = parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.getHeaderTwo();
-            queryTwo = parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.getQueryTwo();
+        if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null) {
+            headerTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.getHeaderTwo();
+            queryTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.getQueryTwo();
         }
-        Call<ResponseBody> call = service.postMultipleParameterGroups(this.client.getAcceptLanguage(), headerOne, queryOne, headerTwo, queryTwo);
-        return postMultipleParameterGroupsDelegate(call.execute(), null);
+        Call<ResponseBody> call = service.postMultiParamGroups(this.client.getAcceptLanguage(), headerOne, queryOne, headerTwo, queryTwo);
+        return postMultiParamGroupsDelegate(call.execute(), null);
     }
 
     /**
      * Post parameters from multiple different parameter groups.
      *
      * @param firstParameterGroup Additional parameters for the operation
-     * @param parameterGroupingPostMultipleParameterGroupsSecondParameterGroup Additional parameters for the operation
+     * @param parameterGroupingPostMultiParamGroupsSecondParamGroup Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> postMultipleParameterGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup parameterGroupingPostMultipleParameterGroupsSecondParameterGroup, final ServiceCallback<Void> serviceCallback) {
+    public Call<ResponseBody> postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup, final ServiceCallback<Void> serviceCallback) {
         String headerOne = null;
         Integer queryOne = null;
         if (firstParameterGroup != null) {
@@ -205,16 +205,16 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
         }
         String headerTwo = null;
         Integer queryTwo = null;
-        if (parameterGroupingPostMultipleParameterGroupsSecondParameterGroup != null) {
-            headerTwo = parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.getHeaderTwo();
-            queryTwo = parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.getQueryTwo();
+        if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null) {
+            headerTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.getHeaderTwo();
+            queryTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.getQueryTwo();
         }
-        Call<ResponseBody> call = service.postMultipleParameterGroups(this.client.getAcceptLanguage(), headerOne, queryOne, headerTwo, queryTwo);
+        Call<ResponseBody> call = service.postMultiParamGroups(this.client.getAcceptLanguage(), headerOne, queryOne, headerTwo, queryTwo);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(postMultipleParameterGroupsDelegate(response, retrofit));
+                    serviceCallback.success(postMultiParamGroupsDelegate(response, retrofit));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -223,7 +223,7 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
         return call;
     }
 
-    private ServiceResponse<Void> postMultipleParameterGroupsDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> postMultiParamGroupsDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
         return new AzureServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)

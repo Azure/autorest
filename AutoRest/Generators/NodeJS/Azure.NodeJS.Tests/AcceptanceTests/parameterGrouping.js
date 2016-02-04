@@ -84,9 +84,9 @@ describe('nodejs', function () {
     it('should allow multiple parameter groups', function (done) {
       var options = {
         firstParameterGroup : { headerOne: header, queryOne: query },
-        parameterGroupingPostMultipleParameterGroupsSecondParameterGroup: { headerTwo: "header2", queryTwo: 42 }
+        parameterGroupingPostMultiParamGroupsSecondParamGroup: { headerTwo: "header2", queryTwo: 42 }
       };
-      testClient.parameterGrouping.postMultipleParameterGroups(options, function (error, result, request, response) {
+      testClient.parameterGrouping.postMultiParamGroups(options, function (error, result, request, response) {
           should.not.exist(error);
           response.statusCode.should.equal(200);
           done();
@@ -96,9 +96,9 @@ describe('nodejs', function () {
     it('should allow multiple parameter groups with some defaults omitted', function (done) {
       var options = {
         firstParameterGroup : { headerOne: header},
-        parameterGroupingPostMultipleParameterGroupsSecondParameterGroup: { queryTwo: 42 }
+        parameterGroupingPostMultiParamGroupsSecondParamGroup: { queryTwo: 42 }
       };
-      testClient.parameterGrouping.postMultipleParameterGroups(options, function (error, result, request, response) {
+      testClient.parameterGrouping.postMultiParamGroups(options, function (error, result, request, response) {
           should.not.exist(error);
           response.statusCode.should.equal(200);
           done();

@@ -45,7 +45,7 @@ sys.path.append(join(tests, "BodyInteger"))
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
 
-from auto_rest_integer_test_service import (
+from autorestintegertestservice import (
     AutoRestIntegerTestService, 
     AutoRestIntegerTestServiceConfiguration)
 
