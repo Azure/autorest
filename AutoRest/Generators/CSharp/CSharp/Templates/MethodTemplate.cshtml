@@ -47,9 +47,18 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
         }
     }
 
-    @foreach (ParameterTemplateModel parameter in Model.ParameterTemplateModels.Where(p => p.IsConstant))
+    @foreach (ParameterTemplateModel parameter in Model.ParameterTemplateModels)
     {
+        if (parameter.IsConstant)
+        {
     @:@(parameter.Type.Name) @(parameter.Name) = @(parameter.DefaultValue);
+        }
+
+        if (parameter.Type is CompositeType && ((CompositeType)parameter.Type).ComposedProperties.Any(p => p.IsConstant))
+        {
+    @:@(parameter.Type.Name) @(parameter.Name) = new @(parameter.Type.Name)();
+        }
+
     }
     @Model.BuildInputMappings()
     // Tracing

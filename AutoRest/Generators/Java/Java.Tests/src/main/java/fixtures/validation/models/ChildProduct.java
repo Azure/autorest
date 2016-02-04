@@ -10,6 +10,7 @@
 
 package fixtures.validation.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The product documentation.
@@ -18,6 +19,7 @@ public class ChildProduct {
     /**
      * Constant string.
      */
+    @JsonProperty(required = true)
     private String constProperty;
 
     /**

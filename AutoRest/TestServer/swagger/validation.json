@@ -208,6 +208,7 @@
     },
     "ChildProduct": {
       "description": "The product documentation.",
+      "required": [ "constProperty" ],
       "properties": {
         "constProperty": {
           "type": "string",

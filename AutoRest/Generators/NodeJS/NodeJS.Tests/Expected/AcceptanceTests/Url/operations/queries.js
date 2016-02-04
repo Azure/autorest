@@ -60,8 +60,8 @@ Queries.prototype.getBooleanTrue = function (options, callback) {
   var boolQuery = true;
   // Validate
   try {
-    if (boolQuery !== null && boolQuery !== undefined && typeof boolQuery !== 'boolean') {
-      throw new Error('boolQuery must be of type boolean.');
+    if (boolQuery === null || boolQuery === undefined || typeof boolQuery !== 'boolean') {
+      throw new Error('boolQuery cannot be null or undefined and it must be of type boolean.');
     }
   } catch (error) {
     return callback(error);
@@ -71,9 +71,7 @@ Queries.prototype.getBooleanTrue = function (options, callback) {
   var requestUrl = this.client.baseUri +
                    '//queries/bool/true';
   var queryParameters = [];
-  if (boolQuery !== null && boolQuery !== undefined) {
-    queryParameters.push('boolQuery=' + encodeURIComponent(boolQuery.toString()));
-  }
+  queryParameters.push('boolQuery=' + encodeURIComponent(boolQuery.toString()));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -167,8 +165,8 @@ Queries.prototype.getBooleanFalse = function (options, callback) {
   var boolQuery = false;
   // Validate
   try {
-    if (boolQuery !== null && boolQuery !== undefined && typeof boolQuery !== 'boolean') {
-      throw new Error('boolQuery must be of type boolean.');
+    if (boolQuery === null || boolQuery === undefined || typeof boolQuery !== 'boolean') {
+      throw new Error('boolQuery cannot be null or undefined and it must be of type boolean.');
     }
   } catch (error) {
     return callback(error);
@@ -178,9 +176,7 @@ Queries.prototype.getBooleanFalse = function (options, callback) {
   var requestUrl = this.client.baseUri +
                    '//queries/bool/false';
   var queryParameters = [];
-  if (boolQuery !== null && boolQuery !== undefined) {
-    queryParameters.push('boolQuery=' + encodeURIComponent(boolQuery.toString()));
-  }
+  queryParameters.push('boolQuery=' + encodeURIComponent(boolQuery.toString()));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -383,8 +379,8 @@ Queries.prototype.getIntOneMillion = function (options, callback) {
   var intQuery = 1000000;
   // Validate
   try {
-    if (intQuery !== null && intQuery !== undefined && typeof intQuery !== 'number') {
-      throw new Error('intQuery must be of type number.');
+    if (intQuery === null || intQuery === undefined || typeof intQuery !== 'number') {
+      throw new Error('intQuery cannot be null or undefined and it must be of type number.');
     }
   } catch (error) {
     return callback(error);
@@ -394,9 +390,7 @@ Queries.prototype.getIntOneMillion = function (options, callback) {
   var requestUrl = this.client.baseUri +
                    '//queries/int/1000000';
   var queryParameters = [];
-  if (intQuery !== null && intQuery !== undefined) {
-    queryParameters.push('intQuery=' + encodeURIComponent(intQuery.toString()));
-  }
+  queryParameters.push('intQuery=' + encodeURIComponent(intQuery.toString()));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -490,8 +484,8 @@ Queries.prototype.getIntNegativeOneMillion = function (options, callback) {
   var intQuery = -1000000;
   // Validate
   try {
-    if (intQuery !== null && intQuery !== undefined && typeof intQuery !== 'number') {
-      throw new Error('intQuery must be of type number.');
+    if (intQuery === null || intQuery === undefined || typeof intQuery !== 'number') {
+      throw new Error('intQuery cannot be null or undefined and it must be of type number.');
     }
   } catch (error) {
     return callback(error);
@@ -501,9 +495,7 @@ Queries.prototype.getIntNegativeOneMillion = function (options, callback) {
   var requestUrl = this.client.baseUri +
                    '//queries/int/-1000000';
   var queryParameters = [];
-  if (intQuery !== null && intQuery !== undefined) {
-    queryParameters.push('intQuery=' + encodeURIComponent(intQuery.toString()));
-  }
+  queryParameters.push('intQuery=' + encodeURIComponent(intQuery.toString()));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -706,8 +698,8 @@ Queries.prototype.getTenBillion = function (options, callback) {
   var longQuery = 10000000000;
   // Validate
   try {
-    if (longQuery !== null && longQuery !== undefined && typeof longQuery !== 'number') {
-      throw new Error('longQuery must be of type number.');
+    if (longQuery === null || longQuery === undefined || typeof longQuery !== 'number') {
+      throw new Error('longQuery cannot be null or undefined and it must be of type number.');
     }
   } catch (error) {
     return callback(error);
@@ -717,9 +709,7 @@ Queries.prototype.getTenBillion = function (options, callback) {
   var requestUrl = this.client.baseUri +
                    '//queries/long/10000000000';
   var queryParameters = [];
-  if (longQuery !== null && longQuery !== undefined) {
-    queryParameters.push('longQuery=' + encodeURIComponent(longQuery.toString()));
-  }
+  queryParameters.push('longQuery=' + encodeURIComponent(longQuery.toString()));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -813,8 +803,8 @@ Queries.prototype.getNegativeTenBillion = function (options, callback) {
   var longQuery = -10000000000;
   // Validate
   try {
-    if (longQuery !== null && longQuery !== undefined && typeof longQuery !== 'number') {
-      throw new Error('longQuery must be of type number.');
+    if (longQuery === null || longQuery === undefined || typeof longQuery !== 'number') {
+      throw new Error('longQuery cannot be null or undefined and it must be of type number.');
     }
   } catch (error) {
     return callback(error);
@@ -824,9 +814,7 @@ Queries.prototype.getNegativeTenBillion = function (options, callback) {
   var requestUrl = this.client.baseUri +
                    '//queries/long/-10000000000';
   var queryParameters = [];
-  if (longQuery !== null && longQuery !== undefined) {
-    queryParameters.push('longQuery=' + encodeURIComponent(longQuery.toString()));
-  }
+  queryParameters.push('longQuery=' + encodeURIComponent(longQuery.toString()));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -1029,8 +1017,8 @@ Queries.prototype.floatScientificPositive = function (options, callback) {
   var floatQuery = 1.034E+20;
   // Validate
   try {
-    if (floatQuery !== null && floatQuery !== undefined && typeof floatQuery !== 'number') {
-      throw new Error('floatQuery must be of type number.');
+    if (floatQuery === null || floatQuery === undefined || typeof floatQuery !== 'number') {
+      throw new Error('floatQuery cannot be null or undefined and it must be of type number.');
     }
   } catch (error) {
     return callback(error);
@@ -1040,9 +1028,7 @@ Queries.prototype.floatScientificPositive = function (options, callback) {
   var requestUrl = this.client.baseUri +
                    '//queries/float/1.034E+20';
   var queryParameters = [];
-  if (floatQuery !== null && floatQuery !== undefined) {
-    queryParameters.push('floatQuery=' + encodeURIComponent(floatQuery.toString()));
-  }
+  queryParameters.push('floatQuery=' + encodeURIComponent(floatQuery.toString()));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -1136,8 +1122,8 @@ Queries.prototype.floatScientificNegative = function (options, callback) {
   var floatQuery = -1.034E-20;
   // Validate
   try {
-    if (floatQuery !== null && floatQuery !== undefined && typeof floatQuery !== 'number') {
-      throw new Error('floatQuery must be of type number.');
+    if (floatQuery === null || floatQuery === undefined || typeof floatQuery !== 'number') {
+      throw new Error('floatQuery cannot be null or undefined and it must be of type number.');
     }
   } catch (error) {
     return callback(error);
@@ -1147,9 +1133,7 @@ Queries.prototype.floatScientificNegative = function (options, callback) {
   var requestUrl = this.client.baseUri +
                    '//queries/float/-1.034E-20';
   var queryParameters = [];
-  if (floatQuery !== null && floatQuery !== undefined) {
-    queryParameters.push('floatQuery=' + encodeURIComponent(floatQuery.toString()));
-  }
+  queryParameters.push('floatQuery=' + encodeURIComponent(floatQuery.toString()));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -1352,8 +1336,8 @@ Queries.prototype.doubleDecimalPositive = function (options, callback) {
   var doubleQuery = 9999999.999;
   // Validate
   try {
-    if (doubleQuery !== null && doubleQuery !== undefined && typeof doubleQuery !== 'number') {
-      throw new Error('doubleQuery must be of type number.');
+    if (doubleQuery === null || doubleQuery === undefined || typeof doubleQuery !== 'number') {
+      throw new Error('doubleQuery cannot be null or undefined and it must be of type number.');
     }
   } catch (error) {
     return callback(error);
@@ -1363,9 +1347,7 @@ Queries.prototype.doubleDecimalPositive = function (options, callback) {
   var requestUrl = this.client.baseUri +
                    '//queries/double/9999999.999';
   var queryParameters = [];
-  if (doubleQuery !== null && doubleQuery !== undefined) {
-    queryParameters.push('doubleQuery=' + encodeURIComponent(doubleQuery.toString()));
-  }
+  queryParameters.push('doubleQuery=' + encodeURIComponent(doubleQuery.toString()));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -1459,8 +1441,8 @@ Queries.prototype.doubleDecimalNegative = function (options, callback) {
   var doubleQuery = -9999999.999;
   // Validate
   try {
-    if (doubleQuery !== null && doubleQuery !== undefined && typeof doubleQuery !== 'number') {
-      throw new Error('doubleQuery must be of type number.');
+    if (doubleQuery === null || doubleQuery === undefined || typeof doubleQuery !== 'number') {
+      throw new Error('doubleQuery cannot be null or undefined and it must be of type number.');
     }
   } catch (error) {
     return callback(error);
@@ -1470,9 +1452,7 @@ Queries.prototype.doubleDecimalNegative = function (options, callback) {
   var requestUrl = this.client.baseUri +
                    '//queries/double/-9999999.999';
   var queryParameters = [];
-  if (doubleQuery !== null && doubleQuery !== undefined) {
-    queryParameters.push('doubleQuery=' + encodeURIComponent(doubleQuery.toString()));
-  }
+  queryParameters.push('doubleQuery=' + encodeURIComponent(doubleQuery.toString()));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -1675,8 +1655,8 @@ Queries.prototype.stringUnicode = function (options, callback) {
   var stringQuery = '啊齄丂狛狜隣郎隣兀﨩';
   // Validate
   try {
-    if (stringQuery !== null && stringQuery !== undefined && typeof stringQuery.valueOf() !== 'string') {
-      throw new Error('stringQuery must be of type string.');
+    if (stringQuery === null || stringQuery === undefined || typeof stringQuery.valueOf() !== 'string') {
+      throw new Error('stringQuery cannot be null or undefined and it must be of type string.');
     }
   } catch (error) {
     return callback(error);
@@ -1686,9 +1666,7 @@ Queries.prototype.stringUnicode = function (options, callback) {
   var requestUrl = this.client.baseUri +
                    '//queries/string/unicode/';
   var queryParameters = [];
-  if (stringQuery !== null && stringQuery !== undefined) {
-    queryParameters.push('stringQuery=' + encodeURIComponent(stringQuery));
-  }
+  queryParameters.push('stringQuery=' + encodeURIComponent(stringQuery));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -1782,8 +1760,8 @@ Queries.prototype.stringUrlEncoded = function (options, callback) {
   var stringQuery = 'begin!*\'();:@ &=+$,/?#[]end';
   // Validate
   try {
-    if (stringQuery !== null && stringQuery !== undefined && typeof stringQuery.valueOf() !== 'string') {
-      throw new Error('stringQuery must be of type string.');
+    if (stringQuery === null || stringQuery === undefined || typeof stringQuery.valueOf() !== 'string') {
+      throw new Error('stringQuery cannot be null or undefined and it must be of type string.');
     }
   } catch (error) {
     return callback(error);
@@ -1793,9 +1771,7 @@ Queries.prototype.stringUrlEncoded = function (options, callback) {
   var requestUrl = this.client.baseUri +
                    '//queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend';
   var queryParameters = [];
-  if (stringQuery !== null && stringQuery !== undefined) {
-    queryParameters.push('stringQuery=' + encodeURIComponent(stringQuery));
-  }
+  queryParameters.push('stringQuery=' + encodeURIComponent(stringQuery));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -1889,8 +1865,8 @@ Queries.prototype.stringEmpty = function (options, callback) {
   var stringQuery = '';
   // Validate
   try {
-    if (stringQuery !== null && stringQuery !== undefined && typeof stringQuery.valueOf() !== 'string') {
-      throw new Error('stringQuery must be of type string.');
+    if (stringQuery === null || stringQuery === undefined || typeof stringQuery.valueOf() !== 'string') {
+      throw new Error('stringQuery cannot be null or undefined and it must be of type string.');
     }
   } catch (error) {
     return callback(error);
@@ -1900,9 +1876,7 @@ Queries.prototype.stringEmpty = function (options, callback) {
   var requestUrl = this.client.baseUri +
                    '//queries/string/empty';
   var queryParameters = [];
-  if (stringQuery !== null && stringQuery !== undefined) {
-    queryParameters.push('stringQuery=' + encodeURIComponent(stringQuery));
-  }
+  queryParameters.push('stringQuery=' + encodeURIComponent(stringQuery));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -2441,8 +2415,8 @@ Queries.prototype.byteEmpty = function (options, callback) {
   var byteQuery = new Buffer('');
   // Validate
   try {
-    if (byteQuery && !Buffer.isBuffer(byteQuery)) {
-      throw new Error('byteQuery must be of type buffer.');
+    if (!Buffer.isBuffer(byteQuery)) {
+      throw new Error('byteQuery cannot be null or undefined and it must be of type buffer.');
     }
   } catch (error) {
     return callback(error);
@@ -2452,9 +2426,7 @@ Queries.prototype.byteEmpty = function (options, callback) {
   var requestUrl = this.client.baseUri +
                    '//queries/byte/empty';
   var queryParameters = [];
-  if (byteQuery !== null && byteQuery !== undefined) {
-    queryParameters.push('byteQuery=' + encodeURIComponent(client.serializeObject(byteQuery)));
-  }
+  queryParameters.push('byteQuery=' + encodeURIComponent(client.serializeObject(byteQuery)));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -2658,9 +2630,9 @@ Queries.prototype.dateValid = function (options, callback) {
   var dateQuery = new Date('2012-01-01');
   // Validate
   try {
-    if (dateQuery && !(dateQuery instanceof Date || 
+    if(!dateQuery || !(dateQuery instanceof Date || 
         (typeof dateQuery.valueOf() === 'string' && !isNaN(Date.parse(dateQuery))))) {
-          throw new Error('dateQuery must be of type date.');
+          throw new Error('dateQuery cannot be null or undefined and it must be of type date.');
         }
   } catch (error) {
     return callback(error);
@@ -2670,9 +2642,7 @@ Queries.prototype.dateValid = function (options, callback) {
   var requestUrl = this.client.baseUri +
                    '//queries/date/2012-01-01';
   var queryParameters = [];
-  if (dateQuery !== null && dateQuery !== undefined) {
-    queryParameters.push('dateQuery=' + encodeURIComponent(client.serializeObject(dateQuery).replace(/[Tt].*[Zz]/, '')));
-  }
+  queryParameters.push('dateQuery=' + encodeURIComponent(client.serializeObject(dateQuery).replace(/[Tt].*[Zz]/, '')));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }
@@ -2876,9 +2846,9 @@ Queries.prototype.dateTimeValid = function (options, callback) {
   var dateTimeQuery = new Date('2012-01-01T01:01:01Z');
   // Validate
   try {
-    if (dateTimeQuery && !(dateTimeQuery instanceof Date || 
+    if(!dateTimeQuery || !(dateTimeQuery instanceof Date || 
         (typeof dateTimeQuery.valueOf() === 'string' && !isNaN(Date.parse(dateTimeQuery))))) {
-          throw new Error('dateTimeQuery must be of type date.');
+          throw new Error('dateTimeQuery cannot be null or undefined and it must be of type date.');
         }
   } catch (error) {
     return callback(error);
@@ -2888,9 +2858,7 @@ Queries.prototype.dateTimeValid = function (options, callback) {
   var requestUrl = this.client.baseUri +
                    '//queries/datetime/2012-01-01T01%3A01%3A01Z';
   var queryParameters = [];
-  if (dateTimeQuery !== null && dateTimeQuery !== undefined) {
-    queryParameters.push('dateTimeQuery=' + encodeURIComponent(client.serializeObject(dateTimeQuery)));
-  }
+  queryParameters.push('dateTimeQuery=' + encodeURIComponent(client.serializeObject(dateTimeQuery)));
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }

@@ -46,13 +46,13 @@ export interface Product {
  * Initializes a new instance of the ChildProduct class.
  * @constructor
  * The product documentation.
- * @member {string} [constProperty] Constant string
+ * @member {string} constProperty Constant string
  * 
  * @member {number} [count] Count
  * 
  */
 export interface ChildProduct {
-    constProperty?: string;
+    constProperty: string;
     count?: number;
 }
 

@@ -30,7 +30,24 @@ namespace @(Settings.Namespace).Models
         /// <summary>
         @WrapComment("/// ", ("Initializes a new instance of the " + Model.Name + " class.").EscapeXmlComment())
         /// </summary>
-        public @(Model.Name)() { }
+        @if (Model.Properties.Any(p => p.Type is CompositeType && ((CompositeType)p.Type).ComposedProperties.Any(p2 => p2.IsConstant)))
+        {
+<text>
+        public @(Model.Name)()
+        {
+            @foreach(var property in Model.ComposedProperties.Where(p => p.Type is CompositeType
+                && ((CompositeType)p.Type).ComposedProperties.Any(p2 => p2.IsConstant)))
+            {
+            @:this.@(property.Name) = new @(property.Type.Name)();
+            }
+        }
+</text>
+        }
+        else
+        {
+        @:public @(Model.Name)() { }
+        }
+        
 
         @EmptyLine
 
@@ -48,6 +65,12 @@ namespace @(Settings.Namespace).Models
             foreach (var property in Model.Properties.Where(p => !p.IsConstant))
             {
             @:@(property.Name) = @(CodeNamer.CamelCase(property.Name));
+            }
+
+            @foreach (var property in Model.ComposedProperties.Where(p => p.Type is CompositeType
+                     && ((CompositeType)p.Type).ComposedProperties.Any(p2 => p2.IsConstant)))
+            {
+            @:@(property.Name) = new @(property.Type.Name)();
             }
         @:}
         }

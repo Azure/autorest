@@ -21,8 +21,8 @@ class Product(Model):
     :param int capacity: Non required int betwen 0 and 100 exclusive.
     :param str image: Image URL representing the product.
     :param ChildProduct child
-    :param int const_int: Constant int. Default value: 0 .
-    :param str const_string: Constant string. Default value: "constant" .
+    :param int const_int: Constant int
+    :param str const_string: Constant string
     """
 
     _required = []

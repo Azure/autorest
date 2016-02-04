@@ -23,17 +23,23 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         /// <summary>
         /// Initializes a new instance of the Product class.
         /// </summary>
-        public Product() { }
+        public Product()
+        {
+            this.Child = new ChildProduct();
+        }
 
         /// <summary>
         /// Initializes a new instance of the Product class.
         /// </summary>
-        public Product(IList<string> displayNames = default(IList<string>), int? capacity = default(int?), string image = default(string), ChildProduct child = default(ChildProduct))
+        public Product(IList<string> displayNames = default(IList<string>), int? capacity = default(int?), string image = default(string), ChildProduct child = default(ChildProduct), int? constInt = default(int?), string constString = default(string))
         {
             DisplayNames = displayNames;
             Capacity = capacity;
             Image = image;
             Child = child;
+            ConstInt = constInt;
+            ConstString = constString;
+            Child = new ChildProduct();
         }
 
         /// <summary>
@@ -63,13 +69,13 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         /// Constant int
         /// </summary>
         [JsonProperty(PropertyName = "constInt")]
-        public static int? ConstInt { get { return 0; } }
+        public int? ConstInt { get; set; }
 
         /// <summary>
         /// Constant string
         /// </summary>
         [JsonProperty(PropertyName = "constString")]
-        public static string ConstString { get { return "constant"; } }
+        public string ConstString { get; set; }
 
         /// <summary>
         /// Validate the object. Throws ValidationException if validation fails.
@@ -108,6 +114,10 @@ namespace Fixtures.AcceptanceTestsValidation.Models
                 {
                     throw new ValidationException(ValidationRules.Pattern, "Image", "http://\\w+");
                 }
+            }
+            if (this.Child != null)
+            {
+                this.Child.Validate();
             }
         }
     }

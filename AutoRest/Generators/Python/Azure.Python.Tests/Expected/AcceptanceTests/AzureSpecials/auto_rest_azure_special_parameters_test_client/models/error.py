@@ -17,7 +17,7 @@ class Error(Model):
     """Error
 
     :param int status
-    :param int constant_id:  Default value: 1 .
+    :param int constant_id
     :param str message
     """
 

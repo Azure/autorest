@@ -28,9 +28,10 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
         /// <summary>
         /// Initializes a new instance of the Error class.
         /// </summary>
-        public Error(int? status = default(int?), string message = default(string))
+        public Error(int? status = default(int?), int? constantId = default(int?), string message = default(string))
         {
             Status = status;
+            ConstantId = constantId;
             Message = message;
         }
 
@@ -41,13 +42,13 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "message")]
-        public string Message { get; set; }
+        [JsonProperty(PropertyName = "constantId")]
+        public int? ConstantId { get; set; }
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "constantId")]
-        public static int? ConstantId { get { return 1; } }
+        [JsonProperty(PropertyName = "message")]
+        public string Message { get; set; }
 
     }
 }

@@ -15,8 +15,7 @@
  * Initializes a new instance of the ChildProduct class.
  * @constructor
  * The product documentation.
- * @member {string} [constProperty] Constant string. Default value: 'constant'
- * .
+ * @member {string} constProperty Constant string. Default value: 'constant' .
  * 
  * @member {number} [count] Count
  * 
@@ -39,7 +38,7 @@ ChildProduct.prototype.mapper = function () {
       className: 'ChildProduct',
       modelProperties: {
         constProperty: {
-          required: false,
+          required: true,
           isConstant: true,
           serializedName: 'constProperty',
           defaultValue: 'constant',

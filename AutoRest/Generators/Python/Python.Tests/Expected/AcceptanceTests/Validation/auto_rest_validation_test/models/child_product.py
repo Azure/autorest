@@ -20,7 +20,7 @@ class ChildProduct(Model):
     :param int count: Count
     """
 
-    _required = []
+    _required = ['const_property']
 
     _attribute_map = {
         'const_property': {'key': 'constProperty', 'type': 'str'},
