@@ -94,14 +94,27 @@ namespace Microsoft.Rest.Generator.Java
                        compositType.Properties.Count == 2 &&
                        compositType.Properties.Any(p => p.SerializedName.Equals(nextLinkString, StringComparison.OrdinalIgnoreCase)))
                     {
-                        var pagableTypeName = string.Format(CultureInfo.InvariantCulture, pageTypeFormat, listClassName, sequenceType.ElementType.Name);
-                        var ipagableTypeName = string.Format(CultureInfo.InvariantCulture, ipageTypeFormat, sequenceType.ElementType.Name);
-
-                        SequenceType pagedResult = new SequenceType
+                        IType pagedResult;
+                        if (method.Url != "{nextLink}")
                         {
-                            ElementType = sequenceType.ElementType,
-                            NameFormat = "List<{0}>"
-                    };
+                            var pagableTypeName = string.Format(CultureInfo.InvariantCulture, pageTypeFormat, listClassName, sequenceType.ElementType.Name);
+                            var ipagableTypeName = string.Format(CultureInfo.InvariantCulture, ipageTypeFormat, sequenceType.ElementType.Name);
+
+                            pagedResult = new SequenceType
+                            {
+                                ElementType = sequenceType.ElementType,
+                                NameFormat = "List<{0}>"
+                            };
+                        } else
+                        {
+                            var pagableTypeName = string.Format(CultureInfo.InvariantCulture, pageTypeFormat, pageClassName, sequenceType.ElementType.Name);
+                            var ipagableTypeName = string.Format(CultureInfo.InvariantCulture, ipageTypeFormat, sequenceType.ElementType.Name);
+
+                            pagedResult = new CompositeType
+                            {
+                                Name = pagableTypeName
+                            };
+                        }
 
                         convertedTypes[method.Responses[responseStatus].Body] = pagedResult;
                         method.Responses[responseStatus] = new Response(pagedResult, method.Responses[responseStatus].Headers);

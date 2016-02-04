@@ -161,7 +161,7 @@ foreach (var transformation in Model.InputParameterTransformation.Where(t => t.P
         @@Override
         public void onResponse(Response<@Model.CallType> response, Retrofit retrofit) {
             try {
-                serviceCallback.success(@(Model.Name)Delegate(response, retrofit));
+                @Model.SuccessCallback
             } catch (@Model.OperationExceptionTypeString | IOException exception) {
                 serviceCallback.failure(exception);
             }
@@ -170,12 +170,12 @@ foreach (var transformation in Model.InputParameterTransformation.Where(t => t.P
     return call;
 }
 @EmptyLine
-private @Model.OperationResponseReturnTypeString @(Model.Name)Delegate(Response<@Model.CallType> response, Retrofit retrofit) throws @Model.ExceptionString {
-    return new @Model.ResponseBuilder<@Model.GenericReturnTypeString, @Model.OperationExceptionTypeString>()
+private @Model.DelegateOperationResponseReturnTypeString @(Model.Name)Delegate(Response<@Model.CallType> response, Retrofit retrofit) throws @Model.ExceptionString {
+    return new @Model.ResponseBuilder<@Model.DelegateReturnTypeString, @Model.OperationExceptionTypeString>()
 @foreach (var response in Model.Responses)
 {
 
-            @:.register(@((int)response.Key), new TypeToken<@JavaCodeNamer.WrapPrimitiveType(response.Value.Body).Name>() { }.getType())
+            @:.register(@((int)response.Key), new TypeToken<@Model.TypeTokenType(response.Value.Body)>() { }.getType())
 }
 @if (Model.DefaultResponse.Body != null)
 {

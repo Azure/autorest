@@ -387,7 +387,7 @@ namespace Microsoft.Rest.Generator.Java
                 return "void";
             }
         }
-
+        
         public string GenericReturnTypeString
         {
             get
@@ -398,6 +398,19 @@ namespace Microsoft.Rest.Generator.Java
                 }
                 return "Void";
             }
+        }
+
+        public virtual string DelegateReturnTypeString
+        {
+            get
+            {
+                return GenericReturnTypeString;
+            }
+        }
+
+        public virtual string TypeTokenType(IType type)
+        {
+            return JavaCodeNamer.WrapPrimitiveType(type).Name;
         }
 
         public string OperationResponseType
@@ -427,6 +440,14 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     return string.Format(CultureInfo.InvariantCulture, "{0}<{1}, {2}>", OperationResponseType, GenericReturnTypeString, ReturnType.Headers.Name);
                 }
+            }
+        }
+
+        public virtual string DelegateOperationResponseReturnTypeString
+        {
+            get
+            {
+                return OperationResponseReturnTypeString;
             }
         }
 
@@ -489,6 +510,14 @@ namespace Microsoft.Rest.Generator.Java
             get
             {
                 return this.Name + "Delegate(call.execute(), null)";
+            }
+        }
+
+        public virtual string SuccessCallback
+        {
+            get
+            {
+                return string.Format(CultureInfo.InvariantCulture, "serviceCallback.success({0}Delegate(response, retrofit));", this.Name);
             }
         }
 

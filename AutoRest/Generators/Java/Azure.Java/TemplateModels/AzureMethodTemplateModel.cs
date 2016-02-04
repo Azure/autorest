@@ -44,6 +44,11 @@ namespace Microsoft.Rest.Generator.Java.Azure
             get { return Url == "{nextLink}"; }
         }
 
+        public bool IsPagingOperation
+        {
+            get { return Extensions.ContainsKey(AzureExtensions.PageableExtension) && !IsPagingNextOperation; }
+        }
+
         /// <summary>
         /// Get the type for operation exception.
         /// </summary>
@@ -81,7 +86,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 {
                     parameters += ", ";
                 }
-                if (this.Extensions.ContainsKey(AzureExtensions.PageableExtension))
+                if (this.IsPagingOperation)
                 {
                     SequenceType sequenceType = (SequenceType)ReturnType.Body;
                     parameters += string.Format(CultureInfo.InvariantCulture, "final ListOperationCallback<{0}> serviceCallback",
@@ -173,7 +178,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
         {
             get
             {
-                if (this.Extensions.ContainsKey(AzureExtensions.PageableExtension) && !this.IsPagingNextOperation)
+                if (this.IsPagingOperation && !this.IsPagingNextOperation)
                 {
                     var builder = new IndentedStringBuilder();
                     builder.AppendLine("ServiceResponse<PageImpl<{0}>> response = {1}Delegate(call.execute(), null);",
@@ -183,7 +188,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     builder.Indent();
                     string invocation;
                     AzureMethodTemplateModel nextMethod = GetPagingNextMethod(out invocation);
-                    builder.Append(TransformPagingGroupedParameter(nextMethod));
+                    TransformPagingGroupedParameter(builder, nextMethod);
                     builder.AppendLine("response = {0}(response.getBody().getNextPageLink(), {1});",
                         invocation,
                         nextMethod.MethodParameterInvocation.Replace("nextPageLink, ", ""));
@@ -202,7 +207,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
         {
             get
             {
-                if (this.Extensions.ContainsKey(AzureExtensions.PageableExtension))
+                if (this.IsPagingOperation)
                 {
                     return "new ServiceResponse<>(result, response.getResponse())";
                 }
@@ -233,13 +238,12 @@ namespace Microsoft.Rest.Generator.Java.Azure
             return methodModel;
         }
 
-        private string TransformPagingGroupedParameter(AzureMethodTemplateModel nextMethod)
+        private void TransformPagingGroupedParameter(IndentedStringBuilder builder, AzureMethodTemplateModel nextMethod)
         {
             if (this.InputParameterTransformation.IsNullOrEmpty())
             {
-                return "";
+                return;
             }
-            var builder = new IndentedStringBuilder();
             var groupedType = this.InputParameterTransformation.FirstOrDefault().ParameterMappings[0].InputParameter;
             var nextGroupType = nextMethod.InputParameterTransformation.FirstOrDefault().ParameterMappings[0].InputParameter;
             builder.AppendLine("{0} {1} = null;", nextGroupType.Name.ToPascalCase(), nextGroupType.Name.ToCamelCase());
@@ -251,7 +255,42 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 builder.AppendLine("{0}.set{1}({2}.get{1}());", nextGroupType.Name.ToCamelCase(), outParam.Name.ToPascalCase(), groupedType.Name.ToCamelCase());
             }
             builder.Outdent().AppendLine(@"}");
-            return builder.ToString();
+        }
+
+        public override string DelegateOperationResponseReturnTypeString
+        {
+            get
+            {
+                if (this.IsPagingOperation)
+                {
+                    return string.Format(CultureInfo.InvariantCulture, "{0}<PageImpl<{1}>>", OperationResponseType, ((SequenceType)ReturnType.Body).ElementType);
+                } 
+                else
+                {
+                    return base.DelegateOperationResponseReturnTypeString;
+                }
+            }
+        }
+
+        public override string DelegateReturnTypeString
+        {
+            get
+            {
+                if (this.IsPagingOperation)
+                {
+                    return string.Format(CultureInfo.InvariantCulture, "PageImpl<{0}>", ((SequenceType)ReturnType.Body).ElementType);
+                }
+                return base.DelegateReturnTypeString;
+            }
+        }
+
+        public override string TypeTokenType(IType type)
+        {
+            if (type is SequenceType && this.IsPagingOperation)
+            {
+                return string.Format(CultureInfo.InvariantCulture, "PageImpl<{0}>", ((SequenceType)type).ElementType);
+            }
+            return base.TypeTokenType(type);
         }
 
         public override string RuntimeBasePackage
@@ -293,6 +332,11 @@ namespace Microsoft.Rest.Generator.Java.Azure
                         .ForEach(i => imports.Remove(i));
                     // return type may have been removed as a side effect
                     imports.AddRange(this.ReturnType.Body.ImportFrom(ServiceClient.Namespace));
+                }
+                if (this.IsPagingOperation)
+                {
+                    imports.Add("com.microsoft.azure.ListOperationCallback");
+                    imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportFrom(ServiceClient.Namespace));
                 }
                 return imports;
             }
