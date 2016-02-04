@@ -1,10 +1,8 @@
 package fixtures.paging;
 
 import com.microsoft.azure.CloudException;
-import com.microsoft.azure.Page;
 import com.microsoft.azure.ListOperationCallback;
 import com.microsoft.rest.ServiceResponse;
-
 import fixtures.paging.models.Product;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -26,8 +24,8 @@ public class PagingTests {
 
     @Test
     public void getSinglePages() throws Exception {
-        Page<Product> response = client.getPagingOperations().getSinglePages().getBody();
-        Assert.assertNull(response.getNextPageLink());
+        List<Product> response = client.getPagingOperations().getSinglePages().getBody();
+        Assert.assertEquals(1, response.size());
     }
 
     @Test
@@ -66,32 +64,20 @@ public class PagingTests {
 
     @Test
     public void getMultiplePagesRetryFirst() throws Exception {
-        Page<Product> response = client.getPagingOperations().getMultiplePagesRetryFirst().getBody();
-        Assert.assertNotNull(response.getNextPageLink());
-        int count = 1;
-        while (response.getNextPageLink() != null) {
-            response = client.getPagingOperations().getMultiplePagesRetryFirstNext(response.getNextPageLink()).getBody();
-            count++;
-        }
-        Assert.assertEquals(10, count);
+        List<Product> response = client.getPagingOperations().getMultiplePagesRetryFirst().getBody();
+        Assert.assertEquals(10, response.size());
     }
 
     @Test
     public void getMultiplePagesRetrySecond() throws Exception {
-        Page<Product> response = client.getPagingOperations().getMultiplePagesRetrySecond().getBody();
-        Assert.assertNotNull(response.getNextPageLink());
-        int count = 1;
-        while (response.getNextPageLink() != null) {
-            response = client.getPagingOperations().getMultiplePagesRetrySecondNext(response.getNextPageLink()).getBody();
-            count++;
-        }
-        Assert.assertEquals(10, count);
+        List<Product> response = client.getPagingOperations().getMultiplePagesRetrySecond().getBody();
+        Assert.assertEquals(10, response.size());
     }
 
     @Test
     public void getSinglePagesFailure() throws Exception {
         try {
-            Page<Product> response = client.getPagingOperations().getSinglePagesFailure().getBody();
+            List<Product> response = client.getPagingOperations().getSinglePagesFailure().getBody();
             fail();
         } catch (CloudException ex) {
             Assert.assertNotNull(ex.getResponse());
@@ -101,9 +87,7 @@ public class PagingTests {
     @Test
     public void getMultiplePagesFailure() throws Exception {
         try {
-            Page<Product> response = client.getPagingOperations().getMultiplePagesFailure().getBody();
-            Assert.assertNotNull(response.getNextPageLink());
-            response = client.getPagingOperations().getMultiplePagesFailureNext(response.getNextPageLink()).getBody();
+            List<Product> response = client.getPagingOperations().getMultiplePagesFailure().getBody();
             fail();
         } catch (CloudException ex) {
             Assert.assertNotNull(ex.getResponse());
@@ -113,9 +97,7 @@ public class PagingTests {
     @Test
     public void getMultiplePagesFailureUri() throws Exception {
         try {
-            Page<Product> response = client.getPagingOperations().getMultiplePagesFailureUri().getBody();
-            Assert.assertNotNull(response.getNextPageLink());
-            response = client.getPagingOperations().getMultiplePagesFailureUriNext(response.getNextPageLink()).getBody();
+            List<Product> response = client.getPagingOperations().getMultiplePagesFailureUri().getBody();
             fail();
         } catch (CloudException ex) {
             Assert.assertNotNull(ex.getResponse());
