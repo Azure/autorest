@@ -78,6 +78,12 @@ declare class AutoRestValidationTest {
          * 
          * @param {string} [options.body.image] Image URL representing the product.
          * 
+         * @param {object} [options.body.child]
+         * 
+         * @param {string} [options.body.child.constProperty] Constant string
+         * 
+         * @param {number} [options.body.child.count] Count
+         * 
          * @param {number} [options.body.constInt] Constant int
          * 
          * @param {string} [options.body.constString] Constant string
@@ -115,6 +121,12 @@ declare class AutoRestValidationTest {
          * exclusive.
          * 
          * @param {string} [options.body.image] Image URL representing the product.
+         * 
+         * @param {object} [options.body.child]
+         * 
+         * @param {string} [options.body.child.constProperty] Constant string
+         * 
+         * @param {number} [options.body.child.count] Count
          * 
          * @param {number} [options.body.constInt] Constant int
          * 

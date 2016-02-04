@@ -34,6 +34,11 @@ public class Product {
     private String image;
 
     /**
+     * The child property.
+     */
+    private ChildProduct child;
+
+    /**
      * Constant int.
      */
     private Integer constInt;
@@ -95,6 +100,24 @@ public class Product {
      */
     public void setImage(String image) {
         this.image = image;
+    }
+
+    /**
+     * Get the child value.
+     *
+     * @return the child value
+     */
+    public ChildProduct getChild() {
+        return this.child;
+    }
+
+    /**
+     * Set the child value.
+     *
+     * @param child the child value to set
+     */
+    public void setChild(ChildProduct child) {
+        this.child = child;
     }
 
     /**

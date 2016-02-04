@@ -259,6 +259,12 @@ AutoRestValidationTest.prototype.validationOfMethodParameters = function (resour
  * 
  * @param {string} [options.body.image] Image URL representing the product.
  * 
+ * @param {object} [options.body.child]
+ * 
+ * @param {string} [options.body.child.constProperty] Constant string
+ * 
+ * @param {number} [options.body.child.count] Count
+ * 
  * @param {number} [options.body.constInt] Constant int
  * 
  * @param {string} [options.body.constString] Constant string
@@ -548,6 +554,12 @@ AutoRestValidationTest.prototype.getWithConstantInPath = function (options, call
  * exclusive.
  * 
  * @param {string} [options.body.image] Image URL representing the product.
+ * 
+ * @param {object} [options.body.child]
+ * 
+ * @param {string} [options.body.child.constProperty] Constant string
+ * 
+ * @param {number} [options.body.child.count] Count
  * 
  * @param {number} [options.body.constInt] Constant int
  * 

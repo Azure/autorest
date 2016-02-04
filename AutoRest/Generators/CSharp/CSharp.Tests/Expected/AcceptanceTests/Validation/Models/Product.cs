@@ -28,11 +28,12 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         /// <summary>
         /// Initializes a new instance of the Product class.
         /// </summary>
-        public Product(IList<string> displayNames = default(IList<string>), int? capacity = default(int?), string image = default(string))
+        public Product(IList<string> displayNames = default(IList<string>), int? capacity = default(int?), string image = default(string), ChildProduct child = default(ChildProduct))
         {
             DisplayNames = displayNames;
             Capacity = capacity;
             Image = image;
+            Child = child;
         }
 
         /// <summary>
@@ -52,6 +53,11 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         /// </summary>
         [JsonProperty(PropertyName = "image")]
         public string Image { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "child")]
+        public ChildProduct Child { get; set; }
 
         /// <summary>
         /// Constant int

@@ -10,6 +10,8 @@
 
 'use strict';
 
+var models = require('./index');
+
 var util = require('util');
 
 /**
@@ -23,6 +25,12 @@ var util = require('util');
  * @member {number} [capacity] Non required int betwen 0 and 100 exclusive.
  * 
  * @member {string} [image] Image URL representing the product.
+ * 
+ * @member {object} [child]
+ * 
+ * @member {string} [child.constProperty] Constant string
+ * 
+ * @member {number} [child.count] Count
  * 
  * @member {number} [constInt] Constant int. Default value: 0 .
  * 
@@ -84,6 +92,14 @@ Product.prototype.mapper = function () {
           },
           type: {
             name: 'String'
+          }
+        },
+        child: {
+          required: false,
+          serializedName: 'child',
+          type: {
+            name: 'Composite',
+            className: 'ChildProduct'
           }
         },
         constInt: {

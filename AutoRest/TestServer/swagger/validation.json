@@ -191,6 +191,9 @@
           "description": "Image URL representing the product.",
           "pattern": "http://\\w+"
         },
+        "child": {
+          "$ref": "#/definitions/ChildProduct"
+        },
         "constInt": {
           "type": "integer",
           "description": "Constant int",
@@ -200,6 +203,20 @@
           "type": "string",
           "description": "Constant string",
           "enum": [ "constant" ]
+        }
+      }
+    },
+    "ChildProduct": {
+      "description": "The product documentation.",
+      "properties": {
+        "constProperty": {
+          "type": "string",
+          "description": "Constant string",
+          "enum": [ "constant" ]
+        },
+        "count": {
+          "type": "integer",
+          "description": "Count"
         }
       }
     },

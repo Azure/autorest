@@ -10,9 +10,11 @@
 # --------------------------------------------------------------------------
 
 from .product import Product
+from .child_product import ChildProduct
 from .error import Error, ErrorException
 
 __all__ = [
     'Product',
+    'ChildProduct',
     'Error', 'ErrorException',
 ]

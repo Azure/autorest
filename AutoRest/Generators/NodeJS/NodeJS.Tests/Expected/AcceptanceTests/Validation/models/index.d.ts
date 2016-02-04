@@ -21,6 +21,12 @@
  * 
  * @member {string} [image] Image URL representing the product.
  * 
+ * @member {object} [child]
+ * 
+ * @member {string} [child.constProperty] Constant string
+ * 
+ * @member {number} [child.count] Count
+ * 
  * @member {number} [constInt] Constant int
  * 
  * @member {string} [constString] Constant string
@@ -30,8 +36,24 @@ export interface Product {
     displayNames?: string[];
     capacity?: number;
     image?: string;
+    child?: ChildProduct;
     constInt?: number;
     constString?: string;
+}
+
+/**
+ * @class
+ * Initializes a new instance of the ChildProduct class.
+ * @constructor
+ * The product documentation.
+ * @member {string} [constProperty] Constant string
+ * 
+ * @member {number} [count] Count
+ * 
+ */
+export interface ChildProduct {
+    constProperty?: string;
+    count?: number;
 }
 
 /**
