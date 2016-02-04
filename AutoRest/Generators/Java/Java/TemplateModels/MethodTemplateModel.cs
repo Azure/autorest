@@ -111,7 +111,7 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public string MethodParameterDeclaration
+        public virtual string MethodParameterDeclaration
         {
             get
             {
@@ -402,7 +402,7 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
         
-        public string GenericReturnTypeString
+        public virtual string GenericReturnTypeString
         {
             get
             {
