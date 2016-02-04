@@ -15,7 +15,7 @@ from .cat import Cat
 class Siamese(Cat):
     """Siamese
 
-    :param str breed
+    :param str breed:
     """
 
     _required = []

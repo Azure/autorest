@@ -15,7 +15,7 @@ from msrest.serialization import Model
 class ClassOptionalWrapper(Model):
     """ClassOptionalWrapper
 
-    :param Product value
+    :param Product value:
     """
 
     _required = []

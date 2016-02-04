@@ -15,7 +15,7 @@ from msrest.serialization import Model
 class D(Model):
     """D
 
-    :param str http_status_code
+    :param str http_status_code:
     """
 
     _required = []

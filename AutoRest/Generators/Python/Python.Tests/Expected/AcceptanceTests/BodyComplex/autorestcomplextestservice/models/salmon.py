@@ -15,8 +15,8 @@ from .fish import Fish
 class Salmon(Fish):
     """Salmon
 
-    :param str location
-    :param bool iswild
+    :param str location:
+    :param bool iswild:
     """
 
     _required = []

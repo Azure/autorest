@@ -15,8 +15,8 @@ from msrest.serialization import Model
 class Product(Model):
     """Product
 
-    :param int id
-    :param str name
+    :param int id:
+    :param str name:
     """
 
     _required = ['id']

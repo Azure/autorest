@@ -15,12 +15,12 @@ from .resource import Resource
 class FlattenedProduct(Resource):
     """FlattenedProduct
 
-    :param str pname
-    :param str flattened_product_type
+    :param str pname:
+    :param str flattened_product_type:
     :param str provisioning_state_values: Possible values include:
      'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created',
      'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
-    :param str provisioning_state
+    :param str provisioning_state:
     """
 
     _required = []

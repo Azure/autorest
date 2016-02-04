@@ -16,7 +16,7 @@ class ParameterGroupingPostOptionalParameters(Model):
     """
     Additional parameters for the postOptional operation.
 
-    :param str custom_header
+    :param str custom_header:
     :param int query: Query parameter with default. Default value: 30 .
     """
 

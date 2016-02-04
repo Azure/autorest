@@ -18,7 +18,7 @@ class OperationResult(Model):
     :param str status: The status of the request. Possible values include:
      'Succeeded', 'Failed', 'canceled', 'Accepted', 'Creating', 'Created',
      'Updating', 'Updated', 'Deleting', 'Deleted', 'OK'
-    :param OperationResultError error
+    :param OperationResultError error:
     """
 
     _required = []

@@ -15,7 +15,7 @@ from msrest.serialization import Model
 class ArrayOptionalWrapper(Model):
     """ArrayOptionalWrapper
 
-    :param list value
+    :param list value:
     """
 
     _required = []

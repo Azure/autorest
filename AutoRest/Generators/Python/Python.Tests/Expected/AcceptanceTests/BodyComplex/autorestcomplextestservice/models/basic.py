@@ -15,8 +15,8 @@ from msrest.serialization import Model
 class Basic(Model):
     """Basic
 
-    :param int id
-    :param str name
+    :param int id:
+    :param str name:
     :param str color: Possible values include: 'cyan', 'Magenta', 'YELLOW',
      'blacK'
     """

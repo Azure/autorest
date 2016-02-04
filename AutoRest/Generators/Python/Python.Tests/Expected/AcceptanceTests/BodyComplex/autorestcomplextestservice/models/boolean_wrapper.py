@@ -15,8 +15,8 @@ from msrest.serialization import Model
 class BooleanWrapper(Model):
     """BooleanWrapper
 
-    :param bool field_true
-    :param bool field_false
+    :param bool field_true:
+    :param bool field_false:
     """
 
     _required = []

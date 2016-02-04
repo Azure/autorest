@@ -15,7 +15,7 @@ from msrest.serialization import Model
 class ByteWrapper(Model):
     """ByteWrapper
 
-    :param bytearray field
+    :param bytearray field:
     """
 
     _required = []

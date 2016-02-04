@@ -16,7 +16,7 @@ class ParameterGroupingPostMultiParamGroupsSecondParamGroup(Model):
     """
     Additional parameters for the postMultiParamGroups operation.
 
-    :param str header_two
+    :param str header_two:
     :param int query_two: Query parameter with default. Default value: 30 .
     """
 

@@ -15,8 +15,8 @@ from msrest.serialization import Model
 class Sku(Model):
     """Sku
 
-    :param str name
-    :param str id
+    :param str name:
+    :param str id:
     """
 
     _required = []

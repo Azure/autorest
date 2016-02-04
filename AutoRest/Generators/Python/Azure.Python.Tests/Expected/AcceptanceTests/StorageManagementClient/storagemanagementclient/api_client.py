@@ -65,7 +65,7 @@ class StorageManagementClientConfiguration(AzureConfiguration):
 
 
 class StorageManagementClient(object):
-    """
+    """StorageManagementClient
 
     :param config: Configuration for client.
     :type config: StorageManagementClientConfiguration

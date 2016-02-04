@@ -15,7 +15,7 @@ from .shark import Shark
 class Goblinshark(Shark):
     """Goblinshark
 
-    :param int jawsize
+    :param int jawsize:
     """
 
     _required = []

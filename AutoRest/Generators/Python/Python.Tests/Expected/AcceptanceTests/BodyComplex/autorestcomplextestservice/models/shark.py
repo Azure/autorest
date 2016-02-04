@@ -15,8 +15,8 @@ from .fish import Fish
 class Shark(Fish):
     """Shark
 
-    :param int age
-    :param datetime birthday
+    :param int age:
+    :param datetime birthday:
     """
 
     _required = ['birthday']

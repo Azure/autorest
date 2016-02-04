@@ -16,9 +16,9 @@ from msrest.exceptions import HttpOperationError
 class Error(Model):
     """Error
 
-    :param int code
-    :param str message
-    :param str fields
+    :param int code:
+    :param str message:
+    :param str fields:
     """
 
     _required = []

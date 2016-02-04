@@ -15,9 +15,9 @@ from msrest.serialization import Model
 class Fish(Model):
     """Fish
 
-    :param str species
-    :param float length
-    :param list siblings
+    :param str species:
+    :param float length:
+    :param list siblings:
     :param str fishtype: Polymorhpic Discriminator
     """
 

@@ -8,6 +8,7 @@ using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 using System.Text;
 using Microsoft.Rest.Generator.Python.TemplateModels;
+using System;
 
 namespace Microsoft.Rest.Generator.Python
 {
@@ -136,6 +137,45 @@ namespace Microsoft.Rest.Generator.Python
             {
                 return this.Name.ToPythonCase().Replace("_", "");
             }
+        }
+
+        public string ServiceDocument
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(this.Documentation))
+                {
+                    return this.Name;
+                }
+                else
+                {
+                    return this.Documentation.EscapeXmlComment();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Provides the property documentation string.
+        /// </summary>
+        /// <param name="property">Parameter to be documented</param>
+        /// <returns>Parameter documentation string correct notation</returns>
+        public static string GetPropertyDocumentationString(Property property)
+        {
+            if (property == null)
+            {
+                throw new ArgumentNullException("property");
+            }
+
+            string docString = ":param ";
+
+            docString += property.Name + ":";
+
+            if (!string.IsNullOrWhiteSpace(property.Documentation))
+            {
+                docString += " " + property.Documentation;
+            }
+
+            return docString;
         }
     }
 }

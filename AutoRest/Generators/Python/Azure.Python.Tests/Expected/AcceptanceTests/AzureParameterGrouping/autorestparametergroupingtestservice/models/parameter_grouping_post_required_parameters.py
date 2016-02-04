@@ -16,8 +16,8 @@ class ParameterGroupingPostRequiredParameters(Model):
     """
     Additional parameters for the postRequired operation.
 
-    :param int body
-    :param str custom_header
+    :param int body:
+    :param str custom_header:
     :param int query: Query parameter with default. Default value: 30 .
     :param str path: Path parameter
     """

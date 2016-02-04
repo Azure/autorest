@@ -15,7 +15,7 @@ from msrest.serialization import Model
 class DurationWrapper(Model):
     """DurationWrapper
 
-    :param timedelta field
+    :param timedelta field:
     """
 
     _required = []

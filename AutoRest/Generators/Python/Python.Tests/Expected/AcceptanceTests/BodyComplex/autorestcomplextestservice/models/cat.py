@@ -15,8 +15,8 @@ from .pet import Pet
 class Cat(Pet):
     """Cat
 
-    :param str color
-    :param list hates
+    :param str color:
+    :param list hates:
     """
 
     _required = []

@@ -15,7 +15,7 @@ from .a import A
 class B(A):
     """B
 
-    :param str text_status_code
+    :param str text_status_code:
     """
 
     _required = []

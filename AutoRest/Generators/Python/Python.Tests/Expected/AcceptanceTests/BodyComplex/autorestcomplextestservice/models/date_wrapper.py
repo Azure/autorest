@@ -15,8 +15,8 @@ from msrest.serialization import Model
 class DateWrapper(Model):
     """DateWrapper
 
-    :param date field
-    :param date leap
+    :param date field:
+    :param date leap:
     """
 
     _required = []

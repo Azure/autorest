@@ -15,8 +15,8 @@ from msrest.serialization import Model
 class OdataFilter(Model):
     """OdataFilter
 
-    :param int id
-    :param str name
+    :param int id:
+    :param str name:
     """
 
     _required = []

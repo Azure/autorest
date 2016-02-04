@@ -16,7 +16,7 @@ class FirstParameterGroup(Model):
     """
     Additional parameters for the postMultiParamGroups operation.
 
-    :param str header_one
+    :param str header_one:
     :param int query_one: Query parameter with default. Default value: 30 .
     """
 

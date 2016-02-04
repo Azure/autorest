@@ -15,7 +15,7 @@ from .pet import Pet
 class Dog(Pet):
     """Dog
 
-    :param str food
+    :param str food:
     """
 
     _required = []

@@ -15,8 +15,8 @@ from msrest.serialization import Model
 class LongWrapper(Model):
     """LongWrapper
 
-    :param long field1
-    :param long field2
+    :param long field1:
+    :param long field2:
     """
 
     _required = []

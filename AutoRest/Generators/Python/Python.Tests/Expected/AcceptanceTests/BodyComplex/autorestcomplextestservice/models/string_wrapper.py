@@ -15,9 +15,9 @@ from msrest.serialization import Model
 class StringWrapper(Model):
     """StringWrapper
 
-    :param str field
-    :param str empty
-    :param str null
+    :param str field:
+    :param str empty:
+    :param str null:
     """
 
     _required = []

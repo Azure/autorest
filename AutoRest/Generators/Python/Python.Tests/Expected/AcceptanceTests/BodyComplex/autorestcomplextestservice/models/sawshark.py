@@ -15,7 +15,7 @@ from .shark import Shark
 class Sawshark(Shark):
     """Sawshark
 
-    :param bytearray picture
+    :param bytearray picture:
     """
 
     _required = []

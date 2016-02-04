@@ -15,7 +15,7 @@ from msrest.serialization import Model
 class Product(Model):
     """Product
 
-    :param ProductProperties properties
+    :param ProductProperties properties:
     """
 
     _required = []

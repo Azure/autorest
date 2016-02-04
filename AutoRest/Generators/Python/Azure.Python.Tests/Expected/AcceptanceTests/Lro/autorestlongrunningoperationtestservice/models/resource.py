@@ -17,7 +17,7 @@ class Resource(Model):
 
     :param str id: Resource Id
     :param str type: Resource Type
-    :param dict tags
+    :param dict tags:
     :param str location: Resource Location
     :param str name: Resource Name
     """

@@ -15,8 +15,8 @@ from msrest.serialization import Model
 class DatetimeWrapper(Model):
     """DatetimeWrapper
 
-    :param datetime field
-    :param datetime now
+    :param datetime field:
+    :param datetime now:
     """
 
     _required = []

@@ -36,7 +36,7 @@ class @(Model.Name)Configuration(Configuration):
 @EmptyLine
 @foreach(var property in Model.Properties)
 {
-@:    @ParameterWrapComment(string.Empty, ":param " + property.Name + ": " + property.Documentation)
+@:    @ParameterWrapComment(string.Empty, ServiceClientTemplateModel.GetPropertyDocumentationString(property))
 @:    @ParameterWrapComment(string.Empty, ":type " + property.Name + ": " + MethodTemplateModel.GetDocumentationType(property.Type, property.IsRequired))
 }
     :param str base_url: Service URL
@@ -64,7 +64,7 @@ class @(Model.Name)Configuration(Configuration):
 @EmptyLine
 @EmptyLine
 class @(Model.Name)(object):
-    """@Model.Documentation.EscapeXmlComment()
+    """@Model.ServiceDocument
 @EmptyLine
     :param config: Configuration for client.
     :type config: @(Model.Name)Configuration

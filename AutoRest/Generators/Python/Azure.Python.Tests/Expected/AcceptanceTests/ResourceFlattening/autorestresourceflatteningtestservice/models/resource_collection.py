@@ -15,9 +15,9 @@ from msrest.serialization import Model
 class ResourceCollection(Model):
     """ResourceCollection
 
-    :param FlattenedProduct productresource
-    :param list arrayofresources
-    :param dict dictionaryofresources
+    :param FlattenedProduct productresource:
+    :param list arrayofresources:
+    :param dict dictionaryofresources:
     """
 
     _required = []

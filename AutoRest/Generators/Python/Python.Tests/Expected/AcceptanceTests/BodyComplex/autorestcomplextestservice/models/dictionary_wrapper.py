@@ -15,7 +15,7 @@ from msrest.serialization import Model
 class DictionaryWrapper(Model):
     """DictionaryWrapper
 
-    :param dict default_program
+    :param dict default_program:
     """
 
     _required = []
