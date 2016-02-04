@@ -56,7 +56,13 @@ public final class PagingOperationsImpl implements PagingOperations {
      */
     public ServiceResponse<List<Product>> getSinglePages() throws CloudException, IOException {
         Call<ResponseBody> call = service.getSinglePages(this.client.getAcceptLanguage());
-        return getSinglePagesDelegate(call.execute(), null);
+        ServiceResponse<PageImpl<Product>> response = getSinglePagesDelegate(call.execute(), null);
+        List<Product> result = response.getBody().getItems();
+        while (response.getBody().getNextPageLink() != null) {
+            response = this.client.getPagingOperations().getSinglePagesNext(response.getBody().getNextPageLink(), nextPageLink);
+            result.addAll(response.getBody().getItems());
+        }
+        return new ServiceResponse<>(result, response.getResponse());
     }
 
     /**
@@ -104,7 +110,19 @@ public final class PagingOperationsImpl implements PagingOperations {
             timeout = pagingGetMultiplePagesOptions.getTimeout();
         }
         Call<ResponseBody> call = service.getMultiplePages(clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
-        return getMultiplePagesDelegate(call.execute(), null);
+        ServiceResponse<PageImpl<Product>> response = getMultiplePagesDelegate(call.execute(), null);
+        List<Product> result = response.getBody().getItems();
+        while (response.getBody().getNextPageLink() != null) {
+        PagingGetMultiplePagesNextOptions pagingGetMultiplePagesNextOptions = null;
+            if (pagingGetMultiplePagesOptions != null) {
+                pagingGetMultiplePagesNextOptions = new PagingGetMultiplePagesNextOptions();
+                pagingGetMultiplePagesNextOptions.setMaxresults(pagingGetMultiplePagesOptions.getMaxresults());
+                pagingGetMultiplePagesNextOptions.setTimeout(pagingGetMultiplePagesOptions.getTimeout());
+            }
+                response = this.client.getPagingOperations().getMultiplePagesNext(response.getBody().getNextPageLink(), clientRequestId, pagingGetMultiplePagesNextOptions);
+            result.addAll(response.getBody().getItems());
+        }
+        return new ServiceResponse<>(result, response.getResponse());
     }
 
     /**
@@ -152,7 +170,13 @@ public final class PagingOperationsImpl implements PagingOperations {
      */
     public ServiceResponse<List<Product>> getMultiplePagesRetryFirst() throws CloudException, IOException {
         Call<ResponseBody> call = service.getMultiplePagesRetryFirst(this.client.getAcceptLanguage());
-        return getMultiplePagesRetryFirstDelegate(call.execute(), null);
+        ServiceResponse<PageImpl<Product>> response = getMultiplePagesRetryFirstDelegate(call.execute(), null);
+        List<Product> result = response.getBody().getItems();
+        while (response.getBody().getNextPageLink() != null) {
+            response = this.client.getPagingOperations().getMultiplePagesRetryFirstNext(response.getBody().getNextPageLink(), nextPageLink);
+            result.addAll(response.getBody().getItems());
+        }
+        return new ServiceResponse<>(result, response.getResponse());
     }
 
     /**
@@ -192,7 +216,13 @@ public final class PagingOperationsImpl implements PagingOperations {
      */
     public ServiceResponse<List<Product>> getMultiplePagesRetrySecond() throws CloudException, IOException {
         Call<ResponseBody> call = service.getMultiplePagesRetrySecond(this.client.getAcceptLanguage());
-        return getMultiplePagesRetrySecondDelegate(call.execute(), null);
+        ServiceResponse<PageImpl<Product>> response = getMultiplePagesRetrySecondDelegate(call.execute(), null);
+        List<Product> result = response.getBody().getItems();
+        while (response.getBody().getNextPageLink() != null) {
+            response = this.client.getPagingOperations().getMultiplePagesRetrySecondNext(response.getBody().getNextPageLink(), nextPageLink);
+            result.addAll(response.getBody().getItems());
+        }
+        return new ServiceResponse<>(result, response.getResponse());
     }
 
     /**
@@ -232,7 +262,13 @@ public final class PagingOperationsImpl implements PagingOperations {
      */
     public ServiceResponse<List<Product>> getSinglePagesFailure() throws CloudException, IOException {
         Call<ResponseBody> call = service.getSinglePagesFailure(this.client.getAcceptLanguage());
-        return getSinglePagesFailureDelegate(call.execute(), null);
+        ServiceResponse<PageImpl<Product>> response = getSinglePagesFailureDelegate(call.execute(), null);
+        List<Product> result = response.getBody().getItems();
+        while (response.getBody().getNextPageLink() != null) {
+            response = this.client.getPagingOperations().getSinglePagesFailureNext(response.getBody().getNextPageLink(), nextPageLink);
+            result.addAll(response.getBody().getItems());
+        }
+        return new ServiceResponse<>(result, response.getResponse());
     }
 
     /**
@@ -272,7 +308,13 @@ public final class PagingOperationsImpl implements PagingOperations {
      */
     public ServiceResponse<List<Product>> getMultiplePagesFailure() throws CloudException, IOException {
         Call<ResponseBody> call = service.getMultiplePagesFailure(this.client.getAcceptLanguage());
-        return getMultiplePagesFailureDelegate(call.execute(), null);
+        ServiceResponse<PageImpl<Product>> response = getMultiplePagesFailureDelegate(call.execute(), null);
+        List<Product> result = response.getBody().getItems();
+        while (response.getBody().getNextPageLink() != null) {
+            response = this.client.getPagingOperations().getMultiplePagesFailureNext(response.getBody().getNextPageLink(), nextPageLink);
+            result.addAll(response.getBody().getItems());
+        }
+        return new ServiceResponse<>(result, response.getResponse());
     }
 
     /**
@@ -312,7 +354,13 @@ public final class PagingOperationsImpl implements PagingOperations {
      */
     public ServiceResponse<List<Product>> getMultiplePagesFailureUri() throws CloudException, IOException {
         Call<ResponseBody> call = service.getMultiplePagesFailureUri(this.client.getAcceptLanguage());
-        return getMultiplePagesFailureUriDelegate(call.execute(), null);
+        ServiceResponse<PageImpl<Product>> response = getMultiplePagesFailureUriDelegate(call.execute(), null);
+        List<Product> result = response.getBody().getItems();
+        while (response.getBody().getNextPageLink() != null) {
+            response = this.client.getPagingOperations().getMultiplePagesFailureUriNext(response.getBody().getNextPageLink(), nextPageLink);
+            result.addAll(response.getBody().getItems());
+        }
+        return new ServiceResponse<>(result, response.getResponse());
     }
 
     /**
@@ -357,7 +405,7 @@ public final class PagingOperationsImpl implements PagingOperations {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getSinglePagesNext(nextPageLink, this.client.getAcceptLanguage());
-        return getSinglePagesNextDelegate(call.execute(), null);
+        return new ServiceResponse<>(result, response.getResponse());
     }
 
     /**
@@ -415,7 +463,7 @@ public final class PagingOperationsImpl implements PagingOperations {
             timeout = pagingGetMultiplePagesNextOptions.getTimeout();
         }
         Call<ResponseBody> call = service.getMultiplePagesNext(nextPageLink, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
-        return getMultiplePagesNextDelegate(call.execute(), null);
+        return new ServiceResponse<>(result, response.getResponse());
     }
 
     /**
@@ -473,7 +521,7 @@ public final class PagingOperationsImpl implements PagingOperations {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getMultiplePagesRetryFirstNext(nextPageLink, this.client.getAcceptLanguage());
-        return getMultiplePagesRetryFirstNextDelegate(call.execute(), null);
+        return new ServiceResponse<>(result, response.getResponse());
     }
 
     /**
@@ -523,7 +571,7 @@ public final class PagingOperationsImpl implements PagingOperations {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getMultiplePagesRetrySecondNext(nextPageLink, this.client.getAcceptLanguage());
-        return getMultiplePagesRetrySecondNextDelegate(call.execute(), null);
+        return new ServiceResponse<>(result, response.getResponse());
     }
 
     /**
@@ -573,7 +621,7 @@ public final class PagingOperationsImpl implements PagingOperations {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getSinglePagesFailureNext(nextPageLink, this.client.getAcceptLanguage());
-        return getSinglePagesFailureNextDelegate(call.execute(), null);
+        return new ServiceResponse<>(result, response.getResponse());
     }
 
     /**
@@ -623,7 +671,7 @@ public final class PagingOperationsImpl implements PagingOperations {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getMultiplePagesFailureNext(nextPageLink, this.client.getAcceptLanguage());
-        return getMultiplePagesFailureNextDelegate(call.execute(), null);
+        return new ServiceResponse<>(result, response.getResponse());
     }
 
     /**
@@ -673,7 +721,7 @@ public final class PagingOperationsImpl implements PagingOperations {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getMultiplePagesFailureUriNext(nextPageLink, this.client.getAcceptLanguage());
-        return getMultiplePagesFailureUriNextDelegate(call.execute(), null);
+        return new ServiceResponse<>(result, response.getResponse());
     }
 
     /**

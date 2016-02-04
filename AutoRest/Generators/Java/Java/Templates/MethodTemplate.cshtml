@@ -82,8 +82,9 @@ foreach (var transformation in Model.InputParameterTransformation.Where(t => t.P
 }
 }
 }
-    Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterInvocation);
-    return @(Model.Name)Delegate(call.execute(), null);
+    Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
+    @Model.ResponseGeneration
+    return @Model.ReturnValue;
 }
 @EmptyLine
 /**
@@ -155,7 +156,7 @@ foreach (var transformation in Model.InputParameterTransformation.Where(t => t.P
 }
 }
 }
-    Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterInvocation);
+    Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
     call.enqueue(new @Model.InternalCallback<@(JavaCodeNamer.WrapPrimitiveType(Model.ReturnType.Body).Name)>(serviceCallback) {
         @@Override
         public void onResponse(Response<@Model.CallType> response, Retrofit retrofit) {

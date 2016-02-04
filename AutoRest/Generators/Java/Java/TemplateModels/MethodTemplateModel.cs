@@ -16,8 +16,6 @@ namespace Microsoft.Rest.Generator.Java
     {
         private readonly IScopeProvider _scopeProvider = new ScopeProvider();
 
-        private string clientReference;
-
         public MethodTemplateModel(Method source, ServiceClient serviceClient)
         {
             this.LoadFrom(source);
@@ -28,14 +26,16 @@ namespace Microsoft.Rest.Generator.Java
             if (source.Group != null)
             {
                 OperationName = source.Group.ToPascalCase();
-                clientReference = "this.client";
+                ClientReference = "this.client";
             }
             else
             {
                 OperationName = serviceClient.Name;
-                clientReference = "this";
+                ClientReference = "this";
             }
         }
+
+        public string ClientReference { get; set; }
 
         public string OperationName { get; set; }
 
@@ -130,13 +130,28 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
+                List<string> invocations = new List<string>();
+                foreach (var parameter in LocalParameters)
+                {
+                    invocations.Add(parameter.Name);
+                }
+
+                var declaration = string.Join(", ", invocations);
+                return declaration;
+            }
+        }
+
+        public string MethodParameterApiInvocation
+        {
+            get
+            {
                 List<string> declarations = new List<string>();
                 foreach (var parameter in OrderedLogicalParameters)
                 {
                     if ((parameter.Location != ParameterLocation.Body)
                          && parameter.Type.NeedsSpecialSerialization())
                     {
-                        declarations.Add(parameter.ToString(parameter.Name, clientReference));
+                        declarations.Add(parameter.ToString(parameter.Name, ClientReference));
                     }
                     else
                     {
@@ -149,11 +164,11 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public string MethodParameterInvocationWithCallback
+        public string MethodParameterApiInvocationWithCallback
         {
             get
             {
-                var parameters = MethodParameterInvocation;
+                var parameters = MethodParameterApiInvocation;
                 if (!parameters.IsNullOrEmpty())
                 {
                     parameters += ", ";
@@ -173,7 +188,7 @@ namespace Microsoft.Rest.Generator.Java
                     if ((parameter.Location != ParameterLocation.Body)
                          && parameter.Type.NeedsSpecialSerialization())
                     {
-                        declarations.Add(parameter.ToString(parameter.Name, clientReference));
+                        declarations.Add(parameter.ToString(parameter.Name, ClientReference));
                     }
                     else
                     {
@@ -458,6 +473,22 @@ namespace Microsoft.Rest.Generator.Java
             get
             {
                 return "com.microsoft.rest";
+            }
+        }
+
+        public virtual string ResponseGeneration
+        {
+            get
+            {
+                return "";
+            }
+        }
+
+        public virtual string ReturnValue
+        {
+            get
+            {
+                return this.Name + "Delegate(call.execute(), null)";
             }
         }
 

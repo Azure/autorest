@@ -472,6 +472,8 @@ namespace Microsoft.Rest.Generator.Azure
                         {
                             nextLinkMethod.Name = nextLinkMethod.Name + "Next";
                         }
+                        method.Extensions["nextMethodName"] = nextLinkMethod.Name;
+                        method.Extensions["nextMethodGroup"] = nextLinkMethod.Group;
                         nextLinkMethod.Parameters.Clear();
                         nextLinkMethod.Url = "{nextLink}";
                         nextLinkMethod.IsAbsoluteUrl = true;

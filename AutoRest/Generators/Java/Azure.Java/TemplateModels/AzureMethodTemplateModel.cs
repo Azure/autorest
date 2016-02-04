@@ -31,24 +31,6 @@ namespace Microsoft.Rest.Generator.Java.Azure
 
         public string RequestIdString { get; private set; }
 
-        public AzureMethodTemplateModel GetMethod
-        {
-            get
-            {
-                var getMethod = ServiceClient.Methods.FirstOrDefault(m => m.Url == Url
-                                                                          && m.HttpMethod == HttpMethod.Get &&
-                                                                          m.Group == Group);
-                if (getMethod == null)
-                {
-                    throw new InvalidOperationException(
-                        string.Format(CultureInfo.InvariantCulture,
-                        Resources.InvalidLongRunningOperationForCreateOrUpdate,
-                            Name, Group));
-                }
-                return new AzureMethodTemplateModel(getMethod, ServiceClient);
-            }
-        }
-
         /// <summary>
         /// Returns true if method has x-ms-long-running-operation extension.
         /// </summary>
@@ -185,6 +167,91 @@ namespace Microsoft.Rest.Generator.Java.Azure
             {
                 return "AzureServiceResponseBuilder";
             }
+        }
+
+        public override string ResponseGeneration
+        {
+            get
+            {
+                if (this.Extensions.ContainsKey(AzureExtensions.PageableExtension) && !this.IsPagingNextOperation)
+                {
+                    var builder = new IndentedStringBuilder();
+                    builder.AppendLine("ServiceResponse<PageImpl<{0}>> response = {1}Delegate(call.execute(), null);",
+                        ((SequenceType)ReturnType.Body).ElementType.Name, this.Name);
+                    builder.AppendLine("{0} result = response.getBody().getItems();", ReturnType.Body.Name);
+                    builder.AppendLine("while (response.getBody().getNextPageLink() != null) {");
+                    builder.Indent();
+                    string invocation;
+                    AzureMethodTemplateModel nextMethod = GetPagingNextMethod(out invocation);
+                    builder.Append(TransformPagingGroupedParameter(nextMethod));
+                    builder.AppendLine("response = {0}(response.getBody().getNextPageLink(), {1});",
+                        invocation,
+                        nextMethod.MethodParameterInvocation.Replace("nextPageLink, ", ""));
+                    builder.AppendLine("result.addAll(response.getBody().getItems());");
+                    builder.Outdent().AppendLine("}");
+                    return builder.ToString();
+                }
+                else
+                {
+                    return base.ResponseGeneration;
+                }
+            }
+        }
+
+        public override string ReturnValue
+        {
+            get
+            {
+                if (this.Extensions.ContainsKey(AzureExtensions.PageableExtension))
+                {
+                    return "new ServiceResponse<>(result, response.getResponse())";
+                }
+                else
+                {
+                    return base.ReturnValue;
+                }
+            }
+        }
+
+        private AzureMethodTemplateModel GetPagingNextMethod(out string invocation)
+        {
+            string name = (string)this.Extensions["nextMethodName"];
+            string group = (string)this.Extensions["nextMethodGroup"];
+            var methodModel = new AzureMethodTemplateModel(ServiceClient.Methods.FirstOrDefault(m => m.Name == name), ServiceClient); group = group.ToPascalCase();
+            if (group != null && !group.EndsWith("Operations", StringComparison.Ordinal))
+            {
+                group += "Operations";
+            }
+            if (group == null || this.OperationName == group)
+            {
+                invocation = name;
+            }
+            else
+            {
+                invocation = string.Format(CultureInfo.InvariantCulture, "{0}.get{1}().{2}", ClientReference, group, name);
+            }
+            return methodModel;
+        }
+
+        private string TransformPagingGroupedParameter(AzureMethodTemplateModel nextMethod)
+        {
+            if (this.InputParameterTransformation.IsNullOrEmpty())
+            {
+                return "";
+            }
+            var builder = new IndentedStringBuilder();
+            var groupedType = this.InputParameterTransformation.FirstOrDefault().ParameterMappings[0].InputParameter;
+            var nextGroupType = nextMethod.InputParameterTransformation.FirstOrDefault().ParameterMappings[0].InputParameter;
+            builder.AppendLine("{0} {1} = null;", nextGroupType.Name.ToPascalCase(), nextGroupType.Name.ToCamelCase());
+            builder.AppendLine("if ({0} != null) {{", groupedType.Name.ToCamelCase());
+            builder.Indent();
+            builder.AppendLine("{0} = new {1}();", nextGroupType.Name.ToCamelCase(), nextGroupType.Name.ToPascalCase());
+            foreach (var outParam in nextMethod.InputParameterTransformation.Select(t => t.OutputParameter))
+            {
+                builder.AppendLine("{0}.set{1}({2}.get{1}());", nextGroupType.Name.ToCamelCase(), outParam.Name.ToPascalCase(), groupedType.Name.ToCamelCase());
+            }
+            builder.Outdent().AppendLine(@"}");
+            return builder.ToString();
         }
 
         public override string RuntimeBasePackage
