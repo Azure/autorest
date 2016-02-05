@@ -51,8 +51,6 @@ namespace Microsoft.Rest.Generator.Azure.Python
             }
         }
 
-        public bool HasAnyModel { get; private set; }
-
         public override IEnumerable<MethodGroupTemplateModel> MethodGroupModels
         {
             get

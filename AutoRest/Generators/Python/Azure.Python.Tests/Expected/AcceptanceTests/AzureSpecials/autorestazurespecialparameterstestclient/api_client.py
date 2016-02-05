@@ -25,6 +25,8 @@ from . import models
 
 class AutoRestAzureSpecialParametersTestClientConfiguration(AzureConfiguration):
     """Configuration for AutoRestAzureSpecialParametersTestClient
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
 
     :param credentials: Gets Azure subscription credentials.
     :type credentials: credentials
@@ -60,7 +62,7 @@ class AutoRestAzureSpecialParametersTestClientConfiguration(AzureConfiguration):
 
         super(AutoRestAzureSpecialParametersTestClientConfiguration, self).__init__(base_url, filepath)
 
-        self.user_agent = 'autorestazurespecialparameterstestclient/2015-07-01-preview'
+        self.add_user_agent('autorestazurespecialparameterstestclient/2015-07-01-preview')
 
         self.credentials = credentials
         self.subscription_id = subscription_id
@@ -75,6 +77,23 @@ class AutoRestAzureSpecialParametersTestClient(object):
 
     :param config: Configuration for client.
     :type config: AutoRestAzureSpecialParametersTestClientConfiguration
+
+    :ivar xms_client_request_id: XMsClientRequestId operations
+    :vartype xms_client_request_id: .operations.XMsClientRequestIdOperations
+    :ivar subscription_in_credentials: SubscriptionInCredentials operations
+    :vartype subscription_in_credentials: .operations.SubscriptionInCredentialsOperations
+    :ivar subscription_in_method: SubscriptionInMethod operations
+    :vartype subscription_in_method: .operations.SubscriptionInMethodOperations
+    :ivar api_version_default: ApiVersionDefault operations
+    :vartype api_version_default: .operations.ApiVersionDefaultOperations
+    :ivar api_version_local: ApiVersionLocal operations
+    :vartype api_version_local: .operations.ApiVersionLocalOperations
+    :ivar skip_url_encoding: SkipUrlEncoding operations
+    :vartype skip_url_encoding: .operations.SkipUrlEncodingOperations
+    :ivar odata: Odata operations
+    :vartype odata: .operations.OdataOperations
+    :ivar header: Header operations
+    :vartype header: .operations.HeaderOperations
     """
 
     def __init__(self, config):

@@ -17,6 +17,8 @@ from . import models
 
 class AutoRestRFC1123DateTimeTestServiceConfiguration(Configuration):
     """Configuration for AutoRestRFC1123DateTimeTestService
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
 
     :param str base_url: Service URL
     :param str filepath: Existing config
@@ -30,7 +32,7 @@ class AutoRestRFC1123DateTimeTestServiceConfiguration(Configuration):
 
         super(AutoRestRFC1123DateTimeTestServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.user_agent = 'autorestrfc1123datetimetestservice/1.0.0'
+        self.add_user_agent('autorestrfc1123datetimetestservice/1.0.0')
 
 
 class AutoRestRFC1123DateTimeTestService(object):
@@ -38,6 +40,9 @@ class AutoRestRFC1123DateTimeTestService(object):
 
     :param config: Configuration for client.
     :type config: AutoRestRFC1123DateTimeTestServiceConfiguration
+
+    :ivar datetimerfc1123: Datetimerfc1123 operations
+    :vartype datetimerfc1123: .operations.Datetimerfc1123
     """
 
     def __init__(self, config):

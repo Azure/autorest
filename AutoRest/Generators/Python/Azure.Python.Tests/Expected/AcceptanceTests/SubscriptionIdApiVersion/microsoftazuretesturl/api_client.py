@@ -18,6 +18,8 @@ from . import models
 
 class MicrosoftAzureTestUrlConfiguration(AzureConfiguration):
     """Configuration for MicrosoftAzureTestUrl
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
 
     :param credentials: Gets Azure subscription credentials.
     :type credentials: credentials
@@ -51,7 +53,7 @@ class MicrosoftAzureTestUrlConfiguration(AzureConfiguration):
 
         super(MicrosoftAzureTestUrlConfiguration, self).__init__(base_url, filepath)
 
-        self.user_agent = 'microsoftazuretesturl/2014-04-01-preview'
+        self.add_user_agent('microsoftazuretesturl/2014-04-01-preview')
 
         self.credentials = credentials
         self.subscription_id = subscription_id
@@ -66,6 +68,9 @@ class MicrosoftAzureTestUrl(object):
 
     :param config: Configuration for client.
     :type config: MicrosoftAzureTestUrlConfiguration
+
+    :ivar group: Group operations
+    :vartype group: .operations.GroupOperations
     """
 
     def __init__(self, config):

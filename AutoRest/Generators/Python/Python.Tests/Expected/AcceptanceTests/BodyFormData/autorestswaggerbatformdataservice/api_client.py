@@ -17,6 +17,8 @@ from . import models
 
 class AutoRestSwaggerBATFormDataServiceConfiguration(Configuration):
     """Configuration for AutoRestSwaggerBATFormDataService
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
 
     :param str base_url: Service URL
     :param str filepath: Existing config
@@ -30,7 +32,7 @@ class AutoRestSwaggerBATFormDataServiceConfiguration(Configuration):
 
         super(AutoRestSwaggerBATFormDataServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.user_agent = 'autorestswaggerbatformdataservice/1.0.0'
+        self.add_user_agent('autorestswaggerbatformdataservice/1.0.0')
 
 
 class AutoRestSwaggerBATFormDataService(object):
@@ -38,6 +40,9 @@ class AutoRestSwaggerBATFormDataService(object):
 
     :param config: Configuration for client.
     :type config: AutoRestSwaggerBATFormDataServiceConfiguration
+
+    :ivar formdata: Formdata operations
+    :vartype formdata: .operations.Formdata
     """
 
     def __init__(self, config):

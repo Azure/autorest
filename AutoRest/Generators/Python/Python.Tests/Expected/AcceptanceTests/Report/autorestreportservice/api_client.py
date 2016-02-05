@@ -17,6 +17,8 @@ from . import models
 
 class AutoRestReportServiceConfiguration(Configuration):
     """Configuration for AutoRestReportService
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
 
     :param str base_url: Service URL
     :param str filepath: Existing config
@@ -30,7 +32,7 @@ class AutoRestReportServiceConfiguration(Configuration):
 
         super(AutoRestReportServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.user_agent = 'autorestreportservice/1.0.0'
+        self.add_user_agent('autorestreportservice/1.0.0')
 
 
 class AutoRestReportService(object):

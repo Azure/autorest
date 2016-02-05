@@ -19,6 +19,8 @@ from . import models
 
 class AutoRestUrlTestServiceConfiguration(Configuration):
     """Configuration for AutoRestUrlTestService
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
 
     :param global_string_path: A string value 'globalItemStringPath' that
      appears in the path
@@ -39,7 +41,7 @@ class AutoRestUrlTestServiceConfiguration(Configuration):
 
         super(AutoRestUrlTestServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.user_agent = 'autoresturltestservice/1.0.0'
+        self.add_user_agent('autoresturltestservice/1.0.0')
 
         self.global_string_path = global_string_path
         self.global_string_query = global_string_query
@@ -50,6 +52,13 @@ class AutoRestUrlTestService(object):
 
     :param config: Configuration for client.
     :type config: AutoRestUrlTestServiceConfiguration
+
+    :ivar paths: Paths operations
+    :vartype paths: .operations.Paths
+    :ivar queries: Queries operations
+    :vartype queries: .operations.Queries
+    :ivar path_items: PathItems operations
+    :vartype path_items: .operations.PathItems
     """
 
     def __init__(self, config):

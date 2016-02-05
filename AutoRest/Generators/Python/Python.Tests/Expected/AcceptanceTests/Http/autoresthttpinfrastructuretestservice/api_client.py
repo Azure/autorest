@@ -23,6 +23,8 @@ from . import models
 
 class AutoRestHttpInfrastructureTestServiceConfiguration(Configuration):
     """Configuration for AutoRestHttpInfrastructureTestService
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
 
     :param str base_url: Service URL
     :param str filepath: Existing config
@@ -36,7 +38,7 @@ class AutoRestHttpInfrastructureTestServiceConfiguration(Configuration):
 
         super(AutoRestHttpInfrastructureTestServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.user_agent = 'autoresthttpinfrastructuretestservice/1.0.0'
+        self.add_user_agent('autoresthttpinfrastructuretestservice/1.0.0')
 
 
 class AutoRestHttpInfrastructureTestService(object):
@@ -44,6 +46,21 @@ class AutoRestHttpInfrastructureTestService(object):
 
     :param config: Configuration for client.
     :type config: AutoRestHttpInfrastructureTestServiceConfiguration
+
+    :ivar http_failure: HttpFailure operations
+    :vartype http_failure: .operations.HttpFailure
+    :ivar http_success: HttpSuccess operations
+    :vartype http_success: .operations.HttpSuccess
+    :ivar http_redirects: HttpRedirects operations
+    :vartype http_redirects: .operations.HttpRedirects
+    :ivar http_client_failure: HttpClientFailure operations
+    :vartype http_client_failure: .operations.HttpClientFailure
+    :ivar http_server_failure: HttpServerFailure operations
+    :vartype http_server_failure: .operations.HttpServerFailure
+    :ivar http_retry: HttpRetry operations
+    :vartype http_retry: .operations.HttpRetry
+    :ivar multiple_responses: MultipleResponses operations
+    :vartype multiple_responses: .operations.MultipleResponses
     """
 
     def __init__(self, config):

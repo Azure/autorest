@@ -18,6 +18,8 @@ from . import models
 
 class AutoRestPagingTestServiceConfiguration(AzureConfiguration):
     """Configuration for AutoRestPagingTestService
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
 
     :param credentials: Gets Azure subscription credentials.
     :type credentials: credentials
@@ -45,7 +47,7 @@ class AutoRestPagingTestServiceConfiguration(AzureConfiguration):
 
         super(AutoRestPagingTestServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.user_agent = 'autorestpagingtestservice/1.0.0'
+        self.add_user_agent('autorestpagingtestservice/1.0.0')
 
         self.credentials = credentials
         self.accept_language = accept_language
@@ -58,6 +60,9 @@ class AutoRestPagingTestService(object):
 
     :param config: Configuration for client.
     :type config: AutoRestPagingTestServiceConfiguration
+
+    :ivar paging: Paging operations
+    :vartype paging: .operations.PagingOperations
     """
 
     def __init__(self, config):

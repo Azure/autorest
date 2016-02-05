@@ -26,5 +26,8 @@
 
 
 from .azure_configuration import AzureConfiguration
+from .version import msrestazure_version
 
 __all__ = ["AzureConfiguration"]
+
+__version__ = msrestazure_version

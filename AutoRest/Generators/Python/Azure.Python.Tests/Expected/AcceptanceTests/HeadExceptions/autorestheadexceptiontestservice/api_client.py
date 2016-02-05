@@ -17,6 +17,8 @@ from .operations.head_exception_operations import HeadExceptionOperations
 
 class AutoRestHeadExceptionTestServiceConfiguration(AzureConfiguration):
     """Configuration for AutoRestHeadExceptionTestService
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
 
     :param credentials: Gets Azure subscription credentials.
     :type credentials: credentials
@@ -44,7 +46,7 @@ class AutoRestHeadExceptionTestServiceConfiguration(AzureConfiguration):
 
         super(AutoRestHeadExceptionTestServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.user_agent = 'autorestheadexceptiontestservice/1.0.0'
+        self.add_user_agent('autorestheadexceptiontestservice/1.0.0')
 
         self.credentials = credentials
         self.accept_language = accept_language
@@ -57,6 +59,9 @@ class AutoRestHeadExceptionTestService(object):
 
     :param config: Configuration for client.
     :type config: AutoRestHeadExceptionTestServiceConfiguration
+
+    :ivar head_exception: HeadException operations
+    :vartype head_exception: .operations.HeadExceptionOperations
     """
 
     def __init__(self, config):

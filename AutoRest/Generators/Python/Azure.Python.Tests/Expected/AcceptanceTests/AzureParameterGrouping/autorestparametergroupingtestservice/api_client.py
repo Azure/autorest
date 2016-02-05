@@ -18,6 +18,8 @@ from . import models
 
 class AutoRestParameterGroupingTestServiceConfiguration(AzureConfiguration):
     """Configuration for AutoRestParameterGroupingTestService
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
 
     :param credentials: Gets Azure subscription credentials.
     :type credentials: credentials
@@ -45,7 +47,7 @@ class AutoRestParameterGroupingTestServiceConfiguration(AzureConfiguration):
 
         super(AutoRestParameterGroupingTestServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.user_agent = 'autorestparametergroupingtestservice/1.0.0'
+        self.add_user_agent('autorestparametergroupingtestservice/1.0.0')
 
         self.credentials = credentials
         self.accept_language = accept_language
@@ -58,6 +60,9 @@ class AutoRestParameterGroupingTestService(object):
 
     :param config: Configuration for client.
     :type config: AutoRestParameterGroupingTestServiceConfiguration
+
+    :ivar parameter_grouping: ParameterGrouping operations
+    :vartype parameter_grouping: .operations.ParameterGroupingOperations
     """
 
     def __init__(self, config):

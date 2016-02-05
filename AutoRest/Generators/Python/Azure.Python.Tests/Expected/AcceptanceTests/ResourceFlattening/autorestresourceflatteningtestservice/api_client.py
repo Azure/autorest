@@ -19,6 +19,8 @@ from . import models
 
 class AutoRestResourceFlatteningTestServiceConfiguration(AzureConfiguration):
     """Configuration for AutoRestResourceFlatteningTestService
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
 
     :param credentials: Gets Azure subscription credentials.
     :type credentials: credentials
@@ -46,7 +48,7 @@ class AutoRestResourceFlatteningTestServiceConfiguration(AzureConfiguration):
 
         super(AutoRestResourceFlatteningTestServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.user_agent = 'autorestresourceflatteningtestservice/1.0.0'
+        self.add_user_agent('autorestresourceflatteningtestservice/1.0.0')
 
         self.credentials = credentials
         self.accept_language = accept_language

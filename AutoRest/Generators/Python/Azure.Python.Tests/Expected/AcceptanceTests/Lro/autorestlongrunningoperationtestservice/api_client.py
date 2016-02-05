@@ -21,6 +21,8 @@ from . import models
 
 class AutoRestLongRunningOperationTestServiceConfiguration(AzureConfiguration):
     """Configuration for AutoRestLongRunningOperationTestService
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
 
     :param credentials: Gets Azure subscription credentials.
     :type credentials: credentials
@@ -48,7 +50,7 @@ class AutoRestLongRunningOperationTestServiceConfiguration(AzureConfiguration):
 
         super(AutoRestLongRunningOperationTestServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.user_agent = 'autorestlongrunningoperationtestservice/1.0.0'
+        self.add_user_agent('autorestlongrunningoperationtestservice/1.0.0')
 
         self.credentials = credentials
         self.accept_language = accept_language
@@ -61,6 +63,15 @@ class AutoRestLongRunningOperationTestService(object):
 
     :param config: Configuration for client.
     :type config: AutoRestLongRunningOperationTestServiceConfiguration
+
+    :ivar lr_os: LROs operations
+    :vartype lr_os: .operations.LROsOperations
+    :ivar lro_retrys: LRORetrys operations
+    :vartype lro_retrys: .operations.LRORetrysOperations
+    :ivar lrosa_ds: LROSADs operations
+    :vartype lrosa_ds: .operations.LROSADsOperations
+    :ivar lr_os_custom_header: LROsCustomHeader operations
+    :vartype lr_os_custom_header: .operations.LROsCustomHeaderOperations
     """
 
     def __init__(self, config):

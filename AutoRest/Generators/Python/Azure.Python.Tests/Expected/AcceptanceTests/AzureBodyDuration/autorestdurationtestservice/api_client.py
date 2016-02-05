@@ -18,6 +18,8 @@ from . import models
 
 class AutoRestDurationTestServiceConfiguration(AzureConfiguration):
     """Configuration for AutoRestDurationTestService
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
 
     :param credentials: Gets Azure subscription credentials.
     :type credentials: credentials
@@ -45,7 +47,7 @@ class AutoRestDurationTestServiceConfiguration(AzureConfiguration):
 
         super(AutoRestDurationTestServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.user_agent = 'autorestdurationtestservice/1.0.0'
+        self.add_user_agent('autorestdurationtestservice/1.0.0')
 
         self.credentials = credentials
         self.accept_language = accept_language
@@ -58,6 +60,9 @@ class AutoRestDurationTestService(object):
 
     :param config: Configuration for client.
     :type config: AutoRestDurationTestServiceConfiguration
+
+    :ivar duration: Duration operations
+    :vartype duration: .operations.DurationOperations
     """
 
     def __init__(self, config):

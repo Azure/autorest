@@ -18,6 +18,8 @@ from . import models
 
 class AutoRestRequiredOptionalTestServiceConfiguration(Configuration):
     """Configuration for AutoRestRequiredOptionalTestService
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
 
     :param required_global_path: number of items to skip
     :type required_global_path: str
@@ -41,7 +43,7 @@ class AutoRestRequiredOptionalTestServiceConfiguration(Configuration):
 
         super(AutoRestRequiredOptionalTestServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.user_agent = 'autorestrequiredoptionaltestservice/1.0.0'
+        self.add_user_agent('autorestrequiredoptionaltestservice/1.0.0')
 
         self.required_global_path = required_global_path
         self.required_global_query = required_global_query
@@ -53,6 +55,11 @@ class AutoRestRequiredOptionalTestService(object):
 
     :param config: Configuration for client.
     :type config: AutoRestRequiredOptionalTestServiceConfiguration
+
+    :ivar implicit: Implicit operations
+    :vartype implicit: .operations.Implicit
+    :ivar explicit: Explicit operations
+    :vartype explicit: .operations.Explicit
     """
 
     def __init__(self, config):

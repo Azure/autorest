@@ -17,6 +17,8 @@ from .operations.http_success_operations import HttpSuccessOperations
 
 class AutoRestHeadTestServiceConfiguration(AzureConfiguration):
     """Configuration for AutoRestHeadTestService
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
 
     :param credentials: Gets Azure subscription credentials.
     :type credentials: credentials
@@ -44,7 +46,7 @@ class AutoRestHeadTestServiceConfiguration(AzureConfiguration):
 
         super(AutoRestHeadTestServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.user_agent = 'autorestheadtestservice/1.0.0'
+        self.add_user_agent('autorestheadtestservice/1.0.0')
 
         self.credentials = credentials
         self.accept_language = accept_language
@@ -57,6 +59,9 @@ class AutoRestHeadTestService(object):
 
     :param config: Configuration for client.
     :type config: AutoRestHeadTestServiceConfiguration
+
+    :ivar http_success: HttpSuccess operations
+    :vartype http_success: .operations.HttpSuccessOperations
     """
 
     def __init__(self, config):

@@ -17,6 +17,8 @@ from . import models
 
 class AutoRestValidationTestConfiguration(Configuration):
     """Configuration for AutoRestValidationTest
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
 
     :param subscription_id: Subscription ID.
     :type subscription_id: str
@@ -38,7 +40,7 @@ class AutoRestValidationTestConfiguration(Configuration):
 
         super(AutoRestValidationTestConfiguration, self).__init__(base_url, filepath)
 
-        self.user_agent = 'autorestvalidationtest/1.0.0'
+        self.add_user_agent('autorestvalidationtest/1.0.0')
 
         self.subscription_id = subscription_id
         self.api_version = api_version

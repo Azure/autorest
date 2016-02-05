@@ -17,6 +17,8 @@ from . import models
 
 class AutoRestBoolTestServiceConfiguration(Configuration):
     """Configuration for AutoRestBoolTestService
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
 
     :param str base_url: Service URL
     :param str filepath: Existing config
@@ -30,7 +32,7 @@ class AutoRestBoolTestServiceConfiguration(Configuration):
 
         super(AutoRestBoolTestServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.user_agent = 'autorestbooltestservice/1.0.0'
+        self.add_user_agent('autorestbooltestservice/1.0.0')
 
 
 class AutoRestBoolTestService(object):
@@ -38,6 +40,9 @@ class AutoRestBoolTestService(object):
 
     :param config: Configuration for client.
     :type config: AutoRestBoolTestServiceConfiguration
+
+    :ivar bool_model: BoolModel operations
+    :vartype bool_model: .operations.BoolModel
     """
 
     def __init__(self, config):

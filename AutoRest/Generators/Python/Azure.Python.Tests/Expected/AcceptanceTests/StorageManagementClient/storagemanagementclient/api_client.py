@@ -19,6 +19,8 @@ from . import models
 
 class StorageManagementClientConfiguration(AzureConfiguration):
     """Configuration for StorageManagementClient
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
 
     :param credentials: Gets Azure subscription credentials.
     :type credentials: credentials
@@ -54,7 +56,7 @@ class StorageManagementClientConfiguration(AzureConfiguration):
 
         super(StorageManagementClientConfiguration, self).__init__(base_url, filepath)
 
-        self.user_agent = 'storagemanagementclient/2015-05-01-preview'
+        self.add_user_agent('storagemanagementclient/2015-05-01-preview')
 
         self.credentials = credentials
         self.subscription_id = subscription_id
@@ -69,6 +71,11 @@ class StorageManagementClient(object):
 
     :param config: Configuration for client.
     :type config: StorageManagementClientConfiguration
+
+    :ivar storage_accounts: StorageAccounts operations
+    :vartype storage_accounts: .operations.StorageAccountsOperations
+    :ivar usage: Usage operations
+    :vartype usage: .operations.UsageOperations
     """
 
     def __init__(self, config):

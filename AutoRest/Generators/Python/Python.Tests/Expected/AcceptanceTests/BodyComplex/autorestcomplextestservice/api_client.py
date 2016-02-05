@@ -23,6 +23,8 @@ from . import models
 
 class AutoRestComplexTestServiceConfiguration(Configuration):
     """Configuration for AutoRestComplexTestService
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
 
     :param str base_url: Service URL
     :param str filepath: Existing config
@@ -36,7 +38,7 @@ class AutoRestComplexTestServiceConfiguration(Configuration):
 
         super(AutoRestComplexTestServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.user_agent = 'autorestcomplextestservice/1.0.0'
+        self.add_user_agent('autorestcomplextestservice/1.0.0')
 
 
 class AutoRestComplexTestService(object):
@@ -44,6 +46,21 @@ class AutoRestComplexTestService(object):
 
     :param config: Configuration for client.
     :type config: AutoRestComplexTestServiceConfiguration
+
+    :ivar basic_operations: BasicOperations operations
+    :vartype basic_operations: .operations.BasicOperations
+    :ivar primitive: Primitive operations
+    :vartype primitive: .operations.Primitive
+    :ivar array: Array operations
+    :vartype array: .operations.Array
+    :ivar dictionary: Dictionary operations
+    :vartype dictionary: .operations.Dictionary
+    :ivar inheritance: Inheritance operations
+    :vartype inheritance: .operations.Inheritance
+    :ivar polymorphism: Polymorphism operations
+    :vartype polymorphism: .operations.Polymorphism
+    :ivar polymorphicrecursive: Polymorphicrecursive operations
+    :vartype polymorphicrecursive: .operations.Polymorphicrecursive
     """
 
     def __init__(self, config):

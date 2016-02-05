@@ -17,6 +17,8 @@ from . import models
 
 class AutoRestNumberTestServiceConfiguration(Configuration):
     """Configuration for AutoRestNumberTestService
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
 
     :param str base_url: Service URL
     :param str filepath: Existing config
@@ -30,7 +32,7 @@ class AutoRestNumberTestServiceConfiguration(Configuration):
 
         super(AutoRestNumberTestServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.user_agent = 'autorestnumbertestservice/1.0.0'
+        self.add_user_agent('autorestnumbertestservice/1.0.0')
 
 
 class AutoRestNumberTestService(object):
@@ -38,6 +40,9 @@ class AutoRestNumberTestService(object):
 
     :param config: Configuration for client.
     :type config: AutoRestNumberTestServiceConfiguration
+
+    :ivar number: Number operations
+    :vartype number: .operations.Number
     """
 
     def __init__(self, config):

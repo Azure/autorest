@@ -17,6 +17,8 @@ from . import models
 
 class AutoRestSwaggerBATdictionaryServiceConfiguration(Configuration):
     """Configuration for AutoRestSwaggerBATdictionaryService
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
 
     :param str base_url: Service URL
     :param str filepath: Existing config
@@ -30,7 +32,7 @@ class AutoRestSwaggerBATdictionaryServiceConfiguration(Configuration):
 
         super(AutoRestSwaggerBATdictionaryServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.user_agent = 'autorestswaggerbatdictionaryservice/1.0.0'
+        self.add_user_agent('autorestswaggerbatdictionaryservice/1.0.0')
 
 
 class AutoRestSwaggerBATdictionaryService(object):
@@ -38,6 +40,9 @@ class AutoRestSwaggerBATdictionaryService(object):
 
     :param config: Configuration for client.
     :type config: AutoRestSwaggerBATdictionaryServiceConfiguration
+
+    :ivar dictionary: Dictionary operations
+    :vartype dictionary: .operations.Dictionary
     """
 
     def __init__(self, config):

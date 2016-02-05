@@ -17,6 +17,8 @@ from . import models
 
 class AutoRestSwaggerBATByteServiceConfiguration(Configuration):
     """Configuration for AutoRestSwaggerBATByteService
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
 
     :param str base_url: Service URL
     :param str filepath: Existing config
@@ -30,7 +32,7 @@ class AutoRestSwaggerBATByteServiceConfiguration(Configuration):
 
         super(AutoRestSwaggerBATByteServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.user_agent = 'autorestswaggerbatbyteservice/1.0.0'
+        self.add_user_agent('autorestswaggerbatbyteservice/1.0.0')
 
 
 class AutoRestSwaggerBATByteService(object):
@@ -38,6 +40,9 @@ class AutoRestSwaggerBATByteService(object):
 
     :param config: Configuration for client.
     :type config: AutoRestSwaggerBATByteServiceConfiguration
+
+    :ivar byte: Byte operations
+    :vartype byte: .operations.Byte
     """
 
     def __init__(self, config):

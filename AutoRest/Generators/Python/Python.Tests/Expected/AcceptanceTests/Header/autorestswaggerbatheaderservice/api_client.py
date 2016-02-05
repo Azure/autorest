@@ -17,6 +17,8 @@ from . import models
 
 class AutoRestSwaggerBATHeaderServiceConfiguration(Configuration):
     """Configuration for AutoRestSwaggerBATHeaderService
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
 
     :param str base_url: Service URL
     :param str filepath: Existing config
@@ -30,7 +32,7 @@ class AutoRestSwaggerBATHeaderServiceConfiguration(Configuration):
 
         super(AutoRestSwaggerBATHeaderServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.user_agent = 'autorestswaggerbatheaderservice/1.0.0'
+        self.add_user_agent('autorestswaggerbatheaderservice/1.0.0')
 
 
 class AutoRestSwaggerBATHeaderService(object):
@@ -38,6 +40,9 @@ class AutoRestSwaggerBATHeaderService(object):
 
     :param config: Configuration for client.
     :type config: AutoRestSwaggerBATHeaderServiceConfiguration
+
+    :ivar header: Header operations
+    :vartype header: .operations.Header
     """
 
     def __init__(self, config):
