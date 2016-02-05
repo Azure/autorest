@@ -634,7 +634,6 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
         public void AzureSpecialParametersTests()
         {
             var validSubscription = "1234-5678-9012-3456";
-            var validApiVersion = "2.0";
             var unencodedPath = "path1/path2/path3";
             var unencodedQuery = "value1&q2=value2&q3=value3";
             SwaggerSpecRunner.RunTests(
