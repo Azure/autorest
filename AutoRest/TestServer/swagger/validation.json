@@ -227,7 +227,7 @@
     },
     "ConstantProduct": {
       "description": "The product documentation.",
-      "required": [ "constProperty" ],
+      "required": [ "constProperty", "constProperty2" ],
       "properties": {
         "constProperty": {
           "type": "string",

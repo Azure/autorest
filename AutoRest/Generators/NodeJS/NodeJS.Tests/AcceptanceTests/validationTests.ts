@@ -116,7 +116,7 @@ describe('nodejs', function () {
       });
 
       it('should work in body', function (done) {
-        testClient.postWithConstantInBody({body: {}}, function (err, result) {
+        testClient.postWithConstantInBody(function (err, result) {
           should.not.exist(err);
           done();
         });

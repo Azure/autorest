@@ -164,6 +164,7 @@ namespace Microsoft.Rest.Modeler.Swagger
             var compositeType = parameter.Type as CompositeType;
             if (compositeType != null && compositeType.ComposedProperties.All(p => p.IsConstant))
             {
+                parameter.DefaultValue = "{}";
                 parameter.IsConstant = true;
             }
 

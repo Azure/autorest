@@ -26,27 +26,25 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         public Product()
         {
             this.Child = new ChildProduct();
-            this.ConstChild = new ConstantProduct();
         }
 
         /// <summary>
         /// Initializes a new instance of the Product class.
         /// </summary>
-        public Product(IList<string> displayNames = default(IList<string>), int? capacity = default(int?), string image = default(string), ChildProduct child = default(ChildProduct), ConstantProduct constChild = default(ConstantProduct))
+        public Product(IList<string> displayNames = default(IList<string>), int? capacity = default(int?), string image = default(string), ChildProduct child = default(ChildProduct))
         {
             DisplayNames = displayNames;
             Capacity = capacity;
             Image = image;
             Child = child;
-            ConstChild = constChild;
             Child = new ChildProduct();
-            ConstChild = new ConstantProduct();
         }
         /// <summary>
         /// Static constructor for Product class.
         /// </summary>
         static Product()
         {
+            ConstChild = new ConstantProduct();
             ConstInt = 0;
             ConstString = "constant";
         }
@@ -77,7 +75,7 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "constChild")]
-        public ConstantProduct ConstChild { get; set; }
+        public static ConstantProduct ConstChild { get; private set; }
 
         /// <summary>
         /// Constant int
@@ -132,10 +130,6 @@ namespace Fixtures.AcceptanceTestsValidation.Models
             if (this.Child != null)
             {
                 this.Child.Validate();
-            }
-            if (this.ConstChild != null)
-            {
-                this.ConstChild.Validate();
             }
         }
     }

@@ -17,10 +17,10 @@ class ConstantProduct(Model):
     The product documentation.
 
     :param str const_property: Constant string. Default value: "constant" .
-    :param str const_property2: Constant string2
+    :param str const_property2: Constant string2. Default value: "constant2" .
     """
 
-    _required = ['const_property']
+    _required = ['const_property', 'const_property2']
 
     _attribute_map = {
         'const_property': {'key': 'constProperty', 'type': 'str'},

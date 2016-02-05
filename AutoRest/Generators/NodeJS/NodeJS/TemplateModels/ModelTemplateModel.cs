@@ -87,7 +87,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                 var visitedHash = new Dictionary<string, PropertyWrapper>();
                 var retValue = new Stack<Property>();
 
-                foreach (var property in Properties)
+                foreach (var property in Properties.Where(p => !p.IsConstant))
                 {
                     var tempWrapper = new PropertyWrapper()
                     {

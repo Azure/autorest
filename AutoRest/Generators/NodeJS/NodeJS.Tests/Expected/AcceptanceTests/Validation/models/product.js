@@ -32,16 +32,6 @@ var util = require('util');
  * 
  * @member {number} [child.count] Count
  * 
- * @member {object} [constChild]
- * 
- * @member {string} [constChild.constProperty] Constant string
- * 
- * @member {string} [constChild.constProperty2] Constant string2
- * 
- * @member {number} constInt Constant int. Default value: 0 .
- * 
- * @member {string} constString Constant string. Default value: 'constant' .
- * 
  */
 function Product() {
 }
@@ -110,7 +100,9 @@ Product.prototype.mapper = function () {
         },
         constChild: {
           required: false,
+          isConstant: true,
           serializedName: 'constChild',
+          defaultValue: {},
           type: {
             name: 'Composite',
             className: 'ConstantProduct'

@@ -234,7 +234,7 @@ function serializeCompositeType(mapper, object, objectName) {
     for (var key in modelProps) {
       if (modelProps.hasOwnProperty(key)) {
         //make sure required properties of the CompositeType are present
-        if (modelProps[key].required) {
+        if (modelProps[key].required && !modelProps[key].isConstant) {
           if (object[key] === null || object[key] === undefined) {
             throw new Error(util.format('\'%s\' cannot be null or undefined in \'%s\'.', key, objectName));
           }

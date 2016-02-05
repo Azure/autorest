@@ -19,7 +19,7 @@ namespace Microsoft.Rest.Generator.Test
             throw new System.NotImplementedException();
         }
 
-        public override string QuoteString(string value, IType type)
+        public override string EscapeDefaultValue(string value, IType type)
         {
             throw new NotImplementedException();
         }

@@ -1946,7 +1946,7 @@ Explicit.prototype.postOptionalClassProperty = function (options, callback) {
     throw new Error('callback cannot be null.');
   }
   var value = (options && options.value !== undefined) ? options.value : undefined;
-    var bodyParameter;
+  var bodyParameter;
   if ((value !== null && value !== undefined))
   {
       bodyParameter = new client.models['ClassOptionalWrapper']();

@@ -27,7 +27,7 @@ else
 @:export interface @(Model.Name) {
 }
     @{
-    var propertyList = new List<Property>(Model.Properties);
+    var propertyList = new List<Property>(Model.Properties.Where(p => !p.IsConstant));
     for (int i = 0; i < propertyList.Count; i++)
     {
     @:@(ModelTemplateModel.PropertyTS(propertyList[i], true));

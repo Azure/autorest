@@ -301,6 +301,10 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
     throw new Error('callback cannot be null.');
   }
   var body = (options && options.body !== undefined) ? options.body : undefined;
+  if (body === null || body === undefined)
+  {
+    body = {};
+  }
   // Validate
   try {
     if (this.subscriptionId === null || this.subscriptionId === undefined || typeof this.subscriptionId.valueOf() !== 'string') {
@@ -602,8 +606,12 @@ AutoRestValidationTest.prototype.postWithConstantInBody = function (options, cal
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var constantParam = 'constant';
   var body = (options && options.body !== undefined) ? options.body : undefined;
+  var constantParam = 'constant';
+  if (body === null || body === undefined)
+  {
+    body = {};
+  }
   // Validate
   try {
     if (constantParam === null || constantParam === undefined || typeof constantParam.valueOf() !== 'string') {

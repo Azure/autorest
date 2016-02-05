@@ -25,6 +25,7 @@ public class ConstantProduct {
     /**
      * Constant string2.
      */
+    @JsonProperty(required = true)
     private String constProperty2;
 
     /**

@@ -340,22 +340,22 @@ namespace Microsoft.Rest.Generator.Python
             return dictionaryType;
         }
 
-        public override string QuoteString(string value, IType type)
+        public override string EscapeDefaultValue(string defaultValue, IType type)
         {
             if (type == null)
             {
                 throw new ArgumentNullException("type");
             }
 
-            if (value != null)
+            if (defaultValue != null)
             {
                 if (type == PrimaryType.String)
                 {
-                    return CodeNamer.QuoteValue(value);
+                    return CodeNamer.QuoteValue(defaultValue);
                 }
                 else if (type == PrimaryType.Boolean)
                 {
-                    return value;
+                    return defaultValue;
                 }
                 else
                 {
@@ -364,16 +364,16 @@ namespace Microsoft.Rest.Generator.Python
                         type == PrimaryType.DateTimeRfc1123 ||
                         type == PrimaryType.TimeSpan)
                     {
-                        return "isodate.parse_date(\"" + value + "\")";
+                        return "isodate.parse_date(\"" + defaultValue + "\")";
                     }
 
                     if (type == PrimaryType.ByteArray)
                     {
-                        return "bytearray(\"" + value + "\", encoding=\"utf-8\")";
+                        return "bytearray(\"" + defaultValue + "\", encoding=\"utf-8\")";
                     }
                 }
             }
-            return value;
+            return defaultValue;
         }
     }
 }

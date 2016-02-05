@@ -15,10 +15,6 @@
  * Initializes a new instance of the ConstantProduct class.
  * @constructor
  * The product documentation.
- * @member {string} constProperty Constant string. Default value: 'constant' .
- * 
- * @member {string} [constProperty2] Constant string2
- * 
  */
 function ConstantProduct() {
 }
@@ -47,8 +43,10 @@ ConstantProduct.prototype.mapper = function () {
           }
         },
         constProperty2: {
-          required: false,
+          required: true,
+          isConstant: true,
           serializedName: 'constProperty2',
+          defaultValue: 'constant2',
           type: {
             name: 'String'
           }

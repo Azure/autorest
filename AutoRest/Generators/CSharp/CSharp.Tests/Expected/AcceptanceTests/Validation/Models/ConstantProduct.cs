@@ -26,31 +26,25 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         public ConstantProduct() { }
 
         /// <summary>
-        /// Initializes a new instance of the ConstantProduct class.
-        /// </summary>
-        public ConstantProduct(string constProperty2 = default(string))
-        {
-            ConstProperty2 = constProperty2;
-        }
-        /// <summary>
         /// Static constructor for ConstantProduct class.
         /// </summary>
         static ConstantProduct()
         {
             ConstProperty = "constant";
+            ConstProperty2 = "constant2";
         }
-
-        /// <summary>
-        /// Constant string2
-        /// </summary>
-        [JsonProperty(PropertyName = "constProperty2")]
-        public string ConstProperty2 { get; set; }
 
         /// <summary>
         /// Constant string
         /// </summary>
         [JsonProperty(PropertyName = "constProperty")]
         public static string ConstProperty { get; private set; }
+
+        /// <summary>
+        /// Constant string2
+        /// </summary>
+        [JsonProperty(PropertyName = "constProperty2")]
+        public static string ConstProperty2 { get; private set; }
 
         /// <summary>
         /// Validate the object. Throws ValidationException if validation fails.

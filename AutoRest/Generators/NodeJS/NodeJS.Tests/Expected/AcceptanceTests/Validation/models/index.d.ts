@@ -27,25 +27,12 @@
  * 
  * @member {number} [child.count] Count
  * 
- * @member {object} [constChild]
- * 
- * @member {string} [constChild.constProperty] Constant string
- * 
- * @member {string} [constChild.constProperty2] Constant string2
- * 
- * @member {number} constInt Constant int
- * 
- * @member {string} constString Constant string
- * 
  */
 export interface Product {
     displayNames?: string[];
     capacity?: number;
     image?: string;
     child?: ChildProduct;
-    constChild?: ConstantProduct;
-    constInt: number;
-    constString: string;
 }
 
 /**
@@ -53,13 +40,10 @@ export interface Product {
  * Initializes a new instance of the ChildProduct class.
  * @constructor
  * The product documentation.
- * @member {string} constProperty Constant string
- * 
  * @member {number} [count] Count
  * 
  */
 export interface ChildProduct {
-    constProperty: string;
     count?: number;
 }
 
@@ -68,14 +52,8 @@ export interface ChildProduct {
  * Initializes a new instance of the ConstantProduct class.
  * @constructor
  * The product documentation.
- * @member {string} constProperty Constant string
- * 
- * @member {string} [constProperty2] Constant string2
- * 
  */
 export interface ConstantProduct {
-    constProperty: string;
-    constProperty2?: string;
 }
 
 /**
