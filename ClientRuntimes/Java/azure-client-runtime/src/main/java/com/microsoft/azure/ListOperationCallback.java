@@ -8,50 +8,60 @@
 package com.microsoft.azure;
 
 import com.microsoft.rest.ServiceCallback;
-import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.ServiceResponseCallback;
-import com.squareup.okhttp.ResponseBody;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-import javax.xml.ws.Service;
-
-import retrofit.Call;
-import retrofit.Response;
-import retrofit.Retrofit;
-
 /**
- * Inner callback used to merge both successful and failed responses into one
- * callback for customized response handling in a response handling delegate.
+ * The callback used for client side asynchronous list operations.
  *
  * @param <E> the item type
  */
 public abstract class ListOperationCallback<E> extends ServiceCallback<List<E>> {
     /**
-     * The client callback.
+     * A list result that stores the accumulated resources loaded from server.
      */
     private List<E> result;
 
+    /**
+     * Number of loaded pages.
+     */
     private int pageCount;
 
     /**
-     * Creates an instance of ServiceResponseCallback.
+     * Creates an instance of ListOperationCallback.
      */
     public ListOperationCallback() {
         this.pageCount = 0;
     }
 
+    /**
+     * Override this method to handle progressive results.
+     * The user is responsible for returning a {@link PagingBahavior} Enum to indicate
+     * whether the client should continue loading or stop.
+     *
+     * @param partial the list of resources from the current request.
+     * @return CONTINUE if you want to go on loading, STOP otherwise.
+     *
+     */
     public PagingBahavior progress(List<E> partial) {
         return PagingBahavior.CONTINUE;
     }
 
+    /**
+     * Get the list result that stores the accumulated resources loaded from server.
+     *
+     * @return the list of resources.
+     */
     public List<E> get() {
         return result;
     }
 
+    /**
+     * This method is called by the client to load the most recent list of resources.
+     * This method should only be called by the service client.
+     *
+     * @param result the most recent list of resources.
+     */
     public void load(List<E> result) {
         ++pageCount;
         if (this.result == null || this.result.isEmpty()) {
@@ -61,12 +71,26 @@ public abstract class ListOperationCallback<E> extends ServiceCallback<List<E>> 
         }
     }
 
+    /**
+     * Get the number of loaded pages.
+     *
+     * @return the number of pages.
+     */
     public int pageCount() {
         return pageCount;
     }
 
+    /**
+     * An enum to indicate whether the client should continue loading or stop.
+     */
     public enum PagingBahavior {
+        /**
+         * Indicates that the client should continue loading.
+         */
         CONTINUE,
+        /**
+         * Indicates that the client should stop loading.
+         */
         STOP
     }
 }

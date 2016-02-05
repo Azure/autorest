@@ -248,8 +248,8 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     builder.AppendLine("ServiceResponse<PageImpl<{0}>> result = {1}Delegate(response, retrofit);",
                         ((SequenceType)ReturnType.Body).ElementType.Name, this.Name);
                     builder.AppendLine("serviceCallback.load(result.getBody().getItems());");
-                    builder.AppendLine("if (result.getBody().getNextPageLink() != null && ").Indent().Indent()
-                        .AppendLine("serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {").Outdent();
+                    builder.AppendLine("if (result.getBody().getNextPageLink() != null").Indent().Indent()
+                        .AppendLine("&& serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {").Outdent();
                     string invocation;
                     AzureMethodTemplateModel nextMethod = GetPagingNextMethod(out invocation, true);
                     TransformPagingGroupedParameter(builder, nextMethod);
@@ -267,8 +267,8 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     var builder = new IndentedStringBuilder();
                     builder.AppendLine("ServiceResponse<{0}> result = {1}Delegate(response, retrofit);", this.DelegateReturnTypeString, this.Name);
                     builder.AppendLine("serviceCallback.load(result.getBody().getItems());");
-                    builder.AppendLine("if (result.getBody().getNextPageLink() != null &&").Indent().Indent();
-                    builder.AppendLine("serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {").Outdent();
+                    builder.AppendLine("if (result.getBody().getNextPageLink() != null").Indent().Indent();
+                    builder.AppendLine("&& serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {").Outdent();
                     var nextCall = string.Format(CultureInfo.InvariantCulture, "{0}Async(result.getBody().getNextPageLink(), {1});",
                         this.Name,
                         this.MethodParameterInvocationWithCallback);

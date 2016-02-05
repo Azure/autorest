@@ -82,8 +82,8 @@ public final class PagingOperationsImpl implements PagingOperations {
                 try {
                     ServiceResponse<PageImpl<Product>> result = getSinglePagesDelegate(response, retrofit);
                     serviceCallback.load(result.getBody().getItems());
-                    if (result.getBody().getNextPageLink() != null && 
-                            serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                    if (result.getBody().getNextPageLink() != null
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
                         getSinglePagesNextAsync(result.getBody().getNextPageLink(), serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
@@ -151,8 +151,8 @@ public final class PagingOperationsImpl implements PagingOperations {
                 try {
                     ServiceResponse<PageImpl<Product>> result = getMultiplePagesDelegate(response, retrofit);
                     serviceCallback.load(result.getBody().getItems());
-                    if (result.getBody().getNextPageLink() != null && 
-                            serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                    if (result.getBody().getNextPageLink() != null
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
                         getMultiplePagesNextAsync(result.getBody().getNextPageLink(), clientRequestId, pagingGetMultiplePagesOptions, serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
@@ -227,8 +227,8 @@ public final class PagingOperationsImpl implements PagingOperations {
                 try {
                     ServiceResponse<PageImpl<Product>> result = getMultiplePagesWithOffsetDelegate(response, retrofit);
                     serviceCallback.load(result.getBody().getItems());
-                    if (result.getBody().getNextPageLink() != null && 
-                            serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                    if (result.getBody().getNextPageLink() != null
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
                         PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = new PagingGetMultiplePagesWithOffsetNextOptions();
                         pagingGetMultiplePagesWithOffsetNextOptions.setMaxresults(pagingGetMultiplePagesWithOffsetOptions.getMaxresults());
                         pagingGetMultiplePagesWithOffsetNextOptions.setTimeout(pagingGetMultiplePagesWithOffsetOptions.getTimeout());
@@ -283,8 +283,8 @@ public final class PagingOperationsImpl implements PagingOperations {
                 try {
                     ServiceResponse<PageImpl<Product>> result = getMultiplePagesRetryFirstDelegate(response, retrofit);
                     serviceCallback.load(result.getBody().getItems());
-                    if (result.getBody().getNextPageLink() != null && 
-                            serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                    if (result.getBody().getNextPageLink() != null
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
                         getMultiplePagesRetryFirstNextAsync(result.getBody().getNextPageLink(), serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
@@ -336,8 +336,8 @@ public final class PagingOperationsImpl implements PagingOperations {
                 try {
                     ServiceResponse<PageImpl<Product>> result = getMultiplePagesRetrySecondDelegate(response, retrofit);
                     serviceCallback.load(result.getBody().getItems());
-                    if (result.getBody().getNextPageLink() != null && 
-                            serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                    if (result.getBody().getNextPageLink() != null
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
                         getMultiplePagesRetrySecondNextAsync(result.getBody().getNextPageLink(), serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
@@ -389,8 +389,8 @@ public final class PagingOperationsImpl implements PagingOperations {
                 try {
                     ServiceResponse<PageImpl<Product>> result = getSinglePagesFailureDelegate(response, retrofit);
                     serviceCallback.load(result.getBody().getItems());
-                    if (result.getBody().getNextPageLink() != null && 
-                            serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                    if (result.getBody().getNextPageLink() != null
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
                         getSinglePagesFailureNextAsync(result.getBody().getNextPageLink(), serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
@@ -442,8 +442,8 @@ public final class PagingOperationsImpl implements PagingOperations {
                 try {
                     ServiceResponse<PageImpl<Product>> result = getMultiplePagesFailureDelegate(response, retrofit);
                     serviceCallback.load(result.getBody().getItems());
-                    if (result.getBody().getNextPageLink() != null && 
-                            serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                    if (result.getBody().getNextPageLink() != null
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
                         getMultiplePagesFailureNextAsync(result.getBody().getNextPageLink(), serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
@@ -495,8 +495,8 @@ public final class PagingOperationsImpl implements PagingOperations {
                 try {
                     ServiceResponse<PageImpl<Product>> result = getMultiplePagesFailureUriDelegate(response, retrofit);
                     serviceCallback.load(result.getBody().getItems());
-                    if (result.getBody().getNextPageLink() != null && 
-                            serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                    if (result.getBody().getNextPageLink() != null
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
                         getMultiplePagesFailureUriNextAsync(result.getBody().getNextPageLink(), serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
@@ -552,8 +552,8 @@ public final class PagingOperationsImpl implements PagingOperations {
                 try {
                     ServiceResponse<PageImpl<Product>> result = getSinglePagesNextDelegate(response, retrofit);
                     serviceCallback.load(result.getBody().getItems());
-                    if (result.getBody().getNextPageLink() != null &&
-                            serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                    if (result.getBody().getNextPageLink() != null
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
                         getSinglePagesNextAsync(result.getBody().getNextPageLink(), serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
@@ -625,8 +625,8 @@ public final class PagingOperationsImpl implements PagingOperations {
                 try {
                     ServiceResponse<PageImpl<Product>> result = getMultiplePagesNextDelegate(response, retrofit);
                     serviceCallback.load(result.getBody().getItems());
-                    if (result.getBody().getNextPageLink() != null &&
-                            serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                    if (result.getBody().getNextPageLink() != null
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
                         getMultiplePagesNextAsync(result.getBody().getNextPageLink(), clientRequestId, pagingGetMultiplePagesOptions, serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
@@ -690,8 +690,8 @@ public final class PagingOperationsImpl implements PagingOperations {
                 try {
                     ServiceResponse<PageImpl<Product>> result = getMultiplePagesWithOffsetNextDelegate(response, retrofit);
                     serviceCallback.load(result.getBody().getItems());
-                    if (result.getBody().getNextPageLink() != null &&
-                            serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                    if (result.getBody().getNextPageLink() != null
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
                         getMultiplePagesWithOffsetNextAsync(result.getBody().getNextPageLink(), clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions, serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
@@ -747,8 +747,8 @@ public final class PagingOperationsImpl implements PagingOperations {
                 try {
                     ServiceResponse<PageImpl<Product>> result = getMultiplePagesRetryFirstNextDelegate(response, retrofit);
                     serviceCallback.load(result.getBody().getItems());
-                    if (result.getBody().getNextPageLink() != null &&
-                            serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                    if (result.getBody().getNextPageLink() != null
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
                         getMultiplePagesRetryFirstNextAsync(result.getBody().getNextPageLink(), serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
@@ -804,8 +804,8 @@ public final class PagingOperationsImpl implements PagingOperations {
                 try {
                     ServiceResponse<PageImpl<Product>> result = getMultiplePagesRetrySecondNextDelegate(response, retrofit);
                     serviceCallback.load(result.getBody().getItems());
-                    if (result.getBody().getNextPageLink() != null &&
-                            serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                    if (result.getBody().getNextPageLink() != null
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
                         getMultiplePagesRetrySecondNextAsync(result.getBody().getNextPageLink(), serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
@@ -861,8 +861,8 @@ public final class PagingOperationsImpl implements PagingOperations {
                 try {
                     ServiceResponse<PageImpl<Product>> result = getSinglePagesFailureNextDelegate(response, retrofit);
                     serviceCallback.load(result.getBody().getItems());
-                    if (result.getBody().getNextPageLink() != null &&
-                            serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                    if (result.getBody().getNextPageLink() != null
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
                         getSinglePagesFailureNextAsync(result.getBody().getNextPageLink(), serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
@@ -918,8 +918,8 @@ public final class PagingOperationsImpl implements PagingOperations {
                 try {
                     ServiceResponse<PageImpl<Product>> result = getMultiplePagesFailureNextDelegate(response, retrofit);
                     serviceCallback.load(result.getBody().getItems());
-                    if (result.getBody().getNextPageLink() != null &&
-                            serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                    if (result.getBody().getNextPageLink() != null
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
                         getMultiplePagesFailureNextAsync(result.getBody().getNextPageLink(), serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
@@ -975,8 +975,8 @@ public final class PagingOperationsImpl implements PagingOperations {
                 try {
                     ServiceResponse<PageImpl<Product>> result = getMultiplePagesFailureUriNextDelegate(response, retrofit);
                     serviceCallback.load(result.getBody().getItems());
-                    if (result.getBody().getNextPageLink() != null &&
-                            serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                    if (result.getBody().getNextPageLink() != null
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
                         getMultiplePagesFailureUriNextAsync(result.getBody().getNextPageLink(), serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
