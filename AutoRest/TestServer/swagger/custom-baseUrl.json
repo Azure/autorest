@@ -1,7 +1,7 @@
 ﻿{
   "swagger": "2.0",
   "info": {
-    "title": "AutoRest Url Test Service",
+    "title": "AutoRest Parameterized Host Test Client",
     "description": "Test Infrastructure for AutoRest",
     "version": "1.0.0"
   },

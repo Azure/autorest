@@ -1,7 +1,7 @@
 ﻿{
   "swagger": "2.0",
   "info": {
-    "title": "AutoRest Custom BaseUri",
+    "title": "AutoRest Azure Special Parameters Test Client",
     "description": "Test Infrastructure for AutoRest",
     "version": "2015-07-01-preview"
   },

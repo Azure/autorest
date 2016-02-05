@@ -68,24 +68,23 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     }
 
     // Construct URL
-    @if (Model.IsAbsoluteUrl)
-    {
+@if (Model.IsAbsoluteUrl)
+{
     @:string _url = "@(Model.Url)";
-    }
-    else
-    {
-        if (Model.IsCustomBaseUri)
-        {
-            @:var _baseUrl = @(Model.ClientReference).BaseUri;
-            @:var _url = _baseUrl + (_baseUrl.EndsWith("/") ? "" : "/") + "@(Model.Url.TrimStart('/'))").ToString();
-        }
-        else
-        {
-            @:var _baseUrl = @(Model.ClientReference).BaseUri.AbsoluteUri;
-            @:var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "@(Model.Url.TrimStart('/'))").ToString();
-        }
-    
-    }
+}
+else
+{
+if (Model.IsCustomBaseUri)
+{
+    @:var _baseUrl = @(Model.ClientReference).BaseUri;
+    @:var _url = _baseUrl + (_baseUrl.EndsWith("/") ? "" : "/") + "@(Model.Url.TrimStart('/'))").ToString();
+}
+else
+{
+    @:var _baseUrl = @(Model.ClientReference).BaseUri.AbsoluteUri;
+    @:var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "@(Model.Url.TrimStart('/'))").ToString();
+}    
+}
     @(Model.BuildUrl("_url"))
     // Create HTTP transport objects
     HttpRequestMessage _httpRequest = new HttpRequestMessage();

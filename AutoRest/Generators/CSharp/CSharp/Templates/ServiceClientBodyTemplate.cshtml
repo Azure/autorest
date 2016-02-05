@@ -12,11 +12,11 @@
 /// </summary>
 @if(Model.IsCustomBaseUri)
 {
-    @:internal string BaseUri {get; set;}
+@:internal string BaseUri {get; set;}
 }
 else
 {
-    @:public Uri BaseUri { get; set; }
+@:public Uri BaseUri { get; set; }
 }
 @EmptyLine
 

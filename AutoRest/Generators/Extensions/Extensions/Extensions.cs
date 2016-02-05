@@ -50,31 +50,34 @@ namespace Microsoft.Rest.Generator
                 throw new ArgumentNullException("settings");
             }
 
-            SwaggerModeler modeler = new SwaggerModeler(settings);
+            if(serviceClient.Extensions.ContainsKey(ParameterizedHostExtension))
+            { 
+                SwaggerModeler modeler = new SwaggerModeler(settings);
+                var hostExtension = serviceClient.Extensions[ParameterizedHostExtension] as JObject;
 
-            var hostExtension = serviceClient.Extensions[ParameterizedHostExtension] as JObject;
-            if (hostExtension != null)
-            {
-                var hostTemplate = (string)hostExtension["hostTemplate"];
-                var jArrayParameters = hostExtension["parameters"] as JArray;
-                if (jArrayParameters != null)
+                if (hostExtension != null)
                 {
-                    foreach (var jObjectParameter in jArrayParameters)
+                    var hostTemplate = (string)hostExtension["hostTemplate"];
+                    var jArrayParameters = hostExtension["parameters"] as JArray;
+                    if (jArrayParameters != null)
                     {
-                        var swaggerParameter = jObjectParameter.ToObject<SwaggerParameter>();
-                        // Build parameter
-                        var parameterBuilder = new ParameterBuilder(swaggerParameter, modeler);
-                        var parameter = parameterBuilder.Build();
-                        foreach (var method in serviceClient.Methods)
+                        foreach (var jObjectParameter in jArrayParameters)
                         {
-                            method.Parameters.Add(parameter);
+                            var swaggerParameter = jObjectParameter.ToObject<SwaggerParameter>();
+                            // Build parameter
+                            var parameterBuilder = new ParameterBuilder(swaggerParameter, modeler);
+                            var parameter = parameterBuilder.Build();
+                            foreach (var method in serviceClient.Methods)
+                            {
+                                method.Parameters.Add(parameter);
+                            }
                         }
                     }
-                }
 
-                serviceClient.BaseUrl = string.Format(CultureInfo.InvariantCulture, "{0}://{1}{2}",
-                modeler.ServiceDefinition.Schemes[0].ToString().ToLowerInvariant(),
-                hostTemplate, modeler.ServiceDefinition.BasePath);
+                    serviceClient.BaseUrl = string.Format(CultureInfo.InvariantCulture, "{0}://{1}{2}",
+                    modeler.ServiceDefinition.Schemes[0].ToString().ToLowerInvariant(),
+                    hostTemplate, modeler.ServiceDefinition.BasePath);
+                }
             }
         }
 
