@@ -23,8 +23,6 @@
  * 
  * @member {object} [child]
  * 
- * @member {string} [child.constProperty] Constant string
- * 
  * @member {number} [child.count] Count
  * 
  */

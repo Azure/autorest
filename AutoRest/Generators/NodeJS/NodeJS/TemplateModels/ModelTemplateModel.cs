@@ -113,6 +113,10 @@ namespace Microsoft.Rest.Generator.NodeJS
                                 traversalStack.Push(wrapper);
                                 foreach (var subProperty in ((CompositeType)wrapper.Property.Type).Properties)
                                 {
+                                    if (subProperty.IsConstant)
+                                    {
+                                        continue;
+                                    }
                                     var individualProperty = new Property();
                                     individualProperty.Name = wrapper.Property.Name + "." + subProperty.Name;
                                     individualProperty.Type = subProperty.Type;
