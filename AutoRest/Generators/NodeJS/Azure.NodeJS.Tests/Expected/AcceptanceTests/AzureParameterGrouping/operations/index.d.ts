@@ -84,14 +84,14 @@ export interface ParameterGrouping {
      * default
      * 
      * @param {object}
-     * [options.parameterGroupingPostMultipleParameterGroupsSecondParameterGroup]
-     * Additional parameters for the operation
+     * [options.parameterGroupingPostMultiParamGroupsSecondParamGroup] Additional
+     * parameters for the operation
      * 
      * @param {string}
-     * [options.parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.headerTwo]
+     * [options.parameterGroupingPostMultiParamGroupsSecondParamGroup.headerTwo]
      * 
      * @param {number}
-     * [options.parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.queryTwo]
+     * [options.parameterGroupingPostMultiParamGroupsSecondParamGroup.queryTwo]
      * Query parameter with default
      * 
      * @param {object} [options.customHeaders] Headers that will be added to the
@@ -100,8 +100,8 @@ export interface ParameterGrouping {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    postMultipleParameterGroups(options: { firstParameterGroup? : models.FirstParameterGroup, parameterGroupingPostMultipleParameterGroupsSecondParameterGroup? : models.ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
-    postMultipleParameterGroups(callback: ServiceCallback<void>): void;
+    postMultiParamGroups(options: { firstParameterGroup? : models.FirstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup? : models.ParameterGroupingPostMultiParamGroupsSecondParamGroup, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    postMultiParamGroups(callback: ServiceCallback<void>): void;
 
     /**
      * Post parameters with a shared parameter group object

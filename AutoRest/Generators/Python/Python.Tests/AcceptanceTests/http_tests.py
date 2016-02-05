@@ -44,11 +44,11 @@ sys.path.append(join(tests, "Http"))
 
 from msrest.exceptions import DeserializationError, HttpOperationError
 
-from auto_rest_http_infrastructure_test_service import (
+from autoresthttpinfrastructuretestservice import (
     AutoRestHttpInfrastructureTestService,
     AutoRestHttpInfrastructureTestServiceConfiguration)
 
-from auto_rest_http_infrastructure_test_service.models import (
+from autoresthttpinfrastructuretestservice.models import (
     A, B, C, D, ErrorException)
 
 

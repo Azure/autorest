@@ -80,7 +80,6 @@ Files.prototype.getFile = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   httpRequest.streamedResponse = true;
   return client.pipeline(httpRequest, function (err, response) {
@@ -155,7 +154,6 @@ Files.prototype.getEmptyFile = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   httpRequest.streamedResponse = true;
   return client.pipeline(httpRequest, function (err, response) {

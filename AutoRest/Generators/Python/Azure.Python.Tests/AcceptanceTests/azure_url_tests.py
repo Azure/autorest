@@ -48,11 +48,11 @@ from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
 from msrest.authentication import BasicTokenAuthentication
 
-from microsoft_azure_test_url import (
+from microsoftazuretesturl import (
     MicrosoftAzureTestUrl, 
     MicrosoftAzureTestUrlConfiguration)
 
-from microsoft_azure_test_url.models import ErrorException, SampleResourceGroup
+from microsoftazuretesturl.models import ErrorException, SampleResourceGroup
 
 class AzureUrlTests(unittest.TestCase):
 

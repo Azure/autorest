@@ -115,7 +115,7 @@
     },
     "/parameterGrouping/postMultipleParameterGroups": {
       "post": {
-        "operationId": "parameterGrouping_postMultipleParameterGroups",
+        "operationId": "parameterGrouping_postMultiParamGroups",
         "description": "Post parameters from multiple different parameter groups",
         "parameters": [
           {
@@ -145,7 +145,7 @@
             "type": "string",
             "required": false,
             "x-ms-parameter-grouping": {
-              "postfix": "second-parameter-group"
+              "postfix": "second-param-group"
             }
           },
           {
@@ -157,7 +157,7 @@
             "default": 30,
             "description": "Query parameter with default",
             "x-ms-parameter-grouping": {
-              "postfix": "second-parameter-group"
+              "postfix": "second-param-group"
             }
           }
         ],

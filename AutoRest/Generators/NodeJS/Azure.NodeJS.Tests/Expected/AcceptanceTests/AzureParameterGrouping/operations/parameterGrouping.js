@@ -323,7 +323,6 @@ ParameterGrouping.prototype.postOptional = function (options, callback) {
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -377,14 +376,14 @@ ParameterGrouping.prototype.postOptional = function (options, callback) {
  * default
  * 
  * @param {object}
- * [options.parameterGroupingPostMultipleParameterGroupsSecondParameterGroup]
- * Additional parameters for the operation
+ * [options.parameterGroupingPostMultiParamGroupsSecondParamGroup] Additional
+ * parameters for the operation
  * 
  * @param {string}
- * [options.parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.headerTwo]
+ * [options.parameterGroupingPostMultiParamGroupsSecondParamGroup.headerTwo]
  * 
  * @param {number}
- * [options.parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.queryTwo]
+ * [options.parameterGroupingPostMultiParamGroupsSecondParamGroup.queryTwo]
  * Query parameter with default
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
@@ -402,7 +401,7 @@ ParameterGrouping.prototype.postOptional = function (options, callback) {
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-ParameterGrouping.prototype.postMultipleParameterGroups = function (options, callback) {
+ParameterGrouping.prototype.postMultiParamGroups = function (options, callback) {
   var client = this.client;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -412,7 +411,7 @@ ParameterGrouping.prototype.postMultipleParameterGroups = function (options, cal
     throw new Error('callback cannot be null.');
   }
   var firstParameterGroup = (options && options.firstParameterGroup !== undefined) ? options.firstParameterGroup : undefined;
-  var parameterGroupingPostMultipleParameterGroupsSecondParameterGroup = (options && options.parameterGroupingPostMultipleParameterGroupsSecondParameterGroup !== undefined) ? options.parameterGroupingPostMultipleParameterGroupsSecondParameterGroup : undefined;
+  var parameterGroupingPostMultiParamGroupsSecondParamGroup = (options && options.parameterGroupingPostMultiParamGroupsSecondParamGroup !== undefined) ? options.parameterGroupingPostMultiParamGroupsSecondParamGroup : undefined;
   // Validate
   try {
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
@@ -440,16 +439,16 @@ ParameterGrouping.prototype.postMultipleParameterGroups = function (options, cal
         throw new Error('queryOne must be of type number.');
       }
     }
-    if ((parameterGroupingPostMultipleParameterGroupsSecondParameterGroup !== null && parameterGroupingPostMultipleParameterGroupsSecondParameterGroup !== undefined))
+    if ((parameterGroupingPostMultiParamGroupsSecondParamGroup !== null && parameterGroupingPostMultiParamGroupsSecondParamGroup !== undefined))
     {
-      headerTwo = parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.headerTwo;
+      headerTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.headerTwo;
       if (headerTwo !== null && headerTwo !== undefined && typeof headerTwo.valueOf() !== 'string') {
         throw new Error('headerTwo must be of type string.');
       }
     }
-    if ((parameterGroupingPostMultipleParameterGroupsSecondParameterGroup !== null && parameterGroupingPostMultipleParameterGroupsSecondParameterGroup !== undefined))
+    if ((parameterGroupingPostMultiParamGroupsSecondParamGroup !== null && parameterGroupingPostMultiParamGroupsSecondParamGroup !== undefined))
     {
-      queryTwo = parameterGroupingPostMultipleParameterGroupsSecondParameterGroup.queryTwo;
+      queryTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.queryTwo;
       if (queryTwo !== null && queryTwo !== undefined && typeof queryTwo !== 'number') {
         throw new Error('queryTwo must be of type number.');
       }
@@ -502,7 +501,6 @@ ParameterGrouping.prototype.postMultipleParameterGroups = function (options, cal
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {
@@ -647,7 +645,6 @@ ParameterGrouping.prototype.postSharedParameterGroupObject = function (options, 
   }
   httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
   httpRequest.body = null;
-  httpRequest.headers['Content-Length'] = 0;
   // Send Request
   return client.pipeline(httpRequest, function (err, response, responseBody) {
     if (err) {

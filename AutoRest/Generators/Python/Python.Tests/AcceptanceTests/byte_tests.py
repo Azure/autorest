@@ -45,7 +45,7 @@ sys.path.append(join(tests, "BodyByte"))
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
 
-from auto_rest_swagger_bat_byte_service import (
+from autorestswaggerbatbyteservice import (
     AutoRestSwaggerBATByteService, 
     AutoRestSwaggerBATByteServiceConfiguration)
 

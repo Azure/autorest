@@ -42,11 +42,11 @@ sys.path.append(join(tests, "RequiredOptional"))
 
 from msrest.exceptions import DeserializationError, SerializationError
 
-from auto_rest_required_optional_test_service import (
+from autorestrequiredoptionaltestservice import (
     AutoRestRequiredOptionalTestService,
     AutoRestRequiredOptionalTestServiceConfiguration)
 
-from auto_rest_required_optional_test_service.models import StringWrapper, ArrayWrapper, ClassWrapper
+from autorestrequiredoptionaltestservice.models import StringWrapper, ArrayWrapper, ClassWrapper
 
 
 class RequiredOptionalTests(unittest.TestCase):

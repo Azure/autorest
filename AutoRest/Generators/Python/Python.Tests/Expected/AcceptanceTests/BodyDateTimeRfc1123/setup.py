@@ -12,7 +12,7 @@
 
 from setuptools import setup, find_packages
 
-NAME = "auto_rest_rfc1123_date_time_test_service"
+NAME = "autorestrfc1123datetimetestservice"
 VERSION = "1.0.0"
 
 # To install the library, run the following

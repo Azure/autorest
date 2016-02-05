@@ -428,6 +428,30 @@ namespace Microsoft.Rest.Generator.Python
         }
 
         /// <summary>
+        /// Provides the parameter documentation string.
+        /// </summary>
+        /// <param name="parameter">Parameter to be documented</param>
+        /// <returns>Parameter documentation string correct notation</returns>
+        public static string GetParameterDocumentationString(Parameter parameter)
+        {
+            if (parameter == null)
+            {
+                throw new ArgumentNullException("parameter");
+            }
+
+            string docString = ":param ";
+
+            docString += parameter.Name + ":";
+
+            if (!string.IsNullOrWhiteSpace(parameter.Documentation))
+            {
+                docString += " " + parameter.Documentation;
+            }
+
+            return docString;
+        }
+
+        /// <summary>
         /// Get the type name for the method's return type
         /// </summary>
         public string ReturnTypeString

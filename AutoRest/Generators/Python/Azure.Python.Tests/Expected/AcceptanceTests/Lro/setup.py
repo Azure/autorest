@@ -12,7 +12,7 @@
 
 from setuptools import setup, find_packages
 
-NAME = "auto_rest_long_running_operation_test_service"
+NAME = "autorestlongrunningoperationtestservice"
 VERSION = "1.0.0"
 
 # To install the library, run the following

@@ -90,12 +90,12 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
             /// <param name='firstParameterGroup'>
             /// Additional parameters for the operation
             /// </param>
-            /// <param name='parameterGroupingPostMultipleParameterGroupsSecondParameterGroup'>
+            /// <param name='parameterGroupingPostMultiParamGroupsSecondParamGroup'>
             /// Additional parameters for the operation
             /// </param>
-            public static void PostMultipleParameterGroups(this IParameterGroupingOperations operations, FirstParameterGroup firstParameterGroup = default(FirstParameterGroup), ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup parameterGroupingPostMultipleParameterGroupsSecondParameterGroup = default(ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup))
+            public static void PostMultiParamGroups(this IParameterGroupingOperations operations, FirstParameterGroup firstParameterGroup = default(FirstParameterGroup), ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup = default(ParameterGroupingPostMultiParamGroupsSecondParamGroup))
             {
-                Task.Factory.StartNew(s => ((IParameterGroupingOperations)s).PostMultipleParameterGroupsAsync(firstParameterGroup, parameterGroupingPostMultipleParameterGroupsSecondParameterGroup), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IParameterGroupingOperations)s).PostMultiParamGroupsAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -107,15 +107,15 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
             /// <param name='firstParameterGroup'>
             /// Additional parameters for the operation
             /// </param>
-            /// <param name='parameterGroupingPostMultipleParameterGroupsSecondParameterGroup'>
+            /// <param name='parameterGroupingPostMultiParamGroupsSecondParamGroup'>
             /// Additional parameters for the operation
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PostMultipleParameterGroupsAsync( this IParameterGroupingOperations operations, FirstParameterGroup firstParameterGroup = default(FirstParameterGroup), ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup parameterGroupingPostMultipleParameterGroupsSecondParameterGroup = default(ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PostMultiParamGroupsAsync( this IParameterGroupingOperations operations, FirstParameterGroup firstParameterGroup = default(FirstParameterGroup), ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup = default(ParameterGroupingPostMultiParamGroupsSecondParamGroup), CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.PostMultipleParameterGroupsWithHttpMessagesAsync(firstParameterGroup, parameterGroupingPostMultipleParameterGroupsSecondParameterGroup, null, cancellationToken).ConfigureAwait(false);
+                await operations.PostMultiParamGroupsWithHttpMessagesAsync(firstParameterGroup, parameterGroupingPostMultiParamGroupsSecondParamGroup, null, cancellationToken).ConfigureAwait(false);
             }
 
             /// <summary>

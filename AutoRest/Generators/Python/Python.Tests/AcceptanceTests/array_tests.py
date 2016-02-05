@@ -45,11 +45,11 @@ sys.path.append(join(tests, "BodyArray"))
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
 
-from auto_rest_swagger_bat_array_service import (
+from autorestswaggerbatarrayservice import (
     AutoRestSwaggerBATArrayService, 
     AutoRestSwaggerBATArrayServiceConfiguration)
 
-from auto_rest_swagger_bat_array_service.models import Product
+from autorestswaggerbatarrayservice.models import Product
 
 
 class ArrayTests(unittest.TestCase):

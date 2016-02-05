@@ -54,7 +54,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
         /// <param name='firstParameterGroup'>
         /// Additional parameters for the operation
         /// </param>
-        /// <param name='parameterGroupingPostMultipleParameterGroupsSecondParameterGroup'>
+        /// <param name='parameterGroupingPostMultiParamGroupsSecondParamGroup'>
         /// Additional parameters for the operation
         /// </param>
         /// <param name='customHeaders'>
@@ -63,7 +63,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<AzureOperationResponse> PostMultipleParameterGroupsWithHttpMessagesAsync(FirstParameterGroup firstParameterGroup = default(FirstParameterGroup), ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup parameterGroupingPostMultipleParameterGroupsSecondParameterGroup = default(ParameterGroupingPostMultipleParameterGroupsSecondParameterGroup), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> PostMultiParamGroupsWithHttpMessagesAsync(FirstParameterGroup firstParameterGroup = default(FirstParameterGroup), ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup = default(ParameterGroupingPostMultiParamGroupsSecondParamGroup), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Post parameters with a shared parameter group object
         /// </summary>
