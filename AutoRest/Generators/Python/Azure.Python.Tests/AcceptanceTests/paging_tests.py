@@ -52,7 +52,7 @@ from msrest.authentication import BasicTokenAuthentication
 from autorestpagingtestservice import (
     AutoRestPagingTestService, 
     AutoRestPagingTestServiceConfiguration)
-from auto_rest_paging_test_service.models import PagingGetMultiplePagesWithOffsetOptions
+from autorestpagingtestservice.models import PagingGetMultiplePagesWithOffsetOptions 
 
 class PagingTests(unittest.TestCase):
 
