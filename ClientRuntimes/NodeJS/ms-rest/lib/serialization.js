@@ -243,8 +243,8 @@ function serializeCompositeType(mapper, object, objectName) {
           }
         }
         //serialize the property if it is present in the provided object instance
-        if ((modelProps[key].defaultValue !== null && modelProps[key].defaultValue !== undefined) 
-            || (object[key] !== null && object[key] !== undefined)) {
+        if ((modelProps[key].defaultValue !== null && modelProps[key].defaultValue !== undefined) || 
+          (object[key] !== null && object[key] !== undefined)) {
           var propertyObjectName = objectName + '.' + objectNameFromSerializedName(modelProps[key].serializedName);
           var propertyMapper = modelProps[key];
           var serializedValue = exports.serialize.call(this, propertyMapper, object[key], propertyObjectName);
