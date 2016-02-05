@@ -1098,16 +1098,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-<<<<<<< 063c3a61280c2cc06fa79ccbf89048423ed1f8e5
     public ServiceResponse<Void> dateValid(LocalDate dateQuery) throws ErrorException, IOException, IllegalArgumentException {
         if (dateQuery == null) {
             throw new IllegalArgumentException("Parameter dateQuery is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.dateValid(this.client.getMapperAdapter().serializeRaw(dateQuery));
-=======
-    public ServiceResponse<Void> dateValid(LocalDate dateQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.dateValid(client.getMapperAdapter().serializeRaw(dateQuery));
->>>>>>> Async, sync and tests added for Java.
         return dateValidDelegate(call.execute(), null);
     }
 
@@ -1119,15 +1114,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link Call} object
      */
     public Call<ResponseBody> dateValidAsync(LocalDate dateQuery, final ServiceCallback<Void> serviceCallback) {
-<<<<<<< 063c3a61280c2cc06fa79ccbf89048423ed1f8e5
         if (dateQuery == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter dateQuery is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.dateValid(this.client.getMapperAdapter().serializeRaw(dateQuery));
-=======
         Call<ResponseBody> call = service.dateValid(client.getMapperAdapter().serializeRaw(dateQuery));
->>>>>>> Async, sync and tests added for Java.
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -1199,16 +1190,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-<<<<<<< 063c3a61280c2cc06fa79ccbf89048423ed1f8e5
     public ServiceResponse<Void> dateTimeValid(DateTime dateTimeQuery) throws ErrorException, IOException, IllegalArgumentException {
         if (dateTimeQuery == null) {
             throw new IllegalArgumentException("Parameter dateTimeQuery is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.dateTimeValid(this.client.getMapperAdapter().serializeRaw(dateTimeQuery));
-=======
-    public ServiceResponse<Void> dateTimeValid(DateTime dateTimeQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.dateTimeValid(client.getMapperAdapter().serializeRaw(dateTimeQuery));
->>>>>>> Async, sync and tests added for Java.
         return dateTimeValidDelegate(call.execute(), null);
     }
 
@@ -1220,15 +1206,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link Call} object
      */
     public Call<ResponseBody> dateTimeValidAsync(DateTime dateTimeQuery, final ServiceCallback<Void> serviceCallback) {
-<<<<<<< 063c3a61280c2cc06fa79ccbf89048423ed1f8e5
         if (dateTimeQuery == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter dateTimeQuery is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.dateTimeValid(this.client.getMapperAdapter().serializeRaw(dateTimeQuery));
-=======
         Call<ResponseBody> call = service.dateTimeValid(client.getMapperAdapter().serializeRaw(dateTimeQuery));
->>>>>>> Async, sync and tests added for Java.
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
