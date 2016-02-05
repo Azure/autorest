@@ -37,8 +37,19 @@ namespace Microsoft.Rest.Generator
             ProcessParameterizedHost(serviceClient, settings);
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "We are normalizing a URI, which is lowercase by convention")]
         public static void ProcessParameterizedHost(ServiceClient serviceClient, Settings settings)
         {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
+            if (settings == null)
+            {
+                throw new ArgumentNullException("settings");
+            }
+
             SwaggerModeler modeler = new SwaggerModeler(settings);
 
             var hostExtension = serviceClient.Extensions[ParameterizedHostExtension] as JObject;
@@ -46,19 +57,24 @@ namespace Microsoft.Rest.Generator
             {
                 var hostTemplate = (string)hostExtension["hostTemplate"];
                 var jArrayParameters = hostExtension["parameters"] as JArray;
-                
-                foreach (JObject jObjectParameter in jArrayParameters)
+                if (jArrayParameters != null)
                 {
-                    SwaggerParameter swaggerParameter = jObjectParameter.ToObject<SwaggerParameter>();
-                    // Build parameter
-                    ParameterBuilder parameterBuilder = new ParameterBuilder(swaggerParameter, modeler);
-                    Parameter parameter = parameterBuilder.Build();
-                    // Make BaseUri internal
-                    foreach (var method in serviceClient.Methods)
+                    foreach (var jObjectParameter in jArrayParameters)
                     {
-                        // method.Parameters.Add(...)
+                        var swaggerParameter = jObjectParameter.ToObject<SwaggerParameter>();
+                        // Build parameter
+                        var parameterBuilder = new ParameterBuilder(swaggerParameter, modeler);
+                        var parameter = parameterBuilder.Build();
+                        foreach (var method in serviceClient.Methods)
+                        {
+                            method.Parameters.Add(parameter);
+                        }
                     }
                 }
+
+                serviceClient.BaseUrl = string.Format(CultureInfo.InvariantCulture, "{0}://{1}{2}",
+                modeler.ServiceDefinition.Schemes[0].ToString().ToLowerInvariant(),
+                hostTemplate, modeler.ServiceDefinition.BasePath);
             }
         }
 
@@ -172,7 +188,7 @@ namespace Microsoft.Rest.Generator
                     {
                         Name = parameterGroupName,
                         IsRequired = isGroupParameterRequired,
-                        Location = ParameterLocation.None,
+                        Location = ClientModel.ParameterLocation.None,
                         SerializedName = string.Empty,
                         Type = parameterGroupType,
                         Documentation = "Additional parameters for the operation"
@@ -221,7 +237,7 @@ namespace Microsoft.Rest.Generator
             foreach (var method in serviceClient.Methods)
             {
                 var bodyParameter = method.Parameters.FirstOrDefault(
-                    p => p.Location == ParameterLocation.Body);
+                    p => p.Location == ClientModel.ParameterLocation.Body);
 
                 if (bodyParameter != null)
                 {

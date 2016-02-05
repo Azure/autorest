@@ -42,7 +42,14 @@ namespace @Settings.Namespace
         {
             @:this.@(operation.MethodGroupName) = new @(operation.MethodGroupType)(this);
         }
-            this.BaseUri = new Uri("@Model.BaseUrl");
+        @if (Model.IsCustomBaseUri)
+        {
+            @:this.BaseUri = "@Model.BaseUrl";
+        }
+        else
+        {
+            @:this.BaseUri = new Uri("@Model.BaseUrl");
+        }
         @foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
         {
             @:this.@(property.Name) = @(property.DefaultValue);

@@ -10,7 +10,14 @@
 /// <summary>
 /// The base URI of the service.
 /// </summary>
-public Uri BaseUri { get; set; }
+@if(Model.IsCustomBaseUri)
+{
+    @:internal string BaseUri {get; set;}
+}
+else
+{
+    @:public Uri BaseUri { get; set; }
+}
 @EmptyLine
 
 /// <summary>
@@ -76,14 +83,17 @@ public JsonSerializerSettings DeserializationSettings { get; private set; }
 /// <param name='handlers'>
 /// Optional. The delegating handlers to add to the http client pipeline.
 /// </param>
-@(Model.ContainsCredentials ? "protected" : Model.ConstructorVisibility) @(Model.Name)(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
+@(Model.ContainsCredentials ? "protected" : Model.ConstructorVisibility) @(Model.Name)(@(Model.IsCustomBaseUri ? "" : "Uri baseUri,") params DelegatingHandler[] handlers) : this(handlers)
 {
-    if (baseUri == null)
-    {
-        throw new ArgumentNullException("baseUri");
-    }
-
-    this.BaseUri = baseUri;
+@if (!Model.IsCustomBaseUri)
+{
+@:    if (baseUri == null)
+@:    {
+@:        throw new ArgumentNullException("baseUri");
+@:    }
+@:
+@:    this.BaseUri = baseUri;
+}
 }
 @EmptyLine
         
@@ -99,14 +109,17 @@ public JsonSerializerSettings DeserializationSettings { get; private set; }
 /// <param name='handlers'>
 /// Optional. The delegating handlers to add to the http client pipeline.
 /// </param>
-@(Model.ContainsCredentials ? "protected" : Model.ConstructorVisibility) @(Model.Name)(Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+@(Model.ContainsCredentials ? "protected" : Model.ConstructorVisibility) @(Model.Name)(@(Model.IsCustomBaseUri ? "" : "Uri baseUri,") HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
 {
-    if (baseUri == null)
-    {
-        throw new ArgumentNullException("baseUri");
-    }
-
-    this.BaseUri = baseUri;
+@if (!Model.IsCustomBaseUri)
+{
+@:    if (baseUri == null)
+@:    {
+@:        throw new ArgumentNullException("baseUri");
+@:    }
+@:
+@:    this.BaseUri = baseUri;
+}
 }
 @EmptyLine
 
@@ -201,20 +214,26 @@ foreach (var param in parameters)
 @:/// <param name='handlers'>
 @:/// Optional. The delegating handlers to add to the http client pipeline.
 @:/// </param>
-@:@(Model.ConstructorVisibility) @(Model.Name)(Uri baseUri, @(Model.RequiredConstructorParameters), params DelegatingHandler[] handlers) : this(handlers)
+@:@(Model.ConstructorVisibility) @(Model.Name)(@(Model.IsCustomBaseUri ? "" : "Uri baseUri,") @(Model.RequiredConstructorParameters), params DelegatingHandler[] handlers) : this(handlers)
 @:{
+if (!Model.IsCustomBaseUri)
+{
 @:    if (baseUri == null)
 @:    {
 @:        throw new ArgumentNullException("baseUri");
 @:    }
-foreach (var param in parameters)
-{
+}
+    foreach (var param in parameters)
+    {
 @:    if (@(param.Name.ToCamelCase()) == null)
 @:    {
 @:        throw new ArgumentNullException("@(param.Name.ToCamelCase())");
 @:    }
 }
+if (Model.IsCustomBaseUri)
+{
 @:    this.BaseUri = baseUri;
+}
 foreach (var param in parameters)
 {
 @:    this.@(param.Name) = @(param.Name.ToCamelCase());
@@ -248,12 +267,16 @@ foreach (var param in parameters)
 @:/// <param name='handlers'>
 @:/// Optional. The delegating handlers to add to the http client pipeline.
 @:/// </param>
-@:@(Model.ConstructorVisibility) @(Model.Name)(Uri baseUri, @(Model.RequiredConstructorParameters), HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+@:@(Model.ConstructorVisibility) @(Model.Name)(@(Model.IsCustomBaseUri ? "" : "Uri baseUri,") @(Model.RequiredConstructorParameters), HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
 @:{
+if (!Model.IsCustomBaseUri)
+{
 @:    if (baseUri == null)
 @:    {
 @:        throw new ArgumentNullException("baseUri");
 @:    }
+}
+
 foreach (var param in parameters)
 {
 @:    if (@(param.Name.ToCamelCase()) == null)
@@ -261,7 +284,10 @@ foreach (var param in parameters)
 @:        throw new ArgumentNullException("@(param.Name.ToCamelCase())");
 @:    }
 }
+if (!Model.IsCustomBaseUri)
+{
 @:    this.BaseUri = baseUri;
+}
 foreach (var param in parameters)
 {
 @:    this.@(param.Name) = @(param.Name.ToCamelCase());

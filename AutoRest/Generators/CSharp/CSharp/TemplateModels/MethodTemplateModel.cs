@@ -25,9 +25,12 @@ namespace Microsoft.Rest.Generator.CSharp
             source.LogicalParameters.ForEach(p => LogicalParameterTemplateModels.Add(new ParameterTemplateModel(p)));
             ServiceClient = serviceClient;
             MethodGroupName = source.Group ?? serviceClient.Name;
+            this.IsCustomBaseUri = serviceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension);
         }
 
         public string MethodGroupName { get; set; }
+
+        public bool IsCustomBaseUri { get; private set; }
 
         public ServiceClient ServiceClient { get; set; }
 

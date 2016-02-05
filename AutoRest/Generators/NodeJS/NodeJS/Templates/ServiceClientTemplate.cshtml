@@ -69,6 +69,10 @@ var ServiceClient = msRest.ServiceClient;
 function @(Model.Name)(@(Model.RequiredConstructorParameters), options) {
 @foreach (var param in requiredParameters)
 {
+foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
+{
+    @:this.@(property.Name) = @(property.DefaultValue);
+}
 @:  if (@(param.Name) === null || @(param.Name) === undefined) {
 @:    throw new Error('\'@(param.Name)\' cannot be null.');
 @:  }
@@ -86,10 +90,6 @@ function @(Model.Name)(@(Model.RequiredConstructorParameters), options) {
 @:  this.@(param.Name) = @(param.Name);
 }
   @EmptyLine
-  @foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
-  {
-  @:this.@(property.Name) = @(property.DefaultValue);
-  }
   @foreach (var property in optionalParameters)
   { 
   @:if(options.@(property.Name) !== null && options.@(property.Name) !== undefined) { 

@@ -30,16 +30,6 @@
         "tags": [
           "Path Operations"
         ],
-        "parameters": [
-          {
-            "name": "boolPath",
-            "in": "path",
-            "description": "true boolean value",
-            "type": "boolean",
-            "enum": [ true ],
-            "required": true
-          }
-        ],
         "responses": {
           "200": {
             "description": "Successfully received the true boolean value"
@@ -54,32 +44,26 @@
       }   
     }
   },
-    "parameters": {
-        "globalStringPath": {
-            "name": "globalStringPath",
-            "in": "path",
-            "description": "A string value 'globalItemStringPath' that appears in the path",
-            "type": "string",
-            "required": true
-        },
-        "globalStringQuery": {
-            "name": "globalStringQuery",
-            "in": "query",
-            "description": "should contain value null",
-            "type": "string"
-        }
-    },
-    "definitions": {
-        "Error": {
-            "properties": {
-                "status": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "message": {
-                    "type": "string"
-                }
-            }
-        }
+  "parameters": {
+    "host": {
+      "name": "host",
+      "description": "A string value that is used as a global part of the parameterized host",
+      "type": "string",
+      "required": false,
+      "default": "host"
     }
+  },
+  "definitions": {
+    "Error": {
+      "properties": {
+        "status": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    }
+  }
 }

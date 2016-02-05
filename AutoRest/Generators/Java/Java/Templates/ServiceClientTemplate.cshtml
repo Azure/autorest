@@ -94,7 +94,7 @@ if(!property.IsReadOnly)
      *
      * @@param baseUri the base URI of the host
      */
-    public @(Model.Name)Impl(String baseUri) {
+    @(Model.IsCustomBaseUri ? "private" : "public") @(Model.Name)Impl(String baseUri) {
         super();
         this.baseUri = baseUri;
         initialize();
@@ -107,11 +107,18 @@ if(!property.IsReadOnly)
      * @@param client the {@@link OkHttpClient} client to use for REST calls
      * @@param retrofitBuilder the builder for building up a {@@link Retrofit}
      */
-    public @(Model.Name)Impl(String baseUri, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
+    public @(Model.Name)Impl(@(Model.IsCustomBaseUri ? "" : "String baseUri,") OkHttpClient client, Retrofit.Builder retrofitBuilder) {
         super(client, retrofitBuilder);
-        this.baseUri = baseUri;
-        initialize();
-    }
+@if (Model.IsCustomBaseUri)
+{
+@:      this.baseUri = @(Model.BaseUrl);
+}
+else
+{
+@:      this.baseUri = baseUri;
+}
+initialize();
+}
 @EmptyLine
     private void initialize() {
     @if (Settings.AddCredentials)
