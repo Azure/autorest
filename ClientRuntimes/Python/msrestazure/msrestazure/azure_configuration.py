@@ -29,6 +29,7 @@ try:
 except ImportError:
     from ConfigParser import NoOptionError
 
+from .version import msrestazure_version
 from msrest import Configuration
 from msrest.exceptions import raise_with_traceback
 
@@ -43,6 +44,7 @@ class AzureConfiguration(Configuration):
     def __init__(self, base_url, filepath=None):
         super(AzureConfiguration, self).__init__(base_url, filepath)
         self.long_running_operation_timeout = 30
+        self.user_agent = "msrest_azure/{}".format(msrestazure_version)
 
     def save(self, filepath):
         """Save current configuration to file.

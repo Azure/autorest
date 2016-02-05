@@ -1,4 +1,4 @@
-﻿# --------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 #
 # Copyright (c) Microsoft Corporation. All rights reserved.
 #
@@ -24,10 +24,4 @@
 #
 # --------------------------------------------------------------------------
 
-
-from .azure_configuration import AzureConfiguration
-from .version import msrestazure_version
-
-__all__ = ["AzureConfiguration"]
-
-__version__ = msrestazure_version
+msrestazure_version = "0.0.1"
