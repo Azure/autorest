@@ -473,6 +473,9 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             Assert.Equal(PrimaryType.String, clientModel.ModelTypes.First(m => m.Name == "Product").Properties[6].Type);
             Assert.Equal(true, clientModel.ModelTypes.First(m => m.Name == "Product").Properties[6].IsConstant);
             Assert.Equal("constant", clientModel.ModelTypes.First(m => m.Name == "Product").Properties[6].DefaultValue);
+
+            Assert.Equal(true, clientModel.ModelTypes.First(m => m.Name == "Product").ContainsConstantProperties);
+            Assert.Equal(false, clientModel.ModelTypes.First(m => m.Name == "Error").ContainsConstantProperties);
         }
 
         [Fact]

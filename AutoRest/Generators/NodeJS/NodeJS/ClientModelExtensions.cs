@@ -646,6 +646,10 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 constraints = parameter.Constraints;
             }
             CompositeType composite = type as CompositeType;
+            if (composite != null && composite.ContainsConstantProperties)
+            {
+                defaultValue = "{}";
+            }
             SequenceType sequence = type as SequenceType;
             DictionaryType dictionary = type as DictionaryType;
             PrimaryType primary = type as PrimaryType;

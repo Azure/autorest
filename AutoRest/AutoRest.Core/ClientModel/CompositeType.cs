@@ -62,6 +62,12 @@ namespace Microsoft.Rest.Generator.ClientModel
         public string Documentation { get; set; }
 
         /// <summary>
+        /// Returns true if any of the properties is a Constant or is 
+        /// a CompositeType which ContainsConstantProperties set to true.
+        /// </summary>
+        public bool ContainsConstantProperties { get; set; }
+
+        /// <summary>
         /// Gets a dictionary of x-vendor extensions defined for the CompositeType.
         /// </summary>
         public Dictionary<string, object> Extensions { get; private set; }

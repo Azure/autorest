@@ -80,19 +80,7 @@ declare class AutoRestValidationTest {
          * 
          * @param {object} [options.body.child]
          * 
-         * @param {string} [options.body.child.constProperty] Constant string
-         * 
          * @param {number} [options.body.child.count] Count
-         * 
-         * @param {object} [options.body.constChild]
-         * 
-         * @param {string} [options.body.constChild.constProperty] Constant string
-         * 
-         * @param {string} [options.body.constChild.constProperty2] Constant string2
-         * 
-         * @param {number} [options.body.constInt] Constant int
-         * 
-         * @param {string} [options.body.constString] Constant string
          * 
          * @param {object} [options.customHeaders] Headers that will be added to the
          * request
@@ -130,19 +118,7 @@ declare class AutoRestValidationTest {
          * 
          * @param {object} [options.body.child]
          * 
-         * @param {string} [options.body.child.constProperty] Constant string
-         * 
          * @param {number} [options.body.child.count] Count
-         * 
-         * @param {object} [options.body.constChild]
-         * 
-         * @param {string} [options.body.constChild.constProperty] Constant string
-         * 
-         * @param {string} [options.body.constChild.constProperty2] Constant string2
-         * 
-         * @param {number} [options.body.constInt] Constant int
-         * 
-         * @param {string} [options.body.constString] Constant string
          * 
          * @param {object} [options.customHeaders] Headers that will be added to the
          * request

@@ -15,7 +15,8 @@ var specials = function (coverage) {
   
   router.post('/constantsInPath/constant/value', function (req, res, next) {
     if (req.body && req.body.constString === 'constant' && req.body.constInt === 0 
-        && req.body.child.constProperty === 'constant' && req.body.constChild.constProperty === 'constant'
+        && req.body.child && req.body.child.constProperty === 'constant' 
+        && req.body.constChild.constProperty === 'constant'
         && req.body.constChild.constProperty2 === 'constant2') {
         coverage["ConstantsInBody"]++;
         res.status(200).end(JSON.stringify(req.body));

@@ -58,14 +58,6 @@ Paths.prototype.getBooleanTrue = function (options, callback) {
     throw new Error('callback cannot be null.');
   }
   var boolPath = true;
-  // Validate
-  try {
-    if (boolPath === null || boolPath === undefined || typeof boolPath !== 'boolean') {
-      throw new Error('boolPath cannot be null or undefined and it must be of type boolean.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri +
@@ -159,14 +151,6 @@ Paths.prototype.getBooleanFalse = function (options, callback) {
     throw new Error('callback cannot be null.');
   }
   var boolPath = false;
-  // Validate
-  try {
-    if (boolPath === null || boolPath === undefined || typeof boolPath !== 'boolean') {
-      throw new Error('boolPath cannot be null or undefined and it must be of type boolean.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri +
@@ -260,14 +244,6 @@ Paths.prototype.getIntOneMillion = function (options, callback) {
     throw new Error('callback cannot be null.');
   }
   var intPath = 1000000;
-  // Validate
-  try {
-    if (intPath === null || intPath === undefined || typeof intPath !== 'number') {
-      throw new Error('intPath cannot be null or undefined and it must be of type number.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri +
@@ -361,14 +337,6 @@ Paths.prototype.getIntNegativeOneMillion = function (options, callback) {
     throw new Error('callback cannot be null.');
   }
   var intPath = -1000000;
-  // Validate
-  try {
-    if (intPath === null || intPath === undefined || typeof intPath !== 'number') {
-      throw new Error('intPath cannot be null or undefined and it must be of type number.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri +
@@ -462,14 +430,6 @@ Paths.prototype.getTenBillion = function (options, callback) {
     throw new Error('callback cannot be null.');
   }
   var longPath = 10000000000;
-  // Validate
-  try {
-    if (longPath === null || longPath === undefined || typeof longPath !== 'number') {
-      throw new Error('longPath cannot be null or undefined and it must be of type number.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri +
@@ -563,14 +523,6 @@ Paths.prototype.getNegativeTenBillion = function (options, callback) {
     throw new Error('callback cannot be null.');
   }
   var longPath = -10000000000;
-  // Validate
-  try {
-    if (longPath === null || longPath === undefined || typeof longPath !== 'number') {
-      throw new Error('longPath cannot be null or undefined and it must be of type number.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri +
@@ -664,14 +616,6 @@ Paths.prototype.floatScientificPositive = function (options, callback) {
     throw new Error('callback cannot be null.');
   }
   var floatPath = 1.034E+20;
-  // Validate
-  try {
-    if (floatPath === null || floatPath === undefined || typeof floatPath !== 'number') {
-      throw new Error('floatPath cannot be null or undefined and it must be of type number.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri +
@@ -765,14 +709,6 @@ Paths.prototype.floatScientificNegative = function (options, callback) {
     throw new Error('callback cannot be null.');
   }
   var floatPath = -1.034E-20;
-  // Validate
-  try {
-    if (floatPath === null || floatPath === undefined || typeof floatPath !== 'number') {
-      throw new Error('floatPath cannot be null or undefined and it must be of type number.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri +
@@ -866,14 +802,6 @@ Paths.prototype.doubleDecimalPositive = function (options, callback) {
     throw new Error('callback cannot be null.');
   }
   var doublePath = 9999999.999;
-  // Validate
-  try {
-    if (doublePath === null || doublePath === undefined || typeof doublePath !== 'number') {
-      throw new Error('doublePath cannot be null or undefined and it must be of type number.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri +
@@ -967,14 +895,6 @@ Paths.prototype.doubleDecimalNegative = function (options, callback) {
     throw new Error('callback cannot be null.');
   }
   var doublePath = -9999999.999;
-  // Validate
-  try {
-    if (doublePath === null || doublePath === undefined || typeof doublePath !== 'number') {
-      throw new Error('doublePath cannot be null or undefined and it must be of type number.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri +
@@ -1068,14 +988,6 @@ Paths.prototype.stringUnicode = function (options, callback) {
     throw new Error('callback cannot be null.');
   }
   var stringPath = '啊齄丂狛狜隣郎隣兀﨩';
-  // Validate
-  try {
-    if (stringPath === null || stringPath === undefined || typeof stringPath.valueOf() !== 'string') {
-      throw new Error('stringPath cannot be null or undefined and it must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri +
@@ -1169,14 +1081,6 @@ Paths.prototype.stringUrlEncoded = function (options, callback) {
     throw new Error('callback cannot be null.');
   }
   var stringPath = 'begin!*\'();:@ &=+$,/?#[]end';
-  // Validate
-  try {
-    if (stringPath === null || stringPath === undefined || typeof stringPath.valueOf() !== 'string') {
-      throw new Error('stringPath cannot be null or undefined and it must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri +
@@ -1270,14 +1174,6 @@ Paths.prototype.stringEmpty = function (options, callback) {
     throw new Error('callback cannot be null.');
   }
   var stringPath = '';
-  // Validate
-  try {
-    if (stringPath === null || stringPath === undefined || typeof stringPath.valueOf() !== 'string') {
-      throw new Error('stringPath cannot be null or undefined and it must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri +
@@ -1792,14 +1688,6 @@ Paths.prototype.byteEmpty = function (options, callback) {
     throw new Error('callback cannot be null.');
   }
   var bytePath = new Buffer('');
-  // Validate
-  try {
-    if (!Buffer.isBuffer(bytePath)) {
-      throw new Error('bytePath cannot be null or undefined and it must be of type buffer.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri +
@@ -1995,15 +1883,6 @@ Paths.prototype.dateValid = function (options, callback) {
     throw new Error('callback cannot be null.');
   }
   var datePath = new Date('2012-01-01');
-  // Validate
-  try {
-    if(!datePath || !(datePath instanceof Date || 
-        (typeof datePath.valueOf() === 'string' && !isNaN(Date.parse(datePath))))) {
-          throw new Error('datePath cannot be null or undefined and it must be of type date.');
-        }
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri +
@@ -2201,15 +2080,6 @@ Paths.prototype.dateTimeValid = function (options, callback) {
     throw new Error('callback cannot be null.');
   }
   var dateTimePath = new Date('2012-01-01T01:01:01Z');
-  // Validate
-  try {
-    if(!dateTimePath || !(dateTimePath instanceof Date || 
-        (typeof dateTimePath.valueOf() === 'string' && !isNaN(Date.parse(dateTimePath))))) {
-          throw new Error('dateTimePath cannot be null or undefined and it must be of type date.');
-        }
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri +

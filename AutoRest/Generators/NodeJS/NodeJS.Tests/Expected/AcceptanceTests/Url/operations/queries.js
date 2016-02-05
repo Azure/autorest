@@ -58,14 +58,6 @@ Queries.prototype.getBooleanTrue = function (options, callback) {
     throw new Error('callback cannot be null.');
   }
   var boolQuery = true;
-  // Validate
-  try {
-    if (boolQuery === null || boolQuery === undefined || typeof boolQuery !== 'boolean') {
-      throw new Error('boolQuery cannot be null or undefined and it must be of type boolean.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri +
@@ -163,14 +155,6 @@ Queries.prototype.getBooleanFalse = function (options, callback) {
     throw new Error('callback cannot be null.');
   }
   var boolQuery = false;
-  // Validate
-  try {
-    if (boolQuery === null || boolQuery === undefined || typeof boolQuery !== 'boolean') {
-      throw new Error('boolQuery cannot be null or undefined and it must be of type boolean.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri +
@@ -377,14 +361,6 @@ Queries.prototype.getIntOneMillion = function (options, callback) {
     throw new Error('callback cannot be null.');
   }
   var intQuery = 1000000;
-  // Validate
-  try {
-    if (intQuery === null || intQuery === undefined || typeof intQuery !== 'number') {
-      throw new Error('intQuery cannot be null or undefined and it must be of type number.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri +
@@ -482,14 +458,6 @@ Queries.prototype.getIntNegativeOneMillion = function (options, callback) {
     throw new Error('callback cannot be null.');
   }
   var intQuery = -1000000;
-  // Validate
-  try {
-    if (intQuery === null || intQuery === undefined || typeof intQuery !== 'number') {
-      throw new Error('intQuery cannot be null or undefined and it must be of type number.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri +
@@ -696,14 +664,6 @@ Queries.prototype.getTenBillion = function (options, callback) {
     throw new Error('callback cannot be null.');
   }
   var longQuery = 10000000000;
-  // Validate
-  try {
-    if (longQuery === null || longQuery === undefined || typeof longQuery !== 'number') {
-      throw new Error('longQuery cannot be null or undefined and it must be of type number.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri +
@@ -801,14 +761,6 @@ Queries.prototype.getNegativeTenBillion = function (options, callback) {
     throw new Error('callback cannot be null.');
   }
   var longQuery = -10000000000;
-  // Validate
-  try {
-    if (longQuery === null || longQuery === undefined || typeof longQuery !== 'number') {
-      throw new Error('longQuery cannot be null or undefined and it must be of type number.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri +
@@ -1015,14 +967,6 @@ Queries.prototype.floatScientificPositive = function (options, callback) {
     throw new Error('callback cannot be null.');
   }
   var floatQuery = 1.034E+20;
-  // Validate
-  try {
-    if (floatQuery === null || floatQuery === undefined || typeof floatQuery !== 'number') {
-      throw new Error('floatQuery cannot be null or undefined and it must be of type number.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri +
@@ -1120,14 +1064,6 @@ Queries.prototype.floatScientificNegative = function (options, callback) {
     throw new Error('callback cannot be null.');
   }
   var floatQuery = -1.034E-20;
-  // Validate
-  try {
-    if (floatQuery === null || floatQuery === undefined || typeof floatQuery !== 'number') {
-      throw new Error('floatQuery cannot be null or undefined and it must be of type number.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri +
@@ -1334,14 +1270,6 @@ Queries.prototype.doubleDecimalPositive = function (options, callback) {
     throw new Error('callback cannot be null.');
   }
   var doubleQuery = 9999999.999;
-  // Validate
-  try {
-    if (doubleQuery === null || doubleQuery === undefined || typeof doubleQuery !== 'number') {
-      throw new Error('doubleQuery cannot be null or undefined and it must be of type number.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri +
@@ -1439,14 +1367,6 @@ Queries.prototype.doubleDecimalNegative = function (options, callback) {
     throw new Error('callback cannot be null.');
   }
   var doubleQuery = -9999999.999;
-  // Validate
-  try {
-    if (doubleQuery === null || doubleQuery === undefined || typeof doubleQuery !== 'number') {
-      throw new Error('doubleQuery cannot be null or undefined and it must be of type number.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri +
@@ -1653,14 +1573,6 @@ Queries.prototype.stringUnicode = function (options, callback) {
     throw new Error('callback cannot be null.');
   }
   var stringQuery = '啊齄丂狛狜隣郎隣兀﨩';
-  // Validate
-  try {
-    if (stringQuery === null || stringQuery === undefined || typeof stringQuery.valueOf() !== 'string') {
-      throw new Error('stringQuery cannot be null or undefined and it must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri +
@@ -1758,14 +1670,6 @@ Queries.prototype.stringUrlEncoded = function (options, callback) {
     throw new Error('callback cannot be null.');
   }
   var stringQuery = 'begin!*\'();:@ &=+$,/?#[]end';
-  // Validate
-  try {
-    if (stringQuery === null || stringQuery === undefined || typeof stringQuery.valueOf() !== 'string') {
-      throw new Error('stringQuery cannot be null or undefined and it must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri +
@@ -1863,14 +1767,6 @@ Queries.prototype.stringEmpty = function (options, callback) {
     throw new Error('callback cannot be null.');
   }
   var stringQuery = '';
-  // Validate
-  try {
-    if (stringQuery === null || stringQuery === undefined || typeof stringQuery.valueOf() !== 'string') {
-      throw new Error('stringQuery cannot be null or undefined and it must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri +
@@ -2413,14 +2309,6 @@ Queries.prototype.byteEmpty = function (options, callback) {
     throw new Error('callback cannot be null.');
   }
   var byteQuery = new Buffer('');
-  // Validate
-  try {
-    if (!Buffer.isBuffer(byteQuery)) {
-      throw new Error('byteQuery cannot be null or undefined and it must be of type buffer.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri +
@@ -2628,15 +2516,6 @@ Queries.prototype.dateValid = function (options, callback) {
     throw new Error('callback cannot be null.');
   }
   var dateQuery = new Date('2012-01-01');
-  // Validate
-  try {
-    if(!dateQuery || !(dateQuery instanceof Date || 
-        (typeof dateQuery.valueOf() === 'string' && !isNaN(Date.parse(dateQuery))))) {
-          throw new Error('dateQuery cannot be null or undefined and it must be of type date.');
-        }
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri +
@@ -2844,15 +2723,6 @@ Queries.prototype.dateTimeValid = function (options, callback) {
     throw new Error('callback cannot be null.');
   }
   var dateTimeQuery = new Date('2012-01-01T01:01:01Z');
-  // Validate
-  try {
-    if(!dateTimeQuery || !(dateTimeQuery instanceof Date || 
-        (typeof dateTimeQuery.valueOf() === 'string' && !isNaN(Date.parse(dateTimeQuery))))) {
-          throw new Error('dateTimeQuery cannot be null or undefined and it must be of type date.');
-        }
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.client.baseUri +

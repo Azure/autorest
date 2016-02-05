@@ -46,6 +46,7 @@ Product.prototype.mapper = function () {
   return {
     required: false,
     serializedName: 'Product',
+    defaultValue: {},
     type: {
       name: 'Composite',
       className: 'Product',
@@ -93,6 +94,7 @@ Product.prototype.mapper = function () {
         child: {
           required: false,
           serializedName: 'child',
+          defaultValue: {},
           type: {
             name: 'Composite',
             className: 'ChildProduct'

@@ -95,6 +95,13 @@ namespace Microsoft.Rest.Modeler.Swagger
                             IsReadOnly = property.Value.ReadOnly
                         };
                         PopulateParameter(propertyObj, property.Value);
+                        var propertyCompositeType = propertyType as CompositeType;
+                        if (propertyObj.IsConstant || 
+                            (propertyCompositeType != null 
+                                && propertyCompositeType.ContainsConstantProperties))
+                        {
+                            objectType.ContainsConstantProperties = true;
+                        }
                         
                         objectType.Properties.Add(propertyObj);
                     }

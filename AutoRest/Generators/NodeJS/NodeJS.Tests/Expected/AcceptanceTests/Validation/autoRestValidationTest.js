@@ -261,19 +261,7 @@ AutoRestValidationTest.prototype.validationOfMethodParameters = function (resour
  * 
  * @param {object} [options.body.child]
  * 
- * @param {string} [options.body.child.constProperty] Constant string
- * 
  * @param {number} [options.body.child.count] Count
- * 
- * @param {object} [options.body.constChild]
- * 
- * @param {string} [options.body.constChild.constProperty] Constant string
- * 
- * @param {string} [options.body.constChild.constProperty2] Constant string2
- * 
- * @param {number} [options.body.constInt] Constant int
- * 
- * @param {string} [options.body.constString] Constant string
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -485,14 +473,6 @@ AutoRestValidationTest.prototype.getWithConstantInPath = function (options, call
     throw new Error('callback cannot be null.');
   }
   var constantParam = 'constant';
-  // Validate
-  try {
-    if (constantParam === null || constantParam === undefined || typeof constantParam.valueOf() !== 'string') {
-      throw new Error('constantParam cannot be null or undefined and it must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.baseUri +
@@ -567,19 +547,7 @@ AutoRestValidationTest.prototype.getWithConstantInPath = function (options, call
  * 
  * @param {object} [options.body.child]
  * 
- * @param {string} [options.body.child.constProperty] Constant string
- * 
  * @param {number} [options.body.child.count] Count
- * 
- * @param {object} [options.body.constChild]
- * 
- * @param {string} [options.body.constChild.constProperty] Constant string
- * 
- * @param {string} [options.body.constChild.constProperty2] Constant string2
- * 
- * @param {number} [options.body.constInt] Constant int
- * 
- * @param {string} [options.body.constString] Constant string
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -611,14 +579,6 @@ AutoRestValidationTest.prototype.postWithConstantInBody = function (options, cal
   if (body === null || body === undefined)
   {
     body = {};
-  }
-  // Validate
-  try {
-    if (constantParam === null || constantParam === undefined || typeof constantParam.valueOf() !== 'string') {
-      throw new Error('constantParam cannot be null or undefined and it must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
   }
 
   // Construct URL
