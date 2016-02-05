@@ -880,7 +880,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> enumValid(UriColor enumQuery) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.enumValid(this.client.getMapperAdapter().serializeRaw(enumQuery));
+        Call<ResponseBody> call = service.enumValid(client.getMapperAdapter().serializeRaw(enumQuery));
         return enumValidDelegate(call.execute(), null);
     }
 
@@ -892,7 +892,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link Call} object
      */
     public Call<ResponseBody> enumValidAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.enumValid(this.client.getMapperAdapter().serializeRaw(enumQuery));
+        Call<ResponseBody> call = service.enumValid(client.getMapperAdapter().serializeRaw(enumQuery));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -922,7 +922,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> enumNull(UriColor enumQuery) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.enumNull(this.client.getMapperAdapter().serializeRaw(enumQuery));
+        Call<ResponseBody> call = service.enumNull(client.getMapperAdapter().serializeRaw(enumQuery));
         return enumNullDelegate(call.execute(), null);
     }
 
@@ -934,7 +934,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link Call} object
      */
     public Call<ResponseBody> enumNullAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.enumNull(this.client.getMapperAdapter().serializeRaw(enumQuery));
+        Call<ResponseBody> call = service.enumNull(client.getMapperAdapter().serializeRaw(enumQuery));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -1098,11 +1098,16 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
+<<<<<<< 063c3a61280c2cc06fa79ccbf89048423ed1f8e5
     public ServiceResponse<Void> dateValid(LocalDate dateQuery) throws ErrorException, IOException, IllegalArgumentException {
         if (dateQuery == null) {
             throw new IllegalArgumentException("Parameter dateQuery is required and cannot be null.");
         }
         Call<ResponseBody> call = service.dateValid(this.client.getMapperAdapter().serializeRaw(dateQuery));
+=======
+    public ServiceResponse<Void> dateValid(LocalDate dateQuery) throws ErrorException, IOException {
+        Call<ResponseBody> call = service.dateValid(client.getMapperAdapter().serializeRaw(dateQuery));
+>>>>>>> Async, sync and tests added for Java.
         return dateValidDelegate(call.execute(), null);
     }
 
@@ -1114,11 +1119,15 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link Call} object
      */
     public Call<ResponseBody> dateValidAsync(LocalDate dateQuery, final ServiceCallback<Void> serviceCallback) {
+<<<<<<< 063c3a61280c2cc06fa79ccbf89048423ed1f8e5
         if (dateQuery == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter dateQuery is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.dateValid(this.client.getMapperAdapter().serializeRaw(dateQuery));
+=======
+        Call<ResponseBody> call = service.dateValid(client.getMapperAdapter().serializeRaw(dateQuery));
+>>>>>>> Async, sync and tests added for Java.
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -1148,7 +1157,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> dateNull(LocalDate dateQuery) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.dateNull(this.client.getMapperAdapter().serializeRaw(dateQuery));
+        Call<ResponseBody> call = service.dateNull(client.getMapperAdapter().serializeRaw(dateQuery));
         return dateNullDelegate(call.execute(), null);
     }
 
@@ -1160,7 +1169,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link Call} object
      */
     public Call<ResponseBody> dateNullAsync(LocalDate dateQuery, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.dateNull(this.client.getMapperAdapter().serializeRaw(dateQuery));
+        Call<ResponseBody> call = service.dateNull(client.getMapperAdapter().serializeRaw(dateQuery));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -1190,11 +1199,16 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
+<<<<<<< 063c3a61280c2cc06fa79ccbf89048423ed1f8e5
     public ServiceResponse<Void> dateTimeValid(DateTime dateTimeQuery) throws ErrorException, IOException, IllegalArgumentException {
         if (dateTimeQuery == null) {
             throw new IllegalArgumentException("Parameter dateTimeQuery is required and cannot be null.");
         }
         Call<ResponseBody> call = service.dateTimeValid(this.client.getMapperAdapter().serializeRaw(dateTimeQuery));
+=======
+    public ServiceResponse<Void> dateTimeValid(DateTime dateTimeQuery) throws ErrorException, IOException {
+        Call<ResponseBody> call = service.dateTimeValid(client.getMapperAdapter().serializeRaw(dateTimeQuery));
+>>>>>>> Async, sync and tests added for Java.
         return dateTimeValidDelegate(call.execute(), null);
     }
 
@@ -1206,11 +1220,15 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link Call} object
      */
     public Call<ResponseBody> dateTimeValidAsync(DateTime dateTimeQuery, final ServiceCallback<Void> serviceCallback) {
+<<<<<<< 063c3a61280c2cc06fa79ccbf89048423ed1f8e5
         if (dateTimeQuery == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter dateTimeQuery is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.dateTimeValid(this.client.getMapperAdapter().serializeRaw(dateTimeQuery));
+=======
+        Call<ResponseBody> call = service.dateTimeValid(client.getMapperAdapter().serializeRaw(dateTimeQuery));
+>>>>>>> Async, sync and tests added for Java.
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -1240,7 +1258,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> dateTimeNull(DateTime dateTimeQuery) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.dateTimeNull(this.client.getMapperAdapter().serializeRaw(dateTimeQuery));
+        Call<ResponseBody> call = service.dateTimeNull(client.getMapperAdapter().serializeRaw(dateTimeQuery));
         return dateTimeNullDelegate(call.execute(), null);
     }
 
@@ -1252,7 +1270,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link Call} object
      */
     public Call<ResponseBody> dateTimeNullAsync(DateTime dateTimeQuery, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.dateTimeNull(this.client.getMapperAdapter().serializeRaw(dateTimeQuery));
+        Call<ResponseBody> call = service.dateTimeNull(client.getMapperAdapter().serializeRaw(dateTimeQuery));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -1282,7 +1300,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> arrayStringCsvValid(List<String> arrayQuery) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.arrayStringCsvValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
+        Call<ResponseBody> call = service.arrayStringCsvValid(client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
         return arrayStringCsvValidDelegate(call.execute(), null);
     }
 
@@ -1294,7 +1312,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link Call} object
      */
     public Call<ResponseBody> arrayStringCsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.arrayStringCsvValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
+        Call<ResponseBody> call = service.arrayStringCsvValid(client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -1324,7 +1342,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> arrayStringCsvNull(List<String> arrayQuery) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.arrayStringCsvNull(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
+        Call<ResponseBody> call = service.arrayStringCsvNull(client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
         return arrayStringCsvNullDelegate(call.execute(), null);
     }
 
@@ -1336,7 +1354,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link Call} object
      */
     public Call<ResponseBody> arrayStringCsvNullAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.arrayStringCsvNull(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
+        Call<ResponseBody> call = service.arrayStringCsvNull(client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -1366,7 +1384,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> arrayStringCsvEmpty(List<String> arrayQuery) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.arrayStringCsvEmpty(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
+        Call<ResponseBody> call = service.arrayStringCsvEmpty(client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
         return arrayStringCsvEmptyDelegate(call.execute(), null);
     }
 
@@ -1378,7 +1396,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link Call} object
      */
     public Call<ResponseBody> arrayStringCsvEmptyAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.arrayStringCsvEmpty(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
+        Call<ResponseBody> call = service.arrayStringCsvEmpty(client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -1408,7 +1426,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> arrayStringSsvValid(List<String> arrayQuery) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.arrayStringSsvValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.SSV));
+        Call<ResponseBody> call = service.arrayStringSsvValid(client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.SSV));
         return arrayStringSsvValidDelegate(call.execute(), null);
     }
 
@@ -1420,7 +1438,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link Call} object
      */
     public Call<ResponseBody> arrayStringSsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.arrayStringSsvValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.SSV));
+        Call<ResponseBody> call = service.arrayStringSsvValid(client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.SSV));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -1450,7 +1468,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> arrayStringTsvValid(List<String> arrayQuery) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.arrayStringTsvValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.TSV));
+        Call<ResponseBody> call = service.arrayStringTsvValid(client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.TSV));
         return arrayStringTsvValidDelegate(call.execute(), null);
     }
 
@@ -1462,7 +1480,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link Call} object
      */
     public Call<ResponseBody> arrayStringTsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.arrayStringTsvValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.TSV));
+        Call<ResponseBody> call = service.arrayStringTsvValid(client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.TSV));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -1492,7 +1510,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> arrayStringPipesValid(List<String> arrayQuery) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.arrayStringPipesValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.PIPES));
+        Call<ResponseBody> call = service.arrayStringPipesValid(client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.PIPES));
         return arrayStringPipesValidDelegate(call.execute(), null);
     }
 
@@ -1504,7 +1522,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link Call} object
      */
     public Call<ResponseBody> arrayStringPipesValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.arrayStringPipesValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.PIPES));
+        Call<ResponseBody> call = service.arrayStringPipesValid(client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.PIPES));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {

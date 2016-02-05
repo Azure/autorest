@@ -976,7 +976,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
             throw new IllegalArgumentException("Parameter headerParameter is required and cannot be null.");
         }
         Validator.validate(headerParameter);
-        Call<ResponseBody> call = service.postRequiredArrayHeader(this.client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV));
+        Call<ResponseBody> call = service.postRequiredArrayHeader(client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV));
         return postRequiredArrayHeaderDelegate(call.execute(), null);
     }
 
@@ -993,7 +993,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
             return null;
         }
         Validator.validate(headerParameter, serviceCallback);
-        Call<ResponseBody> call = service.postRequiredArrayHeader(this.client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV));
+        Call<ResponseBody> call = service.postRequiredArrayHeader(client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV));
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -1022,7 +1022,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> postOptionalArrayHeader(List<String> headerParameter) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.postOptionalArrayHeader(this.client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV));
+        Call<ResponseBody> call = service.postOptionalArrayHeader(client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV));
         return postOptionalArrayHeaderDelegate(call.execute(), null);
     }
 
@@ -1034,7 +1034,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      * @return the {@link Call} object
      */
     public Call<ResponseBody> postOptionalArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.postOptionalArrayHeader(this.client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV));
+        Call<ResponseBody> call = service.postOptionalArrayHeader(client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {

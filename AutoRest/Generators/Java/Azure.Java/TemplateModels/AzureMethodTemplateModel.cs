@@ -314,6 +314,10 @@ namespace Microsoft.Rest.Generator.Java.Azure
             }
             var groupedType = this.InputParameterTransformation.FirstOrDefault().ParameterMappings[0].InputParameter;
             var nextGroupType = nextMethod.InputParameterTransformation.FirstOrDefault().ParameterMappings[0].InputParameter;
+            if (nextGroupType.Name == groupedType.Name)
+            {
+                return;
+            }
             builder.AppendLine("{0} {1} = null;", nextGroupType.Name.ToPascalCase(), nextGroupType.Name.ToCamelCase());
             builder.AppendLine("if ({0} != null) {{", groupedType.Name.ToCamelCase());
             builder.Indent();
@@ -386,11 +390,14 @@ namespace Microsoft.Rest.Generator.Java.Azure
             get
             {
                 var imports = base.InterfaceImports;
-
-                if (this.IsPagingOperation || this.IsPagingNextOperation)
+                if (this.IsPagingNextOperation)
                 {
                     imports.Remove("retrofit.http.Path");
                     imports.Add("retrofit.http.Url");
+                }
+
+                if (this.IsPagingOperation || this.IsPagingNextOperation)
+                {
                     imports.Remove("com.microsoft.rest.ServiceCallback");
                     imports.Add("com.microsoft.azure.ListOperationCallback");
                     imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportFrom(ServiceClient.Namespace));

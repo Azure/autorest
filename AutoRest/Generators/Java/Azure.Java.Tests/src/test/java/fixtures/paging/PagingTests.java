@@ -3,6 +3,8 @@ package fixtures.paging;
 import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
 import com.microsoft.rest.ServiceResponse;
+import com.squareup.okhttp.logging.HttpLoggingInterceptor;
+import fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptions;
 import fixtures.paging.models.Product;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -20,6 +22,7 @@ public class PagingTests {
     @BeforeClass
     public static void setup() {
         client = new AutoRestPagingTestServiceImpl("http://localhost.:3000");
+        client.setLogLevel(HttpLoggingInterceptor.Level.BODY);
     }
 
     @Test
@@ -35,6 +38,15 @@ public class PagingTests {
     }
 
     @Test
+    public void getMultiplePagesWithOffset() throws Exception {
+        PagingGetMultiplePagesWithOffsetOptions options = new PagingGetMultiplePagesWithOffsetOptions();
+        options.setOffset(100);
+        List<Product> response = client.getPagingOperations().getMultiplePagesWithOffset(options, "client-id").getBody();
+        Assert.assertEquals(10, response.size());
+        Assert.assertEquals(110, (int) response.get(response.size() - 1).getProperties().getId());
+    }
+
+    @Test
     public void getMultiplePagesAsync() throws Exception {
         final CountDownLatch lock = new CountDownLatch(1);
         client.getPagingOperations().getMultiplePagesAsync("client-id", null, new ListOperationCallback<Product>() {
@@ -45,13 +57,11 @@ public class PagingTests {
 
             @Override
             public void success(ServiceResponse<List<Product>> result) {
-                System.out.println(result.getBody().size());
                 lock.countDown();
             }
 
             @Override
             public PagingBahavior progress(List<Product> partial) {
-                System.out.println(partial.get(0).getProperties().getId());
                 if (pageCount() == 7) {
                     return PagingBahavior.STOP;
                 } else {

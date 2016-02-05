@@ -13,9 +13,9 @@ package fixtures.paging.models;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Additional parameters for the getMultiplePagesNext operation.
+ * Additional parameters for the getMultiplePagesWithOffsetNext operation.
  */
-public class PagingGetMultiplePagesNextOptions {
+public class PagingGetMultiplePagesWithOffsetNextOptions {
     /**
      * Sets the maximum number of items to return in the response.
      */

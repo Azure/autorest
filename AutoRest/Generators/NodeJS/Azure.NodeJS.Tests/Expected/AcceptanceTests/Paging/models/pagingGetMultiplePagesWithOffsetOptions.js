@@ -12,32 +12,34 @@
 
 /**
  * @class
- * Initializes a new instance of the PagingGetMultiplePagesNextOptions class.
+ * Initializes a new instance of the PagingGetMultiplePagesWithOffsetOptions class.
  * @constructor
- * Additional parameters for the getMultiplePagesNext operation.
+ * Additional parameters for the getMultiplePagesWithOffset operation.
  * @member {number} [maxresults] Sets the maximum number of items to return in
  * the response.
+ * 
+ * @member {number} offset Offset of return value
  * 
  * @member {number} [timeout] Sets the maximum time that the server can spend
  * processing the request, in seconds. The default is 30 seconds. Default
  * value: 30 .
  * 
  */
-function PagingGetMultiplePagesNextOptions() {
+function PagingGetMultiplePagesWithOffsetOptions() {
 }
 
 /**
- * Defines the metadata of PagingGetMultiplePagesNextOptions
+ * Defines the metadata of PagingGetMultiplePagesWithOffsetOptions
  *
- * @returns {object} metadata of PagingGetMultiplePagesNextOptions
+ * @returns {object} metadata of PagingGetMultiplePagesWithOffsetOptions
  *
  */
-PagingGetMultiplePagesNextOptions.prototype.mapper = function () {
+PagingGetMultiplePagesWithOffsetOptions.prototype.mapper = function () {
   return {
     required: false,
     type: {
       name: 'Composite',
-      className: 'PagingGetMultiplePagesNextOptions',
+      className: 'PagingGetMultiplePagesWithOffsetOptions',
       modelProperties: {
         maxresults: {
           required: false,
@@ -45,9 +47,15 @@ PagingGetMultiplePagesNextOptions.prototype.mapper = function () {
             name: 'Number'
           }
         },
+        offset: {
+          required: true,
+          type: {
+            name: 'Number'
+          }
+        },
         timeout: {
           required: false,
-          defaultValue: 30,
+          defaultValue: '30',
           type: {
             name: 'Number'
           }
@@ -57,4 +65,4 @@ PagingGetMultiplePagesNextOptions.prototype.mapper = function () {
   };
 };
 
-module.exports = PagingGetMultiplePagesNextOptions;
+module.exports = PagingGetMultiplePagesWithOffsetOptions;
