@@ -30,7 +30,7 @@ namespace @(Settings.Namespace).Models
         /// <summary>
         @WrapComment("/// ", ("Initializes a new instance of the " + Model.Name + " class.").EscapeXmlComment())
         /// </summary>
-        @if (Model.Properties.Any(p => p.Type is CompositeType && ((CompositeType)p.Type).ComposedProperties.Any(p2 => p2.IsConstant)))
+        @if (Model.Properties.Any(p => p.Type is CompositeType && ((CompositeType)p.Type).ContainsConstantProperties))
         {
 <text>
         public @(Model.Name)()
@@ -70,7 +70,7 @@ namespace @(Settings.Namespace).Models
 
             @foreach (var property in Model.ComposedProperties.Where(p => p.Type is CompositeType
                 && !p.IsConstant
-                && ((CompositeType)p.Type).ComposedProperties.Any(p2 => p2.IsConstant)))
+                && ((CompositeType)p.Type).ContainsConstantProperties))
             {
             @:@(property.Name) = new @(property.Type.Name)();
             }

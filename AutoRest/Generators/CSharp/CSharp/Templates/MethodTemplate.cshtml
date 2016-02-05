@@ -56,7 +56,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
 
         if (parameter.Type is CompositeType
             && !parameter.IsConstant
-            && ((CompositeType)parameter.Type).ComposedProperties.Any(p => p.IsConstant))
+            && ((CompositeType)parameter.Type).ContainsConstantProperties)
         {
     @:if (@(parameter.Name) == null)
     @:{
