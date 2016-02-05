@@ -275,7 +275,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     builder.AppendLine(nextCall.Replace(", nextPageLink", "")).Outdent();
                     builder.AppendLine("} else {").Indent();
                     builder.AppendLine("serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));");
-                    builder.AppendLine("}").Outdent();
+                    builder.Outdent().AppendLine("}");
                     return builder.ToString();
                 }
                 return base.SuccessCallback;
@@ -318,15 +318,25 @@ namespace Microsoft.Rest.Generator.Java.Azure
             {
                 return;
             }
-            builder.AppendLine("{0} {1} = null;", nextGroupType.Name.ToPascalCase(), nextGroupType.Name.ToCamelCase());
-            builder.AppendLine("if ({0} != null) {{", groupedType.Name.ToCamelCase());
-            builder.Indent();
-            builder.AppendLine("{0} = new {1}();", nextGroupType.Name.ToCamelCase(), nextGroupType.Name.ToPascalCase());
+            if (!groupedType.IsRequired)
+            {
+                builder.AppendLine("{0} {1} = null;", nextGroupType.Name.ToPascalCase(), nextGroupType.Name.ToCamelCase());
+                builder.AppendLine("if ({0} != null) {{", groupedType.Name.ToCamelCase());
+                builder.Indent();
+                builder.AppendLine("{0} = new {1}();", nextGroupType.Name.ToCamelCase(), nextGroupType.Name.ToPascalCase());
+            }
+            else
+            { 
+                builder.AppendLine("{1} {0} = new {1}();", nextGroupType.Name.ToCamelCase(), nextGroupType.Name.ToPascalCase());
+            }
             foreach (var outParam in nextMethod.InputParameterTransformation.Select(t => t.OutputParameter))
             {
                 builder.AppendLine("{0}.set{1}({2}.get{1}());", nextGroupType.Name.ToCamelCase(), outParam.Name.ToPascalCase(), groupedType.Name.ToCamelCase());
             }
-            builder.Outdent().AppendLine(@"}");
+            if (!groupedType.IsRequired)
+            {
+                builder.Outdent().AppendLine(@"}");
+            }
         }
 
         public override string DelegateOperationResponseReturnTypeString

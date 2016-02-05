@@ -194,12 +194,9 @@ public final class PagingOperationsImpl implements PagingOperations {
         ServiceResponse<PageImpl<Product>> response = getMultiplePagesWithOffsetDelegate(call.execute(), null);
         List<Product> result = response.getBody().getItems();
         while (response.getBody().getNextPageLink() != null) {
-            PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = null;
-            if (pagingGetMultiplePagesWithOffsetOptions != null) {
-                pagingGetMultiplePagesWithOffsetNextOptions = new PagingGetMultiplePagesWithOffsetNextOptions();
-                pagingGetMultiplePagesWithOffsetNextOptions.setMaxresults(pagingGetMultiplePagesWithOffsetOptions.getMaxresults());
-                pagingGetMultiplePagesWithOffsetNextOptions.setTimeout(pagingGetMultiplePagesWithOffsetOptions.getTimeout());
-            }
+            PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = new PagingGetMultiplePagesWithOffsetNextOptions();
+            pagingGetMultiplePagesWithOffsetNextOptions.setMaxresults(pagingGetMultiplePagesWithOffsetOptions.getMaxresults());
+            pagingGetMultiplePagesWithOffsetNextOptions.setTimeout(pagingGetMultiplePagesWithOffsetOptions.getTimeout());
             response = getMultiplePagesWithOffsetNext(response.getBody().getNextPageLink(), clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions);
             result.addAll(response.getBody().getItems());
         }
@@ -232,12 +229,9 @@ public final class PagingOperationsImpl implements PagingOperations {
                     serviceCallback.load(result.getBody().getItems());
                     if (result.getBody().getNextPageLink() != null && 
                             serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
-                        PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = null;
-                        if (pagingGetMultiplePagesWithOffsetOptions != null) {
-                            pagingGetMultiplePagesWithOffsetNextOptions = new PagingGetMultiplePagesWithOffsetNextOptions();
-                            pagingGetMultiplePagesWithOffsetNextOptions.setMaxresults(pagingGetMultiplePagesWithOffsetOptions.getMaxresults());
-                            pagingGetMultiplePagesWithOffsetNextOptions.setTimeout(pagingGetMultiplePagesWithOffsetOptions.getTimeout());
-                        }
+                        PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = new PagingGetMultiplePagesWithOffsetNextOptions();
+                        pagingGetMultiplePagesWithOffsetNextOptions.setMaxresults(pagingGetMultiplePagesWithOffsetOptions.getMaxresults());
+                        pagingGetMultiplePagesWithOffsetNextOptions.setTimeout(pagingGetMultiplePagesWithOffsetOptions.getTimeout());
                         getMultiplePagesWithOffsetNextAsync(result.getBody().getNextPageLink(), clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions, serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
@@ -563,7 +557,7 @@ public final class PagingOperationsImpl implements PagingOperations {
                         getSinglePagesNextAsync(result.getBody().getNextPageLink(), serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
-                        }
+                    }
                 } catch (CloudException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -636,7 +630,7 @@ public final class PagingOperationsImpl implements PagingOperations {
                         getMultiplePagesNextAsync(result.getBody().getNextPageLink(), clientRequestId, pagingGetMultiplePagesOptions, serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
-                        }
+                    }
                 } catch (CloudException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -701,7 +695,7 @@ public final class PagingOperationsImpl implements PagingOperations {
                         getMultiplePagesWithOffsetNextAsync(result.getBody().getNextPageLink(), clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions, serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
-                        }
+                    }
                 } catch (CloudException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -758,7 +752,7 @@ public final class PagingOperationsImpl implements PagingOperations {
                         getMultiplePagesRetryFirstNextAsync(result.getBody().getNextPageLink(), serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
-                        }
+                    }
                 } catch (CloudException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -815,7 +809,7 @@ public final class PagingOperationsImpl implements PagingOperations {
                         getMultiplePagesRetrySecondNextAsync(result.getBody().getNextPageLink(), serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
-                        }
+                    }
                 } catch (CloudException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -872,7 +866,7 @@ public final class PagingOperationsImpl implements PagingOperations {
                         getSinglePagesFailureNextAsync(result.getBody().getNextPageLink(), serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
-                        }
+                    }
                 } catch (CloudException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -929,7 +923,7 @@ public final class PagingOperationsImpl implements PagingOperations {
                         getMultiplePagesFailureNextAsync(result.getBody().getNextPageLink(), serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
-                        }
+                    }
                 } catch (CloudException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -986,7 +980,7 @@ public final class PagingOperationsImpl implements PagingOperations {
                         getMultiplePagesFailureUriNextAsync(result.getBody().getNextPageLink(), serviceCallback);
                     } else {
                         serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
-                        }
+                    }
                 } catch (CloudException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
