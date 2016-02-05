@@ -76,13 +76,10 @@ namespace Microsoft.Rest.Generator.Java
             {
                 string nextLinkString;
                 string pageClassName = GetPagingSetting(method.Extensions, pageClasses, out nextLinkString);
-                string listClassName = "List";
                 if (string.IsNullOrEmpty(pageClassName))
                 {
                     continue;
                 }
-                var pageTypeFormat = "{0}<{1}>";
-                var ipageTypeFormat = "IPage<{0}>";
 
                 foreach (var responseStatus in method.Responses.Where(r => r.Value.Body is CompositeType).Select(s => s.Key).ToArray())
                 {
@@ -95,9 +92,6 @@ namespace Microsoft.Rest.Generator.Java
                        compositType.Properties.Any(p => p.SerializedName.Equals(nextLinkString, StringComparison.OrdinalIgnoreCase)))
                     {
                         IType pagedResult;
-                        var pagableTypeName = string.Format(CultureInfo.InvariantCulture, pageTypeFormat, listClassName, sequenceType.ElementType.Name);
-                        var ipagableTypeName = string.Format(CultureInfo.InvariantCulture, ipageTypeFormat, sequenceType.ElementType.Name);
-
                         pagedResult = new SequenceType
                         {
                             ElementType = sequenceType.ElementType,

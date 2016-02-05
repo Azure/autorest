@@ -368,9 +368,10 @@ namespace Microsoft.Rest.Generator.Java.Azure
 
         public override string TypeTokenType(IType type)
         {
-            if (type is SequenceType && (this.IsPagingOperation || this.IsPagingNextOperation))
+            SequenceType sequenceType = type as SequenceType;
+            if (sequenceType != null && (this.IsPagingOperation || this.IsPagingNextOperation))
             {
-                return string.Format(CultureInfo.InvariantCulture, "PageImpl<{0}>", ((SequenceType)type).ElementType);
+                return string.Format(CultureInfo.InvariantCulture, "PageImpl<{0}>", sequenceType.ElementType);
             }
             return base.TypeTokenType(type);
         }
