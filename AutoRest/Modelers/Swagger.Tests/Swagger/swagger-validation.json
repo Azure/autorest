@@ -85,6 +85,7 @@
   "definitions": {
     "Product": {
       "description": "The product documentation.",
+      "required": [ "myintconst", "mystrconst" ],
       "properties": {
         "product_id": {
           "type": "string",

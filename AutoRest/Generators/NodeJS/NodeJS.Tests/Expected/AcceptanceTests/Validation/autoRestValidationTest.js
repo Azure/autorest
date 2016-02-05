@@ -259,9 +259,9 @@ AutoRestValidationTest.prototype.validationOfMethodParameters = function (resour
  * 
  * @param {string} [options.body.image] Image URL representing the product.
  * 
- * @param {number} [options.body.constInt] Constant int
+ * @param {object} [options.body.child]
  * 
- * @param {string} [options.body.constString] Constant string
+ * @param {number} [options.body.child.count] Count
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -289,6 +289,10 @@ AutoRestValidationTest.prototype.validationOfBody = function (resourceGroupName,
     throw new Error('callback cannot be null.');
   }
   var body = (options && options.body !== undefined) ? options.body : undefined;
+  if (body === null || body === undefined)
+  {
+    body = {};
+  }
   // Validate
   try {
     if (this.subscriptionId === null || this.subscriptionId === undefined || typeof this.subscriptionId.valueOf() !== 'string') {
@@ -469,14 +473,6 @@ AutoRestValidationTest.prototype.getWithConstantInPath = function (options, call
     throw new Error('callback cannot be null.');
   }
   var constantParam = 'constant';
-  // Validate
-  try {
-    if (constantParam === null || constantParam === undefined || typeof constantParam.valueOf() !== 'string') {
-      throw new Error('constantParam cannot be null or undefined and it must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
-  }
 
   // Construct URL
   var requestUrl = this.baseUri +
@@ -549,9 +545,9 @@ AutoRestValidationTest.prototype.getWithConstantInPath = function (options, call
  * 
  * @param {string} [options.body.image] Image URL representing the product.
  * 
- * @param {number} [options.body.constInt] Constant int
+ * @param {object} [options.body.child]
  * 
- * @param {string} [options.body.constString] Constant string
+ * @param {number} [options.body.child.count] Count
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -578,15 +574,11 @@ AutoRestValidationTest.prototype.postWithConstantInBody = function (options, cal
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var constantParam = 'constant';
   var body = (options && options.body !== undefined) ? options.body : undefined;
-  // Validate
-  try {
-    if (constantParam === null || constantParam === undefined || typeof constantParam.valueOf() !== 'string') {
-      throw new Error('constantParam cannot be null or undefined and it must be of type string.');
-    }
-  } catch (error) {
-    return callback(error);
+  var constantParam = 'constant';
+  if (body === null || body === undefined)
+  {
+    body = {};
   }
 
   // Construct URL

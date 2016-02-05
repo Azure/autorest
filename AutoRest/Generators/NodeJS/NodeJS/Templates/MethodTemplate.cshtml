@@ -51,15 +51,29 @@
     throw new Error('callback cannot be null.');
   }
 
-  @foreach(var parameter in Model.ParameterTemplateModels.Where(p => p.IsConstant))
-  {
-  @:var @(parameter.Name) = @(parameter.DefaultValue);
-  }
-
   @if (((CompositeType)Model.OptionsParameterTemplateModel.Type).Properties.Count > 1)
   {
   @:@(Model.BuildOptionalMappings())
   }
+
+  @foreach(var parameter in Model.ParameterTemplateModels)
+  {
+    if (parameter.IsConstant)
+    {
+  @:var @(parameter.Name) = @(parameter.DefaultValue);
+    }
+
+    if (parameter.Type is CompositeType
+      && !parameter.IsConstant
+      && ((CompositeType)parameter.Type).ComposedProperties.Any(p => p.IsConstant))
+    {
+  @:if (@(parameter.Name) === null || @(parameter.Name) === undefined)
+  @:{
+  @:  @(parameter.Name) = {};
+  @:}
+    }
+  }
+
   @if (Model.ParameterTemplateModels.Any())
   {
       var validationBlock = Model.ValidationString;

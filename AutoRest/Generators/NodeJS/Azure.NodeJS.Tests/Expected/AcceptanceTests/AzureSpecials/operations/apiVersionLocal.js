@@ -62,9 +62,6 @@ ApiVersionLocal.prototype.getMethodLocalValid = function (options, callback) {
   var apiVersion = '2.0';
   // Validate
   try {
-    if (apiVersion === null || apiVersion === undefined || typeof apiVersion.valueOf() !== 'string') {
-      throw new Error('apiVersion cannot be null or undefined and it must be of type string.');
-    }
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
     }
@@ -297,9 +294,6 @@ ApiVersionLocal.prototype.getPathLocalValid = function (options, callback) {
   var apiVersion = '2.0';
   // Validate
   try {
-    if (apiVersion === null || apiVersion === undefined || typeof apiVersion.valueOf() !== 'string') {
-      throw new Error('apiVersion cannot be null or undefined and it must be of type string.');
-    }
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
     }
@@ -412,9 +406,6 @@ ApiVersionLocal.prototype.getSwaggerLocalValid = function (options, callback) {
   var apiVersion = '2.0';
   // Validate
   try {
-    if (apiVersion === null || apiVersion === undefined || typeof apiVersion.valueOf() !== 'string') {
-      throw new Error('apiVersion cannot be null or undefined and it must be of type string.');
-    }
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
     }

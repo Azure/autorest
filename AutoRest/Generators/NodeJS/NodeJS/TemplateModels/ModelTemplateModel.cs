@@ -87,7 +87,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                 var visitedHash = new Dictionary<string, PropertyWrapper>();
                 var retValue = new Stack<Property>();
 
-                foreach (var property in Properties)
+                foreach (var property in Properties.Where(p => !p.IsConstant))
                 {
                     var tempWrapper = new PropertyWrapper()
                     {
@@ -113,6 +113,10 @@ namespace Microsoft.Rest.Generator.NodeJS
                                 traversalStack.Push(wrapper);
                                 foreach (var subProperty in ((CompositeType)wrapper.Property.Type).Properties)
                                 {
+                                    if (subProperty.IsConstant)
+                                    {
+                                        continue;
+                                    }
                                     var individualProperty = new Property();
                                     individualProperty.Name = wrapper.Property.Name + "." + subProperty.Name;
                                     individualProperty.Type = subProperty.Type;

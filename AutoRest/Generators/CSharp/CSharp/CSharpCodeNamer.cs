@@ -225,22 +225,26 @@ namespace Microsoft.Rest.Generator.CSharp
             return dictionaryType;
         }
 
-        public override string QuoteString(string value, IType type)
+        public override string EscapeDefaultValue(string defaultValue, IType type)
         {
             if (type == null)
             {
                 throw new ArgumentNullException("type");
             }
 
-            if (value != null)
+            if (defaultValue != null)
             {
                 if (type == PrimaryType.String)
                 {
-                    return CodeNamer.QuoteValue(value);
+                    return CodeNamer.QuoteValue(defaultValue);
                 }
                 else if (type == PrimaryType.Boolean)
                 {
-                    return value.ToLowerInvariant();
+                    return defaultValue.ToLowerInvariant();
+                }
+                else if (type is CompositeType)
+                {
+                    return "new " + type.Name + "()";
                 }
                 else
                 {
@@ -252,11 +256,11 @@ namespace Microsoft.Rest.Generator.CSharp
                     {
 
                         return "SafeJsonConvert.DeserializeObject<" + type.Name.TrimEnd('?') +
-                            ">(" + CodeNamer.QuoteValue("\"" + value + "\"") + ", this.Client.SerializationSettings)";
+                            ">(" + CodeNamer.QuoteValue("\"" + defaultValue + "\"") + ", this.Client.SerializationSettings)";
                     }
                 }
             }
-            return value;
+            return defaultValue;
         }
     }
 }

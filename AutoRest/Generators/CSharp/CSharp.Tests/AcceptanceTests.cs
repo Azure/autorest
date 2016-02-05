@@ -155,7 +155,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             client.SubscriptionId = "abc123";
             client.ApiVersion = "12-34-5678";
             client.GetWithConstantInPath();
-            var product = client.PostWithConstantInBody(new Fixtures.AcceptanceTestsValidation.Models.Product());
+            var product = client.PostWithConstantInBody();
             Assert.NotNull(product);
         }
 

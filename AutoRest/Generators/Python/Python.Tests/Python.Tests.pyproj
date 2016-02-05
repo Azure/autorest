@@ -142,6 +142,8 @@
     <Folder Include="Expected\AcceptanceTests\Validation\" />
     <Folder Include="Expected\AcceptanceTests\Validation\autorestvalidationtest\" />
     <Folder Include="Expected\AcceptanceTests\Validation\autorestvalidationtest\models\" />
+    <Folder Include="Expected\AcceptanceTests\Validation\auto_rest_validation_test\" />
+    <Folder Include="Expected\AcceptanceTests\Validation\auto_rest_validation_test\models\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -293,9 +293,6 @@ SkipUrlEncoding.prototype.getSwaggerPathValid = function (options, callback) {
   var unencodedPathParam = 'path1/path2/path3';
   // Validate
   try {
-    if (unencodedPathParam === null || unencodedPathParam === undefined || typeof unencodedPathParam.valueOf() !== 'string') {
-      throw new Error('unencodedPathParam cannot be null or undefined and it must be of type string.');
-    }
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
     }
@@ -760,9 +757,6 @@ SkipUrlEncoding.prototype.getSwaggerQueryValid = function (options, callback) {
   var q1 = 'value1&q2=value2&q3=value3';
   // Validate
   try {
-    if (q1 !== null && q1 !== undefined && typeof q1.valueOf() !== 'string') {
-      throw new Error('q1 must be of type string.');
-    }
     if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
       throw new Error('this.client.acceptLanguage must be of type string.');
     }
@@ -774,9 +768,7 @@ SkipUrlEncoding.prototype.getSwaggerQueryValid = function (options, callback) {
   var requestUrl = this.client.baseUri +
                    '//azurespecials/skipUrlEncoding/swagger/query/valid';
   var queryParameters = [];
-  if (q1 !== null && q1 !== undefined) {
-    queryParameters.push('q1=' + q1);
-  }
+  queryParameters.push('q1=' + q1);
   if (queryParameters.length > 0) {
     requestUrl += '?' + queryParameters.join('&');
   }

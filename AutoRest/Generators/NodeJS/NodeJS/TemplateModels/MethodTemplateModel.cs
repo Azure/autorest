@@ -295,7 +295,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                             traversalStack.Push(param);
                             foreach (var property in param.ComposedProperties)
                             {
-                                if (property.IsReadOnly)
+                                if (property.IsReadOnly || property.IsConstant)
                                 {
                                     continue;
                                 }
@@ -430,7 +430,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             get
             {
                 var builder = new IndentedStringBuilder("  ");
-                foreach (var parameter in ParameterTemplateModels)
+                foreach (var parameter in ParameterTemplateModels.Where(p => !p.IsConstant))
                 {
                     if ((HttpMethod == HttpMethod.Patch && parameter.Type is CompositeType))
                     {

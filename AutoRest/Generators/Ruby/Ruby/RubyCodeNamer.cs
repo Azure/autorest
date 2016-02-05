@@ -334,22 +334,22 @@ namespace Microsoft.Rest.Generator.Ruby
             return dictionaryType;
         }
 
-        public override string QuoteString(string value, IType type)
+        public override string EscapeDefaultValue(string defaultValue, IType type)
         {
             if (type == null)
             {
                 throw new ArgumentNullException("type");
             }
 
-            if (value != null)
+            if (defaultValue != null)
             {
                 if (type == PrimaryType.String)
                 {
-                    return CodeNamer.QuoteValue(value, quoteChar: "'");
+                    return CodeNamer.QuoteValue(defaultValue, quoteChar: "'");
                 }
                 else if (type == PrimaryType.Boolean)
                 {
-                    return value.ToLowerInvariant();
+                    return defaultValue.ToLowerInvariant();
                 }
                 else
                 {
@@ -358,16 +358,16 @@ namespace Microsoft.Rest.Generator.Ruby
                         type == PrimaryType.DateTimeRfc1123 ||
                         type == PrimaryType.TimeSpan)
                     {
-                        return "Date.parse('" + value + "')";
+                        return "Date.parse('" + defaultValue + "')";
                     }
 
                     if (type == PrimaryType.ByteArray)
                     {
-                        return "'" + value + "'.bytes.to_a";
+                        return "'" + defaultValue + "'.bytes.to_a";
                     }
                 }
             }
-            return value;
+            return defaultValue;
         }
     }
 }

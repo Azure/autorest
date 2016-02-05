@@ -62,7 +62,10 @@ exports.serialize = function (mapper, object, objectName) {
     throw new Error(util.format('\'%s\' cannot be null or undefined.'), objectName);
   }
   //Set Defaults
-  if (mapper.defaultValue && (object === null || object === undefined)) object = mapper.defaultValue;
+  if ((mapper.defaultValue !== null && mapper.defaultValue !== undefined) && 
+      (object === null || object === undefined)) {
+    object = mapper.defaultValue;
+  }
   if (mapper.isConstant) object = mapper.defaultValue;
   //Validate Constraints if any
   validateConstraints.call(this, mapper, object, objectName);
@@ -234,13 +237,14 @@ function serializeCompositeType(mapper, object, objectName) {
     for (var key in modelProps) {
       if (modelProps.hasOwnProperty(key)) {
         //make sure required properties of the CompositeType are present
-        if (modelProps[key].required) {
+        if (modelProps[key].required && !modelProps[key].isConstant) {
           if (object[key] === null || object[key] === undefined) {
             throw new Error(util.format('\'%s\' cannot be null or undefined in \'%s\'.', key, objectName));
           }
         }
         //serialize the property if it is present in the provided object instance
-        if (modelProps[key].isConstant || (object[key] !== null && object[key] !== undefined)) {
+        if ((modelProps[key].defaultValue !== null && modelProps[key].defaultValue !== undefined) || 
+          (object[key] !== null && object[key] !== undefined)) {
           var propertyObjectName = objectName + '.' + objectNameFromSerializedName(modelProps[key].serializedName);
           var propertyMapper = modelProps[key];
           var serializedValue = exports.serialize.call(this, propertyMapper, object[key], propertyObjectName);

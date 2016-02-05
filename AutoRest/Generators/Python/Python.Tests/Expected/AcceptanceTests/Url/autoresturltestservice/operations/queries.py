@@ -32,12 +32,12 @@ class Queries(object):
         self.config = config
 
     def get_boolean_true(
-            self, bool_query=None, custom_headers={}, raw=False, **operation_config):
+            self, bool_query, custom_headers={}, raw=False, **operation_config):
         """
         Get true Boolean value on path
 
         :param bool_query: true boolean value
-        :type bool_query: bool or None
+        :type bool_query: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
@@ -48,8 +48,7 @@ class Queries(object):
 
         # Construct parameters
         query_parameters = {}
-        if bool_query is not None:
-            query_parameters['boolQuery'] = self._serialize.query("bool_query", bool_query, 'bool')
+        query_parameters['boolQuery'] = self._serialize.query("bool_query", bool_query, 'bool')
 
         # Construct headers
         header_parameters = {}
@@ -69,12 +68,12 @@ class Queries(object):
             return client_raw_response
 
     def get_boolean_false(
-            self, bool_query=None, custom_headers={}, raw=False, **operation_config):
+            self, bool_query, custom_headers={}, raw=False, **operation_config):
         """
         Get false Boolean value on path
 
         :param bool_query: false boolean value
-        :type bool_query: bool or None
+        :type bool_query: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
@@ -85,8 +84,7 @@ class Queries(object):
 
         # Construct parameters
         query_parameters = {}
-        if bool_query is not None:
-            query_parameters['boolQuery'] = self._serialize.query("bool_query", bool_query, 'bool')
+        query_parameters['boolQuery'] = self._serialize.query("bool_query", bool_query, 'bool')
 
         # Construct headers
         header_parameters = {}
@@ -143,12 +141,12 @@ class Queries(object):
             return client_raw_response
 
     def get_int_one_million(
-            self, int_query=None, custom_headers={}, raw=False, **operation_config):
+            self, int_query, custom_headers={}, raw=False, **operation_config):
         """
         Get '1000000' integer value
 
         :param int_query: '1000000' integer value
-        :type int_query: int or None
+        :type int_query: int
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
@@ -159,8 +157,7 @@ class Queries(object):
 
         # Construct parameters
         query_parameters = {}
-        if int_query is not None:
-            query_parameters['intQuery'] = self._serialize.query("int_query", int_query, 'int')
+        query_parameters['intQuery'] = self._serialize.query("int_query", int_query, 'int')
 
         # Construct headers
         header_parameters = {}
@@ -180,12 +177,12 @@ class Queries(object):
             return client_raw_response
 
     def get_int_negative_one_million(
-            self, int_query=None, custom_headers={}, raw=False, **operation_config):
+            self, int_query, custom_headers={}, raw=False, **operation_config):
         """
         Get '-1000000' integer value
 
         :param int_query: '-1000000' integer value
-        :type int_query: int or None
+        :type int_query: int
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
@@ -196,8 +193,7 @@ class Queries(object):
 
         # Construct parameters
         query_parameters = {}
-        if int_query is not None:
-            query_parameters['intQuery'] = self._serialize.query("int_query", int_query, 'int')
+        query_parameters['intQuery'] = self._serialize.query("int_query", int_query, 'int')
 
         # Construct headers
         header_parameters = {}
@@ -254,12 +250,12 @@ class Queries(object):
             return client_raw_response
 
     def get_ten_billion(
-            self, long_query=None, custom_headers={}, raw=False, **operation_config):
+            self, long_query, custom_headers={}, raw=False, **operation_config):
         """
         Get '10000000000' 64 bit integer value
 
         :param long_query: '10000000000' 64 bit integer value
-        :type long_query: long or None
+        :type long_query: long
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
@@ -270,8 +266,7 @@ class Queries(object):
 
         # Construct parameters
         query_parameters = {}
-        if long_query is not None:
-            query_parameters['longQuery'] = self._serialize.query("long_query", long_query, 'long')
+        query_parameters['longQuery'] = self._serialize.query("long_query", long_query, 'long')
 
         # Construct headers
         header_parameters = {}
@@ -291,12 +286,12 @@ class Queries(object):
             return client_raw_response
 
     def get_negative_ten_billion(
-            self, long_query=None, custom_headers={}, raw=False, **operation_config):
+            self, long_query, custom_headers={}, raw=False, **operation_config):
         """
         Get '-10000000000' 64 bit integer value
 
         :param long_query: '-10000000000' 64 bit integer value
-        :type long_query: long or None
+        :type long_query: long
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
@@ -307,8 +302,7 @@ class Queries(object):
 
         # Construct parameters
         query_parameters = {}
-        if long_query is not None:
-            query_parameters['longQuery'] = self._serialize.query("long_query", long_query, 'long')
+        query_parameters['longQuery'] = self._serialize.query("long_query", long_query, 'long')
 
         # Construct headers
         header_parameters = {}
@@ -365,12 +359,12 @@ class Queries(object):
             return client_raw_response
 
     def float_scientific_positive(
-            self, float_query=None, custom_headers={}, raw=False, **operation_config):
+            self, float_query, custom_headers={}, raw=False, **operation_config):
         """
         Get '1.034E+20' numeric value
 
         :param float_query: '1.034E+20'numeric value
-        :type float_query: float or None
+        :type float_query: float
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
@@ -381,8 +375,7 @@ class Queries(object):
 
         # Construct parameters
         query_parameters = {}
-        if float_query is not None:
-            query_parameters['floatQuery'] = self._serialize.query("float_query", float_query, 'float')
+        query_parameters['floatQuery'] = self._serialize.query("float_query", float_query, 'float')
 
         # Construct headers
         header_parameters = {}
@@ -402,12 +395,12 @@ class Queries(object):
             return client_raw_response
 
     def float_scientific_negative(
-            self, float_query=None, custom_headers={}, raw=False, **operation_config):
+            self, float_query, custom_headers={}, raw=False, **operation_config):
         """
         Get '-1.034E-20' numeric value
 
         :param float_query: '-1.034E-20'numeric value
-        :type float_query: float or None
+        :type float_query: float
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
@@ -418,8 +411,7 @@ class Queries(object):
 
         # Construct parameters
         query_parameters = {}
-        if float_query is not None:
-            query_parameters['floatQuery'] = self._serialize.query("float_query", float_query, 'float')
+        query_parameters['floatQuery'] = self._serialize.query("float_query", float_query, 'float')
 
         # Construct headers
         header_parameters = {}
@@ -476,12 +468,12 @@ class Queries(object):
             return client_raw_response
 
     def double_decimal_positive(
-            self, double_query=None, custom_headers={}, raw=False, **operation_config):
+            self, double_query, custom_headers={}, raw=False, **operation_config):
         """
         Get '9999999.999' numeric value
 
         :param double_query: '9999999.999'numeric value
-        :type double_query: float or None
+        :type double_query: float
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
@@ -492,8 +484,7 @@ class Queries(object):
 
         # Construct parameters
         query_parameters = {}
-        if double_query is not None:
-            query_parameters['doubleQuery'] = self._serialize.query("double_query", double_query, 'float')
+        query_parameters['doubleQuery'] = self._serialize.query("double_query", double_query, 'float')
 
         # Construct headers
         header_parameters = {}
@@ -513,12 +504,12 @@ class Queries(object):
             return client_raw_response
 
     def double_decimal_negative(
-            self, double_query=None, custom_headers={}, raw=False, **operation_config):
+            self, double_query, custom_headers={}, raw=False, **operation_config):
         """
         Get '-9999999.999' numeric value
 
         :param double_query: '-9999999.999'numeric value
-        :type double_query: float or None
+        :type double_query: float
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
@@ -529,8 +520,7 @@ class Queries(object):
 
         # Construct parameters
         query_parameters = {}
-        if double_query is not None:
-            query_parameters['doubleQuery'] = self._serialize.query("double_query", double_query, 'float')
+        query_parameters['doubleQuery'] = self._serialize.query("double_query", double_query, 'float')
 
         # Construct headers
         header_parameters = {}
@@ -587,12 +577,12 @@ class Queries(object):
             return client_raw_response
 
     def string_unicode(
-            self, string_query=None, custom_headers={}, raw=False, **operation_config):
+            self, string_query, custom_headers={}, raw=False, **operation_config):
         """
         Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
 
         :param string_query: '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value
-        :type string_query: str or None
+        :type string_query: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
@@ -603,8 +593,7 @@ class Queries(object):
 
         # Construct parameters
         query_parameters = {}
-        if string_query is not None:
-            query_parameters['stringQuery'] = self._serialize.query("string_query", string_query, 'str')
+        query_parameters['stringQuery'] = self._serialize.query("string_query", string_query, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -624,13 +613,13 @@ class Queries(object):
             return client_raw_response
 
     def string_url_encoded(
-            self, string_query=None, custom_headers={}, raw=False, **operation_config):
+            self, string_query, custom_headers={}, raw=False, **operation_config):
         """
         Get 'begin!*'();:@ &=+$,/?#[]end
 
         :param string_query: 'begin!*'();:@ &=+$,/?#[]end' url encoded string
          value
-        :type string_query: str or None
+        :type string_query: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
@@ -641,8 +630,7 @@ class Queries(object):
 
         # Construct parameters
         query_parameters = {}
-        if string_query is not None:
-            query_parameters['stringQuery'] = self._serialize.query("string_query", string_query, 'str')
+        query_parameters['stringQuery'] = self._serialize.query("string_query", string_query, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -662,12 +650,12 @@ class Queries(object):
             return client_raw_response
 
     def string_empty(
-            self, string_query=None, custom_headers={}, raw=False, **operation_config):
+            self, string_query, custom_headers={}, raw=False, **operation_config):
         """
         Get ''
 
         :param string_query: '' string value
-        :type string_query: str or None
+        :type string_query: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
@@ -678,8 +666,7 @@ class Queries(object):
 
         # Construct parameters
         query_parameters = {}
-        if string_query is not None:
-            query_parameters['stringQuery'] = self._serialize.query("string_query", string_query, 'str')
+        query_parameters['stringQuery'] = self._serialize.query("string_query", string_query, 'str')
 
         # Construct headers
         header_parameters = {}
@@ -850,12 +837,12 @@ class Queries(object):
             return client_raw_response
 
     def byte_empty(
-            self, byte_query=None, custom_headers={}, raw=False, **operation_config):
+            self, byte_query, custom_headers={}, raw=False, **operation_config):
         """
         Get '' as byte array
 
         :param byte_query: '' as byte array
-        :type byte_query: bytearray or None
+        :type byte_query: bytearray
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
@@ -866,8 +853,7 @@ class Queries(object):
 
         # Construct parameters
         query_parameters = {}
-        if byte_query is not None:
-            query_parameters['byteQuery'] = self._serialize.query("byte_query", byte_query, 'bytearray')
+        query_parameters['byteQuery'] = self._serialize.query("byte_query", byte_query, 'bytearray')
 
         # Construct headers
         header_parameters = {}
@@ -924,12 +910,12 @@ class Queries(object):
             return client_raw_response
 
     def date_valid(
-            self, date_query=None, custom_headers={}, raw=False, **operation_config):
+            self, date_query, custom_headers={}, raw=False, **operation_config):
         """
         Get '2012-01-01' as date
 
         :param date_query: '2012-01-01' as date
-        :type date_query: date or None
+        :type date_query: date
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
@@ -940,8 +926,7 @@ class Queries(object):
 
         # Construct parameters
         query_parameters = {}
-        if date_query is not None:
-            query_parameters['dateQuery'] = self._serialize.query("date_query", date_query, 'date')
+        query_parameters['dateQuery'] = self._serialize.query("date_query", date_query, 'date')
 
         # Construct headers
         header_parameters = {}
@@ -998,12 +983,12 @@ class Queries(object):
             return client_raw_response
 
     def date_time_valid(
-            self, date_time_query=None, custom_headers={}, raw=False, **operation_config):
+            self, date_time_query, custom_headers={}, raw=False, **operation_config):
         """
         Get '2012-01-01T01:01:01Z' as date-time
 
         :param date_time_query: '2012-01-01T01:01:01Z' as date-time
-        :type date_time_query: datetime or None
+        :type date_time_query: datetime
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
@@ -1014,8 +999,7 @@ class Queries(object):
 
         # Construct parameters
         query_parameters = {}
-        if date_time_query is not None:
-            query_parameters['dateTimeQuery'] = self._serialize.query("date_time_query", date_time_query, 'iso-8601')
+        query_parameters['dateTimeQuery'] = self._serialize.query("date_time_query", date_time_query, 'iso-8601')
 
         # Construct headers
         header_parameters = {}

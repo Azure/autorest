@@ -154,9 +154,17 @@ namespace Microsoft.Rest.Modeler.Swagger
 
             if (swaggerObject.Enum != null 
                 && swaggerObject.Enum.Count == 1 
-                && !IsExpandableEnum(swaggerObject))
+                && !IsExpandableEnum(swaggerObject) 
+                && swaggerObject.IsRequired)
             {
                 parameter.DefaultValue = swaggerObject.Enum[0];
+                parameter.IsConstant = true;
+            }
+
+            var compositeType = parameter.Type as CompositeType;
+            if (compositeType != null && compositeType.ComposedProperties.All(p => p.IsConstant))
+            {
+                parameter.DefaultValue = "{}";
                 parameter.IsConstant = true;
             }
 
