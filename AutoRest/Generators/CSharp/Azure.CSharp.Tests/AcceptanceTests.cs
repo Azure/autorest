@@ -26,7 +26,6 @@ using Microsoft.Rest.Azure;
 using AutoRest.Generator.CSharp.Tests.Utilities;
 using Microsoft.Rest.Azure.OData;
 using Fixtures.Azure.AcceptanceTestsAzureSpecials.Models;
-using Fixtures.Azure.AcceptanceTestsPaging.Models;
 
 namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
 {
@@ -345,7 +344,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 }
                 Assert.Equal(10, count);
 
-                var options = new PagingGetMultiplePagesWithOffsetOptions();
+                var options = new Fixtures.Azure.AcceptanceTestsPaging.Models.PagingGetMultiplePagesWithOffsetOptions();
                 options.Offset = 100;
                 result = client.Paging.GetMultiplePagesWithOffset(options, "client-id");
                 Assert.NotNull(result.NextPageLink);
