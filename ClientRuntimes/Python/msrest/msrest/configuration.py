@@ -146,8 +146,7 @@ class Configuration(object):
     def user_agent(self):
         return self._user_agent
 
-    @user_agent.setter
-    def user_agent(self, value):
+    def add_user_agent(self, value):
         self._user_agent = "{} {}".format(self._user_agent, value)
 
     def _clear_config(self):
