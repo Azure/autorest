@@ -44,11 +44,11 @@ namespace @Settings.Namespace
         }
         @if (Model.IsCustomBaseUri)
         {
-            @:this.BaseUri = "@Model.BaseUrl";
+        @:this.BaseUri = "@Model.BaseUrl";
         }
         else
         {
-            @:this.BaseUri = new Uri("@Model.BaseUrl");
+        @:this.BaseUri = new Uri("@Model.BaseUrl");
         }
         @foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
         {

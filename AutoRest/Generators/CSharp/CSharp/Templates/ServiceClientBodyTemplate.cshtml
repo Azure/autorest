@@ -230,7 +230,7 @@ if (!Model.IsCustomBaseUri)
 @:        throw new ArgumentNullException("@(param.Name.ToCamelCase())");
 @:    }
 }
-if (Model.IsCustomBaseUri)
+if (!Model.IsCustomBaseUri)
 {
 @:    this.BaseUri = baseUri;
 }
