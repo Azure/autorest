@@ -27,11 +27,11 @@ namespace @Settings.Namespace
         /// </summary>
         @if (Model.IsCustomBaseUri)
         {
-        @:internal string BaseUri {get; set;}
+        @:string BaseUri {get; set;}
         }
         else
         {
-        @:public Uri BaseUri { get; set; }
+        @:Uri BaseUri { get; set; }
         }
         @EmptyLine
 
