@@ -24,6 +24,11 @@
 #
 # --------------------------------------------------------------------------
 
+"""
+This file needs to be modified everytime other tests are updated. This is
+because unittest:TestLoader:discover() loads file in the order of last
+modified timestamp. We need a better way of sorting the test files. 
+"""
 import unittest
 import sys
 import datetime
