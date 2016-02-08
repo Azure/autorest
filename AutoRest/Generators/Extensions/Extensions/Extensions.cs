@@ -196,7 +196,7 @@ namespace Microsoft.Rest.Generator
                 if (bodyParameter != null)
                 {
                     var bodyParameterType = bodyParameter.Type as CompositeType;
-                    if (bodyParameterType != null && bodyParameterType.ComposedProperties.Count() <= settings.PayloadFlatteningThreshold)
+                    if (bodyParameterType != null && bodyParameterType.ComposedProperties.Count(p => !p.IsConstant) <= settings.PayloadFlatteningThreshold)
                     {
                         var parameterTransformation = new ParameterTransformation
                         {
@@ -204,7 +204,7 @@ namespace Microsoft.Rest.Generator
                         };
                         method.InputParameterTransformation.Add(parameterTransformation);
 
-                        foreach (var property in bodyParameterType.ComposedProperties)
+                        foreach (var property in bodyParameterType.ComposedProperties.Where(p => !p.IsConstant))
                         {
                             var newMethodParameter = new Parameter();
                             newMethodParameter.LoadFrom(property);
