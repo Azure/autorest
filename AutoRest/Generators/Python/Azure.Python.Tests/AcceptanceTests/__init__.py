@@ -24,6 +24,7 @@
 #
 # --------------------------------------------------------------------------
 
+import glob
 import sys
 import subprocess
 import os
@@ -35,18 +36,9 @@ from os.path import dirname, pardir, join, realpath
 
 cwd = dirname(realpath(__file__))
 root = realpath(join(cwd, pardir, pardir, pardir, pardir, pardir))
-runtime = join(root, "ClientRuntimes", "Python", "msrest")
-sys.path.append(runtime)
-runtime = join(root, "ClientRuntimes", "Python", "msrestazure")
-sys.path.append(runtime)
+sys.path.append(join(root, "ClientRuntimes", "Python", "msrest"))
+sys.path.append(join(root, "ClientRuntimes", "Python", "msrestazure"))
 
-def sort_test(x, y):
-
-    if x == 'test_ensure_coverage' :
-        return 1
-    if y == 'test_ensure_coverage' :
-        return -1
-    return (x > y) - (x < y)
 
 #Ideally this would be in a common helper library shared between the tests
 def start_server_process():
@@ -61,20 +53,23 @@ def terminate_server_process(process):
     if os.name == 'nt':
         process.kill()
     else:
-        os.killpg(os.getpgid(process.pid), signal.SIGTERM)  # Send the signal to all the process groups    
+        os.killpg(os.getpgid(process.pid), signal.SIGTERM)  # Send the signal to all the process groups
     
 if __name__ == '__main__':
 
     cwd = dirname(realpath(__file__))
 
+    print("Current directory is: " + cwd)
+    
     server = start_server_process()
     try:
+        all = glob.glob(os.path.join(cwd, "*_tests.py"))
+        test_modules = sorted([os.path.basename(p).rstrip('.py') for p in all])
+
         runner = TextTestRunner(verbosity=2)
 
-        test_loader = TestLoader()    
-        test_loader.sortTestMethodsUsing = sort_test
-
-        suite = test_loader.discover(cwd, pattern="*_tests.py")
+        test_loader = TestLoader()
+        suite = test_loader.loadTestsFromNames(test_modules)
         result = runner.run(suite)
         if not result.wasSuccessful():
             sys.exit(1)
