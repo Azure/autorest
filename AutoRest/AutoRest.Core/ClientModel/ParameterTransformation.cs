@@ -6,6 +6,7 @@ namespace Microsoft.Rest.Generator.ClientModel
     using System;
     using System.Collections.Generic;
     using System.Text;
+    using System.Linq;
 
     /// <summary>
     /// Defines a parameter transformation.
@@ -52,8 +53,13 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// <returns>A deep clone of current object.</returns>
         public object Clone()
         {
-            ParameterTransformation paramTransformation = (ParameterTransformation)this.MemberwiseClone();
-            return paramTransformation;
+            //ParameterTransformation paramTransformation = (ParameterTransformation)this.MemberwiseClone();
+            //return paramTransformation;
+
+            var transformation = new ParameterTransformation();
+            transformation.OutputParameter = (Parameter) this.OutputParameter.Clone();
+            this.ParameterMappings.ToList().ForEach(pm => transformation.ParameterMappings.Add((ParameterMapping) pm.Clone()));
+            return transformation;
         }
     }
 }

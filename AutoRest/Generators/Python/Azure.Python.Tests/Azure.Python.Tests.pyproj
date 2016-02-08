@@ -86,6 +86,8 @@
     <Folder Include="Expected\AcceptanceTests\Paging\autorestpagingtestservice\" />
     <Folder Include="Expected\AcceptanceTests\Paging\autorestpagingtestservice\models\" />
     <Folder Include="Expected\AcceptanceTests\Paging\autorestpagingtestservice\operations\" />
+    <Folder Include="Expected\AcceptanceTests\Paging\auto_rest_paging_test_service\" />
+    <Folder Include="Expected\AcceptanceTests\Paging\auto_rest_paging_test_service\models\" />
     <Folder Include="Expected\AcceptanceTests\ResourceFlattening\" />
     <Folder Include="Expected\AcceptanceTests\ResourceFlattening\autorestresourceflatteningtestservice\" />
     <Folder Include="Expected\AcceptanceTests\ResourceFlattening\autorestresourceflatteningtestservice\models\" />

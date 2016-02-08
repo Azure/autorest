@@ -680,7 +680,7 @@ public final class PathsOperationsImpl implements PathsOperations {
         if (enumPath == null) {
             throw new IllegalArgumentException("Parameter enumPath is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.enumValid(this.client.getMapperAdapter().serializeRaw(enumPath));
+        Call<ResponseBody> call = service.enumValid(client.getMapperAdapter().serializeRaw(enumPath));
         return enumValidDelegate(call.execute(), null);
     }
 
@@ -696,7 +696,7 @@ public final class PathsOperationsImpl implements PathsOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter enumPath is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.enumValid(this.client.getMapperAdapter().serializeRaw(enumPath));
+        Call<ResponseBody> call = service.enumValid(client.getMapperAdapter().serializeRaw(enumPath));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -730,7 +730,7 @@ public final class PathsOperationsImpl implements PathsOperations {
         if (enumPath == null) {
             throw new IllegalArgumentException("Parameter enumPath is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.enumNull(this.client.getMapperAdapter().serializeRaw(enumPath));
+        Call<ResponseBody> call = service.enumNull(client.getMapperAdapter().serializeRaw(enumPath));
         return enumNullDelegate(call.execute(), null);
     }
 
@@ -746,7 +746,7 @@ public final class PathsOperationsImpl implements PathsOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter enumPath is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.enumNull(this.client.getMapperAdapter().serializeRaw(enumPath));
+        Call<ResponseBody> call = service.enumNull(client.getMapperAdapter().serializeRaw(enumPath));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -930,7 +930,7 @@ public final class PathsOperationsImpl implements PathsOperations {
         if (datePath == null) {
             throw new IllegalArgumentException("Parameter datePath is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.dateValid(this.client.getMapperAdapter().serializeRaw(datePath));
+        Call<ResponseBody> call = service.dateValid(client.getMapperAdapter().serializeRaw(datePath));
         return dateValidDelegate(call.execute(), null);
     }
 
@@ -946,7 +946,7 @@ public final class PathsOperationsImpl implements PathsOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter datePath is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.dateValid(this.client.getMapperAdapter().serializeRaw(datePath));
+        Call<ResponseBody> call = service.dateValid(client.getMapperAdapter().serializeRaw(datePath));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -980,7 +980,7 @@ public final class PathsOperationsImpl implements PathsOperations {
         if (datePath == null) {
             throw new IllegalArgumentException("Parameter datePath is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.dateNull(this.client.getMapperAdapter().serializeRaw(datePath));
+        Call<ResponseBody> call = service.dateNull(client.getMapperAdapter().serializeRaw(datePath));
         return dateNullDelegate(call.execute(), null);
     }
 
@@ -996,7 +996,7 @@ public final class PathsOperationsImpl implements PathsOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter datePath is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.dateNull(this.client.getMapperAdapter().serializeRaw(datePath));
+        Call<ResponseBody> call = service.dateNull(client.getMapperAdapter().serializeRaw(datePath));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -1030,7 +1030,7 @@ public final class PathsOperationsImpl implements PathsOperations {
         if (dateTimePath == null) {
             throw new IllegalArgumentException("Parameter dateTimePath is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.dateTimeValid(this.client.getMapperAdapter().serializeRaw(dateTimePath));
+        Call<ResponseBody> call = service.dateTimeValid(client.getMapperAdapter().serializeRaw(dateTimePath));
         return dateTimeValidDelegate(call.execute(), null);
     }
 
@@ -1046,7 +1046,7 @@ public final class PathsOperationsImpl implements PathsOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter dateTimePath is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.dateTimeValid(this.client.getMapperAdapter().serializeRaw(dateTimePath));
+        Call<ResponseBody> call = service.dateTimeValid(client.getMapperAdapter().serializeRaw(dateTimePath));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -1080,7 +1080,7 @@ public final class PathsOperationsImpl implements PathsOperations {
         if (dateTimePath == null) {
             throw new IllegalArgumentException("Parameter dateTimePath is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.dateTimeNull(this.client.getMapperAdapter().serializeRaw(dateTimePath));
+        Call<ResponseBody> call = service.dateTimeNull(client.getMapperAdapter().serializeRaw(dateTimePath));
         return dateTimeNullDelegate(call.execute(), null);
     }
 
@@ -1096,7 +1096,7 @@ public final class PathsOperationsImpl implements PathsOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter dateTimePath is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.dateTimeNull(this.client.getMapperAdapter().serializeRaw(dateTimePath));
+        Call<ResponseBody> call = service.dateTimeNull(client.getMapperAdapter().serializeRaw(dateTimePath));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {

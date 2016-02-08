@@ -17,21 +17,21 @@ namespace Fixtures.Azure.AcceptanceTestsPaging.Models
     using Microsoft.Rest.Azure;
 
     /// <summary>
-    /// Additional parameters for the getMultiplePagesNext operation.
+    /// Additional parameters for the getMultiplePagesWithOffsetNext operation.
     /// </summary>
-    public partial class PagingGetMultiplePagesNextOptions
+    public partial class PagingGetMultiplePagesWithOffsetNextOptions
     {
         /// <summary>
         /// Initializes a new instance of the
-        /// PagingGetMultiplePagesNextOptions class.
+        /// PagingGetMultiplePagesWithOffsetNextOptions class.
         /// </summary>
-        public PagingGetMultiplePagesNextOptions() { }
+        public PagingGetMultiplePagesWithOffsetNextOptions() { }
 
         /// <summary>
         /// Initializes a new instance of the
-        /// PagingGetMultiplePagesNextOptions class.
+        /// PagingGetMultiplePagesWithOffsetNextOptions class.
         /// </summary>
-        public PagingGetMultiplePagesNextOptions(int? maxresults = default(int?), int? timeout = default(int?))
+        public PagingGetMultiplePagesWithOffsetNextOptions(int? maxresults = default(int?), int? timeout = default(int?))
         {
             Maxresults = maxresults;
             Timeout = timeout;

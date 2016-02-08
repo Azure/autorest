@@ -71,9 +71,29 @@ export interface PagingGetMultiplePagesOptions {
 
 /**
  * @class
- * Initializes a new instance of the PagingGetMultiplePagesNextOptions class.
+ * Initializes a new instance of the PagingGetMultiplePagesWithOffsetOptions class.
  * @constructor
- * Additional parameters for the getMultiplePagesNext operation.
+ * Additional parameters for the getMultiplePagesWithOffset operation.
+ * @member {number} [maxresults] Sets the maximum number of items to return in
+ * the response.
+ * 
+ * @member {number} offset Offset of return value
+ * 
+ * @member {number} [timeout] Sets the maximum time that the server can spend
+ * processing the request, in seconds. The default is 30 seconds.
+ * 
+ */
+export interface PagingGetMultiplePagesWithOffsetOptions {
+    maxresults?: number;
+    offset: number;
+    timeout?: number;
+}
+
+/**
+ * @class
+ * Initializes a new instance of the PagingGetMultiplePagesWithOffsetNextOptions class.
+ * @constructor
+ * Additional parameters for the getMultiplePagesWithOffsetNext operation.
  * @member {number} [maxresults] Sets the maximum number of items to return in
  * the response.
  * 
@@ -81,7 +101,7 @@ export interface PagingGetMultiplePagesOptions {
  * processing the request, in seconds. The default is 30 seconds.
  * 
  */
-export interface PagingGetMultiplePagesNextOptions {
+export interface PagingGetMultiplePagesWithOffsetNextOptions {
     maxresults?: number;
     timeout?: number;
 }
