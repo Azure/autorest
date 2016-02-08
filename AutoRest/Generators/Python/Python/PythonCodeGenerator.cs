@@ -115,7 +115,7 @@ namespace Microsoft.Rest.Generator.Python
             {
                 Model = serviceClientTemplateModel,
             };
-            await Write(serviceClientTemplate, Path.Combine(serviceClientTemplateModel.PackageName, "api_client.py"));
+            await Write(serviceClientTemplate, Path.Combine(serviceClientTemplateModel.PackageName, serviceClientTemplateModel.Name.ToPythonCase() + "_client.py"));
 
             //Models
             if (serviceClient.ModelTypes.Any())
@@ -162,7 +162,7 @@ namespace Microsoft.Rest.Generator.Python
                 {
                     Model = new EnumTemplateModel(serviceClient.EnumTypes),
                 };
-                await Write(enumTemplate, Path.Combine(serviceClientTemplateModel.PackageName, "models", "enums.py"));
+                await Write(enumTemplate, Path.Combine(serviceClientTemplateModel.PackageName, "models", serviceClientTemplateModel.Name.ToPythonCase() + "_enums.py"));
             }
         }
     }

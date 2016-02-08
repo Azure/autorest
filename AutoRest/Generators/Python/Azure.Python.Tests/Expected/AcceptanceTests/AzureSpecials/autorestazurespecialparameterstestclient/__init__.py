@@ -19,7 +19,7 @@ from msrest.exceptions import (
     HttpOperationError,
 )
 
-from .api_client import AutoRestAzureSpecialParametersTestClient, AutoRestAzureSpecialParametersTestClientConfiguration
+from .auto_rest_azure_special_parameters_test_client_client import AutoRestAzureSpecialParametersTestClient, AutoRestAzureSpecialParametersTestClientConfiguration
 
 __all__ = [
     'ClientException',
