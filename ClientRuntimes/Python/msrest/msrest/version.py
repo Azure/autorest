@@ -1,4 +1,4 @@
-﻿# --------------------------------------------------------------------------
+# --------------------------------------------------------------------------
 #
 # Copyright (c) Microsoft Corporation. All rights reserved.
 #
@@ -24,16 +24,5 @@
 #
 # --------------------------------------------------------------------------
 
-from .configuration import Configuration
-from .service_client import ServiceClient
-from .serialization import Serializer, Deserializer
-from .version import msrest_version
 
-__all__ = [
-    "ServiceClient",
-    "Serializer",
-    "Deserializer",
-    "Configuration"
-    ]
-
-__version__ = msrest_version
+msrest_version = "0.0.1"

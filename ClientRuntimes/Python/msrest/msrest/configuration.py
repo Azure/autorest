@@ -31,6 +31,9 @@ try:
 except ImportError:
     import ConfigParser as configparser
     from ConfigParser import NoOptionError
+import sys
+
+import requests
 
 from . import logger
 from .exceptions import raise_with_traceback
@@ -39,6 +42,7 @@ from .pipeline import (
     ClientRedirectPolicy,
     ClientProxies,
     ClientConnection)
+from .version import msrest_version
 
 
 class Configuration(object):
@@ -73,7 +77,10 @@ class Configuration(object):
         self.redirect_policy = ClientRedirectPolicy(self._log_name)
 
         # User-Agent Header
-        self.user_agent = "msrest/0.0.1"
+        self._user_agent = "python/{} requests/{} msrest/{}".format(
+            sys.version.split(' ')[0],
+            requests.__version__,
+            msrest_version)
 
         self._config = configparser.ConfigParser()
         self._config.optionxform = str
@@ -134,6 +141,13 @@ class Configuration(object):
     def log_name(self, value):
         self._log_name = value
         self._log = logger.setup_logger(self)
+
+    @property
+    def user_agent(self):
+        return self._user_agent
+
+    def add_user_agent(self, value):
+        self._user_agent = "{} {}".format(self._user_agent, value)
 
     def _clear_config(self):
         """Clearout config object in memory."""
