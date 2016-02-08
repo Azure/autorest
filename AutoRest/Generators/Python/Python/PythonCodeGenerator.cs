@@ -115,7 +115,7 @@ namespace Microsoft.Rest.Generator.Python
             {
                 Model = serviceClientTemplateModel,
             };
-            await Write(serviceClientTemplate, Path.Combine(serviceClientTemplateModel.PackageName, serviceClientTemplateModel.Name.ToPythonCase() + "_client.py"));
+            await Write(serviceClientTemplate, Path.Combine(serviceClientTemplateModel.PackageName, serviceClientTemplateModel.Name.ToPythonCase() + ".py"));
 
             //Models
             if (serviceClient.ModelTypes.Any())

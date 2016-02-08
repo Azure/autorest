@@ -19,7 +19,7 @@ from msrest.exceptions import (
     HttpOperationError,
 )
 
-from .auto_rest_integer_test_service_client import AutoRestIntegerTestService, AutoRestIntegerTestServiceConfiguration
+from .auto_rest_integer_test_service import AutoRestIntegerTestService, AutoRestIntegerTestServiceConfiguration
 
 __all__ = [
     'ClientException',

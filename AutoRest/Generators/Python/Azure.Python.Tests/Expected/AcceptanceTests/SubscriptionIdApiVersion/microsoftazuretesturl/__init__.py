@@ -19,7 +19,7 @@ from msrest.exceptions import (
     HttpOperationError,
 )
 
-from .microsoft_azure_test_url_client import MicrosoftAzureTestUrl, MicrosoftAzureTestUrlConfiguration
+from .microsoft_azure_test_url import MicrosoftAzureTestUrl, MicrosoftAzureTestUrlConfiguration
 
 __all__ = [
     'ClientException',

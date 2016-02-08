@@ -19,7 +19,7 @@ from msrest.exceptions import (
     HttpOperationError,
 )
 
-from .auto_rest_swagger_bat_byte_service_client import AutoRestSwaggerBATByteService, AutoRestSwaggerBATByteServiceConfiguration
+from .auto_rest_swagger_bat_byte_service import AutoRestSwaggerBATByteService, AutoRestSwaggerBATByteServiceConfiguration
 
 __all__ = [
     'ClientException',

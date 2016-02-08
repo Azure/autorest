@@ -19,7 +19,7 @@ from msrest.exceptions import (
     HttpOperationError,
 )
 
-from .auto_rest_report_service_for_azure_client import AutoRestReportServiceForAzure, AutoRestReportServiceForAzureConfiguration
+from .auto_rest_report_service_for_azure import AutoRestReportServiceForAzure, AutoRestReportServiceForAzureConfiguration
 
 __all__ = [
     'ClientException',

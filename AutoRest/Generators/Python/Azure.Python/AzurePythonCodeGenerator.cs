@@ -180,7 +180,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
             {
                 Model = serviceClientTemplateModel,
             };
-            await Write(serviceClientTemplate, Path.Combine(serviceClientTemplateModel.PackageName, serviceClientTemplateModel.Name.ToPythonCase() + "_client.py"));
+            await Write(serviceClientTemplate, Path.Combine(serviceClientTemplateModel.PackageName, serviceClientTemplateModel.Name.ToPythonCase() + ".py"));
 
             //Models
             if (serviceClientTemplateModel.ModelTemplateModels.Any())

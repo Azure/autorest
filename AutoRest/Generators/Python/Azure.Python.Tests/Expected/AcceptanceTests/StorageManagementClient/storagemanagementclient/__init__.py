@@ -19,7 +19,7 @@ from msrest.exceptions import (
     HttpOperationError,
 )
 
-from .storage_management_client_client import StorageManagementClient, StorageManagementClientConfiguration
+from .storage_management_client import StorageManagementClient, StorageManagementClientConfiguration
 
 __all__ = [
     'ClientException',
