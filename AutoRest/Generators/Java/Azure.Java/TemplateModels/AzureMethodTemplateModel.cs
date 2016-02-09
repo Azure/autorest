@@ -46,7 +46,12 @@ namespace Microsoft.Rest.Generator.Java.Azure
 
         public bool IsPagingOperation
         {
-            get { return Extensions.ContainsKey(AzureExtensions.PageableExtension) && !IsPagingNextOperation; }
+            get
+            {
+                return Extensions.ContainsKey(AzureExtensions.PageableExtension) &&
+                    Extensions[AzureExtensions.PageableExtension] != null &&
+                    !IsPagingNextOperation;
+            }
         }
 
         /// <summary>
