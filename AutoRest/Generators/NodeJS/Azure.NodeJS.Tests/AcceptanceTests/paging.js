@@ -57,6 +57,28 @@ describe('nodejs', function () {
         });
       });
 
+      it('should get multiple pages with offset', function (done) {
+          testClient.paging.getMultiplePagesWithOffset({'offset': 100}, {'clientRequestId': 'client-id'}, function (error, result) {
+          var loop = function (nextLink, count) {
+            if (nextLink !== null && nextLink !== undefined) {
+                testClient.paging.getMultiplePagesWithOffsetNext(nextLink, {'clientRequestId': 'client-id'}, function (err, res) {
+                should.not.exist(err);
+                result = res;
+                loop(res.nextLink, count + 1);
+              });
+            } else {
+              count.should.be.exactly(10);
+              result[0].properties.id.should.be.exactly(110);
+              done();
+            }
+          };
+
+          should.not.exist(error);
+          should.exist(result.nextLink);
+          loop(result.nextLink, 1);
+        });
+      });
+
       it('should get multiple pages with retry on first call', function (done) {
         testClient.paging.getMultiplePagesRetryFirst(function (error, result) {
           var loop = function (nextLink, count) {

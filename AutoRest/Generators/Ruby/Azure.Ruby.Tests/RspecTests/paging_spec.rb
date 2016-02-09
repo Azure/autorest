@@ -38,6 +38,21 @@ describe 'Paging' do
     expect(count).to eq(10)
   end
 
+  it 'should get multiple pages with offset' do
+    result = @client.paging.get_multiple_pages_with_offset(100).value!
+    expect(result.response.status).to eq(200)
+    expect(result.body.next_link).not_to be_nil
+
+    count = 1
+    while result.body.next_link != nil do
+      result = @client.paging.get_multiple_pages_with_offset_next(result.body.next_link).value!
+      count += 1
+    end
+
+    expect(count).to eq(10)
+    expect(result.body.values.last.properties.id).to eq (110)
+  end
+
   it 'should get multiple pages retry first' do
     result = @client.paging.get_multiple_pages_retry_first().value!
     expect(result.response.status).to eq(200)
