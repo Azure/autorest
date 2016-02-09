@@ -100,7 +100,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CompositeSwaggerModelerTests.cs" />
-    <Compile Include="SwaggerSpecHelper.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\AutoRest.Core\AutoRest.Core.csproj">

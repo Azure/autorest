@@ -106,7 +106,7 @@ namespace Microsoft.Rest.Modeler.CompositeSwagger
             }
         }
 
-        private ServiceClient Merge(ServiceClient compositeClient, ServiceClient subClient)
+        private static ServiceClient Merge(ServiceClient compositeClient, ServiceClient subClient)
         {
             if (compositeClient == null)
             {
@@ -230,7 +230,7 @@ namespace Microsoft.Rest.Modeler.CompositeSwagger
             return compositeClient;
         }
 
-        private void AssertJsonEquals<T>(T compositeParam, T subParam)
+        private static void AssertJsonEquals<T>(T compositeParam, T subParam)
         {
             if (compositeParam != null)
             {
@@ -255,7 +255,7 @@ namespace Microsoft.Rest.Modeler.CompositeSwagger
             }
         }
 
-        private void AssertEquals<T>(T compositeProperty, T subProperty, string propertyName)
+        private static void AssertEquals<T>(T compositeProperty, T subProperty, string propertyName)
         {
             if (compositeProperty != null)
             {
