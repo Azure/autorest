@@ -355,7 +355,14 @@ namespace Microsoft.Rest.Generator.Python
                 }
                 else if (type == PrimaryType.Boolean)
                 {
-                    return defaultValue;
+                    if (defaultValue == "true")
+                    {
+                        return "True";
+                    }
+                    else
+                    {
+                        return "False";
+                    }
                 }
                 else
                 {
