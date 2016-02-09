@@ -46,7 +46,22 @@ namespace Microsoft.Rest.Generator.Java.Azure
 
         public bool IsPagingOperation
         {
-            get { return Extensions.ContainsKey(AzureExtensions.PageableExtension) && !IsPagingNextOperation; }
+            get
+            {
+                return Extensions.ContainsKey(AzureExtensions.PageableExtension) &&
+                    Extensions[AzureExtensions.PageableExtension] != null &&
+                    !IsPagingNextOperation;
+            }
+        }
+
+        public bool IsPagingNonPollingOperation
+        {
+            get
+            {
+                return Extensions.ContainsKey(AzureExtensions.PageableExtension) &&
+                    Extensions[AzureExtensions.PageableExtension] == null &&
+                    !IsPagingNextOperation;
+            }
         }
 
         /// <summary>
@@ -216,6 +231,11 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     builder.Outdent().AppendLine("}");
                     return builder.ToString();
                 }
+                else if (this.IsPagingNonPollingOperation)
+                {
+                    return string.Format(CultureInfo.InvariantCulture, "ServiceResponse<PageImpl<{0}>> response = {1}Delegate(call.execute(), null);",
+                        ((SequenceType)ReturnType.Body).ElementType.Name, this.Name.ToCamelCase());
+                }
                 else
                 {
                     return base.ResponseGeneration;
@@ -230,6 +250,10 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 if (this.IsPagingOperation)
                 {
                     return "new ServiceResponse<>(result, response.getResponse())";
+                }
+                else if (this.IsPagingNonPollingOperation)
+                {
+                    return "new ServiceResponse<>(response.getBody().getItems(), response.getResponse())";
                 }
                 else
                 {
@@ -278,15 +302,24 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     builder.Outdent().AppendLine("}");
                     return builder.ToString();
                 }
+                else if (this.IsPagingNonPollingOperation)
+                {
+                    var builder = new IndentedStringBuilder();
+                    builder.AppendLine("ServiceResponse<PageImpl<{0}>> result = {1}Delegate(response, null);",
+                        ((SequenceType)ReturnType.Body).ElementType.Name, this.Name.ToCamelCase());
+                    builder.AppendLine("serviceCallback.success(new ServiceResponse<>(result.getBody().getItems(), result.getResponse()));");
+                    return builder.ToString();
+                }
                 return base.SuccessCallback;
             }
         }
 
         private AzureMethodTemplateModel GetPagingNextMethod(out string invocation, bool async = false)
         {
-            string name = (string)this.Extensions["nextMethodName"];
+            string name = ((string)this.Extensions["nextMethodName"]).ToCamelCase();
             string group = (string)this.Extensions["nextMethodGroup"];
-            var methodModel = new AzureMethodTemplateModel(ServiceClient.Methods.FirstOrDefault(m => m.Name == name), ServiceClient); group = group.ToPascalCase();
+            var methodModel = new AzureMethodTemplateModel(ServiceClient.Methods.FirstOrDefault(m => m.Name.Equals(name, StringComparison.OrdinalIgnoreCase)), ServiceClient);
+            group = group.ToPascalCase();
             if (group != null && !group.EndsWith("Operations", StringComparison.Ordinal))
             {
                 group += "Operations";
@@ -343,7 +376,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
         {
             get
             {
-                if (this.IsPagingOperation || this.IsPagingNextOperation)
+                if (this.IsPagingOperation || this.IsPagingNextOperation || this.IsPagingNonPollingOperation)
                 {
                     return string.Format(CultureInfo.InvariantCulture, "{0}<PageImpl<{1}>>", OperationResponseType, ((SequenceType)ReturnType.Body).ElementType);
                 } 
@@ -358,7 +391,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
         {
             get
             {
-                if (this.IsPagingOperation || this.IsPagingNextOperation)
+                if (this.IsPagingOperation || this.IsPagingNextOperation || this.IsPagingNonPollingOperation)
                 {
                     return string.Format(CultureInfo.InvariantCulture, "PageImpl<{0}>", ((SequenceType)ReturnType.Body).ElementType);
                 }
@@ -369,7 +402,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
         public override string TypeTokenType(IType type)
         {
             SequenceType sequenceType = type as SequenceType;
-            if (sequenceType != null && (this.IsPagingOperation || this.IsPagingNextOperation))
+            if (sequenceType != null && (this.IsPagingOperation || this.IsPagingNextOperation || this.IsPagingNonPollingOperation))
             {
                 return string.Format(CultureInfo.InvariantCulture, "PageImpl<{0}>", sequenceType.ElementType);
             }
@@ -439,6 +472,11 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 {
                     imports.Remove("com.microsoft.rest.ServiceCallback");
                     imports.Add("com.microsoft.azure.ListOperationCallback");
+                    imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportFrom(ServiceClient.Namespace));
+                }
+
+                if (this.IsPagingNonPollingOperation)
+                {
                     imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportFrom(ServiceClient.Namespace));
                 }
                 return imports;

@@ -34,7 +34,7 @@ namespace Microsoft.Rest.Generator.Java
                 return null;
             }
 
-            nextLinkName = (string)ext["nextLinkName"] ?? "nextLink";
+            nextLinkName = (string)ext["nextLinkName"];
             string itemName = (string)ext["itemName"] ?? "value";
 
             var keypair = new KeyValuePair<string, string>(nextLinkName, itemName);
@@ -80,6 +80,10 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     continue;
                 }
+                if (string.IsNullOrEmpty(nextLinkString))
+                {
+                    method.Extensions[AzureExtensions.PageableExtension] = null;
+                }
 
                 foreach (var responseStatus in method.Responses.Where(r => r.Value.Body is CompositeType).Select(s => s.Key).ToArray())
                 {
@@ -87,9 +91,7 @@ namespace Microsoft.Rest.Generator.Java
                     var sequenceType = compositType.Properties.Select(p => p.Type).FirstOrDefault(t => t is SequenceType) as SequenceType;
 
                     // if the type is a wrapper over page-able response
-                    if (sequenceType != null &&
-                       compositType.Properties.Count == 2 &&
-                       compositType.Properties.Any(p => p.SerializedName.Equals(nextLinkString, StringComparison.OrdinalIgnoreCase)))
+                    if (sequenceType != null)
                     {
                         IType pagedResult;
                         pagedResult = new SequenceType
