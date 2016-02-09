@@ -13,6 +13,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Microsoft.Rest.Modeler.Swagger;
 using Microsoft.Rest.Modeler.Swagger.Model;
+using Newtonsoft.Json.Converters;
+using Microsoft.Rest.Generator.Utilities;
 
 namespace Microsoft.Rest.Modeler.CompositeSwagger
 {
@@ -117,8 +119,6 @@ namespace Microsoft.Rest.Modeler.CompositeSwagger
             }
 
             // Merge
-            // TODO: Convert APIVersion to Constants
-
             if(compositeClient.BaseUrl == null)
             {
                 compositeClient.BaseUrl = subClient.BaseUrl;
@@ -128,6 +128,7 @@ namespace Microsoft.Rest.Modeler.CompositeSwagger
                 AssertEquals(compositeClient.BaseUrl, subClient.BaseUrl, "BaseUrl");
             }
 
+            // Copy client properties
             foreach (var subClientProperty in subClient.Properties)
             {
                 var compositeClientProperty = compositeClient.Properties.FirstOrDefault(p => p.Name == subClientProperty.Name);
@@ -137,13 +138,116 @@ namespace Microsoft.Rest.Modeler.CompositeSwagger
                 }
                 else
                 {
-                    AssertEquals(compositeClientProperty.Type, subClientProperty.Type, compositeClient.Name + "." + compositeClientProperty.Name);
-
+                    AssertJsonEquals(compositeClientProperty, subClientProperty);
                 }
             }
 
+            // Copy models
+            foreach (var subClientModel in subClient.ModelTypes)
+            {
+                var compositeClientModel = compositeClient.ModelTypes.FirstOrDefault(p => p.Name == subClientModel.Name);
+                if (compositeClientModel == null)
+                {
+                    compositeClient.ModelTypes.Add(subClientModel);
+                }
+                else
+                {
+                    AssertJsonEquals(compositeClientModel, subClientModel);
+                }
+            }
+
+            // Copy enum types
+            foreach (var subClientModel in subClient.EnumTypes)
+            {
+                var compositeClientModel = compositeClient.EnumTypes.FirstOrDefault(p => p.Name == subClientModel.Name);
+                if (compositeClientModel == null)
+                {
+                    compositeClient.EnumTypes.Add(subClientModel);
+                }
+                else
+                {
+                    AssertJsonEquals(compositeClientModel, subClientModel);
+                }
+            }
+
+            // Copy error types
+            foreach (var subClientModel in subClient.ErrorTypes)
+            {
+                var compositeClientModel = compositeClient.ErrorTypes.FirstOrDefault(p => p.Name == subClientModel.Name);
+                if (compositeClientModel == null)
+                {
+                    compositeClient.ErrorTypes.Add(subClientModel);
+                }
+                else
+                {
+                    AssertJsonEquals(compositeClientModel, subClientModel);
+                }
+            }
+
+            // Copy header types
+            foreach (var subClientModel in subClient.HeaderTypes)
+            {
+                var compositeClientModel = compositeClient.HeaderTypes.FirstOrDefault(p => p.Name == subClientModel.Name);
+                if (compositeClientModel == null)
+                {
+                    compositeClient.HeaderTypes.Add(subClientModel);
+                }
+                else
+                {
+                    AssertJsonEquals(compositeClientModel, subClientModel);
+                }
+            }
+
+            // Copy methods
+            foreach (var subClientMethod in subClient.Methods)
+            {
+                var apiVersionParameter = subClientMethod.Parameters.FirstOrDefault(p => p.SerializedName == "api-version");
+                if (apiVersionParameter != null)
+                {
+                    apiVersionParameter.ClientProperty = null;
+                    apiVersionParameter.IsConstant = true;
+                    apiVersionParameter.DefaultValue = subClient.ApiVersion;
+                    apiVersionParameter.IsRequired = true;
+                }
+
+                var compositeClientMethod = compositeClient.Methods.FirstOrDefault(m => m.ToString() == subClientMethod.ToString()
+                    && m.Group == subClientMethod.Group);
+                if (compositeClientMethod == null)
+                {
+                    compositeClient.Methods.Add(subClientMethod);
+                }
+                else
+                {
+                    AssertEquals(compositeClientMethod.ToString(), subClientMethod.ToString(), "Method signature of " + subClient.Name + "." + subClientMethod.Name + "()");
+                }
+            }
 
             return compositeClient;
+        }
+
+        private void AssertJsonEquals<T>(T compositeParam, T subParam)
+        {
+            if (compositeParam != null)
+            {
+                var jsonSettings = new JsonSerializerSettings
+                {
+                    Formatting = Formatting.Indented,
+                    NullValueHandling = NullValueHandling.Ignore,
+                    ContractResolver = new CamelCaseContractResolver(),
+                    ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                };
+                jsonSettings.Converters.Add(new StringEnumConverter { CamelCaseText = true });
+
+                var compositeParamJson = JsonConvert.SerializeObject(compositeParam, jsonSettings);
+                var subParamJson = JsonConvert.SerializeObject(subParam, jsonSettings);
+
+                if (!compositeParamJson.Equals(subParamJson))
+                {
+                    throw ErrorManager.CreateError(string.Format(CultureInfo.InvariantCulture,
+                        "{0}s are not the same.\nObject 1: {1}\nObject 2:{2}",
+                        typeof(T).Name, compositeParamJson, subParamJson));
+                }
+            }
         }
 
         private void AssertEquals<T>(T compositeProperty, T subProperty, string propertyName)
@@ -153,7 +257,7 @@ namespace Microsoft.Rest.Modeler.CompositeSwagger
                 if (!compositeProperty.Equals(subProperty))
                 {
                     throw ErrorManager.CreateError(string.Format(CultureInfo.InvariantCulture,
-                        "Property {0} has different values in sub swagger documents.",
+                        "{0} has different values in sub swagger documents.",
                         propertyName));
                 }
             }

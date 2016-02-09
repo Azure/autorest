@@ -129,8 +129,8 @@
       "type": "string"
     },
     "ApiVersionParameter": {
-      "name": "apiVersion",
-      "in": "path",
+      "name": "api-version",
+      "in": "query",
       "description": "API ID.",
       "required": true,
       "type": "string"

@@ -26,7 +26,7 @@ namespace Microsoft.Rest.Modeler.CompositeSwagger.Tests
             Assert.Equal("2014-04-01-preview", clientModel.Methods.FirstOrDefault(m => m.Name == "SimpleGet").Parameters.FirstOrDefault(p => p.SerializedName == "api-version").DefaultValue);
             Assert.Equal(true, clientModel.Methods.FirstOrDefault(m => m.Name == "SimpleGet").Parameters.FirstOrDefault(p => p.SerializedName == "api-version").IsConstant);
             Assert.Equal(5, clientModel.Methods.Count);
-            Assert.Equal(4, clientModel.ModelTypes.Count);
+            Assert.Equal(3, clientModel.ModelTypes.Count);
             Assert.Equal(2, clientModel.MethodGroups.Count());
         }
 
