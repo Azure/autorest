@@ -162,6 +162,87 @@ class PagingOperations(object):
 
         return deserialized
 
+    def get_multiple_pages_with_offset(
+            self, paging_get_multiple_pages_with_offset_options, client_request_id=None, custom_headers={}, raw=False, **operation_config):
+        """
+        A paging operation that includes a nextLink that has 10 pages
+
+        :param paging_get_multiple_pages_with_offset_options: Additional
+         parameters for the operation
+        :type paging_get_multiple_pages_with_offset_options:
+         PagingGetMultiplePagesWithOffsetOptions
+        :param client_request_id:
+        :type client_request_id: str or None
+        :param dict custom_headers: headers that will be added to the request
+        :param boolean raw: returns the direct response alongside the
+         deserialized response
+        :rtype: ProductPaged or msrest.pipeline.ClientRawResponse
+        """
+        maxresults = None
+        if paging_get_multiple_pages_with_offset_options is not None:
+            maxresults = paging_get_multiple_pages_with_offset_options.maxresults
+        offset = None
+        if paging_get_multiple_pages_with_offset_options is not None:
+            offset = paging_get_multiple_pages_with_offset_options.offset
+        timeout = None
+        if paging_get_multiple_pages_with_offset_options is not None:
+            timeout = paging_get_multiple_pages_with_offset_options.timeout
+
+        def internal_paging(next_link=None, raw=False):
+
+            if not next_link:
+                # Construct URL
+                url = '/paging/multiple/withpath/{offset}'
+                path_format_arguments = {
+                    'offset': self._serialize.url("offset", offset, 'int')
+                }
+                url = url.format(**path_format_arguments)
+
+                # Construct parameters
+                query_parameters = {}
+
+            else:
+                url = next_link
+                query_parameters = {}
+
+            # Construct headers
+            header_parameters = {}
+            header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+            if self.config.generate_client_request_id:
+                header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+            if custom_headers:
+                header_parameters.update(custom_headers)
+            if client_request_id is not None:
+                header_parameters['client-request-id'] = self._serialize.header("client_request_id", client_request_id, 'str')
+            if self.config.accept_language is not None:
+                header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
+            if maxresults is not None:
+                header_parameters['maxresults'] = self._serialize.header("maxresults", maxresults, 'int')
+            if timeout is not None:
+                header_parameters['timeout'] = self._serialize.header("timeout", timeout, 'int')
+
+            # Construct and send request
+            request = self._client.get(url, query_parameters)
+            response = self._client.send(
+                request, header_parameters, **operation_config)
+
+            if response.status_code not in [200]:
+                exp = CloudError(response)
+                exp.request_id = response.headers.get('x-ms-request-id')
+                raise exp
+
+            return response
+
+        # Deserialize response
+        deserialized = models.ProductPaged(internal_paging, self._deserialize.dependencies)
+
+        if raw:
+            header_dict = {}
+            client_raw_response = models.ProductPaged(internal_paging, self._deserialize.dependencies, header_dict)
+            return client_raw_response
+
+        return deserialized
+
     def get_multiple_pages_retry_first(
             self, custom_headers={}, raw=False, **operation_config):
         """

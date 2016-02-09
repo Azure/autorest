@@ -43,7 +43,7 @@ else
 }
  */
 public @Model.OperationResponseReturnTypeString @(Model.Name)(@Model.MethodParameterDeclaration) throws @Model.ExceptionString {
-    Response<ResponseBody> result = service.@(Model.Name)(@Model.MethodParameterInvocation).execute();
+    Response<ResponseBody> result = service.@(Model.Name)(@Model.MethodParameterApiInvocation).execute();
     return client.getAzureClient().@(Model.PollingMethod)(result, @Model.PollingResourceTypeArgs);
 }
 @EmptyLine
@@ -75,7 +75,7 @@ public Call<@Model.CallType> @(Model.Name)Async(@Model.MethodParameterDeclaratio
 {
 @:    Validator.validate(@(param.Name), serviceCallback);
 }
-    Call<ResponseBody> call = service.@(Model.Name)(@Model.MethodParameterInvocation);
+    Call<ResponseBody> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
     call.enqueue(new Callback<ResponseBody>() {
         @@Override
         public void onFailure(Throwable t) {

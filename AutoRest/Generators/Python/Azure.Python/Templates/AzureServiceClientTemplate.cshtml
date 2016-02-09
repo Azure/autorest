@@ -43,12 +43,15 @@ import uuid
 @EmptyLine
 class @(Model.Name)Configuration(AzureConfiguration):
     """Configuration for @(Model.Name)
+    Note that all parameters used to create this instance are saved as instance
+    attributes.
 @EmptyLine
 @foreach(var property in Model.Properties)
 {
 @:    @ParameterWrapComment(string.Empty, ServiceClientTemplateModel.GetPropertyDocumentationString(property))
 @:    @ParameterWrapComment(string.Empty, ":type " + property.Name + ": " + MethodTemplateModel.GetDocumentationType(property.Type, property.IsRequired))
-}    :param str base_url: Service URL
+}
+    :param str base_url: Service URL
     :param str filepath: Existing config
     """
 @EmptyLine
@@ -61,7 +64,7 @@ class @(Model.Name)Configuration(AzureConfiguration):
 @EmptyLine
         super(@(Model.Name)Configuration, self).__init__(base_url, filepath)
 @EmptyLine
-        self.user_agent = '@Model.UserAgent'
+        self.add_user_agent('@Model.UserAgent')
 @if (Model.Properties.Any())
 {
 @EmptyLine
@@ -77,6 +80,15 @@ class @(Model.Name)(object):
 @EmptyLine
     :param config: Configuration for client.
     :type config: @(Model.Name)Configuration
+@if (Model.MethodGroupModels.Any())
+{
+@EmptyLine
+  foreach (var methodGroup in Model.MethodGroupModels)
+  {
+@:    :ivar @(methodGroup.MethodGroupName.ToPythonCase()): @(methodGroup.MethodGroupName) operations
+@:    :vartype @(methodGroup.MethodGroupName.ToPythonCase()): .operations.@(methodGroup.MethodGroupType)
+  }
+}
     """
 @EmptyLine
     def __init__(self, config):

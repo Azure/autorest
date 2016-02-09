@@ -34,7 +34,7 @@ namespace Microsoft.Rest.Generator.Java
                 return null;
             }
 
-            nextLinkName = (string)ext["nextLinkName"] ?? "nextLink";
+            nextLinkName = (string)ext["nextLinkName"];
             string itemName = (string)ext["itemName"] ?? "value";
 
             var keypair = new KeyValuePair<string, string>(nextLinkName, itemName);
@@ -70,7 +70,7 @@ namespace Microsoft.Rest.Generator.Java
                 throw new ArgumentNullException("serviceClient");
             }
 
-            var convertedTypes = new Dictionary<IType, CompositeType>();
+            var convertedTypes = new Dictionary<IType, IType>();
 
             foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension)))
             {
@@ -80,8 +80,10 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     continue;
                 }
-                var pageTypeFormat = "{0}<{1}>";
-                var ipageTypeFormat = "IPage<{0}>";
+                if (string.IsNullOrEmpty(nextLinkString))
+                {
+                    method.Extensions[AzureExtensions.PageableExtension] = null;
+                }
 
                 foreach (var responseStatus in method.Responses.Where(r => r.Value.Body is CompositeType).Select(s => s.Key).ToArray())
                 {
@@ -89,19 +91,14 @@ namespace Microsoft.Rest.Generator.Java
                     var sequenceType = compositType.Properties.Select(p => p.Type).FirstOrDefault(t => t is SequenceType) as SequenceType;
 
                     // if the type is a wrapper over page-able response
-                    if (sequenceType != null &&
-                       compositType.Properties.Count == 2 &&
-                       compositType.Properties.Any(p => p.SerializedName.Equals(nextLinkString, StringComparison.OrdinalIgnoreCase)))
+                    if (sequenceType != null)
                     {
-                        var pagableTypeName = string.Format(CultureInfo.InvariantCulture, pageTypeFormat, pageClassName, sequenceType.ElementType.Name);
-                        var ipagableTypeName = string.Format(CultureInfo.InvariantCulture, ipageTypeFormat, sequenceType.ElementType.Name);
-
-                        CompositeType pagedResult = new CompositeType
+                        IType pagedResult;
+                        pagedResult = new SequenceType
                         {
-                            Name = pagableTypeName
+                            ElementType = sequenceType.ElementType,
+                            NameFormat = "List<{0}>"
                         };
-                        pagedResult.Extensions[AzureExtensions.ExternalExtension] = true;
-                        pagedResult.Extensions[AzureExtensions.PageableExtension] = ipagableTypeName;
 
                         convertedTypes[method.Responses[responseStatus].Body] = pagedResult;
                         method.Responses[responseStatus] = new Response(pagedResult, method.Responses[responseStatus].Headers);

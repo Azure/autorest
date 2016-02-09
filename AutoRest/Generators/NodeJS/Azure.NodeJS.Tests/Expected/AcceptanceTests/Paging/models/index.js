@@ -22,5 +22,6 @@ exports.Product = require('./product');
 exports.ProductProperties = require('./productProperties');
 exports.OperationResult = require('./operationResult');
 exports.PagingGetMultiplePagesOptions = require('./pagingGetMultiplePagesOptions');
-exports.PagingGetMultiplePagesNextOptions = require('./pagingGetMultiplePagesNextOptions');
+exports.PagingGetMultiplePagesWithOffsetOptions = require('./pagingGetMultiplePagesWithOffsetOptions');
+exports.PagingGetMultiplePagesWithOffsetNextOptions = require('./pagingGetMultiplePagesWithOffsetNextOptions');
 exports.ProductResult = require('./productResult');

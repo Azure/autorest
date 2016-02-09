@@ -53,8 +53,14 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// <returns>A deep clone of current object.</returns>
         public object Clone()
         {
-            ParameterMapping paramMapping = (ParameterMapping)this.MemberwiseClone();
-            return paramMapping;
+            //ParameterMapping paramMapping = (ParameterMapping)this.MemberwiseClone();
+            //return paramMapping;
+
+            ParameterMapping mapping = new ParameterMapping();
+            mapping.InputParameter = this.InputParameter;
+            mapping.InputParameterProperty = this.InputParameterProperty;
+            mapping.OutputParameterProperty = this.OutputParameterProperty;
+            return mapping;
         }
     }
 }

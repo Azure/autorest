@@ -469,7 +469,7 @@ function deserializeCompositeType(mapper, responseBody, objectName) {
         var propertyMapper = modelProps[key];
         var serializedValue;
         //paging
-        if (key === 'value' && util.isArray(responseBody[key]) && modelProps[key].serializedName === '') {
+        if (util.isArray(responseBody[key]) && modelProps[key].serializedName === '') {
           propertyInstance = responseBody[key];
           instance = exports.deserialize.call(this, propertyMapper, propertyInstance, propertyObjectName);
         } else if (propertyInstance !== null && propertyInstance !== undefined) {

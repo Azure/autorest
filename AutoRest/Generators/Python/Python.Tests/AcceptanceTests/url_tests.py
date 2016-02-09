@@ -44,7 +44,7 @@ sys.path.append(join(tests, "Url"))
 from msrest.exceptions import DeserializationError
 
 from autoresturltestservice import AutoRestUrlTestService, AutoRestUrlTestServiceConfiguration
-from autoresturltestservice.models.enums import UriColor
+from autoresturltestservice.models.auto_rest_url_test_service_enums import UriColor
 
 
 class UrlTests(unittest.TestCase):

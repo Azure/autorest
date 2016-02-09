@@ -27,6 +27,7 @@
 from .configuration import Configuration
 from .service_client import ServiceClient
 from .serialization import Serializer, Deserializer
+from .version import msrest_version
 
 __all__ = [
     "ServiceClient",
@@ -35,4 +36,4 @@ __all__ = [
     "Configuration"
     ]
 
-__version__ = "0.0.1"
+__version__ = msrest_version
