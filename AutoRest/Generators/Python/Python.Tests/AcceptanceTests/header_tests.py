@@ -46,7 +46,7 @@ from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
 
 from autorestswaggerbatheaderservice import AutoRestSwaggerBATHeaderService, AutoRestSwaggerBATHeaderServiceConfiguration
-from autorestswaggerbatheaderservice.models.enums import GreyscaleColors
+from autorestswaggerbatheaderservice.models.auto_rest_swagger_bat_header_service_enums import GreyscaleColors
 
 
 class HeaderTests(unittest.TestCase):

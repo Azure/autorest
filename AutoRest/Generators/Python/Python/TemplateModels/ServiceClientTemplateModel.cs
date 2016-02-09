@@ -24,6 +24,12 @@ namespace Microsoft.Rest.Generator.Python
 
             ModelTypes.ForEach(m => ModelTemplateModels.Add(new ModelTemplateModel(m, serviceClient)));
             this.Version = this.ApiVersion;
+
+            this.HasAnyModel = false;
+            if (ModelTemplateModels.Any())
+            {
+                this.HasAnyModel = true;
+            }
         }
 
         public List<MethodTemplateModel> MethodTemplateModels { get; private set; }
@@ -130,6 +136,8 @@ namespace Microsoft.Rest.Generator.Python
         }
 
         public string Version { get; set; }
+
+        public bool HasAnyModel { get; protected set; }
 
         public string PackageName
         {

@@ -50,7 +50,7 @@ from autorestswaggerbatservice import (
     AutoRestSwaggerBATService, 
     AutoRestSwaggerBATServiceConfiguration)
 
-from autorestswaggerbatservice.models.enums import *
+from autorestswaggerbatservice.models.auto_rest_swagger_bat_service_enums import *
 
 class StringTests(unittest.TestCase):
 

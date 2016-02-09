@@ -180,7 +180,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
             {
                 Model = serviceClientTemplateModel,
             };
-            await Write(serviceClientTemplate, Path.Combine(serviceClientTemplateModel.PackageName, "api_client.py"));
+            await Write(serviceClientTemplate, Path.Combine(serviceClientTemplateModel.PackageName, serviceClientTemplateModel.Name.ToPythonCase() + ".py"));
 
             //Models
             if (serviceClientTemplateModel.ModelTemplateModels.Any())
@@ -227,7 +227,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
                 {
                     Model = new EnumTemplateModel(serviceClient.EnumTypes),
                 };
-                await Write(enumTemplate, Path.Combine(serviceClientTemplateModel.PackageName, "models", "enums.py"));
+                await Write(enumTemplate, Path.Combine(serviceClientTemplateModel.PackageName, "models", serviceClientTemplateModel.Name.ToPythonCase() + "_enums.py"));
             }
 
             // Page class

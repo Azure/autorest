@@ -50,6 +50,7 @@
     <Compile Include="msrest\service_client.py">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="msrest\version.py" />
     <Compile Include="setup.py">
       <SubType>Code</SubType>
     </Compile>

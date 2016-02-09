@@ -10,7 +10,7 @@
 # --------------------------------------------------------------------------
 
 from .error import Error, ErrorException
-from .enums import (
+from .auto_rest_url_test_service_enums import (
     UriColor,
 )
 

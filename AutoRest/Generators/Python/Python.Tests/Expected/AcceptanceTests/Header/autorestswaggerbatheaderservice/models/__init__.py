@@ -10,7 +10,7 @@
 # --------------------------------------------------------------------------
 
 from .error import Error, ErrorException
-from .enums import (
+from .auto_rest_swagger_bat_header_service_enums import (
     GreyscaleColors,
 )
 
