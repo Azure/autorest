@@ -290,14 +290,14 @@ class SkipUrlEncodingOperations(object):
             return client_raw_response
 
     def get_swagger_query_valid(
-            self, q1=None, custom_headers={}, raw=False, **operation_config):
+            self, q1, custom_headers={}, raw=False, **operation_config):
         """
         Get method with unencoded query parameter with value
         'value1&q2=value2&q3=value3'
 
         :param q1: An unencoded query parameter with value
          'value1&q2=value2&q3=value3'
-        :type q1: str or None
+        :type q1: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
@@ -308,8 +308,7 @@ class SkipUrlEncodingOperations(object):
 
         # Construct parameters
         query_parameters = {}
-        if q1 is not None:
-            query_parameters['q1'] = self._serialize.query("q1", q1, 'str', skip_quote=True)
+        query_parameters['q1'] = self._serialize.query("q1", q1, 'str', skip_quote=True)
 
         # Construct headers
         header_parameters = {}

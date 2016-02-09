@@ -24,6 +24,7 @@
 #
 # --------------------------------------------------------------------------
 
+import glob
 import sys
 import subprocess
 import os
@@ -38,14 +39,6 @@ root = realpath(join(cwd, pardir, pardir, pardir, pardir, pardir))
 runtime = join(root, "ClientRuntimes", "Python", "msrest")
 sys.path.append(runtime)
 
-
-def sort_test(x, y):
-
-    if x == 'test_ensure_coverage':
-        return 1
-    if y == 'test_ensure_coverage':
-        return -1
-    return (x > y) - (x < y)
 
 #Ideally this would be in a common helper library shared between the tests
 def start_server_process():
@@ -70,12 +63,13 @@ if __name__ == '__main__':
     
     server = start_server_process()
     try:
+        all = glob.glob(os.path.join(cwd, "*_tests.py"))
+        test_modules = sorted([os.path.basename(p).rstrip('.py') for p in all])
+
         runner = TextTestRunner(verbosity=2)
 
-        test_loader = TestLoader()    
-        test_loader.sortTestMethodsUsing = sort_test
-
-        suite = test_loader.discover(cwd, pattern="*_tests.py")
+        test_loader = TestLoader()
+        suite = test_loader.loadTestsFromNames(test_modules)
         result = runner.run(suite)
         if not result.wasSuccessful():
             sys.exit(1)

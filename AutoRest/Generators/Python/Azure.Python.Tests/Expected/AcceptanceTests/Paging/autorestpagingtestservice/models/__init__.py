@@ -13,6 +13,7 @@ from .product import Product
 from .product_properties import ProductProperties
 from .operation_result import OperationResult
 from .paging_get_multiple_pages_options import PagingGetMultiplePagesOptions
+from .paging_get_multiple_pages_with_offset_options import PagingGetMultiplePagesWithOffsetOptions
 from .product_paged import ProductPaged
 
 __all__ = [
@@ -20,5 +21,6 @@ __all__ = [
     'ProductProperties',
     'OperationResult',
     'PagingGetMultiplePagesOptions',
+    'PagingGetMultiplePagesWithOffsetOptions',
     'ProductPaged',
 ]

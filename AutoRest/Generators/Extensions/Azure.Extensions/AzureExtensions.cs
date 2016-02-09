@@ -86,9 +86,9 @@ namespace Microsoft.Rest.Generator.Azure
             AddLongRunningOperations(serviceClient);
             AddAzureProperties(serviceClient);
             SetDefaultResponses(serviceClient);
+            AddParameterGroups(serviceClient);
             AddPageableMethod(serviceClient, codeNamer);
             ProcessParameterizedHost(serviceClient, settings);
-            AddParameterGroups(serviceClient); //This should come after all methods have been dynamically added
         }
 
         /// <summary>
@@ -473,6 +473,8 @@ namespace Microsoft.Rest.Generator.Azure
                         {
                             nextLinkMethod.Name = nextLinkMethod.Name + "Next";
                         }
+                        method.Extensions["nextMethodName"] = nextLinkMethod.Name;
+                        method.Extensions["nextMethodGroup"] = nextLinkMethod.Group;
                         nextLinkMethod.Parameters.Clear();
                         nextLinkMethod.Url = "{nextLink}";
                         nextLinkMethod.IsAbsoluteUrl = true;
@@ -508,10 +510,13 @@ namespace Microsoft.Rest.Generator.Azure
                                 {
                                     // Some grouped properties were header parameters, creating new data types
                                     var headerGrouping = grouping.Where(t => t.OutputParameter.Location == ParameterLocation.Header);
-                                    headerGrouping.ForEach(t => nextLinkMethod.InputParameterTransformation.Add(t));
+                                    headerGrouping.ForEach(t => nextLinkMethod.InputParameterTransformation.Add((ParameterTransformation) t.Clone()));
                                     var newGroupingParam = CreateParameterFromGrouping(headerGrouping, nextLinkMethod, serviceClient);
                                     nextLinkMethod.Parameters.Add(newGroupingParam);
-                                    grouping.Key.Name = newGroupingParam.Name;
+                                    //grouping.Key.Name = newGroupingParam.Name;
+                                    var inputParameter = (Parameter) nextLinkMethod.InputParameterTransformation.FirstOrDefault().ParameterMappings[0].InputParameter.Clone();
+                                    inputParameter.Name = newGroupingParam.Name.ToCamelCase();
+                                    nextLinkMethod.InputParameterTransformation.ForEach(t => t.ParameterMappings[0].InputParameter = inputParameter);
                                 }
                             });
 

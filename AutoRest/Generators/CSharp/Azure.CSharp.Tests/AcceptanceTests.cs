@@ -20,13 +20,10 @@ using Fixtures.Azure.AcceptanceTestsResourceFlattening.Models;
 using Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion;
 using Fixtures.Azure.AcceptanceTestsAzureParameterGrouping;
 using Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models;
-using AutoRest.Generator.Azure.CSharp.Tests.Properties;
 using Microsoft.Rest.Generator.CSharp.Tests;
 using Xunit;
-using Xunit.Abstractions;
 using Microsoft.Rest.Azure;
 using AutoRest.Generator.CSharp.Tests.Utilities;
-using Microsoft.Framework.Logging;
 using Microsoft.Rest.Azure.OData;
 using Fixtures.Azure.AcceptanceTestsAzureSpecials.Models;
 
@@ -347,6 +344,19 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
                 }
                 Assert.Equal(10, count);
 
+                var options = new Fixtures.Azure.AcceptanceTestsPaging.Models.PagingGetMultiplePagesWithOffsetOptions();
+                options.Offset = 100;
+                result = client.Paging.GetMultiplePagesWithOffset(options, "client-id");
+                Assert.NotNull(result.NextPageLink);
+                count = 1;
+                while (result.NextPageLink != null)
+                {
+                    result = client.Paging.GetMultiplePagesWithOffsetNext(result.NextPageLink);
+                    count++;
+                }
+                Assert.Equal(10, count);
+                Assert.Equal(110, result.LastOrDefault().Properties.Id);
+
                 result = client.Paging.GetMultiplePagesRetryFirst();
                 Assert.NotNull(result.NextPageLink);
                 count = 1;
@@ -397,20 +407,20 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
             {
                 var report = client.GetReport();
 #if PORTABLE
-                float totalTests = report.Count - 5;
+                float totalTests = report.Count - 6;
 #else
                 float totalTests = report.Count;
 #endif
                 float executedTests = report.Values.Count(v => v > 0);
                 if (executedTests < totalTests)
                 {
-                    foreach (var r in report)
+                    foreach (var r in report.Where(r => r.Value == 0))
                     {
                         _interceptor.Information(string.Format(CultureInfo.CurrentCulture,
-                            Resources.TestCoverageReportItemFormat, r.Key, r.Value));
+                            "{0}/{1}", r.Key, r.Value));
                     }
                     _interceptor.Information(string.Format(CultureInfo.CurrentCulture,
-                        Resources.TestCoverageReportSummaryFormat,
+                        "The test coverage for Azure is {0}/{1}",
                         executedTests, totalTests));
                     Assert.Equal(executedTests, totalTests);
                 }
@@ -637,7 +647,6 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
         public void AzureSpecialParametersTests()
         {
             var validSubscription = "1234-5678-9012-3456";
-            var validApiVersion = "2.0";
             var unencodedPath = "path1/path2/path3";
             var unencodedQuery = "value1&q2=value2&q3=value3";
             SwaggerSpecRunner.RunTests(

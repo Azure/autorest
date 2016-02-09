@@ -51,8 +51,6 @@ namespace Microsoft.Rest.Generator.Azure.Python
             }
         }
 
-        public bool HasAnyModel { get; private set; }
-
         public override IEnumerable<MethodGroupTemplateModel> MethodGroupModels
         {
             get
@@ -66,6 +64,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
             get
             {
                 var requireParams = new List<string>();
+                var optionalParams = new List<string>();
                 foreach (var property in this.Properties)
                 {
                     if (property.IsRequired)
@@ -77,27 +76,14 @@ namespace Microsoft.Rest.Generator.Azure.Python
                         string defaultValue = "None";
                         if (property.DefaultValue != null && property.Type is PrimaryType)
                         {
-                            PrimaryType type = property.Type as PrimaryType;
-                            if (type == PrimaryType.Double || type == PrimaryType.Int || type == PrimaryType.Long || type == PrimaryType.String)
-                            {
-                                defaultValue = property.DefaultValue;
-                            }
-                            else if (type == PrimaryType.Boolean)
-                            {
-                                if (property.DefaultValue == "true")
-                                {
-                                    defaultValue = "True";
-                                }
-                                else
-                                {
-                                    defaultValue = "False";
-                                }
-                            }
+                            defaultValue = property.DefaultValue;
                         }
-                        requireParams.Add(string.Format(CultureInfo.InvariantCulture, "{0}={1}", property.Name.ToPythonCase(), defaultValue));
+                        optionalParams.Add(string.Format(CultureInfo.InvariantCulture, "{0}={1}", property.Name.ToPythonCase(), defaultValue));
                     }
                 }
-                //requireParams.Add("baseUri");
+
+                // The parameter without default value has to be in front of the parameters with default value
+                requireParams.AddRange(optionalParams);
                 var param = string.Join(", ", requireParams);
                 if (!string.IsNullOrEmpty(param))
                 {

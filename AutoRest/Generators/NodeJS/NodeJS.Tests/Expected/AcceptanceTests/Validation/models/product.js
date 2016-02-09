@@ -10,6 +10,8 @@
 
 'use strict';
 
+var models = require('./index');
+
 var util = require('util');
 
 /**
@@ -24,9 +26,9 @@ var util = require('util');
  * 
  * @member {string} [image] Image URL representing the product.
  * 
- * @member {number} [constInt] Constant int. Default value: 0 .
+ * @member {object} [child]
  * 
- * @member {string} [constString] Constant string. Default value: 'constant' .
+ * @member {number} [child.count] Count
  * 
  */
 function Product() {
@@ -42,6 +44,7 @@ Product.prototype.mapper = function () {
   return {
     required: false,
     serializedName: 'Product',
+    defaultValue: {},
     type: {
       name: 'Composite',
       className: 'Product',
@@ -86,8 +89,27 @@ Product.prototype.mapper = function () {
             name: 'String'
           }
         },
-        constInt: {
+        child: {
           required: false,
+          serializedName: 'child',
+          defaultValue: {},
+          type: {
+            name: 'Composite',
+            className: 'ChildProduct'
+          }
+        },
+        constChild: {
+          required: false,
+          isConstant: true,
+          serializedName: 'constChild',
+          defaultValue: {},
+          type: {
+            name: 'Composite',
+            className: 'ConstantProduct'
+          }
+        },
+        constInt: {
+          required: true,
           isConstant: true,
           serializedName: 'constInt',
           defaultValue: 0,
@@ -96,7 +118,7 @@ Product.prototype.mapper = function () {
           }
         },
         constString: {
-          required: false,
+          required: true,
           isConstant: true,
           serializedName: 'constString',
           defaultValue: 'constant',

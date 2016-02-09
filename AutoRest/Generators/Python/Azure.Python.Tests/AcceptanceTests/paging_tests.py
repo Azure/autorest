@@ -52,7 +52,7 @@ from msrest.authentication import BasicTokenAuthentication
 from autorestpagingtestservice import (
     AutoRestPagingTestService, 
     AutoRestPagingTestServiceConfiguration)
-
+from autorestpagingtestservice.models import PagingGetMultiplePagesWithOffsetOptions 
 
 class PagingTests(unittest.TestCase):
 
@@ -111,6 +111,14 @@ class PagingTests(unittest.TestCase):
         items = [i for i in pages]
         self.assertEqual(len(items), 10)
         self.assertIsNotNone(pages.raw.response)
+
+        options = PagingGetMultiplePagesWithOffsetOptions()
+        options.offset = 100
+        pages = self.client.paging.get_multiple_pages_with_offset(paging_get_multiple_pages_with_offset_options=options)
+        self.assertIsNotNone(pages.next_link)
+        items = [i for i in pages]
+        self.assertEqual(len(items), 10)
+        self.assertEqual(items[-1].properties.id, 110)
 
         pages = self.client.paging.get_multiple_pages_retry_first(raw=True)
         self.assertIsNotNone(pages.next_link)

@@ -221,16 +221,16 @@ namespace Microsoft.Rest.Generator
         {
             if (parameter != null)
             {
-                parameter.DefaultValue = QuoteString(parameter.DefaultValue, parameter.Type);
+                parameter.DefaultValue = EscapeDefaultValue(parameter.DefaultValue, parameter.Type);
             }            
         }
 
         /// <summary>
         /// Returns a quoted string for the given language if applicable.
         /// </summary>
-        /// <param name="value">Value to quote.</param>
+        /// <param name="defaultValue">Value to quote.</param>
         /// <param name="type">Data type.</param>
-        public abstract string QuoteString(string value, IType type);
+        public abstract string EscapeDefaultValue(string defaultValue, IType type);
 
         /// <summary>
         /// Formats a string for naming members of an enum using Pascal case by default.

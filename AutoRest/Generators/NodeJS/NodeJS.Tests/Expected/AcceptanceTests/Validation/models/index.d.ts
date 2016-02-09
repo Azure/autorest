@@ -21,17 +21,37 @@
  * 
  * @member {string} [image] Image URL representing the product.
  * 
- * @member {number} [constInt] Constant int
+ * @member {object} [child]
  * 
- * @member {string} [constString] Constant string
+ * @member {number} [child.count] Count
  * 
  */
 export interface Product {
     displayNames?: string[];
     capacity?: number;
     image?: string;
-    constInt?: number;
-    constString?: string;
+    child?: ChildProduct;
+}
+
+/**
+ * @class
+ * Initializes a new instance of the ChildProduct class.
+ * @constructor
+ * The product documentation.
+ * @member {number} [count] Count
+ * 
+ */
+export interface ChildProduct {
+    count?: number;
+}
+
+/**
+ * @class
+ * Initializes a new instance of the ConstantProduct class.
+ * @constructor
+ * The product documentation.
+ */
+export interface ConstantProduct {
 }
 
 /**

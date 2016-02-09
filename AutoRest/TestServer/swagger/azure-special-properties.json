@@ -366,7 +366,8 @@
             "description": "This should appear as a method parameter, use value '2.0'",
             "type": "string",
             "required": true,
-            "enum": [ "2.0" ]
+            "enum": [ "2.0" ],
+            "required": true
           }
         ],
         "responses": {
@@ -443,7 +444,8 @@
           "description": "This should appear as a method parameter, use value '2.0'",
           "type": "string",
           "required": true,
-          "enum": [ "2.0" ]
+          "enum": [ "2.0" ],
+          "required": true
         }
       ],
       "get": {
@@ -504,7 +506,8 @@
             "description": "The api version, which appears in the query, the value is always '2.0'",
             "type": "string",
             "required": true,
-            "enum": [ "2.0" ]
+            "enum": [ "2.0" ],
+            "required": true
           }
         ],
         "responses": {
@@ -714,6 +717,7 @@
             "description": "An unencoded query parameter with value 'value1&q2=value2&q3=value3'",
             "type": "string",
             "enum": [ "value1&q2=value2&q3=value3" ],
+            "required": true,
             "x-ms-skip-url-encoding": true
           }
         ],
@@ -831,6 +835,7 @@
   },
   "definitions": {
     "Error": {
+      "requiredProperties": ["constantId"],
       "properties": {
         "status": {
           "type": "integer",

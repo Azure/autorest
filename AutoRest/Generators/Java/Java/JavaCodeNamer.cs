@@ -433,22 +433,22 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
-        public override string QuoteString(string value, IType type)
+        public override string EscapeDefaultValue(string defaultValue, IType type)
         {
             if (type == null)
             {
                 throw new ArgumentNullException("type");
             }
 
-            if (value != null)
+            if (defaultValue != null)
             {
                 if (type == PrimaryType.String)
                 {
-                    return CodeNamer.QuoteValue(value);
+                    return CodeNamer.QuoteValue(defaultValue);
                 }
                 else if (type == PrimaryType.Boolean)
                 {
-                    return value.ToLowerInvariant();
+                    return defaultValue.ToLowerInvariant();
                 }
                 else
                 {
@@ -456,19 +456,19 @@ namespace Microsoft.Rest.Generator.Java
                         type == PrimaryType.DateTime ||
                         type == PrimaryType.DateTimeRfc1123)
                     {
-                        return "DateTime.parse(\"" + value + "\")";
+                        return "DateTime.parse(\"" + defaultValue + "\")";
                     }
                     else if (type == PrimaryType.TimeSpan)
                     {
-                        return "Period.parse(\"" + value + "\")";
+                        return "Period.parse(\"" + defaultValue + "\")";
                     }
                     else if (type == PrimaryType.ByteArray)
                     {
-                        return "\"" + value + "\".getBytes()";
+                        return "\"" + defaultValue + "\".getBytes()";
                     }
                 }
             }
-            return value;
+            return defaultValue;
         }
     }
 }

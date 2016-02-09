@@ -13,15 +13,18 @@ package fixtures.paging;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.azure.CloudException;
-import com.microsoft.rest.ServiceCallback;
+import com.microsoft.azure.ListOperationCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
+import com.microsoft.rest.Validator;
 import com.squareup.okhttp.ResponseBody;
 import fixtures.paging.models.PageImpl;
-import fixtures.paging.models.PagingGetMultiplePagesNextOptions;
 import fixtures.paging.models.PagingGetMultiplePagesOptions;
+import fixtures.paging.models.PagingGetMultiplePagesWithOffsetNextOptions;
+import fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptions;
 import fixtures.paging.models.Product;
 import java.io.IOException;
+import java.util.List;
 import retrofit.Call;
 import retrofit.Response;
 import retrofit.Retrofit;
@@ -52,11 +55,17 @@ public final class PagingOperationsImpl implements PagingOperations {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the PageImpl&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<PageImpl<Product>> getSinglePages() throws CloudException, IOException {
+    public ServiceResponse<List<Product>> getSinglePages() throws CloudException, IOException {
         Call<ResponseBody> call = service.getSinglePages(this.client.getAcceptLanguage());
-        return getSinglePagesDelegate(call.execute(), null);
+        ServiceResponse<PageImpl<Product>> response = getSinglePagesDelegate(call.execute(), null);
+        List<Product> result = response.getBody().getItems();
+        while (response.getBody().getNextPageLink() != null) {
+            response = getSinglePagesNext(response.getBody().getNextPageLink());
+            result.addAll(response.getBody().getItems());
+        }
+        return new ServiceResponse<>(result, response.getResponse());
     }
 
     /**
@@ -65,13 +74,20 @@ public final class PagingOperationsImpl implements PagingOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getSinglePagesAsync(final ServiceCallback<PageImpl<Product>> serviceCallback) {
+    public Call<ResponseBody> getSinglePagesAsync(final ListOperationCallback<Product> serviceCallback) {
         Call<ResponseBody> call = service.getSinglePages(this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<PageImpl<Product>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getSinglePagesDelegate(response, retrofit));
+                    ServiceResponse<PageImpl<Product>> result = getSinglePagesDelegate(response, retrofit);
+                    serviceCallback.load(result.getBody().getItems());
+                    if (result.getBody().getNextPageLink() != null
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                        getSinglePagesNextAsync(result.getBody().getNextPageLink(), serviceCallback);
+                    } else {
+                        serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
+                        }
                 } catch (CloudException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -94,9 +110,9 @@ public final class PagingOperationsImpl implements PagingOperations {
      * @param pagingGetMultiplePagesOptions Additional parameters for the operation
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the PageImpl&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<PageImpl<Product>> getMultiplePages(String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) throws CloudException, IOException {
+    public ServiceResponse<List<Product>> getMultiplePages(final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) throws CloudException, IOException {
         Integer maxresults = null;
         Integer timeout = null;
         if (pagingGetMultiplePagesOptions != null) {
@@ -104,7 +120,13 @@ public final class PagingOperationsImpl implements PagingOperations {
             timeout = pagingGetMultiplePagesOptions.getTimeout();
         }
         Call<ResponseBody> call = service.getMultiplePages(clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
-        return getMultiplePagesDelegate(call.execute(), null);
+        ServiceResponse<PageImpl<Product>> response = getMultiplePagesDelegate(call.execute(), null);
+        List<Product> result = response.getBody().getItems();
+        while (response.getBody().getNextPageLink() != null) {
+            response = getMultiplePagesNext(response.getBody().getNextPageLink(), clientRequestId, pagingGetMultiplePagesOptions);
+            result.addAll(response.getBody().getItems());
+        }
+        return new ServiceResponse<>(result, response.getResponse());
     }
 
     /**
@@ -115,7 +137,7 @@ public final class PagingOperationsImpl implements PagingOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getMultiplePagesAsync(String clientRequestId, PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, final ServiceCallback<PageImpl<Product>> serviceCallback) {
+    public Call<ResponseBody> getMultiplePagesAsync(final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, final ListOperationCallback<Product> serviceCallback) {
         Integer maxresults = null;
         Integer timeout = null;
         if (pagingGetMultiplePagesOptions != null) {
@@ -123,11 +145,18 @@ public final class PagingOperationsImpl implements PagingOperations {
             timeout = pagingGetMultiplePagesOptions.getTimeout();
         }
         Call<ResponseBody> call = service.getMultiplePages(clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
-        call.enqueue(new ServiceResponseCallback<PageImpl<Product>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getMultiplePagesDelegate(response, retrofit));
+                    ServiceResponse<PageImpl<Product>> result = getMultiplePagesDelegate(response, retrofit);
+                    serviceCallback.load(result.getBody().getItems());
+                    if (result.getBody().getNextPageLink() != null
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                        getMultiplePagesNextAsync(result.getBody().getNextPageLink(), clientRequestId, pagingGetMultiplePagesOptions, serviceCallback);
+                    } else {
+                        serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
+                        }
                 } catch (CloudException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -144,15 +173,100 @@ public final class PagingOperationsImpl implements PagingOperations {
     }
 
     /**
+     * A paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param pagingGetMultiplePagesWithOffsetOptions Additional parameters for the operation
+     * @param clientRequestId the String value
+     * @throws CloudException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<List<Product>> getMultiplePagesWithOffset(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, final String clientRequestId) throws CloudException, IOException, IllegalArgumentException {
+        if (pagingGetMultiplePagesWithOffsetOptions == null) {
+            throw new IllegalArgumentException("Parameter pagingGetMultiplePagesWithOffsetOptions is required and cannot be null.");
+        }
+        Validator.validate(pagingGetMultiplePagesWithOffsetOptions);
+        Integer maxresults = pagingGetMultiplePagesWithOffsetOptions.getMaxresults();
+        int offset = pagingGetMultiplePagesWithOffsetOptions.getOffset();
+        Integer timeout = pagingGetMultiplePagesWithOffsetOptions.getTimeout();
+        Call<ResponseBody> call = service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
+        ServiceResponse<PageImpl<Product>> response = getMultiplePagesWithOffsetDelegate(call.execute(), null);
+        List<Product> result = response.getBody().getItems();
+        while (response.getBody().getNextPageLink() != null) {
+            PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = new PagingGetMultiplePagesWithOffsetNextOptions();
+            pagingGetMultiplePagesWithOffsetNextOptions.setMaxresults(pagingGetMultiplePagesWithOffsetOptions.getMaxresults());
+            pagingGetMultiplePagesWithOffsetNextOptions.setTimeout(pagingGetMultiplePagesWithOffsetOptions.getTimeout());
+            response = getMultiplePagesWithOffsetNext(response.getBody().getNextPageLink(), clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions);
+            result.addAll(response.getBody().getItems());
+        }
+        return new ServiceResponse<>(result, response.getResponse());
+    }
+
+    /**
+     * A paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param pagingGetMultiplePagesWithOffsetOptions Additional parameters for the operation
+     * @param clientRequestId the String value
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
+     */
+    public Call<ResponseBody> getMultiplePagesWithOffsetAsync(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, final String clientRequestId, final ListOperationCallback<Product> serviceCallback) {
+        if (pagingGetMultiplePagesWithOffsetOptions == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter pagingGetMultiplePagesWithOffsetOptions is required and cannot be null."));
+            return null;
+        }
+        Validator.validate(pagingGetMultiplePagesWithOffsetOptions, serviceCallback);
+        Integer maxresults = pagingGetMultiplePagesWithOffsetOptions.getMaxresults();
+        int offset = pagingGetMultiplePagesWithOffsetOptions.getOffset();
+        Integer timeout = pagingGetMultiplePagesWithOffsetOptions.getTimeout();
+        Call<ResponseBody> call = service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
+        call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
+            @Override
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+                try {
+                    ServiceResponse<PageImpl<Product>> result = getMultiplePagesWithOffsetDelegate(response, retrofit);
+                    serviceCallback.load(result.getBody().getItems());
+                    if (result.getBody().getNextPageLink() != null
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                        PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = new PagingGetMultiplePagesWithOffsetNextOptions();
+                        pagingGetMultiplePagesWithOffsetNextOptions.setMaxresults(pagingGetMultiplePagesWithOffsetOptions.getMaxresults());
+                        pagingGetMultiplePagesWithOffsetNextOptions.setTimeout(pagingGetMultiplePagesWithOffsetOptions.getTimeout());
+                        getMultiplePagesWithOffsetNextAsync(result.getBody().getNextPageLink(), clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions, serviceCallback);
+                    } else {
+                        serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
+                        }
+                } catch (CloudException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return call;
+    }
+
+    private ServiceResponse<PageImpl<Product>> getMultiplePagesWithOffsetDelegate(Response<ResponseBody> response, Retrofit retrofit) throws CloudException, IOException, IllegalArgumentException {
+        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>()
+                .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
+                .registerError(CloudException.class)
+                .build(response, retrofit);
+    }
+
+    /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the PageImpl&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<PageImpl<Product>> getMultiplePagesRetryFirst() throws CloudException, IOException {
+    public ServiceResponse<List<Product>> getMultiplePagesRetryFirst() throws CloudException, IOException {
         Call<ResponseBody> call = service.getMultiplePagesRetryFirst(this.client.getAcceptLanguage());
-        return getMultiplePagesRetryFirstDelegate(call.execute(), null);
+        ServiceResponse<PageImpl<Product>> response = getMultiplePagesRetryFirstDelegate(call.execute(), null);
+        List<Product> result = response.getBody().getItems();
+        while (response.getBody().getNextPageLink() != null) {
+            response = getMultiplePagesRetryFirstNext(response.getBody().getNextPageLink());
+            result.addAll(response.getBody().getItems());
+        }
+        return new ServiceResponse<>(result, response.getResponse());
     }
 
     /**
@@ -161,13 +275,20 @@ public final class PagingOperationsImpl implements PagingOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getMultiplePagesRetryFirstAsync(final ServiceCallback<PageImpl<Product>> serviceCallback) {
+    public Call<ResponseBody> getMultiplePagesRetryFirstAsync(final ListOperationCallback<Product> serviceCallback) {
         Call<ResponseBody> call = service.getMultiplePagesRetryFirst(this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<PageImpl<Product>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getMultiplePagesRetryFirstDelegate(response, retrofit));
+                    ServiceResponse<PageImpl<Product>> result = getMultiplePagesRetryFirstDelegate(response, retrofit);
+                    serviceCallback.load(result.getBody().getItems());
+                    if (result.getBody().getNextPageLink() != null
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                        getMultiplePagesRetryFirstNextAsync(result.getBody().getNextPageLink(), serviceCallback);
+                    } else {
+                        serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
+                        }
                 } catch (CloudException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -188,11 +309,17 @@ public final class PagingOperationsImpl implements PagingOperations {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the PageImpl&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<PageImpl<Product>> getMultiplePagesRetrySecond() throws CloudException, IOException {
+    public ServiceResponse<List<Product>> getMultiplePagesRetrySecond() throws CloudException, IOException {
         Call<ResponseBody> call = service.getMultiplePagesRetrySecond(this.client.getAcceptLanguage());
-        return getMultiplePagesRetrySecondDelegate(call.execute(), null);
+        ServiceResponse<PageImpl<Product>> response = getMultiplePagesRetrySecondDelegate(call.execute(), null);
+        List<Product> result = response.getBody().getItems();
+        while (response.getBody().getNextPageLink() != null) {
+            response = getMultiplePagesRetrySecondNext(response.getBody().getNextPageLink());
+            result.addAll(response.getBody().getItems());
+        }
+        return new ServiceResponse<>(result, response.getResponse());
     }
 
     /**
@@ -201,13 +328,20 @@ public final class PagingOperationsImpl implements PagingOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getMultiplePagesRetrySecondAsync(final ServiceCallback<PageImpl<Product>> serviceCallback) {
+    public Call<ResponseBody> getMultiplePagesRetrySecondAsync(final ListOperationCallback<Product> serviceCallback) {
         Call<ResponseBody> call = service.getMultiplePagesRetrySecond(this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<PageImpl<Product>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getMultiplePagesRetrySecondDelegate(response, retrofit));
+                    ServiceResponse<PageImpl<Product>> result = getMultiplePagesRetrySecondDelegate(response, retrofit);
+                    serviceCallback.load(result.getBody().getItems());
+                    if (result.getBody().getNextPageLink() != null
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                        getMultiplePagesRetrySecondNextAsync(result.getBody().getNextPageLink(), serviceCallback);
+                    } else {
+                        serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
+                        }
                 } catch (CloudException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -228,11 +362,17 @@ public final class PagingOperationsImpl implements PagingOperations {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the PageImpl&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<PageImpl<Product>> getSinglePagesFailure() throws CloudException, IOException {
+    public ServiceResponse<List<Product>> getSinglePagesFailure() throws CloudException, IOException {
         Call<ResponseBody> call = service.getSinglePagesFailure(this.client.getAcceptLanguage());
-        return getSinglePagesFailureDelegate(call.execute(), null);
+        ServiceResponse<PageImpl<Product>> response = getSinglePagesFailureDelegate(call.execute(), null);
+        List<Product> result = response.getBody().getItems();
+        while (response.getBody().getNextPageLink() != null) {
+            response = getSinglePagesFailureNext(response.getBody().getNextPageLink());
+            result.addAll(response.getBody().getItems());
+        }
+        return new ServiceResponse<>(result, response.getResponse());
     }
 
     /**
@@ -241,13 +381,20 @@ public final class PagingOperationsImpl implements PagingOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getSinglePagesFailureAsync(final ServiceCallback<PageImpl<Product>> serviceCallback) {
+    public Call<ResponseBody> getSinglePagesFailureAsync(final ListOperationCallback<Product> serviceCallback) {
         Call<ResponseBody> call = service.getSinglePagesFailure(this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<PageImpl<Product>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getSinglePagesFailureDelegate(response, retrofit));
+                    ServiceResponse<PageImpl<Product>> result = getSinglePagesFailureDelegate(response, retrofit);
+                    serviceCallback.load(result.getBody().getItems());
+                    if (result.getBody().getNextPageLink() != null
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                        getSinglePagesFailureNextAsync(result.getBody().getNextPageLink(), serviceCallback);
+                    } else {
+                        serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
+                        }
                 } catch (CloudException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -268,11 +415,17 @@ public final class PagingOperationsImpl implements PagingOperations {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the PageImpl&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<PageImpl<Product>> getMultiplePagesFailure() throws CloudException, IOException {
+    public ServiceResponse<List<Product>> getMultiplePagesFailure() throws CloudException, IOException {
         Call<ResponseBody> call = service.getMultiplePagesFailure(this.client.getAcceptLanguage());
-        return getMultiplePagesFailureDelegate(call.execute(), null);
+        ServiceResponse<PageImpl<Product>> response = getMultiplePagesFailureDelegate(call.execute(), null);
+        List<Product> result = response.getBody().getItems();
+        while (response.getBody().getNextPageLink() != null) {
+            response = getMultiplePagesFailureNext(response.getBody().getNextPageLink());
+            result.addAll(response.getBody().getItems());
+        }
+        return new ServiceResponse<>(result, response.getResponse());
     }
 
     /**
@@ -281,13 +434,20 @@ public final class PagingOperationsImpl implements PagingOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getMultiplePagesFailureAsync(final ServiceCallback<PageImpl<Product>> serviceCallback) {
+    public Call<ResponseBody> getMultiplePagesFailureAsync(final ListOperationCallback<Product> serviceCallback) {
         Call<ResponseBody> call = service.getMultiplePagesFailure(this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<PageImpl<Product>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getMultiplePagesFailureDelegate(response, retrofit));
+                    ServiceResponse<PageImpl<Product>> result = getMultiplePagesFailureDelegate(response, retrofit);
+                    serviceCallback.load(result.getBody().getItems());
+                    if (result.getBody().getNextPageLink() != null
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                        getMultiplePagesFailureNextAsync(result.getBody().getNextPageLink(), serviceCallback);
+                    } else {
+                        serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
+                        }
                 } catch (CloudException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -308,11 +468,17 @@ public final class PagingOperationsImpl implements PagingOperations {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the PageImpl&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<PageImpl<Product>> getMultiplePagesFailureUri() throws CloudException, IOException {
+    public ServiceResponse<List<Product>> getMultiplePagesFailureUri() throws CloudException, IOException {
         Call<ResponseBody> call = service.getMultiplePagesFailureUri(this.client.getAcceptLanguage());
-        return getMultiplePagesFailureUriDelegate(call.execute(), null);
+        ServiceResponse<PageImpl<Product>> response = getMultiplePagesFailureUriDelegate(call.execute(), null);
+        List<Product> result = response.getBody().getItems();
+        while (response.getBody().getNextPageLink() != null) {
+            response = getMultiplePagesFailureUriNext(response.getBody().getNextPageLink());
+            result.addAll(response.getBody().getItems());
+        }
+        return new ServiceResponse<>(result, response.getResponse());
     }
 
     /**
@@ -321,13 +487,20 @@ public final class PagingOperationsImpl implements PagingOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getMultiplePagesFailureUriAsync(final ServiceCallback<PageImpl<Product>> serviceCallback) {
+    public Call<ResponseBody> getMultiplePagesFailureUriAsync(final ListOperationCallback<Product> serviceCallback) {
         Call<ResponseBody> call = service.getMultiplePagesFailureUri(this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<PageImpl<Product>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getMultiplePagesFailureUriDelegate(response, retrofit));
+                    ServiceResponse<PageImpl<Product>> result = getMultiplePagesFailureUriDelegate(response, retrofit);
+                    serviceCallback.load(result.getBody().getItems());
+                    if (result.getBody().getNextPageLink() != null
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                        getMultiplePagesFailureUriNextAsync(result.getBody().getNextPageLink(), serviceCallback);
+                    } else {
+                        serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
+                        }
                 } catch (CloudException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -350,9 +523,9 @@ public final class PagingOperationsImpl implements PagingOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the PageImpl&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<PageImpl<Product>> getSinglePagesNext(String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
+    public ServiceResponse<PageImpl<Product>> getSinglePagesNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
@@ -367,17 +540,24 @@ public final class PagingOperationsImpl implements PagingOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getSinglePagesNextAsync(String nextPageLink, final ServiceCallback<PageImpl<Product>> serviceCallback) {
+    public Call<ResponseBody> getSinglePagesNextAsync(final String nextPageLink, final ListOperationCallback<Product> serviceCallback) {
         if (nextPageLink == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.getSinglePagesNext(nextPageLink, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<PageImpl<Product>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getSinglePagesNextDelegate(response, retrofit));
+                    ServiceResponse<PageImpl<Product>> result = getSinglePagesNextDelegate(response, retrofit);
+                    serviceCallback.load(result.getBody().getItems());
+                    if (result.getBody().getNextPageLink() != null
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                        getSinglePagesNextAsync(result.getBody().getNextPageLink(), serviceCallback);
+                    } else {
+                        serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
+                    }
                 } catch (CloudException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -398,21 +578,21 @@ public final class PagingOperationsImpl implements PagingOperations {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param clientRequestId the String value
-     * @param pagingGetMultiplePagesNextOptions Additional parameters for the operation
+     * @param pagingGetMultiplePagesOptions Additional parameters for the operation
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the PageImpl&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<PageImpl<Product>> getMultiplePagesNext(String nextPageLink, String clientRequestId, PagingGetMultiplePagesNextOptions pagingGetMultiplePagesNextOptions) throws CloudException, IOException, IllegalArgumentException {
+    public ServiceResponse<PageImpl<Product>> getMultiplePagesNext(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) throws CloudException, IOException, IllegalArgumentException {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         Integer maxresults = null;
         Integer timeout = null;
-        if (pagingGetMultiplePagesNextOptions != null) {
-            maxresults = pagingGetMultiplePagesNextOptions.getMaxresults();
-            timeout = pagingGetMultiplePagesNextOptions.getTimeout();
+        if (pagingGetMultiplePagesOptions != null) {
+            maxresults = pagingGetMultiplePagesOptions.getMaxresults();
+            timeout = pagingGetMultiplePagesOptions.getTimeout();
         }
         Call<ResponseBody> call = service.getMultiplePagesNext(nextPageLink, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
         return getMultiplePagesNextDelegate(call.execute(), null);
@@ -423,27 +603,34 @@ public final class PagingOperationsImpl implements PagingOperations {
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param clientRequestId the String value
-     * @param pagingGetMultiplePagesNextOptions Additional parameters for the operation
+     * @param pagingGetMultiplePagesOptions Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getMultiplePagesNextAsync(String nextPageLink, String clientRequestId, PagingGetMultiplePagesNextOptions pagingGetMultiplePagesNextOptions, final ServiceCallback<PageImpl<Product>> serviceCallback) {
+    public Call<ResponseBody> getMultiplePagesNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, final ListOperationCallback<Product> serviceCallback) {
         if (nextPageLink == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
             return null;
         }
         Integer maxresults = null;
         Integer timeout = null;
-        if (pagingGetMultiplePagesNextOptions != null) {
-            maxresults = pagingGetMultiplePagesNextOptions.getMaxresults();
-            timeout = pagingGetMultiplePagesNextOptions.getTimeout();
+        if (pagingGetMultiplePagesOptions != null) {
+            maxresults = pagingGetMultiplePagesOptions.getMaxresults();
+            timeout = pagingGetMultiplePagesOptions.getTimeout();
         }
         Call<ResponseBody> call = service.getMultiplePagesNext(nextPageLink, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
-        call.enqueue(new ServiceResponseCallback<PageImpl<Product>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getMultiplePagesNextDelegate(response, retrofit));
+                    ServiceResponse<PageImpl<Product>> result = getMultiplePagesNextDelegate(response, retrofit);
+                    serviceCallback.load(result.getBody().getItems());
+                    if (result.getBody().getNextPageLink() != null
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                        getMultiplePagesNextAsync(result.getBody().getNextPageLink(), clientRequestId, pagingGetMultiplePagesOptions, serviceCallback);
+                    } else {
+                        serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
+                    }
                 } catch (CloudException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -460,15 +647,80 @@ public final class PagingOperationsImpl implements PagingOperations {
     }
 
     /**
+     * A paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param clientRequestId the String value
+     * @param pagingGetMultiplePagesWithOffsetNextOptions Additional parameters for the operation
+     * @throws CloudException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<PageImpl<Product>> getMultiplePagesWithOffsetNext(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions) throws CloudException, IOException, IllegalArgumentException {
+        if (nextPageLink == null) {
+            throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
+        }
+        Integer maxresults = pagingGetMultiplePagesWithOffsetNextOptions.getMaxresults();
+        Integer timeout = pagingGetMultiplePagesWithOffsetNextOptions.getTimeout();
+        Call<ResponseBody> call = service.getMultiplePagesWithOffsetNext(nextPageLink, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
+        return getMultiplePagesWithOffsetNextDelegate(call.execute(), null);
+    }
+
+    /**
+     * A paging operation that includes a nextLink that has 10 pages.
+     *
+     * @param nextPageLink The NextLink from the previous successful call to List operation.
+     * @param clientRequestId the String value
+     * @param pagingGetMultiplePagesWithOffsetNextOptions Additional parameters for the operation
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
+     */
+    public Call<ResponseBody> getMultiplePagesWithOffsetNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions, final ListOperationCallback<Product> serviceCallback) {
+        if (nextPageLink == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
+            return null;
+        }
+        Integer maxresults = pagingGetMultiplePagesWithOffsetNextOptions.getMaxresults();
+        Integer timeout = pagingGetMultiplePagesWithOffsetNextOptions.getTimeout();
+        Call<ResponseBody> call = service.getMultiplePagesWithOffsetNext(nextPageLink, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
+        call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
+            @Override
+            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+                try {
+                    ServiceResponse<PageImpl<Product>> result = getMultiplePagesWithOffsetNextDelegate(response, retrofit);
+                    serviceCallback.load(result.getBody().getItems());
+                    if (result.getBody().getNextPageLink() != null
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                        getMultiplePagesWithOffsetNextAsync(result.getBody().getNextPageLink(), clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions, serviceCallback);
+                    } else {
+                        serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
+                    }
+                } catch (CloudException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return call;
+    }
+
+    private ServiceResponse<PageImpl<Product>> getMultiplePagesWithOffsetNextDelegate(Response<ResponseBody> response, Retrofit retrofit) throws CloudException, IOException, IllegalArgumentException {
+        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>()
+                .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
+                .registerError(CloudException.class)
+                .build(response, retrofit);
+    }
+
+    /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      *
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the PageImpl&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<PageImpl<Product>> getMultiplePagesRetryFirstNext(String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
+    public ServiceResponse<PageImpl<Product>> getMultiplePagesRetryFirstNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
@@ -483,17 +735,24 @@ public final class PagingOperationsImpl implements PagingOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getMultiplePagesRetryFirstNextAsync(String nextPageLink, final ServiceCallback<PageImpl<Product>> serviceCallback) {
+    public Call<ResponseBody> getMultiplePagesRetryFirstNextAsync(final String nextPageLink, final ListOperationCallback<Product> serviceCallback) {
         if (nextPageLink == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.getMultiplePagesRetryFirstNext(nextPageLink, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<PageImpl<Product>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getMultiplePagesRetryFirstNextDelegate(response, retrofit));
+                    ServiceResponse<PageImpl<Product>> result = getMultiplePagesRetryFirstNextDelegate(response, retrofit);
+                    serviceCallback.load(result.getBody().getItems());
+                    if (result.getBody().getNextPageLink() != null
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                        getMultiplePagesRetryFirstNextAsync(result.getBody().getNextPageLink(), serviceCallback);
+                    } else {
+                        serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
+                    }
                 } catch (CloudException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -516,9 +775,9 @@ public final class PagingOperationsImpl implements PagingOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the PageImpl&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<PageImpl<Product>> getMultiplePagesRetrySecondNext(String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
+    public ServiceResponse<PageImpl<Product>> getMultiplePagesRetrySecondNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
@@ -533,17 +792,24 @@ public final class PagingOperationsImpl implements PagingOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getMultiplePagesRetrySecondNextAsync(String nextPageLink, final ServiceCallback<PageImpl<Product>> serviceCallback) {
+    public Call<ResponseBody> getMultiplePagesRetrySecondNextAsync(final String nextPageLink, final ListOperationCallback<Product> serviceCallback) {
         if (nextPageLink == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.getMultiplePagesRetrySecondNext(nextPageLink, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<PageImpl<Product>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getMultiplePagesRetrySecondNextDelegate(response, retrofit));
+                    ServiceResponse<PageImpl<Product>> result = getMultiplePagesRetrySecondNextDelegate(response, retrofit);
+                    serviceCallback.load(result.getBody().getItems());
+                    if (result.getBody().getNextPageLink() != null
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                        getMultiplePagesRetrySecondNextAsync(result.getBody().getNextPageLink(), serviceCallback);
+                    } else {
+                        serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
+                    }
                 } catch (CloudException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -566,9 +832,9 @@ public final class PagingOperationsImpl implements PagingOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the PageImpl&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<PageImpl<Product>> getSinglePagesFailureNext(String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
+    public ServiceResponse<PageImpl<Product>> getSinglePagesFailureNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
@@ -583,17 +849,24 @@ public final class PagingOperationsImpl implements PagingOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getSinglePagesFailureNextAsync(String nextPageLink, final ServiceCallback<PageImpl<Product>> serviceCallback) {
+    public Call<ResponseBody> getSinglePagesFailureNextAsync(final String nextPageLink, final ListOperationCallback<Product> serviceCallback) {
         if (nextPageLink == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.getSinglePagesFailureNext(nextPageLink, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<PageImpl<Product>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getSinglePagesFailureNextDelegate(response, retrofit));
+                    ServiceResponse<PageImpl<Product>> result = getSinglePagesFailureNextDelegate(response, retrofit);
+                    serviceCallback.load(result.getBody().getItems());
+                    if (result.getBody().getNextPageLink() != null
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                        getSinglePagesFailureNextAsync(result.getBody().getNextPageLink(), serviceCallback);
+                    } else {
+                        serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
+                    }
                 } catch (CloudException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -616,9 +889,9 @@ public final class PagingOperationsImpl implements PagingOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the PageImpl&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<PageImpl<Product>> getMultiplePagesFailureNext(String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
+    public ServiceResponse<PageImpl<Product>> getMultiplePagesFailureNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
@@ -633,17 +906,24 @@ public final class PagingOperationsImpl implements PagingOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getMultiplePagesFailureNextAsync(String nextPageLink, final ServiceCallback<PageImpl<Product>> serviceCallback) {
+    public Call<ResponseBody> getMultiplePagesFailureNextAsync(final String nextPageLink, final ListOperationCallback<Product> serviceCallback) {
         if (nextPageLink == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.getMultiplePagesFailureNext(nextPageLink, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<PageImpl<Product>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getMultiplePagesFailureNextDelegate(response, retrofit));
+                    ServiceResponse<PageImpl<Product>> result = getMultiplePagesFailureNextDelegate(response, retrofit);
+                    serviceCallback.load(result.getBody().getItems());
+                    if (result.getBody().getNextPageLink() != null
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                        getMultiplePagesFailureNextAsync(result.getBody().getNextPageLink(), serviceCallback);
+                    } else {
+                        serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
+                    }
                 } catch (CloudException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -666,9 +946,9 @@ public final class PagingOperationsImpl implements PagingOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the PageImpl&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<PageImpl<Product>> getMultiplePagesFailureUriNext(String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
+    public ServiceResponse<PageImpl<Product>> getMultiplePagesFailureUriNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
@@ -683,17 +963,24 @@ public final class PagingOperationsImpl implements PagingOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getMultiplePagesFailureUriNextAsync(String nextPageLink, final ServiceCallback<PageImpl<Product>> serviceCallback) {
+    public Call<ResponseBody> getMultiplePagesFailureUriNextAsync(final String nextPageLink, final ListOperationCallback<Product> serviceCallback) {
         if (nextPageLink == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.getMultiplePagesFailureUriNext(nextPageLink, this.client.getAcceptLanguage());
-        call.enqueue(new ServiceResponseCallback<PageImpl<Product>>(serviceCallback) {
+        call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                 try {
-                    serviceCallback.success(getMultiplePagesFailureUriNextDelegate(response, retrofit));
+                    ServiceResponse<PageImpl<Product>> result = getMultiplePagesFailureUriNextDelegate(response, retrofit);
+                    serviceCallback.load(result.getBody().getItems());
+                    if (result.getBody().getNextPageLink() != null
+                            && serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {
+                        getMultiplePagesFailureUriNextAsync(result.getBody().getNextPageLink(), serviceCallback);
+                    } else {
+                        serviceCallback.success(new ServiceResponse<>(serviceCallback.get(), response));
+                    }
                 } catch (CloudException | IOException exception) {
                     serviceCallback.failure(exception);
                 }

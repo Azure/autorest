@@ -12,8 +12,10 @@
     <OutputPath>.</OutputPath>
     <Name>clientruntime</Name>
     <RootNamespace>client_runtime</RootNamespace>
-    <InterpreterId>{12c1f77c-3a20-4e2d-8df2-6f587311ea06}</InterpreterId>
-    <InterpreterVersion>3.5</InterpreterVersion>
+    <InterpreterId>
+    </InterpreterId>
+    <InterpreterVersion>
+    </InterpreterVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,6 +36,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="msrestazure\azure_operation.py" />
+    <Compile Include="msrestazure\version.py" />
     <Compile Include="setup.py">
       <SubType>Code</SubType>
     </Compile>
@@ -52,30 +55,6 @@
   <ItemGroup>
     <Folder Include="msrestazure\" />
     <Folder Include="test\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Interpreter Include="..\..\..\..\PythonEnv\Python27-64-ENV\">
-      <Id>{5cdbe86c-f1f4-45a4-ad13-453be6b2cc3e}</Id>
-      <BaseInterpreter>{9a7a9026-48c1-4688-9d5d-e5699d47d074}</BaseInterpreter>
-      <Version>2.7</Version>
-      <Description>Python27-64-ENV (Python 64-bit 2.7)</Description>
-      <InterpreterPath>Scripts\python.exe</InterpreterPath>
-      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
-      <LibraryPath>Lib\</LibraryPath>
-      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
-      <Architecture>Amd64</Architecture>
-    </Interpreter>
-    <Interpreter Include="..\..\..\..\PythonEnv\Python35-64-ENV\">
-      <Id>{12c1f77c-3a20-4e2d-8df2-6f587311ea06}</Id>
-      <BaseInterpreter>{9a7a9026-48c1-4688-9d5d-e5699d47d074}</BaseInterpreter>
-      <Version>3.5</Version>
-      <Description>Python35-64-ENV (Python 64-bit 3.5)</Description>
-      <InterpreterPath>Scripts\python.exe</InterpreterPath>
-      <WindowsInterpreterPath>Scripts\pythonw.exe</WindowsInterpreterPath>
-      <LibraryPath>Lib\</LibraryPath>
-      <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
-      <Architecture>Amd64</Architecture>
-    </Interpreter>
   </ItemGroup>
   <ItemGroup>
     <Content Include="readme.rst">

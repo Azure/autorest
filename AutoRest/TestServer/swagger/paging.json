@@ -69,7 +69,67 @@
                 "postfix": "Options"
             }
           }
-		],
+		    ],
+        "responses": {
+          "200": {
+            "description": "Initial response with ProvisioningState='Canceled'",
+            "schema": {
+              "$ref": "#/definitions/ProductResult"
+            }
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    },
+    "/paging/multiple/withpath/{offset}": {
+      "get": {
+        "x-ms-pageable": { "nextLinkName": "nextLink", "itemName": "values" },
+        "operationId": "Paging_getMultiplePagesWithOffset",
+        "description": "A paging operation that includes a nextLink that has 10 pages",
+        "parameters": [
+          {
+            "name": "client-request-id",
+            "in": "header",
+            "required": false,
+            "type": "string",
+          },
+          {
+            "name": "maxresults",
+            "in": "header",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "Sets the maximum number of items to return in the response.",
+            "x-ms-parameter-grouping": {
+                "postfix": "Options"
+            }
+          },
+          {
+            "name": "offset",
+            "in": "path",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "description": "Offset of return value",
+            "x-ms-parameter-grouping": {
+                "postfix": "Options"
+            }
+          },
+          {
+            "name": "timeout",
+            "in": "header",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 30,
+            "description": "Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.",
+            "x-ms-parameter-grouping": {
+                "postfix": "Options"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "Initial response with ProvisioningState='Canceled'",

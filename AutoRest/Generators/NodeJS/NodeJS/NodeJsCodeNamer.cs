@@ -339,22 +339,22 @@ namespace Microsoft.Rest.Generator.NodeJS
             return dictionaryType;
         }
 
-        public override string QuoteString(string value, IType type)
+        public override string EscapeDefaultValue(string defaultValue, IType type)
         {
             if (type == null)
             {
                 throw new ArgumentNullException("type");
             }
 
-            if (value != null)
+            if (defaultValue != null)
             {
                 if (type == PrimaryType.String)
                 {
-                    return CodeNamer.QuoteValue(value, quoteChar: "'");
+                    return CodeNamer.QuoteValue(defaultValue, quoteChar: "'");
                 }
                 else if (type == PrimaryType.Boolean)
                 {
-                    return value.ToLowerInvariant();
+                    return defaultValue.ToLowerInvariant();
                 }
                 else
                 {
@@ -362,19 +362,19 @@ namespace Microsoft.Rest.Generator.NodeJS
                         type == PrimaryType.DateTime ||
                         type == PrimaryType.DateTimeRfc1123)
                     {
-                        return "new Date('" + value + "')";
+                        return "new Date('" + defaultValue + "')";
                     }
                     else if (type == PrimaryType.TimeSpan)
                     {
-                        return "moment.duration('" + value + "')";
+                        return "moment.duration('" + defaultValue + "')";
                     }
                     else if (type == PrimaryType.ByteArray)
                     {
-                        return "new Buffer('" + value + "')";
+                        return "new Buffer('" + defaultValue + "')";
                     }
                 }
             }
-            return value;
+            return defaultValue;
         }
     }
 }

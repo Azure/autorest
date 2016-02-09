@@ -61,6 +61,35 @@ export interface Paging {
     getMultiplePages(callback: ServiceCallback<models.ProductResult>): void;
 
     /**
+     * A paging operation that includes a nextLink that has 10 pages
+     *
+     * @param {object} pagingGetMultiplePagesWithOffsetOptions Additional
+     * parameters for the operation
+     * 
+     * @param {number} [pagingGetMultiplePagesWithOffsetOptions.maxresults] Sets
+     * the maximum number of items to return in the response.
+     * 
+     * @param {number} [pagingGetMultiplePagesWithOffsetOptions.offset] Offset of
+     * return value
+     * 
+     * @param {number} [pagingGetMultiplePagesWithOffsetOptions.timeout] Sets the
+     * maximum time that the server can spend processing the request, in seconds.
+     * The default is 30 seconds.
+     * 
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {string} [options.clientRequestId]
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    getMultiplePagesWithOffset(pagingGetMultiplePagesWithOffsetOptions: models.PagingGetMultiplePagesWithOffsetOptions, options: { clientRequestId? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ProductResult>): void;
+    getMultiplePagesWithOffset(pagingGetMultiplePagesWithOffsetOptions: models.PagingGetMultiplePagesWithOffsetOptions, callback: ServiceCallback<models.ProductResult>): void;
+
+    /**
      * A paging operation that fails on the first call with 500 and then retries
      * and then get a response including a nextLink that has 10 pages
      *
@@ -160,15 +189,15 @@ export interface Paging {
      * 
      * @param {string} [options.clientRequestId]
      * 
-     * @param {object} [options.pagingGetMultiplePagesNextOptions] Additional
+     * @param {object} [options.pagingGetMultiplePagesOptions] Additional
      * parameters for the operation
      * 
-     * @param {number} [options.pagingGetMultiplePagesNextOptions.maxresults] Sets
-     * the maximum number of items to return in the response.
+     * @param {number} [options.pagingGetMultiplePagesOptions.maxresults] Sets the
+     * maximum number of items to return in the response.
      * 
-     * @param {number} [options.pagingGetMultiplePagesNextOptions.timeout] Sets
-     * the maximum time that the server can spend processing the request, in
-     * seconds. The default is 30 seconds.
+     * @param {number} [options.pagingGetMultiplePagesOptions.timeout] Sets the
+     * maximum time that the server can spend processing the request, in seconds.
+     * The default is 30 seconds.
      * 
      * @param {object} [options.customHeaders] Headers that will be added to the
      * request
@@ -176,8 +205,39 @@ export interface Paging {
      * @param {ServiceCallback} [callback] callback function; see ServiceCallback
      * doc in ms-rest index.d.ts for details
      */
-    getMultiplePagesNext(nextPageLink: string, options: { clientRequestId? : string, pagingGetMultiplePagesNextOptions? : models.PagingGetMultiplePagesNextOptions, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ProductResult>): void;
+    getMultiplePagesNext(nextPageLink: string, options: { clientRequestId? : string, pagingGetMultiplePagesOptions? : models.PagingGetMultiplePagesOptions, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ProductResult>): void;
     getMultiplePagesNext(nextPageLink: string, callback: ServiceCallback<models.ProductResult>): void;
+
+    /**
+     * A paging operation that includes a nextLink that has 10 pages
+     *
+     * @param {string} nextPageLink The NextLink from the previous successful call
+     * to List operation.
+     * 
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {string} [options.clientRequestId]
+     * 
+     * @param {object} [options.pagingGetMultiplePagesWithOffsetNextOptions]
+     * Additional parameters for the operation
+     * 
+     * @param {number}
+     * [options.pagingGetMultiplePagesWithOffsetNextOptions.maxresults] Sets the
+     * maximum number of items to return in the response.
+     * 
+     * @param {number}
+     * [options.pagingGetMultiplePagesWithOffsetNextOptions.timeout] Sets the
+     * maximum time that the server can spend processing the request, in seconds.
+     * The default is 30 seconds.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    getMultiplePagesWithOffsetNext(nextPageLink: string, options: { clientRequestId? : string, pagingGetMultiplePagesWithOffsetNextOptions? : models.PagingGetMultiplePagesWithOffsetNextOptions, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ProductResult>): void;
+    getMultiplePagesWithOffsetNext(nextPageLink: string, callback: ServiceCallback<models.ProductResult>): void;
 
     /**
      * A paging operation that fails on the first call with 500 and then retries

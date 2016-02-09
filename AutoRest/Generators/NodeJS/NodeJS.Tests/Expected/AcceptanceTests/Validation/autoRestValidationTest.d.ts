@@ -78,9 +78,9 @@ declare class AutoRestValidationTest {
          * 
          * @param {string} [options.body.image] Image URL representing the product.
          * 
-         * @param {number} [options.body.constInt] Constant int
+         * @param {object} [options.body.child]
          * 
-         * @param {string} [options.body.constString] Constant string
+         * @param {number} [options.body.child.count] Count
          * 
          * @param {object} [options.customHeaders] Headers that will be added to the
          * request
@@ -116,9 +116,9 @@ declare class AutoRestValidationTest {
          * 
          * @param {string} [options.body.image] Image URL representing the product.
          * 
-         * @param {number} [options.body.constInt] Constant int
+         * @param {object} [options.body.child]
          * 
-         * @param {string} [options.body.constString] Constant string
+         * @param {number} [options.body.child.count] Count
          * 
          * @param {object} [options.customHeaders] Headers that will be added to the
          * request

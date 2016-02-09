@@ -723,7 +723,8 @@
             "in": "query",
             "description": "true boolean value",
             "type": "boolean",
-            "enum": [ true ]
+            "enum": [ true ],
+            "required": true
           }
         ],
         "responses": {
@@ -752,7 +753,8 @@
             "in": "query",
             "description": "false boolean value",
             "type": "boolean",
-            "enum": [ false ]
+            "enum": [ false ],
+            "required": true
           }
         ],
         "responses": {
@@ -809,7 +811,8 @@
             "in": "query",
             "description": "'1000000' integer value",
             "type": "integer",
-            "enum": [ 1000000 ]
+            "enum": [ 1000000 ],
+            "required": true
           }
         ],
         "responses": {
@@ -838,7 +841,8 @@
             "in": "query",
             "description": "'-1000000' integer value",
             "type": "integer",
-            "enum": [ -1000000 ]
+            "enum": [ -1000000 ],
+            "required": true
           }
         ],
         "responses": {
@@ -896,7 +900,8 @@
             "description": "'10000000000' 64 bit integer value",
             "type": "integer",
             "format": "int64",
-            "enum": [ 10000000000 ]
+            "enum": [ 10000000000 ],
+            "required": true
           }
         ],
         "responses": {
@@ -926,7 +931,8 @@
             "description": "'-10000000000' 64 bit integer value",
             "type": "integer",
             "format": "int64",
-            "enum": [ -10000000000 ]
+            "enum": [ -10000000000 ],
+            "required": true
           }
         ],
         "responses": {
@@ -984,7 +990,8 @@
             "in": "query",
             "description": "'1.034E+20'numeric value",
             "type": "number",
-            "enum": [ 1.034E+20 ]
+            "enum": [ 1.034E+20 ],
+            "required": true
           }
         ],
         "responses": {
@@ -1013,7 +1020,8 @@
             "in": "query",
             "description": "'-1.034E-20'numeric value",
             "type": "number",
-            "enum": [ -1.034E-20 ]
+            "enum": [ -1.034E-20 ],
+            "required": true
           }
         ],
         "responses": {
@@ -1071,7 +1079,8 @@
             "description": "'9999999.999'numeric value",
             "type": "number",
             "format": "double",
-            "enum": [ 9999999.999 ]
+            "enum": [ 9999999.999 ],
+            "required": true
           }
         ],
         "responses": {
@@ -1101,7 +1110,8 @@
             "description": "'-9999999.999'numeric value",
             "type": "number",
             "format": "double",
-            "enum": [ -9999999.999 ]
+            "enum": [ -9999999.999 ],
+            "required": true
           }
         ],
         "responses": {
@@ -1159,7 +1169,8 @@
             "in": "query",
             "description": "'啊齄丂狛狜隣郎隣兀﨩'multi-byte string value",
             "type": "string",
-            "enum": [ "啊齄丂狛狜隣郎隣兀﨩" ]
+            "enum": [ "啊齄丂狛狜隣郎隣兀﨩" ],
+            "required": true
           }
         ],
         "responses": {
@@ -1188,7 +1199,8 @@
             "in": "query",
             "description": "'begin!*'();:@ &=+$,/?#[]end' url encoded string value",
             "type": "string",
-            "enum": [ "begin!*'();:@ &=+$,/?#[]end" ]
+            "enum": [ "begin!*'();:@ &=+$,/?#[]end" ],
+            "required": true
           }
         ],
         "responses": {
@@ -1217,7 +1229,8 @@
             "in": "query",
             "description": "'' string value",
             "type": "string",
-            "enum": [ "" ]
+            "enum": [ "" ],
+            "required": true
           }
         ],
         "responses": {
@@ -1364,7 +1377,8 @@
             "description": "'' as byte array",
             "type": "string",
             "format": "byte",
-            "enum": [ "" ]
+            "enum": [ "" ],
+            "required": true
           }
         ],
         "responses": {
@@ -1423,7 +1437,8 @@
             "description": "'2012-01-01' as date",
             "type": "string",
             "format": "date",
-            "enum": [ "2012-01-01" ]
+            "enum": [ "2012-01-01" ],
+            "required": true
           }
         ],
         "responses": {
@@ -1482,7 +1497,8 @@
             "description": "'2012-01-01T01:01:01Z' as date-time",
             "type": "string",
             "format": "date-time",
-            "enum": [ "2012-01-01T01:01:01Z" ]
+            "enum": [ "2012-01-01T01:01:01Z" ],
+            "required": true
           }
         ],
         "responses": {

@@ -16,7 +16,7 @@
   }
   if (Model.ServiceClient.EnumTypes.Any())
   {
-@:from .enums import (
+@:from .@(Model.ServiceClient.Name.ToPythonCase())_enums import (
     foreach (var enumType in @Model.ServiceClient.EnumTypes)
     {
     @:@(enumType.Name),

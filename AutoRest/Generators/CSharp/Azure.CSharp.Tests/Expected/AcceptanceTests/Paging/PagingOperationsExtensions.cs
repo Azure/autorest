@@ -86,6 +86,44 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             }
 
             /// <summary>
+            /// A paging operation that includes a nextLink that has 10 pages
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='pagingGetMultiplePagesWithOffsetOptions'>
+            /// Additional parameters for the operation
+            /// </param>
+            /// <param name='clientRequestId'>
+            /// </param>
+            public static IPage<Product> GetMultiplePagesWithOffset(this IPagingOperations operations, PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, string clientRequestId = default(string))
+            {
+                return Task.Factory.StartNew(s => ((IPagingOperations)s).GetMultiplePagesWithOffsetAsync(pagingGetMultiplePagesWithOffsetOptions, clientRequestId), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// A paging operation that includes a nextLink that has 10 pages
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='pagingGetMultiplePagesWithOffsetOptions'>
+            /// Additional parameters for the operation
+            /// </param>
+            /// <param name='clientRequestId'>
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<IPage<Product>> GetMultiplePagesWithOffsetAsync( this IPagingOperations operations, PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, string clientRequestId = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetMultiplePagesWithOffsetWithHttpMessagesAsync(pagingGetMultiplePagesWithOffsetOptions, clientRequestId, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
             /// A paging operation that fails on the first call with 500 and then retries
             /// and then get a response including a nextLink that has 10 pages
             /// </summary>
@@ -276,12 +314,12 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             /// <param name='clientRequestId'>
             /// </param>
-            /// <param name='pagingGetMultiplePagesNextOptions'>
+            /// <param name='pagingGetMultiplePagesOptions'>
             /// Additional parameters for the operation
             /// </param>
-            public static IPage<Product> GetMultiplePagesNext(this IPagingOperations operations, string nextPageLink, string clientRequestId = default(string), PagingGetMultiplePagesNextOptions pagingGetMultiplePagesNextOptions = default(PagingGetMultiplePagesNextOptions))
+            public static IPage<Product> GetMultiplePagesNext(this IPagingOperations operations, string nextPageLink, string clientRequestId = default(string), PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = default(PagingGetMultiplePagesOptions))
             {
-                return Task.Factory.StartNew(s => ((IPagingOperations)s).GetMultiplePagesNextAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesNextOptions), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                return Task.Factory.StartNew(s => ((IPagingOperations)s).GetMultiplePagesNextAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
@@ -295,15 +333,59 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             /// </param>
             /// <param name='clientRequestId'>
             /// </param>
-            /// <param name='pagingGetMultiplePagesNextOptions'>
+            /// <param name='pagingGetMultiplePagesOptions'>
             /// Additional parameters for the operation
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<IPage<Product>> GetMultiplePagesNextAsync( this IPagingOperations operations, string nextPageLink, string clientRequestId = default(string), PagingGetMultiplePagesNextOptions pagingGetMultiplePagesNextOptions = default(PagingGetMultiplePagesNextOptions), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<IPage<Product>> GetMultiplePagesNextAsync( this IPagingOperations operations, string nextPageLink, string clientRequestId = default(string), PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = default(PagingGetMultiplePagesOptions), CancellationToken cancellationToken = default(CancellationToken))
             {
-                using (var _result = await operations.GetMultiplePagesNextWithHttpMessagesAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesNextOptions, null, cancellationToken).ConfigureAwait(false))
+                using (var _result = await operations.GetMultiplePagesNextWithHttpMessagesAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesOptions, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// A paging operation that includes a nextLink that has 10 pages
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='nextPageLink'>
+            /// The NextLink from the previous successful call to List operation.
+            /// </param>
+            /// <param name='clientRequestId'>
+            /// </param>
+            /// <param name='pagingGetMultiplePagesWithOffsetNextOptions'>
+            /// Additional parameters for the operation
+            /// </param>
+            public static IPage<Product> GetMultiplePagesWithOffsetNext(this IPagingOperations operations, string nextPageLink, string clientRequestId = default(string), PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = default(PagingGetMultiplePagesWithOffsetNextOptions))
+            {
+                return Task.Factory.StartNew(s => ((IPagingOperations)s).GetMultiplePagesWithOffsetNextAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// A paging operation that includes a nextLink that has 10 pages
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='nextPageLink'>
+            /// The NextLink from the previous successful call to List operation.
+            /// </param>
+            /// <param name='clientRequestId'>
+            /// </param>
+            /// <param name='pagingGetMultiplePagesWithOffsetNextOptions'>
+            /// Additional parameters for the operation
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<IPage<Product>> GetMultiplePagesWithOffsetNextAsync( this IPagingOperations operations, string nextPageLink, string clientRequestId = default(string), PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions = default(PagingGetMultiplePagesWithOffsetNextOptions), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetMultiplePagesWithOffsetNextWithHttpMessagesAsync(nextPageLink, clientRequestId, pagingGetMultiplePagesWithOffsetNextOptions, null, cancellationToken).ConfigureAwait(false))
                 {
                     return _result.Body;
                 }

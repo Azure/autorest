@@ -28,9 +28,9 @@ namespace Microsoft.Rest.Modeler.Swagger.Azure.Tests
             return type;
         }
 
-        public override string QuoteString(string value, IType type)
+        public override string EscapeDefaultValue(string defaultValue, IType type)
         {
-            return value;
+            return defaultValue;
         }
     }
 }
