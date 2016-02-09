@@ -286,7 +286,8 @@ namespace Microsoft.Rest.Generator.Java.Azure
         {
             string name = (string)this.Extensions["nextMethodName"];
             string group = (string)this.Extensions["nextMethodGroup"];
-            var methodModel = new AzureMethodTemplateModel(ServiceClient.Methods.FirstOrDefault(m => m.Name == name), ServiceClient); group = group.ToPascalCase();
+            var methodModel = new AzureMethodTemplateModel(ServiceClient.Methods.FirstOrDefault(m => m.Name.Equals(name, StringComparison.OrdinalIgnoreCase)), ServiceClient);
+            group = group.ToPascalCase();
             if (group != null && !group.EndsWith("Operations", StringComparison.Ordinal))
             {
                 group += "Operations";

@@ -87,9 +87,7 @@ namespace Microsoft.Rest.Generator.Java
                     var sequenceType = compositType.Properties.Select(p => p.Type).FirstOrDefault(t => t is SequenceType) as SequenceType;
 
                     // if the type is a wrapper over page-able response
-                    if (sequenceType != null &&
-                       compositType.Properties.Count == 2 &&
-                       compositType.Properties.Any(p => p.SerializedName.Equals(nextLinkString, StringComparison.OrdinalIgnoreCase)))
+                    if (sequenceType != null)
                     {
                         IType pagedResult;
                         pagedResult = new SequenceType
