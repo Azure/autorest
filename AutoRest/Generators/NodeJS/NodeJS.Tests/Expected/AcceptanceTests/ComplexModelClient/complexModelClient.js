@@ -55,7 +55,7 @@ function ComplexModelClient(subscriptionId, apiVersion, baseUri, options) {
   ComplexModelClient['super_'].call(this, null, options);
   this.baseUri = baseUri;
   if (!this.baseUri) {
-    this.baseUri = 'https://management.azure.com/';
+    this.baseUri = 'http://localhost';
   }
   this.subscriptionId = subscriptionId;
   this.apiVersion = apiVersion;
@@ -123,7 +123,11 @@ ComplexModelClient.prototype.list = function (resourceGroupName, options, callba
                    '//subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/Microsoft.Cache/Redis';
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(this.subscriptionId));
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
-  requestUrl = requestUrl.replace('{apiVersion}', encodeURIComponent(this.apiVersion));
+  var queryParameters = [];
+  queryParameters.push('api-version=' + encodeURIComponent(this.apiVersion));
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -208,8 +212,6 @@ ComplexModelClient.prototype.list = function (resourceGroupName, options, callba
  * 
  * @param {string} resourceGroupName Resource Group ID.
  * 
- * @param {string} apiVersion API ID.
- * 
  * @param {object} [options] Optional Parameters.
  * 
  * @param {object} [options.productDictionaryOfArray] Dictionary of Array of
@@ -231,7 +233,7 @@ ComplexModelClient.prototype.list = function (resourceGroupName, options, callba
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-ComplexModelClient.prototype.create = function (subscriptionId, resourceGroupName, apiVersion, options, callback) {
+ComplexModelClient.prototype.create = function (subscriptionId, resourceGroupName, options, callback) {
   var client = this;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -249,8 +251,8 @@ ComplexModelClient.prototype.create = function (subscriptionId, resourceGroupNam
     if (resourceGroupName === null || resourceGroupName === undefined || typeof resourceGroupName.valueOf() !== 'string') {
       throw new Error('resourceGroupName cannot be null or undefined and it must be of type string.');
     }
-    if (apiVersion === null || apiVersion === undefined || typeof apiVersion.valueOf() !== 'string') {
-      throw new Error('apiVersion cannot be null or undefined and it must be of type string.');
+    if (this.apiVersion === null || this.apiVersion === undefined || typeof this.apiVersion.valueOf() !== 'string') {
+      throw new Error('this.apiVersion cannot be null or undefined and it must be of type string.');
     }
   } catch (error) {
     return callback(error);
@@ -267,7 +269,11 @@ ComplexModelClient.prototype.create = function (subscriptionId, resourceGroupNam
                    '//subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/Microsoft.Cache/Redis';
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(subscriptionId));
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
-  requestUrl = requestUrl.replace('{apiVersion}', encodeURIComponent(apiVersion));
+  var queryParameters = [];
+  queryParameters.push('api-version=' + encodeURIComponent(this.apiVersion));
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');
@@ -366,8 +372,6 @@ ComplexModelClient.prototype.create = function (subscriptionId, resourceGroupNam
  * 
  * @param {string} resourceGroupName Resource Group ID.
  * 
- * @param {string} apiVersion API ID.
- * 
  * @param {object} [options] Optional Parameters.
  * 
  * @param {array} [options.productArrayOfDictionary] Array of dictionary of
@@ -389,7 +393,7 @@ ComplexModelClient.prototype.create = function (subscriptionId, resourceGroupNam
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-ComplexModelClient.prototype.update = function (subscriptionId, resourceGroupName, apiVersion, options, callback) {
+ComplexModelClient.prototype.update = function (subscriptionId, resourceGroupName, options, callback) {
   var client = this;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -407,8 +411,8 @@ ComplexModelClient.prototype.update = function (subscriptionId, resourceGroupNam
     if (resourceGroupName === null || resourceGroupName === undefined || typeof resourceGroupName.valueOf() !== 'string') {
       throw new Error('resourceGroupName cannot be null or undefined and it must be of type string.');
     }
-    if (apiVersion === null || apiVersion === undefined || typeof apiVersion.valueOf() !== 'string') {
-      throw new Error('apiVersion cannot be null or undefined and it must be of type string.');
+    if (this.apiVersion === null || this.apiVersion === undefined || typeof this.apiVersion.valueOf() !== 'string') {
+      throw new Error('this.apiVersion cannot be null or undefined and it must be of type string.');
     }
   } catch (error) {
     return callback(error);
@@ -425,7 +429,11 @@ ComplexModelClient.prototype.update = function (subscriptionId, resourceGroupNam
                    '//subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/Microsoft.Cache/Redis';
   requestUrl = requestUrl.replace('{subscriptionId}', encodeURIComponent(subscriptionId));
   requestUrl = requestUrl.replace('{resourceGroupName}', encodeURIComponent(resourceGroupName));
-  requestUrl = requestUrl.replace('{apiVersion}', encodeURIComponent(apiVersion));
+  var queryParameters = [];
+  queryParameters.push('api-version=' + encodeURIComponent(this.apiVersion));
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');

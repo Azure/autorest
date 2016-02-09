@@ -48,6 +48,7 @@ using Xunit.Abstractions;
 using Error = Fixtures.AcceptanceTestsHttp.Models.Error;
 using System.Reflection;
 using Fixtures.PetstoreV2;
+using Fixtures.AcceptanceTestsCompositeBoolIntClient;
 
 namespace Microsoft.Rest.Generator.CSharp.Tests
 {
@@ -188,6 +189,32 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 SwaggerPath("body-integer.json"),
                 ExpectedPath("BodyInteger"));
             var client = new AutoRestIntegerTestService(Fixture.Uri);
+            client.IntModel.PutMax32(Int32.MaxValue);
+            client.IntModel.PutMin32(Int32.MinValue);
+            client.IntModel.PutMax64(Int64.MaxValue);
+            client.IntModel.PutMin64(Int64.MinValue);
+            client.IntModel.GetNull();
+            Assert.Throws<SerializationException>(() => client.IntModel.GetInvalid());
+            Assert.Throws<SerializationException>(() => client.IntModel.GetOverflowInt32());
+            Assert.Throws<SerializationException>(() => client.IntModel.GetOverflowInt64());
+            Assert.Throws<SerializationException>(() => client.IntModel.GetUnderflowInt32());
+            Assert.Throws<SerializationException>(() => client.IntModel.GetUnderflowInt64());
+        }
+
+        [Fact]
+        public void CompositeBoolIntTests()
+        {
+            SwaggerSpecRunner.RunTests(
+                SwaggerPath("composite-swagger.json"),
+                ExpectedPath("CompositeBoolIntClient"));
+            var client = new CompositeBoolInt(Fixture.Uri);
+            Assert.False(client.BoolModel.GetFalse());
+            Assert.True(client.BoolModel.GetTrue());
+            client.BoolModel.PutTrue(true);
+            client.BoolModel.PutFalse(false);
+            client.BoolModel.GetNull();
+            Assert.Throws<SerializationException>(() => client.BoolModel.GetInvalid());
+
             client.IntModel.PutMax32(Int32.MaxValue);
             client.IntModel.PutMin32(Int32.MinValue);
             client.IntModel.PutMax64(Int64.MaxValue);

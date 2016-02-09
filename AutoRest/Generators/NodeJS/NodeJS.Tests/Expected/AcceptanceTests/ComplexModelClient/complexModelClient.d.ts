@@ -69,8 +69,6 @@ declare class ComplexModelClient {
          * 
          * @param {string} resourceGroupName Resource Group ID.
          * 
-         * @param {string} apiVersion API ID.
-         * 
          * @param {object} [options] Optional Parameters.
          * 
          * @param {object} [options.productDictionaryOfArray] Dictionary of Array of
@@ -82,8 +80,8 @@ declare class ComplexModelClient {
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
-        create(subscriptionId: string, resourceGroupName: string, apiVersion: string, options: { productDictionaryOfArray? : { [propertyName: string]: models.Product[] }, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.CatalogDictionary>): void;
-        create(subscriptionId: string, resourceGroupName: string, apiVersion: string, callback: ServiceCallback<models.CatalogDictionary>): void;
+        create(subscriptionId: string, resourceGroupName: string, options: { productDictionaryOfArray? : { [propertyName: string]: models.Product[] }, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.CatalogDictionary>): void;
+        create(subscriptionId: string, resourceGroupName: string, callback: ServiceCallback<models.CatalogDictionary>): void;
 
         /**
          * @summary Update products
@@ -93,8 +91,6 @@ declare class ComplexModelClient {
          * @param {string} subscriptionId Subscription ID.
          * 
          * @param {string} resourceGroupName Resource Group ID.
-         * 
-         * @param {string} apiVersion API ID.
          * 
          * @param {object} [options] Optional Parameters.
          * 
@@ -107,8 +103,8 @@ declare class ComplexModelClient {
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
-        update(subscriptionId: string, resourceGroupName: string, apiVersion: string, options: { productArrayOfDictionary? : { [propertyName: string]: models.Product }[], customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.CatalogArray>): void;
-        update(subscriptionId: string, resourceGroupName: string, apiVersion: string, callback: ServiceCallback<models.CatalogArray>): void;
+        update(subscriptionId: string, resourceGroupName: string, options: { productArrayOfDictionary? : { [propertyName: string]: models.Product }[], customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.CatalogArray>): void;
+        update(subscriptionId: string, resourceGroupName: string, callback: ServiceCallback<models.CatalogArray>): void;
 }
 
 export = ComplexModelClient;

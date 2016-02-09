@@ -96,6 +96,14 @@ var defaultAzureMappings = {
   'AcceptanceTests/AzureSpecials': '../../../TestServer/swagger/azure-special-properties.json'
 };
 
+var compositeMappings = {
+  'AcceptanceTests/CompositeBoolIntClient': '../../../TestServer/swagger/composite-swagger.json'
+};
+
+var azureCompositeMappings = {
+  'AcceptanceTests/AzureCompositeModelClient': '../../../TestServer/swagger/azure-composite-swagger.json'
+};
+
 var nodeAzureMappings = {
   'AcceptanceTests/StorageManagementClient': '../../../TestServer/swagger/storage.json'
 };
@@ -253,7 +261,7 @@ gulp.task('regenerate:expected:java', function(cb){
   }, cb);
 })
 
-gulp.task('regenerate:expected:csazure', function(cb){
+gulp.task('regenerate:expected:csazure', ['regenerate:expected:csazurecomposite'], function (cb) {
   mappings = mergeOptions({
     'AcceptanceTests/AzureBodyDuration': '../../../TestServer/swagger/body-duration.json'
   }, defaultAzureMappings);
@@ -269,7 +277,7 @@ gulp.task('regenerate:expected:csazure', function(cb){
   }, cb);
 });
 
-gulp.task('regenerate:expected:cs', ['regenerate:expected:cswithcreds'], function(cb){
+gulp.task('regenerate:expected:cs', ['regenerate:expected:cswithcreds', 'regenerate:expected:cscomposite'], function (cb) {
   mappings = mergeOptions({
     'Mirror.RecursiveTypes': 'Swagger/swagger-mirror-recursive-type.json',
     'Mirror.Primitives': 'Swagger/swagger-mirror-primitives.json',
@@ -304,6 +312,32 @@ gulp.task('regenerate:expected:cswithcreds', function(cb){
     'nsPrefix': 'Fixtures',
     'flatteningThreshold': '1',
     'addCredentials': true
+  }, cb);
+});
+
+gulp.task('regenerate:expected:cscomposite', function (cb) {
+  regenExpected({
+    'outputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/CSharp.Tests',
+    'mappings': compositeMappings,
+    'modeler' : 'CompositeSwagger',
+    'outputDir': 'Expected',
+    'codeGenerator': 'CSharp',
+    'nsPrefix': 'Fixtures',
+    'flatteningThreshold': '1'
+  }, cb);
+});
+
+gulp.task('regenerate:expected:csazurecomposite', function (cb) {
+  regenExpected({
+    'outputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
+    'inputBaseDir': 'AutoRest/Generators/CSharp/Azure.CSharp.Tests',
+    'mappings': azureCompositeMappings,
+    'modeler': 'CompositeSwagger',
+    'outputDir': 'Expected',
+    'codeGenerator': 'Azure.CSharp',
+    'nsPrefix': 'Fixtures',
+    'flatteningThreshold': '1'
   }, cb);
 });
 

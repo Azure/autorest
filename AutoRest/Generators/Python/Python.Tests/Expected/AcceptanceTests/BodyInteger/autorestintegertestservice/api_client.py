@@ -26,7 +26,7 @@ class AutoRestIntegerTestServiceConfiguration(Configuration):
             self, base_url=None, filepath=None):
 
         if not base_url:
-            base_url = 'https://localhost'
+            base_url = 'http://localhost'
 
         super(AutoRestIntegerTestServiceConfiguration, self).__init__(base_url, filepath)
 

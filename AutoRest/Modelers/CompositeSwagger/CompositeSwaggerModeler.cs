@@ -131,6 +131,11 @@ namespace Microsoft.Rest.Modeler.CompositeSwagger
             // Copy client properties
             foreach (var subClientProperty in subClient.Properties)
             {
+                if (subClientProperty.SerializedName == "api-version")
+                {
+                    continue;
+                }
+
                 var compositeClientProperty = compositeClient.Properties.FirstOrDefault(p => p.Name == subClientProperty.Name);
                 if (compositeClientProperty == null)
                 {

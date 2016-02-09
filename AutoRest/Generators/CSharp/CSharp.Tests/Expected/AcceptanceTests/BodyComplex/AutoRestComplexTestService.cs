@@ -44,6 +44,11 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// </summary>
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
+        /// <summary>
+        /// API ID.
+        /// </summary>
+        public string ApiVersion { get; set; }
+
         public virtual IBasicOperations BasicOperations { get; private set; }
 
         public virtual IPrimitive Primitive { get; private set; }

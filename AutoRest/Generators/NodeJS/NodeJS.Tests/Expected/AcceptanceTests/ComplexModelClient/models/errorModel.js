@@ -14,11 +14,9 @@
  * @class
  * Initializes a new instance of the ErrorModel class.
  * @constructor
- * @member {number} [code]
+ * @member {number} [status]
  * 
  * @member {string} [message]
- * 
- * @member {string} [fields]
  * 
  */
 function ErrorModel() {
@@ -38,9 +36,9 @@ ErrorModel.prototype.mapper = function () {
       name: 'Composite',
       className: 'ErrorModel',
       modelProperties: {
-        code: {
+        status: {
           required: false,
-          serializedName: 'code',
+          serializedName: 'status',
           type: {
             name: 'Number'
           }
@@ -48,13 +46,6 @@ ErrorModel.prototype.mapper = function () {
         message: {
           required: false,
           serializedName: 'message',
-          type: {
-            name: 'String'
-          }
-        },
-        fields: {
-          required: false,
-          serializedName: 'fields',
           type: {
             name: 'String'
           }

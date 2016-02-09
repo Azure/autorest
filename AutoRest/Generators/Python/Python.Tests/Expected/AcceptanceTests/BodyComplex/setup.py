@@ -13,7 +13,7 @@
 from setuptools import setup, find_packages
 
 NAME = "autorestcomplextestservice"
-VERSION = "1.0.0"
+VERSION = "2016-02-29"
 
 # To install the library, run the following
 #

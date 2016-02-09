@@ -21,6 +21,7 @@ import retrofit.http.Body;
 import retrofit.http.GET;
 import retrofit.http.Headers;
 import retrofit.http.PUT;
+import retrofit.http.Query;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -38,7 +39,7 @@ public interface BasicOperations {
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("complex/basic/valid")
-        Call<ResponseBody> putValid(@Body Basic complexBody);
+        Call<ResponseBody> putValid(@Body Basic complexBody, @Query("api-version") String apiVersion);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("complex/basic/invalid")

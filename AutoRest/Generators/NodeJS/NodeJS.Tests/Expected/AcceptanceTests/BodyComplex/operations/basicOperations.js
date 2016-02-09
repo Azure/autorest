@@ -181,6 +181,9 @@ BasicOperations.prototype.putValid = function (complexBody, options, callback) {
     if (complexBody === null || complexBody === undefined) {
       throw new Error('complexBody cannot be null or undefined.');
     }
+    if (this.client.apiVersion === null || this.client.apiVersion === undefined || typeof this.client.apiVersion.valueOf() !== 'string') {
+      throw new Error('this.client.apiVersion cannot be null or undefined and it must be of type string.');
+    }
   } catch (error) {
     return callback(error);
   }
@@ -188,6 +191,11 @@ BasicOperations.prototype.putValid = function (complexBody, options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//complex/basic/valid';
+  var queryParameters = [];
+  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');

@@ -5,15 +5,14 @@
     "description": "Some cool documentation.",
     "version": "2014-04-01-preview"
   },
-  "host": "management.azure.com",
+  "host": "localhost",
   "schemes": [
-    "https"
+    "http"
   ],
-  "basePath": "/",
   "produces": [ "application/json" ],
   "consumes": [ "application/json" ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/Microsoft.Cache/Redis?api-version={apiVersion}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/Microsoft.Cache/Redis": {
       "get": {
         "operationId": "list",
         "summary": "Product Types",
@@ -71,13 +70,6 @@
             "type": "string"
           },
           {
-            "name": "apiVersion",
-            "in": "path",
-            "description": "API ID.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "bodyParameter",
             "in": "body",
             "description": "body Parameter",
@@ -85,6 +77,9 @@
             "schema": {
               "$ref": "#/definitions/CatalogDictionaryOfArray"
             }
+          },
+          {
+            "$ref": "ApiVersionParameter"
           }
         ],
         "tags": [
@@ -125,13 +120,6 @@
             "type": "string"
           },
           {
-            "name": "apiVersion",
-            "in": "path",
-            "description": "API ID.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "bodyParameter",
             "in": "body",
             "description": "body Parameter",
@@ -139,6 +127,9 @@
             "schema": {
               "$ref": "#/definitions/CatalogArrayOfDictionary"
             }
+          },
+          {
+            "$ref": "ApiVersionParameter"
           }
         ],
         "tags": [
@@ -244,18 +235,15 @@
     },
     "Error": {
       "properties": {
-        "code": {
+        "status": {
           "type": "integer",
           "format": "int32"
         },
         "message": {
           "type": "string"
-        },
-        "fields": {
-          "type": "string"
         }
       }
-    }
+    },
   },
   "parameters": {
     "SubscriptionIdParamterer": {
@@ -266,8 +254,8 @@
       "type": "string"
     },
     "ApiVersionParameter": {
-      "name": "apiVersion",
-      "in": "path",
+      "name": "api-version",
+      "in": "query",
       "description": "API ID.",
       "required": true,
       "type": "string"
