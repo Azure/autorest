@@ -153,7 +153,33 @@ gulp.task('regenerate:delete', function(cb){
   ], cb);
 });
 
-gulp.task('regenerate:expected:nodeazure', function(cb){
+gulp.task('regenerate:expected:nodecomposite', function (cb) {
+  regenExpected({
+    'outputBaseDir': 'AutoRest/Generators/NodeJS/NodeJS.Tests',
+    'inputBaseDir': 'AutoRest/Generators/NodeJS/NodeJS.Tests',
+    'mappings': compositeMappings,
+    'modeler': 'CompositeSwagger',
+    'outputDir': 'Expected',
+    'codeGenerator': 'NodeJS',
+    'nsPrefix': 'Fixtures',
+    'flatteningThreshold': '1'
+  }, cb);
+});
+
+gulp.task('regenerate:expected:nodeazurecomposite', function (cb) {
+  regenExpected({
+    'outputBaseDir': 'AutoRest/Generators/NodeJS/Azure.NodeJS.Tests',
+    'inputBaseDir': 'AutoRest/Generators/NodeJS/Azure.NodeJS.Tests',
+    'mappings': azureCompositeMappings,
+    'modeler': 'CompositeSwagger',
+    'outputDir': 'Expected',
+    'codeGenerator': 'Azure.NodeJS',
+    'nsPrefix': 'Fixtures',
+    'flatteningThreshold': '1'
+  }, cb);
+});
+
+gulp.task('regenerate:expected:nodeazure', ['regenerate:expected:nodeazurecomposite'], function (cb) {
   for (var p in defaultAzureMappings) {
     nodeAzureMappings[p] = defaultAzureMappings[p];
   }
@@ -168,7 +194,7 @@ gulp.task('regenerate:expected:nodeazure', function(cb){
   }, cb);
 })
 
-gulp.task('regenerate:expected:node', function(cb){
+gulp.task('regenerate:expected:node', ['regenerate:expected:nodecomposite'], function (cb) {
   for (var p in defaultMappings) {
     nodeMappings[p] = defaultMappings[p];
   }
