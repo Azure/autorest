@@ -58,13 +58,14 @@
 
   @foreach(var parameter in Model.ParameterTemplateModels)
   {
-    if (parameter.IsConstant)
+    if (parameter.IsConstant && parameter.ClientProperty == null)
     {
   @:var @(parameter.Name) = @(parameter.DefaultValue);
     }
 
     if (parameter.Type is CompositeType
       && !parameter.IsConstant
+      && parameter.ClientProperty == null
       && ((CompositeType)parameter.Type).ComposedProperties.Any(p => p.IsConstant))
     {
   @:if (@(parameter.Name) === null || @(parameter.Name) === undefined)

@@ -48,6 +48,7 @@ function AutoRestComplexTestService(baseUri, options) {
     this.baseUri = 'http://localhost';
   }
 
+  this.apiVersion = '2014-04-01-preview';
   this.basicOperations = new operations.BasicOperations(this);
   this.primitive = new operations.Primitive(this);
   this.arrayModel = new operations.ArrayModel(this);

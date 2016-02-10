@@ -116,7 +116,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
         private void Initialize()
         {
             this.IntModel = new IntModel(this);
-            this.BaseUri = new Uri("https://localhost");
+            this.BaseUri = new Uri("http://localhost");
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Formatting.Indented,

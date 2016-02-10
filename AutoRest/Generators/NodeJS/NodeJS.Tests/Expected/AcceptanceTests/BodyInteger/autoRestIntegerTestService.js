@@ -45,7 +45,7 @@ function AutoRestIntegerTestService(baseUri, options) {
   AutoRestIntegerTestService['super_'].call(this, null, options);
   this.baseUri = baseUri;
   if (!this.baseUri) {
-    this.baseUri = 'https://localhost';
+    this.baseUri = 'http://localhost';
   }
 
   this.intModel = new operations.IntModel(this);

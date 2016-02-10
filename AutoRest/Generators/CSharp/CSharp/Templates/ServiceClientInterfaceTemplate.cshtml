@@ -45,7 +45,7 @@ namespace @Settings.Namespace
         @:/// <summary>
         @:@WrapComment("/// ", property.Documentation.EscapeXmlComment())
         @:/// </summary>
-        @:@property.Type @property.Name { get;@(property.IsReadOnly ? "" : " set;") }
+        @:@property.Type @property.Name { get;@(property.IsReadOnly || property.IsConstant ? "" : " set;") }
         @EmptyLine
         }
 

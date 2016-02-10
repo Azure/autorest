@@ -194,17 +194,6 @@ namespace Microsoft.Rest.Modeler.Swagger
         }
 
         /// <summary>
-        /// Create the BaseURi for a method from metadata
-        /// </summary>
-        /// <param name="serviceClient">The service client that will contain the method </param>
-        /// <param name="path">The relative path for this operation</param>
-        /// <returns>A string representing the full http (parameterized) path for the operation</returns>
-        public virtual string BuildMethodBaseUrl(ServiceClient serviceClient, string path)
-        {
-            return string.Format(CultureInfo.InvariantCulture, "{{{0}}}{1}", BaseUriParameterName, path);
-        }
-
-        /// <summary>
         /// Build composite types from definitions
         /// </summary>
         public virtual void BuildCompositeTypes()
