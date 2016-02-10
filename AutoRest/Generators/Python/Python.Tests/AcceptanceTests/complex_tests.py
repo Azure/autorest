@@ -66,7 +66,7 @@ class ComplexTests(unittest.TestCase):
 
     def test_complex(self):
 
-        config = AutoRestComplexTestServiceConfiguration(base_url="http://localhost:3000")
+        config = AutoRestComplexTestServiceConfiguration(base_url="http://localhost:3000",api_version="2015-01-01")
         config.log_level = log_level
         client = AutoRestComplexTestService(config)
 
