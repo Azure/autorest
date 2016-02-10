@@ -16,7 +16,7 @@
   "produces": [ "application/json" ],
   "consumes": [ "application/json" ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resource?api-version={apiVersion}": {
+    "/subscriptions/{subscriptionId}/resource": {
       "get": {
         "operationId": "SimpleGet",
         "summary": "Get product",

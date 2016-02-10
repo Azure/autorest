@@ -81,14 +81,14 @@
       "in": "path",
       "description": "Subscription ID.",
       "required": true,
-      "type": "string"
+      "type": "number"
     },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "description": "API ID.",
       "required": true,
-      "type": "number"
+      "type": "string"
     }
   }
 }

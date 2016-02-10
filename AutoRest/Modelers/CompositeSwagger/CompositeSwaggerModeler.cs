@@ -221,10 +221,6 @@ namespace Microsoft.Rest.Modeler.CompositeSwagger
                 {
                     compositeClient.Methods.Add(subClientMethod);
                 }
-                else
-                {
-                    AssertEquals(compositeClientMethod.ToString(), subClientMethod.ToString(), "Method signature of " + subClient.Name + "." + subClientMethod.Name + "()");
-                }
             }
 
             return compositeClient;

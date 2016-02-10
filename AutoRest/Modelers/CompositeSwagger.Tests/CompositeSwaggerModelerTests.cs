@@ -75,18 +75,6 @@ namespace Microsoft.Rest.Modeler.CompositeSwagger.Tests
         }
 
         [Fact]
-        public void CompositeModelWithConflictInMethod()
-        {
-
-            Generator.Modeler modeler = new CompositeSwaggerModeler(new Settings
-            {
-                Namespace = "Test",
-                Input = Path.Combine("Swagger", "composite-swagger-conflict-in-method.json")
-            });
-            Assert.Throws<CodeGenerationException>(() => modeler.Build());
-        }
-
-        [Fact]
         public void CompositeModelWithConflictInModel()
         {
 
