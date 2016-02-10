@@ -25,14 +25,11 @@ namespace @Settings.Namespace
         /// <summary>
         /// The base URI of the service.
         /// </summary>
-        @if (Model.IsCustomBaseUri)
+        @if (!Model.IsCustomBaseUri)
         {
-        @:string BaseUri {get; set;}
+        @:Uri BaseUri {get; set;}
         }
-        else
-        {
-        @:Uri BaseUri { get; set; }
-        }
+        
         @EmptyLine
 
         /// <summary>

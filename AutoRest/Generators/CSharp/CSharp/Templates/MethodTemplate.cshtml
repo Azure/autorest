@@ -91,7 +91,7 @@ else
 if (Model.IsCustomBaseUri)
 {
     @:var _baseUrl = @(Model.ClientReference).BaseUri;
-    @:var _url = _baseUrl + (_baseUrl.EndsWith("/") ? "" : "/") + "@(Model.Url.TrimStart('/'))").ToString();
+    @:var _url = _baseUrl + _baseUrl.EndsWith("/") ? "" : "/" + "@(Model.Url.TrimStart('/'))";
 }
 else
 {
