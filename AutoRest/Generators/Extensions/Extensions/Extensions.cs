@@ -61,8 +61,6 @@ namespace Microsoft.Rest.Generator
                 if (hostExtension != null)
                 {
                     var hostTemplate = (string)hostExtension["hostTemplate"];
-                    
-
                     var parametersJson = hostExtension["parameters"].ToString();
                     if (!string.IsNullOrEmpty(parametersJson))
                     {
