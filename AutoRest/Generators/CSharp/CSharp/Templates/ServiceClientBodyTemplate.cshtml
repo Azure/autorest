@@ -74,54 +74,51 @@ public JsonSerializerSettings DeserializationSettings { get; private set; }
 }
 @EmptyLine
 
-/// <summary>
-/// Initializes a new instance of the @Model.Name class.
-/// </summary>
-/// <param name='baseUri'>
-/// Optional. The base URI of the service.
-/// </param>
-/// <param name='handlers'>
-/// Optional. The delegating handlers to add to the http client pipeline.
-/// </param>
-@(Model.ContainsCredentials ? "protected" : Model.ConstructorVisibility) @(Model.Name)(@(Model.IsCustomBaseUri ? "" : "Uri baseUri,") params DelegatingHandler[] handlers) : this(handlers)
-{
-@if (!Model.IsCustomBaseUri)
-{
+@if(Model.IsCustomBaseUri)
+{ 
+@:/// <summary>
+@:/// Initializes a new instance of the @Model.Name class.
+@:/// </summary>
+@:/// <param name='baseUri'>
+@:/// Optional. The base URI of the service.
+@:/// </param>
+@:/// <param name='handlers'>
+@:/// Optional. The delegating handlers to add to the http client pipeline.
+@:/// </param>
+@:@(Model.ContainsCredentials ? "protected" : Model.ConstructorVisibility) @(Model.Name)(Uri baseUri, params DelegatingHandler[] handlers) : this(handlers)
+@:{
 @:    if (baseUri == null)
 @:    {
 @:        throw new ArgumentNullException("baseUri");
 @:    }
 @:
 @:    this.BaseUri = baseUri;
-}
-}
-@EmptyLine
-        
-/// <summary>
-/// Initializes a new instance of the @Model.Name class.
-/// </summary>
-/// <param name='baseUri'>
-/// Optional. The base URI of the service.
-/// </param>
-/// <param name='rootHandler'>
-/// Optional. The http client handler used to handle http transport.
-/// </param>
-/// <param name='handlers'>
-/// Optional. The delegating handlers to add to the http client pipeline.
-/// </param>
-@(Model.ContainsCredentials ? "protected" : Model.ConstructorVisibility) @(Model.Name)(@(Model.IsCustomBaseUri ? "" : "Uri baseUri,") HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
-{
-@if (!Model.IsCustomBaseUri)
-{
+@:}
+@:@EmptyLine 
+
+@:/// <summary>
+@:/// Initializes a new instance of the @Model.Name class.
+@:/// </summary>
+@:/// <param name='baseUri'>
+@:/// Optional. The base URI of the service.
+@:/// </param>
+@:/// <param name='rootHandler'>
+@:/// Optional. The http client handler used to handle http transport.
+@:/// </param>
+@:/// <param name='handlers'>
+@:/// Optional. The delegating handlers to add to the http client pipeline.
+@:/// </param>
+@:@(Model.ContainsCredentials ? "protected" : Model.ConstructorVisibility) @(Model.Name)(Uri baseUri, HttpClientHandler rootHandler, params DelegatingHandler[] handlers) : this(rootHandler, handlers)
+@:{
 @:    if (baseUri == null)
 @:    {
 @:        throw new ArgumentNullException("baseUri");
 @:    }
 @:
 @:    this.BaseUri = baseUri;
+@:}
+@:@EmptyLine
 }
-}
-@EmptyLine
 
 @{var parameters = Model.Properties.Where(p => p.IsRequired && p.IsReadOnly);}
 @if (parameters.Any())
