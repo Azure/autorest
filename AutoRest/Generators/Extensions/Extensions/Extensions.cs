@@ -10,6 +10,8 @@ using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger;
 using Microsoft.Rest.Modeler.Swagger.Model;
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
+using Microsoft.Rest.Modeler.Swagger.JsonConverters;
 
 namespace Microsoft.Rest.Generator
 {
@@ -50,20 +52,30 @@ namespace Microsoft.Rest.Generator
                 throw new ArgumentNullException("settings");
             }
 
-            if(serviceClient.Extensions.ContainsKey(ParameterizedHostExtension))
+            if (serviceClient.Extensions.ContainsKey(ParameterizedHostExtension))
             { 
                 SwaggerModeler modeler = new SwaggerModeler(settings);
+                modeler.Build();
                 var hostExtension = serviceClient.Extensions[ParameterizedHostExtension] as JObject;
 
                 if (hostExtension != null)
                 {
                     var hostTemplate = (string)hostExtension["hostTemplate"];
-                    var jArrayParameters = hostExtension["parameters"] as JArray;
-                    if (jArrayParameters != null)
+                    
+
+                    var parametersJson = hostExtension["parameters"].ToString();
+                    if (!string.IsNullOrEmpty(parametersJson))
                     {
-                        foreach (var jObjectParameter in jArrayParameters)
+                        var jsonSettings = new JsonSerializerSettings
                         {
-                            var swaggerParameter = jObjectParameter.ToObject<SwaggerParameter>();
+                            TypeNameHandling = TypeNameHandling.None,
+                            MetadataPropertyHandling = MetadataPropertyHandling.Ignore
+                        };
+
+                        var swaggerParams = JsonConvert.DeserializeObject<List<SwaggerParameter>>(parametersJson, jsonSettings);
+                        
+                        foreach (var swaggerParameter in swaggerParams)
+                        {
                             // Build parameter
                             var parameterBuilder = new ParameterBuilder(swaggerParameter, modeler);
                             var parameter = parameterBuilder.Build();
@@ -72,11 +84,11 @@ namespace Microsoft.Rest.Generator
                                 method.Parameters.Add(parameter);
                             }
                         }
-                    }
 
-                    serviceClient.BaseUrl = string.Format(CultureInfo.InvariantCulture, "{0}://{1}{2}",
-                    modeler.ServiceDefinition.Schemes[0].ToString().ToLowerInvariant(),
-                    hostTemplate, modeler.ServiceDefinition.BasePath);
+                        serviceClient.BaseUrl = string.Format(CultureInfo.InvariantCulture, "{0}://{1}{2}",
+                        modeler.ServiceDefinition.Schemes[0].ToString().ToLowerInvariant(),
+                        hostTemplate, modeler.ServiceDefinition.BasePath);
+                    }
                 }
             }
         }
