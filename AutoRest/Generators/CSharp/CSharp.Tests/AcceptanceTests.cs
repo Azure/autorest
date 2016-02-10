@@ -49,6 +49,7 @@ using Error = Fixtures.AcceptanceTestsHttp.Models.Error;
 using System.Reflection;
 using Fixtures.PetstoreV2;
 using Fixtures.AcceptanceTestsCompositeBoolIntClient;
+using Fixtures.AcceptanceTestsCustomBaseUri;
 
 namespace Microsoft.Rest.Generator.CSharp.Tests
 {
@@ -1884,6 +1885,39 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 Assert.Equal(HttpStatusCode.OK,
                     client.ExplicitModel.PostOptionalArrayHeaderWithHttpMessagesAsync(null)
                         .Result.Response.StatusCode);
+            }
+        }
+
+        [Fact]
+        public void CustomBaseUriTests()
+        {
+            SwaggerSpecRunner.RunTests(
+                SwaggerPath("custom-baseUrl.json"), ExpectedPath("CustomBaseUri"));
+            using (var client = new AutoRestParameterizedHostTestClient())
+            {
+                Assert.Equal(HttpStatusCode.OK,
+                    client.Paths.GetBooleanTrueWithHttpMessagesAsync("local").Result.Response.StatusCode);
+            }
+        }
+
+        [Fact]
+        public void CustomBaseUriNegativeTests()
+        {
+            SwaggerSpecRunner.RunTests(
+                SwaggerPath("custom-baseUrl.json"), ExpectedPath("CustomBaseUri"));
+            using (var client = new AutoRestParameterizedHostTestClient())
+            {
+                // use a bad acct name
+                Assert.NotEqual(HttpStatusCode.OK,
+                    client.Paths.GetBooleanTrueWithHttpMessagesAsync("bad").Result.Response.StatusCode);
+
+                // pass in null
+                Assert.Throws<ValidationException>(() => client.Paths.GetBooleanTrue(null));
+
+                // set the global parameter incorrectly
+                client.Host = "badSuffix";
+                Assert.NotEqual(HttpStatusCode.OK,
+                    client.Paths.GetBooleanTrueWithHttpMessagesAsync("local").Result.Response.StatusCode);
             }
         }
 
