@@ -12,6 +12,7 @@ public class BasicOperationsTests {
     @BeforeClass
     public static void setup() {
         client = new AutoRestComplexTestServiceImpl("http://localhost:3000");
+        client.setApiVersion("2015-05-01");
     }
 
     @Test
