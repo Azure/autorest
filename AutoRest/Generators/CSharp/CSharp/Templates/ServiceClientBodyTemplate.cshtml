@@ -74,7 +74,7 @@ public JsonSerializerSettings DeserializationSettings { get; private set; }
 }
 @EmptyLine
 
-@if(Model.IsCustomBaseUri)
+@if(!Model.IsCustomBaseUri)
 { 
 @:/// <summary>
 @:/// Initializes a new instance of the @Model.Name class.
