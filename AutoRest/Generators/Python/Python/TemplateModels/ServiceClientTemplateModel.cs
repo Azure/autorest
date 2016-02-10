@@ -192,5 +192,10 @@ namespace Microsoft.Rest.Generator.Python
 
             return docString;
         }
+
+        public virtual bool SupportsAzure
+        {
+            get { return false; }
+        }
     }
 }

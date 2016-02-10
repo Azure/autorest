@@ -9,26 +9,9 @@
 @Header("# ").TrimMultilineHeader()
 # --------------------------------------------------------------------------
 @EmptyLine
-from msrest.exceptions import (
-    ClientException,
-    SerializationError,
-    DeserializationError,
-    TokenExpiredError,
-    ClientRequestError,
-    AuthenticationError,
-    HttpOperationError,
-)
-@EmptyLine
 from .@(Model.Name.ToPythonCase()) import @(Model.Name), @(Model.Name)Configuration
 @EmptyLine
 __all__ = [
-    'ClientException',
-    'SerializationError',
-    'DeserializationError',
-    'TokenExpiredError',
-    'ClientRequestError',
-    'AuthenticationError',
-    'HttpOperationError',
     '@(Model.Name)',
     '@(Model.Name)Configuration'
 ]
