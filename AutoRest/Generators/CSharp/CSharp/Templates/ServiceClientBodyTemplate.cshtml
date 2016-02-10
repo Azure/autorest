@@ -137,7 +137,7 @@ foreach (var param in parameters)
 foreach (var param in parameters)
 {
 @:    this.@(param.Name) = @(param.Name.ToCamelCase());
-    @if (param.Type == PrimaryType.Credentials)
+    @if (param.Type is PrimaryType.Credentials)
     {
     @:if (this.Credentials != null)
     @:{
@@ -175,7 +175,7 @@ foreach (var param in parameters)
 foreach (var param in parameters)
 {
 @:    this.@(param.Name) = @(param.Name.ToCamelCase());
-    @if (param.Type == PrimaryType.Credentials)
+    @if (param.Type is PrimaryType.Credentials)
     {
     @:if (this.Credentials != null)
     @:{
@@ -219,7 +219,7 @@ foreach (var param in parameters)
 {
 @:    this.@(param.Name) = @(param.Name.ToCamelCase());
 
-@if (param.Type == PrimaryType.Credentials)
+@if (param.Type is PrimaryType.Credentials)
 {
     @:if (this.Credentials != null)
     @:{
@@ -266,7 +266,7 @@ foreach (var param in parameters)
 {
 @:    this.@(param.Name) = @(param.Name.ToCamelCase());
 
-@if (param.Type == PrimaryType.Credentials)
+@if (param.Type is PrimaryType.Credentials)
 {
     @:if (this.Credentials != null)
     @:{

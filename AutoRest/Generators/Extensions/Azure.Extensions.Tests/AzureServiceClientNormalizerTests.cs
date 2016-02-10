@@ -33,31 +33,31 @@ namespace Microsoft.Rest.Generator.Azure.Extensions.Tests
             resource.Properties.Add(new Property
             {
                 Name = "id",
-                Type = PrimaryType.String,
+                Type = new PrimaryType.String(),
                 IsRequired = true
             });
             resource.Properties.Add(new Property
             {
                  Name = "location",
-                 Type = PrimaryType.String,
+                 Type = new PrimaryType.String(),
                  IsRequired = true
             });
             resource.Properties.Add(new Property
             {
                Name = "name",
-               Type = PrimaryType.String,
+               Type = new PrimaryType.String(),
                IsRequired = true
             });
             resource.Properties.Add(new Property
             {
                 Name = "tags",
-                Type = new SequenceType { ElementType = PrimaryType.String },
+                Type = new SequenceType { ElementType = new PrimaryType.String() },
                 IsRequired = true
             }); 
             resource.Properties.Add(new Property
             {
                  Name = "type",
-                 Type = PrimaryType.String,
+                 Type = new PrimaryType.String(),
                  IsRequired = true
             });
             dogProperties.Name = "dogProperties";
@@ -72,7 +72,7 @@ namespace Microsoft.Rest.Generator.Azure.Extensions.Tests
             dog.Properties.Add(new Property
             {
                 Name = "pedigree",
-                Type = PrimaryType.Boolean,
+                Type = new PrimaryType.Boolean(),
                 IsRequired = true
             });
             getPet.ReturnType = new Response(dog, null);
@@ -113,44 +113,44 @@ namespace Microsoft.Rest.Generator.Azure.Extensions.Tests
             resource.Properties.Add(new Property
             {
                 Name = "id",
-                Type = PrimaryType.String,
+                Type = new PrimaryType.String(),
                 IsRequired = true
             });
             resource.Properties.Add(new Property
             {
                 Name = "location",
-                Type = PrimaryType.String,
+                Type = new PrimaryType.String(),
                 IsRequired = true
             });
             resource.Properties.Add(new Property
             {
                 Name = "name",
-                Type = PrimaryType.String,
+                Type = new PrimaryType.String(),
                 IsRequired = true
             });
             resource.Properties.Add(new Property
             {
                 Name = "tags",
-                Type = new SequenceType { ElementType = PrimaryType.String },
+                Type = new SequenceType { ElementType = new PrimaryType.String() },
                 IsRequired = true
             });
             resource.Properties.Add(new Property
             {
                 Name = "type",
-                Type = PrimaryType.String,
+                Type = new PrimaryType.String(),
                 IsRequired = true
             });
             dogProperties.Name = "dogProperties";
             dogProperties.Properties.Add(new Property
             {
                 Name = "id",
-                Type = PrimaryType.Long,
+                Type = new PrimaryType.Long(),
                 IsRequired = true
             });
             dogProperties.Properties.Add(new Property
             {
                 Name = "name",
-                Type = PrimaryType.String,
+                Type = new PrimaryType.String(),
                 IsRequired = true
             });
             dog.Name = "dog";
@@ -164,7 +164,7 @@ namespace Microsoft.Rest.Generator.Azure.Extensions.Tests
             dog.Properties.Add(new Property
             {
                 Name = "pedigree",
-                Type = PrimaryType.Boolean,
+                Type = new PrimaryType.Boolean(),
                 IsRequired = true
             });
             getPet.ReturnType = new Response(dog, null);
@@ -204,31 +204,31 @@ namespace Microsoft.Rest.Generator.Azure.Extensions.Tests
              resource.Properties.Add(new Property
             {
                Name = "id",
-               Type = PrimaryType.String,
+               Type = new PrimaryType.String(),
                IsRequired = true
             });
             resource.Properties.Add(new Property
             {
                  Name = "location",
-                 Type = PrimaryType.String,
+                 Type = new PrimaryType.String(),
                  IsRequired = true
             });
             resource.Properties.Add(new Property
             {
                Name = "name",
-               Type = PrimaryType.String,
+               Type = new PrimaryType.String(),
                IsRequired = true
             }); 
             resource.Properties.Add(new Property
             {
                 Name = "tags",
-                Type = new SequenceType { ElementType = PrimaryType.String },
+                Type = new SequenceType { ElementType = new PrimaryType.String() },
                 IsRequired = true
             }); 
             resource.Properties.Add(new Property
             {
                  Name = "type",
-                 Type = PrimaryType.String,
+                 Type = new PrimaryType.String(),
                  IsRequired = true
             });
             resource.Extensions[AzureExtensions.AzureResourceExtension] = null;
@@ -236,7 +236,7 @@ namespace Microsoft.Rest.Generator.Azure.Extensions.Tests
             resourceProperties.Properties.Add(new Property
             {
                 Name = "parent",
-                Type = PrimaryType.Long,
+                Type = new PrimaryType.Long(),
                 IsRequired = true
             });
 
@@ -265,31 +265,31 @@ namespace Microsoft.Rest.Generator.Azure.Extensions.Tests
             resource.Properties.Add(new Property
             {
                Name = "id",
-               Type = PrimaryType.String,
+               Type = new PrimaryType.String(),
                IsRequired = true
             });
             resource.Properties.Add(new Property
             {
                  Name = "location",
-                 Type = PrimaryType.String,
+                 Type = new PrimaryType.String(),
                  IsRequired = true
             });
             resource.Properties.Add(new Property
             {
                Name = "name",
-               Type = PrimaryType.String,
+               Type = new PrimaryType.String(),
                IsRequired = true
             }); 
             resource.Properties.Add(new Property
             {
                 Name = "tags",
-                Type = new SequenceType { ElementType = PrimaryType.String },
+                Type = new SequenceType { ElementType = new PrimaryType.String() },
                 IsRequired = true
             }); 
             resource.Properties.Add(new Property
             {
                  Name = "type",
-                 Type = PrimaryType.String,
+                 Type = new PrimaryType.String(),
                  IsRequired = true
             });
             resource.Extensions[AzureExtensions.AzureResourceExtension] = null;
@@ -297,7 +297,7 @@ namespace Microsoft.Rest.Generator.Azure.Extensions.Tests
             resourceProperties.Properties.Add(new Property
             {
                 Name = "parent",
-                Type = PrimaryType.Long,
+                Type = new PrimaryType.Long(),
                 IsRequired = true
             });
             dogProperties.Name = "dogProperties";
@@ -305,13 +305,13 @@ namespace Microsoft.Rest.Generator.Azure.Extensions.Tests
             dogProperties.Properties.Add(new Property
             {
                 Name = "id",
-                Type = PrimaryType.Long,
+                Type = new PrimaryType.Long(),
                 IsRequired = true
             });
             dogProperties.Properties.Add(new Property
             {
                 Name = "name",
-                Type = PrimaryType.String,
+                Type = new PrimaryType.String(),
                 IsRequired = true
             });
             dog.Name = "dog";
@@ -325,7 +325,7 @@ namespace Microsoft.Rest.Generator.Azure.Extensions.Tests
             dog.Properties.Add(new Property
             {
                 Name = "pedigree",
-                Type = PrimaryType.Boolean,
+                Type = new PrimaryType.Boolean(),
                 IsRequired = true
             });
             getPet.ReturnType = new Response(dog, null);

@@ -331,15 +331,15 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             SequenceType sequenceType = serializationType as SequenceType;
             DictionaryType dictionaryType = serializationType as DictionaryType;
-            if (serializationType == PrimaryType.Date ||
-                (sequenceType != null && sequenceType.ElementType == PrimaryType.Date) ||
-                (dictionaryType != null && dictionaryType.ValueType == PrimaryType.Date))
+            if (serializationType is PrimaryType.Date ||
+                (sequenceType != null && sequenceType.ElementType is PrimaryType.Date) ||
+                (dictionaryType != null && dictionaryType.ValueType is PrimaryType.Date))
             {
                 return "new DateJsonConverter()";
             }
-            else if (serializationType == PrimaryType.DateTimeRfc1123 ||
-                     (sequenceType != null && sequenceType.ElementType == PrimaryType.DateTimeRfc1123) ||
-                     (dictionaryType != null && dictionaryType.ValueType == PrimaryType.DateTimeRfc1123))
+            else if (serializationType is PrimaryType.DateTimeRfc1123 ||
+                     (sequenceType != null && sequenceType.ElementType is PrimaryType.DateTimeRfc1123) ||
+                     (dictionaryType != null && dictionaryType.ValueType is PrimaryType.DateTimeRfc1123))
             {
                 return "new DateTimeRfc1123JsonConverter()";
             }
@@ -355,10 +355,10 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             SequenceType sequenceType = deserializationType as SequenceType;
             DictionaryType dictionaryType = deserializationType as DictionaryType;
-            if (deserializationType == PrimaryType.Date ||
-                (sequenceType != null && sequenceType.ElementType == PrimaryType.Date) ||
-                (dictionaryType != null && dictionaryType.ValueType == PrimaryType.Date))
-            if (deserializationType == PrimaryType.Date)
+            if (deserializationType is PrimaryType.Date ||
+                (sequenceType != null && sequenceType.ElementType is PrimaryType.Date) ||
+                (dictionaryType != null && dictionaryType.ValueType is PrimaryType.Date))
+            if (deserializationType is PrimaryType.Date)
             {
                 return "new DateJsonConverter()";
             }

@@ -8,110 +8,129 @@ namespace Microsoft.Rest.Generator.ClientModel
     /// <summary>
     /// Defines known model type.
     /// </summary>
-    public class PrimaryType : IType
+    public abstract class PrimaryType : IType
     {
         /// <summary>
-        /// Predefined dictionary of known types.
+        /// Defines object model type.
         /// </summary>
-        private static Dictionary<SupportedPrimaryType, PrimaryType> KnownTypes;
-
-        /// <summary>
-        /// Initializes static members of PrimaryType class.
-        /// </summary>
-        static PrimaryType()
+        public class Object : PrimaryType
         {
-            Reset();
-        }
 
-        public static void Reset()
-        {
-            KnownTypes = new Dictionary<SupportedPrimaryType, PrimaryType>();
-            foreach (SupportedPrimaryType knownType in System.Enum.GetValues(typeof (SupportedPrimaryType)))
-            {
-                var name = System.Enum.GetName(typeof (SupportedPrimaryType), knownType);
-                KnownTypes[knownType] = new PrimaryType {Name = name, Type = knownType};
-            }
         }
 
         /// <summary>
-        /// Gets or sets the model type.
+        /// Defines int model type.
         /// </summary>
-        private SupportedPrimaryType Type { get; set; }
+        public class Int : PrimaryType
+        {
+
+        }
+
+        /// <summary>
+        /// Defines long model type.
+        /// </summary>
+        public class Long : PrimaryType
+        {
+
+        }
+
+        /// <summary>
+        /// Defines double model type.
+        /// </summary>
+        public class Double : PrimaryType
+        {
+
+        }
+
+        /// <summary>
+        /// Defines decimal model type.
+        /// </summary>
+        public class Decimal : PrimaryType
+        {
+
+        }
+
+        /// <summary>
+        /// Defines string model type.
+        /// </summary>
+        public class String : PrimaryType
+        {
+
+        }
+
+        /// <summary>
+        /// Defines byte array model type.
+        /// </summary>
+        public class ByteArray : PrimaryType
+        {
+
+        }
+
+        /// <summary>
+        /// Defines time span model type.
+        /// </summary>
+        public class TimeSpan : PrimaryType
+        {
+
+        }
+
+        /// <summary>
+        /// Defines date model type.
+        /// </summary>
+        public class Date : PrimaryType
+        {
+
+        }
+
+        /// <summary>
+        /// Defines date time model type.
+        /// </summary>
+        public class DateTime : PrimaryType
+        {
+
+        }
+
+        /// <summary>
+        /// Defines date time RFC1123 formatted model type.
+        /// </summary>
+        public class DateTimeRfc1123 : PrimaryType
+        {
+
+        }
+
+        /// <summary>
+        /// Defines stream model type.
+        /// </summary>
+        public class Stream : PrimaryType
+        {
+
+        }
+
+        /// <summary>
+        /// Defines boolean model type.
+        /// </summary>
+        public class Boolean : PrimaryType
+        {
+
+        }
+
+        /// <summary>
+        /// Defines credentials model type.
+        /// </summary>
+        public class Credentials : PrimaryType
+        {
+
+        }
+
+        protected PrimaryType()
+        {
+            Name = this.GetType().Name;
+        }
 
         /// <summary>
         /// Gets or sets the model type name on the wire.
         /// </summary>
         public string SerializedName { get; set; }
-
-        public static PrimaryType Object
-        {
-            get { return KnownTypes[SupportedPrimaryType.Object]; }
-        }
-
-        public static PrimaryType Int
-        {
-            get { return KnownTypes[SupportedPrimaryType.Int]; }
-        }
-
-        public static PrimaryType Long
-        {
-            get { return KnownTypes[SupportedPrimaryType.Long]; }
-        }
-
-        public static PrimaryType Double
-        {
-            get { return KnownTypes[SupportedPrimaryType.Double]; }
-        }
-
-        public static PrimaryType Decimal
-        {
-            get { return KnownTypes[SupportedPrimaryType.Decimal]; }
-        }
-
-        public static PrimaryType String
-        {
-            get { return KnownTypes[SupportedPrimaryType.String]; }
-        }
-
-        public static PrimaryType Stream
-        {
-            get { return KnownTypes[SupportedPrimaryType.Stream]; }
-        }
-
-        public static PrimaryType ByteArray
-        {
-            get { return KnownTypes[SupportedPrimaryType.ByteArray]; }
-        }
-
-        public static PrimaryType Date
-        {
-            get { return KnownTypes[SupportedPrimaryType.Date]; }
-        }
-
-        public static PrimaryType DateTime
-        {
-            get { return KnownTypes[SupportedPrimaryType.DateTime]; }
-        }
-
-        public static PrimaryType DateTimeRfc1123
-        {
-            get { return KnownTypes[SupportedPrimaryType.DateTimeRfc1123]; }
-        }
-
-        public static PrimaryType TimeSpan
-        {
-            get { return KnownTypes[SupportedPrimaryType.TimeSpan]; }
-        }
-
-        public static PrimaryType Boolean
-        {
-            get { return KnownTypes[SupportedPrimaryType.Boolean]; }
-        }
-
-        public static PrimaryType Credentials
-        {
-            get { return KnownTypes[SupportedPrimaryType.Credentials]; }
-        }
 
         /// <summary>
         /// Gets or sets the model type name.
@@ -129,7 +148,6 @@ namespace Microsoft.Rest.Generator.ClientModel
             return Name;
         }
 
-
         /// <summary>
         /// Serves as a hash function based on Type.
         /// </summary>
@@ -138,7 +156,7 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// </returns>
         public override int GetHashCode()
         {
-            return Type.GetHashCode();
+            return Name.GetHashCode();
         }
 
         /// <summary>
@@ -152,68 +170,10 @@ namespace Microsoft.Rest.Generator.ClientModel
 
             if (knownType != null)
             {
-                return knownType.Type == Type;
+                return knownType.Name == Name;
             }
 
             return false;
-        }
-
-        /// <summary>
-        /// Determines whether the specified object is equal to this object based on Name and Type.
-        /// </summary>
-        /// <param name="leftSide">Left side type</param>
-        /// <param name="rightSide">Right side type</param>
-        /// <returns></returns>
-        public static bool operator ==(IType leftSide, PrimaryType rightSide)
-        {
-            // If both are null, or both are same instance, return true.
-            if (System.Object.ReferenceEquals(leftSide, rightSide))
-            {
-                return true;
-            }
-
-            // If one is null, but not both, return false.
-            if (((object)leftSide == null) || ((object)rightSide == null))
-            {
-                return false;
-            }
-
-            // Return true if the fields match:
-            return leftSide.Equals(rightSide);
-        }
-
-        /// <summary>
-        /// Determines whether the specified object is not equal to this object based on Name and Type.
-        /// </summary>
-        /// <param name="leftSide">Left side type</param>
-        /// <param name="rightSide">Right side type</param>
-        /// <returns></returns>
-        public static bool operator !=(IType leftSide, PrimaryType rightSide)
-        {
-            return !(leftSide == rightSide);
-        }
-
-
-        /// <summary>
-        /// Available known model types.
-        /// </summary>
-        private enum SupportedPrimaryType
-        {
-            None = 0,
-            Object,
-            Int,
-            Long,
-            Double,
-            Decimal,
-            String,
-            Stream,
-            ByteArray,
-            Date,
-            DateTime,
-            DateTimeRfc1123,
-            TimeSpan,
-            Boolean,
-            Credentials
         }
     }
 }

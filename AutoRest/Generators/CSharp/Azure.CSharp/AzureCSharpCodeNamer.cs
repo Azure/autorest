@@ -60,7 +60,7 @@ namespace Microsoft.Rest.Generator.CSharp
 
         protected override IType NormalizePrimaryType(PrimaryType primaryType)
         {
-            if (primaryType != null && primaryType == PrimaryType.Credentials)
+            if (primaryType != null && primaryType is PrimaryType.Credentials)
             {
                 primaryType.Name = "ServiceClientCredentials";
                 return primaryType;

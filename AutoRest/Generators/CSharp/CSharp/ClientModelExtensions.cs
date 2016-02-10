@@ -138,10 +138,10 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
             EnumType enumType = sequence.ElementType as EnumType;
             if (enumType != null && enumType.ModelAsString)
             {
-                primaryType = PrimaryType.String;
+                primaryType = new PrimaryType.String();
             }
 
-            if (primaryType != PrimaryType.String)
+            if (!(primaryType is PrimaryType.String))
             {
                 throw new InvalidOperationException(
                     string.Format(CultureInfo.InvariantCulture, 
@@ -186,16 +186,16 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
         /// <returns></returns>
         public static string ToString(this IType type, string clientReference, string reference)
         {
-            if (type == null || type.Name == PrimaryType.String.Name)
+            if (type == null || type is PrimaryType.String)
             {
                 return reference;
             }
             string serializationSettings;
-            if (type == PrimaryType.Date)
+            if (type is PrimaryType.Date)
             {
                 serializationSettings = "new DateJsonConverter()";
             }
-            else if (type == PrimaryType.DateTimeRfc1123)
+            else if (type is PrimaryType.DateTimeRfc1123)
             {
                 serializationSettings = "new DateTimeRfc1123JsonConverter()";
             }
@@ -217,9 +217,9 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
         /// <returns>True if the type maps to a C# value type, otherwise false</returns>
         public static bool IsValueType(this PrimaryType primaryType)
         {
-            return primaryType == PrimaryType.Boolean || primaryType == PrimaryType.DateTime || primaryType == PrimaryType.Date
-                || primaryType == PrimaryType.Double || primaryType == PrimaryType.Int || primaryType == PrimaryType.Long 
-                || primaryType == PrimaryType.TimeSpan || primaryType == PrimaryType.DateTimeRfc1123;
+            return primaryType is PrimaryType.Boolean || primaryType is PrimaryType.DateTime || primaryType is PrimaryType.Date
+                || primaryType is PrimaryType.Double || primaryType is PrimaryType.Int || primaryType is PrimaryType.Long 
+                || primaryType is PrimaryType.TimeSpan || primaryType is PrimaryType.DateTimeRfc1123;
         }
 
         public static string CheckNull(string valueReference, string executionBlock)

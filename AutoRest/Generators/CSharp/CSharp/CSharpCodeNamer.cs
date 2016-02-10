@@ -117,59 +117,59 @@ namespace Microsoft.Rest.Generator.CSharp
                 return null;
             }
 
-            if (primaryType == PrimaryType.Boolean)
+            if (primaryType is PrimaryType.Boolean)
             {
                 primaryType.Name = "bool?";
             }
-            else if (primaryType == PrimaryType.ByteArray)
+            else if (primaryType is PrimaryType.ByteArray)
             {
                 primaryType.Name = "byte[]";
             }
-            else if (primaryType == PrimaryType.Date)
+            else if (primaryType is PrimaryType.Date)
             {
                 primaryType.Name = "DateTime?";
             }
-            else if (primaryType == PrimaryType.DateTime)
+            else if (primaryType is PrimaryType.DateTime)
             {
                 primaryType.Name = "DateTime?";
             }
-            else if (primaryType == PrimaryType.DateTimeRfc1123)
+            else if (primaryType is PrimaryType.DateTimeRfc1123)
             {
                 primaryType.Name = "DateTime?";
             }
-            else if (primaryType == PrimaryType.Double)
+            else if (primaryType is PrimaryType.Double)
             {
                 primaryType.Name = "double?";
             }
-            else if (primaryType == PrimaryType.Decimal)
+            else if (primaryType is PrimaryType.Decimal)
             {
                 primaryType.Name = "decimal?";
             }
-            else if (primaryType == PrimaryType.Int)
+            else if (primaryType is PrimaryType.Int)
             {
                 primaryType.Name = "int?";
             }
-            else if (primaryType == PrimaryType.Long)
+            else if (primaryType is PrimaryType.Long)
             {
                 primaryType.Name = "long?";
             }
-            else if (primaryType == PrimaryType.Stream)
+            else if (primaryType is PrimaryType.Stream)
             {
                 primaryType.Name = "System.IO.Stream";
             }
-            else if (primaryType == PrimaryType.String)
+            else if (primaryType is PrimaryType.String)
             {
                 primaryType.Name = "string";
             }
-            else if (primaryType == PrimaryType.TimeSpan)
+            else if (primaryType is PrimaryType.TimeSpan)
             {
                 primaryType.Name = "TimeSpan?";
             }
-            else if (primaryType == PrimaryType.Object)
+            else if (primaryType is PrimaryType.Object)
             {
                 primaryType.Name = "object";
             }
-            else if (primaryType == PrimaryType.Credentials)
+            else if (primaryType is PrimaryType.Credentials)
             {
                 primaryType.Name = "ServiceClientCredentials";
             }
@@ -182,7 +182,7 @@ namespace Microsoft.Rest.Generator.CSharp
             var enumType = type as EnumType;
             if (enumType != null && enumType.ModelAsString)
             {
-                return PrimaryType.String;
+                return new PrimaryType.String();
             }
             return NormalizeTypeDeclaration(type);
         }
@@ -234,11 +234,11 @@ namespace Microsoft.Rest.Generator.CSharp
 
             if (defaultValue != null)
             {
-                if (type == PrimaryType.String)
+                if (type is PrimaryType.String)
                 {
                     return CodeNamer.QuoteValue(defaultValue);
                 }
-                else if (type == PrimaryType.Boolean)
+                else if (type is PrimaryType.Boolean)
                 {
                     return defaultValue.ToLowerInvariant();
                 }
@@ -248,11 +248,11 @@ namespace Microsoft.Rest.Generator.CSharp
                 }
                 else
                 {
-                    if (type == PrimaryType.Date ||
-                        type == PrimaryType.DateTime ||
-                        type == PrimaryType.DateTimeRfc1123 ||
-                        type == PrimaryType.TimeSpan ||
-                        type == PrimaryType.ByteArray)
+                    if (type is PrimaryType.Date ||
+                        type is PrimaryType.DateTime ||
+                        type is PrimaryType.DateTimeRfc1123 ||
+                        type is PrimaryType.TimeSpan ||
+                        type is PrimaryType.ByteArray)
                     {
 
                         return "SafeJsonConvert.DeserializeObject<" + type.Name.TrimEnd('?') +

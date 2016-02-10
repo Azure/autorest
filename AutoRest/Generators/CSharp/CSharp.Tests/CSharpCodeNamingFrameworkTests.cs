@@ -93,7 +93,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             childObject.Properties.Add(new Property
             {
                 Name = "childProperty",
-                Type = PrimaryType.String
+                Type = new PrimaryType.String()
             });
 
             var customObjectType = new CompositeType();
@@ -275,7 +275,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             customObjectType.Properties.Add(new Property
             {
                 Name = "B",
-                Type = PrimaryType.String
+                Type = new PrimaryType.String()
             });
             var method = new Method
             {
@@ -285,8 +285,8 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             };
             var outputParameter = new Parameter { Name = "body", Type = customObjectType };
             serviceClient.Methods.Add(method);
-            method.Parameters.Add(new Parameter { Name = "paramA", Type = PrimaryType.Boolean, SerializedName = "paramA" });
-            method.Parameters.Add(new Parameter { Name = "paramB", Type = PrimaryType.String, SerializedName = "paramB" });
+            method.Parameters.Add(new Parameter { Name = "paramA", Type = new PrimaryType.Boolean(), SerializedName = "paramA" });
+            method.Parameters.Add(new Parameter { Name = "paramB", Type = new PrimaryType.String(), SerializedName = "paramB" });
             method.InputParameterTransformation.Add(new ParameterTransformation
             {
                 OutputParameter = outputParameter
@@ -332,7 +332,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             customObjectType.Properties.Add(new Property
             {
                 Name = "B",
-                Type = PrimaryType.String
+                Type = new PrimaryType.String()
             });
             var method = new Method
             {
@@ -345,7 +345,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             method.Parameters.Add(inputParameter);
             method.InputParameterTransformation.Add(new ParameterTransformation
             {
-                OutputParameter = new Parameter { Name = "paramA", Type = PrimaryType.String, SerializedName = "paramA" }
+                OutputParameter = new Parameter { Name = "paramA", Type = new PrimaryType.String(), SerializedName = "paramA" }
             });
             method.InputParameterTransformation.Last().ParameterMappings.Add(new ParameterMapping
             {
@@ -354,7 +354,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             });
             method.InputParameterTransformation.Add(new ParameterTransformation
             {
-                OutputParameter = new Parameter { Name = "paramB", Type = PrimaryType.String, SerializedName = "paramB" }
+                OutputParameter = new Parameter { Name = "paramB", Type = new PrimaryType.String(), SerializedName = "paramB" }
             });
             method.InputParameterTransformation.Last().ParameterMappings.Add(new ParameterMapping
             {
@@ -390,12 +390,12 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             flattenedPropertyType.Properties.Add(new Property
             {
                 Name = "Sku",
-                Type = PrimaryType.String
+                Type = new PrimaryType.String()
             });
             flattenedPropertyType.Properties.Add(new Property
             {
                 Name = "ProvState",
-                Type = PrimaryType.String
+                Type = new PrimaryType.String()
             });
             flattenedPropertyType.Properties.Add(new Property
             {
@@ -408,12 +408,12 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             customObjectPropertyType.Properties.Add(new Property
             {
                 Name = "Sku",
-                Type = PrimaryType.String
+                Type = new PrimaryType.String()
             });
             customObjectPropertyType.Properties.Add(new Property
             {
                 Name = "ProvState",
-                Type = PrimaryType.String
+                Type = new PrimaryType.String()
             });
 
             var customObjectType = new CompositeType();

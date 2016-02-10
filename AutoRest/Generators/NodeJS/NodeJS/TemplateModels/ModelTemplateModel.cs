@@ -29,7 +29,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                         Name = source.PolymorphicDiscriminator,
                         SerializedName = source.PolymorphicDiscriminator,
                         Documentation = "Polymorhpic Discriminator",
-                        Type = PrimaryType.String
+                        Type = new PrimaryType.String()
                     };
                     source.Properties.Add(polymorphicProperty);
                 }
@@ -200,9 +200,9 @@ namespace Microsoft.Rest.Generator.NodeJS
         public bool ContainsDurationProperty()
         {
             Property prop = ComposedProperties.FirstOrDefault(p =>
-                (p.Type is PrimaryType && (p.Type as PrimaryType) == PrimaryType.TimeSpan) ||
-                (p.Type is SequenceType && (p.Type as SequenceType).ElementType == PrimaryType.TimeSpan) ||
-                (p.Type is DictionaryType && (p.Type as DictionaryType).ValueType == PrimaryType.TimeSpan));
+                (p.Type is PrimaryType && (p.Type as PrimaryType) is PrimaryType.TimeSpan) ||
+                (p.Type is SequenceType && (p.Type as SequenceType).ElementType is PrimaryType.TimeSpan) ||
+                (p.Type is DictionaryType && (p.Type as DictionaryType).ValueType is PrimaryType.TimeSpan));
             return prop != null;
         }
 
@@ -294,7 +294,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             {
                 throw new ArgumentNullException("property");
             }
-            string typeName = PrimaryType.Object.Name;
+            string typeName = "object";
             if (property.Type is PrimaryType)
             {
                 typeName = property.Type.Name;
@@ -305,7 +305,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
             else if (property.Type is EnumType)
             {
-                typeName = PrimaryType.String.Name;
+                typeName = "string";
             }
 
             return typeName.ToLower(CultureInfo.InvariantCulture);

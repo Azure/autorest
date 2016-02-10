@@ -171,7 +171,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             var enumType = type as EnumType;
             if (enumType != null && enumType.ModelAsString)
             {
-                type = PrimaryType.String;
+                type = new PrimaryType.String();
             }
 
             // Using Any instead of Contains since object hash is bound to a property which is modified during normalization
@@ -226,7 +226,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                         parameter.Location == ParameterLocation.Query &&
                         parameter.Type is CompositeType)
                     {
-                        parameter.Type = PrimaryType.String;
+                        parameter.Type = new PrimaryType.String();
                     }
                 }
             }
@@ -269,55 +269,55 @@ namespace Microsoft.Rest.Generator.NodeJS
 
         private static IType NormalizePrimaryType(PrimaryType primaryType)
         {
-            if (primaryType == PrimaryType.Boolean)
+            if (primaryType is PrimaryType.Boolean)
             {
                 primaryType.Name = "Boolean";
             }
-            else if (primaryType == PrimaryType.ByteArray)
+            else if (primaryType is PrimaryType.ByteArray)
             {
                 primaryType.Name = "Buffer";
             }
-            else if (primaryType == PrimaryType.Date)
+            else if (primaryType is PrimaryType.Date)
             {
                 primaryType.Name = "Date";
             }
-            else if (primaryType == PrimaryType.DateTime)
+            else if (primaryType is PrimaryType.DateTime)
             {
                 primaryType.Name = "Date";
             }
-            else if (primaryType == PrimaryType.DateTimeRfc1123)
+            else if (primaryType is PrimaryType.DateTimeRfc1123)
             {
                 primaryType.Name = "Date";
             }
-            else if (primaryType == PrimaryType.Double)
+            else if (primaryType is PrimaryType.Double)
             {
                 primaryType.Name = "Number";
             }
-            else if (primaryType == PrimaryType.Decimal)
+            else if (primaryType is PrimaryType.Decimal)
             {
                 primaryType.Name = "Number";
             }
-            else if (primaryType == PrimaryType.Int)
+            else if (primaryType is PrimaryType.Int)
             {
                 primaryType.Name = "Number";
             }
-            else if (primaryType == PrimaryType.Long)
+            else if (primaryType is PrimaryType.Long)
             {
                 primaryType.Name = "Number";
             }
-            else if (primaryType == PrimaryType.Stream)
+            else if (primaryType is PrimaryType.Stream)
             {
                 primaryType.Name = "Object";
             }
-            else if (primaryType == PrimaryType.String)
+            else if (primaryType is PrimaryType.String)
             {
                 primaryType.Name = "String";
             }
-            else if (primaryType == PrimaryType.TimeSpan)
+            else if (primaryType is PrimaryType.TimeSpan)
             {
                 primaryType.Name = "moment.duration"; 
             }
-            else if (primaryType == PrimaryType.Object)
+            else if (primaryType is PrimaryType.Object)
             {
                 primaryType.Name = "Object";
             }
@@ -348,27 +348,27 @@ namespace Microsoft.Rest.Generator.NodeJS
 
             if (defaultValue != null)
             {
-                if (type == PrimaryType.String)
+                if (type is PrimaryType.String)
                 {
                     return CodeNamer.QuoteValue(defaultValue, quoteChar: "'");
                 }
-                else if (type == PrimaryType.Boolean)
+                else if (type is PrimaryType.Boolean)
                 {
                     return defaultValue.ToLowerInvariant();
                 }
                 else
                 {
-                    if (type == PrimaryType.Date ||
-                        type == PrimaryType.DateTime ||
-                        type == PrimaryType.DateTimeRfc1123)
+                    if (type is PrimaryType.Date ||
+                        type is PrimaryType.DateTime ||
+                        type is PrimaryType.DateTimeRfc1123)
                     {
                         return "new Date('" + defaultValue + "')";
                     }
-                    else if (type == PrimaryType.TimeSpan)
+                    else if (type is PrimaryType.TimeSpan)
                     {
                         return "moment.duration('" + defaultValue + "')";
                     }
-                    else if (type == PrimaryType.ByteArray)
+                    else if (type is PrimaryType.ByteArray)
                     {
                         return "new Buffer('" + defaultValue + "')";
                     }

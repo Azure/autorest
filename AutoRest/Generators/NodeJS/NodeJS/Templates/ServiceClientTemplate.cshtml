@@ -76,7 +76,7 @@ function @(Model.Name)(@(Model.RequiredConstructorParameters), options) {
   @EmptyLine
   if (!options) options = {};
   @EmptyLine
-  @(Model.Name)['super_'].call(this, @(requiredParameters.Any(p => p.Type == PrimaryType.Credentials) ? "credentials" : "null"), options);
+  @(Model.Name)['super_'].call(this, @(requiredParameters.Any(p => p.Type is PrimaryType.Credentials) ? "credentials" : "null"), options);
   this.baseUri = baseUri;
   if (!this.baseUri) {
     this.baseUri = '@Model.BaseUrl';

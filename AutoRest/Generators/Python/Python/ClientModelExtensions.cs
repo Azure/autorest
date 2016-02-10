@@ -36,10 +36,13 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
             EnumType enumType = sequence.ElementType as EnumType;
             if (enumType != null)
             {
-                primaryType = PrimaryType.String;
+                primaryType = new PrimaryType.String
+                {
+                    Name = "str"
+                };
             }
 
-            if (primaryType != PrimaryType.String)
+            if (!(primaryType is PrimaryType.String))
             {
                 throw new InvalidOperationException(
                     string.Format(CultureInfo.InvariantCulture,
@@ -123,22 +126,22 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
 
             var known = type as PrimaryType;
 
-            if (known == PrimaryType.Date)
+            if (known is PrimaryType.Date)
             {
                 return "date";
             }
 
-            if (known == PrimaryType.DateTimeRfc1123)
+            if (known is PrimaryType.DateTimeRfc1123)
             {
                 return "rfc-1123";
             }
 
-            if (known == PrimaryType.DateTime)
+            if (known is PrimaryType.DateTime)
             {
                 return "iso-8601"; 
             }
 
-            if (known == PrimaryType.TimeSpan)
+            if (known is PrimaryType.TimeSpan)
             {
                 return "duration";
             }
@@ -182,9 +185,9 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
             }
 
             Property prop = type.Properties.FirstOrDefault(p =>
-                p.Type == PrimaryType.Decimal ||
-                (p.Type is SequenceType && (p.Type as SequenceType).ElementType == PrimaryType.Decimal) ||
-                (p.Type is DictionaryType && (p.Type as DictionaryType).ValueType == PrimaryType.Decimal));
+                p.Type is PrimaryType.Decimal ||
+                (p.Type is SequenceType && (p.Type as SequenceType).ElementType is PrimaryType.Decimal) ||
+                (p.Type is DictionaryType && (p.Type as DictionaryType).ValueType is PrimaryType.Decimal));
 
             return prop != null;
         }

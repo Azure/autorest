@@ -68,7 +68,7 @@ namespace Microsoft.Rest.Generator.Java
                 serviceClient.Properties.Add(new Property
                 {
                     Name = "credentials",
-                    Type = PrimaryType.Credentials,
+                    Type = new PrimaryType.Credentials(),
                     IsRequired = true,
                     Documentation = "Subscription credentials which uniquely identify client subscription."
                 });

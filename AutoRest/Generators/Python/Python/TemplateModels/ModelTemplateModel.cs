@@ -29,8 +29,8 @@ namespace Microsoft.Rest.Generator.Python
                         IsRequired = true,
                         Name = source.PolymorphicDiscriminator,
                         SerializedName = source.PolymorphicDiscriminator,
-                        Documentation = "Polymorhpic Discriminator",
-                        Type = PrimaryType.String
+                        Documentation = "Polymorphic Discriminator",
+                        Type = new PrimaryType.String { Name = "str" }
                     };
                     source.Properties.Add(polymorphicProperty);
                 }
@@ -203,17 +203,17 @@ namespace Microsoft.Rest.Generator.Python
 
         private static string GetPythonSerializationType(IType type)
         {
-            Dictionary<IType, string> typeNameMapping = new Dictionary<IType, string>()
+            Dictionary<Type, string> typeNameMapping = new Dictionary<Type, string>()
                         {
-                            { PrimaryType.DateTime, "iso-8601" },
-                            { PrimaryType.DateTimeRfc1123, "rfc-1123" },
-                            { PrimaryType.TimeSpan, "duration" }
+                            { typeof(PrimaryType.DateTime), "iso-8601" },
+                            { typeof(PrimaryType.DateTimeRfc1123), "rfc-1123" },
+                            { typeof(PrimaryType.TimeSpan), "duration" }
                         };
             if (type is PrimaryType)
             {
-                if (typeNameMapping.ContainsKey(type))
+                if (typeNameMapping.ContainsKey(type.GetType()))
                 {
-                    return typeNameMapping[type];
+                    return typeNameMapping[type.GetType()];
                 }
                 else 
                 {
@@ -226,9 +226,9 @@ namespace Microsoft.Rest.Generator.Python
             {
                 IType innerType = sequenceType.ElementType;
                 string innerTypeName;
-                if (typeNameMapping.ContainsKey(innerType))
+                if (typeNameMapping.ContainsKey(innerType.GetType()))
                 {
-                    innerTypeName = typeNameMapping[innerType];
+                    innerTypeName = typeNameMapping[innerType.GetType()];
                 }
                 else
                 {
@@ -242,9 +242,9 @@ namespace Microsoft.Rest.Generator.Python
             {
                 IType innerType = dictType.ValueType;
                 string innerTypeName;
-                if (typeNameMapping.ContainsKey(innerType))
+                if (typeNameMapping.ContainsKey(innerType.GetType()))
                 {
-                    innerTypeName = typeNameMapping[innerType];
+                    innerTypeName = typeNameMapping[innerType.GetType()];
                 }
                 else
                 {
@@ -300,7 +300,7 @@ namespace Microsoft.Rest.Generator.Python
             }
 
             IType type = property.Type;
-            string result = PrimaryType.Object.Name;
+            string result = "object";
 
             if (type is PrimaryType)
             {
@@ -312,7 +312,7 @@ namespace Microsoft.Rest.Generator.Python
             }
             else if (type is EnumType)
             {
-                result = PrimaryType.String.Name;
+                result = "str";
             }
             else if (type is DictionaryType)
             {

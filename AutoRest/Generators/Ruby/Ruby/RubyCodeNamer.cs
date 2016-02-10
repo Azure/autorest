@@ -257,52 +257,52 @@ namespace Microsoft.Rest.Generator.Ruby
         /// <returns>Normalized primary type.</returns>
         private IType NormalizePrimaryType(PrimaryType primaryType)
         {
-            if (primaryType == PrimaryType.Boolean)
+            if (primaryType is PrimaryType.Boolean)
             {
                 primaryType.Name = "Boolean";
             }
-            else if (primaryType == PrimaryType.ByteArray)
+            else if (primaryType is PrimaryType.ByteArray)
             {
                 primaryType.Name = "Array";
             }
-            else if (primaryType == PrimaryType.DateTime)
+            else if (primaryType is PrimaryType.DateTime)
             {
                 primaryType.Name = "DateTime";
             }
-            else if (primaryType == PrimaryType.DateTimeRfc1123)
+            else if (primaryType is PrimaryType.DateTimeRfc1123)
             {
                 primaryType.Name = "DateTime";
             }
-            else if (primaryType == PrimaryType.Double)
+            else if (primaryType is PrimaryType.Double)
             {
                 primaryType.Name = "Float";
             }
-            else if (primaryType == PrimaryType.Decimal)
+            else if (primaryType is PrimaryType.Decimal)
             {
                 primaryType.Name = "Float";
             }
-            else if (primaryType == PrimaryType.Int)
+            else if (primaryType is PrimaryType.Int)
             {
                 primaryType.Name = "Number";
             }
-            else if (primaryType == PrimaryType.Long)
+            else if (primaryType is PrimaryType.Long)
             {
                 primaryType.Name = "Bignum";
             }
-            else if (primaryType == PrimaryType.Stream)
+            else if (primaryType is PrimaryType.Stream)
             {
                 // TODO: Ruby doesn't supports streams.
                 primaryType.Name = "System.IO.Stream";
             }
-            else if (primaryType == PrimaryType.String)
+            else if (primaryType is PrimaryType.String)
             {
                 primaryType.Name = "String";
             }
-            else if (primaryType == PrimaryType.TimeSpan)
+            else if (primaryType is PrimaryType.TimeSpan)
             {
                 primaryType.Name = "Duration";
             }
-            else if (primaryType == PrimaryType.Object)
+            else if (primaryType is PrimaryType.Object)
             {
                 primaryType.Name = "Object";
             }
@@ -343,25 +343,25 @@ namespace Microsoft.Rest.Generator.Ruby
 
             if (defaultValue != null)
             {
-                if (type == PrimaryType.String)
+                if (type is PrimaryType.String)
                 {
                     return CodeNamer.QuoteValue(defaultValue, quoteChar: "'");
                 }
-                else if (type == PrimaryType.Boolean)
+                else if (type is PrimaryType.Boolean)
                 {
                     return defaultValue.ToLowerInvariant();
                 }
                 else
                 {
-                    if (type == PrimaryType.Date ||
-                        type == PrimaryType.DateTime ||
-                        type == PrimaryType.DateTimeRfc1123 ||
-                        type == PrimaryType.TimeSpan)
+                    if (type is PrimaryType.Date ||
+                        type is PrimaryType.DateTime ||
+                        type is PrimaryType.DateTimeRfc1123 ||
+                        type is PrimaryType.TimeSpan)
                     {
                         return "Date.parse('" + defaultValue + "')";
                     }
 
-                    if (type == PrimaryType.ByteArray)
+                    if (type is PrimaryType.ByteArray)
                     {
                         return "'" + defaultValue + "'.bytes.to_a";
                     }

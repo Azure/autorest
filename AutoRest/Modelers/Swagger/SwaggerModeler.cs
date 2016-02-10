@@ -60,7 +60,6 @@ namespace Microsoft.Rest.Modeler.Swagger
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Maintainability", "CA1506:AvoidExcessiveClassCoupling")]
         public override ServiceClient Build()
         {
-            PrimaryType.Reset();
             Logger.LogInfo(Resources.ParsingSwagger);
             ServiceDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
             Logger.LogInfo(Resources.GeneratingClient);

@@ -97,7 +97,7 @@ namespace Microsoft.Rest.Generator.Java
 
         private bool isSpecial(IType type)
         {
-            if (type == PrimaryType.DateTime || type == PrimaryType.Date || type == PrimaryType.DateTimeRfc1123 || type == PrimaryType.ByteArray || type is CompositeType)
+            if (type is PrimaryType.DateTime || type is PrimaryType.Date || type is PrimaryType.DateTimeRfc1123 || type is PrimaryType.ByteArray || type is CompositeType)
             {
                 return true;
             }

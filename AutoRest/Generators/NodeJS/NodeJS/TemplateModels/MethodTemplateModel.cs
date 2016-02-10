@@ -82,7 +82,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                 Name = "customHeaders",
                 IsRequired = false,
                 Documentation = "Headers that will be added to the request",
-                Type = PrimaryType.Object,
+                Type = new PrimaryType.Object(),
                 SerializedName = "customHeaders"
             };
             ((CompositeType)optionsParmeter.Type).Properties.Add(customHeaders);
@@ -167,7 +167,7 @@ namespace Microsoft.Rest.Generator.NodeJS
 
                 // For date/datetime parameters, use a union type to reflect that they can be passed as a JS Date or a string.
                 var type = parameter.Type;
-                if (type == PrimaryType.Date || type == PrimaryType.DateTime)
+                if (type is PrimaryType.Date || type is PrimaryType.DateTime)
                     declarations.Append("Date|string");
                 else declarations.Append(type.TSType(false));
 
@@ -393,7 +393,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             {
                 throw new ArgumentNullException("parameter");
             }
-            string typeName = PrimaryType.Object.Name;
+            string typeName = "object";
             if (parameter.Type is PrimaryType)
             {
                 typeName = parameter.Type.Name;
@@ -404,7 +404,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             }
             else if (parameter.Type is EnumType)
             {
-                typeName = PrimaryType.String.Name;
+                typeName = "string";
             }
 
             return typeName.ToLower(CultureInfo.InvariantCulture);
@@ -724,11 +724,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                 }
                 else if (returnBodyType is EnumType)
                 {
-                    typeName = PrimaryType.String.Name;
-                }
-                else if (returnBodyType is CompositeType || returnBodyType is DictionaryType)
-                {
-                    typeName = PrimaryType.Object.Name;
+                    typeName = "string";
                 }
 
                 return typeName.ToLower(CultureInfo.InvariantCulture);

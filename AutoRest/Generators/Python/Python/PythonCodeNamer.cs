@@ -210,7 +210,10 @@ namespace Microsoft.Rest.Generator.Python
             var enumType = type as EnumType;
             if (enumType != null && enumType.Name.Length == 0 && enumType.ModelAsString)
             {
-                type = PrimaryType.String;
+                type = new PrimaryType.String
+                {
+                    Name = "str"
+                };
             }
 
             // Using Any instead of Contains since object hash is bound to a property which is modified during normalization
@@ -270,55 +273,55 @@ namespace Microsoft.Rest.Generator.Python
 
         private static IType NormalizePrimaryType(PrimaryType primaryType)
         {
-            if (primaryType == PrimaryType.Boolean)
+            if (primaryType is PrimaryType.Boolean)
             {
                 primaryType.Name = "bool";
             }
-            else if (primaryType == PrimaryType.ByteArray)
+            else if (primaryType is PrimaryType.ByteArray)
             {
                 primaryType.Name = "bytearray";
             }
-            else if (primaryType == PrimaryType.Date)
+            else if (primaryType is PrimaryType.Date)
             {
                 primaryType.Name = "date";
             }
-            else if (primaryType == PrimaryType.DateTime)
+            else if (primaryType is PrimaryType.DateTime)
             {
                 primaryType.Name = "datetime";
             }
-            else if (primaryType == PrimaryType.DateTimeRfc1123)
+            else if (primaryType is PrimaryType.DateTimeRfc1123)
             {
                 primaryType.Name = "datetime";
             }
-            else if (primaryType == PrimaryType.Double)
+            else if (primaryType is PrimaryType.Double)
             {
                 primaryType.Name = "float";
             }
-            else if (primaryType == PrimaryType.Int)
+            else if (primaryType is PrimaryType.Int)
             {
                 primaryType.Name = "int";
             }
-            else if (primaryType == PrimaryType.Long)
+            else if (primaryType is PrimaryType.Long)
             {
                 primaryType.Name = "long";
             }
-            else if (primaryType == PrimaryType.Stream)  // Revisit here
+            else if (primaryType is PrimaryType.Stream)  // Revisit here
             {
                 primaryType.Name = "Object";
             }
-            else if (primaryType == PrimaryType.String)
+            else if (primaryType is PrimaryType.String)
             {
                 primaryType.Name = "str";
             }
-            else if (primaryType == PrimaryType.TimeSpan)
+            else if (primaryType is PrimaryType.TimeSpan)
             {
                 primaryType.Name = "timedelta"; 
             }
-            else if (primaryType == PrimaryType.Decimal)
+            else if (primaryType is PrimaryType.Decimal)
             {
                 primaryType.Name = "Decimal";
             }
-            else if (primaryType == PrimaryType.Object)  // Revisit here
+            else if (primaryType is PrimaryType.Object)  // Revisit here
             {
                 primaryType.Name = "object";
             }
@@ -349,11 +352,11 @@ namespace Microsoft.Rest.Generator.Python
 
             if (defaultValue != null)
             {
-                if (type == PrimaryType.String)
+                if (type is PrimaryType.String)
                 {
                     return CodeNamer.QuoteValue(defaultValue);
                 }
-                else if (type == PrimaryType.Boolean)
+                else if (type is PrimaryType.Boolean)
                 {
                     if (defaultValue == "true")
                     {
@@ -366,15 +369,15 @@ namespace Microsoft.Rest.Generator.Python
                 }
                 else
                 {
-                    if (type == PrimaryType.Date ||
-                        type == PrimaryType.DateTime ||
-                        type == PrimaryType.DateTimeRfc1123 ||
-                        type == PrimaryType.TimeSpan)
+                    if (type is PrimaryType.Date ||
+                        type is PrimaryType.DateTime ||
+                        type is PrimaryType.DateTimeRfc1123 ||
+                        type is PrimaryType.TimeSpan)
                     {
                         return "isodate.parse_date(\"" + defaultValue + "\")";
                     }
 
-                    if (type == PrimaryType.ByteArray)
+                    if (type is PrimaryType.ByteArray)
                     {
                         return "bytearray(\"" + defaultValue + "\", encoding=\"utf-8\")";
                     }

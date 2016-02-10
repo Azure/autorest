@@ -129,7 +129,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     string _requestContent = null;
     @if (Model.RequestBody != null)
     {
-        if (Model.RequestBody.Type == PrimaryType.Stream)
+        if (Model.RequestBody.Type is PrimaryType.Stream)
         {
         <text>
     StreamContent _fileStreamContent = new StreamContent(@(Model.RequestBody.Name));
@@ -155,7 +155,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
         {
     @:if (@(parameter.Name) != null)
     @:{
-            if (parameter.Type == PrimaryType.Stream)
+            if (parameter.Type is PrimaryType.Stream)
             {
         <text>        
         StreamContent _@parameter.Name = new StreamContent(@parameter.Name);
@@ -216,7 +216,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     {
         @:try
         @:{
-            if (Model.DefaultResponse.Body == PrimaryType.Stream)
+            if (Model.DefaultResponse.Body is PrimaryType.Stream)
             {
             @:@(Model.DefaultResponse.Body.Name) _errorBody = await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
             }
@@ -264,7 +264,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     // Deserialize Response
     if ((int)_statusCode == @MethodTemplateModel.GetStatusCodeReference(responsePair.Key))
     {
-        @if (responsePair.Value.Body == PrimaryType.Stream)
+        @if (responsePair.Value.Body is PrimaryType.Stream)
         {
         @:_result.Body = await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
         }
@@ -292,7 +292,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
 
     @if (Model.ReturnType.Body != null && Model.DefaultResponse.Body != null && !Model.Responses.Any())
     {
-        if (Model.DefaultResponse.Body == PrimaryType.Stream)
+        if (Model.DefaultResponse.Body is PrimaryType.Stream)
         {
     @:_result.Body = await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
         }

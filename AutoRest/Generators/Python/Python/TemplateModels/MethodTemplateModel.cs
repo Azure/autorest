@@ -43,7 +43,7 @@ namespace Microsoft.Rest.Generator.Python
 
         public bool IsStreamResponse
         {
-            get { return this.ReturnType.Body == PrimaryType.Stream; }
+            get { return this.ReturnType.Body is PrimaryType.Stream; }
         }
 
         public bool IsStreamRequestBody
@@ -52,7 +52,7 @@ namespace Microsoft.Rest.Generator.Python
             {
                 foreach (var parameter in LocalParameters)
                 {
-                    if (parameter.Location == ParameterLocation.Body && parameter.Type == PrimaryType.Stream)
+                    if (parameter.Location == ParameterLocation.Body && parameter.Type is PrimaryType.Stream)
                     {
                         return true;
                     }
@@ -474,11 +474,11 @@ namespace Microsoft.Rest.Generator.Python
                 return "None";
             }
 
-            string result = PrimaryType.Object.Name;
+            string result = "object";
 
             if (type is PrimaryType)
             {
-                if (type == PrimaryType.Stream)
+                if (type is PrimaryType.Stream)
                 {
                     result = "Generator";
                 }
@@ -493,7 +493,7 @@ namespace Microsoft.Rest.Generator.Python
             }
             else if (type is EnumType)
             {
-                result = PrimaryType.String.Name.ToLower(CultureInfo.InvariantCulture);
+                result = "str";
             }
             else if (type is DictionaryType)
             {

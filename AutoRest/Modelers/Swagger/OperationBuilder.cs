@@ -210,7 +210,7 @@ namespace Microsoft.Rest.Modeler.Swagger
 
         private Response BuildMethodReturnType(List<Stack<IType>> types, IType headerType)
         {
-            IType baseType = PrimaryType.Object;
+            IType baseType = new PrimaryType.Object();
             // Return null if no response is specified
             if (types.Count == 0)
             {
@@ -289,7 +289,7 @@ namespace Microsoft.Rest.Modeler.Swagger
         {
             var referenceKey = serviceType.Name;
             var responseType = _swaggerModeler.GeneratedTypes[referenceKey];
-            var property = responseType.Properties.FirstOrDefault(p => p.Type == PrimaryType.ByteArray);
+            var property = responseType.Properties.FirstOrDefault(p => p.Type is PrimaryType.ByteArray);
             if (property == null)
             {
                 throw new KeyNotFoundException(
@@ -330,8 +330,8 @@ namespace Microsoft.Rest.Modeler.Swagger
             {
                 if (_operation.Produces.IsNullOrEmpty())
                 {
-                    method.Responses[responseStatusCode] = new Response(PrimaryType.Object, headerType);
-                    BuildMethodReturnTypeStack(PrimaryType.Object, types);
+                    method.Responses[responseStatusCode] = new Response(new PrimaryType.Object(), headerType);
+                    BuildMethodReturnTypeStack(new PrimaryType.Object(), types);
                     handled = true;
                 }
 

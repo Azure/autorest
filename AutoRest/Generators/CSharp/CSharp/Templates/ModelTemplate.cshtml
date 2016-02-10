@@ -97,11 +97,11 @@ namespace @(Settings.Namespace).Models
         @:/// <summary>
         @:@WrapComment("/// ", property.Documentation.EscapeXmlComment())
         @:/// </summary>
-            if (property.Type == PrimaryType.Date)
+            if (property.Type is PrimaryType.Date)
             {
         @:[JsonConverter(typeof(DateJsonConverter))]
             }
-            if (property.Type == PrimaryType.DateTimeRfc1123)
+            if (property.Type is PrimaryType.DateTimeRfc1123)
             {
         @:[JsonConverter(typeof(DateTimeRfc1123JsonConverter))]
             }
@@ -115,11 +115,11 @@ namespace @(Settings.Namespace).Models
         @:/// <summary>
         @:@WrapComment("/// ", property.Documentation.EscapeXmlComment())
         @:/// </summary>
-            if (property.Type == PrimaryType.Date)
+            if (property.Type is PrimaryType.Date)
             {
         @:[JsonConverter(typeof(DateJsonConverter))]
             }
-            if (property.Type == PrimaryType.DateTimeRfc1123)
+            if (property.Type is PrimaryType.DateTimeRfc1123)
             {
         @:[JsonConverter(typeof(DateTimeRfc1123JsonConverter))]
             }

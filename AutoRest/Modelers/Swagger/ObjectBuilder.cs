@@ -42,12 +42,12 @@ namespace Microsoft.Rest.Modeler.Swagger
         public virtual IType BuildServiceType(string serviceTypeName)
         {
             PrimaryType type = SwaggerObject.ToType();
-            if (type == PrimaryType.Object && "file".Equals(SwaggerObject.Format, StringComparison.OrdinalIgnoreCase))
+            if (type is PrimaryType.Object && "file".Equals(SwaggerObject.Format, StringComparison.OrdinalIgnoreCase))
             {
-                type = PrimaryType.Stream;
+                type = new PrimaryType.Stream();
             }
             if (SwaggerObject.Enum != null && 
-                type == PrimaryType.String &&
+                type is PrimaryType.String &&
                 (SwaggerObject.Enum.Count > 1 || IsExpandableEnum(SwaggerObject)))
             {
                 var enumType = new EnumType();

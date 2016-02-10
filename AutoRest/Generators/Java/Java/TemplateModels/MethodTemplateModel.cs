@@ -221,10 +221,10 @@ namespace Microsoft.Rest.Generator.Java
             {
                 foreach (var param in ParameterTemplateModels)
                 {
-                    if (param.Type != PrimaryType.Int &&
-                        param.Type != PrimaryType.Double &&
-                        param.Type != PrimaryType.Boolean &&
-                        param.Type != PrimaryType.Long &&
+                    if (!(param.Type is PrimaryType.Int) &&
+                        !(param.Type is PrimaryType.Double) &&
+                        !(param.Type is PrimaryType.Boolean) &&
+                        !(param.Type is PrimaryType.Long) &&
                         param.IsRequired)
                     {
                         yield return param;
