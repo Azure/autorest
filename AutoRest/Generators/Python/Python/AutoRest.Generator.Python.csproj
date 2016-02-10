@@ -46,6 +46,12 @@
     <Compile Include="TemplateModels\MethodTemplateModel.cs" />
     <Compile Include="ClientModelExtensions.cs" />
     <Compile Include="TemplateModels\ParameterTemplateModel.cs" />
+    <Compile Include="Templates\CredentialTemplate.cs">
+      <DependentUpon>CredentialTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\ExceptionTemplate.cs">
+      <DependentUpon>ExceptionTemplate.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Templates\SetupTemplate.cs">
       <DependentUpon>SetupTemplate.cshtml</DependentUpon>
     </Compile>
@@ -73,6 +79,8 @@
     <Compile Include="Templates\ServiceClientInitTemplate.cs">
       <DependentUpon>ServiceClientInitTemplate.cshtml</DependentUpon>
     </Compile>
+    <None Include="Templates\CredentialTemplate.cshtml" />
+    <None Include="Templates\ExceptionTemplate.cshtml" />
     <None Include="Templates\SetupTemplate.cshtml" />
     <None Include="Templates\EnumTemplate.cshtml" />
     <None Include="Templates\MethodGroupTemplate.cshtml" />

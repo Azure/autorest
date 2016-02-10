@@ -9,26 +9,9 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.exceptions import (
-    ClientException,
-    SerializationError,
-    DeserializationError,
-    TokenExpiredError,
-    ClientRequestError,
-    AuthenticationError,
-    HttpOperationError,
-)
-
 from .auto_rest_integer_test_service import AutoRestIntegerTestService, AutoRestIntegerTestServiceConfiguration
 
 __all__ = [
-    'ClientException',
-    'SerializationError',
-    'DeserializationError',
-    'TokenExpiredError',
-    'ClientRequestError',
-    'AuthenticationError',
-    'HttpOperationError',
     'AutoRestIntegerTestService',
     'AutoRestIntegerTestServiceConfiguration'
 ]

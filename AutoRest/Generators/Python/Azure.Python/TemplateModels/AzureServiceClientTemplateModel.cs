@@ -100,5 +100,13 @@ namespace Microsoft.Rest.Generator.Azure.Python
                 return "\"msrest>=0.0.1\", \"msrestazure>=0.0.1\"";
             }
         }
+
+        public override bool SupportsAzure
+        {
+            get
+            {
+                return true;
+            }
+        }
     }
 }

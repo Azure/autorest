@@ -9,26 +9,9 @@
 # regenerated.
 # --------------------------------------------------------------------------
 
-from msrest.exceptions import (
-    ClientException,
-    SerializationError,
-    DeserializationError,
-    TokenExpiredError,
-    ClientRequestError,
-    AuthenticationError,
-    HttpOperationError,
-)
-
 from .auto_rest_swagger_bat_form_data_service import AutoRestSwaggerBATFormDataService, AutoRestSwaggerBATFormDataServiceConfiguration
 
 __all__ = [
-    'ClientException',
-    'SerializationError',
-    'DeserializationError',
-    'TokenExpiredError',
-    'ClientRequestError',
-    'AuthenticationError',
-    'HttpOperationError',
     'AutoRestSwaggerBATFormDataService',
     'AutoRestSwaggerBATFormDataServiceConfiguration'
 ]
