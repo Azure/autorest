@@ -17,6 +17,7 @@ import stream = require('stream');
 import boolClient = require('../Expected/AcceptanceTests/BodyBoolean/autoRestBoolTestService');
 import stringClient = require('../Expected/AcceptanceTests/BodyString/autoRestSwaggerBATService');
 import integerClient = require('../Expected/AcceptanceTests/BodyInteger/autoRestIntegerTestService');
+import compositeBoolIntClient = require('../Expected/AcceptanceTests/CompositeBoolIntClient/compositeBoolInt');
 import numberClient = require('../Expected/AcceptanceTests/BodyNumber/autoRestNumberTestService');
 import byteClient = require('../Expected/AcceptanceTests/BodyByte/autoRestSwaggerBATByteService');
 import dateClient = require('../Expected/AcceptanceTests/BodyDate/autoRestDateTestService');
@@ -90,6 +91,97 @@ describe('nodejs', function () {
 
     describe('Integer Client', function () {
       var testClient = new integerClient(baseUri, clientOptions);
+      it('should put max value for 32 and 64 bit Integers', function (done) {
+        testClient.intModel.putMax32((Math.pow(2, 32 - 1) - 1), function (error, result) {
+          should.not.exist(error);
+          testClient.intModel.putMax64(9223372036854776000, function (error, result) {
+            should.not.exist(error);
+            done();
+          });
+        });
+      });
+
+      it('should put min value for 32 and 64 bit Integers', function (done) {
+        testClient.intModel.putMin32(-Math.pow(2, 32 - 1), function (error, result) {
+          should.not.exist(error);
+          testClient.intModel.putMin64(-9223372036854776000, function (error, result) {
+            should.not.exist(error);
+            done();
+          });
+        });
+      });
+
+      it('should get null and invalid integer value', function (done) {
+        testClient.intModel.getNull(function (error, result) {
+          should.not.exist(result);
+          testClient.intModel.getInvalid(function (error, result) {
+            should.exist(error);
+            should.not.exist(result);
+            done();
+          });
+        });
+      });
+
+      it('should get overflow and underflow for 32 bit integer value', function (done) {
+        testClient.intModel.getOverflowInt32(function (error, result) {
+          should.not.exist(error);
+          result.should.equal(2147483656);
+          testClient.intModel.getUnderflowInt32(function (error, result) {
+            should.not.exist(error);
+            result.should.equal(-2147483656);
+            done();
+          });
+        });
+      });
+
+      it('should get overflow and underflow for 64 bit integer value', function (done) {
+        testClient.intModel.getOverflowInt64(function (error, result) {
+          should.not.exist(error);
+          result.should.equal(9223372036854775910);
+          testClient.intModel.getUnderflowInt64(function (error, result) {
+            should.not.exist(error);
+            result.should.equal(-9223372036854775910);
+            done();
+          });
+        });
+      });
+    });
+
+    describe('CompositeBoolInt Client', function () {
+      var testClient = new compositeBoolIntClient(baseUri, clientOptions);
+      it('should get valid boolean values', function (done) {
+        testClient.bool.getTrue(function (error, result) {
+          should.not.exist(error);
+          result.should.equal(true);
+          testClient.bool.getFalse(function (error, result) {
+            should.not.exist(error);
+            result.should.equal(false);
+            done();
+          });
+        });
+      });
+
+      it('should put valid boolean values', function (done) {
+        testClient.bool.putTrue(true, function (error, result) {
+          should.not.exist(error);
+          testClient.bool.putFalse(false, function (error, result) {
+            should.not.exist(error);
+            done();
+          });
+        });
+      });
+
+      it('should get null and invalid boolean value', function (done) {
+        testClient.bool.getNull(function (error, result) {
+          should.not.exist(result);
+          testClient.bool.getInvalid(function (error, result) {
+            should.exist(error);
+            should.not.exist(result);
+            done();
+          });
+        });
+      });
+
       it('should put max value for 32 and 64 bit Integers', function (done) {
         testClient.intModel.putMax32((Math.pow(2, 32 - 1) - 1), function (error, result) {
           should.not.exist(error);

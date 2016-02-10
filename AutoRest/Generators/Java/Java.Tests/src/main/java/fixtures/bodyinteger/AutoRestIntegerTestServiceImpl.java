@@ -43,7 +43,7 @@ public final class AutoRestIntegerTestServiceImpl extends ServiceClient implemen
      * Initializes an instance of AutoRestIntegerTestService client.
      */
     public AutoRestIntegerTestServiceImpl() {
-        this("https://localhost");
+        this("http://localhost");
     }
 
     /**

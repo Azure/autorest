@@ -213,13 +213,13 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
         /// <summary>
         /// Determines if the given IType is a value type in C#
         /// </summary>
-        /// <param name="type">The type to check</param>
+        /// <param name="primaryType">The type to check</param>
         /// <returns>True if the type maps to a C# value type, otherwise false</returns>
-        public static bool IsValueType(this PrimaryType type)
+        public static bool IsValueType(this PrimaryType primaryType)
         {
-            return type == PrimaryType.Boolean || type == PrimaryType.DateTime || type == PrimaryType.Date
-                || type == PrimaryType.Double || type == PrimaryType.Int || type == PrimaryType.Long 
-                || type == PrimaryType.TimeSpan || type == PrimaryType.DateTimeRfc1123;
+            return primaryType == PrimaryType.Boolean || primaryType == PrimaryType.DateTime || primaryType == PrimaryType.Date
+                || primaryType == PrimaryType.Double || primaryType == PrimaryType.Int || primaryType == PrimaryType.Long 
+                || primaryType == PrimaryType.TimeSpan || primaryType == PrimaryType.DateTimeRfc1123;
         }
 
         public static string CheckNull(string valueReference, string executionBlock)

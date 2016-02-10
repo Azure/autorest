@@ -26,19 +26,25 @@ class AutoRestComplexTestServiceConfiguration(Configuration):
     Note that all parameters used to create this instance are saved as instance
     attributes.
 
+    :param api_version: API ID.
+    :type api_version: str
     :param str base_url: Service URL
     :param str filepath: Existing config
     """
 
     def __init__(
-            self, base_url=None, filepath=None):
+            self, api_version, base_url=None, filepath=None):
 
+        if api_version is None:
+            raise ValueError('api_version must not be None.')
         if not base_url:
             base_url = 'http://localhost'
 
         super(AutoRestComplexTestServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.add_user_agent('autorestcomplextestservice/1.0.0')
+        self.add_user_agent('autorestcomplextestservice/2016-02-29')
+
+        self.api_version = api_version
 
 
 class AutoRestComplexTestService(object):

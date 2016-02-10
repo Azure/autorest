@@ -129,22 +129,6 @@ namespace Microsoft.Rest.Generator.ClientModel
             return Name;
         }
 
-        /// <summary>
-        /// Determines whether the specified object is equal to this object based on Name and Type.
-        /// </summary>
-        /// <param name="obj">The object to compare with this object.</param>
-        /// <returns>true if the specified object is equal to this object; otherwise, false.</returns>
-        public override bool Equals(object obj)
-        {
-            var knownType = obj as PrimaryType;
-
-            if (knownType != null)
-            {
-                return knownType.Type == Type && knownType.Name == Name;
-            }
-
-            return false;
-        }
 
         /// <summary>
         /// Serves as a hash function based on Type.
@@ -156,6 +140,59 @@ namespace Microsoft.Rest.Generator.ClientModel
         {
             return Type.GetHashCode();
         }
+
+        /// <summary>
+        /// Determines whether the specified object is equal to this object based on Name and Type.
+        /// </summary>
+        /// <param name="obj">The object to compare with this object.</param>
+        /// <returns>true if the specified object is equal to this object; otherwise, false.</returns>
+        public override bool Equals(object obj)
+        {
+            var knownType = obj as PrimaryType;
+
+            if (knownType != null)
+            {
+                return knownType.Type == Type;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Determines whether the specified object is equal to this object based on Name and Type.
+        /// </summary>
+        /// <param name="leftSide">Left side type</param>
+        /// <param name="rightSide">Right side type</param>
+        /// <returns></returns>
+        public static bool operator ==(IType leftSide, PrimaryType rightSide)
+        {
+            // If both are null, or both are same instance, return true.
+            if (System.Object.ReferenceEquals(leftSide, rightSide))
+            {
+                return true;
+            }
+
+            // If one is null, but not both, return false.
+            if (((object)leftSide == null) || ((object)rightSide == null))
+            {
+                return false;
+            }
+
+            // Return true if the fields match:
+            return leftSide.Equals(rightSide);
+        }
+
+        /// <summary>
+        /// Determines whether the specified object is not equal to this object based on Name and Type.
+        /// </summary>
+        /// <param name="leftSide">Left side type</param>
+        /// <param name="rightSide">Right side type</param>
+        /// <returns></returns>
+        public static bool operator !=(IType leftSide, PrimaryType rightSide)
+        {
+            return !(leftSide == rightSide);
+        }
+
 
         /// <summary>
         /// Available known model types.
