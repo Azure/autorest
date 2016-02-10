@@ -83,15 +83,12 @@ export interface CatalogDictionaryOfArray {
  * @class
  * Initializes a new instance of the ErrorModel class.
  * @constructor
- * @member {number} [code]
+ * @member {number} [status]
  * 
  * @member {string} [message]
  * 
- * @member {string} [fields]
- * 
  */
 export interface ErrorModel {
-    code?: number;
+    status?: number;
     message?: string;
-    fields?: string;
 }

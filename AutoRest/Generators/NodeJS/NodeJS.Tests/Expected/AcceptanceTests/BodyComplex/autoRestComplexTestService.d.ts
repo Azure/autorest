@@ -31,6 +31,8 @@ declare class AutoRestComplexTestService {
      */
     constructor(baseUri: string, options: ServiceClientOptions);
 
+    apiVersion: string;
+
     // Operation groups
     basicOperations: operations.BasicOperations;
     primitive: operations.Primitive;

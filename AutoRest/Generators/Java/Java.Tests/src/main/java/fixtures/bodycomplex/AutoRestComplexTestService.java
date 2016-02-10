@@ -49,6 +49,20 @@ public interface AutoRestComplexTestService {
     JacksonMapperAdapter getMapperAdapter();
 
     /**
+     * Gets API ID..
+     *
+     * @return the apiVersion value.
+     */
+    String getApiVersion();
+
+    /**
+     * Sets API ID..
+     *
+     * @param apiVersion the apiVersion value.
+     */
+    void setApiVersion(String apiVersion);
+
+    /**
      * Gets the BasicOperations object to access its operations.
      * @return the BasicOperations object.
      */

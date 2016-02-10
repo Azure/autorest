@@ -3,7 +3,7 @@
   "info": {
     "title": "AutoRest Complex Test Service",
     "description": "Test Infrastructure for AutoRest",
-    "version": "1.0.0"
+    "version": "2016-02-29"
   },
   "host": "localhost",
   "schemes": [
@@ -47,6 +47,9 @@
               "$ref": "#/definitions/basic"
             },
             "required": true
+          },
+          {
+            "$ref": "ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1371,5 +1374,15 @@
         }
       }
     }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "API ID.",
+      "required": true,
+      "type": "string",
+      "enum": [ "2014-04-01-preview" ]
+    }
   }
-  }
+}

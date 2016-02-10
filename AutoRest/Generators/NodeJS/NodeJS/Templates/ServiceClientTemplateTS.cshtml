@@ -18,8 +18,8 @@ import { ServiceClientOptions, RequestOptions, ServiceCallback } from 'ms-rest';
 }
 @EmptyLine
 declare class @(Model.Name) {
-    @{var requiredParameters = Model.Properties.Where(p => p.IsRequired);}
-    @{var optionalParameters = Model.Properties.Where(p => !p.IsRequired);}
+    @{var requiredParameters = Model.Properties.Where(p => p.IsRequired && !p.IsConstant);}
+    @{var optionalParameters = Model.Properties.Where(p => !p.IsRequired && !p.IsConstant);}
     /**
      * @@class
      * Initializes a new instance of the @Model.Name class.

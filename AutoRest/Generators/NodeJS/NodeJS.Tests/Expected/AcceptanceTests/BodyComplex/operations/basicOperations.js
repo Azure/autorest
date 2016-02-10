@@ -188,6 +188,11 @@ BasicOperations.prototype.putValid = function (complexBody, options, callback) {
   // Construct URL
   var requestUrl = this.client.baseUri +
                    '//complex/basic/valid';
+  var queryParameters = [];
+  queryParameters.push('api-version=' + encodeURIComponent(this.client.apiVersion));
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
   // trim all duplicate forward slashes in the url
   var regex = /([^:]\/)\/+/gi;
   requestUrl = requestUrl.replace(regex, '$1');

@@ -131,7 +131,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             get
             {
                 var requireParams = new List<string>();
-                this.Properties.Where(p => p.IsRequired)
+                this.Properties.Where(p => p.IsRequired && !p.IsConstant)
                     .ForEach(p => requireParams.Add(p.Name.ToCamelCase()));
                 requireParams.Add("baseUri");
                 return string.Join(", ", requireParams);
@@ -147,7 +147,7 @@ namespace Microsoft.Rest.Generator.NodeJS
 
                 bool first = true;
                 foreach (var p in this.Properties) {
-                    if (! p.IsRequired)
+                    if (!p.IsRequired || p.IsConstant)
                         continue;
 
                     if (!first)

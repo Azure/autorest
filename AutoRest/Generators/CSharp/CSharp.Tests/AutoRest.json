@@ -28,6 +28,9 @@
   "modelers": {
     "Swagger": {
       "type": "SwaggerModeler, AutoRest.Modeler.Swagger"
+    },
+    "CompositeSwagger": {
+      "type": "CompositeSwaggerModeler, AutoRest.Modeler.CompositeSwagger"
     }
   }
 }

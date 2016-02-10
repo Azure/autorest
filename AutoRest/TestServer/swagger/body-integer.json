@@ -7,7 +7,7 @@
   },
   "host": "localhost",
   "schemes": [
-    "https"
+    "http"
   ],
   "produces": [
     "application/json"
