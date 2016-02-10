@@ -18,7 +18,7 @@ class Fish(Model):
     :param str species:
     :param float length:
     :param list siblings:
-    :param str fishtype: Polymorhpic Discriminator
+    :param str fishtype: Polymorphic Discriminator
     """
 
     _required = ['length', 'fishtype']

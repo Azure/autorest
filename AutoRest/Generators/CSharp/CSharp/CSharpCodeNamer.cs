@@ -182,7 +182,10 @@ namespace Microsoft.Rest.Generator.CSharp
             var enumType = type as EnumType;
             if (enumType != null && enumType.ModelAsString)
             {
-                return new PrimaryType.String();
+                return new PrimaryType.String
+                {
+                    Name = "string"
+                };
             }
             return NormalizeTypeDeclaration(type);
         }

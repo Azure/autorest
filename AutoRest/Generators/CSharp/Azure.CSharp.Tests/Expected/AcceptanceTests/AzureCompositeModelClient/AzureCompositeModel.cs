@@ -347,12 +347,12 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             // Construct URL
             var _baseUrl = this.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/Microsoft.Cache/Redis").ToString();
-            _url = _url.Replace("{subscriptionId}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(this.SubscriptionId, this.SerializationSettings).Trim('"')));
-            _url = _url.Replace("{resourceGroupName}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(resourceGroupName, this.SerializationSettings).Trim('"')));
+            _url = _url.Replace("{subscriptionId}", Uri.EscapeDataString(this.SubscriptionId));
+            _url = _url.Replace("{resourceGroupName}", Uri.EscapeDataString(resourceGroupName));
             List<string> _queryParameters = new List<string>();
             if (apiVersion != null)
             {
-                _queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(apiVersion, this.SerializationSettings).Trim('"'))));
+                _queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(apiVersion)));
             }
             if (_queryParameters.Count > 0)
             {
@@ -374,7 +374,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 {
                     _httpRequest.Headers.Remove("accept-language");
                 }
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", SafeJsonConvert.SerializeObject(this.AcceptLanguage, this.SerializationSettings).Trim('"'));
+                _httpRequest.Headers.TryAddWithoutValidation("accept-language", this.AcceptLanguage);
             }
             if (customHeaders != null)
             {
@@ -525,12 +525,12 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             // Construct URL
             var _baseUrl = this.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/Microsoft.Cache/Redis").ToString();
-            _url = _url.Replace("{subscriptionId}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(subscriptionId, this.SerializationSettings).Trim('"')));
-            _url = _url.Replace("{resourceGroupName}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(resourceGroupName, this.SerializationSettings).Trim('"')));
+            _url = _url.Replace("{subscriptionId}", Uri.EscapeDataString(subscriptionId));
+            _url = _url.Replace("{resourceGroupName}", Uri.EscapeDataString(resourceGroupName));
             List<string> _queryParameters = new List<string>();
             if (apiVersion != null)
             {
-                _queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(apiVersion, this.SerializationSettings).Trim('"'))));
+                _queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(apiVersion)));
             }
             if (_queryParameters.Count > 0)
             {
@@ -552,7 +552,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 {
                     _httpRequest.Headers.Remove("accept-language");
                 }
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", SafeJsonConvert.SerializeObject(this.AcceptLanguage, this.SerializationSettings).Trim('"'));
+                _httpRequest.Headers.TryAddWithoutValidation("accept-language", this.AcceptLanguage);
             }
             if (customHeaders != null)
             {
@@ -706,12 +706,12 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             // Construct URL
             var _baseUrl = this.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/Microsoft.Cache/Redis").ToString();
-            _url = _url.Replace("{subscriptionId}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(subscriptionId, this.SerializationSettings).Trim('"')));
-            _url = _url.Replace("{resourceGroupName}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(resourceGroupName, this.SerializationSettings).Trim('"')));
+            _url = _url.Replace("{subscriptionId}", Uri.EscapeDataString(subscriptionId));
+            _url = _url.Replace("{resourceGroupName}", Uri.EscapeDataString(resourceGroupName));
             List<string> _queryParameters = new List<string>();
             if (apiVersion != null)
             {
-                _queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(apiVersion, this.SerializationSettings).Trim('"'))));
+                _queryParameters.Add(string.Format("api-version={0}", Uri.EscapeDataString(apiVersion)));
             }
             if (_queryParameters.Count > 0)
             {
@@ -733,7 +733,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 {
                     _httpRequest.Headers.Remove("accept-language");
                 }
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", SafeJsonConvert.SerializeObject(this.AcceptLanguage, this.SerializationSettings).Trim('"'));
+                _httpRequest.Headers.TryAddWithoutValidation("accept-language", this.AcceptLanguage);
             }
             if (customHeaders != null)
             {

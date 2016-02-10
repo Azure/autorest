@@ -94,7 +94,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 {
                     _httpRequest.Headers.Remove("accept-language");
                 }
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", SafeJsonConvert.SerializeObject(this.Client.AcceptLanguage, this.Client.SerializationSettings).Trim('"'));
+                _httpRequest.Headers.TryAddWithoutValidation("accept-language", this.Client.AcceptLanguage);
             }
             if (customHeaders != null)
             {
@@ -246,7 +246,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 {
                     _httpRequest.Headers.Remove("accept-language");
                 }
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", SafeJsonConvert.SerializeObject(this.Client.AcceptLanguage, this.Client.SerializationSettings).Trim('"'));
+                _httpRequest.Headers.TryAddWithoutValidation("accept-language", this.Client.AcceptLanguage);
             }
             if (customHeaders != null)
             {
@@ -374,7 +374,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 {
                     _httpRequest.Headers.Remove("accept-language");
                 }
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", SafeJsonConvert.SerializeObject(this.Client.AcceptLanguage, this.Client.SerializationSettings).Trim('"'));
+                _httpRequest.Headers.TryAddWithoutValidation("accept-language", this.Client.AcceptLanguage);
             }
             if (customHeaders != null)
             {
@@ -526,7 +526,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 {
                     _httpRequest.Headers.Remove("accept-language");
                 }
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", SafeJsonConvert.SerializeObject(this.Client.AcceptLanguage, this.Client.SerializationSettings).Trim('"'));
+                _httpRequest.Headers.TryAddWithoutValidation("accept-language", this.Client.AcceptLanguage);
             }
             if (customHeaders != null)
             {
@@ -654,7 +654,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 {
                     _httpRequest.Headers.Remove("accept-language");
                 }
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", SafeJsonConvert.SerializeObject(this.Client.AcceptLanguage, this.Client.SerializationSettings).Trim('"'));
+                _httpRequest.Headers.TryAddWithoutValidation("accept-language", this.Client.AcceptLanguage);
             }
             if (customHeaders != null)
             {
@@ -798,7 +798,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 {
                     _httpRequest.Headers.Remove("accept-language");
                 }
-                _httpRequest.Headers.TryAddWithoutValidation("accept-language", SafeJsonConvert.SerializeObject(this.Client.AcceptLanguage, this.Client.SerializationSettings).Trim('"'));
+                _httpRequest.Headers.TryAddWithoutValidation("accept-language", this.Client.AcceptLanguage);
             }
             if (customHeaders != null)
             {

@@ -146,34 +146,6 @@ namespace Microsoft.Rest.Generator.ClientModel
         public override string ToString()
         {
             return Name;
-        }
-
-        /// <summary>
-        /// Serves as a hash function based on Type.
-        /// </summary>
-        /// <returns>
-        /// A hash code for the current object.
-        /// </returns>
-        public override int GetHashCode()
-        {
-            return Name.GetHashCode();
-        }
-
-        /// <summary>
-        /// Determines whether the specified object is equal to this object based on Name and Type.
-        /// </summary>
-        /// <param name="obj">The object to compare with this object.</param>
-        /// <returns>true if the specified object is equal to this object; otherwise, false.</returns>
-        public override bool Equals(object obj)
-        {
-            var knownType = obj as PrimaryType;
-
-            if (knownType != null)
-            {
-                return knownType.Name == Name;
-            }
-
-            return false;
-        }
+        }        
     }
 }

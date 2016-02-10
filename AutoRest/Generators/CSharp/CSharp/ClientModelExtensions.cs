@@ -138,7 +138,10 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
             EnumType enumType = sequence.ElementType as EnumType;
             if (enumType != null && enumType.ModelAsString)
             {
-                primaryType = new PrimaryType.String();
+                primaryType = new PrimaryType.String
+                {
+                    Name = "string"
+                };
             }
 
             if (!(primaryType is PrimaryType.String))
