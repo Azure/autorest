@@ -26,8 +26,6 @@ var operations = require('./operations');
  * Initializes a new instance of the AutoRestComplexTestService class.
  * @constructor
  *
- * @param {string} apiVersion - API ID.
- *
  * @param {string} [baseUri] - The base URI of the service.
  *
  * @param {object} [options] - The parameter options
@@ -40,10 +38,7 @@ var operations = require('./operations');
  * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
  *
  */
-function AutoRestComplexTestService(apiVersion, baseUri, options) {
-  if (apiVersion === null || apiVersion === undefined) {
-    throw new Error('\'apiVersion\' cannot be null.');
-  }
+function AutoRestComplexTestService(baseUri, options) {
 
   if (!options) options = {};
 
@@ -52,8 +47,8 @@ function AutoRestComplexTestService(apiVersion, baseUri, options) {
   if (!this.baseUri) {
     this.baseUri = 'http://localhost';
   }
-  this.apiVersion = apiVersion;
 
+  this.apiVersion = '2014-04-01-preview';
   this.basicOperations = new operations.BasicOperations(this);
   this.primitive = new operations.Primitive(this);
   this.arrayModel = new operations.ArrayModel(this);

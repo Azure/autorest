@@ -1381,7 +1381,8 @@
       "in": "query",
       "description": "API ID.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "enum": [ "2014-04-01-preview" ]
     }
   }
 }

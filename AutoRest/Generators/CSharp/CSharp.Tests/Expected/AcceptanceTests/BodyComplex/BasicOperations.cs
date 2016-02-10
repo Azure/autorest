@@ -182,10 +182,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "complexBody");
             }
-            if (this.Client.ApiVersion == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.ApiVersion");
-            }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;

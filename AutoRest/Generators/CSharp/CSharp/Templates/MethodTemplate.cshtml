@@ -49,13 +49,14 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
 
     @foreach (ParameterTemplateModel parameter in Model.ParameterTemplateModels)
     {
-        if (parameter.IsConstant)
+        if (parameter.IsConstant && parameter.ClientProperty == null)
         {
     @:@(parameter.Type.Name) @(parameter.Name) = @(parameter.DefaultValue);
         }
 
         if (parameter.Type is CompositeType
             && !parameter.IsConstant
+            && parameter.ClientProperty == null
             && ((CompositeType)parameter.Type).ContainsConstantProperties)
         {
     @:if (@(parameter.Name) == null)

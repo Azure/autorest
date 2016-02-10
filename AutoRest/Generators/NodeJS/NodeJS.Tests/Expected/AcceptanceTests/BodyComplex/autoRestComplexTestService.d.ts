@@ -17,8 +17,6 @@ declare class AutoRestComplexTestService {
      * Initializes a new instance of the AutoRestComplexTestService class.
      * @constructor
      *
-     * @param {string} apiVersion - API ID.
-     *
      * @param {string} [baseUri] - The base URI of the service.
      *
      * @param {object} [options] - The parameter options
@@ -31,7 +29,7 @@ declare class AutoRestComplexTestService {
      * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
      *
      */
-    constructor(apiVersion: string, baseUri: string, options: ServiceClientOptions);
+    constructor(baseUri: string, options: ServiceClientOptions);
 
     apiVersion: string;
 

@@ -251,7 +251,8 @@
       "in": "path",
       "description": "Subscription ID.",
       "required": true,
-      "type": "string"
+      "type": "string",
+      "enum": [ "123456" ]
     },
     "ApiVersionParameter": {
       "name": "api-version",

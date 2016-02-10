@@ -181,9 +181,6 @@ BasicOperations.prototype.putValid = function (complexBody, options, callback) {
     if (complexBody === null || complexBody === undefined) {
       throw new Error('complexBody cannot be null or undefined.');
     }
-    if (this.client.apiVersion === null || this.client.apiVersion === undefined || typeof this.client.apiVersion.valueOf() !== 'string') {
-      throw new Error('this.client.apiVersion cannot be null or undefined and it must be of type string.');
-    }
   } catch (error) {
     return callback(error);
   }

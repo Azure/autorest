@@ -966,7 +966,6 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 SwaggerPath("body-complex.json"), ExpectedPath("BodyComplex"));
             using (var client = new AutoRestComplexTestService(Fixture.Uri))
             {
-                client.ApiVersion = "2015-06-01";
                 /* BASIC COMPLEX TYPE TESTS */
                 // GET basic/valid
                 var basicResult = client.BasicOperations.GetValid();

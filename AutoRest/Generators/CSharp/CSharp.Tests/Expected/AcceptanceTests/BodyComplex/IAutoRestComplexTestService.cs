@@ -40,7 +40,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <summary>
         /// API ID.
         /// </summary>
-        string ApiVersion { get; set; }
+        string ApiVersion { get; }
 
 
         IBasicOperations BasicOperations { get; }

@@ -30,7 +30,7 @@ public JsonSerializerSettings DeserializationSettings { get; private set; }
 @:/// <summary>
 @:@WrapComment("/// ", property.Documentation.EscapeXmlComment())
 @:/// </summary>
-@:public @property.Type @property.Name { get; @(property.IsReadOnly ? "private " : "")set; }
+@:public @property.Type @property.Name { get; @(property.IsReadOnly || property.IsConstant ? "private " : "")set; }
 @EmptyLine
 }
         

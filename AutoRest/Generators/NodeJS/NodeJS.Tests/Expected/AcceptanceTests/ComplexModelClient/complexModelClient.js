@@ -26,10 +26,6 @@ var models = require('./models');
  * Initializes a new instance of the ComplexModelClient class.
  * @constructor
  *
- * @param {string} subscriptionId - Subscription ID.
- *
- * @param {string} apiVersion - API ID.
- *
  * @param {string} [baseUri] - The base URI of the service.
  *
  * @param {object} [options] - The parameter options
@@ -42,13 +38,7 @@ var models = require('./models');
  * @param {boolean} [options.noRetryPolicy] - If set to true, turn off default retry policy
  *
  */
-function ComplexModelClient(subscriptionId, apiVersion, baseUri, options) {
-  if (subscriptionId === null || subscriptionId === undefined) {
-    throw new Error('\'subscriptionId\' cannot be null.');
-  }
-  if (apiVersion === null || apiVersion === undefined) {
-    throw new Error('\'apiVersion\' cannot be null.');
-  }
+function ComplexModelClient(baseUri, options) {
 
   if (!options) options = {};
 
@@ -57,9 +47,8 @@ function ComplexModelClient(subscriptionId, apiVersion, baseUri, options) {
   if (!this.baseUri) {
     this.baseUri = 'http://localhost';
   }
-  this.subscriptionId = subscriptionId;
-  this.apiVersion = apiVersion;
 
+  this.subscriptionId = '123456';
   this.apiVersion = '2014-04-01-preview';
   this.models = models;
   msRest.addSerializationMixin(this);
@@ -104,12 +93,8 @@ ComplexModelClient.prototype.list = function (resourceGroupName, options, callba
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
-  var this.apiVersion = '2014-04-01-preview';
   // Validate
   try {
-    if (this.subscriptionId === null || this.subscriptionId === undefined || typeof this.subscriptionId.valueOf() !== 'string') {
-      throw new Error('this.subscriptionId cannot be null or undefined and it must be of type string.');
-    }
     if (resourceGroupName === null || resourceGroupName === undefined || typeof resourceGroupName.valueOf() !== 'string') {
       throw new Error('resourceGroupName cannot be null or undefined and it must be of type string.');
     }
@@ -242,7 +227,6 @@ ComplexModelClient.prototype.create = function (subscriptionId, resourceGroupNam
     throw new Error('callback cannot be null.');
   }
   var productDictionaryOfArray = (options && options.productDictionaryOfArray !== undefined) ? options.productDictionaryOfArray : undefined;
-  var this.apiVersion = '2014-04-01-preview';
   // Validate
   try {
     if (subscriptionId === null || subscriptionId === undefined || typeof subscriptionId.valueOf() !== 'string') {
@@ -400,7 +384,6 @@ ComplexModelClient.prototype.update = function (subscriptionId, resourceGroupNam
     throw new Error('callback cannot be null.');
   }
   var productArrayOfDictionary = (options && options.productArrayOfDictionary !== undefined) ? options.productArrayOfDictionary : undefined;
-  var this.apiVersion = '2014-04-01-preview';
   // Validate
   try {
     if (subscriptionId === null || subscriptionId === undefined || typeof subscriptionId.valueOf() !== 'string') {

@@ -47,7 +47,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <summary>
         /// Subscription ID.
         /// </summary>
-        string SubscriptionId { get; set; }
+        string SubscriptionId { get; }
 
         /// <summary>
         /// Gets or sets the preferred language for the response.

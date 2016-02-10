@@ -47,7 +47,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// <summary>
         /// API ID.
         /// </summary>
-        public string ApiVersion { get; set; }
+        public string ApiVersion { get; private set; }
 
         public virtual IBasicOperations BasicOperations { get; private set; }
 
@@ -140,6 +140,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             this.Polymorphism = new Polymorphism(this);
             this.Polymorphicrecursive = new Polymorphicrecursive(this);
             this.BaseUri = new Uri("http://localhost");
+            this.ApiVersion = "2014-04-01-preview";
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Formatting.Indented,

@@ -54,7 +54,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <summary>
         /// Subscription ID.
         /// </summary>
-        public string SubscriptionId { get; set; }
+        public string SubscriptionId { get; private set; }
 
         /// <summary>
         /// Gets or sets the preferred language for the response.
@@ -274,6 +274,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             this.Polymorphism = new PolymorphismOperations(this);
             this.Polymorphicrecursive = new PolymorphicrecursiveOperations(this);
             this.BaseUri = new Uri("http://localhost");
+            this.SubscriptionId = "123456";
             this.AcceptLanguage = "en-US";
             this.LongRunningOperationRetryTimeout = 30;
             this.GenerateClientRequestId = true;
@@ -326,10 +327,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// </param>
         public async Task<AzureOperationResponse<CatalogArray>> ListWithHttpMessagesAsync(string resourceGroupName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (this.SubscriptionId == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "this.SubscriptionId");
-            }
             if (resourceGroupName == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "resourceGroupName");
