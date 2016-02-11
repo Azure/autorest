@@ -68,7 +68,7 @@ foreach (var parameter in Model.LocalParameters)
 @:{
     if (Model.ReturnType.Body != null)
     {
-        if (Model.ReturnType.Body is PrimaryType.Stream)
+        if (Model.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream))
         {
     @:var _result = await operations.@(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodInvocationArgs("null"))).ConfigureAwait(false);
     @:_result.Request.Dispose();

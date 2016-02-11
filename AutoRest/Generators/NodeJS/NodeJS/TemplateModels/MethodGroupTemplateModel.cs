@@ -33,9 +33,9 @@ namespace Microsoft.Rest.Generator.NodeJS
             get
             {
                 Method method = this.MethodTemplateModels.FirstOrDefault(m => m.Parameters.FirstOrDefault(p =>
-                    p.Type is PrimaryType.TimeSpan ||
-                    (p.Type is SequenceType && (p.Type as SequenceType).ElementType is PrimaryType.TimeSpan) ||
-                    (p.Type is DictionaryType && (p.Type as DictionaryType).ValueType is PrimaryType.TimeSpan) ||
+                    p.Type.IsPrimaryType(KnownPrimaryType.TimeSpan) ||
+                    (p.Type is SequenceType && (p.Type as SequenceType).ElementType.IsPrimaryType(KnownPrimaryType.TimeSpan)) ||
+                    (p.Type is DictionaryType && (p.Type as DictionaryType).ValueType.IsPrimaryType(KnownPrimaryType.TimeSpan)) ||
                     (p.Type is CompositeType && (p.Type as CompositeType).ContainsTimeSpan())) != null);
                 
                 return  method != null;
@@ -45,8 +45,8 @@ namespace Microsoft.Rest.Generator.NodeJS
         public bool ContainsStream
         {
             get {
-                return this.Methods.Any(m => m.Parameters.FirstOrDefault(p => p.Type is PrimaryType.Stream) != null ||
-                        m.ReturnType.Body is PrimaryType.Stream); }
+                return this.Methods.Any(m => m.Parameters.FirstOrDefault(p => p.Type.IsPrimaryType(KnownPrimaryType.Stream)) != null ||
+                        m.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream)); }
         }
     }
 }

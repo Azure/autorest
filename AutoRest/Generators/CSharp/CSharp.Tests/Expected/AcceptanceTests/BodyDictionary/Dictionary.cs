@@ -3687,7 +3687,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, DateTime?>>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, DateTime?>>(_responseContent, new DateJsonConverter());
                 }
                 catch (JsonException ex)
                 {
@@ -3912,7 +3912,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, DateTime?>>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, DateTime?>>(_responseContent, new DateJsonConverter());
                 }
                 catch (JsonException ex)
                 {
@@ -4028,7 +4028,7 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, DateTime?>>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = SafeJsonConvert.DeserializeObject<IDictionary<string, DateTime?>>(_responseContent, new DateJsonConverter());
                 }
                 catch (JsonException ex)
                 {

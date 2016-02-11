@@ -138,13 +138,13 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
             EnumType enumType = sequence.ElementType as EnumType;
             if (enumType != null && enumType.ModelAsString)
             {
-                primaryType = new PrimaryType.String
+                primaryType = new PrimaryType(KnownPrimaryType.String)
                 {
                     Name = "string"
                 };
             }
 
-            if (!(primaryType is PrimaryType.String))
+            if (primaryType == null || primaryType.Type != KnownPrimaryType.String)
             {
                 throw new InvalidOperationException(
                     string.Format(CultureInfo.InvariantCulture, 
@@ -189,22 +189,22 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
         /// <returns></returns>
         public static string ToString(this IType type, string clientReference, string reference)
         {
-            if (type == null || type is PrimaryType.String)
+            PrimaryType primaryType = type as PrimaryType;
+            if (type == null || primaryType != null && primaryType.Type == KnownPrimaryType.String)
             {
                 return reference;
             }
-            string serializationSettings;
-            if (type is PrimaryType.Date)
+            string serializationSettings = string.Format(CultureInfo.InvariantCulture, "{0}.SerializationSettings", clientReference);
+            if (primaryType != null)
             {
-                serializationSettings = "new DateJsonConverter()";
-            }
-            else if (type is PrimaryType.DateTimeRfc1123)
-            {
-                serializationSettings = "new DateTimeRfc1123JsonConverter()";
-            }
-            else
-            {
-                serializationSettings = string.Format(CultureInfo.InvariantCulture, "{0}.SerializationSettings", clientReference);
+                if (primaryType.Type == KnownPrimaryType.Date)
+                {
+                    serializationSettings = "new DateJsonConverter()";
+                }
+                else if (primaryType.Type == KnownPrimaryType.DateTimeRfc1123)
+                {
+                    serializationSettings = "new DateTimeRfc1123JsonConverter()";
+                }
             }
 
             return string.Format(CultureInfo.InvariantCulture,
@@ -220,9 +220,9 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
         /// <returns>True if the type maps to a C# value type, otherwise false</returns>
         public static bool IsValueType(this PrimaryType primaryType)
         {
-            return primaryType is PrimaryType.Boolean || primaryType is PrimaryType.DateTime || primaryType is PrimaryType.Date
-                || primaryType is PrimaryType.Double || primaryType is PrimaryType.Int || primaryType is PrimaryType.Long 
-                || primaryType is PrimaryType.TimeSpan || primaryType is PrimaryType.DateTimeRfc1123;
+            return primaryType != null && primaryType.Type == KnownPrimaryType.Boolean || primaryType.Type == KnownPrimaryType.DateTime || primaryType.Type == KnownPrimaryType.Date
+                || primaryType.Type == KnownPrimaryType.Double || primaryType.Type == KnownPrimaryType.Int || primaryType.Type == KnownPrimaryType.Long 
+                || primaryType.Type == KnownPrimaryType.TimeSpan || primaryType.Type == KnownPrimaryType.DateTimeRfc1123;
         }
 
         public static string CheckNull(string valueReference, string executionBlock)

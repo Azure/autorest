@@ -117,59 +117,59 @@ namespace Microsoft.Rest.Generator.CSharp
                 return null;
             }
 
-            if (primaryType is PrimaryType.Boolean)
+            if (primaryType.Type == KnownPrimaryType.Boolean)
             {
                 primaryType.Name = "bool?";
             }
-            else if (primaryType is PrimaryType.ByteArray)
+            else if (primaryType.Type == KnownPrimaryType.ByteArray)
             {
                 primaryType.Name = "byte[]";
             }
-            else if (primaryType is PrimaryType.Date)
+            else if (primaryType.Type == KnownPrimaryType.Date)
             {
                 primaryType.Name = "DateTime?";
             }
-            else if (primaryType is PrimaryType.DateTime)
+            else if (primaryType.Type == KnownPrimaryType.DateTime)
             {
                 primaryType.Name = "DateTime?";
             }
-            else if (primaryType is PrimaryType.DateTimeRfc1123)
+            else if (primaryType.Type == KnownPrimaryType.DateTimeRfc1123)
             {
                 primaryType.Name = "DateTime?";
             }
-            else if (primaryType is PrimaryType.Double)
+            else if (primaryType.Type == KnownPrimaryType.Double)
             {
                 primaryType.Name = "double?";
             }
-            else if (primaryType is PrimaryType.Decimal)
+            else if (primaryType.Type == KnownPrimaryType.Decimal)
             {
                 primaryType.Name = "decimal?";
             }
-            else if (primaryType is PrimaryType.Int)
+            else if (primaryType.Type == KnownPrimaryType.Int)
             {
                 primaryType.Name = "int?";
             }
-            else if (primaryType is PrimaryType.Long)
+            else if (primaryType.Type == KnownPrimaryType.Long)
             {
                 primaryType.Name = "long?";
             }
-            else if (primaryType is PrimaryType.Stream)
+            else if (primaryType.Type == KnownPrimaryType.Stream)
             {
                 primaryType.Name = "System.IO.Stream";
             }
-            else if (primaryType is PrimaryType.String)
+            else if (primaryType.Type == KnownPrimaryType.String)
             {
                 primaryType.Name = "string";
             }
-            else if (primaryType is PrimaryType.TimeSpan)
+            else if (primaryType.Type == KnownPrimaryType.TimeSpan)
             {
                 primaryType.Name = "TimeSpan?";
             }
-            else if (primaryType is PrimaryType.Object)
+            else if (primaryType.Type == KnownPrimaryType.Object)
             {
                 primaryType.Name = "object";
             }
-            else if (primaryType is PrimaryType.Credentials)
+            else if (primaryType.Type == KnownPrimaryType.Credentials)
             {
                 primaryType.Name = "ServiceClientCredentials";
             }
@@ -182,7 +182,7 @@ namespace Microsoft.Rest.Generator.CSharp
             var enumType = type as EnumType;
             if (enumType != null && enumType.ModelAsString)
             {
-                return new PrimaryType.String
+                return new PrimaryType(KnownPrimaryType.String)
                 {
                     Name = "string"
                 };
@@ -235,31 +235,35 @@ namespace Microsoft.Rest.Generator.CSharp
                 throw new ArgumentNullException("type");
             }
 
+            PrimaryType primaryType = type as PrimaryType;
             if (defaultValue != null)
             {
-                if (type is PrimaryType.String)
-                {
-                    return CodeNamer.QuoteValue(defaultValue);
-                }
-                else if (type is PrimaryType.Boolean)
-                {
-                    return defaultValue.ToLowerInvariant();
-                }
-                else if (type is CompositeType)
+                if (type is CompositeType)
                 {
                     return "new " + type.Name + "()";
                 }
-                else
+                else if (primaryType != null)
                 {
-                    if (type is PrimaryType.Date ||
-                        type is PrimaryType.DateTime ||
-                        type is PrimaryType.DateTimeRfc1123 ||
-                        type is PrimaryType.TimeSpan ||
-                        type is PrimaryType.ByteArray)
+                    if (primaryType.Type == KnownPrimaryType.String)
                     {
+                        return CodeNamer.QuoteValue(defaultValue);
+                    }
+                    else if (primaryType.Type == KnownPrimaryType.Boolean)
+                    {
+                        return defaultValue.ToLowerInvariant();
+                    }
+                    else
+                    {
+                        if (primaryType.Type == KnownPrimaryType.Date ||
+                            primaryType.Type == KnownPrimaryType.DateTime ||
+                            primaryType.Type == KnownPrimaryType.DateTimeRfc1123 ||
+                            primaryType.Type == KnownPrimaryType.TimeSpan ||
+                            primaryType.Type == KnownPrimaryType.ByteArray)
+                        {
 
-                        return "SafeJsonConvert.DeserializeObject<" + type.Name.TrimEnd('?') +
-                            ">(" + CodeNamer.QuoteValue("\"" + defaultValue + "\"") + ", this.Client.SerializationSettings)";
+                            return "SafeJsonConvert.DeserializeObject<" + primaryType.Name.TrimEnd('?') +
+                                ">(" + CodeNamer.QuoteValue("\"" + defaultValue + "\"") + ", this.Client.SerializationSettings)";
+                        }
                     }
                 }
             }

@@ -47,10 +47,10 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             EnumType enumType = sequence.ElementType as EnumType;
             if (enumType != null && enumType.ModelAsString)
             {
-                primaryType = new PrimaryType.String();
+                primaryType = new PrimaryType(KnownPrimaryType.String);
             }
 
-            if (!(primaryType is PrimaryType.String))
+            if (primaryType == null || primaryType.Type != KnownPrimaryType.String)
             {
                 throw new InvalidOperationException(
                     string.Format(CultureInfo.InvariantCulture,
@@ -95,33 +95,36 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
         {
             var known = type as PrimaryType;
             var enumType = type as EnumType;
-            if (enumType != null || known is PrimaryType.String)
+            if (enumType != null || known.IsPrimaryType(KnownPrimaryType.String))
             {
                 return reference;
             }
 
-            if (known is PrimaryType.Date)
+            if (known != null)
             {
-                return string.Format(CultureInfo.InvariantCulture,
-                    "client.serializeObject({0}).replace(/[Tt].*[Zz]/, '')", reference);
-            }
+                if (known.Type == KnownPrimaryType.Date)
+                {
+                    return string.Format(CultureInfo.InvariantCulture,
+                        "client.serializeObject({0}).replace(/[Tt].*[Zz]/, '')", reference);
+                }
 
-            if (known is PrimaryType.DateTimeRfc1123)
-            {
-                return string.Format(CultureInfo.InvariantCulture, "{0}.toUTCString()", reference);
-            }
+                if (known.Type == KnownPrimaryType.DateTimeRfc1123)
+                {
+                    return string.Format(CultureInfo.InvariantCulture, "{0}.toUTCString()", reference);
+                }
 
-            if (known is PrimaryType.DateTime || 
-                known is PrimaryType.ByteArray)
-            {
-                return string.Format(CultureInfo.InvariantCulture,
-                    "client.serializeObject({0})", reference);
-            }
+                if (known.Type == KnownPrimaryType.DateTime ||
+                    known.Type == KnownPrimaryType.ByteArray)
+                {
+                    return string.Format(CultureInfo.InvariantCulture,
+                        "client.serializeObject({0})", reference);
+                }
 
-            if (known is PrimaryType.TimeSpan)
-            {
-                return string.Format(CultureInfo.InvariantCulture,
-                    "{0}.toISOString()", reference);
+                if (known.Type == KnownPrimaryType.TimeSpan)
+                {
+                    return string.Format(CultureInfo.InvariantCulture,
+                        "{0}.toISOString()", reference);
+                }
             }
 
             return string.Format(CultureInfo.InvariantCulture, "{0}.toString()", reference);
@@ -172,16 +175,21 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 throw new ArgumentNullException("scope");
             }
 
+            if (primary == null)
+            {
+                throw new ArgumentNullException("primary");
+            }
+
             var builder = new IndentedStringBuilder("  ");
             var requiredTypeErrorMessage = "throw new Error('{0} cannot be null or undefined and it must be of type {1}.');";
             var typeErrorMessage = "throw new Error('{0} must be of type {1}.');";
             var lowercaseTypeName = primary.Name.ToLower(CultureInfo.InvariantCulture);
-            if (primary is PrimaryType.Boolean ||
-                primary is PrimaryType.Double ||
-                primary is PrimaryType.Decimal ||
-                primary is PrimaryType.Int ||
-                primary is PrimaryType.Long ||
-                primary is PrimaryType.Object)
+            if (primary.Type == KnownPrimaryType.Boolean ||
+                primary.Type == KnownPrimaryType.Double ||
+                primary.Type == KnownPrimaryType.Decimal ||
+                primary.Type == KnownPrimaryType.Int ||
+                primary.Type == KnownPrimaryType.Long ||
+                primary.Type == KnownPrimaryType.Object)
             {
                 if (isRequired)
                 {
@@ -192,7 +200,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 builder.AppendLine("if ({0} !== null && {0} !== undefined && typeof {0} !== '{1}') {{", valueReference, lowercaseTypeName);
                 return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
             }
-            else if (primary is PrimaryType.Stream)
+            else if (primary.Type == KnownPrimaryType.Stream)
             {
                 if (isRequired)
                 {
@@ -203,7 +211,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 builder.AppendLine("if ({0} !== null && {0} !== undefined && typeof {0}.valueOf() !== '{1}') {{", valueReference, lowercaseTypeName);
                 return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
             }
-            else if (primary is PrimaryType.String)
+            else if (primary.Type == KnownPrimaryType.String)
             {
                 if (isRequired)
                 {
@@ -215,7 +223,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 builder.AppendLine("if ({0} !== null && {0} !== undefined && typeof {0}.valueOf() !== '{1}') {{", valueReference, lowercaseTypeName);
                 return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
             }
-            else if (primary is PrimaryType.ByteArray)
+            else if (primary.Type == KnownPrimaryType.ByteArray)
             {
                 if (isRequired)
                 {
@@ -226,7 +234,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 builder.AppendLine("if ({0} && !Buffer.isBuffer({0})) {{", valueReference, lowercaseTypeName);
                 return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
             }
-            else if (primary is PrimaryType.DateTime || primary is PrimaryType.Date || primary is PrimaryType.DateTimeRfc1123)
+            else if (primary.Type == KnownPrimaryType.DateTime || primary.Type == KnownPrimaryType.Date || primary.Type == KnownPrimaryType.DateTimeRfc1123)
             {
                 if (isRequired)
                 {
@@ -243,7 +251,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                                               .AppendLine("(typeof {0}.valueOf() === 'string' && !isNaN(Date.parse({0}))))) {{", valueReference);
                 return ConstructValidationCheck(builder, typeErrorMessage, valueReference, primary.Name).ToString();
             }
-            else if (primary is PrimaryType.TimeSpan)
+            else if (primary.Type == KnownPrimaryType.TimeSpan)
             {
                 if (isRequired)
                 {
@@ -268,23 +276,28 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
         /// <returns>The TypeScript type correspoinding to this model primary type</returns>
         private static string PrimaryTSType(this PrimaryType primary) 
         {
-            if (primary is PrimaryType.Boolean)
+            if (primary == null)
+            {
+                throw new ArgumentNullException("primary");
+            }
+
+            if (primary.Type == KnownPrimaryType.Boolean)
                 return "boolean";
-            else if (primary is PrimaryType.Double || primary is PrimaryType.Decimal || primary is PrimaryType.Int || primary is PrimaryType.Long)
+            else if (primary.Type == KnownPrimaryType.Double || primary.Type == KnownPrimaryType.Decimal || primary.Type == KnownPrimaryType.Int || primary.Type == KnownPrimaryType.Long)
                 return "number";
-            else if (primary is PrimaryType.String)
+            else if (primary.Type == KnownPrimaryType.String)
                 return "string";
-            else if (primary is PrimaryType.Date || primary is PrimaryType.DateTime || primary is PrimaryType.DateTimeRfc1123)
+            else if (primary.Type == KnownPrimaryType.Date || primary.Type == KnownPrimaryType.DateTime || primary.Type == KnownPrimaryType.DateTimeRfc1123)
                 return "Date";
-            else if (primary is PrimaryType.Object)
+            else if (primary.Type == KnownPrimaryType.Object)
                 return "any";   // TODO: test this
-            else if (primary is PrimaryType.ByteArray)  
+            else if (primary.Type == KnownPrimaryType.ByteArray)  
                 return "Buffer";  
-            else if (primary is PrimaryType.Stream)  
+            else if (primary.Type == KnownPrimaryType.Stream)  
                 return "stream.Readable";
-            else if (primary is PrimaryType.TimeSpan)
+            else if (primary.Type == KnownPrimaryType.TimeSpan)
                 return "moment.Duration"; //TODO: test this, add include for it
-            else if (primary is PrimaryType.Credentials)
+            else if (primary.Type == KnownPrimaryType.Credentials)
                 return "ServiceClientCredentials"; //TODO: test this, add include for it
             else {
                 throw new NotImplementedException(string.Format(CultureInfo.InvariantCulture,
@@ -700,43 +713,43 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             // Add type information 
             if (primary != null)
             {
-                if (primary is PrimaryType.Boolean)
+                if (primary.Type == KnownPrimaryType.Boolean)
                 {
                     builder.AppendLine("type: {").Indent().AppendLine("name: 'Boolean'").Outdent().AppendLine("}");
                 }
-                else if(primary is PrimaryType.Int || primary is PrimaryType.Long || primary is PrimaryType.Decimal || primary is PrimaryType.Double)
+                else if(primary.Type == KnownPrimaryType.Int || primary.Type == KnownPrimaryType.Long || primary.Type == KnownPrimaryType.Decimal || primary.Type == KnownPrimaryType.Double)
                 {
                     builder.AppendLine("type: {").Indent().AppendLine("name: 'Number'").Outdent().AppendLine("}");
                 }
-                else if (primary is PrimaryType.String)
+                else if (primary.Type == KnownPrimaryType.String)
                 {
                     builder.AppendLine("type: {").Indent().AppendLine("name: 'String'").Outdent().AppendLine("}");
                 }
-                else if (primary is PrimaryType.ByteArray)
+                else if (primary.Type == KnownPrimaryType.ByteArray)
                 {
                     builder.AppendLine("type: {").Indent().AppendLine("name: 'ByteArray'").Outdent().AppendLine("}");
                 }
-                else if (primary is PrimaryType.Date)
+                else if (primary.Type == KnownPrimaryType.Date)
                 {
                     builder.AppendLine("type: {").Indent().AppendLine("name: 'Date'").Outdent().AppendLine("}");
                 }
-                else if (primary is PrimaryType.DateTime)
+                else if (primary.Type == KnownPrimaryType.DateTime)
                 {
                     builder.AppendLine("type: {").Indent().AppendLine("name: 'DateTime'").Outdent().AppendLine("}");
                 }
-                else if (primary is PrimaryType.DateTimeRfc1123)
+                else if (primary.Type == KnownPrimaryType.DateTimeRfc1123)
                 {
                     builder.AppendLine("type: {").Indent().AppendLine("name: 'DateTimeRfc1123'").Outdent().AppendLine("}");
                 }
-                else if (primary is PrimaryType.TimeSpan)
+                else if (primary.Type == KnownPrimaryType.TimeSpan)
                 {
                     builder.AppendLine("type: {").Indent().AppendLine("name: 'TimeSpan'").Outdent().AppendLine("}");
                 }
-                else if (primary is PrimaryType.Object)
+                else if (primary.Type == KnownPrimaryType.Object)
                 {
                     builder.AppendLine("type: {").Indent().AppendLine("name: 'Object'").Outdent().AppendLine("}");
                 }
-                else if (primary is PrimaryType.Stream)
+                else if (primary.Type == KnownPrimaryType.Stream)
                 {
                     builder.AppendLine("type: {").Indent().AppendLine("name: 'Stream'").Outdent().AppendLine("}");
                 }
@@ -874,9 +887,9 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             }
 
             Property prop = type.Properties.FirstOrDefault(p =>
-                p.Type is PrimaryType.TimeSpan ||
-                (p.Type is SequenceType && (p.Type as SequenceType).ElementType is PrimaryType.TimeSpan) ||
-                (p.Type is DictionaryType && (p.Type as DictionaryType).ValueType is PrimaryType.TimeSpan));
+                p.Type.IsPrimaryType(KnownPrimaryType.TimeSpan) ||
+                (p.Type is SequenceType && (p.Type as SequenceType).ElementType.IsPrimaryType(KnownPrimaryType.TimeSpan)) ||
+                (p.Type is DictionaryType && (p.Type as DictionaryType).ValueType.IsPrimaryType(KnownPrimaryType.TimeSpan)));
 
             return prop != null;
         }

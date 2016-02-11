@@ -82,7 +82,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                 Name = "customHeaders",
                 IsRequired = false,
                 Documentation = "Headers that will be added to the request",
-                Type = new PrimaryType.Object(),
+                Type = new PrimaryType(KnownPrimaryType.Object),
                 SerializedName = "customHeaders"
             };
             ((CompositeType)optionsParmeter.Type).Properties.Add(customHeaders);
@@ -167,7 +167,7 @@ namespace Microsoft.Rest.Generator.NodeJS
 
                 // For date/datetime parameters, use a union type to reflect that they can be passed as a JS Date or a string.
                 var type = parameter.Type;
-                if (type is PrimaryType.Date || type is PrimaryType.DateTime)
+                if (type.IsPrimaryType(KnownPrimaryType.Date) || type.IsPrimaryType(KnownPrimaryType.DateTime))
                     declarations.Append("Date|string");
                 else declarations.Append(type.TSType(false));
 

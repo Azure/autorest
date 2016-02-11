@@ -8,124 +8,36 @@ namespace Microsoft.Rest.Generator.ClientModel
     /// <summary>
     /// Defines known model type.
     /// </summary>
-    public abstract class PrimaryType : IType
+    public class PrimaryType : IType
     {
         /// <summary>
-        /// Defines object model type.
+        /// Initializes a new instance of PrimaryType class.
         /// </summary>
-        public class Object : PrimaryType
-        {
+        public PrimaryType() : this(KnownPrimaryType.None)
+        { }
 
+        /// <summary>
+        /// Initializes a new instance of PrimaryType class from a known type.
+        /// </summary>
+        public PrimaryType(KnownPrimaryType type)
+        {
+            Type = type;
+            Name = Type.ToString();
         }
 
         /// <summary>
-        /// Defines int model type.
+        /// Initializes a new instance of PrimaryType class from a known type and a name.
         /// </summary>
-        public class Int : PrimaryType
+        public PrimaryType(KnownPrimaryType type, string name)
         {
-
+            Type = type;
+            Name = name;
         }
 
         /// <summary>
-        /// Defines long model type.
+        /// Gets or sets the underlying known type.
         /// </summary>
-        public class Long : PrimaryType
-        {
-
-        }
-
-        /// <summary>
-        /// Defines double model type.
-        /// </summary>
-        public class Double : PrimaryType
-        {
-
-        }
-
-        /// <summary>
-        /// Defines decimal model type.
-        /// </summary>
-        public class Decimal : PrimaryType
-        {
-
-        }
-
-        /// <summary>
-        /// Defines string model type.
-        /// </summary>
-        public class String : PrimaryType
-        {
-
-        }
-
-        /// <summary>
-        /// Defines byte array model type.
-        /// </summary>
-        public class ByteArray : PrimaryType
-        {
-
-        }
-
-        /// <summary>
-        /// Defines time span model type.
-        /// </summary>
-        public class TimeSpan : PrimaryType
-        {
-
-        }
-
-        /// <summary>
-        /// Defines date model type.
-        /// </summary>
-        public class Date : PrimaryType
-        {
-
-        }
-
-        /// <summary>
-        /// Defines date time model type.
-        /// </summary>
-        public class DateTime : PrimaryType
-        {
-
-        }
-
-        /// <summary>
-        /// Defines date time RFC1123 formatted model type.
-        /// </summary>
-        public class DateTimeRfc1123 : PrimaryType
-        {
-
-        }
-
-        /// <summary>
-        /// Defines stream model type.
-        /// </summary>
-        public class Stream : PrimaryType
-        {
-
-        }
-
-        /// <summary>
-        /// Defines boolean model type.
-        /// </summary>
-        public class Boolean : PrimaryType
-        {
-
-        }
-
-        /// <summary>
-        /// Defines credentials model type.
-        /// </summary>
-        public class Credentials : PrimaryType
-        {
-
-        }
-
-        protected PrimaryType()
-        {
-            Name = this.GetType().Name;
-        }
+        public KnownPrimaryType Type { get; set; }
 
         /// <summary>
         /// Gets or sets the model type name on the wire.
@@ -136,6 +48,11 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// Gets or sets the model type name.
         /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets the model type format.
+        /// </summary>
+        public string Format { get; set; }
 
         /// <summary>
         /// Returns a string representation of the PrimaryType object.

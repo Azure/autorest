@@ -72,7 +72,7 @@ namespace Microsoft.Rest.Generator.CSharp
                 serviceClient.Properties.Add(new Property
                 {
                     Name = "Credentials",
-                    Type = new PrimaryType.Credentials(),
+                    Type = new PrimaryType(KnownPrimaryType.Credentials),
                     IsRequired = true,
                     IsReadOnly = true,
                     Documentation = "Subscription credentials which uniquely identify client subscription."

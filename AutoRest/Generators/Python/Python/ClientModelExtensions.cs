@@ -36,13 +36,13 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
             EnumType enumType = sequence.ElementType as EnumType;
             if (enumType != null)
             {
-                primaryType = new PrimaryType.String
+                primaryType = new PrimaryType(KnownPrimaryType.String)
                 {
                     Name = "str"
                 };
             }
 
-            if (!(primaryType is PrimaryType.String))
+            if (primaryType != null && primaryType.Type != KnownPrimaryType.String)
             {
                 throw new InvalidOperationException(
                     string.Format(CultureInfo.InvariantCulture,
@@ -126,24 +126,27 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
 
             var known = type as PrimaryType;
 
-            if (known is PrimaryType.Date)
+            if (known != null)
             {
-                return "date";
-            }
+                if (known.Type == KnownPrimaryType.Date)
+                {
+                    return "date";
+                }
 
-            if (known is PrimaryType.DateTimeRfc1123)
-            {
-                return "rfc-1123";
-            }
+                if (known.Type == KnownPrimaryType.DateTimeRfc1123)
+                {
+                    return "rfc-1123";
+                }
 
-            if (known is PrimaryType.DateTime)
-            {
-                return "iso-8601"; 
-            }
+                if (known.Type == KnownPrimaryType.DateTime)
+                {
+                    return "iso-8601";
+                }
 
-            if (known is PrimaryType.TimeSpan)
-            {
-                return "duration";
+                if (known.Type == KnownPrimaryType.TimeSpan)
+                {
+                    return "duration";
+                }
             }
 
             var sequenceType = type as SequenceType;
@@ -185,9 +188,9 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
             }
 
             Property prop = type.Properties.FirstOrDefault(p =>
-                p.Type is PrimaryType.Decimal ||
-                (p.Type is SequenceType && (p.Type as SequenceType).ElementType is PrimaryType.Decimal) ||
-                (p.Type is DictionaryType && (p.Type as DictionaryType).ValueType is PrimaryType.Decimal));
+                p.Type.IsPrimaryType(KnownPrimaryType.Decimal) ||
+                (p.Type is SequenceType && (p.Type as SequenceType).ElementType.IsPrimaryType(KnownPrimaryType.Decimal)) ||
+                (p.Type is DictionaryType && (p.Type as DictionaryType).ValueType.IsPrimaryType(KnownPrimaryType.Decimal)));
 
             return prop != null;
         }

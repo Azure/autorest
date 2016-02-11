@@ -257,52 +257,57 @@ namespace Microsoft.Rest.Generator.Ruby
         /// <returns>Normalized primary type.</returns>
         private IType NormalizePrimaryType(PrimaryType primaryType)
         {
-            if (primaryType is PrimaryType.Boolean)
+            if (primaryType == null)
+            {
+                throw new ArgumentNullException("primaryType");
+            }
+
+            if (primaryType.Type == KnownPrimaryType.Boolean)
             {
                 primaryType.Name = "Boolean";
             }
-            else if (primaryType is PrimaryType.ByteArray)
+            else if (primaryType.Type == KnownPrimaryType.ByteArray)
             {
                 primaryType.Name = "Array";
             }
-            else if (primaryType is PrimaryType.DateTime)
+            else if (primaryType.Type == KnownPrimaryType.DateTime)
             {
                 primaryType.Name = "DateTime";
             }
-            else if (primaryType is PrimaryType.DateTimeRfc1123)
+            else if (primaryType.Type == KnownPrimaryType.DateTimeRfc1123)
             {
                 primaryType.Name = "DateTime";
             }
-            else if (primaryType is PrimaryType.Double)
+            else if (primaryType.Type == KnownPrimaryType.Double)
             {
                 primaryType.Name = "Float";
             }
-            else if (primaryType is PrimaryType.Decimal)
+            else if (primaryType.Type == KnownPrimaryType.Decimal)
             {
                 primaryType.Name = "Float";
             }
-            else if (primaryType is PrimaryType.Int)
+            else if (primaryType.Type == KnownPrimaryType.Int)
             {
                 primaryType.Name = "Number";
             }
-            else if (primaryType is PrimaryType.Long)
+            else if (primaryType.Type == KnownPrimaryType.Long)
             {
                 primaryType.Name = "Bignum";
             }
-            else if (primaryType is PrimaryType.Stream)
+            else if (primaryType.Type == KnownPrimaryType.Stream)
             {
                 // TODO: Ruby doesn't supports streams.
                 primaryType.Name = "System.IO.Stream";
             }
-            else if (primaryType is PrimaryType.String)
+            else if (primaryType.Type == KnownPrimaryType.String)
             {
                 primaryType.Name = "String";
             }
-            else if (primaryType is PrimaryType.TimeSpan)
+            else if (primaryType.Type == KnownPrimaryType.TimeSpan)
             {
                 primaryType.Name = "Duration";
             }
-            else if (primaryType is PrimaryType.Object)
+            else if (primaryType.Type == KnownPrimaryType.Object)
             {
                 primaryType.Name = "Object";
             }
@@ -341,27 +346,28 @@ namespace Microsoft.Rest.Generator.Ruby
                 throw new ArgumentNullException("type");
             }
 
-            if (defaultValue != null)
+            PrimaryType primaryType = type as PrimaryType;
+            if (defaultValue != null && primaryType != null)
             {
-                if (type is PrimaryType.String)
+                if (primaryType.Type == KnownPrimaryType.String)
                 {
                     return CodeNamer.QuoteValue(defaultValue, quoteChar: "'");
                 }
-                else if (type is PrimaryType.Boolean)
+                else if (primaryType.Type == KnownPrimaryType.Boolean)
                 {
                     return defaultValue.ToLowerInvariant();
                 }
                 else
                 {
-                    if (type is PrimaryType.Date ||
-                        type is PrimaryType.DateTime ||
-                        type is PrimaryType.DateTimeRfc1123 ||
-                        type is PrimaryType.TimeSpan)
+                    if (primaryType.Type == KnownPrimaryType.Date ||
+                        primaryType.Type == KnownPrimaryType.DateTime ||
+                        primaryType.Type == KnownPrimaryType.DateTimeRfc1123 ||
+                        primaryType.Type == KnownPrimaryType.TimeSpan)
                     {
                         return "Date.parse('" + defaultValue + "')";
                     }
 
-                    if (type is PrimaryType.ByteArray)
+                    if (primaryType.Type == KnownPrimaryType.ByteArray)
                     {
                         return "'" + defaultValue + "'.bytes.to_a";
                     }

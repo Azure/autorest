@@ -80,7 +80,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
 
                 if (filterParameter != null)
                 {
-                    filterParameter.Type = new PrimaryType.String();
+                    filterParameter.Type = new PrimaryType(KnownPrimaryType.String);
                 }
             }
         }

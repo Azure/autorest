@@ -43,7 +43,7 @@ namespace Microsoft.Rest.Generator.Python
 
         public bool IsStreamResponse
         {
-            get { return this.ReturnType.Body is PrimaryType.Stream; }
+            get { return this.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Stream); }
         }
 
         public bool IsStreamRequestBody
@@ -52,7 +52,7 @@ namespace Microsoft.Rest.Generator.Python
             {
                 foreach (var parameter in LocalParameters)
                 {
-                    if (parameter.Location == ParameterLocation.Body && parameter.Type is PrimaryType.Stream)
+                    if (parameter.Location == ParameterLocation.Body && parameter.Type.IsPrimaryType(KnownPrimaryType.Stream))
                     {
                         return true;
                     }
@@ -476,9 +476,10 @@ namespace Microsoft.Rest.Generator.Python
 
             string result = "object";
 
-            if (type is PrimaryType)
+            var primaryType = type as PrimaryType;
+            if (primaryType != null)
             {
-                if (type is PrimaryType.Stream)
+                if (primaryType.Type == KnownPrimaryType.Stream)
                 {
                     result = "Generator";
                 }

@@ -29,7 +29,7 @@ namespace Microsoft.Rest.Generator.NodeJS
                         Name = source.PolymorphicDiscriminator,
                         SerializedName = source.PolymorphicDiscriminator,
                         Documentation = "Polymorhpic Discriminator",
-                        Type = new PrimaryType.String()
+                        Type = new PrimaryType(KnownPrimaryType.String)
                     };
                     source.Properties.Add(polymorphicProperty);
                 }
@@ -200,9 +200,9 @@ namespace Microsoft.Rest.Generator.NodeJS
         public bool ContainsDurationProperty()
         {
             Property prop = ComposedProperties.FirstOrDefault(p =>
-                (p.Type is PrimaryType && (p.Type as PrimaryType) is PrimaryType.TimeSpan) ||
-                (p.Type is SequenceType && (p.Type as SequenceType).ElementType is PrimaryType.TimeSpan) ||
-                (p.Type is DictionaryType && (p.Type as DictionaryType).ValueType is PrimaryType.TimeSpan));
+                (p.Type is PrimaryType && (p.Type as PrimaryType).Type == KnownPrimaryType.TimeSpan) ||
+                (p.Type is SequenceType && (p.Type as SequenceType).ElementType.IsPrimaryType(KnownPrimaryType.TimeSpan)) ||
+                (p.Type is DictionaryType && (p.Type as DictionaryType).ValueType.IsPrimaryType(KnownPrimaryType.TimeSpan)));
             return prop != null;
         }
 

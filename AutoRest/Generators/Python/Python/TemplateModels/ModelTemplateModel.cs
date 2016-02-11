@@ -30,7 +30,7 @@ namespace Microsoft.Rest.Generator.Python
                         Name = source.PolymorphicDiscriminator,
                         SerializedName = source.PolymorphicDiscriminator,
                         Documentation = "Polymorphic Discriminator",
-                        Type = new PrimaryType.String { Name = "str" }
+                        Type = new PrimaryType(KnownPrimaryType.String) { Name = "str" }
                     };
                     source.Properties.Add(polymorphicProperty);
                 }
@@ -203,17 +203,18 @@ namespace Microsoft.Rest.Generator.Python
 
         private static string GetPythonSerializationType(IType type)
         {
-            Dictionary<Type, string> typeNameMapping = new Dictionary<Type, string>()
+            Dictionary<KnownPrimaryType, string> typeNameMapping = new Dictionary<KnownPrimaryType, string>()
                         {
-                            { typeof(PrimaryType.DateTime), "iso-8601" },
-                            { typeof(PrimaryType.DateTimeRfc1123), "rfc-1123" },
-                            { typeof(PrimaryType.TimeSpan), "duration" }
+                            { KnownPrimaryType.DateTime, "iso-8601" },
+                            { KnownPrimaryType.DateTimeRfc1123, "rfc-1123" },
+                            { KnownPrimaryType.TimeSpan, "duration" }
                         };
+            PrimaryType primaryType = type as PrimaryType;
             if (type is PrimaryType)
             {
-                if (typeNameMapping.ContainsKey(type.GetType()))
+                if (typeNameMapping.ContainsKey(primaryType.Type))
                 {
-                    return typeNameMapping[type.GetType()];
+                    return typeNameMapping[primaryType.Type];
                 }
                 else 
                 {
@@ -225,10 +226,11 @@ namespace Microsoft.Rest.Generator.Python
             if (sequenceType != null)
             {
                 IType innerType = sequenceType.ElementType;
+                PrimaryType innerPrimaryType = innerType as PrimaryType;
                 string innerTypeName;
-                if (typeNameMapping.ContainsKey(innerType.GetType()))
+                if (innerPrimaryType != null && typeNameMapping.ContainsKey(innerPrimaryType.Type))
                 {
-                    innerTypeName = typeNameMapping[innerType.GetType()];
+                    innerTypeName = typeNameMapping[innerPrimaryType.Type];
                 }
                 else
                 {
@@ -241,10 +243,11 @@ namespace Microsoft.Rest.Generator.Python
             if (dictType != null)
             {
                 IType innerType = dictType.ValueType;
+                PrimaryType innerPrimaryType = innerType as PrimaryType;
                 string innerTypeName;
-                if (typeNameMapping.ContainsKey(innerType.GetType()))
+                if (innerPrimaryType != null && typeNameMapping.ContainsKey(innerPrimaryType.Type))
                 {
-                    innerTypeName = typeNameMapping[innerType.GetType()];
+                    innerTypeName = typeNameMapping[innerPrimaryType.Type];
                 }
                 else
                 {

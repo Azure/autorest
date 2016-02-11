@@ -96,7 +96,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
         {
             get
             {
-                if (this.HttpMethod == HttpMethod.Head && this.ReturnType.Body is PrimaryType.Boolean)
+                if (this.HttpMethod == HttpMethod.Head && this.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Boolean))
                 {
                     HttpStatusCode code = this.Responses.Keys.FirstOrDefault(AzureExtensions.HttpHeadStatusCodeSuccessFunc);
                     var builder = new IndentedStringBuilder("    ");

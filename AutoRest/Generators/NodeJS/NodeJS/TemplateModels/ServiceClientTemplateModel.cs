@@ -50,9 +50,9 @@ namespace Microsoft.Rest.Generator.NodeJS
         public bool ContainsDurationProperty()
         {
             Property prop = Properties.FirstOrDefault(p =>
-                (p.Type is PrimaryType && (p.Type as PrimaryType) is PrimaryType.TimeSpan) ||
-                (p.Type is SequenceType && (p.Type as SequenceType).ElementType is PrimaryType.TimeSpan) ||
-                (p.Type is DictionaryType && (p.Type as DictionaryType).ValueType is PrimaryType.TimeSpan));
+                (p.Type is PrimaryType && (p.Type as PrimaryType).Type == KnownPrimaryType.TimeSpan) ||
+                (p.Type is SequenceType && (p.Type as SequenceType).ElementType.IsPrimaryType(KnownPrimaryType.TimeSpan)) ||
+                (p.Type is DictionaryType && (p.Type as DictionaryType).ValueType.IsPrimaryType(KnownPrimaryType.TimeSpan)));
             return prop != null;
         }
 
@@ -173,7 +173,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             get
             {
                 return this.Methods.FirstOrDefault(
-                    m => m.Parameters.FirstOrDefault(p => p.Type is PrimaryType.TimeSpan) != null) != null;
+                    m => m.Parameters.FirstOrDefault(p => p.Type.IsPrimaryType(KnownPrimaryType.TimeSpan)) != null) != null;
             }
         }
     }

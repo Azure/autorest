@@ -71,13 +71,13 @@ namespace Microsoft.Rest.Generator.NodeJS
         {
             if (Settings.AddCredentials)
             {
-                if (!serviceClient.Properties.Any(p => p.Type is PrimaryType.Credentials))
+                if (!serviceClient.Properties.Any(p => p.Type.IsPrimaryType(KnownPrimaryType.Credentials)))
                 {
                     serviceClient.Properties.Add(new Property
                     {
                         Name = "credentials",
                         SerializedName = "credentials",
-                        Type = new PrimaryType.Credentials(),
+                        Type = new PrimaryType(KnownPrimaryType.Credentials),
                         IsRequired = true,
                         Documentation = "Subscription credentials which uniquely identify client subscription."
                     });

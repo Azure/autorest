@@ -57,7 +57,7 @@ namespace Microsoft.Rest.Generator.Java
             {
                 HashSet<string> classes = new HashSet<string>();
 
-                if (this.Properties.Any(p => p.Type is PrimaryType.Credentials))
+                if (this.Properties.Any(p => p.Type.IsPrimaryType(KnownPrimaryType.Credentials)))
                 {
                     classes.Add("com.microsoft.rest.credentials.ServiceClientCredentials");
                 }
@@ -90,7 +90,7 @@ namespace Microsoft.Rest.Generator.Java
                 classes.Add("com.squareup.okhttp.Interceptor");
                 classes.Add("com.squareup.okhttp.logging.HttpLoggingInterceptor.Level");
                 classes.Add("com.microsoft.rest.serializer.JacksonMapperAdapter");
-                if (this.Properties.Any(p => p.Type is PrimaryType.Credentials))
+                if (this.Properties.Any(p => p.Type.IsPrimaryType(KnownPrimaryType.Credentials)))
                 {
                     classes.Add("com.microsoft.rest.credentials.ServiceClientCredentials");
                 }
