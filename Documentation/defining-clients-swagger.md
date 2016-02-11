@@ -13,11 +13,13 @@ API descriptions that are valid according to the schema can produce client libra
 	- [Inheritance and Polymorphism](#inheritance-and-polymorphism)
 		- [Inheritance](#inheritance)
 		- [Polymorphism](#polymorphism)
+		- [Constants](#constants)
 	- [Type Name Generation](#type-name-generation)
 - [Operations](#operations)
 	- [Generating Operation Classes](#generating-operation-classes)
 	- [Specifying required parameters and properties](#specifying-required-parameters-and-properties)
 	- [Error Modeling](#error-modeling)
+	- [Composite Clients](#composite-clients)
 - [Extensions](#extensions)
 
 ## Data Types
@@ -215,6 +217,75 @@ public partial class Pet
     public Pet()
     {
     }
+}
+```
+
+### Constants
+AutoRest generates constant value for _required_ parameters and properties defined with _one_ enum value. Constant operation parameters are not exposed to the end user and are injected in the method body. Constant definition properties are also automatically added to the payload body.
+
+Example of a constant in a definition:
+```js
+"Product": {
+   "description": "The product documentation.",
+   "required": [ "constProperty" ],
+   "properties": {
+     "constProperty": {
+       "type": "string",
+       "description": "Constant string",
+       "enum": [ "some value" ]
+     }
+   }
+ }
+```
+become
+``` cs
+/// <summary>
+/// The product documentation.
+/// </summary>
+public partial class Product
+{
+    /// <summary>
+    /// Initializes a new instance of the ConstantProduct class.
+    /// </summary>
+    public ConstantProduct() { }
+
+    /// <summary>
+    /// Static constructor for ConstantProduct class.
+    /// </summary>
+    static ConstantProduct()
+    {
+        ConstProperty = "some value";
+    }
+
+    /// <summary>
+    /// Constant string
+    /// </summary>
+    [JsonProperty(PropertyName = "constProperty")]
+    public static string ConstProperty { get; private set; }
+```
+
+
+Example of a constant in an operation:
+```js
+"post": {
+  "operationId": "myOperation",
+  "parameters": [
+     {
+       "name": "constantParam",
+       "type": "string",
+       "enum": [ "some value" ],
+       "in": "path",
+       "required": true
+     }
+  ]
+}
+```
+becomes
+```cs
+public async Task<HttpOperationResponse> MyOperationWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+{
+     string constantParam = "some value";
+     ...
 }
 ```
 
@@ -587,6 +658,48 @@ if ((int)_statusCode != 200)
 
 See [Error Handling](clients-error.md) for details on how to catch and use the exceptions from generated clients.
 
+### Composite Clients
+AutoRest supports a concept of a composite client where multiple swagger documents are merged together to generate a single ServiceClient. To use this feature the swagger documents need to conform to the following rules:
+
+   1. All swagger documents must share the same `host` and `basePath` values
+   2. All definitions with same names must be identical
+   3. All global client parameters with same names must be identical
+   4. Methods with the same `operationId` but different signature are allowed. However, there should be no methods with the same `operationId` and same signature.
+
+For Azure generators, composite clients will not have ApiVersion global property but will instead have apiVersion operation constants. 
+
+#### Generating Composite Clients
+In order to generate a composite client a custom metadata needs to be created.
+
+**Schema**: 
+Field Name | Type | Description
+---|:---:|---
+info| [`Info Object`](http://swagger.io/specification/#infoObject) | **Required**. The info object defines the name and description of the composite client.
+documents| string[] | **Required**. Collection of URLs or local paths that point to individual swagger documents. These URLs or paths are relative to the current working directory and as such it is strongly recommended to use absolute URLs.
+
+**Example**:
+```js
+{
+  "info": {
+    "title": "Composite Model",
+    "description": "Composite Swagger Client that represents merging two clients"
+  },
+  "documents": [
+    "http://myserver/swagger/swagger1.json",
+    "http://myserver/swagger/swagger2.json"
+  ]
+}
+```
+
+**Command Line**:
+
+A `CompositeSwagger` modeler should be used to generate composite clients. For example:
+
+```bash
+autorest.exe -modeler CompositeSwagger -input compositeDoc.json -output C:\Temp -codeGenerator CSharp
+```
+
+ 
 ## Extensions
 AutoRest supports a number of extensions used to configure generated clients. Please refer to [Swagger Extensions](swagger-extensions.md) document for details.
 
