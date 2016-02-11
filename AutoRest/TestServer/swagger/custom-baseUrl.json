@@ -14,7 +14,8 @@
         "description": "Account Name",
         "required": true,
         "type": "string",
-        "in": "path"
+        "in": "path",
+        "x-ms-skip-url-encoding": true
       },
       {
         "$ref": "#/parameters/host"
@@ -52,7 +53,8 @@
       "type": "string",
       "required": false,
       "default": "host",
-      "in": "path"
+      "in": "path",
+      "x-ms-skip-url-encoding": true
     }
   },
   "definitions": {

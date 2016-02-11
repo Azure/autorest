@@ -1895,6 +1895,8 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 SwaggerPath("custom-baseUrl.json"), ExpectedPath("CustomBaseUri"));
             using (var client = new AutoRestParameterizedHostTestClient())
             {
+                // small modification to the "host" portion to include the port and the '.'
+                client.Host = string.Format(CultureInfo.InvariantCulture, "{0}.:{1}", client.Host, Fixture.Port);
                 Assert.Equal(HttpStatusCode.OK,
                     client.Paths.GetBooleanTrueWithHttpMessagesAsync("local").Result.Response.StatusCode);
             }
@@ -1908,16 +1910,16 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             using (var client = new AutoRestParameterizedHostTestClient())
             {
                 // use a bad acct name
-                Assert.NotEqual(HttpStatusCode.OK,
-                    client.Paths.GetBooleanTrueWithHttpMessagesAsync("bad").Result.Response.StatusCode);
+                Assert.Throws<Exception>(() =>
+                    client.Paths.GetBooleanTrue("bad"));
 
                 // pass in null
                 Assert.Throws<ValidationException>(() => client.Paths.GetBooleanTrue(null));
 
                 // set the global parameter incorrectly
                 client.Host = "badSuffix";
-                Assert.NotEqual(HttpStatusCode.OK,
-                    client.Paths.GetBooleanTrueWithHttpMessagesAsync("local").Result.Response.StatusCode);
+                Assert.Throws<Exception>(() =>
+                    client.Paths.GetBooleanTrue("local"));
             }
         }
 
