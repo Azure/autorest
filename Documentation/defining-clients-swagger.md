@@ -7,7 +7,7 @@ API descriptions that are valid according to the schema can produce client libra
 ## Contents
 - [Data Types](#data-types)
 	- [Primitive Data Types](#primitive-data-types)
-	- [`byte[]`, `DateTimeOffset`, `int`, `long`](#byte-datetimeoffset-int-long)
+	- [`byte[]`, `DateTime`, `int`, `long`](#byte-datetime-int-long)
 	- [Arrays and Sequences](#arrays-and-sequences)
 	- [Dictionaries](#dictionaries)
 	- [Inheritance and Polymorphism](#inheritance-and-polymorphism)
@@ -62,12 +62,12 @@ public partial class Pet
 }
 ```
 
-### `byte[]`, `DateTimeOffset`, `int`, `long`
+### `byte[]`, `DateTime`, `int`, `long`
 - **`byte[]`**
 To represent `byte` arrays in the generated code, the property of the Swagger definition should have `string` as its type and `byte` as its format. This indicates binary data that will be represented as a base64-encoded string in requests and responses. The generated client will automatically do this encoding when processing requests and responses.
 
-- **`DateTimeOffset`**
-AutoRest generates `DateTimeOffset` typed properties in generated C# code for Swagger properties that have `string` as the type and `date-time` as the format.
+- **`DateTime`**
+AutoRest generates `DateTime` typed properties in generated C# code for Swagger properties that have `string` as the type and `date-time` as the format. Note: it's possible to generate these properties as `DateTimeOffset` in C# when `-useDateTimeOffset` parameter is passed via command line. 
 
 - **`int` / `long`**
 Both `int` and `long` proeprties in the generated code correspond to `integer` types in Swagger properties. If the format of the Swagger property is `int32`, `int` will be generated; if the format is `int64`, `long` will be generated. If the format field of the Swagger property is not set, AutoRest use  format `int32`.
@@ -108,7 +108,7 @@ public partial class Pet
     /// <summary>
     /// Optional.
     /// </summary>
-    public DateTimeOffset? Birthday { get; set; }
+    public DateTime? Birthday { get; set; }
 
     /// <summary>
     /// Optional.
