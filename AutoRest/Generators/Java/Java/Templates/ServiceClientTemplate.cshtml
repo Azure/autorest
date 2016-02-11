@@ -99,6 +99,7 @@ if(!property.IsReadOnly)
         this.baseUri = baseUri;
         initialize();
     }
+
 @EmptyLine
     /**
      * Initializes an instance of @(Model.Name) client.
@@ -109,16 +110,19 @@ if(!property.IsReadOnly)
      */
     public @(Model.Name)Impl(@(Model.IsCustomBaseUri ? "" : "String baseUri,") OkHttpClient client, Retrofit.Builder retrofitBuilder) {
         super(client, retrofitBuilder);
+
 @if (Model.IsCustomBaseUri)
 {
-@:      this.baseUri = @(Model.BaseUrl);
+        @:this.baseUri = @(Model.BaseUrl);
 }
 else
 {
-@:      this.baseUri = baseUri;
+        @:this.baseUri = baseUri;
 }
-initialize();
-}
+
+        initialize();
+    }
+
 @EmptyLine
     private void initialize() {
     @if (Settings.AddCredentials)
