@@ -883,6 +883,7 @@ public class AzureClient extends AzureServiceClient {
         private PostDeletePollingTask<T> create(final PollingState<T> pollingState, final ServiceCallback<T> clientCallback) {
             this.call = null;
             this.pollingState = pollingState;
+            this.clientCallback = clientCallback;
             this.pollingCallback = new ServiceCallback<T>() {
                 @Override
                 public void failure(Throwable t) {
