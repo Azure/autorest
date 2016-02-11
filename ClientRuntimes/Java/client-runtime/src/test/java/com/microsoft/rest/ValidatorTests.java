@@ -124,6 +124,12 @@ public class ValidatorTests {
         }
     }
 
+    @Test
+    public void validateObject() throws Exception {
+        Product product = new Product();
+        Validator.validate(product);
+    }
+
     public final class IntWrapper {
         @JsonProperty(required = true)
         // CHECKSTYLE IGNORE VisibilityModifier FOR NEXT 2 LINES
@@ -171,5 +177,11 @@ public class ValidatorTests {
         @JsonProperty(required = true)
         // CHECKSTYLE IGNORE VisibilityModifier FOR NEXT 1 LINE
         public Color color;
+    }
+
+    public final class Product {
+        // CHECKSTYLE IGNORE VisibilityModifier FOR NEXT 2 LINES
+        public String id;
+        public String tag;
     }
 }
