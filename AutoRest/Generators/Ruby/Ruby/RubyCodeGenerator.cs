@@ -15,7 +15,7 @@ namespace Microsoft.Rest.Generator.Ruby
     {
         /// <summary>
         /// The name of the SDK. Determined in the following way:
-        /// if the parameter 'Name' is provided that it becames the
+        /// if the parameter 'Name' is provided that it becomes the
         /// name of the SDK, otherwise the name of input swagger is converted
         /// into Ruby style and taken as name.
         /// </summary>
@@ -121,7 +121,7 @@ namespace Microsoft.Rest.Generator.Ruby
         }
 
         /// <summary>
-        /// Generates C# code for service client.
+        /// Generates Ruby code for service client.
         /// </summary>
         /// <param name="serviceClient">The service client.</param>
         /// <returns>Async task for generating SDK files.</returns>
