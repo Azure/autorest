@@ -323,9 +323,9 @@ namespace Microsoft.Rest.Generator.Java
 
         public static IType WrapPrimitiveType(IType type)
         {
-            if (type is PrimaryType)
+            var primaryType = type as PrimaryType;
+            if (primaryType != null)
             {
-                var primaryType = type as PrimaryType;
                 if (type.Name == "boolean")
                 {
                     primaryType.Name = "Boolean";

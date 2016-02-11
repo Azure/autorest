@@ -210,7 +210,7 @@ namespace Microsoft.Rest.Generator.Python
                             { KnownPrimaryType.TimeSpan, "duration" }
                         };
             PrimaryType primaryType = type as PrimaryType;
-            if (type is PrimaryType)
+            if (primaryType != null)
             {
                 if (typeNameMapping.ContainsKey(primaryType.Type))
                 {

@@ -28,8 +28,19 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
         public CompositeType ItemType { 
             get 
             {
-                var sequence = (SequenceType)Properties.FirstOrDefault(p => p.Type is SequenceType).Type;
-                return sequence.ElementType as CompositeType;
+                if (Properties == null)
+                {
+                    return null;
+                }
+                var property = Properties.FirstOrDefault(p => p.Type is SequenceType);
+                if (property != null)
+                {
+                    return ((SequenceType)property.Type).ElementType as CompositeType;
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
 

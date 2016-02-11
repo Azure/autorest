@@ -513,7 +513,7 @@ namespace Microsoft.Rest.Generator.Azure
                                     var newGroupingParam = CreateParameterFromGrouping(headerGrouping, nextLinkMethod, serviceClient);
                                     nextLinkMethod.Parameters.Add(newGroupingParam);
                                     //grouping.Key.Name = newGroupingParam.Name;
-                                    var inputParameter = (Parameter) nextLinkMethod.InputParameterTransformation.FirstOrDefault().ParameterMappings[0].InputParameter.Clone();
+                                    var inputParameter = (Parameter) nextLinkMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter.Clone();
                                     inputParameter.Name = newGroupingParam.Name.ToCamelCase();
                                     nextLinkMethod.InputParameterTransformation.ForEach(t => t.ParameterMappings[0].InputParameter = inputParameter);
                                 }

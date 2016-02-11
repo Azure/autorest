@@ -42,6 +42,10 @@ namespace Microsoft.Rest.Generator.Azure.Python
             get
             {
                 var ext = this.Extensions[AzureExtensions.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
+                if (ext == null || !ext.Contains("className"))
+                {
+                    return string.Empty;
+                }
 
                 return "models." + (string)ext["className"];
             }

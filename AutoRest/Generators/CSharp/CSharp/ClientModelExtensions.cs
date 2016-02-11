@@ -220,9 +220,10 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
         /// <returns>True if the type maps to a C# value type, otherwise false</returns>
         public static bool IsValueType(this PrimaryType primaryType)
         {
-            return primaryType != null && primaryType.Type == KnownPrimaryType.Boolean || primaryType.Type == KnownPrimaryType.DateTime || primaryType.Type == KnownPrimaryType.Date
+            return primaryType != null && 
+                (primaryType.Type == KnownPrimaryType.Boolean || primaryType.Type == KnownPrimaryType.DateTime || primaryType.Type == KnownPrimaryType.Date
                 || primaryType.Type == KnownPrimaryType.Double || primaryType.Type == KnownPrimaryType.Int || primaryType.Type == KnownPrimaryType.Long 
-                || primaryType.Type == KnownPrimaryType.TimeSpan || primaryType.Type == KnownPrimaryType.DateTimeRfc1123;
+                || primaryType.Type == KnownPrimaryType.TimeSpan || primaryType.Type == KnownPrimaryType.DateTimeRfc1123);
         }
 
         public static string CheckNull(string valueReference, string executionBlock)
