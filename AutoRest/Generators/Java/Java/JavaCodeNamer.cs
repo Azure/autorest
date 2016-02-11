@@ -347,7 +347,7 @@ namespace Microsoft.Rest.Generator.Java
             }
             else if (type == null)
             {
-                return new PrimaryType()
+                return new PrimaryType(KnownPrimaryType.None)
                 {
                     Name = "Void"
                 };

@@ -11,27 +11,12 @@ namespace Microsoft.Rest.Generator.ClientModel
     public class PrimaryType : IType
     {
         /// <summary>
-        /// Initializes a new instance of PrimaryType class.
-        /// </summary>
-        public PrimaryType() : this(KnownPrimaryType.None)
-        { }
-
-        /// <summary>
         /// Initializes a new instance of PrimaryType class from a known type.
         /// </summary>
         public PrimaryType(KnownPrimaryType type)
         {
             Type = type;
             Name = Type.ToString();
-        }
-
-        /// <summary>
-        /// Initializes a new instance of PrimaryType class from a known type and a name.
-        /// </summary>
-        public PrimaryType(KnownPrimaryType type, string name)
-        {
-            Type = type;
-            Name = name;
         }
 
         /// <summary>
