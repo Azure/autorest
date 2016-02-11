@@ -22,7 +22,7 @@ namespace Fixtures.AcceptanceTestsCustomBaseUri
     public partial interface IPaths
     {
         /// <summary>
-        /// Get true Boolean value on path
+        /// Get a 200 to test a valid base uri
         /// </summary>
         /// <param name='accountName'>
         /// Account Name
@@ -33,6 +33,6 @@ namespace Fixtures.AcceptanceTestsCustomBaseUri
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse> GetBooleanTrueWithHttpMessagesAsync(string accountName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> GetEmptyWithHttpMessagesAsync(string accountName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

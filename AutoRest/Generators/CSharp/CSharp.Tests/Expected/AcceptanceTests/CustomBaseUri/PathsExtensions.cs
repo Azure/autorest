@@ -19,7 +19,7 @@ namespace Fixtures.AcceptanceTestsCustomBaseUri
     public static partial class PathsExtensions
     {
             /// <summary>
-            /// Get true Boolean value on path
+            /// Get a 200 to test a valid base uri
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -27,13 +27,13 @@ namespace Fixtures.AcceptanceTestsCustomBaseUri
             /// <param name='accountName'>
             /// Account Name
             /// </param>
-            public static void GetBooleanTrue(this IPaths operations, string accountName)
+            public static void GetEmpty(this IPaths operations, string accountName)
             {
-                Task.Factory.StartNew(s => ((IPaths)s).GetBooleanTrueAsync(accountName), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+                Task.Factory.StartNew(s => ((IPaths)s).GetEmptyAsync(accountName), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
 
             /// <summary>
-            /// Get true Boolean value on path
+            /// Get a 200 to test a valid base uri
             /// </summary>
             /// <param name='operations'>
             /// The operations group for this extension method.
@@ -44,9 +44,9 @@ namespace Fixtures.AcceptanceTestsCustomBaseUri
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task GetBooleanTrueAsync( this IPaths operations, string accountName, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task GetEmptyAsync( this IPaths operations, string accountName, CancellationToken cancellationToken = default(CancellationToken))
             {
-                await operations.GetBooleanTrueWithHttpMessagesAsync(accountName, null, cancellationToken).ConfigureAwait(false);
+                await operations.GetEmptyWithHttpMessagesAsync(accountName, null, cancellationToken).ConfigureAwait(false);
             }
 
     }

@@ -1898,7 +1898,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 // small modification to the "host" portion to include the port and the '.'
                 client.Host = string.Format(CultureInfo.InvariantCulture, "{0}.:{1}", client.Host, Fixture.Port);
                 Assert.Equal(HttpStatusCode.OK,
-                    client.Paths.GetBooleanTrueWithHttpMessagesAsync("local").Result.Response.StatusCode);
+                    client.Paths.GetEmptyWithHttpMessagesAsync("local").Result.Response.StatusCode);
             }
         }
 
@@ -1910,16 +1910,16 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             using (var client = new AutoRestParameterizedHostTestClient())
             {
                 // use a bad acct name
-                Assert.Throws<Exception>(() =>
-                    client.Paths.GetBooleanTrue("bad"));
+                Assert.Throws<Fixtures.AcceptanceTestsCustomBaseUri.Models.ErrorException>(() =>
+                    client.Paths.GetEmpty("bad"));
 
                 // pass in null
-                Assert.Throws<ValidationException>(() => client.Paths.GetBooleanTrue(null));
+                Assert.Throws<ValidationException>(() => client.Paths.GetEmpty(null));
 
                 // set the global parameter incorrectly
                 client.Host = "badSuffix";
-                Assert.Throws<Exception>(() =>
-                    client.Paths.GetBooleanTrue("local"));
+                Assert.Throws<Fixtures.AcceptanceTestsCustomBaseUri.Models.ErrorException>(() =>
+                    client.Paths.GetEmpty("local"));
             }
         }
 

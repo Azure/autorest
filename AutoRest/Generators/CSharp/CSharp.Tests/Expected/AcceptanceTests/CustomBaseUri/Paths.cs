@@ -49,7 +49,7 @@ namespace Fixtures.AcceptanceTestsCustomBaseUri
         public AutoRestParameterizedHostTestClient Client { get; private set; }
 
         /// <summary>
-        /// Get true Boolean value on path
+        /// Get a 200 to test a valid base uri
         /// </summary>
         /// <param name='accountName'>
         /// Account Name
@@ -60,7 +60,7 @@ namespace Fixtures.AcceptanceTestsCustomBaseUri
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> GetBooleanTrueWithHttpMessagesAsync(string accountName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> GetEmptyWithHttpMessagesAsync(string accountName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (accountName == null)
             {
@@ -79,13 +79,13 @@ namespace Fixtures.AcceptanceTestsCustomBaseUri
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("accountName", accountName);
                 tracingParameters.Add("cancellationToken", cancellationToken);
-                ServiceClientTracing.Enter(_invocationId, this, "GetBooleanTrue", tracingParameters);
+                ServiceClientTracing.Enter(_invocationId, this, "GetEmpty", tracingParameters);
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri;
-            var _url = _baseUrl + (_baseUrl.EndsWith("/") ? "" : "/") + "example";
-            _url = _url.Replace("{accountName}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(accountName, this.Client.SerializationSettings).Trim('"')));
-            _url = _url.Replace("{host}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(this.Client.Host, this.Client.SerializationSettings).Trim('"')));
+            var _url = _baseUrl + (_baseUrl.EndsWith("/") ? "" : "/") + "customuri";
+            _url = _url.Replace("{accountName}", SafeJsonConvert.SerializeObject(accountName, this.Client.SerializationSettings).Trim('"'));
+            _url = _url.Replace("{host}", SafeJsonConvert.SerializeObject(this.Client.Host, this.Client.SerializationSettings).Trim('"'));
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;

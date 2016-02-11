@@ -4,13 +4,12 @@ var util = require('util');
 var constants = require('../util/constants');
 var utils = require('../util/utils')
 
-var customUri = function (coverage) {
-  coverage['CustomBaseUri'] = 0;
-  router.get('/example', function (req, res, next) {
+var specials = function (coverage) {
+  router.get('/customuri', function (req, res, next) {
       coverage['CustomBaseUri']++;
       res.status(200).end();
   });
 }
 
-customUri.prototype.router = router;
-module.exports = customUri;
+specials.prototype.router = router;
+module.exports = specials;

@@ -25,16 +25,16 @@
   "produces": [ "application/json" ],
   "consumes": [ "application/json" ],
   "paths": {
-    "/example": {
+    "/customuri": {
       "get": {
-        "operationId": "paths_getBooleanTrue",
-        "description": "Get true Boolean value on path",
+        "operationId": "paths_getEmpty",
+        "description": "Get a 200 to test a valid base uri",
         "tags": [
           "Path Operations"
         ],
         "responses": {
           "200": {
-            "description": "Successfully received the true boolean value"
+            "description": "Successfully received a 200 response"
           },
           "default": {
             "description": "Unexpected error",
