@@ -26,6 +26,11 @@ namespace Microsoft.Rest.Modeler.Swagger.JsonConverters
             JsonSerializer serializer)
         {
             JObject jobject = JObject.Load(reader);
+            if (jobject == null)
+            {
+                return null;
+            }
+
             // Unwrap if it's a reference object.
             while (jobject.First.Path == "$ref")
             {

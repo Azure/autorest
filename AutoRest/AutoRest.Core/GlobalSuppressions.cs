@@ -50,3 +50,6 @@
     Scope = "member", Target = "Microsoft.Rest.Generator.ClientModel.Method.#Parameters")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rfc", Scope = "member", Target = "Microsoft.Rest.Generator.ClientModel.PrimaryType.#DateTimeRfc1123")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1002:DoNotExposeGenericLists", Scope = "member", Target = "Microsoft.Rest.Generator.ClientModel.Method.#InputParameterMappings")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rfc", Scope = "member", Target = "Microsoft.Rest.Generator.ClientModel.KnownPrimaryType.#DateTimeRfc1123")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods", Scope = "member", Target = "Microsoft.Rest.Generator.ClientModel.PrimaryType.#Type")]
+

@@ -7,6 +7,7 @@ using System.Globalization;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
 using System.Text;
+using Microsoft.Rest.Generator.Utilities;
 
 namespace Microsoft.Rest.Generator.Java.TemplateModels
 {
@@ -17,7 +18,7 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
         public static bool NeedsSpecialSerialization(this IType type)
         {
             var known = type as PrimaryType;
-            return (known != null && (known.Name == "LocalDate" || known.Name == "DateTime" || known == PrimaryType.ByteArray)) ||
+            return (known != null && (known.Name == "LocalDate" || known.Name == "DateTime" || known.Type == KnownPrimaryType.ByteArray)) ||
                 type is EnumType || type is CompositeType || type is SequenceType || type is DictionaryType;
         }
 
@@ -39,7 +40,7 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
             var sequence = type as SequenceType;
             if (known != null && known.Name != "LocalDate" && known.Name != "DateTime")
             {
-                if (known == PrimaryType.ByteArray)
+                if (known.Type == KnownPrimaryType.ByteArray)
                 {
                     return "Base64.encodeBase64String(" + reference + ")";
                 }
@@ -191,7 +192,7 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
             if (parameter.Location != ParameterLocation.Body
                 && parameter.Location != ParameterLocation.None)
             {
-                if (type == PrimaryType.ByteArray ||
+                if (type.IsPrimaryType(KnownPrimaryType.ByteArray) ||
                     type.Name == "ByteArray")
                 {
                     imports.Add("org.apache.commons.codec.binary.Base64");

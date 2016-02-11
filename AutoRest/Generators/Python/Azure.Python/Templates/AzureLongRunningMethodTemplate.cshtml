@@ -59,7 +59,7 @@
   {
     foreach (var parameter in Model.LocalParameters)
     {
-      if (parameter.Location == ParameterLocation.Body && parameter.Type == PrimaryType.Stream)
+      if (parameter.Location == ParameterLocation.Body && parameter.Type.IsPrimaryType(KnownPrimaryType.Stream))
       {
         @:body_content = upload_gen(@parameter.Name)
         break;
@@ -116,7 +116,7 @@ else
   foreach (var responsePair in Model.Responses.Where(r => r.Value.Body != null))
   {
             @:if response.status_code == @MethodTemplateModel.GetStatusCodeReference(responsePair.Key):
-    if (responsePair.Value.Body == PrimaryType.Stream)
+    if (responsePair.Value.Body.IsPrimaryType(KnownPrimaryType.Stream))
     {
                 @:deserialized = self._client.stream_download(response, callback)
     }

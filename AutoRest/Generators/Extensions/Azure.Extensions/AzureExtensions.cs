@@ -110,7 +110,7 @@ namespace Microsoft.Rest.Generator.Azure
                     successStatusCode != default(HttpStatusCode) &&
                     method.Responses.ContainsKey(HttpStatusCode.NotFound))
                 {
-                    method.ReturnType = new Response(PrimaryType.Boolean, method.ReturnType.Headers);
+                    method.ReturnType = new Response(new PrimaryType(KnownPrimaryType.Boolean), method.ReturnType.Headers);
                 }
                 else
                 {
@@ -271,7 +271,7 @@ namespace Microsoft.Rest.Generator.Azure
             }
             acceptLanguage.IsReadOnly = false;
             acceptLanguage.IsRequired = false;
-            acceptLanguage.Type = PrimaryType.String;
+            acceptLanguage.Type = new PrimaryType(KnownPrimaryType.String);
             serviceClient.Methods
                 .Where(m => !m.Parameters.Any(p => AcceptLanguage.Equals(p.SerializedName, StringComparison.OrdinalIgnoreCase)))
                 .ForEach(m2 => m2.Parameters.Add(new Parameter
@@ -284,7 +284,7 @@ namespace Microsoft.Rest.Generator.Azure
             {
                 Name = "Credentials",
                 SerializedName = "credentials",
-                Type = PrimaryType.Credentials,
+                Type = new PrimaryType(KnownPrimaryType.Credentials),
                 IsRequired = true,
                 IsReadOnly = true,
                 Documentation = "Gets Azure subscription credentials."
@@ -294,7 +294,7 @@ namespace Microsoft.Rest.Generator.Azure
             {
                 Name = "LongRunningOperationRetryTimeout",
                 SerializedName = "longRunningOperationRetryTimeout",
-                Type = PrimaryType.Int,
+                Type = new PrimaryType(KnownPrimaryType.Int),
                 Documentation = "Gets or sets the retry timeout in seconds for Long Running Operations. Default value is 30.",
                 DefaultValue = "30"
             });
@@ -303,7 +303,7 @@ namespace Microsoft.Rest.Generator.Azure
             {
                 Name = "GenerateClientRequestId",
                 SerializedName = "generateClientRequestId",
-                Type = PrimaryType.Boolean,
+                Type = new PrimaryType(KnownPrimaryType.Boolean),
                 Documentation = "When set to true a unique x-ms-client-request-id value is generated and included in each request. Default is true.",
                 DefaultValue = "true"
             });
@@ -481,7 +481,7 @@ namespace Microsoft.Rest.Generator.Azure
                         {
                             Name = "nextPageLink",
                             SerializedName = "nextLink",
-                            Type = PrimaryType.String,
+                            Type = new PrimaryType(KnownPrimaryType.String),
                             Documentation = "The NextLink from the previous successful call to List operation.",
                             IsRequired = true,
                             Location = ParameterLocation.Path
@@ -513,7 +513,7 @@ namespace Microsoft.Rest.Generator.Azure
                                     var newGroupingParam = CreateParameterFromGrouping(headerGrouping, nextLinkMethod, serviceClient);
                                     nextLinkMethod.Parameters.Add(newGroupingParam);
                                     //grouping.Key.Name = newGroupingParam.Name;
-                                    var inputParameter = (Parameter) nextLinkMethod.InputParameterTransformation.FirstOrDefault().ParameterMappings[0].InputParameter.Clone();
+                                    var inputParameter = (Parameter) nextLinkMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter.Clone();
                                     inputParameter.Name = newGroupingParam.Name.ToCamelCase();
                                     nextLinkMethod.InputParameterTransformation.ForEach(t => t.ParameterMappings[0].InputParameter = inputParameter);
                                 }

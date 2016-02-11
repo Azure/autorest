@@ -42,6 +42,10 @@ namespace Microsoft.Rest.Generator.Azure.Python
             get
             {
                 var ext = this.Extensions[AzureExtensions.PageableExtension] as Newtonsoft.Json.Linq.JContainer;
+                if (ext == null)
+                {
+                    return string.Empty;
+                }
 
                 return "models." + (string)ext["className"];
             }
@@ -96,7 +100,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
         {
             get
             {
-                if (this.HttpMethod == HttpMethod.Head && this.ReturnType.Body == PrimaryType.Boolean)
+                if (this.HttpMethod == HttpMethod.Head && this.ReturnType.Body.IsPrimaryType(KnownPrimaryType.Boolean))
                 {
                     HttpStatusCode code = this.Responses.Keys.FirstOrDefault(AzureExtensions.HttpHeadStatusCodeSuccessFunc);
                     var builder = new IndentedStringBuilder("    ");

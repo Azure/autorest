@@ -345,8 +345,8 @@ namespace Microsoft.Rest.Generator.Java.Azure
             {
                 return;
             }
-            var groupedType = this.InputParameterTransformation.FirstOrDefault().ParameterMappings[0].InputParameter;
-            var nextGroupType = nextMethod.InputParameterTransformation.FirstOrDefault().ParameterMappings[0].InputParameter;
+            var groupedType = this.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
+            var nextGroupType = nextMethod.InputParameterTransformation.First().ParameterMappings[0].InputParameter;
             if (nextGroupType.Name == groupedType.Name)
             {
                 return;

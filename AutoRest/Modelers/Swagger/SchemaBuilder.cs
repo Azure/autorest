@@ -48,13 +48,13 @@ namespace Microsoft.Rest.Modeler.Swagger
                 && _schema.Type == DataType.Object 
                 && "file".Equals(SwaggerObject.Format, StringComparison.OrdinalIgnoreCase))
             {
-                return PrimaryType.Stream;
+                return new PrimaryType(KnownPrimaryType.Stream);
             }
 
             // If the object does not have any properties, treat it as raw json (i.e. object)
             if (_schema.Properties.IsNullOrEmpty() && string.IsNullOrEmpty(_schema.Extends))
             {
-                return PrimaryType.Object;
+                return new PrimaryType(KnownPrimaryType.Object);
             }
 
             // Otherwise create new object type
