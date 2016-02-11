@@ -28,12 +28,16 @@ namespace Microsoft.Rest.Generator.Python
             get
             {
                 CompositeType composite = this.Type as CompositeType;
-                IEnumerable<Property> result = composite.Properties;
-                if (composite != null && composite.BaseModelType != null)
+                IEnumerable<Property> result = null;
+                if (composite != null)
                 {
-                    IEnumerable<Property> baseModelProperties =
-                        composite.BaseModelType.Properties.Where(p => !p.IsReadOnly);
-                    result = result.Union(baseModelProperties);
+                    result = composite.Properties;
+                    if (composite.BaseModelType != null)
+                    {
+                        IEnumerable<Property> baseModelProperties =
+                            composite.BaseModelType.Properties.Where(p => !p.IsReadOnly);
+                        result = result.Union(baseModelProperties);
+                    }
                 }
                 return result;
             }

@@ -130,7 +130,7 @@
 
   @if (Model.RequestBody != null)
   {
-      if (Model.RequestBody.Type == PrimaryType.Stream)
+      if (Model.RequestBody.Type.IsPrimaryType(KnownPrimaryType.Stream))
       {
   <text>
   // Serialize Request  
@@ -168,7 +168,7 @@
       @foreach (var parameter in Model.LogicalParameters.Where(p => p.Location == ParameterLocation.FormData))
       {
   @:if (@(parameter.Name) !== undefined && @(parameter.Name) !== null) {
-          if (parameter.Type == PrimaryType.Stream)
+          if (parameter.Type.IsPrimaryType(KnownPrimaryType.Stream))
           {  
     @:formData['@(parameter.SerializedName)'] = @(parameter.Name);  
           }
@@ -188,7 +188,7 @@
   </text>
   }
 
-  @if (Model.Responses.Any(r => r.Value.Body == PrimaryType.Stream))
+  @if (Model.Responses.Any(r => r.Value.Body.IsPrimaryType(KnownPrimaryType.Stream)))
   {
 @:  @Include(new MethodStreamPipelineTemplate(), Model)
   }

@@ -112,13 +112,16 @@ namespace Microsoft.Rest.Generator.Ruby
                         if (parameter.DefaultValue != null && parameter.Type is PrimaryType)
                         {
                             PrimaryType type = parameter.Type as PrimaryType;
-                            if (type == PrimaryType.Boolean || type == PrimaryType.Double || type == PrimaryType.Int || type == PrimaryType.Long)
+                            if (type != null)
                             {
-                                format = "{0} = " + parameter.DefaultValue;
-                            }
-                            else if (type == PrimaryType.String)
-                            {
-                                format = "{0} = \"" + parameter.DefaultValue + "\"";
+                                if (type.Type == KnownPrimaryType.Boolean || type.Type == KnownPrimaryType.Double || type.Type == KnownPrimaryType.Int || type.Type == KnownPrimaryType.Long)
+                                {
+                                    format = "{0} = " + parameter.DefaultValue;
+                                }
+                                else if (type.Type == KnownPrimaryType.String)
+                                {
+                                    format = "{0} = \"" + parameter.DefaultValue + "\"";
+                                }
                             }
                         }
                     }

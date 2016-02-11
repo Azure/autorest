@@ -137,7 +137,7 @@ else
     string _requestContent = null;
     @if (Model.RequestBody != null)
     {
-        if (Model.RequestBody.Type == PrimaryType.Stream)
+        if (Model.RequestBody.Type.IsPrimaryType(KnownPrimaryType.Stream))
         {
         <text>
     StreamContent _fileStreamContent = new StreamContent(@(Model.RequestBody.Name));
@@ -163,7 +163,7 @@ else
         {
     @:if (@(parameter.Name) != null)
     @:{
-            if (parameter.Type == PrimaryType.Stream)
+            if (parameter.Type.IsPrimaryType(KnownPrimaryType.Stream))
             {
         <text>        
         StreamContent _@parameter.Name = new StreamContent(@parameter.Name);
@@ -224,7 +224,7 @@ else
     {
         @:try
         @:{
-            if (Model.DefaultResponse.Body == PrimaryType.Stream)
+            if (Model.DefaultResponse.Body.IsPrimaryType(KnownPrimaryType.Stream))
             {
             @:@(Model.DefaultResponse.Body.Name) _errorBody = await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
             }
@@ -272,7 +272,7 @@ else
     // Deserialize Response
     if ((int)_statusCode == @MethodTemplateModel.GetStatusCodeReference(responsePair.Key))
     {
-        @if (responsePair.Value.Body == PrimaryType.Stream)
+        @if (responsePair.Value.Body.IsPrimaryType(KnownPrimaryType.Stream))
         {
         @:_result.Body = await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
         }
@@ -300,7 +300,7 @@ else
 
     @if (Model.ReturnType.Body != null && Model.DefaultResponse.Body != null && !Model.Responses.Any())
     {
-        if (Model.DefaultResponse.Body == PrimaryType.Stream)
+        if (Model.DefaultResponse.Body.IsPrimaryType(KnownPrimaryType.Stream))
         {
     @:_result.Body = await _httpResponse.Content.ReadAsStreamAsync().ConfigureAwait(false);
         }

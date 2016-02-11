@@ -80,7 +80,7 @@ foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
   @EmptyLine
   if (!options) options = {};
   @EmptyLine
-  @(Model.Name)['super_'].call(this, @(requiredParameters.Any(p => p.Type == PrimaryType.Credentials) ? "credentials" : "null"), options);
+  @(Model.Name)['super_'].call(this, @(requiredParameters.Any(p => p.Type.IsPrimaryType(KnownPrimaryType.Credentials)) ? "credentials" : "null"), options);
   this.baseUri = baseUri;
   if (!this.baseUri) {
     this.baseUri = '@Model.BaseUrl';

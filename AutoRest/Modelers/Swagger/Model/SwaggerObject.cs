@@ -94,45 +94,45 @@ namespace Microsoft.Rest.Modeler.Swagger.Model
                 case DataType.String:
                     if (string.Equals("date", Format, StringComparison.OrdinalIgnoreCase))
                     {
-                        return PrimaryType.Date;
+                        return new PrimaryType(KnownPrimaryType.Date);
                     }
                     if (string.Equals("date-time", Format, StringComparison.OrdinalIgnoreCase))
                     {
-                        return PrimaryType.DateTime;
+                        return new PrimaryType(KnownPrimaryType.DateTime);
                     }
                     if (string.Equals("date-time-rfc1123", Format, StringComparison.OrdinalIgnoreCase))
                     {
-                        return PrimaryType.DateTimeRfc1123;
+                        return new PrimaryType(KnownPrimaryType.DateTimeRfc1123);
                     }
                     if (string.Equals("byte", Format, StringComparison.OrdinalIgnoreCase))
                     {
-                        return PrimaryType.ByteArray;
+                        return new PrimaryType(KnownPrimaryType.ByteArray);
                     }
                     if (string.Equals("duration", Format, StringComparison.OrdinalIgnoreCase))
                     {
-                        return PrimaryType.TimeSpan;
+                        return new PrimaryType(KnownPrimaryType.TimeSpan);
                     }
-                    return PrimaryType.String;
+                    return new PrimaryType(KnownPrimaryType.String);
                 case DataType.Number:
                     if (string.Equals("decimal", Format, StringComparison.OrdinalIgnoreCase))
                     {
-                        return PrimaryType.Decimal;
+                        return new PrimaryType(KnownPrimaryType.Decimal);
                     }
-                    return PrimaryType.Double;
+                    return new PrimaryType(KnownPrimaryType.Double);
                 case DataType.Integer:
                     if (string.Equals("int64", Format, StringComparison.OrdinalIgnoreCase))
                     {
-                        return PrimaryType.Long;
+                        return new PrimaryType(KnownPrimaryType.Long);
                     }
-                    return PrimaryType.Int;
+                    return new PrimaryType(KnownPrimaryType.Int);
                 case DataType.Boolean:
-                    return PrimaryType.Boolean;
+                    return new PrimaryType(KnownPrimaryType.Boolean);
                 case DataType.Object:
                 case DataType.Array:
                 case null:
-                    return PrimaryType.Object;
+                    return new PrimaryType(KnownPrimaryType.Object);
                 case DataType.File:
-                    return PrimaryType.Stream;
+                    return new PrimaryType(KnownPrimaryType.Stream);
                 default:
                     throw new NotImplementedException(
                         string.Format(CultureInfo.InvariantCulture, 

@@ -113,7 +113,7 @@ namespace Microsoft.Rest.Generator.Ruby
                 serviceClientModel.Properties.Add(new Property
                 {
                     Name = "Credentials",
-                    Type = PrimaryType.Credentials,
+                    Type = new PrimaryType(KnownPrimaryType.Credentials),
                     IsRequired = true,
                     Documentation = "Subscription credentials which uniquely identify client subscription."
                 });

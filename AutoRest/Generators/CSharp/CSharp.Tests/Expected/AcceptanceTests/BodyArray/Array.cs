@@ -3337,7 +3337,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<IList<DateTime?>>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = SafeJsonConvert.DeserializeObject<IList<DateTime?>>(_responseContent, new DateJsonConverter());
                 }
                 catch (JsonException ex)
                 {
@@ -3561,7 +3561,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<IList<DateTime?>>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = SafeJsonConvert.DeserializeObject<IList<DateTime?>>(_responseContent, new DateJsonConverter());
                 }
                 catch (JsonException ex)
                 {
@@ -3677,7 +3677,7 @@ namespace Fixtures.AcceptanceTestsBodyArray
                 _responseContent = await _httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
                 try
                 {
-                    _result.Body = SafeJsonConvert.DeserializeObject<IList<DateTime?>>(_responseContent, this.Client.DeserializationSettings);
+                    _result.Body = SafeJsonConvert.DeserializeObject<IList<DateTime?>>(_responseContent, new DateJsonConverter());
                 }
                 catch (JsonException ex)
                 {

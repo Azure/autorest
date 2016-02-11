@@ -394,9 +394,9 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 client.Date.GetMaxDate();
                 client.Date.GetMinDate();
                 client.Date.GetNull();
-                Assert.Throws<FormatException>(() => client.Date.GetInvalidDate());
-                Assert.Throws<FormatException>(() => client.Date.GetOverflowDate());
-                Assert.Throws<FormatException>(() => client.Date.GetUnderflowDate());
+                Assert.Throws<SerializationException>(() => client.Date.GetInvalidDate());
+                Assert.Throws<SerializationException>(() => client.Date.GetOverflowDate());
+                Assert.Throws<SerializationException>(() => client.Date.GetUnderflowDate());
             }
         }
 

@@ -48,7 +48,7 @@ namespace Microsoft.Rest.Generator.CSharp
         {
             get
             {
-                return Properties.Any(p => p.Type == PrimaryType.Credentials);
+                return Properties.Any(p => p.Type.IsPrimaryType(KnownPrimaryType.Credentials));
             }
         }
 

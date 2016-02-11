@@ -16,7 +16,7 @@ namespace Microsoft.Rest.Generator.NodeJS
 {
     public class NodeJSCodeGenerator : CodeGenerator
     {
-        private const string ClientRuntimePackage = "ms-rest version 1.8.0";
+        private const string ClientRuntimePackage = "ms-rest version 1.9.0";
 
         public NodeJsCodeNamer Namer { get; private set; }
 
@@ -71,13 +71,13 @@ namespace Microsoft.Rest.Generator.NodeJS
         {
             if (Settings.AddCredentials)
             {
-                if (!serviceClient.Properties.Any(p => p.Type == PrimaryType.Credentials))
+                if (!serviceClient.Properties.Any(p => p.Type.IsPrimaryType(KnownPrimaryType.Credentials)))
                 {
                     serviceClient.Properties.Add(new Property
                     {
                         Name = "credentials",
                         SerializedName = "credentials",
-                        Type = PrimaryType.Credentials,
+                        Type = new PrimaryType(KnownPrimaryType.Credentials),
                         IsRequired = true,
                         Documentation = "Subscription credentials which uniquely identify client subscription."
                     });

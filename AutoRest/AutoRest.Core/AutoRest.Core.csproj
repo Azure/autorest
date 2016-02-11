@@ -29,6 +29,7 @@
     <Compile Include="ClientModel\EnumValue.cs" />
     <Compile Include="ClientModel\EnumType.cs" />
     <Compile Include="ClientModel\IParameter.cs" />
+    <Compile Include="ClientModel\KnownPrimaryType.cs" />
     <Compile Include="ClientModel\Response.cs" />
     <Compile Include="ClientModel\ParameterTransformation.cs" />
     <Compile Include="ClientModel\ParameterMapping.cs" />
