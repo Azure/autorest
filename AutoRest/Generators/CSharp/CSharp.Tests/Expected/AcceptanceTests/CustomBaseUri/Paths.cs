@@ -66,6 +66,10 @@ namespace Fixtures.AcceptanceTestsCustomBaseUri
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "accountName");
             }
+            if (this.Client.Host == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "this.Client.Host");
+            }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -73,12 +77,15 @@ namespace Fixtures.AcceptanceTestsCustomBaseUri
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
+                tracingParameters.Add("accountName", accountName);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "GetBooleanTrue", tracingParameters);
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri;
             var _url = _baseUrl + (_baseUrl.EndsWith("/") ? "" : "/") + "example";
+            _url = _url.Replace("{accountName}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(accountName, this.Client.SerializationSettings).Trim('"')));
+            _url = _url.Replace("{host}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(this.Client.Host, this.Client.SerializationSettings).Trim('"')));
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;

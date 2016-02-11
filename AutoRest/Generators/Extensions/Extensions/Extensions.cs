@@ -11,7 +11,6 @@ using Microsoft.Rest.Modeler.Swagger;
 using Microsoft.Rest.Modeler.Swagger.Model;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
-using Microsoft.Rest.Modeler.Swagger.JsonConverters;
 
 namespace Microsoft.Rest.Generator
 {
@@ -77,6 +76,13 @@ namespace Microsoft.Rest.Generator
                             // Build parameter
                             var parameterBuilder = new ParameterBuilder(swaggerParameter, modeler);
                             var parameter = parameterBuilder.Build();
+
+                            // check to see if the parameter exists in properties, and needs to have its name normalized
+                            if (serviceClient.Properties.Any(p => p.SerializedName.Equals(parameter.SerializedName)))
+                            {
+                                parameter.ClientProperty = serviceClient.Properties.Single(p => p.SerializedName.Equals(parameter.SerializedName));
+                            }
+
                             foreach (var method in serviceClient.Methods)
                             {
                                 method.Parameters.Add(parameter);

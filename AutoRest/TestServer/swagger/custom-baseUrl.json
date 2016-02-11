@@ -13,7 +13,8 @@
         "name": "accountName",
         "description": "Account Name",
         "required": true,
-        "type": "string"
+        "type": "string",
+        "in": "path"
       },
       {
         "$ref": "#/parameters/host"
@@ -50,7 +51,8 @@
       "description": "A string value that is used as a global part of the parameterized host",
       "type": "string",
       "required": false,
-      "default": "host"
+      "default": "host",
+      "in": "path"
     }
   },
   "definitions": {
