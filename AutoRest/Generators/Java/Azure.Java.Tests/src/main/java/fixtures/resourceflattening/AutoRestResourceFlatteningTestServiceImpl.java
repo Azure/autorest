@@ -19,8 +19,6 @@ import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.resourceflattening.models.ErrorException;
 import fixtures.resourceflattening.models.FlattenedProduct;
 import fixtures.resourceflattening.models.Resource;
@@ -29,9 +27,11 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import retrofit.Call;
-import retrofit.Response;
-import retrofit.Retrofit;
+import okhttp3.OkHttpClient;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestResourceFlatteningTestService class.
@@ -212,7 +212,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      */
     public ServiceResponse<Void> putArray(List<Resource> resourceArray) throws ErrorException, IOException {
         Call<ResponseBody> call = service.putArray(resourceArray, this.getAcceptLanguage());
-        return putArrayDelegate(call.execute(), null);
+        return putArrayDelegate(call.execute());
     }
 
     /**
@@ -226,9 +226,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         Call<ResponseBody> call = service.putArray(resourceArray, this.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putArrayDelegate(response, retrofit));
+                    serviceCallback.success(putArrayDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -237,11 +237,11 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         return call;
     }
 
-    private ServiceResponse<Void> putArrayDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> putArrayDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new AzureServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -253,7 +253,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      */
     public ServiceResponse<List<FlattenedProduct>> getArray() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getArray(this.getAcceptLanguage());
-        return getArrayDelegate(call.execute(), null);
+        return getArrayDelegate(call.execute());
     }
 
     /**
@@ -266,9 +266,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         Call<ResponseBody> call = service.getArray(this.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<List<FlattenedProduct>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getArrayDelegate(response, retrofit));
+                    serviceCallback.success(getArrayDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -277,11 +277,11 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         return call;
     }
 
-    private ServiceResponse<List<FlattenedProduct>> getArrayDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<List<FlattenedProduct>> getArrayDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new AzureServiceResponseBuilder<List<FlattenedProduct>, ErrorException>()
                 .register(200, new TypeToken<List<FlattenedProduct>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -294,7 +294,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      */
     public ServiceResponse<Void> putDictionary(Map<String, FlattenedProduct> resourceDictionary) throws ErrorException, IOException {
         Call<ResponseBody> call = service.putDictionary(resourceDictionary, this.getAcceptLanguage());
-        return putDictionaryDelegate(call.execute(), null);
+        return putDictionaryDelegate(call.execute());
     }
 
     /**
@@ -308,9 +308,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         Call<ResponseBody> call = service.putDictionary(resourceDictionary, this.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putDictionaryDelegate(response, retrofit));
+                    serviceCallback.success(putDictionaryDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -319,11 +319,11 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         return call;
     }
 
-    private ServiceResponse<Void> putDictionaryDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> putDictionaryDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new AzureServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -335,7 +335,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      */
     public ServiceResponse<Map<String, FlattenedProduct>> getDictionary() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getDictionary(this.getAcceptLanguage());
-        return getDictionaryDelegate(call.execute(), null);
+        return getDictionaryDelegate(call.execute());
     }
 
     /**
@@ -348,9 +348,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         Call<ResponseBody> call = service.getDictionary(this.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Map<String, FlattenedProduct>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDictionaryDelegate(response, retrofit));
+                    serviceCallback.success(getDictionaryDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -359,11 +359,11 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         return call;
     }
 
-    private ServiceResponse<Map<String, FlattenedProduct>> getDictionaryDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Map<String, FlattenedProduct>> getDictionaryDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new AzureServiceResponseBuilder<Map<String, FlattenedProduct>, ErrorException>()
                 .register(200, new TypeToken<Map<String, FlattenedProduct>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -376,7 +376,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      */
     public ServiceResponse<Void> putResourceCollection(ResourceCollection resourceComplexObject) throws ErrorException, IOException {
         Call<ResponseBody> call = service.putResourceCollection(resourceComplexObject, this.getAcceptLanguage());
-        return putResourceCollectionDelegate(call.execute(), null);
+        return putResourceCollectionDelegate(call.execute());
     }
 
     /**
@@ -390,9 +390,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         Call<ResponseBody> call = service.putResourceCollection(resourceComplexObject, this.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putResourceCollectionDelegate(response, retrofit));
+                    serviceCallback.success(putResourceCollectionDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -401,11 +401,11 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         return call;
     }
 
-    private ServiceResponse<Void> putResourceCollectionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> putResourceCollectionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new AzureServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -417,7 +417,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      */
     public ServiceResponse<ResourceCollection> getResourceCollection() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getResourceCollection(this.getAcceptLanguage());
-        return getResourceCollectionDelegate(call.execute(), null);
+        return getResourceCollectionDelegate(call.execute());
     }
 
     /**
@@ -430,9 +430,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         Call<ResponseBody> call = service.getResourceCollection(this.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<ResourceCollection>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getResourceCollectionDelegate(response, retrofit));
+                    serviceCallback.success(getResourceCollectionDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -441,11 +441,11 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         return call;
     }
 
-    private ServiceResponse<ResourceCollection> getResourceCollectionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<ResourceCollection> getResourceCollectionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new AzureServiceResponseBuilder<ResourceCollection, ErrorException>()
                 .register(200, new TypeToken<ResourceCollection>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
 }

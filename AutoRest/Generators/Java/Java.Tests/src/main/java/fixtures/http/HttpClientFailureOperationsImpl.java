@@ -15,13 +15,13 @@ import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.ServiceResponseEmptyCallback;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.http.models.Error;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
-import retrofit.Call;
-import retrofit.Response;
-import retrofit.Retrofit;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -53,7 +53,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> head400() throws ErrorException, IOException {
         Call<Void> call = service.head400();
-        return head400Delegate(call.execute(), null);
+        return head400Delegate(call.execute());
     }
 
     /**
@@ -66,9 +66,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         Call<Void> call = service.head400();
         call.enqueue(new ServiceResponseEmptyCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<Void> response, Retrofit retrofit) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
                 try {
-                    serviceCallback.success(head400Delegate(response, retrofit));
+                    serviceCallback.success(head400Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -77,10 +77,10 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         return call;
     }
 
-    private ServiceResponse<Error> head400Delegate(Response<Void> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Error> head400Delegate(Response<Void> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .buildEmpty(response, retrofit);
+                .buildEmpty(response);
     }
 
     /**
@@ -92,7 +92,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> get400() throws ErrorException, IOException {
         Call<ResponseBody> call = service.get400();
-        return get400Delegate(call.execute(), null);
+        return get400Delegate(call.execute());
     }
 
     /**
@@ -105,9 +105,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         Call<ResponseBody> call = service.get400();
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get400Delegate(response, retrofit));
+                    serviceCallback.success(get400Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -116,10 +116,10 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         return call;
     }
 
-    private ServiceResponse<Error> get400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Error> get400Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -132,7 +132,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> put400(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.put400(booleanValue);
-        return put400Delegate(call.execute(), null);
+        return put400Delegate(call.execute());
     }
 
     /**
@@ -146,9 +146,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         Call<ResponseBody> call = service.put400(booleanValue);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(put400Delegate(response, retrofit));
+                    serviceCallback.success(put400Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -157,10 +157,10 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         return call;
     }
 
-    private ServiceResponse<Error> put400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Error> put400Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -173,7 +173,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> patch400(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.patch400(booleanValue);
-        return patch400Delegate(call.execute(), null);
+        return patch400Delegate(call.execute());
     }
 
     /**
@@ -187,9 +187,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         Call<ResponseBody> call = service.patch400(booleanValue);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(patch400Delegate(response, retrofit));
+                    serviceCallback.success(patch400Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -198,10 +198,10 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         return call;
     }
 
-    private ServiceResponse<Error> patch400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Error> patch400Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -214,7 +214,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> post400(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.post400(booleanValue);
-        return post400Delegate(call.execute(), null);
+        return post400Delegate(call.execute());
     }
 
     /**
@@ -228,9 +228,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         Call<ResponseBody> call = service.post400(booleanValue);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(post400Delegate(response, retrofit));
+                    serviceCallback.success(post400Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -239,10 +239,10 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         return call;
     }
 
-    private ServiceResponse<Error> post400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Error> post400Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -255,7 +255,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> delete400(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.delete400(booleanValue);
-        return delete400Delegate(call.execute(), null);
+        return delete400Delegate(call.execute());
     }
 
     /**
@@ -269,9 +269,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         Call<ResponseBody> call = service.delete400(booleanValue);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(delete400Delegate(response, retrofit));
+                    serviceCallback.success(delete400Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -280,10 +280,10 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         return call;
     }
 
-    private ServiceResponse<Error> delete400Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Error> delete400Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -295,7 +295,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> head401() throws ErrorException, IOException {
         Call<Void> call = service.head401();
-        return head401Delegate(call.execute(), null);
+        return head401Delegate(call.execute());
     }
 
     /**
@@ -308,9 +308,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         Call<Void> call = service.head401();
         call.enqueue(new ServiceResponseEmptyCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<Void> response, Retrofit retrofit) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
                 try {
-                    serviceCallback.success(head401Delegate(response, retrofit));
+                    serviceCallback.success(head401Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -319,10 +319,10 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         return call;
     }
 
-    private ServiceResponse<Error> head401Delegate(Response<Void> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Error> head401Delegate(Response<Void> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .buildEmpty(response, retrofit);
+                .buildEmpty(response);
     }
 
     /**
@@ -334,7 +334,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> get402() throws ErrorException, IOException {
         Call<ResponseBody> call = service.get402();
-        return get402Delegate(call.execute(), null);
+        return get402Delegate(call.execute());
     }
 
     /**
@@ -347,9 +347,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         Call<ResponseBody> call = service.get402();
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get402Delegate(response, retrofit));
+                    serviceCallback.success(get402Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -358,10 +358,10 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         return call;
     }
 
-    private ServiceResponse<Error> get402Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Error> get402Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -373,7 +373,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> get403() throws ErrorException, IOException {
         Call<ResponseBody> call = service.get403();
-        return get403Delegate(call.execute(), null);
+        return get403Delegate(call.execute());
     }
 
     /**
@@ -386,9 +386,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         Call<ResponseBody> call = service.get403();
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get403Delegate(response, retrofit));
+                    serviceCallback.success(get403Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -397,10 +397,10 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         return call;
     }
 
-    private ServiceResponse<Error> get403Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Error> get403Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -413,7 +413,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> put404(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.put404(booleanValue);
-        return put404Delegate(call.execute(), null);
+        return put404Delegate(call.execute());
     }
 
     /**
@@ -427,9 +427,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         Call<ResponseBody> call = service.put404(booleanValue);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(put404Delegate(response, retrofit));
+                    serviceCallback.success(put404Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -438,10 +438,10 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         return call;
     }
 
-    private ServiceResponse<Error> put404Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Error> put404Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -454,7 +454,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> patch405(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.patch405(booleanValue);
-        return patch405Delegate(call.execute(), null);
+        return patch405Delegate(call.execute());
     }
 
     /**
@@ -468,9 +468,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         Call<ResponseBody> call = service.patch405(booleanValue);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(patch405Delegate(response, retrofit));
+                    serviceCallback.success(patch405Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -479,10 +479,10 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         return call;
     }
 
-    private ServiceResponse<Error> patch405Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Error> patch405Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -495,7 +495,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> post406(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.post406(booleanValue);
-        return post406Delegate(call.execute(), null);
+        return post406Delegate(call.execute());
     }
 
     /**
@@ -509,9 +509,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         Call<ResponseBody> call = service.post406(booleanValue);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(post406Delegate(response, retrofit));
+                    serviceCallback.success(post406Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -520,10 +520,10 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         return call;
     }
 
-    private ServiceResponse<Error> post406Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Error> post406Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -536,7 +536,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> delete407(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.delete407(booleanValue);
-        return delete407Delegate(call.execute(), null);
+        return delete407Delegate(call.execute());
     }
 
     /**
@@ -550,9 +550,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         Call<ResponseBody> call = service.delete407(booleanValue);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(delete407Delegate(response, retrofit));
+                    serviceCallback.success(delete407Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -561,10 +561,10 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         return call;
     }
 
-    private ServiceResponse<Error> delete407Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Error> delete407Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -577,7 +577,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> put409(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.put409(booleanValue);
-        return put409Delegate(call.execute(), null);
+        return put409Delegate(call.execute());
     }
 
     /**
@@ -591,9 +591,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         Call<ResponseBody> call = service.put409(booleanValue);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(put409Delegate(response, retrofit));
+                    serviceCallback.success(put409Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -602,10 +602,10 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         return call;
     }
 
-    private ServiceResponse<Error> put409Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Error> put409Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -617,7 +617,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> head410() throws ErrorException, IOException {
         Call<Void> call = service.head410();
-        return head410Delegate(call.execute(), null);
+        return head410Delegate(call.execute());
     }
 
     /**
@@ -630,9 +630,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         Call<Void> call = service.head410();
         call.enqueue(new ServiceResponseEmptyCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<Void> response, Retrofit retrofit) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
                 try {
-                    serviceCallback.success(head410Delegate(response, retrofit));
+                    serviceCallback.success(head410Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -641,10 +641,10 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         return call;
     }
 
-    private ServiceResponse<Error> head410Delegate(Response<Void> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Error> head410Delegate(Response<Void> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .buildEmpty(response, retrofit);
+                .buildEmpty(response);
     }
 
     /**
@@ -656,7 +656,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> get411() throws ErrorException, IOException {
         Call<ResponseBody> call = service.get411();
-        return get411Delegate(call.execute(), null);
+        return get411Delegate(call.execute());
     }
 
     /**
@@ -669,9 +669,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         Call<ResponseBody> call = service.get411();
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get411Delegate(response, retrofit));
+                    serviceCallback.success(get411Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -680,10 +680,10 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         return call;
     }
 
-    private ServiceResponse<Error> get411Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Error> get411Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -695,7 +695,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> get412() throws ErrorException, IOException {
         Call<ResponseBody> call = service.get412();
-        return get412Delegate(call.execute(), null);
+        return get412Delegate(call.execute());
     }
 
     /**
@@ -708,9 +708,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         Call<ResponseBody> call = service.get412();
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get412Delegate(response, retrofit));
+                    serviceCallback.success(get412Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -719,10 +719,10 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         return call;
     }
 
-    private ServiceResponse<Error> get412Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Error> get412Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -735,7 +735,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> put413(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.put413(booleanValue);
-        return put413Delegate(call.execute(), null);
+        return put413Delegate(call.execute());
     }
 
     /**
@@ -749,9 +749,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         Call<ResponseBody> call = service.put413(booleanValue);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(put413Delegate(response, retrofit));
+                    serviceCallback.success(put413Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -760,10 +760,10 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         return call;
     }
 
-    private ServiceResponse<Error> put413Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Error> put413Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -776,7 +776,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> patch414(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.patch414(booleanValue);
-        return patch414Delegate(call.execute(), null);
+        return patch414Delegate(call.execute());
     }
 
     /**
@@ -790,9 +790,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         Call<ResponseBody> call = service.patch414(booleanValue);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(patch414Delegate(response, retrofit));
+                    serviceCallback.success(patch414Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -801,10 +801,10 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         return call;
     }
 
-    private ServiceResponse<Error> patch414Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Error> patch414Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -817,7 +817,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> post415(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.post415(booleanValue);
-        return post415Delegate(call.execute(), null);
+        return post415Delegate(call.execute());
     }
 
     /**
@@ -831,9 +831,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         Call<ResponseBody> call = service.post415(booleanValue);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(post415Delegate(response, retrofit));
+                    serviceCallback.success(post415Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -842,10 +842,10 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         return call;
     }
 
-    private ServiceResponse<Error> post415Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Error> post415Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -857,7 +857,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> get416() throws ErrorException, IOException {
         Call<ResponseBody> call = service.get416();
-        return get416Delegate(call.execute(), null);
+        return get416Delegate(call.execute());
     }
 
     /**
@@ -870,9 +870,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         Call<ResponseBody> call = service.get416();
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get416Delegate(response, retrofit));
+                    serviceCallback.success(get416Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -881,10 +881,10 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         return call;
     }
 
-    private ServiceResponse<Error> get416Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Error> get416Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -897,7 +897,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> delete417(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.delete417(booleanValue);
-        return delete417Delegate(call.execute(), null);
+        return delete417Delegate(call.execute());
     }
 
     /**
@@ -911,9 +911,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         Call<ResponseBody> call = service.delete417(booleanValue);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(delete417Delegate(response, retrofit));
+                    serviceCallback.success(delete417Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -922,10 +922,10 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         return call;
     }
 
-    private ServiceResponse<Error> delete417Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Error> delete417Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -937,7 +937,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      */
     public ServiceResponse<Error> head429() throws ErrorException, IOException {
         Call<Void> call = service.head429();
-        return head429Delegate(call.execute(), null);
+        return head429Delegate(call.execute());
     }
 
     /**
@@ -950,9 +950,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         Call<Void> call = service.head429();
         call.enqueue(new ServiceResponseEmptyCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<Void> response, Retrofit retrofit) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
                 try {
-                    serviceCallback.success(head429Delegate(response, retrofit));
+                    serviceCallback.success(head429Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -961,10 +961,10 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
         return call;
     }
 
-    private ServiceResponse<Error> head429Delegate(Response<Void> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Error> head429Delegate(Response<Void> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .buildEmpty(response, retrofit);
+                .buildEmpty(response);
     }
 
 }

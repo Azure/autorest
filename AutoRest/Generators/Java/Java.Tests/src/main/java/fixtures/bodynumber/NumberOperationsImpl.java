@@ -15,13 +15,13 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.bodynumber.models.ErrorException;
 import java.io.IOException;
 import java.math.BigDecimal;
-import retrofit.Call;
-import retrofit.Response;
-import retrofit.Retrofit;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -53,7 +53,7 @@ public final class NumberOperationsImpl implements NumberOperations {
      */
     public ServiceResponse<Double> getNull() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getNull();
-        return getNullDelegate(call.execute(), null);
+        return getNullDelegate(call.execute());
     }
 
     /**
@@ -66,9 +66,9 @@ public final class NumberOperationsImpl implements NumberOperations {
         Call<ResponseBody> call = service.getNull();
         call.enqueue(new ServiceResponseCallback<Double>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getNullDelegate(response, retrofit));
+                    serviceCallback.success(getNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -77,11 +77,11 @@ public final class NumberOperationsImpl implements NumberOperations {
         return call;
     }
 
-    private ServiceResponse<Double> getNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Double> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Double, ErrorException>()
                 .register(200, new TypeToken<Double>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -93,7 +93,7 @@ public final class NumberOperationsImpl implements NumberOperations {
      */
     public ServiceResponse<Double> getInvalidFloat() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getInvalidFloat();
-        return getInvalidFloatDelegate(call.execute(), null);
+        return getInvalidFloatDelegate(call.execute());
     }
 
     /**
@@ -106,9 +106,9 @@ public final class NumberOperationsImpl implements NumberOperations {
         Call<ResponseBody> call = service.getInvalidFloat();
         call.enqueue(new ServiceResponseCallback<Double>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getInvalidFloatDelegate(response, retrofit));
+                    serviceCallback.success(getInvalidFloatDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -117,11 +117,11 @@ public final class NumberOperationsImpl implements NumberOperations {
         return call;
     }
 
-    private ServiceResponse<Double> getInvalidFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Double> getInvalidFloatDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Double, ErrorException>()
                 .register(200, new TypeToken<Double>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -133,7 +133,7 @@ public final class NumberOperationsImpl implements NumberOperations {
      */
     public ServiceResponse<Double> getInvalidDouble() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getInvalidDouble();
-        return getInvalidDoubleDelegate(call.execute(), null);
+        return getInvalidDoubleDelegate(call.execute());
     }
 
     /**
@@ -146,9 +146,9 @@ public final class NumberOperationsImpl implements NumberOperations {
         Call<ResponseBody> call = service.getInvalidDouble();
         call.enqueue(new ServiceResponseCallback<Double>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getInvalidDoubleDelegate(response, retrofit));
+                    serviceCallback.success(getInvalidDoubleDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -157,11 +157,11 @@ public final class NumberOperationsImpl implements NumberOperations {
         return call;
     }
 
-    private ServiceResponse<Double> getInvalidDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Double> getInvalidDoubleDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Double, ErrorException>()
                 .register(200, new TypeToken<Double>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -173,7 +173,7 @@ public final class NumberOperationsImpl implements NumberOperations {
      */
     public ServiceResponse<BigDecimal> getInvalidDecimal() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getInvalidDecimal();
-        return getInvalidDecimalDelegate(call.execute(), null);
+        return getInvalidDecimalDelegate(call.execute());
     }
 
     /**
@@ -186,9 +186,9 @@ public final class NumberOperationsImpl implements NumberOperations {
         Call<ResponseBody> call = service.getInvalidDecimal();
         call.enqueue(new ServiceResponseCallback<BigDecimal>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getInvalidDecimalDelegate(response, retrofit));
+                    serviceCallback.success(getInvalidDecimalDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -197,11 +197,11 @@ public final class NumberOperationsImpl implements NumberOperations {
         return call;
     }
 
-    private ServiceResponse<BigDecimal> getInvalidDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<BigDecimal> getInvalidDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<BigDecimal, ErrorException>()
                 .register(200, new TypeToken<BigDecimal>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -214,7 +214,7 @@ public final class NumberOperationsImpl implements NumberOperations {
      */
     public ServiceResponse<Void> putBigFloat(double numberBody) throws ErrorException, IOException {
         Call<ResponseBody> call = service.putBigFloat(numberBody);
-        return putBigFloatDelegate(call.execute(), null);
+        return putBigFloatDelegate(call.execute());
     }
 
     /**
@@ -228,9 +228,9 @@ public final class NumberOperationsImpl implements NumberOperations {
         Call<ResponseBody> call = service.putBigFloat(numberBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putBigFloatDelegate(response, retrofit));
+                    serviceCallback.success(putBigFloatDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -239,11 +239,11 @@ public final class NumberOperationsImpl implements NumberOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putBigFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> putBigFloatDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -255,7 +255,7 @@ public final class NumberOperationsImpl implements NumberOperations {
      */
     public ServiceResponse<Double> getBigFloat() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getBigFloat();
-        return getBigFloatDelegate(call.execute(), null);
+        return getBigFloatDelegate(call.execute());
     }
 
     /**
@@ -268,9 +268,9 @@ public final class NumberOperationsImpl implements NumberOperations {
         Call<ResponseBody> call = service.getBigFloat();
         call.enqueue(new ServiceResponseCallback<Double>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getBigFloatDelegate(response, retrofit));
+                    serviceCallback.success(getBigFloatDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -279,11 +279,11 @@ public final class NumberOperationsImpl implements NumberOperations {
         return call;
     }
 
-    private ServiceResponse<Double> getBigFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Double> getBigFloatDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Double, ErrorException>()
                 .register(200, new TypeToken<Double>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -296,7 +296,7 @@ public final class NumberOperationsImpl implements NumberOperations {
      */
     public ServiceResponse<Void> putBigDouble(double numberBody) throws ErrorException, IOException {
         Call<ResponseBody> call = service.putBigDouble(numberBody);
-        return putBigDoubleDelegate(call.execute(), null);
+        return putBigDoubleDelegate(call.execute());
     }
 
     /**
@@ -310,9 +310,9 @@ public final class NumberOperationsImpl implements NumberOperations {
         Call<ResponseBody> call = service.putBigDouble(numberBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putBigDoubleDelegate(response, retrofit));
+                    serviceCallback.success(putBigDoubleDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -321,11 +321,11 @@ public final class NumberOperationsImpl implements NumberOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putBigDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> putBigDoubleDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -337,7 +337,7 @@ public final class NumberOperationsImpl implements NumberOperations {
      */
     public ServiceResponse<Double> getBigDouble() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getBigDouble();
-        return getBigDoubleDelegate(call.execute(), null);
+        return getBigDoubleDelegate(call.execute());
     }
 
     /**
@@ -350,9 +350,9 @@ public final class NumberOperationsImpl implements NumberOperations {
         Call<ResponseBody> call = service.getBigDouble();
         call.enqueue(new ServiceResponseCallback<Double>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getBigDoubleDelegate(response, retrofit));
+                    serviceCallback.success(getBigDoubleDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -361,11 +361,11 @@ public final class NumberOperationsImpl implements NumberOperations {
         return call;
     }
 
-    private ServiceResponse<Double> getBigDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Double> getBigDoubleDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Double, ErrorException>()
                 .register(200, new TypeToken<Double>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -378,7 +378,7 @@ public final class NumberOperationsImpl implements NumberOperations {
      */
     public ServiceResponse<Void> putBigDoublePositiveDecimal(double numberBody) throws ErrorException, IOException {
         Call<ResponseBody> call = service.putBigDoublePositiveDecimal(numberBody);
-        return putBigDoublePositiveDecimalDelegate(call.execute(), null);
+        return putBigDoublePositiveDecimalDelegate(call.execute());
     }
 
     /**
@@ -392,9 +392,9 @@ public final class NumberOperationsImpl implements NumberOperations {
         Call<ResponseBody> call = service.putBigDoublePositiveDecimal(numberBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putBigDoublePositiveDecimalDelegate(response, retrofit));
+                    serviceCallback.success(putBigDoublePositiveDecimalDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -403,11 +403,11 @@ public final class NumberOperationsImpl implements NumberOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putBigDoublePositiveDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> putBigDoublePositiveDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -419,7 +419,7 @@ public final class NumberOperationsImpl implements NumberOperations {
      */
     public ServiceResponse<Double> getBigDoublePositiveDecimal() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getBigDoublePositiveDecimal();
-        return getBigDoublePositiveDecimalDelegate(call.execute(), null);
+        return getBigDoublePositiveDecimalDelegate(call.execute());
     }
 
     /**
@@ -432,9 +432,9 @@ public final class NumberOperationsImpl implements NumberOperations {
         Call<ResponseBody> call = service.getBigDoublePositiveDecimal();
         call.enqueue(new ServiceResponseCallback<Double>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getBigDoublePositiveDecimalDelegate(response, retrofit));
+                    serviceCallback.success(getBigDoublePositiveDecimalDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -443,11 +443,11 @@ public final class NumberOperationsImpl implements NumberOperations {
         return call;
     }
 
-    private ServiceResponse<Double> getBigDoublePositiveDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Double> getBigDoublePositiveDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Double, ErrorException>()
                 .register(200, new TypeToken<Double>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -460,7 +460,7 @@ public final class NumberOperationsImpl implements NumberOperations {
      */
     public ServiceResponse<Void> putBigDoubleNegativeDecimal(double numberBody) throws ErrorException, IOException {
         Call<ResponseBody> call = service.putBigDoubleNegativeDecimal(numberBody);
-        return putBigDoubleNegativeDecimalDelegate(call.execute(), null);
+        return putBigDoubleNegativeDecimalDelegate(call.execute());
     }
 
     /**
@@ -474,9 +474,9 @@ public final class NumberOperationsImpl implements NumberOperations {
         Call<ResponseBody> call = service.putBigDoubleNegativeDecimal(numberBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putBigDoubleNegativeDecimalDelegate(response, retrofit));
+                    serviceCallback.success(putBigDoubleNegativeDecimalDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -485,11 +485,11 @@ public final class NumberOperationsImpl implements NumberOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putBigDoubleNegativeDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> putBigDoubleNegativeDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -501,7 +501,7 @@ public final class NumberOperationsImpl implements NumberOperations {
      */
     public ServiceResponse<Double> getBigDoubleNegativeDecimal() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getBigDoubleNegativeDecimal();
-        return getBigDoubleNegativeDecimalDelegate(call.execute(), null);
+        return getBigDoubleNegativeDecimalDelegate(call.execute());
     }
 
     /**
@@ -514,9 +514,9 @@ public final class NumberOperationsImpl implements NumberOperations {
         Call<ResponseBody> call = service.getBigDoubleNegativeDecimal();
         call.enqueue(new ServiceResponseCallback<Double>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getBigDoubleNegativeDecimalDelegate(response, retrofit));
+                    serviceCallback.success(getBigDoubleNegativeDecimalDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -525,11 +525,11 @@ public final class NumberOperationsImpl implements NumberOperations {
         return call;
     }
 
-    private ServiceResponse<Double> getBigDoubleNegativeDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Double> getBigDoubleNegativeDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Double, ErrorException>()
                 .register(200, new TypeToken<Double>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -546,7 +546,7 @@ public final class NumberOperationsImpl implements NumberOperations {
             throw new IllegalArgumentException("Parameter numberBody is required and cannot be null.");
         }
         Call<ResponseBody> call = service.putBigDecimal(numberBody);
-        return putBigDecimalDelegate(call.execute(), null);
+        return putBigDecimalDelegate(call.execute());
     }
 
     /**
@@ -564,9 +564,9 @@ public final class NumberOperationsImpl implements NumberOperations {
         Call<ResponseBody> call = service.putBigDecimal(numberBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putBigDecimalDelegate(response, retrofit));
+                    serviceCallback.success(putBigDecimalDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -575,11 +575,11 @@ public final class NumberOperationsImpl implements NumberOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putBigDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> putBigDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -591,7 +591,7 @@ public final class NumberOperationsImpl implements NumberOperations {
      */
     public ServiceResponse<BigDecimal> getBigDecimal() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getBigDecimal();
-        return getBigDecimalDelegate(call.execute(), null);
+        return getBigDecimalDelegate(call.execute());
     }
 
     /**
@@ -604,9 +604,9 @@ public final class NumberOperationsImpl implements NumberOperations {
         Call<ResponseBody> call = service.getBigDecimal();
         call.enqueue(new ServiceResponseCallback<BigDecimal>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getBigDecimalDelegate(response, retrofit));
+                    serviceCallback.success(getBigDecimalDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -615,11 +615,11 @@ public final class NumberOperationsImpl implements NumberOperations {
         return call;
     }
 
-    private ServiceResponse<BigDecimal> getBigDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<BigDecimal> getBigDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<BigDecimal, ErrorException>()
                 .register(200, new TypeToken<BigDecimal>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -636,7 +636,7 @@ public final class NumberOperationsImpl implements NumberOperations {
             throw new IllegalArgumentException("Parameter numberBody is required and cannot be null.");
         }
         Call<ResponseBody> call = service.putBigDecimalPositiveDecimal(numberBody);
-        return putBigDecimalPositiveDecimalDelegate(call.execute(), null);
+        return putBigDecimalPositiveDecimalDelegate(call.execute());
     }
 
     /**
@@ -654,9 +654,9 @@ public final class NumberOperationsImpl implements NumberOperations {
         Call<ResponseBody> call = service.putBigDecimalPositiveDecimal(numberBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putBigDecimalPositiveDecimalDelegate(response, retrofit));
+                    serviceCallback.success(putBigDecimalPositiveDecimalDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -665,11 +665,11 @@ public final class NumberOperationsImpl implements NumberOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putBigDecimalPositiveDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> putBigDecimalPositiveDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -681,7 +681,7 @@ public final class NumberOperationsImpl implements NumberOperations {
      */
     public ServiceResponse<BigDecimal> getBigDecimalPositiveDecimal() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getBigDecimalPositiveDecimal();
-        return getBigDecimalPositiveDecimalDelegate(call.execute(), null);
+        return getBigDecimalPositiveDecimalDelegate(call.execute());
     }
 
     /**
@@ -694,9 +694,9 @@ public final class NumberOperationsImpl implements NumberOperations {
         Call<ResponseBody> call = service.getBigDecimalPositiveDecimal();
         call.enqueue(new ServiceResponseCallback<BigDecimal>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getBigDecimalPositiveDecimalDelegate(response, retrofit));
+                    serviceCallback.success(getBigDecimalPositiveDecimalDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -705,11 +705,11 @@ public final class NumberOperationsImpl implements NumberOperations {
         return call;
     }
 
-    private ServiceResponse<BigDecimal> getBigDecimalPositiveDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<BigDecimal> getBigDecimalPositiveDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<BigDecimal, ErrorException>()
                 .register(200, new TypeToken<BigDecimal>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -726,7 +726,7 @@ public final class NumberOperationsImpl implements NumberOperations {
             throw new IllegalArgumentException("Parameter numberBody is required and cannot be null.");
         }
         Call<ResponseBody> call = service.putBigDecimalNegativeDecimal(numberBody);
-        return putBigDecimalNegativeDecimalDelegate(call.execute(), null);
+        return putBigDecimalNegativeDecimalDelegate(call.execute());
     }
 
     /**
@@ -744,9 +744,9 @@ public final class NumberOperationsImpl implements NumberOperations {
         Call<ResponseBody> call = service.putBigDecimalNegativeDecimal(numberBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putBigDecimalNegativeDecimalDelegate(response, retrofit));
+                    serviceCallback.success(putBigDecimalNegativeDecimalDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -755,11 +755,11 @@ public final class NumberOperationsImpl implements NumberOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putBigDecimalNegativeDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> putBigDecimalNegativeDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -771,7 +771,7 @@ public final class NumberOperationsImpl implements NumberOperations {
      */
     public ServiceResponse<BigDecimal> getBigDecimalNegativeDecimal() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getBigDecimalNegativeDecimal();
-        return getBigDecimalNegativeDecimalDelegate(call.execute(), null);
+        return getBigDecimalNegativeDecimalDelegate(call.execute());
     }
 
     /**
@@ -784,9 +784,9 @@ public final class NumberOperationsImpl implements NumberOperations {
         Call<ResponseBody> call = service.getBigDecimalNegativeDecimal();
         call.enqueue(new ServiceResponseCallback<BigDecimal>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getBigDecimalNegativeDecimalDelegate(response, retrofit));
+                    serviceCallback.success(getBigDecimalNegativeDecimalDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -795,11 +795,11 @@ public final class NumberOperationsImpl implements NumberOperations {
         return call;
     }
 
-    private ServiceResponse<BigDecimal> getBigDecimalNegativeDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<BigDecimal> getBigDecimalNegativeDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<BigDecimal, ErrorException>()
                 .register(200, new TypeToken<BigDecimal>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -812,7 +812,7 @@ public final class NumberOperationsImpl implements NumberOperations {
      */
     public ServiceResponse<Void> putSmallFloat(double numberBody) throws ErrorException, IOException {
         Call<ResponseBody> call = service.putSmallFloat(numberBody);
-        return putSmallFloatDelegate(call.execute(), null);
+        return putSmallFloatDelegate(call.execute());
     }
 
     /**
@@ -826,9 +826,9 @@ public final class NumberOperationsImpl implements NumberOperations {
         Call<ResponseBody> call = service.putSmallFloat(numberBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putSmallFloatDelegate(response, retrofit));
+                    serviceCallback.success(putSmallFloatDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -837,11 +837,11 @@ public final class NumberOperationsImpl implements NumberOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putSmallFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> putSmallFloatDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -853,7 +853,7 @@ public final class NumberOperationsImpl implements NumberOperations {
      */
     public ServiceResponse<Double> getSmallFloat() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getSmallFloat();
-        return getSmallFloatDelegate(call.execute(), null);
+        return getSmallFloatDelegate(call.execute());
     }
 
     /**
@@ -866,9 +866,9 @@ public final class NumberOperationsImpl implements NumberOperations {
         Call<ResponseBody> call = service.getSmallFloat();
         call.enqueue(new ServiceResponseCallback<Double>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getSmallFloatDelegate(response, retrofit));
+                    serviceCallback.success(getSmallFloatDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -877,11 +877,11 @@ public final class NumberOperationsImpl implements NumberOperations {
         return call;
     }
 
-    private ServiceResponse<Double> getSmallFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Double> getSmallFloatDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Double, ErrorException>()
                 .register(200, new TypeToken<Double>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -894,7 +894,7 @@ public final class NumberOperationsImpl implements NumberOperations {
      */
     public ServiceResponse<Void> putSmallDouble(double numberBody) throws ErrorException, IOException {
         Call<ResponseBody> call = service.putSmallDouble(numberBody);
-        return putSmallDoubleDelegate(call.execute(), null);
+        return putSmallDoubleDelegate(call.execute());
     }
 
     /**
@@ -908,9 +908,9 @@ public final class NumberOperationsImpl implements NumberOperations {
         Call<ResponseBody> call = service.putSmallDouble(numberBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putSmallDoubleDelegate(response, retrofit));
+                    serviceCallback.success(putSmallDoubleDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -919,11 +919,11 @@ public final class NumberOperationsImpl implements NumberOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putSmallDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> putSmallDoubleDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -935,7 +935,7 @@ public final class NumberOperationsImpl implements NumberOperations {
      */
     public ServiceResponse<Double> getSmallDouble() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getSmallDouble();
-        return getSmallDoubleDelegate(call.execute(), null);
+        return getSmallDoubleDelegate(call.execute());
     }
 
     /**
@@ -948,9 +948,9 @@ public final class NumberOperationsImpl implements NumberOperations {
         Call<ResponseBody> call = service.getSmallDouble();
         call.enqueue(new ServiceResponseCallback<Double>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getSmallDoubleDelegate(response, retrofit));
+                    serviceCallback.success(getSmallDoubleDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -959,11 +959,11 @@ public final class NumberOperationsImpl implements NumberOperations {
         return call;
     }
 
-    private ServiceResponse<Double> getSmallDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Double> getSmallDoubleDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Double, ErrorException>()
                 .register(200, new TypeToken<Double>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -980,7 +980,7 @@ public final class NumberOperationsImpl implements NumberOperations {
             throw new IllegalArgumentException("Parameter numberBody is required and cannot be null.");
         }
         Call<ResponseBody> call = service.putSmallDecimal(numberBody);
-        return putSmallDecimalDelegate(call.execute(), null);
+        return putSmallDecimalDelegate(call.execute());
     }
 
     /**
@@ -998,9 +998,9 @@ public final class NumberOperationsImpl implements NumberOperations {
         Call<ResponseBody> call = service.putSmallDecimal(numberBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putSmallDecimalDelegate(response, retrofit));
+                    serviceCallback.success(putSmallDecimalDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1009,11 +1009,11 @@ public final class NumberOperationsImpl implements NumberOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putSmallDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> putSmallDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1025,7 +1025,7 @@ public final class NumberOperationsImpl implements NumberOperations {
      */
     public ServiceResponse<BigDecimal> getSmallDecimal() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getSmallDecimal();
-        return getSmallDecimalDelegate(call.execute(), null);
+        return getSmallDecimalDelegate(call.execute());
     }
 
     /**
@@ -1038,9 +1038,9 @@ public final class NumberOperationsImpl implements NumberOperations {
         Call<ResponseBody> call = service.getSmallDecimal();
         call.enqueue(new ServiceResponseCallback<BigDecimal>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getSmallDecimalDelegate(response, retrofit));
+                    serviceCallback.success(getSmallDecimalDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1049,11 +1049,11 @@ public final class NumberOperationsImpl implements NumberOperations {
         return call;
     }
 
-    private ServiceResponse<BigDecimal> getSmallDecimalDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<BigDecimal> getSmallDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<BigDecimal, ErrorException>()
                 .register(200, new TypeToken<BigDecimal>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
 }

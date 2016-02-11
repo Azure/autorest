@@ -15,13 +15,13 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.bodyformdata.models.ErrorException;
 import java.io.InputStream;
 import java.io.IOException;
-import retrofit.Call;
-import retrofit.Response;
-import retrofit.Retrofit;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -62,7 +62,7 @@ public final class FormdataOperationsImpl implements FormdataOperations {
             throw new IllegalArgumentException("Parameter fileName is required and cannot be null.");
         }
         Call<ResponseBody> call = service.uploadFile(fileContent, fileName);
-        return uploadFileDelegate(call.execute(), null);
+        return uploadFileDelegate(call.execute());
     }
 
     /**
@@ -85,9 +85,9 @@ public final class FormdataOperationsImpl implements FormdataOperations {
         Call<ResponseBody> call = service.uploadFile(fileContent, fileName);
         call.enqueue(new ServiceResponseCallback<InputStream>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(uploadFileDelegate(response, retrofit));
+                    serviceCallback.success(uploadFileDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -96,11 +96,11 @@ public final class FormdataOperationsImpl implements FormdataOperations {
         return call;
     }
 
-    private ServiceResponse<InputStream> uploadFileDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<InputStream> uploadFileDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<InputStream, ErrorException>()
                 .register(200, new TypeToken<InputStream>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -121,7 +121,7 @@ public final class FormdataOperationsImpl implements FormdataOperations {
             throw new IllegalArgumentException("Parameter fileName is required and cannot be null.");
         }
         Call<ResponseBody> call = service.uploadFileViaBody(fileContent, fileName);
-        return uploadFileViaBodyDelegate(call.execute(), null);
+        return uploadFileViaBodyDelegate(call.execute());
     }
 
     /**
@@ -144,9 +144,9 @@ public final class FormdataOperationsImpl implements FormdataOperations {
         Call<ResponseBody> call = service.uploadFileViaBody(fileContent, fileName);
         call.enqueue(new ServiceResponseCallback<InputStream>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(uploadFileViaBodyDelegate(response, retrofit));
+                    serviceCallback.success(uploadFileViaBodyDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -155,11 +155,11 @@ public final class FormdataOperationsImpl implements FormdataOperations {
         return call;
     }
 
-    private ServiceResponse<InputStream> uploadFileViaBodyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<InputStream> uploadFileViaBodyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<InputStream, ErrorException>()
                 .register(200, new TypeToken<InputStream>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
 }

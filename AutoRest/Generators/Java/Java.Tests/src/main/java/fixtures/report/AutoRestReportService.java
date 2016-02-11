@@ -11,18 +11,18 @@
 package fixtures.report;
 
 import java.util.List;
-import com.squareup.okhttp.Interceptor;
-import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
+import okhttp3.Interceptor;
+import okhttp3.logging.HttpLoggingInterceptor.Level;
 import com.microsoft.rest.serializer.JacksonMapperAdapter;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.report.models.ErrorException;
 import java.io.IOException;
 import java.util.Map;
-import retrofit.Call;
-import retrofit.http.GET;
-import retrofit.http.Headers;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
 
 /**
  * The interface for AutoRestReportService class.

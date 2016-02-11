@@ -9,17 +9,19 @@ package com.microsoft.rest;
 
 import com.microsoft.rest.retry.RetryHandler;
 import com.microsoft.rest.serializer.JacksonMapperAdapter;
-import com.squareup.okhttp.Interceptor;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.logging.HttpLoggingInterceptor;
-import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
-import retrofit.Retrofit;
 
 import java.net.CookieManager;
 import java.net.CookiePolicy;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
+
+import okhttp3.Interceptor;
+import okhttp3.JavaNetCookieJar;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
+import okhttp3.logging.HttpLoggingInterceptor.Level;
+import retrofit2.Retrofit;
 
 /**
  * ServiceClient is the abstraction for accessing REST operations and their payload data types.
@@ -28,7 +30,7 @@ public abstract class ServiceClient {
     /**
      * The HTTP client object.
      */
-    protected final OkHttpClient client;
+    protected OkHttpClient client;
 
     /**
      * The builder for building Retrofit services.
@@ -49,7 +51,7 @@ public abstract class ServiceClient {
 
         CookieManager cookieManager = new CookieManager();
         cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
-        this.client.setCookieHandler(cookieManager);
+        this.client = this.client.newBuilder().cookieJar(new JavaNetCookieJar(cookieManager)).build();
 
         Executor executor = Executors.newCachedThreadPool();
         this.mapperAdapter = new JacksonMapperAdapter();

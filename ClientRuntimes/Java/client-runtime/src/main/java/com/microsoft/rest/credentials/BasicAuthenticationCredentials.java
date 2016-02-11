@@ -7,7 +7,7 @@
 
 package com.microsoft.rest.credentials;
 
-import com.squareup.okhttp.OkHttpClient;
+import okhttp3.OkHttpClient;
 
 /**
  * Basic Auth credentials for use with a REST Service Client.

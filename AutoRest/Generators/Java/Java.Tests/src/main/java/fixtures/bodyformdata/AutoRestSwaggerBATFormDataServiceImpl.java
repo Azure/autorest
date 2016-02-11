@@ -11,8 +11,8 @@
 package fixtures.bodyformdata;
 
 import com.microsoft.rest.ServiceClient;
-import com.squareup.okhttp.OkHttpClient;
-import retrofit.Retrofit;
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestSwaggerBATFormDataService class.

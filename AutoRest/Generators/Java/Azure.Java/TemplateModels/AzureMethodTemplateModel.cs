@@ -215,7 +215,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 if (this.IsPagingOperation && !this.IsPagingNextOperation)
                 {
                     var builder = new IndentedStringBuilder();
-                    builder.AppendLine("ServiceResponse<PageImpl<{0}>> response = {1}Delegate(call.execute(), null);",
+                    builder.AppendLine("ServiceResponse<PageImpl<{0}>> response = {1}Delegate(call.execute());",
                         ((SequenceType)ReturnType.Body).ElementType.Name, this.Name);
                     builder.AppendLine("{0} result = response.getBody().getItems();", ReturnType.Body.Name);
                     builder.AppendLine("while (response.getBody().getNextPageLink() != null) {");
@@ -233,7 +233,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 }
                 else if (this.IsPagingNonPollingOperation)
                 {
-                    return string.Format(CultureInfo.InvariantCulture, "ServiceResponse<PageImpl<{0}>> response = {1}Delegate(call.execute(), null);",
+                    return string.Format(CultureInfo.InvariantCulture, "ServiceResponse<PageImpl<{0}>> response = {1}Delegate(call.execute());",
                         ((SequenceType)ReturnType.Body).ElementType.Name, this.Name.ToCamelCase());
                 }
                 else
@@ -269,7 +269,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 if (this.IsPagingOperation)
                 {
                     var builder = new IndentedStringBuilder();
-                    builder.AppendLine("ServiceResponse<PageImpl<{0}>> result = {1}Delegate(response, retrofit);",
+                    builder.AppendLine("ServiceResponse<PageImpl<{0}>> result = {1}Delegate(response);",
                         ((SequenceType)ReturnType.Body).ElementType.Name, this.Name);
                     builder.AppendLine("serviceCallback.load(result.getBody().getItems());");
                     builder.AppendLine("if (result.getBody().getNextPageLink() != null").Indent().Indent()
@@ -289,7 +289,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 else if (this.IsPagingNextOperation)
                 {
                     var builder = new IndentedStringBuilder();
-                    builder.AppendLine("ServiceResponse<{0}> result = {1}Delegate(response, retrofit);", this.DelegateReturnTypeString, this.Name);
+                    builder.AppendLine("ServiceResponse<{0}> result = {1}Delegate(response);", this.DelegateReturnTypeString, this.Name);
                     builder.AppendLine("serviceCallback.load(result.getBody().getItems());");
                     builder.AppendLine("if (result.getBody().getNextPageLink() != null").Indent().Indent();
                     builder.AppendLine("&& serviceCallback.progress(result.getBody().getItems()) == ListOperationCallback.PagingBahavior.CONTINUE) {").Outdent();
@@ -305,7 +305,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 else if (this.IsPagingNonPollingOperation)
                 {
                     var builder = new IndentedStringBuilder();
-                    builder.AppendLine("ServiceResponse<PageImpl<{0}>> result = {1}Delegate(response, null);",
+                    builder.AppendLine("ServiceResponse<PageImpl<{0}>> result = {1}Delegate(response);",
                         ((SequenceType)ReturnType.Body).ElementType.Name, this.Name.ToCamelCase());
                     builder.AppendLine("serviceCallback.success(new ServiceResponse<>(result.getBody().getItems(), result.getResponse()));");
                     return builder.ToString();
@@ -436,8 +436,8 @@ namespace Microsoft.Rest.Generator.Java.Azure
                 var imports = base.InterfaceImports;
                 if (this.IsPagingNextOperation)
                 {
-                    imports.Remove("retrofit.http.Path");
-                    imports.Add("retrofit.http.Url");
+                    imports.Remove("retrofit2.http.Path");
+                    imports.Add("retrofit2.http.Url");
                 }
 
                 if (this.IsPagingOperation || this.IsPagingNextOperation)
@@ -460,7 +460,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     imports.Remove("com.microsoft.rest.ServiceResponseEmptyCallback");
                     imports.Remove("com.microsoft.rest.ServiceResponseCallback");
                     imports.Remove("com.microsoft.azure.AzureServiceResponseBuilder");
-                    imports.Add("retrofit.Callback");
+                    imports.Add("retrofit2.Callback");
                     this.Responses.Select(r => r.Value.Body).Concat(new IType[]{ DefaultResponse.Body })
                         .SelectMany(t => t.ImportFrom(ServiceClient.Namespace))
                         .Where(i => !this.Parameters.Any(p => p.Type.ImportFrom(ServiceClient.Namespace).Contains(i)))

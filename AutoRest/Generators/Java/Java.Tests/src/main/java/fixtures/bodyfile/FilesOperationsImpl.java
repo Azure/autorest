@@ -15,13 +15,13 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.bodyfile.models.ErrorException;
 import java.io.InputStream;
 import java.io.IOException;
-import retrofit.Call;
-import retrofit.Response;
-import retrofit.Retrofit;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -53,7 +53,7 @@ public final class FilesOperationsImpl implements FilesOperations {
      */
     public ServiceResponse<InputStream> getFile() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getFile();
-        return getFileDelegate(call.execute(), null);
+        return getFileDelegate(call.execute());
     }
 
     /**
@@ -66,9 +66,9 @@ public final class FilesOperationsImpl implements FilesOperations {
         Call<ResponseBody> call = service.getFile();
         call.enqueue(new ServiceResponseCallback<InputStream>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getFileDelegate(response, retrofit));
+                    serviceCallback.success(getFileDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -77,11 +77,11 @@ public final class FilesOperationsImpl implements FilesOperations {
         return call;
     }
 
-    private ServiceResponse<InputStream> getFileDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<InputStream> getFileDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<InputStream, ErrorException>()
                 .register(200, new TypeToken<InputStream>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -93,7 +93,7 @@ public final class FilesOperationsImpl implements FilesOperations {
      */
     public ServiceResponse<InputStream> getEmptyFile() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getEmptyFile();
-        return getEmptyFileDelegate(call.execute(), null);
+        return getEmptyFileDelegate(call.execute());
     }
 
     /**
@@ -106,9 +106,9 @@ public final class FilesOperationsImpl implements FilesOperations {
         Call<ResponseBody> call = service.getEmptyFile();
         call.enqueue(new ServiceResponseCallback<InputStream>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getEmptyFileDelegate(response, retrofit));
+                    serviceCallback.success(getEmptyFileDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -117,11 +117,11 @@ public final class FilesOperationsImpl implements FilesOperations {
         return call;
     }
 
-    private ServiceResponse<InputStream> getEmptyFileDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<InputStream> getEmptyFileDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<InputStream, ErrorException>()
                 .register(200, new TypeToken<InputStream>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
 }

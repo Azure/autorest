@@ -16,7 +16,6 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.http.models.A;
 import fixtures.http.models.B;
 import fixtures.http.models.C;
@@ -24,9 +23,10 @@ import fixtures.http.models.D;
 import fixtures.http.models.ErrorException;
 import fixtures.http.models.MyException;
 import java.io.IOException;
-import retrofit.Call;
-import retrofit.Response;
-import retrofit.Retrofit;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -58,7 +58,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      */
     public ServiceResponse<A> get200Model204NoModelDefaultError200Valid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.get200Model204NoModelDefaultError200Valid();
-        return get200Model204NoModelDefaultError200ValidDelegate(call.execute(), null);
+        return get200Model204NoModelDefaultError200ValidDelegate(call.execute());
     }
 
     /**
@@ -71,9 +71,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         Call<ResponseBody> call = service.get200Model204NoModelDefaultError200Valid();
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get200Model204NoModelDefaultError200ValidDelegate(response, retrofit));
+                    serviceCallback.success(get200Model204NoModelDefaultError200ValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -82,12 +82,12 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         return call;
     }
 
-    private ServiceResponse<A> get200Model204NoModelDefaultError200ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<A> get200Model204NoModelDefaultError200ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<A, ErrorException>()
                 .register(200, new TypeToken<A>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -99,7 +99,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      */
     public ServiceResponse<A> get200Model204NoModelDefaultError204Valid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.get200Model204NoModelDefaultError204Valid();
-        return get200Model204NoModelDefaultError204ValidDelegate(call.execute(), null);
+        return get200Model204NoModelDefaultError204ValidDelegate(call.execute());
     }
 
     /**
@@ -112,9 +112,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         Call<ResponseBody> call = service.get200Model204NoModelDefaultError204Valid();
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get200Model204NoModelDefaultError204ValidDelegate(response, retrofit));
+                    serviceCallback.success(get200Model204NoModelDefaultError204ValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -123,12 +123,12 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         return call;
     }
 
-    private ServiceResponse<A> get200Model204NoModelDefaultError204ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<A> get200Model204NoModelDefaultError204ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<A, ErrorException>()
                 .register(200, new TypeToken<A>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -140,7 +140,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      */
     public ServiceResponse<A> get200Model204NoModelDefaultError201Invalid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.get200Model204NoModelDefaultError201Invalid();
-        return get200Model204NoModelDefaultError201InvalidDelegate(call.execute(), null);
+        return get200Model204NoModelDefaultError201InvalidDelegate(call.execute());
     }
 
     /**
@@ -153,9 +153,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         Call<ResponseBody> call = service.get200Model204NoModelDefaultError201Invalid();
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get200Model204NoModelDefaultError201InvalidDelegate(response, retrofit));
+                    serviceCallback.success(get200Model204NoModelDefaultError201InvalidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -164,12 +164,12 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         return call;
     }
 
-    private ServiceResponse<A> get200Model204NoModelDefaultError201InvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<A> get200Model204NoModelDefaultError201InvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<A, ErrorException>()
                 .register(200, new TypeToken<A>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -181,7 +181,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      */
     public ServiceResponse<A> get200Model204NoModelDefaultError202None() throws ErrorException, IOException {
         Call<ResponseBody> call = service.get200Model204NoModelDefaultError202None();
-        return get200Model204NoModelDefaultError202NoneDelegate(call.execute(), null);
+        return get200Model204NoModelDefaultError202NoneDelegate(call.execute());
     }
 
     /**
@@ -194,9 +194,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         Call<ResponseBody> call = service.get200Model204NoModelDefaultError202None();
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get200Model204NoModelDefaultError202NoneDelegate(response, retrofit));
+                    serviceCallback.success(get200Model204NoModelDefaultError202NoneDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -205,12 +205,12 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         return call;
     }
 
-    private ServiceResponse<A> get200Model204NoModelDefaultError202NoneDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<A> get200Model204NoModelDefaultError202NoneDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<A, ErrorException>()
                 .register(200, new TypeToken<A>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -222,7 +222,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      */
     public ServiceResponse<A> get200Model204NoModelDefaultError400Valid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.get200Model204NoModelDefaultError400Valid();
-        return get200Model204NoModelDefaultError400ValidDelegate(call.execute(), null);
+        return get200Model204NoModelDefaultError400ValidDelegate(call.execute());
     }
 
     /**
@@ -235,9 +235,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         Call<ResponseBody> call = service.get200Model204NoModelDefaultError400Valid();
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get200Model204NoModelDefaultError400ValidDelegate(response, retrofit));
+                    serviceCallback.success(get200Model204NoModelDefaultError400ValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -246,12 +246,12 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         return call;
     }
 
-    private ServiceResponse<A> get200Model204NoModelDefaultError400ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<A> get200Model204NoModelDefaultError400ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<A, ErrorException>()
                 .register(200, new TypeToken<A>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -263,7 +263,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      */
     public ServiceResponse<A> get200Model201ModelDefaultError200Valid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.get200Model201ModelDefaultError200Valid();
-        return get200Model201ModelDefaultError200ValidDelegate(call.execute(), null);
+        return get200Model201ModelDefaultError200ValidDelegate(call.execute());
     }
 
     /**
@@ -276,9 +276,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         Call<ResponseBody> call = service.get200Model201ModelDefaultError200Valid();
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get200Model201ModelDefaultError200ValidDelegate(response, retrofit));
+                    serviceCallback.success(get200Model201ModelDefaultError200ValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -287,12 +287,12 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         return call;
     }
 
-    private ServiceResponse<A> get200Model201ModelDefaultError200ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<A> get200Model201ModelDefaultError200ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<A, ErrorException>()
                 .register(200, new TypeToken<A>() { }.getType())
                 .register(201, new TypeToken<B>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -304,7 +304,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      */
     public ServiceResponse<A> get200Model201ModelDefaultError201Valid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.get200Model201ModelDefaultError201Valid();
-        return get200Model201ModelDefaultError201ValidDelegate(call.execute(), null);
+        return get200Model201ModelDefaultError201ValidDelegate(call.execute());
     }
 
     /**
@@ -317,9 +317,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         Call<ResponseBody> call = service.get200Model201ModelDefaultError201Valid();
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get200Model201ModelDefaultError201ValidDelegate(response, retrofit));
+                    serviceCallback.success(get200Model201ModelDefaultError201ValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -328,12 +328,12 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         return call;
     }
 
-    private ServiceResponse<A> get200Model201ModelDefaultError201ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<A> get200Model201ModelDefaultError201ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<A, ErrorException>()
                 .register(200, new TypeToken<A>() { }.getType())
                 .register(201, new TypeToken<B>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -345,7 +345,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      */
     public ServiceResponse<A> get200Model201ModelDefaultError400Valid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.get200Model201ModelDefaultError400Valid();
-        return get200Model201ModelDefaultError400ValidDelegate(call.execute(), null);
+        return get200Model201ModelDefaultError400ValidDelegate(call.execute());
     }
 
     /**
@@ -358,9 +358,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         Call<ResponseBody> call = service.get200Model201ModelDefaultError400Valid();
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get200Model201ModelDefaultError400ValidDelegate(response, retrofit));
+                    serviceCallback.success(get200Model201ModelDefaultError400ValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -369,12 +369,12 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         return call;
     }
 
-    private ServiceResponse<A> get200Model201ModelDefaultError400ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<A> get200Model201ModelDefaultError400ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<A, ErrorException>()
                 .register(200, new TypeToken<A>() { }.getType())
                 .register(201, new TypeToken<B>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -386,7 +386,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      */
     public ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError200Valid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.get200ModelA201ModelC404ModelDDefaultError200Valid();
-        return get200ModelA201ModelC404ModelDDefaultError200ValidDelegate(call.execute(), null);
+        return get200ModelA201ModelC404ModelDDefaultError200ValidDelegate(call.execute());
     }
 
     /**
@@ -399,9 +399,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         Call<ResponseBody> call = service.get200ModelA201ModelC404ModelDDefaultError200Valid();
         call.enqueue(new ServiceResponseCallback<Object>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get200ModelA201ModelC404ModelDDefaultError200ValidDelegate(response, retrofit));
+                    serviceCallback.success(get200ModelA201ModelC404ModelDDefaultError200ValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -410,13 +410,13 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         return call;
     }
 
-    private ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError200ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError200ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Object, ErrorException>()
                 .register(200, new TypeToken<A>() { }.getType())
                 .register(201, new TypeToken<C>() { }.getType())
                 .register(404, new TypeToken<D>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -428,7 +428,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      */
     public ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError201Valid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.get200ModelA201ModelC404ModelDDefaultError201Valid();
-        return get200ModelA201ModelC404ModelDDefaultError201ValidDelegate(call.execute(), null);
+        return get200ModelA201ModelC404ModelDDefaultError201ValidDelegate(call.execute());
     }
 
     /**
@@ -441,9 +441,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         Call<ResponseBody> call = service.get200ModelA201ModelC404ModelDDefaultError201Valid();
         call.enqueue(new ServiceResponseCallback<Object>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get200ModelA201ModelC404ModelDDefaultError201ValidDelegate(response, retrofit));
+                    serviceCallback.success(get200ModelA201ModelC404ModelDDefaultError201ValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -452,13 +452,13 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         return call;
     }
 
-    private ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError201ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError201ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Object, ErrorException>()
                 .register(200, new TypeToken<A>() { }.getType())
                 .register(201, new TypeToken<C>() { }.getType())
                 .register(404, new TypeToken<D>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -470,7 +470,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      */
     public ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError404Valid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.get200ModelA201ModelC404ModelDDefaultError404Valid();
-        return get200ModelA201ModelC404ModelDDefaultError404ValidDelegate(call.execute(), null);
+        return get200ModelA201ModelC404ModelDDefaultError404ValidDelegate(call.execute());
     }
 
     /**
@@ -483,9 +483,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         Call<ResponseBody> call = service.get200ModelA201ModelC404ModelDDefaultError404Valid();
         call.enqueue(new ServiceResponseCallback<Object>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get200ModelA201ModelC404ModelDDefaultError404ValidDelegate(response, retrofit));
+                    serviceCallback.success(get200ModelA201ModelC404ModelDDefaultError404ValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -494,13 +494,13 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         return call;
     }
 
-    private ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError404ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError404ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Object, ErrorException>()
                 .register(200, new TypeToken<A>() { }.getType())
                 .register(201, new TypeToken<C>() { }.getType())
                 .register(404, new TypeToken<D>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -512,7 +512,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      */
     public ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError400Valid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.get200ModelA201ModelC404ModelDDefaultError400Valid();
-        return get200ModelA201ModelC404ModelDDefaultError400ValidDelegate(call.execute(), null);
+        return get200ModelA201ModelC404ModelDDefaultError400ValidDelegate(call.execute());
     }
 
     /**
@@ -525,9 +525,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         Call<ResponseBody> call = service.get200ModelA201ModelC404ModelDDefaultError400Valid();
         call.enqueue(new ServiceResponseCallback<Object>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get200ModelA201ModelC404ModelDDefaultError400ValidDelegate(response, retrofit));
+                    serviceCallback.success(get200ModelA201ModelC404ModelDDefaultError400ValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -536,13 +536,13 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         return call;
     }
 
-    private ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError400ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError400ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Object, ErrorException>()
                 .register(200, new TypeToken<A>() { }.getType())
                 .register(201, new TypeToken<C>() { }.getType())
                 .register(404, new TypeToken<D>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -554,7 +554,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      */
     public ServiceResponse<Void> get202None204NoneDefaultError202None() throws ErrorException, IOException {
         Call<ResponseBody> call = service.get202None204NoneDefaultError202None();
-        return get202None204NoneDefaultError202NoneDelegate(call.execute(), null);
+        return get202None204NoneDefaultError202NoneDelegate(call.execute());
     }
 
     /**
@@ -567,9 +567,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         Call<ResponseBody> call = service.get202None204NoneDefaultError202None();
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get202None204NoneDefaultError202NoneDelegate(response, retrofit));
+                    serviceCallback.success(get202None204NoneDefaultError202NoneDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -578,12 +578,12 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         return call;
     }
 
-    private ServiceResponse<Void> get202None204NoneDefaultError202NoneDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> get202None204NoneDefaultError202NoneDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(202, new TypeToken<Void>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -595,7 +595,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      */
     public ServiceResponse<Void> get202None204NoneDefaultError204None() throws ErrorException, IOException {
         Call<ResponseBody> call = service.get202None204NoneDefaultError204None();
-        return get202None204NoneDefaultError204NoneDelegate(call.execute(), null);
+        return get202None204NoneDefaultError204NoneDelegate(call.execute());
     }
 
     /**
@@ -608,9 +608,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         Call<ResponseBody> call = service.get202None204NoneDefaultError204None();
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get202None204NoneDefaultError204NoneDelegate(response, retrofit));
+                    serviceCallback.success(get202None204NoneDefaultError204NoneDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -619,12 +619,12 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         return call;
     }
 
-    private ServiceResponse<Void> get202None204NoneDefaultError204NoneDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> get202None204NoneDefaultError204NoneDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(202, new TypeToken<Void>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -636,7 +636,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      */
     public ServiceResponse<Void> get202None204NoneDefaultError400Valid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.get202None204NoneDefaultError400Valid();
-        return get202None204NoneDefaultError400ValidDelegate(call.execute(), null);
+        return get202None204NoneDefaultError400ValidDelegate(call.execute());
     }
 
     /**
@@ -649,9 +649,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         Call<ResponseBody> call = service.get202None204NoneDefaultError400Valid();
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get202None204NoneDefaultError400ValidDelegate(response, retrofit));
+                    serviceCallback.success(get202None204NoneDefaultError400ValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -660,12 +660,12 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         return call;
     }
 
-    private ServiceResponse<Void> get202None204NoneDefaultError400ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> get202None204NoneDefaultError400ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(202, new TypeToken<Void>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -677,7 +677,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      */
     public ServiceResponse<Void> get202None204NoneDefaultNone202Invalid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.get202None204NoneDefaultNone202Invalid();
-        return get202None204NoneDefaultNone202InvalidDelegate(call.execute(), null);
+        return get202None204NoneDefaultNone202InvalidDelegate(call.execute());
     }
 
     /**
@@ -690,9 +690,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         Call<ResponseBody> call = service.get202None204NoneDefaultNone202Invalid();
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get202None204NoneDefaultNone202InvalidDelegate(response, retrofit));
+                    serviceCallback.success(get202None204NoneDefaultNone202InvalidDelegate(response));
                 } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -701,11 +701,11 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         return call;
     }
 
-    private ServiceResponse<Void> get202None204NoneDefaultNone202InvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> get202None204NoneDefaultNone202InvalidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void, ServiceException>()
                 .register(202, new TypeToken<Void>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -717,7 +717,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      */
     public ServiceResponse<Void> get202None204NoneDefaultNone204None() throws ServiceException, IOException {
         Call<ResponseBody> call = service.get202None204NoneDefaultNone204None();
-        return get202None204NoneDefaultNone204NoneDelegate(call.execute(), null);
+        return get202None204NoneDefaultNone204NoneDelegate(call.execute());
     }
 
     /**
@@ -730,9 +730,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         Call<ResponseBody> call = service.get202None204NoneDefaultNone204None();
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get202None204NoneDefaultNone204NoneDelegate(response, retrofit));
+                    serviceCallback.success(get202None204NoneDefaultNone204NoneDelegate(response));
                 } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -741,11 +741,11 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         return call;
     }
 
-    private ServiceResponse<Void> get202None204NoneDefaultNone204NoneDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> get202None204NoneDefaultNone204NoneDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void, ServiceException>()
                 .register(202, new TypeToken<Void>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -757,7 +757,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      */
     public ServiceResponse<Void> get202None204NoneDefaultNone400None() throws ServiceException, IOException {
         Call<ResponseBody> call = service.get202None204NoneDefaultNone400None();
-        return get202None204NoneDefaultNone400NoneDelegate(call.execute(), null);
+        return get202None204NoneDefaultNone400NoneDelegate(call.execute());
     }
 
     /**
@@ -770,9 +770,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         Call<ResponseBody> call = service.get202None204NoneDefaultNone400None();
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get202None204NoneDefaultNone400NoneDelegate(response, retrofit));
+                    serviceCallback.success(get202None204NoneDefaultNone400NoneDelegate(response));
                 } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -781,11 +781,11 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         return call;
     }
 
-    private ServiceResponse<Void> get202None204NoneDefaultNone400NoneDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> get202None204NoneDefaultNone400NoneDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void, ServiceException>()
                 .register(202, new TypeToken<Void>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -797,7 +797,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      */
     public ServiceResponse<Void> get202None204NoneDefaultNone400Invalid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.get202None204NoneDefaultNone400Invalid();
-        return get202None204NoneDefaultNone400InvalidDelegate(call.execute(), null);
+        return get202None204NoneDefaultNone400InvalidDelegate(call.execute());
     }
 
     /**
@@ -810,9 +810,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         Call<ResponseBody> call = service.get202None204NoneDefaultNone400Invalid();
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get202None204NoneDefaultNone400InvalidDelegate(response, retrofit));
+                    serviceCallback.success(get202None204NoneDefaultNone400InvalidDelegate(response));
                 } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -821,11 +821,11 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         return call;
     }
 
-    private ServiceResponse<Void> get202None204NoneDefaultNone400InvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> get202None204NoneDefaultNone400InvalidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void, ServiceException>()
                 .register(202, new TypeToken<Void>() { }.getType())
                 .register(204, new TypeToken<Void>() { }.getType())
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -837,7 +837,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      */
     public ServiceResponse<A> getDefaultModelA200Valid() throws MyException, IOException {
         Call<ResponseBody> call = service.getDefaultModelA200Valid();
-        return getDefaultModelA200ValidDelegate(call.execute(), null);
+        return getDefaultModelA200ValidDelegate(call.execute());
     }
 
     /**
@@ -850,9 +850,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         Call<ResponseBody> call = service.getDefaultModelA200Valid();
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDefaultModelA200ValidDelegate(response, retrofit));
+                    serviceCallback.success(getDefaultModelA200ValidDelegate(response));
                 } catch (MyException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -861,10 +861,10 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         return call;
     }
 
-    private ServiceResponse<A> getDefaultModelA200ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws MyException, IOException {
+    private ServiceResponse<A> getDefaultModelA200ValidDelegate(Response<ResponseBody> response) throws MyException, IOException {
         return new ServiceResponseBuilder<A, MyException>()
                 .registerError(MyException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -876,7 +876,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      */
     public ServiceResponse<A> getDefaultModelA200None() throws MyException, IOException {
         Call<ResponseBody> call = service.getDefaultModelA200None();
-        return getDefaultModelA200NoneDelegate(call.execute(), null);
+        return getDefaultModelA200NoneDelegate(call.execute());
     }
 
     /**
@@ -889,9 +889,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         Call<ResponseBody> call = service.getDefaultModelA200None();
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDefaultModelA200NoneDelegate(response, retrofit));
+                    serviceCallback.success(getDefaultModelA200NoneDelegate(response));
                 } catch (MyException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -900,10 +900,10 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         return call;
     }
 
-    private ServiceResponse<A> getDefaultModelA200NoneDelegate(Response<ResponseBody> response, Retrofit retrofit) throws MyException, IOException {
+    private ServiceResponse<A> getDefaultModelA200NoneDelegate(Response<ResponseBody> response) throws MyException, IOException {
         return new ServiceResponseBuilder<A, MyException>()
                 .registerError(MyException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -915,7 +915,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      */
     public ServiceResponse<A> getDefaultModelA400Valid() throws MyException, IOException {
         Call<ResponseBody> call = service.getDefaultModelA400Valid();
-        return getDefaultModelA400ValidDelegate(call.execute(), null);
+        return getDefaultModelA400ValidDelegate(call.execute());
     }
 
     /**
@@ -928,9 +928,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         Call<ResponseBody> call = service.getDefaultModelA400Valid();
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDefaultModelA400ValidDelegate(response, retrofit));
+                    serviceCallback.success(getDefaultModelA400ValidDelegate(response));
                 } catch (MyException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -939,10 +939,10 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         return call;
     }
 
-    private ServiceResponse<A> getDefaultModelA400ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws MyException, IOException {
+    private ServiceResponse<A> getDefaultModelA400ValidDelegate(Response<ResponseBody> response) throws MyException, IOException {
         return new ServiceResponseBuilder<A, MyException>()
                 .registerError(MyException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -954,7 +954,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      */
     public ServiceResponse<A> getDefaultModelA400None() throws MyException, IOException {
         Call<ResponseBody> call = service.getDefaultModelA400None();
-        return getDefaultModelA400NoneDelegate(call.execute(), null);
+        return getDefaultModelA400NoneDelegate(call.execute());
     }
 
     /**
@@ -967,9 +967,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         Call<ResponseBody> call = service.getDefaultModelA400None();
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDefaultModelA400NoneDelegate(response, retrofit));
+                    serviceCallback.success(getDefaultModelA400NoneDelegate(response));
                 } catch (MyException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -978,10 +978,10 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         return call;
     }
 
-    private ServiceResponse<A> getDefaultModelA400NoneDelegate(Response<ResponseBody> response, Retrofit retrofit) throws MyException, IOException {
+    private ServiceResponse<A> getDefaultModelA400NoneDelegate(Response<ResponseBody> response) throws MyException, IOException {
         return new ServiceResponseBuilder<A, MyException>()
                 .registerError(MyException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -993,7 +993,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      */
     public ServiceResponse<Void> getDefaultNone200Invalid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDefaultNone200Invalid();
-        return getDefaultNone200InvalidDelegate(call.execute(), null);
+        return getDefaultNone200InvalidDelegate(call.execute());
     }
 
     /**
@@ -1006,9 +1006,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         Call<ResponseBody> call = service.getDefaultNone200Invalid();
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDefaultNone200InvalidDelegate(response, retrofit));
+                    serviceCallback.success(getDefaultNone200InvalidDelegate(response));
                 } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1017,9 +1017,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         return call;
     }
 
-    private ServiceResponse<Void> getDefaultNone200InvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> getDefaultNone200InvalidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void, ServiceException>()
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1031,7 +1031,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      */
     public ServiceResponse<Void> getDefaultNone200None() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDefaultNone200None();
-        return getDefaultNone200NoneDelegate(call.execute(), null);
+        return getDefaultNone200NoneDelegate(call.execute());
     }
 
     /**
@@ -1044,9 +1044,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         Call<ResponseBody> call = service.getDefaultNone200None();
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDefaultNone200NoneDelegate(response, retrofit));
+                    serviceCallback.success(getDefaultNone200NoneDelegate(response));
                 } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1055,9 +1055,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         return call;
     }
 
-    private ServiceResponse<Void> getDefaultNone200NoneDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> getDefaultNone200NoneDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void, ServiceException>()
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1069,7 +1069,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      */
     public ServiceResponse<Void> getDefaultNone400Invalid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDefaultNone400Invalid();
-        return getDefaultNone400InvalidDelegate(call.execute(), null);
+        return getDefaultNone400InvalidDelegate(call.execute());
     }
 
     /**
@@ -1082,9 +1082,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         Call<ResponseBody> call = service.getDefaultNone400Invalid();
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDefaultNone400InvalidDelegate(response, retrofit));
+                    serviceCallback.success(getDefaultNone400InvalidDelegate(response));
                 } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1093,9 +1093,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         return call;
     }
 
-    private ServiceResponse<Void> getDefaultNone400InvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> getDefaultNone400InvalidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void, ServiceException>()
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1107,7 +1107,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      */
     public ServiceResponse<Void> getDefaultNone400None() throws ServiceException, IOException {
         Call<ResponseBody> call = service.getDefaultNone400None();
-        return getDefaultNone400NoneDelegate(call.execute(), null);
+        return getDefaultNone400NoneDelegate(call.execute());
     }
 
     /**
@@ -1120,9 +1120,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         Call<ResponseBody> call = service.getDefaultNone400None();
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDefaultNone400NoneDelegate(response, retrofit));
+                    serviceCallback.success(getDefaultNone400NoneDelegate(response));
                 } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1131,9 +1131,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         return call;
     }
 
-    private ServiceResponse<Void> getDefaultNone400NoneDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<Void> getDefaultNone400NoneDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
         return new ServiceResponseBuilder<Void, ServiceException>()
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1145,7 +1145,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      */
     public ServiceResponse<A> get200ModelA200None() throws ServiceException, IOException {
         Call<ResponseBody> call = service.get200ModelA200None();
-        return get200ModelA200NoneDelegate(call.execute(), null);
+        return get200ModelA200NoneDelegate(call.execute());
     }
 
     /**
@@ -1158,9 +1158,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         Call<ResponseBody> call = service.get200ModelA200None();
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get200ModelA200NoneDelegate(response, retrofit));
+                    serviceCallback.success(get200ModelA200NoneDelegate(response));
                 } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1169,10 +1169,10 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         return call;
     }
 
-    private ServiceResponse<A> get200ModelA200NoneDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<A> get200ModelA200NoneDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
         return new ServiceResponseBuilder<A, ServiceException>()
                 .register(200, new TypeToken<A>() { }.getType())
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1184,7 +1184,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      */
     public ServiceResponse<A> get200ModelA200Valid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.get200ModelA200Valid();
-        return get200ModelA200ValidDelegate(call.execute(), null);
+        return get200ModelA200ValidDelegate(call.execute());
     }
 
     /**
@@ -1197,9 +1197,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         Call<ResponseBody> call = service.get200ModelA200Valid();
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get200ModelA200ValidDelegate(response, retrofit));
+                    serviceCallback.success(get200ModelA200ValidDelegate(response));
                 } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1208,10 +1208,10 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         return call;
     }
 
-    private ServiceResponse<A> get200ModelA200ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<A> get200ModelA200ValidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
         return new ServiceResponseBuilder<A, ServiceException>()
                 .register(200, new TypeToken<A>() { }.getType())
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1223,7 +1223,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      */
     public ServiceResponse<A> get200ModelA200Invalid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.get200ModelA200Invalid();
-        return get200ModelA200InvalidDelegate(call.execute(), null);
+        return get200ModelA200InvalidDelegate(call.execute());
     }
 
     /**
@@ -1236,9 +1236,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         Call<ResponseBody> call = service.get200ModelA200Invalid();
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get200ModelA200InvalidDelegate(response, retrofit));
+                    serviceCallback.success(get200ModelA200InvalidDelegate(response));
                 } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1247,10 +1247,10 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         return call;
     }
 
-    private ServiceResponse<A> get200ModelA200InvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<A> get200ModelA200InvalidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
         return new ServiceResponseBuilder<A, ServiceException>()
                 .register(200, new TypeToken<A>() { }.getType())
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1262,7 +1262,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      */
     public ServiceResponse<A> get200ModelA400None() throws ServiceException, IOException {
         Call<ResponseBody> call = service.get200ModelA400None();
-        return get200ModelA400NoneDelegate(call.execute(), null);
+        return get200ModelA400NoneDelegate(call.execute());
     }
 
     /**
@@ -1275,9 +1275,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         Call<ResponseBody> call = service.get200ModelA400None();
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get200ModelA400NoneDelegate(response, retrofit));
+                    serviceCallback.success(get200ModelA400NoneDelegate(response));
                 } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1286,10 +1286,10 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         return call;
     }
 
-    private ServiceResponse<A> get200ModelA400NoneDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<A> get200ModelA400NoneDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
         return new ServiceResponseBuilder<A, ServiceException>()
                 .register(200, new TypeToken<A>() { }.getType())
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1301,7 +1301,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      */
     public ServiceResponse<A> get200ModelA400Valid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.get200ModelA400Valid();
-        return get200ModelA400ValidDelegate(call.execute(), null);
+        return get200ModelA400ValidDelegate(call.execute());
     }
 
     /**
@@ -1314,9 +1314,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         Call<ResponseBody> call = service.get200ModelA400Valid();
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get200ModelA400ValidDelegate(response, retrofit));
+                    serviceCallback.success(get200ModelA400ValidDelegate(response));
                 } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1325,10 +1325,10 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         return call;
     }
 
-    private ServiceResponse<A> get200ModelA400ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<A> get200ModelA400ValidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
         return new ServiceResponseBuilder<A, ServiceException>()
                 .register(200, new TypeToken<A>() { }.getType())
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1340,7 +1340,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      */
     public ServiceResponse<A> get200ModelA400Invalid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.get200ModelA400Invalid();
-        return get200ModelA400InvalidDelegate(call.execute(), null);
+        return get200ModelA400InvalidDelegate(call.execute());
     }
 
     /**
@@ -1353,9 +1353,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         Call<ResponseBody> call = service.get200ModelA400Invalid();
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get200ModelA400InvalidDelegate(response, retrofit));
+                    serviceCallback.success(get200ModelA400InvalidDelegate(response));
                 } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1364,10 +1364,10 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         return call;
     }
 
-    private ServiceResponse<A> get200ModelA400InvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<A> get200ModelA400InvalidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
         return new ServiceResponseBuilder<A, ServiceException>()
                 .register(200, new TypeToken<A>() { }.getType())
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1379,7 +1379,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      */
     public ServiceResponse<A> get200ModelA202Valid() throws ServiceException, IOException {
         Call<ResponseBody> call = service.get200ModelA202Valid();
-        return get200ModelA202ValidDelegate(call.execute(), null);
+        return get200ModelA202ValidDelegate(call.execute());
     }
 
     /**
@@ -1392,9 +1392,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         Call<ResponseBody> call = service.get200ModelA202Valid();
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get200ModelA202ValidDelegate(response, retrofit));
+                    serviceCallback.success(get200ModelA202ValidDelegate(response));
                 } catch (ServiceException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1403,10 +1403,10 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
         return call;
     }
 
-    private ServiceResponse<A> get200ModelA202ValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ServiceException, IOException {
+    private ServiceResponse<A> get200ModelA202ValidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
         return new ServiceResponseBuilder<A, ServiceException>()
                 .register(200, new TypeToken<A>() { }.getType())
-                .build(response, retrofit);
+                .build(response);
     }
 
 }

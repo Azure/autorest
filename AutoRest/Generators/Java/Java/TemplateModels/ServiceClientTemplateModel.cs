@@ -63,8 +63,8 @@ namespace Microsoft.Rest.Generator.Java
                 }
                 classes.AddRange(new[]{
                         "com.microsoft.rest.ServiceClient",
-                        "com.squareup.okhttp.OkHttpClient",
-                        "retrofit.Retrofit" 
+                        "okhttp3.OkHttpClient",
+                        "retrofit2.Retrofit" 
                     });
                 
                 if (this.MethodTemplateModels.IsNullOrEmpty())
@@ -87,8 +87,8 @@ namespace Microsoft.Rest.Generator.Java
             {
                 HashSet<string> classes = new HashSet<string>();
                 classes.Add("java.util.List");
-                classes.Add("com.squareup.okhttp.Interceptor");
-                classes.Add("com.squareup.okhttp.logging.HttpLoggingInterceptor.Level");
+                classes.Add("okhttp3.Interceptor");
+                classes.Add("okhttp3.logging.HttpLoggingInterceptor.Level");
                 classes.Add("com.microsoft.rest.serializer.JacksonMapperAdapter");
                 if (this.Properties.Any(p => p.Type == PrimaryType.Credentials))
                 {

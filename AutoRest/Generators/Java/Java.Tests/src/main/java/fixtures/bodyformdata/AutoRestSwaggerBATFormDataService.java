@@ -11,8 +11,8 @@
 package fixtures.bodyformdata;
 
 import java.util.List;
-import com.squareup.okhttp.Interceptor;
-import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
+import okhttp3.Interceptor;
+import okhttp3.logging.HttpLoggingInterceptor.Level;
 import com.microsoft.rest.serializer.JacksonMapperAdapter;
 
 /**

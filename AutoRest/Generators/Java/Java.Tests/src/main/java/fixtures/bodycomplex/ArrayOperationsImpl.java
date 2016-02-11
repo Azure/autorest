@@ -16,13 +16,13 @@ import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.Validator;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.bodycomplex.models.ArrayWrapper;
 import fixtures.bodycomplex.models.ErrorException;
 import java.io.IOException;
-import retrofit.Call;
-import retrofit.Response;
-import retrofit.Retrofit;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -54,7 +54,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<ArrayWrapper> getValid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getValid();
-        return getValidDelegate(call.execute(), null);
+        return getValidDelegate(call.execute());
     }
 
     /**
@@ -67,9 +67,9 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         Call<ResponseBody> call = service.getValid();
         call.enqueue(new ServiceResponseCallback<ArrayWrapper>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getValidDelegate(response, retrofit));
+                    serviceCallback.success(getValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -78,11 +78,11 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         return call;
     }
 
-    private ServiceResponse<ArrayWrapper> getValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<ArrayWrapper> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<ArrayWrapper, ErrorException>()
                 .register(200, new TypeToken<ArrayWrapper>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -100,7 +100,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putValid(complexBody);
-        return putValidDelegate(call.execute(), null);
+        return putValidDelegate(call.execute());
     }
 
     /**
@@ -119,9 +119,9 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         Call<ResponseBody> call = service.putValid(complexBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putValidDelegate(response, retrofit));
+                    serviceCallback.success(putValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -130,11 +130,11 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -146,7 +146,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<ArrayWrapper> getEmpty() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getEmpty();
-        return getEmptyDelegate(call.execute(), null);
+        return getEmptyDelegate(call.execute());
     }
 
     /**
@@ -159,9 +159,9 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         Call<ResponseBody> call = service.getEmpty();
         call.enqueue(new ServiceResponseCallback<ArrayWrapper>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getEmptyDelegate(response, retrofit));
+                    serviceCallback.success(getEmptyDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -170,11 +170,11 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         return call;
     }
 
-    private ServiceResponse<ArrayWrapper> getEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<ArrayWrapper> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<ArrayWrapper, ErrorException>()
                 .register(200, new TypeToken<ArrayWrapper>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -192,7 +192,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putEmpty(complexBody);
-        return putEmptyDelegate(call.execute(), null);
+        return putEmptyDelegate(call.execute());
     }
 
     /**
@@ -211,9 +211,9 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         Call<ResponseBody> call = service.putEmpty(complexBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putEmptyDelegate(response, retrofit));
+                    serviceCallback.success(putEmptyDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -222,11 +222,11 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -238,7 +238,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceResponse<ArrayWrapper> getNotProvided() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getNotProvided();
-        return getNotProvidedDelegate(call.execute(), null);
+        return getNotProvidedDelegate(call.execute());
     }
 
     /**
@@ -251,9 +251,9 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         Call<ResponseBody> call = service.getNotProvided();
         call.enqueue(new ServiceResponseCallback<ArrayWrapper>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getNotProvidedDelegate(response, retrofit));
+                    serviceCallback.success(getNotProvidedDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -262,11 +262,11 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         return call;
     }
 
-    private ServiceResponse<ArrayWrapper> getNotProvidedDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<ArrayWrapper> getNotProvidedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<ArrayWrapper, ErrorException>()
                 .register(200, new TypeToken<ArrayWrapper>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
 }

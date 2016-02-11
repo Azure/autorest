@@ -11,19 +11,19 @@
 package fixtures.report;
 
 import com.microsoft.rest.ServiceClient;
-import com.squareup.okhttp.OkHttpClient;
-import retrofit.Retrofit;
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.report.models.ErrorException;
 import java.io.IOException;
 import java.util.Map;
-import retrofit.Call;
-import retrofit.Response;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Response;
 
 /**
  * Initializes a new instance of the AutoRestReportService class.
@@ -91,7 +91,7 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
      */
     public ServiceResponse<Map<String, Integer>> getReport() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getReport();
-        return getReportDelegate(call.execute(), null);
+        return getReportDelegate(call.execute());
     }
 
     /**
@@ -104,9 +104,9 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
         Call<ResponseBody> call = service.getReport();
         call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getReportDelegate(response, retrofit));
+                    serviceCallback.success(getReportDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -115,11 +115,11 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
         return call;
     }
 
-    private ServiceResponse<Map<String, Integer>> getReportDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Map<String, Integer>> getReportDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Map<String, Integer>, ErrorException>()
                 .register(200, new TypeToken<Map<String, Integer>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
 }

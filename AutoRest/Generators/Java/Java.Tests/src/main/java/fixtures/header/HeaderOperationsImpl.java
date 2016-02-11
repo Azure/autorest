@@ -17,7 +17,6 @@ import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.ServiceResponseWithHeaders;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.header.models.ErrorException;
 import fixtures.header.models.GreyscaleColors;
 import fixtures.header.models.HeaderResponseBoolHeaders;
@@ -35,13 +34,14 @@ import fixtures.header.models.HeaderResponseLongHeaders;
 import fixtures.header.models.HeaderResponseProtectedKeyHeaders;
 import fixtures.header.models.HeaderResponseStringHeaders;
 import java.io.IOException;
+import okhttp3.ResponseBody;
 import org.apache.commons.codec.binary.Base64;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.Period;
-import retrofit.Call;
-import retrofit.Response;
-import retrofit.Retrofit;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -78,7 +78,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             throw new IllegalArgumentException("Parameter userAgent is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramExistingKey(userAgent);
-        return paramExistingKeyDelegate(call.execute(), null);
+        return paramExistingKeyDelegate(call.execute());
     }
 
     /**
@@ -96,9 +96,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         Call<ResponseBody> call = service.paramExistingKey(userAgent);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(paramExistingKeyDelegate(response, retrofit));
+                    serviceCallback.success(paramExistingKeyDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -107,11 +107,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponse<Void> paramExistingKeyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> paramExistingKeyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -123,7 +123,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      */
     public ServiceResponseWithHeaders<Void, HeaderResponseExistingKeyHeaders> responseExistingKey() throws ErrorException, IOException {
         Call<ResponseBody> call = service.responseExistingKey();
-        return responseExistingKeyDelegate(call.execute(), null);
+        return responseExistingKeyDelegate(call.execute());
     }
 
     /**
@@ -136,9 +136,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         Call<ResponseBody> call = service.responseExistingKey();
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(responseExistingKeyDelegate(response, retrofit));
+                    serviceCallback.success(responseExistingKeyDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -147,11 +147,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponseWithHeaders<Void, HeaderResponseExistingKeyHeaders> responseExistingKeyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponseWithHeaders<Void, HeaderResponseExistingKeyHeaders> responseExistingKeyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .buildWithHeaders(response, retrofit, HeaderResponseExistingKeyHeaders.class);
+                .buildWithHeaders(response, HeaderResponseExistingKeyHeaders.class);
     }
 
     /**
@@ -168,7 +168,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             throw new IllegalArgumentException("Parameter contentType is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramProtectedKey(contentType);
-        return paramProtectedKeyDelegate(call.execute(), null);
+        return paramProtectedKeyDelegate(call.execute());
     }
 
     /**
@@ -186,9 +186,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         Call<ResponseBody> call = service.paramProtectedKey(contentType);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(paramProtectedKeyDelegate(response, retrofit));
+                    serviceCallback.success(paramProtectedKeyDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -197,11 +197,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponse<Void> paramProtectedKeyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> paramProtectedKeyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -213,7 +213,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      */
     public ServiceResponseWithHeaders<Void, HeaderResponseProtectedKeyHeaders> responseProtectedKey() throws ErrorException, IOException {
         Call<ResponseBody> call = service.responseProtectedKey();
-        return responseProtectedKeyDelegate(call.execute(), null);
+        return responseProtectedKeyDelegate(call.execute());
     }
 
     /**
@@ -226,9 +226,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         Call<ResponseBody> call = service.responseProtectedKey();
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(responseProtectedKeyDelegate(response, retrofit));
+                    serviceCallback.success(responseProtectedKeyDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -237,11 +237,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponseWithHeaders<Void, HeaderResponseProtectedKeyHeaders> responseProtectedKeyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponseWithHeaders<Void, HeaderResponseProtectedKeyHeaders> responseProtectedKeyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .buildWithHeaders(response, retrofit, HeaderResponseProtectedKeyHeaders.class);
+                .buildWithHeaders(response, HeaderResponseProtectedKeyHeaders.class);
     }
 
     /**
@@ -259,7 +259,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramInteger(scenario, value);
-        return paramIntegerDelegate(call.execute(), null);
+        return paramIntegerDelegate(call.execute());
     }
 
     /**
@@ -278,9 +278,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         Call<ResponseBody> call = service.paramInteger(scenario, value);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(paramIntegerDelegate(response, retrofit));
+                    serviceCallback.success(paramIntegerDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -289,11 +289,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponse<Void> paramIntegerDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> paramIntegerDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -310,7 +310,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.responseInteger(scenario);
-        return responseIntegerDelegate(call.execute(), null);
+        return responseIntegerDelegate(call.execute());
     }
 
     /**
@@ -328,9 +328,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         Call<ResponseBody> call = service.responseInteger(scenario);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(responseIntegerDelegate(response, retrofit));
+                    serviceCallback.success(responseIntegerDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -339,11 +339,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponseWithHeaders<Void, HeaderResponseIntegerHeaders> responseIntegerDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponseWithHeaders<Void, HeaderResponseIntegerHeaders> responseIntegerDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .buildWithHeaders(response, retrofit, HeaderResponseIntegerHeaders.class);
+                .buildWithHeaders(response, HeaderResponseIntegerHeaders.class);
     }
 
     /**
@@ -361,7 +361,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramLong(scenario, value);
-        return paramLongDelegate(call.execute(), null);
+        return paramLongDelegate(call.execute());
     }
 
     /**
@@ -380,9 +380,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         Call<ResponseBody> call = service.paramLong(scenario, value);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(paramLongDelegate(response, retrofit));
+                    serviceCallback.success(paramLongDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -391,11 +391,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponse<Void> paramLongDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> paramLongDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -412,7 +412,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.responseLong(scenario);
-        return responseLongDelegate(call.execute(), null);
+        return responseLongDelegate(call.execute());
     }
 
     /**
@@ -430,9 +430,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         Call<ResponseBody> call = service.responseLong(scenario);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(responseLongDelegate(response, retrofit));
+                    serviceCallback.success(responseLongDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -441,11 +441,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponseWithHeaders<Void, HeaderResponseLongHeaders> responseLongDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponseWithHeaders<Void, HeaderResponseLongHeaders> responseLongDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .buildWithHeaders(response, retrofit, HeaderResponseLongHeaders.class);
+                .buildWithHeaders(response, HeaderResponseLongHeaders.class);
     }
 
     /**
@@ -463,7 +463,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramFloat(scenario, value);
-        return paramFloatDelegate(call.execute(), null);
+        return paramFloatDelegate(call.execute());
     }
 
     /**
@@ -482,9 +482,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         Call<ResponseBody> call = service.paramFloat(scenario, value);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(paramFloatDelegate(response, retrofit));
+                    serviceCallback.success(paramFloatDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -493,11 +493,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponse<Void> paramFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> paramFloatDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -514,7 +514,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.responseFloat(scenario);
-        return responseFloatDelegate(call.execute(), null);
+        return responseFloatDelegate(call.execute());
     }
 
     /**
@@ -532,9 +532,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         Call<ResponseBody> call = service.responseFloat(scenario);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(responseFloatDelegate(response, retrofit));
+                    serviceCallback.success(responseFloatDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -543,11 +543,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponseWithHeaders<Void, HeaderResponseFloatHeaders> responseFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponseWithHeaders<Void, HeaderResponseFloatHeaders> responseFloatDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .buildWithHeaders(response, retrofit, HeaderResponseFloatHeaders.class);
+                .buildWithHeaders(response, HeaderResponseFloatHeaders.class);
     }
 
     /**
@@ -565,7 +565,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramDouble(scenario, value);
-        return paramDoubleDelegate(call.execute(), null);
+        return paramDoubleDelegate(call.execute());
     }
 
     /**
@@ -584,9 +584,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         Call<ResponseBody> call = service.paramDouble(scenario, value);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(paramDoubleDelegate(response, retrofit));
+                    serviceCallback.success(paramDoubleDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -595,11 +595,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponse<Void> paramDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> paramDoubleDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -616,7 +616,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.responseDouble(scenario);
-        return responseDoubleDelegate(call.execute(), null);
+        return responseDoubleDelegate(call.execute());
     }
 
     /**
@@ -634,9 +634,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         Call<ResponseBody> call = service.responseDouble(scenario);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(responseDoubleDelegate(response, retrofit));
+                    serviceCallback.success(responseDoubleDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -645,11 +645,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponseWithHeaders<Void, HeaderResponseDoubleHeaders> responseDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponseWithHeaders<Void, HeaderResponseDoubleHeaders> responseDoubleDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .buildWithHeaders(response, retrofit, HeaderResponseDoubleHeaders.class);
+                .buildWithHeaders(response, HeaderResponseDoubleHeaders.class);
     }
 
     /**
@@ -667,7 +667,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramBool(scenario, value);
-        return paramBoolDelegate(call.execute(), null);
+        return paramBoolDelegate(call.execute());
     }
 
     /**
@@ -686,9 +686,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         Call<ResponseBody> call = service.paramBool(scenario, value);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(paramBoolDelegate(response, retrofit));
+                    serviceCallback.success(paramBoolDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -697,11 +697,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponse<Void> paramBoolDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> paramBoolDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -718,7 +718,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.responseBool(scenario);
-        return responseBoolDelegate(call.execute(), null);
+        return responseBoolDelegate(call.execute());
     }
 
     /**
@@ -736,9 +736,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         Call<ResponseBody> call = service.responseBool(scenario);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(responseBoolDelegate(response, retrofit));
+                    serviceCallback.success(responseBoolDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -747,11 +747,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponseWithHeaders<Void, HeaderResponseBoolHeaders> responseBoolDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponseWithHeaders<Void, HeaderResponseBoolHeaders> responseBoolDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .buildWithHeaders(response, retrofit, HeaderResponseBoolHeaders.class);
+                .buildWithHeaders(response, HeaderResponseBoolHeaders.class);
     }
 
     /**
@@ -769,7 +769,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramString(scenario, value);
-        return paramStringDelegate(call.execute(), null);
+        return paramStringDelegate(call.execute());
     }
 
     /**
@@ -788,9 +788,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         Call<ResponseBody> call = service.paramString(scenario, value);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(paramStringDelegate(response, retrofit));
+                    serviceCallback.success(paramStringDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -799,11 +799,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponse<Void> paramStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> paramStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -820,7 +820,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.responseString(scenario);
-        return responseStringDelegate(call.execute(), null);
+        return responseStringDelegate(call.execute());
     }
 
     /**
@@ -838,9 +838,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         Call<ResponseBody> call = service.responseString(scenario);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(responseStringDelegate(response, retrofit));
+                    serviceCallback.success(responseStringDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -849,11 +849,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponseWithHeaders<Void, HeaderResponseStringHeaders> responseStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponseWithHeaders<Void, HeaderResponseStringHeaders> responseStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .buildWithHeaders(response, retrofit, HeaderResponseStringHeaders.class);
+                .buildWithHeaders(response, HeaderResponseStringHeaders.class);
     }
 
     /**
@@ -874,7 +874,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             throw new IllegalArgumentException("Parameter value is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramDate(scenario, client.getMapperAdapter().serializeRaw(value));
-        return paramDateDelegate(call.execute(), null);
+        return paramDateDelegate(call.execute());
     }
 
     /**
@@ -897,9 +897,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         Call<ResponseBody> call = service.paramDate(scenario, client.getMapperAdapter().serializeRaw(value));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(paramDateDelegate(response, retrofit));
+                    serviceCallback.success(paramDateDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -908,11 +908,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponse<Void> paramDateDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> paramDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -929,7 +929,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.responseDate(scenario);
-        return responseDateDelegate(call.execute(), null);
+        return responseDateDelegate(call.execute());
     }
 
     /**
@@ -947,9 +947,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         Call<ResponseBody> call = service.responseDate(scenario);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(responseDateDelegate(response, retrofit));
+                    serviceCallback.success(responseDateDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -958,11 +958,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponseWithHeaders<Void, HeaderResponseDateHeaders> responseDateDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponseWithHeaders<Void, HeaderResponseDateHeaders> responseDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .buildWithHeaders(response, retrofit, HeaderResponseDateHeaders.class);
+                .buildWithHeaders(response, HeaderResponseDateHeaders.class);
     }
 
     /**
@@ -983,7 +983,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             throw new IllegalArgumentException("Parameter value is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramDatetime(scenario, client.getMapperAdapter().serializeRaw(value));
-        return paramDatetimeDelegate(call.execute(), null);
+        return paramDatetimeDelegate(call.execute());
     }
 
     /**
@@ -1006,9 +1006,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         Call<ResponseBody> call = service.paramDatetime(scenario, client.getMapperAdapter().serializeRaw(value));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(paramDatetimeDelegate(response, retrofit));
+                    serviceCallback.success(paramDatetimeDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1017,11 +1017,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponse<Void> paramDatetimeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> paramDatetimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1038,7 +1038,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.responseDatetime(scenario);
-        return responseDatetimeDelegate(call.execute(), null);
+        return responseDatetimeDelegate(call.execute());
     }
 
     /**
@@ -1056,9 +1056,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         Call<ResponseBody> call = service.responseDatetime(scenario);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(responseDatetimeDelegate(response, retrofit));
+                    serviceCallback.success(responseDatetimeDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1067,11 +1067,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponseWithHeaders<Void, HeaderResponseDatetimeHeaders> responseDatetimeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponseWithHeaders<Void, HeaderResponseDatetimeHeaders> responseDatetimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .buildWithHeaders(response, retrofit, HeaderResponseDatetimeHeaders.class);
+                .buildWithHeaders(response, HeaderResponseDatetimeHeaders.class);
     }
 
     /**
@@ -1089,7 +1089,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramDatetimeRfc1123(scenario, value);
-        return paramDatetimeRfc1123Delegate(call.execute(), null);
+        return paramDatetimeRfc1123Delegate(call.execute());
     }
 
     /**
@@ -1108,9 +1108,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         Call<ResponseBody> call = service.paramDatetimeRfc1123(scenario, value);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(paramDatetimeRfc1123Delegate(response, retrofit));
+                    serviceCallback.success(paramDatetimeRfc1123Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1119,11 +1119,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponse<Void> paramDatetimeRfc1123Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> paramDatetimeRfc1123Delegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1140,7 +1140,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.responseDatetimeRfc1123(scenario);
-        return responseDatetimeRfc1123Delegate(call.execute(), null);
+        return responseDatetimeRfc1123Delegate(call.execute());
     }
 
     /**
@@ -1158,9 +1158,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         Call<ResponseBody> call = service.responseDatetimeRfc1123(scenario);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(responseDatetimeRfc1123Delegate(response, retrofit));
+                    serviceCallback.success(responseDatetimeRfc1123Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1169,11 +1169,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponseWithHeaders<Void, HeaderResponseDatetimeRfc1123Headers> responseDatetimeRfc1123Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponseWithHeaders<Void, HeaderResponseDatetimeRfc1123Headers> responseDatetimeRfc1123Delegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .buildWithHeaders(response, retrofit, HeaderResponseDatetimeRfc1123Headers.class);
+                .buildWithHeaders(response, HeaderResponseDatetimeRfc1123Headers.class);
     }
 
     /**
@@ -1194,7 +1194,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             throw new IllegalArgumentException("Parameter value is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramDuration(scenario, value);
-        return paramDurationDelegate(call.execute(), null);
+        return paramDurationDelegate(call.execute());
     }
 
     /**
@@ -1217,9 +1217,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         Call<ResponseBody> call = service.paramDuration(scenario, value);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(paramDurationDelegate(response, retrofit));
+                    serviceCallback.success(paramDurationDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1228,11 +1228,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponse<Void> paramDurationDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> paramDurationDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1249,7 +1249,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.responseDuration(scenario);
-        return responseDurationDelegate(call.execute(), null);
+        return responseDurationDelegate(call.execute());
     }
 
     /**
@@ -1267,9 +1267,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         Call<ResponseBody> call = service.responseDuration(scenario);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(responseDurationDelegate(response, retrofit));
+                    serviceCallback.success(responseDurationDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1278,11 +1278,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponseWithHeaders<Void, HeaderResponseDurationHeaders> responseDurationDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponseWithHeaders<Void, HeaderResponseDurationHeaders> responseDurationDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .buildWithHeaders(response, retrofit, HeaderResponseDurationHeaders.class);
+                .buildWithHeaders(response, HeaderResponseDurationHeaders.class);
     }
 
     /**
@@ -1303,7 +1303,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             throw new IllegalArgumentException("Parameter value is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramByte(scenario, Base64.encodeBase64String(value));
-        return paramByteDelegate(call.execute(), null);
+        return paramByteDelegate(call.execute());
     }
 
     /**
@@ -1326,9 +1326,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         Call<ResponseBody> call = service.paramByte(scenario, Base64.encodeBase64String(value));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(paramByteDelegate(response, retrofit));
+                    serviceCallback.success(paramByteDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1337,11 +1337,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponse<Void> paramByteDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> paramByteDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1358,7 +1358,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.responseByte(scenario);
-        return responseByteDelegate(call.execute(), null);
+        return responseByteDelegate(call.execute());
     }
 
     /**
@@ -1376,9 +1376,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         Call<ResponseBody> call = service.responseByte(scenario);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(responseByteDelegate(response, retrofit));
+                    serviceCallback.success(responseByteDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1387,11 +1387,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponseWithHeaders<Void, HeaderResponseByteHeaders> responseByteDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponseWithHeaders<Void, HeaderResponseByteHeaders> responseByteDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .buildWithHeaders(response, retrofit, HeaderResponseByteHeaders.class);
+                .buildWithHeaders(response, HeaderResponseByteHeaders.class);
     }
 
     /**
@@ -1409,7 +1409,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.paramEnum(scenario, client.getMapperAdapter().serializeRaw(value));
-        return paramEnumDelegate(call.execute(), null);
+        return paramEnumDelegate(call.execute());
     }
 
     /**
@@ -1428,9 +1428,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         Call<ResponseBody> call = service.paramEnum(scenario, client.getMapperAdapter().serializeRaw(value));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(paramEnumDelegate(response, retrofit));
+                    serviceCallback.success(paramEnumDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1439,11 +1439,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponse<Void> paramEnumDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> paramEnumDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1460,7 +1460,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
         Call<ResponseBody> call = service.responseEnum(scenario);
-        return responseEnumDelegate(call.execute(), null);
+        return responseEnumDelegate(call.execute());
     }
 
     /**
@@ -1478,9 +1478,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         Call<ResponseBody> call = service.responseEnum(scenario);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(responseEnumDelegate(response, retrofit));
+                    serviceCallback.success(responseEnumDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1489,11 +1489,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponseWithHeaders<Void, HeaderResponseEnumHeaders> responseEnumDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponseWithHeaders<Void, HeaderResponseEnumHeaders> responseEnumDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .buildWithHeaders(response, retrofit, HeaderResponseEnumHeaders.class);
+                .buildWithHeaders(response, HeaderResponseEnumHeaders.class);
     }
 
     /**
@@ -1505,7 +1505,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      */
     public ServiceResponse<Void> customRequestId() throws ErrorException, IOException {
         Call<ResponseBody> call = service.customRequestId();
-        return customRequestIdDelegate(call.execute(), null);
+        return customRequestIdDelegate(call.execute());
     }
 
     /**
@@ -1518,9 +1518,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         Call<ResponseBody> call = service.customRequestId();
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(customRequestIdDelegate(response, retrofit));
+                    serviceCallback.success(customRequestIdDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1529,11 +1529,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponse<Void> customRequestIdDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> customRequestIdDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
 }

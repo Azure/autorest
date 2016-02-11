@@ -7,7 +7,7 @@
 
 package com.microsoft.rest.retry;
 
-import com.squareup.okhttp.Response;
+import okhttp3.Response;
 
 /**
  * A retry strategy with backoff parameters for calculating the exponential delay between retries.

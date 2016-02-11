@@ -9,8 +9,10 @@ package com.microsoft.azure;
 
 import com.microsoft.rest.ServiceClient;
 import com.microsoft.azure.serializer.AzureJacksonMapperAdapter;
-import com.squareup.okhttp.OkHttpClient;
-import retrofit.Retrofit;
+
+import okhttp3.JavaNetCookieJar;
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
 
 import java.net.CookieManager;
 import java.net.CookiePolicy;
@@ -29,7 +31,7 @@ public abstract class AzureServiceClient extends ServiceClient {
 
         CookieManager cookieManager = new CookieManager();
         cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
-        this.client.setCookieHandler(cookieManager);
+        this.client = this.client.newBuilder().cookieJar(new JavaNetCookieJar(cookieManager)).build();
 
         Executor executor = Executors.newCachedThreadPool();
         this.mapperAdapter = new AzureJacksonMapperAdapter();

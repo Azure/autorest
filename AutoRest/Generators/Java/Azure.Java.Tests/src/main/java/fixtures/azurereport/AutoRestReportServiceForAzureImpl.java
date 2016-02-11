@@ -19,15 +19,15 @@ import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.azurereport.models.ErrorException;
 import java.io.IOException;
 import java.util.Map;
 import java.util.UUID;
-import retrofit.Call;
-import retrofit.Response;
-import retrofit.Retrofit;
+import okhttp3.OkHttpClient;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestReportServiceForAzure class.
@@ -207,7 +207,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
      */
     public ServiceResponse<Map<String, Integer>> getReport() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getReport(this.getAcceptLanguage());
-        return getReportDelegate(call.execute(), null);
+        return getReportDelegate(call.execute());
     }
 
     /**
@@ -220,9 +220,9 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
         Call<ResponseBody> call = service.getReport(this.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getReportDelegate(response, retrofit));
+                    serviceCallback.success(getReportDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -231,11 +231,11 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
         return call;
     }
 
-    private ServiceResponse<Map<String, Integer>> getReportDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Map<String, Integer>> getReportDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new AzureServiceResponseBuilder<Map<String, Integer>, ErrorException>()
                 .register(200, new TypeToken<Map<String, Integer>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
 }

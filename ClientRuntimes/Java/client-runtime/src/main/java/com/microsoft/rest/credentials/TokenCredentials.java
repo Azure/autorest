@@ -7,7 +7,7 @@
 
 package com.microsoft.rest.credentials;
 
-import com.squareup.okhttp.OkHttpClient;
+import okhttp3.OkHttpClient;
 
 import java.io.IOException;
 

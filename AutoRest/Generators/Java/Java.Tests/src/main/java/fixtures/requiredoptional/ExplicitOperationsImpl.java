@@ -17,7 +17,6 @@ import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.Validator;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.requiredoptional.models.ArrayOptionalWrapper;
 import fixtures.requiredoptional.models.ArrayWrapper;
 import fixtures.requiredoptional.models.ClassOptionalWrapper;
@@ -31,9 +30,10 @@ import fixtures.requiredoptional.models.StringOptionalWrapper;
 import fixtures.requiredoptional.models.StringWrapper;
 import java.io.IOException;
 import java.util.List;
-import retrofit.Call;
-import retrofit.Response;
-import retrofit.Retrofit;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -66,7 +66,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      */
     public ServiceResponse<Error> postRequiredIntegerParameter(int bodyParameter) throws ErrorException, IOException {
         Call<ResponseBody> call = service.postRequiredIntegerParameter(bodyParameter);
-        return postRequiredIntegerParameterDelegate(call.execute(), null);
+        return postRequiredIntegerParameterDelegate(call.execute());
     }
 
     /**
@@ -80,9 +80,9 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         Call<ResponseBody> call = service.postRequiredIntegerParameter(bodyParameter);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(postRequiredIntegerParameterDelegate(response, retrofit));
+                    serviceCallback.success(postRequiredIntegerParameterDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -91,10 +91,10 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         return call;
     }
 
-    private ServiceResponse<Error> postRequiredIntegerParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Error> postRequiredIntegerParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -107,7 +107,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      */
     public ServiceResponse<Void> postOptionalIntegerParameter(Integer bodyParameter) throws ErrorException, IOException {
         Call<ResponseBody> call = service.postOptionalIntegerParameter(bodyParameter);
-        return postOptionalIntegerParameterDelegate(call.execute(), null);
+        return postOptionalIntegerParameterDelegate(call.execute());
     }
 
     /**
@@ -121,9 +121,9 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         Call<ResponseBody> call = service.postOptionalIntegerParameter(bodyParameter);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(postOptionalIntegerParameterDelegate(response, retrofit));
+                    serviceCallback.success(postOptionalIntegerParameterDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -132,11 +132,11 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         return call;
     }
 
-    private ServiceResponse<Void> postOptionalIntegerParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> postOptionalIntegerParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -154,7 +154,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         }
         Validator.validate(bodyParameter);
         Call<ResponseBody> call = service.postRequiredIntegerProperty(bodyParameter);
-        return postRequiredIntegerPropertyDelegate(call.execute(), null);
+        return postRequiredIntegerPropertyDelegate(call.execute());
     }
 
     /**
@@ -173,9 +173,9 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         Call<ResponseBody> call = service.postRequiredIntegerProperty(bodyParameter);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(postRequiredIntegerPropertyDelegate(response, retrofit));
+                    serviceCallback.success(postRequiredIntegerPropertyDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -184,10 +184,10 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         return call;
     }
 
-    private ServiceResponse<Error> postRequiredIntegerPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Error> postRequiredIntegerPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -200,7 +200,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      */
     public ServiceResponse<Void> postOptionalIntegerProperty(IntOptionalWrapper bodyParameter) throws ErrorException, IOException {
         Call<ResponseBody> call = service.postOptionalIntegerProperty(bodyParameter);
-        return postOptionalIntegerPropertyDelegate(call.execute(), null);
+        return postOptionalIntegerPropertyDelegate(call.execute());
     }
 
     /**
@@ -214,9 +214,9 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         Call<ResponseBody> call = service.postOptionalIntegerProperty(bodyParameter);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(postOptionalIntegerPropertyDelegate(response, retrofit));
+                    serviceCallback.success(postOptionalIntegerPropertyDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -225,11 +225,11 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         return call;
     }
 
-    private ServiceResponse<Void> postOptionalIntegerPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> postOptionalIntegerPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -242,7 +242,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      */
     public ServiceResponse<Error> postRequiredIntegerHeader(int headerParameter) throws ErrorException, IOException {
         Call<ResponseBody> call = service.postRequiredIntegerHeader(headerParameter);
-        return postRequiredIntegerHeaderDelegate(call.execute(), null);
+        return postRequiredIntegerHeaderDelegate(call.execute());
     }
 
     /**
@@ -256,9 +256,9 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         Call<ResponseBody> call = service.postRequiredIntegerHeader(headerParameter);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(postRequiredIntegerHeaderDelegate(response, retrofit));
+                    serviceCallback.success(postRequiredIntegerHeaderDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -267,10 +267,10 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         return call;
     }
 
-    private ServiceResponse<Error> postRequiredIntegerHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Error> postRequiredIntegerHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -283,7 +283,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      */
     public ServiceResponse<Void> postOptionalIntegerHeader(Integer headerParameter) throws ErrorException, IOException {
         Call<ResponseBody> call = service.postOptionalIntegerHeader(headerParameter);
-        return postOptionalIntegerHeaderDelegate(call.execute(), null);
+        return postOptionalIntegerHeaderDelegate(call.execute());
     }
 
     /**
@@ -297,9 +297,9 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         Call<ResponseBody> call = service.postOptionalIntegerHeader(headerParameter);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(postOptionalIntegerHeaderDelegate(response, retrofit));
+                    serviceCallback.success(postOptionalIntegerHeaderDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -308,11 +308,11 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         return call;
     }
 
-    private ServiceResponse<Void> postOptionalIntegerHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> postOptionalIntegerHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -329,7 +329,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
             throw new IllegalArgumentException("Parameter bodyParameter is required and cannot be null.");
         }
         Call<ResponseBody> call = service.postRequiredStringParameter(bodyParameter);
-        return postRequiredStringParameterDelegate(call.execute(), null);
+        return postRequiredStringParameterDelegate(call.execute());
     }
 
     /**
@@ -347,9 +347,9 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         Call<ResponseBody> call = service.postRequiredStringParameter(bodyParameter);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(postRequiredStringParameterDelegate(response, retrofit));
+                    serviceCallback.success(postRequiredStringParameterDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -358,10 +358,10 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         return call;
     }
 
-    private ServiceResponse<Error> postRequiredStringParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Error> postRequiredStringParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -374,7 +374,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      */
     public ServiceResponse<Void> postOptionalStringParameter(String bodyParameter) throws ErrorException, IOException {
         Call<ResponseBody> call = service.postOptionalStringParameter(bodyParameter);
-        return postOptionalStringParameterDelegate(call.execute(), null);
+        return postOptionalStringParameterDelegate(call.execute());
     }
 
     /**
@@ -388,9 +388,9 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         Call<ResponseBody> call = service.postOptionalStringParameter(bodyParameter);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(postOptionalStringParameterDelegate(response, retrofit));
+                    serviceCallback.success(postOptionalStringParameterDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -399,11 +399,11 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         return call;
     }
 
-    private ServiceResponse<Void> postOptionalStringParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> postOptionalStringParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -421,7 +421,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         }
         Validator.validate(bodyParameter);
         Call<ResponseBody> call = service.postRequiredStringProperty(bodyParameter);
-        return postRequiredStringPropertyDelegate(call.execute(), null);
+        return postRequiredStringPropertyDelegate(call.execute());
     }
 
     /**
@@ -440,9 +440,9 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         Call<ResponseBody> call = service.postRequiredStringProperty(bodyParameter);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(postRequiredStringPropertyDelegate(response, retrofit));
+                    serviceCallback.success(postRequiredStringPropertyDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -451,10 +451,10 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         return call;
     }
 
-    private ServiceResponse<Error> postRequiredStringPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Error> postRequiredStringPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -467,7 +467,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      */
     public ServiceResponse<Void> postOptionalStringProperty(StringOptionalWrapper bodyParameter) throws ErrorException, IOException {
         Call<ResponseBody> call = service.postOptionalStringProperty(bodyParameter);
-        return postOptionalStringPropertyDelegate(call.execute(), null);
+        return postOptionalStringPropertyDelegate(call.execute());
     }
 
     /**
@@ -481,9 +481,9 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         Call<ResponseBody> call = service.postOptionalStringProperty(bodyParameter);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(postOptionalStringPropertyDelegate(response, retrofit));
+                    serviceCallback.success(postOptionalStringPropertyDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -492,11 +492,11 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         return call;
     }
 
-    private ServiceResponse<Void> postOptionalStringPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> postOptionalStringPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -513,7 +513,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
             throw new IllegalArgumentException("Parameter headerParameter is required and cannot be null.");
         }
         Call<ResponseBody> call = service.postRequiredStringHeader(headerParameter);
-        return postRequiredStringHeaderDelegate(call.execute(), null);
+        return postRequiredStringHeaderDelegate(call.execute());
     }
 
     /**
@@ -531,9 +531,9 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         Call<ResponseBody> call = service.postRequiredStringHeader(headerParameter);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(postRequiredStringHeaderDelegate(response, retrofit));
+                    serviceCallback.success(postRequiredStringHeaderDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -542,10 +542,10 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         return call;
     }
 
-    private ServiceResponse<Error> postRequiredStringHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Error> postRequiredStringHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -558,7 +558,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      */
     public ServiceResponse<Void> postOptionalStringHeader(String bodyParameter) throws ErrorException, IOException {
         Call<ResponseBody> call = service.postOptionalStringHeader(bodyParameter);
-        return postOptionalStringHeaderDelegate(call.execute(), null);
+        return postOptionalStringHeaderDelegate(call.execute());
     }
 
     /**
@@ -572,9 +572,9 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         Call<ResponseBody> call = service.postOptionalStringHeader(bodyParameter);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(postOptionalStringHeaderDelegate(response, retrofit));
+                    serviceCallback.success(postOptionalStringHeaderDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -583,11 +583,11 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         return call;
     }
 
-    private ServiceResponse<Void> postOptionalStringHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> postOptionalStringHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -605,7 +605,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         }
         Validator.validate(bodyParameter);
         Call<ResponseBody> call = service.postRequiredClassParameter(bodyParameter);
-        return postRequiredClassParameterDelegate(call.execute(), null);
+        return postRequiredClassParameterDelegate(call.execute());
     }
 
     /**
@@ -624,9 +624,9 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         Call<ResponseBody> call = service.postRequiredClassParameter(bodyParameter);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(postRequiredClassParameterDelegate(response, retrofit));
+                    serviceCallback.success(postRequiredClassParameterDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -635,10 +635,10 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         return call;
     }
 
-    private ServiceResponse<Error> postRequiredClassParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Error> postRequiredClassParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -651,7 +651,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      */
     public ServiceResponse<Void> postOptionalClassParameter(Product bodyParameter) throws ErrorException, IOException {
         Call<ResponseBody> call = service.postOptionalClassParameter(bodyParameter);
-        return postOptionalClassParameterDelegate(call.execute(), null);
+        return postOptionalClassParameterDelegate(call.execute());
     }
 
     /**
@@ -665,9 +665,9 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         Call<ResponseBody> call = service.postOptionalClassParameter(bodyParameter);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(postOptionalClassParameterDelegate(response, retrofit));
+                    serviceCallback.success(postOptionalClassParameterDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -676,11 +676,11 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         return call;
     }
 
-    private ServiceResponse<Void> postOptionalClassParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> postOptionalClassParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -698,7 +698,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         }
         Validator.validate(bodyParameter);
         Call<ResponseBody> call = service.postRequiredClassProperty(bodyParameter);
-        return postRequiredClassPropertyDelegate(call.execute(), null);
+        return postRequiredClassPropertyDelegate(call.execute());
     }
 
     /**
@@ -717,9 +717,9 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         Call<ResponseBody> call = service.postRequiredClassProperty(bodyParameter);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(postRequiredClassPropertyDelegate(response, retrofit));
+                    serviceCallback.success(postRequiredClassPropertyDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -728,10 +728,10 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         return call;
     }
 
-    private ServiceResponse<Error> postRequiredClassPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Error> postRequiredClassPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -744,7 +744,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      */
     public ServiceResponse<Void> postOptionalClassProperty(ClassOptionalWrapper bodyParameter) throws ErrorException, IOException {
         Call<ResponseBody> call = service.postOptionalClassProperty(bodyParameter);
-        return postOptionalClassPropertyDelegate(call.execute(), null);
+        return postOptionalClassPropertyDelegate(call.execute());
     }
 
     /**
@@ -758,9 +758,9 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         Call<ResponseBody> call = service.postOptionalClassProperty(bodyParameter);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(postOptionalClassPropertyDelegate(response, retrofit));
+                    serviceCallback.success(postOptionalClassPropertyDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -769,11 +769,11 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         return call;
     }
 
-    private ServiceResponse<Void> postOptionalClassPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> postOptionalClassPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -791,7 +791,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         }
         Validator.validate(bodyParameter);
         Call<ResponseBody> call = service.postRequiredArrayParameter(bodyParameter);
-        return postRequiredArrayParameterDelegate(call.execute(), null);
+        return postRequiredArrayParameterDelegate(call.execute());
     }
 
     /**
@@ -810,9 +810,9 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         Call<ResponseBody> call = service.postRequiredArrayParameter(bodyParameter);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(postRequiredArrayParameterDelegate(response, retrofit));
+                    serviceCallback.success(postRequiredArrayParameterDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -821,10 +821,10 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         return call;
     }
 
-    private ServiceResponse<Error> postRequiredArrayParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Error> postRequiredArrayParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -837,7 +837,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      */
     public ServiceResponse<Void> postOptionalArrayParameter(List<String> bodyParameter) throws ErrorException, IOException {
         Call<ResponseBody> call = service.postOptionalArrayParameter(bodyParameter);
-        return postOptionalArrayParameterDelegate(call.execute(), null);
+        return postOptionalArrayParameterDelegate(call.execute());
     }
 
     /**
@@ -851,9 +851,9 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         Call<ResponseBody> call = service.postOptionalArrayParameter(bodyParameter);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(postOptionalArrayParameterDelegate(response, retrofit));
+                    serviceCallback.success(postOptionalArrayParameterDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -862,11 +862,11 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         return call;
     }
 
-    private ServiceResponse<Void> postOptionalArrayParameterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> postOptionalArrayParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -884,7 +884,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         }
         Validator.validate(bodyParameter);
         Call<ResponseBody> call = service.postRequiredArrayProperty(bodyParameter);
-        return postRequiredArrayPropertyDelegate(call.execute(), null);
+        return postRequiredArrayPropertyDelegate(call.execute());
     }
 
     /**
@@ -903,9 +903,9 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         Call<ResponseBody> call = service.postRequiredArrayProperty(bodyParameter);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(postRequiredArrayPropertyDelegate(response, retrofit));
+                    serviceCallback.success(postRequiredArrayPropertyDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -914,10 +914,10 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         return call;
     }
 
-    private ServiceResponse<Error> postRequiredArrayPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Error> postRequiredArrayPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -930,7 +930,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      */
     public ServiceResponse<Void> postOptionalArrayProperty(ArrayOptionalWrapper bodyParameter) throws ErrorException, IOException {
         Call<ResponseBody> call = service.postOptionalArrayProperty(bodyParameter);
-        return postOptionalArrayPropertyDelegate(call.execute(), null);
+        return postOptionalArrayPropertyDelegate(call.execute());
     }
 
     /**
@@ -944,9 +944,9 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         Call<ResponseBody> call = service.postOptionalArrayProperty(bodyParameter);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(postOptionalArrayPropertyDelegate(response, retrofit));
+                    serviceCallback.success(postOptionalArrayPropertyDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -955,11 +955,11 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         return call;
     }
 
-    private ServiceResponse<Void> postOptionalArrayPropertyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> postOptionalArrayPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -977,7 +977,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         }
         Validator.validate(headerParameter);
         Call<ResponseBody> call = service.postRequiredArrayHeader(client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV));
-        return postRequiredArrayHeaderDelegate(call.execute(), null);
+        return postRequiredArrayHeaderDelegate(call.execute());
     }
 
     /**
@@ -996,9 +996,9 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         Call<ResponseBody> call = service.postRequiredArrayHeader(client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV));
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(postRequiredArrayHeaderDelegate(response, retrofit));
+                    serviceCallback.success(postRequiredArrayHeaderDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1007,10 +1007,10 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         return call;
     }
 
-    private ServiceResponse<Error> postRequiredArrayHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Error> postRequiredArrayHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1023,7 +1023,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      */
     public ServiceResponse<Void> postOptionalArrayHeader(List<String> headerParameter) throws ErrorException, IOException {
         Call<ResponseBody> call = service.postOptionalArrayHeader(client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV));
-        return postOptionalArrayHeaderDelegate(call.execute(), null);
+        return postOptionalArrayHeaderDelegate(call.execute());
     }
 
     /**
@@ -1037,9 +1037,9 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         Call<ResponseBody> call = service.postOptionalArrayHeader(client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(postOptionalArrayHeaderDelegate(response, retrofit));
+                    serviceCallback.success(postOptionalArrayHeaderDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1048,11 +1048,11 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         return call;
     }
 
-    private ServiceResponse<Void> postOptionalArrayHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> postOptionalArrayHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
 }
