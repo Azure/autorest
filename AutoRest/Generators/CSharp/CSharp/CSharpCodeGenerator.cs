@@ -13,7 +13,7 @@ namespace Microsoft.Rest.Generator.CSharp
     public class CSharpCodeGenerator : CodeGenerator
     {
         private readonly CSharpCodeNamer _namer;
-        private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.2.0.1";
+        private const string ClientRuntimePackage = "Microsoft.Rest.ClientRuntime.2.0.2";
 
         public CSharpCodeGenerator(Settings settings) : base(settings)
         {
