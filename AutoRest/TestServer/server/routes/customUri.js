@@ -5,7 +5,7 @@ var constants = require('../util/constants');
 var utils = require('../util/utils')
 
 var specials = function (coverage) {
-  router.get('/customuri', function (req, res, next) {
+  router.get('/', function (req, res, next) {
       coverage['CustomBaseUri']++;
       res.status(200).end();
   });

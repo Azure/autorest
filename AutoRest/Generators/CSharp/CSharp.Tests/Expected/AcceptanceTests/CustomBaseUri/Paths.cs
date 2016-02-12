@@ -84,8 +84,8 @@ namespace Fixtures.AcceptanceTestsCustomBaseUri
             // Construct URL
             var _baseUrl = this.Client.BaseUri;
             var _url = _baseUrl + (_baseUrl.EndsWith("/") ? "" : "/") + "customuri";
-            _url = _url.Replace("{accountName}", SafeJsonConvert.SerializeObject(accountName, this.Client.SerializationSettings).Trim('"'));
-            _url = _url.Replace("{host}", SafeJsonConvert.SerializeObject(this.Client.Host, this.Client.SerializationSettings).Trim('"'));
+            _url = _url.Replace("{accountName}", accountName);
+            _url = _url.Replace("{host}", this.Client.Host);
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;

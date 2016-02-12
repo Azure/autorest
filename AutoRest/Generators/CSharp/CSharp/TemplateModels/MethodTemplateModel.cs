@@ -399,7 +399,7 @@ namespace Microsoft.Rest.Generator.CSharp
             foreach (var pathParameter in this.LogicalParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
             {
                 string replaceString = "{0} = {0}.Replace(\"{{{1}}}\", Uri.EscapeDataString({2}));";
-                if (ClientModelExtensions.SkipUrlEncoding(pathParameter))
+                if (pathParameter.SkipUrlEncoding())
                 {
                     replaceString = "{0} = {0}.Replace(\"{{{1}}}\", {2});";
                 }
@@ -416,7 +416,7 @@ namespace Microsoft.Rest.Generator.CSharp
                 {
                     var replaceString = "_queryParameters.Add(string.Format(\"{0}={{0}}\", Uri.EscapeDataString({1})));";
 
-                    if (ClientModelExtensions.SkipUrlEncoding(queryParameter))
+                    if (queryParameter.SkipUrlEncoding())
                     {
                         replaceString = "_queryParameters.Add(string.Format(\"{0}={{0}}\", {1}));";
                     }

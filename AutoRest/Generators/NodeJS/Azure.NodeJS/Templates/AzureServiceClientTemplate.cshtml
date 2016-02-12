@@ -52,8 +52,12 @@ var ServiceClient = msRestAzure.AzureServiceClient;
 @: * @@param {@param.Type.Name.ToCamelCase()} @param.Name - @param.Documentation
 @: *
 }
- * @@param {string} [baseUri] - The base URI of the service.
- *
+
+@if(!Model.IsCustomBaseUri)
+{
+ @:* @@param {string} [baseUri] - The base URI of the service.
+ @:*
+}
  * @@param {object} [options] - The parameter options
  *
  * @@param {Array} [options.filters] - Filters to be added to the request pipeline
@@ -70,6 +74,10 @@ var ServiceClient = msRestAzure.AzureServiceClient;
 }
  */
 function @(Model.Name)(@(Model.RequiredConstructorParameters), options) {
+@foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
+{
+  @:this.@(property.Name) = @(property.DefaultValue);
+}
 @foreach (var param in requiredParameters)
 {
 @:  if (@(param.Name) === null || @(param.Name) === undefined) {
@@ -89,10 +97,6 @@ function @(Model.Name)(@(Model.RequiredConstructorParameters), options) {
 @:  this.@(param.Name) = @(param.Name);
 }
   @EmptyLine
-  @foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
-  {
-  @:this.@(property.Name) = @(property.DefaultValue);
-  }
   @foreach (var property in optionalParameters)
   { 
   @:if(options.@(property.Name) !== null && options.@(property.Name) !== undefined) { 
