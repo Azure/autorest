@@ -289,7 +289,10 @@ namespace Fixtures.AcceptanceTestsUrl
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/bool/null").ToString();
             List<string> _queryParameters = new List<string>();
-            _queryParameters.Add(string.Format("boolQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(boolQuery, this.Client.SerializationSettings).Trim('"'))));
+            if (boolQuery != null)
+            {
+                _queryParameters.Add(string.Format("boolQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(boolQuery, this.Client.SerializationSettings).Trim('"'))));
+            }
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);
@@ -609,7 +612,10 @@ namespace Fixtures.AcceptanceTestsUrl
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/int/null").ToString();
             List<string> _queryParameters = new List<string>();
-            _queryParameters.Add(string.Format("intQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(intQuery, this.Client.SerializationSettings).Trim('"'))));
+            if (intQuery != null)
+            {
+                _queryParameters.Add(string.Format("intQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(intQuery, this.Client.SerializationSettings).Trim('"'))));
+            }
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);
@@ -929,7 +935,10 @@ namespace Fixtures.AcceptanceTestsUrl
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/long/null").ToString();
             List<string> _queryParameters = new List<string>();
-            _queryParameters.Add(string.Format("longQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(longQuery, this.Client.SerializationSettings).Trim('"'))));
+            if (longQuery != null)
+            {
+                _queryParameters.Add(string.Format("longQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(longQuery, this.Client.SerializationSettings).Trim('"'))));
+            }
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);
@@ -1249,7 +1258,10 @@ namespace Fixtures.AcceptanceTestsUrl
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/float/null").ToString();
             List<string> _queryParameters = new List<string>();
-            _queryParameters.Add(string.Format("floatQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(floatQuery, this.Client.SerializationSettings).Trim('"'))));
+            if (floatQuery != null)
+            {
+                _queryParameters.Add(string.Format("floatQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(floatQuery, this.Client.SerializationSettings).Trim('"'))));
+            }
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);
@@ -1569,7 +1581,10 @@ namespace Fixtures.AcceptanceTestsUrl
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/double/null").ToString();
             List<string> _queryParameters = new List<string>();
-            _queryParameters.Add(string.Format("doubleQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(doubleQuery, this.Client.SerializationSettings).Trim('"'))));
+            if (doubleQuery != null)
+            {
+                _queryParameters.Add(string.Format("doubleQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(doubleQuery, this.Client.SerializationSettings).Trim('"'))));
+            }
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);
@@ -2116,7 +2131,10 @@ namespace Fixtures.AcceptanceTestsUrl
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/enum/green%20color").ToString();
             List<string> _queryParameters = new List<string>();
-            _queryParameters.Add(string.Format("enumQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(enumQuery, this.Client.SerializationSettings).Trim('"'))));
+            if (enumQuery != null)
+            {
+                _queryParameters.Add(string.Format("enumQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(enumQuery, this.Client.SerializationSettings).Trim('"'))));
+            }
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);
@@ -2225,7 +2243,10 @@ namespace Fixtures.AcceptanceTestsUrl
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/enum/null").ToString();
             List<string> _queryParameters = new List<string>();
-            _queryParameters.Add(string.Format("enumQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(enumQuery, this.Client.SerializationSettings).Trim('"'))));
+            if (enumQuery != null)
+            {
+                _queryParameters.Add(string.Format("enumQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(enumQuery, this.Client.SerializationSettings).Trim('"'))));
+            }
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);
@@ -2770,7 +2791,10 @@ namespace Fixtures.AcceptanceTestsUrl
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/date/null").ToString();
             List<string> _queryParameters = new List<string>();
-            _queryParameters.Add(string.Format("dateQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(dateQuery, new DateJsonConverter()).Trim('"'))));
+            if (dateQuery != null)
+            {
+                _queryParameters.Add(string.Format("dateQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(dateQuery, new DateJsonConverter()).Trim('"'))));
+            }
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);
@@ -2984,7 +3008,10 @@ namespace Fixtures.AcceptanceTestsUrl
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/datetime/null").ToString();
             List<string> _queryParameters = new List<string>();
-            _queryParameters.Add(string.Format("dateTimeQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(dateTimeQuery, this.Client.SerializationSettings).Trim('"'))));
+            if (dateTimeQuery != null)
+            {
+                _queryParameters.Add(string.Format("dateTimeQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(dateTimeQuery, this.Client.SerializationSettings).Trim('"'))));
+            }
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);

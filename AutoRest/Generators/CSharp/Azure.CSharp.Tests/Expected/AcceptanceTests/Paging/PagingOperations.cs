@@ -270,16 +270,22 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", this.Client.AcceptLanguage);
             }
-            if (_httpRequest.Headers.Contains("maxresults"))
+            if (maxresults != null)
             {
-                _httpRequest.Headers.Remove("maxresults");
+                if (_httpRequest.Headers.Contains("maxresults"))
+                {
+                    _httpRequest.Headers.Remove("maxresults");
+                }
+                _httpRequest.Headers.TryAddWithoutValidation("maxresults", SafeJsonConvert.SerializeObject(maxresults, this.Client.SerializationSettings).Trim('"'));
             }
-            _httpRequest.Headers.TryAddWithoutValidation("maxresults", SafeJsonConvert.SerializeObject(maxresults, this.Client.SerializationSettings).Trim('"'));
-            if (_httpRequest.Headers.Contains("timeout"))
+            if (timeout != null)
             {
-                _httpRequest.Headers.Remove("timeout");
+                if (_httpRequest.Headers.Contains("timeout"))
+                {
+                    _httpRequest.Headers.Remove("timeout");
+                }
+                _httpRequest.Headers.TryAddWithoutValidation("timeout", SafeJsonConvert.SerializeObject(timeout, this.Client.SerializationSettings).Trim('"'));
             }
-            _httpRequest.Headers.TryAddWithoutValidation("timeout", SafeJsonConvert.SerializeObject(timeout, this.Client.SerializationSettings).Trim('"'));
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -469,16 +475,22 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", this.Client.AcceptLanguage);
             }
-            if (_httpRequest.Headers.Contains("maxresults"))
+            if (maxresults != null)
             {
-                _httpRequest.Headers.Remove("maxresults");
+                if (_httpRequest.Headers.Contains("maxresults"))
+                {
+                    _httpRequest.Headers.Remove("maxresults");
+                }
+                _httpRequest.Headers.TryAddWithoutValidation("maxresults", SafeJsonConvert.SerializeObject(maxresults, this.Client.SerializationSettings).Trim('"'));
             }
-            _httpRequest.Headers.TryAddWithoutValidation("maxresults", SafeJsonConvert.SerializeObject(maxresults, this.Client.SerializationSettings).Trim('"'));
-            if (_httpRequest.Headers.Contains("timeout"))
+            if (timeout != null)
             {
-                _httpRequest.Headers.Remove("timeout");
+                if (_httpRequest.Headers.Contains("timeout"))
+                {
+                    _httpRequest.Headers.Remove("timeout");
+                }
+                _httpRequest.Headers.TryAddWithoutValidation("timeout", SafeJsonConvert.SerializeObject(timeout, this.Client.SerializationSettings).Trim('"'));
             }
-            _httpRequest.Headers.TryAddWithoutValidation("timeout", SafeJsonConvert.SerializeObject(timeout, this.Client.SerializationSettings).Trim('"'));
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1560,16 +1572,22 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", this.Client.AcceptLanguage);
             }
-            if (_httpRequest.Headers.Contains("maxresults"))
+            if (maxresults != null)
             {
-                _httpRequest.Headers.Remove("maxresults");
+                if (_httpRequest.Headers.Contains("maxresults"))
+                {
+                    _httpRequest.Headers.Remove("maxresults");
+                }
+                _httpRequest.Headers.TryAddWithoutValidation("maxresults", SafeJsonConvert.SerializeObject(maxresults, this.Client.SerializationSettings).Trim('"'));
             }
-            _httpRequest.Headers.TryAddWithoutValidation("maxresults", SafeJsonConvert.SerializeObject(maxresults, this.Client.SerializationSettings).Trim('"'));
-            if (_httpRequest.Headers.Contains("timeout"))
+            if (timeout != null)
             {
-                _httpRequest.Headers.Remove("timeout");
+                if (_httpRequest.Headers.Contains("timeout"))
+                {
+                    _httpRequest.Headers.Remove("timeout");
+                }
+                _httpRequest.Headers.TryAddWithoutValidation("timeout", SafeJsonConvert.SerializeObject(timeout, this.Client.SerializationSettings).Trim('"'));
             }
-            _httpRequest.Headers.TryAddWithoutValidation("timeout", SafeJsonConvert.SerializeObject(timeout, this.Client.SerializationSettings).Trim('"'));
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1752,16 +1770,22 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("accept-language", this.Client.AcceptLanguage);
             }
-            if (_httpRequest.Headers.Contains("maxresults"))
+            if (maxresults != null)
             {
-                _httpRequest.Headers.Remove("maxresults");
+                if (_httpRequest.Headers.Contains("maxresults"))
+                {
+                    _httpRequest.Headers.Remove("maxresults");
+                }
+                _httpRequest.Headers.TryAddWithoutValidation("maxresults", SafeJsonConvert.SerializeObject(maxresults, this.Client.SerializationSettings).Trim('"'));
             }
-            _httpRequest.Headers.TryAddWithoutValidation("maxresults", SafeJsonConvert.SerializeObject(maxresults, this.Client.SerializationSettings).Trim('"'));
-            if (_httpRequest.Headers.Contains("timeout"))
+            if (timeout != null)
             {
-                _httpRequest.Headers.Remove("timeout");
+                if (_httpRequest.Headers.Contains("timeout"))
+                {
+                    _httpRequest.Headers.Remove("timeout");
+                }
+                _httpRequest.Headers.TryAddWithoutValidation("timeout", SafeJsonConvert.SerializeObject(timeout, this.Client.SerializationSettings).Trim('"'));
             }
-            _httpRequest.Headers.TryAddWithoutValidation("timeout", SafeJsonConvert.SerializeObject(timeout, this.Client.SerializationSettings).Trim('"'));
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)

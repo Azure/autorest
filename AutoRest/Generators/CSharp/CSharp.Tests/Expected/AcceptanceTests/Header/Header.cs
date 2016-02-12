@@ -2570,11 +2570,14 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
             }
-            if (_httpRequest.Headers.Contains("value"))
+            if (value != null)
             {
-                _httpRequest.Headers.Remove("value");
+                if (_httpRequest.Headers.Contains("value"))
+                {
+                    _httpRequest.Headers.Remove("value");
+                }
+                _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, new DateTimeRfc1123JsonConverter()).Trim('"'));
             }
-            _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, new DateTimeRfc1123JsonConverter()).Trim('"'));
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -3333,11 +3336,14 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
             }
-            if (_httpRequest.Headers.Contains("value"))
+            if (value != null)
             {
-                _httpRequest.Headers.Remove("value");
+                if (_httpRequest.Headers.Contains("value"))
+                {
+                    _httpRequest.Headers.Remove("value");
+                }
+                _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
             }
-            _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)

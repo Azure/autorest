@@ -213,6 +213,21 @@ namespace Microsoft.Rest.Generator.CSharp
                     serializationSettings);
         }
 
+        public static bool CanBeNull(this IParameter parameter)
+        {
+            if (parameter == null)
+            {
+                throw new ArgumentNullException("parameter");
+            }
+
+            if (parameter.IsRequired && parameter.Type.IsValueType())
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         /// <summary>
         /// Determines if the given IType is a value type in C#
         /// </summary>

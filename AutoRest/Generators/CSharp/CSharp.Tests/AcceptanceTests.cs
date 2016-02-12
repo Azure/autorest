@@ -1223,9 +1223,11 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                         }
                     }
                 };
-                var missingRequired =
-                    Assert.Throws<ValidationException>(() => client.Polymorphism.PutValidMissingRequired(badRequest));
-                Assert.Equal("Birthday", missingRequired.Target);
+
+                // NO LONGER VALID - Birthday is not nullable as such validation is removed
+                // var missingRequired =
+                //    Assert.Throws<ValidationException>(() => client.Polymorphism.PutValidMissingRequired(badRequest));
+                // Assert.Equal("Birthday", missingRequired.Target);
                 /* COMPLEX TYPES THAT INVOLVE RECURSIVE REFERENCE */
                 // GET polymorphicrecursive/valid
                 var recursiveResult = client.Polymorphicrecursive.GetValid();

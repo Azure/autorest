@@ -657,11 +657,14 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             _httpRequest.Method = new HttpMethod("POST");
             _httpRequest.RequestUri = new Uri(_url);
             // Set Headers
-            if (_httpRequest.Headers.Contains("headerParameter"))
+            if (headerParameter != null)
             {
-                _httpRequest.Headers.Remove("headerParameter");
+                if (_httpRequest.Headers.Contains("headerParameter"))
+                {
+                    _httpRequest.Headers.Remove("headerParameter");
+                }
+                _httpRequest.Headers.TryAddWithoutValidation("headerParameter", SafeJsonConvert.SerializeObject(headerParameter, this.Client.SerializationSettings).Trim('"'));
             }
-            _httpRequest.Headers.TryAddWithoutValidation("headerParameter", SafeJsonConvert.SerializeObject(headerParameter, this.Client.SerializationSettings).Trim('"'));
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)

@@ -758,7 +758,10 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "reqopt/global/optional/query").ToString();
             List<string> _queryParameters = new List<string>();
-            _queryParameters.Add(string.Format("optional-global-query={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(this.Client.OptionalGlobalQuery, this.Client.SerializationSettings).Trim('"'))));
+            if (this.Client.OptionalGlobalQuery != null)
+            {
+                _queryParameters.Add(string.Format("optional-global-query={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(this.Client.OptionalGlobalQuery, this.Client.SerializationSettings).Trim('"'))));
+            }
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);

@@ -102,7 +102,7 @@ public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithH
     @(Model.SetDefaultHeaders)
     @foreach (var parameter in Model.LogicalParameterTemplateModels.Where(p => p.Location == ParameterLocation.Header))
     {
-        if (parameter.Type.IsValueType())
+        if (!parameter.CanBeNull())
         {
     @:if (_httpRequest.Headers.Contains("@(parameter.SerializedName)"))
     @:{

@@ -404,14 +404,14 @@ namespace Microsoft.Rest.Generator.CSharp
                 builder.AppendLine("List<string> _queryParameters = new List<string>();");
                 foreach (var queryParameter in this.LogicalParameterTemplateModels.Where(p => p.Location == ParameterLocation.Query))
                 {
-                    if (!queryParameter.Type.IsValueType())
+                    if (queryParameter.CanBeNull())
                     {
                         builder.AppendLine("if ({0} != null)", queryParameter.Name)
                             .AppendLine("{").Indent();
                     }
                     builder.AppendLine("_queryParameters.Add(string.Format(\"{0}={{0}}\", Uri.EscapeDataString({1})));",
                             queryParameter.SerializedName, queryParameter.GetFormattedReferenceValue(ClientReference));
-                    if (!queryParameter.Type.IsValueType())
+                    if (queryParameter.CanBeNull())
                     {
                         builder.Outdent()
                             .AppendLine("}");
