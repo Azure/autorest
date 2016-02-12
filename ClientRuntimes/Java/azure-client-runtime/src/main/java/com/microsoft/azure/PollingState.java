@@ -9,8 +9,8 @@ package com.microsoft.azure;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.azure.serializer.AzureJacksonMapperAdapter;
-import com.squareup.okhttp.ResponseBody;
-import retrofit.Response;
+import okhttp3.ResponseBody;
+import retrofit2.Response;
 
 import java.io.IOException;
 import java.lang.reflect.Type;

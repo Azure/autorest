@@ -11,8 +11,8 @@
 package fixtures.bodyformdata;
 
 import com.microsoft.rest.ServiceClient;
-import com.squareup.okhttp.OkHttpClient;
-import retrofit.Retrofit;
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestSwaggerBATFormDataService class.
@@ -36,7 +36,7 @@ public final class AutoRestSwaggerBATFormDataServiceImpl extends ServiceClient i
      * @return the FormdataOperations object.
      */
     public FormdataOperations getFormdataOperations() {
-        return new FormdataOperationsImpl(this.retrofitBuilder.build(), this);
+        return new FormdataOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -61,16 +61,18 @@ public final class AutoRestSwaggerBATFormDataServiceImpl extends ServiceClient i
      * Initializes an instance of AutoRestSwaggerBATFormDataService client.
      *
      * @param baseUri the base URI of the host
-     * @param client the {@link OkHttpClient} client to use for REST calls
+     * @param clientBuilder the builder for building up an {@link OkHttpClient}
      * @param retrofitBuilder the builder for building up a {@link Retrofit}
      */
-    public AutoRestSwaggerBATFormDataServiceImpl(String baseUri, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
-        super(client, retrofitBuilder);
+    public AutoRestSwaggerBATFormDataServiceImpl(String baseUri, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
+        super(clientBuilder, retrofitBuilder);
         this.baseUri = baseUri;
         initialize();
     }
 
-    private void initialize() {
+    @Override
+    protected void initialize() {
+        super.initialize();
         this.retrofitBuilder.baseUrl(baseUri);
     }
 }

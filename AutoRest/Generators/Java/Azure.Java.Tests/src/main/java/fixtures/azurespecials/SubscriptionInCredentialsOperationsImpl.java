@@ -15,12 +15,12 @@ import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.azurespecials.models.ErrorException;
 import java.io.IOException;
-import retrofit.Call;
-import retrofit.Response;
-import retrofit.Retrofit;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -56,7 +56,7 @@ public final class SubscriptionInCredentialsOperationsImpl implements Subscripti
             throw new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null.");
         }
         Call<ResponseBody> call = service.postMethodGlobalValid(this.client.getSubscriptionId(), this.client.getAcceptLanguage());
-        return postMethodGlobalValidDelegate(call.execute(), null);
+        return postMethodGlobalValidDelegate(call.execute());
     }
 
     /**
@@ -73,9 +73,9 @@ public final class SubscriptionInCredentialsOperationsImpl implements Subscripti
         Call<ResponseBody> call = service.postMethodGlobalValid(this.client.getSubscriptionId(), this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(postMethodGlobalValidDelegate(response, retrofit));
+                    serviceCallback.success(postMethodGlobalValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -84,11 +84,11 @@ public final class SubscriptionInCredentialsOperationsImpl implements Subscripti
         return call;
     }
 
-    private ServiceResponse<Void> postMethodGlobalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> postMethodGlobalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -104,7 +104,7 @@ public final class SubscriptionInCredentialsOperationsImpl implements Subscripti
             throw new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null.");
         }
         Call<ResponseBody> call = service.postMethodGlobalNull(this.client.getSubscriptionId(), this.client.getAcceptLanguage());
-        return postMethodGlobalNullDelegate(call.execute(), null);
+        return postMethodGlobalNullDelegate(call.execute());
     }
 
     /**
@@ -121,9 +121,9 @@ public final class SubscriptionInCredentialsOperationsImpl implements Subscripti
         Call<ResponseBody> call = service.postMethodGlobalNull(this.client.getSubscriptionId(), this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(postMethodGlobalNullDelegate(response, retrofit));
+                    serviceCallback.success(postMethodGlobalNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -132,11 +132,11 @@ public final class SubscriptionInCredentialsOperationsImpl implements Subscripti
         return call;
     }
 
-    private ServiceResponse<Void> postMethodGlobalNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> postMethodGlobalNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -155,7 +155,7 @@ public final class SubscriptionInCredentialsOperationsImpl implements Subscripti
             throw new IllegalArgumentException("Parameter this.client.getApiVersion() is required and cannot be null.");
         }
         Call<ResponseBody> call = service.postMethodGlobalNotProvidedValid(this.client.getSubscriptionId(), this.client.getApiVersion(), this.client.getAcceptLanguage());
-        return postMethodGlobalNotProvidedValidDelegate(call.execute(), null);
+        return postMethodGlobalNotProvidedValidDelegate(call.execute());
     }
 
     /**
@@ -176,9 +176,9 @@ public final class SubscriptionInCredentialsOperationsImpl implements Subscripti
         Call<ResponseBody> call = service.postMethodGlobalNotProvidedValid(this.client.getSubscriptionId(), this.client.getApiVersion(), this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(postMethodGlobalNotProvidedValidDelegate(response, retrofit));
+                    serviceCallback.success(postMethodGlobalNotProvidedValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -187,11 +187,11 @@ public final class SubscriptionInCredentialsOperationsImpl implements Subscripti
         return call;
     }
 
-    private ServiceResponse<Void> postMethodGlobalNotProvidedValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> postMethodGlobalNotProvidedValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -207,7 +207,7 @@ public final class SubscriptionInCredentialsOperationsImpl implements Subscripti
             throw new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null.");
         }
         Call<ResponseBody> call = service.postPathGlobalValid(this.client.getSubscriptionId(), this.client.getAcceptLanguage());
-        return postPathGlobalValidDelegate(call.execute(), null);
+        return postPathGlobalValidDelegate(call.execute());
     }
 
     /**
@@ -224,9 +224,9 @@ public final class SubscriptionInCredentialsOperationsImpl implements Subscripti
         Call<ResponseBody> call = service.postPathGlobalValid(this.client.getSubscriptionId(), this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(postPathGlobalValidDelegate(response, retrofit));
+                    serviceCallback.success(postPathGlobalValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -235,11 +235,11 @@ public final class SubscriptionInCredentialsOperationsImpl implements Subscripti
         return call;
     }
 
-    private ServiceResponse<Void> postPathGlobalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> postPathGlobalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -255,7 +255,7 @@ public final class SubscriptionInCredentialsOperationsImpl implements Subscripti
             throw new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null.");
         }
         Call<ResponseBody> call = service.postSwaggerGlobalValid(this.client.getSubscriptionId(), this.client.getAcceptLanguage());
-        return postSwaggerGlobalValidDelegate(call.execute(), null);
+        return postSwaggerGlobalValidDelegate(call.execute());
     }
 
     /**
@@ -272,9 +272,9 @@ public final class SubscriptionInCredentialsOperationsImpl implements Subscripti
         Call<ResponseBody> call = service.postSwaggerGlobalValid(this.client.getSubscriptionId(), this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(postSwaggerGlobalValidDelegate(response, retrofit));
+                    serviceCallback.success(postSwaggerGlobalValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -283,11 +283,11 @@ public final class SubscriptionInCredentialsOperationsImpl implements Subscripti
         return call;
     }
 
-    private ServiceResponse<Void> postSwaggerGlobalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> postSwaggerGlobalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
 }

@@ -7,9 +7,9 @@
 
 package com.microsoft.rest;
 
-import com.squareup.okhttp.Interceptor;
-import com.squareup.okhttp.Protocol;
-import com.squareup.okhttp.Response;
+import okhttp3.Interceptor;
+import okhttp3.Protocol;
+import okhttp3.Response;
 import org.junit.Assert;
 import org.junit.Test;
 

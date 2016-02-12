@@ -12,12 +12,12 @@ package fixtures.http;
 
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
-import retrofit.Call;
-import retrofit.http.GET;
-import retrofit.http.Headers;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
 
 /**
  * An instance of this class provides access to all the operations defined

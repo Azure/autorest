@@ -15,16 +15,16 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
 import java.io.IOException;
+import okhttp3.ResponseBody;
 import org.apache.commons.codec.binary.Base64;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
-import retrofit.Call;
-import retrofit.Response;
-import retrofit.Retrofit;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -57,7 +57,7 @@ public final class PathsOperationsImpl implements PathsOperations {
      */
     public ServiceResponse<Void> getBooleanTrue(boolean boolPath) throws ErrorException, IOException {
         Call<ResponseBody> call = service.getBooleanTrue(boolPath);
-        return getBooleanTrueDelegate(call.execute(), null);
+        return getBooleanTrueDelegate(call.execute());
     }
 
     /**
@@ -71,9 +71,9 @@ public final class PathsOperationsImpl implements PathsOperations {
         Call<ResponseBody> call = service.getBooleanTrue(boolPath);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getBooleanTrueDelegate(response, retrofit));
+                    serviceCallback.success(getBooleanTrueDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -82,11 +82,11 @@ public final class PathsOperationsImpl implements PathsOperations {
         return call;
     }
 
-    private ServiceResponse<Void> getBooleanTrueDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> getBooleanTrueDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -99,7 +99,7 @@ public final class PathsOperationsImpl implements PathsOperations {
      */
     public ServiceResponse<Void> getBooleanFalse(boolean boolPath) throws ErrorException, IOException {
         Call<ResponseBody> call = service.getBooleanFalse(boolPath);
-        return getBooleanFalseDelegate(call.execute(), null);
+        return getBooleanFalseDelegate(call.execute());
     }
 
     /**
@@ -113,9 +113,9 @@ public final class PathsOperationsImpl implements PathsOperations {
         Call<ResponseBody> call = service.getBooleanFalse(boolPath);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getBooleanFalseDelegate(response, retrofit));
+                    serviceCallback.success(getBooleanFalseDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -124,11 +124,11 @@ public final class PathsOperationsImpl implements PathsOperations {
         return call;
     }
 
-    private ServiceResponse<Void> getBooleanFalseDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> getBooleanFalseDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -141,7 +141,7 @@ public final class PathsOperationsImpl implements PathsOperations {
      */
     public ServiceResponse<Void> getIntOneMillion(int intPath) throws ErrorException, IOException {
         Call<ResponseBody> call = service.getIntOneMillion(intPath);
-        return getIntOneMillionDelegate(call.execute(), null);
+        return getIntOneMillionDelegate(call.execute());
     }
 
     /**
@@ -155,9 +155,9 @@ public final class PathsOperationsImpl implements PathsOperations {
         Call<ResponseBody> call = service.getIntOneMillion(intPath);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getIntOneMillionDelegate(response, retrofit));
+                    serviceCallback.success(getIntOneMillionDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -166,11 +166,11 @@ public final class PathsOperationsImpl implements PathsOperations {
         return call;
     }
 
-    private ServiceResponse<Void> getIntOneMillionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> getIntOneMillionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -183,7 +183,7 @@ public final class PathsOperationsImpl implements PathsOperations {
      */
     public ServiceResponse<Void> getIntNegativeOneMillion(int intPath) throws ErrorException, IOException {
         Call<ResponseBody> call = service.getIntNegativeOneMillion(intPath);
-        return getIntNegativeOneMillionDelegate(call.execute(), null);
+        return getIntNegativeOneMillionDelegate(call.execute());
     }
 
     /**
@@ -197,9 +197,9 @@ public final class PathsOperationsImpl implements PathsOperations {
         Call<ResponseBody> call = service.getIntNegativeOneMillion(intPath);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getIntNegativeOneMillionDelegate(response, retrofit));
+                    serviceCallback.success(getIntNegativeOneMillionDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -208,11 +208,11 @@ public final class PathsOperationsImpl implements PathsOperations {
         return call;
     }
 
-    private ServiceResponse<Void> getIntNegativeOneMillionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> getIntNegativeOneMillionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -225,7 +225,7 @@ public final class PathsOperationsImpl implements PathsOperations {
      */
     public ServiceResponse<Void> getTenBillion(long longPath) throws ErrorException, IOException {
         Call<ResponseBody> call = service.getTenBillion(longPath);
-        return getTenBillionDelegate(call.execute(), null);
+        return getTenBillionDelegate(call.execute());
     }
 
     /**
@@ -239,9 +239,9 @@ public final class PathsOperationsImpl implements PathsOperations {
         Call<ResponseBody> call = service.getTenBillion(longPath);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getTenBillionDelegate(response, retrofit));
+                    serviceCallback.success(getTenBillionDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -250,11 +250,11 @@ public final class PathsOperationsImpl implements PathsOperations {
         return call;
     }
 
-    private ServiceResponse<Void> getTenBillionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> getTenBillionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -267,7 +267,7 @@ public final class PathsOperationsImpl implements PathsOperations {
      */
     public ServiceResponse<Void> getNegativeTenBillion(long longPath) throws ErrorException, IOException {
         Call<ResponseBody> call = service.getNegativeTenBillion(longPath);
-        return getNegativeTenBillionDelegate(call.execute(), null);
+        return getNegativeTenBillionDelegate(call.execute());
     }
 
     /**
@@ -281,9 +281,9 @@ public final class PathsOperationsImpl implements PathsOperations {
         Call<ResponseBody> call = service.getNegativeTenBillion(longPath);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getNegativeTenBillionDelegate(response, retrofit));
+                    serviceCallback.success(getNegativeTenBillionDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -292,11 +292,11 @@ public final class PathsOperationsImpl implements PathsOperations {
         return call;
     }
 
-    private ServiceResponse<Void> getNegativeTenBillionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> getNegativeTenBillionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -309,7 +309,7 @@ public final class PathsOperationsImpl implements PathsOperations {
      */
     public ServiceResponse<Void> floatScientificPositive(double floatPath) throws ErrorException, IOException {
         Call<ResponseBody> call = service.floatScientificPositive(floatPath);
-        return floatScientificPositiveDelegate(call.execute(), null);
+        return floatScientificPositiveDelegate(call.execute());
     }
 
     /**
@@ -323,9 +323,9 @@ public final class PathsOperationsImpl implements PathsOperations {
         Call<ResponseBody> call = service.floatScientificPositive(floatPath);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(floatScientificPositiveDelegate(response, retrofit));
+                    serviceCallback.success(floatScientificPositiveDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -334,11 +334,11 @@ public final class PathsOperationsImpl implements PathsOperations {
         return call;
     }
 
-    private ServiceResponse<Void> floatScientificPositiveDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> floatScientificPositiveDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -351,7 +351,7 @@ public final class PathsOperationsImpl implements PathsOperations {
      */
     public ServiceResponse<Void> floatScientificNegative(double floatPath) throws ErrorException, IOException {
         Call<ResponseBody> call = service.floatScientificNegative(floatPath);
-        return floatScientificNegativeDelegate(call.execute(), null);
+        return floatScientificNegativeDelegate(call.execute());
     }
 
     /**
@@ -365,9 +365,9 @@ public final class PathsOperationsImpl implements PathsOperations {
         Call<ResponseBody> call = service.floatScientificNegative(floatPath);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(floatScientificNegativeDelegate(response, retrofit));
+                    serviceCallback.success(floatScientificNegativeDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -376,11 +376,11 @@ public final class PathsOperationsImpl implements PathsOperations {
         return call;
     }
 
-    private ServiceResponse<Void> floatScientificNegativeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> floatScientificNegativeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -393,7 +393,7 @@ public final class PathsOperationsImpl implements PathsOperations {
      */
     public ServiceResponse<Void> doubleDecimalPositive(double doublePath) throws ErrorException, IOException {
         Call<ResponseBody> call = service.doubleDecimalPositive(doublePath);
-        return doubleDecimalPositiveDelegate(call.execute(), null);
+        return doubleDecimalPositiveDelegate(call.execute());
     }
 
     /**
@@ -407,9 +407,9 @@ public final class PathsOperationsImpl implements PathsOperations {
         Call<ResponseBody> call = service.doubleDecimalPositive(doublePath);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(doubleDecimalPositiveDelegate(response, retrofit));
+                    serviceCallback.success(doubleDecimalPositiveDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -418,11 +418,11 @@ public final class PathsOperationsImpl implements PathsOperations {
         return call;
     }
 
-    private ServiceResponse<Void> doubleDecimalPositiveDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> doubleDecimalPositiveDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -435,7 +435,7 @@ public final class PathsOperationsImpl implements PathsOperations {
      */
     public ServiceResponse<Void> doubleDecimalNegative(double doublePath) throws ErrorException, IOException {
         Call<ResponseBody> call = service.doubleDecimalNegative(doublePath);
-        return doubleDecimalNegativeDelegate(call.execute(), null);
+        return doubleDecimalNegativeDelegate(call.execute());
     }
 
     /**
@@ -449,9 +449,9 @@ public final class PathsOperationsImpl implements PathsOperations {
         Call<ResponseBody> call = service.doubleDecimalNegative(doublePath);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(doubleDecimalNegativeDelegate(response, retrofit));
+                    serviceCallback.success(doubleDecimalNegativeDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -460,11 +460,11 @@ public final class PathsOperationsImpl implements PathsOperations {
         return call;
     }
 
-    private ServiceResponse<Void> doubleDecimalNegativeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> doubleDecimalNegativeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -481,7 +481,7 @@ public final class PathsOperationsImpl implements PathsOperations {
             throw new IllegalArgumentException("Parameter stringPath is required and cannot be null.");
         }
         Call<ResponseBody> call = service.stringUnicode(stringPath);
-        return stringUnicodeDelegate(call.execute(), null);
+        return stringUnicodeDelegate(call.execute());
     }
 
     /**
@@ -499,9 +499,9 @@ public final class PathsOperationsImpl implements PathsOperations {
         Call<ResponseBody> call = service.stringUnicode(stringPath);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(stringUnicodeDelegate(response, retrofit));
+                    serviceCallback.success(stringUnicodeDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -510,11 +510,11 @@ public final class PathsOperationsImpl implements PathsOperations {
         return call;
     }
 
-    private ServiceResponse<Void> stringUnicodeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> stringUnicodeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -531,7 +531,7 @@ public final class PathsOperationsImpl implements PathsOperations {
             throw new IllegalArgumentException("Parameter stringPath is required and cannot be null.");
         }
         Call<ResponseBody> call = service.stringUrlEncoded(stringPath);
-        return stringUrlEncodedDelegate(call.execute(), null);
+        return stringUrlEncodedDelegate(call.execute());
     }
 
     /**
@@ -549,9 +549,9 @@ public final class PathsOperationsImpl implements PathsOperations {
         Call<ResponseBody> call = service.stringUrlEncoded(stringPath);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(stringUrlEncodedDelegate(response, retrofit));
+                    serviceCallback.success(stringUrlEncodedDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -560,11 +560,11 @@ public final class PathsOperationsImpl implements PathsOperations {
         return call;
     }
 
-    private ServiceResponse<Void> stringUrlEncodedDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> stringUrlEncodedDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -581,7 +581,7 @@ public final class PathsOperationsImpl implements PathsOperations {
             throw new IllegalArgumentException("Parameter stringPath is required and cannot be null.");
         }
         Call<ResponseBody> call = service.stringEmpty(stringPath);
-        return stringEmptyDelegate(call.execute(), null);
+        return stringEmptyDelegate(call.execute());
     }
 
     /**
@@ -599,9 +599,9 @@ public final class PathsOperationsImpl implements PathsOperations {
         Call<ResponseBody> call = service.stringEmpty(stringPath);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(stringEmptyDelegate(response, retrofit));
+                    serviceCallback.success(stringEmptyDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -610,11 +610,11 @@ public final class PathsOperationsImpl implements PathsOperations {
         return call;
     }
 
-    private ServiceResponse<Void> stringEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> stringEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -631,7 +631,7 @@ public final class PathsOperationsImpl implements PathsOperations {
             throw new IllegalArgumentException("Parameter stringPath is required and cannot be null.");
         }
         Call<ResponseBody> call = service.stringNull(stringPath);
-        return stringNullDelegate(call.execute(), null);
+        return stringNullDelegate(call.execute());
     }
 
     /**
@@ -649,9 +649,9 @@ public final class PathsOperationsImpl implements PathsOperations {
         Call<ResponseBody> call = service.stringNull(stringPath);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(stringNullDelegate(response, retrofit));
+                    serviceCallback.success(stringNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -660,11 +660,11 @@ public final class PathsOperationsImpl implements PathsOperations {
         return call;
     }
 
-    private ServiceResponse<Void> stringNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> stringNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(400, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -681,7 +681,7 @@ public final class PathsOperationsImpl implements PathsOperations {
             throw new IllegalArgumentException("Parameter enumPath is required and cannot be null.");
         }
         Call<ResponseBody> call = service.enumValid(client.getMapperAdapter().serializeRaw(enumPath));
-        return enumValidDelegate(call.execute(), null);
+        return enumValidDelegate(call.execute());
     }
 
     /**
@@ -699,9 +699,9 @@ public final class PathsOperationsImpl implements PathsOperations {
         Call<ResponseBody> call = service.enumValid(client.getMapperAdapter().serializeRaw(enumPath));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(enumValidDelegate(response, retrofit));
+                    serviceCallback.success(enumValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -710,11 +710,11 @@ public final class PathsOperationsImpl implements PathsOperations {
         return call;
     }
 
-    private ServiceResponse<Void> enumValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> enumValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -731,7 +731,7 @@ public final class PathsOperationsImpl implements PathsOperations {
             throw new IllegalArgumentException("Parameter enumPath is required and cannot be null.");
         }
         Call<ResponseBody> call = service.enumNull(client.getMapperAdapter().serializeRaw(enumPath));
-        return enumNullDelegate(call.execute(), null);
+        return enumNullDelegate(call.execute());
     }
 
     /**
@@ -749,9 +749,9 @@ public final class PathsOperationsImpl implements PathsOperations {
         Call<ResponseBody> call = service.enumNull(client.getMapperAdapter().serializeRaw(enumPath));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(enumNullDelegate(response, retrofit));
+                    serviceCallback.success(enumNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -760,11 +760,11 @@ public final class PathsOperationsImpl implements PathsOperations {
         return call;
     }
 
-    private ServiceResponse<Void> enumNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> enumNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(400, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -781,7 +781,7 @@ public final class PathsOperationsImpl implements PathsOperations {
             throw new IllegalArgumentException("Parameter bytePath is required and cannot be null.");
         }
         Call<ResponseBody> call = service.byteMultiByte(Base64.encodeBase64String(bytePath));
-        return byteMultiByteDelegate(call.execute(), null);
+        return byteMultiByteDelegate(call.execute());
     }
 
     /**
@@ -799,9 +799,9 @@ public final class PathsOperationsImpl implements PathsOperations {
         Call<ResponseBody> call = service.byteMultiByte(Base64.encodeBase64String(bytePath));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(byteMultiByteDelegate(response, retrofit));
+                    serviceCallback.success(byteMultiByteDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -810,11 +810,11 @@ public final class PathsOperationsImpl implements PathsOperations {
         return call;
     }
 
-    private ServiceResponse<Void> byteMultiByteDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> byteMultiByteDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -831,7 +831,7 @@ public final class PathsOperationsImpl implements PathsOperations {
             throw new IllegalArgumentException("Parameter bytePath is required and cannot be null.");
         }
         Call<ResponseBody> call = service.byteEmpty(Base64.encodeBase64String(bytePath));
-        return byteEmptyDelegate(call.execute(), null);
+        return byteEmptyDelegate(call.execute());
     }
 
     /**
@@ -849,9 +849,9 @@ public final class PathsOperationsImpl implements PathsOperations {
         Call<ResponseBody> call = service.byteEmpty(Base64.encodeBase64String(bytePath));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(byteEmptyDelegate(response, retrofit));
+                    serviceCallback.success(byteEmptyDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -860,11 +860,11 @@ public final class PathsOperationsImpl implements PathsOperations {
         return call;
     }
 
-    private ServiceResponse<Void> byteEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> byteEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -881,7 +881,7 @@ public final class PathsOperationsImpl implements PathsOperations {
             throw new IllegalArgumentException("Parameter bytePath is required and cannot be null.");
         }
         Call<ResponseBody> call = service.byteNull(Base64.encodeBase64String(bytePath));
-        return byteNullDelegate(call.execute(), null);
+        return byteNullDelegate(call.execute());
     }
 
     /**
@@ -899,9 +899,9 @@ public final class PathsOperationsImpl implements PathsOperations {
         Call<ResponseBody> call = service.byteNull(Base64.encodeBase64String(bytePath));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(byteNullDelegate(response, retrofit));
+                    serviceCallback.success(byteNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -910,11 +910,11 @@ public final class PathsOperationsImpl implements PathsOperations {
         return call;
     }
 
-    private ServiceResponse<Void> byteNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> byteNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(400, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -931,7 +931,7 @@ public final class PathsOperationsImpl implements PathsOperations {
             throw new IllegalArgumentException("Parameter datePath is required and cannot be null.");
         }
         Call<ResponseBody> call = service.dateValid(client.getMapperAdapter().serializeRaw(datePath));
-        return dateValidDelegate(call.execute(), null);
+        return dateValidDelegate(call.execute());
     }
 
     /**
@@ -949,9 +949,9 @@ public final class PathsOperationsImpl implements PathsOperations {
         Call<ResponseBody> call = service.dateValid(client.getMapperAdapter().serializeRaw(datePath));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(dateValidDelegate(response, retrofit));
+                    serviceCallback.success(dateValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -960,11 +960,11 @@ public final class PathsOperationsImpl implements PathsOperations {
         return call;
     }
 
-    private ServiceResponse<Void> dateValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> dateValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -981,7 +981,7 @@ public final class PathsOperationsImpl implements PathsOperations {
             throw new IllegalArgumentException("Parameter datePath is required and cannot be null.");
         }
         Call<ResponseBody> call = service.dateNull(client.getMapperAdapter().serializeRaw(datePath));
-        return dateNullDelegate(call.execute(), null);
+        return dateNullDelegate(call.execute());
     }
 
     /**
@@ -999,9 +999,9 @@ public final class PathsOperationsImpl implements PathsOperations {
         Call<ResponseBody> call = service.dateNull(client.getMapperAdapter().serializeRaw(datePath));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(dateNullDelegate(response, retrofit));
+                    serviceCallback.success(dateNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1010,11 +1010,11 @@ public final class PathsOperationsImpl implements PathsOperations {
         return call;
     }
 
-    private ServiceResponse<Void> dateNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> dateNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(400, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1031,7 +1031,7 @@ public final class PathsOperationsImpl implements PathsOperations {
             throw new IllegalArgumentException("Parameter dateTimePath is required and cannot be null.");
         }
         Call<ResponseBody> call = service.dateTimeValid(client.getMapperAdapter().serializeRaw(dateTimePath));
-        return dateTimeValidDelegate(call.execute(), null);
+        return dateTimeValidDelegate(call.execute());
     }
 
     /**
@@ -1049,9 +1049,9 @@ public final class PathsOperationsImpl implements PathsOperations {
         Call<ResponseBody> call = service.dateTimeValid(client.getMapperAdapter().serializeRaw(dateTimePath));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(dateTimeValidDelegate(response, retrofit));
+                    serviceCallback.success(dateTimeValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1060,11 +1060,11 @@ public final class PathsOperationsImpl implements PathsOperations {
         return call;
     }
 
-    private ServiceResponse<Void> dateTimeValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> dateTimeValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1081,7 +1081,7 @@ public final class PathsOperationsImpl implements PathsOperations {
             throw new IllegalArgumentException("Parameter dateTimePath is required and cannot be null.");
         }
         Call<ResponseBody> call = service.dateTimeNull(client.getMapperAdapter().serializeRaw(dateTimePath));
-        return dateTimeNullDelegate(call.execute(), null);
+        return dateTimeNullDelegate(call.execute());
     }
 
     /**
@@ -1099,9 +1099,9 @@ public final class PathsOperationsImpl implements PathsOperations {
         Call<ResponseBody> call = service.dateTimeNull(client.getMapperAdapter().serializeRaw(dateTimePath));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(dateTimeNullDelegate(response, retrofit));
+                    serviceCallback.success(dateTimeNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1110,11 +1110,11 @@ public final class PathsOperationsImpl implements PathsOperations {
         return call;
     }
 
-    private ServiceResponse<Void> dateTimeNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> dateTimeNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(400, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
 }

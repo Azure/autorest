@@ -11,8 +11,8 @@
 package fixtures.bodyinteger;
 
 import com.microsoft.rest.ServiceClient;
-import com.squareup.okhttp.OkHttpClient;
-import retrofit.Retrofit;
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestIntegerTestService class.
@@ -36,7 +36,7 @@ public final class AutoRestIntegerTestServiceImpl extends ServiceClient implemen
      * @return the IntOperations object.
      */
     public IntOperations getIntOperations() {
-        return new IntOperationsImpl(this.retrofitBuilder.build(), this);
+        return new IntOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -61,16 +61,18 @@ public final class AutoRestIntegerTestServiceImpl extends ServiceClient implemen
      * Initializes an instance of AutoRestIntegerTestService client.
      *
      * @param baseUri the base URI of the host
-     * @param client the {@link OkHttpClient} client to use for REST calls
+     * @param clientBuilder the builder for building up an {@link OkHttpClient}
      * @param retrofitBuilder the builder for building up a {@link Retrofit}
      */
-    public AutoRestIntegerTestServiceImpl(String baseUri, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
-        super(client, retrofitBuilder);
+    public AutoRestIntegerTestServiceImpl(String baseUri, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
+        super(clientBuilder, retrofitBuilder);
         this.baseUri = baseUri;
         initialize();
     }
 
-    private void initialize() {
+    @Override
+    protected void initialize() {
+        super.initialize();
         this.retrofitBuilder.baseUrl(baseUri);
     }
 }

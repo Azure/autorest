@@ -9,9 +9,6 @@ package com.microsoft.rest;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.microsoft.rest.serializer.JacksonMapperAdapter;
-import com.squareup.okhttp.ResponseBody;
-import retrofit.Response;
-import retrofit.Retrofit;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,6 +17,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
+
+import okhttp3.ResponseBody;
+import retrofit2.Response;
 
 /**
  * The builder for building a {@link ServiceResponse}.
@@ -127,13 +127,12 @@ public class ServiceResponseBuilder<T, E extends AutoRestException> {
      * </p>
      *
      * @param response the {@link Response} instance from REST call
-     * @param retrofit the {@link Retrofit} instance from REST call
      * @return a ServiceResponse instance of generic type {@link T}
      * @throws E exceptions from the REST call
      * @throws IOException exceptions from deserialization
      */
     @SuppressWarnings("unchecked")
-    public ServiceResponse<T> build(Response<ResponseBody> response, Retrofit retrofit) throws E, IOException {
+    public ServiceResponse<T> build(Response<ResponseBody> response) throws E, IOException {
         if (response == null) {
             return null;
         }
@@ -174,13 +173,12 @@ public class ServiceResponseBuilder<T, E extends AutoRestException> {
      * </p>
      *
      * @param response the {@link Response} instance from REST call
-     * @param retrofit the {@link Retrofit} instance from REST call
      * @return a ServiceResponse instance of generic type {@link T}
      * @throws E exceptions from the REST call
      * @throws IOException exceptions from deserialization
      */
     @SuppressWarnings("unchecked")
-    public ServiceResponse<T> buildEmpty(Response<Void> response, Retrofit retrofit) throws E, IOException {
+    public ServiceResponse<T> buildEmpty(Response<Void> response) throws E, IOException {
         int statusCode = response.code();
         if (responseTypes.containsKey(statusCode)) {
             return new ServiceResponse<>(response);
@@ -211,15 +209,14 @@ public class ServiceResponseBuilder<T, E extends AutoRestException> {
      * </p>
      *
      * @param response the {@link Response} instance from REST call
-     * @param retrofit the {@link Retrofit} instance from REST call
      * @param headerType the type of the header
      * @param <THeader> the type of the header
      * @return a ServiceResponseWithHeaders instance of generic type {@link T}
      * @throws E exceptions from the REST call
      * @throws IOException exceptions from deserialization
      */
-    public <THeader> ServiceResponseWithHeaders<T, THeader> buildWithHeaders(Response<ResponseBody> response, Retrofit retrofit, Class<THeader> headerType) throws E, IOException {
-        ServiceResponse<T> bodyResponse = build(response, retrofit);
+    public <THeader> ServiceResponseWithHeaders<T, THeader> buildWithHeaders(Response<ResponseBody> response, Class<THeader> headerType) throws E, IOException {
+        ServiceResponse<T> bodyResponse = build(response);
         THeader headers = mapperAdapter.deserialize(
                 mapperAdapter.serialize(response.headers()),
                 headerType);
@@ -237,15 +234,14 @@ public class ServiceResponseBuilder<T, E extends AutoRestException> {
      * </p>
      *
      * @param response the {@link Response} instance from REST call
-     * @param retrofit the {@link Retrofit} instance from REST call
      * @param headerType the type of the header
      * @param <THeader> the type of the header
      * @return a ServiceResponseWithHeaders instance of generic type {@link T}
      * @throws E exceptions from the REST call
      * @throws IOException exceptions from deserialization
      */
-    public <THeader> ServiceResponseWithHeaders<T, THeader> buildEmptyWithHeaders(Response<Void> response, Retrofit retrofit, Class<THeader> headerType) throws E, IOException {
-        ServiceResponse<T> bodyResponse = buildEmpty(response, retrofit);
+    public <THeader> ServiceResponseWithHeaders<T, THeader> buildEmptyWithHeaders(Response<Void> response, Class<THeader> headerType) throws E, IOException {
+        ServiceResponse<T> bodyResponse = buildEmpty(response);
         THeader headers = mapperAdapter.deserialize(
                 mapperAdapter.serialize(response.headers()),
                 headerType);

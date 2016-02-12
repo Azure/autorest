@@ -15,13 +15,13 @@ import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.ServiceResponseEmptyCallback;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.http.models.Error;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
-import retrofit.Call;
-import retrofit.Response;
-import retrofit.Retrofit;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -53,7 +53,7 @@ public final class HttpServerFailureOperationsImpl implements HttpServerFailureO
      */
     public ServiceResponse<Error> head501() throws ErrorException, IOException {
         Call<Void> call = service.head501();
-        return head501Delegate(call.execute(), null);
+        return head501Delegate(call.execute());
     }
 
     /**
@@ -66,9 +66,9 @@ public final class HttpServerFailureOperationsImpl implements HttpServerFailureO
         Call<Void> call = service.head501();
         call.enqueue(new ServiceResponseEmptyCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<Void> response, Retrofit retrofit) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
                 try {
-                    serviceCallback.success(head501Delegate(response, retrofit));
+                    serviceCallback.success(head501Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -77,10 +77,10 @@ public final class HttpServerFailureOperationsImpl implements HttpServerFailureO
         return call;
     }
 
-    private ServiceResponse<Error> head501Delegate(Response<Void> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Error> head501Delegate(Response<Void> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .buildEmpty(response, retrofit);
+                .buildEmpty(response);
     }
 
     /**
@@ -92,7 +92,7 @@ public final class HttpServerFailureOperationsImpl implements HttpServerFailureO
      */
     public ServiceResponse<Error> get501() throws ErrorException, IOException {
         Call<ResponseBody> call = service.get501();
-        return get501Delegate(call.execute(), null);
+        return get501Delegate(call.execute());
     }
 
     /**
@@ -105,9 +105,9 @@ public final class HttpServerFailureOperationsImpl implements HttpServerFailureO
         Call<ResponseBody> call = service.get501();
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(get501Delegate(response, retrofit));
+                    serviceCallback.success(get501Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -116,10 +116,10 @@ public final class HttpServerFailureOperationsImpl implements HttpServerFailureO
         return call;
     }
 
-    private ServiceResponse<Error> get501Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Error> get501Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -132,7 +132,7 @@ public final class HttpServerFailureOperationsImpl implements HttpServerFailureO
      */
     public ServiceResponse<Error> post505(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.post505(booleanValue);
-        return post505Delegate(call.execute(), null);
+        return post505Delegate(call.execute());
     }
 
     /**
@@ -146,9 +146,9 @@ public final class HttpServerFailureOperationsImpl implements HttpServerFailureO
         Call<ResponseBody> call = service.post505(booleanValue);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(post505Delegate(response, retrofit));
+                    serviceCallback.success(post505Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -157,10 +157,10 @@ public final class HttpServerFailureOperationsImpl implements HttpServerFailureO
         return call;
     }
 
-    private ServiceResponse<Error> post505Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Error> post505Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -173,7 +173,7 @@ public final class HttpServerFailureOperationsImpl implements HttpServerFailureO
      */
     public ServiceResponse<Error> delete505(Boolean booleanValue) throws ErrorException, IOException {
         Call<ResponseBody> call = service.delete505(booleanValue);
-        return delete505Delegate(call.execute(), null);
+        return delete505Delegate(call.execute());
     }
 
     /**
@@ -187,9 +187,9 @@ public final class HttpServerFailureOperationsImpl implements HttpServerFailureO
         Call<ResponseBody> call = service.delete505(booleanValue);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(delete505Delegate(response, retrofit));
+                    serviceCallback.success(delete505Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -198,10 +198,10 @@ public final class HttpServerFailureOperationsImpl implements HttpServerFailureO
         return call;
     }
 
-    private ServiceResponse<Error> delete505Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Error> delete505Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
 }

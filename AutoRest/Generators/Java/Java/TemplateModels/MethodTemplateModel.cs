@@ -523,7 +523,7 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                return this.Name + "Delegate(call.execute(), null)";
+                return this.Name + "Delegate(call.execute())";
             }
         }
 
@@ -531,7 +531,7 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                return string.Format(CultureInfo.InvariantCulture, "serviceCallback.success({0}Delegate(response, retrofit));", this.Name);
+                return string.Format(CultureInfo.InvariantCulture, "serviceCallback.success({0}Delegate(response));", this.Name);
             }
         }
 
@@ -541,11 +541,11 @@ namespace Microsoft.Rest.Generator.Java
             {
                 HashSet<string> imports = new HashSet<string>();
                 // static imports
-                imports.Add("retrofit.Call");
-                imports.Add("retrofit.http.Headers");
+                imports.Add("retrofit2.Call");
+                imports.Add("retrofit2.http.Headers");
                 if (this.HttpMethod != HttpMethod.Head)
                 {
-                    imports.Add("com.squareup.okhttp.ResponseBody");
+                    imports.Add("okhttp3.ResponseBody");
                 }
                 imports.Add("com.microsoft.rest." + OperationResponseType);
                 imports.Add("com.microsoft.rest.ServiceCallback");
@@ -583,12 +583,12 @@ namespace Microsoft.Rest.Generator.Java
             {
                 HashSet<string> imports = new HashSet<string>();
                 // static imports
-                imports.Add("retrofit.Call");
-                imports.Add("retrofit.Response");
-                imports.Add("retrofit.Retrofit");
+                imports.Add("retrofit2.Call");
+                imports.Add("retrofit2.Response");
+                imports.Add("retrofit2.Retrofit");
                 if (this.HttpMethod != HttpMethod.Head)
                 {
-                    imports.Add("com.squareup.okhttp.ResponseBody");
+                    imports.Add("okhttp3.ResponseBody");
                 }
                 imports.Add("com.microsoft.rest." + OperationResponseType);
                 imports.Add(RuntimeBasePackage + "." + ResponseBuilder);

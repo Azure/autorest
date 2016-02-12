@@ -8,7 +8,7 @@
 package com.microsoft.azure;
 
 import com.microsoft.rest.AutoRestException;
-import retrofit.Response;
+import retrofit2.Response;
 
 /**
  * Exception thrown for an invalid response with custom error information.
@@ -96,7 +96,7 @@ public class CloudException extends AutoRestException {
     @Override
     public String toString() {
         String message = super.toString();
-        if (body.getMessage() != null) {
+        if (body != null && body.getMessage() != null) {
             message = message + ": " + body.getMessage();
         }
         return message;

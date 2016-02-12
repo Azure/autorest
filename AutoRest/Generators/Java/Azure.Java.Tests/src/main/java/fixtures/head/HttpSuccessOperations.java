@@ -14,10 +14,10 @@ import com.microsoft.azure.CloudException;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import java.io.IOException;
-import retrofit.Call;
-import retrofit.http.HEAD;
-import retrofit.http.Header;
-import retrofit.http.Headers;
+import retrofit2.Call;
+import retrofit2.http.HEAD;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
 
 /**
  * An instance of this class provides access to all the operations defined

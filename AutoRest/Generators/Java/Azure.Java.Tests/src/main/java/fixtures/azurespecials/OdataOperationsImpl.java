@@ -15,13 +15,13 @@ import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.azurespecials.models.ErrorException;
 import fixtures.azurespecials.models.OdataFilter;
 import java.io.IOException;
-import retrofit.Call;
-import retrofit.Response;
-import retrofit.Retrofit;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -56,7 +56,7 @@ public final class OdataOperationsImpl implements OdataOperations {
      */
     public ServiceResponse<Void> getWithFilter(OdataFilter filter, Integer top, String orderby) throws ErrorException, IOException {
         Call<ResponseBody> call = service.getWithFilter(client.getMapperAdapter().serializeRaw(filter), top, orderby, this.client.getAcceptLanguage());
-        return getWithFilterDelegate(call.execute(), null);
+        return getWithFilterDelegate(call.execute());
     }
 
     /**
@@ -72,9 +72,9 @@ public final class OdataOperationsImpl implements OdataOperations {
         Call<ResponseBody> call = service.getWithFilter(client.getMapperAdapter().serializeRaw(filter), top, orderby, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getWithFilterDelegate(response, retrofit));
+                    serviceCallback.success(getWithFilterDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -83,11 +83,11 @@ public final class OdataOperationsImpl implements OdataOperations {
         return call;
     }
 
-    private ServiceResponse<Void> getWithFilterDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> getWithFilterDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new AzureServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
 }

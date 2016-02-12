@@ -11,19 +11,20 @@
 package fixtures.report;
 
 import com.microsoft.rest.ServiceClient;
-import com.squareup.okhttp.OkHttpClient;
-import retrofit.Retrofit;
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
+import okhttp3.logging.HttpLoggingInterceptor.Level;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.report.models.ErrorException;
 import java.io.IOException;
 import java.util.Map;
-import retrofit.Call;
-import retrofit.Response;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Response;
 
 /**
  * Initializes a new instance of the AutoRestReportService class.
@@ -68,18 +69,37 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
      * Initializes an instance of AutoRestReportService client.
      *
      * @param baseUri the base URI of the host
-     * @param client the {@link OkHttpClient} client to use for REST calls
+     * @param clientBuilder the builder for building up an {@link OkHttpClient}
      * @param retrofitBuilder the builder for building up a {@link Retrofit}
      */
-    public AutoRestReportServiceImpl(String baseUri, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
-        super(client, retrofitBuilder);
+    public AutoRestReportServiceImpl(String baseUri, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
+        super(clientBuilder, retrofitBuilder);
         this.baseUri = baseUri;
         initialize();
     }
 
-    private void initialize() {
+    @Override
+    protected void initialize() {
+        super.initialize();
         this.retrofitBuilder.baseUrl(baseUri);
-        service = this.retrofitBuilder.build().create(AutoRestReportServiceService.class);
+        initializeService();
+    }
+
+    private void initializeService() {
+        service = this.retrofitBuilder.client(this.clientBuilder.build())
+                .build()
+                .create(AutoRestReportServiceService.class);
+    }
+
+    /**
+     * Sets the logging level for OkHttp client.
+     *
+     * @param logLevel the logging level enum
+     */
+    @Override
+    public void setLogLevel(Level logLevel) {
+        super.setLogLevel(logLevel);
+        initializeService();
     }
 
     /**
@@ -91,7 +111,7 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
      */
     public ServiceResponse<Map<String, Integer>> getReport() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getReport();
-        return getReportDelegate(call.execute(), null);
+        return getReportDelegate(call.execute());
     }
 
     /**
@@ -104,9 +124,9 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
         Call<ResponseBody> call = service.getReport();
         call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getReportDelegate(response, retrofit));
+                    serviceCallback.success(getReportDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -115,11 +135,11 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
         return call;
     }
 
-    private ServiceResponse<Map<String, Integer>> getReportDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Map<String, Integer>> getReportDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Map<String, Integer>, ErrorException>()
                 .register(200, new TypeToken<Map<String, Integer>>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
 }

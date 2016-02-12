@@ -17,9 +17,9 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseEmptyCallback;
 import java.io.IOException;
-import retrofit.Call;
-import retrofit.Response;
-import retrofit.Retrofit;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -51,7 +51,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      */
     public ServiceResponse<Boolean> head200() throws CloudException, IOException {
         Call<Void> call = service.head200(this.client.getAcceptLanguage());
-        return head200Delegate(call.execute(), null);
+        return head200Delegate(call.execute());
     }
 
     /**
@@ -64,9 +64,9 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
         Call<Void> call = service.head200(this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseEmptyCallback<Boolean>(serviceCallback) {
             @Override
-            public void onResponse(Response<Void> response, Retrofit retrofit) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
                 try {
-                    serviceCallback.success(head200Delegate(response, retrofit));
+                    serviceCallback.success(head200Delegate(response));
                 } catch (CloudException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -75,12 +75,12 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
         return call;
     }
 
-    private ServiceResponse<Boolean> head200Delegate(Response<Void> response, Retrofit retrofit) throws CloudException, IOException {
+    private ServiceResponse<Boolean> head200Delegate(Response<Void> response) throws CloudException, IOException {
         return new AzureServiceResponseBuilder<Boolean, CloudException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(404, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
-                .buildEmpty(response, retrofit);
+                .buildEmpty(response);
     }
 
     /**
@@ -92,7 +92,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      */
     public ServiceResponse<Boolean> head204() throws CloudException, IOException {
         Call<Void> call = service.head204(this.client.getAcceptLanguage());
-        return head204Delegate(call.execute(), null);
+        return head204Delegate(call.execute());
     }
 
     /**
@@ -105,9 +105,9 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
         Call<Void> call = service.head204(this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseEmptyCallback<Boolean>(serviceCallback) {
             @Override
-            public void onResponse(Response<Void> response, Retrofit retrofit) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
                 try {
-                    serviceCallback.success(head204Delegate(response, retrofit));
+                    serviceCallback.success(head204Delegate(response));
                 } catch (CloudException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -116,12 +116,12 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
         return call;
     }
 
-    private ServiceResponse<Boolean> head204Delegate(Response<Void> response, Retrofit retrofit) throws CloudException, IOException {
+    private ServiceResponse<Boolean> head204Delegate(Response<Void> response) throws CloudException, IOException {
         return new AzureServiceResponseBuilder<Boolean, CloudException>()
                 .register(204, new TypeToken<Void>() { }.getType())
                 .register(404, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
-                .buildEmpty(response, retrofit);
+                .buildEmpty(response);
     }
 
     /**
@@ -133,7 +133,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      */
     public ServiceResponse<Boolean> head404() throws CloudException, IOException {
         Call<Void> call = service.head404(this.client.getAcceptLanguage());
-        return head404Delegate(call.execute(), null);
+        return head404Delegate(call.execute());
     }
 
     /**
@@ -146,9 +146,9 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
         Call<Void> call = service.head404(this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseEmptyCallback<Boolean>(serviceCallback) {
             @Override
-            public void onResponse(Response<Void> response, Retrofit retrofit) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
                 try {
-                    serviceCallback.success(head404Delegate(response, retrofit));
+                    serviceCallback.success(head404Delegate(response));
                 } catch (CloudException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -157,12 +157,12 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
         return call;
     }
 
-    private ServiceResponse<Boolean> head404Delegate(Response<Void> response, Retrofit retrofit) throws CloudException, IOException {
+    private ServiceResponse<Boolean> head404Delegate(Response<Void> response) throws CloudException, IOException {
         return new AzureServiceResponseBuilder<Boolean, CloudException>()
                 .register(204, new TypeToken<Void>() { }.getType())
                 .register(404, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
-                .buildEmpty(response, retrofit);
+                .buildEmpty(response);
     }
 
 }

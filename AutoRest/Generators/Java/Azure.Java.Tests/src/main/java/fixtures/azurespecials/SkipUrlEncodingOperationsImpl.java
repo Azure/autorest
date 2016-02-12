@@ -15,12 +15,12 @@ import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.azurespecials.models.ErrorException;
 import java.io.IOException;
-import retrofit.Call;
-import retrofit.Response;
-import retrofit.Retrofit;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -57,7 +57,7 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
             throw new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getMethodPathValid(unencodedPathParam, this.client.getAcceptLanguage());
-        return getMethodPathValidDelegate(call.execute(), null);
+        return getMethodPathValidDelegate(call.execute());
     }
 
     /**
@@ -75,9 +75,9 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
         Call<ResponseBody> call = service.getMethodPathValid(unencodedPathParam, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getMethodPathValidDelegate(response, retrofit));
+                    serviceCallback.success(getMethodPathValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -86,11 +86,11 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
         return call;
     }
 
-    private ServiceResponse<Void> getMethodPathValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> getMethodPathValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -107,7 +107,7 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
             throw new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getPathPathValid(unencodedPathParam, this.client.getAcceptLanguage());
-        return getPathPathValidDelegate(call.execute(), null);
+        return getPathPathValidDelegate(call.execute());
     }
 
     /**
@@ -125,9 +125,9 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
         Call<ResponseBody> call = service.getPathPathValid(unencodedPathParam, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getPathPathValidDelegate(response, retrofit));
+                    serviceCallback.success(getPathPathValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -136,11 +136,11 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
         return call;
     }
 
-    private ServiceResponse<Void> getPathPathValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> getPathPathValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -157,7 +157,7 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
             throw new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getSwaggerPathValid(unencodedPathParam, this.client.getAcceptLanguage());
-        return getSwaggerPathValidDelegate(call.execute(), null);
+        return getSwaggerPathValidDelegate(call.execute());
     }
 
     /**
@@ -175,9 +175,9 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
         Call<ResponseBody> call = service.getSwaggerPathValid(unencodedPathParam, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getSwaggerPathValidDelegate(response, retrofit));
+                    serviceCallback.success(getSwaggerPathValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -186,11 +186,11 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
         return call;
     }
 
-    private ServiceResponse<Void> getSwaggerPathValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> getSwaggerPathValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -207,7 +207,7 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
             throw new IllegalArgumentException("Parameter q1 is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getMethodQueryValid(q1, this.client.getAcceptLanguage());
-        return getMethodQueryValidDelegate(call.execute(), null);
+        return getMethodQueryValidDelegate(call.execute());
     }
 
     /**
@@ -225,9 +225,9 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
         Call<ResponseBody> call = service.getMethodQueryValid(q1, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getMethodQueryValidDelegate(response, retrofit));
+                    serviceCallback.success(getMethodQueryValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -236,11 +236,11 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
         return call;
     }
 
-    private ServiceResponse<Void> getMethodQueryValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> getMethodQueryValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -253,7 +253,7 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
      */
     public ServiceResponse<Void> getMethodQueryNull(String q1) throws ErrorException, IOException {
         Call<ResponseBody> call = service.getMethodQueryNull(q1, this.client.getAcceptLanguage());
-        return getMethodQueryNullDelegate(call.execute(), null);
+        return getMethodQueryNullDelegate(call.execute());
     }
 
     /**
@@ -267,9 +267,9 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
         Call<ResponseBody> call = service.getMethodQueryNull(q1, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getMethodQueryNullDelegate(response, retrofit));
+                    serviceCallback.success(getMethodQueryNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -278,11 +278,11 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
         return call;
     }
 
-    private ServiceResponse<Void> getMethodQueryNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> getMethodQueryNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new AzureServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -299,7 +299,7 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
             throw new IllegalArgumentException("Parameter q1 is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getPathQueryValid(q1, this.client.getAcceptLanguage());
-        return getPathQueryValidDelegate(call.execute(), null);
+        return getPathQueryValidDelegate(call.execute());
     }
 
     /**
@@ -317,9 +317,9 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
         Call<ResponseBody> call = service.getPathQueryValid(q1, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getPathQueryValidDelegate(response, retrofit));
+                    serviceCallback.success(getPathQueryValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -328,11 +328,11 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
         return call;
     }
 
-    private ServiceResponse<Void> getPathQueryValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> getPathQueryValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -349,7 +349,7 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
             throw new IllegalArgumentException("Parameter q1 is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getSwaggerQueryValid(q1, this.client.getAcceptLanguage());
-        return getSwaggerQueryValidDelegate(call.execute(), null);
+        return getSwaggerQueryValidDelegate(call.execute());
     }
 
     /**
@@ -367,9 +367,9 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
         Call<ResponseBody> call = service.getSwaggerQueryValid(q1, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getSwaggerQueryValidDelegate(response, retrofit));
+                    serviceCallback.success(getSwaggerQueryValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -378,11 +378,11 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
         return call;
     }
 
-    private ServiceResponse<Void> getSwaggerQueryValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> getSwaggerQueryValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
 }

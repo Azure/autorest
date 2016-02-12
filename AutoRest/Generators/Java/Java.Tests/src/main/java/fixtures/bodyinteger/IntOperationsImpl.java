@@ -15,12 +15,12 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.bodyinteger.models.ErrorException;
 import java.io.IOException;
-import retrofit.Call;
-import retrofit.Response;
-import retrofit.Retrofit;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -52,7 +52,7 @@ public final class IntOperationsImpl implements IntOperations {
      */
     public ServiceResponse<Integer> getNull() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getNull();
-        return getNullDelegate(call.execute(), null);
+        return getNullDelegate(call.execute());
     }
 
     /**
@@ -65,9 +65,9 @@ public final class IntOperationsImpl implements IntOperations {
         Call<ResponseBody> call = service.getNull();
         call.enqueue(new ServiceResponseCallback<Integer>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getNullDelegate(response, retrofit));
+                    serviceCallback.success(getNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -76,11 +76,11 @@ public final class IntOperationsImpl implements IntOperations {
         return call;
     }
 
-    private ServiceResponse<Integer> getNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Integer> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Integer, ErrorException>()
                 .register(200, new TypeToken<Integer>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -92,7 +92,7 @@ public final class IntOperationsImpl implements IntOperations {
      */
     public ServiceResponse<Integer> getInvalid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getInvalid();
-        return getInvalidDelegate(call.execute(), null);
+        return getInvalidDelegate(call.execute());
     }
 
     /**
@@ -105,9 +105,9 @@ public final class IntOperationsImpl implements IntOperations {
         Call<ResponseBody> call = service.getInvalid();
         call.enqueue(new ServiceResponseCallback<Integer>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getInvalidDelegate(response, retrofit));
+                    serviceCallback.success(getInvalidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -116,11 +116,11 @@ public final class IntOperationsImpl implements IntOperations {
         return call;
     }
 
-    private ServiceResponse<Integer> getInvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Integer> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Integer, ErrorException>()
                 .register(200, new TypeToken<Integer>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -132,7 +132,7 @@ public final class IntOperationsImpl implements IntOperations {
      */
     public ServiceResponse<Integer> getOverflowInt32() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getOverflowInt32();
-        return getOverflowInt32Delegate(call.execute(), null);
+        return getOverflowInt32Delegate(call.execute());
     }
 
     /**
@@ -145,9 +145,9 @@ public final class IntOperationsImpl implements IntOperations {
         Call<ResponseBody> call = service.getOverflowInt32();
         call.enqueue(new ServiceResponseCallback<Integer>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getOverflowInt32Delegate(response, retrofit));
+                    serviceCallback.success(getOverflowInt32Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -156,11 +156,11 @@ public final class IntOperationsImpl implements IntOperations {
         return call;
     }
 
-    private ServiceResponse<Integer> getOverflowInt32Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Integer> getOverflowInt32Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Integer, ErrorException>()
                 .register(200, new TypeToken<Integer>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -172,7 +172,7 @@ public final class IntOperationsImpl implements IntOperations {
      */
     public ServiceResponse<Integer> getUnderflowInt32() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getUnderflowInt32();
-        return getUnderflowInt32Delegate(call.execute(), null);
+        return getUnderflowInt32Delegate(call.execute());
     }
 
     /**
@@ -185,9 +185,9 @@ public final class IntOperationsImpl implements IntOperations {
         Call<ResponseBody> call = service.getUnderflowInt32();
         call.enqueue(new ServiceResponseCallback<Integer>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getUnderflowInt32Delegate(response, retrofit));
+                    serviceCallback.success(getUnderflowInt32Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -196,11 +196,11 @@ public final class IntOperationsImpl implements IntOperations {
         return call;
     }
 
-    private ServiceResponse<Integer> getUnderflowInt32Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Integer> getUnderflowInt32Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Integer, ErrorException>()
                 .register(200, new TypeToken<Integer>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -212,7 +212,7 @@ public final class IntOperationsImpl implements IntOperations {
      */
     public ServiceResponse<Long> getOverflowInt64() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getOverflowInt64();
-        return getOverflowInt64Delegate(call.execute(), null);
+        return getOverflowInt64Delegate(call.execute());
     }
 
     /**
@@ -225,9 +225,9 @@ public final class IntOperationsImpl implements IntOperations {
         Call<ResponseBody> call = service.getOverflowInt64();
         call.enqueue(new ServiceResponseCallback<Long>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getOverflowInt64Delegate(response, retrofit));
+                    serviceCallback.success(getOverflowInt64Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -236,11 +236,11 @@ public final class IntOperationsImpl implements IntOperations {
         return call;
     }
 
-    private ServiceResponse<Long> getOverflowInt64Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Long> getOverflowInt64Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Long, ErrorException>()
                 .register(200, new TypeToken<Long>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -252,7 +252,7 @@ public final class IntOperationsImpl implements IntOperations {
      */
     public ServiceResponse<Long> getUnderflowInt64() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getUnderflowInt64();
-        return getUnderflowInt64Delegate(call.execute(), null);
+        return getUnderflowInt64Delegate(call.execute());
     }
 
     /**
@@ -265,9 +265,9 @@ public final class IntOperationsImpl implements IntOperations {
         Call<ResponseBody> call = service.getUnderflowInt64();
         call.enqueue(new ServiceResponseCallback<Long>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getUnderflowInt64Delegate(response, retrofit));
+                    serviceCallback.success(getUnderflowInt64Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -276,11 +276,11 @@ public final class IntOperationsImpl implements IntOperations {
         return call;
     }
 
-    private ServiceResponse<Long> getUnderflowInt64Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Long> getUnderflowInt64Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Long, ErrorException>()
                 .register(200, new TypeToken<Long>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -293,7 +293,7 @@ public final class IntOperationsImpl implements IntOperations {
      */
     public ServiceResponse<Void> putMax32(int intBody) throws ErrorException, IOException {
         Call<ResponseBody> call = service.putMax32(intBody);
-        return putMax32Delegate(call.execute(), null);
+        return putMax32Delegate(call.execute());
     }
 
     /**
@@ -307,9 +307,9 @@ public final class IntOperationsImpl implements IntOperations {
         Call<ResponseBody> call = service.putMax32(intBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putMax32Delegate(response, retrofit));
+                    serviceCallback.success(putMax32Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -318,11 +318,11 @@ public final class IntOperationsImpl implements IntOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putMax32Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> putMax32Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -335,7 +335,7 @@ public final class IntOperationsImpl implements IntOperations {
      */
     public ServiceResponse<Void> putMax64(long intBody) throws ErrorException, IOException {
         Call<ResponseBody> call = service.putMax64(intBody);
-        return putMax64Delegate(call.execute(), null);
+        return putMax64Delegate(call.execute());
     }
 
     /**
@@ -349,9 +349,9 @@ public final class IntOperationsImpl implements IntOperations {
         Call<ResponseBody> call = service.putMax64(intBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putMax64Delegate(response, retrofit));
+                    serviceCallback.success(putMax64Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -360,11 +360,11 @@ public final class IntOperationsImpl implements IntOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putMax64Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> putMax64Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -377,7 +377,7 @@ public final class IntOperationsImpl implements IntOperations {
      */
     public ServiceResponse<Void> putMin32(int intBody) throws ErrorException, IOException {
         Call<ResponseBody> call = service.putMin32(intBody);
-        return putMin32Delegate(call.execute(), null);
+        return putMin32Delegate(call.execute());
     }
 
     /**
@@ -391,9 +391,9 @@ public final class IntOperationsImpl implements IntOperations {
         Call<ResponseBody> call = service.putMin32(intBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putMin32Delegate(response, retrofit));
+                    serviceCallback.success(putMin32Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -402,11 +402,11 @@ public final class IntOperationsImpl implements IntOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putMin32Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> putMin32Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -419,7 +419,7 @@ public final class IntOperationsImpl implements IntOperations {
      */
     public ServiceResponse<Void> putMin64(long intBody) throws ErrorException, IOException {
         Call<ResponseBody> call = service.putMin64(intBody);
-        return putMin64Delegate(call.execute(), null);
+        return putMin64Delegate(call.execute());
     }
 
     /**
@@ -433,9 +433,9 @@ public final class IntOperationsImpl implements IntOperations {
         Call<ResponseBody> call = service.putMin64(intBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putMin64Delegate(response, retrofit));
+                    serviceCallback.success(putMin64Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -444,11 +444,11 @@ public final class IntOperationsImpl implements IntOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putMin64Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> putMin64Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
 }

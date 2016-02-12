@@ -15,13 +15,13 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.bodystring.models.Colors;
 import fixtures.bodystring.models.ErrorException;
 import java.io.IOException;
-import retrofit.Call;
-import retrofit.Response;
-import retrofit.Retrofit;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -53,7 +53,7 @@ public final class EnumOperationsImpl implements EnumOperations {
      */
     public ServiceResponse<Colors> getNotExpandable() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getNotExpandable();
-        return getNotExpandableDelegate(call.execute(), null);
+        return getNotExpandableDelegate(call.execute());
     }
 
     /**
@@ -66,9 +66,9 @@ public final class EnumOperationsImpl implements EnumOperations {
         Call<ResponseBody> call = service.getNotExpandable();
         call.enqueue(new ServiceResponseCallback<Colors>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getNotExpandableDelegate(response, retrofit));
+                    serviceCallback.success(getNotExpandableDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -77,11 +77,11 @@ public final class EnumOperationsImpl implements EnumOperations {
         return call;
     }
 
-    private ServiceResponse<Colors> getNotExpandableDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Colors> getNotExpandableDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Colors, ErrorException>()
                 .register(200, new TypeToken<Colors>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -98,7 +98,7 @@ public final class EnumOperationsImpl implements EnumOperations {
             throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
         Call<ResponseBody> call = service.putNotExpandable(stringBody);
-        return putNotExpandableDelegate(call.execute(), null);
+        return putNotExpandableDelegate(call.execute());
     }
 
     /**
@@ -116,9 +116,9 @@ public final class EnumOperationsImpl implements EnumOperations {
         Call<ResponseBody> call = service.putNotExpandable(stringBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putNotExpandableDelegate(response, retrofit));
+                    serviceCallback.success(putNotExpandableDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -127,11 +127,11 @@ public final class EnumOperationsImpl implements EnumOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putNotExpandableDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> putNotExpandableDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
 }

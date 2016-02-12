@@ -8,7 +8,7 @@
 package com.microsoft.azure;
 
 import com.microsoft.rest.ServiceResponse;
-import retrofit.Response;
+import retrofit2.Response;
 
 /**
  * A standard service response including request ID.

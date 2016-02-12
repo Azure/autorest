@@ -7,10 +7,10 @@
 
 package com.microsoft.azure;
 
-import com.squareup.okhttp.Headers;
-import com.squareup.okhttp.Interceptor;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
+import okhttp3.Headers;
+import okhttp3.Interceptor;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -20,7 +20,7 @@ import java.util.Map;
 
 /**
  * An instance of this class enables adding custom headers in client requests
- * when added to the {@link com.squareup.okhttp.OkHttpClient} interceptors.
+ * when added to the {@link okhttp3.OkHttpClient} interceptors.
  */
 public class CustomHeaderInterceptor implements Interceptor {
     /**

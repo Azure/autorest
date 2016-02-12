@@ -11,10 +11,11 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
 import com.fasterxml.jackson.databind.ObjectWriter;
-import com.squareup.okhttp.MediaType;
-import com.squareup.okhttp.RequestBody;
-import com.squareup.okhttp.ResponseBody;
-import retrofit.Converter;
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+import retrofit2.Converter;
+import retrofit2.Retrofit;
 
 import java.io.IOException;
 import java.io.Reader;
@@ -22,7 +23,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Type;
 
 /**
- * A similar implementation of {@link retrofit.JacksonConverterFactory} which supports polymorphism.
+ * A similar implementation of {@link retrofit2.converter.jackson.JacksonConverterFactory} which supports polymorphism.
  */
 public final class JacksonConverterFactory extends Converter.Factory {
     /**
@@ -58,14 +59,15 @@ public final class JacksonConverterFactory extends Converter.Factory {
     }
 
     @Override
-    public Converter<ResponseBody, ?> fromResponseBody(Type type, Annotation[] annotations) {
+    public Converter<ResponseBody, ?> responseBodyConverter(Type type, Annotation[] annotations, Retrofit retrofit) {
         JavaType javaType = mapper.getTypeFactory().constructType(type);
         ObjectReader reader = mapper.reader(javaType);
         return new JacksonResponseBodyConverter<>(reader);
     }
 
     @Override
-    public Converter<?, RequestBody> toRequestBody(Type type, Annotation[] annotations) {
+    public Converter<?, RequestBody> requestBodyConverter(Type type,
+            Annotation[] parameterAnnotations, Annotation[] methodAnnotations, Retrofit retrofit) {
         ObjectWriter writer = mapper.writer();
         return new JacksonRequestBodyConverter<>(writer);
     }

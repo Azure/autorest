@@ -11,7 +11,7 @@
 package fixtures.bodyboolean.models;
 
 import com.microsoft.rest.AutoRestException;
-import retrofit.Response;
+import retrofit2.Response;
 
 /**
  * Exception thrown for an invalid response with Error information.

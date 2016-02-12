@@ -11,8 +11,8 @@
 package fixtures.bodydictionary;
 
 import com.microsoft.rest.ServiceClient;
-import com.squareup.okhttp.OkHttpClient;
-import retrofit.Retrofit;
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestSwaggerBATdictionaryService class.
@@ -36,7 +36,7 @@ public final class AutoRestSwaggerBATdictionaryServiceImpl extends ServiceClient
      * @return the DictionaryOperations object.
      */
     public DictionaryOperations getDictionaryOperations() {
-        return new DictionaryOperationsImpl(this.retrofitBuilder.build(), this);
+        return new DictionaryOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -61,16 +61,18 @@ public final class AutoRestSwaggerBATdictionaryServiceImpl extends ServiceClient
      * Initializes an instance of AutoRestSwaggerBATdictionaryService client.
      *
      * @param baseUri the base URI of the host
-     * @param client the {@link OkHttpClient} client to use for REST calls
+     * @param clientBuilder the builder for building up an {@link OkHttpClient}
      * @param retrofitBuilder the builder for building up a {@link Retrofit}
      */
-    public AutoRestSwaggerBATdictionaryServiceImpl(String baseUri, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
-        super(client, retrofitBuilder);
+    public AutoRestSwaggerBATdictionaryServiceImpl(String baseUri, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
+        super(clientBuilder, retrofitBuilder);
         this.baseUri = baseUri;
         initialize();
     }
 
-    private void initialize() {
+    @Override
+    protected void initialize() {
+        super.initialize();
         this.retrofitBuilder.baseUrl(baseUri);
     }
 }

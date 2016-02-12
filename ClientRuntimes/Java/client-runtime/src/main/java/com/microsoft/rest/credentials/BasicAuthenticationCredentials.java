@@ -7,7 +7,7 @@
 
 package com.microsoft.rest.credentials;
 
-import com.squareup.okhttp.OkHttpClient;
+import okhttp3.OkHttpClient;
 
 /**
  * Basic Auth credentials for use with a REST Service Client.
@@ -54,7 +54,7 @@ public class BasicAuthenticationCredentials implements ServiceClientCredentials 
     }
 
     @Override
-    public void applyCredentialsFilter(OkHttpClient client) {
-        client.interceptors().add(new BasicAuthenticationCredentialsInterceptor(this));
+    public void applyCredentialsFilter(OkHttpClient.Builder clientBuilder) {
+        clientBuilder.interceptors().add(new BasicAuthenticationCredentialsInterceptor(this));
     }
 }

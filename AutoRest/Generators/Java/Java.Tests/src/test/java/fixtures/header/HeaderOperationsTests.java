@@ -3,7 +3,7 @@ package fixtures.header;
 import com.microsoft.rest.DateTimeRfc1123;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.squareup.okhttp.Headers;
+import okhttp3.Headers;
 import fixtures.header.models.ErrorException;
 import fixtures.header.models.GreyscaleColors;
 import org.apache.commons.codec.binary.Base64;

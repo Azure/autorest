@@ -16,13 +16,13 @@ import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.Validator;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Fish;
 import java.io.IOException;
-import retrofit.Call;
-import retrofit.Response;
-import retrofit.Retrofit;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -54,7 +54,7 @@ public final class PolymorphismOperationsImpl implements PolymorphismOperations 
      */
     public ServiceResponse<Fish> getValid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getValid();
-        return getValidDelegate(call.execute(), null);
+        return getValidDelegate(call.execute());
     }
 
     /**
@@ -67,9 +67,9 @@ public final class PolymorphismOperationsImpl implements PolymorphismOperations 
         Call<ResponseBody> call = service.getValid();
         call.enqueue(new ServiceResponseCallback<Fish>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getValidDelegate(response, retrofit));
+                    serviceCallback.success(getValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -78,11 +78,11 @@ public final class PolymorphismOperationsImpl implements PolymorphismOperations 
         return call;
     }
 
-    private ServiceResponse<Fish> getValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Fish> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Fish, ErrorException>()
                 .register(200, new TypeToken<Fish>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -132,7 +132,7 @@ public final class PolymorphismOperationsImpl implements PolymorphismOperations 
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putValid(complexBody);
-        return putValidDelegate(call.execute(), null);
+        return putValidDelegate(call.execute());
     }
 
     /**
@@ -183,9 +183,9 @@ public final class PolymorphismOperationsImpl implements PolymorphismOperations 
         Call<ResponseBody> call = service.putValid(complexBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putValidDelegate(response, retrofit));
+                    serviceCallback.success(putValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -194,11 +194,11 @@ public final class PolymorphismOperationsImpl implements PolymorphismOperations 
         return call;
     }
 
-    private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -241,7 +241,7 @@ public final class PolymorphismOperationsImpl implements PolymorphismOperations 
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putValidMissingRequired(complexBody);
-        return putValidMissingRequiredDelegate(call.execute(), null);
+        return putValidMissingRequiredDelegate(call.execute());
     }
 
     /**
@@ -285,9 +285,9 @@ public final class PolymorphismOperationsImpl implements PolymorphismOperations 
         Call<ResponseBody> call = service.putValidMissingRequired(complexBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putValidMissingRequiredDelegate(response, retrofit));
+                    serviceCallback.success(putValidMissingRequiredDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -296,11 +296,11 @@ public final class PolymorphismOperationsImpl implements PolymorphismOperations 
         return call;
     }
 
-    private ServiceResponse<Void> putValidMissingRequiredDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> putValidMissingRequiredDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
 }
