@@ -9,9 +9,9 @@ package com.microsoft.rest;
 
 import com.microsoft.rest.credentials.BasicAuthenticationCredentials;
 import com.microsoft.rest.credentials.TokenCredentials;
-import com.squareup.okhttp.Interceptor;
-import com.squareup.okhttp.Protocol;
-import com.squareup.okhttp.Response;
+import okhttp3.Interceptor;
+import okhttp3.Protocol;
+import okhttp3.Response;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -22,7 +22,7 @@ public class CredentialsTests {
     public void basicCredentialsTest() throws Exception {
         ServiceClient serviceClient = new ServiceClient() { };
         BasicAuthenticationCredentials credentials = new BasicAuthenticationCredentials("user", "pass");
-        credentials.applyCredentialsFilter(serviceClient.client);
+        credentials.applyCredentialsFilter(serviceClient.clientBuilder);
         serviceClient.getClientInterceptors().add(new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {
@@ -39,9 +39,9 @@ public class CredentialsTests {
 
     @Test
     public void tokenCredentialsTest() throws Exception {
-        ServiceClient serviceClient = new ServiceClient() { };
+        ServiceClient serviceClient = new ServiceClient() {};
         TokenCredentials credentials = new TokenCredentials(null, "this_is_a_token");
-        credentials.applyCredentialsFilter(serviceClient.client);
+        credentials.applyCredentialsFilter(serviceClient.clientBuilder);
         serviceClient.getClientInterceptors().add(new Interceptor() {
             @Override
             public Response intercept(Chain chain) throws IOException {

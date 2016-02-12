@@ -1,41 +1,26 @@
 package fixtures.resourceflattening;
 
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.azure.serializer.AzureJacksonMapperAdapter;
-import com.squareup.okhttp.OkHttpClient;
-import fixtures.resourceflattening.models.FlattenedProduct;
-import fixtures.resourceflattening.models.Resource;
-import fixtures.resourceflattening.models.ResourceCollection;
+
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import retrofit.JacksonConverterFactory;
-import retrofit.Retrofit;
 
-import java.net.CookieManager;
-import java.net.CookiePolicy;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
+
+import fixtures.resourceflattening.models.FlattenedProduct;
+import fixtures.resourceflattening.models.Resource;
+import fixtures.resourceflattening.models.ResourceCollection;
 
 public class ResourceFlatteningTests {
     private static AutoRestResourceFlatteningTestService client;
 
     @BeforeClass
     public static void setup() {
-        OkHttpClient httpClient = new OkHttpClient();
-        CookieManager cookieManager = new CookieManager();
-        cookieManager.setCookiePolicy(CookiePolicy.ACCEPT_ALL);
-        httpClient.setCookieHandler(cookieManager);
-        Executor executor = Executors.newCachedThreadPool();
-        Retrofit.Builder builder = new Retrofit.Builder()
-                .addConverterFactory(JacksonConverterFactory.create(new AzureJacksonMapperAdapter().getObjectMapper()))
-                .callbackExecutor(executor);
-
-        client = new AutoRestResourceFlatteningTestServiceImpl("http://localhost.:3000", null, httpClient, builder);
+        client = new AutoRestResourceFlatteningTestServiceImpl("http://localhost.:3000", null);
         client.setLongRunningOperationRetryTimeout(0);
     }
 

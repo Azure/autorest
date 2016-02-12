@@ -96,7 +96,7 @@ public class CloudException extends AutoRestException {
     @Override
     public String toString() {
         String message = super.toString();
-        if (body.getMessage() != null) {
+        if (body != null && body.getMessage() != null) {
             message = message + ": " + body.getMessage();
         }
         return message;

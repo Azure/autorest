@@ -7,15 +7,13 @@
 
 package com.microsoft.azure;
 
+import com.microsoft.azure.serializer.AzureJacksonMapperAdapter;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.ServiceResponseWithHeaders;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
-import com.microsoft.azure.serializer.AzureJacksonMapperAdapter;
-import okhttp3.OkHttpClient;
-import okhttp3.ResponseBody;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -25,6 +23,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.OkHttpClient;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Response;
 import retrofit2.Retrofit;
@@ -60,11 +60,11 @@ public class AzureClient extends AzureServiceClient {
     /**
      * Initializes an instance of this class with customized client metadata.
      *
-     * @param client customized http client.
+     * @param clientBuilder customized http client.
      * @param retrofitBuilder customized retrofit builder
      */
-    public AzureClient(OkHttpClient client, Retrofit.Builder retrofitBuilder) {
-        super(client, retrofitBuilder);
+    public AzureClient(OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
+        super(clientBuilder, retrofitBuilder);
         this.mapperAdapter = new AzureJacksonMapperAdapter();
     }
 

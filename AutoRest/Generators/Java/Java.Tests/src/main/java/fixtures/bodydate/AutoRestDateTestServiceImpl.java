@@ -61,16 +61,18 @@ public final class AutoRestDateTestServiceImpl extends ServiceClient implements 
      * Initializes an instance of AutoRestDateTestService client.
      *
      * @param baseUri the base URI of the host
-     * @param client the {@link OkHttpClient} client to use for REST calls
+     * @param clientBuilder the builder for building up an {@link OkHttpClient}
      * @param retrofitBuilder the builder for building up a {@link Retrofit}
      */
-    public AutoRestDateTestServiceImpl(String baseUri, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
-        super(client, retrofitBuilder);
+    public AutoRestDateTestServiceImpl(String baseUri, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
+        super(clientBuilder, retrofitBuilder);
         this.baseUri = baseUri;
         initialize();
     }
 
-    private void initialize() {
+    @Override
+    protected void initialize() {
+        super.initialize();
         this.retrofitBuilder.baseUrl(baseUri);
     }
 }

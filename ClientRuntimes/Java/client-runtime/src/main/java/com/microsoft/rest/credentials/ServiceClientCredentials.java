@@ -17,7 +17,7 @@ public interface ServiceClientCredentials {
     /**
      * Apply the credentials to the HTTP client builder.
      *
-     * @param client the ServiceClient instance
+     * @param clientBuilder the builder for building up an {@link OkHttpClient}
      */
-    void applyCredentialsFilter(OkHttpClient client);
+    void applyCredentialsFilter(OkHttpClient.Builder clientBuilder);
 }

@@ -134,11 +134,11 @@ if(!property.IsReadOnly)
      *
      * @@param baseUri the base URI of the host
      * @@param credentials the management credentials for Azure
-     * @@param client the {@@link OkHttpClient} client to use for REST calls
+     * @@param clientBuilder the builder for building up an {@@link OkHttpClient}
      * @@param retrofitBuilder the builder for building up a {@@link Retrofit}
      */
-    public @(Model.Name)Impl(String baseUri, ServiceClientCredentials credentials, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
-        super(client, retrofitBuilder);
+    public @(Model.Name)Impl(String baseUri, ServiceClientCredentials credentials, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
+        super(clientBuilder, retrofitBuilder);
         this.baseUri = baseUri;
         this.credentials = credentials;
         initialize();
@@ -153,18 +153,19 @@ else
      * Initializes an instance of @(Model.Name) client.
      *
      * @@param baseUri the base URI of the host
-     * @@param client the {@@link OkHttpClient} client to use for REST calls
+     * @@param clientBuilder the builder for building up an {@@link OkHttpClient}
      * @@param retrofitBuilder the builder for building up a {@@link Retrofit}
      */
-    public @(Model.Name)Impl(String baseUri, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
-        super(client, retrofitBuilder);
+    public @(Model.Name)Impl(String baseUri, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
+        super(clientBuilder, retrofitBuilder);
         this.baseUri = baseUri;
         initialize();
     }
 @EmptyLine
 </text>
 }
-    private void initialize() {
+    @@Override
+    protected void initialize() {
 @foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
 {
         @:this.@(property.Name) = @(property.DefaultValue);
@@ -173,11 +174,11 @@ else
     @if (Settings.AddCredentials)
     {
 @:        if (this.credentials != null) {
-@:            this.credentials.applyCredentialsFilter(this.client);
+@:            this.credentials.applyCredentialsFilter(clientBuilder);
 @:        }
     }
-    
-        this.azureClient = new AzureClient(client, retrofitBuilder);
+        super.initialize();
+        this.azureClient = new AzureClient(clientBuilder, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
 
         this.retrofitBuilder.baseUrl(baseUri);

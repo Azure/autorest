@@ -7,10 +7,10 @@
 
 package com.microsoft.rest;
 
-import com.squareup.okhttp.Interceptor;
-import com.squareup.okhttp.Protocol;
-import com.squareup.okhttp.Request;
-import com.squareup.okhttp.Response;
+import okhttp3.Interceptor;
+import okhttp3.Protocol;
+import okhttp3.Request;
+import okhttp3.Response;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -22,18 +22,19 @@ public class RetryHandlerTests {
         ServiceClient serviceClient = new ServiceClient() { };
         serviceClient.getClientInterceptors().add(new Interceptor() {
             // Send 408, 500, 502, all retried, with a 501 ending
-            private int[] codes = new int[] {408, 500, 502, 501};
+            private int[] codes = new int[]{408, 500, 502, 501};
             private int count = 0;
+
             @Override
             public Response intercept(Chain chain) throws IOException {
-                    return new Response.Builder()
-                            .request(chain.request())
-                            .code(codes[count++])
-                            .protocol(Protocol.HTTP_1_1)
-                            .build();
+                return new Response.Builder()
+                        .request(chain.request())
+                        .code(codes[count++])
+                        .protocol(Protocol.HTTP_1_1)
+                        .build();
             }
         });
-        Response response = serviceClient.client.newCall(
+        Response response = serviceClient.clientBuilder.build().newCall(
                 new Request.Builder().url("http://localhost").get().build()).execute();
         Assert.assertEquals(501, response.code());
     }
@@ -54,7 +55,7 @@ public class RetryHandlerTests {
                         .build();
             }
         });
-        Response response = serviceClient.client.newCall(
+        Response response = serviceClient.clientBuilder.build().newCall(
                 new Request.Builder().url("http://localhost").get().build()).execute();
         Assert.assertEquals(500, response.code());
     }

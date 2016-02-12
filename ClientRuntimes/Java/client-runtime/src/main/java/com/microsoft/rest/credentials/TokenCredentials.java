@@ -72,7 +72,7 @@ public class TokenCredentials implements ServiceClientCredentials {
     }
 
     @Override
-    public void applyCredentialsFilter(OkHttpClient client) {
-        client.interceptors().add(new TokenCredentialsInterceptor(this));
+    public void applyCredentialsFilter(OkHttpClient.Builder clientBuilder) {
+        clientBuilder.interceptors().add(new TokenCredentialsInterceptor(this));
     }
 }

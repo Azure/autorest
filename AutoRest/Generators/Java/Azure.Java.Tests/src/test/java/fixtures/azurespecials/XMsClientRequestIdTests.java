@@ -3,7 +3,7 @@ package fixtures.azurespecials;
 import com.microsoft.azure.CustomHeaderInterceptor;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.credentials.TokenCredentials;
-import com.squareup.okhttp.Interceptor;
+import okhttp3.Interceptor;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
