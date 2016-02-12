@@ -74,22 +74,22 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
             {
                 parameterGroupingPostRequiredParameters.Validate();
             }
-            int? body = null;
+            int body = default(int);
             if (parameterGroupingPostRequiredParameters != null)
             {
                 body = parameterGroupingPostRequiredParameters.Body;
             }
-            string customHeader = null;
+            string customHeader = default(string);
             if (parameterGroupingPostRequiredParameters != null)
             {
                 customHeader = parameterGroupingPostRequiredParameters.CustomHeader;
             }
-            int? query = null;
+            int? query = default(int?);
             if (parameterGroupingPostRequiredParameters != null)
             {
                 query = parameterGroupingPostRequiredParameters.Query;
             }
-            string path = null;
+            string path = default(string);
             if (parameterGroupingPostRequiredParameters != null)
             {
                 path = parameterGroupingPostRequiredParameters.Path;
@@ -245,12 +245,12 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
         /// </return>
         public async Task<AzureOperationResponse> PostOptionalWithHttpMessagesAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters = default(ParameterGroupingPostOptionalParameters), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            string customHeader = null;
+            string customHeader = default(string);
             if (parameterGroupingPostOptionalParameters != null)
             {
                 customHeader = parameterGroupingPostOptionalParameters.CustomHeader;
             }
-            int? query = null;
+            int? query = default(int?);
             if (parameterGroupingPostOptionalParameters != null)
             {
                 query = parameterGroupingPostOptionalParameters.Query;
@@ -403,22 +403,22 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
         /// </return>
         public async Task<AzureOperationResponse> PostMultiParamGroupsWithHttpMessagesAsync(FirstParameterGroup firstParameterGroup = default(FirstParameterGroup), ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup = default(ParameterGroupingPostMultiParamGroupsSecondParamGroup), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            string headerOne = null;
+            string headerOne = default(string);
             if (firstParameterGroup != null)
             {
                 headerOne = firstParameterGroup.HeaderOne;
             }
-            int? queryOne = null;
+            int? queryOne = default(int?);
             if (firstParameterGroup != null)
             {
                 queryOne = firstParameterGroup.QueryOne;
             }
-            string headerTwo = null;
+            string headerTwo = default(string);
             if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null)
             {
                 headerTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.HeaderTwo;
             }
-            int? queryTwo = null;
+            int? queryTwo = default(int?);
             if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null)
             {
                 queryTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.QueryTwo;
@@ -582,12 +582,12 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
         /// </return>
         public async Task<AzureOperationResponse> PostSharedParameterGroupObjectWithHttpMessagesAsync(FirstParameterGroup firstParameterGroup = default(FirstParameterGroup), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            string headerOne = null;
+            string headerOne = default(string);
             if (firstParameterGroup != null)
             {
                 headerOne = firstParameterGroup.HeaderOne;
             }
-            int? queryOne = null;
+            int? queryOne = default(int?);
             if (firstParameterGroup != null)
             {
                 queryOne = firstParameterGroup.QueryOne;

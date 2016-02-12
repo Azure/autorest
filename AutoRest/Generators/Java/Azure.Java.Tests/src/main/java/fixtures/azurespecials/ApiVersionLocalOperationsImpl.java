@@ -15,12 +15,12 @@ import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.azurespecials.models.ErrorException;
 import java.io.IOException;
-import retrofit.Call;
-import retrofit.Response;
-import retrofit.Retrofit;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -57,7 +57,7 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
             throw new IllegalArgumentException("Parameter apiVersion is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getMethodLocalValid(apiVersion, this.client.getAcceptLanguage());
-        return getMethodLocalValidDelegate(call.execute(), null);
+        return getMethodLocalValidDelegate(call.execute());
     }
 
     /**
@@ -75,9 +75,9 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
         Call<ResponseBody> call = service.getMethodLocalValid(apiVersion, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getMethodLocalValidDelegate(response, retrofit));
+                    serviceCallback.success(getMethodLocalValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -86,11 +86,11 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
         return call;
     }
 
-    private ServiceResponse<Void> getMethodLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> getMethodLocalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -103,7 +103,7 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
      */
     public ServiceResponse<Void> getMethodLocalNull(String apiVersion) throws ErrorException, IOException {
         Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.getAcceptLanguage());
-        return getMethodLocalNullDelegate(call.execute(), null);
+        return getMethodLocalNullDelegate(call.execute());
     }
 
     /**
@@ -117,9 +117,9 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
         Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getMethodLocalNullDelegate(response, retrofit));
+                    serviceCallback.success(getMethodLocalNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -128,11 +128,11 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
         return call;
     }
 
-    private ServiceResponse<Void> getMethodLocalNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> getMethodLocalNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new AzureServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -149,7 +149,7 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
             throw new IllegalArgumentException("Parameter apiVersion is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getPathLocalValid(apiVersion, this.client.getAcceptLanguage());
-        return getPathLocalValidDelegate(call.execute(), null);
+        return getPathLocalValidDelegate(call.execute());
     }
 
     /**
@@ -167,9 +167,9 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
         Call<ResponseBody> call = service.getPathLocalValid(apiVersion, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getPathLocalValidDelegate(response, retrofit));
+                    serviceCallback.success(getPathLocalValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -178,11 +178,11 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
         return call;
     }
 
-    private ServiceResponse<Void> getPathLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> getPathLocalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -199,7 +199,7 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
             throw new IllegalArgumentException("Parameter apiVersion is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getSwaggerLocalValid(apiVersion, this.client.getAcceptLanguage());
-        return getSwaggerLocalValidDelegate(call.execute(), null);
+        return getSwaggerLocalValidDelegate(call.execute());
     }
 
     /**
@@ -217,9 +217,9 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
         Call<ResponseBody> call = service.getSwaggerLocalValid(apiVersion, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getSwaggerLocalValidDelegate(response, retrofit));
+                    serviceCallback.success(getSwaggerLocalValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -228,11 +228,11 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
         return call;
     }
 
-    private ServiceResponse<Void> getSwaggerLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> getSwaggerLocalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
 }

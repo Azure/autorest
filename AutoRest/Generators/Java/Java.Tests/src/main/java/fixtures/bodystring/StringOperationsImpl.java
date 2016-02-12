@@ -15,12 +15,12 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.bodystring.models.ErrorException;
 import java.io.IOException;
-import retrofit.Call;
-import retrofit.Response;
-import retrofit.Retrofit;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -52,7 +52,7 @@ public final class StringOperationsImpl implements StringOperations {
      */
     public ServiceResponse<String> getNull() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getNull();
-        return getNullDelegate(call.execute(), null);
+        return getNullDelegate(call.execute());
     }
 
     /**
@@ -65,9 +65,9 @@ public final class StringOperationsImpl implements StringOperations {
         Call<ResponseBody> call = service.getNull();
         call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getNullDelegate(response, retrofit));
+                    serviceCallback.success(getNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -76,11 +76,11 @@ public final class StringOperationsImpl implements StringOperations {
         return call;
     }
 
-    private ServiceResponse<String> getNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<String> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<String, ErrorException>()
                 .register(200, new TypeToken<String>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -93,7 +93,7 @@ public final class StringOperationsImpl implements StringOperations {
      */
     public ServiceResponse<Void> putNull(String stringBody) throws ErrorException, IOException {
         Call<ResponseBody> call = service.putNull(stringBody);
-        return putNullDelegate(call.execute(), null);
+        return putNullDelegate(call.execute());
     }
 
     /**
@@ -107,9 +107,9 @@ public final class StringOperationsImpl implements StringOperations {
         Call<ResponseBody> call = service.putNull(stringBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putNullDelegate(response, retrofit));
+                    serviceCallback.success(putNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -118,11 +118,11 @@ public final class StringOperationsImpl implements StringOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> putNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -134,7 +134,7 @@ public final class StringOperationsImpl implements StringOperations {
      */
     public ServiceResponse<String> getEmpty() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getEmpty();
-        return getEmptyDelegate(call.execute(), null);
+        return getEmptyDelegate(call.execute());
     }
 
     /**
@@ -147,9 +147,9 @@ public final class StringOperationsImpl implements StringOperations {
         Call<ResponseBody> call = service.getEmpty();
         call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getEmptyDelegate(response, retrofit));
+                    serviceCallback.success(getEmptyDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -158,11 +158,11 @@ public final class StringOperationsImpl implements StringOperations {
         return call;
     }
 
-    private ServiceResponse<String> getEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<String> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<String, ErrorException>()
                 .register(200, new TypeToken<String>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -179,7 +179,7 @@ public final class StringOperationsImpl implements StringOperations {
             throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
         Call<ResponseBody> call = service.putEmpty(stringBody);
-        return putEmptyDelegate(call.execute(), null);
+        return putEmptyDelegate(call.execute());
     }
 
     /**
@@ -197,9 +197,9 @@ public final class StringOperationsImpl implements StringOperations {
         Call<ResponseBody> call = service.putEmpty(stringBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putEmptyDelegate(response, retrofit));
+                    serviceCallback.success(putEmptyDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -208,11 +208,11 @@ public final class StringOperationsImpl implements StringOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -224,7 +224,7 @@ public final class StringOperationsImpl implements StringOperations {
      */
     public ServiceResponse<String> getMbcs() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getMbcs();
-        return getMbcsDelegate(call.execute(), null);
+        return getMbcsDelegate(call.execute());
     }
 
     /**
@@ -237,9 +237,9 @@ public final class StringOperationsImpl implements StringOperations {
         Call<ResponseBody> call = service.getMbcs();
         call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getMbcsDelegate(response, retrofit));
+                    serviceCallback.success(getMbcsDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -248,11 +248,11 @@ public final class StringOperationsImpl implements StringOperations {
         return call;
     }
 
-    private ServiceResponse<String> getMbcsDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<String> getMbcsDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<String, ErrorException>()
                 .register(200, new TypeToken<String>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -269,7 +269,7 @@ public final class StringOperationsImpl implements StringOperations {
             throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
         Call<ResponseBody> call = service.putMbcs(stringBody);
-        return putMbcsDelegate(call.execute(), null);
+        return putMbcsDelegate(call.execute());
     }
 
     /**
@@ -287,9 +287,9 @@ public final class StringOperationsImpl implements StringOperations {
         Call<ResponseBody> call = service.putMbcs(stringBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putMbcsDelegate(response, retrofit));
+                    serviceCallback.success(putMbcsDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -298,11 +298,11 @@ public final class StringOperationsImpl implements StringOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putMbcsDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> putMbcsDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -314,7 +314,7 @@ public final class StringOperationsImpl implements StringOperations {
      */
     public ServiceResponse<String> getWhitespace() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getWhitespace();
-        return getWhitespaceDelegate(call.execute(), null);
+        return getWhitespaceDelegate(call.execute());
     }
 
     /**
@@ -327,9 +327,9 @@ public final class StringOperationsImpl implements StringOperations {
         Call<ResponseBody> call = service.getWhitespace();
         call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getWhitespaceDelegate(response, retrofit));
+                    serviceCallback.success(getWhitespaceDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -338,11 +338,11 @@ public final class StringOperationsImpl implements StringOperations {
         return call;
     }
 
-    private ServiceResponse<String> getWhitespaceDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<String> getWhitespaceDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<String, ErrorException>()
                 .register(200, new TypeToken<String>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -359,7 +359,7 @@ public final class StringOperationsImpl implements StringOperations {
             throw new IllegalArgumentException("Parameter stringBody is required and cannot be null.");
         }
         Call<ResponseBody> call = service.putWhitespace(stringBody);
-        return putWhitespaceDelegate(call.execute(), null);
+        return putWhitespaceDelegate(call.execute());
     }
 
     /**
@@ -377,9 +377,9 @@ public final class StringOperationsImpl implements StringOperations {
         Call<ResponseBody> call = service.putWhitespace(stringBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putWhitespaceDelegate(response, retrofit));
+                    serviceCallback.success(putWhitespaceDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -388,11 +388,11 @@ public final class StringOperationsImpl implements StringOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putWhitespaceDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> putWhitespaceDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -404,7 +404,7 @@ public final class StringOperationsImpl implements StringOperations {
      */
     public ServiceResponse<String> getNotProvided() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getNotProvided();
-        return getNotProvidedDelegate(call.execute(), null);
+        return getNotProvidedDelegate(call.execute());
     }
 
     /**
@@ -417,9 +417,9 @@ public final class StringOperationsImpl implements StringOperations {
         Call<ResponseBody> call = service.getNotProvided();
         call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getNotProvidedDelegate(response, retrofit));
+                    serviceCallback.success(getNotProvidedDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -428,11 +428,11 @@ public final class StringOperationsImpl implements StringOperations {
         return call;
     }
 
-    private ServiceResponse<String> getNotProvidedDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<String> getNotProvidedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<String, ErrorException>()
                 .register(200, new TypeToken<String>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
 }

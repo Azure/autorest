@@ -11,8 +11,8 @@
 package fixtures.bodydatetimerfc1123;
 
 import com.microsoft.rest.ServiceClient;
-import com.squareup.okhttp.OkHttpClient;
-import retrofit.Retrofit;
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestRFC1123DateTimeTestService class.
@@ -36,7 +36,7 @@ public final class AutoRestRFC1123DateTimeTestServiceImpl extends ServiceClient 
      * @return the Datetimerfc1123Operations object.
      */
     public Datetimerfc1123Operations getDatetimerfc1123Operations() {
-        return new Datetimerfc1123OperationsImpl(this.retrofitBuilder.build(), this);
+        return new Datetimerfc1123OperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -61,16 +61,18 @@ public final class AutoRestRFC1123DateTimeTestServiceImpl extends ServiceClient 
      * Initializes an instance of AutoRestRFC1123DateTimeTestService client.
      *
      * @param baseUri the base URI of the host
-     * @param client the {@link OkHttpClient} client to use for REST calls
+     * @param clientBuilder the builder for building up an {@link OkHttpClient}
      * @param retrofitBuilder the builder for building up a {@link Retrofit}
      */
-    public AutoRestRFC1123DateTimeTestServiceImpl(String baseUri, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
-        super(client, retrofitBuilder);
+    public AutoRestRFC1123DateTimeTestServiceImpl(String baseUri, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
+        super(clientBuilder, retrofitBuilder);
         this.baseUri = baseUri;
         initialize();
     }
 
-    private void initialize() {
+    @Override
+    protected void initialize() {
+        super.initialize();
         this.retrofitBuilder.baseUrl(baseUri);
     }
 }

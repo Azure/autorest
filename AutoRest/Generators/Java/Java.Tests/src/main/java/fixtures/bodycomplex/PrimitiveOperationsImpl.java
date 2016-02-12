@@ -16,7 +16,6 @@ import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.Validator;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.bodycomplex.models.BooleanWrapper;
 import fixtures.bodycomplex.models.ByteWrapper;
 import fixtures.bodycomplex.models.Datetimerfc1123Wrapper;
@@ -30,9 +29,10 @@ import fixtures.bodycomplex.models.IntWrapper;
 import fixtures.bodycomplex.models.LongWrapper;
 import fixtures.bodycomplex.models.StringWrapper;
 import java.io.IOException;
-import retrofit.Call;
-import retrofit.Response;
-import retrofit.Retrofit;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -64,7 +64,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      */
     public ServiceResponse<IntWrapper> getInt() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getInt();
-        return getIntDelegate(call.execute(), null);
+        return getIntDelegate(call.execute());
     }
 
     /**
@@ -77,9 +77,9 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         Call<ResponseBody> call = service.getInt();
         call.enqueue(new ServiceResponseCallback<IntWrapper>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getIntDelegate(response, retrofit));
+                    serviceCallback.success(getIntDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -88,11 +88,11 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         return call;
     }
 
-    private ServiceResponse<IntWrapper> getIntDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<IntWrapper> getIntDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<IntWrapper, ErrorException>()
                 .register(200, new TypeToken<IntWrapper>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -110,7 +110,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putInt(complexBody);
-        return putIntDelegate(call.execute(), null);
+        return putIntDelegate(call.execute());
     }
 
     /**
@@ -129,9 +129,9 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         Call<ResponseBody> call = service.putInt(complexBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putIntDelegate(response, retrofit));
+                    serviceCallback.success(putIntDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -140,11 +140,11 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putIntDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> putIntDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -156,7 +156,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      */
     public ServiceResponse<LongWrapper> getLong() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getLong();
-        return getLongDelegate(call.execute(), null);
+        return getLongDelegate(call.execute());
     }
 
     /**
@@ -169,9 +169,9 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         Call<ResponseBody> call = service.getLong();
         call.enqueue(new ServiceResponseCallback<LongWrapper>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getLongDelegate(response, retrofit));
+                    serviceCallback.success(getLongDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -180,11 +180,11 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         return call;
     }
 
-    private ServiceResponse<LongWrapper> getLongDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<LongWrapper> getLongDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<LongWrapper, ErrorException>()
                 .register(200, new TypeToken<LongWrapper>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -202,7 +202,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putLong(complexBody);
-        return putLongDelegate(call.execute(), null);
+        return putLongDelegate(call.execute());
     }
 
     /**
@@ -221,9 +221,9 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         Call<ResponseBody> call = service.putLong(complexBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putLongDelegate(response, retrofit));
+                    serviceCallback.success(putLongDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -232,11 +232,11 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putLongDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> putLongDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -248,7 +248,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      */
     public ServiceResponse<FloatWrapper> getFloat() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getFloat();
-        return getFloatDelegate(call.execute(), null);
+        return getFloatDelegate(call.execute());
     }
 
     /**
@@ -261,9 +261,9 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         Call<ResponseBody> call = service.getFloat();
         call.enqueue(new ServiceResponseCallback<FloatWrapper>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getFloatDelegate(response, retrofit));
+                    serviceCallback.success(getFloatDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -272,11 +272,11 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         return call;
     }
 
-    private ServiceResponse<FloatWrapper> getFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<FloatWrapper> getFloatDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<FloatWrapper, ErrorException>()
                 .register(200, new TypeToken<FloatWrapper>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -294,7 +294,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putFloat(complexBody);
-        return putFloatDelegate(call.execute(), null);
+        return putFloatDelegate(call.execute());
     }
 
     /**
@@ -313,9 +313,9 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         Call<ResponseBody> call = service.putFloat(complexBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putFloatDelegate(response, retrofit));
+                    serviceCallback.success(putFloatDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -324,11 +324,11 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putFloatDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> putFloatDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -340,7 +340,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      */
     public ServiceResponse<DoubleWrapper> getDouble() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getDouble();
-        return getDoubleDelegate(call.execute(), null);
+        return getDoubleDelegate(call.execute());
     }
 
     /**
@@ -353,9 +353,9 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         Call<ResponseBody> call = service.getDouble();
         call.enqueue(new ServiceResponseCallback<DoubleWrapper>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDoubleDelegate(response, retrofit));
+                    serviceCallback.success(getDoubleDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -364,11 +364,11 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         return call;
     }
 
-    private ServiceResponse<DoubleWrapper> getDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<DoubleWrapper> getDoubleDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<DoubleWrapper, ErrorException>()
                 .register(200, new TypeToken<DoubleWrapper>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -386,7 +386,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putDouble(complexBody);
-        return putDoubleDelegate(call.execute(), null);
+        return putDoubleDelegate(call.execute());
     }
 
     /**
@@ -405,9 +405,9 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         Call<ResponseBody> call = service.putDouble(complexBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putDoubleDelegate(response, retrofit));
+                    serviceCallback.success(putDoubleDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -416,11 +416,11 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putDoubleDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> putDoubleDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -432,7 +432,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      */
     public ServiceResponse<BooleanWrapper> getBool() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getBool();
-        return getBoolDelegate(call.execute(), null);
+        return getBoolDelegate(call.execute());
     }
 
     /**
@@ -445,9 +445,9 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         Call<ResponseBody> call = service.getBool();
         call.enqueue(new ServiceResponseCallback<BooleanWrapper>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getBoolDelegate(response, retrofit));
+                    serviceCallback.success(getBoolDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -456,11 +456,11 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         return call;
     }
 
-    private ServiceResponse<BooleanWrapper> getBoolDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<BooleanWrapper> getBoolDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<BooleanWrapper, ErrorException>()
                 .register(200, new TypeToken<BooleanWrapper>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -478,7 +478,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putBool(complexBody);
-        return putBoolDelegate(call.execute(), null);
+        return putBoolDelegate(call.execute());
     }
 
     /**
@@ -497,9 +497,9 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         Call<ResponseBody> call = service.putBool(complexBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putBoolDelegate(response, retrofit));
+                    serviceCallback.success(putBoolDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -508,11 +508,11 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putBoolDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> putBoolDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -524,7 +524,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      */
     public ServiceResponse<StringWrapper> getString() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getString();
-        return getStringDelegate(call.execute(), null);
+        return getStringDelegate(call.execute());
     }
 
     /**
@@ -537,9 +537,9 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         Call<ResponseBody> call = service.getString();
         call.enqueue(new ServiceResponseCallback<StringWrapper>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getStringDelegate(response, retrofit));
+                    serviceCallback.success(getStringDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -548,11 +548,11 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         return call;
     }
 
-    private ServiceResponse<StringWrapper> getStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<StringWrapper> getStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<StringWrapper, ErrorException>()
                 .register(200, new TypeToken<StringWrapper>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -570,7 +570,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putString(complexBody);
-        return putStringDelegate(call.execute(), null);
+        return putStringDelegate(call.execute());
     }
 
     /**
@@ -589,9 +589,9 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         Call<ResponseBody> call = service.putString(complexBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putStringDelegate(response, retrofit));
+                    serviceCallback.success(putStringDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -600,11 +600,11 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putStringDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> putStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -616,7 +616,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      */
     public ServiceResponse<DateWrapper> getDate() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getDate();
-        return getDateDelegate(call.execute(), null);
+        return getDateDelegate(call.execute());
     }
 
     /**
@@ -629,9 +629,9 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         Call<ResponseBody> call = service.getDate();
         call.enqueue(new ServiceResponseCallback<DateWrapper>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDateDelegate(response, retrofit));
+                    serviceCallback.success(getDateDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -640,11 +640,11 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         return call;
     }
 
-    private ServiceResponse<DateWrapper> getDateDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<DateWrapper> getDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<DateWrapper, ErrorException>()
                 .register(200, new TypeToken<DateWrapper>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -662,7 +662,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putDate(complexBody);
-        return putDateDelegate(call.execute(), null);
+        return putDateDelegate(call.execute());
     }
 
     /**
@@ -681,9 +681,9 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         Call<ResponseBody> call = service.putDate(complexBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putDateDelegate(response, retrofit));
+                    serviceCallback.success(putDateDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -692,11 +692,11 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putDateDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> putDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -708,7 +708,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      */
     public ServiceResponse<DatetimeWrapper> getDateTime() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getDateTime();
-        return getDateTimeDelegate(call.execute(), null);
+        return getDateTimeDelegate(call.execute());
     }
 
     /**
@@ -721,9 +721,9 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         Call<ResponseBody> call = service.getDateTime();
         call.enqueue(new ServiceResponseCallback<DatetimeWrapper>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDateTimeDelegate(response, retrofit));
+                    serviceCallback.success(getDateTimeDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -732,11 +732,11 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         return call;
     }
 
-    private ServiceResponse<DatetimeWrapper> getDateTimeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<DatetimeWrapper> getDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<DatetimeWrapper, ErrorException>()
                 .register(200, new TypeToken<DatetimeWrapper>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -754,7 +754,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putDateTime(complexBody);
-        return putDateTimeDelegate(call.execute(), null);
+        return putDateTimeDelegate(call.execute());
     }
 
     /**
@@ -773,9 +773,9 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         Call<ResponseBody> call = service.putDateTime(complexBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putDateTimeDelegate(response, retrofit));
+                    serviceCallback.success(putDateTimeDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -784,11 +784,11 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putDateTimeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> putDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -800,7 +800,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      */
     public ServiceResponse<Datetimerfc1123Wrapper> getDateTimeRfc1123() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getDateTimeRfc1123();
-        return getDateTimeRfc1123Delegate(call.execute(), null);
+        return getDateTimeRfc1123Delegate(call.execute());
     }
 
     /**
@@ -813,9 +813,9 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         Call<ResponseBody> call = service.getDateTimeRfc1123();
         call.enqueue(new ServiceResponseCallback<Datetimerfc1123Wrapper>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDateTimeRfc1123Delegate(response, retrofit));
+                    serviceCallback.success(getDateTimeRfc1123Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -824,11 +824,11 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         return call;
     }
 
-    private ServiceResponse<Datetimerfc1123Wrapper> getDateTimeRfc1123Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Datetimerfc1123Wrapper> getDateTimeRfc1123Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Datetimerfc1123Wrapper, ErrorException>()
                 .register(200, new TypeToken<Datetimerfc1123Wrapper>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -846,7 +846,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putDateTimeRfc1123(complexBody);
-        return putDateTimeRfc1123Delegate(call.execute(), null);
+        return putDateTimeRfc1123Delegate(call.execute());
     }
 
     /**
@@ -865,9 +865,9 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         Call<ResponseBody> call = service.putDateTimeRfc1123(complexBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putDateTimeRfc1123Delegate(response, retrofit));
+                    serviceCallback.success(putDateTimeRfc1123Delegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -876,11 +876,11 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putDateTimeRfc1123Delegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> putDateTimeRfc1123Delegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -892,7 +892,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      */
     public ServiceResponse<DurationWrapper> getDuration() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getDuration();
-        return getDurationDelegate(call.execute(), null);
+        return getDurationDelegate(call.execute());
     }
 
     /**
@@ -905,9 +905,9 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         Call<ResponseBody> call = service.getDuration();
         call.enqueue(new ServiceResponseCallback<DurationWrapper>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getDurationDelegate(response, retrofit));
+                    serviceCallback.success(getDurationDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -916,11 +916,11 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         return call;
     }
 
-    private ServiceResponse<DurationWrapper> getDurationDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<DurationWrapper> getDurationDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<DurationWrapper, ErrorException>()
                 .register(200, new TypeToken<DurationWrapper>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -938,7 +938,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putDuration(complexBody);
-        return putDurationDelegate(call.execute(), null);
+        return putDurationDelegate(call.execute());
     }
 
     /**
@@ -957,9 +957,9 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         Call<ResponseBody> call = service.putDuration(complexBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putDurationDelegate(response, retrofit));
+                    serviceCallback.success(putDurationDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -968,11 +968,11 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putDurationDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> putDurationDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -984,7 +984,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      */
     public ServiceResponse<ByteWrapper> getByte() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getByte();
-        return getByteDelegate(call.execute(), null);
+        return getByteDelegate(call.execute());
     }
 
     /**
@@ -997,9 +997,9 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         Call<ResponseBody> call = service.getByte();
         call.enqueue(new ServiceResponseCallback<ByteWrapper>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getByteDelegate(response, retrofit));
+                    serviceCallback.success(getByteDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1008,11 +1008,11 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         return call;
     }
 
-    private ServiceResponse<ByteWrapper> getByteDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<ByteWrapper> getByteDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<ByteWrapper, ErrorException>()
                 .register(200, new TypeToken<ByteWrapper>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1030,7 +1030,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putByte(complexBody);
-        return putByteDelegate(call.execute(), null);
+        return putByteDelegate(call.execute());
     }
 
     /**
@@ -1049,9 +1049,9 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         Call<ResponseBody> call = service.putByte(complexBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putByteDelegate(response, retrofit));
+                    serviceCallback.success(putByteDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1060,11 +1060,11 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putByteDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> putByteDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
 }

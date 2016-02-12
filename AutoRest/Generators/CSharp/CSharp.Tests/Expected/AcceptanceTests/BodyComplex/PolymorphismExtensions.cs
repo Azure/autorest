@@ -41,7 +41,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Fish> GetValidAsync( this IPolymorphism operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Fish> GetValidAsync(this IPolymorphism operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -141,7 +141,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutValidAsync( this IPolymorphism operations, Fish complexBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutValidAsync(this IPolymorphism operations, Fish complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutValidWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -226,7 +226,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutValidMissingRequiredAsync( this IPolymorphism operations, Fish complexBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutValidMissingRequiredAsync(this IPolymorphism operations, Fish complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutValidMissingRequiredWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }

@@ -41,7 +41,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<DateTime?> GetNullAsync( this IDate operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<DateTime?> GetNullAsync(this IDate operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -69,7 +69,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<DateTime?> GetInvalidDateAsync( this IDate operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<DateTime?> GetInvalidDateAsync(this IDate operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetInvalidDateWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -97,7 +97,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<DateTime?> GetOverflowDateAsync( this IDate operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<DateTime?> GetOverflowDateAsync(this IDate operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetOverflowDateWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -125,7 +125,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<DateTime?> GetUnderflowDateAsync( this IDate operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<DateTime?> GetUnderflowDateAsync(this IDate operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetUnderflowDateWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -141,7 +141,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
             /// </param>
             /// <param name='dateBody'>
             /// </param>
-            public static void PutMaxDate(this IDate operations, DateTime? dateBody)
+            public static void PutMaxDate(this IDate operations, DateTime dateBody)
             {
                 Task.Factory.StartNew(s => ((IDate)s).PutMaxDateAsync(dateBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -157,7 +157,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutMaxDateAsync( this IDate operations, DateTime? dateBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutMaxDateAsync(this IDate operations, DateTime dateBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutMaxDateWithHttpMessagesAsync(dateBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -182,7 +182,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<DateTime?> GetMaxDateAsync( this IDate operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<DateTime?> GetMaxDateAsync(this IDate operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetMaxDateWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -198,7 +198,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
             /// </param>
             /// <param name='dateBody'>
             /// </param>
-            public static void PutMinDate(this IDate operations, DateTime? dateBody)
+            public static void PutMinDate(this IDate operations, DateTime dateBody)
             {
                 Task.Factory.StartNew(s => ((IDate)s).PutMinDateAsync(dateBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -214,7 +214,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutMinDateAsync( this IDate operations, DateTime? dateBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutMinDateAsync(this IDate operations, DateTime dateBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutMinDateWithHttpMessagesAsync(dateBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -239,7 +239,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<DateTime?> GetMinDateAsync( this IDate operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<DateTime?> GetMinDateAsync(this IDate operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetMinDateWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

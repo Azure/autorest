@@ -169,7 +169,7 @@ namespace Fixtures.AcceptanceTestsValidation
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<Product>> ValidationOfMethodParametersWithHttpMessagesAsync(string resourceGroupName, int? id, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<Product>> ValidationOfMethodParametersWithHttpMessagesAsync(string resourceGroupName, int id, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (this.SubscriptionId == null)
             {
@@ -194,24 +194,17 @@ namespace Fixtures.AcceptanceTestsValidation
                     throw new ValidationException(ValidationRules.Pattern, "resourceGroupName", "[a-zA-Z0-9]+");
                 }
             }
-            if (id == null)
+            if (id > 1000)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "id");
+                throw new ValidationException(ValidationRules.InclusiveMaximum, "id", 1000);
             }
-            if (id != null)
+            if (id < 100)
             {
-                if (id > 1000)
-                {
-                    throw new ValidationException(ValidationRules.InclusiveMaximum, "id", 1000);
-                }
-                if (id < 100)
-                {
-                    throw new ValidationException(ValidationRules.InclusiveMinimum, "id", 100);
-                }
-                if (id % 10 != 0)
-                {
-                    throw new ValidationException(ValidationRules.MultipleOf, "id", 10);
-                }
+                throw new ValidationException(ValidationRules.InclusiveMinimum, "id", 100);
+            }
+            if (id % 10 != 0)
+            {
+                throw new ValidationException(ValidationRules.MultipleOf, "id", 10);
             }
             if (this.ApiVersion == null)
             {
@@ -363,7 +356,7 @@ namespace Fixtures.AcceptanceTestsValidation
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<Product>> ValidationOfBodyWithHttpMessagesAsync(string resourceGroupName, int? id, Product body = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<Product>> ValidationOfBodyWithHttpMessagesAsync(string resourceGroupName, int id, Product body = default(Product), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (this.SubscriptionId == null)
             {
@@ -388,24 +381,17 @@ namespace Fixtures.AcceptanceTestsValidation
                     throw new ValidationException(ValidationRules.Pattern, "resourceGroupName", "[a-zA-Z0-9]+");
                 }
             }
-            if (id == null)
+            if (id > 1000)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "id");
+                throw new ValidationException(ValidationRules.InclusiveMaximum, "id", 1000);
             }
-            if (id != null)
+            if (id < 100)
             {
-                if (id > 1000)
-                {
-                    throw new ValidationException(ValidationRules.InclusiveMaximum, "id", 1000);
-                }
-                if (id < 100)
-                {
-                    throw new ValidationException(ValidationRules.InclusiveMinimum, "id", 100);
-                }
-                if (id % 10 != 0)
-                {
-                    throw new ValidationException(ValidationRules.MultipleOf, "id", 10);
-                }
+                throw new ValidationException(ValidationRules.InclusiveMinimum, "id", 100);
+            }
+            if (id % 10 != 0)
+            {
+                throw new ValidationException(ValidationRules.MultipleOf, "id", 10);
             }
             if (body != null)
             {

@@ -44,7 +44,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task GetAsync( this IXMsClientRequestIdOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task GetAsync(this IXMsClientRequestIdOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.GetWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -79,7 +79,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task ParamGetAsync( this IXMsClientRequestIdOperations operations, string xMsClientRequestId, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task ParamGetAsync(this IXMsClientRequestIdOperations operations, string xMsClientRequestId, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.ParamGetWithHttpMessagesAsync(xMsClientRequestId, null, cancellationToken).ConfigureAwait(false);
             }

@@ -53,7 +53,7 @@ namespace Fixtures.AcceptanceTestsBodyFormData
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<System.IO.Stream> UploadFileAsync( this IFormdata operations, System.IO.Stream fileContent, string fileName, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<System.IO.Stream> UploadFileAsync(this IFormdata operations, System.IO.Stream fileContent, string fileName, CancellationToken cancellationToken = default(CancellationToken))
             {
                 var _result = await operations.UploadFileWithHttpMessagesAsync(fileContent, fileName, null, cancellationToken).ConfigureAwait(false);
                 _result.Request.Dispose();
@@ -92,7 +92,7 @@ namespace Fixtures.AcceptanceTestsBodyFormData
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<System.IO.Stream> UploadFileViaBodyAsync( this IFormdata operations, System.IO.Stream fileContent, string fileName, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<System.IO.Stream> UploadFileViaBodyAsync(this IFormdata operations, System.IO.Stream fileContent, string fileName, CancellationToken cancellationToken = default(CancellationToken))
             {
                 var _result = await operations.UploadFileViaBodyWithHttpMessagesAsync(fileContent, fileName, null, cancellationToken).ConfigureAwait(false);
                 _result.Request.Dispose();

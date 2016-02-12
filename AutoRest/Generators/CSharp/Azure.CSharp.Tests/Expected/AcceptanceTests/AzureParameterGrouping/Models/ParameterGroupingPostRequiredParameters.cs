@@ -31,7 +31,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
         /// Initializes a new instance of the
         /// ParameterGroupingPostRequiredParameters class.
         /// </summary>
-        public ParameterGroupingPostRequiredParameters(int? body, string path, string customHeader = default(string), int? query = default(int?))
+        public ParameterGroupingPostRequiredParameters(int body, string path, string customHeader = default(string), int? query = default(int?))
         {
             Body = body;
             CustomHeader = customHeader;
@@ -42,7 +42,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "")]
-        public int? Body { get; set; }
+        public int Body { get; set; }
 
         /// <summary>
         /// </summary>
@@ -66,10 +66,6 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping.Models
         /// </summary>
         public virtual void Validate()
         {
-            if (Body == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "Body");
-            }
             if (Path == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "Path");

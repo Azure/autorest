@@ -219,12 +219,12 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// </return>
         public async Task<AzureOperationResponse<IPage<Product>>> GetMultiplePagesWithHttpMessagesAsync(string clientRequestId = default(string), PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions = default(PagingGetMultiplePagesOptions), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            int? maxresults = null;
+            int? maxresults = default(int?);
             if (pagingGetMultiplePagesOptions != null)
             {
                 maxresults = pagingGetMultiplePagesOptions.Maxresults;
             }
-            int? timeout = null;
+            int? timeout = default(int?);
             if (pagingGetMultiplePagesOptions != null)
             {
                 timeout = pagingGetMultiplePagesOptions.Timeout;
@@ -420,17 +420,17 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             {
                 pagingGetMultiplePagesWithOffsetOptions.Validate();
             }
-            int? maxresults = null;
+            int? maxresults = default(int?);
             if (pagingGetMultiplePagesWithOffsetOptions != null)
             {
                 maxresults = pagingGetMultiplePagesWithOffsetOptions.Maxresults;
             }
-            int? offset = null;
+            int offset = default(int);
             if (pagingGetMultiplePagesWithOffsetOptions != null)
             {
                 offset = pagingGetMultiplePagesWithOffsetOptions.Offset;
             }
-            int? timeout = null;
+            int? timeout = default(int?);
             if (pagingGetMultiplePagesWithOffsetOptions != null)
             {
                 timeout = pagingGetMultiplePagesWithOffsetOptions.Timeout;
@@ -1544,12 +1544,12 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "nextPageLink");
             }
-            int? maxresults = null;
+            int? maxresults = default(int?);
             if (pagingGetMultiplePagesOptions != null)
             {
                 maxresults = pagingGetMultiplePagesOptions.Maxresults;
             }
-            int? timeout = null;
+            int? timeout = default(int?);
             if (pagingGetMultiplePagesOptions != null)
             {
                 timeout = pagingGetMultiplePagesOptions.Timeout;
@@ -1745,12 +1745,12 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "nextPageLink");
             }
-            int? maxresults = null;
+            int? maxresults = default(int?);
             if (pagingGetMultiplePagesWithOffsetNextOptions != null)
             {
                 maxresults = pagingGetMultiplePagesWithOffsetNextOptions.Maxresults;
             }
-            int? timeout = null;
+            int? timeout = default(int?);
             if (pagingGetMultiplePagesWithOffsetNextOptions != null)
             {
                 timeout = pagingGetMultiplePagesWithOffsetNextOptions.Timeout;

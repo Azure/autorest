@@ -3,7 +3,7 @@ package fixtures.paging;
 import com.microsoft.azure.CloudException;
 import com.microsoft.azure.ListOperationCallback;
 import com.microsoft.rest.ServiceResponse;
-import com.squareup.okhttp.logging.HttpLoggingInterceptor;
+import okhttp3.logging.HttpLoggingInterceptor;
 import fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptions;
 import fixtures.paging.models.Product;
 import org.junit.Assert;

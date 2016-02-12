@@ -15,12 +15,12 @@ import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.azurespecials.models.ErrorException;
 import java.io.IOException;
-import retrofit.Call;
-import retrofit.Response;
-import retrofit.Retrofit;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -57,7 +57,7 @@ public final class SubscriptionInMethodOperationsImpl implements SubscriptionInM
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
         Call<ResponseBody> call = service.postMethodLocalValid(subscriptionId, this.client.getAcceptLanguage());
-        return postMethodLocalValidDelegate(call.execute(), null);
+        return postMethodLocalValidDelegate(call.execute());
     }
 
     /**
@@ -75,9 +75,9 @@ public final class SubscriptionInMethodOperationsImpl implements SubscriptionInM
         Call<ResponseBody> call = service.postMethodLocalValid(subscriptionId, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(postMethodLocalValidDelegate(response, retrofit));
+                    serviceCallback.success(postMethodLocalValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -86,11 +86,11 @@ public final class SubscriptionInMethodOperationsImpl implements SubscriptionInM
         return call;
     }
 
-    private ServiceResponse<Void> postMethodLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> postMethodLocalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -107,7 +107,7 @@ public final class SubscriptionInMethodOperationsImpl implements SubscriptionInM
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
         Call<ResponseBody> call = service.postMethodLocalNull(subscriptionId, this.client.getAcceptLanguage());
-        return postMethodLocalNullDelegate(call.execute(), null);
+        return postMethodLocalNullDelegate(call.execute());
     }
 
     /**
@@ -125,9 +125,9 @@ public final class SubscriptionInMethodOperationsImpl implements SubscriptionInM
         Call<ResponseBody> call = service.postMethodLocalNull(subscriptionId, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(postMethodLocalNullDelegate(response, retrofit));
+                    serviceCallback.success(postMethodLocalNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -136,11 +136,11 @@ public final class SubscriptionInMethodOperationsImpl implements SubscriptionInM
         return call;
     }
 
-    private ServiceResponse<Void> postMethodLocalNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> postMethodLocalNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -157,7 +157,7 @@ public final class SubscriptionInMethodOperationsImpl implements SubscriptionInM
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
         Call<ResponseBody> call = service.postPathLocalValid(subscriptionId, this.client.getAcceptLanguage());
-        return postPathLocalValidDelegate(call.execute(), null);
+        return postPathLocalValidDelegate(call.execute());
     }
 
     /**
@@ -175,9 +175,9 @@ public final class SubscriptionInMethodOperationsImpl implements SubscriptionInM
         Call<ResponseBody> call = service.postPathLocalValid(subscriptionId, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(postPathLocalValidDelegate(response, retrofit));
+                    serviceCallback.success(postPathLocalValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -186,11 +186,11 @@ public final class SubscriptionInMethodOperationsImpl implements SubscriptionInM
         return call;
     }
 
-    private ServiceResponse<Void> postPathLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> postPathLocalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -207,7 +207,7 @@ public final class SubscriptionInMethodOperationsImpl implements SubscriptionInM
             throw new IllegalArgumentException("Parameter subscriptionId is required and cannot be null.");
         }
         Call<ResponseBody> call = service.postSwaggerLocalValid(subscriptionId, this.client.getAcceptLanguage());
-        return postSwaggerLocalValidDelegate(call.execute(), null);
+        return postSwaggerLocalValidDelegate(call.execute());
     }
 
     /**
@@ -225,9 +225,9 @@ public final class SubscriptionInMethodOperationsImpl implements SubscriptionInM
         Call<ResponseBody> call = service.postSwaggerLocalValid(subscriptionId, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(postSwaggerLocalValidDelegate(response, retrofit));
+                    serviceCallback.success(postSwaggerLocalValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -236,11 +236,11 @@ public final class SubscriptionInMethodOperationsImpl implements SubscriptionInM
         return call;
     }
 
-    private ServiceResponse<Void> postSwaggerLocalValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> postSwaggerLocalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
 }

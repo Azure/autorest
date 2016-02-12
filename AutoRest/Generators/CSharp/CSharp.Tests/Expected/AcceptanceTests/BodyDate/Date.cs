@@ -538,12 +538,8 @@ namespace Fixtures.AcceptanceTestsBodyDate
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse> PutMaxDateWithHttpMessagesAsync(DateTime? dateBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> PutMaxDateWithHttpMessagesAsync(DateTime dateBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (dateBody == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "dateBody");
-            }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -768,12 +764,8 @@ namespace Fixtures.AcceptanceTestsBodyDate
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse> PutMinDateWithHttpMessagesAsync(DateTime? dateBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> PutMinDateWithHttpMessagesAsync(DateTime dateBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (dateBody == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "dateBody");
-            }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;

@@ -7,15 +7,13 @@
 
 package com.microsoft.azure;
 
+import com.microsoft.azure.serializer.AzureJacksonMapperAdapter;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.ServiceResponseWithHeaders;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
-import com.microsoft.azure.serializer.AzureJacksonMapperAdapter;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.ResponseBody;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -25,11 +23,13 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import retrofit.Call;
-import retrofit.Response;
-import retrofit.Retrofit;
-import retrofit.http.GET;
-import retrofit.http.Url;
+import okhttp3.OkHttpClient;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.http.GET;
+import retrofit2.http.Url;
 
 /**
  * An instance of this class defines a ServiceClient that handles polling and
@@ -60,11 +60,11 @@ public class AzureClient extends AzureServiceClient {
     /**
      * Initializes an instance of this class with customized client metadata.
      *
-     * @param client customized http client.
+     * @param clientBuilder customized http client.
      * @param retrofitBuilder customized retrofit builder
      */
-    public AzureClient(OkHttpClient client, Retrofit.Builder retrofitBuilder) {
-        super(client, retrofitBuilder);
+    public AzureClient(OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
+        super(clientBuilder, retrofitBuilder);
         this.mapperAdapter = new AzureJacksonMapperAdapter();
     }
 
@@ -102,7 +102,7 @@ public class AzureClient extends AzureServiceClient {
         }
 
         PollingState<T> pollingState = new PollingState<>(response, this.getLongRunningOperationRetryTimeout(), resourceType);
-        String url = response.raw().request().urlString();
+        String url = response.raw().request().url().toString();
 
         // Check provisioning state
         while (!AzureAsyncOperation.getTerminalStatuses().contains(pollingState.getStatus())) {
@@ -196,7 +196,7 @@ public class AzureClient extends AzureServiceClient {
             callback.failure(e);
             return null;
         }
-        String url = response.raw().request().urlString();
+        String url = response.raw().request().url().toString();
 
         // Task runner will take it from here
         PutPatchPollingTask<T> task = new PutPatchPollingTask<>(pollingState, url, callback);
@@ -690,7 +690,7 @@ public class AzureClient extends AzureServiceClient {
         Call<ResponseBody> call = service.get(endpoint.getFile());
         call.enqueue(new ServiceResponseCallback<ResponseBody>(callback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
                     int statusCode = response.code();
                     if (statusCode != 200 && statusCode != 201 && statusCode != 202 && statusCode != 204) {

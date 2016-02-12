@@ -56,7 +56,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<CatalogArray> ListAsync( this IAzureCompositeModel operations, string resourceGroupName, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<CatalogArray> ListAsync(this IAzureCompositeModel operations, string resourceGroupName, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.ListWithHttpMessagesAsync(resourceGroupName, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -104,7 +104,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<CatalogDictionary> CreateAsync( this IAzureCompositeModel operations, string subscriptionId, string resourceGroupName, IDictionary<string, IList<Product>> productDictionaryOfArray = default(IDictionary<string, IList<Product>>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<CatalogDictionary> CreateAsync(this IAzureCompositeModel operations, string subscriptionId, string resourceGroupName, IDictionary<string, IList<Product>> productDictionaryOfArray = default(IDictionary<string, IList<Product>>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.CreateWithHttpMessagesAsync(subscriptionId, resourceGroupName, productDictionaryOfArray, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -152,7 +152,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<CatalogArray> UpdateAsync( this IAzureCompositeModel operations, string subscriptionId, string resourceGroupName, IList<IDictionary<string, Product>> productArrayOfDictionary = default(IList<IDictionary<string, Product>>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<CatalogArray> UpdateAsync(this IAzureCompositeModel operations, string subscriptionId, string resourceGroupName, IList<IDictionary<string, Product>> productArrayOfDictionary = default(IList<IDictionary<string, Product>>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.UpdateWithHttpMessagesAsync(subscriptionId, resourceGroupName, productArrayOfDictionary, null, cancellationToken).ConfigureAwait(false))
                 {

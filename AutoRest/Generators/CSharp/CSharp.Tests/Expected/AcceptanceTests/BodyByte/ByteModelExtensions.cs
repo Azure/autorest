@@ -41,7 +41,7 @@ namespace Fixtures.AcceptanceTestsBodyByte
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<byte[]> GetNullAsync( this IByteModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<byte[]> GetNullAsync(this IByteModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -69,7 +69,7 @@ namespace Fixtures.AcceptanceTestsBodyByte
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<byte[]> GetEmptyAsync( this IByteModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<byte[]> GetEmptyAsync(this IByteModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -97,7 +97,7 @@ namespace Fixtures.AcceptanceTestsBodyByte
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<byte[]> GetNonAsciiAsync( this IByteModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<byte[]> GetNonAsciiAsync(this IByteModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetNonAsciiWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -131,7 +131,7 @@ namespace Fixtures.AcceptanceTestsBodyByte
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutNonAsciiAsync( this IByteModel operations, byte[] byteBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutNonAsciiAsync(this IByteModel operations, byte[] byteBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutNonAsciiWithHttpMessagesAsync(byteBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -156,7 +156,7 @@ namespace Fixtures.AcceptanceTestsBodyByte
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<byte[]> GetInvalidAsync( this IByteModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<byte[]> GetInvalidAsync(this IByteModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

@@ -1199,33 +1199,6 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 };
                 client.Polymorphism.PutValid(polymorphismRequest);
 
-                var badRequest = new Salmon
-                {
-                    Iswild = true,
-                    Length = 1,
-                    Location = "alaska",
-                    Species = "king",
-                    Siblings = new List<Fish>
-                    {
-                        new Shark
-                        {
-                            Age = 6,
-                            Length = 20,
-                            Species = "predator",
-                            Birthday = new DateTime(2012, 1, 5, 1, 0, 0, DateTimeKind.Utc)
-                        },
-                        new Sawshark
-                        {
-                            Age = 105,
-                            Length = 10,
-                            Species = "dangerous",
-                            Picture = new byte[] {255, 255, 255, 255, 254}
-                        }
-                    }
-                };
-                var missingRequired =
-                    Assert.Throws<ValidationException>(() => client.Polymorphism.PutValidMissingRequired(badRequest));
-                Assert.Equal("Birthday", missingRequired.Target);
                 /* COMPLEX TYPES THAT INVOLVE RECURSIVE REFERENCE */
                 // GET polymorphicrecursive/valid
                 var recursiveResult = client.Polymorphicrecursive.GetValid();
@@ -1329,7 +1302,6 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 Assert.Throws<ValidationException>(() => client.Paths.StringNull(null));
                 client.Paths.StringUrlEncoded();
                 client.Paths.EnumValid(UriColor.Greencolor);
-                Assert.Throws<ValidationException>(() => client.Paths.EnumNull(null));
             }
         }
 

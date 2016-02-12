@@ -15,13 +15,13 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.requiredoptional.models.Error;
 import fixtures.requiredoptional.models.ErrorException;
 import java.io.IOException;
-import retrofit.Call;
-import retrofit.Response;
-import retrofit.Retrofit;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -58,7 +58,7 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
             throw new IllegalArgumentException("Parameter pathParameter is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getRequiredPath(pathParameter);
-        return getRequiredPathDelegate(call.execute(), null);
+        return getRequiredPathDelegate(call.execute());
     }
 
     /**
@@ -76,9 +76,9 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
         Call<ResponseBody> call = service.getRequiredPath(pathParameter);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getRequiredPathDelegate(response, retrofit));
+                    serviceCallback.success(getRequiredPathDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -87,10 +87,10 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
         return call;
     }
 
-    private ServiceResponse<Error> getRequiredPathDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Error> getRequiredPathDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -103,7 +103,7 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
      */
     public ServiceResponse<Void> putOptionalQuery(String queryParameter) throws ErrorException, IOException {
         Call<ResponseBody> call = service.putOptionalQuery(queryParameter);
-        return putOptionalQueryDelegate(call.execute(), null);
+        return putOptionalQueryDelegate(call.execute());
     }
 
     /**
@@ -117,9 +117,9 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
         Call<ResponseBody> call = service.putOptionalQuery(queryParameter);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putOptionalQueryDelegate(response, retrofit));
+                    serviceCallback.success(putOptionalQueryDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -128,11 +128,11 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putOptionalQueryDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> putOptionalQueryDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -145,7 +145,7 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
      */
     public ServiceResponse<Void> putOptionalHeader(String queryParameter) throws ErrorException, IOException {
         Call<ResponseBody> call = service.putOptionalHeader(queryParameter);
-        return putOptionalHeaderDelegate(call.execute(), null);
+        return putOptionalHeaderDelegate(call.execute());
     }
 
     /**
@@ -159,9 +159,9 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
         Call<ResponseBody> call = service.putOptionalHeader(queryParameter);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putOptionalHeaderDelegate(response, retrofit));
+                    serviceCallback.success(putOptionalHeaderDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -170,11 +170,11 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putOptionalHeaderDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> putOptionalHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -187,7 +187,7 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
      */
     public ServiceResponse<Void> putOptionalBody(String bodyParameter) throws ErrorException, IOException {
         Call<ResponseBody> call = service.putOptionalBody(bodyParameter);
-        return putOptionalBodyDelegate(call.execute(), null);
+        return putOptionalBodyDelegate(call.execute());
     }
 
     /**
@@ -201,9 +201,9 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
         Call<ResponseBody> call = service.putOptionalBody(bodyParameter);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putOptionalBodyDelegate(response, retrofit));
+                    serviceCallback.success(putOptionalBodyDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -212,11 +212,11 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putOptionalBodyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> putOptionalBodyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -232,7 +232,7 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
             throw new IllegalArgumentException("Parameter this.client.getRequiredGlobalPath() is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getRequiredGlobalPath(this.client.getRequiredGlobalPath());
-        return getRequiredGlobalPathDelegate(call.execute(), null);
+        return getRequiredGlobalPathDelegate(call.execute());
     }
 
     /**
@@ -249,9 +249,9 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
         Call<ResponseBody> call = service.getRequiredGlobalPath(this.client.getRequiredGlobalPath());
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getRequiredGlobalPathDelegate(response, retrofit));
+                    serviceCallback.success(getRequiredGlobalPathDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -260,10 +260,10 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
         return call;
     }
 
-    private ServiceResponse<Error> getRequiredGlobalPathDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Error> getRequiredGlobalPathDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -279,7 +279,7 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
             throw new IllegalArgumentException("Parameter this.client.getRequiredGlobalQuery() is required and cannot be null.");
         }
         Call<ResponseBody> call = service.getRequiredGlobalQuery(this.client.getRequiredGlobalQuery());
-        return getRequiredGlobalQueryDelegate(call.execute(), null);
+        return getRequiredGlobalQueryDelegate(call.execute());
     }
 
     /**
@@ -296,9 +296,9 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
         Call<ResponseBody> call = service.getRequiredGlobalQuery(this.client.getRequiredGlobalQuery());
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getRequiredGlobalQueryDelegate(response, retrofit));
+                    serviceCallback.success(getRequiredGlobalQueryDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -307,10 +307,10 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
         return call;
     }
 
-    private ServiceResponse<Error> getRequiredGlobalQueryDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Error> getRequiredGlobalQueryDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -322,7 +322,7 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
      */
     public ServiceResponse<Error> getOptionalGlobalQuery() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getOptionalGlobalQuery(this.client.getOptionalGlobalQuery());
-        return getOptionalGlobalQueryDelegate(call.execute(), null);
+        return getOptionalGlobalQueryDelegate(call.execute());
     }
 
     /**
@@ -335,9 +335,9 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
         Call<ResponseBody> call = service.getOptionalGlobalQuery(this.client.getOptionalGlobalQuery());
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getOptionalGlobalQueryDelegate(response, retrofit));
+                    serviceCallback.success(getOptionalGlobalQueryDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -346,10 +346,10 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
         return call;
     }
 
-    private ServiceResponse<Error> getOptionalGlobalQueryDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Error> getOptionalGlobalQueryDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Error, ErrorException>()
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
 }

@@ -42,7 +42,7 @@ namespace Fixtures.AcceptanceTestsBodyDuration
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse> PutPositiveDurationWithHttpMessagesAsync(TimeSpan? durationBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> PutPositiveDurationWithHttpMessagesAsync(TimeSpan durationBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get a positive duration value
         /// </summary>

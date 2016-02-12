@@ -41,7 +41,7 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<bool?> GetTrueAsync( this IBoolModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<bool?> GetTrueAsync(this IBoolModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetTrueWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -57,7 +57,7 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
             /// </param>
             /// <param name='boolBody'>
             /// </param>
-            public static void PutTrue(this IBoolModel operations, bool? boolBody)
+            public static void PutTrue(this IBoolModel operations, bool boolBody)
             {
                 Task.Factory.StartNew(s => ((IBoolModel)s).PutTrueAsync(boolBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -73,7 +73,7 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutTrueAsync( this IBoolModel operations, bool? boolBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutTrueAsync(this IBoolModel operations, bool boolBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutTrueWithHttpMessagesAsync(boolBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -98,7 +98,7 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<bool?> GetFalseAsync( this IBoolModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<bool?> GetFalseAsync(this IBoolModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetFalseWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -114,7 +114,7 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
             /// </param>
             /// <param name='boolBody'>
             /// </param>
-            public static void PutFalse(this IBoolModel operations, bool? boolBody)
+            public static void PutFalse(this IBoolModel operations, bool boolBody)
             {
                 Task.Factory.StartNew(s => ((IBoolModel)s).PutFalseAsync(boolBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -130,7 +130,7 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutFalseAsync( this IBoolModel operations, bool? boolBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutFalseAsync(this IBoolModel operations, bool boolBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutFalseWithHttpMessagesAsync(boolBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -155,7 +155,7 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<bool?> GetNullAsync( this IBoolModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<bool?> GetNullAsync(this IBoolModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -183,7 +183,7 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<bool?> GetInvalidAsync( this IBoolModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<bool?> GetInvalidAsync(this IBoolModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

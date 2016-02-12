@@ -15,12 +15,12 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
-import retrofit.Call;
-import retrofit.Response;
-import retrofit.Retrofit;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -52,7 +52,7 @@ public final class HttpFailureOperationsImpl implements HttpFailureOperations {
      */
     public ServiceResponse<Boolean> getEmptyError() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getEmptyError();
-        return getEmptyErrorDelegate(call.execute(), null);
+        return getEmptyErrorDelegate(call.execute());
     }
 
     /**
@@ -65,9 +65,9 @@ public final class HttpFailureOperationsImpl implements HttpFailureOperations {
         Call<ResponseBody> call = service.getEmptyError();
         call.enqueue(new ServiceResponseCallback<Boolean>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getEmptyErrorDelegate(response, retrofit));
+                    serviceCallback.success(getEmptyErrorDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -76,11 +76,11 @@ public final class HttpFailureOperationsImpl implements HttpFailureOperations {
         return call;
     }
 
-    private ServiceResponse<Boolean> getEmptyErrorDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Boolean> getEmptyErrorDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Boolean, ErrorException>()
                 .register(200, new TypeToken<Boolean>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
 }

@@ -84,7 +84,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse> ParamIntegerWithHttpMessagesAsync(string scenario, int? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ParamIntegerWithHttpMessagesAsync(string scenario, int value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get a response with header value "value": 1 or -2
         /// </summary>
@@ -116,7 +116,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse> ParamLongWithHttpMessagesAsync(string scenario, long? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ParamLongWithHttpMessagesAsync(string scenario, long value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get a response with header value "value": 105 or -2
         /// </summary>
@@ -148,7 +148,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse> ParamFloatWithHttpMessagesAsync(string scenario, double? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ParamFloatWithHttpMessagesAsync(string scenario, double value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get a response with header value "value": 0.07 or -3.0
         /// </summary>
@@ -180,7 +180,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse> ParamDoubleWithHttpMessagesAsync(string scenario, double? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ParamDoubleWithHttpMessagesAsync(string scenario, double value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get a response with header value "value": 7e120 or -3.0
         /// </summary>
@@ -212,7 +212,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse> ParamBoolWithHttpMessagesAsync(string scenario, bool? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ParamBoolWithHttpMessagesAsync(string scenario, bool value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get a response with header value "value": true or false
         /// </summary>
@@ -279,7 +279,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse> ParamDateWithHttpMessagesAsync(string scenario, DateTime? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ParamDateWithHttpMessagesAsync(string scenario, DateTime value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get a response with header values "2010-01-01" or "0001-01-01"
         /// </summary>
@@ -311,7 +311,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse> ParamDatetimeWithHttpMessagesAsync(string scenario, DateTime? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ParamDatetimeWithHttpMessagesAsync(string scenario, DateTime value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get a response with header values "2010-01-01T12:34:56Z" or
         /// "0001-01-01T00:00:00Z"
@@ -375,7 +375,7 @@ namespace Fixtures.AcceptanceTestsHeader
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse> ParamDurationWithHttpMessagesAsync(string scenario, TimeSpan? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ParamDurationWithHttpMessagesAsync(string scenario, TimeSpan value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get a response with header values "P123DT22H14M12.011S"
         /// </summary>

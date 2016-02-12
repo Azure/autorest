@@ -28,7 +28,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the Sawshark class.
         /// </summary>
-        public Sawshark(double? length, DateTime? birthday, string species = default(string), IList<Fish> siblings = default(IList<Fish>), int? age = default(int?), byte[] picture = default(byte[]))
+        public Sawshark(double length, DateTime birthday, string species = default(string), IList<Fish> siblings = default(IList<Fish>), int? age = default(int?), byte[] picture = default(byte[]))
             : base(length, birthday, species, siblings, age)
         {
             Picture = picture;

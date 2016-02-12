@@ -16,17 +16,17 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
 import java.io.IOException;
 import java.util.List;
+import okhttp3.ResponseBody;
 import org.apache.commons.codec.binary.Base64;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
-import retrofit.Call;
-import retrofit.Response;
-import retrofit.Retrofit;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -59,7 +59,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> getBooleanTrue(boolean boolQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.getBooleanTrue(boolQuery);
-        return getBooleanTrueDelegate(call.execute(), null);
+        return getBooleanTrueDelegate(call.execute());
     }
 
     /**
@@ -73,9 +73,9 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         Call<ResponseBody> call = service.getBooleanTrue(boolQuery);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getBooleanTrueDelegate(response, retrofit));
+                    serviceCallback.success(getBooleanTrueDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -84,11 +84,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         return call;
     }
 
-    private ServiceResponse<Void> getBooleanTrueDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> getBooleanTrueDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -101,7 +101,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> getBooleanFalse(boolean boolQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.getBooleanFalse(boolQuery);
-        return getBooleanFalseDelegate(call.execute(), null);
+        return getBooleanFalseDelegate(call.execute());
     }
 
     /**
@@ -115,9 +115,9 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         Call<ResponseBody> call = service.getBooleanFalse(boolQuery);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getBooleanFalseDelegate(response, retrofit));
+                    serviceCallback.success(getBooleanFalseDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -126,11 +126,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         return call;
     }
 
-    private ServiceResponse<Void> getBooleanFalseDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> getBooleanFalseDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -143,7 +143,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> getBooleanNull(Boolean boolQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.getBooleanNull(boolQuery);
-        return getBooleanNullDelegate(call.execute(), null);
+        return getBooleanNullDelegate(call.execute());
     }
 
     /**
@@ -157,9 +157,9 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         Call<ResponseBody> call = service.getBooleanNull(boolQuery);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getBooleanNullDelegate(response, retrofit));
+                    serviceCallback.success(getBooleanNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -168,11 +168,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         return call;
     }
 
-    private ServiceResponse<Void> getBooleanNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> getBooleanNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -185,7 +185,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> getIntOneMillion(int intQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.getIntOneMillion(intQuery);
-        return getIntOneMillionDelegate(call.execute(), null);
+        return getIntOneMillionDelegate(call.execute());
     }
 
     /**
@@ -199,9 +199,9 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         Call<ResponseBody> call = service.getIntOneMillion(intQuery);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getIntOneMillionDelegate(response, retrofit));
+                    serviceCallback.success(getIntOneMillionDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -210,11 +210,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         return call;
     }
 
-    private ServiceResponse<Void> getIntOneMillionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> getIntOneMillionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -227,7 +227,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> getIntNegativeOneMillion(int intQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.getIntNegativeOneMillion(intQuery);
-        return getIntNegativeOneMillionDelegate(call.execute(), null);
+        return getIntNegativeOneMillionDelegate(call.execute());
     }
 
     /**
@@ -241,9 +241,9 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         Call<ResponseBody> call = service.getIntNegativeOneMillion(intQuery);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getIntNegativeOneMillionDelegate(response, retrofit));
+                    serviceCallback.success(getIntNegativeOneMillionDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -252,11 +252,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         return call;
     }
 
-    private ServiceResponse<Void> getIntNegativeOneMillionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> getIntNegativeOneMillionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -269,7 +269,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> getIntNull(Integer intQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.getIntNull(intQuery);
-        return getIntNullDelegate(call.execute(), null);
+        return getIntNullDelegate(call.execute());
     }
 
     /**
@@ -283,9 +283,9 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         Call<ResponseBody> call = service.getIntNull(intQuery);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getIntNullDelegate(response, retrofit));
+                    serviceCallback.success(getIntNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -294,11 +294,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         return call;
     }
 
-    private ServiceResponse<Void> getIntNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> getIntNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -311,7 +311,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> getTenBillion(long longQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.getTenBillion(longQuery);
-        return getTenBillionDelegate(call.execute(), null);
+        return getTenBillionDelegate(call.execute());
     }
 
     /**
@@ -325,9 +325,9 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         Call<ResponseBody> call = service.getTenBillion(longQuery);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getTenBillionDelegate(response, retrofit));
+                    serviceCallback.success(getTenBillionDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -336,11 +336,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         return call;
     }
 
-    private ServiceResponse<Void> getTenBillionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> getTenBillionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -353,7 +353,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> getNegativeTenBillion(long longQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.getNegativeTenBillion(longQuery);
-        return getNegativeTenBillionDelegate(call.execute(), null);
+        return getNegativeTenBillionDelegate(call.execute());
     }
 
     /**
@@ -367,9 +367,9 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         Call<ResponseBody> call = service.getNegativeTenBillion(longQuery);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getNegativeTenBillionDelegate(response, retrofit));
+                    serviceCallback.success(getNegativeTenBillionDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -378,11 +378,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         return call;
     }
 
-    private ServiceResponse<Void> getNegativeTenBillionDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> getNegativeTenBillionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -395,7 +395,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> getLongNull(Long longQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.getLongNull(longQuery);
-        return getLongNullDelegate(call.execute(), null);
+        return getLongNullDelegate(call.execute());
     }
 
     /**
@@ -409,9 +409,9 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         Call<ResponseBody> call = service.getLongNull(longQuery);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getLongNullDelegate(response, retrofit));
+                    serviceCallback.success(getLongNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -420,11 +420,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         return call;
     }
 
-    private ServiceResponse<Void> getLongNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> getLongNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -437,7 +437,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> floatScientificPositive(double floatQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.floatScientificPositive(floatQuery);
-        return floatScientificPositiveDelegate(call.execute(), null);
+        return floatScientificPositiveDelegate(call.execute());
     }
 
     /**
@@ -451,9 +451,9 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         Call<ResponseBody> call = service.floatScientificPositive(floatQuery);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(floatScientificPositiveDelegate(response, retrofit));
+                    serviceCallback.success(floatScientificPositiveDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -462,11 +462,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         return call;
     }
 
-    private ServiceResponse<Void> floatScientificPositiveDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> floatScientificPositiveDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -479,7 +479,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> floatScientificNegative(double floatQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.floatScientificNegative(floatQuery);
-        return floatScientificNegativeDelegate(call.execute(), null);
+        return floatScientificNegativeDelegate(call.execute());
     }
 
     /**
@@ -493,9 +493,9 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         Call<ResponseBody> call = service.floatScientificNegative(floatQuery);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(floatScientificNegativeDelegate(response, retrofit));
+                    serviceCallback.success(floatScientificNegativeDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -504,11 +504,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         return call;
     }
 
-    private ServiceResponse<Void> floatScientificNegativeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> floatScientificNegativeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -521,7 +521,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> floatNull(Double floatQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.floatNull(floatQuery);
-        return floatNullDelegate(call.execute(), null);
+        return floatNullDelegate(call.execute());
     }
 
     /**
@@ -535,9 +535,9 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         Call<ResponseBody> call = service.floatNull(floatQuery);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(floatNullDelegate(response, retrofit));
+                    serviceCallback.success(floatNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -546,11 +546,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         return call;
     }
 
-    private ServiceResponse<Void> floatNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> floatNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -563,7 +563,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> doubleDecimalPositive(double doubleQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.doubleDecimalPositive(doubleQuery);
-        return doubleDecimalPositiveDelegate(call.execute(), null);
+        return doubleDecimalPositiveDelegate(call.execute());
     }
 
     /**
@@ -577,9 +577,9 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         Call<ResponseBody> call = service.doubleDecimalPositive(doubleQuery);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(doubleDecimalPositiveDelegate(response, retrofit));
+                    serviceCallback.success(doubleDecimalPositiveDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -588,11 +588,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         return call;
     }
 
-    private ServiceResponse<Void> doubleDecimalPositiveDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> doubleDecimalPositiveDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -605,7 +605,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> doubleDecimalNegative(double doubleQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.doubleDecimalNegative(doubleQuery);
-        return doubleDecimalNegativeDelegate(call.execute(), null);
+        return doubleDecimalNegativeDelegate(call.execute());
     }
 
     /**
@@ -619,9 +619,9 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         Call<ResponseBody> call = service.doubleDecimalNegative(doubleQuery);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(doubleDecimalNegativeDelegate(response, retrofit));
+                    serviceCallback.success(doubleDecimalNegativeDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -630,11 +630,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         return call;
     }
 
-    private ServiceResponse<Void> doubleDecimalNegativeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> doubleDecimalNegativeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -647,7 +647,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> doubleNull(Double doubleQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.doubleNull(doubleQuery);
-        return doubleNullDelegate(call.execute(), null);
+        return doubleNullDelegate(call.execute());
     }
 
     /**
@@ -661,9 +661,9 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         Call<ResponseBody> call = service.doubleNull(doubleQuery);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(doubleNullDelegate(response, retrofit));
+                    serviceCallback.success(doubleNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -672,11 +672,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         return call;
     }
 
-    private ServiceResponse<Void> doubleNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> doubleNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -693,7 +693,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
             throw new IllegalArgumentException("Parameter stringQuery is required and cannot be null.");
         }
         Call<ResponseBody> call = service.stringUnicode(stringQuery);
-        return stringUnicodeDelegate(call.execute(), null);
+        return stringUnicodeDelegate(call.execute());
     }
 
     /**
@@ -711,9 +711,9 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         Call<ResponseBody> call = service.stringUnicode(stringQuery);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(stringUnicodeDelegate(response, retrofit));
+                    serviceCallback.success(stringUnicodeDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -722,11 +722,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         return call;
     }
 
-    private ServiceResponse<Void> stringUnicodeDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> stringUnicodeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -743,7 +743,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
             throw new IllegalArgumentException("Parameter stringQuery is required and cannot be null.");
         }
         Call<ResponseBody> call = service.stringUrlEncoded(stringQuery);
-        return stringUrlEncodedDelegate(call.execute(), null);
+        return stringUrlEncodedDelegate(call.execute());
     }
 
     /**
@@ -761,9 +761,9 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         Call<ResponseBody> call = service.stringUrlEncoded(stringQuery);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(stringUrlEncodedDelegate(response, retrofit));
+                    serviceCallback.success(stringUrlEncodedDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -772,11 +772,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         return call;
     }
 
-    private ServiceResponse<Void> stringUrlEncodedDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> stringUrlEncodedDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -793,7 +793,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
             throw new IllegalArgumentException("Parameter stringQuery is required and cannot be null.");
         }
         Call<ResponseBody> call = service.stringEmpty(stringQuery);
-        return stringEmptyDelegate(call.execute(), null);
+        return stringEmptyDelegate(call.execute());
     }
 
     /**
@@ -811,9 +811,9 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         Call<ResponseBody> call = service.stringEmpty(stringQuery);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(stringEmptyDelegate(response, retrofit));
+                    serviceCallback.success(stringEmptyDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -822,11 +822,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         return call;
     }
 
-    private ServiceResponse<Void> stringEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> stringEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -839,7 +839,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> stringNull(String stringQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.stringNull(stringQuery);
-        return stringNullDelegate(call.execute(), null);
+        return stringNullDelegate(call.execute());
     }
 
     /**
@@ -853,9 +853,9 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         Call<ResponseBody> call = service.stringNull(stringQuery);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(stringNullDelegate(response, retrofit));
+                    serviceCallback.success(stringNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -864,11 +864,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         return call;
     }
 
-    private ServiceResponse<Void> stringNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> stringNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -881,7 +881,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> enumValid(UriColor enumQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.enumValid(client.getMapperAdapter().serializeRaw(enumQuery));
-        return enumValidDelegate(call.execute(), null);
+        return enumValidDelegate(call.execute());
     }
 
     /**
@@ -895,9 +895,9 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         Call<ResponseBody> call = service.enumValid(client.getMapperAdapter().serializeRaw(enumQuery));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(enumValidDelegate(response, retrofit));
+                    serviceCallback.success(enumValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -906,11 +906,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         return call;
     }
 
-    private ServiceResponse<Void> enumValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> enumValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -923,7 +923,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> enumNull(UriColor enumQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.enumNull(client.getMapperAdapter().serializeRaw(enumQuery));
-        return enumNullDelegate(call.execute(), null);
+        return enumNullDelegate(call.execute());
     }
 
     /**
@@ -937,9 +937,9 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         Call<ResponseBody> call = service.enumNull(client.getMapperAdapter().serializeRaw(enumQuery));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(enumNullDelegate(response, retrofit));
+                    serviceCallback.success(enumNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -948,11 +948,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         return call;
     }
 
-    private ServiceResponse<Void> enumNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> enumNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -965,7 +965,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> byteMultiByte(byte[] byteQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.byteMultiByte(Base64.encodeBase64String(byteQuery));
-        return byteMultiByteDelegate(call.execute(), null);
+        return byteMultiByteDelegate(call.execute());
     }
 
     /**
@@ -979,9 +979,9 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         Call<ResponseBody> call = service.byteMultiByte(Base64.encodeBase64String(byteQuery));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(byteMultiByteDelegate(response, retrofit));
+                    serviceCallback.success(byteMultiByteDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -990,11 +990,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         return call;
     }
 
-    private ServiceResponse<Void> byteMultiByteDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> byteMultiByteDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1011,7 +1011,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
             throw new IllegalArgumentException("Parameter byteQuery is required and cannot be null.");
         }
         Call<ResponseBody> call = service.byteEmpty(Base64.encodeBase64String(byteQuery));
-        return byteEmptyDelegate(call.execute(), null);
+        return byteEmptyDelegate(call.execute());
     }
 
     /**
@@ -1029,9 +1029,9 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         Call<ResponseBody> call = service.byteEmpty(Base64.encodeBase64String(byteQuery));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(byteEmptyDelegate(response, retrofit));
+                    serviceCallback.success(byteEmptyDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1040,11 +1040,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         return call;
     }
 
-    private ServiceResponse<Void> byteEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> byteEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1057,7 +1057,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> byteNull(byte[] byteQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.byteNull(Base64.encodeBase64String(byteQuery));
-        return byteNullDelegate(call.execute(), null);
+        return byteNullDelegate(call.execute());
     }
 
     /**
@@ -1071,9 +1071,9 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         Call<ResponseBody> call = service.byteNull(Base64.encodeBase64String(byteQuery));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(byteNullDelegate(response, retrofit));
+                    serviceCallback.success(byteNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1082,11 +1082,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         return call;
     }
 
-    private ServiceResponse<Void> byteNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> byteNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1103,7 +1103,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
             throw new IllegalArgumentException("Parameter dateQuery is required and cannot be null.");
         }
         Call<ResponseBody> call = service.dateValid(client.getMapperAdapter().serializeRaw(dateQuery));
-        return dateValidDelegate(call.execute(), null);
+        return dateValidDelegate(call.execute());
     }
 
     /**
@@ -1121,9 +1121,9 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         Call<ResponseBody> call = service.dateValid(client.getMapperAdapter().serializeRaw(dateQuery));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(dateValidDelegate(response, retrofit));
+                    serviceCallback.success(dateValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1132,11 +1132,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         return call;
     }
 
-    private ServiceResponse<Void> dateValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> dateValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1149,7 +1149,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> dateNull(LocalDate dateQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.dateNull(client.getMapperAdapter().serializeRaw(dateQuery));
-        return dateNullDelegate(call.execute(), null);
+        return dateNullDelegate(call.execute());
     }
 
     /**
@@ -1163,9 +1163,9 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         Call<ResponseBody> call = service.dateNull(client.getMapperAdapter().serializeRaw(dateQuery));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(dateNullDelegate(response, retrofit));
+                    serviceCallback.success(dateNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1174,11 +1174,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         return call;
     }
 
-    private ServiceResponse<Void> dateNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> dateNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1195,7 +1195,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
             throw new IllegalArgumentException("Parameter dateTimeQuery is required and cannot be null.");
         }
         Call<ResponseBody> call = service.dateTimeValid(client.getMapperAdapter().serializeRaw(dateTimeQuery));
-        return dateTimeValidDelegate(call.execute(), null);
+        return dateTimeValidDelegate(call.execute());
     }
 
     /**
@@ -1213,9 +1213,9 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         Call<ResponseBody> call = service.dateTimeValid(client.getMapperAdapter().serializeRaw(dateTimeQuery));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(dateTimeValidDelegate(response, retrofit));
+                    serviceCallback.success(dateTimeValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1224,11 +1224,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         return call;
     }
 
-    private ServiceResponse<Void> dateTimeValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> dateTimeValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1241,7 +1241,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> dateTimeNull(DateTime dateTimeQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.dateTimeNull(client.getMapperAdapter().serializeRaw(dateTimeQuery));
-        return dateTimeNullDelegate(call.execute(), null);
+        return dateTimeNullDelegate(call.execute());
     }
 
     /**
@@ -1255,9 +1255,9 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         Call<ResponseBody> call = service.dateTimeNull(client.getMapperAdapter().serializeRaw(dateTimeQuery));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(dateTimeNullDelegate(response, retrofit));
+                    serviceCallback.success(dateTimeNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1266,11 +1266,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         return call;
     }
 
-    private ServiceResponse<Void> dateTimeNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> dateTimeNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1283,7 +1283,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> arrayStringCsvValid(List<String> arrayQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.arrayStringCsvValid(client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
-        return arrayStringCsvValidDelegate(call.execute(), null);
+        return arrayStringCsvValidDelegate(call.execute());
     }
 
     /**
@@ -1297,9 +1297,9 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         Call<ResponseBody> call = service.arrayStringCsvValid(client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(arrayStringCsvValidDelegate(response, retrofit));
+                    serviceCallback.success(arrayStringCsvValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1308,11 +1308,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         return call;
     }
 
-    private ServiceResponse<Void> arrayStringCsvValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> arrayStringCsvValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1325,7 +1325,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> arrayStringCsvNull(List<String> arrayQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.arrayStringCsvNull(client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
-        return arrayStringCsvNullDelegate(call.execute(), null);
+        return arrayStringCsvNullDelegate(call.execute());
     }
 
     /**
@@ -1339,9 +1339,9 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         Call<ResponseBody> call = service.arrayStringCsvNull(client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(arrayStringCsvNullDelegate(response, retrofit));
+                    serviceCallback.success(arrayStringCsvNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1350,11 +1350,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         return call;
     }
 
-    private ServiceResponse<Void> arrayStringCsvNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> arrayStringCsvNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1367,7 +1367,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> arrayStringCsvEmpty(List<String> arrayQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.arrayStringCsvEmpty(client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
-        return arrayStringCsvEmptyDelegate(call.execute(), null);
+        return arrayStringCsvEmptyDelegate(call.execute());
     }
 
     /**
@@ -1381,9 +1381,9 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         Call<ResponseBody> call = service.arrayStringCsvEmpty(client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(arrayStringCsvEmptyDelegate(response, retrofit));
+                    serviceCallback.success(arrayStringCsvEmptyDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1392,11 +1392,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         return call;
     }
 
-    private ServiceResponse<Void> arrayStringCsvEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> arrayStringCsvEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1409,7 +1409,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> arrayStringSsvValid(List<String> arrayQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.arrayStringSsvValid(client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.SSV));
-        return arrayStringSsvValidDelegate(call.execute(), null);
+        return arrayStringSsvValidDelegate(call.execute());
     }
 
     /**
@@ -1423,9 +1423,9 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         Call<ResponseBody> call = service.arrayStringSsvValid(client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.SSV));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(arrayStringSsvValidDelegate(response, retrofit));
+                    serviceCallback.success(arrayStringSsvValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1434,11 +1434,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         return call;
     }
 
-    private ServiceResponse<Void> arrayStringSsvValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> arrayStringSsvValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1451,7 +1451,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> arrayStringTsvValid(List<String> arrayQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.arrayStringTsvValid(client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.TSV));
-        return arrayStringTsvValidDelegate(call.execute(), null);
+        return arrayStringTsvValidDelegate(call.execute());
     }
 
     /**
@@ -1465,9 +1465,9 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         Call<ResponseBody> call = service.arrayStringTsvValid(client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.TSV));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(arrayStringTsvValidDelegate(response, retrofit));
+                    serviceCallback.success(arrayStringTsvValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1476,11 +1476,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         return call;
     }
 
-    private ServiceResponse<Void> arrayStringTsvValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> arrayStringTsvValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -1493,7 +1493,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> arrayStringPipesValid(List<String> arrayQuery) throws ErrorException, IOException {
         Call<ResponseBody> call = service.arrayStringPipesValid(client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.PIPES));
-        return arrayStringPipesValidDelegate(call.execute(), null);
+        return arrayStringPipesValidDelegate(call.execute());
     }
 
     /**
@@ -1507,9 +1507,9 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         Call<ResponseBody> call = service.arrayStringPipesValid(client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.PIPES));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(arrayStringPipesValidDelegate(response, retrofit));
+                    serviceCallback.success(arrayStringPipesValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -1518,11 +1518,11 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         return call;
     }
 
-    private ServiceResponse<Void> arrayStringPipesValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> arrayStringPipesValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
 }

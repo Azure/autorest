@@ -40,7 +40,7 @@ namespace Fixtures.InternalCtors
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task GetAsync( this IPets operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task GetAsync(this IPets operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.GetWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }

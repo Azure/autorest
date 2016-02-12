@@ -8,7 +8,7 @@ using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 
-namespace Microsoft.Rest.Generator.CSharp.TemplateModels
+namespace Microsoft.Rest.Generator.CSharp
 {
     public static class ClientModelExtensions
     {
@@ -213,17 +213,41 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
                     serializationSettings);
         }
 
+        public static bool CanBeNull(this IParameter parameter)
+        {
+            if (parameter == null)
+            {
+                throw new ArgumentNullException("parameter");
+            }
+
+            if (parameter.IsRequired && parameter.Type.IsValueType())
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         /// <summary>
         /// Determines if the given IType is a value type in C#
         /// </summary>
-        /// <param name="primaryType">The type to check</param>
+        /// <param name="type">The type to check</param>
         /// <returns>True if the type maps to a C# value type, otherwise false</returns>
-        public static bool IsValueType(this PrimaryType primaryType)
+        public static bool IsValueType(this IType type)
         {
-            return primaryType != null && 
-                (primaryType.Type == KnownPrimaryType.Boolean || primaryType.Type == KnownPrimaryType.DateTime || primaryType.Type == KnownPrimaryType.Date
-                || primaryType.Type == KnownPrimaryType.Double || primaryType.Type == KnownPrimaryType.Int || primaryType.Type == KnownPrimaryType.Long 
-                || primaryType.Type == KnownPrimaryType.TimeSpan || primaryType.Type == KnownPrimaryType.DateTimeRfc1123);
+            PrimaryType primaryType = type as PrimaryType;
+            EnumType enumType = type as EnumType;
+            return enumType != null || 
+                (primaryType != null && 
+                (primaryType.Type == KnownPrimaryType.Boolean 
+                || primaryType.Type == KnownPrimaryType.DateTime 
+                || primaryType.Type == KnownPrimaryType.Date
+                || primaryType.Type == KnownPrimaryType.Decimal 
+                || primaryType.Type == KnownPrimaryType.Double
+                || primaryType.Type == KnownPrimaryType.Int 
+                || primaryType.Type == KnownPrimaryType.Long 
+                || primaryType.Type == KnownPrimaryType.TimeSpan 
+                || primaryType.Type == KnownPrimaryType.DateTimeRfc1123));
         }
 
         public static string CheckNull(string valueReference, string executionBlock)
@@ -295,7 +319,14 @@ namespace Microsoft.Rest.Generator.CSharp.TemplateModels
 
             if (sb.ToString().Trim().Length > 0)
             {
-                return CheckNull(valueReference, sb.ToString());
+                if (type.IsValueType())
+                {
+                    return sb.ToString();
+                }
+                else
+                {
+                    return CheckNull(valueReference, sb.ToString());
+                }
             }
 
             return null;

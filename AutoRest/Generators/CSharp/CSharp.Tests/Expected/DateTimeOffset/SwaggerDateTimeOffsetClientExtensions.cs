@@ -53,7 +53,7 @@ namespace Fixtures.DateTimeOffset
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Product> GetProductAsync( this ISwaggerDateTimeOffsetClient operations, string responseCode = default(string), Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Product> GetProductAsync(this ISwaggerDateTimeOffsetClient operations, string responseCode = default(string), Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetProductWithHttpMessagesAsync(responseCode, product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -93,7 +93,7 @@ namespace Fixtures.DateTimeOffset
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Product> PutProductAsync( this ISwaggerDateTimeOffsetClient operations, string responseCode = default(string), Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Product> PutProductAsync(this ISwaggerDateTimeOffsetClient operations, string responseCode = default(string), Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.PutProductWithHttpMessagesAsync(responseCode, product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -133,7 +133,7 @@ namespace Fixtures.DateTimeOffset
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Product> PostProductAsync( this ISwaggerDateTimeOffsetClient operations, string responseCode = default(string), Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Product> PostProductAsync(this ISwaggerDateTimeOffsetClient operations, string responseCode = default(string), Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.PostProductWithHttpMessagesAsync(responseCode, product, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -173,7 +173,7 @@ namespace Fixtures.DateTimeOffset
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Product> PatchProductAsync( this ISwaggerDateTimeOffsetClient operations, string responseCode = default(string), Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Product> PatchProductAsync(this ISwaggerDateTimeOffsetClient operations, string responseCode = default(string), Product product = default(Product), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.PatchProductWithHttpMessagesAsync(responseCode, product, null, cancellationToken).ConfigureAwait(false))
                 {

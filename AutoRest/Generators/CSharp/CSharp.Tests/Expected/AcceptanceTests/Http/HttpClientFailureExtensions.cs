@@ -41,7 +41,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Error> Head400Async( this IHttpClientFailure operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Error> Head400Async(this IHttpClientFailure operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Head400WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -69,7 +69,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Error> Get400Async( this IHttpClientFailure operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Error> Get400Async(this IHttpClientFailure operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Get400WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -103,7 +103,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Error> Put400Async( this IHttpClientFailure operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Error> Put400Async(this IHttpClientFailure operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Put400WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -137,7 +137,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Error> Patch400Async( this IHttpClientFailure operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Error> Patch400Async(this IHttpClientFailure operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Patch400WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -171,7 +171,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Error> Post400Async( this IHttpClientFailure operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Error> Post400Async(this IHttpClientFailure operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Post400WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -205,7 +205,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Error> Delete400Async( this IHttpClientFailure operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Error> Delete400Async(this IHttpClientFailure operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Delete400WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -233,7 +233,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Error> Head401Async( this IHttpClientFailure operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Error> Head401Async(this IHttpClientFailure operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Head401WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -261,7 +261,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Error> Get402Async( this IHttpClientFailure operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Error> Get402Async(this IHttpClientFailure operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Get402WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -289,7 +289,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Error> Get403Async( this IHttpClientFailure operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Error> Get403Async(this IHttpClientFailure operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Get403WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -323,7 +323,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Error> Put404Async( this IHttpClientFailure operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Error> Put404Async(this IHttpClientFailure operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Put404WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -357,7 +357,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Error> Patch405Async( this IHttpClientFailure operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Error> Patch405Async(this IHttpClientFailure operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Patch405WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -391,7 +391,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Error> Post406Async( this IHttpClientFailure operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Error> Post406Async(this IHttpClientFailure operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Post406WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -425,7 +425,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Error> Delete407Async( this IHttpClientFailure operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Error> Delete407Async(this IHttpClientFailure operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Delete407WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -459,7 +459,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Error> Put409Async( this IHttpClientFailure operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Error> Put409Async(this IHttpClientFailure operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Put409WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -487,7 +487,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Error> Head410Async( this IHttpClientFailure operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Error> Head410Async(this IHttpClientFailure operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Head410WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -515,7 +515,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Error> Get411Async( this IHttpClientFailure operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Error> Get411Async(this IHttpClientFailure operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Get411WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -543,7 +543,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Error> Get412Async( this IHttpClientFailure operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Error> Get412Async(this IHttpClientFailure operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Get412WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -577,7 +577,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Error> Put413Async( this IHttpClientFailure operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Error> Put413Async(this IHttpClientFailure operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Put413WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -611,7 +611,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Error> Patch414Async( this IHttpClientFailure operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Error> Patch414Async(this IHttpClientFailure operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Patch414WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -645,7 +645,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Error> Post415Async( this IHttpClientFailure operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Error> Post415Async(this IHttpClientFailure operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Post415WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -673,7 +673,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Error> Get416Async( this IHttpClientFailure operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Error> Get416Async(this IHttpClientFailure operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Get416WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -707,7 +707,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Error> Delete417Async( this IHttpClientFailure operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Error> Delete417Async(this IHttpClientFailure operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Delete417WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -735,7 +735,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Error> Head429Async( this IHttpClientFailure operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Error> Head429Async(this IHttpClientFailure operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Head429WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

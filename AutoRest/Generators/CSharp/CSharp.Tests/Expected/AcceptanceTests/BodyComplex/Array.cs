@@ -183,7 +183,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// </return>
         public async Task<HttpOperationResponse> PutValidWithHttpMessagesAsync(IList<string> array = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            ArrayWrapper complexBody = null;
+            ArrayWrapper complexBody = default(ArrayWrapper);
             if (array != null)
             {
                 complexBody = new ArrayWrapper();
@@ -415,7 +415,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// </return>
         public async Task<HttpOperationResponse> PutEmptyWithHttpMessagesAsync(IList<string> array = default(IList<string>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            ArrayWrapper complexBody = null;
+            ArrayWrapper complexBody = default(ArrayWrapper);
             if (array != null)
             {
                 complexBody = new ArrayWrapper();

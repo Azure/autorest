@@ -41,7 +41,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<ArrayWrapper> GetValidAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ArrayWrapper> GetValidAsync(this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -73,7 +73,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutValidAsync( this IArray operations, IList<string> array = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutValidAsync(this IArray operations, IList<string> array = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutValidWithHttpMessagesAsync(array, null, cancellationToken).ConfigureAwait(false);
             }
@@ -98,7 +98,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<ArrayWrapper> GetEmptyAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ArrayWrapper> GetEmptyAsync(this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -130,7 +130,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutEmptyAsync( this IArray operations, IList<string> array = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutEmptyAsync(this IArray operations, IList<string> array = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutEmptyWithHttpMessagesAsync(array, null, cancellationToken).ConfigureAwait(false);
             }
@@ -157,7 +157,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<ArrayWrapper> GetNotProvidedAsync( this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ArrayWrapper> GetNotProvidedAsync(this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetNotProvidedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

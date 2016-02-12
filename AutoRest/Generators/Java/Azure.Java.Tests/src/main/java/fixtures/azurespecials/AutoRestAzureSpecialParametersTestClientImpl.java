@@ -14,9 +14,9 @@ import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
 import com.microsoft.azure.CustomHeaderInterceptor;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
-import com.squareup.okhttp.OkHttpClient;
 import java.util.UUID;
-import retrofit.Retrofit;
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestAzureSpecialParametersTestClient class.
@@ -156,7 +156,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * @return the XMsClientRequestIdOperations object.
      */
     public XMsClientRequestIdOperations getXMsClientRequestIdOperations() {
-        return new XMsClientRequestIdOperationsImpl(this.retrofitBuilder.build(), this);
+        return new XMsClientRequestIdOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -164,7 +164,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * @return the SubscriptionInCredentialsOperations object.
      */
     public SubscriptionInCredentialsOperations getSubscriptionInCredentialsOperations() {
-        return new SubscriptionInCredentialsOperationsImpl(this.retrofitBuilder.build(), this);
+        return new SubscriptionInCredentialsOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -172,7 +172,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * @return the SubscriptionInMethodOperations object.
      */
     public SubscriptionInMethodOperations getSubscriptionInMethodOperations() {
-        return new SubscriptionInMethodOperationsImpl(this.retrofitBuilder.build(), this);
+        return new SubscriptionInMethodOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -180,7 +180,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * @return the ApiVersionDefaultOperations object.
      */
     public ApiVersionDefaultOperations getApiVersionDefaultOperations() {
-        return new ApiVersionDefaultOperationsImpl(this.retrofitBuilder.build(), this);
+        return new ApiVersionDefaultOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -188,7 +188,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * @return the ApiVersionLocalOperations object.
      */
     public ApiVersionLocalOperations getApiVersionLocalOperations() {
-        return new ApiVersionLocalOperationsImpl(this.retrofitBuilder.build(), this);
+        return new ApiVersionLocalOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -196,7 +196,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * @return the SkipUrlEncodingOperations object.
      */
     public SkipUrlEncodingOperations getSkipUrlEncodingOperations() {
-        return new SkipUrlEncodingOperationsImpl(this.retrofitBuilder.build(), this);
+        return new SkipUrlEncodingOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -204,7 +204,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * @return the OdataOperations object.
      */
     public OdataOperations getOdataOperations() {
-        return new OdataOperationsImpl(this.retrofitBuilder.build(), this);
+        return new OdataOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -212,7 +212,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * @return the HeaderOperations object.
      */
     public HeaderOperations getHeaderOperations() {
-        return new HeaderOperationsImpl(this.retrofitBuilder.build(), this);
+        return new HeaderOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -258,26 +258,28 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      *
      * @param baseUri the base URI of the host
      * @param credentials the management credentials for Azure
-     * @param client the {@link OkHttpClient} client to use for REST calls
+     * @param clientBuilder the builder for building up an {@link OkHttpClient}
      * @param retrofitBuilder the builder for building up a {@link Retrofit}
      */
-    public AutoRestAzureSpecialParametersTestClientImpl(String baseUri, ServiceClientCredentials credentials, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
-        super(client, retrofitBuilder);
+    public AutoRestAzureSpecialParametersTestClientImpl(String baseUri, ServiceClientCredentials credentials, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
+        super(clientBuilder, retrofitBuilder);
         this.baseUri = baseUri;
         this.credentials = credentials;
         initialize();
     }
 
-    private void initialize() {
+    @Override
+    protected void initialize() {
         this.apiVersion = "2015-07-01-preview";
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
-        this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
+        this.clientBuilder.interceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         if (this.credentials != null) {
-            this.credentials.applyCredentialsFilter(this.client);
+            this.credentials.applyCredentialsFilter(clientBuilder);
         }
-        this.azureClient = new AzureClient(client, retrofitBuilder);
+        super.initialize();
+        this.azureClient = new AzureClient(clientBuilder, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
         this.retrofitBuilder.baseUrl(baseUri);
     }
