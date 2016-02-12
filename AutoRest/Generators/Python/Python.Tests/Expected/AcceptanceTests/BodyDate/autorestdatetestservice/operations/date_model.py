@@ -39,7 +39,8 @@ class DateModel(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: date or msrest.pipeline.ClientRawResponse
+        :rtype: date
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/date/null'
@@ -79,7 +80,8 @@ class DateModel(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: date or msrest.pipeline.ClientRawResponse
+        :rtype: date
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/date/invaliddate'
@@ -119,7 +121,8 @@ class DateModel(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: date or msrest.pipeline.ClientRawResponse
+        :rtype: date
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/date/overflowdate'
@@ -159,7 +162,8 @@ class DateModel(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: date or msrest.pipeline.ClientRawResponse
+        :rtype: date
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/date/underflowdate'
@@ -201,7 +205,8 @@ class DateModel(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/date/max'
@@ -238,7 +243,8 @@ class DateModel(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: date or msrest.pipeline.ClientRawResponse
+        :rtype: date
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/date/max'
@@ -280,7 +286,8 @@ class DateModel(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/date/min'
@@ -317,7 +324,8 @@ class DateModel(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: date or msrest.pipeline.ClientRawResponse
+        :rtype: date
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/date/min'

@@ -22,8 +22,6 @@ class FirstParameterGroup(Model):
 
     _required = []
 
-    def __init__(self, *args, **kwargs):
-        self.header_one = None
-        self.query_one = None
-
-        super(FirstParameterGroup, self).__init__(*args, **kwargs)
+    def __init__(self, header_one=None, query_one=None):
+        self.header_one = header_one
+        self.query_one = query_one

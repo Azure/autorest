@@ -16,6 +16,11 @@ class StorageAccountCreateParameters(Resource):
     """
     The parameters to provide for the account.
 
+    :param str id: Resource Id
+    :param str name: Resource name
+    :param str type: Resource type
+    :param str location: Resource location
+    :param dict tags: Resource tags
     :param str account_type: Gets or sets the account type. Possible values
      include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
      'Standard_RAGRS', 'Premium_LRS'
@@ -27,7 +32,6 @@ class StorageAccountCreateParameters(Resource):
         'account_type': {'key': 'properties.accountType', 'type': 'AccountType'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.account_type = None
-
-        super(StorageAccountCreateParameters, self).__init__(*args, **kwargs)
+    def __init__(self, location, id=None, name=None, type=None, tags=None, account_type=None):
+        super(StorageAccountCreateParameters, self).__init__(location, id=id, name=name, type=type, tags=tags)
+        self.account_type = account_type

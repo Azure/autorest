@@ -26,8 +26,6 @@ class Datetimerfc1123Wrapper(Model):
         'now': {'key': 'now', 'type': 'rfc-1123'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.field = None
-        self.now = None
-
-        super(Datetimerfc1123Wrapper, self).__init__(*args, **kwargs)
+    def __init__(self, field=None, now=None):
+        self.field = field
+        self.now = now

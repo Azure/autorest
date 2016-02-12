@@ -44,7 +44,8 @@ class Files(object):
          bytes of the current chunk of data and the response object. If the
          data is uploading, response will be None.
         :type callback: Callable[Bytes, response=None]
-        :rtype: Generator or msrest.pipeline.ClientRawResponse
+        :rtype: Generator
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/files/stream/nonempty'
@@ -89,7 +90,8 @@ class Files(object):
          bytes of the current chunk of data and the response object. If the
          data is uploading, response will be None.
         :type callback: Callable[Bytes, response=None]
-        :rtype: Generator or msrest.pipeline.ClientRawResponse
+        :rtype: Generator
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/files/stream/empty'

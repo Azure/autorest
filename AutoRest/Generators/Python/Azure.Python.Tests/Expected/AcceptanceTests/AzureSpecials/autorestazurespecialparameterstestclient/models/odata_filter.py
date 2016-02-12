@@ -26,8 +26,6 @@ class OdataFilter(Model):
         'name': {'key': 'name', 'type': 'str'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.id = None
-        self.name = None
-
-        super(OdataFilter, self).__init__(*args, **kwargs)
+    def __init__(self, id=None, name=None):
+        self.id = id
+        self.name = name

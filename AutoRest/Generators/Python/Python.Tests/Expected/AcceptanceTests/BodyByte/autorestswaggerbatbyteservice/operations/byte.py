@@ -39,7 +39,8 @@ class Byte(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: bytearray or msrest.pipeline.ClientRawResponse
+        :rtype: bytearray
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/byte/null'
@@ -79,7 +80,8 @@ class Byte(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: bytearray or msrest.pipeline.ClientRawResponse
+        :rtype: bytearray
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/byte/empty'
@@ -119,7 +121,8 @@ class Byte(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: bytearray or msrest.pipeline.ClientRawResponse
+        :rtype: bytearray
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/byte/nonAscii'
@@ -162,7 +165,8 @@ class Byte(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/byte/nonAscii'
@@ -199,7 +203,8 @@ class Byte(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: bytearray or msrest.pipeline.ClientRawResponse
+        :rtype: bytearray
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/byte/invalid'

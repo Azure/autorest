@@ -24,14 +24,14 @@ class AutoRestHeadTestServiceConfiguration(AzureConfiguration):
     :type credentials: credentials
     :param accept_language: Gets or sets the preferred language for the
      response.
-    :type accept_language: str or None
+    :type accept_language: str
     :param long_running_operation_retry_timeout: Gets or sets the retry
      timeout in seconds for Long Running Operations. Default value is 30.
-    :type long_running_operation_retry_timeout: int or None
+    :type long_running_operation_retry_timeout: int
     :param generate_client_request_id: When set to true a unique
      x-ms-client-request-id value is generated and included in each request.
      Default is true.
-    :type generate_client_request_id: bool or None
+    :type generate_client_request_id: bool
     :param str base_url: Service URL
     :param str filepath: Existing config
     """

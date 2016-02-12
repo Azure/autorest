@@ -26,7 +26,7 @@ class AutoRestUrlTestServiceConfiguration(Configuration):
      appears in the path
     :type global_string_path: str
     :param global_string_query: should contain value null
-    :type global_string_query: str or None
+    :type global_string_query: str
     :param str base_url: Service URL
     :param str filepath: Existing config
     """

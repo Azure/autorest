@@ -39,7 +39,8 @@ class HttpSuccess(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/success/200'
@@ -72,7 +73,8 @@ class HttpSuccess(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: bool or msrest.pipeline.ClientRawResponse
+        :rtype: bool
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/success/200'
@@ -110,11 +112,12 @@ class HttpSuccess(object):
         Put boolean value true returning 200 success
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/success/200'
@@ -152,11 +155,12 @@ class HttpSuccess(object):
         Patch true Boolean value in request returning 200
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/success/200'
@@ -194,11 +198,12 @@ class HttpSuccess(object):
         Post bollean value true in request that returns a 200
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/success/200'
@@ -236,11 +241,12 @@ class HttpSuccess(object):
         Delete simple boolean value true returns 200
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/success/200'
@@ -278,11 +284,12 @@ class HttpSuccess(object):
         Put true Boolean value in request returns 201
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/success/201'
@@ -320,11 +327,12 @@ class HttpSuccess(object):
         Post true Boolean value in request returns 201 (Created)
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/success/201'
@@ -362,11 +370,12 @@ class HttpSuccess(object):
         Put true Boolean value in request returns 202 (Accepted)
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/success/202'
@@ -404,11 +413,12 @@ class HttpSuccess(object):
         Patch true Boolean value in request returns 202
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/success/202'
@@ -446,11 +456,12 @@ class HttpSuccess(object):
         Post true Boolean value in request returns 202 (Accepted)
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/success/202'
@@ -488,11 +499,12 @@ class HttpSuccess(object):
         Delete true Boolean value in request returns 202 (accepted)
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/success/202'
@@ -532,7 +544,8 @@ class HttpSuccess(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/success/204'
@@ -563,11 +576,12 @@ class HttpSuccess(object):
         Put true Boolean value in request returns 204 (no content)
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/success/204'
@@ -605,11 +619,12 @@ class HttpSuccess(object):
         Patch true Boolean value in request returns 204 (no content)
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/success/204'
@@ -647,11 +662,12 @@ class HttpSuccess(object):
         Post true Boolean value in request returns 204 (no content)
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/success/204'
@@ -689,11 +705,12 @@ class HttpSuccess(object):
         Delete true Boolean value in request returns 204 (no content)
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/success/204'
@@ -733,7 +750,8 @@ class HttpSuccess(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/success/404'

@@ -18,7 +18,6 @@ class Cookiecuttershark(Shark):
 
     _required = []
 
-    def __init__(self, *args, **kwargs):
-        super(Cookiecuttershark, self).__init__(*args, **kwargs)
-
+    def __init__(self, birthday, length, species=None, siblings=None, age=None):
+        super(Cookiecuttershark, self).__init__(birthday, length, species=species, siblings=siblings, age=age)
         self.fishtype = 'cookiecuttershark'

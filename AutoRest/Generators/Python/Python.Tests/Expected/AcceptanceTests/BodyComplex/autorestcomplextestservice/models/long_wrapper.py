@@ -26,8 +26,6 @@ class LongWrapper(Model):
         'field2': {'key': 'field2', 'type': 'long'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.field1 = None
-        self.field2 = None
-
-        super(LongWrapper, self).__init__(*args, **kwargs)
+    def __init__(self, field1=None, field2=None):
+        self.field1 = field1
+        self.field2 = field2

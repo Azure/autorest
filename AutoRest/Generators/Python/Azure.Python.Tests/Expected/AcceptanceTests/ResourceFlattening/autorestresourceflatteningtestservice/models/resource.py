@@ -32,11 +32,9 @@ class Resource(Model):
         'name': {'key': 'name', 'type': 'str'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.id = None
-        self.type = None
-        self.tags = None
-        self.location = None
-        self.name = None
-
-        super(Resource, self).__init__(*args, **kwargs)
+    def __init__(self, id=None, type=None, tags=None, location=None, name=None):
+        self.id = id
+        self.type = type
+        self.tags = tags
+        self.location = location
+        self.name = name

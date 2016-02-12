@@ -15,6 +15,10 @@ from .cat import Cat
 class Siamese(Cat):
     """Siamese
 
+    :param int id:
+    :param str name:
+    :param str color:
+    :param list hates:
     :param str breed:
     """
 
@@ -24,7 +28,6 @@ class Siamese(Cat):
         'breed': {'key': 'breed', 'type': 'str'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.breed = None
-
-        super(Siamese, self).__init__(*args, **kwargs)
+    def __init__(self, id=None, name=None, color=None, hates=None, breed=None):
+        super(Siamese, self).__init__(id=id, name=name, color=color, hates=hates)
+        self.breed = breed

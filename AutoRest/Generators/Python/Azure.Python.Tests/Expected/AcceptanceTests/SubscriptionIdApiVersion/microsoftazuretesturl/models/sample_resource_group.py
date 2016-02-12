@@ -26,8 +26,6 @@ class SampleResourceGroup(Model):
         'location': {'key': 'location', 'type': 'str'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.name = None
-        self.location = None
-
-        super(SampleResourceGroup, self).__init__(*args, **kwargs)
+    def __init__(self, name=None, location=None):
+        self.name = name
+        self.location = location

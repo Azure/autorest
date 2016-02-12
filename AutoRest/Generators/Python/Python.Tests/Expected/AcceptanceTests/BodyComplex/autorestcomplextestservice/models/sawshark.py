@@ -15,6 +15,12 @@ from .shark import Shark
 class Sawshark(Shark):
     """Sawshark
 
+    :param str species:
+    :param float length:
+    :param list siblings:
+    :param str fishtype: Polymorhpic Discriminator
+    :param int age:
+    :param datetime birthday:
     :param bytearray picture:
     """
 
@@ -24,9 +30,7 @@ class Sawshark(Shark):
         'picture': {'key': 'picture', 'type': 'bytearray'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.picture = None
-
-        super(Sawshark, self).__init__(*args, **kwargs)
-
+    def __init__(self, birthday, length, species=None, siblings=None, age=None, picture=None):
+        super(Sawshark, self).__init__(birthday, length, species=species, siblings=siblings, age=age)
+        self.picture = picture
         self.fishtype = 'sawshark'

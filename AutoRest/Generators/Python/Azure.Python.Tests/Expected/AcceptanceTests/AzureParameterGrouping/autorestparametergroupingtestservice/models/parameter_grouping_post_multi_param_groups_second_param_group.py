@@ -22,8 +22,6 @@ class ParameterGroupingPostMultiParamGroupsSecondParamGroup(Model):
 
     _required = []
 
-    def __init__(self, *args, **kwargs):
-        self.header_two = None
-        self.query_two = None
-
-        super(ParameterGroupingPostMultiParamGroupsSecondParamGroup, self).__init__(*args, **kwargs)
+    def __init__(self, header_two=None, query_two=None):
+        self.header_two = header_two
+        self.query_two = query_two

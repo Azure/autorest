@@ -34,9 +34,7 @@ class CheckNameAvailabilityResult(Model):
         'message': {'key': 'message', 'type': 'str'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.name_available = None
-        self.reason = None
-        self.message = None
-
-        super(CheckNameAvailabilityResult, self).__init__(*args, **kwargs)
+    def __init__(self, name_available=None, reason=None, message=None):
+        self.name_available = name_available
+        self.reason = reason
+        self.message = message

@@ -41,7 +41,8 @@ class Paths(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/paths/bool/true/{boolPath}'
@@ -80,7 +81,8 @@ class Paths(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/paths/bool/false/{boolPath}'
@@ -119,7 +121,8 @@ class Paths(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/paths/int/1000000/{intPath}'
@@ -158,7 +161,8 @@ class Paths(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/paths/int/-1000000/{intPath}'
@@ -197,7 +201,8 @@ class Paths(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/paths/long/10000000000/{longPath}'
@@ -236,7 +241,8 @@ class Paths(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/paths/long/-10000000000/{longPath}'
@@ -275,7 +281,8 @@ class Paths(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/paths/float/1.034E+20/{floatPath}'
@@ -314,7 +321,8 @@ class Paths(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/paths/float/-1.034E-20/{floatPath}'
@@ -353,7 +361,8 @@ class Paths(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/paths/double/9999999.999/{doublePath}'
@@ -392,7 +401,8 @@ class Paths(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/paths/double/-9999999.999/{doublePath}'
@@ -431,7 +441,8 @@ class Paths(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/paths/string/unicode/{stringPath}'
@@ -471,7 +482,8 @@ class Paths(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}'
@@ -510,7 +522,8 @@ class Paths(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/paths/string/empty/{stringPath}'
@@ -549,7 +562,8 @@ class Paths(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/paths/string/null/{stringPath}'
@@ -589,7 +603,8 @@ class Paths(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/paths/enum/green%20color/{enumPath}'
@@ -630,7 +645,8 @@ class Paths(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/paths/string/null/{enumPath}'
@@ -670,7 +686,8 @@ class Paths(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/paths/byte/multibyte/{bytePath}'
@@ -709,7 +726,8 @@ class Paths(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/paths/byte/empty/{bytePath}'
@@ -748,7 +766,8 @@ class Paths(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/paths/byte/null/{bytePath}'
@@ -787,7 +806,8 @@ class Paths(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/paths/date/2012-01-01/{datePath}'
@@ -827,7 +847,8 @@ class Paths(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/paths/date/null/{datePath}'
@@ -866,7 +887,8 @@ class Paths(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}'
@@ -906,7 +928,8 @@ class Paths(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/paths/datetime/null/{dateTimePath}'

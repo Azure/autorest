@@ -42,7 +42,8 @@ class Explicit(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/reqopt/requied/integer/parameter'
@@ -77,11 +78,12 @@ class Explicit(object):
         Test explicitly optional integer. Please put null.
 
         :param body_parameter:
-        :type body_parameter: int or None
+        :type body_parameter: int
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/reqopt/optional/integer/parameter'
@@ -125,11 +127,10 @@ class Explicit(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
-        body_parameter = models.IntWrapper()
-        if value is not None:
-            body_parameter.value = value
+        body_parameter = models.IntWrapper(value)
 
         # Construct URL
         url = '/reqopt/requied/integer/property'
@@ -165,15 +166,14 @@ class Explicit(object):
         'value' = null.
 
         :param value:
-        :type value: int or None
+        :type value: int
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
-        body_parameter = models.IntOptionalWrapper()
-        if value is not None:
-            body_parameter.value = value
+        body_parameter = models.IntOptionalWrapper(value=value)
 
         # Construct URL
         url = '/reqopt/optional/integer/property'
@@ -217,7 +217,8 @@ class Explicit(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/reqopt/requied/integer/header'
@@ -250,11 +251,12 @@ class Explicit(object):
         'headerParameter' => null.
 
         :param header_parameter:
-        :type header_parameter: int or None
+        :type header_parameter: int
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/reqopt/optional/integer/header'
@@ -292,7 +294,8 @@ class Explicit(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/reqopt/requied/string/parameter'
@@ -327,11 +330,12 @@ class Explicit(object):
         Test explicitly optional string. Please put null.
 
         :param body_parameter:
-        :type body_parameter: str or None
+        :type body_parameter: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/reqopt/optional/string/parameter'
@@ -375,11 +379,10 @@ class Explicit(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
-        body_parameter = models.StringWrapper()
-        if value is not None:
-            body_parameter.value = value
+        body_parameter = models.StringWrapper(value)
 
         # Construct URL
         url = '/reqopt/requied/string/property'
@@ -415,15 +418,14 @@ class Explicit(object):
         with 'value' = null.
 
         :param value:
-        :type value: str or None
+        :type value: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
-        body_parameter = models.StringOptionalWrapper()
-        if value is not None:
-            body_parameter.value = value
+        body_parameter = models.StringOptionalWrapper(value=value)
 
         # Construct URL
         url = '/reqopt/optional/string/property'
@@ -467,7 +469,8 @@ class Explicit(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/reqopt/requied/string/header'
@@ -500,11 +503,12 @@ class Explicit(object):
         => null.
 
         :param body_parameter:
-        :type body_parameter: str or None
+        :type body_parameter: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/reqopt/optional/string/header'
@@ -542,7 +546,8 @@ class Explicit(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/reqopt/requied/class/parameter'
@@ -577,11 +582,12 @@ class Explicit(object):
         Test explicitly optional complex object. Please put null.
 
         :param body_parameter:
-        :type body_parameter: Product or None
+        :type body_parameter: Product
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/reqopt/optional/class/parameter'
@@ -625,11 +631,10 @@ class Explicit(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
-        body_parameter = models.ClassWrapper()
-        if value is not None:
-            body_parameter.value = value
+        body_parameter = models.ClassWrapper(value)
 
         # Construct URL
         url = '/reqopt/requied/class/property'
@@ -665,15 +670,14 @@ class Explicit(object):
         class-wrapper with 'value' = null.
 
         :param value:
-        :type value: Product or None
+        :type value: Product
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
-        body_parameter = models.ClassOptionalWrapper()
-        if value is not None:
-            body_parameter.value = value
+        body_parameter = models.ClassOptionalWrapper(value=value)
 
         # Construct URL
         url = '/reqopt/optional/class/property'
@@ -716,7 +720,8 @@ class Explicit(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/reqopt/requied/array/parameter'
@@ -751,11 +756,12 @@ class Explicit(object):
         Test explicitly optional array. Please put null.
 
         :param body_parameter:
-        :type body_parameter: list or None
+        :type body_parameter: list
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/reqopt/optional/array/parameter'
@@ -799,11 +805,10 @@ class Explicit(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
-        body_parameter = models.ArrayWrapper()
-        if value is not None:
-            body_parameter.value = value
+        body_parameter = models.ArrayWrapper(value)
 
         # Construct URL
         url = '/reqopt/requied/array/property'
@@ -839,15 +844,14 @@ class Explicit(object):
         'value' = null.
 
         :param value:
-        :type value: list or None
+        :type value: list
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
-        body_parameter = models.ArrayOptionalWrapper()
-        if value is not None:
-            body_parameter.value = value
+        body_parameter = models.ArrayOptionalWrapper(value=value)
 
         # Construct URL
         url = '/reqopt/optional/array/property'
@@ -891,7 +895,8 @@ class Explicit(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/reqopt/requied/array/header'
@@ -924,11 +929,12 @@ class Explicit(object):
         'headerParameter' => null.
 
         :param header_parameter:
-        :type header_parameter: list or None
+        :type header_parameter: list
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/reqopt/optional/array/header'

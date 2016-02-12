@@ -15,6 +15,8 @@ from .pet import Pet
 class Cat(Pet):
     """Cat
 
+    :param int id:
+    :param str name:
     :param str color:
     :param list hates:
     """
@@ -26,8 +28,7 @@ class Cat(Pet):
         'hates': {'key': 'hates', 'type': '[Dog]'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.color = None
-        self.hates = None
-
-        super(Cat, self).__init__(*args, **kwargs)
+    def __init__(self, id=None, name=None, color=None, hates=None):
+        super(Cat, self).__init__(id=id, name=name)
+        self.color = color
+        self.hates = hates

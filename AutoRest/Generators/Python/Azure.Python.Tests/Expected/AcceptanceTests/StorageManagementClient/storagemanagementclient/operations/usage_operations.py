@@ -42,7 +42,8 @@ class UsageOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: UsageListResult or msrest.pipeline.ClientRawResponse
+        :rtype: UsageListResult
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/usages'

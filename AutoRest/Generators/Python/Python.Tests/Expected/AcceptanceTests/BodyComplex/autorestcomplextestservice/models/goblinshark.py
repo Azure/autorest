@@ -15,6 +15,12 @@ from .shark import Shark
 class Goblinshark(Shark):
     """Goblinshark
 
+    :param str species:
+    :param float length:
+    :param list siblings:
+    :param str fishtype: Polymorhpic Discriminator
+    :param int age:
+    :param datetime birthday:
     :param int jawsize:
     """
 
@@ -24,9 +30,7 @@ class Goblinshark(Shark):
         'jawsize': {'key': 'jawsize', 'type': 'int'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.jawsize = None
-
-        super(Goblinshark, self).__init__(*args, **kwargs)
-
+    def __init__(self, birthday, length, species=None, siblings=None, age=None, jawsize=None):
+        super(Goblinshark, self).__init__(birthday, length, species=species, siblings=siblings, age=age)
+        self.jawsize = jawsize
         self.fishtype = 'goblin'

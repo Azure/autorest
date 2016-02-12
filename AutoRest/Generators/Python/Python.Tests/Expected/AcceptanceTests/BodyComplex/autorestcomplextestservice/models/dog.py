@@ -15,6 +15,8 @@ from .pet import Pet
 class Dog(Pet):
     """Dog
 
+    :param int id:
+    :param str name:
     :param str food:
     """
 
@@ -24,7 +26,6 @@ class Dog(Pet):
         'food': {'key': 'food', 'type': 'str'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.food = None
-
-        super(Dog, self).__init__(*args, **kwargs)
+    def __init__(self, id=None, name=None, food=None):
+        super(Dog, self).__init__(id=id, name=name)
+        self.food = food

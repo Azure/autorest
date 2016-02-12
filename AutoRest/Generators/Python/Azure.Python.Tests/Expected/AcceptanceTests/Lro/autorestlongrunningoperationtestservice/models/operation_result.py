@@ -28,8 +28,6 @@ class OperationResult(Model):
         'error': {'key': 'error', 'type': 'OperationResultError'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.status = None
-        self.error = None
-
-        super(OperationResult, self).__init__(*args, **kwargs)
+    def __init__(self, status=None, error=None):
+        self.status = status
+        self.error = error

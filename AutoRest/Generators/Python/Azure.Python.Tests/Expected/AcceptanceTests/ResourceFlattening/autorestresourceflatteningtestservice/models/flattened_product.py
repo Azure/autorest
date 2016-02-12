@@ -15,6 +15,11 @@ from .resource import Resource
 class FlattenedProduct(Resource):
     """FlattenedProduct
 
+    :param str id: Resource Id
+    :param str type: Resource Type
+    :param dict tags:
+    :param str location: Resource Location
+    :param str name: Resource Name
     :param str pname:
     :param str flattened_product_type:
     :param str provisioning_state_values: Possible values include:
@@ -32,10 +37,9 @@ class FlattenedProduct(Resource):
         'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.pname = None
-        self.flattened_product_type = None
-        self.provisioning_state_values = None
-        self.provisioning_state = None
-
-        super(FlattenedProduct, self).__init__(*args, **kwargs)
+    def __init__(self, id=None, type=None, tags=None, location=None, name=None, pname=None, flattened_product_type=None, provisioning_state_values=None, provisioning_state=None):
+        super(FlattenedProduct, self).__init__(id=id, type=type, tags=tags, location=location, name=name)
+        self.pname = pname
+        self.flattened_product_type = flattened_product_type
+        self.provisioning_state_values = provisioning_state_values
+        self.provisioning_state = provisioning_state

@@ -40,7 +40,8 @@ class HttpClientFailure(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/failure/client/400'
@@ -74,7 +75,8 @@ class HttpClientFailure(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/failure/client/400'
@@ -106,11 +108,12 @@ class HttpClientFailure(object):
         error
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/failure/client/400'
@@ -149,11 +152,12 @@ class HttpClientFailure(object):
         error
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/failure/client/400'
@@ -192,11 +196,12 @@ class HttpClientFailure(object):
         error
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/failure/client/400'
@@ -235,11 +240,12 @@ class HttpClientFailure(object):
         error
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/failure/client/400'
@@ -280,7 +286,8 @@ class HttpClientFailure(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/failure/client/401'
@@ -314,7 +321,8 @@ class HttpClientFailure(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/failure/client/402'
@@ -348,7 +356,8 @@ class HttpClientFailure(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/failure/client/403'
@@ -380,11 +389,12 @@ class HttpClientFailure(object):
         error
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/failure/client/404'
@@ -423,11 +433,12 @@ class HttpClientFailure(object):
         error
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/failure/client/405'
@@ -466,11 +477,12 @@ class HttpClientFailure(object):
         error
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/failure/client/406'
@@ -509,11 +521,12 @@ class HttpClientFailure(object):
         error
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/failure/client/407'
@@ -552,11 +565,12 @@ class HttpClientFailure(object):
         error
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/failure/client/409'
@@ -597,7 +611,8 @@ class HttpClientFailure(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/failure/client/410'
@@ -631,7 +646,8 @@ class HttpClientFailure(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/failure/client/411'
@@ -665,7 +681,8 @@ class HttpClientFailure(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/failure/client/412'
@@ -697,11 +714,12 @@ class HttpClientFailure(object):
         error
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/failure/client/413'
@@ -740,11 +758,12 @@ class HttpClientFailure(object):
         error
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/failure/client/414'
@@ -783,11 +802,12 @@ class HttpClientFailure(object):
         error
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/failure/client/415'
@@ -828,7 +848,8 @@ class HttpClientFailure(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/failure/client/416'
@@ -860,11 +881,12 @@ class HttpClientFailure(object):
         error
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/failure/client/417'
@@ -905,7 +927,8 @@ class HttpClientFailure(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Error or msrest.pipeline.ClientRawResponse
+        :rtype: Error
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/failure/client/429'

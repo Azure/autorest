@@ -76,7 +76,8 @@ class AutoRestValidationTest(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Product or msrest.pipeline.ClientRawResponse
+        :rtype: Product
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/fakepath/{subscriptionId}/{resourceGroupName}/{id}'
@@ -126,11 +127,12 @@ class AutoRestValidationTest(object):
         :param id: Required int multiple of 10 from 100 to 1000.
         :type id: int
         :param body:
-        :type body: Product or None
+        :type body: Product
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Product or msrest.pipeline.ClientRawResponse
+        :rtype: Product
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/fakepath/{subscriptionId}/{resourceGroupName}/{id}'
@@ -185,7 +187,8 @@ class AutoRestValidationTest(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/validation/constantsInPath/{constantParam}/value'
@@ -221,11 +224,12 @@ class AutoRestValidationTest(object):
         :param constant_param:
         :type constant_param: str
         :param body:
-        :type body: Product or None
+        :type body: Product
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Product or msrest.pipeline.ClientRawResponse
+        :rtype: Product
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/validation/constantsInPath/{constantParam}/value'

@@ -16,6 +16,11 @@ class StorageAccount(Resource):
     """
     The storage account.
 
+    :param str id: Resource Id
+    :param str name: Resource name
+    :param str type: Resource type
+    :param str location: Resource location
+    :param dict tags: Resource tags
     :param str provisioning_state: Gets the status of the storage account at
      the time the operation was called. Possible values include: 'Creating',
      'ResolvingDNS', 'Succeeded'
@@ -68,17 +73,16 @@ class StorageAccount(Resource):
         'secondary_endpoints': {'key': 'properties.secondaryEndpoints', 'type': 'Endpoints'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.provisioning_state = None
-        self.account_type = None
-        self.primary_endpoints = None
-        self.primary_location = None
-        self.status_of_primary = None
-        self.last_geo_failover_time = None
-        self.secondary_location = None
-        self.status_of_secondary = None
-        self.creation_time = None
-        self.custom_domain = None
-        self.secondary_endpoints = None
-
-        super(StorageAccount, self).__init__(*args, **kwargs)
+    def __init__(self, location, id=None, name=None, type=None, tags=None, provisioning_state=None, account_type=None, primary_endpoints=None, primary_location=None, status_of_primary=None, last_geo_failover_time=None, secondary_location=None, status_of_secondary=None, creation_time=None, custom_domain=None, secondary_endpoints=None):
+        super(StorageAccount, self).__init__(location, id=id, name=name, type=type, tags=tags)
+        self.provisioning_state = provisioning_state
+        self.account_type = account_type
+        self.primary_endpoints = primary_endpoints
+        self.primary_location = primary_location
+        self.status_of_primary = status_of_primary
+        self.last_geo_failover_time = last_geo_failover_time
+        self.secondary_location = secondary_location
+        self.status_of_secondary = status_of_secondary
+        self.creation_time = creation_time
+        self.custom_domain = custom_domain
+        self.secondary_endpoints = secondary_endpoints

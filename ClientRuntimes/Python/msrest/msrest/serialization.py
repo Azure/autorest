@@ -49,6 +49,13 @@ except NameError:
     basestring = str
 
 
+def get_heirarchy(cls):
+    parents = list(cls.__bases__)
+    if parents:
+        parents.extend(get_heirarchy(parents[-1]))
+    return parents
+
+
 class Model(object):
     """Mixin for all client request body/response body models to support
     serialization and deserialization.
@@ -62,8 +69,7 @@ class Model(object):
     def __init__(self, *args, **kwargs):
         """Allow attribute setting via kwargs on initialization."""
         for k in kwargs:
-            if hasattr(self, k):
-                setattr(self, k, kwargs[k])
+            setattr(self, k, kwargs[k])
 
     def __eq__(self, other):
         """Compare objects by comparing all attributes."""
@@ -78,32 +84,35 @@ class Model(object):
     def __str__(self):
         return str(self.__dict__)
 
-    def __getattribute__(self, attr):
-        """When getting Model map attributes, check the maps
-        of parent objects.
-        """
-        if attr == '_attribute_map':
-            parents = list(self.__class__.__mro__)
-            map = {}
-            for p in reversed(parents):
-                if hasattr(p, attr):
-                    map.update(p.__dict__.get(attr, {}))
-            return map
-        elif attr == '_subtype_map':
-            parents = list(self.__class__.__bases__)
-            for p in parents:
-                if hasattr(p, '_subtype_map') and p._subtype_map:
-                    return p._subtype_map
-            return {}
-        elif attr == '_required':
-            parents = list(self.__class__.__mro__)
-            map = []
-            for p in reversed(parents):
-                if hasattr(p, attr):
-                    map += p.__dict__[attr]
-            return map
-        else:
-            return super(Model, self).__getattribute__(attr)
+    @classmethod
+    def _get_attribute_map(cls):
+        attr = '_attribute_map'
+        cls_refs = [cls]
+        cls_refs.extend(get_heirarchy(cls))
+        map = {}
+        for p in reversed(cls_refs):
+            map.update(p.__dict__.get(attr, {}))
+        return map
+
+    @classmethod
+    def _get_required_attrs(cls):
+        attr = '_required'
+        cls_refs = [cls]
+        cls_refs.extend(get_heirarchy(cls))
+        map = []
+        for p in reversed(cls_refs):
+            if hasattr(p, attr):
+                map += p.__dict__[attr]
+        return map
+
+    @classmethod
+    def _get_subtype_map(cls):
+        attr = '_subtype_map'
+        parents = cls.__bases__
+        for base in parents:
+            if hasattr(base, attr) and base._subtype_map:
+                return base._subtype_map
+        return {}
 
     @classmethod
     def _classify(cls, response, objects):
@@ -180,8 +189,8 @@ class Serializer(object):
                     target_obj, data_type, required=True, **kwargs)
 
         try:
-            attributes = target_obj._attribute_map
-            required_attrs = target_obj._required
+            attributes = target_obj._get_attribute_map()
+            required_attrs = target_obj._get_required_attrs()
             self._classify_data(target_obj, class_name, serialized)
 
             for attr, map in attributes.items():
@@ -220,7 +229,7 @@ class Serializer(object):
         classified in the message.
         """
         try:
-            for _type, _classes in target_obj._subtype_map.items():
+            for _type, _classes in target_obj._get_subtype_map().items():
                 for ref, name in _classes.items():
                     if name == class_name:
                         serialized[_type] = ref
@@ -596,7 +605,8 @@ class Deserializer(object):
         if data is None:
             return data
         try:
-            attributes = response._attribute_map
+            attributes = response._get_attribute_map()
+            d_attrs = {}
             for attr, map in attributes.items():
                 attr_type = map['type']
                 key = map['key']
@@ -609,12 +619,12 @@ class Deserializer(object):
 
                 raw_value = working_data.get(key)
                 value = self.deserialize_data(raw_value, attr_type)
-                setattr(response, attr, value)
+                d_attrs[attr] = value
         except (AttributeError, TypeError, KeyError) as err:
             msg = "Unable to deserialize to object: " + class_name
             raise_with_traceback(DeserializationError, msg, err)
         else:
-            return response
+            return self._instantiate_model(response, d_attrs)
 
     def _classify_target(self, target, data):
         """Check to see whether the deserialization target object can
@@ -637,12 +647,7 @@ class Deserializer(object):
             target = target._classify(data, self.dependencies)
         except (TypeError, AttributeError):
             pass  # Target has no subclasses, so can't classify further.
-
-        try:
-            target_obj = target()
-            return target_obj, target_obj.__class__.__name__
-        except TypeError:
-            return target, target.__class__.__name__
+        return target, target.__class__.__name__
 
     def _unpack_content(self, raw_data):
         """Extract data from the body of a REST response object.
@@ -672,6 +677,34 @@ class Deserializer(object):
                 return data
 
         return data
+
+    def _instantiate_model(self, response, attrs):
+        """Instantiate a response model passing in deserializaed args.
+
+        :param response: The response model class.
+        :param d_attrs: The deserialized response attributes.
+        """
+        required = response._get_required_attrs()
+        subtype = response._get_subtype_map()
+
+        params = sorted(attrs.items())
+        try:
+            args = [v for k, v in params
+                    if k in required and k not in subtype]
+            kwargs = {k: v for k, v in params
+                      if k not in required and k not in subtype}
+            return response(*args, **kwargs)
+        except TypeError:
+            pass
+
+        try:
+            for attr, value in params:
+                setattr(response, attr, value)
+            return response
+        except Exception as exp:
+            msg = "Unable to instantiate or populate response model. "
+            msg += "Type: {}, Error: {}".format(type(response), exp)
+            raise DeserializationError(msg)
 
     def deserialize_data(self, data, data_type):
         """Process data for deserialization according to data type.
@@ -703,6 +736,7 @@ class Deserializer(object):
 
         except (ValueError, TypeError, AttributeError) as err:
             msg = "Unable to deserialize response data."
+            msg += " Data: {}, {}".format(data, data_type)
             raise_with_traceback(DeserializationError, msg, err)
         else:
             return self(obj_type, data)
