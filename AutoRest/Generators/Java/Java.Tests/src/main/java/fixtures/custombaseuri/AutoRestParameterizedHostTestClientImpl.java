@@ -64,7 +64,7 @@ public final class AutoRestParameterizedHostTestClientImpl extends ServiceClient
      * Initializes an instance of AutoRestParameterizedHostTestClient client.
      */
     public AutoRestParameterizedHostTestClientImpl() {
-        this("http://badhost");
+        this("http://{accountName}{host}");
     }
 
     /**
@@ -87,7 +87,7 @@ public final class AutoRestParameterizedHostTestClientImpl extends ServiceClient
      */
     public AutoRestParameterizedHostTestClientImpl( OkHttpClient client, Retrofit.Builder retrofitBuilder) {
         super(client, retrofitBuilder);
-        this.baseUri = http://badhost;
+        this.baseUri = http://{accountName}{host};
         initialize();
     }
 

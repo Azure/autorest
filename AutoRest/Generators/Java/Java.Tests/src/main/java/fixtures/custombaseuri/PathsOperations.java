@@ -18,6 +18,7 @@ import java.io.IOException;
 import retrofit.Call;
 import retrofit.http.GET;
 import retrofit.http.Headers;
+import retrofit.http.Path;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -31,24 +32,27 @@ public interface PathsOperations {
     interface PathsService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("customuri")
-        Call<ResponseBody> getEmpty();
+        Call<ResponseBody> getEmpty(@Path("accountName") String accountName, @Path("host") String host);
 
     }
     /**
      * Get a 200 to test a valid base uri.
      *
+     * @param accountName Account Name
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    ServiceResponse<Void> getEmpty() throws ErrorException, IOException;
+    ServiceResponse<Void> getEmpty(String accountName) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Get a 200 to test a valid base uri.
      *
+     * @param accountName Account Name
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    Call<ResponseBody> getEmptyAsync(final ServiceCallback<Void> serviceCallback);
+    Call<ResponseBody> getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback);
 
 }

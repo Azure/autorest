@@ -46,23 +46,40 @@ public final class PathsOperationsImpl implements PathsOperations {
     /**
      * Get a 200 to test a valid base uri.
      *
+     * @param accountName Account Name
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the {@link ServiceResponse} object if successful.
      */
-    public ServiceResponse<Void> getEmpty() throws ErrorException, IOException {
-        Call<ResponseBody> call = service.getEmpty();
+    public ServiceResponse<Void> getEmpty(String accountName) throws ErrorException, IOException, IllegalArgumentException {
+        if (accountName == null) {
+            throw new IllegalArgumentException("Parameter accountName is required and cannot be null.");
+        }
+        if (this.client.getHost() == null) {
+            throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
+        }
+        Call<ResponseBody> call = service.getEmpty(accountName, this.client.getHost());
         return getEmptyDelegate(call.execute(), null);
     }
 
     /**
      * Get a 200 to test a valid base uri.
      *
+     * @param accountName Account Name
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getEmptyAsync(final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.getEmpty();
+    public Call<ResponseBody> getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback) {
+        if (accountName == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter accountName is required and cannot be null."));
+            return null;
+        }
+        if (this.client.getHost() == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            return null;
+        }
+        Call<ResponseBody> call = service.getEmpty(accountName, this.client.getHost());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
@@ -76,7 +93,7 @@ public final class PathsOperationsImpl implements PathsOperations {
         return call;
     }
 
-    private ServiceResponse<Void> getEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Void> getEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)

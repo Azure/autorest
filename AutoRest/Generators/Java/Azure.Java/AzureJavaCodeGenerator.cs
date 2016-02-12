@@ -69,6 +69,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
             AzureExtensions.SetDefaultResponses(serviceClient);
             AzureExtensions.AddParameterGroups(serviceClient);
             AzureExtensions.AddPageableMethod(serviceClient, _namer);
+            Extensions.NormalizeClientModel(serviceClient, Settings);
             _namer.NormalizeClientModel(serviceClient);
             _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");
