@@ -69,7 +69,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
         {
             get
             {
-                return "this.getClientInterceptors().add(new CustomHeaderInterceptor(\"x-ms-client-request-id\", UUID.randomUUID().toString()));";
+                return "this.clientBuilder.interceptors().add(new CustomHeaderInterceptor(\"x-ms-client-request-id\", UUID.randomUUID().toString()));";
             }
         }
     }

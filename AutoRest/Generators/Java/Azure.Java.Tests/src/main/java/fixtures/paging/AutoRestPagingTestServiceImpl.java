@@ -123,7 +123,7 @@ public final class AutoRestPagingTestServiceImpl extends AzureServiceClient impl
      * @return the PagingOperations object.
      */
     public PagingOperations getPagingOperations() {
-        return new PagingOperationsImpl(this.retrofitBuilder.build(), this);
+        return new PagingOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -184,7 +184,7 @@ public final class AutoRestPagingTestServiceImpl extends AzureServiceClient impl
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
-        this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
+        this.clientBuilder.interceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         if (this.credentials != null) {
             this.credentials.applyCredentialsFilter(clientBuilder);
         }

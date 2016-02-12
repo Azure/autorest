@@ -57,7 +57,7 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
      * @return the BasicOperations object.
      */
     public BasicOperations getBasicOperations() {
-        return new BasicOperationsImpl(this.retrofitBuilder.build(), this);
+        return new BasicOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -65,7 +65,7 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
      * @return the PrimitiveOperations object.
      */
     public PrimitiveOperations getPrimitiveOperations() {
-        return new PrimitiveOperationsImpl(this.retrofitBuilder.build(), this);
+        return new PrimitiveOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -73,7 +73,7 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
      * @return the ArrayOperations object.
      */
     public ArrayOperations getArrayOperations() {
-        return new ArrayOperationsImpl(this.retrofitBuilder.build(), this);
+        return new ArrayOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -81,7 +81,7 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
      * @return the DictionaryOperations object.
      */
     public DictionaryOperations getDictionaryOperations() {
-        return new DictionaryOperationsImpl(this.retrofitBuilder.build(), this);
+        return new DictionaryOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -89,7 +89,7 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
      * @return the InheritanceOperations object.
      */
     public InheritanceOperations getInheritanceOperations() {
-        return new InheritanceOperationsImpl(this.retrofitBuilder.build(), this);
+        return new InheritanceOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -97,7 +97,7 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
      * @return the PolymorphismOperations object.
      */
     public PolymorphismOperations getPolymorphismOperations() {
-        return new PolymorphismOperationsImpl(this.retrofitBuilder.build(), this);
+        return new PolymorphismOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -105,7 +105,7 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
      * @return the PolymorphicrecursiveOperations object.
      */
     public PolymorphicrecursiveOperations getPolymorphicrecursiveOperations() {
-        return new PolymorphicrecursiveOperationsImpl(this.retrofitBuilder.build(), this);
+        return new PolymorphicrecursiveOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**

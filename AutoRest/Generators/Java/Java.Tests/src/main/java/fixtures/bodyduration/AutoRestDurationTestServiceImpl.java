@@ -36,7 +36,7 @@ public final class AutoRestDurationTestServiceImpl extends ServiceClient impleme
      * @return the DurationOperations object.
      */
     public DurationOperations getDurationOperations() {
-        return new DurationOperationsImpl(this.retrofitBuilder.build(), this);
+        return new DurationOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**

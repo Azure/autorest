@@ -9,9 +9,6 @@ package com.microsoft.rest;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.microsoft.rest.serializer.JacksonMapperAdapter;
-import okhttp3.ResponseBody;
-import retrofit2.Response;
-import retrofit2.Retrofit;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,6 +17,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
+
+import okhttp3.ResponseBody;
+import retrofit2.Response;
 
 /**
  * The builder for building a {@link ServiceResponse}.

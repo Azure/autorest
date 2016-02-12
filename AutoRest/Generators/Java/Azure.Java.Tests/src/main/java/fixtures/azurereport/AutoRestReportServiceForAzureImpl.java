@@ -23,6 +23,7 @@ import fixtures.azurereport.models.ErrorException;
 import java.io.IOException;
 import java.util.Map;
 import java.util.UUID;
+import okhttp3.logging.HttpLoggingInterceptor.Level;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -189,7 +190,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
-        this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
+        this.clientBuilder.interceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         if (this.credentials != null) {
             this.credentials.applyCredentialsFilter(clientBuilder);
         }
@@ -197,7 +198,24 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
         this.azureClient = new AzureClient(clientBuilder, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
         this.retrofitBuilder.baseUrl(baseUri);
-        service = this.retrofitBuilder.build().create(AutoRestReportServiceForAzureService.class);
+        initializeService();
+    }
+
+    private void initializeService() {
+        service = this.retrofitBuilder.client(this.clientBuilder.build())
+                .build()
+                .create(AutoRestReportServiceForAzureService.class);
+    }
+
+    /**
+     * Sets the logging level for OkHttp client.
+     *
+     * @param logLevel the logging level enum
+     */
+    @Override
+    public void setLogLevel(Level logLevel) {
+        super.setLogLevel(logLevel);
+        initializeService();
     }
 
     /**

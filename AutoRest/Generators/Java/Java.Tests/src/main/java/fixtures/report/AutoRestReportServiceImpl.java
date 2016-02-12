@@ -13,6 +13,7 @@ package fixtures.report;
 import com.microsoft.rest.ServiceClient;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
+import okhttp3.logging.HttpLoggingInterceptor.Level;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
@@ -81,7 +82,24 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
     protected void initialize() {
         super.initialize();
         this.retrofitBuilder.baseUrl(baseUri);
-        service = this.retrofitBuilder.build().create(AutoRestReportServiceService.class);
+        initializeService();
+    }
+
+    private void initializeService() {
+        service = this.retrofitBuilder.client(this.clientBuilder.build())
+                .build()
+                .create(AutoRestReportServiceService.class);
+    }
+
+    /**
+     * Sets the logging level for OkHttp client.
+     *
+     * @param logLevel the logging level enum
+     */
+    @Override
+    public void setLogLevel(Level logLevel) {
+        super.setLogLevel(logLevel);
+        initializeService();
     }
 
     /**

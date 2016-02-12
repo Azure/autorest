@@ -72,6 +72,9 @@ namespace Microsoft.Rest.Generator.Java
                     return classes;
                 }
 
+                // The following are for client level methods
+                classes.Add("okhttp3.logging.HttpLoggingInterceptor.Level");
+
                 classes.AddRange(this.MethodTemplateModels
                     .SelectMany(m => m.ImplImports)
                     .OrderBy(i => i));

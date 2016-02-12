@@ -123,7 +123,7 @@ public final class AutoRestLongRunningOperationTestServiceImpl extends AzureServ
      * @return the LROsOperations object.
      */
     public LROsOperations getLROsOperations() {
-        return new LROsOperationsImpl(this.retrofitBuilder.build(), this);
+        return new LROsOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -131,7 +131,7 @@ public final class AutoRestLongRunningOperationTestServiceImpl extends AzureServ
      * @return the LRORetrysOperations object.
      */
     public LRORetrysOperations getLRORetrysOperations() {
-        return new LRORetrysOperationsImpl(this.retrofitBuilder.build(), this);
+        return new LRORetrysOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -139,7 +139,7 @@ public final class AutoRestLongRunningOperationTestServiceImpl extends AzureServ
      * @return the LROSADsOperations object.
      */
     public LROSADsOperations getLROSADsOperations() {
-        return new LROSADsOperationsImpl(this.retrofitBuilder.build(), this);
+        return new LROSADsOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -147,7 +147,7 @@ public final class AutoRestLongRunningOperationTestServiceImpl extends AzureServ
      * @return the LROsCustomHeaderOperations object.
      */
     public LROsCustomHeaderOperations getLROsCustomHeaderOperations() {
-        return new LROsCustomHeaderOperationsImpl(this.retrofitBuilder.build(), this);
+        return new LROsCustomHeaderOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -208,7 +208,7 @@ public final class AutoRestLongRunningOperationTestServiceImpl extends AzureServ
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
-        this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
+        this.clientBuilder.interceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         if (this.credentials != null) {
             this.credentials.applyCredentialsFilter(clientBuilder);
         }

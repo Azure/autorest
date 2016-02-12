@@ -156,7 +156,7 @@ public final class MicrosoftAzureTestUrlImpl extends AzureServiceClient implemen
      * @return the GroupOperations object.
      */
     public GroupOperations getGroupOperations() {
-        return new GroupOperationsImpl(this.retrofitBuilder.build(), this);
+        return new GroupOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -218,7 +218,7 @@ public final class MicrosoftAzureTestUrlImpl extends AzureServiceClient implemen
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
-        this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
+        this.clientBuilder.interceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         if (this.credentials != null) {
             this.credentials.applyCredentialsFilter(clientBuilder);
         }

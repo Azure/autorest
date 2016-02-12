@@ -13,6 +13,7 @@ package fixtures.validation;
 import com.microsoft.rest.ServiceClient;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
+import okhttp3.logging.HttpLoggingInterceptor.Level;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
@@ -124,7 +125,24 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
     protected void initialize() {
         super.initialize();
         this.retrofitBuilder.baseUrl(baseUri);
-        service = this.retrofitBuilder.build().create(AutoRestValidationTestService.class);
+        initializeService();
+    }
+
+    private void initializeService() {
+        service = this.retrofitBuilder.client(this.clientBuilder.build())
+                .build()
+                .create(AutoRestValidationTestService.class);
+    }
+
+    /**
+     * Sets the logging level for OkHttp client.
+     *
+     * @param logLevel the logging level enum
+     */
+    @Override
+    public void setLogLevel(Level logLevel) {
+        super.setLogLevel(logLevel);
+        initializeService();
     }
 
     /**

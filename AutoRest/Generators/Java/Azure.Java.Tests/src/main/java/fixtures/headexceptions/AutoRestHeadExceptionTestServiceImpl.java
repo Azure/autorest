@@ -123,7 +123,7 @@ public final class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClie
      * @return the HeadExceptionOperations object.
      */
     public HeadExceptionOperations getHeadExceptionOperations() {
-        return new HeadExceptionOperationsImpl(this.retrofitBuilder.build(), this);
+        return new HeadExceptionOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -184,7 +184,7 @@ public final class AutoRestHeadExceptionTestServiceImpl extends AzureServiceClie
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
-        this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
+        this.clientBuilder.interceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         if (this.credentials != null) {
             this.credentials.applyCredentialsFilter(clientBuilder);
         }

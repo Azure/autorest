@@ -7,6 +7,8 @@
 
 package com.microsoft.rest;
 
+import com.microsoft.rest.retry.RetryHandler;
+
 import okhttp3.Interceptor;
 import okhttp3.Protocol;
 import okhttp3.Request;
@@ -20,6 +22,7 @@ public class RetryHandlerTests {
     @Test
     public void exponentialRetryEndOn501() throws Exception {
         ServiceClient serviceClient = new ServiceClient() { };
+        serviceClient.getClientInterceptors().add(new RetryHandler());
         serviceClient.getClientInterceptors().add(new Interceptor() {
             // Send 408, 500, 502, all retried, with a 501 ending
             private int[] codes = new int[]{408, 500, 502, 501};
@@ -42,6 +45,7 @@ public class RetryHandlerTests {
     @Test
     public void exponentialRetryMax() throws Exception {
         ServiceClient serviceClient = new ServiceClient() { };
+        serviceClient.getClientInterceptors().add(new RetryHandler());
         serviceClient.getClientInterceptors().add(new Interceptor() {
             // Send 500 until max retry is hit
             private int count = 0;

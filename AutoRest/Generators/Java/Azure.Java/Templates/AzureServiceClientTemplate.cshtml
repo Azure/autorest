@@ -84,7 +84,7 @@ if(!property.IsReadOnly)
 @:     * @@return the @(operation.MethodGroupType) object.
 @:     */
 @:    public @(operation.MethodGroupType) get@(operation.MethodGroupType)() {
-@:        return new @(operation.MethodGroupType)Impl(this.retrofitBuilder.build(), this);
+@:        return new @(operation.MethodGroupType)Impl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
 @:    }
 }
 @EmptyLine
@@ -184,11 +184,32 @@ else
         this.retrofitBuilder.baseUrl(baseUri);
 @if (Model.MethodTemplateModels.Any())
 {
-@:        service = this.retrofitBuilder.build().create(@(Model.ServiceClientServiceType).class);
+@:        initializeService();
 }
     }
 @if (Model.MethodTemplateModels.Any())
 {
+@EmptyLine
+<text>
+    private void initializeService() {
+        service = this.retrofitBuilder.client(this.clientBuilder.build())
+                .build()
+                .create(@(Model.ServiceClientServiceType).class);
+    }
+</text>
+@EmptyLine
+<text>
+    /**
+     * Sets the logging level for OkHttp client.
+     *
+     * @@param logLevel the logging level enum
+     */
+    @@Override
+    public void setLogLevel(Level logLevel) {
+        super.setLogLevel(logLevel);
+        initializeService();
+    }
+</text>
 @EmptyLine
 <text>
 @foreach (var method in Model.MethodTemplateModels)

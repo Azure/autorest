@@ -156,7 +156,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * @return the XMsClientRequestIdOperations object.
      */
     public XMsClientRequestIdOperations getXMsClientRequestIdOperations() {
-        return new XMsClientRequestIdOperationsImpl(this.retrofitBuilder.build(), this);
+        return new XMsClientRequestIdOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -164,7 +164,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * @return the SubscriptionInCredentialsOperations object.
      */
     public SubscriptionInCredentialsOperations getSubscriptionInCredentialsOperations() {
-        return new SubscriptionInCredentialsOperationsImpl(this.retrofitBuilder.build(), this);
+        return new SubscriptionInCredentialsOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -172,7 +172,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * @return the SubscriptionInMethodOperations object.
      */
     public SubscriptionInMethodOperations getSubscriptionInMethodOperations() {
-        return new SubscriptionInMethodOperationsImpl(this.retrofitBuilder.build(), this);
+        return new SubscriptionInMethodOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -180,7 +180,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * @return the ApiVersionDefaultOperations object.
      */
     public ApiVersionDefaultOperations getApiVersionDefaultOperations() {
-        return new ApiVersionDefaultOperationsImpl(this.retrofitBuilder.build(), this);
+        return new ApiVersionDefaultOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -188,7 +188,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * @return the ApiVersionLocalOperations object.
      */
     public ApiVersionLocalOperations getApiVersionLocalOperations() {
-        return new ApiVersionLocalOperationsImpl(this.retrofitBuilder.build(), this);
+        return new ApiVersionLocalOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -196,7 +196,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * @return the SkipUrlEncodingOperations object.
      */
     public SkipUrlEncodingOperations getSkipUrlEncodingOperations() {
-        return new SkipUrlEncodingOperationsImpl(this.retrofitBuilder.build(), this);
+        return new SkipUrlEncodingOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -204,7 +204,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * @return the OdataOperations object.
      */
     public OdataOperations getOdataOperations() {
-        return new OdataOperationsImpl(this.retrofitBuilder.build(), this);
+        return new OdataOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -212,7 +212,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
      * @return the HeaderOperations object.
      */
     public HeaderOperations getHeaderOperations() {
-        return new HeaderOperationsImpl(this.retrofitBuilder.build(), this);
+        return new HeaderOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -274,7 +274,7 @@ public final class AutoRestAzureSpecialParametersTestClientImpl extends AzureSer
         this.acceptLanguage = "en-US";
         this.longRunningOperationRetryTimeout = 30;
         this.generateClientRequestId = true;
-        this.getClientInterceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
+        this.clientBuilder.interceptors().add(new CustomHeaderInterceptor("x-ms-client-request-id", UUID.randomUUID().toString()));
         if (this.credentials != null) {
             this.credentials.applyCredentialsFilter(clientBuilder);
         }

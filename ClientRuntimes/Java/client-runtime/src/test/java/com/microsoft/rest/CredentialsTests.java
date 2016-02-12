@@ -39,7 +39,7 @@ public class CredentialsTests {
 
     @Test
     public void tokenCredentialsTest() throws Exception {
-        ServiceClient serviceClient = new ServiceClient() {};
+        ServiceClient serviceClient = new ServiceClient() { };
         TokenCredentials credentials = new TokenCredentials(null, "this_is_a_token");
         credentials.applyCredentialsFilter(serviceClient.clientBuilder);
         serviceClient.getClientInterceptors().add(new Interceptor() {

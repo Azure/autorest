@@ -112,7 +112,6 @@ public abstract class ServiceClient {
         // Set up rest adapter
         this.mapperAdapter = new JacksonMapperAdapter();
         this.retrofitBuilder = retrofitBuilder
-                .client(clientBuilder.build())
                 .addConverterFactory(mapperAdapter.getConverterFactory());
     }
 }

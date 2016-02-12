@@ -36,7 +36,7 @@ public final class AutoRestSwaggerBATHeaderServiceImpl extends ServiceClient imp
      * @return the HeaderOperations object.
      */
     public HeaderOperations getHeaderOperations() {
-        return new HeaderOperationsImpl(this.retrofitBuilder.build(), this);
+        return new HeaderOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**

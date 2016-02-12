@@ -36,7 +36,7 @@ public final class AutoRestNumberTestServiceImpl extends ServiceClient implement
      * @return the NumberOperations object.
      */
     public NumberOperations getNumberOperations() {
-        return new NumberOperationsImpl(this.retrofitBuilder.build(), this);
+        return new NumberOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
