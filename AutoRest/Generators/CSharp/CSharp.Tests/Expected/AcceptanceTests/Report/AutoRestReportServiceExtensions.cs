@@ -38,7 +38,7 @@ namespace Fixtures.AcceptanceTestsReport
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<IDictionary<string, int?>> GetReportAsync( this IAutoRestReportService operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<IDictionary<string, int?>> GetReportAsync(this IAutoRestReportService operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetReportWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

@@ -27,7 +27,7 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
         /// <summary>
         /// Initializes a new instance of the IntWrapper class.
         /// </summary>
-        public IntWrapper(int? value)
+        public IntWrapper(int value)
         {
             Value = value;
         }
@@ -35,17 +35,14 @@ namespace Fixtures.AcceptanceTestsRequiredOptional.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "value")]
-        public int? Value { get; set; }
+        public int Value { get; set; }
 
         /// <summary>
         /// Validate the object. Throws ValidationException if validation fails.
         /// </summary>
         public virtual void Validate()
         {
-            if (Value == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "Value");
-            }
+            //Nothing to validate
         }
     }
 }

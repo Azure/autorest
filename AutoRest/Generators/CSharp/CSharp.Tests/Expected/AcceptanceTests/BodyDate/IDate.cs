@@ -72,7 +72,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse> PutMaxDateWithHttpMessagesAsync(DateTime? dateBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> PutMaxDateWithHttpMessagesAsync(DateTime dateBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get max date value 9999-12-31
         /// </summary>
@@ -94,7 +94,7 @@ namespace Fixtures.AcceptanceTestsBodyDate
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse> PutMinDateWithHttpMessagesAsync(DateTime? dateBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> PutMinDateWithHttpMessagesAsync(DateTime dateBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get min date value 0000-01-01
         /// </summary>

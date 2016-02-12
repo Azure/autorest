@@ -45,7 +45,7 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutArrayAsync( this IAutoRestResourceFlatteningTestService operations, IList<Resource> resourceArray = default(IList<Resource>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutArrayAsync(this IAutoRestResourceFlatteningTestService operations, IList<Resource> resourceArray = default(IList<Resource>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutArrayWithHttpMessagesAsync(resourceArray, null, cancellationToken).ConfigureAwait(false);
             }
@@ -70,7 +70,7 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<IList<FlattenedProduct>> GetArrayAsync( this IAutoRestResourceFlatteningTestService operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<IList<FlattenedProduct>> GetArrayAsync(this IAutoRestResourceFlatteningTestService operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetArrayWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -104,7 +104,7 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutDictionaryAsync( this IAutoRestResourceFlatteningTestService operations, IDictionary<string, FlattenedProduct> resourceDictionary = default(IDictionary<string, FlattenedProduct>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutDictionaryAsync(this IAutoRestResourceFlatteningTestService operations, IDictionary<string, FlattenedProduct> resourceDictionary = default(IDictionary<string, FlattenedProduct>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutDictionaryWithHttpMessagesAsync(resourceDictionary, null, cancellationToken).ConfigureAwait(false);
             }
@@ -129,7 +129,7 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<IDictionary<string, FlattenedProduct>> GetDictionaryAsync( this IAutoRestResourceFlatteningTestService operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<IDictionary<string, FlattenedProduct>> GetDictionaryAsync(this IAutoRestResourceFlatteningTestService operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetDictionaryWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -163,7 +163,7 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutResourceCollectionAsync( this IAutoRestResourceFlatteningTestService operations, ResourceCollection resourceComplexObject = default(ResourceCollection), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutResourceCollectionAsync(this IAutoRestResourceFlatteningTestService operations, ResourceCollection resourceComplexObject = default(ResourceCollection), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutResourceCollectionWithHttpMessagesAsync(resourceComplexObject, null, cancellationToken).ConfigureAwait(false);
             }
@@ -188,7 +188,7 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<ResourceCollection> GetResourceCollectionAsync( this IAutoRestResourceFlatteningTestService operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ResourceCollection> GetResourceCollectionAsync(this IAutoRestResourceFlatteningTestService operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetResourceCollectionWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

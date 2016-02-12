@@ -40,7 +40,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Colors?> GetNotExpandableAsync( this IEnumModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Colors?> GetNotExpandableAsync(this IEnumModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetNotExpandableWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -58,7 +58,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='stringBody'>
             /// Possible values include: 'red color', 'green-color', 'blue_color'
             /// </param>
-            public static void PutNotExpandable(this IEnumModel operations, Colors? stringBody)
+            public static void PutNotExpandable(this IEnumModel operations, Colors stringBody)
             {
                 Task.Factory.StartNew(s => ((IEnumModel)s).PutNotExpandableAsync(stringBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -76,7 +76,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutNotExpandableAsync( this IEnumModel operations, Colors? stringBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutNotExpandableAsync(this IEnumModel operations, Colors stringBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutNotExpandableWithHttpMessagesAsync(stringBody, null, cancellationToken).ConfigureAwait(false);
             }

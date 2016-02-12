@@ -38,7 +38,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<HttpRedirectsHead300Headers> Head300Async( this IHttpRedirects operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<HttpRedirectsHead300Headers> Head300Async(this IHttpRedirects operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Head300WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -66,7 +66,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<IList<string>> Get300Async( this IHttpRedirects operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<IList<string>> Get300Async(this IHttpRedirects operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Get300WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -94,7 +94,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<HttpRedirectsHead301Headers> Head301Async( this IHttpRedirects operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<HttpRedirectsHead301Headers> Head301Async(this IHttpRedirects operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Head301WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -122,7 +122,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<HttpRedirectsGet301Headers> Get301Async( this IHttpRedirects operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<HttpRedirectsGet301Headers> Get301Async(this IHttpRedirects operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Get301WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -160,7 +160,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<HttpRedirectsPut301Headers> Put301Async( this IHttpRedirects operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<HttpRedirectsPut301Headers> Put301Async(this IHttpRedirects operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Put301WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -188,7 +188,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<HttpRedirectsHead302Headers> Head302Async( this IHttpRedirects operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<HttpRedirectsHead302Headers> Head302Async(this IHttpRedirects operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Head302WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -216,7 +216,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<HttpRedirectsGet302Headers> Get302Async( this IHttpRedirects operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<HttpRedirectsGet302Headers> Get302Async(this IHttpRedirects operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Get302WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -254,7 +254,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<HttpRedirectsPatch302Headers> Patch302Async( this IHttpRedirects operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<HttpRedirectsPatch302Headers> Patch302Async(this IHttpRedirects operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Patch302WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -292,7 +292,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<HttpRedirectsPost303Headers> Post303Async( this IHttpRedirects operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<HttpRedirectsPost303Headers> Post303Async(this IHttpRedirects operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Post303WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -320,7 +320,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<HttpRedirectsHead307Headers> Head307Async( this IHttpRedirects operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<HttpRedirectsHead307Headers> Head307Async(this IHttpRedirects operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Head307WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -348,7 +348,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<HttpRedirectsGet307Headers> Get307Async( this IHttpRedirects operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<HttpRedirectsGet307Headers> Get307Async(this IHttpRedirects operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Get307WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -382,7 +382,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<HttpRedirectsPut307Headers> Put307Async( this IHttpRedirects operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<HttpRedirectsPut307Headers> Put307Async(this IHttpRedirects operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Put307WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -416,7 +416,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<HttpRedirectsPatch307Headers> Patch307Async( this IHttpRedirects operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<HttpRedirectsPatch307Headers> Patch307Async(this IHttpRedirects operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Patch307WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -450,7 +450,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<HttpRedirectsPost307Headers> Post307Async( this IHttpRedirects operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<HttpRedirectsPost307Headers> Post307Async(this IHttpRedirects operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Post307WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -484,7 +484,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<HttpRedirectsDelete307Headers> Delete307Async( this IHttpRedirects operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<HttpRedirectsDelete307Headers> Delete307Async(this IHttpRedirects operations, bool? booleanValue = default(bool?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Delete307WithHttpMessagesAsync(booleanValue, null, cancellationToken).ConfigureAwait(false))
                 {

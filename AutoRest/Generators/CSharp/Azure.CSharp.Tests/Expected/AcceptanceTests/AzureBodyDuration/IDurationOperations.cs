@@ -43,7 +43,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<AzureOperationResponse> PutPositiveDurationWithHttpMessagesAsync(TimeSpan? durationBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<AzureOperationResponse> PutPositiveDurationWithHttpMessagesAsync(TimeSpan durationBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get a positive duration value
         /// </summary>

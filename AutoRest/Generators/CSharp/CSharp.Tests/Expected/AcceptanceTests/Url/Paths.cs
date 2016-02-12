@@ -59,7 +59,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </param>
         public async Task<HttpOperationResponse> GetBooleanTrueWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            bool? boolPath = true;
+            bool boolPath = true;
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -160,7 +160,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </param>
         public async Task<HttpOperationResponse> GetBooleanFalseWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            bool? boolPath = false;
+            bool boolPath = false;
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -261,7 +261,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </param>
         public async Task<HttpOperationResponse> GetIntOneMillionWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            int? intPath = 1000000;
+            int intPath = 1000000;
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -362,7 +362,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </param>
         public async Task<HttpOperationResponse> GetIntNegativeOneMillionWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            int? intPath = -1000000;
+            int intPath = -1000000;
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -463,7 +463,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </param>
         public async Task<HttpOperationResponse> GetTenBillionWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            long? longPath = 10000000000;
+            long longPath = 10000000000;
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -564,7 +564,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </param>
         public async Task<HttpOperationResponse> GetNegativeTenBillionWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            long? longPath = -10000000000;
+            long longPath = -10000000000;
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -665,7 +665,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </param>
         public async Task<HttpOperationResponse> FloatScientificPositiveWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            double? floatPath = 1.034E+20;
+            double floatPath = 1.034E+20;
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -766,7 +766,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </param>
         public async Task<HttpOperationResponse> FloatScientificNegativeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            double? floatPath = -1.034E-20;
+            double floatPath = -1.034E-20;
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -867,7 +867,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </param>
         public async Task<HttpOperationResponse> DoubleDecimalPositiveWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            double? doublePath = 9999999.999;
+            double doublePath = 9999999.999;
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -968,7 +968,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </param>
         public async Task<HttpOperationResponse> DoubleDecimalNegativeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            double? doublePath = -9999999.999;
+            double doublePath = -9999999.999;
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -1481,12 +1481,8 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> EnumValidWithHttpMessagesAsync(UriColor? enumPath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> EnumValidWithHttpMessagesAsync(UriColor enumPath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (enumPath == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "enumPath");
-            }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -1589,12 +1585,8 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> EnumNullWithHttpMessagesAsync(UriColor? enumPath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> EnumNullWithHttpMessagesAsync(UriColor enumPath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (enumPath == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "enumPath");
-            }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -2010,7 +2002,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </param>
         public async Task<HttpOperationResponse> DateValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            DateTime? datePath = SafeJsonConvert.DeserializeObject<DateTime>("\"2012-01-01\"", this.Client.SerializationSettings);
+            DateTime datePath = SafeJsonConvert.DeserializeObject<DateTime>("\"2012-01-01\"", this.Client.SerializationSettings);
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -2113,12 +2105,8 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> DateNullWithHttpMessagesAsync(DateTime? datePath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> DateNullWithHttpMessagesAsync(DateTime datePath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (datePath == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "datePath");
-            }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -2219,7 +2207,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </param>
         public async Task<HttpOperationResponse> DateTimeValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            DateTime? dateTimePath = SafeJsonConvert.DeserializeObject<DateTime>("\"2012-01-01T01:01:01Z\"", this.Client.SerializationSettings);
+            DateTime dateTimePath = SafeJsonConvert.DeserializeObject<DateTime>("\"2012-01-01T01:01:01Z\"", this.Client.SerializationSettings);
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -2322,12 +2310,8 @@ namespace Fixtures.AcceptanceTestsUrl
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> DateTimeNullWithHttpMessagesAsync(DateTime? dateTimePath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> DateTimeNullWithHttpMessagesAsync(DateTime dateTimePath, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (dateTimePath == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "dateTimePath");
-            }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
