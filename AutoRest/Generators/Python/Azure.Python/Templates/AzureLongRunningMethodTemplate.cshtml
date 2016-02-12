@@ -31,7 +31,8 @@
 @:        @ParameterWrapComment(string.Empty, ":param callback: When specified, will be called with each chunk of data that is streamed. The callback should take two arguments, the bytes of the current chunk of data and the response object. If the data is uploading, response will be None.")
 @:        @ParameterWrapComment(string.Empty, ":type callback: Callable[Bytes, response=None]")
 }
-        @ParameterWrapComment(string.Empty, string.Format(":rtype: {0} or msrest.pipeline.ClientRawResponse", MethodTemplateModel.GetDocumentationType(Model.ReturnType.Body)))
+        @ParameterWrapComment(string.Empty, string.Format(":rtype: {0}", MethodTemplateModel.GetDocumentationType(Model.ReturnType.Body)))
+        @ParameterWrapComment(string.Empty, ":rtype: msrest.pipeline.ClientRawResponse if raw=True")
         """
         @Model.BuildInputMappings()
 @if (Model.InputParameterTransformation.Any())

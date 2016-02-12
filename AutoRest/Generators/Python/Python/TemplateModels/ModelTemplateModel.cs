@@ -107,6 +107,11 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
+        public bool HasParent
+        {
+            get { return this._parent != null; }
+        }
+
         /// <summary>
         /// Provides the property documentation string along with default value if any.
         /// </summary>
@@ -156,6 +161,76 @@ namespace Microsoft.Rest.Generator.Python
                 }
                 return requiredFields;
             }
+        }
+
+        public virtual string SuperParameterDeclaration()
+        {
+            List<string> declarations = new List<string>();
+            List<string> requiredDeclarations = new List<string>();
+            List<string> combinedDeclarations = new List<string>();
+
+            foreach (var property in ComposedProperties.Except(Properties))
+            {
+                if (this.IsPolymorphic)
+                    if (property.Name == this.BasePolymorphicDiscriminator)
+                        continue;
+
+                if (property.IsRequired)
+                {
+                    requiredDeclarations.Add(property.Name);
+                }
+                else
+                {
+                    declarations.Add(string.Format(CultureInfo.InvariantCulture, "{0}={0}", property.Name));
+                }
+            }
+
+            if (!requiredDeclarations.IsNullOrEmpty())
+            {
+                requiredDeclarations.Sort();
+                combinedDeclarations.Add(string.Join(", ", requiredDeclarations));
+            }
+            if (!declarations.IsNullOrEmpty())
+            {
+                combinedDeclarations.Add(string.Join(", ", declarations));
+            }
+            var declaration = string.Join(", ", declarations);
+
+            return string.Join(", ", combinedDeclarations);
+        }
+        public virtual string MethodParameterDeclaration()
+        {
+            List<string> declarations = new List<string>();
+            List<string> requiredDeclarations = new List<string>();
+            List<string> combinedDeclarations = new List<string>();
+
+            foreach (var property in ComposedProperties)
+            {
+                if (this.IsPolymorphic)
+                    if (property.Name == this.BasePolymorphicDiscriminator)
+                        continue;
+
+                if (property.IsRequired)
+                {
+                    requiredDeclarations.Add(property.Name);
+                }
+                else
+                {
+                    declarations.Add(string.Format(CultureInfo.InvariantCulture, "{0}=None", property.Name));
+                }
+            }
+
+            if (!requiredDeclarations.IsNullOrEmpty())
+            {
+                requiredDeclarations.Sort();
+                combinedDeclarations.Add(string.Join(", ", requiredDeclarations));
+            }
+            if (!declarations.IsNullOrEmpty())
+            {
+                combinedDeclarations.Add(string.Join(", ", declarations));
+            }
+
+            return string.Join(", ", combinedDeclarations);
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "PolymorphicDiscriminator")]
@@ -271,14 +346,20 @@ namespace Microsoft.Rest.Generator.Python
             return string.Format(CultureInfo.InvariantCulture, "'{0}': {{'key': '{1}', 'type': '{2}'}},", property.Name, property.SerializedName, GetPythonSerializationType(property.Type));
         }
 
-        public static string InitializeProperty(string objectName, Property property)
+        public string InitializeProperty(string objectName, Property property)
         {
             if (property == null || property.Type == null)
             {
                 throw new ArgumentNullException("property");
             }
-
-            return string.Format(CultureInfo.InvariantCulture, "{0}.{1} = None", objectName, property.Name);
+            if (IsPolymorphic)
+            {
+                if (property.Name == this.BasePolymorphicDiscriminator)
+                {
+                    return string.Format(CultureInfo.InvariantCulture, "{0}.{1} = None", objectName, property.Name);
+                }
+            }
+            return string.Format(CultureInfo.InvariantCulture, "{0}.{1} = {1}", objectName, property.Name);
         }
 
         public bool NeedsPolymorphicConverter

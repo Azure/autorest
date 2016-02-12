@@ -45,7 +45,7 @@ else
 @if (Model.Properties.Any())
 {
 @EmptyLine
-  @foreach (var property in Model.Properties)
+  @foreach (var property in Model.ComposedProperties)
   {
 @:    @ParameterWrapComment(string.Empty, ModelTemplateModel.GetPropertyDocumentationString(property))
   }
@@ -91,19 +91,21 @@ else
 </text>
 }
 @EmptyLine
-    def __init__(self, *args, **kwargs):
+    def __init__(self, @(Model.MethodParameterDeclaration())):
+@if (Model.HasParent)
+{
+        @:super(@(Model.Name), self).__init__(@(Model.SuperParameterDeclaration()))
+}
 @if (propertyList.Count > 0)
 {
   for (int i = 0; i < propertyList.Count; i++)
   {
-        @:@(ModelTemplateModel.InitializeProperty("self", propertyList[i]))
+        @:@(Model.InitializeProperty("self", propertyList[i]))
   }
-@EmptyLine
 }
-        super(@(Model.Name), self).__init__(*args, **kwargs)
+
 @if (Model.NeedsPolymorphicConverter)
 {
-@EmptyLine
         @:self.@Model.BasePolymorphicDiscriminator = '@Model.SerializedName'
 }
 @if (Model.IsException)

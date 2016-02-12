@@ -289,31 +289,28 @@ class ComplexTests(unittest.TestCase):
 
 
         # PUT polymorphism/valid
-        request = Salmon(
+        request = Salmon(1,
             iswild = True,
-            length = 1,
             location = "alaska",
             species = "king",
-            siblings = [Shark(age=6, length=20, species="predator",
-                              birthday=isodate.parse_datetime("2012-01-05T01:00:00Z")),
-                        Sawshark(age=105, length=10, species="dangerous",
-                              birthday=isodate.parse_datetime("1900-01-05T01:00:00Z"),
-                              picture=bytearray([255, 255, 255, 255, 254])),
-                        Goblinshark(age=1, length=30, species="scary",
-                              birthday=isodate.parse_datetime("2015-08-08T00:00:00Z"),
-                              jawsize=5)]
+            siblings = [Shark(isodate.parse_datetime("2012-01-05T01:00:00Z"), 20,
+                              age=6, species="predator"),
+                        Sawshark(isodate.parse_datetime("1900-01-05T01:00:00Z"), 10,
+                                 age=105, species="dangerous",
+                                 picture=bytearray([255, 255, 255, 255, 254])),
+                        Goblinshark(isodate.parse_datetime("2015-08-08T00:00:00Z"), 30,
+                                    age=1, species="scary", jawsize=5)]
             )
         client.polymorphism.put_valid(request)
 
-        bad_request = Salmon(
+        bad_request = Salmon(1,
             iswild=True,
-            length=1,
             location="alaska",
             species="king",
             siblings = [
-                Shark(age=6, length=20, species="predator",
-                      birthday=isodate.parse_datetime("2012-01-05T01:00:00Z")),
-                Sawshark(age=105, length=10, species="dangerous",
+                Shark(isodate.parse_datetime("2012-01-05T01:00:00Z"), 20,
+                      age=6, species="predator"),
+                Sawshark(None, 10, age=105, species="dangerous",
                          picture=bytearray([255, 255, 255, 255, 254]))]
             )
 
