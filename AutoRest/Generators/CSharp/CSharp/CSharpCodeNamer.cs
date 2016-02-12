@@ -14,6 +14,9 @@ namespace Microsoft.Rest.Generator.CSharp
     {
         private readonly HashSet<IType> _normalizedTypes;
 
+        [SettingsInfo("Whether to use DateTimeOffset instead of DateTime to model date-time types")]
+        public bool UseDateTimeOffset { get; set; }
+
         /// <summary>
         /// Initializes a new instance of CSharpCodeNamingFramework.
         /// </summary>
@@ -49,7 +52,6 @@ namespace Microsoft.Rest.Generator.CSharp
             {
                 throw new ArgumentNullException("client");
             }
-
             base.NormalizeClientModel(client);
 
             foreach (var method in client.Methods)
@@ -131,7 +133,7 @@ namespace Microsoft.Rest.Generator.CSharp
             }
             else if (primaryType.Type == KnownPrimaryType.DateTime)
             {
-                primaryType.Name = "DateTime?";
+                primaryType.Name = UseDateTimeOffset ? "DateTimeOffset?" : "DateTime?";
             }
             else if (primaryType.Type == KnownPrimaryType.DateTimeRfc1123)
             {

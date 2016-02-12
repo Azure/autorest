@@ -1,6 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
+using System.Collections.Generic;
 using System.IO;
 using System.Globalization;
 using System.Threading.Tasks;
@@ -50,6 +51,12 @@ namespace Microsoft.Rest.Generator.CSharp
         public override string ImplementationFileExtension
         {
             get { return ".cs"; }
+        }
+
+        public override void PopulateSettings(IDictionary<string, string> settings)
+        {
+            base.PopulateSettings(settings);
+            Settings.PopulateSettings(_namer, settings);
         }
 
         /// <summary>

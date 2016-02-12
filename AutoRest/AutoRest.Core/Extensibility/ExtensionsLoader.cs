@@ -53,7 +53,7 @@ namespace Microsoft.Rest.Generator.Extensibility
                     var config = JsonConvert.DeserializeObject<AutoRestConfiguration>(configurationFile);
                     codeGenerator = LoadTypeFromAssembly<CodeGenerator>(config.CodeGenerators, settings.CodeGenerator,
                         settings);
-                    Settings.PopulateSettings(codeGenerator, settings.CustomSettings);
+                    codeGenerator.PopulateSettings(settings.CustomSettings);
                 }
                 catch (Exception ex)
                 {
