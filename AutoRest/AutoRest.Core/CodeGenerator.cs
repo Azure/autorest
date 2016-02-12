@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,6 +50,15 @@ namespace Microsoft.Rest.Generator
         /// Gets or sets boolean value indicating if code generation language supports all the code to be generated in a single file.
         /// </summary>
         public bool IsSingleFileGenerationSupported { get; set; }
+
+        /// <summary>
+        /// Populate settings on self and any child objects
+        /// </summary>
+        /// <param name="settings">A dictionary of settings</param>
+        public virtual void PopulateSettings(IDictionary<string, string> settings)
+        {
+            Settings.PopulateSettings(this, settings);
+        }
 
         /// <summary>
         /// Normalizes service model by updating names and types to be language specific.

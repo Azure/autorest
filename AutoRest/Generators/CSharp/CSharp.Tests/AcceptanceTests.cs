@@ -1834,6 +1834,20 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         }
 
         [Fact]
+        public void UseDateTimeOffsetInModelTest()
+        {
+            var productType = typeof(Fixtures.DateTimeOffset.Models.Product);
+
+            //DateTime should be modeled as DateTimeOffset
+            Assert.Equal(typeof (System.DateTimeOffset?), productType.GetProperty("DateTime").PropertyType);
+            Assert.Equal(typeof(System.DateTimeOffset?), productType.GetProperty("DateTimeArray").PropertyType.GetGenericArguments()[0]);
+
+            //Dates should be modeled as DateTime
+            Assert.Equal(typeof(System.DateTime?), productType.GetProperty("Date").PropertyType);
+            Assert.Equal(typeof(System.DateTime?), productType.GetProperty("DateArray").PropertyType.GetGenericArguments()[0]);
+        }
+
+        [Fact]
         public void RequiredOptionalTests()
         {
             SwaggerSpecRunner.RunTests(
