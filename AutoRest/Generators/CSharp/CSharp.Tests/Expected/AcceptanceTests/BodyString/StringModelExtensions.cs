@@ -38,7 +38,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<string> GetNullAsync( this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<string> GetNullAsync(this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -70,7 +70,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutNullAsync( this IStringModel operations, string stringBody = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutNullAsync(this IStringModel operations, string stringBody = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutNullWithHttpMessagesAsync(stringBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -95,7 +95,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<string> GetEmptyAsync( this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<string> GetEmptyAsync(this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -127,7 +127,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutEmptyAsync( this IStringModel operations, string stringBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutEmptyAsync(this IStringModel operations, string stringBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutEmptyWithHttpMessagesAsync(stringBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -154,7 +154,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<string> GetMbcsAsync( this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<string> GetMbcsAsync(this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetMbcsWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -188,7 +188,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutMbcsAsync( this IStringModel operations, string stringBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutMbcsAsync(this IStringModel operations, string stringBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutMbcsWithHttpMessagesAsync(stringBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -217,7 +217,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<string> GetWhitespaceAsync( this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<string> GetWhitespaceAsync(this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetWhitespaceWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -253,7 +253,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutWhitespaceAsync( this IStringModel operations, string stringBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutWhitespaceAsync(this IStringModel operations, string stringBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutWhitespaceWithHttpMessagesAsync(stringBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -278,7 +278,7 @@ namespace Fixtures.AcceptanceTestsBodyString
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<string> GetNotProvidedAsync( this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<string> GetNotProvidedAsync(this IStringModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetNotProvidedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

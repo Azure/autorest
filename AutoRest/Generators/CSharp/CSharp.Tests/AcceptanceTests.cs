@@ -1329,7 +1329,6 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 Assert.Throws<ValidationException>(() => client.Paths.StringNull(null));
                 client.Paths.StringUrlEncoded();
                 client.Paths.EnumValid(UriColor.Greencolor);
-                Assert.Throws<ValidationException>(() => client.Paths.EnumNull(null));
             }
         }
 

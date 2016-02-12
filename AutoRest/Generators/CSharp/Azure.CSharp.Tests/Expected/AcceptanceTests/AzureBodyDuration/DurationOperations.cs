@@ -203,12 +203,8 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse> PutPositiveDurationWithHttpMessagesAsync(TimeSpan? durationBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse> PutPositiveDurationWithHttpMessagesAsync(TimeSpan durationBody, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (durationBody == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "durationBody");
-            }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;

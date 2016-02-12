@@ -2718,12 +2718,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// </param>
         public async Task<AzureOperationResponse> PutDurationWithHttpMessagesAsync(TimeSpan? field = default(TimeSpan?), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            DurationWrapper complexBody = null;
-            if (field != null)
-            {
-                complexBody = new DurationWrapper();
-                complexBody.Field = field;
-            }
+            DurationWrapper complexBody = default(DurationWrapper);
+            complexBody = new DurationWrapper();
+            complexBody.Field = field;
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -2998,7 +2995,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// </param>
         public async Task<AzureOperationResponse> PutByteWithHttpMessagesAsync(byte[] field = default(byte[]), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            ByteWrapper complexBody = null;
+            ByteWrapper complexBody = default(ByteWrapper);
             if (field != null)
             {
                 complexBody = new ByteWrapper();

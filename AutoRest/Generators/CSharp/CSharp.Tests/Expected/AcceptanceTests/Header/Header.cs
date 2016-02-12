@@ -514,15 +514,11 @@ namespace Fixtures.AcceptanceTestsHeader
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ParamIntegerWithHttpMessagesAsync(string scenario, int? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ParamIntegerWithHttpMessagesAsync(string scenario, int value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "scenario");
-            }
-            if (value == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "value");
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -553,14 +549,11 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
             }
-            if (value != null)
+            if (_httpRequest.Headers.Contains("value"))
             {
-                if (_httpRequest.Headers.Contains("value"))
-                {
-                    _httpRequest.Headers.Remove("value");
-                }
-                _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
+                _httpRequest.Headers.Remove("value");
             }
+            _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -772,15 +765,11 @@ namespace Fixtures.AcceptanceTestsHeader
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ParamLongWithHttpMessagesAsync(string scenario, long? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ParamLongWithHttpMessagesAsync(string scenario, long value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "scenario");
-            }
-            if (value == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "value");
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -811,14 +800,11 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
             }
-            if (value != null)
+            if (_httpRequest.Headers.Contains("value"))
             {
-                if (_httpRequest.Headers.Contains("value"))
-                {
-                    _httpRequest.Headers.Remove("value");
-                }
-                _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
+                _httpRequest.Headers.Remove("value");
             }
+            _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1030,15 +1016,11 @@ namespace Fixtures.AcceptanceTestsHeader
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ParamFloatWithHttpMessagesAsync(string scenario, double? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ParamFloatWithHttpMessagesAsync(string scenario, double value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "scenario");
-            }
-            if (value == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "value");
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1069,14 +1051,11 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
             }
-            if (value != null)
+            if (_httpRequest.Headers.Contains("value"))
             {
-                if (_httpRequest.Headers.Contains("value"))
-                {
-                    _httpRequest.Headers.Remove("value");
-                }
-                _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
+                _httpRequest.Headers.Remove("value");
             }
+            _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1288,15 +1267,11 @@ namespace Fixtures.AcceptanceTestsHeader
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ParamDoubleWithHttpMessagesAsync(string scenario, double? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ParamDoubleWithHttpMessagesAsync(string scenario, double value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "scenario");
-            }
-            if (value == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "value");
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1327,14 +1302,11 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
             }
-            if (value != null)
+            if (_httpRequest.Headers.Contains("value"))
             {
-                if (_httpRequest.Headers.Contains("value"))
-                {
-                    _httpRequest.Headers.Remove("value");
-                }
-                _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
+                _httpRequest.Headers.Remove("value");
             }
+            _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -1546,15 +1518,11 @@ namespace Fixtures.AcceptanceTestsHeader
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ParamBoolWithHttpMessagesAsync(string scenario, bool? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ParamBoolWithHttpMessagesAsync(string scenario, bool value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "scenario");
-            }
-            if (value == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "value");
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -1585,14 +1553,11 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
             }
-            if (value != null)
+            if (_httpRequest.Headers.Contains("value"))
             {
-                if (_httpRequest.Headers.Contains("value"))
-                {
-                    _httpRequest.Headers.Remove("value");
-                }
-                _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
+                _httpRequest.Headers.Remove("value");
             }
+            _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2063,15 +2028,11 @@ namespace Fixtures.AcceptanceTestsHeader
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ParamDateWithHttpMessagesAsync(string scenario, DateTime? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ParamDateWithHttpMessagesAsync(string scenario, DateTime value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "scenario");
-            }
-            if (value == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "value");
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2102,14 +2063,11 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
             }
-            if (value != null)
+            if (_httpRequest.Headers.Contains("value"))
             {
-                if (_httpRequest.Headers.Contains("value"))
-                {
-                    _httpRequest.Headers.Remove("value");
-                }
-                _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, new DateJsonConverter()).Trim('"'));
+                _httpRequest.Headers.Remove("value");
             }
+            _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, new DateJsonConverter()).Trim('"'));
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2323,15 +2281,11 @@ namespace Fixtures.AcceptanceTestsHeader
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ParamDatetimeWithHttpMessagesAsync(string scenario, DateTime? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ParamDatetimeWithHttpMessagesAsync(string scenario, DateTime value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "scenario");
-            }
-            if (value == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "value");
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2362,14 +2316,11 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
             }
-            if (value != null)
+            if (_httpRequest.Headers.Contains("value"))
             {
-                if (_httpRequest.Headers.Contains("value"))
-                {
-                    _httpRequest.Headers.Remove("value");
-                }
-                _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
+                _httpRequest.Headers.Remove("value");
             }
+            _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2619,14 +2570,11 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
             }
-            if (value != null)
+            if (_httpRequest.Headers.Contains("value"))
             {
-                if (_httpRequest.Headers.Contains("value"))
-                {
-                    _httpRequest.Headers.Remove("value");
-                }
-                _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, new DateTimeRfc1123JsonConverter()).Trim('"'));
+                _httpRequest.Headers.Remove("value");
             }
+            _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, new DateTimeRfc1123JsonConverter()).Trim('"'));
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -2839,15 +2787,11 @@ namespace Fixtures.AcceptanceTestsHeader
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<HttpOperationResponse> ParamDurationWithHttpMessagesAsync(string scenario, TimeSpan? value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ParamDurationWithHttpMessagesAsync(string scenario, TimeSpan value, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (scenario == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "scenario");
-            }
-            if (value == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "value");
             }
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -2878,14 +2822,11 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
             }
-            if (value != null)
+            if (_httpRequest.Headers.Contains("value"))
             {
-                if (_httpRequest.Headers.Contains("value"))
-                {
-                    _httpRequest.Headers.Remove("value");
-                }
-                _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
+                _httpRequest.Headers.Remove("value");
             }
+            _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)
@@ -3392,14 +3333,11 @@ namespace Fixtures.AcceptanceTestsHeader
                 }
                 _httpRequest.Headers.TryAddWithoutValidation("scenario", scenario);
             }
-            if (value != null)
+            if (_httpRequest.Headers.Contains("value"))
             {
-                if (_httpRequest.Headers.Contains("value"))
-                {
-                    _httpRequest.Headers.Remove("value");
-                }
-                _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
+                _httpRequest.Headers.Remove("value");
             }
+            _httpRequest.Headers.TryAddWithoutValidation("value", SafeJsonConvert.SerializeObject(value, this.Client.SerializationSettings).Trim('"'));
             if (customHeaders != null)
             {
                 foreach(var _header in customHeaders)

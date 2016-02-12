@@ -38,7 +38,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<int?> GetNullAsync( this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<int?> GetNullAsync(this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -66,7 +66,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<int?> GetInvalidAsync( this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<int?> GetInvalidAsync(this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -94,7 +94,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<int?> GetOverflowInt32Async( this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<int?> GetOverflowInt32Async(this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetOverflowInt32WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -122,7 +122,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<int?> GetUnderflowInt32Async( this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<int?> GetUnderflowInt32Async(this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetUnderflowInt32WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -150,7 +150,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<long?> GetOverflowInt64Async( this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<long?> GetOverflowInt64Async(this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetOverflowInt64WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -178,7 +178,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<long?> GetUnderflowInt64Async( this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<long?> GetUnderflowInt64Async(this IIntModel operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetUnderflowInt64WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -194,7 +194,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// </param>
             /// <param name='intBody'>
             /// </param>
-            public static void PutMax32(this IIntModel operations, int? intBody)
+            public static void PutMax32(this IIntModel operations, int intBody)
             {
                 Task.Factory.StartNew(s => ((IIntModel)s).PutMax32Async(intBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -210,7 +210,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutMax32Async( this IIntModel operations, int? intBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutMax32Async(this IIntModel operations, int intBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutMax32WithHttpMessagesAsync(intBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -223,7 +223,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// </param>
             /// <param name='intBody'>
             /// </param>
-            public static void PutMax64(this IIntModel operations, long? intBody)
+            public static void PutMax64(this IIntModel operations, long intBody)
             {
                 Task.Factory.StartNew(s => ((IIntModel)s).PutMax64Async(intBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -239,7 +239,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutMax64Async( this IIntModel operations, long? intBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutMax64Async(this IIntModel operations, long intBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutMax64WithHttpMessagesAsync(intBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -252,7 +252,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// </param>
             /// <param name='intBody'>
             /// </param>
-            public static void PutMin32(this IIntModel operations, int? intBody)
+            public static void PutMin32(this IIntModel operations, int intBody)
             {
                 Task.Factory.StartNew(s => ((IIntModel)s).PutMin32Async(intBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -268,7 +268,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutMin32Async( this IIntModel operations, int? intBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutMin32Async(this IIntModel operations, int intBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutMin32WithHttpMessagesAsync(intBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -281,7 +281,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// </param>
             /// <param name='intBody'>
             /// </param>
-            public static void PutMin64(this IIntModel operations, long? intBody)
+            public static void PutMin64(this IIntModel operations, long intBody)
             {
                 Task.Factory.StartNew(s => ((IIntModel)s).PutMin64Async(intBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -297,7 +297,7 @@ namespace Fixtures.AcceptanceTestsBodyInteger
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutMin64Async( this IIntModel operations, long? intBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutMin64Async(this IIntModel operations, long intBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutMin64WithHttpMessagesAsync(intBody, null, cancellationToken).ConfigureAwait(false);
             }

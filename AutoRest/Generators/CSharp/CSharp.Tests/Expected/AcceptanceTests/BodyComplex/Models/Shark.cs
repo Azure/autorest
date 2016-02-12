@@ -28,7 +28,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// Initializes a new instance of the Shark class.
         /// </summary>
-        public Shark(double? length, DateTime? birthday, string species = default(string), IList<Fish> siblings = default(IList<Fish>), int? age = default(int?))
+        public Shark(double length, DateTime birthday, string species = default(string), IList<Fish> siblings = default(IList<Fish>), int? age = default(int?))
             : base(length, species, siblings)
         {
             Age = age;
@@ -43,7 +43,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "birthday")]
-        public DateTime? Birthday { get; set; }
+        public DateTime Birthday { get; set; }
 
         /// <summary>
         /// Validate the object. Throws ValidationException if validation fails.
@@ -51,10 +51,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
         public override void Validate()
         {
             base.Validate();
-            if (Birthday == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "Birthday");
-            }
         }
     }
 }

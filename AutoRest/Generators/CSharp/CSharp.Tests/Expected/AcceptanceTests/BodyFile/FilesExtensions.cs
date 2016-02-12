@@ -38,7 +38,7 @@ namespace Fixtures.AcceptanceTestsBodyFile
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<System.IO.Stream> GetFileAsync( this IFiles operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<System.IO.Stream> GetFileAsync(this IFiles operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 var _result = await operations.GetFileWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 _result.Request.Dispose();
@@ -65,7 +65,7 @@ namespace Fixtures.AcceptanceTestsBodyFile
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<System.IO.Stream> GetEmptyFileAsync( this IFiles operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<System.IO.Stream> GetEmptyFileAsync(this IFiles operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 var _result = await operations.GetEmptyFileWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
                 _result.Request.Dispose();

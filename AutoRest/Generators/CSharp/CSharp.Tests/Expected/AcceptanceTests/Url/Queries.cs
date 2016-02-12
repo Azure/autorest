@@ -59,7 +59,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </param>
         public async Task<HttpOperationResponse> GetBooleanTrueWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            bool? boolQuery = true;
+            bool boolQuery = true;
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -75,10 +75,7 @@ namespace Fixtures.AcceptanceTestsUrl
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/bool/true").ToString();
             List<string> _queryParameters = new List<string>();
-            if (boolQuery != null)
-            {
-                _queryParameters.Add(string.Format("boolQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(boolQuery, this.Client.SerializationSettings).Trim('"'))));
-            }
+            _queryParameters.Add(string.Format("boolQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(boolQuery, this.Client.SerializationSettings).Trim('"'))));
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);
@@ -168,7 +165,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </param>
         public async Task<HttpOperationResponse> GetBooleanFalseWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            bool? boolQuery = false;
+            bool boolQuery = false;
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -184,10 +181,7 @@ namespace Fixtures.AcceptanceTestsUrl
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/bool/false").ToString();
             List<string> _queryParameters = new List<string>();
-            if (boolQuery != null)
-            {
-                _queryParameters.Add(string.Format("boolQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(boolQuery, this.Client.SerializationSettings).Trim('"'))));
-            }
+            _queryParameters.Add(string.Format("boolQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(boolQuery, this.Client.SerializationSettings).Trim('"'))));
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);
@@ -295,10 +289,7 @@ namespace Fixtures.AcceptanceTestsUrl
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/bool/null").ToString();
             List<string> _queryParameters = new List<string>();
-            if (boolQuery != null)
-            {
-                _queryParameters.Add(string.Format("boolQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(boolQuery, this.Client.SerializationSettings).Trim('"'))));
-            }
+            _queryParameters.Add(string.Format("boolQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(boolQuery, this.Client.SerializationSettings).Trim('"'))));
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);
@@ -388,7 +379,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </param>
         public async Task<HttpOperationResponse> GetIntOneMillionWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            int? intQuery = 1000000;
+            int intQuery = 1000000;
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -404,10 +395,7 @@ namespace Fixtures.AcceptanceTestsUrl
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/int/1000000").ToString();
             List<string> _queryParameters = new List<string>();
-            if (intQuery != null)
-            {
-                _queryParameters.Add(string.Format("intQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(intQuery, this.Client.SerializationSettings).Trim('"'))));
-            }
+            _queryParameters.Add(string.Format("intQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(intQuery, this.Client.SerializationSettings).Trim('"'))));
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);
@@ -497,7 +485,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </param>
         public async Task<HttpOperationResponse> GetIntNegativeOneMillionWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            int? intQuery = -1000000;
+            int intQuery = -1000000;
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -513,10 +501,7 @@ namespace Fixtures.AcceptanceTestsUrl
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/int/-1000000").ToString();
             List<string> _queryParameters = new List<string>();
-            if (intQuery != null)
-            {
-                _queryParameters.Add(string.Format("intQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(intQuery, this.Client.SerializationSettings).Trim('"'))));
-            }
+            _queryParameters.Add(string.Format("intQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(intQuery, this.Client.SerializationSettings).Trim('"'))));
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);
@@ -624,10 +609,7 @@ namespace Fixtures.AcceptanceTestsUrl
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/int/null").ToString();
             List<string> _queryParameters = new List<string>();
-            if (intQuery != null)
-            {
-                _queryParameters.Add(string.Format("intQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(intQuery, this.Client.SerializationSettings).Trim('"'))));
-            }
+            _queryParameters.Add(string.Format("intQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(intQuery, this.Client.SerializationSettings).Trim('"'))));
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);
@@ -717,7 +699,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </param>
         public async Task<HttpOperationResponse> GetTenBillionWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            long? longQuery = 10000000000;
+            long longQuery = 10000000000;
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -733,10 +715,7 @@ namespace Fixtures.AcceptanceTestsUrl
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/long/10000000000").ToString();
             List<string> _queryParameters = new List<string>();
-            if (longQuery != null)
-            {
-                _queryParameters.Add(string.Format("longQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(longQuery, this.Client.SerializationSettings).Trim('"'))));
-            }
+            _queryParameters.Add(string.Format("longQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(longQuery, this.Client.SerializationSettings).Trim('"'))));
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);
@@ -826,7 +805,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </param>
         public async Task<HttpOperationResponse> GetNegativeTenBillionWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            long? longQuery = -10000000000;
+            long longQuery = -10000000000;
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -842,10 +821,7 @@ namespace Fixtures.AcceptanceTestsUrl
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/long/-10000000000").ToString();
             List<string> _queryParameters = new List<string>();
-            if (longQuery != null)
-            {
-                _queryParameters.Add(string.Format("longQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(longQuery, this.Client.SerializationSettings).Trim('"'))));
-            }
+            _queryParameters.Add(string.Format("longQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(longQuery, this.Client.SerializationSettings).Trim('"'))));
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);
@@ -953,10 +929,7 @@ namespace Fixtures.AcceptanceTestsUrl
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/long/null").ToString();
             List<string> _queryParameters = new List<string>();
-            if (longQuery != null)
-            {
-                _queryParameters.Add(string.Format("longQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(longQuery, this.Client.SerializationSettings).Trim('"'))));
-            }
+            _queryParameters.Add(string.Format("longQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(longQuery, this.Client.SerializationSettings).Trim('"'))));
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);
@@ -1046,7 +1019,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </param>
         public async Task<HttpOperationResponse> FloatScientificPositiveWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            double? floatQuery = 1.034E+20;
+            double floatQuery = 1.034E+20;
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -1062,10 +1035,7 @@ namespace Fixtures.AcceptanceTestsUrl
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/float/1.034E+20").ToString();
             List<string> _queryParameters = new List<string>();
-            if (floatQuery != null)
-            {
-                _queryParameters.Add(string.Format("floatQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(floatQuery, this.Client.SerializationSettings).Trim('"'))));
-            }
+            _queryParameters.Add(string.Format("floatQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(floatQuery, this.Client.SerializationSettings).Trim('"'))));
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);
@@ -1155,7 +1125,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </param>
         public async Task<HttpOperationResponse> FloatScientificNegativeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            double? floatQuery = -1.034E-20;
+            double floatQuery = -1.034E-20;
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -1171,10 +1141,7 @@ namespace Fixtures.AcceptanceTestsUrl
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/float/-1.034E-20").ToString();
             List<string> _queryParameters = new List<string>();
-            if (floatQuery != null)
-            {
-                _queryParameters.Add(string.Format("floatQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(floatQuery, this.Client.SerializationSettings).Trim('"'))));
-            }
+            _queryParameters.Add(string.Format("floatQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(floatQuery, this.Client.SerializationSettings).Trim('"'))));
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);
@@ -1282,10 +1249,7 @@ namespace Fixtures.AcceptanceTestsUrl
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/float/null").ToString();
             List<string> _queryParameters = new List<string>();
-            if (floatQuery != null)
-            {
-                _queryParameters.Add(string.Format("floatQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(floatQuery, this.Client.SerializationSettings).Trim('"'))));
-            }
+            _queryParameters.Add(string.Format("floatQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(floatQuery, this.Client.SerializationSettings).Trim('"'))));
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);
@@ -1375,7 +1339,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </param>
         public async Task<HttpOperationResponse> DoubleDecimalPositiveWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            double? doubleQuery = 9999999.999;
+            double doubleQuery = 9999999.999;
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -1391,10 +1355,7 @@ namespace Fixtures.AcceptanceTestsUrl
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/double/9999999.999").ToString();
             List<string> _queryParameters = new List<string>();
-            if (doubleQuery != null)
-            {
-                _queryParameters.Add(string.Format("doubleQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(doubleQuery, this.Client.SerializationSettings).Trim('"'))));
-            }
+            _queryParameters.Add(string.Format("doubleQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(doubleQuery, this.Client.SerializationSettings).Trim('"'))));
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);
@@ -1484,7 +1445,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </param>
         public async Task<HttpOperationResponse> DoubleDecimalNegativeWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            double? doubleQuery = -9999999.999;
+            double doubleQuery = -9999999.999;
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -1500,10 +1461,7 @@ namespace Fixtures.AcceptanceTestsUrl
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/double/-9999999.999").ToString();
             List<string> _queryParameters = new List<string>();
-            if (doubleQuery != null)
-            {
-                _queryParameters.Add(string.Format("doubleQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(doubleQuery, this.Client.SerializationSettings).Trim('"'))));
-            }
+            _queryParameters.Add(string.Format("doubleQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(doubleQuery, this.Client.SerializationSettings).Trim('"'))));
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);
@@ -1611,10 +1569,7 @@ namespace Fixtures.AcceptanceTestsUrl
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/double/null").ToString();
             List<string> _queryParameters = new List<string>();
-            if (doubleQuery != null)
-            {
-                _queryParameters.Add(string.Format("doubleQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(doubleQuery, this.Client.SerializationSettings).Trim('"'))));
-            }
+            _queryParameters.Add(string.Format("doubleQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(doubleQuery, this.Client.SerializationSettings).Trim('"'))));
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);
@@ -2161,10 +2116,7 @@ namespace Fixtures.AcceptanceTestsUrl
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/enum/green%20color").ToString();
             List<string> _queryParameters = new List<string>();
-            if (enumQuery != null)
-            {
-                _queryParameters.Add(string.Format("enumQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(enumQuery, this.Client.SerializationSettings).Trim('"'))));
-            }
+            _queryParameters.Add(string.Format("enumQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(enumQuery, this.Client.SerializationSettings).Trim('"'))));
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);
@@ -2273,10 +2225,7 @@ namespace Fixtures.AcceptanceTestsUrl
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/enum/null").ToString();
             List<string> _queryParameters = new List<string>();
-            if (enumQuery != null)
-            {
-                _queryParameters.Add(string.Format("enumQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(enumQuery, this.Client.SerializationSettings).Trim('"'))));
-            }
+            _queryParameters.Add(string.Format("enumQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(enumQuery, this.Client.SerializationSettings).Trim('"'))));
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);
@@ -2697,7 +2646,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </param>
         public async Task<HttpOperationResponse> DateValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            DateTime? dateQuery = SafeJsonConvert.DeserializeObject<DateTime>("\"2012-01-01\"", this.Client.SerializationSettings);
+            DateTime dateQuery = SafeJsonConvert.DeserializeObject<DateTime>("\"2012-01-01\"", this.Client.SerializationSettings);
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -2713,10 +2662,7 @@ namespace Fixtures.AcceptanceTestsUrl
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/date/2012-01-01").ToString();
             List<string> _queryParameters = new List<string>();
-            if (dateQuery != null)
-            {
-                _queryParameters.Add(string.Format("dateQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(dateQuery, new DateJsonConverter()).Trim('"'))));
-            }
+            _queryParameters.Add(string.Format("dateQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(dateQuery, new DateJsonConverter()).Trim('"'))));
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);
@@ -2824,10 +2770,7 @@ namespace Fixtures.AcceptanceTestsUrl
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/date/null").ToString();
             List<string> _queryParameters = new List<string>();
-            if (dateQuery != null)
-            {
-                _queryParameters.Add(string.Format("dateQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(dateQuery, new DateJsonConverter()).Trim('"'))));
-            }
+            _queryParameters.Add(string.Format("dateQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(dateQuery, new DateJsonConverter()).Trim('"'))));
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);
@@ -2917,7 +2860,7 @@ namespace Fixtures.AcceptanceTestsUrl
         /// </param>
         public async Task<HttpOperationResponse> DateTimeValidWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            DateTime? dateTimeQuery = SafeJsonConvert.DeserializeObject<DateTime>("\"2012-01-01T01:01:01Z\"", this.Client.SerializationSettings);
+            DateTime dateTimeQuery = SafeJsonConvert.DeserializeObject<DateTime>("\"2012-01-01T01:01:01Z\"", this.Client.SerializationSettings);
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
@@ -2933,10 +2876,7 @@ namespace Fixtures.AcceptanceTestsUrl
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/datetime/2012-01-01T01%3A01%3A01Z").ToString();
             List<string> _queryParameters = new List<string>();
-            if (dateTimeQuery != null)
-            {
-                _queryParameters.Add(string.Format("dateTimeQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(dateTimeQuery, this.Client.SerializationSettings).Trim('"'))));
-            }
+            _queryParameters.Add(string.Format("dateTimeQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(dateTimeQuery, this.Client.SerializationSettings).Trim('"'))));
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);
@@ -3044,10 +2984,7 @@ namespace Fixtures.AcceptanceTestsUrl
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
             var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "queries/datetime/null").ToString();
             List<string> _queryParameters = new List<string>();
-            if (dateTimeQuery != null)
-            {
-                _queryParameters.Add(string.Format("dateTimeQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(dateTimeQuery, this.Client.SerializationSettings).Trim('"'))));
-            }
+            _queryParameters.Add(string.Format("dateTimeQuery={0}", Uri.EscapeDataString(SafeJsonConvert.SerializeObject(dateTimeQuery, this.Client.SerializationSettings).Trim('"'))));
             if (_queryParameters.Count > 0)
             {
                 _url += "?" + string.Join("&", _queryParameters);

@@ -7,7 +7,6 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using Microsoft.Rest.Generator.ClientModel;
-using Microsoft.Rest.Generator.CSharp.TemplateModels;
 using Microsoft.Rest.Generator.Utilities;
 
 namespace Microsoft.Rest.Generator.CSharp
@@ -405,11 +404,18 @@ namespace Microsoft.Rest.Generator.CSharp
                 builder.AppendLine("List<string> _queryParameters = new List<string>();");
                 foreach (var queryParameter in this.LogicalParameterTemplateModels.Where(p => p.Location == ParameterLocation.Query))
                 {
-                    builder.AppendLine("if ({0} != null)", queryParameter.Name)
-                        .AppendLine("{").Indent()
-                        .AppendLine("_queryParameters.Add(string.Format(\"{0}={{0}}\", Uri.EscapeDataString({1})));",
-                            queryParameter.SerializedName, queryParameter.GetFormattedReferenceValue(ClientReference)).Outdent()
-                        .AppendLine("}");
+                    if (!queryParameter.Type.IsValueType())
+                    {
+                        builder.AppendLine("if ({0} != null)", queryParameter.Name)
+                            .AppendLine("{").Indent();
+                    }
+                    builder.AppendLine("_queryParameters.Add(string.Format(\"{0}={{0}}\", Uri.EscapeDataString({1})));",
+                            queryParameter.SerializedName, queryParameter.GetFormattedReferenceValue(ClientReference));
+                    if (!queryParameter.Type.IsValueType())
+                    {
+                        builder.Outdent()
+                            .AppendLine("}");
+                    }
                 }
 
                 builder.AppendLine("if (_queryParameters.Count > 0)")
@@ -430,13 +436,17 @@ namespace Microsoft.Rest.Generator.CSharp
             var builder = new IndentedStringBuilder();
             foreach (var transformation in InputParameterTransformation)
             {
-                builder.AppendLine("{0} {1} = null;", 
+                builder.AppendLine("{0} {1} = default({0});", 
                         transformation.OutputParameter.Type.Name,
                         transformation.OutputParameter.Name);
 
-                builder.AppendLine("if ({0})", BuildNullCheckExpression(transformation))
+                var nullCheck = BuildNullCheckExpression(transformation);
+                if (!string.IsNullOrEmpty(nullCheck))
+                {
+                    builder.AppendLine("if ({0})", nullCheck)
                        .AppendLine("{").Indent();
-
+                }
+                
                 if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
                     transformation.OutputParameter.Type is CompositeType)
                 {
@@ -452,8 +462,11 @@ namespace Microsoft.Rest.Generator.CSharp
                         mapping);
                 }
 
-                builder.Outdent()
+                if (!string.IsNullOrEmpty(nullCheck))
+                {
+                    builder.Outdent()
                        .AppendLine("}");
+                }
             }
 
             return builder.ToString();
@@ -467,7 +480,9 @@ namespace Microsoft.Rest.Generator.CSharp
             }
 
             return string.Join(" || ",
-                transformation.ParameterMappings.Select(m => m.InputParameter.Name + " != null"));
+                transformation.ParameterMappings
+                    .Where(m => !m.InputParameter.Type.IsValueType())
+                    .Select(m => m.InputParameter.Name + " != null"));
         }
     }
 }

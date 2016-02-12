@@ -27,7 +27,7 @@ namespace Fixtures.MirrorSequences.Models
         /// <summary>
         /// Initializes a new instance of the ErrorModel class.
         /// </summary>
-        public ErrorModel(int? code, string message)
+        public ErrorModel(int code, string message)
         {
             Code = code;
             Message = message;
@@ -36,7 +36,7 @@ namespace Fixtures.MirrorSequences.Models
         /// <summary>
         /// </summary>
         [JsonProperty(PropertyName = "code")]
-        public int? Code { get; set; }
+        public int Code { get; set; }
 
         /// <summary>
         /// </summary>
@@ -48,10 +48,6 @@ namespace Fixtures.MirrorSequences.Models
         /// </summary>
         public virtual void Validate()
         {
-            if (Code == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "Code");
-            }
             if (Message == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "Message");

@@ -39,7 +39,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<ArrayWrapper> GetValidAsync( this IArrayOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ArrayWrapper> GetValidAsync(this IArrayOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -71,7 +71,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutValidAsync( this IArrayOperations operations, IList<string> array = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutValidAsync(this IArrayOperations operations, IList<string> array = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutValidWithHttpMessagesAsync(array, null, cancellationToken).ConfigureAwait(false);
             }
@@ -96,7 +96,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<ArrayWrapper> GetEmptyAsync( this IArrayOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ArrayWrapper> GetEmptyAsync(this IArrayOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -128,7 +128,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutEmptyAsync( this IArrayOperations operations, IList<string> array = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutEmptyAsync(this IArrayOperations operations, IList<string> array = default(IList<string>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutEmptyWithHttpMessagesAsync(array, null, cancellationToken).ConfigureAwait(false);
             }
@@ -155,7 +155,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<ArrayWrapper> GetNotProvidedAsync( this IArrayOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ArrayWrapper> GetNotProvidedAsync(this IArrayOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetNotProvidedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

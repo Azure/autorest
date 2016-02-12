@@ -81,7 +81,7 @@ namespace Fixtures.AcceptanceTestsValidation.Models
         /// Constant int
         /// </summary>
         [JsonProperty(PropertyName = "constInt")]
-        public static int? ConstInt { get; private set; }
+        public static int ConstInt { get; private set; }
 
         /// <summary>
         /// Constant string
@@ -109,16 +109,13 @@ namespace Fixtures.AcceptanceTestsValidation.Models
                     throw new ValidationException(ValidationRules.UniqueItems, "DisplayNames");
                 }
             }
-            if (this.Capacity != null)
+            if (this.Capacity >= 100)
             {
-                if (this.Capacity >= 100)
-                {
-                    throw new ValidationException(ValidationRules.ExclusiveMaximum, "Capacity", 100);
-                }
-                if (this.Capacity <= 0)
-                {
-                    throw new ValidationException(ValidationRules.ExclusiveMinimum, "Capacity", 0);
-                }
+                throw new ValidationException(ValidationRules.ExclusiveMaximum, "Capacity", 100);
+            }
+            if (this.Capacity <= 0)
+            {
+                throw new ValidationException(ValidationRules.ExclusiveMinimum, "Capacity", 0);
             }
             if (this.Image != null)
             {

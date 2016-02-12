@@ -39,7 +39,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<TimeSpan?> GetNullAsync( this IDurationOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<TimeSpan?> GetNullAsync(this IDurationOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -55,7 +55,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
             /// </param>
             /// <param name='durationBody'>
             /// </param>
-            public static void PutPositiveDuration(this IDurationOperations operations, TimeSpan? durationBody)
+            public static void PutPositiveDuration(this IDurationOperations operations, TimeSpan durationBody)
             {
                 Task.Factory.StartNew(s => ((IDurationOperations)s).PutPositiveDurationAsync(durationBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -71,7 +71,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutPositiveDurationAsync( this IDurationOperations operations, TimeSpan? durationBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutPositiveDurationAsync(this IDurationOperations operations, TimeSpan durationBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutPositiveDurationWithHttpMessagesAsync(durationBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -96,7 +96,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<TimeSpan?> GetPositiveDurationAsync( this IDurationOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<TimeSpan?> GetPositiveDurationAsync(this IDurationOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetPositiveDurationWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -124,7 +124,7 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<TimeSpan?> GetInvalidAsync( this IDurationOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<TimeSpan?> GetInvalidAsync(this IDurationOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetInvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

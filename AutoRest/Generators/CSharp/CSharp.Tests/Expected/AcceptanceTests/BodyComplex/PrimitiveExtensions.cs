@@ -38,7 +38,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<IntWrapper> GetIntAsync( this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<IntWrapper> GetIntAsync(this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetIntWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -72,7 +72,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutIntAsync( this IPrimitive operations, IntWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutIntAsync(this IPrimitive operations, IntWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutIntWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -97,7 +97,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<LongWrapper> GetLongAsync( this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<LongWrapper> GetLongAsync(this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetLongWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -131,7 +131,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutLongAsync( this IPrimitive operations, LongWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutLongAsync(this IPrimitive operations, LongWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutLongWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -156,7 +156,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<FloatWrapper> GetFloatAsync( this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<FloatWrapper> GetFloatAsync(this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetFloatWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -190,7 +190,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutFloatAsync( this IPrimitive operations, FloatWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutFloatAsync(this IPrimitive operations, FloatWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutFloatWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -215,7 +215,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<DoubleWrapper> GetDoubleAsync( this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<DoubleWrapper> GetDoubleAsync(this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetDoubleWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -251,7 +251,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutDoubleAsync( this IPrimitive operations, DoubleWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutDoubleAsync(this IPrimitive operations, DoubleWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutDoubleWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -276,7 +276,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<BooleanWrapper> GetBoolAsync( this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<BooleanWrapper> GetBoolAsync(this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetBoolWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -310,7 +310,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutBoolAsync( this IPrimitive operations, BooleanWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutBoolAsync(this IPrimitive operations, BooleanWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutBoolWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -335,7 +335,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<StringWrapper> GetStringAsync( this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<StringWrapper> GetStringAsync(this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetStringWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -369,7 +369,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutStringAsync( this IPrimitive operations, StringWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutStringAsync(this IPrimitive operations, StringWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutStringWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -394,7 +394,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<DateWrapper> GetDateAsync( this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<DateWrapper> GetDateAsync(this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetDateWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -428,7 +428,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutDateAsync( this IPrimitive operations, DateWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutDateAsync(this IPrimitive operations, DateWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutDateWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -453,7 +453,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<DatetimeWrapper> GetDateTimeAsync( this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<DatetimeWrapper> GetDateTimeAsync(this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetDateTimeWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -487,7 +487,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutDateTimeAsync( this IPrimitive operations, DatetimeWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutDateTimeAsync(this IPrimitive operations, DatetimeWrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutDateTimeWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -512,7 +512,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Datetimerfc1123Wrapper> GetDateTimeRfc1123Async( this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Datetimerfc1123Wrapper> GetDateTimeRfc1123Async(this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetDateTimeRfc1123WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -548,7 +548,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutDateTimeRfc1123Async( this IPrimitive operations, Datetimerfc1123Wrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutDateTimeRfc1123Async(this IPrimitive operations, Datetimerfc1123Wrapper complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutDateTimeRfc1123WithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -573,7 +573,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<DurationWrapper> GetDurationAsync( this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<DurationWrapper> GetDurationAsync(this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetDurationWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -605,7 +605,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutDurationAsync( this IPrimitive operations, TimeSpan? field = default(TimeSpan?), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutDurationAsync(this IPrimitive operations, TimeSpan? field = default(TimeSpan?), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutDurationWithHttpMessagesAsync(field, null, cancellationToken).ConfigureAwait(false);
             }
@@ -630,7 +630,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<ByteWrapper> GetByteAsync( this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<ByteWrapper> GetByteAsync(this IPrimitive operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetByteWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -662,7 +662,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutByteAsync( this IPrimitive operations, byte[] field = default(byte[]), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutByteAsync(this IPrimitive operations, byte[] field = default(byte[]), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutByteWithHttpMessagesAsync(field, null, cancellationToken).ConfigureAwait(false);
             }
