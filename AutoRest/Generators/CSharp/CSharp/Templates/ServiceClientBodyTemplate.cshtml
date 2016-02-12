@@ -36,6 +36,9 @@ public JsonSerializerSettings DeserializationSettings { get; private set; }
         
 @foreach (var operation in Model.Operations) 
 {
+@:/// <summary>
+@:/// Gets the I@(operation.MethodGroupType).
+@:/// </summary>
 @:public virtual I@(operation.MethodGroupType) @(operation.MethodGroupName) { get; private set; }
 @EmptyLine
 }
