@@ -1199,35 +1199,6 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 };
                 client.Polymorphism.PutValid(polymorphismRequest);
 
-                var badRequest = new Salmon
-                {
-                    Iswild = true,
-                    Length = 1,
-                    Location = "alaska",
-                    Species = "king",
-                    Siblings = new List<Fish>
-                    {
-                        new Shark
-                        {
-                            Age = 6,
-                            Length = 20,
-                            Species = "predator",
-                            Birthday = new DateTime(2012, 1, 5, 1, 0, 0, DateTimeKind.Utc)
-                        },
-                        new Sawshark
-                        {
-                            Age = 105,
-                            Length = 10,
-                            Species = "dangerous",
-                            Picture = new byte[] {255, 255, 255, 255, 254}
-                        }
-                    }
-                };
-
-                // NO LONGER VALID - Birthday is not nullable as such validation is removed
-                // var missingRequired =
-                //    Assert.Throws<ValidationException>(() => client.Polymorphism.PutValidMissingRequired(badRequest));
-                // Assert.Equal("Birthday", missingRequired.Target);
                 /* COMPLEX TYPES THAT INVOLVE RECURSIVE REFERENCE */
                 // GET polymorphicrecursive/valid
                 var recursiveResult = client.Polymorphicrecursive.GetValid();
