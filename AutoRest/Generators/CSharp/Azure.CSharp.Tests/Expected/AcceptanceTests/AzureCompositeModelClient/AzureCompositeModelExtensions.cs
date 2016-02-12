@@ -17,6 +17,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
     using Microsoft.Rest.Azure;
     using Models;
 
+    /// <summary>
+    /// Extension methods for AzureCompositeModel.
+    /// </summary>
     public static partial class AzureCompositeModelExtensions
     {
             /// <summary>

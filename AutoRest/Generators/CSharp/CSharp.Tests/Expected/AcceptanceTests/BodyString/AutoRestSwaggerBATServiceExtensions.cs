@@ -16,6 +16,9 @@ namespace Fixtures.AcceptanceTestsBodyString
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for AutoRestSwaggerBATService.
+    /// </summary>
     public static partial class AutoRestSwaggerBATServiceExtensions
     {
     }

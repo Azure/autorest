@@ -16,6 +16,9 @@ namespace Fixtures.AcceptanceTestsHttp
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for MultipleResponses.
+    /// </summary>
     public static partial class MultipleResponsesExtensions
     {
             /// <summary>

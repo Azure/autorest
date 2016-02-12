@@ -16,6 +16,9 @@ namespace Fixtures.AcceptanceTestsBodyInteger
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for IntModel.
+    /// </summary>
     public static partial class IntModelExtensions
     {
             /// <summary>

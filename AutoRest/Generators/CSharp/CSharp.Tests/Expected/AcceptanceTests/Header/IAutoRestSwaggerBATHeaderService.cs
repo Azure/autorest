@@ -38,6 +38,9 @@ namespace Fixtures.AcceptanceTestsHeader
         JsonSerializerSettings DeserializationSettings { get; }
 
 
+        /// <summary>
+        /// Gets the IHeader.
+        /// </summary>
         IHeader Header { get; }
 
     }

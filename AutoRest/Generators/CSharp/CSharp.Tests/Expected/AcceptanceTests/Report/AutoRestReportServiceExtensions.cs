@@ -16,6 +16,9 @@ namespace Fixtures.AcceptanceTestsReport
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for AutoRestReportService.
+    /// </summary>
     public static partial class AutoRestReportServiceExtensions
     {
             /// <summary>

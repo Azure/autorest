@@ -16,6 +16,9 @@ namespace Fixtures.MirrorSequences
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for SequenceRequestResponseTest.
+    /// </summary>
     public static partial class SequenceRequestResponseTestExtensions
     {
             /// <summary>

@@ -38,6 +38,9 @@ namespace Fixtures.AcceptanceTestsBodyInteger
         JsonSerializerSettings DeserializationSettings { get; }
 
 
+        /// <summary>
+        /// Gets the IIntModel.
+        /// </summary>
         IIntModel IntModel { get; }
 
     }

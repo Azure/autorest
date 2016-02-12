@@ -16,6 +16,9 @@ namespace Fixtures.AcceptanceTestsBodyComplex
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for Primitive.
+    /// </summary>
     public static partial class PrimitiveExtensions
     {
             /// <summary>

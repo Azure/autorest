@@ -16,6 +16,9 @@ namespace Fixtures.AcceptanceTestsHeader
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for AutoRestSwaggerBATHeaderService.
+    /// </summary>
     public static partial class AutoRestSwaggerBATHeaderServiceExtensions
     {
     }

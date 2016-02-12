@@ -61,6 +61,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
         bool? GenerateClientRequestId { get; set; }
 
 
+        /// <summary>
+        /// Gets the IDurationOperations.
+        /// </summary>
         IDurationOperations Duration { get; }
 
     }

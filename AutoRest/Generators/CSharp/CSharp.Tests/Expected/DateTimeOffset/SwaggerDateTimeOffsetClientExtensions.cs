@@ -16,6 +16,9 @@ namespace Fixtures.DateTimeOffset
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for SwaggerDateTimeOffsetClient.
+    /// </summary>
     public static partial class SwaggerDateTimeOffsetClientExtensions
     {
             /// <summary>

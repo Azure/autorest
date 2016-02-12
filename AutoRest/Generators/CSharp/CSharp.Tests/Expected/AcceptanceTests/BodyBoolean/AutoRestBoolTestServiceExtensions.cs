@@ -16,6 +16,9 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for AutoRestBoolTestService.
+    /// </summary>
     public static partial class AutoRestBoolTestServiceExtensions
     {
     }

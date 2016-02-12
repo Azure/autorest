@@ -67,6 +67,9 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
         /// </summary>
         public bool? GenerateClientRequestId { get; set; }
 
+        /// <summary>
+        /// Gets the IPagingOperations.
+        /// </summary>
         public virtual IPagingOperations Paging { get; private set; }
 
         /// <summary>

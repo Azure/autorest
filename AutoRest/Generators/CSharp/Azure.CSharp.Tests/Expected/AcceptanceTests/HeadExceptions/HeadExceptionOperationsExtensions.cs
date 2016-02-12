@@ -16,6 +16,9 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
 
+    /// <summary>
+    /// Extension methods for HeadExceptionOperations.
+    /// </summary>
     public static partial class HeadExceptionOperationsExtensions
     {
             /// <summary>

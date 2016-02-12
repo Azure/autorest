@@ -16,6 +16,9 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for Datetimerfc1123.
+    /// </summary>
     public static partial class Datetimerfc1123Extensions
     {
             /// <summary>

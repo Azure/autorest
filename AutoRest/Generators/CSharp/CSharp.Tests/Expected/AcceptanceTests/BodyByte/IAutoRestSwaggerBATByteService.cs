@@ -38,6 +38,9 @@ namespace Fixtures.AcceptanceTestsBodyByte
         JsonSerializerSettings DeserializationSettings { get; }
 
 
+        /// <summary>
+        /// Gets the IByteModel.
+        /// </summary>
         IByteModel ByteModel { get; }
 
     }

@@ -16,6 +16,9 @@ namespace Fixtures.AcceptanceTestsBodyDateTime
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for Datetime.
+    /// </summary>
     public static partial class DatetimeExtensions
     {
             /// <summary>

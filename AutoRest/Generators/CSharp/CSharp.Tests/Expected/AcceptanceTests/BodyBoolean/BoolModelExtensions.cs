@@ -16,6 +16,9 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for BoolModel.
+    /// </summary>
     public static partial class BoolModelExtensions
     {
             /// <summary>

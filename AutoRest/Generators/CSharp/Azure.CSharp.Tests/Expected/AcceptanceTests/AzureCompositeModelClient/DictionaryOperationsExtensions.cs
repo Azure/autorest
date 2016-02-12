@@ -17,6 +17,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
     using Microsoft.Rest.Azure;
     using Models;
 
+    /// <summary>
+    /// Extension methods for DictionaryOperations.
+    /// </summary>
     public static partial class DictionaryOperationsExtensions
     {
             /// <summary>

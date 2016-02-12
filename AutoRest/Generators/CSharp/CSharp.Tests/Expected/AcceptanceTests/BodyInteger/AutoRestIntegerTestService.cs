@@ -44,6 +44,9 @@ namespace Fixtures.AcceptanceTestsBodyInteger
         /// </summary>
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
+        /// <summary>
+        /// Gets the IIntModel.
+        /// </summary>
         public virtual IIntModel IntModel { get; private set; }
 
         /// <summary>

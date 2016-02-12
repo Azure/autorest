@@ -16,6 +16,9 @@ namespace Fixtures.AcceptanceTestsValidation
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for AutoRestValidationTest.
+    /// </summary>
     public static partial class AutoRestValidationTestExtensions
     {
             /// <summary>

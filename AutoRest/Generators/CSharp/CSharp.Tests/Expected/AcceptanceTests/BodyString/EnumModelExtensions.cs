@@ -16,6 +16,9 @@ namespace Fixtures.AcceptanceTestsBodyString
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for EnumModel.
+    /// </summary>
     public static partial class EnumModelExtensions
     {
             /// <summary>

@@ -17,6 +17,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
     using Microsoft.Rest.Azure;
     using Models;
 
+    /// <summary>
+    /// Extension methods for SubscriptionInCredentialsOperations.
+    /// </summary>
     public static partial class SubscriptionInCredentialsOperationsExtensions
     {
             /// <summary>

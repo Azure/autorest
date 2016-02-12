@@ -44,6 +44,9 @@ namespace Fixtures.AcceptanceTestsHeader
         /// </summary>
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
+        /// <summary>
+        /// Gets the IHeader.
+        /// </summary>
         public virtual IHeader Header { get; private set; }
 
         /// <summary>

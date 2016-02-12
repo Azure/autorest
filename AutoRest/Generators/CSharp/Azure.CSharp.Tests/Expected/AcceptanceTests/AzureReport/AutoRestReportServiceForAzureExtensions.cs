@@ -17,6 +17,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureReport
     using Microsoft.Rest.Azure;
     using Models;
 
+    /// <summary>
+    /// Extension methods for AutoRestReportServiceForAzure.
+    /// </summary>
     public static partial class AutoRestReportServiceForAzureExtensions
     {
             /// <summary>

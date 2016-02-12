@@ -17,6 +17,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
     using Microsoft.Rest.Azure;
     using Models;
 
+    /// <summary>
+    /// Extension methods for ParameterGroupingOperations.
+    /// </summary>
     public static partial class ParameterGroupingOperationsExtensions
     {
             /// <summary>

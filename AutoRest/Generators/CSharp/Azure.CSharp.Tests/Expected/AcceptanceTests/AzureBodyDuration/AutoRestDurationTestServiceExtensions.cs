@@ -17,6 +17,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureBodyDuration
     using Microsoft.Rest.Azure;
     using Models;
 
+    /// <summary>
+    /// Extension methods for AutoRestDurationTestService.
+    /// </summary>
     public static partial class AutoRestDurationTestServiceExtensions
     {
     }

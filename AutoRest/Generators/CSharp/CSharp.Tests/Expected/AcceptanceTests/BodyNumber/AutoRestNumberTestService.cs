@@ -44,6 +44,9 @@ namespace Fixtures.AcceptanceTestsBodyNumber
         /// </summary>
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
+        /// <summary>
+        /// Gets the INumber.
+        /// </summary>
         public virtual INumber Number { get; private set; }
 
         /// <summary>

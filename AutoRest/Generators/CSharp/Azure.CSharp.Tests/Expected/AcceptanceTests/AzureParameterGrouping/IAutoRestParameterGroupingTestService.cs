@@ -61,6 +61,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureParameterGrouping
         bool? GenerateClientRequestId { get; set; }
 
 
+        /// <summary>
+        /// Gets the IParameterGroupingOperations.
+        /// </summary>
         IParameterGroupingOperations ParameterGrouping { get; }
 
     }

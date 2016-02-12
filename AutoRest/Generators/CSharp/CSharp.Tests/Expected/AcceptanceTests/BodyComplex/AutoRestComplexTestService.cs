@@ -49,18 +49,39 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// </summary>
         public string ApiVersion { get; private set; }
 
+        /// <summary>
+        /// Gets the IBasicOperations.
+        /// </summary>
         public virtual IBasicOperations BasicOperations { get; private set; }
 
+        /// <summary>
+        /// Gets the IPrimitive.
+        /// </summary>
         public virtual IPrimitive Primitive { get; private set; }
 
+        /// <summary>
+        /// Gets the IArray.
+        /// </summary>
         public virtual IArray Array { get; private set; }
 
+        /// <summary>
+        /// Gets the IDictionary.
+        /// </summary>
         public virtual IDictionary Dictionary { get; private set; }
 
+        /// <summary>
+        /// Gets the IInheritance.
+        /// </summary>
         public virtual IInheritance Inheritance { get; private set; }
 
+        /// <summary>
+        /// Gets the IPolymorphism.
+        /// </summary>
         public virtual IPolymorphism Polymorphism { get; private set; }
 
+        /// <summary>
+        /// Gets the IPolymorphicrecursive.
+        /// </summary>
         public virtual IPolymorphicrecursive Polymorphicrecursive { get; private set; }
 
         /// <summary>

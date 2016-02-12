@@ -44,6 +44,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
         /// </summary>
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
+        /// <summary>
+        /// Gets the IDictionary.
+        /// </summary>
         public virtual IDictionary Dictionary { get; private set; }
 
         /// <summary>
