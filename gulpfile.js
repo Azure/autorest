@@ -94,7 +94,8 @@ var defaultAzureMappings = {
   'AcceptanceTests/Head': '../../../TestServer/swagger/head.json',
   'AcceptanceTests/HeadExceptions': '../../../TestServer/swagger/head-exceptions.json',
   'AcceptanceTests/SubscriptionIdApiVersion': '../../../TestServer/swagger/subscriptionId-apiVersion.json',
-  'AcceptanceTests/AzureSpecials': '../../../TestServer/swagger/azure-special-properties.json'
+  'AcceptanceTests/AzureSpecials': '../../../TestServer/swagger/azure-special-properties.json',
+  'AcceptanceTests/CustomBaseUri': '../../../TestServer/swagger/custom-baseUrl.json'
 };
 
 var compositeMappings = {

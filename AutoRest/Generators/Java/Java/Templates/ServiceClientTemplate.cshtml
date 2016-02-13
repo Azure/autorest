@@ -104,16 +104,16 @@ if(!property.IsReadOnly)
     /**
      * Initializes an instance of @(Model.Name) client.
      *
-     * @@param baseUri the base URI of the host
+     @(Model.IsCustomBaseUri ? "" : "* @param baseUri the base URI of the host")
      * @@param client the {@@link OkHttpClient} client to use for REST calls
      * @@param retrofitBuilder the builder for building up a {@@link Retrofit}
      */
-    public @(Model.Name)Impl(@(Model.IsCustomBaseUri ? "" : "String baseUri,") OkHttpClient client, Retrofit.Builder retrofitBuilder) {
+    public @(Model.Name)Impl(@(Model.IsCustomBaseUri ? "" : "String baseUri, ")OkHttpClient client, Retrofit.Builder retrofitBuilder) {
         super(client, retrofitBuilder);
 
 @if (Model.IsCustomBaseUri)
 {
-        @:this.baseUri = @(Model.BaseUrl);
+        @:this.baseUri = "@(Model.BaseUrl)";
 }
 else
 {

@@ -100,10 +100,11 @@ if(!property.IsReadOnly)
      *
      * @@param baseUri the base URI of the host
      */
-    public @(Model.Name)Impl(String baseUri) {
+    @(Model.IsCustomBaseUri ? "private" : "public") @(Model.Name)Impl(String baseUri) {
         this(baseUri, null);
     }
 @EmptyLine
+
 @if (Settings.AddCredentials)
 {
 <text>
@@ -122,45 +123,84 @@ if(!property.IsReadOnly)
      * @@param baseUri the base URI of the host
      * @@param credentials the management credentials for Azure
      */
-    public @(Model.Name)Impl(String baseUri, ServiceClientCredentials credentials) {
+    @(Model.IsCustomBaseUri ? "private" : "public") @(Model.Name)Impl(String baseUri, ServiceClientCredentials credentials) {
         super();
         this.baseUri = baseUri;
         this.credentials = credentials;
         initialize();
     }
 @EmptyLine
-    /**
-     * Initializes an instance of @(Model.Name) client.
-     *
-     * @@param baseUri the base URI of the host
-     * @@param credentials the management credentials for Azure
-     * @@param client the {@@link OkHttpClient} client to use for REST calls
-     * @@param retrofitBuilder the builder for building up a {@@link Retrofit}
-     */
-    public @(Model.Name)Impl(String baseUri, ServiceClientCredentials credentials, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
-        super(client, retrofitBuilder);
-        this.baseUri = baseUri;
-        this.credentials = credentials;
-        initialize();
-    }
+@if(!Model.IsCustomBaseUri)
+{
+@:    /**
+@:     * Initializes an instance of @(Model.Name) client.
+@:     *
+@:     * @@param baseUri the base URI of the host
+@:     * @@param credentials the management credentials for Azure
+@:     * @@param client the {@@link OkHttpClient} client to use for REST calls
+@:     * @@param retrofitBuilder the builder for building up a {@@link Retrofit}
+@:     */
+@:    public @(Model.Name)Impl(String baseUri, ServiceClientCredentials credentials, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
+@:        super(client, retrofitBuilder);
+@:        this.baseUri = baseUri;
+@:        this.credentials = credentials;
+@:        initialize();
+@:    }
 @EmptyLine
+}
+else
+{
+@:    /**
+@:     * Initializes an instance of @(Model.Name) client.
+@:     *
+@:     * @@param credentials the management credentials for Azure
+@:     * @@param client the {@@link OkHttpClient} client to use for REST calls
+@:     * @@param retrofitBuilder the builder for building up a {@@link Retrofit}
+@:     */
+@:    public @(Model.Name)Impl(ServiceClientCredentials credentials, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
+@:        super(client, retrofitBuilder);
+@:        this.baseUri = "@Model.BaseUrl";
+@:        this.credentials = credentials;
+@:        initialize();
+@:    }
+@EmptyLine
+
+}
+
 </text>
 }
 else
 {
 <text>
-    /**
-     * Initializes an instance of @(Model.Name) client.
-     *
-     * @@param baseUri the base URI of the host
-     * @@param client the {@@link OkHttpClient} client to use for REST calls
-     * @@param retrofitBuilder the builder for building up a {@@link Retrofit}
-     */
-    public @(Model.Name)Impl(String baseUri, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
-        super(client, retrofitBuilder);
-        this.baseUri = baseUri;
-        initialize();
-    }
+@if(Model.IsCustomBaseUri)
+{
+@:    /**
+@:     * Initializes an instance of @(Model.Name) client.
+@:     *
+@:     * @@param client the {@@link OkHttpClient} client to use for REST calls
+@:     * @@param retrofitBuilder the builder for building up a {@@link Retrofit}
+@:     */
+@:    public @(Model.Name)Impl(OkHttpClient client, Retrofit.Builder retrofitBuilder) {
+@:        super(client, retrofitBuilder);
+@:        this.baseUri = "@Model.BaseUrl";
+@:        initialize();
+@:    }
+}
+else
+{
+@:    /**
+@:     * Initializes an instance of @(Model.Name) client.
+@:     *
+@:     * @@param baseUri the base URI of the host
+@:     * @@param client the {@@link OkHttpClient} client to use for REST calls
+@:     * @@param retrofitBuilder the builder for building up a {@@link Retrofit}
+@:     */
+@:    public @(Model.Name)Impl(String baseUri, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
+@:        super(client, retrofitBuilder);
+@:        this.baseUri = baseUri;
+@:        initialize();
+@:    }
+}
 @EmptyLine
 </text>
 }

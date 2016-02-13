@@ -88,7 +88,6 @@ namespace Microsoft.Rest.Generator.Azure
             SetDefaultResponses(serviceClient);
             AddParameterGroups(serviceClient);
             AddPageableMethod(serviceClient, codeNamer);
-            ProcessParameterizedHost(serviceClient, settings);
         }
 
         /// <summary>

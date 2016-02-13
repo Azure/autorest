@@ -26,6 +26,9 @@ using Microsoft.Rest.Azure;
 using AutoRest.Generator.CSharp.Tests.Utilities;
 using Microsoft.Rest.Azure.OData;
 using Fixtures.Azure.AcceptanceTestsAzureSpecials.Models;
+using Fixtures.Azure.AcceptanceTestsCustomBaseUri;
+using System.Net;
+using System.Net.Http;
 
 namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
 {
@@ -59,6 +62,41 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
         private static string SwaggerPath(string file)
         {
             return Path.Combine("Swagger", file);
+        }
+
+        [Fact]
+        public void AzureCustomBaseUriTests()
+        {
+            SwaggerSpecRunner.RunTests(
+                SwaggerPath("custom-baseUrl.json"), ExpectedPath("CustomBaseUri"), generator: "Azure.CSharp");
+            using (var client = new AutoRestParameterizedHostTestClient(new TokenCredentials(Guid.NewGuid().ToString())))
+            {
+                // small modification to the "host" portion to include the port and the '.'
+                client.Host = string.Format(CultureInfo.InvariantCulture, "{0}.:{1}", client.Host, Fixture.Port);
+                Assert.Equal(HttpStatusCode.OK,
+                    client.Paths.GetEmptyWithHttpMessagesAsync("local").Result.Response.StatusCode);
+            }
+        }
+
+        [Fact]
+        public void AzureCustomBaseUriNegativeTests()
+        {
+            SwaggerSpecRunner.RunTests(
+                SwaggerPath("custom-baseUrl.json"), ExpectedPath("CustomBaseUri"), generator: "Azure.CSharp");
+            using (var client = new AutoRestParameterizedHostTestClient(new TokenCredentials(Guid.NewGuid().ToString())))
+            {
+                // use a bad acct name
+                Assert.Throws<HttpRequestException>(() =>
+                    client.Paths.GetEmpty("bad"));
+
+                // pass in null
+                Assert.Throws<ValidationException>(() => client.Paths.GetEmpty(null));
+
+                // set the global parameter incorrectly
+                client.Host = "badSuffix";
+                Assert.Throws<HttpRequestException>(() =>
+                    client.Paths.GetEmpty("local"));
+            }
         }
 
         [Fact]

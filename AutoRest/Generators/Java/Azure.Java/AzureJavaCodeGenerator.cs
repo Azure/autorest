@@ -62,6 +62,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
             Settings.AddCredentials = true;
+            Extensions.NormalizeClientModel(serviceClient, Settings);
             AzureExtensions.UpdateHeadMethods(serviceClient);
             AzureExtensions.ParseODataExtension(serviceClient);
             AzureExtensions.FlattenResourceProperties(serviceClient);
@@ -69,7 +70,6 @@ namespace Microsoft.Rest.Generator.Java.Azure
             AzureExtensions.SetDefaultResponses(serviceClient);
             AzureExtensions.AddParameterGroups(serviceClient);
             AzureExtensions.AddPageableMethod(serviceClient, _namer);
-            Extensions.NormalizeClientModel(serviceClient, Settings);
             _namer.NormalizeClientModel(serviceClient);
             _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");
