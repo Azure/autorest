@@ -17,6 +17,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
     using Microsoft.Rest.Azure;
     using Models;
 
+    /// <summary>
+    /// Extension methods for PrimitiveOperations.
+    /// </summary>
     public static partial class PrimitiveOperationsExtensions
     {
             /// <summary>

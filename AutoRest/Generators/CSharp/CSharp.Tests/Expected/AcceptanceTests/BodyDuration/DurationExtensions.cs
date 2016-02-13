@@ -16,6 +16,9 @@ namespace Fixtures.AcceptanceTestsBodyDuration
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for Duration.
+    /// </summary>
     public static partial class DurationExtensions
     {
             /// <summary>

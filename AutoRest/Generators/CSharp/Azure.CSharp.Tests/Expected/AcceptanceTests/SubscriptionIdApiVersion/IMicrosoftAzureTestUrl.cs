@@ -71,6 +71,9 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
         bool? GenerateClientRequestId { get; set; }
 
 
+        /// <summary>
+        /// Gets the IGroupOperations.
+        /// </summary>
         IGroupOperations Group { get; }
 
     }

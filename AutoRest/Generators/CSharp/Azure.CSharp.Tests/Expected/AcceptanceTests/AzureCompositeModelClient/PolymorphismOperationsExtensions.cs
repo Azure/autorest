@@ -17,6 +17,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
     using Microsoft.Rest.Azure;
     using Models;
 
+    /// <summary>
+    /// Extension methods for PolymorphismOperations.
+    /// </summary>
     public static partial class PolymorphismOperationsExtensions
     {
             /// <summary>

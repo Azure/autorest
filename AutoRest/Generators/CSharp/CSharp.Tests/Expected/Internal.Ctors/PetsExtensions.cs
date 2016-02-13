@@ -15,6 +15,9 @@ namespace Fixtures.InternalCtors
     using System.Threading.Tasks;
     using Microsoft.Rest;
 
+    /// <summary>
+    /// Extension methods for Pets.
+    /// </summary>
     public static partial class PetsExtensions
     {
             /// <summary>

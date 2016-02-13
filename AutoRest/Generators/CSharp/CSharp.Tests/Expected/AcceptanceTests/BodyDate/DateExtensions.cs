@@ -16,6 +16,9 @@ namespace Fixtures.AcceptanceTestsBodyDate
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for Date.
+    /// </summary>
     public static partial class DateExtensions
     {
             /// <summary>

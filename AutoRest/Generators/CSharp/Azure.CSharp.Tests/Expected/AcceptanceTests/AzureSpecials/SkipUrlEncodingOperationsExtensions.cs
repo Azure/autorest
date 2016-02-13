@@ -17,6 +17,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
     using Microsoft.Rest.Azure;
     using Models;
 
+    /// <summary>
+    /// Extension methods for SkipUrlEncodingOperations.
+    /// </summary>
     public static partial class SkipUrlEncodingOperationsExtensions
     {
             /// <summary>

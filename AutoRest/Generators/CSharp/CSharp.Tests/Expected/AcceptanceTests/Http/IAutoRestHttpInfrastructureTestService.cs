@@ -38,18 +38,39 @@ namespace Fixtures.AcceptanceTestsHttp
         JsonSerializerSettings DeserializationSettings { get; }
 
 
+        /// <summary>
+        /// Gets the IHttpFailure.
+        /// </summary>
         IHttpFailure HttpFailure { get; }
 
+        /// <summary>
+        /// Gets the IHttpSuccess.
+        /// </summary>
         IHttpSuccess HttpSuccess { get; }
 
+        /// <summary>
+        /// Gets the IHttpRedirects.
+        /// </summary>
         IHttpRedirects HttpRedirects { get; }
 
+        /// <summary>
+        /// Gets the IHttpClientFailure.
+        /// </summary>
         IHttpClientFailure HttpClientFailure { get; }
 
+        /// <summary>
+        /// Gets the IHttpServerFailure.
+        /// </summary>
         IHttpServerFailure HttpServerFailure { get; }
 
+        /// <summary>
+        /// Gets the IHttpRetry.
+        /// </summary>
         IHttpRetry HttpRetry { get; }
 
+        /// <summary>
+        /// Gets the IMultipleResponses.
+        /// </summary>
         IMultipleResponses MultipleResponses { get; }
 
     }

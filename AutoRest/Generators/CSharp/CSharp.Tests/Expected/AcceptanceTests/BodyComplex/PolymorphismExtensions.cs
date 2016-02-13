@@ -16,6 +16,9 @@ namespace Fixtures.AcceptanceTestsBodyComplex
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for Polymorphism.
+    /// </summary>
     public static partial class PolymorphismExtensions
     {
             /// <summary>

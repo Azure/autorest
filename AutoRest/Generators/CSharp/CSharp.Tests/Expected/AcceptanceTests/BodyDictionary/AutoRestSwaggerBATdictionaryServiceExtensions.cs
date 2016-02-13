@@ -16,6 +16,9 @@ namespace Fixtures.AcceptanceTestsBodyDictionary
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for AutoRestSwaggerBATdictionaryService.
+    /// </summary>
     public static partial class AutoRestSwaggerBATdictionaryServiceExtensions
     {
     }

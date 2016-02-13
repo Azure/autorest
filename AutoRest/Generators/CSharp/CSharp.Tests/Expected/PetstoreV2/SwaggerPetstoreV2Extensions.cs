@@ -16,6 +16,9 @@ namespace Fixtures.PetstoreV2
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for SwaggerPetstoreV2.
+    /// </summary>
     public static partial class SwaggerPetstoreV2Extensions
     {
             /// <summary>

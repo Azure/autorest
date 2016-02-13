@@ -79,20 +79,44 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
         /// </summary>
         public bool? GenerateClientRequestId { get; set; }
 
+        /// <summary>
+        /// Gets the IXMsClientRequestIdOperations.
+        /// </summary>
         public virtual IXMsClientRequestIdOperations XMsClientRequestId { get; private set; }
 
+        /// <summary>
+        /// Gets the ISubscriptionInCredentialsOperations.
+        /// </summary>
         public virtual ISubscriptionInCredentialsOperations SubscriptionInCredentials { get; private set; }
 
+        /// <summary>
+        /// Gets the ISubscriptionInMethodOperations.
+        /// </summary>
         public virtual ISubscriptionInMethodOperations SubscriptionInMethod { get; private set; }
 
+        /// <summary>
+        /// Gets the IApiVersionDefaultOperations.
+        /// </summary>
         public virtual IApiVersionDefaultOperations ApiVersionDefault { get; private set; }
 
+        /// <summary>
+        /// Gets the IApiVersionLocalOperations.
+        /// </summary>
         public virtual IApiVersionLocalOperations ApiVersionLocal { get; private set; }
 
+        /// <summary>
+        /// Gets the ISkipUrlEncodingOperations.
+        /// </summary>
         public virtual ISkipUrlEncodingOperations SkipUrlEncoding { get; private set; }
 
+        /// <summary>
+        /// Gets the IOdataOperations.
+        /// </summary>
         public virtual IOdataOperations Odata { get; private set; }
 
+        /// <summary>
+        /// Gets the IHeaderOperations.
+        /// </summary>
         public virtual IHeaderOperations Header { get; private set; }
 
         /// <summary>

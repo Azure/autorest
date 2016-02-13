@@ -16,6 +16,9 @@ namespace Fixtures.AcceptanceTestsBodyArray
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for Array.
+    /// </summary>
     public static partial class ArrayExtensions
     {
             /// <summary>

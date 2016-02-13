@@ -66,6 +66,9 @@ namespace Fixtures.Azure.AcceptanceTestsHead
         /// </summary>
         public bool? GenerateClientRequestId { get; set; }
 
+        /// <summary>
+        /// Gets the IHttpSuccessOperations.
+        /// </summary>
         public virtual IHttpSuccessOperations HttpSuccess { get; private set; }
 
         /// <summary>

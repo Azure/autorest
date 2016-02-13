@@ -16,6 +16,9 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for ExplicitModel.
+    /// </summary>
     public static partial class ExplicitModelExtensions
     {
             /// <summary>

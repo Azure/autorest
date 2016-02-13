@@ -16,6 +16,9 @@ namespace Fixtures.AcceptanceTestsHttp
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for HttpSuccess.
+    /// </summary>
     public static partial class HttpSuccessExtensions
     {
             /// <summary>

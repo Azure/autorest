@@ -38,6 +38,9 @@ namespace Fixtures.InternalCtors
         JsonSerializerSettings DeserializationSettings { get; }
 
 
+        /// <summary>
+        /// Gets the IPets.
+        /// </summary>
         IPets Pets { get; }
 
     }

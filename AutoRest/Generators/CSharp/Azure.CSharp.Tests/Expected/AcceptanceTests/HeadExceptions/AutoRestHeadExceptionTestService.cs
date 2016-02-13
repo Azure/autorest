@@ -66,6 +66,9 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
         /// </summary>
         public bool? GenerateClientRequestId { get; set; }
 
+        /// <summary>
+        /// Gets the IHeadExceptionOperations.
+        /// </summary>
         public virtual IHeadExceptionOperations HeadException { get; private set; }
 
         /// <summary>

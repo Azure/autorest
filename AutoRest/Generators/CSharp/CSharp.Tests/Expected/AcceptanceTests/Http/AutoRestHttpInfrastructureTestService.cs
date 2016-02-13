@@ -44,18 +44,39 @@ namespace Fixtures.AcceptanceTestsHttp
         /// </summary>
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
+        /// <summary>
+        /// Gets the IHttpFailure.
+        /// </summary>
         public virtual IHttpFailure HttpFailure { get; private set; }
 
+        /// <summary>
+        /// Gets the IHttpSuccess.
+        /// </summary>
         public virtual IHttpSuccess HttpSuccess { get; private set; }
 
+        /// <summary>
+        /// Gets the IHttpRedirects.
+        /// </summary>
         public virtual IHttpRedirects HttpRedirects { get; private set; }
 
+        /// <summary>
+        /// Gets the IHttpClientFailure.
+        /// </summary>
         public virtual IHttpClientFailure HttpClientFailure { get; private set; }
 
+        /// <summary>
+        /// Gets the IHttpServerFailure.
+        /// </summary>
         public virtual IHttpServerFailure HttpServerFailure { get; private set; }
 
+        /// <summary>
+        /// Gets the IHttpRetry.
+        /// </summary>
         public virtual IHttpRetry HttpRetry { get; private set; }
 
+        /// <summary>
+        /// Gets the IMultipleResponses.
+        /// </summary>
         public virtual IMultipleResponses MultipleResponses { get; private set; }
 
         /// <summary>

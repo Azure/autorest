@@ -16,6 +16,9 @@ namespace Fixtures.MirrorPrimitives
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for SwaggerDataTypesClient.
+    /// </summary>
     public static partial class SwaggerDataTypesClientExtensions
     {
             /// <summary>

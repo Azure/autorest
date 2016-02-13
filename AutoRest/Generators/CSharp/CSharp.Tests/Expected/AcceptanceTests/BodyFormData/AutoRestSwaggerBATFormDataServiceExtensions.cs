@@ -16,6 +16,9 @@ namespace Fixtures.AcceptanceTestsBodyFormData
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for AutoRestSwaggerBATFormDataService.
+    /// </summary>
     public static partial class AutoRestSwaggerBATFormDataServiceExtensions
     {
     }

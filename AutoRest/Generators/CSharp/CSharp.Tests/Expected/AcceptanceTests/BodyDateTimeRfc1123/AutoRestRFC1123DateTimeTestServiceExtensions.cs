@@ -16,6 +16,9 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for AutoRestRFC1123DateTimeTestService.
+    /// </summary>
     public static partial class AutoRestRFC1123DateTimeTestServiceExtensions
     {
     }

@@ -16,6 +16,9 @@ namespace Fixtures.MirrorRecursiveTypes
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for RecursiveTypesAPI.
+    /// </summary>
     public static partial class RecursiveTypesAPIExtensions
     {
             /// <summary>

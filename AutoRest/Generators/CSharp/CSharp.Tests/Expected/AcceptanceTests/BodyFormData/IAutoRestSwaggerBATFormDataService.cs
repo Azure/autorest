@@ -38,6 +38,9 @@ namespace Fixtures.AcceptanceTestsBodyFormData
         JsonSerializerSettings DeserializationSettings { get; }
 
 
+        /// <summary>
+        /// Gets the IFormdata.
+        /// </summary>
         IFormdata Formdata { get; }
 
     }

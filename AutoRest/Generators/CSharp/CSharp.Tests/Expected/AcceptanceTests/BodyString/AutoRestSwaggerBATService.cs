@@ -44,8 +44,14 @@ namespace Fixtures.AcceptanceTestsBodyString
         /// </summary>
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
+        /// <summary>
+        /// Gets the IStringModel.
+        /// </summary>
         public virtual IStringModel StringModel { get; private set; }
 
+        /// <summary>
+        /// Gets the IEnumModel.
+        /// </summary>
         public virtual IEnumModel EnumModel { get; private set; }
 
         /// <summary>

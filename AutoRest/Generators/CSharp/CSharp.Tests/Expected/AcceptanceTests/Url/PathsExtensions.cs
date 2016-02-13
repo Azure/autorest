@@ -16,6 +16,9 @@ namespace Fixtures.AcceptanceTestsUrl
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for Paths.
+    /// </summary>
     public static partial class PathsExtensions
     {
             /// <summary>

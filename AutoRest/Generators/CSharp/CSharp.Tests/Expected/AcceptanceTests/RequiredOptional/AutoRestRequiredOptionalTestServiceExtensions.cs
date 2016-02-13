@@ -16,6 +16,9 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for AutoRestRequiredOptionalTestService.
+    /// </summary>
     public static partial class AutoRestRequiredOptionalTestServiceExtensions
     {
     }

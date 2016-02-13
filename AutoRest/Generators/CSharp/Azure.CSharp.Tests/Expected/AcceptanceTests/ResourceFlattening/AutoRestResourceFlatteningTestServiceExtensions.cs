@@ -17,6 +17,9 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
     using Microsoft.Rest.Azure;
     using Models;
 
+    /// <summary>
+    /// Extension methods for AutoRestResourceFlatteningTestService.
+    /// </summary>
     public static partial class AutoRestResourceFlatteningTestServiceExtensions
     {
             /// <summary>

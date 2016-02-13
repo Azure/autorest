@@ -16,6 +16,9 @@ namespace Fixtures.MirrorPolymorphic
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for PolymorphicAnimalStore.
+    /// </summary>
     public static partial class PolymorphicAnimalStoreExtensions
     {
             /// <summary>

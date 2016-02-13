@@ -17,6 +17,9 @@ namespace Fixtures.Azure.AcceptanceTestsAzureSpecials
     using Microsoft.Rest.Azure;
     using Models;
 
+    /// <summary>
+    /// Extension methods for XMsClientRequestIdOperations.
+    /// </summary>
     public static partial class XMsClientRequestIdOperationsExtensions
     {
             /// <summary>

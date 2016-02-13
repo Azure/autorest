@@ -15,6 +15,9 @@ namespace Fixtures.InternalCtors
     using System.Threading.Tasks;
     using Microsoft.Rest;
 
+    /// <summary>
+    /// Extension methods for InternalClient.
+    /// </summary>
     public static partial class InternalClientExtensions
     {
     }

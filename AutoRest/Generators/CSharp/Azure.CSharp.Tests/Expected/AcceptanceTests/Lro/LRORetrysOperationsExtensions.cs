@@ -17,6 +17,9 @@ namespace Fixtures.Azure.AcceptanceTestsLro
     using Microsoft.Rest.Azure;
     using Models;
 
+    /// <summary>
+    /// Extension methods for LRORetrysOperations.
+    /// </summary>
     public static partial class LRORetrysOperationsExtensions
     {
             /// <summary>
