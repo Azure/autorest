@@ -240,6 +240,10 @@ namespace Microsoft.Rest.Generator.CSharp
             {
                 primaryType.Name = "ServiceClientCredentials";
             }
+            else if (primaryType.Type == KnownPrimaryType.Uuid)
+            {
+                primaryType.Name = "Guid";
+            }
 
             return primaryType;
         }

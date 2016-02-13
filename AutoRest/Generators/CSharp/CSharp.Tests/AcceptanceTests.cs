@@ -1819,6 +1819,13 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         }
 
         [Fact]
+        public void FormatUuidModeledAsGuidTest()
+        {
+            var productType = typeof (Fixtures.MirrorPrimitives.Models.Product);
+            Assert.Equal(typeof(Guid), productType.GetProperty("Uuid").PropertyType);
+        }
+
+        [Fact]
         public void RequiredOptionalTests()
         {
             SwaggerSpecRunner.RunTests(

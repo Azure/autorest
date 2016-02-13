@@ -247,7 +247,8 @@ namespace Microsoft.Rest.Generator.CSharp
                 || primaryType.Type == KnownPrimaryType.Int 
                 || primaryType.Type == KnownPrimaryType.Long 
                 || primaryType.Type == KnownPrimaryType.TimeSpan 
-                || primaryType.Type == KnownPrimaryType.DateTimeRfc1123));
+                || primaryType.Type == KnownPrimaryType.DateTimeRfc1123
+                || primaryType.Type == KnownPrimaryType.Uuid));
         }
 
         public static string CheckNull(string valueReference, string executionBlock)
