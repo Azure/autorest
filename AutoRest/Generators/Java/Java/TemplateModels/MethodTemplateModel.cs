@@ -461,7 +461,14 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                return OperationResponseReturnTypeString;
+                if (ReturnType.Headers == null)
+                {
+                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}>", OperationResponseType, DelegateReturnTypeString);
+                }
+                else
+                {
+                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}, {2}>", OperationResponseType, DelegateReturnTypeString, ReturnType.Headers.Name);
+                }
             }
         }
 
