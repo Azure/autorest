@@ -30,7 +30,7 @@ import retrofit2.Retrofit;
  */
 public final class BasicOperationsImpl implements BasicOperations {
     /** The Retrofit service to perform REST calls. */
-    private BasicOperationsService service;
+    private BasicService service;
     /** The service client containing this operation class. */
     private AutoRestComplexTestService client;
 
@@ -41,7 +41,7 @@ public final class BasicOperationsImpl implements BasicOperations {
      * @param client the instance of the service client containing this operation class.
      */
     public BasicOperationsImpl(Retrofit retrofit, AutoRestComplexTestService client) {
-        this.service = retrofit.create(BasicOperationsService.class);
+        this.service = retrofit.create(BasicService.class);
         this.client = client;
     }
 

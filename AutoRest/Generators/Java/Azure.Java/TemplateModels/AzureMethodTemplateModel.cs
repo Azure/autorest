@@ -352,7 +352,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     group == null ? m.Group == null : group.Equals(m.Group, StringComparison.OrdinalIgnoreCase)
                     && m.Name.Equals(name, StringComparison.OrdinalIgnoreCase)), ServiceClient);
             group = group.ToPascalCase();
-            if (group != null && !group.EndsWith("Operations", StringComparison.Ordinal))
+            if (group != null)
             {
                 group += "Operations";
             }
