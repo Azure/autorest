@@ -49,7 +49,7 @@ import retrofit2.Retrofit;
  */
 public final class HeaderOperationsImpl implements HeaderOperations {
     /** The Retrofit service to perform REST calls. */
-    private HeaderOperationsService service;
+    private HeaderService service;
     /** The service client containing this operation class. */
     private AutoRestSwaggerBATHeaderService client;
 
@@ -60,7 +60,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @param client the instance of the service client containing this operation class.
      */
     public HeaderOperationsImpl(Retrofit retrofit, AutoRestSwaggerBATHeaderService client) {
-        this.service = retrofit.create(HeaderOperationsService.class);
+        this.service = retrofit.create(HeaderService.class);
         this.client = client;
     }
 

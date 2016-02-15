@@ -49,7 +49,7 @@ public interface HeaderOperations {
      * The interface defining all the services for HeaderOperations to be
      * used by Retrofit to perform actually REST calls.
      */
-    interface HeaderOperationsService {
+    interface HeaderService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("header/param/existingkey")
         Call<ResponseBody> paramExistingKey(@Header("User-Agent") String userAgent);

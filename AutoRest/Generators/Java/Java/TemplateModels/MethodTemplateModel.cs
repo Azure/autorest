@@ -461,7 +461,14 @@ namespace Microsoft.Rest.Generator.Java
         {
             get
             {
-                return OperationResponseReturnTypeString;
+                if (ReturnType.Headers == null)
+                {
+                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}>", OperationResponseType, DelegateReturnTypeString);
+                }
+                else
+                {
+                    return string.Format(CultureInfo.InvariantCulture, "{0}<{1}, {2}>", OperationResponseType, DelegateReturnTypeString, ReturnType.Headers.Name);
+                }
             }
         }
 
@@ -550,7 +557,10 @@ namespace Microsoft.Rest.Generator.Java
                 imports.Add("com.microsoft.rest." + OperationResponseType);
                 imports.Add("com.microsoft.rest.ServiceCallback");
                 // parameter types
-                this.Parameters.Concat(this.LogicalParameters)
+                this.Parameters.ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace)));
+                this.LogicalParameters
+                    .Where(p => p.Location == ParameterLocation.Body
+                        || !p.Type.NeedsSpecialSerialization())
                     .ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace)));
                 // parameter locations
                 this.LogicalParameters.ForEach(p =>
