@@ -13,9 +13,9 @@ package fixtures.custombaseuri;
 import com.microsoft.azure.AzureClient;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.serializer.JacksonMapperAdapter;
-import com.squareup.okhttp.Interceptor;
-import com.squareup.okhttp.logging.HttpLoggingInterceptor.Level;
 import java.util.List;
+import okhttp3.Interceptor;
+import okhttp3.logging.HttpLoggingInterceptor.Level;
 
 /**
  * The interface for AutoRestParameterizedHostTestClient class.

@@ -16,6 +16,9 @@ namespace Fixtures.AcceptanceTestsCustomBaseUri
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for Paths.
+    /// </summary>
     public static partial class PathsExtensions
     {
             /// <summary>
@@ -44,7 +47,7 @@ namespace Fixtures.AcceptanceTestsCustomBaseUri
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task GetEmptyAsync( this IPaths operations, string accountName, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task GetEmptyAsync(this IPaths operations, string accountName, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.GetEmptyWithHttpMessagesAsync(accountName, null, cancellationToken).ConfigureAwait(false);
             }

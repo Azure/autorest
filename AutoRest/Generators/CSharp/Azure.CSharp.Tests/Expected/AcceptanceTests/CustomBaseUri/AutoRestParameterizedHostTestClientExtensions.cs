@@ -17,6 +17,9 @@ namespace Fixtures.Azure.AcceptanceTestsCustomBaseUri
     using Microsoft.Rest.Azure;
     using Models;
 
+    /// <summary>
+    /// Extension methods for AutoRestParameterizedHostTestClient.
+    /// </summary>
     public static partial class AutoRestParameterizedHostTestClientExtensions
     {
     }

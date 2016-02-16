@@ -11,8 +11,8 @@
 package fixtures.custombaseuri;
 
 import com.microsoft.rest.ServiceClient;
-import com.squareup.okhttp.OkHttpClient;
-import retrofit.Retrofit;
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestParameterizedHostTestClient class.
@@ -57,7 +57,7 @@ public final class AutoRestParameterizedHostTestClientImpl extends ServiceClient
      * @return the PathsOperations object.
      */
     public PathsOperations getPathsOperations() {
-        return new PathsOperationsImpl(this.retrofitBuilder.build(), this);
+        return new PathsOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -81,16 +81,18 @@ public final class AutoRestParameterizedHostTestClientImpl extends ServiceClient
     /**
      * Initializes an instance of AutoRestParameterizedHostTestClient client.
      *
-     * @param client the {@link OkHttpClient} client to use for REST calls
+     * @param clientBuilder the builder for building up an {@link OkHttpClient}
      * @param retrofitBuilder the builder for building up a {@link Retrofit}
      */
-    public AutoRestParameterizedHostTestClientImpl(OkHttpClient client, Retrofit.Builder retrofitBuilder) {
-        super(client, retrofitBuilder);
+    public AutoRestParameterizedHostTestClientImpl(OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
+        super(clientBuilder, retrofitBuilder);
         this.baseUri = "http://{accountName}{host}";
         initialize();
     }
 
-    private void initialize() {
+    @Override
+    protected void initialize() {
+        super.initialize();
         this.retrofitBuilder.baseUrl(baseUri);
     }
 }

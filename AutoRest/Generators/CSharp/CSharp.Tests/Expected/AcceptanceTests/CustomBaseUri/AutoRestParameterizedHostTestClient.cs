@@ -49,6 +49,9 @@ namespace Fixtures.AcceptanceTestsCustomBaseUri
         /// </summary>
         public string Host { get; set; }
 
+        /// <summary>
+        /// Gets the IPaths.
+        /// </summary>
         public virtual IPaths Paths { get; private set; }
 
         /// <summary>

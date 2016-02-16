@@ -72,6 +72,9 @@ namespace Fixtures.Azure.AcceptanceTestsCustomBaseUri
         /// </summary>
         public bool? GenerateClientRequestId { get; set; }
 
+        /// <summary>
+        /// Gets the IPathsOperations.
+        /// </summary>
         public virtual IPathsOperations Paths { get; private set; }
 
         /// <summary>

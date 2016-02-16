@@ -66,6 +66,9 @@ namespace Fixtures.Azure.AcceptanceTestsCustomBaseUri
         bool? GenerateClientRequestId { get; set; }
 
 
+        /// <summary>
+        /// Gets the IPathsOperations.
+        /// </summary>
         IPathsOperations Paths { get; }
 
     }
