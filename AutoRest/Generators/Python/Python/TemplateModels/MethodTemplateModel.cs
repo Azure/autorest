@@ -549,36 +549,18 @@ namespace Microsoft.Rest.Generator.Python
                 if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
                     transformation.OutputParameter.Type is CompositeType)
                 {
-                    List<string> requiredParams = new List<string>();
-                    List<string> optionalParams = new List<string>();
                     List<string> combinedParams = new List<string>();
                     var comps = ServiceClient.ModelTypes.Where(x => x.Name == transformation.OutputParameter.Type.Name);
                     var composite = comps.First();
 
                     foreach (var mapping in transformation.ParameterMappings)
                     {
-                        var required = composite.Properties.Where(x => x.Name == mapping.InputParameter.Name);
-                        if (required.Count() == 1)
+                        var mappedParams = composite.Properties.Where(x => x.Name == mapping.InputParameter.Name);
+                        if (!mappedParams.IsNullOrEmpty())
                         {
-                            var param = required.First();
-                            if (param.IsRequired)
-                            {
-                                requiredParams.Add(param.Name);
-                            }
-                            else
-                            {
-                                optionalParams.Add(string.Format(CultureInfo.InvariantCulture, "{0}={0}", param.Name));
-                            }
+                            var param = mappedParams.First();
+                            combinedParams.Add(string.Format(CultureInfo.InvariantCulture, "{0}={0}", param.Name));
                         }
-                    }
-                    if (!requiredParams.IsNullOrEmpty())
-                    {
-                        requiredParams.Sort();
-                        combinedParams.Add(string.Join(", ", requiredParams));
-                    }
-                    if (!optionalParams.IsNullOrEmpty())
-                    {
-                        combinedParams.Add(string.Join(", ", optionalParams));
                     }
 
                     builder.AppendLine("{0} = models.{1}({2})",

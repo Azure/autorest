@@ -130,7 +130,7 @@ class Explicit(object):
         :rtype: Error
         :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
-        body_parameter = models.IntWrapper(value)
+        body_parameter = models.IntWrapper(value=value)
 
         # Construct URL
         url = '/reqopt/requied/integer/property'
@@ -382,7 +382,7 @@ class Explicit(object):
         :rtype: Error
         :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
-        body_parameter = models.StringWrapper(value)
+        body_parameter = models.StringWrapper(value=value)
 
         # Construct URL
         url = '/reqopt/requied/string/property'
@@ -634,7 +634,7 @@ class Explicit(object):
         :rtype: Error
         :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
-        body_parameter = models.ClassWrapper(value)
+        body_parameter = models.ClassWrapper(value=value)
 
         # Construct URL
         url = '/reqopt/requied/class/property'
@@ -808,7 +808,7 @@ class Explicit(object):
         :rtype: Error
         :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
-        body_parameter = models.ArrayWrapper(value)
+        body_parameter = models.ArrayWrapper(value=value)
 
         # Construct URL
         url = '/reqopt/requied/array/property'

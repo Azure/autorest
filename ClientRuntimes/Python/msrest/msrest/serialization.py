@@ -196,7 +196,10 @@ class Serializer(object):
             for attr, map in attributes.items():
                 attr_name = attr
                 try:
-                    keys = map['key'].split('.')
+                    if map.get('flattened'):
+                        keys = map['key'].split('.')
+                    else:
+                        keys = [map['key']]
                     attr_type = map['type']
                     orig_attr = getattr(target_obj, attr)
                     new_attr = self.serialize_data(
@@ -610,12 +613,14 @@ class Deserializer(object):
             for attr, map in attributes.items():
                 attr_type = map['type']
                 key = map['key']
+                flattened = map.get('flattened')
                 working_data = data
 
-                while '.' in key:
-                    dict_keys = key.partition('.')
-                    working_data = working_data.get(dict_keys[0], data)
-                    key = ''.join(dict_keys[2:])
+                if flattened:
+                    while '.' in key:
+                        dict_keys = key.partition('.')
+                        working_data = working_data.get(dict_keys[0], data)
+                        key = ''.join(dict_keys[2:])
 
                 raw_value = working_data.get(key)
                 value = self.deserialize_data(raw_value, attr_type)
@@ -684,21 +689,15 @@ class Deserializer(object):
         :param response: The response model class.
         :param d_attrs: The deserialized response attributes.
         """
-        required = response._get_required_attrs()
         subtype = response._get_subtype_map()
-
-        params = sorted(attrs.items())
         try:
-            args = [v for k, v in params
-                    if k in required and k not in subtype]
-            kwargs = {k: v for k, v in params
-                      if k not in required and k not in subtype}
-            return response(*args, **kwargs)
+            kwargs = {k: v for k, v in attrs.items() if k not in subtype}
+            return response(**kwargs)
         except TypeError:
             pass
 
         try:
-            for attr, value in params:
+            for attr, value in attrs.items():
                 setattr(response, attr, value)
             return response
         except Exception as exp:
