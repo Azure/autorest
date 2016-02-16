@@ -16,6 +16,9 @@ namespace Fixtures.AcceptanceTestsHttp
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for AutoRestHttpInfrastructureTestService.
+    /// </summary>
     public static partial class AutoRestHttpInfrastructureTestServiceExtensions
     {
     }

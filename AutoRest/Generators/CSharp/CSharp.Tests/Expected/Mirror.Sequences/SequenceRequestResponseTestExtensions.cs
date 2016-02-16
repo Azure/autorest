@@ -16,6 +16,9 @@ namespace Fixtures.MirrorSequences
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for SequenceRequestResponseTest.
+    /// </summary>
     public static partial class SequenceRequestResponseTestExtensions
     {
             /// <summary>
@@ -44,7 +47,7 @@ namespace Fixtures.MirrorSequences
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<IList<Pet>> AddPetAsync( this ISequenceRequestResponseTest operations, IList<Pet> pets, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<IList<Pet>> AddPetAsync(this ISequenceRequestResponseTest operations, IList<Pet> pets, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.AddPetWithHttpMessagesAsync(pets, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -78,7 +81,7 @@ namespace Fixtures.MirrorSequences
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<IList<int?>> AddPetStylesAsync( this ISequenceRequestResponseTest operations, IList<int?> petStyle, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<IList<int?>> AddPetStylesAsync(this ISequenceRequestResponseTest operations, IList<int?> petStyle, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.AddPetStylesWithHttpMessagesAsync(petStyle, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -112,7 +115,7 @@ namespace Fixtures.MirrorSequences
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<IList<int?>> UpdatePetStylesAsync( this ISequenceRequestResponseTest operations, IList<int?> petStyle, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<IList<int?>> UpdatePetStylesAsync(this ISequenceRequestResponseTest operations, IList<int?> petStyle, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.UpdatePetStylesWithHttpMessagesAsync(petStyle, null, cancellationToken).ConfigureAwait(false))
                 {

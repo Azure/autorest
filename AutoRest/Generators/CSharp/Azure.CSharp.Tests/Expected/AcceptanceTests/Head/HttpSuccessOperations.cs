@@ -57,7 +57,10 @@ namespace Fixtures.Azure.AcceptanceTestsHead
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<bool?>> Head200WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
+        public async Task<AzureOperationResponse<bool>> Head200WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -164,7 +167,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
                 throw ex;
             }
             // Create Result
-            var _result = new AzureOperationResponse<bool?>();
+            var _result = new AzureOperationResponse<bool>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             _result.Body = (_statusCode == HttpStatusCode.OK);
@@ -188,7 +191,10 @@ namespace Fixtures.Azure.AcceptanceTestsHead
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<bool?>> Head204WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
+        public async Task<AzureOperationResponse<bool>> Head204WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -295,7 +301,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
                 throw ex;
             }
             // Create Result
-            var _result = new AzureOperationResponse<bool?>();
+            var _result = new AzureOperationResponse<bool>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             _result.Body = (_statusCode == HttpStatusCode.NoContent);
@@ -319,7 +325,10 @@ namespace Fixtures.Azure.AcceptanceTestsHead
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<bool?>> Head404WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
+        public async Task<AzureOperationResponse<bool>> Head404WithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -426,7 +435,7 @@ namespace Fixtures.Azure.AcceptanceTestsHead
                 throw ex;
             }
             // Create Result
-            var _result = new AzureOperationResponse<bool?>();
+            var _result = new AzureOperationResponse<bool>();
             _result.Request = _httpRequest;
             _result.Response = _httpResponse;
             _result.Body = (_statusCode == HttpStatusCode.NoContent);

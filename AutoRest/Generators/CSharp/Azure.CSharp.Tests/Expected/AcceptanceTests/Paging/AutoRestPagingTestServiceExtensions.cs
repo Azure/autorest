@@ -17,6 +17,9 @@ namespace Fixtures.Azure.AcceptanceTestsPaging
     using Microsoft.Rest.Azure;
     using Models;
 
+    /// <summary>
+    /// Extension methods for AutoRestPagingTestService.
+    /// </summary>
     public static partial class AutoRestPagingTestServiceExtensions
     {
     }

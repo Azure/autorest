@@ -59,8 +59,14 @@ namespace Fixtures.AcceptanceTestsRequiredOptional
         /// </summary>
         public int? OptionalGlobalQuery { get; set; }
 
+        /// <summary>
+        /// Gets the IImplicitModel.
+        /// </summary>
         public virtual IImplicitModel ImplicitModel { get; private set; }
 
+        /// <summary>
+        /// Gets the IExplicitModel.
+        /// </summary>
         public virtual IExplicitModel ExplicitModel { get; private set; }
 
         /// <summary>

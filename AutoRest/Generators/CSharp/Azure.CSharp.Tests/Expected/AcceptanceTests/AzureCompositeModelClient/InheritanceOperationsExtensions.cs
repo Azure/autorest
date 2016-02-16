@@ -17,6 +17,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
     using Microsoft.Rest.Azure;
     using Models;
 
+    /// <summary>
+    /// Extension methods for InheritanceOperations.
+    /// </summary>
     public static partial class InheritanceOperationsExtensions
     {
             /// <summary>
@@ -39,7 +42,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Siamese> GetValidAsync( this IInheritanceOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Siamese> GetValidAsync(this IInheritanceOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -79,7 +82,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutValidAsync( this IInheritanceOperations operations, Siamese complexBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutValidAsync(this IInheritanceOperations operations, Siamese complexBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutValidWithHttpMessagesAsync(complexBody, null, cancellationToken).ConfigureAwait(false);
             }

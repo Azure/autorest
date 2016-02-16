@@ -7,7 +7,8 @@
 
 package com.microsoft.rest;
 
-import retrofit.Callback;
+import retrofit2.Call;
+import retrofit2.Callback;
 
 /**
  * Inner callback used to merge both successful and failed responses into one
@@ -31,7 +32,7 @@ public abstract class ServiceResponseEmptyCallback<T> implements Callback<Void> 
     }
 
     @Override
-    public void onFailure(Throwable t) {
+    public void onFailure(Call<Void> call, Throwable t) {
         serviceCallback.failure(new ServiceException(t));
     }
 }

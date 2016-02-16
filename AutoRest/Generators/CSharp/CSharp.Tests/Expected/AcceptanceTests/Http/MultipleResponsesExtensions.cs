@@ -16,6 +16,9 @@ namespace Fixtures.AcceptanceTestsHttp
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for MultipleResponses.
+    /// </summary>
     public static partial class MultipleResponsesExtensions
     {
             /// <summary>
@@ -38,7 +41,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<A> Get200Model204NoModelDefaultError200ValidAsync( this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<A> Get200Model204NoModelDefaultError200ValidAsync(this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Get200Model204NoModelDefaultError200ValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -66,7 +69,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<A> Get200Model204NoModelDefaultError204ValidAsync( this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<A> Get200Model204NoModelDefaultError204ValidAsync(this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Get200Model204NoModelDefaultError204ValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -94,7 +97,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<A> Get200Model204NoModelDefaultError201InvalidAsync( this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<A> Get200Model204NoModelDefaultError201InvalidAsync(this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Get200Model204NoModelDefaultError201InvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -122,7 +125,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<A> Get200Model204NoModelDefaultError202NoneAsync( this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<A> Get200Model204NoModelDefaultError202NoneAsync(this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Get200Model204NoModelDefaultError202NoneWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -152,7 +155,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<A> Get200Model204NoModelDefaultError400ValidAsync( this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<A> Get200Model204NoModelDefaultError400ValidAsync(this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Get200Model204NoModelDefaultError400ValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -180,7 +183,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<A> Get200Model201ModelDefaultError200ValidAsync( this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<A> Get200Model201ModelDefaultError200ValidAsync(this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Get200Model201ModelDefaultError200ValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -210,7 +213,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<A> Get200Model201ModelDefaultError201ValidAsync( this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<A> Get200Model201ModelDefaultError201ValidAsync(this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Get200Model201ModelDefaultError201ValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -240,7 +243,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<A> Get200Model201ModelDefaultError400ValidAsync( this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<A> Get200Model201ModelDefaultError400ValidAsync(this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Get200Model201ModelDefaultError400ValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -268,7 +271,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<object> Get200ModelA201ModelC404ModelDDefaultError200ValidAsync( this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<object> Get200ModelA201ModelC404ModelDDefaultError200ValidAsync(this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Get200ModelA201ModelC404ModelDDefaultError200ValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -296,7 +299,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<object> Get200ModelA201ModelC404ModelDDefaultError201ValidAsync( this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<object> Get200ModelA201ModelC404ModelDDefaultError201ValidAsync(this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Get200ModelA201ModelC404ModelDDefaultError201ValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -324,7 +327,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<object> Get200ModelA201ModelC404ModelDDefaultError404ValidAsync( this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<object> Get200ModelA201ModelC404ModelDDefaultError404ValidAsync(this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Get200ModelA201ModelC404ModelDDefaultError404ValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -354,7 +357,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<object> Get200ModelA201ModelC404ModelDDefaultError400ValidAsync( this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<object> Get200ModelA201ModelC404ModelDDefaultError400ValidAsync(this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Get200ModelA201ModelC404ModelDDefaultError400ValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -382,7 +385,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task Get202None204NoneDefaultError202NoneAsync( this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task Get202None204NoneDefaultError202NoneAsync(this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.Get202None204NoneDefaultError202NoneWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -407,7 +410,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task Get202None204NoneDefaultError204NoneAsync( this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task Get202None204NoneDefaultError204NoneAsync(this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.Get202None204NoneDefaultError204NoneWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -434,7 +437,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task Get202None204NoneDefaultError400ValidAsync( this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task Get202None204NoneDefaultError400ValidAsync(this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.Get202None204NoneDefaultError400ValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -459,7 +462,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task Get202None204NoneDefaultNone202InvalidAsync( this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task Get202None204NoneDefaultNone202InvalidAsync(this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.Get202None204NoneDefaultNone202InvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -484,7 +487,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task Get202None204NoneDefaultNone204NoneAsync( this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task Get202None204NoneDefaultNone204NoneAsync(this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.Get202None204NoneDefaultNone204NoneWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -509,7 +512,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task Get202None204NoneDefaultNone400NoneAsync( this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task Get202None204NoneDefaultNone400NoneAsync(this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.Get202None204NoneDefaultNone400NoneWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -534,7 +537,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task Get202None204NoneDefaultNone400InvalidAsync( this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task Get202None204NoneDefaultNone400InvalidAsync(this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.Get202None204NoneDefaultNone400InvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -559,7 +562,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<A> GetDefaultModelA200ValidAsync( this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<A> GetDefaultModelA200ValidAsync(this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetDefaultModelA200ValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -587,7 +590,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<A> GetDefaultModelA200NoneAsync( this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<A> GetDefaultModelA200NoneAsync(this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetDefaultModelA200NoneWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -615,7 +618,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<A> GetDefaultModelA400ValidAsync( this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<A> GetDefaultModelA400ValidAsync(this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetDefaultModelA400ValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -643,7 +646,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<A> GetDefaultModelA400NoneAsync( this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<A> GetDefaultModelA400NoneAsync(this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetDefaultModelA400NoneWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -671,7 +674,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task GetDefaultNone200InvalidAsync( this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task GetDefaultNone200InvalidAsync(this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.GetDefaultNone200InvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -696,7 +699,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task GetDefaultNone200NoneAsync( this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task GetDefaultNone200NoneAsync(this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.GetDefaultNone200NoneWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -721,7 +724,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task GetDefaultNone400InvalidAsync( this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task GetDefaultNone400InvalidAsync(this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.GetDefaultNone400InvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -746,7 +749,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task GetDefaultNone400NoneAsync( this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task GetDefaultNone400NoneAsync(this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.GetDefaultNone400NoneWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -773,7 +776,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<A> Get200ModelA200NoneAsync( this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<A> Get200ModelA200NoneAsync(this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Get200ModelA200NoneWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -801,7 +804,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<A> Get200ModelA200ValidAsync( this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<A> Get200ModelA200ValidAsync(this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Get200ModelA200ValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -829,7 +832,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<A> Get200ModelA200InvalidAsync( this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<A> Get200ModelA200InvalidAsync(this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Get200ModelA200InvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -859,7 +862,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<A> Get200ModelA400NoneAsync( this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<A> Get200ModelA400NoneAsync(this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Get200ModelA400NoneWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -887,7 +890,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<A> Get200ModelA400ValidAsync( this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<A> Get200ModelA400ValidAsync(this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Get200ModelA400ValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -915,7 +918,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<A> Get200ModelA400InvalidAsync( this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<A> Get200ModelA400InvalidAsync(this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Get200ModelA400InvalidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -943,7 +946,7 @@ namespace Fixtures.AcceptanceTestsHttp
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<A> Get200ModelA202ValidAsync( this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<A> Get200ModelA202ValidAsync(this IMultipleResponses operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.Get200ModelA202ValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

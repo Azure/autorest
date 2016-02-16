@@ -38,6 +38,9 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
         JsonSerializerSettings DeserializationSettings { get; }
 
 
+        /// <summary>
+        /// Gets the IBoolModel.
+        /// </summary>
         IBoolModel BoolModel { get; }
 
     }

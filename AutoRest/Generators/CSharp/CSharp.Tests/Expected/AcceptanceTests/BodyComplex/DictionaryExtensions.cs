@@ -16,6 +16,9 @@ namespace Fixtures.AcceptanceTestsBodyComplex
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for Dictionary.
+    /// </summary>
     public static partial class DictionaryExtensions
     {
             /// <summary>
@@ -38,7 +41,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<DictionaryWrapper> GetValidAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<DictionaryWrapper> GetValidAsync(this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -70,7 +73,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutValidAsync( this IDictionary operations, IDictionary<string, string> defaultProgram = default(IDictionary<string, string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutValidAsync(this IDictionary operations, IDictionary<string, string> defaultProgram = default(IDictionary<string, string>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutValidWithHttpMessagesAsync(defaultProgram, null, cancellationToken).ConfigureAwait(false);
             }
@@ -95,7 +98,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<DictionaryWrapper> GetEmptyAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<DictionaryWrapper> GetEmptyAsync(this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetEmptyWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -127,7 +130,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutEmptyAsync( this IDictionary operations, IDictionary<string, string> defaultProgram = default(IDictionary<string, string>), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutEmptyAsync(this IDictionary operations, IDictionary<string, string> defaultProgram = default(IDictionary<string, string>), CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutEmptyWithHttpMessagesAsync(defaultProgram, null, cancellationToken).ConfigureAwait(false);
             }
@@ -152,7 +155,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<DictionaryWrapper> GetNullAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<DictionaryWrapper> GetNullAsync(this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -182,7 +185,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<DictionaryWrapper> GetNotProvidedAsync( this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<DictionaryWrapper> GetNotProvidedAsync(this IDictionary operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetNotProvidedWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

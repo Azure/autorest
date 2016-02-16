@@ -44,6 +44,9 @@ namespace Fixtures.AcceptanceTestsBodyDate
         /// </summary>
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
+        /// <summary>
+        /// Gets the IDate.
+        /// </summary>
         public virtual IDate Date { get; private set; }
 
         /// <summary>

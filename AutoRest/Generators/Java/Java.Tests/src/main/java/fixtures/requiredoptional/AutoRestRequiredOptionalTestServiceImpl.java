@@ -11,8 +11,8 @@
 package fixtures.requiredoptional;
 
 import com.microsoft.rest.ServiceClient;
-import com.squareup.okhttp.OkHttpClient;
-import retrofit.Retrofit;
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestRequiredOptionalTestService class.
@@ -99,7 +99,7 @@ public final class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient
      * @return the ImplicitOperations object.
      */
     public ImplicitOperations getImplicitOperations() {
-        return new ImplicitOperationsImpl(this.retrofitBuilder.build(), this);
+        return new ImplicitOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -107,7 +107,7 @@ public final class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient
      * @return the ExplicitOperations object.
      */
     public ExplicitOperations getExplicitOperations() {
-        return new ExplicitOperationsImpl(this.retrofitBuilder.build(), this);
+        return new ExplicitOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -132,16 +132,18 @@ public final class AutoRestRequiredOptionalTestServiceImpl extends ServiceClient
      * Initializes an instance of AutoRestRequiredOptionalTestService client.
      *
      * @param baseUri the base URI of the host
-     * @param client the {@link OkHttpClient} client to use for REST calls
+     * @param clientBuilder the builder for building up an {@link OkHttpClient}
      * @param retrofitBuilder the builder for building up a {@link Retrofit}
      */
-    public AutoRestRequiredOptionalTestServiceImpl(String baseUri, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
-        super(client, retrofitBuilder);
+    public AutoRestRequiredOptionalTestServiceImpl(String baseUri, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
+        super(clientBuilder, retrofitBuilder);
         this.baseUri = baseUri;
         initialize();
     }
 
-    private void initialize() {
+    @Override
+    protected void initialize() {
+        super.initialize();
         this.retrofitBuilder.baseUrl(baseUri);
     }
 }

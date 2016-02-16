@@ -7,8 +7,9 @@
 
 package com.microsoft.rest;
 
-import com.squareup.okhttp.ResponseBody;
-import retrofit.Callback;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
 
 /**
  * Inner callback used to merge both successful and failed responses into one
@@ -32,7 +33,7 @@ public abstract class ServiceResponseCallback<T> implements Callback<ResponseBod
     }
 
     @Override
-    public void onFailure(Throwable t) {
+    public void onFailure(Call<ResponseBody> call, Throwable t) {
         serviceCallback.failure(new ServiceException(t));
     }
 }

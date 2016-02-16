@@ -7,7 +7,7 @@
 
 package com.microsoft.rest.retry;
 
-import com.squareup.okhttp.Response;
+import okhttp3.Response;
 
 /**
  * Represents a retry strategy that determines the number of retry attempts and the interval

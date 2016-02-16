@@ -853,11 +853,6 @@ namespace Microsoft.Rest.Generator.CSharp.Azure.Tests
 
                 client.ParameterGrouping.PostRequired(requiredParameters);
 
-                //Required parameters object is not null, but a required property of the object is
-                requiredParameters = new ParameterGroupingPostRequiredParameters(null, pathParameter);
-
-                Assert.Throws<ValidationException>(() => client.ParameterGrouping.PostRequired(requiredParameters));
-
                 //null required parameters
                 Assert.Throws<ValidationException>(() => client.ParameterGrouping.PostRequired(null));
 

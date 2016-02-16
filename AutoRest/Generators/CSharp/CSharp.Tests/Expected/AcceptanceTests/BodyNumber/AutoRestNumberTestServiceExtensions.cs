@@ -16,6 +16,9 @@ namespace Fixtures.AcceptanceTestsBodyNumber
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for AutoRestNumberTestService.
+    /// </summary>
     public static partial class AutoRestNumberTestServiceExtensions
     {
     }

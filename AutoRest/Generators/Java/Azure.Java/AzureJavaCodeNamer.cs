@@ -12,18 +12,6 @@ namespace Microsoft.Rest.Generator.Java
 {
     public class AzureJavaCodeNamer : JavaCodeNamer
     {
-        /// <summary>
-        /// Skips name collision resolution for method groups (operations) as they get
-        /// renamed in template models.
-        /// </summary>
-        /// <param name="serviceClient"></param>
-        /// <param name="exclusionDictionary"></param>
-        protected override void ResolveMethodGroupNameCollision(ServiceClient serviceClient,
-            Dictionary<string, string> exclusionDictionary)
-        {
-            // Do nothing   
-        }
-
         private static string GetPagingSetting(Dictionary<string, object> extensions, IDictionary<KeyValuePair<string, string>, string> pageClasses, out string nextLinkName)
         {
             // default value

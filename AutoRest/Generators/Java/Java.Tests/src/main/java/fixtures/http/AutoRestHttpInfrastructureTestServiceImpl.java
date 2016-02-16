@@ -11,8 +11,8 @@
 package fixtures.http;
 
 import com.microsoft.rest.ServiceClient;
-import com.squareup.okhttp.OkHttpClient;
-import retrofit.Retrofit;
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
 
 /**
  * Initializes a new instance of the AutoRestHttpInfrastructureTestService class.
@@ -36,7 +36,7 @@ public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClie
      * @return the HttpFailureOperations object.
      */
     public HttpFailureOperations getHttpFailureOperations() {
-        return new HttpFailureOperationsImpl(this.retrofitBuilder.build(), this);
+        return new HttpFailureOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -44,7 +44,7 @@ public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClie
      * @return the HttpSuccessOperations object.
      */
     public HttpSuccessOperations getHttpSuccessOperations() {
-        return new HttpSuccessOperationsImpl(this.retrofitBuilder.build(), this);
+        return new HttpSuccessOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -52,7 +52,7 @@ public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClie
      * @return the HttpRedirectsOperations object.
      */
     public HttpRedirectsOperations getHttpRedirectsOperations() {
-        return new HttpRedirectsOperationsImpl(this.retrofitBuilder.build(), this);
+        return new HttpRedirectsOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -60,7 +60,7 @@ public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClie
      * @return the HttpClientFailureOperations object.
      */
     public HttpClientFailureOperations getHttpClientFailureOperations() {
-        return new HttpClientFailureOperationsImpl(this.retrofitBuilder.build(), this);
+        return new HttpClientFailureOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -68,7 +68,7 @@ public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClie
      * @return the HttpServerFailureOperations object.
      */
     public HttpServerFailureOperations getHttpServerFailureOperations() {
-        return new HttpServerFailureOperationsImpl(this.retrofitBuilder.build(), this);
+        return new HttpServerFailureOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -76,7 +76,7 @@ public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClie
      * @return the HttpRetryOperations object.
      */
     public HttpRetryOperations getHttpRetryOperations() {
-        return new HttpRetryOperationsImpl(this.retrofitBuilder.build(), this);
+        return new HttpRetryOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -84,7 +84,7 @@ public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClie
      * @return the MultipleResponsesOperations object.
      */
     public MultipleResponsesOperations getMultipleResponsesOperations() {
-        return new MultipleResponsesOperationsImpl(this.retrofitBuilder.build(), this);
+        return new MultipleResponsesOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
     }
 
     /**
@@ -109,16 +109,18 @@ public final class AutoRestHttpInfrastructureTestServiceImpl extends ServiceClie
      * Initializes an instance of AutoRestHttpInfrastructureTestService client.
      *
      * @param baseUri the base URI of the host
-     * @param client the {@link OkHttpClient} client to use for REST calls
+     * @param clientBuilder the builder for building up an {@link OkHttpClient}
      * @param retrofitBuilder the builder for building up a {@link Retrofit}
      */
-    public AutoRestHttpInfrastructureTestServiceImpl(String baseUri, OkHttpClient client, Retrofit.Builder retrofitBuilder) {
-        super(client, retrofitBuilder);
+    public AutoRestHttpInfrastructureTestServiceImpl(String baseUri, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
+        super(clientBuilder, retrofitBuilder);
         this.baseUri = baseUri;
         initialize();
     }
 
-    private void initialize() {
+    @Override
+    protected void initialize() {
+        super.initialize();
         this.retrofitBuilder.baseUrl(baseUri);
     }
 }

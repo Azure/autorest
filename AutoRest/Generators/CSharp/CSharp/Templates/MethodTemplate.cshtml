@@ -3,7 +3,6 @@
 @using System
 @using Microsoft.Rest.Generator.ClientModel
 @using Microsoft.Rest.Generator.CSharp
-@using Microsoft.Rest.Generator.CSharp.TemplateModels
 @using Microsoft.Rest.Generator.Utilities
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.CSharp.MethodTemplateModel>
 
@@ -29,11 +28,14 @@
 /// <param name='cancellationToken'>
 /// The cancellation token.
 /// </param>
+/// <return>
+/// A response object containing the response body and response headers.
+/// </return>
 public async Task<@(Model.OperationResponseReturnTypeString)> @(Model.Name)WithHttpMessagesAsync(@(Model.GetAsyncMethodParameterDeclaration(true)))
 {
     @foreach (ParameterTemplateModel parameter in Model.ParameterTemplateModels.Where(p => !p.IsConstant))
     {
-        if (parameter.IsRequired)
+        if (parameter.IsRequired && !parameter.Type.IsValueType())
         {
     @:if (@(parameter.Name) == null)
     @:{
@@ -111,6 +113,16 @@ else
     @(Model.SetDefaultHeaders)
     @foreach (var parameter in Model.LogicalParameterTemplateModels.Where(p => p.Location == ParameterLocation.Header))
     {
+        if (!parameter.CanBeNull())
+        {
+    @:if (_httpRequest.Headers.Contains("@(parameter.SerializedName)"))
+    @:{
+    @:    _httpRequest.Headers.Remove("@(parameter.SerializedName)");
+    @:}
+    @:_httpRequest.Headers.TryAddWithoutValidation("@(parameter.SerializedName)", @parameter.Type.ToString(Model.ClientReference, parameter.Name));
+        }
+        else
+        {
     @:if (@(parameter.Name) != null)
     @:{
     @:    if (_httpRequest.Headers.Contains("@(parameter.SerializedName)"))
@@ -119,6 +131,7 @@ else
     @:    }
     @:    _httpRequest.Headers.TryAddWithoutValidation("@(parameter.SerializedName)", @parameter.Type.ToString(Model.ClientReference, parameter.Name));
     @:}
+        }
     }
     if (customHeaders != null)
     {

@@ -73,18 +73,39 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// </summary>
         public bool? GenerateClientRequestId { get; set; }
 
+        /// <summary>
+        /// Gets the IBasicOperations.
+        /// </summary>
         public virtual IBasicOperations Basic { get; private set; }
 
+        /// <summary>
+        /// Gets the IPrimitiveOperations.
+        /// </summary>
         public virtual IPrimitiveOperations Primitive { get; private set; }
 
+        /// <summary>
+        /// Gets the IArrayOperations.
+        /// </summary>
         public virtual IArrayOperations Array { get; private set; }
 
+        /// <summary>
+        /// Gets the IDictionaryOperations.
+        /// </summary>
         public virtual IDictionaryOperations Dictionary { get; private set; }
 
+        /// <summary>
+        /// Gets the IInheritanceOperations.
+        /// </summary>
         public virtual IInheritanceOperations Inheritance { get; private set; }
 
+        /// <summary>
+        /// Gets the IPolymorphismOperations.
+        /// </summary>
         public virtual IPolymorphismOperations Polymorphism { get; private set; }
 
+        /// <summary>
+        /// Gets the IPolymorphicrecursiveOperations.
+        /// </summary>
         public virtual IPolymorphicrecursiveOperations Polymorphicrecursive { get; private set; }
 
         /// <summary>
@@ -325,6 +346,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<AzureOperationResponse<CatalogArray>> ListWithHttpMessagesAsync(string resourceGroupName, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (resourceGroupName == null)
@@ -491,6 +515,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<AzureOperationResponse<CatalogDictionary>> CreateWithHttpMessagesAsync(string subscriptionId, string resourceGroupName, IDictionary<string, IList<Product>> productDictionaryOfArray = default(IDictionary<string, IList<Product>>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (subscriptionId == null)
@@ -502,7 +529,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 throw new ValidationException(ValidationRules.CannotBeNull, "resourceGroupName");
             }
             string apiVersion = "2014-04-01-preview";
-            CatalogDictionaryOfArray bodyParameter = null;
+            CatalogDictionaryOfArray bodyParameter = default(CatalogDictionaryOfArray);
             if (productDictionaryOfArray != null)
             {
                 bodyParameter = new CatalogDictionaryOfArray();
@@ -672,6 +699,9 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
+        /// <return>
+        /// A response object containing the response body and response headers.
+        /// </return>
         public async Task<AzureOperationResponse<CatalogArray>> UpdateWithHttpMessagesAsync(string subscriptionId, string resourceGroupName, IList<IDictionary<string, Product>> productArrayOfDictionary = default(IList<IDictionary<string, Product>>), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (subscriptionId == null)
@@ -683,7 +713,7 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                 throw new ValidationException(ValidationRules.CannotBeNull, "resourceGroupName");
             }
             string apiVersion = "2014-04-01-preview";
-            CatalogArrayOfDictionary bodyParameter = null;
+            CatalogArrayOfDictionary bodyParameter = default(CatalogArrayOfDictionary);
             if (productArrayOfDictionary != null)
             {
                 bodyParameter = new CatalogArrayOfDictionary();

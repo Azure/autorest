@@ -14,6 +14,9 @@ namespace Microsoft.Rest.Generator.CSharp
     {
         private readonly HashSet<IType> _normalizedTypes;
 
+        [SettingsInfo("Whether to use DateTimeOffset instead of DateTime to model date-time types")]
+        public bool UseDateTimeOffset { get; set; }
+
         /// <summary>
         /// Initializes a new instance of CSharpCodeNamingFramework.
         /// </summary>
@@ -49,8 +52,26 @@ namespace Microsoft.Rest.Generator.CSharp
             {
                 throw new ArgumentNullException("client");
             }
-
             base.NormalizeClientModel(client);
+
+            foreach (var modelType in client.ModelTypes.Concat(client.ErrorTypes).Concat(client.HeaderTypes))
+            {
+                modelType.Properties.ForEach(p =>
+                {
+                    if (!p.IsRequired)
+                    {
+                        MakeTypeNullable(p.Type);
+                    }
+                });
+            }
+
+            foreach (var property in client.Properties)
+            {
+                if (!property.IsRequired)
+                {
+                    MakeTypeNullable(property.Type);
+                }
+            }
 
             foreach (var method in client.Methods)
             {
@@ -67,7 +88,53 @@ namespace Microsoft.Rest.Generator.CSharp
                     else
                     {
                         parameter.Name = scope.GetVariableName(parameter.Name);
+                        if (!parameter.IsRequired)
+                        {
+                            MakeTypeNullable(parameter.Type);
+                        }
                     }
+                }
+
+                if (method.HttpMethod != HttpMethod.Head)
+                {
+                    foreach (var statusCode in method.Responses.Keys)
+                    {
+                        MakeTypeNullable(method.Responses[statusCode].Body);
+                        MakeTypeNullable(method.Responses[statusCode].Headers);
+                    }
+                    MakeTypeNullable(method.ReturnType.Body);
+                    MakeTypeNullable(method.ReturnType.Headers);
+                }
+
+                foreach (var parameterTransformation in method.InputParameterTransformation)
+                {
+                    if (!parameterTransformation.OutputParameter.IsRequired)
+                    {
+                        MakeTypeNullable(parameterTransformation.OutputParameter.Type);
+                    }
+                }
+            }
+        }
+
+        private static void MakeTypeNullable(IType type)
+        {
+            PrimaryType primaryType = type as PrimaryType;
+            EnumType enumType = type as EnumType;
+            if (primaryType != null)
+            {
+                if (primaryType.Name != null 
+                    && !primaryType.Name.EndsWith("?", StringComparison.OrdinalIgnoreCase)
+                    && primaryType.IsValueType())
+                {
+                    primaryType.Name += "?";
+                }
+            }
+            else if (enumType != null)
+            {
+                if (enumType.Name != null
+                    && !enumType.Name.EndsWith("?", StringComparison.OrdinalIgnoreCase))
+                {
+                    enumType.Name += "?";
                 }
             }
         }
@@ -119,7 +186,7 @@ namespace Microsoft.Rest.Generator.CSharp
 
             if (primaryType.Type == KnownPrimaryType.Boolean)
             {
-                primaryType.Name = "bool?";
+                primaryType.Name = "bool";
             }
             else if (primaryType.Type == KnownPrimaryType.ByteArray)
             {
@@ -127,31 +194,31 @@ namespace Microsoft.Rest.Generator.CSharp
             }
             else if (primaryType.Type == KnownPrimaryType.Date)
             {
-                primaryType.Name = "DateTime?";
+                primaryType.Name = "DateTime";
             }
             else if (primaryType.Type == KnownPrimaryType.DateTime)
             {
-                primaryType.Name = "DateTime?";
+                primaryType.Name = UseDateTimeOffset ? "DateTimeOffset" : "DateTime";
             }
             else if (primaryType.Type == KnownPrimaryType.DateTimeRfc1123)
             {
-                primaryType.Name = "DateTime?";
+                primaryType.Name = "DateTime";
             }
             else if (primaryType.Type == KnownPrimaryType.Double)
             {
-                primaryType.Name = "double?";
+                primaryType.Name = "double";
             }
             else if (primaryType.Type == KnownPrimaryType.Decimal)
             {
-                primaryType.Name = "decimal?";
+                primaryType.Name = "decimal";
             }
             else if (primaryType.Type == KnownPrimaryType.Int)
             {
-                primaryType.Name = "int?";
+                primaryType.Name = "int";
             }
             else if (primaryType.Type == KnownPrimaryType.Long)
             {
-                primaryType.Name = "long?";
+                primaryType.Name = "long";
             }
             else if (primaryType.Type == KnownPrimaryType.Stream)
             {
@@ -163,7 +230,7 @@ namespace Microsoft.Rest.Generator.CSharp
             }
             else if (primaryType.Type == KnownPrimaryType.TimeSpan)
             {
-                primaryType.Name = "TimeSpan?";
+                primaryType.Name = "TimeSpan";
             }
             else if (primaryType.Type == KnownPrimaryType.Object)
             {
@@ -205,7 +272,7 @@ namespace Microsoft.Rest.Generator.CSharp
 
         private IType NormalizeEnumType(EnumType enumType)
         {
-            enumType.Name = GetTypeName(enumType.Name) + "?";
+            enumType.Name = GetTypeName(enumType.Name);
 
             for (int i = 0; i < enumType.Values.Count; i++)
             {
@@ -217,14 +284,28 @@ namespace Microsoft.Rest.Generator.CSharp
         private IType NormalizeSequenceType(SequenceType sequenceType)
         {
             sequenceType.ElementType = NormalizeTypeReference(sequenceType.ElementType);
-            sequenceType.NameFormat = "IList<{0}>";
+            if (sequenceType.ElementType.IsValueType())
+            {
+                sequenceType.NameFormat = "IList<{0}?>";
+            }
+            else
+            {
+                sequenceType.NameFormat = "IList<{0}>";
+            }
             return sequenceType;
         }
 
         private IType NormalizeDictionaryType(DictionaryType dictionaryType)
         {
             dictionaryType.ValueType = NormalizeTypeReference(dictionaryType.ValueType);
-            dictionaryType.NameFormat = "IDictionary<string, {0}>";
+            if (dictionaryType.ValueType.IsValueType())
+            {
+                dictionaryType.NameFormat = "IDictionary<string, {0}?>";
+            }
+            else
+            {
+                dictionaryType.NameFormat = "IDictionary<string, {0}>";
+            }
             return dictionaryType;
         }
 

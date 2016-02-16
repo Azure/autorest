@@ -16,6 +16,9 @@ namespace Fixtures.AcceptanceTestsBodyNumber
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for Number.
+    /// </summary>
     public static partial class NumberExtensions
     {
             /// <summary>
@@ -38,7 +41,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<double?> GetNullAsync( this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<double?> GetNullAsync(this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetNullWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -66,7 +69,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<double?> GetInvalidFloatAsync( this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<double?> GetInvalidFloatAsync(this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetInvalidFloatWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -94,7 +97,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<double?> GetInvalidDoubleAsync( this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<double?> GetInvalidDoubleAsync(this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetInvalidDoubleWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -122,7 +125,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<decimal?> GetInvalidDecimalAsync( this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<decimal?> GetInvalidDecimalAsync(this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetInvalidDecimalWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -138,7 +141,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             /// <param name='numberBody'>
             /// </param>
-            public static void PutBigFloat(this INumber operations, double? numberBody)
+            public static void PutBigFloat(this INumber operations, double numberBody)
             {
                 Task.Factory.StartNew(s => ((INumber)s).PutBigFloatAsync(numberBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -154,7 +157,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutBigFloatAsync( this INumber operations, double? numberBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutBigFloatAsync(this INumber operations, double numberBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutBigFloatWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -179,7 +182,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<double?> GetBigFloatAsync( this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<double?> GetBigFloatAsync(this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetBigFloatWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -195,7 +198,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             /// <param name='numberBody'>
             /// </param>
-            public static void PutBigDouble(this INumber operations, double? numberBody)
+            public static void PutBigDouble(this INumber operations, double numberBody)
             {
                 Task.Factory.StartNew(s => ((INumber)s).PutBigDoubleAsync(numberBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -211,7 +214,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutBigDoubleAsync( this INumber operations, double? numberBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutBigDoubleAsync(this INumber operations, double numberBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutBigDoubleWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -236,7 +239,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<double?> GetBigDoubleAsync( this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<double?> GetBigDoubleAsync(this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetBigDoubleWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -252,7 +255,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             /// <param name='numberBody'>
             /// </param>
-            public static void PutBigDoublePositiveDecimal(this INumber operations, double? numberBody)
+            public static void PutBigDoublePositiveDecimal(this INumber operations, double numberBody)
             {
                 Task.Factory.StartNew(s => ((INumber)s).PutBigDoublePositiveDecimalAsync(numberBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -268,7 +271,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutBigDoublePositiveDecimalAsync( this INumber operations, double? numberBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutBigDoublePositiveDecimalAsync(this INumber operations, double numberBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutBigDoublePositiveDecimalWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -293,7 +296,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<double?> GetBigDoublePositiveDecimalAsync( this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<double?> GetBigDoublePositiveDecimalAsync(this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetBigDoublePositiveDecimalWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -309,7 +312,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             /// <param name='numberBody'>
             /// </param>
-            public static void PutBigDoubleNegativeDecimal(this INumber operations, double? numberBody)
+            public static void PutBigDoubleNegativeDecimal(this INumber operations, double numberBody)
             {
                 Task.Factory.StartNew(s => ((INumber)s).PutBigDoubleNegativeDecimalAsync(numberBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -325,7 +328,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutBigDoubleNegativeDecimalAsync( this INumber operations, double? numberBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutBigDoubleNegativeDecimalAsync(this INumber operations, double numberBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutBigDoubleNegativeDecimalWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -350,7 +353,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<double?> GetBigDoubleNegativeDecimalAsync( this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<double?> GetBigDoubleNegativeDecimalAsync(this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetBigDoubleNegativeDecimalWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -366,7 +369,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             /// <param name='numberBody'>
             /// </param>
-            public static void PutBigDecimal(this INumber operations, decimal? numberBody)
+            public static void PutBigDecimal(this INumber operations, decimal numberBody)
             {
                 Task.Factory.StartNew(s => ((INumber)s).PutBigDecimalAsync(numberBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -382,7 +385,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutBigDecimalAsync( this INumber operations, decimal? numberBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutBigDecimalAsync(this INumber operations, decimal numberBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutBigDecimalWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -407,7 +410,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<decimal?> GetBigDecimalAsync( this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<decimal?> GetBigDecimalAsync(this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetBigDecimalWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -423,7 +426,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             /// <param name='numberBody'>
             /// </param>
-            public static void PutBigDecimalPositiveDecimal(this INumber operations, decimal? numberBody)
+            public static void PutBigDecimalPositiveDecimal(this INumber operations, decimal numberBody)
             {
                 Task.Factory.StartNew(s => ((INumber)s).PutBigDecimalPositiveDecimalAsync(numberBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -439,7 +442,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutBigDecimalPositiveDecimalAsync( this INumber operations, decimal? numberBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutBigDecimalPositiveDecimalAsync(this INumber operations, decimal numberBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutBigDecimalPositiveDecimalWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -464,7 +467,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<decimal?> GetBigDecimalPositiveDecimalAsync( this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<decimal?> GetBigDecimalPositiveDecimalAsync(this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetBigDecimalPositiveDecimalWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -480,7 +483,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             /// <param name='numberBody'>
             /// </param>
-            public static void PutBigDecimalNegativeDecimal(this INumber operations, decimal? numberBody)
+            public static void PutBigDecimalNegativeDecimal(this INumber operations, decimal numberBody)
             {
                 Task.Factory.StartNew(s => ((INumber)s).PutBigDecimalNegativeDecimalAsync(numberBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -496,7 +499,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutBigDecimalNegativeDecimalAsync( this INumber operations, decimal? numberBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutBigDecimalNegativeDecimalAsync(this INumber operations, decimal numberBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutBigDecimalNegativeDecimalWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -521,7 +524,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<decimal?> GetBigDecimalNegativeDecimalAsync( this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<decimal?> GetBigDecimalNegativeDecimalAsync(this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetBigDecimalNegativeDecimalWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -537,7 +540,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             /// <param name='numberBody'>
             /// </param>
-            public static void PutSmallFloat(this INumber operations, double? numberBody)
+            public static void PutSmallFloat(this INumber operations, double numberBody)
             {
                 Task.Factory.StartNew(s => ((INumber)s).PutSmallFloatAsync(numberBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -553,7 +556,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutSmallFloatAsync( this INumber operations, double? numberBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutSmallFloatAsync(this INumber operations, double numberBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutSmallFloatWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -578,7 +581,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<double?> GetSmallFloatAsync( this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<double?> GetSmallFloatAsync(this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetSmallFloatWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -594,7 +597,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             /// <param name='numberBody'>
             /// </param>
-            public static void PutSmallDouble(this INumber operations, double? numberBody)
+            public static void PutSmallDouble(this INumber operations, double numberBody)
             {
                 Task.Factory.StartNew(s => ((INumber)s).PutSmallDoubleAsync(numberBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -610,7 +613,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutSmallDoubleAsync( this INumber operations, double? numberBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutSmallDoubleAsync(this INumber operations, double numberBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutSmallDoubleWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -635,7 +638,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<double?> GetSmallDoubleAsync( this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<double?> GetSmallDoubleAsync(this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetSmallDoubleWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {
@@ -651,7 +654,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// </param>
             /// <param name='numberBody'>
             /// </param>
-            public static void PutSmallDecimal(this INumber operations, decimal? numberBody)
+            public static void PutSmallDecimal(this INumber operations, decimal numberBody)
             {
                 Task.Factory.StartNew(s => ((INumber)s).PutSmallDecimalAsync(numberBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
             }
@@ -667,7 +670,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task PutSmallDecimalAsync( this INumber operations, decimal? numberBody, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task PutSmallDecimalAsync(this INumber operations, decimal numberBody, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.PutSmallDecimalWithHttpMessagesAsync(numberBody, null, cancellationToken).ConfigureAwait(false);
             }
@@ -692,7 +695,7 @@ namespace Fixtures.AcceptanceTestsBodyNumber
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<decimal?> GetSmallDecimalAsync( this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<decimal?> GetSmallDecimalAsync(this INumber operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetSmallDecimalWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
                 {

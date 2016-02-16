@@ -159,7 +159,7 @@ foreach (var transformation in Model.InputParameterTransformation.Where(t => t.P
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
     call.enqueue(new @Model.InternalCallback<@(JavaCodeNamer.WrapPrimitiveType(Model.ReturnType.Body).Name)>(serviceCallback) {
         @@Override
-        public void onResponse(Response<@Model.CallType> response, Retrofit retrofit) {
+        public void onResponse(Call<@Model.CallType> call, Response<@Model.CallType> response) {
             try {
                 @Model.SuccessCallback
             } catch (@Model.OperationExceptionTypeString | IOException exception) {
@@ -170,7 +170,7 @@ foreach (var transformation in Model.InputParameterTransformation.Where(t => t.P
     return call;
 }
 @EmptyLine
-private @Model.DelegateOperationResponseReturnTypeString @(Model.Name)Delegate(Response<@Model.CallType> response, Retrofit retrofit) throws @Model.ExceptionString {
+private @Model.DelegateOperationResponseReturnTypeString @(Model.Name)Delegate(Response<@Model.CallType> response) throws @Model.ExceptionString {
     return new @Model.ResponseBuilder<@Model.DelegateReturnTypeString, @Model.OperationExceptionTypeString>()
 @foreach (var response in Model.Responses)
 {
@@ -185,22 +185,22 @@ private @Model.DelegateOperationResponseReturnTypeString @(Model.Name)Delegate(R
 {
     if (Model.ReturnType.Headers != null)
     {
-            @:.buildEmptyWithHeaders(response, retrofit, @(Model.ReturnType.Headers.Name).class);
+            @:.buildEmptyWithHeaders(response, @(Model.ReturnType.Headers.Name).class);
     }
     else
     {
-            @:.buildEmpty(response, retrofit);
+            @:.buildEmpty(response);
     }
 }
 else
 {
     if (Model.ReturnType.Headers != null)
     {
-            @:.buildWithHeaders(response, retrofit, @(Model.ReturnType.Headers.Name).class);
+            @:.buildWithHeaders(response, @(Model.ReturnType.Headers.Name).class);
     }
     else
     {
-            @:.build(response, retrofit);
+            @:.build(response);
     }
 }
 }

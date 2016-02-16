@@ -16,13 +16,13 @@ import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.Validator;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.bodycomplex.models.Basic;
 import fixtures.bodycomplex.models.ErrorException;
 import java.io.IOException;
-import retrofit.Call;
-import retrofit.Response;
-import retrofit.Retrofit;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -30,7 +30,7 @@ import retrofit.Retrofit;
  */
 public final class BasicOperationsImpl implements BasicOperations {
     /** The Retrofit service to perform REST calls. */
-    private BasicOperationsService service;
+    private BasicService service;
     /** The service client containing this operation class. */
     private AutoRestComplexTestService client;
 
@@ -41,7 +41,7 @@ public final class BasicOperationsImpl implements BasicOperations {
      * @param client the instance of the service client containing this operation class.
      */
     public BasicOperationsImpl(Retrofit retrofit, AutoRestComplexTestService client) {
-        this.service = retrofit.create(BasicOperationsService.class);
+        this.service = retrofit.create(BasicService.class);
         this.client = client;
     }
 
@@ -54,7 +54,7 @@ public final class BasicOperationsImpl implements BasicOperations {
      */
     public ServiceResponse<Basic> getValid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getValid();
-        return getValidDelegate(call.execute(), null);
+        return getValidDelegate(call.execute());
     }
 
     /**
@@ -67,9 +67,9 @@ public final class BasicOperationsImpl implements BasicOperations {
         Call<ResponseBody> call = service.getValid();
         call.enqueue(new ServiceResponseCallback<Basic>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getValidDelegate(response, retrofit));
+                    serviceCallback.success(getValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -78,11 +78,11 @@ public final class BasicOperationsImpl implements BasicOperations {
         return call;
     }
 
-    private ServiceResponse<Basic> getValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Basic> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Basic, ErrorException>()
                 .register(200, new TypeToken<Basic>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -103,7 +103,7 @@ public final class BasicOperationsImpl implements BasicOperations {
         }
         Validator.validate(complexBody);
         Call<ResponseBody> call = service.putValid(complexBody, this.client.getApiVersion());
-        return putValidDelegate(call.execute(), null);
+        return putValidDelegate(call.execute());
     }
 
     /**
@@ -126,9 +126,9 @@ public final class BasicOperationsImpl implements BasicOperations {
         Call<ResponseBody> call = service.putValid(complexBody, this.client.getApiVersion());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putValidDelegate(response, retrofit));
+                    serviceCallback.success(putValidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -137,11 +137,11 @@ public final class BasicOperationsImpl implements BasicOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -153,7 +153,7 @@ public final class BasicOperationsImpl implements BasicOperations {
      */
     public ServiceResponse<Basic> getInvalid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getInvalid();
-        return getInvalidDelegate(call.execute(), null);
+        return getInvalidDelegate(call.execute());
     }
 
     /**
@@ -166,9 +166,9 @@ public final class BasicOperationsImpl implements BasicOperations {
         Call<ResponseBody> call = service.getInvalid();
         call.enqueue(new ServiceResponseCallback<Basic>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getInvalidDelegate(response, retrofit));
+                    serviceCallback.success(getInvalidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -177,11 +177,11 @@ public final class BasicOperationsImpl implements BasicOperations {
         return call;
     }
 
-    private ServiceResponse<Basic> getInvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Basic> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Basic, ErrorException>()
                 .register(200, new TypeToken<Basic>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -193,7 +193,7 @@ public final class BasicOperationsImpl implements BasicOperations {
      */
     public ServiceResponse<Basic> getEmpty() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getEmpty();
-        return getEmptyDelegate(call.execute(), null);
+        return getEmptyDelegate(call.execute());
     }
 
     /**
@@ -206,9 +206,9 @@ public final class BasicOperationsImpl implements BasicOperations {
         Call<ResponseBody> call = service.getEmpty();
         call.enqueue(new ServiceResponseCallback<Basic>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getEmptyDelegate(response, retrofit));
+                    serviceCallback.success(getEmptyDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -217,11 +217,11 @@ public final class BasicOperationsImpl implements BasicOperations {
         return call;
     }
 
-    private ServiceResponse<Basic> getEmptyDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Basic> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Basic, ErrorException>()
                 .register(200, new TypeToken<Basic>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -233,7 +233,7 @@ public final class BasicOperationsImpl implements BasicOperations {
      */
     public ServiceResponse<Basic> getNull() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getNull();
-        return getNullDelegate(call.execute(), null);
+        return getNullDelegate(call.execute());
     }
 
     /**
@@ -246,9 +246,9 @@ public final class BasicOperationsImpl implements BasicOperations {
         Call<ResponseBody> call = service.getNull();
         call.enqueue(new ServiceResponseCallback<Basic>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getNullDelegate(response, retrofit));
+                    serviceCallback.success(getNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -257,11 +257,11 @@ public final class BasicOperationsImpl implements BasicOperations {
         return call;
     }
 
-    private ServiceResponse<Basic> getNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Basic> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Basic, ErrorException>()
                 .register(200, new TypeToken<Basic>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -273,7 +273,7 @@ public final class BasicOperationsImpl implements BasicOperations {
      */
     public ServiceResponse<Basic> getNotProvided() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getNotProvided();
-        return getNotProvidedDelegate(call.execute(), null);
+        return getNotProvidedDelegate(call.execute());
     }
 
     /**
@@ -286,9 +286,9 @@ public final class BasicOperationsImpl implements BasicOperations {
         Call<ResponseBody> call = service.getNotProvided();
         call.enqueue(new ServiceResponseCallback<Basic>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getNotProvidedDelegate(response, retrofit));
+                    serviceCallback.success(getNotProvidedDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -297,11 +297,11 @@ public final class BasicOperationsImpl implements BasicOperations {
         return call;
     }
 
-    private ServiceResponse<Basic> getNotProvidedDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Basic> getNotProvidedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Basic, ErrorException>()
                 .register(200, new TypeToken<Basic>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
 }

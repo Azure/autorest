@@ -38,6 +38,9 @@ namespace Fixtures.AcceptanceTestsBodyDuration
         JsonSerializerSettings DeserializationSettings { get; }
 
 
+        /// <summary>
+        /// Gets the IDuration.
+        /// </summary>
         IDuration Duration { get; }
 
     }

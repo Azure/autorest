@@ -44,6 +44,9 @@ namespace Fixtures.AcceptanceTestsBodyBoolean
         /// </summary>
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
+        /// <summary>
+        /// Gets the IBoolModel.
+        /// </summary>
         public virtual IBoolModel BoolModel { get; private set; }
 
         /// <summary>

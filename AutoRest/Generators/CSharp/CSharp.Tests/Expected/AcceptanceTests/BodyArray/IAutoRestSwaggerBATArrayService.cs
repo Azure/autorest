@@ -38,6 +38,9 @@ namespace Fixtures.AcceptanceTestsBodyArray
         JsonSerializerSettings DeserializationSettings { get; }
 
 
+        /// <summary>
+        /// Gets the IArray.
+        /// </summary>
         IArray Array { get; }
 
     }

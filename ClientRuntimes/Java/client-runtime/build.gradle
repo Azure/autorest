@@ -23,10 +23,11 @@ checkstyle {
 
 dependencies {
     compile 'com.google.guava:guava:18.0'
-    compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
-    compile 'com.squareup.okhttp:okhttp:2.6.0'
-    compile 'com.squareup.okhttp:logging-interceptor:2.6.0'
-    compile 'com.squareup.retrofit:converter-jackson:2.0.0-beta2'
+    compile 'com.squareup.retrofit2:retrofit:2.0.0-beta4'
+    compile 'com.squareup.okhttp3:okhttp:3.1.2'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.1.1'
+    compile 'com.squareup.okhttp3:okhttp-urlconnection:3.1.1'
+    compile 'com.squareup.retrofit2:converter-jackson:2.0.0-beta4'
     compile 'com.fasterxml.jackson.datatype:jackson-datatype-joda:2.7.0'
     compile 'org.apache.commons:commons-lang3:3.4'
     testCompile 'junit:junit:4.12'

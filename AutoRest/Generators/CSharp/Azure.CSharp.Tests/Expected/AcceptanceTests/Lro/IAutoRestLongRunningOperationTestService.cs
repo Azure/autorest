@@ -61,12 +61,24 @@ namespace Fixtures.Azure.AcceptanceTestsLro
         bool? GenerateClientRequestId { get; set; }
 
 
+        /// <summary>
+        /// Gets the ILROsOperations.
+        /// </summary>
         ILROsOperations LROs { get; }
 
+        /// <summary>
+        /// Gets the ILRORetrysOperations.
+        /// </summary>
         ILRORetrysOperations LRORetrys { get; }
 
+        /// <summary>
+        /// Gets the ILROSADsOperations.
+        /// </summary>
         ILROSADsOperations LROSADs { get; }
 
+        /// <summary>
+        /// Gets the ILROsCustomHeaderOperations.
+        /// </summary>
         ILROsCustomHeaderOperations LROsCustomHeader { get; }
 
     }

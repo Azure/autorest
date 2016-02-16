@@ -15,13 +15,13 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.bodyduration.models.ErrorException;
 import java.io.IOException;
+import okhttp3.ResponseBody;
 import org.joda.time.Period;
-import retrofit.Call;
-import retrofit.Response;
-import retrofit.Retrofit;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -53,7 +53,7 @@ public final class DurationOperationsImpl implements DurationOperations {
      */
     public ServiceResponse<Period> getNull() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getNull();
-        return getNullDelegate(call.execute(), null);
+        return getNullDelegate(call.execute());
     }
 
     /**
@@ -66,9 +66,9 @@ public final class DurationOperationsImpl implements DurationOperations {
         Call<ResponseBody> call = service.getNull();
         call.enqueue(new ServiceResponseCallback<Period>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getNullDelegate(response, retrofit));
+                    serviceCallback.success(getNullDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -77,11 +77,11 @@ public final class DurationOperationsImpl implements DurationOperations {
         return call;
     }
 
-    private ServiceResponse<Period> getNullDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Period> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Period, ErrorException>()
                 .register(200, new TypeToken<Period>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -98,7 +98,7 @@ public final class DurationOperationsImpl implements DurationOperations {
             throw new IllegalArgumentException("Parameter durationBody is required and cannot be null.");
         }
         Call<ResponseBody> call = service.putPositiveDuration(durationBody);
-        return putPositiveDurationDelegate(call.execute(), null);
+        return putPositiveDurationDelegate(call.execute());
     }
 
     /**
@@ -116,9 +116,9 @@ public final class DurationOperationsImpl implements DurationOperations {
         Call<ResponseBody> call = service.putPositiveDuration(durationBody);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(putPositiveDurationDelegate(response, retrofit));
+                    serviceCallback.success(putPositiveDurationDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -127,11 +127,11 @@ public final class DurationOperationsImpl implements DurationOperations {
         return call;
     }
 
-    private ServiceResponse<Void> putPositiveDurationDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponse<Void> putPositiveDurationDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new ServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -143,7 +143,7 @@ public final class DurationOperationsImpl implements DurationOperations {
      */
     public ServiceResponse<Period> getPositiveDuration() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getPositiveDuration();
-        return getPositiveDurationDelegate(call.execute(), null);
+        return getPositiveDurationDelegate(call.execute());
     }
 
     /**
@@ -156,9 +156,9 @@ public final class DurationOperationsImpl implements DurationOperations {
         Call<ResponseBody> call = service.getPositiveDuration();
         call.enqueue(new ServiceResponseCallback<Period>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getPositiveDurationDelegate(response, retrofit));
+                    serviceCallback.success(getPositiveDurationDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -167,11 +167,11 @@ public final class DurationOperationsImpl implements DurationOperations {
         return call;
     }
 
-    private ServiceResponse<Period> getPositiveDurationDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Period> getPositiveDurationDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Period, ErrorException>()
                 .register(200, new TypeToken<Period>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
     /**
@@ -183,7 +183,7 @@ public final class DurationOperationsImpl implements DurationOperations {
      */
     public ServiceResponse<Period> getInvalid() throws ErrorException, IOException {
         Call<ResponseBody> call = service.getInvalid();
-        return getInvalidDelegate(call.execute(), null);
+        return getInvalidDelegate(call.execute());
     }
 
     /**
@@ -196,9 +196,9 @@ public final class DurationOperationsImpl implements DurationOperations {
         Call<ResponseBody> call = service.getInvalid();
         call.enqueue(new ServiceResponseCallback<Period>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(getInvalidDelegate(response, retrofit));
+                    serviceCallback.success(getInvalidDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -207,11 +207,11 @@ public final class DurationOperationsImpl implements DurationOperations {
         return call;
     }
 
-    private ServiceResponse<Period> getInvalidDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException {
+    private ServiceResponse<Period> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new ServiceResponseBuilder<Period, ErrorException>()
                 .register(200, new TypeToken<Period>() { }.getType())
                 .registerError(ErrorException.class)
-                .build(response, retrofit);
+                .build(response);
     }
 
 }

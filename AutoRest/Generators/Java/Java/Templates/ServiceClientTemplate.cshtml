@@ -78,7 +78,7 @@ if(!property.IsReadOnly)
 @:     * @@return the @(operation.MethodGroupType) object.
 @:     */
 @:    public @(operation.MethodGroupType) get@(operation.MethodGroupType)() {
-@:        return new @(operation.MethodGroupType)Impl(this.retrofitBuilder.build(), this);
+@:        return new @(operation.MethodGroupType)Impl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
 @:    }
 }
 @EmptyLine
@@ -105,11 +105,11 @@ if(!property.IsReadOnly)
      * Initializes an instance of @(Model.Name) client.
      *
      @(Model.IsCustomBaseUri ? "" : "* @param baseUri the base URI of the host")
-     * @@param client the {@@link OkHttpClient} client to use for REST calls
+     * @@param clientBuilder the builder for building up an {@@link OkHttpClient}
      * @@param retrofitBuilder the builder for building up a {@@link Retrofit}
      */
-    public @(Model.Name)Impl(@(Model.IsCustomBaseUri ? "" : "String baseUri, ")OkHttpClient client, Retrofit.Builder retrofitBuilder) {
-        super(client, retrofitBuilder);
+    public @(Model.Name)Impl(@(Model.IsCustomBaseUri ? "" : "String baseUri, ")OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
+        super(clientBuilder, retrofitBuilder);
 
 @if (Model.IsCustomBaseUri)
 {
@@ -124,7 +124,8 @@ else
     }
 
 @EmptyLine
-    private void initialize() {
+    @@Override
+    protected void initialize() {
     @if (Settings.AddCredentials)
     {
 @:        if (this.credentials != null)
@@ -132,22 +133,43 @@ else
 @:            this.credentials.applyCredentialsFilter(this.client);
 @:        }
     }
-    
+        super.initialize();
         this.retrofitBuilder.baseUrl(baseUri);
 @if (Model.MethodTemplateModels.Any())
 {
-@:        service = this.retrofitBuilder.build().create(@(Model.ServiceClientServiceType).class);
+@:        initializeService();
 }
     }
 @if (Model.MethodTemplateModels.Any())
 {
 @EmptyLine
 <text>
+    private void initializeService() {
+        service = this.retrofitBuilder.client(this.clientBuilder.build())
+                .build()
+                .create(@(Model.ServiceClientServiceType).class);
+    }
+</text>
+@EmptyLine
+<text>
+    /**
+     * Sets the logging level for OkHttp client.
+     *
+     * @@param logLevel the logging level enum
+     */
+    @@Override
+    public void setLogLevel(Level logLevel) {
+        super.setLogLevel(logLevel);
+        initializeService();
+    }
+</text>
+@EmptyLine
+<text>
 @foreach (var method in Model.MethodTemplateModels)
-    {
+{
     @:@(Include(new MethodTemplate(), method))
     @EmptyLine
-    }
+}
 </text>
 }
 }

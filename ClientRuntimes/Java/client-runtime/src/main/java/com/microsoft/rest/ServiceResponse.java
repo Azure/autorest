@@ -7,8 +7,8 @@
 
 package com.microsoft.rest;
 
-import com.squareup.okhttp.ResponseBody;
-import retrofit.Response;
+import okhttp3.ResponseBody;
+import retrofit2.Response;
 
 /**
  * An instance of this class holds a response object and a raw REST response.

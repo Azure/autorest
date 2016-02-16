@@ -44,6 +44,9 @@ namespace Fixtures.AcceptanceTestsBodyFile
         /// </summary>
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
+        /// <summary>
+        /// Gets the IFiles.
+        /// </summary>
         public virtual IFiles Files { get; private set; }
 
         /// <summary>

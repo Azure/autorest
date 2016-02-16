@@ -208,7 +208,7 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
 
         public static string ImportFrom(this HttpMethod httpMethod)
         {
-            string package = "retrofit.http.";
+            string package = "retrofit2.http.";
             if (httpMethod == HttpMethod.Delete)
             {
                 return package + "HTTP";
@@ -223,7 +223,7 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
         {
             if (parameterLocation != ParameterLocation.None &&
                 parameterLocation != ParameterLocation.FormData)
-                return "retrofit.http." + parameterLocation.ToString();
+                return "retrofit2.http." + parameterLocation.ToString();
             else
                 return null;
         }

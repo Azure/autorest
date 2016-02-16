@@ -16,6 +16,9 @@ namespace Fixtures.MirrorPolymorphic
     using Microsoft.Rest;
     using Models;
 
+    /// <summary>
+    /// Extension methods for PolymorphicAnimalStore.
+    /// </summary>
     public static partial class PolymorphicAnimalStoreExtensions
     {
             /// <summary>
@@ -52,7 +55,7 @@ namespace Fixtures.MirrorPolymorphic
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Animal> CreateOrUpdatePolymorphicAnimalsAsync( this IPolymorphicAnimalStore operations, Animal animalCreateOrUpdateParameter = default(Animal), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Animal> CreateOrUpdatePolymorphicAnimalsAsync(this IPolymorphicAnimalStore operations, Animal animalCreateOrUpdateParameter = default(Animal), CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.CreateOrUpdatePolymorphicAnimalsWithHttpMessagesAsync(animalCreateOrUpdateParameter, null, cancellationToken).ConfigureAwait(false))
                 {

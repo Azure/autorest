@@ -17,6 +17,9 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
     using Microsoft.Rest.Azure;
     using Models;
 
+    /// <summary>
+    /// Extension methods for MicrosoftAzureTestUrl.
+    /// </summary>
     public static partial class MicrosoftAzureTestUrlExtensions
     {
     }

@@ -17,6 +17,9 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
     using Microsoft.Rest.Azure;
     using Models;
 
+    /// <summary>
+    /// Extension methods for GroupOperations.
+    /// </summary>
     public static partial class GroupOperationsExtensions
     {
             /// <summary>
@@ -45,7 +48,7 @@ namespace Fixtures.Azure.AcceptanceTestsSubscriptionIdApiVersion
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<SampleResourceGroup> GetSampleResourceGroupAsync( this IGroupOperations operations, string resourceGroupName, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<SampleResourceGroup> GetSampleResourceGroupAsync(this IGroupOperations operations, string resourceGroupName, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.GetSampleResourceGroupWithHttpMessagesAsync(resourceGroupName, null, cancellationToken).ConfigureAwait(false))
                 {

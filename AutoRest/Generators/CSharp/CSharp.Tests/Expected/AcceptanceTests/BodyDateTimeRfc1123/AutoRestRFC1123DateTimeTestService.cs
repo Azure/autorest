@@ -44,6 +44,9 @@ namespace Fixtures.AcceptanceTestsBodyDateTimeRfc1123
         /// </summary>
         public JsonSerializerSettings DeserializationSettings { get; private set; }        
 
+        /// <summary>
+        /// Gets the IDatetimerfc1123.
+        /// </summary>
         public virtual IDatetimerfc1123 Datetimerfc1123 { get; private set; }
 
         /// <summary>

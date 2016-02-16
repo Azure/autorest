@@ -14,7 +14,6 @@ import com.microsoft.rest.DateTimeRfc1123;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseWithHeaders;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.header.models.ErrorException;
 import fixtures.header.models.GreyscaleColors;
 import fixtures.header.models.HeaderResponseBoolHeaders;
@@ -32,13 +31,14 @@ import fixtures.header.models.HeaderResponseLongHeaders;
 import fixtures.header.models.HeaderResponseProtectedKeyHeaders;
 import fixtures.header.models.HeaderResponseStringHeaders;
 import java.io.IOException;
+import okhttp3.ResponseBody;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.Period;
-import retrofit.Call;
-import retrofit.http.Header;
-import retrofit.http.Headers;
-import retrofit.http.POST;
+import retrofit2.Call;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
+import retrofit2.http.POST;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -49,7 +49,7 @@ public interface HeaderOperations {
      * The interface defining all the services for HeaderOperations to be
      * used by Retrofit to perform actually REST calls.
      */
-    interface HeaderOperationsService {
+    interface HeaderService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("header/param/existingkey")
         Call<ResponseBody> paramExistingKey(@Header("User-Agent") String userAgent);

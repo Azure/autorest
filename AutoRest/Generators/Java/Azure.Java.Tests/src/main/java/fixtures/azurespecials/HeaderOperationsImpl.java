@@ -15,13 +15,13 @@ import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.ServiceResponseWithHeaders;
-import com.squareup.okhttp.ResponseBody;
 import fixtures.azurespecials.models.ErrorException;
 import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeaders;
 import java.io.IOException;
-import retrofit.Call;
-import retrofit.Response;
-import retrofit.Retrofit;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -58,7 +58,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             throw new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null.");
         }
         Call<ResponseBody> call = service.customNamedRequestId(fooClientRequestId, this.client.getAcceptLanguage());
-        return customNamedRequestIdDelegate(call.execute(), null);
+        return customNamedRequestIdDelegate(call.execute());
     }
 
     /**
@@ -76,9 +76,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         Call<ResponseBody> call = service.customNamedRequestId(fooClientRequestId, this.client.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
-            public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    serviceCallback.success(customNamedRequestIdDelegate(response, retrofit));
+                    serviceCallback.success(customNamedRequestIdDelegate(response));
                 } catch (ErrorException | IOException exception) {
                     serviceCallback.failure(exception);
                 }
@@ -87,11 +87,11 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         return call;
     }
 
-    private ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders> customNamedRequestIdDelegate(Response<ResponseBody> response, Retrofit retrofit) throws ErrorException, IOException, IllegalArgumentException {
+    private ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders> customNamedRequestIdDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
         return new AzureServiceResponseBuilder<Void, ErrorException>()
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
-                .buildWithHeaders(response, retrofit, HeaderCustomNamedRequestIdHeaders.class);
+                .buildWithHeaders(response, HeaderCustomNamedRequestIdHeaders.class);
     }
 
 }

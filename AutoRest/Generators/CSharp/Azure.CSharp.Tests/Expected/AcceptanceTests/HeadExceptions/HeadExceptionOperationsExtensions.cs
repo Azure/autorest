@@ -16,6 +16,9 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
     using Microsoft.Rest;
     using Microsoft.Rest.Azure;
 
+    /// <summary>
+    /// Extension methods for HeadExceptionOperations.
+    /// </summary>
     public static partial class HeadExceptionOperationsExtensions
     {
             /// <summary>
@@ -38,7 +41,7 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task Head200Async( this IHeadExceptionOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task Head200Async(this IHeadExceptionOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.Head200WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -63,7 +66,7 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task Head204Async( this IHeadExceptionOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task Head204Async(this IHeadExceptionOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.Head204WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
@@ -88,7 +91,7 @@ namespace Fixtures.Azure.AcceptanceTestsHeadExceptions
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task Head404Async( this IHeadExceptionOperations operations, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task Head404Async(this IHeadExceptionOperations operations, CancellationToken cancellationToken = default(CancellationToken))
             {
                 await operations.Head404WithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false);
             }
