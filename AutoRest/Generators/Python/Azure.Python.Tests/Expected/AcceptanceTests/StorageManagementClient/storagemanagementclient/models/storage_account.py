@@ -60,17 +60,17 @@ class StorageAccount(Resource):
     _required = []
 
     _attribute_map = {
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'ProvisioningState'},
-        'account_type': {'key': 'properties.accountType', 'type': 'AccountType'},
-        'primary_endpoints': {'key': 'properties.primaryEndpoints', 'type': 'Endpoints'},
-        'primary_location': {'key': 'properties.primaryLocation', 'type': 'str'},
-        'status_of_primary': {'key': 'properties.statusOfPrimary', 'type': 'AccountStatus'},
-        'last_geo_failover_time': {'key': 'properties.lastGeoFailoverTime', 'type': 'iso-8601'},
-        'secondary_location': {'key': 'properties.secondaryLocation', 'type': 'str'},
-        'status_of_secondary': {'key': 'properties.statusOfSecondary', 'type': 'AccountStatus'},
-        'creation_time': {'key': 'properties.creationTime', 'type': 'iso-8601'},
-        'custom_domain': {'key': 'properties.customDomain', 'type': 'CustomDomain'},
-        'secondary_endpoints': {'key': 'properties.secondaryEndpoints', 'type': 'Endpoints'},
+        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'ProvisioningState', 'flatten': True},
+        'account_type': {'key': 'properties.accountType', 'type': 'AccountType', 'flatten': True},
+        'primary_endpoints': {'key': 'properties.primaryEndpoints', 'type': 'Endpoints', 'flatten': True},
+        'primary_location': {'key': 'properties.primaryLocation', 'type': 'str', 'flatten': True},
+        'status_of_primary': {'key': 'properties.statusOfPrimary', 'type': 'AccountStatus', 'flatten': True},
+        'last_geo_failover_time': {'key': 'properties.lastGeoFailoverTime', 'type': 'iso-8601', 'flatten': True},
+        'secondary_location': {'key': 'properties.secondaryLocation', 'type': 'str', 'flatten': True},
+        'status_of_secondary': {'key': 'properties.statusOfSecondary', 'type': 'AccountStatus', 'flatten': True},
+        'creation_time': {'key': 'properties.creationTime', 'type': 'iso-8601', 'flatten': True},
+        'custom_domain': {'key': 'properties.customDomain', 'type': 'CustomDomain', 'flatten': True},
+        'secondary_endpoints': {'key': 'properties.secondaryEndpoints', 'type': 'Endpoints', 'flatten': True},
     }
 
     def __init__(self, location, id=None, name=None, type=None, tags=None, provisioning_state=None, account_type=None, primary_endpoints=None, primary_location=None, status_of_primary=None, last_geo_failover_time=None, secondary_location=None, status_of_secondary=None, creation_time=None, custom_domain=None, secondary_endpoints=None):

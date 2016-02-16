@@ -35,8 +35,8 @@ class StorageAccountUpdateParameters(Resource):
     _required = []
 
     _attribute_map = {
-        'account_type': {'key': 'properties.accountType', 'type': 'AccountType'},
-        'custom_domain': {'key': 'properties.customDomain', 'type': 'CustomDomain'},
+        'account_type': {'key': 'properties.accountType', 'type': 'AccountType', 'flatten': True},
+        'custom_domain': {'key': 'properties.customDomain', 'type': 'CustomDomain', 'flatten': True},
     }
 
     def __init__(self, location, id=None, name=None, type=None, tags=None, account_type=None, custom_domain=None):

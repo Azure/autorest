@@ -29,7 +29,7 @@ class StorageAccountCreateParameters(Resource):
     _required = []
 
     _attribute_map = {
-        'account_type': {'key': 'properties.accountType', 'type': 'AccountType'},
+        'account_type': {'key': 'properties.accountType', 'type': 'AccountType', 'flatten': True},
     }
 
     def __init__(self, location, id=None, name=None, type=None, tags=None, account_type=None):

@@ -196,7 +196,7 @@ class Serializer(object):
             for attr, map in attributes.items():
                 attr_name = attr
                 try:
-                    if map.get('flattened'):
+                    if map.get('flatten'):
                         keys = map['key'].split('.')
                     else:
                         keys = [map['key']]
@@ -613,7 +613,7 @@ class Deserializer(object):
             for attr, map in attributes.items():
                 attr_type = map['type']
                 key = map['key']
-                flattened = map.get('flattened')
+                flattened = map.get('flatten')
                 working_data = data
 
                 if flattened:

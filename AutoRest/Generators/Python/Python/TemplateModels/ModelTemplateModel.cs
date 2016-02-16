@@ -276,7 +276,7 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
-        private static string GetPythonSerializationType(IType type)
+        public static string GetPythonSerializationType(IType type)
         {
             Dictionary<KnownPrimaryType, string> typeNameMapping = new Dictionary<KnownPrimaryType, string>()
                         {
@@ -335,7 +335,7 @@ namespace Microsoft.Rest.Generator.Python
             return type.Name;
         }
 
-        public static string InitializeProperty(Property property)
+        public virtual string InitializeProperty(Property property)
         {
             if (property == null || property.Type == null)
             {
