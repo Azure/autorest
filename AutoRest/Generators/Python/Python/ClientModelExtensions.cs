@@ -242,17 +242,18 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
                 throw new ArgumentNullException("type");
             }
 
-            Dictionary<IType, string> typeNameMapping = new Dictionary<IType, string>()
+            Dictionary<KnownPrimaryType, string> typeNameMapping = new Dictionary<KnownPrimaryType, string>()
                         {
-                            { PrimaryType.DateTime, "iso-8601" },
-                            { PrimaryType.DateTimeRfc1123, "rfc-1123" },
-                            { PrimaryType.TimeSpan, "duration" }
+                            { KnownPrimaryType.DateTime, "iso-8601" },
+                            { KnownPrimaryType.DateTimeRfc1123, "rfc-1123" },
+                            { KnownPrimaryType.TimeSpan, "duration" }
                         };
-            if (type is PrimaryType)
+            PrimaryType primaryType = type as PrimaryType;
+            if (primaryType != null)
             {
-                if (typeNameMapping.ContainsKey(type))
+                if (typeNameMapping.ContainsKey(primaryType.Type))
                 {
-                    return typeNameMapping[type];
+                    return typeNameMapping[primaryType.Type];
                 }
                 else
                 {
@@ -264,10 +265,11 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
             if (sequenceType != null)
             {
                 IType innerType = sequenceType.ElementType;
+                PrimaryType innerPrimaryType = innerType as PrimaryType;
                 string innerTypeName;
-                if (typeNameMapping.ContainsKey(innerType))
+                if (innerPrimaryType != null && typeNameMapping.ContainsKey(innerPrimaryType.Type))
                 {
-                    innerTypeName = typeNameMapping[innerType];
+                    innerTypeName = typeNameMapping[innerPrimaryType.Type];
                 }
                 else
                 {
@@ -280,10 +282,11 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
             if (dictType != null)
             {
                 IType innerType = dictType.ValueType;
+                PrimaryType innerPrimaryType = innerType as PrimaryType;
                 string innerTypeName;
-                if (typeNameMapping.ContainsKey(innerType))
+                if (innerPrimaryType != null && typeNameMapping.ContainsKey(innerPrimaryType.Type))
                 {
-                    innerTypeName = typeNameMapping[innerType];
+                    innerTypeName = typeNameMapping[innerPrimaryType.Type];
                 }
                 else
                 {

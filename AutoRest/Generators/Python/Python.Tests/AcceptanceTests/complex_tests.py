@@ -293,12 +293,12 @@ class ComplexTests(unittest.TestCase):
             iswild = True,
             location = "alaska",
             species = "king",
-            siblings = [Shark(isodate.parse_datetime("2012-01-05T01:00:00Z"), 20,
+            siblings = [Shark(20, isodate.parse_datetime("2012-01-05T01:00:00Z"),
                               age=6, species="predator"),
-                        Sawshark(isodate.parse_datetime("1900-01-05T01:00:00Z"), 10,
+                        Sawshark(10, isodate.parse_datetime("1900-01-05T01:00:00Z"),
                                  age=105, species="dangerous",
                                  picture=bytearray([255, 255, 255, 255, 254])),
-                        Goblinshark(isodate.parse_datetime("2015-08-08T00:00:00Z"), 30,
+                        Goblinshark(30, isodate.parse_datetime("2015-08-08T00:00:00Z"),
                                     age=1, species="scary", jawsize=5)]
             )
         client.polymorphism.put_valid(request)
@@ -308,9 +308,9 @@ class ComplexTests(unittest.TestCase):
             location="alaska",
             species="king",
             siblings = [
-                Shark(isodate.parse_datetime("2012-01-05T01:00:00Z"), 20,
+                Shark(20, isodate.parse_datetime("2012-01-05T01:00:00Z"),
                       age=6, species="predator"),
-                Sawshark(None, 10, age=105, species="dangerous",
+                Sawshark(10, None, age=105, species="dangerous",
                          picture=bytearray([255, 255, 255, 255, 254]))]
             )
 

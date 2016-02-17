@@ -18,7 +18,7 @@ class Goblinshark(Shark):
     :param str species:
     :param float length:
     :param list siblings:
-    :param str fishtype: Polymorhpic Discriminator
+    :param str fishtype: Polymorphic Discriminator
     :param int age:
     :param datetime birthday:
     :param int jawsize:
@@ -30,7 +30,7 @@ class Goblinshark(Shark):
         'jawsize': {'key': 'jawsize', 'type': 'int'},
     }
 
-    def __init__(self, birthday, length, species=None, siblings=None, age=None, jawsize=None):
-        super(Goblinshark, self).__init__(birthday, length, species=species, siblings=siblings, age=age)
+    def __init__(self, length, birthday, species=None, siblings=None, age=None, jawsize=None):
+        super(Goblinshark, self).__init__(species=species, length=length, siblings=siblings, age=age, birthday=birthday)
         self.jawsize = jawsize
         self.fishtype = 'goblin'

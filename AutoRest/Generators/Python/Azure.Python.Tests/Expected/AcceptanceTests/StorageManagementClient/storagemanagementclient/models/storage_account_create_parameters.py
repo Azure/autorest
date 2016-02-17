@@ -33,5 +33,5 @@ class StorageAccountCreateParameters(Resource):
     }
 
     def __init__(self, location, id=None, name=None, type=None, tags=None, account_type=None):
-        super(StorageAccountCreateParameters, self).__init__(location, id=id, name=name, type=type, tags=tags)
+        super(StorageAccountCreateParameters, self).__init__(id=id, name=name, type=type, location=location, tags=tags)
         self.account_type = account_type

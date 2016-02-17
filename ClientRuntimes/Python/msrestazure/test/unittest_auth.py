@@ -112,7 +112,7 @@ class TestInteractiveCredentials(unittest.TestCase):
 
         mix = AADMixin()
         mix.cred_store = "store_name"
-        mix.id = "client_id"
+        mix.store_key = "client_id"
         mix._default_token_cache({'token_type':'1', 'access_token':'2'})
 
         mock_keyring.set_password.assert_called_with(
@@ -124,7 +124,7 @@ class TestInteractiveCredentials(unittest.TestCase):
 
         mix = AADMixin()
         mix.cred_store = "store_name"
-        mix.id = "client_id"
+        mix.store_key = "client_id"
         mix.clear_cached_token()
 
         mock_keyring.delete_password.assert_called_with(
@@ -135,7 +135,8 @@ class TestInteractiveCredentials(unittest.TestCase):
 
         mix = AADMixin()
         mix.cred_store = "store_name"
-        mix.id = "client_id"
+        mix.store_key = "client_id"
+        mix.signed_session = mock.Mock()
 
         mock_keyring.get_password.return_value = None
 
@@ -151,23 +152,19 @@ class TestInteractiveCredentials(unittest.TestCase):
         mix._retrieve_stored_token()
         mock_keyring.get_password.assert_called_with("store_name", "client_id")
 
-    def test_credentials_retrieve_session(self):
+    @mock.patch.object(AADMixin, '_retrieve_stored_token')
+    def test_credentials_retrieve_session(self, mock_retrieve):
 
-        creds = mock.create_autospec(InteractiveCredentials)
-        creds._retrieve_stored_token.return_value = {
-            'expires_at':'1',
-            'expires_in':'2',
-            'refresh_token':"test"}
+        creds = InteractiveCredentials.retrieve_session("client_id", "redirect")
+        mock_retrieve.asset_called_with(mock.ANY)
 
-        token = InteractiveCredentials.retrieve_session(creds)
-        self.assertEqual(token, creds._retrieve_stored_token.return_value)
+        mock_retrieve.side_effect = ValueError("No stored token")
+        with self.assertRaises(ValueError):
+            InteractiveCredentials.retrieve_session("client_id", "redirect")
 
-        creds._retrieve_stored_token.side_effect=ValueError("No stored token")
-        self.assertIsNone(InteractiveCredentials.retrieve_session(creds))
-
-        creds._retrieve_stored_token.side_effect=None
-        creds.signed_session.side_effect=TokenExpiredError("Token expired")
-        self.assertIsNone(InteractiveCredentials.retrieve_session(creds))
+        mock_retrieve.side_effect = TokenExpiredError("Token expired")
+        with self.assertRaises(TokenExpiredError):
+            InteractiveCredentials.retrieve_session("client_id", "redirect")
 
     def test_credentials_auth_url(self):
 
@@ -225,6 +222,7 @@ class TestInteractiveCredentials(unittest.TestCase):
     def test_credentials_signed_session(self, mock_requests):
 
         creds = mock.create_autospec(InteractiveCredentials)
+        creds._parse_token = lambda: AADMixin._parse_token(creds)
         creds.id = 'client_id'
         creds.token_uri = "token_uri"
         creds.resource = "resource"
@@ -233,7 +231,7 @@ class TestInteractiveCredentials(unittest.TestCase):
                        'expires_in':'2',
                        'refresh_token':"test"}
 
-        InteractiveCredentials.signed_session(creds)
+        AADMixin.signed_session(creds)
         mock_requests.OAuth2Session.assert_called_with(
             'client_id',
             token=creds.token,

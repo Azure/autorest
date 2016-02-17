@@ -18,7 +18,7 @@ class Salmon(Fish):
     :param str species:
     :param float length:
     :param list siblings:
-    :param str fishtype: Polymorhpic Discriminator
+    :param str fishtype: Polymorphic Discriminator
     :param str location:
     :param bool iswild:
     """
@@ -31,7 +31,7 @@ class Salmon(Fish):
     }
 
     def __init__(self, length, species=None, siblings=None, location=None, iswild=None):
-        super(Salmon, self).__init__(length, species=species, siblings=siblings)
+        super(Salmon, self).__init__(species=species, length=length, siblings=siblings)
         self.location = location
         self.iswild = iswild
         self.fishtype = 'salmon'
