@@ -52,6 +52,9 @@
     "x-ms-paths": {
       "$ref": "#/definitions/xmsPaths"
     },
+    "x-ms-parameterized-host": {
+      "$ref": "#definitions/xmsParameterizedHost"
+    },
     "definitions": {
       "$ref": "#/definitions/definitions"
     },
@@ -1739,6 +1742,32 @@
     },
     "xmsCodeGenerationSettings": {
       "additionalProperties": true
+    },
+    "xmsHostParametersList": {
+      "type": "array",
+      "description": "The parameters used in conjunction with x-ms-parameterized-host.",
+      "additionalItems": false,
+      "items": {
+        "$ref": "#/definitions/nonBodyParameter"
+      },
+      "uniqueItems": true
+    },
+    "xmsParameterizedHost": {
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {
+        "^x-(?!ms-).*$": {
+          "$ref": "#/definitions/vendorExtension"
+        }
+      },
+      "properties": {
+        "hostTemplate": {
+          "type": "string"
+        },
+        "parameters": {
+          "$ref": "#/definitions/xmsHostParametersList"
+        }
+      }
     }
   }
 }
