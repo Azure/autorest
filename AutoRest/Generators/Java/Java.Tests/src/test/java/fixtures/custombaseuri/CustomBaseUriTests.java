@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import fixtures.custombaseuri.models.ErrorException;
+import java.net.UnknownHostException;
 
 public class CustomBaseUriTests {
     private static AutoRestParameterizedHostTestClient client;
@@ -27,7 +27,7 @@ public class CustomBaseUriTests {
             client.getPathsOperations().getEmpty("bad");
             Assert.assertTrue(false);
         }
-        catch (ErrorException e) {
+        catch (UnknownHostException e) {
             Assert.assertTrue(true);
         }
     }
@@ -39,7 +39,7 @@ public class CustomBaseUriTests {
             client.getPathsOperations().getEmpty("local");
             Assert.assertTrue(false);
         }
-        catch (ErrorException e) {
+        catch (UnknownHostException e) {
             Assert.assertTrue(true);
         }
         finally {

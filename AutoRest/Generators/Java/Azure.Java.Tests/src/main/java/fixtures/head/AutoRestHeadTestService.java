@@ -11,6 +11,7 @@
 package fixtures.head;
 
 import com.microsoft.azure.AzureClient;
+import com.microsoft.rest.AutoRestBaseUrl;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.serializer.JacksonMapperAdapter;
 import java.util.List;
@@ -22,10 +23,11 @@ import okhttp3.logging.HttpLoggingInterceptor.Level;
  */
 public interface AutoRestHeadTestService {
     /**
-     * Gets the URI used as the base for all cloud service requests.
-     * @return The BaseUri value.
+     * Gets the URL used as the base for all cloud service requests.
+     *
+     * @return the BaseUrl object.
      */
-    String getBaseUri();
+    AutoRestBaseUrl getBaseUrl();
 
     /**
      * Gets the list of interceptors the OkHttp client will execute.

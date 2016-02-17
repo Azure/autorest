@@ -59,7 +59,9 @@ public final class PathsOperationsImpl implements PathsOperations {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.getEmpty(accountName, this.client.getHost());
+        client.getBaseUrl().set("{accountName}", accountName);
+        client.getBaseUrl().set("{host}", this.client.getHost());
+        Call<ResponseBody> call = service.getEmpty();
         return getEmptyDelegate(call.execute());
     }
 
@@ -79,7 +81,9 @@ public final class PathsOperationsImpl implements PathsOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.getEmpty(accountName, this.client.getHost());
+        client.getBaseUrl().set("{accountName}", accountName);
+        client.getBaseUrl().set("{host}", this.client.getHost());
+        Call<ResponseBody> call = service.getEmpty();
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

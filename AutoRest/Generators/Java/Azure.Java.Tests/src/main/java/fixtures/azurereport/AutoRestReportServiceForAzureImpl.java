@@ -15,6 +15,7 @@ import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.azure.CustomHeaderInterceptor;
+import com.microsoft.rest.AutoRestBaseUrl;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
@@ -36,17 +37,18 @@ import retrofit2.Retrofit;
 public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient implements AutoRestReportServiceForAzure {
     /** The Retrofit service to perform REST calls. */
     private AutoRestReportServiceForAzureService service;
-    /** The URI used as the base for all cloud service requests. */
-    private final String baseUri;
+    /** The URL used as the base for all cloud service requests. */
+    private final AutoRestBaseUrl baseUrl;
     /** the {@link AzureClient} used for long running operations. */
     private AzureClient azureClient;
 
     /**
-     * Gets the URI used as the base for all cloud service requests.
-     * @return The BaseUri value.
+     * Gets the URL used as the base for all cloud service requests.
+     *
+     * @return The BaseUrl value.
      */
-    public String getBaseUri() {
-        return this.baseUri;
+    public AutoRestBaseUrl getBaseUrl() {
+        return this.baseUrl;
     }
 
     /**
@@ -142,10 +144,10 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
     /**
      * Initializes an instance of AutoRestReportServiceForAzure client.
      *
-     * @param baseUri the base URI of the host
+     * @param baseUrl the base URL of the host
      */
-    public AutoRestReportServiceForAzureImpl(String baseUri) {
-        this(baseUri, null);
+    public AutoRestReportServiceForAzureImpl(String baseUrl) {
+        this(baseUrl, null);
     }
 
     /**
@@ -160,12 +162,12 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
     /**
      * Initializes an instance of AutoRestReportServiceForAzure client.
      *
-     * @param baseUri the base URI of the host
+     * @param baseUrl the base URL of the host
      * @param credentials the management credentials for Azure
      */
-    public AutoRestReportServiceForAzureImpl(String baseUri, ServiceClientCredentials credentials) {
+    public AutoRestReportServiceForAzureImpl(String baseUrl, ServiceClientCredentials credentials) {
         super();
-        this.baseUri = baseUri;
+        this.baseUrl = new AutoRestBaseUrl(baseUrl);
         this.credentials = credentials;
         initialize();
     }
@@ -173,14 +175,14 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
     /**
      * Initializes an instance of AutoRestReportServiceForAzure client.
      *
-     * @param baseUri the base URI of the host
+     * @param baseUrl the base URL of the host
      * @param credentials the management credentials for Azure
      * @param clientBuilder the builder for building up an {@link OkHttpClient}
      * @param retrofitBuilder the builder for building up a {@link Retrofit}
      */
-    public AutoRestReportServiceForAzureImpl(String baseUri, ServiceClientCredentials credentials, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
+    public AutoRestReportServiceForAzureImpl(String baseUrl, ServiceClientCredentials credentials, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
         super(clientBuilder, retrofitBuilder);
-        this.baseUri = baseUri;
+        this.baseUrl = new AutoRestBaseUrl(baseUrl);
         this.credentials = credentials;
         initialize();
     }
@@ -197,7 +199,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
         super.initialize();
         this.azureClient = new AzureClient(clientBuilder, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
-        this.retrofitBuilder.baseUrl(baseUri);
+        this.retrofitBuilder.baseUrl(baseUrl);
         initializeService();
     }
 
