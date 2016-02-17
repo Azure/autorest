@@ -25,9 +25,12 @@ namespace Microsoft.Rest.Generator.Azure.Python
 
         public override string InitializeProperty(Property property)
         {
-            if (Azure.AzureExtensions.IsAzureResource(this) && property.SerializedName.Contains("."))
+            if (Azure.AzureExtensions.IsAzureResource(this) && property.SerializedName.Contains("properties."))
             {
-                return string.Format(CultureInfo.InvariantCulture, "'{0}': {{'key': '{1}', 'type': '{2}', 'flatten': True}},", property.Name, property.SerializedName, GetPythonSerializationType(property.Type));
+                return string.Format(CultureInfo.InvariantCulture,
+                    "'{0}': {{'key': '{1}', 'type': '{2}', 'flatten': True}},",
+                    property.Name, property.SerializedName,
+                    ClientModelExtensions.GetPythonSerializationType(property.Type));
             }
             return base.InitializeProperty(property);
         }

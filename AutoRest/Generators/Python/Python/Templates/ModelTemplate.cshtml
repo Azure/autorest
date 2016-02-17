@@ -42,7 +42,7 @@ else
 {
 @:    """@(Model.Name)
 }
-@if (Model.Properties.Any())
+@if (Model.ComposedProperties.Any())
 {
 @EmptyLine
   @foreach (var property in Model.ComposedProperties)

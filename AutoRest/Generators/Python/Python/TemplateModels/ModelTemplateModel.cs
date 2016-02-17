@@ -165,8 +165,6 @@ namespace Microsoft.Rest.Generator.Python
 
         public virtual string SuperParameterDeclaration()
         {
-            List<string> declarations = new List<string>();
-            List<string> requiredDeclarations = new List<string>();
             List<string> combinedDeclarations = new List<string>();
 
             foreach (var property in ComposedProperties.Except(Properties))
@@ -175,29 +173,11 @@ namespace Microsoft.Rest.Generator.Python
                     if (property.Name == this.BasePolymorphicDiscriminator)
                         continue;
 
-                if (property.IsRequired)
-                {
-                    requiredDeclarations.Add(property.Name);
-                }
-                else
-                {
-                    declarations.Add(string.Format(CultureInfo.InvariantCulture, "{0}={0}", property.Name));
-                }
+                combinedDeclarations.Add(string.Format(CultureInfo.InvariantCulture, "{0}={0}", property.Name));
             }
-
-            if (!requiredDeclarations.IsNullOrEmpty())
-            {
-                requiredDeclarations.Sort();
-                combinedDeclarations.Add(string.Join(", ", requiredDeclarations));
-            }
-            if (!declarations.IsNullOrEmpty())
-            {
-                combinedDeclarations.Add(string.Join(", ", declarations));
-            }
-            var declaration = string.Join(", ", declarations);
-
             return string.Join(", ", combinedDeclarations);
         }
+
         public virtual string MethodParameterDeclaration()
         {
             List<string> declarations = new List<string>();
@@ -220,12 +200,11 @@ namespace Microsoft.Rest.Generator.Python
                 }
             }
 
-            if (!requiredDeclarations.IsNullOrEmpty())
+            if (requiredDeclarations.Any())
             {
-                requiredDeclarations.Sort();
                 combinedDeclarations.Add(string.Join(", ", requiredDeclarations));
             }
-            if (!declarations.IsNullOrEmpty())
+            if (declarations.Any())
             {
                 combinedDeclarations.Add(string.Join(", ", declarations));
             }
@@ -276,65 +255,6 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
-        public static string GetPythonSerializationType(IType type)
-        {
-            Dictionary<KnownPrimaryType, string> typeNameMapping = new Dictionary<KnownPrimaryType, string>()
-                        {
-                            { KnownPrimaryType.DateTime, "iso-8601" },
-                            { KnownPrimaryType.DateTimeRfc1123, "rfc-1123" },
-                            { KnownPrimaryType.TimeSpan, "duration" }
-                        };
-            PrimaryType primaryType = type as PrimaryType;
-            if (primaryType != null)
-            {
-                if (typeNameMapping.ContainsKey(primaryType.Type))
-                {
-                    return typeNameMapping[primaryType.Type];
-                }
-                else 
-                {
-                    return type.Name;
-                }
-            }
-            
-            SequenceType sequenceType = type as SequenceType;
-            if (sequenceType != null)
-            {
-                IType innerType = sequenceType.ElementType;
-                PrimaryType innerPrimaryType = innerType as PrimaryType;
-                string innerTypeName;
-                if (innerPrimaryType != null && typeNameMapping.ContainsKey(innerPrimaryType.Type))
-                {
-                    innerTypeName = typeNameMapping[innerPrimaryType.Type];
-                }
-                else
-                {
-                    innerTypeName = innerType.Name;
-                }
-                return "[" + innerTypeName +"]";
-            }
-
-            DictionaryType dictType = type as DictionaryType;
-            if (dictType != null)
-            {
-                IType innerType = dictType.ValueType;
-                PrimaryType innerPrimaryType = innerType as PrimaryType;
-                string innerTypeName;
-                if (innerPrimaryType != null && typeNameMapping.ContainsKey(innerPrimaryType.Type))
-                {
-                    innerTypeName = typeNameMapping[innerPrimaryType.Type];
-                }
-                else
-                {
-                    innerTypeName = innerType.Name;
-                }
-                return "{" + innerTypeName + "}";
-            }
-
-            // CompositeType or EnumType
-            return type.Name;
-        }
-
         public virtual string InitializeProperty(Property property)
         {
             if (property == null || property.Type == null)
@@ -343,7 +263,10 @@ namespace Microsoft.Rest.Generator.Python
             }
 
             //'id':{'key':'id', 'type':'str'},
-            return string.Format(CultureInfo.InvariantCulture, "'{0}': {{'key': '{1}', 'type': '{2}'}},", property.Name, property.SerializedName, GetPythonSerializationType(property.Type));
+            return string.Format(CultureInfo.InvariantCulture,
+                "'{0}': {{'key': '{1}', 'type': '{2}'}},",
+                property.Name, property.SerializedName,
+                ClientModelExtensions.GetPythonSerializationType(property.Type));
         }
 
         public string InitializeProperty(string objectName, Property property)

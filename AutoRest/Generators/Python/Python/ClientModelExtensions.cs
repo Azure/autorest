@@ -234,5 +234,66 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
                 return null;
             }
         }
+
+        public static string GetPythonSerializationType(IType type)
+        {
+            if (type == null)
+            {
+                throw new ArgumentNullException("type");
+            }
+
+            Dictionary<IType, string> typeNameMapping = new Dictionary<IType, string>()
+                        {
+                            { PrimaryType.DateTime, "iso-8601" },
+                            { PrimaryType.DateTimeRfc1123, "rfc-1123" },
+                            { PrimaryType.TimeSpan, "duration" }
+                        };
+            if (type is PrimaryType)
+            {
+                if (typeNameMapping.ContainsKey(type))
+                {
+                    return typeNameMapping[type];
+                }
+                else
+                {
+                    return type.Name;
+                }
+            }
+
+            SequenceType sequenceType = type as SequenceType;
+            if (sequenceType != null)
+            {
+                IType innerType = sequenceType.ElementType;
+                string innerTypeName;
+                if (typeNameMapping.ContainsKey(innerType))
+                {
+                    innerTypeName = typeNameMapping[innerType];
+                }
+                else
+                {
+                    innerTypeName = innerType.Name;
+                }
+                return "[" + innerTypeName + "]";
+            }
+
+            DictionaryType dictType = type as DictionaryType;
+            if (dictType != null)
+            {
+                IType innerType = dictType.ValueType;
+                string innerTypeName;
+                if (typeNameMapping.ContainsKey(innerType))
+                {
+                    innerTypeName = typeNameMapping[innerType];
+                }
+                else
+                {
+                    innerTypeName = innerType.Name;
+                }
+                return "{" + innerTypeName + "}";
+            }
+
+            // CompositeType or EnumType
+            return type.Name;
+        }
     }
 }

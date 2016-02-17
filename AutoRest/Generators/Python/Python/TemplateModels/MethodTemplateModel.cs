@@ -556,7 +556,7 @@ namespace Microsoft.Rest.Generator.Python
                     foreach (var mapping in transformation.ParameterMappings)
                     {
                         var mappedParams = composite.Properties.Where(x => x.Name == mapping.InputParameter.Name);
-                        if (!mappedParams.IsNullOrEmpty())
+                        if (mappedParams.Any())
                         {
                             var param = mappedParams.First();
                             combinedParams.Add(string.Format(CultureInfo.InvariantCulture, "{0}={0}", param.Name));
@@ -564,9 +564,9 @@ namespace Microsoft.Rest.Generator.Python
                     }
 
                     builder.AppendLine("{0} = models.{1}({2})",
-                    transformation.OutputParameter.Name,
-                    transformation.OutputParameter.Type.Name,
-                    string.Join(", ", combinedParams));
+                        transformation.OutputParameter.Name,
+                        transformation.OutputParameter.Type.Name,
+                        string.Join(", ", combinedParams));
                 }
                 else
                 {

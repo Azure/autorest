@@ -14,6 +14,13 @@ from .shark import Shark
 
 class Cookiecuttershark(Shark):
     """Cookiecuttershark
+
+    :param str species:
+    :param float length:
+    :param list siblings:
+    :param str fishtype: Polymorhpic Discriminator
+    :param int age:
+    :param datetime birthday:
     """
 
     _required = []
