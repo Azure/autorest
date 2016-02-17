@@ -1765,7 +1765,7 @@
           "type": "string"
         },
         "parameters": {
-          "$ref": "#/definitions/xmsHostParametersList"
+          "$ref": "#/definitions/parametersList"
         }
       }
     }
