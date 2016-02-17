@@ -50,6 +50,7 @@ using System.Reflection;
 using Fixtures.PetstoreV2;
 using Fixtures.AcceptanceTestsCompositeBoolIntClient;
 using Fixtures.AcceptanceTestsCustomBaseUri;
+using System.Net.Http;
 
 namespace Microsoft.Rest.Generator.CSharp.Tests
 {
@@ -1896,7 +1897,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             using (var client = new AutoRestParameterizedHostTestClient())
             {
                 // use a bad acct name
-                Assert.Throws<Fixtures.AcceptanceTestsCustomBaseUri.Models.ErrorException>(() =>
+                Assert.Throws<HttpRequestException>(() =>
                     client.Paths.GetEmpty("bad"));
 
                 // pass in null
@@ -1904,7 +1905,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
 
                 // set the global parameter incorrectly
                 client.Host = "badSuffix";
-                Assert.Throws<Fixtures.AcceptanceTestsCustomBaseUri.Models.ErrorException>(() =>
+                Assert.Throws<HttpRequestException>(() =>
                     client.Paths.GetEmpty("local"));
             }
         }
