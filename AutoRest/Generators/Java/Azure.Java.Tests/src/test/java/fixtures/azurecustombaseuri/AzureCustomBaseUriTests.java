@@ -6,11 +6,11 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.net.UnknownHostException;
 import java.util.UUID;
 
 import fixtures.custombaseuri.AutoRestParameterizedHostTestClient;
 import fixtures.custombaseuri.AutoRestParameterizedHostTestClientImpl;
-import fixtures.custombaseuri.models.ErrorException;
 
 public class AzureCustomBaseUriTests {
     private static AutoRestParameterizedHostTestClient client;
@@ -33,7 +33,7 @@ public class AzureCustomBaseUriTests {
             client.getPathsOperations().getEmpty("bad");
             Assert.assertTrue(false);
         }
-        catch (ErrorException e) {
+        catch (UnknownHostException e) {
             Assert.assertTrue(true);
         }
     }
@@ -45,7 +45,7 @@ public class AzureCustomBaseUriTests {
             client.getPathsOperations().getEmpty("local");
             Assert.assertTrue(false);
         }
-        catch (ErrorException e) {
+        catch (UnknownHostException e) {
             Assert.assertTrue(true);
         }
         finally {

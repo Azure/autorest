@@ -82,6 +82,7 @@ namespace Microsoft.Rest.Generator
                             {
                                 parameter.ClientProperty = serviceClient.Properties.Single(p => p.SerializedName.Equals(parameter.SerializedName));
                             }
+                            parameter.Extensions["hostParameter"] = true;
 
                             foreach (var method in serviceClient.Methods)
                             {

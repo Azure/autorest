@@ -19,7 +19,6 @@ import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
-import retrofit2.http.Path;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -33,7 +32,7 @@ public interface PathsOperations {
     interface PathsService {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("customuri")
-        Call<ResponseBody> getEmpty(@Path("accountName") String accountName, @Path("host") String host, @Header("accept-language") String acceptLanguage);
+        Call<ResponseBody> getEmpty(@Header("accept-language") String acceptLanguage);
 
     }
     /**
