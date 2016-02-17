@@ -422,7 +422,7 @@ namespace Microsoft.Rest.Generator.CSharp
 
                     if(queryParameter.SkipUrlEncoding())
                     {
-                        replaceString = replaceString = "_queryParameters.Add(string.Format(\"{0}={{0}}\", {1}));";
+                        replaceString = "_queryParameters.Add(string.Format(\"{0}={{0}}\", {1}));";
                     }
 
                     builder.AppendLine(replaceString,
