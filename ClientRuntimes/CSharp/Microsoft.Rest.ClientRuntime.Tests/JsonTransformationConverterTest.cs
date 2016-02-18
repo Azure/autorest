@@ -17,7 +17,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         public void TestResourceSerialization()
         {
             var sampleJson = @"{
-  ""location"": ""EastUS"",
+  ""Location"": ""EastUS"",
   ""tags"": {
     ""tag1"": ""value1""
   },
@@ -101,7 +101,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             string json = JsonConvert.SerializeObject(sampleResource, serializeSettings);
             Assert.Equal(@"{
   ""dType"": ""SampleResource"",
-  ""location"": ""EastUS"",
+  ""Location"": ""EastUS"",
   ""tags"": {
     ""tag1"": ""value1""
   },
@@ -134,7 +134,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
             serializeSettings.Converters.Add(new PolymorphicSerializeJsonConverter<SampleResourceChild>("dType"));
             string json = JsonConvert.SerializeObject(sampleResource, serializeSettings);
             Assert.Equal(@"{
-  ""location"": ""EastUS"",
+  ""Location"": ""EastUS"",
   ""tags"": {
     ""tag1"": ""value1""
   }
@@ -159,7 +159,7 @@ namespace Microsoft.Rest.ClientRuntime.Azure.Test
         public void TestProvisioningStateDeserialization()
         {
             var expected = @"{
-                              ""location"": ""EastUS"",
+                              ""Location"": ""EastUS"",
                               ""tags"": {
                                 ""tag1"": ""value1""
                               },

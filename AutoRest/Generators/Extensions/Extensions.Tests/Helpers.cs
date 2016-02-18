@@ -77,7 +77,7 @@ namespace Microsoft.Rest.Generator.Tests
             {
                 return false;
             }
-            return text.Trim().Equals(textToMatch.Trim(), StringComparison.InvariantCulture);
+            return text.Trim().Equals(textToMatch.Trim(), StringComparison.Ordinal);
         }
     }
 }

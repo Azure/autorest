@@ -28,13 +28,13 @@ namespace Microsoft.Rest.Azure
         /// <summary>
         /// Gets the type of the resource.
         /// </summary>
-        [JsonProperty("type")]
+        [JsonProperty]
         public string Type { get; private set; }
 
         /// <summary>
         /// Required. Gets or sets the location of the resource.
         /// </summary>
-        [JsonProperty("location")]
+        [JsonProperty]
         public string Location { get; set; }
 
         /// <summary>
