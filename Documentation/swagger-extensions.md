@@ -27,6 +27,7 @@ The following documents describes AutoRest specific vendor extensions for [Swagg
 **Parent element**: [Info Object](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md#infoObject)
 
 **Schema**: 
+
 Field Name | Type | Description
 ---|:---:|---
 .*| `string` or `bool` | **Required**. Field name should be a valid autorest.exe parameter. Value should be a valid string value or boolean for flag parameters
