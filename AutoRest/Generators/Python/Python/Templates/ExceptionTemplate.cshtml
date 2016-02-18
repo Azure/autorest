@@ -16,7 +16,7 @@ from msrest.exceptions import (
     AuthenticationError,
     HttpOperationError,
 )
-@if (Model.SupportsAzure)
+@if (Model.NeedsExtraImport)
 {
 @EmptyLine
 <text>

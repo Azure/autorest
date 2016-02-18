@@ -103,7 +103,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
             }
         }
 
-        public override bool SupportsAzure
+        public override bool NeedsExtraImport
         {
             get
             {
