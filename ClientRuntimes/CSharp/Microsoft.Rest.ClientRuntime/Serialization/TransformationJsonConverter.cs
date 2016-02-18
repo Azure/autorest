@@ -80,7 +80,8 @@ namespace Microsoft.Rest.Serialization
 
                     if (parentPath.Length > 0)
                     {
-                        propertyValueToken = jsonObject.SelectToken(string.Join(".", parentPath), false);
+                        string jsonPath = string.Concat(parentPath.Select(p => $"['{p}']"));
+                        propertyValueToken = jsonObject.SelectToken(jsonPath, false);
                         if (propertyValueToken != null)
                         {
                             propertyValueToken = propertyValueToken[propertyName];
