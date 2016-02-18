@@ -49,13 +49,6 @@ except NameError:
     basestring = str
 
 
-def get_heirarchy(cls):
-    parents = list(cls.__bases__)
-    if parents:
-        parents.extend(get_heirarchy(parents[-1]))
-    return parents
-
-
 class Model(object):
     """Mixin for all client request body/response body models to support
     serialization and deserialization.
@@ -87,20 +80,16 @@ class Model(object):
     @classmethod
     def _get_attribute_map(cls):
         attr = '_attribute_map'
-        cls_refs = [cls]
-        cls_refs.extend(get_heirarchy(cls))
         map = {}
-        for p in reversed(cls_refs):
+        for p in reversed(cls.__mro__):
             map.update(p.__dict__.get(attr, {}))
         return map
 
     @classmethod
     def _get_required_attrs(cls):
         attr = '_required'
-        cls_refs = [cls]
-        cls_refs.extend(get_heirarchy(cls))
         map = []
-        for p in reversed(cls_refs):
+        for p in reversed(cls.__mro__):
             if hasattr(p, attr):
                 map += p.__dict__[attr]
         return map
@@ -684,7 +673,7 @@ class Deserializer(object):
         return data
 
     def _instantiate_model(self, response, attrs):
-        """Instantiate a response model passing in deserializaed args.
+        """Instantiate a response model passing in deserialized args.
 
         :param response: The response model class.
         :param d_attrs: The deserialized response attributes.

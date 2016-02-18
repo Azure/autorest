@@ -234,6 +234,8 @@ class UserPassCredentials(OAuthTokenAuthentication, AADMixin):
       is 'https://management.core.windows.net/'.
     - verify (bool): Verify secure connection, default is 'True'.
     - keyring (str): Name of local token cache, default is 'AzureAAD'.
+    - cached (bool): If true, will not attempt to collect a token,
+      which can then be populated later from a cached token.
 
     :param str username: Account username.
     :param str password: Account password.
@@ -256,7 +258,7 @@ class UserPassCredentials(OAuthTokenAuthentication, AADMixin):
         self.secret = secret
         self.client = LegacyApplicationClient(client_id=self.id)
         if not kwargs.get('cached'):
-            self.get_token()
+            self.set_token()
 
     @classmethod
     def retrieve_session(cls, username, client_id=None):
@@ -274,7 +276,7 @@ class UserPassCredentials(OAuthTokenAuthentication, AADMixin):
         """
         return oauth.OAuth2Session(client=self.client)
 
-    def get_token(self):
+    def set_token(self):
         """Get token using Username/Password credentials.
 
         :raises: AuthenticationError if credentials invalid, or call fails.
@@ -309,6 +311,8 @@ class ServicePrincipalCredentials(OAuthTokenAuthentication, AADMixin):
       is 'https://management.core.windows.net/'.
     - verify (bool): Verify secure connection, default is 'True'.
     - keyring (str): Name of local token cache, default is 'AzureAAD'.
+    - cached (bool): If true, will not attempt to collect a token,
+      which can then be populated later from a cached token.
 
     :param str client_id: Client ID.
     :param str secret: Client secret.
@@ -320,7 +324,7 @@ class ServicePrincipalCredentials(OAuthTokenAuthentication, AADMixin):
         self.secret = secret
         self.client = BackendApplicationClient(self.id)
         if not kwargs.get('cached'):
-            self.get_token()
+            self.set_token()
 
     @classmethod
     def retrieve_session(cls, client_id):
@@ -338,7 +342,7 @@ class ServicePrincipalCredentials(OAuthTokenAuthentication, AADMixin):
         """
         return oauth.OAuth2Session(self.id, client=self.client)
 
-    def get_token(self):
+    def set_token(self):
         """Get token using Client ID/Secret credentials.
 
         :raises: AuthenticationError if credentials invalid, or call fails.
@@ -370,6 +374,8 @@ class InteractiveCredentials(OAuthTokenAuthentication, AADMixin):
       is 'https://management.core.windows.net/'.
     - verify (bool): Verify secure connection, default is 'True'.
     - keyring (str): Name of local token cache, default is 'AzureAAD'.
+    - cached (bool): If true, will not attempt to collect a token,
+      which can then be populated later from a cached token.
 
     :param str client_id: Client ID.
     :param str redirect: Redirect URL.
@@ -381,7 +387,7 @@ class InteractiveCredentials(OAuthTokenAuthentication, AADMixin):
 
         self.redirect = redirect
         if not kwargs.get('cached'):
-            self.get_token()
+            self.set_token()
 
     @classmethod
     def retrieve_session(cls, client_id, redirect):
@@ -420,7 +426,7 @@ class InteractiveCredentials(OAuthTokenAuthentication, AADMixin):
                                                     **additional_args)
         return auth_url, state
 
-    def get_token(self, response_url):
+    def set_token(self, response_url):
         """Get token using Authorization Code from redirected URL.
 
         :param str response_url: The full redirected URL from successful

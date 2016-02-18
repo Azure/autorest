@@ -202,7 +202,7 @@ class TestInteractiveCredentials(unittest.TestCase):
         creds._check_state.return_value = True
         creds.verify = True
 
-        InteractiveCredentials.get_token(creds, "response")
+        InteractiveCredentials.set_token(creds, "response")
         self.assertEqual(creds.token, session.fetch_token.return_value)
         session.fetch_token.assert_called_with(
             "token_uri",
@@ -211,12 +211,12 @@ class TestInteractiveCredentials(unittest.TestCase):
 
         creds._check_state.side_effect = ValueError("failed")
         with self.assertRaises(ValueError):
-            InteractiveCredentials.get_token(creds, "response")
+            InteractiveCredentials.set_token(creds, "response")
 
         creds._check_state.side_effect = None
         session.fetch_token.side_effect = oauthlib.oauth2.OAuth2Error
         with self.assertRaises(AuthenticationError):
-            InteractiveCredentials.get_token(creds, "response")
+            InteractiveCredentials.set_token(creds, "response")
 
     @mock.patch('msrestazure.azure_active_directory.oauth')
     def test_credentials_signed_session(self, mock_requests):
@@ -255,7 +255,7 @@ class TestInteractiveCredentials(unittest.TestCase):
         creds.secret = 'secret'
         creds.resource = 'resource'
 
-        ServicePrincipalCredentials.get_token(creds)
+        ServicePrincipalCredentials.set_token(creds)
         self.assertEqual(creds.token, session.fetch_token.return_value)
         session.fetch_token.assert_called_with(
             "token_uri", client_id=123, client_secret='secret',
@@ -265,7 +265,7 @@ class TestInteractiveCredentials(unittest.TestCase):
         session.fetch_token.side_effect = oauthlib.oauth2.OAuth2Error
 
         with self.assertRaises(AuthenticationError):
-            ServicePrincipalCredentials.get_token(creds)
+            ServicePrincipalCredentials.set_token(creds)
 
         session = mock.create_autospec(OAuth2Session)
         with mock.patch.object(
@@ -310,7 +310,7 @@ class TestInteractiveCredentials(unittest.TestCase):
         creds.resource = 'resource'
         creds.id = "id"
 
-        UserPassCredentials.get_token(creds)
+        UserPassCredentials.set_token(creds)
         self.assertEqual(creds.token, session.fetch_token.return_value)
         session.fetch_token.assert_called_with(
             "token_uri", client_id="id", username='user',
@@ -319,7 +319,7 @@ class TestInteractiveCredentials(unittest.TestCase):
         session.fetch_token.side_effect = oauthlib.oauth2.OAuth2Error
 
         with self.assertRaises(AuthenticationError):
-            UserPassCredentials.get_token(creds)
+            UserPassCredentials.set_token(creds)
 
         session = mock.create_autospec(OAuth2Session)
         with mock.patch.object(

@@ -64,14 +64,17 @@ class Paged(object):
 
     @classmethod
     def _get_attribute_map(cls):
+        """Required for parity to Model object for deserialization."""
         return cls._attribute_map
 
     @classmethod
     def _get_required_attrs(cls):
+        """Required for parity to Model object for deserialization."""
         return []
 
     @classmethod
     def _get_subtype_map(cls):
+        """Required for parity to Model object for deserialization."""
         return {}
 
     @property
