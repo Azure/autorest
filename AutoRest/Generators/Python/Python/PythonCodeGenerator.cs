@@ -117,6 +117,18 @@ namespace Microsoft.Rest.Generator.Python
             };
             await Write(serviceClientTemplate, Path.Combine(serviceClientTemplateModel.PackageName, serviceClientTemplateModel.Name.ToPythonCase() + ".py"));
 
+            var exceptionTemplate = new ExceptionTemplate
+            {
+                Model = serviceClientTemplateModel,
+            };
+            await Write(exceptionTemplate, Path.Combine(serviceClientTemplateModel.PackageName, "exceptions.py"));
+
+            var credentialTemplate = new CredentialTemplate
+            {
+                Model = serviceClientTemplateModel,
+            };
+            await Write(credentialTemplate, Path.Combine(serviceClientTemplateModel.PackageName, "credentials.py"));
+
             //Models
             if (serviceClient.ModelTypes.Any())
             {
