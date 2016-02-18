@@ -113,7 +113,7 @@ namespace Microsoft.Rest.Generator.Python
         }
 
         /// <summary>
-        /// Provides the property documentation string along with default value if any.
+        /// Provides the modelProperty documentation string along with default value if any.
         /// </summary>
         /// <param name="property">Parameter to be documented</param>
         /// <returns>Parameter documentation string along with default value if any 
@@ -255,18 +255,18 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
-        public virtual string InitializeProperty(Property property)
+        public virtual string InitializeProperty(Property modelProperty)
         {
-            if (property == null || property.Type == null)
+            if (modelProperty == null || modelProperty.Type == null)
             {
-                throw new ArgumentNullException("property");
+                throw new ArgumentNullException("modelProperty");
             }
 
             //'id':{'key':'id', 'type':'str'},
             return string.Format(CultureInfo.InvariantCulture,
                 "'{0}': {{'key': '{1}', 'type': '{2}'}},",
-                property.Name, property.SerializedName,
-                ClientModelExtensions.GetPythonSerializationType(property.Type));
+                modelProperty.Name, modelProperty.SerializedName,
+                ClientModelExtensions.GetPythonSerializationType(modelProperty.Type));
         }
 
         public string InitializeProperty(string objectName, Property property)
@@ -294,7 +294,7 @@ namespace Microsoft.Rest.Generator.Python
         }
 
         /// <summary>
-        /// Provides the type of the property
+        /// Provides the type of the modelProperty
         /// </summary>
         /// <param name="property">Parameter to be documented</param>
         /// <returns>Parameter name in the correct jsdoc notation</returns>

@@ -23,16 +23,21 @@ namespace Microsoft.Rest.Generator.Azure.Python
         {
         }
 
-        public override string InitializeProperty(Property property)
+        public override string InitializeProperty(Property modelProperty)
         {
-            if (Azure.AzureExtensions.IsAzureResource(this) && property.SerializedName.Contains("properties."))
+            if (modelProperty == null || modelProperty.Type == null)
+            {
+                throw new ArgumentNullException("modelProperty");
+            }
+
+            if (Azure.AzureExtensions.IsAzureResource(this) && modelProperty.SerializedName.Contains("properties."))
             {
                 return string.Format(CultureInfo.InvariantCulture,
                     "'{0}': {{'key': '{1}', 'type': '{2}', 'flatten': True}},",
-                    property.Name, property.SerializedName,
-                    ClientModelExtensions.GetPythonSerializationType(property.Type));
+                    modelProperty.Name, modelProperty.SerializedName,
+                    ClientModelExtensions.GetPythonSerializationType(modelProperty.Type));
             }
-            return base.InitializeProperty(property);
+            return base.InitializeProperty(modelProperty);
         }
 
     }

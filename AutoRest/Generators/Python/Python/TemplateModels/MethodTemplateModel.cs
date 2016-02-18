@@ -467,7 +467,7 @@ namespace Microsoft.Rest.Generator.Python
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
-        public static string GetDocumentationType(IType type, bool isRequired = true)
+        public static string GetDocumentationType(IType type)
         {
             if (type == null)
             {
