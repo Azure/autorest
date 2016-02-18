@@ -79,5 +79,93 @@ namespace Microsoft.Rest.Serialization
                 }
             }
         }
+
+        public static bool UnderParentPath(this JsonProperty property, string parentPath)
+        {
+            if (parentPath == null)
+            {
+                throw new ArgumentNullException("parentPath");
+            }
+            if (property == null)
+            {
+                throw new ArgumentNullException("property");
+            }
+
+            return parentPath.Equals(property.GetParentPath(), StringComparison.OrdinalIgnoreCase);
+        }
+
+        public static string GetParentPath(this JsonProperty property)
+        {
+            if (property == null)
+            {
+                throw new ArgumentNullException("property");
+            }
+
+            if (property.PropertyName == null)
+            {
+                return "";
+            }
+
+            JsonTransformationAttribute transformationAttribute = property.AttributeProvider.GetAttributes(false)
+                        .FirstOrDefault(a => a is JsonTransformationAttribute) as JsonTransformationAttribute;
+            if (transformationAttribute != null)
+            {
+                if (!string.IsNullOrEmpty(transformationAttribute.PropertyName))
+                {
+                    return property.PropertyName;
+                }
+                else
+                {
+                    int lastPeriod = property.PropertyName.LastIndexOf('.');
+                    if (lastPeriod < 0)
+                    {
+                        return "";
+                    }
+                    else
+                    {
+                        return property.PropertyName.Substring(0, lastPeriod);
+                    }
+                }
+            }
+            else
+            {
+                return "";
+            }
+        }
+
+        public static string GetPropertyName(this JsonProperty property)
+        {
+            if (property == null)
+            {
+                throw new ArgumentNullException("property");
+            }
+
+            JsonTransformationAttribute transformationAttribute = property.AttributeProvider.GetAttributes(false)
+                  .FirstOrDefault(a => a is JsonTransformationAttribute) as JsonTransformationAttribute;
+
+            if (transformationAttribute != null)
+            {
+                if (!string.IsNullOrEmpty(transformationAttribute.PropertyName))
+                {
+                    return transformationAttribute.PropertyName;
+                }
+                else
+                {
+                    int lastPeriod = property.PropertyName.LastIndexOf('.');
+                    if (lastPeriod < 0)
+                    {
+                        return property.PropertyName;
+                    }
+                    else
+                    {
+                        return property.PropertyName.Substring(lastPeriod + 1);
+                    }
+                }
+            }
+            else
+            {
+                return property.PropertyName;
+            }
+        }
     }
 }
