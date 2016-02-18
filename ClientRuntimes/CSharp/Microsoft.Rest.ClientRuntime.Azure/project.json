@@ -60,6 +60,6 @@
   },
 
   "dependencies": {
-    "Microsoft.Rest.ClientRuntime": "[2.0.2,3.0)"
+    "Microsoft.Rest.ClientRuntime": "[2.1.0,3.0)"
   }
 }

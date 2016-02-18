@@ -5,15 +5,12 @@ using System;
 
 namespace Microsoft.Rest.Serialization
 {
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
+    /// <summary>
+    /// Instructs the Microsoft.Rest.Serialization.TransformationJsonConverter to 
+    /// transform properties of the type based on dot convention.
+    /// </summary>
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
     public class JsonTransformationAttribute : Attribute
     {
-        public JsonTransformationAttribute() { }
-        public JsonTransformationAttribute(string originalPropertyName)
-        {
-            PropertyName = originalPropertyName;
-        }
-
-        public string PropertyName { get; set; }
     }
 }

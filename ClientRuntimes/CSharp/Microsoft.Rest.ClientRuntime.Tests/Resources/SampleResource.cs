@@ -47,28 +47,24 @@ namespace Microsoft.Rest.Azure
         /// Optional. Gets or sets the size of the resource.
         /// </summary>
         [JsonProperty("properties.size")]
-        [JsonTransformation]
         public string Size { get; set; }
 
         /// <summary>
         /// Gets the key of the child resource.
         /// </summary>
-        [JsonProperty("properties.child1")]
-        [JsonTransformation("@child.key")]
+        [JsonProperty("properties.child1.@child\\.key")]
         public string ChildKey { get; set; }
 
         /// <summary>
         /// Optional. Gets or sets the child resource.
         /// </summary>
         [JsonProperty("properties.child")]
-        [JsonTransformation]
         public SampleResourceChild Child { get; set; }
 
         /// <summary>
         /// Optional. Gets or sets the details.
         /// </summary>
         [JsonProperty("properties.name")]
-        [JsonTransformation]
         public dynamic Details { get; set; }
 
         /// <summary>
@@ -81,7 +77,6 @@ namespace Microsoft.Rest.Azure
         /// Optional. Gets or sets the provisioning state.
         /// </summary>
         [JsonProperty("properties.provisioningState")]
-        [JsonTransformation]
         public string ProvisioningState { get; set; }
 
         /// <summary>
@@ -119,7 +114,6 @@ namespace Microsoft.Rest.Azure
         /// Optional. Gets or sets the Id of the resource.
         /// </summary>
         [JsonProperty("properties.name1")]
-        [JsonTransformation]
         public string ChildName1 { get; set; }
     }
 
@@ -133,7 +127,6 @@ namespace Microsoft.Rest.Azure
         /// Optional. Gets or sets the Id of the resource.
         /// </summary>
         [JsonProperty("properties.name2")]
-        [JsonTransformation]
         public string ChildName2 { get; set; }
     }
 
@@ -177,14 +170,12 @@ namespace Microsoft.Rest.Azure
         /// Optional. Gets or sets the special location of the resource.
         /// </summary>
         [JsonProperty("properties.location")]
-        [JsonTransformation]
         public string SampleResourceWithConflictLocation { get; set; }
 
         /// <summary>
         /// Optional. Gets or sets the special id resource.
         /// </summary>
         [JsonProperty("properties.id")]
-        [JsonTransformation]
         public string SampleResourceWithConflictId { get; set; }
     }
 }

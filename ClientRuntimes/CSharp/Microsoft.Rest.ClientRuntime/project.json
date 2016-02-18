@@ -51,6 +51,7 @@
         "System.Runtime.Extensions": "",
         "System.Runtime.Serialization": "",
         "System.Text.Encoding": "",
+        "System.Text.RegularExpressions": "",
         "System.Threading": "",
         "System.Threading.Tasks": "",
         "System.Xml": "",

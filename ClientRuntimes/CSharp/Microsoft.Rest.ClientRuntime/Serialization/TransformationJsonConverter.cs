@@ -74,22 +74,21 @@ namespace Microsoft.Rest.Serialization
                 var contract = (JsonObjectContract)serializer.ContractResolver.ResolveContract(objectType);
                 foreach (JsonProperty property in contract.Properties)
                 {
-                    JsonTransformationAttribute transformationAttribute = property.AttributeProvider.GetAttributes(false)
-                        .FirstOrDefault(a => a is JsonTransformationAttribute) as JsonTransformationAttribute;
-
                     JToken propertyValueToken;
-                    if (transformationAttribute != null)
+                    string[] parentPath;
+                    string propertyName = property.GetPropertyName(out parentPath);
+
+                    if (parentPath.Length > 0)
                     {
-                        string propertyPath = property.PropertyName;
-                        propertyValueToken = jsonObject.SelectToken(propertyPath, false);
-                        if (propertyValueToken != null && !string.IsNullOrEmpty(transformationAttribute.PropertyName))
+                        propertyValueToken = jsonObject.SelectToken(string.Join(".", parentPath), false);
+                        if (propertyValueToken != null)
                         {
-                            propertyValueToken = propertyValueToken[transformationAttribute.PropertyName];
+                            propertyValueToken = propertyValueToken[propertyName];
                         }
                     }
                     else
                     {
-                        propertyValueToken = jsonObject[property.PropertyName];
+                        propertyValueToken = jsonObject[propertyName];
                     }                  
 
                     if (propertyValueToken != null && property.Writable)
@@ -164,22 +163,22 @@ namespace Microsoft.Rest.Serialization
                 if (!property.Ignored && property.Readable &&
                     (property.ShouldSerialize == null || property.ShouldSerialize(memberValue)))
                 {
-                    string parentPath = property.GetParentPath();
+                    string[] parentPath;
+                    string propertyName = property.GetPropertyName(out parentPath);
 
                     // Build hierarchy if necessary
-                    string[] parentHierarchy = parentPath.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries);
                     JObject parentObject = jsonObject;
-                    for (int i = 0; i < parentHierarchy.Length; i++)
+                    for (int i = 0; i < parentPath.Length; i++)
                     {
-                        JObject childToken = parentObject[parentHierarchy[i]] as JObject;
+                        JObject childToken = parentObject[parentPath[i]] as JObject;
                         if (childToken == null)
                         {
-                            parentObject[parentHierarchy[i]] = new JObject();
+                            parentObject[parentPath[i]] = new JObject();
                         }
-                        parentObject = parentObject[parentHierarchy[i]] as JObject;
+                        parentObject = parentObject[parentPath[i]] as JObject;
                     }
 
-                    parentObject[property.GetPropertyName()] = JToken.FromObject(memberValue, serializer);
+                    parentObject[propertyName] = JToken.FromObject(memberValue, serializer);
                 }
             }
 

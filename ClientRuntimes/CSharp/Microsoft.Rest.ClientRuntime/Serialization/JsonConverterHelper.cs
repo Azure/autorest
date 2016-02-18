@@ -3,6 +3,7 @@
 
 using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 #if!NET45
@@ -80,92 +81,28 @@ namespace Microsoft.Rest.Serialization
             }
         }
 
-        public static bool UnderParentPath(this JsonProperty property, string parentPath)
-        {
-            if (parentPath == null)
-            {
-                throw new ArgumentNullException("parentPath");
-            }
-            if (property == null)
-            {
-                throw new ArgumentNullException("property");
-            }
-
-            return parentPath.Equals(property.GetParentPath(), StringComparison.OrdinalIgnoreCase);
-        }
-
-        public static string GetParentPath(this JsonProperty property)
+        public static string GetPropertyName(this JsonProperty property, out string[] parentPath)
         {
             if (property == null)
             {
                 throw new ArgumentNullException("property");
             }
 
-            if (property.PropertyName == null)
-            {
-                return "";
-            }
+            string propertyName = property.PropertyName;
+            parentPath = new string[0];
 
-            JsonTransformationAttribute transformationAttribute = property.AttributeProvider.GetAttributes(false)
-                        .FirstOrDefault(a => a is JsonTransformationAttribute) as JsonTransformationAttribute;
-            if (transformationAttribute != null)
+            if (!string.IsNullOrEmpty(propertyName))
             {
-                if (!string.IsNullOrEmpty(transformationAttribute.PropertyName))
+                string[] hierarchy = Regex.Split(propertyName, @"(?<!\\)\.")
+                    .Select(p => p?.Replace("\\.", ".")).ToArray();
+                if (hierarchy.Length > 1)
                 {
-                    return property.PropertyName;
-                }
-                else
-                {
-                    int lastPeriod = property.PropertyName.LastIndexOf('.');
-                    if (lastPeriod < 0)
-                    {
-                        return "";
-                    }
-                    else
-                    {
-                        return property.PropertyName.Substring(0, lastPeriod);
-                    }
+                    propertyName = hierarchy.Last();
+                    parentPath = hierarchy.Take(hierarchy.Length - 1).ToArray();
                 }
             }
-            else
-            {
-                return "";
-            }
-        }
 
-        public static string GetPropertyName(this JsonProperty property)
-        {
-            if (property == null)
-            {
-                throw new ArgumentNullException("property");
-            }
-
-            JsonTransformationAttribute transformationAttribute = property.AttributeProvider.GetAttributes(false)
-                  .FirstOrDefault(a => a is JsonTransformationAttribute) as JsonTransformationAttribute;
-
-            if (transformationAttribute != null)
-            {
-                if (!string.IsNullOrEmpty(transformationAttribute.PropertyName))
-                {
-                    return transformationAttribute.PropertyName;
-                }
-                else
-                {
-                    int lastPeriod = property.PropertyName.LastIndexOf('.');
-                    if (lastPeriod < 0)
-                    {
-                        return property.PropertyName;
-                    }
-                    else
-                    {
-                        return property.PropertyName.Substring(lastPeriod + 1);
-                    }
-                }
-            }
-            else
-            {
-                return property.PropertyName;
-            }
+            return propertyName;            
         }
     }
 }

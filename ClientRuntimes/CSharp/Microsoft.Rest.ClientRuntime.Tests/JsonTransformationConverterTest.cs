@@ -10,6 +10,7 @@ using Microsoft.Rest.Azure;
 
 namespace Microsoft.Rest.ClientRuntime.Azure.Test
 {
+    [Collection("Serialization Tests")]
     public class JsonTransformationConverterTest
     {
         [Fact]
