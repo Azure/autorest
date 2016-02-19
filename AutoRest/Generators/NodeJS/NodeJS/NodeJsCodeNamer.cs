@@ -161,7 +161,7 @@ namespace Microsoft.Rest.Generator.NodeJS
             {
                 foreach (var property in modelType.Properties)
                 {
-                    if (property.Name.Contains(".") && !property.Name.StartsWith("'"))
+                    if (property.Name.Contains(".") && !property.Name.StartsWith("'", StringComparison.CurrentCultureIgnoreCase))
                     {
                         property.Name = string.Format(CultureInfo.InvariantCulture, "'{0}'", property.Name);
                     }
