@@ -1,5 +1,5 @@
 {
-  "version": "2.0.2",
+  "version": "2.1.0",
   "copyright": "Copyright (c) Microsoft Corporation",
   "iconUrl": "https://cdn.rawgit.com/Azure/AutoRest/7c1576dfb56974176223545cfac5762d168ded5f/Documentation/images/autorest-small-flat.png",
   "title": "Client Runtime Library for Microsoft AutoRest Generated Clients",
@@ -51,6 +51,7 @@
         "System.Runtime.Extensions": "",
         "System.Runtime.Serialization": "",
         "System.Text.Encoding": "",
+        "System.Text.RegularExpressions": "",
         "System.Threading": "",
         "System.Threading.Tasks": "",
         "System.Xml": "",
