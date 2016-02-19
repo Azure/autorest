@@ -155,6 +155,18 @@ namespace Microsoft.Rest.Generator.NodeJS
                     }
                 }
             }
+            //Normalize properties with dots by surrounding them with single quotes to represent 
+            //them as a single property and not as one being part of another. For example: 'odata.nextLink' 
+            foreach (var modelType in client.ModelTypes)
+            {
+                foreach (var property in modelType.Properties)
+                {
+                    if (property.Name.Contains(".") && !property.Name.StartsWith("'"))
+                    {
+                        property.Name = string.Format(CultureInfo.InvariantCulture, "'{0}'", property.Name);
+                    }
+                }
+            }
         }
 
         public override IType NormalizeTypeDeclaration(IType type)

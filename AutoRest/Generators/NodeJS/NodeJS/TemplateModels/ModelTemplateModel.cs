@@ -94,13 +94,6 @@ namespace Microsoft.Rest.Generator.NodeJS
                         Property = property,
                         RecursiveTypes = new List<string> () { Name }
                     };
-                    //Quote properties with dots to represent them as one property 
-                    //and not as one being part of another. For example: 'odata.nextLink' 
-                    if (tempWrapper.Property.Name.Contains(".") && !tempWrapper.Property.Name.StartsWith("'"))
-                    {
-                        tempWrapper.Property.Name = string.Format(CultureInfo.InvariantCulture, "'{0}'", 
-                            tempWrapper.Property.Name);
-                    }
                     traversalStack.Push(tempWrapper);
                 }
 

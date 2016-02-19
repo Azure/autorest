@@ -101,9 +101,9 @@ export interface StorageAccountCreateParameters extends Resource {
  * 
  * @member {object} [fooPoint] Foo point
  * 
- * @member {object} [fooPoint.bar.Point] Bar point
+ * @member {object} [fooPoint.'bar.Point'] Bar point
  * 
- * @member {object} [fooPoint.bar.Point.recursivePoint] Recursive Endpoints
+ * @member {object} [fooPoint.'bar.Point'.recursivePoint] Recursive Endpoints
  * 
  */
 export interface Endpoints {
