@@ -813,6 +813,99 @@ namespace Fixtures.AcceptanceTestsBodyArray
             }
 
             /// <summary>
+            /// Get uuid array value ['6DCC7237-45FE-45C4-8A6B-3A8A3F625652',
+            /// 'D1399005-30F7-40D6-8DA6-DD7C89AD34DB',
+            /// 'F42F6AA1-A5BC-4DDF-907E-5F915DE43205']
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static IList<Guid?> GetUuidValid(this IArray operations)
+            {
+                return Task.Factory.StartNew(s => ((IArray)s).GetUuidValidAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get uuid array value ['6DCC7237-45FE-45C4-8A6B-3A8A3F625652',
+            /// 'D1399005-30F7-40D6-8DA6-DD7C89AD34DB',
+            /// 'F42F6AA1-A5BC-4DDF-907E-5F915DE43205']
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<IList<Guid?>> GetUuidValidAsync(this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetUuidValidWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Set array value  ['6DCC7237-45FE-45C4-8A6B-3A8A3F625652',
+            /// 'D1399005-30F7-40D6-8DA6-DD7C89AD34DB',
+            /// 'F42F6AA1-A5BC-4DDF-907E-5F915DE43205']
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='arrayBody'>
+            /// </param>
+            public static void PutUuidValid(this IArray operations, IList<Guid?> arrayBody)
+            {
+                Task.Factory.StartNew(s => ((IArray)s).PutUuidValidAsync(arrayBody), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Set array value  ['6DCC7237-45FE-45C4-8A6B-3A8A3F625652',
+            /// 'D1399005-30F7-40D6-8DA6-DD7C89AD34DB',
+            /// 'F42F6AA1-A5BC-4DDF-907E-5F915DE43205']
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='arrayBody'>
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task PutUuidValidAsync(this IArray operations, IList<Guid?> arrayBody, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                await operations.PutUuidValidWithHttpMessagesAsync(arrayBody, null, cancellationToken).ConfigureAwait(false);
+            }
+
+            /// <summary>
+            /// Get uuid array value ['6DCC7237-45FE-45C4-8A6B-3A8A3F625652', 'foo']
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            public static IList<Guid?> GetUuidInvalidChars(this IArray operations)
+            {
+                return Task.Factory.StartNew(s => ((IArray)s).GetUuidInvalidCharsAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Get uuid array value ['6DCC7237-45FE-45C4-8A6B-3A8A3F625652', 'foo']
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<IList<Guid?>> GetUuidInvalidCharsAsync(this IArray operations, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.GetUuidInvalidCharsWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
             /// Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12']
             /// </summary>
             /// <param name='operations'>

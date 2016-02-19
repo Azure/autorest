@@ -276,6 +276,13 @@
                         "type": "string",
                         "format": "date-time"
                     }
+                },
+                "uuidArray": {
+                    "type": "array",
+                    "items": {
+                        "type": "string",
+                        "format": "uuid"
+                    }
                 }
             }
         },
