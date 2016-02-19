@@ -160,6 +160,8 @@ def log_request(adapter, request, *args, **kwargs):
     :param ClientHTTPAdapter adapter: Adapter making the request.
     :param requests.Request request: The request object.
     """
+    if not LOGGER:
+        return
     try:
         LOGGER.debug("Request URL: %r", request.url)
         LOGGER.debug("Request method: %r", request.method)
@@ -184,6 +186,8 @@ def log_response(adapter, request, response, *args, **kwargs):
     :param requests.Request request: The request object.
     :param requests.Response response: The response object.
     """
+    if not LOGGER:
+        return kwargs['result']
     try:
         result = kwargs['result']
         LOGGER.debug("Response status: %r", result.status_code)
