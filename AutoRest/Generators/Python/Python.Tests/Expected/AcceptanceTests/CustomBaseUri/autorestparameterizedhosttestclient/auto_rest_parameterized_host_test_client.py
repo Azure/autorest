@@ -23,17 +23,15 @@ class AutoRestParameterizedHostTestClientConfiguration(Configuration):
     :param host: A string value that is used as a global part of the
      parameterized host
     :type host: str
-    :param str base_url: Service URL
     :param str filepath: Existing config
     """
 
     def __init__(
-            self, host, base_url=None, filepath=None):
+            self, host, filepath=None):
 
         if host is None:
             raise ValueError('host must not be None.')
-        if not base_url:
-            base_url = 'http://{accountName}{host}'
+        base_url = 'http://{accountName}{host}'
 
         super(AutoRestParameterizedHostTestClientConfiguration, self).__init__(base_url, filepath)
 

@@ -36,19 +36,17 @@ class AutoRestParameterizedHostTestClientConfiguration(AzureConfiguration):
      x-ms-client-request-id value is generated and included in each request.
      Default is true.
     :type generate_client_request_id: bool or None
-    :param str base_url: Service URL
     :param str filepath: Existing config
     """
 
     def __init__(
-            self, credentials, host, accept_language='en-US', long_running_operation_retry_timeout=30, generate_client_request_id=True, base_url=None, filepath=None):
+            self, credentials, host, accept_language='en-US', long_running_operation_retry_timeout=30, generate_client_request_id=True, filepath=None):
 
         if credentials is None:
             raise ValueError('credentials must not be None.')
         if host is None:
             raise ValueError('host must not be None.')
-        if not base_url:
-            base_url = 'http://{accountName}{host}'
+        base_url = 'http://{accountName}{host}'
 
         super(AutoRestParameterizedHostTestClientConfiguration, self).__init__(base_url, filepath)
 

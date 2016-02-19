@@ -25,11 +25,11 @@
 # --------------------------------------------------------------------------
 
 import unittest
-import isodate
 import subprocess
 import sys
-import datetime
+import isodate
 import os
+from datetime import date, datetime, timedelta
 from os.path import dirname, pardir, join, realpath, sep, pardir
 
 cwd = dirname(realpath(__file__))
@@ -38,45 +38,46 @@ sys.path.append(join(root, "ClientRuntimes" , "Python", "msrest"))
 log_level = int(os.environ.get('PythonLogLevel', 30))
 
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
-sys.path.append(join(tests, "Report"))
+sys.path.append(join(tests, "CustomBaseUri"))
+
+from msrest.exceptions import DeserializationError, SerializationError
+
+from autorestparameterizedhosttestclient import (
+    AutoRestParameterizedHostTestClient,
+    AutoRestParameterizedHostTestClientConfiguration)
+
+from autorestparameterizedhosttestclient.models import Error, ErrorException
 
 
-from autorestreportservice import (
-    AutoRestReportService, 
-    AutoRestReportServiceConfiguration)
+class CustomBaseUriTests(unittest.TestCase):
 
+    @classmethod
+    def setUpClass(cls):
 
-class AcceptanceTests(unittest.TestCase):
-    def test_ensure_coverage(self):
+        config = AutoRestParameterizedHostTestClientConfiguration(
+            "host:3000")
 
-        config = AutoRestReportServiceConfiguration(base_url="http://localhost:3000")
         config.log_level = log_level
-        client = AutoRestReportService(config)
-        report = client.get_report()
-        report['getIntegerOverflow']=1
-        report['getIntegerUnderflow']=1
-        report['getLongOverflow']=1
-        report['getLongUnderflow']=1
-        report['getDateInvalid']=1
-        report['getDictionaryNullkey']=1
-        report['HttpRedirect300Get']=1
+        cls.client = AutoRestParameterizedHostTestClient(config)
+        return super(CustomBaseUriTests, cls).setUpClass()
+    # commenting out these tests until x-ms-parameterized-host is functional in python
+    # def test_custom_base_uri_positive(self):
         
-        # TODO: Implement constants support in Python
-        report['ConstantsInPath']=1
-        report['ConstantsInBody']=1
+        # self.client.paths.get_empty("local")
 
-        # TODO: Once x-ms-parameterized-host is support in python we should run these tests
-        report['CustomBaseUri']=1
+    # def test_custom_base_uri_negative(self):
 
-        skipped = [k for k, v in report.items() if v == 0]
+        # with self.assertRaises(ErrorException):
+        #    self.client.paths.get_empty("bad")
 
-        for s in skipped:
-            print("SKIPPED {0}".format(s))
+        # with self.assertRaises(ValueError):
+        #    self.client.paths.get_empty(None)
 
-        totalTests = len(report)
-        print ("The test coverage is {0}/{1}.".format(totalTests - len(skipped), totalTests))
-        
-        self.assertEqual(0, len(skipped))
+        # self.client.config.host = "badhost:3000"
+        # with self.assertRaises(ErrorException):
+        #    self.client.paths.get_empty("local")
 
 if __name__ == '__main__':
+    
+    
     unittest.main()
