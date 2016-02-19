@@ -16,6 +16,11 @@ class StorageAccountUpdateParameters(Resource):
     """
     The parameters to update on the account.
 
+    :param str id: Resource Id
+    :param str name: Resource name
+    :param str type: Resource type
+    :param str location: Resource location
+    :param dict tags: Resource tags
     :param str account_type: Gets or sets the account type. Note that
      StandardZRS and PremiumLRS accounts cannot be changed to other account
      types, and other account types cannot be changed to StandardZRS or
@@ -30,12 +35,11 @@ class StorageAccountUpdateParameters(Resource):
     _required = []
 
     _attribute_map = {
-        'account_type': {'key': 'properties.accountType', 'type': 'AccountType'},
-        'custom_domain': {'key': 'properties.customDomain', 'type': 'CustomDomain'},
+        'account_type': {'key': 'properties.accountType', 'type': 'AccountType', 'flatten': True},
+        'custom_domain': {'key': 'properties.customDomain', 'type': 'CustomDomain', 'flatten': True},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.account_type = None
-        self.custom_domain = None
-
-        super(StorageAccountUpdateParameters, self).__init__(*args, **kwargs)
+    def __init__(self, location, id=None, name=None, type=None, tags=None, account_type=None, custom_domain=None):
+        super(StorageAccountUpdateParameters, self).__init__(id=id, name=name, type=type, location=location, tags=tags)
+        self.account_type = account_type
+        self.custom_domain = custom_domain

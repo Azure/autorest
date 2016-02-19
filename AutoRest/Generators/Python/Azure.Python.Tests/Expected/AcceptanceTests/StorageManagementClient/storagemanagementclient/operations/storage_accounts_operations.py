@@ -47,8 +47,8 @@ class StorageAccountsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: CheckNameAvailabilityResult or
-         msrest.pipeline.ClientRawResponse
+        :rtype: CheckNameAvailabilityResult
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/providers/Microsoft.Storage/checkNameAvailability'
@@ -117,7 +117,8 @@ class StorageAccountsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: StorageAccount or msrest.pipeline.ClientRawResponse
+        :rtype: StorageAccount
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
@@ -200,7 +201,8 @@ class StorageAccountsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
@@ -256,7 +258,8 @@ class StorageAccountsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: StorageAccount or msrest.pipeline.ClientRawResponse
+        :rtype: StorageAccount
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
@@ -329,7 +332,8 @@ class StorageAccountsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: StorageAccount or msrest.pipeline.ClientRawResponse
+        :rtype: StorageAccount
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}'
@@ -390,7 +394,8 @@ class StorageAccountsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: StorageAccountKeys or msrest.pipeline.ClientRawResponse
+        :rtype: StorageAccountKeys
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/listKeys'
@@ -445,7 +450,8 @@ class StorageAccountsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: StorageAccountPaged or msrest.pipeline.ClientRawResponse
+        :rtype: StorageAccountPaged
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -510,7 +516,8 @@ class StorageAccountsOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: StorageAccountPaged or msrest.pipeline.ClientRawResponse
+        :rtype: StorageAccountPaged
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         def internal_paging(next_link=None, raw=False):
 
@@ -577,15 +584,14 @@ class StorageAccountsOperations(object):
          only.
         :type account_name: str
         :param key_name: Possible values include: 'key1', 'key2'
-        :type key_name: str or None
+        :type key_name: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: StorageAccountKeys or msrest.pipeline.ClientRawResponse
+        :rtype: StorageAccountKeys
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
-        regenerate_key = models.StorageAccountRegenerateKeyParameters()
-        if key_name is not None:
-            regenerate_key.key_name = key_name
+        regenerate_key = models.StorageAccountRegenerateKeyParameters(key_name=key_name)
 
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/regenerateKey'

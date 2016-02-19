@@ -53,7 +53,8 @@ class ClientException(Exception):
 
     def __init__(self, message, inner_exception=None, *args):
         self.inner_exception = inner_exception
-        logger.LOGGER.debug(message)
+        if logger.LOGGER:
+            logger.LOGGER.debug(message)
         super(ClientException, self).__init__(message, *args)
 
 

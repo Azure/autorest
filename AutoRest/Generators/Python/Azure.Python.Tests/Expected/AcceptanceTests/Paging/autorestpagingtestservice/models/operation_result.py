@@ -26,7 +26,5 @@ class OperationResult(Model):
         'status': {'key': 'status', 'type': 'str'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.status = None
-
-        super(OperationResult, self).__init__(*args, **kwargs)
+    def __init__(self, status=None):
+        self.status = status

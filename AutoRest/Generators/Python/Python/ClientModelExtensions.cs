@@ -234,5 +234,69 @@ namespace Microsoft.Rest.Generator.Python.TemplateModels
                 return null;
             }
         }
+
+        public static string GetPythonSerializationType(IType type)
+        {
+            if (type == null)
+            {
+                throw new ArgumentNullException("type");
+            }
+
+            Dictionary<KnownPrimaryType, string> typeNameMapping = new Dictionary<KnownPrimaryType, string>()
+                        {
+                            { KnownPrimaryType.DateTime, "iso-8601" },
+                            { KnownPrimaryType.DateTimeRfc1123, "rfc-1123" },
+                            { KnownPrimaryType.TimeSpan, "duration" }
+                        };
+            PrimaryType primaryType = type as PrimaryType;
+            if (primaryType != null)
+            {
+                if (typeNameMapping.ContainsKey(primaryType.Type))
+                {
+                    return typeNameMapping[primaryType.Type];
+                }
+                else
+                {
+                    return type.Name;
+                }
+            }
+
+            SequenceType sequenceType = type as SequenceType;
+            if (sequenceType != null)
+            {
+                IType innerType = sequenceType.ElementType;
+                PrimaryType innerPrimaryType = innerType as PrimaryType;
+                string innerTypeName;
+                if (innerPrimaryType != null && typeNameMapping.ContainsKey(innerPrimaryType.Type))
+                {
+                    innerTypeName = typeNameMapping[innerPrimaryType.Type];
+                }
+                else
+                {
+                    innerTypeName = innerType.Name;
+                }
+                return "[" + innerTypeName + "]";
+            }
+
+            DictionaryType dictType = type as DictionaryType;
+            if (dictType != null)
+            {
+                IType innerType = dictType.ValueType;
+                PrimaryType innerPrimaryType = innerType as PrimaryType;
+                string innerTypeName;
+                if (innerPrimaryType != null && typeNameMapping.ContainsKey(innerPrimaryType.Type))
+                {
+                    innerTypeName = typeNameMapping[innerPrimaryType.Type];
+                }
+                else
+                {
+                    innerTypeName = innerType.Name;
+                }
+                return "{" + innerTypeName + "}";
+            }
+
+            // CompositeType or EnumType
+            return type.Name;
+        }
     }
 }

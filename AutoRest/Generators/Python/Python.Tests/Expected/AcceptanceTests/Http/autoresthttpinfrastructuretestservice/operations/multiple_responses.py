@@ -40,7 +40,8 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: A or msrest.pipeline.ClientRawResponse
+        :rtype: A
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/payloads/200/A/204/none/default/Error/response/200/valid'
@@ -80,7 +81,8 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: A or msrest.pipeline.ClientRawResponse
+        :rtype: A
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/payloads/200/A/204/none/default/Error/response/204/none'
@@ -120,7 +122,8 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: A or msrest.pipeline.ClientRawResponse
+        :rtype: A
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/payloads/200/A/204/none/default/Error/response/201/valid'
@@ -160,7 +163,8 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: A or msrest.pipeline.ClientRawResponse
+        :rtype: A
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/payloads/200/A/204/none/default/Error/response/202/none'
@@ -201,7 +205,8 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: A or msrest.pipeline.ClientRawResponse
+        :rtype: A
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/payloads/200/A/204/none/default/Error/response/400/valid'
@@ -241,7 +246,8 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: A or msrest.pipeline.ClientRawResponse
+        :rtype: A
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/payloads/200/A/201/B/default/Error/response/200/valid'
@@ -284,7 +290,8 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: A or msrest.pipeline.ClientRawResponse
+        :rtype: A
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/payloads/200/A/201/B/default/Error/response/201/valid'
@@ -327,7 +334,8 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: A or msrest.pipeline.ClientRawResponse
+        :rtype: A
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/payloads/200/A/201/B/default/Error/response/400/valid'
@@ -369,7 +377,8 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: object or msrest.pipeline.ClientRawResponse
+        :rtype: object
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/payloads/200/A/201/C/404/D/default/Error/response/200/valid'
@@ -413,7 +422,8 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: object or msrest.pipeline.ClientRawResponse
+        :rtype: object
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/payloads/200/A/201/C/404/D/default/Error/response/201/valid'
@@ -457,7 +467,8 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: object or msrest.pipeline.ClientRawResponse
+        :rtype: object
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/payloads/200/A/201/C/404/D/default/Error/response/404/valid'
@@ -502,7 +513,8 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: object or msrest.pipeline.ClientRawResponse
+        :rtype: object
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/payloads/200/A/201/C/404/D/default/Error/response/400/valid'
@@ -546,7 +558,8 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/payloads/202/none/204/none/default/Error/response/202/none'
@@ -579,7 +592,8 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/payloads/202/none/204/none/default/Error/response/204/none'
@@ -613,7 +627,8 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/payloads/202/none/204/none/default/Error/response/400/valid'
@@ -646,7 +661,8 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/payloads/202/none/204/none/default/none/response/202/invalid'
@@ -679,7 +695,8 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/payloads/202/none/204/none/default/none/response/204/none'
@@ -712,7 +729,8 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/payloads/202/none/204/none/default/none/response/400/none'
@@ -745,7 +763,8 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/payloads/202/none/204/none/default/none/response/400/invalid'
@@ -778,7 +797,8 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: A or msrest.pipeline.ClientRawResponse
+        :rtype: A
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/payloads/default/A/response/200/valid'
@@ -811,7 +831,8 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: A or msrest.pipeline.ClientRawResponse
+        :rtype: A
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/payloads/default/A/response/200/none'
@@ -844,7 +865,8 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: A or msrest.pipeline.ClientRawResponse
+        :rtype: A
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/payloads/default/A/response/400/valid'
@@ -877,7 +899,8 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: A or msrest.pipeline.ClientRawResponse
+        :rtype: A
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/payloads/default/A/response/400/none'
@@ -910,7 +933,8 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/payloads/default/none/response/200/invalid'
@@ -943,7 +967,8 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/payloads/default/none/response/200/none'
@@ -976,7 +1001,8 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/payloads/default/none/response/400/invalid'
@@ -1009,7 +1035,8 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/payloads/default/none/response/400/none'
@@ -1043,7 +1070,8 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: A or msrest.pipeline.ClientRawResponse
+        :rtype: A
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/payloads/200/A/response/200/none'
@@ -1083,7 +1111,8 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: A or msrest.pipeline.ClientRawResponse
+        :rtype: A
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/payloads/200/A/response/200/valid'
@@ -1123,7 +1152,8 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: A or msrest.pipeline.ClientRawResponse
+        :rtype: A
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/payloads/200/A/response/200/invalid'
@@ -1164,7 +1194,8 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: A or msrest.pipeline.ClientRawResponse
+        :rtype: A
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/payloads/200/A/response/400/none'
@@ -1204,7 +1235,8 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: A or msrest.pipeline.ClientRawResponse
+        :rtype: A
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/payloads/200/A/response/400/valid'
@@ -1244,7 +1276,8 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: A or msrest.pipeline.ClientRawResponse
+        :rtype: A
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/payloads/200/A/response/400/invalid'
@@ -1284,7 +1317,8 @@ class MultipleResponses(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: A or msrest.pipeline.ClientRawResponse
+        :rtype: A
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/payloads/200/A/response/202/valid'

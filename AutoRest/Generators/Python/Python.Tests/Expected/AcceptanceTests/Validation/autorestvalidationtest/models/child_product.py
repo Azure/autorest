@@ -27,8 +27,6 @@ class ChildProduct(Model):
         'count': {'key': 'count', 'type': 'int'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.const_property = None
-        self.count = None
-
-        super(ChildProduct, self).__init__(*args, **kwargs)
+    def __init__(self, const_property, count=None):
+        self.const_property = const_property
+        self.count = count

@@ -39,7 +39,8 @@ class HttpFailure(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: bool or msrest.pipeline.ClientRawResponse
+        :rtype: bool
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/failure/emptybody/error'

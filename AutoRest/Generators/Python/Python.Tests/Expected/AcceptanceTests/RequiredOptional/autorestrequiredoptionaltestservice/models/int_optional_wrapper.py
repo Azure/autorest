@@ -24,7 +24,5 @@ class IntOptionalWrapper(Model):
         'value': {'key': 'value', 'type': 'int'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.value = None
-
-        super(IntOptionalWrapper, self).__init__(*args, **kwargs)
+    def __init__(self, value=None):
+        self.value = value

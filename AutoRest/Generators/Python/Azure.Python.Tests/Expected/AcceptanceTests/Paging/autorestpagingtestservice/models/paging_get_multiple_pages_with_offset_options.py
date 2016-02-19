@@ -26,9 +26,7 @@ class PagingGetMultiplePagesWithOffsetOptions(Model):
 
     _required = ['offset']
 
-    def __init__(self, *args, **kwargs):
-        self.maxresults = None
-        self.offset = None
-        self.timeout = None
-
-        super(PagingGetMultiplePagesWithOffsetOptions, self).__init__(*args, **kwargs)
+    def __init__(self, offset, maxresults=None, timeout=None):
+        self.maxresults = maxresults
+        self.offset = offset
+        self.timeout = timeout

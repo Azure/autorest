@@ -44,7 +44,8 @@ class ParameterGroupingOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         body = None
         if parameter_grouping_post_required_parameters is not None:
@@ -106,11 +107,12 @@ class ParameterGroupingOperations(object):
         :param parameter_grouping_post_optional_parameters: Additional
          parameters for the operation
         :type parameter_grouping_post_optional_parameters:
-         ParameterGroupingPostOptionalParameters or None
+         ParameterGroupingPostOptionalParameters
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         custom_header = None
         if parameter_grouping_post_optional_parameters is not None:
@@ -156,15 +158,16 @@ class ParameterGroupingOperations(object):
         Post parameters from multiple different parameter groups
 
         :param first_parameter_group: Additional parameters for the operation
-        :type first_parameter_group: FirstParameterGroup or None
+        :type first_parameter_group: FirstParameterGroup
         :param parameter_grouping_post_multi_param_groups_second_param_group:
          Additional parameters for the operation
         :type parameter_grouping_post_multi_param_groups_second_param_group:
-         ParameterGroupingPostMultiParamGroupsSecondParamGroup or None
+         ParameterGroupingPostMultiParamGroupsSecondParamGroup
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         header_one = None
         if first_parameter_group is not None:
@@ -220,11 +223,12 @@ class ParameterGroupingOperations(object):
         Post parameters with a shared parameter group object
 
         :param first_parameter_group: Additional parameters for the operation
-        :type first_parameter_group: FirstParameterGroup or None
+        :type first_parameter_group: FirstParameterGroup
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         header_one = None
         if first_parameter_group is not None:

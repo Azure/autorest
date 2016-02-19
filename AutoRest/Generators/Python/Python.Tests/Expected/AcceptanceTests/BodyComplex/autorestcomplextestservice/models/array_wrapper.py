@@ -24,7 +24,5 @@ class ArrayWrapper(Model):
         'array': {'key': 'array', 'type': '[str]'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.array = None
-
-        super(ArrayWrapper, self).__init__(*args, **kwargs)
+    def __init__(self, array=None):
+        self.array = array

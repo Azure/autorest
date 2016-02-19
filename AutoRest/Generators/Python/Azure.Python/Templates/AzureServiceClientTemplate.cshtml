@@ -49,7 +49,7 @@ class @(Model.Name)Configuration(AzureConfiguration):
 @foreach(var property in Model.Properties)
 {
 @:    @ParameterWrapComment(string.Empty, ServiceClientTemplateModel.GetPropertyDocumentationString(property))
-@:    @ParameterWrapComment(string.Empty, ":type " + property.Name + ": " + MethodTemplateModel.GetDocumentationType(property.Type, property.IsRequired))
+@:    @ParameterWrapComment(string.Empty, ":type " + property.Name + ": " + MethodTemplateModel.GetDocumentationType(property.Type))
 }
     :param str base_url: Service URL
     :param str filepath: Existing config

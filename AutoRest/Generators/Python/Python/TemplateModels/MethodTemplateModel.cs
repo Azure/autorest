@@ -467,7 +467,7 @@ namespace Microsoft.Rest.Generator.Python
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1026:DefaultParametersShouldNotBeUsed"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
-        public static string GetDocumentationType(IType type, bool isRequired = true)
+        public static string GetDocumentationType(IType type)
         {
             if (type == null)
             {
@@ -503,12 +503,6 @@ namespace Microsoft.Rest.Generator.Python
             else if (type is CompositeType)
             {
                 result = type.Name;
-            }
-
-            //If None is allowed
-            if (!isRequired)
-            {
-                result += " or None";
             }
 
             return result;
@@ -555,26 +549,39 @@ namespace Microsoft.Rest.Generator.Python
                 if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
                     transformation.OutputParameter.Type is CompositeType)
                 {
-                    builder.AppendLine("{0} = models.{1}()",
+                    List<string> combinedParams = new List<string>();
+                    var comps = ServiceClient.ModelTypes.Where(x => x.Name == transformation.OutputParameter.Type.Name);
+                    var composite = comps.First();
+
+                    foreach (var mapping in transformation.ParameterMappings)
+                    {
+                        var mappedParams = composite.Properties.Where(x => x.Name == mapping.InputParameter.Name);
+                        if (mappedParams.Any())
+                        {
+                            var param = mappedParams.First();
+                            combinedParams.Add(string.Format(CultureInfo.InvariantCulture, "{0}={0}", param.Name));
+                        }
+                    }
+
+                    builder.AppendLine("{0} = models.{1}({2})",
                         transformation.OutputParameter.Name,
-                        transformation.OutputParameter.Type.Name);
+                        transformation.OutputParameter.Type.Name,
+                        string.Join(", ", combinedParams));
                 }
                 else
                 {
                     builder.AppendLine("{0} = None",
                             transformation.OutputParameter.Name);
-                }
-
-                builder.AppendLine("if {0}:", BuildNullCheckExpression(transformation))
+                    builder.AppendLine("if {0}:", BuildNullCheckExpression(transformation))
                        .Indent();
-                foreach (var mapping in transformation.ParameterMappings)
-                {
-                    builder.AppendLine("{0}{1}",
-                        transformation.OutputParameter.Name,
-                        mapping);
+                    foreach (var mapping in transformation.ParameterMappings)
+                    {
+                        builder.AppendLine("{0}{1}",
+                            transformation.OutputParameter.Name,
+                            mapping);
+                    }
+                    builder.Outdent();
                 }
-
-                builder.Outdent();
             }
 
             return builder.ToString();

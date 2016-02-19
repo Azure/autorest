@@ -44,11 +44,12 @@ class LROsCustomHeaderOperations(object):
         the Azure-AsyncOperation header for operation status
 
         :param product: Product to put
-        :type product: Product or None
+        :type product: Product
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Product or msrest.pipeline.ClientRawResponse
+        :rtype: Product
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/lro/customheader/putasync/retry/succeeded'
@@ -128,11 +129,12 @@ class LROsCustomHeaderOperations(object):
         the last poll returns a ‘200’ with ProvisioningState=’Succeeded’
 
         :param product: Product to put
-        :type product: Product or None
+        :type product: Product
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: Product or msrest.pipeline.ClientRawResponse
+        :rtype: Product
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/lro/customheader/put/201/creating/succeeded/200'
@@ -207,11 +209,12 @@ class LROsCustomHeaderOperations(object):
         success
 
         :param product: Product to put
-        :type product: Product or None
+        :type product: Product
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/lro/customheader/post/202/retry/200'
@@ -281,11 +284,12 @@ class LROsCustomHeaderOperations(object):
         the Azure-AsyncOperation header for operation status
 
         :param product: Product to put
-        :type product: Product or None
+        :type product: Product
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/lro/customheader/postasync/retry/succeeded'

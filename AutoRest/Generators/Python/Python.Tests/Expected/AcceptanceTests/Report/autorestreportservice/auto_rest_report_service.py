@@ -60,7 +60,8 @@ class AutoRestReportService(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: dict or msrest.pipeline.ClientRawResponse
+        :rtype: dict
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/report'

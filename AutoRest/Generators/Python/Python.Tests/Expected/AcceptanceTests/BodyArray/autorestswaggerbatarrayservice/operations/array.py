@@ -39,7 +39,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/null'
@@ -79,7 +80,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/invalid'
@@ -119,7 +121,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/empty'
@@ -161,7 +164,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/empty'
@@ -198,7 +202,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/boolean/tfft'
@@ -240,7 +245,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/boolean/tfft'
@@ -277,7 +283,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/boolean/true.null.false'
@@ -317,7 +324,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/boolean/true.boolean.false'
@@ -357,7 +365,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/integer/1.-1.3.300'
@@ -399,7 +408,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/integer/1.-1.3.300'
@@ -436,7 +446,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/integer/1.null.zero'
@@ -476,7 +487,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/integer/1.integer.0'
@@ -516,7 +528,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/long/1.-1.3.300'
@@ -558,7 +571,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/long/1.-1.3.300'
@@ -595,7 +609,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/long/1.null.zero'
@@ -635,7 +650,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/long/1.integer.0'
@@ -675,7 +691,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/float/0--0.01-1.2e20'
@@ -717,7 +734,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/float/0--0.01-1.2e20'
@@ -754,7 +772,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/float/0.0-null-1.2e20'
@@ -794,7 +813,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/float/1.number.0'
@@ -834,7 +854,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/double/0--0.01-1.2e20'
@@ -876,7 +897,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/double/0--0.01-1.2e20'
@@ -913,7 +935,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/double/0.0-null-1.2e20'
@@ -953,7 +976,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/double/1.number.0'
@@ -993,7 +1017,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/string/foo1.foo2.foo3'
@@ -1035,7 +1060,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/string/foo1.foo2.foo3'
@@ -1072,7 +1098,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/string/foo.null.foo2'
@@ -1112,7 +1139,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/string/foo.123.foo2'
@@ -1152,7 +1180,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/date/valid'
@@ -1194,7 +1223,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/date/valid'
@@ -1231,7 +1261,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/date/invalidnull'
@@ -1271,7 +1302,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/date/invalidchars'
@@ -1312,7 +1344,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/date-time/valid'
@@ -1355,7 +1388,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/date-time/valid'
@@ -1392,7 +1426,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/date-time/invalidnull'
@@ -1432,7 +1467,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/date-time/invalidchars'
@@ -1473,7 +1509,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/date-time-rfc1123/valid'
@@ -1516,7 +1553,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/date-time-rfc1123/valid'
@@ -1553,7 +1591,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/duration/valid'
@@ -1595,7 +1634,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/duration/valid'
@@ -1633,7 +1673,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/byte/valid'
@@ -1676,7 +1717,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/byte/valid'
@@ -1714,7 +1756,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/prim/byte/invalidnull'
@@ -1754,7 +1797,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/complex/null'
@@ -1794,7 +1838,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/complex/empty'
@@ -1835,7 +1880,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/complex/itemnull'
@@ -1876,7 +1922,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/complex/itemempty'
@@ -1917,7 +1964,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/complex/valid'
@@ -1960,7 +2008,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/complex/valid'
@@ -1997,7 +2046,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/array/null'
@@ -2037,7 +2087,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/array/empty'
@@ -2078,7 +2129,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/array/itemnull'
@@ -2118,7 +2170,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/array/itemempty'
@@ -2159,7 +2212,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/array/valid'
@@ -2202,7 +2256,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/array/valid'
@@ -2239,7 +2294,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/dictionary/null'
@@ -2279,7 +2335,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/dictionary/empty'
@@ -2321,7 +2378,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/dictionary/itemnull'
@@ -2363,7 +2421,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/dictionary/itemempty'
@@ -2405,7 +2464,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/dictionary/valid'
@@ -2449,7 +2509,8 @@ class Array(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/array/dictionary/valid'
