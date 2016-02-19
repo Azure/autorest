@@ -488,7 +488,7 @@
     },
     "Foo": {
       "properties": {
-        "BarPoint": {
+        "Bar.Point": {
           "$ref": "#/definitions/Bar",
           "description": "Bar point"
         }
