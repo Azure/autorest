@@ -61,10 +61,10 @@ namespace Microsoft.Rest.Generator.Azure.Python
             Settings.AddCredentials = true;
             AzureExtensions.UpdateHeadMethods(serviceClient);
             AzureExtensions.ParseODataExtension(serviceClient);
-            AzureExtensions.FlattenResourceProperties(serviceClient);
+            Extensions.FlattenModels(serviceClient);
             AzureExtensions.AddAzureProperties(serviceClient);
             AzureExtensions.SetDefaultResponses(serviceClient);
-            AzureExtensions.AddParameterGroups(serviceClient);
+            Extensions.AddParameterGroups(serviceClient);
 
             base.NormalizeClientModel(serviceClient);
             NormalizeApiVersion(serviceClient);
@@ -146,7 +146,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
                 }
             }
 
-            AzureExtensions.RemoveUnreferencedTypes(serviceClient, convertedTypes.Keys.Cast<CompositeType>().Select(t => t.Name));
+            Extensions.RemoveUnreferencedTypes(serviceClient, new HashSet<string>(convertedTypes.Keys.Cast<CompositeType>().Select(t => t.Name)));
         }
 
         /// <summary>

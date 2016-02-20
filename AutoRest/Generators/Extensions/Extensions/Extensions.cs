@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
@@ -18,6 +19,7 @@ namespace Microsoft.Rest.Generator
     {
         public const string SkipUrlEncodingExtension = "x-ms-skip-url-encoding";
         public const string NameOverrideExtension = "x-ms-client-name";
+        public const string FlattenExtension = "x-ms-client-flatten";
         public const string ParameterGroupExtension = "x-ms-parameter-grouping";
         
         /// <summary>
@@ -28,8 +30,174 @@ namespace Microsoft.Rest.Generator
         /// <returns></returns>
         public static void NormalizeClientModel(ServiceClient serviceClient, Settings settings)
         {
+            FlattenModels(serviceClient);
             FlattenRequestPayload(serviceClient, settings);
             AddParameterGroups(serviceClient);
+        }
+
+        /// <summary>
+        /// Flattens the Resource Properties.
+        /// </summary>
+        /// <param name="serviceClient"></param>
+        public static void FlattenModels(ServiceClient serviceClient)
+        {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
+            HashSet<string> typesToDelete = new HashSet<string>();
+            foreach (var compositeType in serviceClient.ModelTypes)
+            {
+                if (compositeType.Properties.Any(p => ShouldBeFlattened(p))
+                    && !typesToDelete.Contains(compositeType.Name))
+                {
+                    List<Property> oldProperties = compositeType.Properties.ToList();
+                    compositeType.Properties.Clear();
+                    foreach (Property innerProperty in oldProperties)
+                    {
+                        if (ShouldBeFlattened(innerProperty))
+                        {
+                            FlattenProperty(innerProperty, typesToDelete)
+                                .ForEach(p => compositeType.Properties.Add(p));
+                        }
+                        else
+                        {
+                            compositeType.Properties.Add(innerProperty);
+                        }
+                    }
+
+                    // Remove conflicts
+                    foreach (Property innerProperty in compositeType.ComposedProperties)
+                    {
+                        var conflictProperties = compositeType.ComposedProperties
+                            .Where(p => p.Name == innerProperty.Name && p.SerializedName != innerProperty.SerializedName);
+
+                        if (conflictProperties.Any())
+                        {
+                            innerProperty.Name = innerProperty.SerializedName;
+                            foreach (var cp in conflictProperties)
+                            {
+                                cp.Name = cp.SerializedName;
+                            }
+                        }
+                    }
+                }
+            }
+
+            RemoveUnreferencedTypes(serviceClient, typesToDelete);
+        }
+
+        private static IEnumerable<Property> FlattenProperty(Property propertyToFlatten, HashSet<string> typesToDelete)
+        {
+            if (propertyToFlatten == null)
+            {
+                throw new ArgumentNullException("propertyToFlatten");
+            }
+            if (typesToDelete == null)
+            {
+                throw new ArgumentNullException("typesToDelete");
+            }
+
+            CompositeType typeToFlatten = propertyToFlatten.Type as CompositeType;
+            if (typeToFlatten == null)
+            {
+                throw new ArgumentException("Only composite properties can be decorated with x-ms-client-flatten extensions.", "propertyToFlatten");
+            }
+
+            List<Property> extractedProperties = new List<Property>();
+            foreach (Property innerProperty in typeToFlatten.Properties)
+            {
+                Debug.Assert(typeToFlatten.SerializedName != null);
+                Debug.Assert(innerProperty.SerializedName != null);
+
+                if (ShouldBeFlattened(innerProperty))
+                {
+                    extractedProperties.AddRange(FlattenProperty(innerProperty, typesToDelete)
+                        .Select(fp => UpdateSerializedNameWithPathHierarchy(fp, propertyToFlatten.SerializedName, false)));
+                }
+                else
+                {
+                    Property clonedProperty = (Property)innerProperty.Clone();
+                    UpdateSerializedNameWithPathHierarchy(clonedProperty, propertyToFlatten.SerializedName, true);
+                    extractedProperties.Add(clonedProperty);
+                }
+            }
+
+            typesToDelete.Add(typeToFlatten.Name);
+
+            return extractedProperties;
+        }
+
+        private static Property UpdateSerializedNameWithPathHierarchy(Property property, string basePath, bool escapePropertyName)
+        {
+            if (property == null)
+            {
+                throw new ArgumentNullException("property");
+            }
+            if (basePath == null)
+            {
+                basePath = "";
+            }
+
+            basePath = basePath.Replace(".", "\\.");
+            string propertyName = property.SerializedName;
+            if (escapePropertyName)
+            {
+                propertyName = propertyName.Replace(".", "\\.");
+            }
+            property.SerializedName = basePath + "." + propertyName;
+            return property;
+        }
+
+        private static bool ShouldBeFlattened(Property propertyToCheck)
+        {
+            if (propertyToCheck == null)
+            {
+                throw new ArgumentNullException("propertyToCheck");
+            }
+
+            return propertyToCheck.Extensions.ContainsKey(FlattenExtension) &&
+                propertyToCheck.Extensions[FlattenExtension] as bool? == true;
+        }
+
+        /// <summary>
+        /// Cleans all model types that are not used
+        /// </summary>
+        /// <param name="serviceClient"></param>
+        /// <param name="typeNames"></param>
+        public static void RemoveUnreferencedTypes(ServiceClient serviceClient, HashSet<string> typeNames)
+        {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
+            if (typeNames == null)
+            {
+                throw new ArgumentNullException("typeNames");
+            }
+
+            while (typeNames.Count > 0)
+            {
+                string typeName = typeNames.First();
+                typeNames.Remove(typeName);
+
+                var typeToDelete = serviceClient.ModelTypes.First(t => t.Name == typeName);
+
+                var isUsedInResponses = serviceClient.Methods.Any(m => m.Responses.Any(r => r.Value.Body == typeToDelete));
+                var isUsedInParameters = serviceClient.Methods.Any(m => m.Parameters.Any(p => p.Type == typeToDelete));
+                var isBaseType = serviceClient.ModelTypes.Any(t => t.BaseModelType == typeToDelete);
+                var isUsedInProperties = serviceClient.ModelTypes.Where(t => !typeNames.Contains(t.Name))
+                                                                 .Any(t => t.Properties.Any(p => p.Type == typeToDelete));
+                if (!isUsedInResponses &&
+                    !isUsedInParameters &&
+                    !isBaseType &&
+                    !isUsedInProperties)
+                {
+                    serviceClient.ModelTypes.Remove(typeToDelete);
+                }
+            }
         }
 
         /// <summary>
@@ -114,7 +282,7 @@ namespace Microsoft.Rest.Generator
 
                     foreach (Property property in parameterGroups[parameterGroupName].Keys)
                     {
-                        //Either the paramter group is "empty" since it is new, or it is "full" and we don't allow different schemas
+                        //Either the parameter group is "empty" since it is new, or it is "full" and we don't allow different schemas
                         if (createdNewCompositeType)
                         {
                             parameterGroupType.Properties.Add(property);

@@ -64,10 +64,10 @@ namespace Microsoft.Rest.Generator.Java.Azure
             Settings.AddCredentials = true;
             AzureExtensions.UpdateHeadMethods(serviceClient);
             AzureExtensions.ParseODataExtension(serviceClient);
-            AzureExtensions.FlattenResourceProperties(serviceClient);
+            Extensions.FlattenModels(serviceClient);
             AzureExtensions.AddAzureProperties(serviceClient);
             AzureExtensions.SetDefaultResponses(serviceClient);
-            AzureExtensions.AddParameterGroups(serviceClient);
+            Extensions.AddParameterGroups(serviceClient);
             AzureExtensions.AddPageableMethod(serviceClient, _namer);
             _namer.NormalizeClientModel(serviceClient);
             _namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
