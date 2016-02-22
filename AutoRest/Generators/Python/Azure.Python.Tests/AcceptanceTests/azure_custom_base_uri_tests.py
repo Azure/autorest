@@ -42,7 +42,7 @@ sys.path.append(join(root, "ClientRuntimes" , "Python", "msrestazure"))
 log_level = int(os.environ.get('PythonLogLevel', 30))
 
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
-sys.path.append(join(tests, "CustomBaseUri"))
+sys.path.append(join(tests, "AzureCustomBaseUri"))
 
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
@@ -60,7 +60,7 @@ class CustomBaseUriTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
-        config = AutoRestParameterizedHostTestClientConfiguration(cred, "host:3000")
+        config = AutoRestParameterizedHostTestClientConfiguration(cred, host="host:3000")
 
         config.log_level = log_level
         cls.client = AutoRestParameterizedHostTestClient(config)
