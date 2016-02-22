@@ -3,6 +3,7 @@
 
 using System.IO;
 using System.Linq;
+using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Modeler.Swagger;
 using Xunit;
 
@@ -78,17 +79,24 @@ namespace Microsoft.Rest.Generator.Tests
             Assert.True(conflictedProduct.Properties.Any(p => p.SerializedName == "max_product_display_name"
                                                        && p.Name == "max_product_display_name"));
             Assert.True(conflictedProduct.Properties.Any(p => p.SerializedName == "details.max_product_display_name"
-                                                       && p.Name == "details.max_product_display_name"));
+                                                       && p.Name == "ConflictedProductProperties_max_product_display_name"));
             Assert.True(conflictedProduct.Properties.Any(p => p.SerializedName == "simpleDetails.max_product_display_name"
-                                                       && p.Name == "simpleDetails.max_product_display_name"));
+                                                       && p.Name == "SimpleProductProperties_max_product_display_name"));
             Assert.True(conflictedProduct.Properties.Any(p => p.SerializedName == "details.base_product_description"
-                                                       && p.Name == "details.base_product_description"));
+                                                       && p.Name == "ConflictedProduct_base_product_description"));
 
             var recursiveProduct = clientModel.ModelTypes.First(m => m.Name == "RecursiveProduct");
             Assert.True(recursiveProduct.Properties.Any(p => p.SerializedName == "properties.name"
                                                        && p.Name == "name"));
             Assert.True(recursiveProduct.Properties.Any(p => p.SerializedName == "properties.parent"
                                                        && p.Name == "parent"));
+
+            var error = clientModel.ModelTypes.First(m => m.Name == "Error");
+            Assert.Equal(3, error.Properties.Count);
+            Assert.True(error.Properties.Any(p => p.SerializedName == "code" && p.Name == "code"));
+            Assert.True(error.Properties.Any(p => p.SerializedName == "message" && p.Name == "message"));
+            Assert.True(error.Properties.Any(p => p.SerializedName == "parentError" && p.Name == "parentError"));
+            Assert.True(error.Properties.First(p => p.SerializedName == "parentError" && p.Name == "parentError").Type == error);
         }
     }
 }

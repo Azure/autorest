@@ -20,6 +20,7 @@ namespace Microsoft.Rest.Generator
         public const string SkipUrlEncodingExtension = "x-ms-skip-url-encoding";
         public const string NameOverrideExtension = "x-ms-client-name";
         public const string FlattenExtension = "x-ms-client-flatten";
+        public const string FlattenOriginalTypeName = "x-ms-client-flatten-original-type-name";
         public const string ParameterGroupExtension = "x-ms-parameter-grouping";
         
         /// <summary>
@@ -56,7 +57,7 @@ namespace Microsoft.Rest.Generator
                     compositeType.Properties.Clear();
                     foreach (Property innerProperty in oldProperties)
                     {
-                        if (ShouldBeFlattened(innerProperty))
+                        if (ShouldBeFlattened(innerProperty) && compositeType != innerProperty.Type)
                         {
                             FlattenProperty(innerProperty, typesToDelete)
                                 .ForEach(p => compositeType.Properties.Add(p));
@@ -68,19 +69,34 @@ namespace Microsoft.Rest.Generator
                     }
 
                     // Remove conflicts
-                    foreach (Property innerProperty in compositeType.ComposedProperties)
+                    foreach (Property innerProperty in compositeType.Properties)
                     {
-                        var conflictProperties = compositeType.ComposedProperties
+                        // Check conflict among peers
+
+                        var conflictingPeers = compositeType.Properties
                             .Where(p => p.Name == innerProperty.Name && p.SerializedName != innerProperty.SerializedName);
 
-                        if (conflictProperties.Any())
+                        if (conflictingPeers.Any())
                         {
-                            innerProperty.Name = innerProperty.SerializedName;
-                            foreach (var cp in conflictProperties)
+                            foreach (var cp in conflictingPeers.Concat(new[] { innerProperty }))
                             {
-                                cp.Name = cp.SerializedName;
+                                if (cp.Extensions.ContainsKey(FlattenOriginalTypeName))
+                                {
+                                    cp.Name = cp.Extensions[FlattenOriginalTypeName].ToString() + "_" + cp.Name;
+                                }
                             }
                         }
+
+                        if (compositeType.BaseModelType != null)
+                        {
+                            var conflictingParentProperties = compositeType.BaseModelType.ComposedProperties
+                                .Where(p => p.Name == innerProperty.Name && p.SerializedName != innerProperty.SerializedName);
+
+                            if (conflictingParentProperties.Any())
+                            {
+                                innerProperty.Name = compositeType.Name + "_" + innerProperty.Name;                                
+                            }
+                        }                        
                     }
                 }
             }
@@ -111,7 +127,7 @@ namespace Microsoft.Rest.Generator
                 Debug.Assert(typeToFlatten.SerializedName != null);
                 Debug.Assert(innerProperty.SerializedName != null);
 
-                if (ShouldBeFlattened(innerProperty))
+                if (ShouldBeFlattened(innerProperty) && typeToFlatten != innerProperty.Type)
                 {
                     extractedProperties.AddRange(FlattenProperty(innerProperty, typesToDelete)
                         .Select(fp => UpdateSerializedNameWithPathHierarchy(fp, propertyToFlatten.SerializedName, false)));
@@ -119,6 +135,7 @@ namespace Microsoft.Rest.Generator
                 else
                 {
                     Property clonedProperty = (Property)innerProperty.Clone();
+                    clonedProperty.Extensions[FlattenOriginalTypeName] = typeToFlatten.Name;
                     UpdateSerializedNameWithPathHierarchy(clonedProperty, propertyToFlatten.SerializedName, true);
                     extractedProperties.Add(clonedProperty);
                 }
@@ -185,12 +202,14 @@ namespace Microsoft.Rest.Generator
 
                 var typeToDelete = serviceClient.ModelTypes.First(t => t.Name == typeName);
 
+                var isUsedInErrorTypes = serviceClient.ErrorTypes.Any(e => e.Name == typeName);
                 var isUsedInResponses = serviceClient.Methods.Any(m => m.Responses.Any(r => r.Value.Body == typeToDelete));
                 var isUsedInParameters = serviceClient.Methods.Any(m => m.Parameters.Any(p => p.Type == typeToDelete));
                 var isBaseType = serviceClient.ModelTypes.Any(t => t.BaseModelType == typeToDelete);
                 var isUsedInProperties = serviceClient.ModelTypes.Where(t => !typeNames.Contains(t.Name))
                                                                  .Any(t => t.Properties.Any(p => p.Type == typeToDelete));
-                if (!isUsedInResponses &&
+                if (!isUsedInErrorTypes &&
+                    !isUsedInResponses &&
                     !isUsedInParameters &&
                     !isBaseType &&
                     !isUsedInProperties)

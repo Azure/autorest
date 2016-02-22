@@ -245,8 +245,9 @@
         "message": {
           "type": "string"
         },
-        "fields": {
-          "type": "string"
+        "parentError": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/Error"
         }
       }
     }
