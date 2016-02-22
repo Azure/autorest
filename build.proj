@@ -67,7 +67,8 @@
     <!-- Only set set this to true for testing the code sign workflow locally. -->
     <DelaySign Condition =" '$(DelaySign)' == '' ">false</DelaySign>
     <Scope Condition=" '$(Scope)' == '' ">all</Scope>
-    <ZipExe>$(LibraryToolsFolder)\7-Zip\7z.exe</ZipExe>
+    <ZipExeFolder>$(LibraryToolsFolder)\7-Zip</ZipExeFolder>
+    <ZipExe>$(ZipExeFolder)\7z.exe</ZipExe>
     <DnxVersion>1.0.0-rc1-final</DnxVersion>
   </PropertyGroup>
 
@@ -267,7 +268,14 @@
   <!-- Conditional import due to a bug in mono related to asterisk -->
   <Import Condition=" '$(OS)' == 'Windows_NT'" Project="tools\NuGet.targets"/>
 
-  <Target Name="SignAssembliesInDnxPackages">
+  <Target Name="GetZip">
+    <Message Text="Ensure 7zip is available" />
+    <Exec
+      Command="$(LibraryToolsFolder)\AzCopy\AzCopy.exe /Source:https://azuresdktools.blob.core.windows.net/7-zip  /S /Dest:$(ZipExeFolder) /Y"
+      Condition="!Exists('$(ZipExe)')" />
+  </Target>
+  
+  <Target Name="SignAssembliesInDnxPackages" DependsOnTargets="GetZip">
     <ItemGroup>
       <_DnxPackages Include="$(LibraryRoot)\dnx\*.nupkg" Exclude="$(LibraryRoot)\dnx\*Tests*.nupkg" />
     </ItemGroup> 
