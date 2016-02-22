@@ -46,16 +46,6 @@ namespace Microsoft.Rest.Generator.Azure
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         public static readonly Func<HttpStatusCode, bool> HttpHeadStatusCodeSuccessFunc = code => (int)code >= 200 && (int)code < 300;
 
-        private static IEnumerable<string> ResourcePropertyNames =  
-            new List<string>
-            { 
-                "Id",
-                "Name",
-                "Type",
-                "Location",
-                "Tags"
-            }.OrderBy(s=> s);
-
         /// <summary>
         /// Normalizes client model using Azure-specific extensions.
         /// </summary>
@@ -541,20 +531,6 @@ namespace Microsoft.Rest.Generator.Azure
             }
             
             return requestIdName;
-        }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
-        private static void CheckAzureResourceProperties(CompositeType compositeType)
-        {
-            // If derived from resource with x-ms-azure-resource then resource should have resource specific properties
-            var missingResourceProperties = ResourcePropertyNames.Select(p => p.ToLowerInvariant())
-                                               .Except(compositeType.ComposedProperties.Select(n => n.Name.ToLowerInvariant()));
-
-            if (missingResourceProperties.Count() != 0)
-            {
-                Logger.LogWarning(Resources.ResourcePropertyMismatch,
-                    string.Join(", ", missingResourceProperties));
-            }
-        }
+        }        
     }
 }
