@@ -672,6 +672,7 @@ For Azure generators, composite clients will not have ApiVersion global property
 In order to generate a composite client a custom metadata needs to be created.
 
 **Schema**: 
+
 Field Name | Type | Description
 ---|:---:|---
 info| [`Info Object`](http://swagger.io/specification/#infoObject) | **Required**. The info object defines the name and description of the composite client.
