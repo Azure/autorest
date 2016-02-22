@@ -15,8 +15,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
 
-    /// <summary>
-    /// </summary>
     [JsonObject("shark")]
     public partial class Shark : Fish
     {

@@ -23,7 +23,7 @@ class Foo(Model):
     _required = []
 
     _attribute_map = {
-        'bar_point': {'key': 'BarPoint', 'type': 'Bar'},
+        'bar_point': {'key': 'Bar.Point', 'type': 'Bar'},
     }
 
     def __init__(self, bar_point=None):

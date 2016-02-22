@@ -15,8 +15,6 @@ namespace Fixtures.AcceptanceTestsBodyComplex.Models
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
 
-    /// <summary>
-    /// </summary>
     public partial class Datetimerfc1123Wrapper
     {
         /// <summary>

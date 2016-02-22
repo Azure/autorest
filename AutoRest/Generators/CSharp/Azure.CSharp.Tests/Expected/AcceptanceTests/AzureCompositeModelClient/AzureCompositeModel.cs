@@ -312,7 +312,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
                         new Iso8601TimeSpanConverter()
                     }
             };
-            SerializationSettings.Converters.Add(new ResourceJsonConverter()); 
             DeserializationSettings = new JsonSerializerSettings
             {
                 DateFormatHandling = DateFormatHandling.IsoDateFormat,
@@ -327,7 +326,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
             };
             SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<Fish>("fishtype"));
             DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<Fish>("fishtype"));
-            DeserializationSettings.Converters.Add(new ResourceJsonConverter()); 
             DeserializationSettings.Converters.Add(new CloudErrorJsonConverter()); 
         }    
         /// <summary>

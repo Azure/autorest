@@ -15,8 +15,6 @@ namespace Fixtures.AcceptanceTestsBodyFile.Models
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
 
-    /// <summary>
-    /// </summary>
     public partial class Error
     {
         /// <summary>

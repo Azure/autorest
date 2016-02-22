@@ -16,8 +16,6 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient.Models
     using Microsoft.Rest.Serialization;
     using Microsoft.Rest.Azure;
 
-    /// <summary>
-    /// </summary>
     [JsonObject("salmon")]
     public partial class Salmon : Fish
     {

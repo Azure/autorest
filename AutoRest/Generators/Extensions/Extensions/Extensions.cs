@@ -50,14 +50,14 @@ namespace Microsoft.Rest.Generator
             HashSet<string> typesToDelete = new HashSet<string>();
             foreach (var compositeType in serviceClient.ModelTypes)
             {
-                if (compositeType.Properties.Any(p => ShouldBeFlattened(p))
+                if (compositeType.Properties.Any(p => p.ShouldBeFlattened())
                     && !typesToDelete.Contains(compositeType.Name))
                 {
                     List<Property> oldProperties = compositeType.Properties.ToList();
                     compositeType.Properties.Clear();
                     foreach (Property innerProperty in oldProperties)
                     {
-                        if (ShouldBeFlattened(innerProperty) && compositeType != innerProperty.Type)
+                        if (innerProperty.ShouldBeFlattened() && compositeType != innerProperty.Type)
                         {
                             FlattenProperty(innerProperty, typesToDelete)
                                 .ForEach(p => compositeType.Properties.Add(p));
@@ -127,7 +127,7 @@ namespace Microsoft.Rest.Generator
                 Debug.Assert(typeToFlatten.SerializedName != null);
                 Debug.Assert(innerProperty.SerializedName != null);
 
-                if (ShouldBeFlattened(innerProperty) && typeToFlatten != innerProperty.Type)
+                if (innerProperty.ShouldBeFlattened() && typeToFlatten != innerProperty.Type)
                 {
                     extractedProperties.AddRange(FlattenProperty(innerProperty, typesToDelete)
                         .Select(fp => UpdateSerializedNameWithPathHierarchy(fp, propertyToFlatten.SerializedName, false)));
@@ -165,17 +165,6 @@ namespace Microsoft.Rest.Generator
             }
             property.SerializedName = basePath + "." + propertyName;
             return property;
-        }
-
-        private static bool ShouldBeFlattened(Property propertyToCheck)
-        {
-            if (propertyToCheck == null)
-            {
-                throw new ArgumentNullException("propertyToCheck");
-            }
-
-            return propertyToCheck.Extensions.ContainsKey(FlattenExtension) &&
-                propertyToCheck.Extensions[FlattenExtension] as bool? == true;
         }
 
         /// <summary>
