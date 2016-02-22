@@ -22,8 +22,6 @@ class ParameterGroupingPostOptionalParameters(Model):
 
     _required = []
 
-    def __init__(self, *args, **kwargs):
-        self.custom_header = None
-        self.query = None
-
-        super(ParameterGroupingPostOptionalParameters, self).__init__(*args, **kwargs)
+    def __init__(self, custom_header=None, query=None):
+        self.custom_header = custom_header
+        self.query = query

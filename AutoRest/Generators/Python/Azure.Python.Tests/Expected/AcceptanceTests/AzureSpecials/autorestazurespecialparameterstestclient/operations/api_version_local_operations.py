@@ -44,7 +44,8 @@ class ApiVersionLocalOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/azurespecials/apiVersion/method/string/none/query/local/2.0'
@@ -82,11 +83,12 @@ class ApiVersionLocalOperations(object):
 
         :param api_version: This should appear as a method parameter, use
          value null, this should result in no serialized parameter
-        :type api_version: str or None
+        :type api_version: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/azurespecials/apiVersion/method/string/none/query/local/null'
@@ -129,7 +131,8 @@ class ApiVersionLocalOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/azurespecials/apiVersion/path/string/none/query/local/2.0'
@@ -171,7 +174,8 @@ class ApiVersionLocalOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/azurespecials/apiVersion/swagger/string/none/query/local/2.0'

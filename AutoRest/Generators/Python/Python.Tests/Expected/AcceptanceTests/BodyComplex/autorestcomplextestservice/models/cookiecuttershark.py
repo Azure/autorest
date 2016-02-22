@@ -14,11 +14,17 @@ from .shark import Shark
 
 class Cookiecuttershark(Shark):
     """Cookiecuttershark
+
+    :param str species:
+    :param float length:
+    :param list siblings:
+    :param str fishtype: Polymorphic Discriminator
+    :param int age:
+    :param datetime birthday:
     """
 
     _required = []
 
-    def __init__(self, *args, **kwargs):
-        super(Cookiecuttershark, self).__init__(*args, **kwargs)
-
+    def __init__(self, length, birthday, species=None, siblings=None, age=None):
+        super(Cookiecuttershark, self).__init__(species=species, length=length, siblings=siblings, age=age, birthday=birthday)
         self.fishtype = 'cookiecuttershark'

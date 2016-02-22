@@ -21,6 +21,8 @@ namespace Microsoft.Rest.Generator.Azure.Python
                 .ForEach(m => MethodTemplateModels.Add(new AzureMethodTemplateModel(m, serviceClient)));
             // Removing all models that contain the extension "x-ms-external", as they will be 
             // generated in python client runtime for azure - "ms-rest-azure".
+            ModelTemplateModels.Clear();
+            ModelTypes.ForEach(m => ModelTemplateModels.Add(new AzureModelTemplateModel(m, serviceClient)));
             ModelTemplateModels.RemoveAll(m => m.Extensions.ContainsKey(AzureExtensions.PageableExtension));
             ModelTemplateModels.RemoveAll(m => m.Extensions.ContainsKey(AzureExtensions.ExternalExtension));
 
@@ -98,6 +100,14 @@ namespace Microsoft.Rest.Generator.Azure.Python
             get
             {
                 return "\"msrest>=0.0.1\", \"msrestazure>=0.0.1\"";
+            }
+        }
+
+        public override bool NeedsExtraImport
+        {
+            get
+            {
+                return true;
             }
         }
     }

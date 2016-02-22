@@ -39,7 +39,8 @@ class Dictionary(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: DictionaryWrapper or msrest.pipeline.ClientRawResponse
+        :rtype: DictionaryWrapper
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/complex/dictionary/typed/valid'
@@ -77,15 +78,14 @@ class Dictionary(object):
         Put complex types with dictionary property
 
         :param default_program:
-        :type default_program: dict or None
+        :type default_program: dict
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
-        complex_body = models.DictionaryWrapper()
-        if default_program is not None:
-            complex_body.default_program = default_program
+        complex_body = models.DictionaryWrapper(default_program=default_program)
 
         # Construct URL
         url = '/complex/dictionary/typed/valid'
@@ -122,7 +122,8 @@ class Dictionary(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: DictionaryWrapper or msrest.pipeline.ClientRawResponse
+        :rtype: DictionaryWrapper
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/complex/dictionary/typed/empty'
@@ -160,15 +161,14 @@ class Dictionary(object):
         Put complex types with dictionary property which is empty
 
         :param default_program:
-        :type default_program: dict or None
+        :type default_program: dict
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
-        complex_body = models.DictionaryWrapper()
-        if default_program is not None:
-            complex_body.default_program = default_program
+        complex_body = models.DictionaryWrapper(default_program=default_program)
 
         # Construct URL
         url = '/complex/dictionary/typed/empty'
@@ -205,7 +205,8 @@ class Dictionary(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: DictionaryWrapper or msrest.pipeline.ClientRawResponse
+        :rtype: DictionaryWrapper
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/complex/dictionary/typed/null'
@@ -246,7 +247,8 @@ class Dictionary(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: DictionaryWrapper or msrest.pipeline.ClientRawResponse
+        :rtype: DictionaryWrapper
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/complex/dictionary/typed/notprovided'

@@ -39,7 +39,8 @@ class HttpRedirects(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/redirect/300'
@@ -75,7 +76,8 @@ class HttpRedirects(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: list or msrest.pipeline.ClientRawResponse
+        :rtype: list
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/redirect/300'
@@ -120,7 +122,8 @@ class HttpRedirects(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/redirect/301'
@@ -156,7 +159,8 @@ class HttpRedirects(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/redirect/301'
@@ -192,11 +196,12 @@ class HttpRedirects(object):
         to the caller for evaluation
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/redirect/301'
@@ -239,7 +244,8 @@ class HttpRedirects(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/redirect/302'
@@ -275,7 +281,8 @@ class HttpRedirects(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/redirect/302'
@@ -311,11 +318,12 @@ class HttpRedirects(object):
         to the caller for evaluation
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/redirect/302'
@@ -358,11 +366,12 @@ class HttpRedirects(object):
         status code
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/redirect/303'
@@ -405,7 +414,8 @@ class HttpRedirects(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/redirect/307'
@@ -441,7 +451,8 @@ class HttpRedirects(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/redirect/307'
@@ -475,11 +486,12 @@ class HttpRedirects(object):
         Put redirected with 307, resulting in a 200 after redirect
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/redirect/307'
@@ -520,11 +532,12 @@ class HttpRedirects(object):
         Patch redirected with 307, resulting in a 200 after redirect
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/redirect/307'
@@ -565,11 +578,12 @@ class HttpRedirects(object):
         Post redirected with 307, resulting in a 200 after redirect
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/redirect/307'
@@ -610,11 +624,12 @@ class HttpRedirects(object):
         Delete redirected with 307, resulting in a 200 after redirect
 
         :param boolean_value: Simple boolean value true
-        :type boolean_value: bool or None
+        :type boolean_value: bool
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/http/redirect/307'

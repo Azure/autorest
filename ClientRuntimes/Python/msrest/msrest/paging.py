@@ -41,6 +41,7 @@ class Paged(object):
     :param dict classes: A dictionary of class dependencies for
      deserialization.
     """
+    _attribute_map = {}
 
     def __init__(self, command, classes, raw_headers=None):
         self.next_link = ""
@@ -61,12 +62,20 @@ class Paged(object):
             for i in self.next():
                 yield i
 
-    def _validate_url(self):
-        """Validate next page URL."""
-        if self.next_link:
-            parsed = urlparse(self.next_link)
-            if not parsed.scheme or not parsed.netloc:
-                raise ValueError("Invalid URL: " + self.next_link)
+    @classmethod
+    def _get_attribute_map(cls):
+        """Required for parity to Model object for deserialization."""
+        return cls._attribute_map
+
+    @classmethod
+    def _get_required_attrs(cls):
+        """Required for parity to Model object for deserialization."""
+        return []
+
+    @classmethod
+    def _get_subtype_map(cls):
+        """Required for parity to Model object for deserialization."""
+        return {}
 
     @property
     def raw(self):
@@ -74,6 +83,13 @@ class Paged(object):
         if self._raw_headers:
             raw.add_headers(self._raw_headers)
         return raw
+
+    def _validate_url(self):
+        """Validate next page URL."""
+        if self.next_link:
+            parsed = urlparse(self.next_link)
+            if not parsed.scheme or not parsed.netloc:
+                raise ValueError("Invalid URL: " + self.next_link)
 
     def get(self, url):
         """Get arbitrary page.

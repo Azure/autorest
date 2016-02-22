@@ -2,3 +2,5 @@
 // Licensed under the MIT License. See License.txt in the project root for license information.
 
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "Microsoft.Rest.Generator.Tests.ExtensionsTests.#TestClientModelWithPayloadFlattening()")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic", Scope = "member", Target = "Microsoft.Rest.Generator.Tests.MappingExtensionsTests.#TestInputMapping()")]
+

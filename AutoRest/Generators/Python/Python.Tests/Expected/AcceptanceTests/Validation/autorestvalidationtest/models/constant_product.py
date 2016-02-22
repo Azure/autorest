@@ -27,8 +27,6 @@ class ConstantProduct(Model):
         'const_property2': {'key': 'constProperty2', 'type': 'str'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.const_property = None
-        self.const_property2 = None
-
-        super(ConstantProduct, self).__init__(*args, **kwargs)
+    def __init__(self, const_property, const_property2):
+        self.const_property = const_property
+        self.const_property2 = const_property2

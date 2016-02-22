@@ -43,7 +43,8 @@ class GroupOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: SampleResourceGroup or msrest.pipeline.ClientRawResponse
+        :rtype: SampleResourceGroup
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}'

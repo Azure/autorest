@@ -26,8 +26,6 @@ class StorageAccountCheckNameAvailabilityParameters(Model):
         'type': {'key': 'type', 'type': 'str'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.name = None
-        self.type = None
-
-        super(StorageAccountCheckNameAvailabilityParameters, self).__init__(*args, **kwargs)
+    def __init__(self, name, type=None):
+        self.name = name
+        self.type = type

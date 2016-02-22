@@ -138,6 +138,8 @@ class AADMixin(object):
         self.cred_store = kwargs.get('keyring', self._keyring)
         self.resource = kwargs.get('resource', resource)
         self.state = oauth.oauth2_session.generate_token()
+        self.store_key = "{}_{}".format(
+            self._auth_endpoint.strip('/'), self.store_key)
 
     def _check_state(self, response):
         """Validate state returned by AAD server.
@@ -151,6 +153,18 @@ class AADMixin(object):
             raise ValueError(
                 "State received from server does not match that of request.")
 
+    def _parse_token(self):
+        if self.token.get('expires_at'):
+            countdown = float(self.token['expires_at']) - time.time()
+            self.token['expires_in'] = countdown
+        kwargs = {}
+        if self.token.get('refresh_token'):
+            kwargs['auto_refresh_url'] = self.token_uri
+            kwargs['auto_refresh_kwargs'] = {'client_id': self.id,
+                                             'resource': self.resource}
+            kwargs['token_updater'] = self._default_token_cache
+        return kwargs
+
     def _default_token_cache(self, token):
         """Store token for future sessions.
 
@@ -158,7 +172,7 @@ class AADMixin(object):
         :rtype: None
         """
         self.token = token
-        keyring.set_password(self.cred_store, self.id, str(token))
+        keyring.set_password(self.cred_store, self.store_key, str(token))
 
     def _retrieve_stored_token(self):
         """Retrieve stored token for new session.
@@ -167,11 +181,28 @@ class AADMixin(object):
         :rtype: dict
         :return: Retrieved token.
         """
-        token = keyring.get_password(self.cred_store, self.id)
+        token = keyring.get_password(self.cred_store, self.store_key)
         if token is None:
             raise ValueError("No stored token found.")
-        else:
-            return ast.literal_eval(str(token))
+        self.token = ast.literal_eval(str(token))
+        self.signed_session()
+
+    def signed_session(self):
+        """Create token-friendly Requests session, using auto-refresh.
+        Used internally when a request is made.
+
+        :rtype: requests_oauthlib.OAuth2Session
+        :raises: TokenExpiredError if token can no longer be refreshed.
+        """
+        kwargs = self._parse_token()
+        try:
+            new_session = oauth.OAuth2Session(
+                self.id,
+                token=self.token,
+                **kwargs)
+            return new_session
+        except TokenExpiredError as err:
+            raise_with_traceback(Expired, "", err)
 
     def clear_cached_token(self):
         """Clear any stored tokens.
@@ -180,7 +211,7 @@ class AADMixin(object):
         :rtype: None
         """
         try:
-            keyring.delete_password(self.cred_store, self.id)
+            keyring.delete_password(self.cred_store, self.store_key)
         except keyring.errors.PasswordDeleteError:
             raise_with_traceback(KeyError, "Unable to clear token.")
 
@@ -203,6 +234,8 @@ class UserPassCredentials(OAuthTokenAuthentication, AADMixin):
       is 'https://management.core.windows.net/'.
     - verify (bool): Verify secure connection, default is 'True'.
     - keyring (str): Name of local token cache, default is 'AzureAAD'.
+    - cached (bool): If true, will not attempt to collect a token,
+      which can then be populated later from a cached token.
 
     :param str username: Account username.
     :param str password: Account password.
@@ -219,11 +252,22 @@ class UserPassCredentials(OAuthTokenAuthentication, AADMixin):
         super(UserPassCredentials, self).__init__(client_id, None)
         self._configure(**kwargs)
 
+        self.store_key += "_{}".format(username)
         self.username = username
         self.password = password
         self.secret = secret
         self.client = LegacyApplicationClient(client_id=self.id)
-        self.get_token()
+        if not kwargs.get('cached'):
+            self.set_token()
+
+    @classmethod
+    def retrieve_session(cls, username, client_id=None):
+        """Create ServicePrincipalCredentials from a cached token if it has not
+        yet expired.
+        """
+        session = cls(username, None, client_id=client_id, cached=True)
+        session._retrieve_stored_token()
+        return session
 
     def _setup_session(self):
         """Create token-friendly Requests session.
@@ -232,7 +276,7 @@ class UserPassCredentials(OAuthTokenAuthentication, AADMixin):
         """
         return oauth.OAuth2Session(client=self.client)
 
-    def get_token(self):
+    def set_token(self):
         """Get token using Username/Password credentials.
 
         :raises: AuthenticationError if credentials invalid, or call fails.
@@ -267,6 +311,8 @@ class ServicePrincipalCredentials(OAuthTokenAuthentication, AADMixin):
       is 'https://management.core.windows.net/'.
     - verify (bool): Verify secure connection, default is 'True'.
     - keyring (str): Name of local token cache, default is 'AzureAAD'.
+    - cached (bool): If true, will not attempt to collect a token,
+      which can then be populated later from a cached token.
 
     :param str client_id: Client ID.
     :param str secret: Client secret.
@@ -277,7 +323,17 @@ class ServicePrincipalCredentials(OAuthTokenAuthentication, AADMixin):
 
         self.secret = secret
         self.client = BackendApplicationClient(self.id)
-        self.get_token()
+        if not kwargs.get('cached'):
+            self.set_token()
+
+    @classmethod
+    def retrieve_session(cls, client_id):
+        """Create ServicePrincipalCredentials from a cached token if it has not
+        yet expired.
+        """
+        session = cls(client_id, None, cached=True)
+        session._retrieve_stored_token()
+        return session
 
     def _setup_session(self):
         """Create token-friendly Requests session.
@@ -286,7 +342,7 @@ class ServicePrincipalCredentials(OAuthTokenAuthentication, AADMixin):
         """
         return oauth.OAuth2Session(self.id, client=self.client)
 
-    def get_token(self):
+    def set_token(self):
         """Get token using Client ID/Secret credentials.
 
         :raises: AuthenticationError if credentials invalid, or call fails.
@@ -318,6 +374,8 @@ class InteractiveCredentials(OAuthTokenAuthentication, AADMixin):
       is 'https://management.core.windows.net/'.
     - verify (bool): Verify secure connection, default is 'True'.
     - keyring (str): Name of local token cache, default is 'AzureAAD'.
+    - cached (bool): If true, will not attempt to collect a token,
+      which can then be populated later from a cached token.
 
     :param str client_id: Client ID.
     :param str redirect: Redirect URL.
@@ -328,7 +386,17 @@ class InteractiveCredentials(OAuthTokenAuthentication, AADMixin):
         self._configure(**kwargs)
 
         self.redirect = redirect
-        self.get_token()
+        if not kwargs.get('cached'):
+            self.set_token()
+
+    @classmethod
+    def retrieve_session(cls, client_id, redirect):
+        """Create InteractiveCredentials from a cached token if it has not
+        yet expired.
+        """
+        session = cls(client_id, redirect, cached=True)
+        session._retrieve_stored_token()
+        return session
 
     def _setup_session(self):
         """Create token-friendly Requests session.
@@ -338,19 +406,6 @@ class InteractiveCredentials(OAuthTokenAuthentication, AADMixin):
         return oauth.OAuth2Session(self.id,
                                    redirect_uri=self.redirect,
                                    state=self.state)
-
-    def retrieve_session(self):
-        """Create a session from a cached token if it has not
-        yet expired.
-
-        :returns: Token if valid cached token found, else 'None'.
-        """
-        try:
-            self.token = self._retrieve_stored_token()
-            self.signed_session()
-            return self.token
-        except (ValueError, Expired):
-            return None
 
     def get_auth_url(self, msa=False, **additional_args):
         """Get URL to web portal for authentication.
@@ -371,7 +426,7 @@ class InteractiveCredentials(OAuthTokenAuthentication, AADMixin):
                                                     **additional_args)
         return auth_url, state
 
-    def get_token(self, response_url):
+    def set_token(self, response_url):
         """Get token using Authorization Code from redirected URL.
 
         :param str response_url: The full redirected URL from successful
@@ -394,24 +449,3 @@ class InteractiveCredentials(OAuthTokenAuthentication, AADMixin):
             raise_with_traceback(AuthenticationError, "", err)
         else:
             self.token = token
-
-    def signed_session(self):
-        """Create token-friendly Requests session, using auto-refresh.
-        Used internally when a request is made.
-
-        :rtype: requests_oauthlib.OAuth2Session
-        :raises: TokenExpiredError if token can no longer be refreshed.
-        """
-        countdown = float(self.token['expires_at']) - time.time()
-        self.token['expires_in'] = countdown
-        try:
-            new_session = oauth.OAuth2Session(
-                self.id,
-                token=self.token,
-                auto_refresh_url=self.token_uri,
-                auto_refresh_kwargs={'client_id': self.id,
-                                     'resource': self.resource},
-                token_updater=self._default_token_cache)
-            return new_session
-        except TokenExpiredError as err:
-            raise_with_traceback(Expired, "", err)

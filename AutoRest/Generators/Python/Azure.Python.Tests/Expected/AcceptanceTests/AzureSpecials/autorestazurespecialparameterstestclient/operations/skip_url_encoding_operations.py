@@ -43,7 +43,8 @@ class SkipUrlEncodingOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/azurespecials/skipUrlEncoding/method/path/valid/{unencodedPathParam}'
@@ -87,7 +88,8 @@ class SkipUrlEncodingOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/azurespecials/skipUrlEncoding/path/path/valid/{unencodedPathParam}'
@@ -131,7 +133,8 @@ class SkipUrlEncodingOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/azurespecials/skipUrlEncoding/swagger/path/valid/{unencodedPathParam}'
@@ -176,7 +179,8 @@ class SkipUrlEncodingOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/azurespecials/skipUrlEncoding/method/query/valid'
@@ -212,11 +216,12 @@ class SkipUrlEncodingOperations(object):
         Get method with unencoded query parameter with value null
 
         :param q1: Unencoded query parameter with value null
-        :type q1: str or None
+        :type q1: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/azurespecials/skipUrlEncoding/method/query/null'
@@ -259,7 +264,8 @@ class SkipUrlEncodingOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/azurespecials/skipUrlEncoding/path/query/valid'
@@ -301,7 +307,8 @@ class SkipUrlEncodingOperations(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/azurespecials/skipUrlEncoding/swagger/query/valid'

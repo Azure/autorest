@@ -54,6 +54,18 @@ class CloudErrorData(object):
         """Cloud error message."""
         return str(self._message)
 
+    @classmethod
+    def _get_attribute_map(cls):
+        return cls._attribute_map
+
+    @classmethod
+    def _get_required_attrs(cls):
+        return []
+
+    @classmethod
+    def _get_subtype_map(cls):
+        return {}
+
     @property
     def message(self):
         """Cloud error message."""
@@ -112,7 +124,7 @@ class CloudError(ClientException):
             else:
                 data = data.get('error', data)
             try:
-                self.error = deserialize(CloudErrorData, data)
+                self.error = deserialize(CloudErrorData(), data)
             except DeserializationError:
                 self.error = None
             try:

@@ -27,11 +27,9 @@ class Error(Model):
         'message': {'key': 'message', 'type': 'str'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.status = None
-        self.message = None
-
-        super(Error, self).__init__(*args, **kwargs)
+    def __init__(self, status=None, message=None):
+        self.status = status
+        self.message = message
 
 
 class ErrorException(HttpOperationError):

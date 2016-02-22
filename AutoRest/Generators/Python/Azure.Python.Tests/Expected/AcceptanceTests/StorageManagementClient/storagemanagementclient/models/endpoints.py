@@ -34,11 +34,9 @@ class Endpoints(Model):
         'foo_point': {'key': 'FooPoint', 'type': 'Foo'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.blob = None
-        self.queue = None
-        self.table = None
-        self.dummy_end_point = None
-        self.foo_point = None
-
-        super(Endpoints, self).__init__(*args, **kwargs)
+    def __init__(self, blob=None, queue=None, table=None, dummy_end_point=None, foo_point=None):
+        self.blob = blob
+        self.queue = queue
+        self.table = table
+        self.dummy_end_point = dummy_end_point
+        self.foo_point = foo_point

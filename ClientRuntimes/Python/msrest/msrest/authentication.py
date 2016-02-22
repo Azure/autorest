@@ -24,8 +24,6 @@
 #
 # --------------------------------------------------------------------------
 
-import time
-
 import requests
 from requests.auth import HTTPBasicAuth
 import requests_oauthlib as oauth
@@ -105,6 +103,7 @@ class OAuthTokenAuthentication(Authentication):
         self.scheme = 'Bearer'
         self.id = client_id
         self.token = token
+        self.store_key = self.id
 
     def construct_auth(self):
         """Format token header.
@@ -127,9 +126,4 @@ class OAuthTokenAuthentication(Authentication):
 
         :rtype: requests.Session.
         """
-        expiry = self.token.get('expires_at')
-
-        if expiry:
-            countdown = float(expiry) - time.time()
-            self.token['expires_in'] = countdown
         return oauth.OAuth2Session(self.id, token=self.token)

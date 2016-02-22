@@ -26,7 +26,7 @@ class AutoRestRequiredOptionalTestServiceConfiguration(Configuration):
     :param required_global_query: number of items to skip
     :type required_global_query: str
     :param optional_global_query: number of items to skip
-    :type optional_global_query: int or None
+    :type optional_global_query: int
     :param str base_url: Service URL
     :param str filepath: Existing config
     """

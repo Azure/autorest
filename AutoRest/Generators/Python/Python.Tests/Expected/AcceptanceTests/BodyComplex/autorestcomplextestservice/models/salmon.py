@@ -15,6 +15,10 @@ from .fish import Fish
 class Salmon(Fish):
     """Salmon
 
+    :param str species:
+    :param float length:
+    :param list siblings:
+    :param str fishtype: Polymorphic Discriminator
     :param str location:
     :param bool iswild:
     """
@@ -26,10 +30,8 @@ class Salmon(Fish):
         'iswild': {'key': 'iswild', 'type': 'bool'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.location = None
-        self.iswild = None
-
-        super(Salmon, self).__init__(*args, **kwargs)
-
+    def __init__(self, length, species=None, siblings=None, location=None, iswild=None):
+        super(Salmon, self).__init__(species=species, length=length, siblings=siblings)
+        self.location = location
+        self.iswild = iswild
         self.fishtype = 'salmon'

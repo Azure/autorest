@@ -27,8 +27,6 @@ class StorageAccountKeys(Model):
         'key2': {'key': 'key2', 'type': 'str'},
     }
 
-    def __init__(self, *args, **kwargs):
-        self.key1 = None
-        self.key2 = None
-
-        super(StorageAccountKeys, self).__init__(*args, **kwargs)
+    def __init__(self, key1=None, key2=None):
+        self.key1 = key1
+        self.key2 = key2
