@@ -41,7 +41,8 @@ class Paths(object):
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
-        :rtype: None or msrest.pipeline.ClientRawResponse
+        :rtype: None
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
         # Construct URL
         url = '/customuri'

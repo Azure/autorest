@@ -19,16 +19,4 @@ from msrest.exceptions import (
     HttpOperationError,
 )
 
-from .auto_rest_parameterized_host_test_client import AutoRestParameterizedHostTestClient, AutoRestParameterizedHostTestClientConfiguration
-
-__all__ = [
-    'ClientException',
-    'SerializationError',
-    'DeserializationError',
-    'TokenExpiredError',
-    'ClientRequestError',
-    'AuthenticationError',
-    'HttpOperationError',
-    'AutoRestParameterizedHostTestClient',
-    'AutoRestParameterizedHostTestClientConfiguration'
-]
+from msrestazure.azure_exceptions import CloudError
