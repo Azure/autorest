@@ -77,7 +77,7 @@ public class FlatteningSerializer<T> extends StdSerializer<T> implements Resolva
     }
 
     @Override
-    public void serialize(T value, JsonGenerator jgen, SerializerProvider provider) throws IOException, JsonGenerationException {
+    public void serialize(T value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
         if (value == null) {
             jgen.writeNull();
             return;
