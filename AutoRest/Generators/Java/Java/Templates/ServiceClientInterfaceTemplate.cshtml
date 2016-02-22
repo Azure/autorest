@@ -23,11 +23,11 @@ package @(Settings.Namespace.ToLower());
  */
 public interface @Model.Name {
     /**
-     * Gets the URI used as the base for all cloud service requests.
+     * Gets the URL used as the base for all cloud service requests.
      *
-     * @@return the BaseUri value.
+     * @@return the BaseUrl object.
      */
-    String getBaseUri();
+    AutoRestBaseUrl getBaseUrl();
 @EmptyLine
     /**
      * Gets the list of interceptors the OkHttp client will execute.

@@ -13,6 +13,22 @@ namespace Microsoft.Rest.Generator.CSharp
     public static class ClientModelExtensions
     {
         /// <summary>
+        /// Determine whether URL encoding should be skipped for this parameter
+        /// </summary>
+        /// <param name="parameter">The parameter to check</param>
+        /// <returns>true if url encoding should be skipped for the parameter, otherwise false</returns>
+        public static bool SkipUrlEncoding(this Parameter parameter)
+        {
+            if (parameter == null)
+            {
+                return false;
+            }
+
+            return parameter.Extensions.ContainsKey(Extensions.SkipUrlEncodingExtension) &&
+                   (bool)parameter.Extensions[Extensions.SkipUrlEncodingExtension];
+        }
+
+        /// <summary>
         /// Generate code for the string representation for http method
         /// </summary>
         /// <param name="method">The http method</param>

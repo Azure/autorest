@@ -30,7 +30,11 @@ namespace Microsoft.Rest.Generator.Python
             {
                 this.HasAnyModel = true;
             }
+
+            this.IsCustomBaseUri = serviceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension);
         }
+
+        public bool IsCustomBaseUri { get; private set; }
 
         public List<MethodTemplateModel> MethodTemplateModels { get; private set; }
 

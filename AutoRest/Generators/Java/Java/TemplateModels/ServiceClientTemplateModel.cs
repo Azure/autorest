@@ -21,7 +21,10 @@ namespace Microsoft.Rest.Generator.Java
                 .ForEach(m => MethodTemplateModels.Add(new MethodTemplateModel(m, serviceClient)));
 
             ModelTypes.ForEach(m => ModelTemplateModels.Add(new ModelTemplateModel(m, serviceClient)));
+            this.IsCustomBaseUri = serviceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension);
         }
+
+        public bool IsCustomBaseUri { get; private set; }
 
         public List<MethodTemplateModel> MethodTemplateModels { get; private set; }
 
@@ -63,6 +66,7 @@ namespace Microsoft.Rest.Generator.Java
                 }
                 classes.AddRange(new[]{
                         "com.microsoft.rest.ServiceClient",
+                        "com.microsoft.rest.AutoRestBaseUrl",
                         "okhttp3.OkHttpClient",
                         "retrofit2.Retrofit" 
                     });
@@ -92,6 +96,7 @@ namespace Microsoft.Rest.Generator.Java
                 classes.Add("java.util.List");
                 classes.Add("okhttp3.Interceptor");
                 classes.Add("okhttp3.logging.HttpLoggingInterceptor.Level");
+                classes.Add("com.microsoft.rest.AutoRestBaseUrl");
                 classes.Add("com.microsoft.rest.serializer.JacksonMapperAdapter");
                 if (this.Properties.Any(p => p.Type.IsPrimaryType(KnownPrimaryType.Credentials)))
                 {

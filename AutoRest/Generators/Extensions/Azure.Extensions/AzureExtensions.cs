@@ -79,6 +79,10 @@ namespace Microsoft.Rest.Generator.Azure
             }
 
             settings.AddCredentials = true;
+
+            // This extension from general extensions must be run prior to Azure specific extensions.
+            ProcessParameterizedHost(serviceClient, settings);
+
             UpdateHeadMethods(serviceClient);
             ParseODataExtension(serviceClient);
             FlattenResourceProperties(serviceClient);

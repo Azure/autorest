@@ -41,25 +41,38 @@ class @(Model.Name)Configuration(Configuration):
 @:    @ParameterWrapComment(string.Empty, ServiceClientTemplateModel.GetPropertyDocumentationString(property))
 @:    @ParameterWrapComment(string.Empty, ":type " + property.Name + ": " + MethodTemplateModel.GetDocumentationType(property.Type))
 }
-    :param str base_url: Service URL
+
+@if (!Model.IsCustomBaseUri)
+{ 
+@:    :param str base_url: Service URL
+}
     :param str filepath: Existing config
     """
 @EmptyLine
     def __init__(
-            self, @(Model.RequiredConstructorParameters)base_url=None, filepath=None):
+            self, @(Model.RequiredConstructorParameters)@(Model.IsCustomBaseUri ? "" : "base_url=None, ")filepath=None):
 @EmptyLine
         @Model.ValidateRequiredParameters
-        if not base_url:
-            base_url = '@Model.BaseUrl'
+
+@if (Model.IsCustomBaseUri)
+{
+@:        base_url = '@Model.BaseUrl'
+}
+else
+{
+@:        if not base_url:
+@:            base_url = '@Model.BaseUrl'
+}
+
 @EmptyLine
         super(@(Model.Name)Configuration, self).__init__(base_url, filepath)
 @EmptyLine
         self.add_user_agent('@Model.UserAgent')
 @if (Model.Properties.Any())
 {
-@EmptyLine
+    @EmptyLine
   foreach (var property in Model.Properties)
-  {
+    {
         @:self.@(property.Name) = @(property.Name)
   }
 }

@@ -82,6 +82,13 @@ foreach (var transformation in Model.InputParameterTransformation.Where(t => t.P
 }
 }
 }
+@if (Model.ServiceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension))
+{
+foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("hostParameter")))
+{
+@:    @(Model.ClientReference).getBaseUrl().set("{@(param.SerializedName)}", @param.Name);
+}
+}
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
     @Model.ResponseGeneration
     return @Model.ReturnValue;
@@ -154,6 +161,13 @@ foreach (var transformation in Model.InputParameterTransformation.Where(t => t.P
     var inProp = transformation.ParameterMappings[0].InputParameterProperty;
 @:    @outType @outProp = @(inParam).get@(inProp.ToPascalCase())();
 }
+}
+}
+@if (Model.ServiceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension))
+{
+foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("hostParameter")))
+{
+@:    @(Model.ClientReference).getBaseUrl().set("{@(param.SerializedName)}", @param.Name);
 }
 }
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);

@@ -62,7 +62,7 @@ function AutoRestRequiredOptionalTestService(requiredGlobalPath, requiredGlobalQ
   this.requiredGlobalPath = requiredGlobalPath;
   this.requiredGlobalQuery = requiredGlobalQuery;
 
-    if(options.optionalGlobalQuery !== null && options.optionalGlobalQuery !== undefined) { 
+  if(options.optionalGlobalQuery !== null && options.optionalGlobalQuery !== undefined) { 
     this.optionalGlobalQuery = options.optionalGlobalQuery;
   }
   this.implicit = new operations.Implicit(this);
