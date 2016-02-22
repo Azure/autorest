@@ -68,40 +68,49 @@ namespace Microsoft.Rest.Generator
                         }
                     }
 
-                    // Remove conflicts
-                    foreach (Property innerProperty in compositeType.Properties)
-                    {
-                        // Check conflict among peers
-
-                        var conflictingPeers = compositeType.Properties
-                            .Where(p => p.Name == innerProperty.Name && p.SerializedName != innerProperty.SerializedName);
-
-                        if (conflictingPeers.Any())
-                        {
-                            foreach (var cp in conflictingPeers.Concat(new[] { innerProperty }))
-                            {
-                                if (cp.Extensions.ContainsKey(FlattenOriginalTypeName))
-                                {
-                                    cp.Name = cp.Extensions[FlattenOriginalTypeName].ToString() + "_" + cp.Name;
-                                }
-                            }
-                        }
-
-                        if (compositeType.BaseModelType != null)
-                        {
-                            var conflictingParentProperties = compositeType.BaseModelType.ComposedProperties
-                                .Where(p => p.Name == innerProperty.Name && p.SerializedName != innerProperty.SerializedName);
-
-                            if (conflictingParentProperties.Any())
-                            {
-                                innerProperty.Name = compositeType.Name + "_" + innerProperty.Name;                                
-                            }
-                        }                        
-                    }
+                    RemoveFlatteningConflicts(compositeType);
                 }
             }
 
             RemoveUnreferencedTypes(serviceClient, typesToDelete);
+        }
+
+        private static void RemoveFlatteningConflicts(CompositeType compositeType)
+        {
+            if (compositeType == null)
+            {
+                throw new ArgumentNullException("compositeType");
+            }
+
+            foreach (Property innerProperty in compositeType.Properties)
+            {
+                // Check conflict among peers
+
+                var conflictingPeers = compositeType.Properties
+                    .Where(p => p.Name == innerProperty.Name && p.SerializedName != innerProperty.SerializedName);
+
+                if (conflictingPeers.Any())
+                {
+                    foreach (var cp in conflictingPeers.Concat(new[] { innerProperty }))
+                    {
+                        if (cp.Extensions.ContainsKey(FlattenOriginalTypeName))
+                        {
+                            cp.Name = cp.Extensions[FlattenOriginalTypeName].ToString() + "_" + cp.Name;
+                        }
+                    }
+                }
+
+                if (compositeType.BaseModelType != null)
+                {
+                    var conflictingParentProperties = compositeType.BaseModelType.ComposedProperties
+                        .Where(p => p.Name == innerProperty.Name && p.SerializedName != innerProperty.SerializedName);
+
+                    if (conflictingParentProperties.Any())
+                    {
+                        innerProperty.Name = compositeType.Name + "_" + innerProperty.Name;
+                    }
+                }
+            }
         }
 
         private static IEnumerable<Property> FlattenProperty(Property propertyToFlatten, HashSet<string> typesToDelete)
