@@ -111,6 +111,14 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
     }
 
     /**
+     * Gets the ReadonlypropertyOperations object to access its operations.
+     * @return the ReadonlypropertyOperations object.
+     */
+    public ReadonlypropertyOperations getReadonlypropertyOperations() {
+        return new ReadonlypropertyOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    }
+
+    /**
      * Initializes an instance of AutoRestComplexTestService client.
      */
     public AutoRestComplexTestServiceImpl() {

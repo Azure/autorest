@@ -456,6 +456,21 @@ var complex = function(coverage) {
             utils.send400(res, next, 'Must provide a valid scenario.');
         }
     });
+
+    router.get('/readonlyproperty/valid', function(req, res, next) {
+        res.status(200).end(JSON.stringify({"id": "1234", "size": 2}));
+    });
+
+    router.put('/readonlyproperty/valid', function(req, res, next) {
+        req_body = req.body
+        if (req_body) {
+            if (req_body.id) {
+                utils.send400(res, next, 'id is readonly');
+            } else {
+                res.status(200).end();
+            }
+        }
+    });
 };
 
 complex.prototype.router = router;
