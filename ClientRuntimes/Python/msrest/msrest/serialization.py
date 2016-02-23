@@ -56,8 +56,7 @@ class Model(object):
 
     _subtype_map = {}
     _attribute_map = {}
-    _header_map = {}
-    _response_map = {}
+    _required = []
 
     def __init__(self, *args, **kwargs):
         """Allow attribute setting via kwargs on initialization."""
@@ -76,23 +75,6 @@ class Model(object):
 
     def __str__(self):
         return str(self.__dict__)
-
-    @classmethod
-    def _get_attribute_map(cls):
-        attr = '_attribute_map'
-        map = {}
-        for p in reversed(cls.__mro__):
-            map.update(p.__dict__.get(attr, {}))
-        return map
-
-    @classmethod
-    def _get_required_attrs(cls):
-        attr = '_required'
-        map = []
-        for p in reversed(cls.__mro__):
-            if hasattr(p, attr):
-                map += p.__dict__[attr]
-        return map
 
     @classmethod
     def _get_subtype_map(cls):
@@ -178,8 +160,7 @@ class Serializer(object):
                     target_obj, data_type, required=True, **kwargs)
 
         try:
-            attributes = target_obj._get_attribute_map()
-            required_attrs = target_obj._get_required_attrs()
+            attributes = target_obj._attribute_map
             self._classify_data(target_obj, class_name, serialized)
 
             for attr, map in attributes.items():
@@ -193,7 +174,7 @@ class Serializer(object):
                     orig_attr = getattr(target_obj, attr)
                     new_attr = self.serialize_data(
                         orig_attr, attr_type,
-                        attr in required_attrs, **kwargs)
+                        attr in target_obj._required, **kwargs)
 
                     for k in reversed(keys):
                         unflattened = {k: new_attr}
@@ -597,7 +578,7 @@ class Deserializer(object):
         if data is None:
             return data
         try:
-            attributes = response._get_attribute_map()
+            attributes = response._attribute_map
             d_attrs = {}
             for attr, map in attributes.items():
                 attr_type = map['type']
