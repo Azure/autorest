@@ -254,7 +254,7 @@ class ServiceClient(object):
         if not parsed.scheme or not parsed.netloc:
             url = url.lstrip('/')
             base = self.config.base_url.format(**kwargs).rstrip('/')
-            url = urljoin(base, url)
+            url = urljoin(base + '/', url)
         return url
 
     def add_hook(self, event, hook, precall=True, overwrite=False):
