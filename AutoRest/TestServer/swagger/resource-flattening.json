@@ -162,6 +162,115 @@
           }
         }
       }
+    },
+    "/azure/resource-flatten/customFlattening": {
+      "put": {
+        "operationId": "putSimpleProduct",
+        "description": "Put Simple Product with client flattening true on the model",
+        "parameters": [
+          {
+            "name": "SimpleBodyProduct",
+            "description": "Simple body product to put",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/SimpleProduct"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/SimpleProduct"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "postFlattenedSimpleProduct",
+        "description": "Put Flattened Simple Product with client flattening true on the parameter",
+        "parameters": [
+          {
+            "name": "SimpleBodyProduct",
+            "description": "Simple body product to post",
+            "in": "body",
+            "x-ms-client-flatten": true,
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/SimpleProduct"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/SimpleProduct"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
+    "/azure/resource-flatten/customFlattening/parametergrouping/{name}/": {
+      "put": {
+        "operationId": "putSimpleProductWithGrouping",
+        "description": "Put Simple Product with client flattening true on the model",
+        "parameters": [
+          {
+            "name": "SimpleBodyProduct",
+            "description": "Simple body product to put",
+            "in": "body",
+            "x-ms-client-flatten": true,
+            "x-ms-parameter-grouping": {
+              "name": "flatten-parameter-group"
+            },
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/SimpleProduct"
+            }
+          },
+          {
+            "name": "name",
+            "description": "Product name",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "x-ms-parameter-grouping": {
+              "name": "flatten-parameter-group"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "schema": {
+              "type": "object",
+              "$ref": "#/definitions/SimpleProduct"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -173,6 +282,10 @@
         },
         "message": {
           "type": "string"
+        },
+        "parentError": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/Error"
         }
       }
     },
@@ -263,6 +376,67 @@
           "additionalProperties": {
             "$ref": "#/definitions/FlattenedProduct"
           }
+        }
+      }
+    },
+    "BaseProduct": {
+      "description": "The product documentation.",
+      "required": [
+        "base_product_id"
+      ],
+      "properties": {
+        "base_product_id": {
+          "type": "string",
+          "description": "Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles."
+        },
+        "base_product_description": {
+          "type": "string",
+          "description": "Description of product."
+        }
+      },
+      "example": {
+        "name": "Puma",
+        "id": 1
+      }
+    },
+    "SimpleProduct": {
+      "description": "The product documentation.",
+      "allOf": [ { "$ref": "#/definitions/BaseProduct" } ],
+      "properties": {
+        "details": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SimpleProductProperties"
+        }
+      }
+    },
+    "SimpleProductProperties": {
+      "description": "The product documentation.",
+      "required": [
+        "max_product_display_name",
+        "max_product_capacity"
+      ],
+      "properties": {
+        "max_product_display_name": {
+          "type": "string",
+          "description": "Display name of product."
+        },
+        "max_product_capacity": {
+          "type": "string",
+          "description": "Capacity of product. For example, 4 people.",
+          "enum": [ "Large" ]
+        },
+        "max_product_image": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ProductUrl"
+        }
+      }
+    },
+    "ProductUrl": {
+      "description": "The product URL.",
+      "properties": {
+        "@odata.value": {
+          "type": "string",
+          "description": "URL value."
         }
       }
     }

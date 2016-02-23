@@ -71,12 +71,12 @@ namespace Microsoft.Rest.Generator.Azure
             settings.AddCredentials = true;
             UpdateHeadMethods(serviceClient);
             ParseODataExtension(serviceClient);
+            AddParameterGroups(serviceClient);
             FlattenModels(serviceClient);
-            FlattenRequestPayload(serviceClient, settings);
+            FlattenMethodParameters(serviceClient, settings);
             AddLongRunningOperations(serviceClient);
             AddAzureProperties(serviceClient);
             SetDefaultResponses(serviceClient);
-            AddParameterGroups(serviceClient);
             AddPageableMethod(serviceClient, codeNamer);
         }
 

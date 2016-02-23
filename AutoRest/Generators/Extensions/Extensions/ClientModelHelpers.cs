@@ -17,7 +17,7 @@ namespace Microsoft.Rest.Generator
         /// </summary>
         /// <param name="propertyToCheck">Property to check.</param>
         /// <returns></returns>
-        public static bool ShouldBeFlattened(this Property propertyToCheck)
+        public static bool ShouldBeFlattened(this IParameter propertyToCheck)
         {
             if (propertyToCheck == null)
             {
@@ -33,7 +33,7 @@ namespace Microsoft.Rest.Generator
         /// </summary>
         /// <param name="propertyToCheck">Property to check.</param>
         /// <returns></returns>
-        public static bool WasFlattened(this Property propertyToCheck)
+        public static bool WasFlattened(this IParameter propertyToCheck)
         {
             if (propertyToCheck == null)
             {

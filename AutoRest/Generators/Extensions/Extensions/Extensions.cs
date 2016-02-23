@@ -31,9 +31,9 @@ namespace Microsoft.Rest.Generator
         /// <returns></returns>
         public static void NormalizeClientModel(ServiceClient serviceClient, Settings settings)
         {
-            FlattenModels(serviceClient);
-            FlattenRequestPayload(serviceClient, settings);
             AddParameterGroups(serviceClient);
+            FlattenModels(serviceClient);
+            FlattenMethodParameters(serviceClient, settings);
         }
 
         /// <summary>
@@ -270,6 +270,11 @@ namespace Microsoft.Rest.Generator
                                 Type = parameter.Type,
                                 SerializedName = null //Parameter is never serialized directly
                             };
+                            // Copy over extensions
+                            foreach (var key in parameter.Extensions.Keys)
+                            {
+                                groupProperty.Extensions[key] = parameter.Extensions[key];
+                            }
 
                             parameterGroups[parameterGroupName].Add(groupProperty, parameter);
                         }
@@ -362,7 +367,7 @@ namespace Microsoft.Rest.Generator
         /// </summary>
         /// <param name="serviceClient">Service client</param>                            
         /// <param name="settings">AutoRest settings</param>                            
-        public static void FlattenRequestPayload(ServiceClient serviceClient, Settings settings)
+        public static void FlattenMethodParameters(ServiceClient serviceClient, Settings settings)
         {
             if (serviceClient == null)
             {
@@ -381,7 +386,9 @@ namespace Microsoft.Rest.Generator
                 if (bodyParameter != null)
                 {
                     var bodyParameterType = bodyParameter.Type as CompositeType;
-                    if (bodyParameterType != null && bodyParameterType.ComposedProperties.Count(p => !p.IsConstant) <= settings.PayloadFlatteningThreshold)
+                    if (bodyParameterType != null && 
+                        (bodyParameterType.ComposedProperties.Count(p => !p.IsConstant) <= settings.PayloadFlatteningThreshold ||
+                         bodyParameter.ShouldBeFlattened()))
                     {
                         var parameterTransformation = new ParameterTransformation
                         {
