@@ -138,6 +138,39 @@ namespace Microsoft.Rest.Generator.Python
             }
         }
 
+        private static string GetParameterDefault(ParameterTemplateModel parameter)
+        {
+            List<KnownPrimaryType> SupportedDefaultType = new List<KnownPrimaryType>
+            {
+                KnownPrimaryType.Int,
+                KnownPrimaryType.Double,
+                KnownPrimaryType.Boolean,
+                KnownPrimaryType.Long,
+                KnownPrimaryType.String
+            };
+            var result = "None";
+
+            if (!string.IsNullOrWhiteSpace(parameter.DefaultValue))
+            {
+                IType type = parameter.Type;
+
+
+                if (type is PrimaryType)
+                {
+                    var primaryType = parameter.Type as PrimaryType;
+                    if (SupportedDefaultType.Contains(primaryType.Type))
+                    {
+                        result = parameter.DefaultValue;
+                    }
+                }
+                else if (type is EnumType)
+                {
+                    result = '"' + parameter.DefaultValue + '"';
+                }
+            }
+            return result;
+        }
+
         /// <summary>
         /// Generate the method parameter declarations for a method
         /// </summary>
@@ -154,7 +187,12 @@ namespace Microsoft.Rest.Generator.Python
                 }
                 else
                 {
-                    declarations.Add(string.Format(CultureInfo.InvariantCulture, "{0}=None", parameter.Name));
+                    var defaultValue = GetParameterDefault(parameter);
+                    declarations.Add(string.Format(
+                        CultureInfo.InvariantCulture,
+                        "{0}={1}",
+                        parameter.Name,
+                        defaultValue));
                 }
             }
 

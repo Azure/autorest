@@ -66,30 +66,32 @@ else
     @:_required = [@requiredStr]
 }
 @{
-  var propertyList = new List<Property>(Model.Properties);
-  if (!Model.IsParameterGroup)
-  {
+    var propertyList = new List<Property>(Model.Properties);
+    var mapAttrList = new List<Property>(Model.ComposedProperties);
+    if (!Model.IsParameterGroup)
+    {
 @EmptyLine
     @:_attribute_map = {
-    if (propertyList.Count > 0)
+    if (mapAttrList.Count > 0)
     {
-      for (int i = 0; i < propertyList.Count; i++) 
+      for (int i = 0; i < mapAttrList.Count; i++) 
       {
-        @:@(Model.InitializeProperty(propertyList[i]))
+        @:@(Model.InitializeProperty(mapAttrList[i]))
       }
     }
     @:}
   }
 }
-@if (Model.SubModelTypes.Any())
-{
+
 <text>
 @EmptyLine
-    _subtype_map = {
-        '@Model.BasePolymorphicDiscriminator': {@Model.SubModelTypeList}
+   @:_subtype_map = {
+    @if (Model.SubModelTypes.Any())
+        {
+            '@Model.BasePolymorphicDiscriminator': { @Model.SubModelTypeList}
+        }
     }
 </text>
-}
 @EmptyLine
     def __init__(self, @(Model.MethodParameterDeclaration())):
 @if (Model.HasParent)
