@@ -31,6 +31,11 @@ class FlattenedProduct(Resource):
     _required = []
 
     _attribute_map = {
+        'id': {'key': 'id', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
+        'tags': {'key': 'tags', 'type': '{str}'},
+        'location': {'key': 'location', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
         'pname': {'key': 'properties.pname', 'type': 'str', 'flatten': True},
         'flattened_product_type': {'key': 'properties.type', 'type': 'str', 'flatten': True},
         'provisioning_state_values': {'key': 'properties.provisioningStateValues', 'type': 'str', 'flatten': True},

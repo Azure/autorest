@@ -23,6 +23,8 @@ class Dog(Pet):
     _required = []
 
     _attribute_map = {
+        'id': {'key': 'id', 'type': 'int'},
+        'name': {'key': 'name', 'type': 'str'},
         'food': {'key': 'food', 'type': 'str'},
     }
 

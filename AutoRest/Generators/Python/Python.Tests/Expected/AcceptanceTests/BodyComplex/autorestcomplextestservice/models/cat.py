@@ -24,6 +24,8 @@ class Cat(Pet):
     _required = []
 
     _attribute_map = {
+        'id': {'key': 'id', 'type': 'int'},
+        'name': {'key': 'name', 'type': 'str'},
         'color': {'key': 'color', 'type': 'str'},
         'hates': {'key': 'hates', 'type': '[Dog]'},
     }

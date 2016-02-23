@@ -23,9 +23,13 @@ class Shark(Fish):
     :param datetime birthday:
     """
 
-    _required = ['birthday']
+    _required = ['length', 'fishtype', 'birthday']
 
     _attribute_map = {
+        'species': {'key': 'species', 'type': 'str'},
+        'length': {'key': 'length', 'type': 'float'},
+        'siblings': {'key': 'siblings', 'type': '[Fish]'},
+        'fishtype': {'key': 'fishtype', 'type': 'str'},
         'age': {'key': 'age', 'type': 'int'},
         'birthday': {'key': 'birthday', 'type': 'iso-8601'},
     }

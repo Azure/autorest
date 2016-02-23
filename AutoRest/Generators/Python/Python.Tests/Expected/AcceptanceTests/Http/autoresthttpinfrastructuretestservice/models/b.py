@@ -22,6 +22,7 @@ class B(A):
     _required = []
 
     _attribute_map = {
+        'status_code': {'key': 'statusCode', 'type': 'str'},
         'text_status_code': {'key': 'textStatusCode', 'type': 'str'},
     }
 

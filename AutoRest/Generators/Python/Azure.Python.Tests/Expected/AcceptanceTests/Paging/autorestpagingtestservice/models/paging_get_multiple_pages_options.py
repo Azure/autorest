@@ -25,6 +25,6 @@ class PagingGetMultiplePagesOptions(Model):
 
     _required = []
 
-    def __init__(self, maxresults=None, timeout=None):
+    def __init__(self, maxresults=None, timeout=30):
         self.maxresults = maxresults
         self.timeout = timeout

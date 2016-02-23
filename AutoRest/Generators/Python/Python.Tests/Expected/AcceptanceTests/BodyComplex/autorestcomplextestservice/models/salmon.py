@@ -23,9 +23,13 @@ class Salmon(Fish):
     :param bool iswild:
     """
 
-    _required = []
+    _required = ['length', 'fishtype']
 
     _attribute_map = {
+        'species': {'key': 'species', 'type': 'str'},
+        'length': {'key': 'length', 'type': 'float'},
+        'siblings': {'key': 'siblings', 'type': '[Fish]'},
+        'fishtype': {'key': 'fishtype', 'type': 'str'},
         'location': {'key': 'location', 'type': 'str'},
         'iswild': {'key': 'iswild', 'type': 'bool'},
     }

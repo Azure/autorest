@@ -32,9 +32,14 @@ class StorageAccountUpdateParameters(Resource):
      use an empty string for the custom domain name property.
     """
 
-    _required = []
+    _required = ['location']
 
     _attribute_map = {
+        'id': {'key': 'id', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
+        'location': {'key': 'location', 'type': 'str'},
+        'tags': {'key': 'tags', 'type': '{str}'},
         'account_type': {'key': 'properties.accountType', 'type': 'AccountType', 'flatten': True},
         'custom_domain': {'key': 'properties.customDomain', 'type': 'CustomDomain', 'flatten': True},
     }

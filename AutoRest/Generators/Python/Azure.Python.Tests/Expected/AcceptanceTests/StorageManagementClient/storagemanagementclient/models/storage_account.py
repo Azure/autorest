@@ -57,9 +57,14 @@ class StorageAccount(Resource):
      accountType is StandardRAGRS.
     """
 
-    _required = []
+    _required = ['location']
 
     _attribute_map = {
+        'id': {'key': 'id', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
+        'location': {'key': 'location', 'type': 'str'},
+        'tags': {'key': 'tags', 'type': '{str}'},
         'provisioning_state': {'key': 'properties.provisioningState', 'type': 'ProvisioningState', 'flatten': True},
         'account_type': {'key': 'properties.accountType', 'type': 'AccountType', 'flatten': True},
         'primary_endpoints': {'key': 'properties.primaryEndpoints', 'type': 'Endpoints', 'flatten': True},
