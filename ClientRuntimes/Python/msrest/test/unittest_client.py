@@ -65,17 +65,17 @@ class TestServiceClient(unittest.TestCase):
 
         obj = client.get("/service", {'param':"testing"})
         self.assertEqual(obj.method, 'GET')
-        self.assertEqual(obj.url, "/service?param=testing")
+        self.assertEqual(obj.url, "https://my_endpoint.com/service?param=testing")
         self.assertEqual(obj.params, {})
 
         obj = client.get("service 2")
         self.assertEqual(obj.method, 'GET')
-        self.assertEqual(obj.url, "service 2")
+        self.assertEqual(obj.url, "https://my_endpoint.com/service 2")
 
         self.cfg.base_url = "https://my_endpoint.com/"
         obj = client.get("//service3")
         self.assertEqual(obj.method, 'GET')
-        self.assertEqual(obj.url, "//service3")
+        self.assertEqual(obj.url, "https://my_endpoint.com/service3")
 
         obj = client.put()
         self.assertEqual(obj.method, 'PUT')

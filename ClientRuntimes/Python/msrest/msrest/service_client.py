@@ -92,7 +92,8 @@ class ServiceClient(object):
         request = ClientRequest()
 
         if url:
-            request.url = url
+            # TODO Remove this from later versions - needed for back-compat
+            request.url = self.format_url(url)
 
         if params:
             request.format_parameters(params)
@@ -252,9 +253,7 @@ class ServiceClient(object):
         parsed = urlparse(url)
         if not parsed.scheme or not parsed.netloc:
             url = url.lstrip('/')
-            base = self.config.base_url.format(**kwargs)
-            if not base.endswith('/'):
-                base = base + '/'
+            base = self.config.base_url.format(**kwargs).rstrip('/')
             url = urljoin(base, url)
         return url
 
