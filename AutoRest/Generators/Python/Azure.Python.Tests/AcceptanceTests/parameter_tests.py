@@ -1,4 +1,4 @@
-# --------------------------------------------------------------------------
+﻿# --------------------------------------------------------------------------
 #
 # Copyright (c) Microsoft Corporation. All rights reserved.
 #
@@ -75,11 +75,11 @@ class ParameterTests(unittest.TestCase):
         client = AutoRestParameterGroupingTestService(config)
 
         # Valid required parameters
-        requiredParameters = ParameterGroupingPostRequiredParameters(body = bodyParameter, path = pathParameter, custom_header = headerParameter, query = queryParameter)
+        requiredParameters = ParameterGroupingPostRequiredParameters(body=bodyParameter, path=pathParameter, custom_header=headerParameter, query=queryParameter)
         client.parameter_grouping.post_required(requiredParameters)
 
         #Required parameters but null optional parameters
-        requiredParameters = ParameterGroupingPostRequiredParameters(body = bodyParameter, path = pathParameter)
+        requiredParameters = ParameterGroupingPostRequiredParameters(body=bodyParameter, path=pathParameter, query=None)
         client.parameter_grouping.post_required(requiredParameters)
 
         #Required parameters object is not null, but a required property of the object is
