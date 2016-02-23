@@ -24,7 +24,9 @@ namespace Microsoft.Rest.Generator
         public const string NameOverrideExtension = "x-ms-client-name";
         public const string ParameterGroupExtension = "x-ms-parameter-grouping";
         public const string ParameterizedHostExtension = "x-ms-parameterized-host";
-        
+
+        private static bool hostChecked = false;
+
         /// <summary>
         /// Normalizes client model using generic extensions.
         /// </summary>
@@ -51,7 +53,7 @@ namespace Microsoft.Rest.Generator
                 throw new ArgumentNullException("settings");
             }
 
-            if (serviceClient.Extensions.ContainsKey(ParameterizedHostExtension))
+            if (serviceClient.Extensions.ContainsKey(ParameterizedHostExtension) && !hostChecked)
             { 
                 SwaggerModeler modeler = new SwaggerModeler(settings);
                 modeler.Build();
@@ -96,6 +98,8 @@ namespace Microsoft.Rest.Generator
                     }
                 }
             }
+
+            hostChecked = true;
         }
 
         /// <summary>

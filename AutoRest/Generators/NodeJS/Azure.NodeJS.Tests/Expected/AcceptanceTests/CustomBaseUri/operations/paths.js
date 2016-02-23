@@ -62,14 +62,14 @@ Paths.prototype.getEmpty = function (accountName, options, callback) {
   }
   // Validate
   try {
-    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
-      throw new Error('this.client.acceptLanguage must be of type string.');
-    }
     if (accountName === null || accountName === undefined || typeof accountName.valueOf() !== 'string') {
       throw new Error('accountName cannot be null or undefined and it must be of type string.');
     }
     if (this.client.host === null || this.client.host === undefined || typeof this.client.host.valueOf() !== 'string') {
       throw new Error('this.client.host cannot be null or undefined and it must be of type string.');
+    }
+    if (this.client.acceptLanguage !== null && this.client.acceptLanguage !== undefined && typeof this.client.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.client.acceptLanguage must be of type string.');
     }
   } catch (error) {
     return callback(error);
