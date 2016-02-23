@@ -83,7 +83,8 @@ class TestRuntime(unittest.TestCase):
             self.assertEqual(req.headers['Authorization'], 'Bearer eswfld123kjhn1v5423')
         
         client.add_hook('request', hook)
-        request = client.get("/get_endpoint", {'check':True})
+        url = client.format_url("/get_endpoint")
+        request = client.get(url, {'check':True})
         response = client.send(request)
         check = httpretty.last_request()
         self.assertEqual(response.json(), [{"title": "Test Data"}])
@@ -91,7 +92,8 @@ class TestRuntime(unittest.TestCase):
         token['expires_in'] = '-30'
         creds = OAuthTokenAuthentication("client_id", token)
         client = ServiceClient(creds, cfg)
-        request = client.get("/get_endpoint", {'check':True})
+        url = client.format_url("/get_endpoint")
+        request = client.get(url, {'check':True})
 
         with self.assertRaises(TokenExpiredError):
             response = client.send(request)
@@ -105,7 +107,8 @@ class TestRuntime(unittest.TestCase):
         creds = Authentication()
 
         client = ServiceClient(creds, cfg)
-        request = client.get("/get_endpoint", {'check':True})
+        url = client.format_url("/get_endpoint")
+        request = client.get(url, {'check':True})
         response = client.send(request)
 
         check = httpretty.last_request()
@@ -128,7 +131,8 @@ class TestRuntime(unittest.TestCase):
 
         client = ServiceClient(creds, cfg)
         client.add_hook('request', hook, precall=False, overwrite=True)
-        request = client.get("/get_endpoint", {'check':True})
+        url = client.format_url("/get_endpoint")
+        request = client.get(url, {'check':True})
         response = client.send(request)
 
         os.environ['HTTPS_PROXY'] = "http://localhost:1987"
@@ -140,7 +144,8 @@ class TestRuntime(unittest.TestCase):
         cfg = Configuration("http://my_service.com")
         client = ServiceClient(creds, cfg)
         client.add_hook('request', hook2, precall=False, overwrite=True)
-        request = client.get("/get_endpoint", {'check':True})
+        url = client.format_url("/get_endpoint")
+        request = client.get(url, {'check':True})
         response = client.send(request)
 
         del os.environ['HTTPS_PROXY']
@@ -162,7 +167,8 @@ class TestRedirect(unittest.TestCase):
     @httpretty.activate
     def test_request_redirect_post(self):
 
-        request = self.client.post("/get_endpoint", {'check':True})
+        url = self.client.format_url("/get_endpoint")
+        request = self.client.post(url, {'check':True})
 
         httpretty.register_uri(httpretty.GET, 'https://my_service.com/http/success/get/200', status=200)
         httpretty.register_uri(httpretty.POST, "https://my_service.com/get_endpoint",
@@ -192,7 +198,8 @@ class TestRedirect(unittest.TestCase):
     @httpretty.activate
     def test_request_redirect_head(self):
 
-        request = self.client.head("/get_endpoint", {'check':True})
+        url = self.client.format_url("/get_endpoint")
+        request = self.client.head(url, {'check':True})
 
         httpretty.register_uri(httpretty.HEAD, 'https://my_service.com/http/success/200', status=200)
         httpretty.register_uri(httpretty.HEAD, "https://my_service.com/get_endpoint",
@@ -222,7 +229,8 @@ class TestRedirect(unittest.TestCase):
     @httpretty.activate
     def test_request_redirect_delete(self):
 
-        request = self.client.delete("/get_endpoint", {'check':True})
+        url = self.client.format_url("/get_endpoint")
+        request = self.client.delete(url, {'check':True})
 
         httpretty.register_uri(httpretty.DELETE, 'https://my_service.com/http/success/200', status=200)
         httpretty.register_uri(httpretty.DELETE, "https://my_service.com/get_endpoint",
@@ -252,7 +260,8 @@ class TestRedirect(unittest.TestCase):
     @httpretty.activate
     def test_request_redirect_put(self):
 
-        request = self.client.put("/get_endpoint", {'check':True})
+        url = self.client.format_url("/get_endpoint")
+        request = self.client.put(url, {'check':True})
 
         httpretty.register_uri(httpretty.PUT, "https://my_service.com/get_endpoint",
                                 responses=[
@@ -267,7 +276,8 @@ class TestRedirect(unittest.TestCase):
     @httpretty.activate
     def test_request_redirect_get(self):
 
-        request = self.client.get("/get_endpoint", {'check':True})
+        url = self.client.format_url("/get_endpoint")
+        request = self.client.get(url, {'check':True})
 
         httpretty.register_uri(httpretty.GET, "https://my_service.com/http/finished",
                         responses=[
@@ -307,7 +317,8 @@ class TestRuntimeRetry(unittest.TestCase):
         creds = Authentication()
 
         self.client = ServiceClient(creds, cfg)
-        self.request = self.client.get("/get_endpoint", {'check':True})
+        url = self.client.format_url("/get_endpoint")
+        self.request = self.client.get(url, {'check':True})
         return super(TestRuntimeRetry, self).setUp()
 
     @httpretty.activate

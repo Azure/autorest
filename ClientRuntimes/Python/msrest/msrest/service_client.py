@@ -66,18 +66,6 @@ class ServiceClient(object):
         self._adapter.add_hook("request", log_request)
         self._adapter.add_hook("response", log_response, precall=False)
 
-    def _format_url(self, url):
-        """Format request URL with the client base URL, unless the
-        supplied URL is already absolute.
-
-        :param str url: The request URL to be formatted if necessary.
-        """
-        parsed = urlparse(url)
-        if not parsed.scheme or not parsed.netloc:
-            url = url.lstrip('/')
-            url = urljoin(self.config.base_url, url)
-        return url
-
     def _format_data(self, data):
         """Format field data according to whether it is a stream or
         a string for a form-data request.
@@ -104,7 +92,7 @@ class ServiceClient(object):
         request = ClientRequest()
 
         if url:
-            request.url = self._format_url(url)
+            request.url = url
 
         if params:
             request.format_parameters(params)
@@ -253,6 +241,22 @@ class ServiceClient(object):
             if callback and callable(callback):
                 callback(chunk, response=None)
             yield chunk
+
+    def format_url(self, url, **kwargs):
+        """Format request URL with the client base URL, unless the
+        supplied URL is already absolute.
+
+        :param str url: The request URL to be formatted if necessary.
+        """
+        url = url.format(**kwargs)
+        parsed = urlparse(url)
+        if not parsed.scheme or not parsed.netloc:
+            url = url.lstrip('/')
+            base = self.config.base_url.format(**kwargs)
+            if not base.endswith('/'):
+                base = base + '/'
+            url = urljoin(base, url)
+        return url
 
     def add_hook(self, event, hook, precall=True, overwrite=False):
         """
