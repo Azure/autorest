@@ -61,7 +61,7 @@
     <CallTarget Targets="PackageAutoRestZip" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'"/>  
   </Target>
   
-  <Target Name="PackageAutoRestZip">
+  <Target Name="PackageAutoRestZip" DependsOnTargets="GetZip">
     <ItemGroup>
       <_NugetPackages Include="$(PackageOutputDir)\autorest.*.nupkg" Exclude="$(PackageOutputDir)\autorest.*symbols.nupkg"/>
     </ItemGroup> 
