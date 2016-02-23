@@ -13,6 +13,7 @@ package fixtures.validation;
 import java.util.List;
 import okhttp3.Interceptor;
 import okhttp3.logging.HttpLoggingInterceptor.Level;
+import com.microsoft.rest.AutoRestBaseUrl;
 import com.microsoft.rest.serializer.JacksonMapperAdapter;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
@@ -35,11 +36,11 @@ import retrofit2.http.Query;
  */
 public interface AutoRestValidationTest {
     /**
-     * Gets the URI used as the base for all cloud service requests.
+     * Gets the URL used as the base for all cloud service requests.
      *
-     * @return the BaseUri value.
+     * @return the BaseUrl object.
      */
-    String getBaseUri();
+    AutoRestBaseUrl getBaseUrl();
 
     /**
      * Gets the list of interceptors the OkHttp client will execute.

@@ -62,6 +62,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
             Settings.AddCredentials = true;
+            Extensions.NormalizeClientModel(serviceClient, Settings);
             AzureExtensions.UpdateHeadMethods(serviceClient);
             AzureExtensions.ParseODataExtension(serviceClient);
             AzureExtensions.FlattenResourceProperties(serviceClient);

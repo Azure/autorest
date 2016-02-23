@@ -28,17 +28,18 @@ public final class @(Model.Name)Impl extends AzureServiceClient implements @Mode
 @:    /** The Retrofit service to perform REST calls. */
 @:    private @Model.ServiceClientServiceType service;
 }
-    /** The URI used as the base for all cloud service requests. */
-    private final String baseUri;
+    /** The URL used as the base for all cloud service requests. */
+    private final AutoRestBaseUrl baseUrl;
     /** the {@@link AzureClient} used for long running operations. */
     private AzureClient azureClient;
 @EmptyLine
     /**
-     * Gets the URI used as the base for all cloud service requests.
-     * @@return The BaseUri value.
+     * Gets the URL used as the base for all cloud service requests.
+     *
+     * @@return The BaseUrl value.
      */
-    public String getBaseUri() {
-        return this.baseUri;
+    public AutoRestBaseUrl getBaseUrl() {
+        return this.baseUrl;
     }
 @EmptyLine
     /**
@@ -98,12 +99,13 @@ if(!property.IsReadOnly)
     /**
      * Initializes an instance of @(Model.Name) client.
      *
-     * @@param baseUri the base URI of the host
+     * @@param baseUrl the base URL of the host
      */
-    public @(Model.Name)Impl(String baseUri) {
-        this(baseUri, null);
+    @(Model.IsCustomBaseUri ? "private" : "public") @(Model.Name)Impl(String baseUrl) {
+        this(baseUrl, null);
     }
 @EmptyLine
+
 @if (Settings.AddCredentials)
 {
 <text>
@@ -119,48 +121,85 @@ if(!property.IsReadOnly)
     /**
      * Initializes an instance of @(Model.Name) client.
      *
-     * @@param baseUri the base URI of the host
+     * @@param baseUrl the base URL of the host
      * @@param credentials the management credentials for Azure
      */
-    public @(Model.Name)Impl(String baseUri, ServiceClientCredentials credentials) {
+    @(Model.IsCustomBaseUri ? "private" : "public") @(Model.Name)Impl(String baseUrl, ServiceClientCredentials credentials) {
         super();
-        this.baseUri = baseUri;
+        this.baseUrl = new AutoRestBaseUrl(baseUrl);
         this.credentials = credentials;
         initialize();
     }
 @EmptyLine
-    /**
-     * Initializes an instance of @(Model.Name) client.
-     *
-     * @@param baseUri the base URI of the host
-     * @@param credentials the management credentials for Azure
-     * @@param clientBuilder the builder for building up an {@@link OkHttpClient}
-     * @@param retrofitBuilder the builder for building up a {@@link Retrofit}
-     */
-    public @(Model.Name)Impl(String baseUri, ServiceClientCredentials credentials, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
-        super(clientBuilder, retrofitBuilder);
-        this.baseUri = baseUri;
-        this.credentials = credentials;
-        initialize();
-    }
+@if(!Model.IsCustomBaseUri)
+{
+@:    /**
+@:     * Initializes an instance of @(Model.Name) client.
+@:     *
+@:     * @@param baseUrl the base URL of the host
+@:     * @@param credentials the management credentials for Azure
+@:     * @@param clientBuilder the builder for building up an {@@link OkHttpClient}
+@:     * @@param retrofitBuilder the builder for building up a {@@link Retrofit}
+@:     */
+@:    public @(Model.Name)Impl(String baseUrl, ServiceClientCredentials credentials, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
+@:        super(clientBuilder, retrofitBuilder);
+@:        this.baseUrl = new AutoRestBaseUrl(baseUrl);
+@:        this.credentials = credentials;
+@:        initialize();
+@:    }
+}
+else
+{
+@:    /**
+@:     * Initializes an instance of @(Model.Name) client.
+@:     *
+@:     * @@param credentials the management credentials for Azure
+@:     * @@param clientBuilder the builder for building up an {@@link OkHttpClient}
+@:     * @@param retrofitBuilder the builder for building up a {@@link Retrofit}
+@:     */
+@:    public @(Model.Name)Impl(ServiceClientCredentials credentials, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
+@:        super(clientBuilder, retrofitBuilder);
+@:        this.baseUrl = new AutoRestBaseUrl("@Model.BaseUrl");
+@:        this.credentials = credentials;
+@:        initialize();
+@:    }
+}
 @EmptyLine
+
 </text>
 }
 else
 {
 <text>
-    /**
-     * Initializes an instance of @(Model.Name) client.
-     *
-     * @@param baseUri the base URI of the host
-     * @@param clientBuilder the builder for building up an {@@link OkHttpClient}
-     * @@param retrofitBuilder the builder for building up a {@@link Retrofit}
-     */
-    public @(Model.Name)Impl(String baseUri, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
-        super(clientBuilder, retrofitBuilder);
-        this.baseUri = baseUri;
-        initialize();
-    }
+@if(Model.IsCustomBaseUri)
+{
+@:    /**
+@:     * Initializes an instance of @(Model.Name) client.
+@:     *
+@:     * @@param clientBuilder the builder for building up an {@@link OkHttpClient}
+@:     * @@param retrofitBuilder the builder for building up a {@@link Retrofit}
+@:     */
+@:    public @(Model.Name)Impl(OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
+@:        super(clientBuilder, retrofitBuilder);
+@:        this.baseUrl = new AutoRestBaseUrl("@Model.BaseUrl");
+@:        initialize();
+@:    }
+}
+else
+{
+@:     /**
+@:     * Initializes an instance of @(Model.Name) client.
+@:     *
+@:     * @@param baseUrl the base URL of the host
+@:     * @@param clientBuilder the builder for building up an {@@link OkHttpClient}
+@:     * @@param retrofitBuilder the builder for building up a {@@link Retrofit}
+@:     */
+@:    public @(Model.Name)Impl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
+@:        super(clientBuilder, retrofitBuilder);
+@:        this.baseUrl = new AutoRestBaseUrl(baseUrl);
+@:        initialize();
+@:    }
+}
 @EmptyLine
 </text>
 }
@@ -181,7 +220,7 @@ else
         this.azureClient = new AzureClient(clientBuilder, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
 
-        this.retrofitBuilder.baseUrl(baseUri);
+        this.retrofitBuilder.baseUrl(baseUrl);
 @if (Model.MethodTemplateModels.Any())
 {
 @:        initializeService();

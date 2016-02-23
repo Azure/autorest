@@ -35,6 +35,7 @@ var azureUrl = require('./routes/azureUrl');
 var azureSpecial = require('./routes/azureSpecials');
 var parameterGrouping = require('./routes/azureParameterGrouping.js');
 var validation = require('./routes/validation.js');
+var customUri = require('./routes/customUri.js');
 var util = require('util');
 
 var app = express();
@@ -412,7 +413,8 @@ var coverage = {
   "FormdataStreamUploadFile": 0,
   "StreamUploadFile": 0,
   "ConstantsInPath": 0,
-  "ConstantsInBody": 0
+  "ConstantsInBody": 0,
+  "CustomBaseUri": 0,
 };
 
 // view engine setup
@@ -456,6 +458,7 @@ app.use('/report', new report(coverage, azurecoverage).router);
 app.use('/subscriptions', new azureUrl(azurecoverage).router);
 app.use('/parameterGrouping', new parameterGrouping(azurecoverage).router);
 app.use('/validation', new validation(coverage).router);
+app.use('/customUri', new customUri(coverage).router);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

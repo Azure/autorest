@@ -56,6 +56,7 @@ namespace Microsoft.Rest.Generator.Java
         public override void NormalizeClientModel(ServiceClient serviceClient)
         {
             PopulateAdditionalProperties(serviceClient);
+            Extensions.NormalizeClientModel(serviceClient, Settings);
             Namer.NormalizeClientModel(serviceClient);
             Namer.ResolveNameCollisions(serviceClient, Settings.Namespace,
                 Settings.Namespace + ".Models");
