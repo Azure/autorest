@@ -47,7 +47,6 @@ class XMsClientRequestIdOperations(object):
         """
         # Construct URL
         url = '/azurespecials/overwrite/x-ms-client-request-id/method/'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -92,7 +91,6 @@ class XMsClientRequestIdOperations(object):
         """
         # Construct URL
         url = '/azurespecials/overwrite/x-ms-client-request-id/via-param/method/'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

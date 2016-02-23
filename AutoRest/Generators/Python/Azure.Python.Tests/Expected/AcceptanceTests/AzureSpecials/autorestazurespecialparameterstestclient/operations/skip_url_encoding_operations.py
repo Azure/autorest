@@ -184,7 +184,6 @@ class SkipUrlEncodingOperations(object):
         """
         # Construct URL
         url = '/azurespecials/skipUrlEncoding/method/query/valid'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -226,7 +225,6 @@ class SkipUrlEncodingOperations(object):
         """
         # Construct URL
         url = '/azurespecials/skipUrlEncoding/method/query/null'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -271,7 +269,6 @@ class SkipUrlEncodingOperations(object):
         """
         # Construct URL
         url = '/azurespecials/skipUrlEncoding/path/query/valid'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -315,7 +312,6 @@ class SkipUrlEncodingOperations(object):
         """
         # Construct URL
         url = '/azurespecials/skipUrlEncoding/swagger/query/valid'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

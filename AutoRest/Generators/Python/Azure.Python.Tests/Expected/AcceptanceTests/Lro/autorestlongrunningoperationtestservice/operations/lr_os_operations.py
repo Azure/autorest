@@ -50,7 +50,6 @@ class LROsOperations(object):
         """
         # Construct URL
         url = '/lro/put/200/succeeded'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -127,7 +126,6 @@ class LROsOperations(object):
         """
         # Construct URL
         url = '/lro/put/200/succeeded/nostate'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -204,7 +202,6 @@ class LROsOperations(object):
         """
         # Construct URL
         url = '/lro/put/202/retry/200'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -282,7 +279,6 @@ class LROsOperations(object):
         """
         # Construct URL
         url = '/lro/put/201/creating/succeeded/200'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -362,7 +358,6 @@ class LROsOperations(object):
         """
         # Construct URL
         url = '/lro/put/200/updating/succeeded/200'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -440,7 +435,6 @@ class LROsOperations(object):
         """
         # Construct URL
         url = '/lro/put/201/created/failed/200'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -520,7 +514,6 @@ class LROsOperations(object):
         """
         # Construct URL
         url = '/lro/put/200/accepted/canceled/200'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -597,7 +590,6 @@ class LROsOperations(object):
         """
         # Construct URL
         url = '/lro/put/noheader/202/200'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -680,7 +672,6 @@ class LROsOperations(object):
         """
         # Construct URL
         url = '/lro/putasync/retry/succeeded'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -765,7 +756,6 @@ class LROsOperations(object):
         """
         # Construct URL
         url = '/lro/putasync/noretry/succeeded'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -849,7 +839,6 @@ class LROsOperations(object):
         """
         # Construct URL
         url = '/lro/putasync/retry/failed'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -934,7 +923,6 @@ class LROsOperations(object):
         """
         # Construct URL
         url = '/lro/putasync/noretry/canceled'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1017,7 +1005,6 @@ class LROsOperations(object):
         """
         # Construct URL
         url = '/lro/putasync/noheader/201/200'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1097,7 +1084,6 @@ class LROsOperations(object):
         """
         # Construct URL
         url = '/lro/putnonresource/202/200'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1172,7 +1158,6 @@ class LROsOperations(object):
         """
         # Construct URL
         url = '/lro/putnonresourceasync/202/200'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1247,7 +1232,6 @@ class LROsOperations(object):
         """
         # Construct URL
         url = '/lro/putsubresource/202/200'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1322,7 +1306,6 @@ class LROsOperations(object):
         """
         # Construct URL
         url = '/lro/putsubresourceasync/202/200'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1398,7 +1381,6 @@ class LROsOperations(object):
         """
         # Construct URL
         url = '/lro/delete/provisioning/202/accepted/200/succeeded'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1479,7 +1461,6 @@ class LROsOperations(object):
         """
         # Construct URL
         url = '/lro/delete/provisioning/202/deleting/200/failed'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1560,7 +1541,6 @@ class LROsOperations(object):
         """
         # Construct URL
         url = '/lro/delete/provisioning/202/deleting/200/canceled'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1638,7 +1618,6 @@ class LROsOperations(object):
         """
         # Construct URL
         url = '/lro/delete/204/succeeded'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1699,7 +1678,6 @@ class LROsOperations(object):
         """
         # Construct URL
         url = '/lro/delete/202/retry/200'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1773,7 +1751,6 @@ class LROsOperations(object):
         """
         # Construct URL
         url = '/lro/delete/202/noretry/204'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1847,7 +1824,6 @@ class LROsOperations(object):
         """
         # Construct URL
         url = '/lro/delete/noheader'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1911,7 +1887,6 @@ class LROsOperations(object):
         """
         # Construct URL
         url = '/lro/deleteasync/noheader/202/204'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1975,7 +1950,6 @@ class LROsOperations(object):
         """
         # Construct URL
         url = '/lro/deleteasync/retry/succeeded'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2041,7 +2015,6 @@ class LROsOperations(object):
         """
         # Construct URL
         url = '/lro/deleteasync/noretry/succeeded'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2107,7 +2080,6 @@ class LROsOperations(object):
         """
         # Construct URL
         url = '/lro/deleteasync/retry/failed'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2173,7 +2145,6 @@ class LROsOperations(object):
         """
         # Construct URL
         url = '/lro/deleteasync/retry/canceled'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2239,7 +2210,6 @@ class LROsOperations(object):
         """
         # Construct URL
         url = '/lro/post/payload/200'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2311,7 +2281,6 @@ class LROsOperations(object):
         """
         # Construct URL
         url = '/lro/post/202/retry/200'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2385,7 +2354,6 @@ class LROsOperations(object):
         """
         # Construct URL
         url = '/lro/post/202/noretry/204'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2469,7 +2437,6 @@ class LROsOperations(object):
         """
         # Construct URL
         url = '/lro/postasync/retry/succeeded'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2554,7 +2521,6 @@ class LROsOperations(object):
         """
         # Construct URL
         url = '/lro/postasync/noretry/succeeded'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2639,7 +2605,6 @@ class LROsOperations(object):
         """
         # Construct URL
         url = '/lro/postasync/retry/failed'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2715,7 +2680,6 @@ class LROsOperations(object):
         """
         # Construct URL
         url = '/lro/postasync/retry/canceled'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

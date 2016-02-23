@@ -44,7 +44,6 @@ class Primitive(object):
         """
         # Construct URL
         url = '/complex/primitive/integer'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -88,7 +87,6 @@ class Primitive(object):
         """
         # Construct URL
         url = '/complex/primitive/integer'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -127,7 +125,6 @@ class Primitive(object):
         """
         # Construct URL
         url = '/complex/primitive/long'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -171,7 +168,6 @@ class Primitive(object):
         """
         # Construct URL
         url = '/complex/primitive/long'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -210,7 +206,6 @@ class Primitive(object):
         """
         # Construct URL
         url = '/complex/primitive/float'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -254,7 +249,6 @@ class Primitive(object):
         """
         # Construct URL
         url = '/complex/primitive/float'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -293,7 +287,6 @@ class Primitive(object):
         """
         # Construct URL
         url = '/complex/primitive/double'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -338,7 +331,6 @@ class Primitive(object):
         """
         # Construct URL
         url = '/complex/primitive/double'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -377,7 +369,6 @@ class Primitive(object):
         """
         # Construct URL
         url = '/complex/primitive/bool'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -421,7 +412,6 @@ class Primitive(object):
         """
         # Construct URL
         url = '/complex/primitive/bool'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -460,7 +450,6 @@ class Primitive(object):
         """
         # Construct URL
         url = '/complex/primitive/string'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -504,7 +493,6 @@ class Primitive(object):
         """
         # Construct URL
         url = '/complex/primitive/string'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -543,7 +531,6 @@ class Primitive(object):
         """
         # Construct URL
         url = '/complex/primitive/date'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -587,7 +574,6 @@ class Primitive(object):
         """
         # Construct URL
         url = '/complex/primitive/date'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -626,7 +612,6 @@ class Primitive(object):
         """
         # Construct URL
         url = '/complex/primitive/datetime'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -671,7 +656,6 @@ class Primitive(object):
         """
         # Construct URL
         url = '/complex/primitive/datetime'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -710,7 +694,6 @@ class Primitive(object):
         """
         # Construct URL
         url = '/complex/primitive/datetimerfc1123'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -755,7 +738,6 @@ class Primitive(object):
         """
         # Construct URL
         url = '/complex/primitive/datetimerfc1123'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -794,7 +776,6 @@ class Primitive(object):
         """
         # Construct URL
         url = '/complex/primitive/duration'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -840,7 +821,6 @@ class Primitive(object):
 
         # Construct URL
         url = '/complex/primitive/duration'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -879,7 +859,6 @@ class Primitive(object):
         """
         # Construct URL
         url = '/complex/primitive/byte'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -925,7 +904,6 @@ class Primitive(object):
 
         # Construct URL
         url = '/complex/primitive/byte'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

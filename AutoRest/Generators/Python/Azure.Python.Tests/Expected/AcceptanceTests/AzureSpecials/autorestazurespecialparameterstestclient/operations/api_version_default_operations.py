@@ -45,7 +45,6 @@ class ApiVersionDefaultOperations(object):
         """
         # Construct URL
         url = '/azurespecials/apiVersion/method/string/none/query/global/2015-07-01-preview'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -85,7 +84,6 @@ class ApiVersionDefaultOperations(object):
         """
         # Construct URL
         url = '/azurespecials/apiVersion/method/string/none/query/globalNotProvided/2015-07-01-preview'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -125,7 +123,6 @@ class ApiVersionDefaultOperations(object):
         """
         # Construct URL
         url = '/azurespecials/apiVersion/path/string/none/query/global/2015-07-01-preview'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -165,7 +162,6 @@ class ApiVersionDefaultOperations(object):
         """
         # Construct URL
         url = '/azurespecials/apiVersion/swagger/string/none/query/global/2015-07-01-preview'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

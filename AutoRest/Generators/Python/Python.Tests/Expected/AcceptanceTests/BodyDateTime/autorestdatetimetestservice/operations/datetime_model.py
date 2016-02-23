@@ -44,7 +44,6 @@ class DatetimeModel(object):
         """
         # Construct URL
         url = '/datetime/null'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -86,7 +85,6 @@ class DatetimeModel(object):
         """
         # Construct URL
         url = '/datetime/invalid'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -128,7 +126,6 @@ class DatetimeModel(object):
         """
         # Construct URL
         url = '/datetime/overflow'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -170,7 +167,6 @@ class DatetimeModel(object):
         """
         # Construct URL
         url = '/datetime/underflow'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -214,7 +210,6 @@ class DatetimeModel(object):
         """
         # Construct URL
         url = '/datetime/max/utc'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -253,7 +248,6 @@ class DatetimeModel(object):
         """
         # Construct URL
         url = '/datetime/max/utc/lowercase'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -295,7 +289,6 @@ class DatetimeModel(object):
         """
         # Construct URL
         url = '/datetime/max/utc/uppercase'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -340,7 +333,6 @@ class DatetimeModel(object):
         """
         # Construct URL
         url = '/datetime/max/localpositiveoffset'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -380,7 +372,6 @@ class DatetimeModel(object):
         """
         # Construct URL
         url = '/datetime/max/localpositiveoffset/lowercase'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -423,7 +414,6 @@ class DatetimeModel(object):
         """
         # Construct URL
         url = '/datetime/max/localpositiveoffset/uppercase'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -468,7 +458,6 @@ class DatetimeModel(object):
         """
         # Construct URL
         url = '/datetime/max/localnegativeoffset'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -508,7 +497,6 @@ class DatetimeModel(object):
         """
         # Construct URL
         url = '/datetime/max/localnegativeoffset/uppercase'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -551,7 +539,6 @@ class DatetimeModel(object):
         """
         # Construct URL
         url = '/datetime/max/localnegativeoffset/lowercase'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -595,7 +582,6 @@ class DatetimeModel(object):
         """
         # Construct URL
         url = '/datetime/min/utc'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -634,7 +620,6 @@ class DatetimeModel(object):
         """
         # Construct URL
         url = '/datetime/min/utc'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -678,7 +663,6 @@ class DatetimeModel(object):
         """
         # Construct URL
         url = '/datetime/min/localpositiveoffset'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -717,7 +701,6 @@ class DatetimeModel(object):
         """
         # Construct URL
         url = '/datetime/min/localpositiveoffset'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -761,7 +744,6 @@ class DatetimeModel(object):
         """
         # Construct URL
         url = '/datetime/min/localnegativeoffset'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -800,7 +782,6 @@ class DatetimeModel(object):
         """
         # Construct URL
         url = '/datetime/min/localnegativeoffset'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

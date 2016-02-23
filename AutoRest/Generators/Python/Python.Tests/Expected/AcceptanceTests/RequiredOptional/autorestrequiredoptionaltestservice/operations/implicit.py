@@ -86,7 +86,6 @@ class Implicit(object):
         """
         # Construct URL
         url = '/reqopt/implicit/optional/query'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -125,7 +124,6 @@ class Implicit(object):
         """
         # Construct URL
         url = '/reqopt/implicit/optional/header'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -164,7 +162,6 @@ class Implicit(object):
         """
         # Construct URL
         url = '/reqopt/implicit/optional/body'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -244,7 +241,6 @@ class Implicit(object):
         """
         # Construct URL
         url = '/reqopt/global/required/query'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -280,7 +276,6 @@ class Implicit(object):
         """
         # Construct URL
         url = '/reqopt/global/optional/query'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

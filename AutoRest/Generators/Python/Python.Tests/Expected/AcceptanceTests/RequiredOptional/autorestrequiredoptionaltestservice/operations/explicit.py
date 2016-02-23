@@ -47,7 +47,6 @@ class Explicit(object):
         """
         # Construct URL
         url = '/reqopt/requied/integer/parameter'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -88,7 +87,6 @@ class Explicit(object):
         """
         # Construct URL
         url = '/reqopt/optional/integer/parameter'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -136,7 +134,6 @@ class Explicit(object):
 
         # Construct URL
         url = '/reqopt/requied/integer/property'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -180,7 +177,6 @@ class Explicit(object):
 
         # Construct URL
         url = '/reqopt/optional/integer/property'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -226,7 +222,6 @@ class Explicit(object):
         """
         # Construct URL
         url = '/reqopt/requied/integer/header'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -265,7 +260,6 @@ class Explicit(object):
         """
         # Construct URL
         url = '/reqopt/optional/integer/header'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -305,7 +299,6 @@ class Explicit(object):
         """
         # Construct URL
         url = '/reqopt/requied/string/parameter'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -346,7 +339,6 @@ class Explicit(object):
         """
         # Construct URL
         url = '/reqopt/optional/string/parameter'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -394,7 +386,6 @@ class Explicit(object):
 
         # Construct URL
         url = '/reqopt/requied/string/property'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -438,7 +429,6 @@ class Explicit(object):
 
         # Construct URL
         url = '/reqopt/optional/string/property'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -484,7 +474,6 @@ class Explicit(object):
         """
         # Construct URL
         url = '/reqopt/requied/string/header'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -523,7 +512,6 @@ class Explicit(object):
         """
         # Construct URL
         url = '/reqopt/optional/string/header'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -563,7 +551,6 @@ class Explicit(object):
         """
         # Construct URL
         url = '/reqopt/requied/class/parameter'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -604,7 +591,6 @@ class Explicit(object):
         """
         # Construct URL
         url = '/reqopt/optional/class/parameter'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -652,7 +638,6 @@ class Explicit(object):
 
         # Construct URL
         url = '/reqopt/requied/class/property'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -696,7 +681,6 @@ class Explicit(object):
 
         # Construct URL
         url = '/reqopt/optional/class/property'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -741,7 +725,6 @@ class Explicit(object):
         """
         # Construct URL
         url = '/reqopt/requied/array/parameter'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -782,7 +765,6 @@ class Explicit(object):
         """
         # Construct URL
         url = '/reqopt/optional/array/parameter'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -830,7 +812,6 @@ class Explicit(object):
 
         # Construct URL
         url = '/reqopt/requied/array/property'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -874,7 +855,6 @@ class Explicit(object):
 
         # Construct URL
         url = '/reqopt/optional/array/property'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -920,7 +900,6 @@ class Explicit(object):
         """
         # Construct URL
         url = '/reqopt/requied/array/header'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -959,7 +938,6 @@ class Explicit(object):
         """
         # Construct URL
         url = '/reqopt/optional/array/header'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

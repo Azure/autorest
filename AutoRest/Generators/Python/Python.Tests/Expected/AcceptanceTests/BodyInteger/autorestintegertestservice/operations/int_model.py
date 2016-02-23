@@ -44,7 +44,6 @@ class IntModel(object):
         """
         # Construct URL
         url = '/int/null'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -86,7 +85,6 @@ class IntModel(object):
         """
         # Construct URL
         url = '/int/invalid'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -128,7 +126,6 @@ class IntModel(object):
         """
         # Construct URL
         url = '/int/overflowint32'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -170,7 +167,6 @@ class IntModel(object):
         """
         # Construct URL
         url = '/int/underflowint32'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -212,7 +208,6 @@ class IntModel(object):
         """
         # Construct URL
         url = '/int/overflowint64'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -254,7 +249,6 @@ class IntModel(object):
         """
         # Construct URL
         url = '/int/underflowint64'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -298,7 +292,6 @@ class IntModel(object):
         """
         # Construct URL
         url = '/int/max/32'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -339,7 +332,6 @@ class IntModel(object):
         """
         # Construct URL
         url = '/int/max/64'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -380,7 +372,6 @@ class IntModel(object):
         """
         # Construct URL
         url = '/int/min/32'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -421,7 +412,6 @@ class IntModel(object):
         """
         # Construct URL
         url = '/int/min/64'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

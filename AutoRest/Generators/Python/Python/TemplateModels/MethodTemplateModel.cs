@@ -220,10 +220,6 @@ namespace Microsoft.Rest.Generator.Python
                 builder.Outdent().AppendLine("}");
                 builder.AppendLine("{0} = self._client.format_url({0}, **path_format_arguments)", variableName);
             }
-            else
-            {
-                builder.AppendLine("{0} = self._client.format_url({0})", variableName);
-            }
 
             return builder.ToString();
         }

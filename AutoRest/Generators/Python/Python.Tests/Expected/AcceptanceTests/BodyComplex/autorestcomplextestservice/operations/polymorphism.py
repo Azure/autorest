@@ -44,7 +44,6 @@ class Polymorphism(object):
         """
         # Construct URL
         url = '/complex/polymorphism/valid'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -121,7 +120,6 @@ class Polymorphism(object):
         """
         # Construct URL
         url = '/complex/polymorphism/valid'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -189,7 +187,6 @@ class Polymorphism(object):
         """
         # Construct URL
         url = '/complex/polymorphism/missingrequired/invalid'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

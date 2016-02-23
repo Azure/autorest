@@ -86,7 +86,6 @@ class AutoRestReportServiceForAzure(object):
         """
         # Construct URL
         url = '/report/azure'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

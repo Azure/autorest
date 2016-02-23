@@ -53,7 +53,6 @@ class OdataOperations(object):
         """
         # Construct URL
         url = '/azurespecials/odata/filter'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

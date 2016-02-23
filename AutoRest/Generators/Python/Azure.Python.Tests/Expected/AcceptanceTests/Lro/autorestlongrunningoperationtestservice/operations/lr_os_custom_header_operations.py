@@ -53,7 +53,6 @@ class LROsCustomHeaderOperations(object):
         """
         # Construct URL
         url = '/lro/customheader/putasync/retry/succeeded'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -139,7 +138,6 @@ class LROsCustomHeaderOperations(object):
         """
         # Construct URL
         url = '/lro/customheader/put/201/creating/succeeded/200'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -220,7 +218,6 @@ class LROsCustomHeaderOperations(object):
         """
         # Construct URL
         url = '/lro/customheader/post/202/retry/200'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -296,7 +293,6 @@ class LROsCustomHeaderOperations(object):
         """
         # Construct URL
         url = '/lro/customheader/postasync/retry/succeeded'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

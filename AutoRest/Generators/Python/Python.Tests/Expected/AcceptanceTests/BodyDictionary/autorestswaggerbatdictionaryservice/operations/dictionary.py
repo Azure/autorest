@@ -44,7 +44,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/null'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -86,7 +85,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/empty'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -130,7 +128,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/empty'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -169,7 +166,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/nullvalue'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -211,7 +207,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/nullkey'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -253,7 +248,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/keyemptystring'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -295,7 +289,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/invalid'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -338,7 +331,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/boolean/tfft'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -383,7 +375,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/boolean/tfft'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -422,7 +413,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/boolean/true.null.false'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -464,7 +454,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/boolean/true.boolean.false'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -506,7 +495,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/integer/1.-1.3.300'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -550,7 +538,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/integer/1.-1.3.300'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -589,7 +576,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/integer/1.null.zero'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -631,7 +617,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/integer/1.integer.0'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -673,7 +658,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/long/1.-1.3.300'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -717,7 +701,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/long/1.-1.3.300'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -756,7 +739,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/long/1.null.zero'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -798,7 +780,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/long/1.integer.0'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -840,7 +821,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/float/0--0.01-1.2e20'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -884,7 +864,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/float/0--0.01-1.2e20'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -923,7 +902,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/float/0.0-null-1.2e20'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -965,7 +943,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/float/1.number.0'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1007,7 +984,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/double/0--0.01-1.2e20'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1051,7 +1027,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/double/0--0.01-1.2e20'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1090,7 +1065,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/double/0.0-null-1.2e20'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1132,7 +1106,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/double/1.number.0'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1174,7 +1147,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/string/foo1.foo2.foo3'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1218,7 +1190,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/string/foo1.foo2.foo3'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1257,7 +1228,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/string/foo.null.foo2'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1299,7 +1269,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/string/foo.123.foo2'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1342,7 +1311,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/date/valid'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1387,7 +1355,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/date/valid'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1427,7 +1394,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/date/invalidnull'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1469,7 +1435,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/date/invalidchars'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1512,7 +1477,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/date-time/valid'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1557,7 +1521,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/date-time/valid'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1596,7 +1559,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/date-time/invalidnull'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1639,7 +1601,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/date-time/invalidchars'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1683,7 +1644,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/date-time-rfc1123/valid'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1728,7 +1688,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/date-time-rfc1123/valid'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1768,7 +1727,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/duration/valid'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1812,7 +1770,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/duration/valid'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1852,7 +1809,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/byte/valid'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1897,7 +1853,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/byte/valid'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1937,7 +1892,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/prim/byte/invalidnull'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1979,7 +1933,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/complex/null'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2021,7 +1974,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/complex/empty'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2064,7 +2016,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/complex/itemnull'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2107,7 +2058,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/complex/itemempty'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2151,7 +2101,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/complex/valid'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2197,7 +2146,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/complex/valid'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2236,7 +2184,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/array/null'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2278,7 +2225,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/array/empty'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2321,7 +2267,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/array/itemnull'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2364,7 +2309,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/array/itemempty'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2407,7 +2351,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/array/valid'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2452,7 +2395,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/array/valid'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2491,7 +2433,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/dictionary/null'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2534,7 +2475,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/dictionary/empty'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2578,7 +2518,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/dictionary/itemnull'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2622,7 +2561,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/dictionary/itemempty'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2667,7 +2605,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/dictionary/valid'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2714,7 +2651,6 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/dictionary/dictionary/valid'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

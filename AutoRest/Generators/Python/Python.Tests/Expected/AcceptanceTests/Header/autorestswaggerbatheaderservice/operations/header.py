@@ -47,7 +47,6 @@ class Header(object):
         """
         # Construct URL
         url = '/header/param/existingkey'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -83,7 +82,6 @@ class Header(object):
         """
         # Construct URL
         url = '/header/response/existingkey'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -124,7 +122,6 @@ class Header(object):
         """
         # Construct URL
         url = '/header/param/protectedkey'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -160,7 +157,6 @@ class Header(object):
         """
         # Construct URL
         url = '/header/response/protectedkey'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -204,7 +200,6 @@ class Header(object):
         """
         # Construct URL
         url = '/header/param/prim/integer'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -244,7 +239,6 @@ class Header(object):
         """
         # Construct URL
         url = '/header/response/prim/integer'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -289,7 +283,6 @@ class Header(object):
         """
         # Construct URL
         url = '/header/param/prim/long'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -329,7 +322,6 @@ class Header(object):
         """
         # Construct URL
         url = '/header/response/prim/long'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -374,7 +366,6 @@ class Header(object):
         """
         # Construct URL
         url = '/header/param/prim/float'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -414,7 +405,6 @@ class Header(object):
         """
         # Construct URL
         url = '/header/response/prim/float'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -459,7 +449,6 @@ class Header(object):
         """
         # Construct URL
         url = '/header/param/prim/double'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -499,7 +488,6 @@ class Header(object):
         """
         # Construct URL
         url = '/header/response/prim/double'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -544,7 +532,6 @@ class Header(object):
         """
         # Construct URL
         url = '/header/param/prim/bool'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -584,7 +571,6 @@ class Header(object):
         """
         # Construct URL
         url = '/header/response/prim/bool'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -631,7 +617,6 @@ class Header(object):
         """
         # Construct URL
         url = '/header/param/prim/string'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -673,7 +658,6 @@ class Header(object):
         """
         # Construct URL
         url = '/header/response/prim/string'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -719,7 +703,6 @@ class Header(object):
         """
         # Construct URL
         url = '/header/param/prim/date'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -759,7 +742,6 @@ class Header(object):
         """
         # Construct URL
         url = '/header/response/prim/date'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -806,7 +788,6 @@ class Header(object):
         """
         # Construct URL
         url = '/header/param/prim/datetime'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -847,7 +828,6 @@ class Header(object):
         """
         # Construct URL
         url = '/header/response/prim/datetime'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -894,7 +874,6 @@ class Header(object):
         """
         # Construct URL
         url = '/header/param/prim/datetimerfc1123'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -936,7 +915,6 @@ class Header(object):
         """
         # Construct URL
         url = '/header/response/prim/datetimerfc1123'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -982,7 +960,6 @@ class Header(object):
         """
         # Construct URL
         url = '/header/param/prim/duration'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1022,7 +999,6 @@ class Header(object):
         """
         # Construct URL
         url = '/header/response/prim/duration'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1067,7 +1043,6 @@ class Header(object):
         """
         # Construct URL
         url = '/header/param/prim/byte'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1107,7 +1082,6 @@ class Header(object):
         """
         # Construct URL
         url = '/header/response/prim/byte'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1153,7 +1127,6 @@ class Header(object):
         """
         # Construct URL
         url = '/header/param/prim/enum'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1194,7 +1167,6 @@ class Header(object):
         """
         # Construct URL
         url = '/header/response/prim/enum'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1234,7 +1206,6 @@ class Header(object):
         """
         # Construct URL
         url = '/header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

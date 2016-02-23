@@ -123,7 +123,6 @@ class ParameterGroupingOperations(object):
 
         # Construct URL
         url = '/parameterGrouping/postOptional'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -185,7 +184,6 @@ class ParameterGroupingOperations(object):
 
         # Construct URL
         url = '/parameterGrouping/postMultipleParameterGroups'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -241,7 +239,6 @@ class ParameterGroupingOperations(object):
 
         # Construct URL
         url = '/parameterGrouping/sharedParameterGroupObject'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

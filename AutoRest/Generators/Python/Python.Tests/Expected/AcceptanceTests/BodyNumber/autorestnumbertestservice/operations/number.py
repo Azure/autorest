@@ -44,7 +44,6 @@ class Number(object):
         """
         # Construct URL
         url = '/number/null'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -86,7 +85,6 @@ class Number(object):
         """
         # Construct URL
         url = '/number/invalidfloat'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -128,7 +126,6 @@ class Number(object):
         """
         # Construct URL
         url = '/number/invaliddouble'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -170,7 +167,6 @@ class Number(object):
         """
         # Construct URL
         url = '/number/invaliddecimal'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -214,7 +210,6 @@ class Number(object):
         """
         # Construct URL
         url = '/number/big/float/3.402823e+20'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -253,7 +248,6 @@ class Number(object):
         """
         # Construct URL
         url = '/number/big/float/3.402823e+20'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -297,7 +291,6 @@ class Number(object):
         """
         # Construct URL
         url = '/number/big/double/2.5976931e+101'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -336,7 +329,6 @@ class Number(object):
         """
         # Construct URL
         url = '/number/big/double/2.5976931e+101'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -380,7 +372,6 @@ class Number(object):
         """
         # Construct URL
         url = '/number/big/double/99999999.99'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -419,7 +410,6 @@ class Number(object):
         """
         # Construct URL
         url = '/number/big/double/99999999.99'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -463,7 +453,6 @@ class Number(object):
         """
         # Construct URL
         url = '/number/big/double/-99999999.99'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -502,7 +491,6 @@ class Number(object):
         """
         # Construct URL
         url = '/number/big/double/-99999999.99'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -546,7 +534,6 @@ class Number(object):
         """
         # Construct URL
         url = '/number/big/decimal/2.5976931e+101'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -585,7 +572,6 @@ class Number(object):
         """
         # Construct URL
         url = '/number/big/decimal/2.5976931e+101'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -629,7 +615,6 @@ class Number(object):
         """
         # Construct URL
         url = '/number/big/decimal/99999999.99'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -668,7 +653,6 @@ class Number(object):
         """
         # Construct URL
         url = '/number/big/decimal/99999999.99'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -712,7 +696,6 @@ class Number(object):
         """
         # Construct URL
         url = '/number/big/decimal/-99999999.99'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -751,7 +734,6 @@ class Number(object):
         """
         # Construct URL
         url = '/number/big/decimal/-99999999.99'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -795,7 +777,6 @@ class Number(object):
         """
         # Construct URL
         url = '/number/small/float/3.402823e-20'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -834,7 +815,6 @@ class Number(object):
         """
         # Construct URL
         url = '/number/small/float/3.402823e-20'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -878,7 +858,6 @@ class Number(object):
         """
         # Construct URL
         url = '/number/small/double/2.5976931e-101'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -917,7 +896,6 @@ class Number(object):
         """
         # Construct URL
         url = '/number/small/double/2.5976931e-101'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -961,7 +939,6 @@ class Number(object):
         """
         # Construct URL
         url = '/number/small/decimal/2.5976931e-101'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1000,7 +977,6 @@ class Number(object):
         """
         # Construct URL
         url = '/number/small/decimal/2.5976931e-101'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

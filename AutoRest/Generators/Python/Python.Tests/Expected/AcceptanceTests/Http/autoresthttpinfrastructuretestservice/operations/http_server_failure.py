@@ -45,7 +45,6 @@ class HttpServerFailure(object):
         """
         # Construct URL
         url = '/http/failure/server/501'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -81,7 +80,6 @@ class HttpServerFailure(object):
         """
         # Construct URL
         url = '/http/failure/server/501'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -119,7 +117,6 @@ class HttpServerFailure(object):
         """
         # Construct URL
         url = '/http/failure/server/505'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -164,7 +161,6 @@ class HttpServerFailure(object):
         """
         # Construct URL
         url = '/http/failure/server/505'
-        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

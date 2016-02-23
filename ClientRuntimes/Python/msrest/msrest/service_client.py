@@ -92,7 +92,6 @@ class ServiceClient(object):
         request = ClientRequest()
 
         if url:
-            # TODO Remove this from later versions - needed for back-compat
             request.url = self.format_url(url)
 
         if params:
