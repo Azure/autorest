@@ -49,6 +49,8 @@ using Error = Fixtures.AcceptanceTestsHttp.Models.Error;
 using System.Reflection;
 using Fixtures.PetstoreV2;
 using Fixtures.AcceptanceTestsCompositeBoolIntClient;
+using Fixtures.AcceptanceTestsCustomBaseUri;
+using System.Net.Http;
 
 namespace Microsoft.Rest.Generator.CSharp.Tests
 {
@@ -1870,6 +1872,41 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 Assert.Equal(HttpStatusCode.OK,
                     client.ExplicitModel.PostOptionalArrayHeaderWithHttpMessagesAsync(null)
                         .Result.Response.StatusCode);
+            }
+        }
+
+        [Fact]
+        public void CustomBaseUriTests()
+        {
+            SwaggerSpecRunner.RunTests(
+                SwaggerPath("custom-baseUrl.json"), ExpectedPath("CustomBaseUri"));
+            using (var client = new AutoRestParameterizedHostTestClient())
+            {
+                // small modification to the "host" portion to include the port and the '.'
+                client.Host = string.Format(CultureInfo.InvariantCulture, "{0}.:{1}", client.Host, Fixture.Port);
+                Assert.Equal(HttpStatusCode.OK,
+                    client.Paths.GetEmptyWithHttpMessagesAsync("local").Result.Response.StatusCode);
+            }
+        }
+
+        [Fact]
+        public void CustomBaseUriNegativeTests()
+        {
+            SwaggerSpecRunner.RunTests(
+                SwaggerPath("custom-baseUrl.json"), ExpectedPath("CustomBaseUri"));
+            using (var client = new AutoRestParameterizedHostTestClient())
+            {
+                // use a bad acct name
+                Assert.Throws<HttpRequestException>(() =>
+                    client.Paths.GetEmpty("bad"));
+
+                // pass in null
+                Assert.Throws<ValidationException>(() => client.Paths.GetEmpty(null));
+
+                // set the global parameter incorrectly
+                client.Host = "badSuffix";
+                Assert.Throws<HttpRequestException>(() =>
+                    client.Paths.GetEmpty("local"));
             }
         }
 

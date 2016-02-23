@@ -53,7 +53,8 @@ namespace Microsoft.Rest.Generator.Java
             get
             {
                 return LogicalParameters.Where(p => p.Location == ParameterLocation.Path)
-                    .Union(LogicalParameters.Where(p => p.Location != ParameterLocation.Path));
+                    .Union(LogicalParameters.Where(p => p.Location != ParameterLocation.Path))
+                    .Where(p => !p.Extensions.ContainsKey("hostParameter"));
             }
         }
 
@@ -558,12 +559,12 @@ namespace Microsoft.Rest.Generator.Java
                 imports.Add("com.microsoft.rest.ServiceCallback");
                 // parameter types
                 this.Parameters.ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace)));
-                this.LogicalParameters
+                this.OrderedLogicalParameters
                     .Where(p => p.Location == ParameterLocation.Body
                         || !p.Type.NeedsSpecialSerialization())
                     .ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace)));
                 // parameter locations
-                this.LogicalParameters.ForEach(p =>
+                this.OrderedLogicalParameters.ForEach(p =>
                 {
                     string locationImport = p.Location.ImportFrom();
                     if (!string.IsNullOrEmpty(locationImport))

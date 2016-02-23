@@ -31,6 +31,7 @@ import dictionaryClient = require('../Expected/AcceptanceTests/BodyDictionary/au
 import dictionaryModels = require('../Expected/AcceptanceTests/BodyDictionary/models');
 import httpClient = require('../Expected/AcceptanceTests/Http/autoRestHttpInfrastructureTestService');
 import formDataClient = require('../Expected/AcceptanceTests/BodyFormData/autoRestSwaggerBATFormDataService');
+import customBaseUriClient = require('../Expected/AcceptanceTests/CustomBaseUri/autoRestParameterizedHostTestClient');
 
 
 var dummyToken = 'dummy12321343423';
@@ -52,7 +53,33 @@ var baseUri = 'http://localhost:3000';
 describe('nodejs', function () {
 
   describe('Swagger BAT', function () {
-    
+    describe('Custom BaseUri Client', function () {
+      var testClient = new customBaseUriClient('host:3000', clientOptions);
+      it('should return 200', function (done) {
+          testClient.paths.getEmpty('local', function (error, result, request, response) {
+          should.not.exist(error);
+          response.statusCode.should.equal(200);
+          done();
+        });
+      });
+      it('should throw due to bad "host", bad "account" and missing account', function (done) {
+        testClient.host = 'nonexistent';
+        testClient.paths.getEmpty('local', function (error, result, request, response) {
+          should.exist(error);
+          should.not.exist(result);
+          testClient.host = 'host:3000';
+          testClient.paths.getEmpty('bad', function (error, result, request, response) {
+            should.exist(error);
+            should.not.exist(result);
+            testClient.paths.getEmpty(null, function (error, result, request, response) {
+              should.exist(error);
+              should.not.exist(result);
+              done();
+            });
+          });
+        });
+      });
+    });
     describe('Bool Client', function () {
       var testClient = new boolClient(baseUri, clientOptions);
       it('should get valid boolean values', function (done) {

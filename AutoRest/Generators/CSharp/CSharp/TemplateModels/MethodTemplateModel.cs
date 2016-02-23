@@ -24,9 +24,12 @@ namespace Microsoft.Rest.Generator.CSharp
             source.LogicalParameters.ForEach(p => LogicalParameterTemplateModels.Add(new ParameterTemplateModel(p)));
             ServiceClient = serviceClient;
             MethodGroupName = source.Group ?? serviceClient.Name;
+            this.IsCustomBaseUri = serviceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension);
         }
 
         public string MethodGroupName { get; set; }
+
+        public bool IsCustomBaseUri { get; private set; }
 
         public ServiceClient ServiceClient { get; set; }
 
@@ -394,7 +397,13 @@ namespace Microsoft.Rest.Generator.CSharp
 
             foreach (var pathParameter in this.LogicalParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
             {
-                builder.AppendLine("{0} = {0}.Replace(\"{{{1}}}\", Uri.EscapeDataString({2}));",
+                string replaceString = "{0} = {0}.Replace(\"{{{1}}}\", Uri.EscapeDataString({2}));";
+                if (pathParameter.SkipUrlEncoding())
+                {
+                    replaceString = "{0} = {0}.Replace(\"{{{1}}}\", {2});";
+                }
+
+                builder.AppendLine(replaceString,
                     variableName,
                     pathParameter.SerializedName,
                     pathParameter.Type.ToString(ClientReference, pathParameter.Name));
@@ -404,13 +413,21 @@ namespace Microsoft.Rest.Generator.CSharp
                 builder.AppendLine("List<string> _queryParameters = new List<string>();");
                 foreach (var queryParameter in this.LogicalParameterTemplateModels.Where(p => p.Location == ParameterLocation.Query))
                 {
+                    var replaceString = "_queryParameters.Add(string.Format(\"{0}={{0}}\", Uri.EscapeDataString({1})));";
                     if (queryParameter.CanBeNull())
                     {
                         builder.AppendLine("if ({0} != null)", queryParameter.Name)
                             .AppendLine("{").Indent();
                     }
-                    builder.AppendLine("_queryParameters.Add(string.Format(\"{0}={{0}}\", Uri.EscapeDataString({1})));",
+
+                    if(queryParameter.SkipUrlEncoding())
+                    {
+                        replaceString = "_queryParameters.Add(string.Format(\"{0}={{0}}\", {1}));";
+                    }
+
+                    builder.AppendLine(replaceString,
                             queryParameter.SerializedName, queryParameter.GetFormattedReferenceValue(ClientReference));
+
                     if (queryParameter.CanBeNull())
                     {
                         builder.Outdent()

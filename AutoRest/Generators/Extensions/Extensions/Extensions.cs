@@ -8,6 +8,10 @@ using System.Globalization;
 using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
+using Microsoft.Rest.Modeler.Swagger;
+using Microsoft.Rest.Modeler.Swagger.Model;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace Microsoft.Rest.Generator
 {
@@ -22,7 +26,10 @@ namespace Microsoft.Rest.Generator
         public const string FlattenExtension = "x-ms-client-flatten";
         public const string FlattenOriginalTypeName = "x-ms-client-flatten-original-type-name";
         public const string ParameterGroupExtension = "x-ms-parameter-grouping";
-        
+        public const string ParameterizedHostExtension = "x-ms-parameterized-host";
+
+        private static bool hostChecked = false;
+
         /// <summary>
         /// Normalizes client model using generic extensions.
         /// </summary>
@@ -34,6 +41,69 @@ namespace Microsoft.Rest.Generator
             AddParameterGroups(serviceClient);
             FlattenModels(serviceClient);
             FlattenMethodParameters(serviceClient, settings);
+            ProcessParameterizedHost(serviceClient, settings);
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Justification = "We are normalizing a URI, which is lowercase by convention")]
+        public static void ProcessParameterizedHost(ServiceClient serviceClient, Settings settings)
+        {
+            if (serviceClient == null)
+            {
+                throw new ArgumentNullException("serviceClient");
+            }
+
+            if (settings == null)
+            {
+                throw new ArgumentNullException("settings");
+            }
+
+            if (serviceClient.Extensions.ContainsKey(ParameterizedHostExtension) && !hostChecked)
+            { 
+                SwaggerModeler modeler = new SwaggerModeler(settings);
+                modeler.Build();
+                var hostExtension = serviceClient.Extensions[ParameterizedHostExtension] as JObject;
+
+                if (hostExtension != null)
+                {
+                    var hostTemplate = (string)hostExtension["hostTemplate"];
+                    var parametersJson = hostExtension["parameters"].ToString();
+                    if (!string.IsNullOrEmpty(parametersJson))
+                    {
+                        var jsonSettings = new JsonSerializerSettings
+                        {
+                            TypeNameHandling = TypeNameHandling.None,
+                            MetadataPropertyHandling = MetadataPropertyHandling.Ignore
+                        };
+
+                        var swaggerParams = JsonConvert.DeserializeObject<List<SwaggerParameter>>(parametersJson, jsonSettings);
+                        
+                        foreach (var swaggerParameter in swaggerParams)
+                        {
+                            // Build parameter
+                            var parameterBuilder = new ParameterBuilder(swaggerParameter, modeler);
+                            var parameter = parameterBuilder.Build();
+
+                            // check to see if the parameter exists in properties, and needs to have its name normalized
+                            if (serviceClient.Properties.Any(p => p.SerializedName.Equals(parameter.SerializedName)))
+                            {
+                                parameter.ClientProperty = serviceClient.Properties.Single(p => p.SerializedName.Equals(parameter.SerializedName));
+                            }
+                            parameter.Extensions["hostParameter"] = true;
+
+                            foreach (var method in serviceClient.Methods)
+                            {
+                                method.Parameters.Add(parameter);
+                            }
+                        }
+
+                        serviceClient.BaseUrl = string.Format(CultureInfo.InvariantCulture, "{0}://{1}{2}",
+                        modeler.ServiceDefinition.Schemes[0].ToString().ToLowerInvariant(),
+                        hostTemplate, modeler.ServiceDefinition.BasePath);
+                    }
+                }
+            }
+
+            hostChecked = true;
         }
 
         /// <summary>
@@ -332,7 +402,7 @@ namespace Microsoft.Rest.Generator
                     {
                         Name = parameterGroupName,
                         IsRequired = isGroupParameterRequired,
-                        Location = ParameterLocation.None,
+                        Location = ClientModel.ParameterLocation.None,
                         SerializedName = string.Empty,
                         Type = parameterGroupType,
                         Documentation = "Additional parameters for the operation"
@@ -381,7 +451,7 @@ namespace Microsoft.Rest.Generator
             foreach (var method in serviceClient.Methods)
             {
                 var bodyParameter = method.Parameters.FirstOrDefault(
-                    p => p.Location == ParameterLocation.Body);
+                    p => p.Location == ClientModel.ParameterLocation.Body);
 
                 if (bodyParameter != null)
                 {

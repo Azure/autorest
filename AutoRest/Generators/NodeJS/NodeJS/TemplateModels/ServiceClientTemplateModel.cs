@@ -23,7 +23,10 @@ namespace Microsoft.Rest.Generator.NodeJS
                 .ForEach(m => MethodTemplateModels.Add(new MethodTemplateModel(m, serviceClient)));
 
             ModelTypes.ForEach(m => ModelTemplateModels.Add(new ModelTemplateModel(m, serviceClient)));
+            this.IsCustomBaseUri = serviceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension);
         }
+
+        public bool IsCustomBaseUri { get; private set; }
 
         public List<MethodTemplateModel> MethodTemplateModels { get; private set; }
 
@@ -133,7 +136,11 @@ namespace Microsoft.Rest.Generator.NodeJS
                 var requireParams = new List<string>();
                 this.Properties.Where(p => p.IsRequired && !p.IsConstant)
                     .ForEach(p => requireParams.Add(p.Name.ToCamelCase()));
-                requireParams.Add("baseUri");
+                if (!IsCustomBaseUri)
+                {
+                    requireParams.Add("baseUri");
+                }
+
                 return string.Join(", ", requireParams);
             }
         }
@@ -160,10 +167,14 @@ namespace Microsoft.Rest.Generator.NodeJS
                     first = false;
                 }
 
-                if (!first)
-                    requiredParams.Append(", ");
+                if (!IsCustomBaseUri)
+                {
+                    if (!first)
+                        requiredParams.Append(", ");
 
-                requiredParams.Append("baseUri: string");
+                    requiredParams.Append("baseUri: string");
+                }
+
                 return requiredParams.ToString();
             }
         }

@@ -11,6 +11,7 @@
 package fixtures.validation;
 
 import com.microsoft.rest.ServiceClient;
+import com.microsoft.rest.AutoRestBaseUrl;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import okhttp3.logging.HttpLoggingInterceptor.Level;
@@ -36,16 +37,17 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      */
     private AutoRestValidationTestService service;
     /**
-     * The URI used as the base for all cloud service requests.
+     * The URL used as the base for all cloud service requests.
      */
-    private final String baseUri;
+    private final AutoRestBaseUrl baseUrl;
 
     /**
-     * Gets the URI used as the base for all cloud service requests.
-     * @return The BaseUri value.
+     * Gets the URL used as the base for all cloud service requests.
+     *
+     * @return The BaseUrl value.
      */
-    public String getBaseUri() {
-        return this.baseUri;
+    public AutoRestBaseUrl getBaseUrl() {
+        return this.baseUrl;
     }
 
     /** Subscription ID. */
@@ -100,31 +102,31 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
     /**
      * Initializes an instance of AutoRestValidationTest client.
      *
-     * @param baseUri the base URI of the host
+     * @param baseUrl the base URL of the host
      */
-    public AutoRestValidationTestImpl(String baseUri) {
+    public AutoRestValidationTestImpl(String baseUrl) {
         super();
-        this.baseUri = baseUri;
+        this.baseUrl = new AutoRestBaseUrl(baseUrl);
         initialize();
     }
 
     /**
      * Initializes an instance of AutoRestValidationTest client.
      *
-     * @param baseUri the base URI of the host
+     * @param baseUrl the base URL of the host
      * @param clientBuilder the builder for building up an {@link OkHttpClient}
      * @param retrofitBuilder the builder for building up a {@link Retrofit}
      */
-    public AutoRestValidationTestImpl(String baseUri, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
+    public AutoRestValidationTestImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
         super(clientBuilder, retrofitBuilder);
-        this.baseUri = baseUri;
+        this.baseUrl = new AutoRestBaseUrl(baseUrl);
         initialize();
     }
 
     @Override
     protected void initialize() {
         super.initialize();
-        this.retrofitBuilder.baseUrl(baseUri);
+        this.retrofitBuilder.baseUrl(baseUrl);
         initializeService();
     }
 

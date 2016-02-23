@@ -56,7 +56,7 @@ function AutoRestUrlTestService(globalStringPath, baseUri, options) {
   }
   this.globalStringPath = globalStringPath;
 
-    if(options.globalStringQuery !== null && options.globalStringQuery !== undefined) { 
+  if(options.globalStringQuery !== null && options.globalStringQuery !== undefined) { 
     this.globalStringQuery = options.globalStringQuery;
   }
   this.paths = new operations.Paths(this);

@@ -48,6 +48,9 @@ var models = require('./models');
  *
  */
 function AutoRestResourceFlatteningTestService(credentials, baseUri, options) {
+  this.acceptLanguage = 'en-US';
+  this.longRunningOperationRetryTimeout = 30;
+  this.generateClientRequestId = true;
   if (credentials === null || credentials === undefined) {
     throw new Error('\'credentials\' cannot be null.');
   }
@@ -61,10 +64,7 @@ function AutoRestResourceFlatteningTestService(credentials, baseUri, options) {
   }
   this.credentials = credentials;
 
-  this.acceptLanguage = 'en-US';
-  this.longRunningOperationRetryTimeout = 30;
-  this.generateClientRequestId = true;
-    if(options.acceptLanguage !== null && options.acceptLanguage !== undefined) { 
+  if(options.acceptLanguage !== null && options.acceptLanguage !== undefined) { 
     this.acceptLanguage = options.acceptLanguage;
   }
   if(options.longRunningOperationRetryTimeout !== null && options.longRunningOperationRetryTimeout !== undefined) { 

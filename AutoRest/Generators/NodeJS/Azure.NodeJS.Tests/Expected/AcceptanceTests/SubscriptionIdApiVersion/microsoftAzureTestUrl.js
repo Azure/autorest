@@ -52,6 +52,10 @@ var operations = require('./operations');
  *
  */
 function MicrosoftAzureTestUrl(credentials, subscriptionId, baseUri, options) {
+  this.apiVersion = '2014-04-01-preview';
+  this.acceptLanguage = 'en-US';
+  this.longRunningOperationRetryTimeout = 30;
+  this.generateClientRequestId = true;
   if (credentials === null || credentials === undefined) {
     throw new Error('\'credentials\' cannot be null.');
   }
@@ -69,11 +73,7 @@ function MicrosoftAzureTestUrl(credentials, subscriptionId, baseUri, options) {
   this.credentials = credentials;
   this.subscriptionId = subscriptionId;
 
-  this.apiVersion = '2014-04-01-preview';
-  this.acceptLanguage = 'en-US';
-  this.longRunningOperationRetryTimeout = 30;
-  this.generateClientRequestId = true;
-    if(options.apiVersion !== null && options.apiVersion !== undefined) { 
+  if(options.apiVersion !== null && options.apiVersion !== undefined) { 
     this.apiVersion = options.apiVersion;
   }
   if(options.acceptLanguage !== null && options.acceptLanguage !== undefined) { 

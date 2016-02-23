@@ -125,8 +125,8 @@
   </Target>
   
   <Target Name="BuildDnxLibraries" DependsOnTargets="RestoreNugetPackages">
-    <Exec Command="dnu build" WorkingDirectory="%(DnxLibraries.RootDir)%(DnxLibraries.Directory)"/>
-    <Exec Command="dnu pack" WorkingDirectory="%(DnxLibraries.RootDir)%(DnxLibraries.Directory)"/>
+    <Exec Command="dnu build --configuration $(Configuration)" WorkingDirectory="%(DnxLibraries.RootDir)%(DnxLibraries.Directory)"/>
+    <Exec Command="dnu pack --configuration $(Configuration)" WorkingDirectory="%(DnxLibraries.RootDir)%(DnxLibraries.Directory)"/>
     <ItemGroup>
       <_OriginalDnxPackages Include="%(DnxLibraries.RootDir)%(DnxLibraries.Directory)\bin\*\*.nupkg" />
     </ItemGroup>  
