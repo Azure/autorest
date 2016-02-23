@@ -53,10 +53,25 @@
   <Target Name="Package" Condition=" @(SdkNuGetPackage) != '' " DependsOnTargets="BuildDynamicNuSpecs">
     <Message Text="Generating NuGet library &amp; symbols + source packages" Importance="high" />
     <Exec Condition=" '%(SdkNuGetPackage.NoPackageAnalysis)' != 'true' "
-      Command="$(NuGetCommand) pack binaries\packages\specs\%(SdkNuGetPackage.Name).nuspec -BasePath $(LibraryRoot) -Verbosity $(NuGetVerbosity) -Version %(SdkNuGetPackage.PackageVersion) -OutputDirectory $(PackageOutputDir) -Symbols $(NoWarnOnPack)" />
+      Command="$(NuGetCommand) pack $(PackageOutputDir)\specs\%(SdkNuGetPackage.Name).nuspec -BasePath $(LibraryRoot) -Verbosity $(NuGetVerbosity) -Version %(SdkNuGetPackage.PackageVersion) -OutputDirectory $(PackageOutputDir) -Symbols $(NoWarnOnPack)" />
 
     <Exec Condition=" '%(SdkNuGetPackage.NoPackageAnalysis)' == 'true' "
-      Command="$(NuGetCommand) pack binaries\packages\specs\%(SdkNuGetPackage.Name).nuspec -BasePath $(LibraryRoot) -NoPackageAnalysis -Verbosity $(NuGetVerbosity) -Version %(SdkNuGetPackage.PackageVersion) -OutputDirectory $(PackageOutputDir) -Symbols $(NoWarnOnPack)" />
+      Command="$(NuGetCommand) pack $(PackageOutputDir)\specs\%(SdkNuGetPackage.Name).nuspec -BasePath $(LibraryRoot) -NoPackageAnalysis -Verbosity $(NuGetVerbosity) -Version %(SdkNuGetPackage.PackageVersion) -OutputDirectory $(PackageOutputDir) -Symbols $(NoWarnOnPack)" />
+      
+    <CallTarget Targets="PackageAutoRestZip" Condition=" '$(Scope)' == 'all' or '$(Scope)' == 'CodeGenerator'"/>  
+  </Target>
+  
+  <Target Name="PackageAutoRestZip" DependsOnTargets="GetZip">
+    <ItemGroup>
+      <_NugetPackages Include="$(PackageOutputDir)\autorest.*.nupkg" Exclude="$(PackageOutputDir)\autorest.*symbols.nupkg"/>
+    </ItemGroup> 
+    <RemoveDir Directories="@(_NugetPackages->'$(PackageOutputDir)\%(Filename)')" ContinueOnError="false" />
+    
+    <Exec Command="$(ZipExe) x -y -scsUTF-8 -o@(_NugetPackages->'$(PackageOutputDir)\%(Filename)') %(_NugetPackages.Identity)" />
+
+    <Exec Command="$(ZipExe) a -tzip -mx9 -r -y @(_NugetPackages->'$(PackageOutputDir)\%(Filename)').zip" WorkingDirectory="@(_NugetPackages->'$(PackageOutputDir)\%(Filename)\tools')" />
+    
+    <RemoveDir Directories="@(_NugetPackages->'$(PackageOutputDir)\%(Filename)')" ContinueOnError="false" />
   </Target>
 
   <!--
