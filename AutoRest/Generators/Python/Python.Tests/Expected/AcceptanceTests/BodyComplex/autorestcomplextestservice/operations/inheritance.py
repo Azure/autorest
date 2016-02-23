@@ -44,6 +44,7 @@ class Inheritance(object):
         """
         # Construct URL
         url = '/complex/inheritance/valid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -90,6 +91,7 @@ class Inheritance(object):
         """
         # Construct URL
         url = '/complex/inheritance/valid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

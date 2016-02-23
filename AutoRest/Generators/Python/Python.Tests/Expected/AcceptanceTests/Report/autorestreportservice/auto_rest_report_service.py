@@ -65,6 +65,7 @@ class AutoRestReportService(object):
         """
         # Construct URL
         url = '/report'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

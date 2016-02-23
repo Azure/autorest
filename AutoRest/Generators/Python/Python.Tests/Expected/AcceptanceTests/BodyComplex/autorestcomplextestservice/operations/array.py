@@ -44,6 +44,7 @@ class Array(object):
         """
         # Construct URL
         url = '/complex/array/valid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -89,6 +90,7 @@ class Array(object):
 
         # Construct URL
         url = '/complex/array/valid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -127,6 +129,7 @@ class Array(object):
         """
         # Construct URL
         url = '/complex/array/empty'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -172,6 +175,7 @@ class Array(object):
 
         # Construct URL
         url = '/complex/array/empty'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -211,6 +215,7 @@ class Array(object):
         """
         # Construct URL
         url = '/complex/array/notprovided'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

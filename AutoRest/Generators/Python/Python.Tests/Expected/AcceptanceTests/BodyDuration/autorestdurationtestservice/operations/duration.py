@@ -44,6 +44,7 @@ class Duration(object):
         """
         # Construct URL
         url = '/duration/null'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -87,6 +88,7 @@ class Duration(object):
         """
         # Construct URL
         url = '/duration/positiveduration'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -125,6 +127,7 @@ class Duration(object):
         """
         # Construct URL
         url = '/duration/positiveduration'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -166,6 +169,7 @@ class Duration(object):
         """
         # Construct URL
         url = '/duration/invalid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

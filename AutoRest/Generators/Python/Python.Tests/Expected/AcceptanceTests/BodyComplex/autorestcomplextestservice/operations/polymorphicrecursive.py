@@ -44,6 +44,7 @@ class Polymorphicrecursive(object):
         """
         # Construct URL
         url = '/complex/polymorphicrecursive/valid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -139,6 +140,7 @@ class Polymorphicrecursive(object):
         """
         # Construct URL
         url = '/complex/polymorphicrecursive/valid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

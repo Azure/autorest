@@ -45,6 +45,7 @@ class HttpClientFailure(object):
         """
         # Construct URL
         url = '/http/failure/client/400'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -80,6 +81,7 @@ class HttpClientFailure(object):
         """
         # Construct URL
         url = '/http/failure/client/400'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -117,6 +119,7 @@ class HttpClientFailure(object):
         """
         # Construct URL
         url = '/http/failure/client/400'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -161,6 +164,7 @@ class HttpClientFailure(object):
         """
         # Construct URL
         url = '/http/failure/client/400'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -205,6 +209,7 @@ class HttpClientFailure(object):
         """
         # Construct URL
         url = '/http/failure/client/400'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -249,6 +254,7 @@ class HttpClientFailure(object):
         """
         # Construct URL
         url = '/http/failure/client/400'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -291,6 +297,7 @@ class HttpClientFailure(object):
         """
         # Construct URL
         url = '/http/failure/client/401'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -326,6 +333,7 @@ class HttpClientFailure(object):
         """
         # Construct URL
         url = '/http/failure/client/402'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -361,6 +369,7 @@ class HttpClientFailure(object):
         """
         # Construct URL
         url = '/http/failure/client/403'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -398,6 +407,7 @@ class HttpClientFailure(object):
         """
         # Construct URL
         url = '/http/failure/client/404'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -442,6 +452,7 @@ class HttpClientFailure(object):
         """
         # Construct URL
         url = '/http/failure/client/405'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -486,6 +497,7 @@ class HttpClientFailure(object):
         """
         # Construct URL
         url = '/http/failure/client/406'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -530,6 +542,7 @@ class HttpClientFailure(object):
         """
         # Construct URL
         url = '/http/failure/client/407'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -574,6 +587,7 @@ class HttpClientFailure(object):
         """
         # Construct URL
         url = '/http/failure/client/409'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -616,6 +630,7 @@ class HttpClientFailure(object):
         """
         # Construct URL
         url = '/http/failure/client/410'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -651,6 +666,7 @@ class HttpClientFailure(object):
         """
         # Construct URL
         url = '/http/failure/client/411'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -686,6 +702,7 @@ class HttpClientFailure(object):
         """
         # Construct URL
         url = '/http/failure/client/412'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -723,6 +740,7 @@ class HttpClientFailure(object):
         """
         # Construct URL
         url = '/http/failure/client/413'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -767,6 +785,7 @@ class HttpClientFailure(object):
         """
         # Construct URL
         url = '/http/failure/client/414'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -811,6 +830,7 @@ class HttpClientFailure(object):
         """
         # Construct URL
         url = '/http/failure/client/415'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -853,6 +873,7 @@ class HttpClientFailure(object):
         """
         # Construct URL
         url = '/http/failure/client/416'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -890,6 +911,7 @@ class HttpClientFailure(object):
         """
         # Construct URL
         url = '/http/failure/client/417'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -932,6 +954,7 @@ class HttpClientFailure(object):
         """
         # Construct URL
         url = '/http/failure/client/429'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

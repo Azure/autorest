@@ -49,7 +49,7 @@ class Implicit(object):
         path_format_arguments = {
             'pathParameter': self._serialize.url("path_parameter", path_parameter, 'str')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -86,6 +86,7 @@ class Implicit(object):
         """
         # Construct URL
         url = '/reqopt/implicit/optional/query'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -124,6 +125,7 @@ class Implicit(object):
         """
         # Construct URL
         url = '/reqopt/implicit/optional/header'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -162,6 +164,7 @@ class Implicit(object):
         """
         # Construct URL
         url = '/reqopt/implicit/optional/body'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -206,7 +209,7 @@ class Implicit(object):
         path_format_arguments = {
             'required-global-path': self._serialize.url("self.config.required_global_path", self.config.required_global_path, 'str')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -241,6 +244,7 @@ class Implicit(object):
         """
         # Construct URL
         url = '/reqopt/global/required/query'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -276,6 +280,7 @@ class Implicit(object):
         """
         # Construct URL
         url = '/reqopt/global/optional/query'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

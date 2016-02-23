@@ -49,6 +49,7 @@ class ApiVersionLocalOperations(object):
         """
         # Construct URL
         url = '/azurespecials/apiVersion/method/string/none/query/local/2.0'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -92,6 +93,7 @@ class ApiVersionLocalOperations(object):
         """
         # Construct URL
         url = '/azurespecials/apiVersion/method/string/none/query/local/null'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -136,6 +138,7 @@ class ApiVersionLocalOperations(object):
         """
         # Construct URL
         url = '/azurespecials/apiVersion/path/string/none/query/local/2.0'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -179,6 +182,7 @@ class ApiVersionLocalOperations(object):
         """
         # Construct URL
         url = '/azurespecials/apiVersion/swagger/string/none/query/local/2.0'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

@@ -44,6 +44,7 @@ class HttpFailure(object):
         """
         # Construct URL
         url = '/http/failure/emptybody/error'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

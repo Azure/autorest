@@ -88,6 +88,7 @@ class AutoRestResourceFlatteningTestService(object):
         """
         # Construct URL
         url = '/azure/resource-flatten/array'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -133,6 +134,7 @@ class AutoRestResourceFlatteningTestService(object):
         """
         # Construct URL
         url = '/azure/resource-flatten/array'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -180,6 +182,7 @@ class AutoRestResourceFlatteningTestService(object):
         """
         # Construct URL
         url = '/azure/resource-flatten/dictionary'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -225,6 +228,7 @@ class AutoRestResourceFlatteningTestService(object):
         """
         # Construct URL
         url = '/azure/resource-flatten/dictionary'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -273,6 +277,7 @@ class AutoRestResourceFlatteningTestService(object):
         """
         # Construct URL
         url = '/azure/resource-flatten/resourcecollection'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -318,6 +323,7 @@ class AutoRestResourceFlatteningTestService(object):
         """
         # Construct URL
         url = '/azure/resource-flatten/resourcecollection'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

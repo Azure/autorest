@@ -46,6 +46,7 @@ class Queries(object):
         """
         # Construct URL
         url = '/queries/bool/true'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -83,6 +84,7 @@ class Queries(object):
         """
         # Construct URL
         url = '/queries/bool/false'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -120,6 +122,7 @@ class Queries(object):
         """
         # Construct URL
         url = '/queries/bool/null'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -158,6 +161,7 @@ class Queries(object):
         """
         # Construct URL
         url = '/queries/int/1000000'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -195,6 +199,7 @@ class Queries(object):
         """
         # Construct URL
         url = '/queries/int/-1000000'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -232,6 +237,7 @@ class Queries(object):
         """
         # Construct URL
         url = '/queries/int/null'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -270,6 +276,7 @@ class Queries(object):
         """
         # Construct URL
         url = '/queries/long/10000000000'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -307,6 +314,7 @@ class Queries(object):
         """
         # Construct URL
         url = '/queries/long/-10000000000'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -344,6 +352,7 @@ class Queries(object):
         """
         # Construct URL
         url = '/queries/long/null'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -382,6 +391,7 @@ class Queries(object):
         """
         # Construct URL
         url = '/queries/float/1.034E+20'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -419,6 +429,7 @@ class Queries(object):
         """
         # Construct URL
         url = '/queries/float/-1.034E-20'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -456,6 +467,7 @@ class Queries(object):
         """
         # Construct URL
         url = '/queries/float/null'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -494,6 +506,7 @@ class Queries(object):
         """
         # Construct URL
         url = '/queries/double/9999999.999'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -531,6 +544,7 @@ class Queries(object):
         """
         # Construct URL
         url = '/queries/double/-9999999.999'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -568,6 +582,7 @@ class Queries(object):
         """
         # Construct URL
         url = '/queries/double/null'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -606,6 +621,7 @@ class Queries(object):
         """
         # Construct URL
         url = '/queries/string/unicode/'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -644,6 +660,7 @@ class Queries(object):
         """
         # Construct URL
         url = '/queries/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -681,6 +698,7 @@ class Queries(object):
         """
         # Construct URL
         url = '/queries/string/empty'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -718,6 +736,7 @@ class Queries(object):
         """
         # Construct URL
         url = '/queries/string/null'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -757,6 +776,7 @@ class Queries(object):
         """
         # Construct URL
         url = '/queries/enum/green%20color'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -796,6 +816,7 @@ class Queries(object):
         """
         # Construct URL
         url = '/queries/enum/null'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -835,6 +856,7 @@ class Queries(object):
         """
         # Construct URL
         url = '/queries/byte/multibyte'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -873,6 +895,7 @@ class Queries(object):
         """
         # Construct URL
         url = '/queries/byte/empty'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -910,6 +933,7 @@ class Queries(object):
         """
         # Construct URL
         url = '/queries/byte/null'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -948,6 +972,7 @@ class Queries(object):
         """
         # Construct URL
         url = '/queries/date/2012-01-01'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -985,6 +1010,7 @@ class Queries(object):
         """
         # Construct URL
         url = '/queries/date/null'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1023,6 +1049,7 @@ class Queries(object):
         """
         # Construct URL
         url = '/queries/datetime/2012-01-01T01%3A01%3A01Z'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1060,6 +1087,7 @@ class Queries(object):
         """
         # Construct URL
         url = '/queries/datetime/null'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1100,6 +1128,7 @@ class Queries(object):
         """
         # Construct URL
         url = '/queries/array/csv/string/valid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1138,6 +1167,7 @@ class Queries(object):
         """
         # Construct URL
         url = '/queries/array/csv/string/null'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1177,6 +1207,7 @@ class Queries(object):
         """
         # Construct URL
         url = '/queries/array/csv/string/empty'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1217,6 +1248,7 @@ class Queries(object):
         """
         # Construct URL
         url = '/queries/array/ssv/string/valid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1257,6 +1289,7 @@ class Queries(object):
         """
         # Construct URL
         url = '/queries/array/tsv/string/valid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1297,6 +1330,7 @@ class Queries(object):
         """
         # Construct URL
         url = '/queries/array/pipes/string/valid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

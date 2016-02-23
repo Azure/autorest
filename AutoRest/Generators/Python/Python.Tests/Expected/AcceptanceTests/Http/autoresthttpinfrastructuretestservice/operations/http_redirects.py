@@ -44,6 +44,7 @@ class HttpRedirects(object):
         """
         # Construct URL
         url = '/http/redirect/300'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -81,6 +82,7 @@ class HttpRedirects(object):
         """
         # Construct URL
         url = '/http/redirect/300'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -127,6 +129,7 @@ class HttpRedirects(object):
         """
         # Construct URL
         url = '/http/redirect/301'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -164,6 +167,7 @@ class HttpRedirects(object):
         """
         # Construct URL
         url = '/http/redirect/301'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -205,6 +209,7 @@ class HttpRedirects(object):
         """
         # Construct URL
         url = '/http/redirect/301'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -249,6 +254,7 @@ class HttpRedirects(object):
         """
         # Construct URL
         url = '/http/redirect/302'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -286,6 +292,7 @@ class HttpRedirects(object):
         """
         # Construct URL
         url = '/http/redirect/302'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -327,6 +334,7 @@ class HttpRedirects(object):
         """
         # Construct URL
         url = '/http/redirect/302'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -375,6 +383,7 @@ class HttpRedirects(object):
         """
         # Construct URL
         url = '/http/redirect/303'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -419,6 +428,7 @@ class HttpRedirects(object):
         """
         # Construct URL
         url = '/http/redirect/307'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -456,6 +466,7 @@ class HttpRedirects(object):
         """
         # Construct URL
         url = '/http/redirect/307'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -495,6 +506,7 @@ class HttpRedirects(object):
         """
         # Construct URL
         url = '/http/redirect/307'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -541,6 +553,7 @@ class HttpRedirects(object):
         """
         # Construct URL
         url = '/http/redirect/307'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -587,6 +600,7 @@ class HttpRedirects(object):
         """
         # Construct URL
         url = '/http/redirect/307'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -633,6 +647,7 @@ class HttpRedirects(object):
         """
         # Construct URL
         url = '/http/redirect/307'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

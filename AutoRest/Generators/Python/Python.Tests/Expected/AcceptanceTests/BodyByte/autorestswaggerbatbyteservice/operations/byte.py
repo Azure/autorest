@@ -44,6 +44,7 @@ class Byte(object):
         """
         # Construct URL
         url = '/byte/null'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -85,6 +86,7 @@ class Byte(object):
         """
         # Construct URL
         url = '/byte/empty'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -126,6 +128,7 @@ class Byte(object):
         """
         # Construct URL
         url = '/byte/nonAscii'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -170,6 +173,7 @@ class Byte(object):
         """
         # Construct URL
         url = '/byte/nonAscii'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -208,6 +212,7 @@ class Byte(object):
         """
         # Construct URL
         url = '/byte/invalid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

@@ -49,6 +49,7 @@ class PagingOperations(object):
             if not next_link:
                 # Construct URL
                 url = '/paging/single'
+                url = self._client.format_url(url)
 
                 # Construct parameters
                 query_parameters = {}
@@ -117,6 +118,7 @@ class PagingOperations(object):
             if not next_link:
                 # Construct URL
                 url = '/paging/multiple'
+                url = self._client.format_url(url)
 
                 # Construct parameters
                 query_parameters = {}
@@ -198,7 +200,7 @@ class PagingOperations(object):
                 path_format_arguments = {
                     'offset': self._serialize.url("offset", offset, 'int')
                 }
-                url = url.format(**path_format_arguments)
+                url = self._client.format_url(url, **path_format_arguments)
 
                 # Construct parameters
                 query_parameters = {}
@@ -262,6 +264,7 @@ class PagingOperations(object):
             if not next_link:
                 # Construct URL
                 url = '/paging/multiple/retryfirst'
+                url = self._client.format_url(url)
 
                 # Construct parameters
                 query_parameters = {}
@@ -320,6 +323,7 @@ class PagingOperations(object):
             if not next_link:
                 # Construct URL
                 url = '/paging/multiple/retrysecond'
+                url = self._client.format_url(url)
 
                 # Construct parameters
                 query_parameters = {}
@@ -376,6 +380,7 @@ class PagingOperations(object):
             if not next_link:
                 # Construct URL
                 url = '/paging/single/failure'
+                url = self._client.format_url(url)
 
                 # Construct parameters
                 query_parameters = {}
@@ -432,6 +437,7 @@ class PagingOperations(object):
             if not next_link:
                 # Construct URL
                 url = '/paging/multiple/failure'
+                url = self._client.format_url(url)
 
                 # Construct parameters
                 query_parameters = {}
@@ -488,6 +494,7 @@ class PagingOperations(object):
             if not next_link:
                 # Construct URL
                 url = '/paging/multiple/failureuri'
+                url = self._client.format_url(url)
 
                 # Construct parameters
                 query_parameters = {}

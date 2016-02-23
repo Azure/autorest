@@ -44,6 +44,7 @@ class BasicOperations(object):
         """
         # Construct URL
         url = '/complex/basic/valid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -87,6 +88,7 @@ class BasicOperations(object):
         """
         # Construct URL
         url = '/complex/basic/valid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -126,6 +128,7 @@ class BasicOperations(object):
         """
         # Construct URL
         url = '/complex/basic/invalid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -167,6 +170,7 @@ class BasicOperations(object):
         """
         # Construct URL
         url = '/complex/basic/empty'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -208,6 +212,7 @@ class BasicOperations(object):
         """
         # Construct URL
         url = '/complex/basic/null'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -250,6 +255,7 @@ class BasicOperations(object):
         """
         # Construct URL
         url = '/complex/basic/notprovided'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

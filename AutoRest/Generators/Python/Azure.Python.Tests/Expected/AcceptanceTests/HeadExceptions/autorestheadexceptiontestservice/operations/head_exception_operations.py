@@ -44,6 +44,7 @@ class HeadExceptionOperations(object):
         """
         # Construct URL
         url = '/http/success/200'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -84,6 +85,7 @@ class HeadExceptionOperations(object):
         """
         # Construct URL
         url = '/http/success/204'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -124,6 +126,7 @@ class HeadExceptionOperations(object):
         """
         # Construct URL
         url = '/http/success/404'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

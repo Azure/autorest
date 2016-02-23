@@ -44,6 +44,7 @@ class Datetimerfc1123(object):
         """
         # Construct URL
         url = '/datetimerfc1123/null'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -85,6 +86,7 @@ class Datetimerfc1123(object):
         """
         # Construct URL
         url = '/datetimerfc1123/invalid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -126,6 +128,7 @@ class Datetimerfc1123(object):
         """
         # Construct URL
         url = '/datetimerfc1123/overflow'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -167,6 +170,7 @@ class Datetimerfc1123(object):
         """
         # Construct URL
         url = '/datetimerfc1123/underflow'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -210,6 +214,7 @@ class Datetimerfc1123(object):
         """
         # Construct URL
         url = '/datetimerfc1123/max'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -248,6 +253,7 @@ class Datetimerfc1123(object):
         """
         # Construct URL
         url = '/datetimerfc1123/max/lowercase'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -289,6 +295,7 @@ class Datetimerfc1123(object):
         """
         # Construct URL
         url = '/datetimerfc1123/max/uppercase'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -332,6 +339,7 @@ class Datetimerfc1123(object):
         """
         # Construct URL
         url = '/datetimerfc1123/min'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -370,6 +378,7 @@ class Datetimerfc1123(object):
         """
         # Construct URL
         url = '/datetimerfc1123/min'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

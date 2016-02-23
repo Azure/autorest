@@ -44,6 +44,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/null'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -85,6 +86,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/invalid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -126,6 +128,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/empty'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -169,6 +172,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/empty'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -207,6 +211,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/boolean/tfft'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -250,6 +255,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/boolean/tfft'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -288,6 +294,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/boolean/true.null.false'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -329,6 +336,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/boolean/true.boolean.false'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -370,6 +378,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/integer/1.-1.3.300'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -413,6 +422,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/integer/1.-1.3.300'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -451,6 +461,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/integer/1.null.zero'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -492,6 +503,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/integer/1.integer.0'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -533,6 +545,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/long/1.-1.3.300'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -576,6 +589,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/long/1.-1.3.300'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -614,6 +628,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/long/1.null.zero'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -655,6 +670,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/long/1.integer.0'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -696,6 +712,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/float/0--0.01-1.2e20'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -739,6 +756,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/float/0--0.01-1.2e20'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -777,6 +795,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/float/0.0-null-1.2e20'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -818,6 +837,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/float/1.number.0'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -859,6 +879,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/double/0--0.01-1.2e20'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -902,6 +923,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/double/0--0.01-1.2e20'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -940,6 +962,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/double/0.0-null-1.2e20'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -981,6 +1004,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/double/1.number.0'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1022,6 +1046,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/string/foo1.foo2.foo3'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1065,6 +1090,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/string/foo1.foo2.foo3'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1103,6 +1129,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/string/foo.null.foo2'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1144,6 +1171,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/string/foo.123.foo2'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1185,6 +1213,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/date/valid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1228,6 +1257,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/date/valid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1266,6 +1296,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/date/invalidnull'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1307,6 +1338,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/date/invalidchars'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1349,6 +1381,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/date-time/valid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1393,6 +1426,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/date-time/valid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1431,6 +1465,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/date-time/invalidnull'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1472,6 +1507,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/date-time/invalidchars'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1514,6 +1550,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/date-time-rfc1123/valid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1558,6 +1595,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/date-time-rfc1123/valid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1596,6 +1634,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/duration/valid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1639,6 +1678,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/duration/valid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1678,6 +1718,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/byte/valid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1722,6 +1763,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/byte/valid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1761,6 +1803,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/prim/byte/invalidnull'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1802,6 +1845,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/complex/null'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1843,6 +1887,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/complex/empty'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1885,6 +1930,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/complex/itemnull'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1927,6 +1973,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/complex/itemempty'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1969,6 +2016,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/complex/valid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2013,6 +2061,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/complex/valid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2051,6 +2100,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/array/null'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2092,6 +2142,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/array/empty'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2134,6 +2185,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/array/itemnull'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2175,6 +2227,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/array/itemempty'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2217,6 +2270,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/array/valid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2261,6 +2315,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/array/valid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2299,6 +2354,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/dictionary/null'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2340,6 +2396,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/dictionary/empty'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2383,6 +2440,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/dictionary/itemnull'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2426,6 +2484,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/dictionary/itemempty'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2469,6 +2528,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/dictionary/valid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -2514,6 +2574,7 @@ class Array(object):
         """
         # Construct URL
         url = '/array/dictionary/valid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

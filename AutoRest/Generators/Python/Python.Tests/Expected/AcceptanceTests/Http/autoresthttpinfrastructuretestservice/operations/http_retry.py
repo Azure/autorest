@@ -44,6 +44,7 @@ class HttpRetry(object):
         """
         # Construct URL
         url = '/http/retry/408'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -80,6 +81,7 @@ class HttpRetry(object):
         """
         # Construct URL
         url = '/http/retry/500'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -123,6 +125,7 @@ class HttpRetry(object):
         """
         # Construct URL
         url = '/http/retry/500'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -164,6 +167,7 @@ class HttpRetry(object):
         """
         # Construct URL
         url = '/http/retry/502'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -200,6 +204,7 @@ class HttpRetry(object):
         """
         # Construct URL
         url = '/http/retry/503'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -243,6 +248,7 @@ class HttpRetry(object):
         """
         # Construct URL
         url = '/http/retry/503'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -286,6 +292,7 @@ class HttpRetry(object):
         """
         # Construct URL
         url = '/http/retry/504'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -329,6 +336,7 @@ class HttpRetry(object):
         """
         # Construct URL
         url = '/http/retry/504'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

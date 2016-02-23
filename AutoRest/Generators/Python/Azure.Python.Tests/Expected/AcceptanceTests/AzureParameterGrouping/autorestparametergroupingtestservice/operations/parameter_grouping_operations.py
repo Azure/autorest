@@ -65,7 +65,7 @@ class ParameterGroupingOperations(object):
         path_format_arguments = {
             'path': self._serialize.url("path", path, 'str')
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -123,6 +123,7 @@ class ParameterGroupingOperations(object):
 
         # Construct URL
         url = '/parameterGrouping/postOptional'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -184,6 +185,7 @@ class ParameterGroupingOperations(object):
 
         # Construct URL
         url = '/parameterGrouping/postMultipleParameterGroups'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -239,6 +241,7 @@ class ParameterGroupingOperations(object):
 
         # Construct URL
         url = '/parameterGrouping/sharedParameterGroupObject'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

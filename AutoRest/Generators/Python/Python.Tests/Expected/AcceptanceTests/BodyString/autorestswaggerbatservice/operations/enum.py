@@ -45,6 +45,7 @@ class Enum(object):
         """
         # Construct URL
         url = '/string/enum/notExpandable'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -90,6 +91,7 @@ class Enum(object):
         """
         # Construct URL
         url = '/string/enum/notExpandable'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

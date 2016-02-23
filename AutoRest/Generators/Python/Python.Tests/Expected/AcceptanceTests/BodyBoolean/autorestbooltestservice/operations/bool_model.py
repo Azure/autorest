@@ -44,6 +44,7 @@ class BoolModel(object):
         """
         # Construct URL
         url = '/bool/true'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -87,6 +88,7 @@ class BoolModel(object):
         """
         # Construct URL
         url = '/bool/true'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -125,6 +127,7 @@ class BoolModel(object):
         """
         # Construct URL
         url = '/bool/false'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -168,6 +171,7 @@ class BoolModel(object):
         """
         # Construct URL
         url = '/bool/false'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -206,6 +210,7 @@ class BoolModel(object):
         """
         # Construct URL
         url = '/bool/null'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -247,6 +252,7 @@ class BoolModel(object):
         """
         # Construct URL
         url = '/bool/invalid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

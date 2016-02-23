@@ -44,6 +44,7 @@ class String(object):
         """
         # Construct URL
         url = '/string/null'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -87,6 +88,7 @@ class String(object):
         """
         # Construct URL
         url = '/string/null'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -128,6 +130,7 @@ class String(object):
         """
         # Construct URL
         url = '/string/empty'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -171,6 +174,7 @@ class String(object):
         """
         # Construct URL
         url = '/string/empty'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -211,6 +215,7 @@ class String(object):
         """
         # Construct URL
         url = '/string/mbcs'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -256,6 +261,7 @@ class String(object):
         """
         # Construct URL
         url = '/string/mbcs'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -296,6 +302,7 @@ class String(object):
         """
         # Construct URL
         url = '/string/whitespace'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -341,6 +348,7 @@ class String(object):
         """
         # Construct URL
         url = '/string/whitespace'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -379,6 +387,7 @@ class String(object):
         """
         # Construct URL
         url = '/string/notProvided'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

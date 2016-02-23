@@ -49,6 +49,7 @@ class Files(object):
         """
         # Construct URL
         url = '/files/stream/nonempty'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -95,6 +96,7 @@ class Files(object):
         """
         # Construct URL
         url = '/files/stream/empty'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

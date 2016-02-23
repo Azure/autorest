@@ -51,7 +51,7 @@ class SkipUrlEncodingOperations(object):
         path_format_arguments = {
             'unencodedPathParam': self._serialize.url("unencoded_path_param", unencoded_path_param, 'str', skip_quote=True)
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -96,7 +96,7 @@ class SkipUrlEncodingOperations(object):
         path_format_arguments = {
             'unencodedPathParam': self._serialize.url("unencoded_path_param", unencoded_path_param, 'str', skip_quote=True)
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -141,7 +141,7 @@ class SkipUrlEncodingOperations(object):
         path_format_arguments = {
             'unencodedPathParam': self._serialize.url("unencoded_path_param", unencoded_path_param, 'str', skip_quote=True)
         }
-        url = url.format(**path_format_arguments)
+        url = self._client.format_url(url, **path_format_arguments)
 
         # Construct parameters
         query_parameters = {}
@@ -184,6 +184,7 @@ class SkipUrlEncodingOperations(object):
         """
         # Construct URL
         url = '/azurespecials/skipUrlEncoding/method/query/valid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -225,6 +226,7 @@ class SkipUrlEncodingOperations(object):
         """
         # Construct URL
         url = '/azurespecials/skipUrlEncoding/method/query/null'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -269,6 +271,7 @@ class SkipUrlEncodingOperations(object):
         """
         # Construct URL
         url = '/azurespecials/skipUrlEncoding/path/query/valid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -312,6 +315,7 @@ class SkipUrlEncodingOperations(object):
         """
         # Construct URL
         url = '/azurespecials/skipUrlEncoding/swagger/query/valid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

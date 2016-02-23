@@ -44,6 +44,7 @@ class DateModel(object):
         """
         # Construct URL
         url = '/date/null'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -85,6 +86,7 @@ class DateModel(object):
         """
         # Construct URL
         url = '/date/invaliddate'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -126,6 +128,7 @@ class DateModel(object):
         """
         # Construct URL
         url = '/date/overflowdate'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -167,6 +170,7 @@ class DateModel(object):
         """
         # Construct URL
         url = '/date/underflowdate'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -210,6 +214,7 @@ class DateModel(object):
         """
         # Construct URL
         url = '/date/max'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -248,6 +253,7 @@ class DateModel(object):
         """
         # Construct URL
         url = '/date/max'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -291,6 +297,7 @@ class DateModel(object):
         """
         # Construct URL
         url = '/date/min'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -329,6 +336,7 @@ class DateModel(object):
         """
         # Construct URL
         url = '/date/min'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

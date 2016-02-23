@@ -54,6 +54,7 @@ class Formdata(object):
         """
         # Construct URL
         url = '/formdata/stream/uploadfile'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -112,6 +113,7 @@ class Formdata(object):
         """
         # Construct URL
         url = '/formdata/stream/uploadfile'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

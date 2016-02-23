@@ -44,6 +44,7 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/complex/dictionary/typed/valid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -89,6 +90,7 @@ class Dictionary(object):
 
         # Construct URL
         url = '/complex/dictionary/typed/valid'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -127,6 +129,7 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/complex/dictionary/typed/empty'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -172,6 +175,7 @@ class Dictionary(object):
 
         # Construct URL
         url = '/complex/dictionary/typed/empty'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -210,6 +214,7 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/complex/dictionary/typed/null'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -252,6 +257,7 @@ class Dictionary(object):
         """
         # Construct URL
         url = '/complex/dictionary/typed/notprovided'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}

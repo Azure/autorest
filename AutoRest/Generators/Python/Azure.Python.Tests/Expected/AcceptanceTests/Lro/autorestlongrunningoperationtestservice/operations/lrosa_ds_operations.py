@@ -49,6 +49,7 @@ class LROSADsOperations(object):
         """
         # Construct URL
         url = '/lro/nonretryerror/put/400'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -126,6 +127,7 @@ class LROSADsOperations(object):
         """
         # Construct URL
         url = '/lro/nonretryerror/put/201/creating/400'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -204,6 +206,7 @@ class LROSADsOperations(object):
         """
         # Construct URL
         url = '/lro/nonretryerror/putasync/retry/400'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -283,6 +286,7 @@ class LROSADsOperations(object):
         """
         # Construct URL
         url = '/lro/nonretryerror/delete/400'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -346,6 +350,7 @@ class LROSADsOperations(object):
         """
         # Construct URL
         url = '/lro/nonretryerror/delete/202/retry/400'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -410,6 +415,7 @@ class LROSADsOperations(object):
         """
         # Construct URL
         url = '/lro/nonretryerror/deleteasync/retry/400'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -475,6 +481,7 @@ class LROSADsOperations(object):
         """
         # Construct URL
         url = '/lro/nonretryerror/post/400'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -546,6 +553,7 @@ class LROSADsOperations(object):
         """
         # Construct URL
         url = '/lro/nonretryerror/post/202/retry/400'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -619,6 +627,7 @@ class LROSADsOperations(object):
         """
         # Construct URL
         url = '/lro/nonretryerror/postasync/retry/400'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -692,6 +701,7 @@ class LROSADsOperations(object):
         """
         # Construct URL
         url = '/lro/error/put/201/noprovisioningstatepayload'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -771,6 +781,7 @@ class LROSADsOperations(object):
         """
         # Construct URL
         url = '/lro/error/putasync/retry/nostatus'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -855,6 +866,7 @@ class LROSADsOperations(object):
         """
         # Construct URL
         url = '/lro/error/putasync/retry/nostatuspayload'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -935,6 +947,7 @@ class LROSADsOperations(object):
         """
         # Construct URL
         url = '/lro/error/delete/204/nolocation'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -995,6 +1008,7 @@ class LROSADsOperations(object):
         """
         # Construct URL
         url = '/lro/error/deleteasync/retry/nostatus'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1061,6 +1075,7 @@ class LROSADsOperations(object):
         """
         # Construct URL
         url = '/lro/error/post/202/nolocation'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1135,6 +1150,7 @@ class LROSADsOperations(object):
         """
         # Construct URL
         url = '/lro/error/postasync/retry/nopayload'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1208,6 +1224,7 @@ class LROSADsOperations(object):
         """
         # Construct URL
         url = '/lro/error/put/200/invalidjson'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1284,6 +1301,7 @@ class LROSADsOperations(object):
         """
         # Construct URL
         url = '/lro/error/putasync/retry/invalidheader'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1368,6 +1386,7 @@ class LROSADsOperations(object):
         """
         # Construct URL
         url = '/lro/error/putasync/retry/invalidjsonpolling'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1449,6 +1468,7 @@ class LROSADsOperations(object):
         """
         # Construct URL
         url = '/lro/error/delete/202/retry/invalidheader'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1513,6 +1533,7 @@ class LROSADsOperations(object):
         """
         # Construct URL
         url = '/lro/error/deleteasync/retry/invalidheader'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1578,6 +1599,7 @@ class LROSADsOperations(object):
         """
         # Construct URL
         url = '/lro/error/deleteasync/retry/invalidjsonpolling'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1644,6 +1666,7 @@ class LROSADsOperations(object):
         """
         # Construct URL
         url = '/lro/error/post/202/retry/invalidheader'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1717,6 +1740,7 @@ class LROSADsOperations(object):
         """
         # Construct URL
         url = '/lro/error/postasync/retry/invalidheader'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
@@ -1792,6 +1816,7 @@ class LROSADsOperations(object):
         """
         # Construct URL
         url = '/lro/error/postasync/retry/invalidjsonpolling'
+        url = self._client.format_url(url)
 
         # Construct parameters
         query_parameters = {}
