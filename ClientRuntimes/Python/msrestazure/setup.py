@@ -49,5 +49,5 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Topic :: Software Development'],
     install_requires=[
-        "msrest>=0.0.2"],
+        "msrest>=0.1.0"],
 )
