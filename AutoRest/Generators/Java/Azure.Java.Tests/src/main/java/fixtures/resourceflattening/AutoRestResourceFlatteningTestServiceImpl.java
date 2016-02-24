@@ -530,11 +530,20 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         }
         Validator.validate(flattenParameterGroup);
         String baseProductId = flattenParameterGroup.getBaseProductId();
-        String baseProductDescription = flattenParameterGroup.getBaseProductDescription();
+        String baseProductDescription = null;
+        baseProductDescription = flattenParameterGroup.getBaseProductDescription();
         String maxProductDisplayName = flattenParameterGroup.getMaxProductDisplayName();
-        String odatavalue = flattenParameterGroup.getOdatavalue();
-        SimpleProduct simpleBodyProduct = baseProductId.get();
-        Call<ResponseBody> call = service.postFlattenedSimpleProduct(this.getAcceptLanguage(), baseProductId, baseProductDescription, maxProductDisplayName, odatavalue, simpleBodyProduct);
+        String odatavalue = null;
+        odatavalue = flattenParameterGroup.getOdatavalue();
+        SimpleProduct simpleBodyProduct = null;
+        if (baseProductDescription != null || odatavalue != null) {
+            simpleBodyProduct = new SimpleProduct();
+            simpleBodyProduct.setBaseProductId(baseProductId);
+            simpleBodyProduct.setBaseProductDescription(baseProductDescription);
+            simpleBodyProduct.setMaxProductDisplayName(maxProductDisplayName);
+            simpleBodyProduct.setOdatavalue(odatavalue);
+        }
+        Call<ResponseBody> call = service.postFlattenedSimpleProduct(this.getAcceptLanguage(), simpleBodyProduct);
         return postFlattenedSimpleProductDelegate(call.execute());
     }
 
@@ -552,11 +561,20 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         }
         Validator.validate(flattenParameterGroup, serviceCallback);
         String baseProductId = flattenParameterGroup.getBaseProductId();
-        String baseProductDescription = flattenParameterGroup.getBaseProductDescription();
+        String baseProductDescription = null;
+        baseProductDescription = flattenParameterGroup.getBaseProductDescription();
         String maxProductDisplayName = flattenParameterGroup.getMaxProductDisplayName();
-        String odatavalue = flattenParameterGroup.getOdatavalue();
-        SimpleProduct simpleBodyProduct = baseProductId.get();
-        Call<ResponseBody> call = service.postFlattenedSimpleProduct(this.getAcceptLanguage(), baseProductId, baseProductDescription, maxProductDisplayName, odatavalue, simpleBodyProduct);
+        String odatavalue = null;
+        odatavalue = flattenParameterGroup.getOdatavalue();
+        SimpleProduct simpleBodyProduct = null;
+        if (baseProductDescription != null || odatavalue != null) {
+            simpleBodyProduct = new SimpleProduct();
+            simpleBodyProduct.setBaseProductId(baseProductId);
+            simpleBodyProduct.setBaseProductDescription(baseProductDescription);
+            simpleBodyProduct.setMaxProductDisplayName(maxProductDisplayName);
+            simpleBodyProduct.setOdatavalue(odatavalue);
+        }
+        Call<ResponseBody> call = service.postFlattenedSimpleProduct(this.getAcceptLanguage(), simpleBodyProduct);
         call.enqueue(new ServiceResponseCallback<SimpleProduct>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -593,11 +611,20 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         Validator.validate(flattenParameterGroup);
         String name = flattenParameterGroup.getName();
         String baseProductId = flattenParameterGroup.getBaseProductId();
-        String baseProductDescription = flattenParameterGroup.getBaseProductDescription();
+        String baseProductDescription = null;
+        baseProductDescription = flattenParameterGroup.getBaseProductDescription();
         String maxProductDisplayName = flattenParameterGroup.getMaxProductDisplayName();
-        String odatavalue = flattenParameterGroup.getOdatavalue();
-        SimpleProduct simpleBodyProduct = baseProductId.get();
-        Call<ResponseBody> call = service.putSimpleProductWithGrouping(name, this.getAcceptLanguage(), baseProductId, baseProductDescription, maxProductDisplayName, odatavalue, simpleBodyProduct);
+        String odatavalue = null;
+        odatavalue = flattenParameterGroup.getOdatavalue();
+        SimpleProduct simpleBodyProduct = null;
+        if (baseProductDescription != null || odatavalue != null) {
+            simpleBodyProduct = new SimpleProduct();
+            simpleBodyProduct.setBaseProductId(baseProductId);
+            simpleBodyProduct.setBaseProductDescription(baseProductDescription);
+            simpleBodyProduct.setMaxProductDisplayName(maxProductDisplayName);
+            simpleBodyProduct.setOdatavalue(odatavalue);
+        }
+        Call<ResponseBody> call = service.putSimpleProductWithGrouping(name, this.getAcceptLanguage(), simpleBodyProduct);
         return putSimpleProductWithGroupingDelegate(call.execute());
     }
 
@@ -616,11 +643,20 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         Validator.validate(flattenParameterGroup, serviceCallback);
         String name = flattenParameterGroup.getName();
         String baseProductId = flattenParameterGroup.getBaseProductId();
-        String baseProductDescription = flattenParameterGroup.getBaseProductDescription();
+        String baseProductDescription = null;
+        baseProductDescription = flattenParameterGroup.getBaseProductDescription();
         String maxProductDisplayName = flattenParameterGroup.getMaxProductDisplayName();
-        String odatavalue = flattenParameterGroup.getOdatavalue();
-        SimpleProduct simpleBodyProduct = baseProductId.get();
-        Call<ResponseBody> call = service.putSimpleProductWithGrouping(name, this.getAcceptLanguage(), baseProductId, baseProductDescription, maxProductDisplayName, odatavalue, simpleBodyProduct);
+        String odatavalue = null;
+        odatavalue = flattenParameterGroup.getOdatavalue();
+        SimpleProduct simpleBodyProduct = null;
+        if (baseProductDescription != null || odatavalue != null) {
+            simpleBodyProduct = new SimpleProduct();
+            simpleBodyProduct.setBaseProductId(baseProductId);
+            simpleBodyProduct.setBaseProductDescription(baseProductDescription);
+            simpleBodyProduct.setMaxProductDisplayName(maxProductDisplayName);
+            simpleBodyProduct.setOdatavalue(odatavalue);
+        }
+        Call<ResponseBody> call = service.putSimpleProductWithGrouping(name, this.getAcceptLanguage(), simpleBodyProduct);
         call.enqueue(new ServiceResponseCallback<SimpleProduct>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

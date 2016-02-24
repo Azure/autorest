@@ -159,11 +159,11 @@ public interface AutoRestResourceFlatteningTestService {
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @POST("azure/resource-flatten/customFlattening")
-        Call<ResponseBody> postFlattenedSimpleProduct(@Header("accept-language") String acceptLanguage, String baseProductId, String baseProductDescription, String maxProductDisplayName, String odatavalue, @Body SimpleProduct simpleBodyProduct);
+        Call<ResponseBody> postFlattenedSimpleProduct(@Header("accept-language") String acceptLanguage, @Body SimpleProduct simpleBodyProduct);
 
         @Headers("Content-Type: application/json; charset=utf-8")
         @PUT("azure/resource-flatten/customFlattening/parametergrouping/{name}/")
-        Call<ResponseBody> putSimpleProductWithGrouping(@Path("name") String name, @Header("accept-language") String acceptLanguage, String baseProductId, String baseProductDescription, String maxProductDisplayName, String odatavalue, @Body SimpleProduct simpleBodyProduct);
+        Call<ResponseBody> putSimpleProductWithGrouping(@Path("name") String name, @Header("accept-language") String acceptLanguage, @Body SimpleProduct simpleBodyProduct);
 
     }
 
