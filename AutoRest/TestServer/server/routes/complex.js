@@ -462,12 +462,12 @@ var complex = function(coverage) {
     });
 
     router.put('/readonlyproperty/valid', function(req, res, next) {
-        req_body = req.body
-        if (req_body) {
-            if (req_body.id) {
-                utils.send400(res, next, 'id is readonly');
-            } else {
+        if (req.body) {
+            if (typeof req.body.id == "undefined") {
+                coverage["putComplexReadOnlyPropertyValid"]++;
                 res.status(200).end();
+            } else {
+                utils.send400(res, next, 'id is readonly');
             }
         }
     });
