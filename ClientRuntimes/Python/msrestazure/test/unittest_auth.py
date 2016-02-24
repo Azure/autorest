@@ -314,7 +314,7 @@ class TestInteractiveCredentials(unittest.TestCase):
         self.assertEqual(creds.token, session.fetch_token.return_value)
         session.fetch_token.assert_called_with(
             "token_uri", client_id="id", username='user',
-            client_secret="secret", password='pass', resource='resource')
+            client_secret="secret", password='pass', resource='resource', verify=True)
 
         session.fetch_token.side_effect = oauthlib.oauth2.OAuth2Error
 
