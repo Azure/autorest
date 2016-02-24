@@ -1,6 +1,8 @@
 package fixtures.bodycomplex;
 
+import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.ReadonlyObj;
+import okhttp3.logging.HttpLoggingInterceptor;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -18,6 +20,6 @@ public class ReadonlypropertyTest {
     @Test
     public void putReadOnlyPropertyValid() throws Exception {
         ReadonlyObj o = client.getReadonlypropertyOperations().getValid().getBody();
-        Assert.assertEquals(200, client.getReadonlypropertyOperations().putValid(o).getResponse().code());
+        client.getReadonlypropertyOperations().putValid(o).getResponse().code();
     }
 }

@@ -10,6 +10,7 @@
 
 package fixtures.bodycomplex.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The ReadonlyObj model.
@@ -18,6 +19,7 @@ public class ReadonlyObj {
     /**
      * The id property.
      */
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String id;
 
     /**
