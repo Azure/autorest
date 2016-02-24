@@ -117,6 +117,7 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> postOptional(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters) throws ErrorException, IOException {
+        Validator.validate(parameterGroupingPostOptionalParameters);
         String customHeader = null;
         Integer query = null;
         if (parameterGroupingPostOptionalParameters != null) {
@@ -135,6 +136,7 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
      * @return the {@link Call} object
      */
     public Call<ResponseBody> postOptionalAsync(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters, final ServiceCallback<Void> serviceCallback) {
+        Validator.validate(parameterGroupingPostOptionalParameters, serviceCallback);
         String customHeader = null;
         Integer query = null;
         if (parameterGroupingPostOptionalParameters != null) {
@@ -172,6 +174,8 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> postMultiParamGroups(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup) throws ErrorException, IOException {
+        Validator.validate(firstParameterGroup);
+        Validator.validate(parameterGroupingPostMultiParamGroupsSecondParamGroup);
         String headerOne = null;
         Integer queryOne = null;
         if (firstParameterGroup != null) {
@@ -197,6 +201,8 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
      * @return the {@link Call} object
      */
     public Call<ResponseBody> postMultiParamGroupsAsync(FirstParameterGroup firstParameterGroup, ParameterGroupingPostMultiParamGroupsSecondParamGroup parameterGroupingPostMultiParamGroupsSecondParamGroup, final ServiceCallback<Void> serviceCallback) {
+        Validator.validate(firstParameterGroup, serviceCallback);
+        Validator.validate(parameterGroupingPostMultiParamGroupsSecondParamGroup, serviceCallback);
         String headerOne = null;
         Integer queryOne = null;
         if (firstParameterGroup != null) {
@@ -239,6 +245,7 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> postSharedParameterGroupObject(FirstParameterGroup firstParameterGroup) throws ErrorException, IOException {
+        Validator.validate(firstParameterGroup);
         String headerOne = null;
         Integer queryOne = null;
         if (firstParameterGroup != null) {
@@ -257,6 +264,7 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
      * @return the {@link Call} object
      */
     public Call<ResponseBody> postSharedParameterGroupObjectAsync(FirstParameterGroup firstParameterGroup, final ServiceCallback<Void> serviceCallback) {
+        Validator.validate(firstParameterGroup, serviceCallback);
         String headerOne = null;
         Integer queryOne = null;
         if (firstParameterGroup != null) {
