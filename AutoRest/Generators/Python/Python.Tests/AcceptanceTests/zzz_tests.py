@@ -68,6 +68,9 @@ class AcceptanceTests(unittest.TestCase):
         # TODO: Once x-ms-parameterized-host is support in python we should run these tests
         report['CustomBaseUri']=1
 
+        # TODO: Support ignore readonly property in http put
+        report['putComplexReadOnlyPropertyValid']=1
+
         skipped = [k for k, v in report.items() if v == 0]
 
         for s in skipped:
