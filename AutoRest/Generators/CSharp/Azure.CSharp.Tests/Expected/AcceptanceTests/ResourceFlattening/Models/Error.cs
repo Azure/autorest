@@ -26,10 +26,11 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening.Models
         /// <summary>
         /// Initializes a new instance of the Error class.
         /// </summary>
-        public Error(int? status = default(int?), string message = default(string))
+        public Error(int? status = default(int?), string message = default(string), Error parentError = default(Error))
         {
             Status = status;
             Message = message;
+            ParentError = parentError;
         }
 
         /// <summary>
@@ -41,6 +42,11 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening.Models
         /// </summary>
         [JsonProperty(PropertyName = "message")]
         public string Message { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "parentError")]
+        public Error ParentError { get; set; }
 
     }
 }

@@ -13,10 +13,16 @@ from .error import Error, ErrorException
 from .resource import Resource
 from .flattened_product import FlattenedProduct
 from .resource_collection import ResourceCollection
+from .base_product import BaseProduct
+from .simple_product import SimpleProduct
+from .flatten_parameter_group import FlattenParameterGroup
 
 __all__ = [
     'Error', 'ErrorException',
     'Resource',
     'FlattenedProduct',
     'ResourceCollection',
+    'BaseProduct',
+    'SimpleProduct',
+    'FlattenParameterGroup',
 ]

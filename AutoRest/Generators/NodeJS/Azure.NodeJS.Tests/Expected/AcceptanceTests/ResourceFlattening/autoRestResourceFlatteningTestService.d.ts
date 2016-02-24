@@ -157,6 +157,99 @@ declare class AutoRestResourceFlatteningTestService {
          */
         getResourceCollection(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ResourceCollection>): void;
         getResourceCollection(callback: ServiceCallback<models.ResourceCollection>): void;
+
+        /**
+         * Put Simple Product with client flattening true on the model
+         *
+         * @param {object} [options] Optional Parameters.
+         * 
+         * @param {object} [options.simpleBodyProduct] Simple body product to put
+         * 
+         * @param {string} [options.simpleBodyProduct.maxProductDisplayName] Display
+         * name of product.
+         * 
+         * @param {string} [options.simpleBodyProduct.'@odata.value'] URL value.
+         * 
+         * @param {string} [options.simpleBodyProduct.baseProductId] Unique identifier
+         * representing a specific product for a given latitude & longitude. For
+         * example, uberX in San Francisco will have a different product_id than
+         * uberX in Los Angeles.
+         * 
+         * @param {string} [options.simpleBodyProduct.baseProductDescription]
+         * Description of product.
+         * 
+         * @param {object} [options.customHeaders] Headers that will be added to the
+         * request
+         * 
+         * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+         * doc in ms-rest index.d.ts for details
+         */
+        putSimpleProduct(options: { simpleBodyProduct? : models.SimpleProduct, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SimpleProduct>): void;
+        putSimpleProduct(callback: ServiceCallback<models.SimpleProduct>): void;
+
+        /**
+         * Put Flattened Simple Product with client flattening true on the parameter
+         *
+         * @param {object} flattenParameterGroup Additional parameters for the
+         * operation
+         * 
+         * @param {string} [flattenParameterGroup.baseProductId] Unique identifier
+         * representing a specific product for a given latitude & longitude. For
+         * example, uberX in San Francisco will have a different product_id than
+         * uberX in Los Angeles.
+         * 
+         * @param {string} [flattenParameterGroup.baseProductDescription] Description
+         * of product.
+         * 
+         * @param {string} [flattenParameterGroup.maxProductDisplayName] Display name
+         * of product.
+         * 
+         * @param {string} [flattenParameterGroup.'@odata.value'] URL value.
+         * 
+         * @param {string} [flattenParameterGroup.name] Product name
+         * 
+         * @param {object} [options] Optional Parameters.
+         * 
+         * @param {object} [options.customHeaders] Headers that will be added to the
+         * request
+         * 
+         * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+         * doc in ms-rest index.d.ts for details
+         */
+        postFlattenedSimpleProduct(flattenParameterGroup: models.FlattenParameterGroup, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SimpleProduct>): void;
+        postFlattenedSimpleProduct(flattenParameterGroup: models.FlattenParameterGroup, callback: ServiceCallback<models.SimpleProduct>): void;
+
+        /**
+         * Put Simple Product with client flattening true on the model
+         *
+         * @param {object} flattenParameterGroup Additional parameters for the
+         * operation
+         * 
+         * @param {string} [flattenParameterGroup.baseProductId] Unique identifier
+         * representing a specific product for a given latitude & longitude. For
+         * example, uberX in San Francisco will have a different product_id than
+         * uberX in Los Angeles.
+         * 
+         * @param {string} [flattenParameterGroup.baseProductDescription] Description
+         * of product.
+         * 
+         * @param {string} [flattenParameterGroup.maxProductDisplayName] Display name
+         * of product.
+         * 
+         * @param {string} [flattenParameterGroup.'@odata.value'] URL value.
+         * 
+         * @param {string} [flattenParameterGroup.name] Product name
+         * 
+         * @param {object} [options] Optional Parameters.
+         * 
+         * @param {object} [options.customHeaders] Headers that will be added to the
+         * request
+         * 
+         * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+         * doc in ms-rest index.d.ts for details
+         */
+        putSimpleProductWithGrouping(flattenParameterGroup: models.FlattenParameterGroup, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SimpleProduct>): void;
+        putSimpleProductWithGrouping(flattenParameterGroup: models.FlattenParameterGroup, callback: ServiceCallback<models.SimpleProduct>): void;
 }
 
 export = AutoRestResourceFlatteningTestService;

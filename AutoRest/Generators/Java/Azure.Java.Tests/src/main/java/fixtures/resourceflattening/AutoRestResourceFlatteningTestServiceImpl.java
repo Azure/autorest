@@ -20,10 +20,13 @@ import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
+import com.microsoft.rest.Validator;
 import fixtures.resourceflattening.models.ErrorException;
 import fixtures.resourceflattening.models.FlattenedProduct;
+import fixtures.resourceflattening.models.FlattenParameterGroup;
 import fixtures.resourceflattening.models.Resource;
 import fixtures.resourceflattening.models.ResourceCollection;
+import fixtures.resourceflattening.models.SimpleProduct;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -466,6 +469,174 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     private ServiceResponse<ResourceCollection> getResourceCollectionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
         return new AzureServiceResponseBuilder<ResourceCollection, ErrorException>()
                 .register(200, new TypeToken<ResourceCollection>() { }.getType())
+                .registerError(ErrorException.class)
+                .build(response);
+    }
+
+    /**
+     * Put Simple Product with client flattening true on the model.
+     *
+     * @param simpleBodyProduct Simple body product to put
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the SimpleProduct object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<SimpleProduct> putSimpleProduct(SimpleProduct simpleBodyProduct) throws ErrorException, IOException {
+        Call<ResponseBody> call = service.putSimpleProduct(simpleBodyProduct, this.getAcceptLanguage());
+        return putSimpleProductDelegate(call.execute());
+    }
+
+    /**
+     * Put Simple Product with client flattening true on the model.
+     *
+     * @param simpleBodyProduct Simple body product to put
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
+     */
+    public Call<ResponseBody> putSimpleProductAsync(SimpleProduct simpleBodyProduct, final ServiceCallback<SimpleProduct> serviceCallback) {
+        Call<ResponseBody> call = service.putSimpleProduct(simpleBodyProduct, this.getAcceptLanguage());
+        call.enqueue(new ServiceResponseCallback<SimpleProduct>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(putSimpleProductDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return call;
+    }
+
+    private ServiceResponse<SimpleProduct> putSimpleProductDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
+        return new AzureServiceResponseBuilder<SimpleProduct, ErrorException>()
+                .register(200, new TypeToken<SimpleProduct>() { }.getType())
+                .registerError(ErrorException.class)
+                .build(response);
+    }
+
+    /**
+     * Put Flattened Simple Product with client flattening true on the parameter.
+     *
+     * @param flattenParameterGroup Additional parameters for the operation
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the SimpleProduct object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<SimpleProduct> postFlattenedSimpleProduct(FlattenParameterGroup flattenParameterGroup) throws ErrorException, IOException, IllegalArgumentException {
+        if (flattenParameterGroup == null) {
+            throw new IllegalArgumentException("Parameter flattenParameterGroup is required and cannot be null.");
+        }
+        Validator.validate(flattenParameterGroup);
+        String baseProductId = flattenParameterGroup.getBaseProductId();
+        String baseProductDescription = flattenParameterGroup.getBaseProductDescription();
+        String maxProductDisplayName = flattenParameterGroup.getMaxProductDisplayName();
+        String odatavalue = flattenParameterGroup.getOdatavalue();
+        SimpleProduct simpleBodyProduct = baseProductId.get();
+        Call<ResponseBody> call = service.postFlattenedSimpleProduct(this.getAcceptLanguage(), baseProductId, baseProductDescription, maxProductDisplayName, odatavalue, simpleBodyProduct);
+        return postFlattenedSimpleProductDelegate(call.execute());
+    }
+
+    /**
+     * Put Flattened Simple Product with client flattening true on the parameter.
+     *
+     * @param flattenParameterGroup Additional parameters for the operation
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
+     */
+    public Call<ResponseBody> postFlattenedSimpleProductAsync(FlattenParameterGroup flattenParameterGroup, final ServiceCallback<SimpleProduct> serviceCallback) {
+        if (flattenParameterGroup == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter flattenParameterGroup is required and cannot be null."));
+            return null;
+        }
+        Validator.validate(flattenParameterGroup, serviceCallback);
+        String baseProductId = flattenParameterGroup.getBaseProductId();
+        String baseProductDescription = flattenParameterGroup.getBaseProductDescription();
+        String maxProductDisplayName = flattenParameterGroup.getMaxProductDisplayName();
+        String odatavalue = flattenParameterGroup.getOdatavalue();
+        SimpleProduct simpleBodyProduct = baseProductId.get();
+        Call<ResponseBody> call = service.postFlattenedSimpleProduct(this.getAcceptLanguage(), baseProductId, baseProductDescription, maxProductDisplayName, odatavalue, simpleBodyProduct);
+        call.enqueue(new ServiceResponseCallback<SimpleProduct>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(postFlattenedSimpleProductDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return call;
+    }
+
+    private ServiceResponse<SimpleProduct> postFlattenedSimpleProductDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return new AzureServiceResponseBuilder<SimpleProduct, ErrorException>()
+                .register(200, new TypeToken<SimpleProduct>() { }.getType())
+                .registerError(ErrorException.class)
+                .build(response);
+    }
+
+    /**
+     * Put Simple Product with client flattening true on the model.
+     *
+     * @param flattenParameterGroup Additional parameters for the operation
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the SimpleProduct object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<SimpleProduct> putSimpleProductWithGrouping(FlattenParameterGroup flattenParameterGroup) throws ErrorException, IOException, IllegalArgumentException {
+        if (flattenParameterGroup == null) {
+            throw new IllegalArgumentException("Parameter flattenParameterGroup is required and cannot be null.");
+        }
+        Validator.validate(flattenParameterGroup);
+        String name = flattenParameterGroup.getName();
+        String baseProductId = flattenParameterGroup.getBaseProductId();
+        String baseProductDescription = flattenParameterGroup.getBaseProductDescription();
+        String maxProductDisplayName = flattenParameterGroup.getMaxProductDisplayName();
+        String odatavalue = flattenParameterGroup.getOdatavalue();
+        SimpleProduct simpleBodyProduct = baseProductId.get();
+        Call<ResponseBody> call = service.putSimpleProductWithGrouping(name, this.getAcceptLanguage(), baseProductId, baseProductDescription, maxProductDisplayName, odatavalue, simpleBodyProduct);
+        return putSimpleProductWithGroupingDelegate(call.execute());
+    }
+
+    /**
+     * Put Simple Product with client flattening true on the model.
+     *
+     * @param flattenParameterGroup Additional parameters for the operation
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
+     */
+    public Call<ResponseBody> putSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup, final ServiceCallback<SimpleProduct> serviceCallback) {
+        if (flattenParameterGroup == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter flattenParameterGroup is required and cannot be null."));
+            return null;
+        }
+        Validator.validate(flattenParameterGroup, serviceCallback);
+        String name = flattenParameterGroup.getName();
+        String baseProductId = flattenParameterGroup.getBaseProductId();
+        String baseProductDescription = flattenParameterGroup.getBaseProductDescription();
+        String maxProductDisplayName = flattenParameterGroup.getMaxProductDisplayName();
+        String odatavalue = flattenParameterGroup.getOdatavalue();
+        SimpleProduct simpleBodyProduct = baseProductId.get();
+        Call<ResponseBody> call = service.putSimpleProductWithGrouping(name, this.getAcceptLanguage(), baseProductId, baseProductDescription, maxProductDisplayName, odatavalue, simpleBodyProduct);
+        call.enqueue(new ServiceResponseCallback<SimpleProduct>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(putSimpleProductWithGroupingDelegate(response));
+                } catch (ErrorException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return call;
+    }
+
+    private ServiceResponse<SimpleProduct> putSimpleProductWithGroupingDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
+        return new AzureServiceResponseBuilder<SimpleProduct, ErrorException>()
+                .register(200, new TypeToken<SimpleProduct>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
     }

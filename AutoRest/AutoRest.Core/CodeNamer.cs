@@ -198,16 +198,12 @@ namespace Microsoft.Rest.Generator
                 {
                     if (parameterMapping.InputParameterProperty != null)
                     {
-                        parameterMapping.InputParameterProperty = string.Join(".",
-                            parameterMapping.InputParameterProperty.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries)
-                                .Select(p => GetPropertyName(p)));
+                        parameterMapping.InputParameterProperty = GetPropertyName(parameterMapping.InputParameterProperty);
                     }
 
                     if (parameterMapping.OutputParameterProperty != null)
                     {
-                        parameterMapping.OutputParameterProperty = string.Join(".",
-                            parameterMapping.OutputParameterProperty.Split(new[] { '.' }, StringSplitOptions.RemoveEmptyEntries)
-                                .Select(p => GetPropertyName(p)));
+                        parameterMapping.OutputParameterProperty = GetPropertyName(parameterMapping.OutputParameterProperty);
                     }
                 }
             }

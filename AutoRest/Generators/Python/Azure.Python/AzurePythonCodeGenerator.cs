@@ -61,8 +61,8 @@ namespace Microsoft.Rest.Generator.Azure.Python
             Settings.AddCredentials = true;
             AzureExtensions.UpdateHeadMethods(serviceClient);
             AzureExtensions.ParseODataExtension(serviceClient);
-            Extensions.AddParameterGroups(serviceClient);
             Extensions.FlattenModels(serviceClient);
+            Extensions.AddParameterGroups(serviceClient);
             AzureExtensions.AddAzureProperties(serviceClient);
             AzureExtensions.SetDefaultResponses(serviceClient);
 

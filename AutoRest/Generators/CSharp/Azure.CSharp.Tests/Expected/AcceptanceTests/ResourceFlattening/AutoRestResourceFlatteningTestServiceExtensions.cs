@@ -199,5 +199,107 @@ namespace Fixtures.Azure.AcceptanceTestsResourceFlattening
                 }
             }
 
+            /// <summary>
+            /// Put Simple Product with client flattening true on the model
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='simpleBodyProduct'>
+            /// Simple body product to put
+            /// </param>
+            public static SimpleProduct PutSimpleProduct(this IAutoRestResourceFlatteningTestService operations, SimpleProduct simpleBodyProduct = default(SimpleProduct))
+            {
+                return Task.Factory.StartNew(s => ((IAutoRestResourceFlatteningTestService)s).PutSimpleProductAsync(simpleBodyProduct), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Put Simple Product with client flattening true on the model
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='simpleBodyProduct'>
+            /// Simple body product to put
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<SimpleProduct> PutSimpleProductAsync(this IAutoRestResourceFlatteningTestService operations, SimpleProduct simpleBodyProduct = default(SimpleProduct), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.PutSimpleProductWithHttpMessagesAsync(simpleBodyProduct, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Put Flattened Simple Product with client flattening true on the parameter
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='flattenParameterGroup'>
+            /// Additional parameters for the operation
+            /// </param>
+            public static SimpleProduct PostFlattenedSimpleProduct(this IAutoRestResourceFlatteningTestService operations, FlattenParameterGroup flattenParameterGroup)
+            {
+                return Task.Factory.StartNew(s => ((IAutoRestResourceFlatteningTestService)s).PostFlattenedSimpleProductAsync(flattenParameterGroup), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Put Flattened Simple Product with client flattening true on the parameter
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='flattenParameterGroup'>
+            /// Additional parameters for the operation
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<SimpleProduct> PostFlattenedSimpleProductAsync(this IAutoRestResourceFlatteningTestService operations, FlattenParameterGroup flattenParameterGroup, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.PostFlattenedSimpleProductWithHttpMessagesAsync(flattenParameterGroup, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
+            /// <summary>
+            /// Put Simple Product with client flattening true on the model
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='flattenParameterGroup'>
+            /// Additional parameters for the operation
+            /// </param>
+            public static SimpleProduct PutSimpleProductWithGrouping(this IAutoRestResourceFlatteningTestService operations, FlattenParameterGroup flattenParameterGroup)
+            {
+                return Task.Factory.StartNew(s => ((IAutoRestResourceFlatteningTestService)s).PutSimpleProductWithGroupingAsync(flattenParameterGroup), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+            }
+
+            /// <summary>
+            /// Put Simple Product with client flattening true on the model
+            /// </summary>
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='flattenParameterGroup'>
+            /// Additional parameters for the operation
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<SimpleProduct> PutSimpleProductWithGroupingAsync(this IAutoRestResourceFlatteningTestService operations, FlattenParameterGroup flattenParameterGroup, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.PutSimpleProductWithGroupingWithHttpMessagesAsync(flattenParameterGroup, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
+            }
+
     }
 }

@@ -18,8 +18,10 @@ import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.resourceflattening.models.ErrorException;
 import fixtures.resourceflattening.models.FlattenedProduct;
+import fixtures.resourceflattening.models.FlattenParameterGroup;
 import fixtures.resourceflattening.models.Resource;
 import fixtures.resourceflattening.models.ResourceCollection;
+import fixtures.resourceflattening.models.SimpleProduct;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +33,8 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Headers;
+import retrofit2.http.Path;
+import retrofit2.http.POST;
 import retrofit2.http.PUT;
 
 /**
@@ -149,6 +153,18 @@ public interface AutoRestResourceFlatteningTestService {
         @GET("azure/resource-flatten/resourcecollection")
         Call<ResponseBody> getResourceCollection(@Header("accept-language") String acceptLanguage);
 
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("azure/resource-flatten/customFlattening")
+        Call<ResponseBody> putSimpleProduct(@Body SimpleProduct simpleBodyProduct, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("azure/resource-flatten/customFlattening")
+        Call<ResponseBody> postFlattenedSimpleProduct(@Header("accept-language") String acceptLanguage, String baseProductId, String baseProductDescription, String maxProductDisplayName, String odatavalue, @Body SimpleProduct simpleBodyProduct);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("azure/resource-flatten/customFlattening/parametergrouping/{name}/")
+        Call<ResponseBody> putSimpleProductWithGrouping(@Path("name") String name, @Header("accept-language") String acceptLanguage, String baseProductId, String baseProductDescription, String maxProductDisplayName, String odatavalue, @Body SimpleProduct simpleBodyProduct);
+
     }
 
     /**
@@ -258,5 +274,64 @@ public interface AutoRestResourceFlatteningTestService {
      * @return the {@link Call} object
      */
     Call<ResponseBody> getResourceCollectionAsync(final ServiceCallback<ResourceCollection> serviceCallback);
+
+    /**
+     * Put Simple Product with client flattening true on the model.
+     *
+     * @param simpleBodyProduct Simple body product to put
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the SimpleProduct object wrapped in ServiceResponse if successful.
+     */
+    ServiceResponse<SimpleProduct> putSimpleProduct(SimpleProduct simpleBodyProduct) throws ErrorException, IOException;
+
+    /**
+     * Put Simple Product with client flattening true on the model.
+     *
+     * @param simpleBodyProduct Simple body product to put
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
+     */
+    Call<ResponseBody> putSimpleProductAsync(SimpleProduct simpleBodyProduct, final ServiceCallback<SimpleProduct> serviceCallback);
+
+    /**
+     * Put Flattened Simple Product with client flattening true on the parameter.
+     *
+     * @param flattenParameterGroup Additional parameters for the operation
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the SimpleProduct object wrapped in ServiceResponse if successful.
+     */
+    ServiceResponse<SimpleProduct> postFlattenedSimpleProduct(FlattenParameterGroup flattenParameterGroup) throws ErrorException, IOException, IllegalArgumentException;
+
+    /**
+     * Put Flattened Simple Product with client flattening true on the parameter.
+     *
+     * @param flattenParameterGroup Additional parameters for the operation
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
+     */
+    Call<ResponseBody> postFlattenedSimpleProductAsync(FlattenParameterGroup flattenParameterGroup, final ServiceCallback<SimpleProduct> serviceCallback);
+
+    /**
+     * Put Simple Product with client flattening true on the model.
+     *
+     * @param flattenParameterGroup Additional parameters for the operation
+     * @throws ErrorException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @throws IllegalArgumentException exception thrown from invalid parameters
+     * @return the SimpleProduct object wrapped in ServiceResponse if successful.
+     */
+    ServiceResponse<SimpleProduct> putSimpleProductWithGrouping(FlattenParameterGroup flattenParameterGroup) throws ErrorException, IOException, IllegalArgumentException;
+
+    /**
+     * Put Simple Product with client flattening true on the model.
+     *
+     * @param flattenParameterGroup Additional parameters for the operation
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @return the {@link Call} object
+     */
+    Call<ResponseBody> putSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup, final ServiceCallback<SimpleProduct> serviceCallback);
 
 }

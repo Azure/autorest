@@ -18,10 +18,13 @@
  * 
  * @member {string} [message]
  * 
+ * @member {object} [parentError]
+ * 
  */
 export interface ErrorModel {
     status?: number;
     message?: string;
+    parentError?: ErrorModel;
 }
 
 /**
@@ -94,4 +97,62 @@ export interface ResourceCollection {
     productresource?: FlattenedProduct;
     arrayofresources?: FlattenedProduct[];
     dictionaryofresources?: { [propertyName: string]: FlattenedProduct };
+}
+
+/**
+ * @class
+ * Initializes a new instance of the BaseProduct class.
+ * @constructor
+ * The product documentation.
+ * @member {string} baseProductId Unique identifier representing a specific
+ * product for a given latitude & longitude. For example, uberX in San
+ * Francisco will have a different product_id than uberX in Los Angeles.
+ * 
+ * @member {string} [baseProductDescription] Description of product.
+ * 
+ */
+export interface BaseProduct {
+    baseProductId: string;
+    baseProductDescription?: string;
+}
+
+/**
+ * @class
+ * Initializes a new instance of the SimpleProduct class.
+ * @constructor
+ * The product documentation.
+ * @member {string} maxProductDisplayName Display name of product.
+ * 
+ * @member {string} ['@odata.value'] URL value.
+ * 
+ */
+export interface SimpleProduct extends BaseProduct {
+    maxProductDisplayName: string;
+    '@odata.value'?: string;
+}
+
+/**
+ * @class
+ * Initializes a new instance of the FlattenParameterGroup class.
+ * @constructor
+ * Additional parameters for the postFlattenedSimpleProduct operation.
+ * @member {string} baseProductId Unique identifier representing a specific
+ * product for a given latitude & longitude. For example, uberX in San
+ * Francisco will have a different product_id than uberX in Los Angeles.
+ * 
+ * @member {string} [baseProductDescription] Description of product.
+ * 
+ * @member {string} maxProductDisplayName Display name of product.
+ * 
+ * @member {string} ['@odata.value'] URL value.
+ * 
+ * @member {string} name Product name
+ * 
+ */
+export interface FlattenParameterGroup {
+    baseProductId: string;
+    baseProductDescription?: string;
+    maxProductDisplayName: string;
+    '@odata.value'?: string;
+    name: string;
 }

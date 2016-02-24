@@ -913,4 +913,588 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
   });
 };
 
+/**
+ * Put Simple Product with client flattening true on the model
+ *
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.simpleBodyProduct] Simple body product to put
+ * 
+ * @param {string} [options.simpleBodyProduct.maxProductDisplayName] Display
+ * name of product.
+ * 
+ * @param {string} [options.simpleBodyProduct.'@odata.value'] URL value.
+ * 
+ * @param {string} [options.simpleBodyProduct.baseProductId] Unique identifier
+ * representing a specific product for a given latitude & longitude. For
+ * example, uberX in San Francisco will have a different product_id than
+ * uberX in Los Angeles.
+ * 
+ * @param {string} [options.simpleBodyProduct.baseProductDescription]
+ * Description of product.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
+ * request
+ * 
+ * @param {function} callback
+ *
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link SimpleProduct} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+ */
+AutoRestResourceFlatteningTestService.prototype.putSimpleProduct = function (options, callback) {
+  var client = this;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+  var simpleBodyProduct = (options && options.simpleBodyProduct !== undefined) ? options.simpleBodyProduct : undefined;
+  if (simpleBodyProduct === null || simpleBodyProduct === undefined)
+  {
+    simpleBodyProduct = {};
+  }
+  // Validate
+  try {
+    if (this.acceptLanguage !== null && this.acceptLanguage !== undefined && typeof this.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
+
+  // Construct URL
+  var requestUrl = this.baseUri +
+                   '//azure/resource-flatten/customFlattening';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
+
+  // Create HTTP transport objects
+  var httpRequest = new WebResource();
+  httpRequest.method = 'PUT';
+  httpRequest.headers = {};
+  httpRequest.url = requestUrl;
+  // Set Headers
+  if (this.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  }
+  if (this.acceptLanguage !== undefined && this.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.acceptLanguage;
+  }
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  // Serialize Request
+  var requestContent = null;
+  var requestModel = null;
+  try {
+    if (simpleBodyProduct !== null && simpleBodyProduct !== undefined) {
+      var requestModelMapper = new client.models['SimpleProduct']().mapper();
+      requestModel = client.serialize(requestModelMapper, simpleBodyProduct, 'simpleBodyProduct');
+    }
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
+        'payload - "%s"', error.message, util.inspect(simpleBodyProduct, {depth: null})));
+    return callback(serializationError);
+  }
+  httpRequest.body = requestContent;
+  // Send Request
+  return client.pipeline(httpRequest, function (err, response, responseBody) {
+    if (err) {
+      return callback(err);
+    }
+    var statusCode = response.statusCode;
+    if (statusCode !== 200) {
+      var error = new Error(responseBody);
+      error.statusCode = response.statusCode;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
+      if (responseBody === '') responseBody = null;
+      var parsedErrorResponse;
+      try {
+        parsedErrorResponse = JSON.parse(responseBody);
+        if (parsedErrorResponse) {
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+        }
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          var resultMapper = new client.models['ErrorModel']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
+        }
+      } catch (defaultError) {
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+                         '- "%s" for the default response.', defaultError.message, responseBody);
+        return callback(error);
+      }
+      return callback(error);
+    }
+    // Create Result
+    var result = null;
+    if (responseBody === '') responseBody = null;
+    // Deserialize Response
+    if (statusCode === 200) {
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = JSON.parse(responseBody);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          var resultMapper = new client.models['SimpleProduct']().mapper();
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
+        return callback(deserializationError);
+      }
+    }
+
+    return callback(null, result, httpRequest, response);
+  });
+};
+
+/**
+ * Put Flattened Simple Product with client flattening true on the parameter
+ *
+ * @param {object} flattenParameterGroup Additional parameters for the
+ * operation
+ * 
+ * @param {string} [flattenParameterGroup.baseProductId] Unique identifier
+ * representing a specific product for a given latitude & longitude. For
+ * example, uberX in San Francisco will have a different product_id than
+ * uberX in Los Angeles.
+ * 
+ * @param {string} [flattenParameterGroup.baseProductDescription] Description
+ * of product.
+ * 
+ * @param {string} [flattenParameterGroup.maxProductDisplayName] Display name
+ * of product.
+ * 
+ * @param {string} [flattenParameterGroup.'@odata.value'] URL value.
+ * 
+ * @param {string} [flattenParameterGroup.name] Product name
+ * 
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
+ * request
+ * 
+ * @param {function} callback
+ *
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link SimpleProduct} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+ */
+AutoRestResourceFlatteningTestService.prototype.postFlattenedSimpleProduct = function (flattenParameterGroup, options, callback) {
+  var client = this;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+  // Validate
+  try {
+    if (flattenParameterGroup === null || flattenParameterGroup === undefined) {
+      throw new Error('flattenParameterGroup cannot be null or undefined.');
+    }
+    if (this.acceptLanguage !== null && this.acceptLanguage !== undefined && typeof this.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
+  var baseProductId;
+  var baseProductDescription;
+  var maxProductDisplayName;
+  var odatavalue;
+  var simpleBodyProduct;
+  try {
+    if ((flattenParameterGroup !== null && flattenParameterGroup !== undefined))
+    {
+      baseProductId = flattenParameterGroup.baseProductId;
+      if (baseProductId === null || baseProductId === undefined || typeof baseProductId.valueOf() !== 'string') {
+        throw new Error('baseProductId cannot be null or undefined and it must be of type string.');
+      }
+    }
+    if ((flattenParameterGroup !== null && flattenParameterGroup !== undefined))
+    {
+      baseProductDescription = flattenParameterGroup.baseProductDescription;
+      if (baseProductDescription !== null && baseProductDescription !== undefined && typeof baseProductDescription.valueOf() !== 'string') {
+        throw new Error('baseProductDescription must be of type string.');
+      }
+    }
+    if ((flattenParameterGroup !== null && flattenParameterGroup !== undefined))
+    {
+      maxProductDisplayName = flattenParameterGroup.maxProductDisplayName;
+      if (maxProductDisplayName === null || maxProductDisplayName === undefined || typeof maxProductDisplayName.valueOf() !== 'string') {
+        throw new Error('maxProductDisplayName cannot be null or undefined and it must be of type string.');
+      }
+    }
+    if ((flattenParameterGroup !== null && flattenParameterGroup !== undefined))
+    {
+      odatavalue = flattenParameterGroup.@odata.value;
+      if (odatavalue !== null && odatavalue !== undefined && typeof odatavalue.valueOf() !== 'string') {
+        throw new Error('odatavalue must be of type string.');
+      }
+    }
+    if ((baseProductId !== null && baseProductId !== undefined) || (baseProductDescription !== null && baseProductDescription !== undefined) || (maxProductDisplayName !== null && maxProductDisplayName !== undefined) || (odatavalue !== null && odatavalue !== undefined))
+    {
+      simpleBodyProduct = new client.models['SimpleProduct']();
+      simpleBodyProduct.baseProductId = baseProductId;
+      simpleBodyProduct.baseProductDescription = baseProductDescription;
+      simpleBodyProduct.maxProductDisplayName = maxProductDisplayName;
+      simpleBodyProduct.@odata.value = odatavalue;
+    }
+  } catch (error) {
+    return callback(error);
+  }
+
+  // Construct URL
+  var requestUrl = this.baseUri +
+                   '//azure/resource-flatten/customFlattening';
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
+
+  // Create HTTP transport objects
+  var httpRequest = new WebResource();
+  httpRequest.method = 'POST';
+  httpRequest.headers = {};
+  httpRequest.url = requestUrl;
+  // Set Headers
+  if (this.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  }
+  if (this.acceptLanguage !== undefined && this.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.acceptLanguage;
+  }
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  // Serialize Request
+  var requestContent = null;
+  var requestModel = null;
+  try {
+    if (simpleBodyProduct !== null && simpleBodyProduct !== undefined) {
+      var requestModelMapper = new client.models['SimpleProduct']().mapper();
+      requestModel = client.serialize(requestModelMapper, simpleBodyProduct, 'simpleBodyProduct');
+    }
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
+        'payload - "%s"', error.message, util.inspect(simpleBodyProduct, {depth: null})));
+    return callback(serializationError);
+  }
+  httpRequest.body = requestContent;
+  // Send Request
+  return client.pipeline(httpRequest, function (err, response, responseBody) {
+    if (err) {
+      return callback(err);
+    }
+    var statusCode = response.statusCode;
+    if (statusCode !== 200) {
+      var error = new Error(responseBody);
+      error.statusCode = response.statusCode;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
+      if (responseBody === '') responseBody = null;
+      var parsedErrorResponse;
+      try {
+        parsedErrorResponse = JSON.parse(responseBody);
+        if (parsedErrorResponse) {
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+        }
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          var resultMapper = new client.models['ErrorModel']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
+        }
+      } catch (defaultError) {
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+                         '- "%s" for the default response.', defaultError.message, responseBody);
+        return callback(error);
+      }
+      return callback(error);
+    }
+    // Create Result
+    var result = null;
+    if (responseBody === '') responseBody = null;
+    // Deserialize Response
+    if (statusCode === 200) {
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = JSON.parse(responseBody);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          var resultMapper = new client.models['SimpleProduct']().mapper();
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
+        return callback(deserializationError);
+      }
+    }
+
+    return callback(null, result, httpRequest, response);
+  });
+};
+
+/**
+ * Put Simple Product with client flattening true on the model
+ *
+ * @param {object} flattenParameterGroup Additional parameters for the
+ * operation
+ * 
+ * @param {string} [flattenParameterGroup.baseProductId] Unique identifier
+ * representing a specific product for a given latitude & longitude. For
+ * example, uberX in San Francisco will have a different product_id than
+ * uberX in Los Angeles.
+ * 
+ * @param {string} [flattenParameterGroup.baseProductDescription] Description
+ * of product.
+ * 
+ * @param {string} [flattenParameterGroup.maxProductDisplayName] Display name
+ * of product.
+ * 
+ * @param {string} [flattenParameterGroup.'@odata.value'] URL value.
+ * 
+ * @param {string} [flattenParameterGroup.name] Product name
+ * 
+ * @param {object} [options] Optional Parameters.
+ * 
+ * @param {object} [options.customHeaders] Headers that will be added to the
+ * request
+ * 
+ * @param {function} callback
+ *
+ * @returns {function} callback(err, result, request, response)
+ *
+ *                      {Error}  err        - The Error object if an error occurred, null otherwise.
+ *
+ *                      {object} [result]   - The deserialized result object.
+ *                      See {@link SimpleProduct} for more information.
+ *
+ *                      {object} [request]  - The HTTP Request object if an error did not occur.
+ *
+ *                      {stream} [response] - The HTTP Response stream if an error did not occur.
+ */
+AutoRestResourceFlatteningTestService.prototype.putSimpleProductWithGrouping = function (flattenParameterGroup, options, callback) {
+  var client = this;
+  if(!callback && typeof options === 'function') {
+    callback = options;
+    options = null;
+  }
+  if (!callback) {
+    throw new Error('callback cannot be null.');
+  }
+  // Validate
+  try {
+    if (flattenParameterGroup === null || flattenParameterGroup === undefined) {
+      throw new Error('flattenParameterGroup cannot be null or undefined.');
+    }
+    if (this.acceptLanguage !== null && this.acceptLanguage !== undefined && typeof this.acceptLanguage.valueOf() !== 'string') {
+      throw new Error('this.acceptLanguage must be of type string.');
+    }
+  } catch (error) {
+    return callback(error);
+  }
+  var name;
+  var baseProductId;
+  var baseProductDescription;
+  var maxProductDisplayName;
+  var odatavalue;
+  var simpleBodyProduct;
+  try {
+    if ((flattenParameterGroup !== null && flattenParameterGroup !== undefined))
+    {
+      name = flattenParameterGroup.name;
+      if (name === null || name === undefined || typeof name.valueOf() !== 'string') {
+        throw new Error('name cannot be null or undefined and it must be of type string.');
+      }
+    }
+    if ((flattenParameterGroup !== null && flattenParameterGroup !== undefined))
+    {
+      baseProductId = flattenParameterGroup.baseProductId;
+      if (baseProductId === null || baseProductId === undefined || typeof baseProductId.valueOf() !== 'string') {
+        throw new Error('baseProductId cannot be null or undefined and it must be of type string.');
+      }
+    }
+    if ((flattenParameterGroup !== null && flattenParameterGroup !== undefined))
+    {
+      baseProductDescription = flattenParameterGroup.baseProductDescription;
+      if (baseProductDescription !== null && baseProductDescription !== undefined && typeof baseProductDescription.valueOf() !== 'string') {
+        throw new Error('baseProductDescription must be of type string.');
+      }
+    }
+    if ((flattenParameterGroup !== null && flattenParameterGroup !== undefined))
+    {
+      maxProductDisplayName = flattenParameterGroup.maxProductDisplayName;
+      if (maxProductDisplayName === null || maxProductDisplayName === undefined || typeof maxProductDisplayName.valueOf() !== 'string') {
+        throw new Error('maxProductDisplayName cannot be null or undefined and it must be of type string.');
+      }
+    }
+    if ((flattenParameterGroup !== null && flattenParameterGroup !== undefined))
+    {
+      odatavalue = flattenParameterGroup.@odata.value;
+      if (odatavalue !== null && odatavalue !== undefined && typeof odatavalue.valueOf() !== 'string') {
+        throw new Error('odatavalue must be of type string.');
+      }
+    }
+    if ((baseProductId !== null && baseProductId !== undefined) || (baseProductDescription !== null && baseProductDescription !== undefined) || (maxProductDisplayName !== null && maxProductDisplayName !== undefined) || (odatavalue !== null && odatavalue !== undefined))
+    {
+      simpleBodyProduct = new client.models['SimpleProduct']();
+      simpleBodyProduct.baseProductId = baseProductId;
+      simpleBodyProduct.baseProductDescription = baseProductDescription;
+      simpleBodyProduct.maxProductDisplayName = maxProductDisplayName;
+      simpleBodyProduct.@odata.value = odatavalue;
+    }
+  } catch (error) {
+    return callback(error);
+  }
+
+  // Construct URL
+  var requestUrl = this.baseUri +
+                   '//azure/resource-flatten/customFlattening/parametergrouping/{name}/';
+  requestUrl = requestUrl.replace('{name}', encodeURIComponent(name));
+  var queryParameters = [];
+  if (queryParameters.length > 0) {
+    requestUrl += '?' + queryParameters.join('&');
+  }
+  // trim all duplicate forward slashes in the url
+  var regex = /([^:]\/)\/+/gi;
+  requestUrl = requestUrl.replace(regex, '$1');
+
+  // Create HTTP transport objects
+  var httpRequest = new WebResource();
+  httpRequest.method = 'PUT';
+  httpRequest.headers = {};
+  httpRequest.url = requestUrl;
+  // Set Headers
+  if (this.generateClientRequestId) {
+      httpRequest.headers['x-ms-client-request-id'] = msRestAzure.generateUuid();
+  }
+  if (this.acceptLanguage !== undefined && this.acceptLanguage !== null) {
+    httpRequest.headers['accept-language'] = this.acceptLanguage;
+  }
+  if(options) {
+    for(var headerName in options['customHeaders']) {
+      if (options['customHeaders'].hasOwnProperty(headerName)) {
+        httpRequest.headers[headerName] = options['customHeaders'][headerName];
+      }
+    }
+  }
+  httpRequest.headers['Content-Type'] = 'application/json; charset=utf-8';
+  // Serialize Request
+  var requestContent = null;
+  var requestModel = null;
+  try {
+    if (simpleBodyProduct !== null && simpleBodyProduct !== undefined) {
+      var requestModelMapper = new client.models['SimpleProduct']().mapper();
+      requestModel = client.serialize(requestModelMapper, simpleBodyProduct, 'simpleBodyProduct');
+    }
+    requestContent = JSON.stringify(requestModel);
+  } catch (error) {
+    var serializationError = new Error(util.format('Error "%s" occurred in serializing the ' + 
+        'payload - "%s"', error.message, util.inspect(simpleBodyProduct, {depth: null})));
+    return callback(serializationError);
+  }
+  httpRequest.body = requestContent;
+  // Send Request
+  return client.pipeline(httpRequest, function (err, response, responseBody) {
+    if (err) {
+      return callback(err);
+    }
+    var statusCode = response.statusCode;
+    if (statusCode !== 200) {
+      var error = new Error(responseBody);
+      error.statusCode = response.statusCode;
+      error.request = msRest.stripRequest(httpRequest);
+      error.response = msRest.stripResponse(response);
+      if (responseBody === '') responseBody = null;
+      var parsedErrorResponse;
+      try {
+        parsedErrorResponse = JSON.parse(responseBody);
+        if (parsedErrorResponse) {
+          if (parsedErrorResponse.error) parsedErrorResponse = parsedErrorResponse.error;
+          if (parsedErrorResponse.code) error.code = parsedErrorResponse.code;
+          if (parsedErrorResponse.message) error.message = parsedErrorResponse.message;
+        }
+        if (parsedErrorResponse !== null && parsedErrorResponse !== undefined) {
+          var resultMapper = new client.models['ErrorModel']().mapper();
+          error.body = client.deserialize(resultMapper, parsedErrorResponse, 'error.body');
+        }
+      } catch (defaultError) {
+        error.message = util.format('Error "%s" occurred in deserializing the responseBody ' + 
+                         '- "%s" for the default response.', defaultError.message, responseBody);
+        return callback(error);
+      }
+      return callback(error);
+    }
+    // Create Result
+    var result = null;
+    if (responseBody === '') responseBody = null;
+    // Deserialize Response
+    if (statusCode === 200) {
+      var parsedResponse = null;
+      try {
+        parsedResponse = JSON.parse(responseBody);
+        result = JSON.parse(responseBody);
+        if (parsedResponse !== null && parsedResponse !== undefined) {
+          var resultMapper = new client.models['SimpleProduct']().mapper();
+          result = client.deserialize(resultMapper, parsedResponse, 'result');
+        }
+      } catch (error) {
+        var deserializationError = new Error(util.format('Error "%s" occurred in deserializing the responseBody - "%s"', error, responseBody));
+        deserializationError.request = msRest.stripRequest(httpRequest);
+        deserializationError.response = msRest.stripResponse(response);
+        return callback(deserializationError);
+      }
+    }
+
+    return callback(null, result, httpRequest, response);
+  });
+};
+
 module.exports = AutoRestResourceFlatteningTestService;

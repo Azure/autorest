@@ -10,6 +10,8 @@
 
 'use strict';
 
+var models = require('./index');
+
 /**
  * @class
  * Initializes a new instance of the ErrorModel class.
@@ -17,6 +19,8 @@
  * @member {number} [status]
  * 
  * @member {string} [message]
+ * 
+ * @member {object} [parentError]
  * 
  */
 function ErrorModel() {
@@ -48,6 +52,14 @@ ErrorModel.prototype.mapper = function () {
           serializedName: 'message',
           type: {
             name: 'String'
+          }
+        },
+        parentError: {
+          required: false,
+          serializedName: 'parentError',
+          type: {
+            name: 'Composite',
+            className: 'ErrorModel'
           }
         }
       }

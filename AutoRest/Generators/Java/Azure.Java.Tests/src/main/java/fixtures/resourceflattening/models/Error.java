@@ -26,6 +26,11 @@ public class Error {
     private String message;
 
     /**
+     * The parentError property.
+     */
+    private Error parentError;
+
+    /**
      * Get the status value.
      *
      * @return the status value
@@ -59,6 +64,24 @@ public class Error {
      */
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    /**
+     * Get the parentError value.
+     *
+     * @return the parentError value
+     */
+    public Error getParentError() {
+        return this.parentError;
+    }
+
+    /**
+     * Set the parentError value.
+     *
+     * @param parentError the parentError value to set
+     */
+    public void setParentError(Error parentError) {
+        this.parentError = parentError;
     }
 
 }

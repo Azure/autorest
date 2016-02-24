@@ -65,8 +65,8 @@ namespace Microsoft.Rest.Generator.Java.Azure
             Extensions.NormalizeClientModel(serviceClient, Settings);
             AzureExtensions.UpdateHeadMethods(serviceClient);
             AzureExtensions.ParseODataExtension(serviceClient);
-            Extensions.AddParameterGroups(serviceClient);
             Extensions.FlattenModels(serviceClient);
+            Extensions.AddParameterGroups(serviceClient);
             AzureExtensions.AddAzureProperties(serviceClient);
             AzureExtensions.SetDefaultResponses(serviceClient);
             AzureExtensions.AddPageableMethod(serviceClient, _namer);

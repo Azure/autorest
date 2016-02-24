@@ -38,9 +38,9 @@ namespace Microsoft.Rest.Generator
         /// <returns></returns>
         public static void NormalizeClientModel(ServiceClient serviceClient, Settings settings)
         {
-            AddParameterGroups(serviceClient);
             FlattenModels(serviceClient);
             FlattenMethodParameters(serviceClient, settings);
+            AddParameterGroups(serviceClient);
             ProcessParameterizedHost(serviceClient, settings);
         }
 
@@ -197,7 +197,7 @@ namespace Microsoft.Rest.Generator
             CompositeType typeToFlatten = propertyToFlatten.Type as CompositeType;
             if (typeToFlatten == null)
             {
-                throw new ArgumentException("Only composite properties can be decorated with x-ms-client-flatten extensions.", "propertyToFlatten");
+                return new[] { propertyToFlatten };
             }
 
             List<Property> extractedProperties = new List<Property>();
@@ -214,8 +214,11 @@ namespace Microsoft.Rest.Generator
                 else
                 {
                     Property clonedProperty = (Property)innerProperty.Clone();
-                    clonedProperty.Extensions[FlattenOriginalTypeName] = typeToFlatten.Name;
-                    UpdateSerializedNameWithPathHierarchy(clonedProperty, propertyToFlatten.SerializedName, true);
+                    if (!clonedProperty.Extensions.ContainsKey(FlattenOriginalTypeName))
+                    {
+                        clonedProperty.Extensions[FlattenOriginalTypeName] = typeToFlatten.Name;
+                        UpdateSerializedNameWithPathHierarchy(clonedProperty, propertyToFlatten.SerializedName, true);
+                    }
                     extractedProperties.Add(clonedProperty);
                 }
             }
@@ -302,6 +305,10 @@ namespace Microsoft.Rest.Generator
 
             foreach (Method method in serviceClient.Methods)
             {
+                //Copy out flattening transformations as they should be the last
+                List<ParameterTransformation> flatteningTransformations = method.InputParameterTransformation.ToList();
+                method.InputParameterTransformation.Clear();
+
                 //This group name is normalized by each languages code generator later, so it need not happen here.
                 Dictionary<string, Dictionary<Property, Parameter>> parameterGroups = new Dictionary<string, Dictionary<Property, Parameter>>();
 
@@ -309,7 +316,7 @@ namespace Microsoft.Rest.Generator
                 {
                     if (parameter.Extensions.ContainsKey(ParameterGroupExtension))
                     {
-                        Newtonsoft.Json.Linq.JContainer extensionObject = parameter.Extensions[ParameterGroupExtension] as Newtonsoft.Json.Linq.JContainer;
+                        JContainer extensionObject = parameter.Extensions[ParameterGroupExtension] as JContainer;
                         if (extensionObject != null)
                         {
                             string specifiedGroupName = extensionObject.Value<string>("name");
@@ -355,10 +362,9 @@ namespace Microsoft.Rest.Generator
                 {
                     CompositeType parameterGroupType =
                         generatedParameterGroups.FirstOrDefault(item => item.Name == parameterGroupName);
-                    bool createdNewCompositeType = false;
                     if (parameterGroupType == null)
                     {
-                        parameterGroupType = new CompositeType()
+                        parameterGroupType = new CompositeType
                         {
                             Name = parameterGroupName,
                             Documentation = "Additional parameters for the " + method.Name + " operation."
@@ -369,29 +375,18 @@ namespace Microsoft.Rest.Generator
 
                         //Add to the service client
                         serviceClient.ModelTypes.Add(parameterGroupType);
-                        createdNewCompositeType = true;
                     }
 
                     foreach (Property property in parameterGroups[parameterGroupName].Keys)
                     {
-                        //Either the parameter group is "empty" since it is new, or it is "full" and we don't allow different schemas
-                        if (createdNewCompositeType)
-                        {
-                            parameterGroupType.Properties.Add(property);
-                        }
-                        else
-                        {
-                            Property matchingProperty = parameterGroupType.Properties.FirstOrDefault(
+                        Property matchingProperty = parameterGroupType.Properties.FirstOrDefault(
                                 item => item.Name == property.Name &&
                                         item.IsReadOnly == property.IsReadOnly &&
                                         item.DefaultValue == property.DefaultValue &&
                                         item.SerializedName == property.SerializedName);
-
-                            if (matchingProperty == null)
-                            {
-                                throw new ArgumentException(string.Format(CultureInfo.CurrentCulture, "Property {0} was specified on group {1} but it is not on shared parameter group object {2}",
-                                    property.Name, method.Name, parameterGroupType.Name));
-                            }
+                        if (matchingProperty == null)
+                        {
+                            parameterGroupType.Properties.Add(property);
                         }
                     }
 
@@ -426,8 +421,11 @@ namespace Microsoft.Rest.Generator
                         });
                         method.InputParameterTransformation.Add(parameterTransformation);
                         method.Parameters.Remove(p);
-                    }
+                    }                    
                 }
+
+                // Copy back flattening transformations if any
+                flatteningTransformations.ForEach(t => method.InputParameterTransformation.Add(t));
             }
         }
 
@@ -466,10 +464,11 @@ namespace Microsoft.Rest.Generator
                         };
                         method.InputParameterTransformation.Add(parameterTransformation);
 
-                        foreach (var property in bodyParameterType.ComposedProperties.Where(p => !p.IsConstant))
+                        foreach (var property in bodyParameterType.ComposedProperties.Where(p => !p.IsConstant && p.Name != null))
                         {
                             var newMethodParameter = new Parameter();
                             newMethodParameter.LoadFrom(property);
+                            bodyParameter.Extensions.ForEach(kv => { newMethodParameter.Extensions[kv.Key] = kv.Value; });
                             method.Parameters.Add(newMethodParameter);
 
                             parameterTransformation.ParameterMappings.Add(new ParameterMapping

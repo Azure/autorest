@@ -349,3 +349,188 @@ class AutoRestResourceFlatteningTestService(object):
             return client_raw_response
 
         return deserialized
+
+    def put_simple_product(
+            self, simple_body_product=None, custom_headers={}, raw=False, **operation_config):
+        """
+        Put Simple Product with client flattening true on the model
+
+        :param simple_body_product: Simple body product to put
+        :type simple_body_product: SimpleProduct
+        :param dict custom_headers: headers that will be added to the request
+        :param boolean raw: returns the direct response alongside the
+         deserialized response
+        :rtype: SimpleProduct
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        """
+        # Construct URL
+        url = '/azure/resource-flatten/customFlattening'
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if custom_headers:
+            header_parameters.update(custom_headers)
+        if self.config.accept_language is not None:
+            header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
+
+        # Construct body
+        if simple_body_product is not None:
+            body_content = self._serialize.body(simple_body_product, 'SimpleProduct')
+        else:
+            body_content = None
+
+        # Construct and send request
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('SimpleProduct', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+
+    def post_flattened_simple_product(
+            self, base_product_id, max_product_display_name, base_product_description=None, odatavalue=None, custom_headers={}, raw=False, **operation_config):
+        """
+        Put Flattened Simple Product with client flattening true on the
+        parameter
+
+        :param base_product_id: Unique identifier representing a specific
+         product for a given latitude & longitude. For example, uberX in San
+         Francisco will have a different product_id than uberX in Los Angeles.
+        :type base_product_id: str
+        :param max_product_display_name: Display name of product.
+        :type max_product_display_name: str
+        :param base_product_description: Description of product.
+        :type base_product_description: str
+        :param odatavalue: URL value.
+        :type odatavalue: str
+        :param dict custom_headers: headers that will be added to the request
+        :param boolean raw: returns the direct response alongside the
+         deserialized response
+        :rtype: SimpleProduct
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        """
+        simple_body_product = models.SimpleProduct(max_product_display_name=max_product_display_name, odatavalue=odatavalue)
+
+        # Construct URL
+        url = '/azure/resource-flatten/customFlattening'
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if custom_headers:
+            header_parameters.update(custom_headers)
+        if self.config.accept_language is not None:
+            header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
+
+        # Construct body
+        if simple_body_product is not None:
+            body_content = self._serialize.body(simple_body_product, 'SimpleProduct')
+        else:
+            body_content = None
+
+        # Construct and send request
+        request = self._client.post(url, query_parameters)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('SimpleProduct', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
+
+    def put_simple_product_with_grouping(
+            self, flatten_parameter_group, custom_headers={}, raw=False, **operation_config):
+        """
+        Put Simple Product with client flattening true on the model
+
+        :param flatten_parameter_group: Additional parameters for the
+         operation
+        :type flatten_parameter_group: FlattenParameterGroup
+        :param dict custom_headers: headers that will be added to the request
+        :param boolean raw: returns the direct response alongside the
+         deserialized response
+        :rtype: SimpleProduct
+        :rtype: msrest.pipeline.ClientRawResponse if raw=True
+        """
+        simple_body_product = None
+        if flatten_parameter_group is not None:
+            simple_body_product = flatten_parameter_group.simple_body_product
+        name = None
+        if flatten_parameter_group is not None:
+            name = flatten_parameter_group.name
+
+        # Construct URL
+        url = '/azure/resource-flatten/customFlattening/parametergrouping/{name}/'
+        path_format_arguments = {
+            'name': self._serialize.url("name", name, 'str')
+        }
+        url = url.format(**path_format_arguments)
+
+        # Construct parameters
+        query_parameters = {}
+
+        # Construct headers
+        header_parameters = {}
+        header_parameters['Content-Type'] = 'application/json; charset=utf-8'
+        if self.config.generate_client_request_id:
+            header_parameters['x-ms-client-request-id'] = str(uuid.uuid1())
+        if custom_headers:
+            header_parameters.update(custom_headers)
+        if self.config.accept_language is not None:
+            header_parameters['accept-language'] = self._serialize.header("self.config.accept_language", self.config.accept_language, 'str')
+
+        # Construct body
+        if simple_body_product is not None:
+            body_content = self._serialize.body(simple_body_product, 'SimpleProduct')
+        else:
+            body_content = None
+
+        # Construct and send request
+        request = self._client.put(url, query_parameters)
+        response = self._client.send(
+            request, header_parameters, body_content, **operation_config)
+
+        if response.status_code not in [200]:
+            raise models.ErrorException(self._deserialize, response)
+
+        deserialized = None
+
+        if response.status_code == 200:
+            deserialized = self._deserialize('SimpleProduct', response)
+
+        if raw:
+            client_raw_response = ClientRawResponse(deserialized, response)
+            return client_raw_response
+
+        return deserialized
