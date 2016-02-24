@@ -1273,6 +1273,11 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                     }
                 };
                 client.Polymorphicrecursive.PutValid(recursiveRequest);
+
+                /* COMPLEX TYPE WITH READ ONLY PROPERTIES TESTS */
+                // PUT /readonlyproperty/valid
+                var o = client.Readonlyproperty.GetValid();
+                client.Readonlyproperty.PutValid(o);
             }
         }
 

@@ -85,6 +85,11 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         public virtual IPolymorphicrecursive Polymorphicrecursive { get; private set; }
 
         /// <summary>
+        /// Gets the IReadonlyproperty.
+        /// </summary>
+        public virtual IReadonlyproperty Readonlyproperty { get; private set; }
+
+        /// <summary>
         /// Initializes a new instance of the AutoRestComplexTestService class.
         /// </summary>
         /// <param name='handlers'>
@@ -160,6 +165,7 @@ namespace Fixtures.AcceptanceTestsBodyComplex
             this.Inheritance = new Inheritance(this);
             this.Polymorphism = new Polymorphism(this);
             this.Polymorphicrecursive = new Polymorphicrecursive(this);
+            this.Readonlyproperty = new Readonlyproperty(this);
             this.BaseUri = new Uri("http://localhost");
             this.ApiVersion = "2014-04-01-preview";
             SerializationSettings = new JsonSerializerSettings
