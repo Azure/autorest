@@ -371,8 +371,6 @@ namespace Microsoft.Rest.Generator
                         };
                         generatedParameterGroups.Add(parameterGroupType);
 
-                        //Populate the parameter group type with properties.
-
                         //Add to the service client
                         serviceClient.ModelTypes.Add(parameterGroupType);
                     }
