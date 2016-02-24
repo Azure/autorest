@@ -1067,7 +1067,6 @@
         "description": "Get complex types that have readonly properties",
         "responses": {
           "200": {
-            "description": "",
             "schema": {
               "$ref": "#/definitions/readonly-obj"
             }
@@ -1087,7 +1086,6 @@
           {
             "name": "complexBody",
             "in": "body",
-            "description": "",
             "schema": {
               "$ref": "#/definitions/readonly-obj"
             },

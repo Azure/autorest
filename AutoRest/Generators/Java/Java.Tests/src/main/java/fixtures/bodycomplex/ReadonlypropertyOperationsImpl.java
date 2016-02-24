@@ -88,7 +88,7 @@ public final class ReadonlypropertyOperationsImpl implements ReadonlypropertyOpe
     /**
      * Put complex types that have readonly properties.
      *
-     * @param complexBody 
+     * @param complexBody the ReadonlyObj value
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
@@ -106,7 +106,7 @@ public final class ReadonlypropertyOperationsImpl implements ReadonlypropertyOpe
     /**
      * Put complex types that have readonly properties.
      *
-     * @param complexBody 
+     * @param complexBody the ReadonlyObj value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
