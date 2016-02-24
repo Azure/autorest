@@ -18,19 +18,19 @@ var models = require('./index');
  * @constructor
  * The URIs that are used to perform a retrieval of a public blob, queue or
  * table object.
- * @member {object} ['bar.Point'] Bar point
+ * @member {object} [barPoint] Bar point
  * 
- * @member {object} ['bar.Point'.recursivePoint] Recursive Endpoints
+ * @member {object} [barPoint.recursivePoint] Recursive Endpoints
  * 
- * @member {string} ['bar.Point'.recursivePoint.blob] Gets the blob endpoint.
+ * @member {string} [barPoint.recursivePoint.blob] Gets the blob endpoint.
  * 
- * @member {string} ['bar.Point'.recursivePoint.queue] Gets the queue endpoint.
+ * @member {string} [barPoint.recursivePoint.queue] Gets the queue endpoint.
  * 
- * @member {string} ['bar.Point'.recursivePoint.table] Gets the table endpoint.
+ * @member {string} [barPoint.recursivePoint.table] Gets the table endpoint.
  * 
- * @member {object} ['bar.Point'.recursivePoint.dummyEndPoint] Dummy EndPoint
+ * @member {object} [barPoint.recursivePoint.dummyEndPoint] Dummy EndPoint
  * 
- * @member {object} ['bar.Point'.recursivePoint.fooPoint] Foo point
+ * @member {object} [barPoint.recursivePoint.fooPoint] Foo point
  * 
  */
 function Foo() {
@@ -50,7 +50,7 @@ Foo.prototype.mapper = function () {
       name: 'Composite',
       className: 'Foo',
       modelProperties: {
-        'bar.Point': {
+        barPoint: {
           required: false,
           serializedName: 'Bar.Point',
           type: {

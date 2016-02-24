@@ -30,7 +30,7 @@ var models = require('./index');
  * 
  * @member {object} [recursivePoint.fooPoint] Foo point
  * 
- * @member {object} [recursivePoint.fooPoint.'bar.Point'] Bar point
+ * @member {object} [recursivePoint.fooPoint.barPoint] Bar point
  * 
  */
 function Bar() {

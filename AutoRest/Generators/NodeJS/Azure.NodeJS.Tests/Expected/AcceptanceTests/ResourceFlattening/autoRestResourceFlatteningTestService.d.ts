@@ -168,7 +168,7 @@ declare class AutoRestResourceFlatteningTestService {
          * @param {string} [options.simpleBodyProduct.maxProductDisplayName] Display
          * name of product.
          * 
-         * @param {string} [options.simpleBodyProduct.'@odata.value'] URL value.
+         * @param {string} [options.simpleBodyProduct.odatavalue] URL value.
          * 
          * @param {string} [options.simpleBodyProduct.baseProductId] Unique identifier
          * representing a specific product for a given latitude & longitude. For
@@ -204,7 +204,7 @@ declare class AutoRestResourceFlatteningTestService {
          * @param {string} [flattenParameterGroup.maxProductDisplayName] Display name
          * of product.
          * 
-         * @param {string} [flattenParameterGroup.'@odata.value'] URL value.
+         * @param {string} [flattenParameterGroup.odatavalue] URL value.
          * 
          * @param {string} [flattenParameterGroup.name] Product name
          * 
@@ -236,7 +236,7 @@ declare class AutoRestResourceFlatteningTestService {
          * @param {string} [flattenParameterGroup.maxProductDisplayName] Display name
          * of product.
          * 
-         * @param {string} [flattenParameterGroup.'@odata.value'] URL value.
+         * @param {string} [flattenParameterGroup.odatavalue] URL value.
          * 
          * @param {string} [flattenParameterGroup.name] Product name
          * 

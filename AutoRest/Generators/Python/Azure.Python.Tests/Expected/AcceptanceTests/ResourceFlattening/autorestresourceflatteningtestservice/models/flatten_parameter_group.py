@@ -28,7 +28,7 @@ class FlattenParameterGroup(Model):
     _attribute_map = {
         'max_product_display_name': {'key': 'details.max_product_display_name', 'type': 'str'},
         'max_product_capacity': {'key': 'details.max_product_capacity', 'type': 'str'},
-        'odatavalue': {'key': 'details.max_product_image.@odata\.value', 'type': 'str'},
+        'odatavalue': {'key': 'details.max_product_image.@odata\\.value', 'type': 'str'},
         'name': {'key': '', 'type': 'str'},
     }
 

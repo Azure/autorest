@@ -101,9 +101,9 @@ export interface StorageAccountCreateParameters extends Resource {
  * 
  * @member {object} [fooPoint] Foo point
  * 
- * @member {object} [fooPoint.'bar.Point'] Bar point
+ * @member {object} [fooPoint.barPoint] Bar point
  * 
- * @member {object} [fooPoint.'bar.Point'.recursivePoint] Recursive Endpoints
+ * @member {object} [fooPoint.barPoint.recursivePoint] Recursive Endpoints
  * 
  */
 export interface Endpoints {
@@ -120,23 +120,23 @@ export interface Endpoints {
  * @constructor
  * The URIs that are used to perform a retrieval of a public blob, queue or
  * table object.
- * @member {object} ['bar.Point'] Bar point
+ * @member {object} [barPoint] Bar point
  * 
- * @member {object} ['bar.Point'.recursivePoint] Recursive Endpoints
+ * @member {object} [barPoint.recursivePoint] Recursive Endpoints
  * 
- * @member {string} ['bar.Point'.recursivePoint.blob] Gets the blob endpoint.
+ * @member {string} [barPoint.recursivePoint.blob] Gets the blob endpoint.
  * 
- * @member {string} ['bar.Point'.recursivePoint.queue] Gets the queue endpoint.
+ * @member {string} [barPoint.recursivePoint.queue] Gets the queue endpoint.
  * 
- * @member {string} ['bar.Point'.recursivePoint.table] Gets the table endpoint.
+ * @member {string} [barPoint.recursivePoint.table] Gets the table endpoint.
  * 
- * @member {object} ['bar.Point'.recursivePoint.dummyEndPoint] Dummy EndPoint
+ * @member {object} [barPoint.recursivePoint.dummyEndPoint] Dummy EndPoint
  * 
- * @member {object} ['bar.Point'.recursivePoint.fooPoint] Foo point
+ * @member {object} [barPoint.recursivePoint.fooPoint] Foo point
  * 
  */
 export interface Foo {
-    'bar.Point'?: Bar;
+    barPoint?: Bar;
 }
 
 /**
@@ -157,7 +157,7 @@ export interface Foo {
  * 
  * @member {object} [recursivePoint.fooPoint] Foo point
  * 
- * @member {object} [recursivePoint.fooPoint.'bar.Point'] Bar point
+ * @member {object} [recursivePoint.fooPoint.barPoint] Bar point
  * 
  */
 export interface Bar {
@@ -210,9 +210,9 @@ export interface CustomDomain {
  * 
  * @member {object} [primaryEndpoints.fooPoint] Foo point
  * 
- * @member {object} [primaryEndpoints.fooPoint.'bar.Point'] Bar point
+ * @member {object} [primaryEndpoints.fooPoint.barPoint] Bar point
  * 
- * @member {object} [primaryEndpoints.fooPoint.'bar.Point'.recursivePoint]
+ * @member {object} [primaryEndpoints.fooPoint.barPoint.recursivePoint]
  * Recursive Endpoints
  * 
  * @member {string} [primaryLocation] Gets the location of the primary for the
@@ -265,9 +265,9 @@ export interface CustomDomain {
  * 
  * @member {object} [secondaryEndpoints.fooPoint] Foo point
  * 
- * @member {object} [secondaryEndpoints.fooPoint.'bar.Point'] Bar point
+ * @member {object} [secondaryEndpoints.fooPoint.barPoint] Bar point
  * 
- * @member {object} [secondaryEndpoints.fooPoint.'bar.Point'.recursivePoint]
+ * @member {object} [secondaryEndpoints.fooPoint.barPoint.recursivePoint]
  * Recursive Endpoints
  * 
  */

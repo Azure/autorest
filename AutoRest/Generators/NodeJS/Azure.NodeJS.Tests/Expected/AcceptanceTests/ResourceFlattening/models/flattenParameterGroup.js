@@ -23,7 +23,7 @@
  * 
  * @member {string} maxProductDisplayName Display name of product.
  * 
- * @member {string} ['@odata.value'] URL value.
+ * @member {string} [odatavalue] URL value.
  * 
  * @member {string} name Product name
  * 
@@ -62,7 +62,7 @@ FlattenParameterGroup.prototype.mapper = function () {
             name: 'String'
           }
         },
-        '@odata.value': {
+        odatavalue: {
           required: false,
           type: {
             name: 'String'

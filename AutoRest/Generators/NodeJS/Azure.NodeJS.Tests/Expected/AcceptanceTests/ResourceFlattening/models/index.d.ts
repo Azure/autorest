@@ -123,12 +123,12 @@ export interface BaseProduct {
  * The product documentation.
  * @member {string} maxProductDisplayName Display name of product.
  * 
- * @member {string} ['@odata.value'] URL value.
+ * @member {string} [odatavalue] URL value.
  * 
  */
 export interface SimpleProduct extends BaseProduct {
     maxProductDisplayName: string;
-    '@odata.value'?: string;
+    odatavalue?: string;
 }
 
 /**
@@ -144,7 +144,7 @@ export interface SimpleProduct extends BaseProduct {
  * 
  * @member {string} maxProductDisplayName Display name of product.
  * 
- * @member {string} ['@odata.value'] URL value.
+ * @member {string} [odatavalue] URL value.
  * 
  * @member {string} name Product name
  * 
@@ -153,6 +153,6 @@ export interface FlattenParameterGroup {
     baseProductId: string;
     baseProductDescription?: string;
     maxProductDisplayName: string;
-    '@odata.value'?: string;
+    odatavalue?: string;
     name: string;
 }

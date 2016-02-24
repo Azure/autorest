@@ -923,7 +923,7 @@ AutoRestResourceFlatteningTestService.prototype.getResourceCollection = function
  * @param {string} [options.simpleBodyProduct.maxProductDisplayName] Display
  * name of product.
  * 
- * @param {string} [options.simpleBodyProduct.'@odata.value'] URL value.
+ * @param {string} [options.simpleBodyProduct.odatavalue] URL value.
  * 
  * @param {string} [options.simpleBodyProduct.baseProductId] Unique identifier
  * representing a specific product for a given latitude & longitude. For
@@ -1091,7 +1091,7 @@ AutoRestResourceFlatteningTestService.prototype.putSimpleProduct = function (opt
  * @param {string} [flattenParameterGroup.maxProductDisplayName] Display name
  * of product.
  * 
- * @param {string} [flattenParameterGroup.'@odata.value'] URL value.
+ * @param {string} [flattenParameterGroup.odatavalue] URL value.
  * 
  * @param {string} [flattenParameterGroup.name] Product name
  * 
@@ -1162,7 +1162,7 @@ AutoRestResourceFlatteningTestService.prototype.postFlattenedSimpleProduct = fun
     }
     if ((flattenParameterGroup !== null && flattenParameterGroup !== undefined))
     {
-      odatavalue = flattenParameterGroup.@odata.value;
+      odatavalue = flattenParameterGroup.odatavalue;
       if (odatavalue !== null && odatavalue !== undefined && typeof odatavalue.valueOf() !== 'string') {
         throw new Error('odatavalue must be of type string.');
       }
@@ -1173,7 +1173,7 @@ AutoRestResourceFlatteningTestService.prototype.postFlattenedSimpleProduct = fun
       simpleBodyProduct.baseProductId = baseProductId;
       simpleBodyProduct.baseProductDescription = baseProductDescription;
       simpleBodyProduct.maxProductDisplayName = maxProductDisplayName;
-      simpleBodyProduct.@odata.value = odatavalue;
+      simpleBodyProduct.odatavalue = odatavalue;
     }
   } catch (error) {
     return callback(error);
@@ -1298,7 +1298,7 @@ AutoRestResourceFlatteningTestService.prototype.postFlattenedSimpleProduct = fun
  * @param {string} [flattenParameterGroup.maxProductDisplayName] Display name
  * of product.
  * 
- * @param {string} [flattenParameterGroup.'@odata.value'] URL value.
+ * @param {string} [flattenParameterGroup.odatavalue] URL value.
  * 
  * @param {string} [flattenParameterGroup.name] Product name
  * 
@@ -1377,7 +1377,7 @@ AutoRestResourceFlatteningTestService.prototype.putSimpleProductWithGrouping = f
     }
     if ((flattenParameterGroup !== null && flattenParameterGroup !== undefined))
     {
-      odatavalue = flattenParameterGroup.@odata.value;
+      odatavalue = flattenParameterGroup.odatavalue;
       if (odatavalue !== null && odatavalue !== undefined && typeof odatavalue.valueOf() !== 'string') {
         throw new Error('odatavalue must be of type string.');
       }
@@ -1388,7 +1388,7 @@ AutoRestResourceFlatteningTestService.prototype.putSimpleProductWithGrouping = f
       simpleBodyProduct.baseProductId = baseProductId;
       simpleBodyProduct.baseProductDescription = baseProductDescription;
       simpleBodyProduct.maxProductDisplayName = maxProductDisplayName;
-      simpleBodyProduct.@odata.value = odatavalue;
+      simpleBodyProduct.odatavalue = odatavalue;
     }
   } catch (error) {
     return callback(error);

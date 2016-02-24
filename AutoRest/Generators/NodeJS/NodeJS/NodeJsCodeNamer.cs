@@ -101,7 +101,7 @@ namespace Microsoft.Rest.Generator.NodeJS
 
         public override string GetPropertyName(string name)
         {
-            return CamelCase(name);
+            return CamelCase(RemoveInvalidCharacters(name));
         }
 
         public override string GetMethodName(string name)
@@ -273,6 +273,10 @@ namespace Microsoft.Rest.Generator.NodeJS
             foreach (var property in compositeType.Properties)
             {
                 property.Name = GetPropertyName(property.Name);
+                if (property.SerializedName != null)
+                {
+                    property.SerializedName = property.SerializedName.Replace("\\", "\\\\");
+                }
                 property.Type = NormalizeTypeReference(property.Type);
             }
 

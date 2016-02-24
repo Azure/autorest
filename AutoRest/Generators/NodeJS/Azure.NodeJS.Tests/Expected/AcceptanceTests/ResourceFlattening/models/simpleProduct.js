@@ -21,7 +21,7 @@ var util = require('util');
  * The product documentation.
  * @member {string} maxProductDisplayName Display name of product.
  * 
- * @member {string} ['@odata.value'] URL value.
+ * @member {string} [odatavalue] URL value.
  * 
  */
 function SimpleProduct() {
@@ -75,9 +75,9 @@ SimpleProduct.prototype.mapper = function () {
             name: 'String'
           }
         },
-        '@odata.value': {
+        odatavalue: {
           required: false,
-          serializedName: 'details.max_product_image.@odata\.value',
+          serializedName: 'details.max_product_image.@odata\\.value',
           type: {
             name: 'String'
           }
