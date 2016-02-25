@@ -1,15 +1,10 @@
 package fixtures.bodycomplex;
 
-import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.ReadonlyObj;
-import okhttp3.logging.HttpLoggingInterceptor;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.lang.reflect.Field;
-
-public class ReadonlypropertyTest {
+public class ReadonlypropertyTests {
     private static AutoRestComplexTestService client;
 
     @BeforeClass
