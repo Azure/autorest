@@ -19,6 +19,8 @@ import fixtures.custombaseuri.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -41,6 +43,17 @@ public final class PathsOperationsImpl implements PathsOperations {
     public PathsOperationsImpl(Retrofit retrofit, AutoRestParameterizedHostTestClient client) {
         this.service = retrofit.create(PathsService.class);
         this.client = client;
+    }
+
+    /**
+     * The interface defining all the services for PathsOperations to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface PathsService {
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("customuri")
+        Call<ResponseBody> getEmpty();
+
     }
 
     /**

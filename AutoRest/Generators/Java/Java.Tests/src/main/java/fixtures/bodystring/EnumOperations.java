@@ -17,30 +17,12 @@ import fixtures.bodystring.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.PUT;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in EnumOperations.
  */
 public interface EnumOperations {
-    /**
-     * The interface defining all the services for EnumOperations to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface EnumService {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("string/enum/notExpandable")
-        Call<ResponseBody> getNotExpandable();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("string/enum/notExpandable")
-        Call<ResponseBody> putNotExpandable(@Body Colors stringBody);
-
-    }
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *

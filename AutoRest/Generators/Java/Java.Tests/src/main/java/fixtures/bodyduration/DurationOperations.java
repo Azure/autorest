@@ -17,38 +17,12 @@ import java.io.IOException;
 import okhttp3.ResponseBody;
 import org.joda.time.Period;
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.PUT;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in DurationOperations.
  */
 public interface DurationOperations {
-    /**
-     * The interface defining all the services for DurationOperations to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface DurationService {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("duration/null")
-        Call<ResponseBody> getNull();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("duration/positiveduration")
-        Call<ResponseBody> putPositiveDuration(@Body Period durationBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("duration/positiveduration")
-        Call<ResponseBody> getPositiveDuration();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("duration/invalid")
-        Call<ResponseBody> getInvalid();
-
-    }
     /**
      * Get null duration value.
      *

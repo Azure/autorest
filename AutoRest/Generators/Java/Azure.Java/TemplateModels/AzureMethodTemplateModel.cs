@@ -451,12 +451,6 @@ namespace Microsoft.Rest.Generator.Java.Azure
             get
             {
                 var imports = base.InterfaceImports;
-                if (this.IsPagingNextOperation)
-                {
-                    imports.Remove("retrofit2.http.Path");
-                    imports.Add("retrofit2.http.Url");
-                }
-
                 if (this.IsPagingOperation || this.IsPagingNextOperation)
                 {
                     imports.Remove("com.microsoft.rest.ServiceCallback");
@@ -491,7 +485,11 @@ namespace Microsoft.Rest.Generator.Java.Azure
                     imports.Add("com.microsoft.azure.ListOperationCallback");
                     imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportFrom(ServiceClient.Namespace));
                 }
-
+                if (this.IsPagingNextOperation)
+                {
+                    imports.Remove("retrofit2.http.Path");
+                    imports.Add("retrofit2.http.Url");
+                }
                 if (this.IsPagingNonPollingOperation)
                 {
                     imports.AddRange(new CompositeType { Name = "PageImpl" }.ImportFrom(ServiceClient.Namespace));

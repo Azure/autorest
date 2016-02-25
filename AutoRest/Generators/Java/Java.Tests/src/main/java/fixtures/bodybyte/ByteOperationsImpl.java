@@ -19,6 +19,10 @@ import fixtures.bodybyte.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.PUT;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -41,6 +45,33 @@ public final class ByteOperationsImpl implements ByteOperations {
     public ByteOperationsImpl(Retrofit retrofit, AutoRestSwaggerBATByteService client) {
         this.service = retrofit.create(ByteService.class);
         this.client = client;
+    }
+
+    /**
+     * The interface defining all the services for ByteOperations to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface ByteService {
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("byte/null")
+        Call<ResponseBody> getNull();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("byte/empty")
+        Call<ResponseBody> getEmpty();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("byte/nonAscii")
+        Call<ResponseBody> getNonAscii();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("byte/nonAscii")
+        Call<ResponseBody> putNonAscii(@Body byte[] byteBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("byte/invalid")
+        Call<ResponseBody> getInvalid();
+
     }
 
     /**

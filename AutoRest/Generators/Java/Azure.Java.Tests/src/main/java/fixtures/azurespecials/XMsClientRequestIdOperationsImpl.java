@@ -20,6 +20,9 @@ import fixtures.azurespecials.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -42,6 +45,21 @@ public final class XMsClientRequestIdOperationsImpl implements XMsClientRequestI
     public XMsClientRequestIdOperationsImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClient client) {
         this.service = retrofit.create(XMsClientRequestIdService.class);
         this.client = client;
+    }
+
+    /**
+     * The interface defining all the services for XMsClientRequestIdOperations to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface XMsClientRequestIdService {
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("azurespecials/overwrite/x-ms-client-request-id/method/")
+        Call<ResponseBody> get(@Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("azurespecials/overwrite/x-ms-client-request-id/via-param/method/")
+        Call<ResponseBody> paramGet(@Header("x-ms-client-request-id") String xMsClientRequestId, @Header("accept-language") String acceptLanguage);
+
     }
 
     /**

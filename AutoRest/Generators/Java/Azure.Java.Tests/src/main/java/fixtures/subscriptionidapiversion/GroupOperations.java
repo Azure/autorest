@@ -17,27 +17,12 @@ import fixtures.subscriptionidapiversion.models.SampleResourceGroup;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Header;
-import retrofit2.http.Headers;
-import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in GroupOperations.
  */
 public interface GroupOperations {
-    /**
-     * The interface defining all the services for GroupOperations to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface GroupService {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}")
-        Call<ResponseBody> getSampleResourceGroup(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
-
-    }
     /**
      * Provides a resouce group with name 'testgroup101' and location 'West US'.
      *

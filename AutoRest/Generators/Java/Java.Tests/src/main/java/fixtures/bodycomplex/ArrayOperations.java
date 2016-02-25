@@ -17,42 +17,12 @@ import fixtures.bodycomplex.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.PUT;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in ArrayOperations.
  */
 public interface ArrayOperations {
-    /**
-     * The interface defining all the services for ArrayOperations to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface ArrayService {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("complex/array/valid")
-        Call<ResponseBody> getValid();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("complex/array/valid")
-        Call<ResponseBody> putValid(@Body ArrayWrapper complexBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("complex/array/empty")
-        Call<ResponseBody> getEmpty();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("complex/array/empty")
-        Call<ResponseBody> putEmpty(@Body ArrayWrapper complexBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("complex/array/notprovided")
-        Call<ResponseBody> getNotProvided();
-
-    }
     /**
      * Get complex types with array property.
      *

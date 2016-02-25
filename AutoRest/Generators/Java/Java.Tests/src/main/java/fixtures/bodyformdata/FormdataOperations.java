@@ -17,30 +17,12 @@ import java.io.InputStream;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.Headers;
-import retrofit2.http.POST;
-import retrofit2.http.PUT;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in FormdataOperations.
  */
 public interface FormdataOperations {
-    /**
-     * The interface defining all the services for FormdataOperations to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface FormdataService {
-        @Headers("Content-Type: multipart/form-data")
-        @POST("formdata/stream/uploadfile")
-        Call<ResponseBody> uploadFile(InputStream fileContent, String fileName);
-
-        @Headers("Content-Type: application/octet-stream")
-        @PUT("formdata/stream/uploadfile")
-        Call<ResponseBody> uploadFileViaBody(@Body InputStream fileContent, String fileName);
-
-    }
     /**
      * Upload file.
      *

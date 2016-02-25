@@ -16,38 +16,12 @@ import fixtures.azurespecials.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Header;
-import retrofit2.http.Headers;
-import retrofit2.http.Query;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in ApiVersionLocalOperations.
  */
 public interface ApiVersionLocalOperations {
-    /**
-     * The interface defining all the services for ApiVersionLocalOperations to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface ApiVersionLocalService {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("azurespecials/apiVersion/method/string/none/query/local/2.0")
-        Call<ResponseBody> getMethodLocalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("azurespecials/apiVersion/method/string/none/query/local/null")
-        Call<ResponseBody> getMethodLocalNull(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("azurespecials/apiVersion/path/string/none/query/local/2.0")
-        Call<ResponseBody> getPathLocalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("azurespecials/apiVersion/swagger/string/none/query/local/2.0")
-        Call<ResponseBody> getSwaggerLocalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
-
-    }
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      *

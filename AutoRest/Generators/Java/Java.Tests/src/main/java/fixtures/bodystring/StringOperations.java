@@ -16,58 +16,12 @@ import fixtures.bodystring.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.PUT;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in StringOperations.
  */
 public interface StringOperations {
-    /**
-     * The interface defining all the services for StringOperations to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface StringService {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("string/null")
-        Call<ResponseBody> getNull();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("string/null")
-        Call<ResponseBody> putNull(@Body String stringBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("string/empty")
-        Call<ResponseBody> getEmpty();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("string/empty")
-        Call<ResponseBody> putEmpty(@Body String stringBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("string/mbcs")
-        Call<ResponseBody> getMbcs();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("string/mbcs")
-        Call<ResponseBody> putMbcs(@Body String stringBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("string/whitespace")
-        Call<ResponseBody> getWhitespace();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("string/whitespace")
-        Call<ResponseBody> putWhitespace(@Body String stringBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("string/notProvided")
-        Call<ResponseBody> getNotProvided();
-
-    }
     /**
      * Get null string value value.
      *

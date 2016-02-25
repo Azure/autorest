@@ -27,11 +27,6 @@ import okhttp3.Interceptor;
 import okhttp3.logging.HttpLoggingInterceptor.Level;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.Header;
-import retrofit2.http.Headers;
-import retrofit2.http.PUT;
 
 /**
  * The interface for AutoRestResourceFlatteningTestService class.
@@ -119,37 +114,6 @@ public interface AutoRestResourceFlatteningTestService {
      * @param generateClientRequestId the generateClientRequestId value.
      */
     void setGenerateClientRequestId(boolean generateClientRequestId);
-
-    /**
-     * The interface defining all the services for AutoRestResourceFlatteningTestService to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface AutoRestResourceFlatteningTestServiceService {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("azure/resource-flatten/array")
-        Call<ResponseBody> putArray(@Body List<Resource> resourceArray, @Header("accept-language") String acceptLanguage);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("azure/resource-flatten/array")
-        Call<ResponseBody> getArray(@Header("accept-language") String acceptLanguage);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("azure/resource-flatten/dictionary")
-        Call<ResponseBody> putDictionary(@Body Map<String, FlattenedProduct> resourceDictionary, @Header("accept-language") String acceptLanguage);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("azure/resource-flatten/dictionary")
-        Call<ResponseBody> getDictionary(@Header("accept-language") String acceptLanguage);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("azure/resource-flatten/resourcecollection")
-        Call<ResponseBody> putResourceCollection(@Body ResourceCollection resourceComplexObject, @Header("accept-language") String acceptLanguage);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("azure/resource-flatten/resourcecollection")
-        Call<ResponseBody> getResourceCollection(@Header("accept-language") String acceptLanguage);
-
-    }
 
     /**
      * Put External Resource as an Array.

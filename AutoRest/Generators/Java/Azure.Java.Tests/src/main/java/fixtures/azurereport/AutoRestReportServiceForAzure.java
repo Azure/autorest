@@ -24,9 +24,6 @@ import okhttp3.Interceptor;
 import okhttp3.logging.HttpLoggingInterceptor.Level;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Header;
-import retrofit2.http.Headers;
 
 /**
  * The interface for AutoRestReportServiceForAzure class.
@@ -114,17 +111,6 @@ public interface AutoRestReportServiceForAzure {
      * @param generateClientRequestId the generateClientRequestId value.
      */
     void setGenerateClientRequestId(boolean generateClientRequestId);
-
-    /**
-     * The interface defining all the services for AutoRestReportServiceForAzure to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface AutoRestReportServiceForAzureService {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("report/azure")
-        Call<ResponseBody> getReport(@Header("accept-language") String acceptLanguage);
-
-    }
 
     /**
      * Get test coverage report.

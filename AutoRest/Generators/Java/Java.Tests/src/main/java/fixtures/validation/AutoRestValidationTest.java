@@ -23,13 +23,6 @@ import fixtures.validation.models.Product;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.Path;
-import retrofit2.http.POST;
-import retrofit2.http.PUT;
-import retrofit2.http.Query;
 
 /**
  * The interface for AutoRestValidationTest class.
@@ -91,29 +84,6 @@ public interface AutoRestValidationTest {
      * @param apiVersion the apiVersion value.
      */
     void setApiVersion(String apiVersion);
-
-    /**
-     * The interface defining all the services for AutoRestValidationTest to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface AutoRestValidationTestService {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("fakepath/{subscriptionId}/{resourceGroupName}/{id}")
-        Call<ResponseBody> validationOfMethodParameters(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("id") int id, @Query("apiVersion") String apiVersion);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("fakepath/{subscriptionId}/{resourceGroupName}/{id}")
-        Call<ResponseBody> validationOfBody(@Path("subscriptionId") String subscriptionId, @Path("resourceGroupName") String resourceGroupName, @Path("id") int id, @Body Product body, @Query("apiVersion") String apiVersion);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("validation/constantsInPath/{constantParam}/value")
-        Call<ResponseBody> getWithConstantInPath(@Path("constantParam") String constantParam);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("validation/constantsInPath/{constantParam}/value")
-        Call<ResponseBody> postWithConstantInBody(@Path("constantParam") String constantParam, @Body Product body);
-
-    }
 
     /**
      * Validates input parameters on the method. See swagger for details.

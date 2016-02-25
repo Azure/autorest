@@ -16,62 +16,12 @@ import fixtures.bodyinteger.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.PUT;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in IntOperations.
  */
 public interface IntOperations {
-    /**
-     * The interface defining all the services for IntOperations to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface IntService {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("int/null")
-        Call<ResponseBody> getNull();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("int/invalid")
-        Call<ResponseBody> getInvalid();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("int/overflowint32")
-        Call<ResponseBody> getOverflowInt32();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("int/underflowint32")
-        Call<ResponseBody> getUnderflowInt32();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("int/overflowint64")
-        Call<ResponseBody> getOverflowInt64();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("int/underflowint64")
-        Call<ResponseBody> getUnderflowInt64();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("int/max/32")
-        Call<ResponseBody> putMax32(@Body int intBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("int/max/64")
-        Call<ResponseBody> putMax64(@Body long intBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("int/min/32")
-        Call<ResponseBody> putMin32(@Body int intBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("int/min/64")
-        Call<ResponseBody> putMin64(@Body long intBody);
-
-    }
     /**
      * Get null Int value.
      *

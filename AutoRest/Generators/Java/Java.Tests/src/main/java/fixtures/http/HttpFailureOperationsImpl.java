@@ -19,6 +19,8 @@ import fixtures.http.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -41,6 +43,17 @@ public final class HttpFailureOperationsImpl implements HttpFailureOperations {
     public HttpFailureOperationsImpl(Retrofit retrofit, AutoRestHttpInfrastructureTestService client) {
         this.service = retrofit.create(HttpFailureService.class);
         this.client = client;
+    }
+
+    /**
+     * The interface defining all the services for HttpFailureOperations to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface HttpFailureService {
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/failure/emptybody/error")
+        Call<ResponseBody> getEmptyError();
+
     }
 
     /**

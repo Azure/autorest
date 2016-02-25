@@ -16,38 +16,12 @@ import fixtures.azurespecials.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Header;
-import retrofit2.http.Headers;
-import retrofit2.http.Query;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in ApiVersionDefaultOperations.
  */
 public interface ApiVersionDefaultOperations {
-    /**
-     * The interface defining all the services for ApiVersionDefaultOperations to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface ApiVersionDefaultService {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("azurespecials/apiVersion/method/string/none/query/global/2015-07-01-preview")
-        Call<ResponseBody> getMethodGlobalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("azurespecials/apiVersion/method/string/none/query/globalNotProvided/2015-07-01-preview")
-        Call<ResponseBody> getMethodGlobalNotProvidedValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("azurespecials/apiVersion/path/string/none/query/global/2015-07-01-preview")
-        Call<ResponseBody> getPathGlobalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("azurespecials/apiVersion/swagger/string/none/query/global/2015-07-01-preview")
-        Call<ResponseBody> getSwaggerGlobalValid(@Query("api-version") String apiVersion, @Header("accept-language") String acceptLanguage);
-
-    }
     /**
      * GET method with api-version modeled in global settings.
      *

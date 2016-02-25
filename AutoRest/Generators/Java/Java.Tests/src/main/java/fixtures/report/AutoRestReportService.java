@@ -22,8 +22,6 @@ import java.io.IOException;
 import java.util.Map;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
 
 /**
  * The interface for AutoRestReportService class.
@@ -57,17 +55,6 @@ public interface AutoRestReportService {
      * @return the adapter.
      */
     JacksonMapperAdapter getMapperAdapter();
-
-    /**
-     * The interface defining all the services for AutoRestReportService to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface AutoRestReportServiceService {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("report")
-        Call<ResponseBody> getReport();
-
-    }
 
     /**
      * Get test coverage report.

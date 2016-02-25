@@ -16,46 +16,12 @@ import fixtures.bodyboolean.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.PUT;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in BoolOperations.
  */
 public interface BoolOperations {
-    /**
-     * The interface defining all the services for BoolOperations to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface BoolService {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("bool/true")
-        Call<ResponseBody> getTrue();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("bool/true")
-        Call<ResponseBody> putTrue(@Body boolean boolBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("bool/false")
-        Call<ResponseBody> getFalse();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("bool/false")
-        Call<ResponseBody> putFalse(@Body boolean boolBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("bool/null")
-        Call<ResponseBody> getNull();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("bool/invalid")
-        Call<ResponseBody> getInvalid();
-
-    }
     /**
      * Get true Boolean value.
      *

@@ -20,6 +20,10 @@ import java.io.IOException;
 import okhttp3.ResponseBody;
 import org.joda.time.DateTime;
 import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.PUT;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -42,6 +46,89 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
     public DatetimeOperationsImpl(Retrofit retrofit, AutoRestDateTimeTestService client) {
         this.service = retrofit.create(DatetimeService.class);
         this.client = client;
+    }
+
+    /**
+     * The interface defining all the services for DatetimeOperations to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface DatetimeService {
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("datetime/null")
+        Call<ResponseBody> getNull();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("datetime/invalid")
+        Call<ResponseBody> getInvalid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("datetime/overflow")
+        Call<ResponseBody> getOverflow();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("datetime/underflow")
+        Call<ResponseBody> getUnderflow();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("datetime/max/utc")
+        Call<ResponseBody> putUtcMaxDateTime(@Body DateTime datetimeBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("datetime/max/utc/lowercase")
+        Call<ResponseBody> getUtcLowercaseMaxDateTime();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("datetime/max/utc/uppercase")
+        Call<ResponseBody> getUtcUppercaseMaxDateTime();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("datetime/max/localpositiveoffset")
+        Call<ResponseBody> putLocalPositiveOffsetMaxDateTime(@Body DateTime datetimeBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("datetime/max/localpositiveoffset/lowercase")
+        Call<ResponseBody> getLocalPositiveOffsetLowercaseMaxDateTime();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("datetime/max/localpositiveoffset/uppercase")
+        Call<ResponseBody> getLocalPositiveOffsetUppercaseMaxDateTime();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("datetime/max/localnegativeoffset")
+        Call<ResponseBody> putLocalNegativeOffsetMaxDateTime(@Body DateTime datetimeBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("datetime/max/localnegativeoffset/uppercase")
+        Call<ResponseBody> getLocalNegativeOffsetUppercaseMaxDateTime();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("datetime/max/localnegativeoffset/lowercase")
+        Call<ResponseBody> getLocalNegativeOffsetLowercaseMaxDateTime();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("datetime/min/utc")
+        Call<ResponseBody> putUtcMinDateTime(@Body DateTime datetimeBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("datetime/min/utc")
+        Call<ResponseBody> getUtcMinDateTime();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("datetime/min/localpositiveoffset")
+        Call<ResponseBody> putLocalPositiveOffsetMinDateTime(@Body DateTime datetimeBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("datetime/min/localpositiveoffset")
+        Call<ResponseBody> getLocalPositiveOffsetMinDateTime();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("datetime/min/localnegativeoffset")
+        Call<ResponseBody> putLocalNegativeOffsetMinDateTime(@Body DateTime datetimeBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("datetime/min/localnegativeoffset")
+        Call<ResponseBody> getLocalNegativeOffsetMinDateTime();
+
     }
 
     /**

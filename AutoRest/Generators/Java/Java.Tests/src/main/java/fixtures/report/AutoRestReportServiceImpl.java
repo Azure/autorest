@@ -25,6 +25,8 @@ import java.io.IOException;
 import java.util.Map;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.Response;
 
 /**
@@ -102,6 +104,17 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
     public void setLogLevel(Level logLevel) {
         super.setLogLevel(logLevel);
         initializeService();
+    }
+
+    /**
+     * The interface defining all the services for AutoRestReportService to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface AutoRestReportServiceService {
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("report")
+        Call<ResponseBody> getReport();
+
     }
 
     /**

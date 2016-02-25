@@ -16,25 +16,12 @@ import fixtures.custombaseuri.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Header;
-import retrofit2.http.Headers;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in PathsOperations.
  */
 public interface PathsOperations {
-    /**
-     * The interface defining all the services for PathsOperations to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface PathsService {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("customuri")
-        Call<ResponseBody> getEmpty(@Header("accept-language") String acceptLanguage);
-
-    }
     /**
      * Get a 200 to test a valid base uri.
      *

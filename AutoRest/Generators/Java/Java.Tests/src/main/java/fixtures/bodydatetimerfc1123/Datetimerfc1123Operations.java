@@ -17,58 +17,12 @@ import fixtures.bodydatetimerfc1123.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.PUT;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in Datetimerfc1123Operations.
  */
 public interface Datetimerfc1123Operations {
-    /**
-     * The interface defining all the services for Datetimerfc1123Operations to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface Datetimerfc1123Service {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("datetimerfc1123/null")
-        Call<ResponseBody> getNull();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("datetimerfc1123/invalid")
-        Call<ResponseBody> getInvalid();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("datetimerfc1123/overflow")
-        Call<ResponseBody> getOverflow();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("datetimerfc1123/underflow")
-        Call<ResponseBody> getUnderflow();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("datetimerfc1123/max")
-        Call<ResponseBody> putUtcMaxDateTime(@Body DateTimeRfc1123 datetimeBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("datetimerfc1123/max/lowercase")
-        Call<ResponseBody> getUtcLowercaseMaxDateTime();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("datetimerfc1123/max/uppercase")
-        Call<ResponseBody> getUtcUppercaseMaxDateTime();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("datetimerfc1123/min")
-        Call<ResponseBody> putUtcMinDateTime(@Body DateTimeRfc1123 datetimeBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("datetimerfc1123/min")
-        Call<ResponseBody> getUtcMinDateTime();
-
-    }
     /**
      * Get null datetime value.
      *

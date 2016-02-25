@@ -20,6 +20,14 @@ import fixtures.http.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.HEAD;
+import retrofit2.http.Headers;
+import retrofit2.http.HTTP;
+import retrofit2.http.PATCH;
+import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -42,6 +50,85 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
     public HttpSuccessOperationsImpl(Retrofit retrofit, AutoRestHttpInfrastructureTestService client) {
         this.service = retrofit.create(HttpSuccessService.class);
         this.client = client;
+    }
+
+    /**
+     * The interface defining all the services for HttpSuccessOperations to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface HttpSuccessService {
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HEAD("http/success/200")
+        Call<Void> head200();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/success/200")
+        Call<ResponseBody> get200();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("http/success/200")
+        Call<ResponseBody> put200(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PATCH("http/success/200")
+        Call<ResponseBody> patch200(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("http/success/200")
+        Call<ResponseBody> post200(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "http/success/200", method = "DELETE", hasBody = true)
+        Call<ResponseBody> delete200(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("http/success/201")
+        Call<ResponseBody> put201(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("http/success/201")
+        Call<ResponseBody> post201(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("http/success/202")
+        Call<ResponseBody> put202(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PATCH("http/success/202")
+        Call<ResponseBody> patch202(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("http/success/202")
+        Call<ResponseBody> post202(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "http/success/202", method = "DELETE", hasBody = true)
+        Call<ResponseBody> delete202(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HEAD("http/success/204")
+        Call<Void> head204();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("http/success/204")
+        Call<ResponseBody> put204(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PATCH("http/success/204")
+        Call<ResponseBody> patch204(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("http/success/204")
+        Call<ResponseBody> post204(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "http/success/204", method = "DELETE", hasBody = true)
+        Call<ResponseBody> delete204(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HEAD("http/success/404")
+        Call<Void> head404();
+
     }
 
     /**

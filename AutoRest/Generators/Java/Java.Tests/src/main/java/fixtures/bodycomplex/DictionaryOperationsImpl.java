@@ -21,6 +21,10 @@ import fixtures.bodycomplex.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.PUT;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -43,6 +47,37 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
     public DictionaryOperationsImpl(Retrofit retrofit, AutoRestComplexTestService client) {
         this.service = retrofit.create(DictionaryService.class);
         this.client = client;
+    }
+
+    /**
+     * The interface defining all the services for DictionaryOperations to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface DictionaryService {
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/dictionary/typed/valid")
+        Call<ResponseBody> getValid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("complex/dictionary/typed/valid")
+        Call<ResponseBody> putValid(@Body DictionaryWrapper complexBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/dictionary/typed/empty")
+        Call<ResponseBody> getEmpty();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("complex/dictionary/typed/empty")
+        Call<ResponseBody> putEmpty(@Body DictionaryWrapper complexBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/dictionary/typed/null")
+        Call<ResponseBody> getNull();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/dictionary/typed/notprovided")
+        Call<ResponseBody> getNotProvided();
+
     }
 
     /**

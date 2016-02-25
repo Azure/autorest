@@ -20,6 +20,14 @@ import fixtures.http.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.HEAD;
+import retrofit2.http.Headers;
+import retrofit2.http.HTTP;
+import retrofit2.http.PATCH;
+import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -42,6 +50,45 @@ public final class HttpRetryOperationsImpl implements HttpRetryOperations {
     public HttpRetryOperationsImpl(Retrofit retrofit, AutoRestHttpInfrastructureTestService client) {
         this.service = retrofit.create(HttpRetryService.class);
         this.client = client;
+    }
+
+    /**
+     * The interface defining all the services for HttpRetryOperations to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface HttpRetryService {
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HEAD("http/retry/408")
+        Call<Void> head408();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("http/retry/500")
+        Call<ResponseBody> put500(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PATCH("http/retry/500")
+        Call<ResponseBody> patch500(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/retry/502")
+        Call<ResponseBody> get502();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("http/retry/503")
+        Call<ResponseBody> post503(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "http/retry/503", method = "DELETE", hasBody = true)
+        Call<ResponseBody> delete503(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("http/retry/504")
+        Call<ResponseBody> put504(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PATCH("http/retry/504")
+        Call<ResponseBody> patch504(@Body Boolean booleanValue);
+
     }
 
     /**

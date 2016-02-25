@@ -48,6 +48,12 @@ import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.http.Body;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
+import retrofit2.http.HTTP;
+import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -70,6 +76,301 @@ public final class LROsOperationsImpl implements LROsOperations {
     public LROsOperationsImpl(Retrofit retrofit, AutoRestLongRunningOperationTestService client) {
         this.service = retrofit.create(LROsService.class);
         this.client = client;
+    }
+
+    /**
+     * The interface defining all the services for LROsOperations to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface LROsService {
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/put/200/succeeded")
+        Call<ResponseBody> put200Succeeded(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/put/200/succeeded")
+        Call<ResponseBody> beginPut200Succeeded(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/put/200/succeeded/nostate")
+        Call<ResponseBody> put200SucceededNoState(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/put/200/succeeded/nostate")
+        Call<ResponseBody> beginPut200SucceededNoState(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/put/202/retry/200")
+        Call<ResponseBody> put202Retry200(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/put/202/retry/200")
+        Call<ResponseBody> beginPut202Retry200(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/put/201/creating/succeeded/200")
+        Call<ResponseBody> put201CreatingSucceeded200(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/put/201/creating/succeeded/200")
+        Call<ResponseBody> beginPut201CreatingSucceeded200(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/put/200/updating/succeeded/200")
+        Call<ResponseBody> put200UpdatingSucceeded204(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/put/200/updating/succeeded/200")
+        Call<ResponseBody> beginPut200UpdatingSucceeded204(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/put/201/created/failed/200")
+        Call<ResponseBody> put201CreatingFailed200(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/put/201/created/failed/200")
+        Call<ResponseBody> beginPut201CreatingFailed200(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/put/200/accepted/canceled/200")
+        Call<ResponseBody> put200Acceptedcanceled200(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/put/200/accepted/canceled/200")
+        Call<ResponseBody> beginPut200Acceptedcanceled200(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/put/noheader/202/200")
+        Call<ResponseBody> putNoHeaderInRetry(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/put/noheader/202/200")
+        Call<ResponseBody> beginPutNoHeaderInRetry(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/putasync/retry/succeeded")
+        Call<ResponseBody> putAsyncRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/putasync/retry/succeeded")
+        Call<ResponseBody> beginPutAsyncRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/putasync/noretry/succeeded")
+        Call<ResponseBody> putAsyncNoRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/putasync/noretry/succeeded")
+        Call<ResponseBody> beginPutAsyncNoRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/putasync/retry/failed")
+        Call<ResponseBody> putAsyncRetryFailed(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/putasync/retry/failed")
+        Call<ResponseBody> beginPutAsyncRetryFailed(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/putasync/noretry/canceled")
+        Call<ResponseBody> putAsyncNoRetrycanceled(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/putasync/noretry/canceled")
+        Call<ResponseBody> beginPutAsyncNoRetrycanceled(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/putasync/noheader/201/200")
+        Call<ResponseBody> putAsyncNoHeaderInRetry(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/putasync/noheader/201/200")
+        Call<ResponseBody> beginPutAsyncNoHeaderInRetry(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/putnonresource/202/200")
+        Call<ResponseBody> putNonResource(@Body Sku sku, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/putnonresource/202/200")
+        Call<ResponseBody> beginPutNonResource(@Body Sku sku, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/putnonresourceasync/202/200")
+        Call<ResponseBody> putAsyncNonResource(@Body Sku sku, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/putnonresourceasync/202/200")
+        Call<ResponseBody> beginPutAsyncNonResource(@Body Sku sku, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/putsubresource/202/200")
+        Call<ResponseBody> putSubResource(@Body SubProduct product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/putsubresource/202/200")
+        Call<ResponseBody> beginPutSubResource(@Body SubProduct product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/putsubresourceasync/202/200")
+        Call<ResponseBody> putAsyncSubResource(@Body SubProduct product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/putsubresourceasync/202/200")
+        Call<ResponseBody> beginPutAsyncSubResource(@Body SubProduct product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "lro/delete/provisioning/202/accepted/200/succeeded", method = "DELETE", hasBody = true)
+        Call<ResponseBody> deleteProvisioning202Accepted200Succeeded(@Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "lro/delete/provisioning/202/accepted/200/succeeded", method = "DELETE", hasBody = true)
+        Call<ResponseBody> beginDeleteProvisioning202Accepted200Succeeded(@Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "lro/delete/provisioning/202/deleting/200/failed", method = "DELETE", hasBody = true)
+        Call<ResponseBody> deleteProvisioning202DeletingFailed200(@Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "lro/delete/provisioning/202/deleting/200/failed", method = "DELETE", hasBody = true)
+        Call<ResponseBody> beginDeleteProvisioning202DeletingFailed200(@Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "lro/delete/provisioning/202/deleting/200/canceled", method = "DELETE", hasBody = true)
+        Call<ResponseBody> deleteProvisioning202Deletingcanceled200(@Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "lro/delete/provisioning/202/deleting/200/canceled", method = "DELETE", hasBody = true)
+        Call<ResponseBody> beginDeleteProvisioning202Deletingcanceled200(@Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "lro/delete/204/succeeded", method = "DELETE", hasBody = true)
+        Call<ResponseBody> delete204Succeeded(@Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "lro/delete/204/succeeded", method = "DELETE", hasBody = true)
+        Call<ResponseBody> beginDelete204Succeeded(@Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "lro/delete/202/retry/200", method = "DELETE", hasBody = true)
+        Call<ResponseBody> delete202Retry200(@Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "lro/delete/202/retry/200", method = "DELETE", hasBody = true)
+        Call<ResponseBody> beginDelete202Retry200(@Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "lro/delete/202/noretry/204", method = "DELETE", hasBody = true)
+        Call<ResponseBody> delete202NoRetry204(@Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "lro/delete/202/noretry/204", method = "DELETE", hasBody = true)
+        Call<ResponseBody> beginDelete202NoRetry204(@Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "lro/delete/noheader", method = "DELETE", hasBody = true)
+        Call<ResponseBody> deleteNoHeaderInRetry(@Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "lro/delete/noheader", method = "DELETE", hasBody = true)
+        Call<ResponseBody> beginDeleteNoHeaderInRetry(@Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "lro/deleteasync/noheader/202/204", method = "DELETE", hasBody = true)
+        Call<ResponseBody> deleteAsyncNoHeaderInRetry(@Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "lro/deleteasync/noheader/202/204", method = "DELETE", hasBody = true)
+        Call<ResponseBody> beginDeleteAsyncNoHeaderInRetry(@Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "lro/deleteasync/retry/succeeded", method = "DELETE", hasBody = true)
+        Call<ResponseBody> deleteAsyncRetrySucceeded(@Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "lro/deleteasync/retry/succeeded", method = "DELETE", hasBody = true)
+        Call<ResponseBody> beginDeleteAsyncRetrySucceeded(@Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "lro/deleteasync/noretry/succeeded", method = "DELETE", hasBody = true)
+        Call<ResponseBody> deleteAsyncNoRetrySucceeded(@Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "lro/deleteasync/noretry/succeeded", method = "DELETE", hasBody = true)
+        Call<ResponseBody> beginDeleteAsyncNoRetrySucceeded(@Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "lro/deleteasync/retry/failed", method = "DELETE", hasBody = true)
+        Call<ResponseBody> deleteAsyncRetryFailed(@Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "lro/deleteasync/retry/failed", method = "DELETE", hasBody = true)
+        Call<ResponseBody> beginDeleteAsyncRetryFailed(@Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "lro/deleteasync/retry/canceled", method = "DELETE", hasBody = true)
+        Call<ResponseBody> deleteAsyncRetrycanceled(@Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "lro/deleteasync/retry/canceled", method = "DELETE", hasBody = true)
+        Call<ResponseBody> beginDeleteAsyncRetrycanceled(@Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("lro/post/payload/200")
+        Call<ResponseBody> post200WithPayload(@Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("lro/post/payload/200")
+        Call<ResponseBody> beginPost200WithPayload(@Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("lro/post/202/retry/200")
+        Call<ResponseBody> post202Retry200(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("lro/post/202/retry/200")
+        Call<ResponseBody> beginPost202Retry200(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("lro/post/202/noretry/204")
+        Call<ResponseBody> post202NoRetry204(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("lro/post/202/noretry/204")
+        Call<ResponseBody> beginPost202NoRetry204(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("lro/postasync/retry/succeeded")
+        Call<ResponseBody> postAsyncRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("lro/postasync/retry/succeeded")
+        Call<ResponseBody> beginPostAsyncRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("lro/postasync/noretry/succeeded")
+        Call<ResponseBody> postAsyncNoRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("lro/postasync/noretry/succeeded")
+        Call<ResponseBody> beginPostAsyncNoRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("lro/postasync/retry/failed")
+        Call<ResponseBody> postAsyncRetryFailed(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("lro/postasync/retry/failed")
+        Call<ResponseBody> beginPostAsyncRetryFailed(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("lro/postasync/retry/canceled")
+        Call<ResponseBody> postAsyncRetrycanceled(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("lro/postasync/retry/canceled")
+        Call<ResponseBody> beginPostAsyncRetrycanceled(@Body Product product, @Header("accept-language") String acceptLanguage);
+
     }
 
     /**

@@ -20,6 +20,10 @@ import fixtures.bodydatetimerfc1123.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.PUT;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -42,6 +46,49 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
     public Datetimerfc1123OperationsImpl(Retrofit retrofit, AutoRestRFC1123DateTimeTestService client) {
         this.service = retrofit.create(Datetimerfc1123Service.class);
         this.client = client;
+    }
+
+    /**
+     * The interface defining all the services for Datetimerfc1123Operations to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface Datetimerfc1123Service {
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("datetimerfc1123/null")
+        Call<ResponseBody> getNull();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("datetimerfc1123/invalid")
+        Call<ResponseBody> getInvalid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("datetimerfc1123/overflow")
+        Call<ResponseBody> getOverflow();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("datetimerfc1123/underflow")
+        Call<ResponseBody> getUnderflow();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("datetimerfc1123/max")
+        Call<ResponseBody> putUtcMaxDateTime(@Body DateTimeRfc1123 datetimeBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("datetimerfc1123/max/lowercase")
+        Call<ResponseBody> getUtcLowercaseMaxDateTime();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("datetimerfc1123/max/uppercase")
+        Call<ResponseBody> getUtcUppercaseMaxDateTime();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("datetimerfc1123/min")
+        Call<ResponseBody> putUtcMinDateTime(@Body DateTimeRfc1123 datetimeBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("datetimerfc1123/min")
+        Call<ResponseBody> getUtcMinDateTime();
+
     }
 
     /**

@@ -17,54 +17,12 @@ import java.io.IOException;
 import okhttp3.ResponseBody;
 import org.joda.time.LocalDate;
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.PUT;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in DateOperations.
  */
 public interface DateOperations {
-    /**
-     * The interface defining all the services for DateOperations to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface DateService {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("date/null")
-        Call<ResponseBody> getNull();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("date/invaliddate")
-        Call<ResponseBody> getInvalidDate();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("date/overflowdate")
-        Call<ResponseBody> getOverflowDate();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("date/underflowdate")
-        Call<ResponseBody> getUnderflowDate();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("date/max")
-        Call<ResponseBody> putMaxDate(@Body LocalDate dateBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("date/max")
-        Call<ResponseBody> getMaxDate();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("date/min")
-        Call<ResponseBody> putMinDate(@Body LocalDate dateBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("date/min")
-        Call<ResponseBody> getMinDate();
-
-    }
     /**
      * Get null date value.
      *

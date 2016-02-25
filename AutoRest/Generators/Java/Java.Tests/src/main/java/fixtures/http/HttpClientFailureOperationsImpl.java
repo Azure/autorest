@@ -20,6 +20,14 @@ import fixtures.http.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.HEAD;
+import retrofit2.http.Headers;
+import retrofit2.http.HTTP;
+import retrofit2.http.PATCH;
+import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -42,6 +50,105 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
     public HttpClientFailureOperationsImpl(Retrofit retrofit, AutoRestHttpInfrastructureTestService client) {
         this.service = retrofit.create(HttpClientFailureService.class);
         this.client = client;
+    }
+
+    /**
+     * The interface defining all the services for HttpClientFailureOperations to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface HttpClientFailureService {
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HEAD("http/failure/client/400")
+        Call<Void> head400();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/failure/client/400")
+        Call<ResponseBody> get400();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("http/failure/client/400")
+        Call<ResponseBody> put400(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PATCH("http/failure/client/400")
+        Call<ResponseBody> patch400(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("http/failure/client/400")
+        Call<ResponseBody> post400(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "http/failure/client/400", method = "DELETE", hasBody = true)
+        Call<ResponseBody> delete400(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HEAD("http/failure/client/401")
+        Call<Void> head401();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/failure/client/402")
+        Call<ResponseBody> get402();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/failure/client/403")
+        Call<ResponseBody> get403();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("http/failure/client/404")
+        Call<ResponseBody> put404(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PATCH("http/failure/client/405")
+        Call<ResponseBody> patch405(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("http/failure/client/406")
+        Call<ResponseBody> post406(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "http/failure/client/407", method = "DELETE", hasBody = true)
+        Call<ResponseBody> delete407(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("http/failure/client/409")
+        Call<ResponseBody> put409(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HEAD("http/failure/client/410")
+        Call<Void> head410();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/failure/client/411")
+        Call<ResponseBody> get411();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/failure/client/412")
+        Call<ResponseBody> get412();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("http/failure/client/413")
+        Call<ResponseBody> put413(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PATCH("http/failure/client/414")
+        Call<ResponseBody> patch414(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("http/failure/client/415")
+        Call<ResponseBody> post415(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/failure/client/416")
+        Call<ResponseBody> get416();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "http/failure/client/417", method = "DELETE", hasBody = true)
+        Call<ResponseBody> delete417(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HEAD("http/failure/client/429")
+        Call<Void> head429();
+
     }
 
     /**

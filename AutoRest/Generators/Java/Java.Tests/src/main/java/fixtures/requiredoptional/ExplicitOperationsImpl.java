@@ -32,6 +32,10 @@ import java.io.IOException;
 import java.util.List;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
+import retrofit2.http.POST;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -54,6 +58,101 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
     public ExplicitOperationsImpl(Retrofit retrofit, AutoRestRequiredOptionalTestService client) {
         this.service = retrofit.create(ExplicitService.class);
         this.client = client;
+    }
+
+    /**
+     * The interface defining all the services for ExplicitOperations to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface ExplicitService {
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("reqopt/requied/integer/parameter")
+        Call<ResponseBody> postRequiredIntegerParameter(@Body int bodyParameter);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("reqopt/optional/integer/parameter")
+        Call<ResponseBody> postOptionalIntegerParameter(@Body Integer bodyParameter);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("reqopt/requied/integer/property")
+        Call<ResponseBody> postRequiredIntegerProperty(@Body IntWrapper bodyParameter);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("reqopt/optional/integer/property")
+        Call<ResponseBody> postOptionalIntegerProperty(@Body IntOptionalWrapper bodyParameter);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("reqopt/requied/integer/header")
+        Call<ResponseBody> postRequiredIntegerHeader(@Header("headerParameter") int headerParameter);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("reqopt/optional/integer/header")
+        Call<ResponseBody> postOptionalIntegerHeader(@Header("headerParameter") Integer headerParameter);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("reqopt/requied/string/parameter")
+        Call<ResponseBody> postRequiredStringParameter(@Body String bodyParameter);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("reqopt/optional/string/parameter")
+        Call<ResponseBody> postOptionalStringParameter(@Body String bodyParameter);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("reqopt/requied/string/property")
+        Call<ResponseBody> postRequiredStringProperty(@Body StringWrapper bodyParameter);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("reqopt/optional/string/property")
+        Call<ResponseBody> postOptionalStringProperty(@Body StringOptionalWrapper bodyParameter);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("reqopt/requied/string/header")
+        Call<ResponseBody> postRequiredStringHeader(@Header("headerParameter") String headerParameter);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("reqopt/optional/string/header")
+        Call<ResponseBody> postOptionalStringHeader(@Header("bodyParameter") String bodyParameter);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("reqopt/requied/class/parameter")
+        Call<ResponseBody> postRequiredClassParameter(@Body Product bodyParameter);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("reqopt/optional/class/parameter")
+        Call<ResponseBody> postOptionalClassParameter(@Body Product bodyParameter);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("reqopt/requied/class/property")
+        Call<ResponseBody> postRequiredClassProperty(@Body ClassWrapper bodyParameter);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("reqopt/optional/class/property")
+        Call<ResponseBody> postOptionalClassProperty(@Body ClassOptionalWrapper bodyParameter);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("reqopt/requied/array/parameter")
+        Call<ResponseBody> postRequiredArrayParameter(@Body List<String> bodyParameter);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("reqopt/optional/array/parameter")
+        Call<ResponseBody> postOptionalArrayParameter(@Body List<String> bodyParameter);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("reqopt/requied/array/property")
+        Call<ResponseBody> postRequiredArrayProperty(@Body ArrayWrapper bodyParameter);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("reqopt/optional/array/property")
+        Call<ResponseBody> postOptionalArrayProperty(@Body ArrayOptionalWrapper bodyParameter);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("reqopt/requied/array/header")
+        Call<ResponseBody> postRequiredArrayHeader(@Header("headerParameter") String headerParameter);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("reqopt/optional/array/header")
+        Call<ResponseBody> postOptionalArrayHeader(@Header("headerParameter") String headerParameter);
+
     }
 
     /**

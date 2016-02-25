@@ -21,6 +21,10 @@ import fixtures.bodycomplex.models.Siamese;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.PUT;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -43,6 +47,21 @@ public final class InheritanceOperationsImpl implements InheritanceOperations {
     public InheritanceOperationsImpl(Retrofit retrofit, AutoRestComplexTestService client) {
         this.service = retrofit.create(InheritanceService.class);
         this.client = client;
+    }
+
+    /**
+     * The interface defining all the services for InheritanceOperations to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface InheritanceService {
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/inheritance/valid")
+        Call<ResponseBody> getValid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("complex/inheritance/valid")
+        Call<ResponseBody> putValid(@Body Siamese complexBody);
+
     }
 
     /**

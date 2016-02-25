@@ -21,6 +21,10 @@ import fixtures.bodycomplex.models.Fish;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.PUT;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -43,6 +47,21 @@ public final class PolymorphicrecursiveOperationsImpl implements Polymorphicrecu
     public PolymorphicrecursiveOperationsImpl(Retrofit retrofit, AutoRestComplexTestService client) {
         this.service = retrofit.create(PolymorphicrecursiveService.class);
         this.client = client;
+    }
+
+    /**
+     * The interface defining all the services for PolymorphicrecursiveOperations to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface PolymorphicrecursiveService {
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/polymorphicrecursive/valid")
+        Call<ResponseBody> getValid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("complex/polymorphicrecursive/valid")
+        Call<ResponseBody> putValid(@Body Fish complexBody);
+
     }
 
     /**

@@ -20,6 +20,12 @@ import fixtures.http.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.HEAD;
+import retrofit2.http.Headers;
+import retrofit2.http.HTTP;
+import retrofit2.http.POST;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -42,6 +48,29 @@ public final class HttpServerFailureOperationsImpl implements HttpServerFailureO
     public HttpServerFailureOperationsImpl(Retrofit retrofit, AutoRestHttpInfrastructureTestService client) {
         this.service = retrofit.create(HttpServerFailureService.class);
         this.client = client;
+    }
+
+    /**
+     * The interface defining all the services for HttpServerFailureOperations to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface HttpServerFailureService {
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HEAD("http/failure/server/501")
+        Call<Void> head501();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/failure/server/501")
+        Call<ResponseBody> get501();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("http/failure/server/505")
+        Call<ResponseBody> post505(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "http/failure/server/505", method = "DELETE", hasBody = true)
+        Call<ResponseBody> delete505(@Body Boolean booleanValue);
+
     }
 
     /**

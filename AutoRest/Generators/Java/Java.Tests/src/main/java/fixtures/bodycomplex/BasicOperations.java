@@ -17,47 +17,12 @@ import fixtures.bodycomplex.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.PUT;
-import retrofit2.http.Query;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in BasicOperations.
  */
 public interface BasicOperations {
-    /**
-     * The interface defining all the services for BasicOperations to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface BasicService {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("complex/basic/valid")
-        Call<ResponseBody> getValid();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("complex/basic/valid")
-        Call<ResponseBody> putValid(@Body Basic complexBody, @Query("api-version") String apiVersion);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("complex/basic/invalid")
-        Call<ResponseBody> getInvalid();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("complex/basic/empty")
-        Call<ResponseBody> getEmpty();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("complex/basic/null")
-        Call<ResponseBody> getNull();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("complex/basic/notprovided")
-        Call<ResponseBody> getNotProvided();
-
-    }
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      *

@@ -21,6 +21,10 @@ import fixtures.azurespecials.models.OdataFilter;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
+import retrofit2.http.Query;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -43,6 +47,17 @@ public final class OdataOperationsImpl implements OdataOperations {
     public OdataOperationsImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClient client) {
         this.service = retrofit.create(OdataService.class);
         this.client = client;
+    }
+
+    /**
+     * The interface defining all the services for OdataOperations to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface OdataService {
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("azurespecials/odata/filter")
+        Call<ResponseBody> getWithFilter(@Query("$filter") String filter, @Query("$top") Integer top, @Query("$orderby") String orderby, @Header("accept-language") String acceptLanguage);
+
     }
 
     /**

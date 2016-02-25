@@ -20,40 +20,12 @@ import fixtures.azureparametergrouping.models.ParameterGroupingPostRequiredParam
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.Header;
-import retrofit2.http.Headers;
-import retrofit2.http.Path;
-import retrofit2.http.POST;
-import retrofit2.http.Query;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in ParameterGroupingOperations.
  */
 public interface ParameterGroupingOperations {
-    /**
-     * The interface defining all the services for ParameterGroupingOperations to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface ParameterGroupingService {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("parameterGrouping/postRequired/{path}")
-        Call<ResponseBody> postRequired(@Path("path") String path, @Header("accept-language") String acceptLanguage, @Body int body, @Header("customHeader") String customHeader, @Query("query") Integer query);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("parameterGrouping/postOptional")
-        Call<ResponseBody> postOptional(@Header("accept-language") String acceptLanguage, @Header("customHeader") String customHeader, @Query("query") Integer query);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("parameterGrouping/postMultipleParameterGroups")
-        Call<ResponseBody> postMultiParamGroups(@Header("accept-language") String acceptLanguage, @Header("header-one") String headerOne, @Query("query-one") Integer queryOne, @Header("header-two") String headerTwo, @Query("query-two") Integer queryTwo);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("parameterGrouping/sharedParameterGroupObject")
-        Call<ResponseBody> postSharedParameterGroupObject(@Header("accept-language") String acceptLanguage, @Header("header-one") String headerOne, @Query("query-one") Integer queryOne);
-
-    }
     /**
      * Post a bunch of required parameters grouped.
      *

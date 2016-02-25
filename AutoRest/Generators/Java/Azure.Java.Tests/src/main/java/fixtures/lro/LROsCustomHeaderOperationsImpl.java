@@ -26,6 +26,11 @@ import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.http.Body;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
+import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -48,6 +53,45 @@ public final class LROsCustomHeaderOperationsImpl implements LROsCustomHeaderOpe
     public LROsCustomHeaderOperationsImpl(Retrofit retrofit, AutoRestLongRunningOperationTestService client) {
         this.service = retrofit.create(LROsCustomHeaderService.class);
         this.client = client;
+    }
+
+    /**
+     * The interface defining all the services for LROsCustomHeaderOperations to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface LROsCustomHeaderService {
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/customheader/putasync/retry/succeeded")
+        Call<ResponseBody> putAsyncRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/customheader/putasync/retry/succeeded")
+        Call<ResponseBody> beginPutAsyncRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/customheader/put/201/creating/succeeded/200")
+        Call<ResponseBody> put201CreatingSucceeded200(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("lro/customheader/put/201/creating/succeeded/200")
+        Call<ResponseBody> beginPut201CreatingSucceeded200(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("lro/customheader/post/202/retry/200")
+        Call<ResponseBody> post202Retry200(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("lro/customheader/post/202/retry/200")
+        Call<ResponseBody> beginPost202Retry200(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("lro/customheader/postasync/retry/succeeded")
+        Call<ResponseBody> postAsyncRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("lro/customheader/postasync/retry/succeeded")
+        Call<ResponseBody> beginPostAsyncRetrySucceeded(@Body Product product, @Header("accept-language") String acceptLanguage);
+
     }
 
     /**

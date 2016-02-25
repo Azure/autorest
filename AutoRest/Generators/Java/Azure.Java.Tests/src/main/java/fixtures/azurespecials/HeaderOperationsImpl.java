@@ -20,6 +20,9 @@ import fixtures.azurespecials.models.HeaderCustomNamedRequestIdHeaders;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
+import retrofit2.http.POST;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -42,6 +45,17 @@ public final class HeaderOperationsImpl implements HeaderOperations {
     public HeaderOperationsImpl(Retrofit retrofit, AutoRestAzureSpecialParametersTestClient client) {
         this.service = retrofit.create(HeaderService.class);
         this.client = client;
+    }
+
+    /**
+     * The interface defining all the services for HeaderOperations to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface HeaderService {
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("azurespecials/customNamedRequestId")
+        Call<ResponseBody> customNamedRequestId(@Header("foo-client-request-id") String fooClientRequestId, @Header("accept-language") String acceptLanguage);
+
     }
 
     /**
