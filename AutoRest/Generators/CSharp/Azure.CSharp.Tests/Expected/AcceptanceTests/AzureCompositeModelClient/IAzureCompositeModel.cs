@@ -102,6 +102,11 @@ namespace Fixtures.AcceptanceTestsAzureCompositeModelClient
         /// </summary>
         IPolymorphicrecursiveOperations Polymorphicrecursive { get; }
 
+        /// <summary>
+        /// Gets the IReadonlypropertyOperations.
+        /// </summary>
+        IReadonlypropertyOperations Readonlyproperty { get; }
+
             /// <summary>
         /// Product Types
         /// </summary>

@@ -41,6 +41,7 @@ declare class AutoRestComplexTestService {
     inheritance: operations.Inheritance;
     polymorphism: operations.Polymorphism;
     polymorphicrecursive: operations.Polymorphicrecursive;
+    readonlyproperty: operations.Readonlyproperty;
     }
 
 export = AutoRestComplexTestService;

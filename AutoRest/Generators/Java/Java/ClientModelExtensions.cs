@@ -104,6 +104,10 @@ namespace Microsoft.Rest.Generator.Java.TemplateModels
             {
                 settings.Add("required = true");
             }
+            if (property.IsReadOnly)
+            {
+                settings.Add("access = JsonProperty.Access.WRITE_ONLY");
+            }
             return string.Join(", ", settings);
         }
 

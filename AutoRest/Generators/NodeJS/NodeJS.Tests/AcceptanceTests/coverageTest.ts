@@ -34,6 +34,7 @@ describe('nodejs', function () {
         result['putDictionaryDateValid'] = 1;
         result['putArrayDateValid'] = 1;
         result['UrlQueriesDateValid'] = 1;
+        result['putComplexReadOnlyPropertyValid'] = 1;
 
         var total = _.keys(result).length;
         var passed = 0;

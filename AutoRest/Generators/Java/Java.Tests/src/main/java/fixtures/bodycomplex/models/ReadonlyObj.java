@@ -8,20 +8,24 @@
  * regenerated.
  */
 
-package fixtures.lro.models;
+package fixtures.bodycomplex.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.microsoft.azure.BaseResource;
 
 /**
- * The SubResource model.
+ * The ReadonlyObj model.
  */
-public class SubResource extends BaseResource {
+public class ReadonlyObj {
     /**
-     * Sub Resource Id.
+     * The id property.
      */
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String id;
+
+    /**
+     * The size property.
+     */
+    private Integer size;
 
     /**
      * Get the id value.
@@ -30,6 +34,24 @@ public class SubResource extends BaseResource {
      */
     public String getId() {
         return this.id;
+    }
+
+    /**
+     * Get the size value.
+     *
+     * @return the size value
+     */
+    public Integer getSize() {
+        return this.size;
+    }
+
+    /**
+     * Set the size value.
+     *
+     * @param size the size value to set
+     */
+    public void setSize(Integer size) {
+        this.size = size;
     }
 
 }
