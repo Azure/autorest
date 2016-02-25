@@ -245,10 +245,7 @@ namespace Microsoft.Rest.Generator.Java
                     {
                         continue;
                     }
-                    if (param.IsRequired)
-                    {
-                        yield return param;
-                    }
+                    yield return param;
                 }
             }
         }

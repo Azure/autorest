@@ -21,6 +21,7 @@ import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
+import com.microsoft.rest.Validator;
 import fixtures.validation.models.ErrorException;
 import fixtures.validation.models.Product;
 import java.io.IOException;
@@ -234,6 +235,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         if (this.getApiVersion() == null) {
             throw new IllegalArgumentException("Parameter this.getApiVersion() is required and cannot be null.");
         }
+        Validator.validate(body);
         Call<ResponseBody> call = service.validationOfBody(this.getSubscriptionId(), resourceGroupName, id, body, this.getApiVersion());
         return validationOfBodyDelegate(call.execute());
     }
@@ -260,6 +262,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
             serviceCallback.failure(new IllegalArgumentException("Parameter this.getApiVersion() is required and cannot be null."));
             return null;
         }
+        Validator.validate(body, serviceCallback);
         Call<ResponseBody> call = service.validationOfBody(this.getSubscriptionId(), resourceGroupName, id, body, this.getApiVersion());
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
@@ -341,6 +344,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         if (constantParam == null) {
             throw new IllegalArgumentException("Parameter constantParam is required and cannot be null.");
         }
+        Validator.validate(body);
         Call<ResponseBody> call = service.postWithConstantInBody(constantParam, body);
         return postWithConstantInBodyDelegate(call.execute());
     }
@@ -357,6 +361,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
             serviceCallback.failure(new IllegalArgumentException("Parameter constantParam is required and cannot be null."));
             return null;
         }
+        Validator.validate(body, serviceCallback);
         Call<ResponseBody> call = service.postWithConstantInBody(constantParam, body);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override

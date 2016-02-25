@@ -15,6 +15,7 @@ import com.microsoft.azure.CloudException;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseWithHeaders;
+import com.microsoft.rest.Validator;
 import fixtures.lro.models.LRORetrysDelete202Retry200Headers;
 import fixtures.lro.models.LRORetrysDeleteAsyncRelativeRetrySucceededHeaders;
 import fixtures.lro.models.LRORetrysDeleteProvisioning202Accepted200SucceededHeaders;
@@ -60,6 +61,7 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
      * @return the Product object wrapped in ServiceResponse if successful.
      */
     public ServiceResponse<Product> put201CreatingSucceeded200(Product product) throws CloudException, IOException, InterruptedException {
+        Validator.validate(product);
         Response<ResponseBody> result = service.put201CreatingSucceeded200(product, this.client.getAcceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResult(result, new TypeToken<Product>() { }.getType());
     }
@@ -72,6 +74,7 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
      * @return the {@link Call} object
      */
     public Call<ResponseBody> put201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) {
+        Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.put201CreatingSucceeded200(product, this.client.getAcceptLanguage());
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -96,6 +99,7 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
      * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
      */
     public ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders> putAsyncRelativeRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException {
+        Validator.validate(product);
         Response<ResponseBody> result = service.putAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage()).execute();
         return client.getAzureClient().getPutOrPatchResultWithHeaders(result, new TypeToken<Product>() { }.getType(), LRORetrysPutAsyncRelativeRetrySucceededHeaders.class);
     }
@@ -108,6 +112,7 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
      * @return the {@link Call} object
      */
     public Call<ResponseBody> putAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+        Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.putAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage());
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -234,6 +239,7 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers> post202Retry200(Product product) throws CloudException, IOException, InterruptedException {
+        Validator.validate(product);
         Response<ResponseBody> result = service.post202Retry200(product, this.client.getAcceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LRORetrysPost202Retry200Headers.class);
     }
@@ -246,6 +252,7 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
      * @return the {@link Call} object
      */
     public Call<ResponseBody> post202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) {
+        Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.post202Retry200(product, this.client.getAcceptLanguage());
         call.enqueue(new Callback<ResponseBody>() {
             @Override
@@ -270,6 +277,7 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
      * @return the ServiceResponseWithHeaders object if successful.
      */
     public ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders> postAsyncRelativeRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException {
+        Validator.validate(product);
         Response<ResponseBody> result = service.postAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage()).execute();
         return client.getAzureClient().getPostOrDeleteResultWithHeaders(result, new TypeToken<Void>() { }.getType(), LRORetrysPostAsyncRelativeRetrySucceededHeaders.class);
     }
@@ -282,6 +290,7 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
      * @return the {@link Call} object
      */
     public Call<ResponseBody> postAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback) {
+        Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.postAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage());
         call.enqueue(new Callback<ResponseBody>() {
             @Override

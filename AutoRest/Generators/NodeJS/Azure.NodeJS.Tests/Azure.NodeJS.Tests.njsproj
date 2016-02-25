@@ -83,6 +83,9 @@
     <Folder Include="bin\Net45-Debug\Swagger" />
     <Folder Include="Expected" />
     <Folder Include="Expected\AcceptanceTests\" />
+    <Folder Include="Expected\AcceptanceTests\AzureCompositeModelClient\" />
+    <Folder Include="Expected\AcceptanceTests\AzureCompositeModelClient\models\" />
+    <Folder Include="Expected\AcceptanceTests\AzureCompositeModelClient\operations\" />
     <Folder Include="Expected\AcceptanceTests\AzureParameterGrouping\" />
     <Folder Include="Expected\AcceptanceTests\AzureParameterGrouping\models\" />
     <Folder Include="Expected\AcceptanceTests\AzureParameterGrouping\operations\" />

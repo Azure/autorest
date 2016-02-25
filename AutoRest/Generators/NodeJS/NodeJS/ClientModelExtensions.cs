@@ -795,6 +795,12 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 if (composite.PolymorphicDiscriminator != null)
                 {
                     builder.AppendLine("polymorphicDiscriminator: '{0}',", composite.PolymorphicDiscriminator);
+                    var polymorphicType = composite;
+                    while (polymorphicType.BaseModelType != null)
+                    {
+                        polymorphicType = polymorphicType.BaseModelType;
+                    }
+                    builder.AppendLine("uberParent: '{0}',", polymorphicType.Name);
                 }
                 if (!expandComposite)
                 {

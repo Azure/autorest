@@ -43,6 +43,16 @@ else
 }
  */
 public @Model.OperationResponseReturnTypeString @(Model.Name)(@Model.MethodParameterDeclaration) throws @Model.ExceptionString {
+@foreach (var param in Model.RequiredNullableParameters)
+{
+@:    if (@param.Name == null) {
+@:        throw new IllegalArgumentException("Parameter @param.Name is required and cannot be null.");
+@:    }
+}
+@foreach (var param in Model.ParametersToValidate)
+{
+@:    Validator.validate(@(param.Name));
+}
     Response<ResponseBody> result = service.@(Model.Name)(@Model.MethodParameterApiInvocation).execute();
     return client.getAzureClient().@(Model.PollingMethod)(result, @Model.PollingResourceTypeArgs);
 }
