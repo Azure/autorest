@@ -65,7 +65,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
             AzureExtensions.AddAzureProperties(serviceClient);
             AzureExtensions.SetDefaultResponses(serviceClient);
             AzureExtensions.AddParameterGroups(serviceClient);
-
+            CorrectFilterParameters(serviceClient);
             base.NormalizeClientModel(serviceClient);
             NormalizeApiVersion(serviceClient);
             NormalizePaginatedMethods(serviceClient);
@@ -147,6 +147,26 @@ namespace Microsoft.Rest.Generator.Azure.Python
             }
 
             AzureExtensions.RemoveUnreferencedTypes(serviceClient, convertedTypes.Keys.Cast<CompositeType>().Select(t => t.Name));
+        }
+
+        /// <summary>
+        /// Corrects type of the filter parameter. Currently typization of filters isn't
+        /// supported and therefore we provide to user an opportunity to pass it in form
+        /// of raw string.
+        /// </summary>
+        /// <param name="serviceClient">The service client.</param>
+        public static void CorrectFilterParameters(ServiceClient serviceClient)
+        {
+            foreach (var method in serviceClient.Methods.Where(m => m.Extensions.ContainsKey(AzureExtensions.ODataExtension)))
+            {
+                var filterParameter = method.Parameters
+                    .FirstOrDefault(p => p.Location == ParameterLocation.Query && p.Name == "$filter");
+
+                if (filterParameter != null)
+                {
+                    filterParameter.Type = new PrimaryType(KnownPrimaryType.String);
+                }
+            }
         }
 
         /// <summary>

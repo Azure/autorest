@@ -82,16 +82,15 @@ else
     @:}
   }
 }
-
+@if (Model.SubModelTypes.Any())
+{
 <text>
 @EmptyLine
-   @:_subtype_map = {
-    @if (Model.SubModelTypes.Any())
-        {
-            '@Model.BasePolymorphicDiscriminator': { @Model.SubModelTypeList}
-        }
+    _subtype_map = {
+        '@Model.BasePolymorphicDiscriminator': {@Model.SubModelTypeList}
     }
 </text>
+}
 @EmptyLine
     def __init__(self, @(Model.MethodParameterDeclaration())):
 @if (Model.HasParent)
