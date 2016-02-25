@@ -115,9 +115,11 @@ public final class PagingOperationsImpl implements PagingOperations {
     public ServiceResponse<List<Product>> getMultiplePages(final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) throws CloudException, IOException {
         Validator.validate(pagingGetMultiplePagesOptions);
         Integer maxresults = null;
-        Integer timeout = null;
         if (pagingGetMultiplePagesOptions != null) {
             maxresults = pagingGetMultiplePagesOptions.getMaxresults();
+        }
+        Integer timeout = null;
+        if (pagingGetMultiplePagesOptions != null) {
             timeout = pagingGetMultiplePagesOptions.getTimeout();
         }
         Call<ResponseBody> call = service.getMultiplePages(clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
@@ -141,9 +143,11 @@ public final class PagingOperationsImpl implements PagingOperations {
     public Call<ResponseBody> getMultiplePagesAsync(final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, final ListOperationCallback<Product> serviceCallback) {
         Validator.validate(pagingGetMultiplePagesOptions, serviceCallback);
         Integer maxresults = null;
-        Integer timeout = null;
         if (pagingGetMultiplePagesOptions != null) {
             maxresults = pagingGetMultiplePagesOptions.getMaxresults();
+        }
+        Integer timeout = null;
+        if (pagingGetMultiplePagesOptions != null) {
             timeout = pagingGetMultiplePagesOptions.getTimeout();
         }
         Call<ResponseBody> call = service.getMultiplePages(clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
@@ -189,9 +193,11 @@ public final class PagingOperationsImpl implements PagingOperations {
             throw new IllegalArgumentException("Parameter pagingGetMultiplePagesWithOffsetOptions is required and cannot be null.");
         }
         Validator.validate(pagingGetMultiplePagesWithOffsetOptions);
-        Integer maxresults = pagingGetMultiplePagesWithOffsetOptions.getMaxresults();
+        Integer maxresults = null;
+        maxresults = pagingGetMultiplePagesWithOffsetOptions.getMaxresults();
         int offset = pagingGetMultiplePagesWithOffsetOptions.getOffset();
-        Integer timeout = pagingGetMultiplePagesWithOffsetOptions.getTimeout();
+        Integer timeout = null;
+        timeout = pagingGetMultiplePagesWithOffsetOptions.getTimeout();
         Call<ResponseBody> call = service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
         ServiceResponse<PageImpl<Product>> response = getMultiplePagesWithOffsetDelegate(call.execute());
         List<Product> result = response.getBody().getItems();
@@ -219,9 +225,11 @@ public final class PagingOperationsImpl implements PagingOperations {
             return null;
         }
         Validator.validate(pagingGetMultiplePagesWithOffsetOptions, serviceCallback);
-        Integer maxresults = pagingGetMultiplePagesWithOffsetOptions.getMaxresults();
+        Integer maxresults = null;
+        maxresults = pagingGetMultiplePagesWithOffsetOptions.getMaxresults();
         int offset = pagingGetMultiplePagesWithOffsetOptions.getOffset();
-        Integer timeout = pagingGetMultiplePagesWithOffsetOptions.getTimeout();
+        Integer timeout = null;
+        timeout = pagingGetMultiplePagesWithOffsetOptions.getTimeout();
         Call<ResponseBody> call = service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
@@ -592,9 +600,11 @@ public final class PagingOperationsImpl implements PagingOperations {
         }
         Validator.validate(pagingGetMultiplePagesOptions);
         Integer maxresults = null;
-        Integer timeout = null;
         if (pagingGetMultiplePagesOptions != null) {
             maxresults = pagingGetMultiplePagesOptions.getMaxresults();
+        }
+        Integer timeout = null;
+        if (pagingGetMultiplePagesOptions != null) {
             timeout = pagingGetMultiplePagesOptions.getTimeout();
         }
         Call<ResponseBody> call = service.getMultiplePagesNext(nextPageLink, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
@@ -617,9 +627,11 @@ public final class PagingOperationsImpl implements PagingOperations {
         }
         Validator.validate(pagingGetMultiplePagesOptions, serviceCallback);
         Integer maxresults = null;
-        Integer timeout = null;
         if (pagingGetMultiplePagesOptions != null) {
             maxresults = pagingGetMultiplePagesOptions.getMaxresults();
+        }
+        Integer timeout = null;
+        if (pagingGetMultiplePagesOptions != null) {
             timeout = pagingGetMultiplePagesOptions.getTimeout();
         }
         Call<ResponseBody> call = service.getMultiplePagesNext(nextPageLink, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
@@ -665,9 +677,10 @@ public final class PagingOperationsImpl implements PagingOperations {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
-        Validator.validate(pagingGetMultiplePagesWithOffsetNextOptions);
-        Integer maxresults = pagingGetMultiplePagesWithOffsetNextOptions.getMaxresults();
-        Integer timeout = pagingGetMultiplePagesWithOffsetNextOptions.getTimeout();
+        Integer maxresults = null;
+        maxresults = pagingGetMultiplePagesWithOffsetNextOptions.getMaxresults();
+        Integer timeout = null;
+        timeout = pagingGetMultiplePagesWithOffsetNextOptions.getTimeout();
         Call<ResponseBody> call = service.getMultiplePagesWithOffsetNext(nextPageLink, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
         return getMultiplePagesWithOffsetNextDelegate(call.execute());
     }
@@ -686,9 +699,10 @@ public final class PagingOperationsImpl implements PagingOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
             return null;
         }
-        Validator.validate(pagingGetMultiplePagesWithOffsetNextOptions, serviceCallback);
-        Integer maxresults = pagingGetMultiplePagesWithOffsetNextOptions.getMaxresults();
-        Integer timeout = pagingGetMultiplePagesWithOffsetNextOptions.getTimeout();
+        Integer maxresults = null;
+        maxresults = pagingGetMultiplePagesWithOffsetNextOptions.getMaxresults();
+        Integer timeout = null;
+        timeout = pagingGetMultiplePagesWithOffsetNextOptions.getTimeout();
         Call<ResponseBody> call = service.getMultiplePagesWithOffsetNext(nextPageLink, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override

@@ -5,7 +5,6 @@ startServer.js
 paging.js
 lro.js
 head.js
-resourceFlattening.js
 subscriptionIdApiVersion.js
 azureSpecialProperties.js
 parameterGrouping.js

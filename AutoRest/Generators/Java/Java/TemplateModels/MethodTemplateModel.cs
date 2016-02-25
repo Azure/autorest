@@ -48,13 +48,21 @@ namespace Microsoft.Rest.Generator.Java
             get { return _scopeProvider; }
         }
 
-        public IEnumerable<Parameter> OrderedLogicalParameters
+        public IEnumerable<Parameter> RetrofitParameters
         {
             get
             {
-                return LogicalParameters.Where(p => p.Location == ParameterLocation.Path)
-                    .Union(LogicalParameters.Where(p => p.Location != ParameterLocation.Path))
+                return LogicalParameters.Where(p => p.Location != ParameterLocation.None)
                     .Where(p => !p.Extensions.ContainsKey("hostParameter"));
+            }
+        }
+
+        public IEnumerable<Parameter> OrderedRetrofitParameters
+        {
+            get
+            {
+                return RetrofitParameters.Where(p => p.Location == ParameterLocation.Path)
+                    .Union(RetrofitParameters.Where(p => p.Location != ParameterLocation.Path));
             }
         }
 
@@ -66,7 +74,7 @@ namespace Microsoft.Rest.Generator.Java
             get
             {
                 List<string> declarations = new List<string>();
-                foreach (var parameter in OrderedLogicalParameters)
+                foreach (var parameter in OrderedRetrofitParameters)
                 {
                     StringBuilder declarationBuilder = new StringBuilder();
                     if (Url.Contains("{" + parameter.Name + "}"))
@@ -147,7 +155,7 @@ namespace Microsoft.Rest.Generator.Java
             get
             {
                 List<string> declarations = new List<string>();
-                foreach (var parameter in OrderedLogicalParameters)
+                foreach (var parameter in OrderedRetrofitParameters)
                 {
                     if ((parameter.Location != ParameterLocation.Body)
                          && parameter.Type.NeedsSpecialSerialization())
@@ -214,6 +222,87 @@ namespace Microsoft.Rest.Generator.Java
                 parameters += string.Format(CultureInfo.InvariantCulture, "new ServiceCallback<" + GenericReturnTypeString + ">()");
                 return parameters;
             }
+        }
+
+        /// <summary>
+        /// Generates input mapping code block.
+        /// </summary>
+        /// <returns></returns>
+        public virtual string BuildInputMappings()
+        {
+            var builder = new IndentedStringBuilder();
+            foreach (var transformation in InputParameterTransformation)
+            {
+                if (!transformation.OutputParameter.IsRequired)
+                {
+                    builder.AppendLine("{0} {1} = null;",
+                            JavaCodeNamer.WrapPrimitiveType(transformation.OutputParameter.Type).Name,
+                            transformation.OutputParameter.Name);
+                }
+
+                var nullCheck = BuildNullCheckExpression(transformation);
+                if (!string.IsNullOrEmpty(nullCheck))
+                {
+                    builder.AppendLine("if ({0}) {{", nullCheck).Indent();
+                }
+
+                if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
+                    transformation.OutputParameter.Type is CompositeType)
+                {
+                    builder.AppendLine("{0} = new {1}();",
+                        transformation.OutputParameter.Name,
+                        transformation.OutputParameter.Type.Name);
+                }
+
+                foreach (var mapping in transformation.ParameterMappings)
+                {
+                    builder.AppendLine("{0}{1}{2};",
+                        transformation.OutputParameter.IsRequired ? transformation.OutputParameter.Type.Name + " " : "",
+                        transformation.OutputParameter.Name,
+                        GetMapping(mapping));
+                }
+
+                if (!string.IsNullOrEmpty(nullCheck))
+                {
+                    builder.Outdent()
+                       .AppendLine("}");
+                }
+            }
+
+            return builder.ToString();
+        }
+
+        private static string GetMapping(ParameterMapping mapping)
+        {
+            string inputPath = mapping.InputParameter.Name;
+            if (mapping.InputParameterProperty != null)
+            {
+                inputPath += ".get" + CodeNamer.PascalCase(mapping.InputParameterProperty) + "()";
+            }
+
+            string outputPath = "";
+            if (mapping.OutputParameterProperty != null)
+            {
+                outputPath += ".set" + CodeNamer.PascalCase(mapping.OutputParameterProperty);
+                return string.Format(CultureInfo.InvariantCulture, "{0}({1})", outputPath, inputPath);
+            }
+            else
+            {
+                return string.Format(CultureInfo.InvariantCulture, "{0} = {1}", outputPath, inputPath);
+            }
+        }
+
+        private static string BuildNullCheckExpression(ParameterTransformation transformation)
+        {
+            if (transformation == null)
+            {
+                throw new ArgumentNullException("transformation");
+            }
+
+            return string.Join(" || ",
+                transformation.ParameterMappings
+                    .Where(m => !m.InputParameter.IsRequired)
+                    .Select(m => m.InputParameter.Name + " != null"));
         }
 
         public IEnumerable<ParameterTemplateModel> RequiredNullableParameters
@@ -556,12 +645,12 @@ namespace Microsoft.Rest.Generator.Java
                 imports.Add("com.microsoft.rest.ServiceCallback");
                 // parameter types
                 this.Parameters.ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace)));
-                this.OrderedLogicalParameters
+                this.RetrofitParameters
                     .Where(p => p.Location == ParameterLocation.Body
                         || !p.Type.NeedsSpecialSerialization())
                     .ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace)));
                 // parameter locations
-                this.OrderedLogicalParameters.ForEach(p =>
+                this.RetrofitParameters.ForEach(p =>
                 {
                     string locationImport = p.Location.ImportFrom();
                     if (!string.IsNullOrEmpty(locationImport))
