@@ -926,25 +926,17 @@ AutoRestResourceFlatteningTestService.prototype.putSimpleProduct = function (opt
 /**
  * Put Flattened Simple Product with client flattening true on the parameter
  *
- * @param {object} flattenParameterGroup Additional parameters for the
- * operation
+ * @param {string} baseProductId Unique identifier representing a specific
+ * product for a given latitude & longitude. For example, uberX in San
+ * Francisco will have a different product_id than uberX in Los Angeles.
  * 
- * @param {string} [flattenParameterGroup.baseProductId] Unique identifier
- * representing a specific product for a given latitude & longitude. For
- * example, uberX in San Francisco will have a different product_id than
- * uberX in Los Angeles.
- * 
- * @param {string} [flattenParameterGroup.baseProductDescription] Description
- * of product.
- * 
- * @param {string} [flattenParameterGroup.maxProductDisplayName] Display name
- * of product.
- * 
- * @param {string} [flattenParameterGroup.odatavalue] URL value.
- * 
- * @param {string} [flattenParameterGroup.name] Product name
+ * @param {string} maxProductDisplayName Display name of product.
  * 
  * @param {object} [options] Optional Parameters.
+ * 
+ * @param {string} [options.baseProductDescription] Description of product.
+ * 
+ * @param {string} [options.odatavalue] URL value.
  * 
  * @param {object} [options.customHeaders] Headers that will be added to the
  * request
@@ -962,7 +954,7 @@ AutoRestResourceFlatteningTestService.prototype.putSimpleProduct = function (opt
  *
  *                      {stream} [response] - The HTTP Response stream if an error did not occur.
  */
-AutoRestResourceFlatteningTestService.prototype.postFlattenedSimpleProduct = function (flattenParameterGroup, options, callback) {
+AutoRestResourceFlatteningTestService.prototype.postFlattenedSimpleProduct = function (baseProductId, maxProductDisplayName, options, callback) {
   var client = this;
   if(!callback && typeof options === 'function') {
     callback = options;
@@ -971,48 +963,27 @@ AutoRestResourceFlatteningTestService.prototype.postFlattenedSimpleProduct = fun
   if (!callback) {
     throw new Error('callback cannot be null.');
   }
+  var baseProductDescription = (options && options.baseProductDescription !== undefined) ? options.baseProductDescription : undefined;
+  var odatavalue = (options && options.odatavalue !== undefined) ? options.odatavalue : undefined;
   // Validate
   try {
-    if (flattenParameterGroup === null || flattenParameterGroup === undefined) {
-      throw new Error('flattenParameterGroup cannot be null or undefined.');
+    if (baseProductId === null || baseProductId === undefined || typeof baseProductId.valueOf() !== 'string') {
+      throw new Error('baseProductId cannot be null or undefined and it must be of type string.');
+    }
+    if (baseProductDescription !== null && baseProductDescription !== undefined && typeof baseProductDescription.valueOf() !== 'string') {
+      throw new Error('baseProductDescription must be of type string.');
+    }
+    if (maxProductDisplayName === null || maxProductDisplayName === undefined || typeof maxProductDisplayName.valueOf() !== 'string') {
+      throw new Error('maxProductDisplayName cannot be null or undefined and it must be of type string.');
+    }
+    if (odatavalue !== null && odatavalue !== undefined && typeof odatavalue.valueOf() !== 'string') {
+      throw new Error('odatavalue must be of type string.');
     }
   } catch (error) {
     return callback(error);
   }
-  var baseProductId;
-  var baseProductDescription;
-  var maxProductDisplayName;
-  var odatavalue;
   var simpleBodyProduct;
   try {
-    if ((flattenParameterGroup !== null && flattenParameterGroup !== undefined))
-    {
-      baseProductId = flattenParameterGroup.baseProductId;
-      if (baseProductId === null || baseProductId === undefined || typeof baseProductId.valueOf() !== 'string') {
-        throw new Error('baseProductId cannot be null or undefined and it must be of type string.');
-      }
-    }
-    if ((flattenParameterGroup !== null && flattenParameterGroup !== undefined))
-    {
-      baseProductDescription = flattenParameterGroup.baseProductDescription;
-      if (baseProductDescription !== null && baseProductDescription !== undefined && typeof baseProductDescription.valueOf() !== 'string') {
-        throw new Error('baseProductDescription must be of type string.');
-      }
-    }
-    if ((flattenParameterGroup !== null && flattenParameterGroup !== undefined))
-    {
-      maxProductDisplayName = flattenParameterGroup.maxProductDisplayName;
-      if (maxProductDisplayName === null || maxProductDisplayName === undefined || typeof maxProductDisplayName.valueOf() !== 'string') {
-        throw new Error('maxProductDisplayName cannot be null or undefined and it must be of type string.');
-      }
-    }
-    if ((flattenParameterGroup !== null && flattenParameterGroup !== undefined))
-    {
-      odatavalue = flattenParameterGroup.odatavalue;
-      if (odatavalue !== null && odatavalue !== undefined && typeof odatavalue.valueOf() !== 'string') {
-        throw new Error('odatavalue must be of type string.');
-      }
-    }
     if ((baseProductId !== null && baseProductId !== undefined) || (baseProductDescription !== null && baseProductDescription !== undefined) || (maxProductDisplayName !== null && maxProductDisplayName !== undefined) || (odatavalue !== null && odatavalue !== undefined))
     {
       simpleBodyProduct = new client.models['SimpleProduct']();
@@ -1123,6 +1094,9 @@ AutoRestResourceFlatteningTestService.prototype.postFlattenedSimpleProduct = fun
  * @param {object} flattenParameterGroup Additional parameters for the
  * operation
  * 
+ * @param {string} [flattenParameterGroup.name] Product name with value
+ * 'groupproduct'
+ * 
  * @param {string} [flattenParameterGroup.baseProductId] Unique identifier
  * representing a specific product for a given latitude & longitude. For
  * example, uberX in San Francisco will have a different product_id than
@@ -1135,8 +1109,6 @@ AutoRestResourceFlatteningTestService.prototype.postFlattenedSimpleProduct = fun
  * of product.
  * 
  * @param {string} [flattenParameterGroup.odatavalue] URL value.
- * 
- * @param {string} [flattenParameterGroup.name] Product name
  * 
  * @param {object} [options] Optional Parameters.
  * 

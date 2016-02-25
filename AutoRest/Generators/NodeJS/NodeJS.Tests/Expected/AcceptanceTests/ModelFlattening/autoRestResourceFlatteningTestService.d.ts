@@ -174,25 +174,17 @@ declare class AutoRestResourceFlatteningTestService {
         /**
          * Put Flattened Simple Product with client flattening true on the parameter
          *
-         * @param {object} flattenParameterGroup Additional parameters for the
-         * operation
+         * @param {string} baseProductId Unique identifier representing a specific
+         * product for a given latitude & longitude. For example, uberX in San
+         * Francisco will have a different product_id than uberX in Los Angeles.
          * 
-         * @param {string} [flattenParameterGroup.baseProductId] Unique identifier
-         * representing a specific product for a given latitude & longitude. For
-         * example, uberX in San Francisco will have a different product_id than
-         * uberX in Los Angeles.
-         * 
-         * @param {string} [flattenParameterGroup.baseProductDescription] Description
-         * of product.
-         * 
-         * @param {string} [flattenParameterGroup.maxProductDisplayName] Display name
-         * of product.
-         * 
-         * @param {string} [flattenParameterGroup.odatavalue] URL value.
-         * 
-         * @param {string} [flattenParameterGroup.name] Product name
+         * @param {string} maxProductDisplayName Display name of product.
          * 
          * @param {object} [options] Optional Parameters.
+         * 
+         * @param {string} [options.baseProductDescription] Description of product.
+         * 
+         * @param {string} [options.odatavalue] URL value.
          * 
          * @param {object} [options.customHeaders] Headers that will be added to the
          * request
@@ -200,14 +192,17 @@ declare class AutoRestResourceFlatteningTestService {
          * @param {ServiceCallback} [callback] callback function; see ServiceCallback
          * doc in ms-rest index.d.ts for details
          */
-        postFlattenedSimpleProduct(flattenParameterGroup: models.FlattenParameterGroup, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SimpleProduct>): void;
-        postFlattenedSimpleProduct(flattenParameterGroup: models.FlattenParameterGroup, callback: ServiceCallback<models.SimpleProduct>): void;
+        postFlattenedSimpleProduct(baseProductId: string, maxProductDisplayName: string, options: { baseProductDescription? : string, odatavalue? : string, customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.SimpleProduct>): void;
+        postFlattenedSimpleProduct(baseProductId: string, maxProductDisplayName: string, callback: ServiceCallback<models.SimpleProduct>): void;
 
         /**
          * Put Simple Product with client flattening true on the model
          *
          * @param {object} flattenParameterGroup Additional parameters for the
          * operation
+         * 
+         * @param {string} [flattenParameterGroup.name] Product name with value
+         * 'groupproduct'
          * 
          * @param {string} [flattenParameterGroup.baseProductId] Unique identifier
          * representing a specific product for a given latitude & longitude. For
@@ -221,8 +216,6 @@ declare class AutoRestResourceFlatteningTestService {
          * of product.
          * 
          * @param {string} [flattenParameterGroup.odatavalue] URL value.
-         * 
-         * @param {string} [flattenParameterGroup.name] Product name
          * 
          * @param {object} [options] Optional Parameters.
          * 

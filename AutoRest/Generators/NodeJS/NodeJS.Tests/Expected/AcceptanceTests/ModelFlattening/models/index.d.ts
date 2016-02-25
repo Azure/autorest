@@ -134,7 +134,9 @@ export interface SimpleProduct extends BaseProduct {
  * @class
  * Initializes a new instance of the FlattenParameterGroup class.
  * @constructor
- * Additional parameters for the postFlattenedSimpleProduct operation.
+ * Additional parameters for the putSimpleProductWithGrouping operation.
+ * @member {string} name Product name with value 'groupproduct'
+ * 
  * @member {string} baseProductId Unique identifier representing a specific
  * product for a given latitude & longitude. For example, uberX in San
  * Francisco will have a different product_id than uberX in Los Angeles.
@@ -145,13 +147,11 @@ export interface SimpleProduct extends BaseProduct {
  * 
  * @member {string} [odatavalue] URL value.
  * 
- * @member {string} name Product name
- * 
  */
 export interface FlattenParameterGroup {
+    name: string;
     baseProductId: string;
     baseProductDescription?: string;
     maxProductDisplayName: string;
     odatavalue?: string;
-    name: string;
 }

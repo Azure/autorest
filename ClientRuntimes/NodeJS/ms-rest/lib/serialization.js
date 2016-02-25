@@ -55,7 +55,7 @@ exports.serializeObject = function (toSerialize) {
 exports.serialize = function (mapper, object, objectName) {
   var payload = {};
   var mapperType = mapper.type.name;
-  if (!objectName) objectName = objectNameFromSerializedName(mapper.serializedName);
+  if (!objectName) objectName = mapper.serializedName;
   if (mapperType.match(/^Sequence$/ig) !== null) payload = [];
   //Throw if required and object is null or undefined
   if (mapper.required && (object === null || object === undefined) && !mapper.isConstant) {
@@ -233,9 +233,20 @@ function serializeCompositeType(mapper, object, objectName) {
       }
     }
     
-    if (requiresFlattening(modelProps, object) && !payload.properties) payload.properties = {};
     for (var key in modelProps) {
       if (modelProps.hasOwnProperty(key)) {
+        var paths = splitSerializeName(modelProps[key].serializedName);
+        var propName = paths.pop();
+
+        var parentObject = payload;
+        paths.forEach(function(pathName) {
+           var childObject = parentObject[pathName];
+           if (childObject === null || childObject === undefined) {
+            parentObject[pathName] = {};
+           }
+           parentObject = parentObject[pathName];
+        });
+
         //make sure required properties of the CompositeType are present
         if (modelProps[key].required && !modelProps[key].isConstant) {
           if (object[key] === null || object[key] === undefined) {
@@ -245,10 +256,10 @@ function serializeCompositeType(mapper, object, objectName) {
         //serialize the property if it is present in the provided object instance
         if ((modelProps[key].defaultValue !== null && modelProps[key].defaultValue !== undefined) || 
           (object[key] !== null && object[key] !== undefined)) {
-          var propertyObjectName = objectName + '.' + objectNameFromSerializedName(modelProps[key].serializedName);
+          var propertyObjectName = objectName + '.' + modelProps[key].serializedName;
           var propertyMapper = modelProps[key];
           var serializedValue = exports.serialize.call(this, propertyMapper, object[key], propertyObjectName);
-          assignProperty(modelProps[key].serializedName, payload, serializedValue);
+          parentObject[propName] = serializedValue;
         }
       }
     }
@@ -350,7 +361,7 @@ exports.deserialize = function (mapper, responseBody, objectName) {
   if (responseBody === null || responseBody === undefined) return responseBody;
   var payload = {};
   var mapperType = mapper.type.name;
-  if (!objectName) objectName = objectNameFromSerializedName(mapper.serializedName);
+  if (!objectName) objectName = mapper.serializedName;
   if (mapperType.match(/^Sequence$/ig) !== null) payload = [];
   
   if (mapperType.match(/^(Number|String|Boolean|Enum|Object|Stream)$/ig) !== null) {
@@ -457,14 +468,14 @@ function deserializeCompositeType(mapper, responseBody, objectName) {
     
     for (var key in modelProps) {
       if (modelProps.hasOwnProperty(key)) {
+
+        var jpath = ['responseBody'];
+        var paths = splitSerializeName(modelProps[key].serializedName);
+        paths.forEach(function(item){
+            jpath.push(util.format('[\'%s\']', item));
+        })
         //deserialize the property if it is present in the provided responseBody instance
-        var propertyInstance = responseBody[modelProps[key].serializedName];
-        if (stringContainsProperties(modelProps[key].serializedName)) {
-          if (responseBody.properties) {
-            var serializedKey = objectNameFromSerializedName(modelProps[key].serializedName);
-            propertyInstance = responseBody.properties[serializedKey];
-          }
-        }
+        var propertyInstance = eval(jpath.join(''));
         var propertyObjectName = objectName + '.' + modelProps[key].serializedName;
         var propertyMapper = modelProps[key];
         var serializedValue;
@@ -483,31 +494,22 @@ function deserializeCompositeType(mapper, responseBody, objectName) {
   return responseBody;
 }
 
-function assignProperty(serializedName, payload, serializedValue) {
-  var key = objectNameFromSerializedName(serializedName);
-  if (stringContainsProperties(serializedName)) {
-    payload.properties[key] = serializedValue;
-  } else {
-    payload[key] = serializedValue;
-  }
-}
+function splitSerializeName(prop) {
+  var classes = []; 
+  var partialclass = ''; 
+  var subwords = prop.split('.');
 
-function requiresFlattening(mapper, object) {
-  return Object.keys(mapper).some(function (key) {
-    return ((mapper[key].serializedName.match(/^properties\./ig) !== null) && 
-            (object[key] !== null && object[key] !== undefined));
+  subwords.forEach(function(item) {
+    if (item.charAt(item.length - 1) === '\\') {
+     partialclass += item.substr(0, item.length - 1) + '.'; 
+    } else {
+     partialclass += item;
+     classes.push(partialclass);
+     partialclass = '';
+    }
   });
-}
 
-function objectNameFromSerializedName(name) {
-  if (stringContainsProperties(name)) {
-    return name.match(/^properties\.(\w+)$/i)[1];
-  }
-  return name;
-}
-
-function stringContainsProperties(prop) {
-  return (prop.match(/^properties\.(\w+)$/i) !== null);
-}
+  return classes;
+};
 
 exports = module.exports;

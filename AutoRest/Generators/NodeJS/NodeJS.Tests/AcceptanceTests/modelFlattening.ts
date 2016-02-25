@@ -183,7 +183,7 @@ describe('nodejs', function () {
         });
       });
 
-      it.only('should put simple type to flatten', function (done) {
+      it('should put simple product to flatten', function (done) {
         var resourceBody = <flatteningClientModels.SimpleProduct>{
           baseProductId: "123",
           baseProductDescription: "product description",
@@ -192,6 +192,44 @@ describe('nodejs', function () {
         };
         testClient.putSimpleProduct({ simpleBodyProduct: resourceBody }, function (error, result) {
           should.not.exist(error);
+          resourceBody.maxProductCapacity = "Large";
+          assert.deepEqual(result, resourceBody);
+          done();
+        });
+      });
+
+      it('should post simple product with param flattening', function (done) {
+        var resourceBody = <flatteningClientModels.SimpleProduct>{
+          baseProductId: "123",
+          baseProductDescription: "product description",
+          maxProductDisplayName: "max name",
+          odatavalue: "http://foo"
+        };
+        testClient.postFlattenedSimpleProduct("123", "max name", { baseProductDescription: "product description", odatavalue: "http://foo" }, function (error, result) {
+          should.not.exist(error);
+          resourceBody.maxProductCapacity = "Large";
+          assert.deepEqual(result, resourceBody);
+          done();
+        });
+      });
+
+      it('should put flattened and grouped product', function (done) {
+        var resourceBody = <flatteningClientModels.SimpleProduct>{
+          baseProductId: "123",
+          baseProductDescription: "product description",
+          maxProductDisplayName: "max name",
+          odatavalue: "http://foo"
+        };
+        var paramGroup = <flatteningClientModels.FlattenParameterGroup>{
+          baseProductId: "123",
+          baseProductDescription: "product description",
+          maxProductDisplayName: "max name",
+          odatavalue: "http://foo",
+          name: "groupproduct"
+        };
+        testClient.putSimpleProductWithGrouping(paramGroup, function (error, result) {
+          should.not.exist(error);
+          resourceBody.maxProductCapacity = "Large";
           assert.deepEqual(result, resourceBody);
           done();
         });

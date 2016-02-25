@@ -256,10 +256,6 @@ namespace Microsoft.Rest.Generator.Java
             foreach (var property in compositeType.Properties)
             {
                 property.Name = GetPropertyName(property.Name);
-                if (property.SerializedName != null)
-                {
-                    property.SerializedName = property.SerializedName.Replace("\\", "\\\\");
-                }
                 property.Type = NormalizeTypeReference(property.Type);
                 if (!property.IsRequired)
                 {

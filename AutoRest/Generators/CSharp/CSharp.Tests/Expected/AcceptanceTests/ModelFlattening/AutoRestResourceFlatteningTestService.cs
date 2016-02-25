@@ -960,8 +960,19 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// <summary>
         /// Put Flattened Simple Product with client flattening true on the parameter
         /// </summary>
-        /// <param name='flattenParameterGroup'>
-        /// Additional parameters for the operation
+        /// <param name='baseProductId'>
+        /// Unique identifier representing a specific product for a given latitude
+        /// &amp; longitude. For example, uberX in San Francisco will have a
+        /// different product_id than uberX in Los Angeles.
+        /// </param>
+        /// <param name='maxProductDisplayName'>
+        /// Display name of product.
+        /// </param>
+        /// <param name='baseProductDescription'>
+        /// Description of product.
+        /// </param>
+        /// <param name='odatavalue'>
+        /// URL value.
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -972,35 +983,15 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<SimpleProduct>> PostFlattenedSimpleProductWithHttpMessagesAsync(FlattenParameterGroup flattenParameterGroup, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<SimpleProduct>> PostFlattenedSimpleProductWithHttpMessagesAsync(string baseProductId, string maxProductDisplayName, string baseProductDescription = default(string), string odatavalue = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (flattenParameterGroup == null)
+            if (baseProductId == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "flattenParameterGroup");
+                throw new ValidationException(ValidationRules.CannotBeNull, "baseProductId");
             }
-            if (flattenParameterGroup != null)
+            if (maxProductDisplayName == null)
             {
-                flattenParameterGroup.Validate();
-            }
-            string baseProductId = default(string);
-            if (flattenParameterGroup != null)
-            {
-                baseProductId = flattenParameterGroup.BaseProductId;
-            }
-            string baseProductDescription = default(string);
-            if (flattenParameterGroup != null)
-            {
-                baseProductDescription = flattenParameterGroup.BaseProductDescription;
-            }
-            string maxProductDisplayName = default(string);
-            if (flattenParameterGroup != null)
-            {
-                maxProductDisplayName = flattenParameterGroup.MaxProductDisplayName;
-            }
-            string odatavalue = default(string);
-            if (flattenParameterGroup != null)
-            {
-                odatavalue = flattenParameterGroup.Odatavalue;
+                throw new ValidationException(ValidationRules.CannotBeNull, "maxProductDisplayName");
             }
             SimpleProduct simpleBodyProduct = default(SimpleProduct);
             if (baseProductId != null || baseProductDescription != null || maxProductDisplayName != null || odatavalue != null)
@@ -1018,10 +1009,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
-                tracingParameters.Add("baseProductId", baseProductId);
-                tracingParameters.Add("baseProductDescription", baseProductDescription);
-                tracingParameters.Add("maxProductDisplayName", maxProductDisplayName);
-                tracingParameters.Add("odatavalue", odatavalue);
                 tracingParameters.Add("simpleBodyProduct", simpleBodyProduct);
                 tracingParameters.Add("cancellationToken", cancellationToken);
                 ServiceClientTracing.Enter(_invocationId, this, "PostFlattenedSimpleProduct", tracingParameters);

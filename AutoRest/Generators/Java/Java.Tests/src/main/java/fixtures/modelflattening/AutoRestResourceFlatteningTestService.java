@@ -233,22 +233,28 @@ public interface AutoRestResourceFlatteningTestService {
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
      *
-     * @param flattenParameterGroup Additional parameters for the operation
+     * @param baseProductId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     * @param maxProductDisplayName Display name of product.
+     * @param baseProductDescription Description of product.
+     * @param odatavalue URL value.
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the SimpleProduct object wrapped in {@link ServiceResponse} if successful.
      */
-    ServiceResponse<SimpleProduct> postFlattenedSimpleProduct(FlattenParameterGroup flattenParameterGroup) throws ErrorException, IOException, IllegalArgumentException;
+    ServiceResponse<SimpleProduct> postFlattenedSimpleProduct(String baseProductId, String maxProductDisplayName, String baseProductDescription, String odatavalue) throws ErrorException, IOException, IllegalArgumentException;
 
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
      *
-     * @param flattenParameterGroup Additional parameters for the operation
+     * @param baseProductId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     * @param maxProductDisplayName Display name of product.
+     * @param baseProductDescription Description of product.
+     * @param odatavalue URL value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    Call<ResponseBody> postFlattenedSimpleProductAsync(FlattenParameterGroup flattenParameterGroup, final ServiceCallback<SimpleProduct> serviceCallback);
+    Call<ResponseBody> postFlattenedSimpleProductAsync(String baseProductId, String maxProductDisplayName, String baseProductDescription, String odatavalue, final ServiceCallback<SimpleProduct> serviceCallback);
     /**
      * Put Simple Product with client flattening true on the model.
      *

@@ -16,7 +16,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
     using Microsoft.Rest.Serialization;
 
     /// <summary>
-    /// Additional parameters for the postFlattenedSimpleProduct operation.
+    /// Additional parameters for the putSimpleProductWithGrouping operation.
     /// </summary>
     [JsonTransformation]
     public partial class FlattenParameterGroup
@@ -29,14 +29,20 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         /// <summary>
         /// Initializes a new instance of the FlattenParameterGroup class.
         /// </summary>
-        public FlattenParameterGroup(string baseProductId, string maxProductDisplayName, string name, string baseProductDescription = default(string), string odatavalue = default(string))
+        public FlattenParameterGroup(string name, string baseProductId, string maxProductDisplayName, string baseProductDescription = default(string), string odatavalue = default(string))
         {
+            Name = name;
             BaseProductId = baseProductId;
             BaseProductDescription = baseProductDescription;
             MaxProductDisplayName = maxProductDisplayName;
             Odatavalue = odatavalue;
-            Name = name;
         }
+
+        /// <summary>
+        /// Product name with value 'groupproduct'
+        /// </summary>
+        [JsonProperty(PropertyName = "")]
+        public string Name { get; set; }
 
         /// <summary>
         /// Unique identifier representing a specific product for a given
@@ -65,16 +71,14 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
         public string Odatavalue { get; set; }
 
         /// <summary>
-        /// Product name
-        /// </summary>
-        [JsonProperty(PropertyName = "")]
-        public string Name { get; set; }
-
-        /// <summary>
         /// Validate the object. Throws ValidationException if validation fails.
         /// </summary>
         public virtual void Validate()
         {
+            if (Name == null)
+            {
+                throw new ValidationException(ValidationRules.CannotBeNull, "Name");
+            }
             if (BaseProductId == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "BaseProductId");
@@ -82,10 +86,6 @@ namespace Fixtures.AcceptanceTestsModelFlattening.Models
             if (MaxProductDisplayName == null)
             {
                 throw new ValidationException(ValidationRules.CannotBeNull, "MaxProductDisplayName");
-            }
-            if (Name == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "Name");
             }
         }
     }

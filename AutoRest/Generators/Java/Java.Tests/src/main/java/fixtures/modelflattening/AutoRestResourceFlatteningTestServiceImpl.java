@@ -402,23 +402,22 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
      *
-     * @param flattenParameterGroup Additional parameters for the operation
+     * @param baseProductId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     * @param maxProductDisplayName Display name of product.
+     * @param baseProductDescription Description of product.
+     * @param odatavalue URL value.
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
      * @return the SimpleProduct object wrapped in {@link ServiceResponse} if successful.
      */
-    public ServiceResponse<SimpleProduct> postFlattenedSimpleProduct(FlattenParameterGroup flattenParameterGroup) throws ErrorException, IOException, IllegalArgumentException {
-        if (flattenParameterGroup == null) {
-            throw new IllegalArgumentException("Parameter flattenParameterGroup is required and cannot be null.");
+    public ServiceResponse<SimpleProduct> postFlattenedSimpleProduct(String baseProductId, String maxProductDisplayName, String baseProductDescription, String odatavalue) throws ErrorException, IOException, IllegalArgumentException {
+        if (baseProductId == null) {
+            throw new IllegalArgumentException("Parameter baseProductId is required and cannot be null.");
         }
-        Validator.validate(flattenParameterGroup);
-        String baseProductId = flattenParameterGroup.getBaseProductId();
-        String baseProductDescription = null;
-        baseProductDescription = flattenParameterGroup.getBaseProductDescription();
-        String maxProductDisplayName = flattenParameterGroup.getMaxProductDisplayName();
-        String odatavalue = null;
-        odatavalue = flattenParameterGroup.getOdatavalue();
+        if (maxProductDisplayName == null) {
+            throw new IllegalArgumentException("Parameter maxProductDisplayName is required and cannot be null.");
+        }
         SimpleProduct simpleBodyProduct = null;
         if (baseProductDescription != null || odatavalue != null) {
             simpleBodyProduct = new SimpleProduct();
@@ -434,22 +433,22 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
      *
-     * @param flattenParameterGroup Additional parameters for the operation
+     * @param baseProductId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     * @param maxProductDisplayName Display name of product.
+     * @param baseProductDescription Description of product.
+     * @param odatavalue URL value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> postFlattenedSimpleProductAsync(FlattenParameterGroup flattenParameterGroup, final ServiceCallback<SimpleProduct> serviceCallback) {
-        if (flattenParameterGroup == null) {
-            serviceCallback.failure(new IllegalArgumentException("Parameter flattenParameterGroup is required and cannot be null."));
+    public Call<ResponseBody> postFlattenedSimpleProductAsync(String baseProductId, String maxProductDisplayName, String baseProductDescription, String odatavalue, final ServiceCallback<SimpleProduct> serviceCallback) {
+        if (baseProductId == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter baseProductId is required and cannot be null."));
             return null;
         }
-        Validator.validate(flattenParameterGroup, serviceCallback);
-        String baseProductId = flattenParameterGroup.getBaseProductId();
-        String baseProductDescription = null;
-        baseProductDescription = flattenParameterGroup.getBaseProductDescription();
-        String maxProductDisplayName = flattenParameterGroup.getMaxProductDisplayName();
-        String odatavalue = null;
-        odatavalue = flattenParameterGroup.getOdatavalue();
+        if (maxProductDisplayName == null) {
+            serviceCallback.failure(new IllegalArgumentException("Parameter maxProductDisplayName is required and cannot be null."));
+            return null;
+        }
         SimpleProduct simpleBodyProduct = null;
         if (baseProductDescription != null || odatavalue != null) {
             simpleBodyProduct = new SimpleProduct();

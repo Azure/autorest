@@ -137,10 +137,12 @@ var modelFlatten = function (coverage) {
   var customFlattenBody = {
     base_product_id: "123",
     base_product_description: "product description",
-    max_product_display_name: "max name",
-    max_product_capacity: "Large",
-    max_product_image: {
-      '@odata\\.value': "http://foo"
+    details: {
+      max_product_display_name: 'max name',
+      max_product_capacity: "Large",
+      max_product_image: {
+        '@odata.value': "http://foo"
+      }
     }
   };                            
   router.put('/:type', function (req, res, next) {
@@ -167,15 +169,40 @@ var modelFlatten = function (coverage) {
           utils.send400(res, next, "The received body '" + JSON.stringify(req.body) + "' did not match the expected body '" + JSON.stringify(resourceCollectionBody) + "'.");
         }
       } else if (req.params.type === 'customFlattening') {
-        console.log('>>>>>');
-        console.log(util.inspect(req.body, { depth: null }));
-        console.log(util.inspect(customFlattenBody, { depth: null }));
         if (_.isEqual(req.body, customFlattenBody)) {
           coverage['putModelFlattenCustomBase']++;
           res.status(200).end(JSON.stringify(customFlattenBody));
         } else {
           utils.send400(res, next, "The received body '" + JSON.stringify(req.body) + "' did not match the expected body '" + JSON.stringify(customFlattenBody) + "'.");
         }
+      }
+    } else {
+      utils.send400(res, next, "Was expecting a body in the put request.");
+    }
+  });
+
+  router.post('/:type', function (req, res, next) {
+    if (req.body) {
+      if (req.params.type === 'customFlattening') {
+        if (_.isEqual(req.body, customFlattenBody)) {
+          coverage['postModelFlattenCustomParameter']++;
+          res.status(200).end(JSON.stringify(customFlattenBody));
+        } else {
+          utils.send400(res, next, "The received body '" + JSON.stringify(req.body) + "' did not match the expected body '" + JSON.stringify(customFlattenBody) + "'.");
+        }
+      }
+    } else {
+      utils.send400(res, next, "Was expecting a body in the put request.");
+    }
+  });
+
+  router.put('/customFlattening/parametergrouping/:name', function (req, res, next) {
+    if (req.body) {
+      if (_.isEqual(req.body, customFlattenBody) && req.params.name === 'groupproduct') {
+        coverage['putModelFlattenCustomGroupedParameter']++;
+        res.status(200).end(JSON.stringify(customFlattenBody));
+      } else {
+        utils.send400(res, next, "The received body '" + JSON.stringify(req.body) + "' did not match the expected body '" + JSON.stringify(customFlattenBody) + "'.");
       }
     } else {
       utils.send400(res, next, "Was expecting a body in the put request.");
