@@ -7,7 +7,6 @@
 
 package com.microsoft.azure.serializer;
 
-import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.BeanDescription;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -77,7 +76,7 @@ public class FlatteningSerializer<T> extends StdSerializer<T> implements Resolva
     }
 
     @Override
-    public void serialize(T value, JsonGenerator jgen, SerializerProvider provider) throws IOException, JsonGenerationException {
+    public void serialize(T value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
         if (value == null) {
             jgen.writeNull();
             return;
