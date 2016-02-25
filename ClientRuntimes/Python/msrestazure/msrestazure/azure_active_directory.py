@@ -290,6 +290,7 @@ class UserPassCredentials(OAuthTokenAuthentication, AADMixin):
                                         username=self.username,
                                         password=self.password,
                                         resource=self.resource,
+                                        verify=self.verify,
                                         **optional)
         except (RequestException, OAuth2Error, InvalidGrantError) as err:
             raise_with_traceback(AuthenticationError, "", err)
