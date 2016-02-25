@@ -25,6 +25,7 @@
     <Compile Include="routes\datetime-rfc1123.js" />
     <Compile Include="routes\files.js" />
     <Compile Include="routes\formData.js" />
+    <Compile Include="routes\model-flatten.js" />
     <Compile Include="routes\validation.js" />
     <Compile Include="util\constants.js" />
     <Compile Include="util\utils.js" />
@@ -51,7 +52,6 @@
     <Compile Include="routes\report.js" />
     <Compile Include="routes\reqopt.js" />
     <Compile Include="routes\azureParameterGrouping.js" />
-    <Compile Include="routes\resource-flatten.js" />
     <Compile Include="routes\string.js" />
     <Content Include="routes\sample.png" />
     <Content Include="startup\www.js" />

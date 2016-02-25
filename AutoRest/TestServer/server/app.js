@@ -30,7 +30,7 @@ var files = require('./routes/files');
 var formData = require('./routes/formData');
 var lros = require('./routes/lros');
 var paging = require('./routes/paging');
-var resourceFlatten = require('./routes/resource-flatten');
+var modelFlatten = require('./routes/model-flatten');
 var azureUrl = require('./routes/azureUrl');
 var azureSpecial = require('./routes/azureSpecials');
 var parameterGrouping = require('./routes/azureParameterGrouping.js');
@@ -415,6 +415,13 @@ var coverage = {
   "ConstantsInPath": 0,
   "ConstantsInBody": 0,
   "CustomBaseUri": 0,
+  'getModelFlattenArray': 0,
+  'putModelFlattenArray': 0,
+  'getModelFlattenDictionary': 0,
+  'putModelFlattenDictionary': 0,
+  'getModelFlattenResourceCollection': 0,
+  'putModelFlattenResourceCollection': 0,
+  'putModelFlattenCustomBase': 0
 };
 
 // view engine setup
@@ -450,9 +457,9 @@ app.use('/reqopt', new reqopt(coverage).router);
 app.use('/files', new files(coverage).router);
 app.use('/formdata', new formData(coverage).router);
 app.use('/http', new httpResponses(coverage, optionalCoverage).router);
+app.use('/model-flatten', new modelFlatten(coverage).router);
 app.use('/lro', new lros(azurecoverage).router);
 app.use('/paging', new paging(azurecoverage).router);
-app.use('/azure/resource-flatten', new resourceFlatten(azurecoverage).router);
 app.use('/azurespecials', new azureSpecial(azurecoverage).router);
 app.use('/report', new report(coverage, azurecoverage).router);
 app.use('/subscriptions', new azureUrl(azurecoverage).router);

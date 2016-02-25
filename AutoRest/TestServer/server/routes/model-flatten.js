@@ -4,16 +4,10 @@ var util = require('util');
 var _ = require('underscore');
 var utils = require('../util/utils');
 
-var resourceFlatten = function (coverage) {
-  coverage['getResourceFlattenArray'] = 0;
-  coverage['putResourceFlattenArray'] = 0;
-  coverage['getResourceFlattenDictionary'] = 0;
-  coverage['putResourceFlattenDictionary'] = 0;
-  coverage['getResourceFlattenResourceCollection'] = 0;
-  coverage['putResourceFlattenResourceCollection'] = 0;
+var modelFlatten = function (coverage) {
   router.get('/:type', function (req, res, next) {
     if (req.params.type === 'array') {
-      coverage['getResourceFlattenArray']++;
+      coverage['getModelFlattenArray']++;
       var result = [
         {
           id: '1',
@@ -40,7 +34,7 @@ var resourceFlatten = function (coverage) {
       ];
       res.status(200).end(JSON.stringify(result));
     } else if (req.params.type === 'dictionary') {
-      coverage['getResourceFlattenDictionary']++;
+      coverage['getModelFlattenDictionary']++;
       var result = {
         Product1: {
           id: '1',
@@ -67,7 +61,7 @@ var resourceFlatten = function (coverage) {
       };
       res.status(200).end(JSON.stringify(result));
     } else if (req.params.type === 'resourcecollection') {
-      coverage['getResourceFlattenResourceCollection']++;
+      coverage['getModelFlattenResourceCollection']++;
       var result = {
         dictionaryofresources: {
           Product1: {
@@ -139,28 +133,48 @@ var resourceFlatten = function (coverage) {
                             '{"location":"East US", "properties":{"pname":"Product2","type":"Flat"}}],' +
                             '"dictionaryofresources":' + dictionaryBody + ',' +
                             '"productresource":{"location":"India", "properties":{"pname":"Azure","type":"Flat"}}}';
+
+  var customFlattenBody = {
+    base_product_id: "123",
+    base_product_description: "product description",
+    max_product_display_name: "max name",
+    max_product_capacity: "Large",
+    max_product_image: {
+      '@odata\\.value': "http://foo"
+    }
+  };                            
   router.put('/:type', function (req, res, next) {
     if (req.body) {
       if (req.params.type === 'array') {
-        coverage['putResourceFlattenArray']++;
         if (_.isEqual(req.body, JSON.parse(arrayBody))) {
+          coverage['putModelFlattenArray']++;
           res.status(200).end();
         } else {
-          utils.send400(res, next, "The received body '" + JSON.stringify(req.body) + "' did not match the expected body '" + arrayBody + "'.");
+          utils.send400(res, next, "The received body '" + JSON.stringify(req.body) + "' did not match the expected body '" + JSON.stringify(arrayBody) + "'.");
         }
       } else if (req.params.type === 'dictionary') {
-        coverage['putResourceFlattenDictionary']++;
         if (_.isEqual(req.body, JSON.parse(dictionaryBody))) {
+          coverage['putModelFlattenDictionary']++;
           res.status(200).end();
         } else {
-          utils.send400(res, next, "The received body '" + JSON.stringify(req.body) + "' did not match the expected body '" + dictionaryBody + "'.");
+          utils.send400(res, next, "The received body '" + JSON.stringify(req.body) + "' did not match the expected body '" + JSON.stringify(dictionaryBody) + "'.");
         }
       } else if (req.params.type === 'resourcecollection') {
-        coverage['putResourceFlattenResourceCollection']++;
         if (_.isEqual(req.body, JSON.parse(resourceCollectionBody))) {
+          coverage['putModelFlattenResourceCollection']++;
           res.status(200).end();
         } else {
-          utils.send400(res, next, "The received body '" + JSON.stringify(req.body) + "' did not match the expected body '" + resourceCollectionBody + "'.");
+          utils.send400(res, next, "The received body '" + JSON.stringify(req.body) + "' did not match the expected body '" + JSON.stringify(resourceCollectionBody) + "'.");
+        }
+      } else if (req.params.type === 'customFlattening') {
+        console.log('>>>>>');
+        console.log(util.inspect(req.body, { depth: null }));
+        console.log(util.inspect(customFlattenBody, { depth: null }));
+        if (_.isEqual(req.body, customFlattenBody)) {
+          coverage['putModelFlattenCustomBase']++;
+          res.status(200).end(JSON.stringify(customFlattenBody));
+        } else {
+          utils.send400(res, next, "The received body '" + JSON.stringify(req.body) + "' did not match the expected body '" + JSON.stringify(customFlattenBody) + "'.");
         }
       }
     } else {
@@ -169,6 +183,6 @@ var resourceFlatten = function (coverage) {
   });
 };
 
-resourceFlatten.prototype.router = router;
+modelFlatten.prototype.router = router;
 
-module.exports = resourceFlatten;
+module.exports = modelFlatten;

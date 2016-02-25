@@ -3,32 +3,26 @@
 
 'use strict';
 
-var should = require('should');
-var http = require('http');
-var util = require('util');
-var assert = require('assert');
-var msRestAzure = require('ms-rest-azure');
-var msRest = require('ms-rest');
+import should = require('should');
+import http = require('http');
+import util = require('util');
+import assert = require('assert');
+import msRest = require('ms-rest');
+import moment = require('moment');
+var _ = require('underscore');
 
-var flatteningClient = require('../Expected/AcceptanceTests/ResourceFlattening/autoRestResourceFlatteningTestService');
-
-var dummySubscriptionId = 'a878ae02-6106-429z-9397-58091ee45g98';
-var dummyToken = 'dummy12321343423';
-var credentials = new msRestAzure.TokenCredentials(dummyToken);
+import flatteningClient = require('../Expected/AcceptanceTests/ModelFlattening/autoRestResourceFlatteningTestService');
+import flatteningClientModels = require('../Expected/AcceptanceTests/ModelFlattening/models');
 
 var clientOptions = {};
 var baseUri = 'http://localhost:3000';
 
 describe('nodejs', function () {
 
-  describe('Swagger ResourceFlattening BAT', function () {
+  describe('Swagger ModelFlattening BAT', function () {
 
     describe('Resource Flattening Operations', function () {
-      var testOptions = clientOptions;
-      testOptions.requestOptions = { jar: true };
-      testOptions.filters = [new msRest.ExponentialRetryPolicyFilter(3, 0, 0, 0)];
-      testOptions.noRetryPolicy = true;
-      var testClient = new flatteningClient(credentials, baseUri, clientOptions);
+      var testClient = new flatteningClient(baseUri, clientOptions);
 
       it('should get external resource as an array', function (done) {
         var expectedResult = [
@@ -62,8 +56,8 @@ describe('nodejs', function () {
 
       it('should put external resource as an array', function (done) {
         var resourceBody = [
-          { "location": "West US", "tags": { "tag1": "value1", "tag2": "value3" }, "pname": "Product1", "flattenedProductType": "Flat" },
-          { "location": "Building 44", "pname": "Product2" }
+          <flatteningClientModels.Resource> { "location": "West US", "tags": { "tag1": "value1", "tag2": "value3" }, "pname": "Product1", "flattenedProductType": "Flat" },
+          <flatteningClientModels.Resource> { "location": "Building 44", "pname": "Product2" }
         ];
         testClient.putArray({ resourceArray: resourceBody }, function (error, result) {
           should.not.exist(error);
@@ -102,8 +96,8 @@ describe('nodejs', function () {
       });
 
       it('should put external resource as a dictionary', function (done) {
-        var resourceBody = {
-          "Resource1": { "location": "West US", "tags": { "tag1": "value1", "tag2": "value3" }, "pname": "Product1", "flattenedProductType": "Flat" },
+        var resourceBody: { [propertyName: string]: flatteningClientModels.FlattenedProduct } =  {
+          "Resource1":  { "location": "West US", "tags": { "tag1": "value1", "tag2": "value3" }, "pname": "Product1", "flattenedProductType": "Flat" },
           "Resource2": { "location": "Building 44", "pname": "Product2", "flattenedProductType": "Flat" }
         };
         testClient.putDictionary({ resourceDictionary: resourceBody }, function (error, result) {
@@ -172,7 +166,7 @@ describe('nodejs', function () {
       });
 
       it('should put external resource as a complex type', function (done) {
-        var resourceBody = {
+        var resourceBody = <flatteningClientModels.ResourceCollection>{
           "arrayofresources": [
             {"location":"West US", "tags":{"tag1":"value1", "tag2":"value3"}, "pname":"Product1", "flattenedProductType": "Flat" },
             { "location": "East US", "pname": "Product2", "flattenedProductType": "Flat" }
@@ -185,6 +179,20 @@ describe('nodejs', function () {
         };
         testClient.putResourceCollection({ resourceComplexObject: resourceBody }, function (error, result) {
           should.not.exist(error);
+          done();
+        });
+      });
+
+      it.only('should put simple type to flatten', function (done) {
+        var resourceBody = <flatteningClientModels.SimpleProduct>{
+          baseProductId: "123",
+          baseProductDescription: "product description",
+          maxProductDisplayName: "max name",
+          odatavalue: "http://foo"
+        };
+        testClient.putSimpleProduct({ simpleBodyProduct: resourceBody }, function (error, result) {
+          should.not.exist(error);
+          assert.deepEqual(result, resourceBody);
           done();
         });
       });

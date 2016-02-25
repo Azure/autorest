@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/azure/resource-flatten/array": {
+    "/model-flatten/array": {
       "put": {
         "operationId": "putArray",
         "description": "Put External Resource as an Array",
@@ -67,7 +67,7 @@
         }
       }
     },
-    "/azure/resource-flatten/dictionary": {
+    "/model-flatten/dictionary": {
       "put": {
         "operationId": "putDictionary",
         "description": "Put External Resource as a Dictionary",
@@ -118,7 +118,7 @@
         }
       }
     },
-    "/azure/resource-flatten/resourcecollection": {
+    "/model-flatten/resourcecollection": {
       "put": {
         "operationId": "putResourceCollection",
         "description": "Put External Resource as a ResourceCollection",
@@ -163,7 +163,7 @@
         }
       }
     },
-    "/azure/resource-flatten/customFlattening": {
+    "/model-flatten/customFlattening": {
       "put": {
         "operationId": "putSimpleProduct",
         "description": "Put Simple Product with client flattening true on the model",
@@ -226,7 +226,7 @@
         }
       }
     },
-    "/azure/resource-flatten/customFlattening/parametergrouping/{name}/": {
+    "/model-flatten/customFlattening/parametergrouping/{name}/": {
       "put": {
         "operationId": "putSimpleProductWithGrouping",
         "description": "Put Simple Product with client flattening true on the model",
@@ -290,7 +290,6 @@
       }
     },
     "Resource": {
-      "x-ms-azure-resource": true,
       "properties": {
         "id": {
           "type": "string",
