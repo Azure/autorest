@@ -192,8 +192,9 @@ describe('nodejs', function () {
         };
         testClient.putSimpleProduct({ simpleBodyProduct: resourceBody }, function (error, result) {
           should.not.exist(error);
-          resourceBody.maxProductCapacity = "Large";
-          assert.deepEqual(result, resourceBody);
+          var newResourceBody = JSON.parse(JSON.stringify(resourceBody));
+          newResourceBody.maxProductCapacity = "Large";
+          assert.deepEqual(result, newResourceBody);
           done();
         });
       });
@@ -207,8 +208,9 @@ describe('nodejs', function () {
         };
         testClient.postFlattenedSimpleProduct("123", "max name", { baseProductDescription: "product description", odatavalue: "http://foo" }, function (error, result) {
           should.not.exist(error);
-          resourceBody.maxProductCapacity = "Large";
-          assert.deepEqual(result, resourceBody);
+          var newResourceBody = JSON.parse(JSON.stringify(resourceBody));
+          newResourceBody.maxProductCapacity = "Large";
+          assert.deepEqual(result, newResourceBody);
           done();
         });
       });
@@ -229,8 +231,9 @@ describe('nodejs', function () {
         };
         testClient.putSimpleProductWithGrouping(paramGroup, function (error, result) {
           should.not.exist(error);
-          resourceBody.maxProductCapacity = "Large";
-          assert.deepEqual(result, resourceBody);
+          var newResourceBody = JSON.parse(JSON.stringify(resourceBody));
+          newResourceBody.maxProductCapacity = "Large";
+          assert.deepEqual(result, newResourceBody);
           done();
         });
       });

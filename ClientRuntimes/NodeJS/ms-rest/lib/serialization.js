@@ -475,7 +475,12 @@ function deserializeCompositeType(mapper, responseBody, objectName) {
             jpath.push(util.format('[\'%s\']', item));
         })
         //deserialize the property if it is present in the provided responseBody instance
-        var propertyInstance = eval(jpath.join(''));
+        var propertyInstance;
+        try {
+          propertyInstance = eval(jpath.join(''));
+        } catch (err) {
+          continue;
+        }
         var propertyObjectName = objectName + '.' + modelProps[key].serializedName;
         var propertyMapper = modelProps[key];
         var serializedValue;
