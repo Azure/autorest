@@ -632,6 +632,13 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                     null
                 }));
                 Assert.Throws<SerializationException>(() => client.Array.GetDateTimeInvalidChars());
+
+                Guid guid1 = new Guid("6DCC7237-45FE-45C4-8A6B-3A8A3F625652");
+                Guid guid2 = new Guid("D1399005-30F7-40D6-8DA6-DD7C89AD34DB");
+                Guid guid3 = new Guid("F42F6AA1-A5BC-4DDF-907E-5F915DE43205");
+                Assert.Equal(new List<Guid?> { guid1, guid2, guid3 }, client.Array.GetUuidValid());
+                client.Array.PutUuidValid(new List<Guid?> { guid1, guid2, guid3 });
+                Assert.Throws<SerializationException>(() => client.Array.GetUuidInvalidChars());
             }
         }
 
@@ -1826,6 +1833,14 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         }
 
         [Fact]
+        public void FormatUuidModeledAsGuidTest()
+        {
+            var productType = typeof (Fixtures.MirrorPrimitives.Models.Product);
+            Assert.Equal(typeof(Guid?), productType.GetProperty("Uuid").PropertyType);
+            Assert.Equal(typeof(IList<Guid?>), productType.GetProperty("UuidArray").PropertyType);
+        }
+
+        [Fact]
         public void RequiredOptionalTests()
         {
             SwaggerSpecRunner.RunTests(
@@ -1939,6 +1954,12 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
                 float totalTests = report.Count;
 #endif
                 float executedTests = report.Values.Count(v => v > 0);
+
+                var nullValued = report.Where(p => p.Value == null).Select(p => p.Key);
+                foreach (var item in nullValued)
+                {
+                    logger.LogInformation(string.Format(CultureInfo.CurrentCulture, "MISSING: {0}", item));
+                }
                 Assert.Equal(totalTests, executedTests);
             }
         }

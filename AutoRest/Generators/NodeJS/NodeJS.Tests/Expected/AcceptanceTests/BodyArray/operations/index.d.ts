@@ -428,6 +428,54 @@ export interface ArrayModel {
     getStringWithInvalid(callback: ServiceCallback<string[]>): void;
 
     /**
+     * Get uuid array value ['6DCC7237-45FE-45C4-8A6B-3A8A3F625652',
+     * 'D1399005-30F7-40D6-8DA6-DD7C89AD34DB',
+     * 'F42F6AA1-A5BC-4DDF-907E-5F915DE43205']
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    getUuidValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<string[]>): void;
+    getUuidValid(callback: ServiceCallback<string[]>): void;
+
+    /**
+     * Set array value  ['6DCC7237-45FE-45C4-8A6B-3A8A3F625652',
+     * 'D1399005-30F7-40D6-8DA6-DD7C89AD34DB',
+     * 'F42F6AA1-A5BC-4DDF-907E-5F915DE43205']
+     *
+     * @param {array} arrayBody
+     * 
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    putUuidValid(arrayBody: string[], options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putUuidValid(arrayBody: string[], callback: ServiceCallback<void>): void;
+
+    /**
+     * Get uuid array value ['6DCC7237-45FE-45C4-8A6B-3A8A3F625652', 'foo']
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    getUuidInvalidChars(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<string[]>): void;
+    getUuidInvalidChars(callback: ServiceCallback<string[]>): void;
+
+    /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12']
      *
      * @param {object} [options] Optional Parameters.

@@ -23,6 +23,7 @@ namespace Microsoft.Rest.Generator.ClientModel
         DateTimeRfc1123,
         TimeSpan,
         Boolean,
-        Credentials
+        Credentials,
+        Uuid
     }
 }
