@@ -11,6 +11,7 @@
 package fixtures.bodydatetime;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
@@ -149,8 +150,9 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getNullAsync(final ServiceCallback<DateTime> serviceCallback) {
+    public ServiceCall getNullAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -161,7 +163,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<DateTime> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -189,8 +191,9 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getInvalidAsync(final ServiceCallback<DateTime> serviceCallback) {
+    public ServiceCall getInvalidAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getInvalid();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -201,7 +204,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<DateTime> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -229,8 +232,9 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getOverflowAsync(final ServiceCallback<DateTime> serviceCallback) {
+    public ServiceCall getOverflowAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getOverflow();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -241,7 +245,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<DateTime> getOverflowDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -269,8 +273,9 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getUnderflowAsync(final ServiceCallback<DateTime> serviceCallback) {
+    public ServiceCall getUnderflowAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getUnderflow();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -281,7 +286,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<DateTime> getUnderflowDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -315,12 +320,13 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putUtcMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putUtcMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
         if (datetimeBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.putUtcMaxDateTime(datetimeBody);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -331,7 +337,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putUtcMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -359,8 +365,9 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getUtcLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
+    public ServiceCall getUtcLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getUtcLowercaseMaxDateTime();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -371,7 +378,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<DateTime> getUtcLowercaseMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -399,8 +406,9 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
+    public ServiceCall getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getUtcUppercaseMaxDateTime();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -411,7 +419,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<DateTime> getUtcUppercaseMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -445,12 +453,13 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putLocalPositiveOffsetMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putLocalPositiveOffsetMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
         if (datetimeBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.putLocalPositiveOffsetMaxDateTime(datetimeBody);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -461,7 +470,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putLocalPositiveOffsetMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -489,8 +498,9 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getLocalPositiveOffsetLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
+    public ServiceCall getLocalPositiveOffsetLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getLocalPositiveOffsetLowercaseMaxDateTime();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -501,7 +511,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<DateTime> getLocalPositiveOffsetLowercaseMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -529,8 +539,9 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getLocalPositiveOffsetUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
+    public ServiceCall getLocalPositiveOffsetUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getLocalPositiveOffsetUppercaseMaxDateTime();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -541,7 +552,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<DateTime> getLocalPositiveOffsetUppercaseMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -575,12 +586,13 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putLocalNegativeOffsetMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putLocalNegativeOffsetMaxDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
         if (datetimeBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.putLocalNegativeOffsetMaxDateTime(datetimeBody);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -591,7 +603,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putLocalNegativeOffsetMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -619,8 +631,9 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getLocalNegativeOffsetUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
+    public ServiceCall getLocalNegativeOffsetUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getLocalNegativeOffsetUppercaseMaxDateTime();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -631,7 +644,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<DateTime> getLocalNegativeOffsetUppercaseMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -659,8 +672,9 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getLocalNegativeOffsetLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
+    public ServiceCall getLocalNegativeOffsetLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getLocalNegativeOffsetLowercaseMaxDateTime();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -671,7 +685,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<DateTime> getLocalNegativeOffsetLowercaseMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -705,12 +719,13 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putUtcMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putUtcMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
         if (datetimeBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.putUtcMinDateTime(datetimeBody);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -721,7 +736,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putUtcMinDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -749,8 +764,9 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getUtcMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
+    public ServiceCall getUtcMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getUtcMinDateTime();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -761,7 +777,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<DateTime> getUtcMinDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -795,12 +811,13 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putLocalPositiveOffsetMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putLocalPositiveOffsetMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
         if (datetimeBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.putLocalPositiveOffsetMinDateTime(datetimeBody);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -811,7 +828,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putLocalPositiveOffsetMinDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -839,8 +856,9 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getLocalPositiveOffsetMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
+    public ServiceCall getLocalPositiveOffsetMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getLocalPositiveOffsetMinDateTime();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -851,7 +869,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<DateTime> getLocalPositiveOffsetMinDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -885,12 +903,13 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putLocalNegativeOffsetMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putLocalNegativeOffsetMinDateTimeAsync(DateTime datetimeBody, final ServiceCallback<Void> serviceCallback) {
         if (datetimeBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.putLocalNegativeOffsetMinDateTime(datetimeBody);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -901,7 +920,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putLocalNegativeOffsetMinDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -929,8 +948,9 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getLocalNegativeOffsetMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
+    public ServiceCall getLocalNegativeOffsetMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getLocalNegativeOffsetMinDateTime();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -941,7 +961,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<DateTime> getLocalNegativeOffsetMinDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {

@@ -10,13 +10,12 @@
 
 package fixtures.bodyformdata;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodyformdata.models.ErrorException;
 import java.io.InputStream;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -41,9 +40,9 @@ public interface FormdataOperations {
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> uploadFileAsync(InputStream fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback);
+    ServiceCall uploadFileAsync(InputStream fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback);
 
     /**
      * Upload file.
@@ -63,8 +62,8 @@ public interface FormdataOperations {
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> uploadFileViaBodyAsync(InputStream fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback);
+    ServiceCall uploadFileViaBodyAsync(InputStream fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback);
 
 }

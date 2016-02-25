@@ -13,6 +13,7 @@ package fixtures.azurespecials;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.azure.CloudException;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
@@ -80,8 +81,9 @@ public final class XMsClientRequestIdOperationsImpl implements XMsClientRequestI
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall getAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.get(this.client.getAcceptLanguage());
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -92,7 +94,7 @@ public final class XMsClientRequestIdOperationsImpl implements XMsClientRequestI
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> getDelegate(Response<ResponseBody> response) throws CloudException, IOException {
@@ -125,12 +127,13 @@ public final class XMsClientRequestIdOperationsImpl implements XMsClientRequestI
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> paramGetAsync(String xMsClientRequestId, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall paramGetAsync(String xMsClientRequestId, final ServiceCallback<Void> serviceCallback) {
         if (xMsClientRequestId == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter xMsClientRequestId is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.paramGet(xMsClientRequestId, this.client.getAcceptLanguage());
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -141,7 +144,7 @@ public final class XMsClientRequestIdOperationsImpl implements XMsClientRequestI
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> paramGetDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {

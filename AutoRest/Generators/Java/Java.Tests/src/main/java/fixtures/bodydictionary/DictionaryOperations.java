@@ -11,6 +11,7 @@
 package fixtures.bodydictionary;
 
 import com.microsoft.rest.DateTimeRfc1123;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodydictionary.models.ErrorException;
@@ -18,11 +19,9 @@ import fixtures.bodydictionary.models.Widget;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import okhttp3.ResponseBody;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.Period;
-import retrofit2.Call;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -42,9 +41,9 @@ public interface DictionaryOperations {
      * Get null dictionary value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getNullAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
+    ServiceCall getNullAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
 
     /**
      * Get empty dictionary value {}.
@@ -59,9 +58,9 @@ public interface DictionaryOperations {
      * Get empty dictionary value {}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getEmptyAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
+    ServiceCall getEmptyAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
 
     /**
      * Set dictionary value empty {}.
@@ -79,9 +78,9 @@ public interface DictionaryOperations {
      *
      * @param arrayBody the Map&lt;String, String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putEmptyAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putEmptyAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get Dictionary with null value.
@@ -96,9 +95,9 @@ public interface DictionaryOperations {
      * Get Dictionary with null value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getNullValueAsync(final ServiceCallback<Map<String, String>> serviceCallback);
+    ServiceCall getNullValueAsync(final ServiceCallback<Map<String, String>> serviceCallback);
 
     /**
      * Get Dictionary with null key.
@@ -113,9 +112,9 @@ public interface DictionaryOperations {
      * Get Dictionary with null key.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getNullKeyAsync(final ServiceCallback<Map<String, String>> serviceCallback);
+    ServiceCall getNullKeyAsync(final ServiceCallback<Map<String, String>> serviceCallback);
 
     /**
      * Get Dictionary with key as empty string.
@@ -130,9 +129,9 @@ public interface DictionaryOperations {
      * Get Dictionary with key as empty string.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getEmptyStringKeyAsync(final ServiceCallback<Map<String, String>> serviceCallback);
+    ServiceCall getEmptyStringKeyAsync(final ServiceCallback<Map<String, String>> serviceCallback);
 
     /**
      * Get invalid Dictionary value.
@@ -147,9 +146,9 @@ public interface DictionaryOperations {
      * Get invalid Dictionary value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getInvalidAsync(final ServiceCallback<Map<String, String>> serviceCallback);
+    ServiceCall getInvalidAsync(final ServiceCallback<Map<String, String>> serviceCallback);
 
     /**
      * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
@@ -164,9 +163,9 @@ public interface DictionaryOperations {
      * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getBooleanTfftAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback);
+    ServiceCall getBooleanTfftAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback);
 
     /**
      * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }.
@@ -184,9 +183,9 @@ public interface DictionaryOperations {
      *
      * @param arrayBody the Map&lt;String, Boolean&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putBooleanTfftAsync(Map<String, Boolean> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putBooleanTfftAsync(Map<String, Boolean> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get boolean dictionary value {"0": true, "1": null, "2": false }.
@@ -201,9 +200,9 @@ public interface DictionaryOperations {
      * Get boolean dictionary value {"0": true, "1": null, "2": false }.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getBooleanInvalidNullAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback);
+    ServiceCall getBooleanInvalidNullAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback);
 
     /**
      * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
@@ -218,9 +217,9 @@ public interface DictionaryOperations {
      * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getBooleanInvalidStringAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback);
+    ServiceCall getBooleanInvalidStringAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback);
 
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -235,9 +234,9 @@ public interface DictionaryOperations {
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getIntegerValidAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
+    ServiceCall getIntegerValidAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
 
     /**
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -255,9 +254,9 @@ public interface DictionaryOperations {
      *
      * @param arrayBody the Map&lt;String, Integer&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putIntegerValidAsync(Map<String, Integer> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putIntegerValidAsync(Map<String, Integer> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get integer dictionary value {"0": 1, "1": null, "2": 0}.
@@ -272,9 +271,9 @@ public interface DictionaryOperations {
      * Get integer dictionary value {"0": 1, "1": null, "2": 0}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getIntInvalidNullAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
+    ServiceCall getIntInvalidNullAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
 
     /**
      * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}.
@@ -289,9 +288,9 @@ public interface DictionaryOperations {
      * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getIntInvalidStringAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
+    ServiceCall getIntInvalidStringAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
 
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -306,9 +305,9 @@ public interface DictionaryOperations {
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getLongValidAsync(final ServiceCallback<Map<String, Long>> serviceCallback);
+    ServiceCall getLongValidAsync(final ServiceCallback<Map<String, Long>> serviceCallback);
 
     /**
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -326,9 +325,9 @@ public interface DictionaryOperations {
      *
      * @param arrayBody the Map&lt;String, Long&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putLongValidAsync(Map<String, Long> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putLongValidAsync(Map<String, Long> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get long dictionary value {"0": 1, "1": null, "2": 0}.
@@ -343,9 +342,9 @@ public interface DictionaryOperations {
      * Get long dictionary value {"0": 1, "1": null, "2": 0}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getLongInvalidNullAsync(final ServiceCallback<Map<String, Long>> serviceCallback);
+    ServiceCall getLongInvalidNullAsync(final ServiceCallback<Map<String, Long>> serviceCallback);
 
     /**
      * Get long dictionary value {"0": 1, "1": "integer", "2": 0}.
@@ -360,9 +359,9 @@ public interface DictionaryOperations {
      * Get long dictionary value {"0": 1, "1": "integer", "2": 0}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getLongInvalidStringAsync(final ServiceCallback<Map<String, Long>> serviceCallback);
+    ServiceCall getLongInvalidStringAsync(final ServiceCallback<Map<String, Long>> serviceCallback);
 
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -377,9 +376,9 @@ public interface DictionaryOperations {
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getFloatValidAsync(final ServiceCallback<Map<String, Double>> serviceCallback);
+    ServiceCall getFloatValidAsync(final ServiceCallback<Map<String, Double>> serviceCallback);
 
     /**
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -397,9 +396,9 @@ public interface DictionaryOperations {
      *
      * @param arrayBody the Map&lt;String, Double&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putFloatValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putFloatValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
@@ -414,9 +413,9 @@ public interface DictionaryOperations {
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getFloatInvalidNullAsync(final ServiceCallback<Map<String, Double>> serviceCallback);
+    ServiceCall getFloatInvalidNullAsync(final ServiceCallback<Map<String, Double>> serviceCallback);
 
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
@@ -431,9 +430,9 @@ public interface DictionaryOperations {
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getFloatInvalidStringAsync(final ServiceCallback<Map<String, Double>> serviceCallback);
+    ServiceCall getFloatInvalidStringAsync(final ServiceCallback<Map<String, Double>> serviceCallback);
 
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -448,9 +447,9 @@ public interface DictionaryOperations {
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getDoubleValidAsync(final ServiceCallback<Map<String, Double>> serviceCallback);
+    ServiceCall getDoubleValidAsync(final ServiceCallback<Map<String, Double>> serviceCallback);
 
     /**
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -468,9 +467,9 @@ public interface DictionaryOperations {
      *
      * @param arrayBody the Map&lt;String, Double&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putDoubleValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putDoubleValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
@@ -485,9 +484,9 @@ public interface DictionaryOperations {
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getDoubleInvalidNullAsync(final ServiceCallback<Map<String, Double>> serviceCallback);
+    ServiceCall getDoubleInvalidNullAsync(final ServiceCallback<Map<String, Double>> serviceCallback);
 
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
@@ -502,9 +501,9 @@ public interface DictionaryOperations {
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getDoubleInvalidStringAsync(final ServiceCallback<Map<String, Double>> serviceCallback);
+    ServiceCall getDoubleInvalidStringAsync(final ServiceCallback<Map<String, Double>> serviceCallback);
 
     /**
      * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
@@ -519,9 +518,9 @@ public interface DictionaryOperations {
      * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getStringValidAsync(final ServiceCallback<Map<String, String>> serviceCallback);
+    ServiceCall getStringValidAsync(final ServiceCallback<Map<String, String>> serviceCallback);
 
     /**
      * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
@@ -539,9 +538,9 @@ public interface DictionaryOperations {
      *
      * @param arrayBody the Map&lt;String, String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putStringValidAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putStringValidAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
@@ -556,9 +555,9 @@ public interface DictionaryOperations {
      * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getStringWithNullAsync(final ServiceCallback<Map<String, String>> serviceCallback);
+    ServiceCall getStringWithNullAsync(final ServiceCallback<Map<String, String>> serviceCallback);
 
     /**
      * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
@@ -573,9 +572,9 @@ public interface DictionaryOperations {
      * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getStringWithInvalidAsync(final ServiceCallback<Map<String, String>> serviceCallback);
+    ServiceCall getStringWithInvalidAsync(final ServiceCallback<Map<String, String>> serviceCallback);
 
     /**
      * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
@@ -590,9 +589,9 @@ public interface DictionaryOperations {
      * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getDateValidAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback);
+    ServiceCall getDateValidAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback);
 
     /**
      * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
@@ -610,9 +609,9 @@ public interface DictionaryOperations {
      *
      * @param arrayBody the Map&lt;String, LocalDate&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putDateValidAsync(Map<String, LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putDateValidAsync(Map<String, LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
@@ -627,9 +626,9 @@ public interface DictionaryOperations {
      * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getDateInvalidNullAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback);
+    ServiceCall getDateInvalidNullAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback);
 
     /**
      * Get date dictionary value {"0": "2011-03-22", "1": "date"}.
@@ -644,9 +643,9 @@ public interface DictionaryOperations {
      * Get date dictionary value {"0": "2011-03-22", "1": "date"}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getDateInvalidCharsAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback);
+    ServiceCall getDateInvalidCharsAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback);
 
     /**
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
@@ -661,9 +660,9 @@ public interface DictionaryOperations {
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getDateTimeValidAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback);
+    ServiceCall getDateTimeValidAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback);
 
     /**
      * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
@@ -681,9 +680,9 @@ public interface DictionaryOperations {
      *
      * @param arrayBody the Map&lt;String, DateTime&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putDateTimeValidAsync(Map<String, DateTime> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putDateTimeValidAsync(Map<String, DateTime> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
@@ -698,9 +697,9 @@ public interface DictionaryOperations {
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getDateTimeInvalidNullAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback);
+    ServiceCall getDateTimeInvalidNullAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback);
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
@@ -715,9 +714,9 @@ public interface DictionaryOperations {
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getDateTimeInvalidCharsAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback);
+    ServiceCall getDateTimeInvalidCharsAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback);
 
     /**
      * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
@@ -732,9 +731,9 @@ public interface DictionaryOperations {
      * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getDateTimeRfc1123ValidAsync(final ServiceCallback<Map<String, DateTimeRfc1123>> serviceCallback);
+    ServiceCall getDateTimeRfc1123ValidAsync(final ServiceCallback<Map<String, DateTimeRfc1123>> serviceCallback);
 
     /**
      * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
@@ -752,9 +751,9 @@ public interface DictionaryOperations {
      *
      * @param arrayBody the Map&lt;String, DateTimeRfc1123&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putDateTimeRfc1123ValidAsync(Map<String, DateTimeRfc1123> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putDateTimeRfc1123ValidAsync(Map<String, DateTimeRfc1123> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
@@ -769,9 +768,9 @@ public interface DictionaryOperations {
      * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getDurationValidAsync(final ServiceCallback<Map<String, Period>> serviceCallback);
+    ServiceCall getDurationValidAsync(final ServiceCallback<Map<String, Period>> serviceCallback);
 
     /**
      * Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
@@ -789,9 +788,9 @@ public interface DictionaryOperations {
      *
      * @param arrayBody the Map&lt;String, Period&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putDurationValidAsync(Map<String, Period> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putDurationValidAsync(Map<String, Period> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64.
@@ -806,9 +805,9 @@ public interface DictionaryOperations {
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getByteValidAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback);
+    ServiceCall getByteValidAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback);
 
     /**
      * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64.
@@ -826,9 +825,9 @@ public interface DictionaryOperations {
      *
      * @param arrayBody the Map&lt;String, byte[]&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putByteValidAsync(Map<String, byte[]> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putByteValidAsync(Map<String, byte[]> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
@@ -843,9 +842,9 @@ public interface DictionaryOperations {
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getByteInvalidNullAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback);
+    ServiceCall getByteInvalidNullAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback);
 
     /**
      * Get dictionary of complex type null value.
@@ -860,9 +859,9 @@ public interface DictionaryOperations {
      * Get dictionary of complex type null value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getComplexNullAsync(final ServiceCallback<Map<String, Widget>> serviceCallback);
+    ServiceCall getComplexNullAsync(final ServiceCallback<Map<String, Widget>> serviceCallback);
 
     /**
      * Get empty dictionary of complex type {}.
@@ -877,9 +876,9 @@ public interface DictionaryOperations {
      * Get empty dictionary of complex type {}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getComplexEmptyAsync(final ServiceCallback<Map<String, Widget>> serviceCallback);
+    ServiceCall getComplexEmptyAsync(final ServiceCallback<Map<String, Widget>> serviceCallback);
 
     /**
      * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}.
@@ -894,9 +893,9 @@ public interface DictionaryOperations {
      * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getComplexItemNullAsync(final ServiceCallback<Map<String, Widget>> serviceCallback);
+    ServiceCall getComplexItemNullAsync(final ServiceCallback<Map<String, Widget>> serviceCallback);
 
     /**
      * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}.
@@ -911,9 +910,9 @@ public interface DictionaryOperations {
      * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getComplexItemEmptyAsync(final ServiceCallback<Map<String, Widget>> serviceCallback);
+    ServiceCall getComplexItemEmptyAsync(final ServiceCallback<Map<String, Widget>> serviceCallback);
 
     /**
      * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
@@ -928,9 +927,9 @@ public interface DictionaryOperations {
      * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getComplexValidAsync(final ServiceCallback<Map<String, Widget>> serviceCallback);
+    ServiceCall getComplexValidAsync(final ServiceCallback<Map<String, Widget>> serviceCallback);
 
     /**
      * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
@@ -948,9 +947,9 @@ public interface DictionaryOperations {
      *
      * @param arrayBody the Map&lt;String, Widget&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putComplexValidAsync(Map<String, Widget> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putComplexValidAsync(Map<String, Widget> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get a null array.
@@ -965,9 +964,9 @@ public interface DictionaryOperations {
      * Get a null array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getArrayNullAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback);
+    ServiceCall getArrayNullAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback);
 
     /**
      * Get an empty dictionary {}.
@@ -982,9 +981,9 @@ public interface DictionaryOperations {
      * Get an empty dictionary {}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getArrayEmptyAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback);
+    ServiceCall getArrayEmptyAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback);
 
     /**
      * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
@@ -999,9 +998,9 @@ public interface DictionaryOperations {
      * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getArrayItemNullAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback);
+    ServiceCall getArrayItemNullAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback);
 
     /**
      * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
@@ -1016,9 +1015,9 @@ public interface DictionaryOperations {
      * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getArrayItemEmptyAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback);
+    ServiceCall getArrayItemEmptyAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback);
 
     /**
      * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
@@ -1033,9 +1032,9 @@ public interface DictionaryOperations {
      * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getArrayValidAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback);
+    ServiceCall getArrayValidAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback);
 
     /**
      * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
@@ -1053,9 +1052,9 @@ public interface DictionaryOperations {
      *
      * @param arrayBody the Map&lt;String, List&lt;String&gt;&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putArrayValidAsync(Map<String, List<String>> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putArrayValidAsync(Map<String, List<String>> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get an dictionaries of dictionaries with value null.
@@ -1070,9 +1069,9 @@ public interface DictionaryOperations {
      * Get an dictionaries of dictionaries with value null.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getDictionaryNullAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback);
+    ServiceCall getDictionaryNullAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback);
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
@@ -1087,9 +1086,9 @@ public interface DictionaryOperations {
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getDictionaryEmptyAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback);
+    ServiceCall getDictionaryEmptyAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback);
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
@@ -1104,9 +1103,9 @@ public interface DictionaryOperations {
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getDictionaryItemNullAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback);
+    ServiceCall getDictionaryItemNullAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback);
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
@@ -1121,9 +1120,9 @@ public interface DictionaryOperations {
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getDictionaryItemEmptyAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback);
+    ServiceCall getDictionaryItemEmptyAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback);
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
@@ -1138,9 +1137,9 @@ public interface DictionaryOperations {
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getDictionaryValidAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback);
+    ServiceCall getDictionaryValidAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback);
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
@@ -1158,8 +1157,8 @@ public interface DictionaryOperations {
      *
      * @param arrayBody the Map&lt;String, Map&lt;String, String&gt;&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback);
 
 }

@@ -11,10 +11,10 @@
 package fixtures.headexceptions;
 
 import com.microsoft.azure.CloudException;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import java.io.IOException;
-import retrofit2.Call;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -34,9 +34,9 @@ public interface HeadExceptionOperations {
      * Return 200 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<Void> head200Async(final ServiceCallback<Void> serviceCallback);
+    ServiceCall head200Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 204 status code if successful.
@@ -51,9 +51,9 @@ public interface HeadExceptionOperations {
      * Return 204 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<Void> head204Async(final ServiceCallback<Void> serviceCallback);
+    ServiceCall head204Async(final ServiceCallback<Void> serviceCallback);
 
     /**
      * Return 404 status code if successful.
@@ -68,8 +68,8 @@ public interface HeadExceptionOperations {
      * Return 404 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<Void> head404Async(final ServiceCallback<Void> serviceCallback);
+    ServiceCall head404Async(final ServiceCallback<Void> serviceCallback);
 
 }

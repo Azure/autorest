@@ -12,6 +12,7 @@ package fixtures.azurespecials;
 
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
@@ -94,12 +95,13 @@ public final class SubscriptionInMethodOperationsImpl implements SubscriptionInM
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> postMethodLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall postMethodLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
         if (subscriptionId == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.postMethodLocalValid(subscriptionId, this.client.getAcceptLanguage());
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -110,7 +112,7 @@ public final class SubscriptionInMethodOperationsImpl implements SubscriptionInM
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> postMethodLocalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -144,12 +146,13 @@ public final class SubscriptionInMethodOperationsImpl implements SubscriptionInM
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> postMethodLocalNullAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall postMethodLocalNullAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
         if (subscriptionId == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.postMethodLocalNull(subscriptionId, this.client.getAcceptLanguage());
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -160,7 +163,7 @@ public final class SubscriptionInMethodOperationsImpl implements SubscriptionInM
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> postMethodLocalNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -194,12 +197,13 @@ public final class SubscriptionInMethodOperationsImpl implements SubscriptionInM
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> postPathLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall postPathLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
         if (subscriptionId == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.postPathLocalValid(subscriptionId, this.client.getAcceptLanguage());
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -210,7 +214,7 @@ public final class SubscriptionInMethodOperationsImpl implements SubscriptionInM
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> postPathLocalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -244,12 +248,13 @@ public final class SubscriptionInMethodOperationsImpl implements SubscriptionInM
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> postSwaggerLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall postSwaggerLocalValidAsync(String subscriptionId, final ServiceCallback<Void> serviceCallback) {
         if (subscriptionId == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter subscriptionId is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.postSwaggerLocalValid(subscriptionId, this.client.getAcceptLanguage());
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -260,7 +265,7 @@ public final class SubscriptionInMethodOperationsImpl implements SubscriptionInM
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> postSwaggerLocalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {

@@ -16,6 +16,7 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import okhttp3.logging.HttpLoggingInterceptor.Level;
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -210,7 +211,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> validationOfMethodParametersAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall validationOfMethodParametersAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) {
         if (this.getSubscriptionId() == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter this.getSubscriptionId() is required and cannot be null."));
             return null;
@@ -224,6 +225,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
             return null;
         }
         Call<ResponseBody> call = service.validationOfMethodParameters(this.getSubscriptionId(), resourceGroupName, id, this.getApiVersion());
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -234,7 +236,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Product> validationOfMethodParametersDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -279,7 +281,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> validationOfBodyAsync(String resourceGroupName, int id, Product body, final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall validationOfBodyAsync(String resourceGroupName, int id, Product body, final ServiceCallback<Product> serviceCallback) {
         if (this.getSubscriptionId() == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter this.getSubscriptionId() is required and cannot be null."));
             return null;
@@ -294,6 +296,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         }
         Validator.validate(body, serviceCallback);
         Call<ResponseBody> call = service.validationOfBody(this.getSubscriptionId(), resourceGroupName, id, body, this.getApiVersion());
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -304,7 +307,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Product> validationOfBodyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -336,12 +339,13 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getWithConstantInPathAsync(String constantParam, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall getWithConstantInPathAsync(String constantParam, final ServiceCallback<Void> serviceCallback) {
         if (constantParam == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter constantParam is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.getWithConstantInPath(constantParam);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -352,7 +356,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> getWithConstantInPathDelegate(Response<ResponseBody> response) throws ServiceException, IOException, IllegalArgumentException {
@@ -386,13 +390,14 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> postWithConstantInBodyAsync(String constantParam, Product body, final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall postWithConstantInBodyAsync(String constantParam, Product body, final ServiceCallback<Product> serviceCallback) {
         if (constantParam == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter constantParam is required and cannot be null."));
             return null;
         }
         Validator.validate(body, serviceCallback);
         Call<ResponseBody> call = service.postWithConstantInBody(constantParam, body);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -403,7 +408,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Product> postWithConstantInBodyDelegate(Response<ResponseBody> response) throws ServiceException, IOException, IllegalArgumentException {

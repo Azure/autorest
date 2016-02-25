@@ -14,6 +14,7 @@ import com.microsoft.azure.AzureClient;
 import com.microsoft.rest.AutoRestBaseUrl;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.serializer.JacksonMapperAdapter;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.resourceflattening.models.ErrorException;
@@ -25,8 +26,6 @@ import java.util.List;
 import java.util.Map;
 import okhttp3.Interceptor;
 import okhttp3.logging.HttpLoggingInterceptor.Level;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
 
 /**
  * The interface for AutoRestResourceFlatteningTestService class.
@@ -130,9 +129,9 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @param resourceArray External Resource as an Array to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putArrayAsync(List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putArrayAsync(List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get External Resource as an Array.
@@ -147,9 +146,9 @@ public interface AutoRestResourceFlatteningTestService {
      * Get External Resource as an Array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getArrayAsync(final ServiceCallback<List<FlattenedProduct>> serviceCallback);
+    ServiceCall getArrayAsync(final ServiceCallback<List<FlattenedProduct>> serviceCallback);
 
     /**
      * Put External Resource as a Dictionary.
@@ -166,9 +165,9 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @param resourceDictionary External Resource as a Dictionary to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get External Resource as a Dictionary.
@@ -183,9 +182,9 @@ public interface AutoRestResourceFlatteningTestService {
      * Get External Resource as a Dictionary.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProduct>> serviceCallback);
+    ServiceCall getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProduct>> serviceCallback);
 
     /**
      * Put External Resource as a ResourceCollection.
@@ -202,9 +201,9 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putResourceCollectionAsync(ResourceCollection resourceComplexObject, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putResourceCollectionAsync(ResourceCollection resourceComplexObject, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get External Resource as a ResourceCollection.
@@ -219,8 +218,8 @@ public interface AutoRestResourceFlatteningTestService {
      * Get External Resource as a ResourceCollection.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getResourceCollectionAsync(final ServiceCallback<ResourceCollection> serviceCallback);
+    ServiceCall getResourceCollectionAsync(final ServiceCallback<ResourceCollection> serviceCallback);
 
 }

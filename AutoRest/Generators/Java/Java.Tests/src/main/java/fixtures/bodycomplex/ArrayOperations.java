@@ -10,13 +10,12 @@
 
 package fixtures.bodycomplex;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodycomplex.models.ArrayWrapper;
 import fixtures.bodycomplex.models.ErrorException;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -36,9 +35,9 @@ public interface ArrayOperations {
      * Get complex types with array property.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getValidAsync(final ServiceCallback<ArrayWrapper> serviceCallback);
+    ServiceCall getValidAsync(final ServiceCallback<ArrayWrapper> serviceCallback);
 
     /**
      * Put complex types with array property.
@@ -56,9 +55,9 @@ public interface ArrayOperations {
      *
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putValidAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putValidAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get complex types with array property which is empty.
@@ -73,9 +72,9 @@ public interface ArrayOperations {
      * Get complex types with array property which is empty.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getEmptyAsync(final ServiceCallback<ArrayWrapper> serviceCallback);
+    ServiceCall getEmptyAsync(final ServiceCallback<ArrayWrapper> serviceCallback);
 
     /**
      * Put complex types with array property which is empty.
@@ -93,9 +92,9 @@ public interface ArrayOperations {
      *
      * @param complexBody Please put an empty array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putEmptyAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putEmptyAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get complex types with array property while server doesn't provide a response payload.
@@ -110,8 +109,8 @@ public interface ArrayOperations {
      * Get complex types with array property while server doesn't provide a response payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getNotProvidedAsync(final ServiceCallback<ArrayWrapper> serviceCallback);
+    ServiceCall getNotProvidedAsync(final ServiceCallback<ArrayWrapper> serviceCallback);
 
 }

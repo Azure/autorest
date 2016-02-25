@@ -10,6 +10,7 @@
 
 package fixtures.http;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
@@ -91,8 +92,9 @@ public final class HttpServerFailureOperationsImpl implements HttpServerFailureO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<Void> head501Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall head501Async(final ServiceCallback<Error> serviceCallback) {
         Call<Void> call = service.head501();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -103,7 +105,7 @@ public final class HttpServerFailureOperationsImpl implements HttpServerFailureO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> head501Delegate(Response<Void> response) throws ErrorException, IOException {
@@ -130,8 +132,9 @@ public final class HttpServerFailureOperationsImpl implements HttpServerFailureO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get501Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall get501Async(final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.get501();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -142,7 +145,7 @@ public final class HttpServerFailureOperationsImpl implements HttpServerFailureO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> get501Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -171,8 +174,9 @@ public final class HttpServerFailureOperationsImpl implements HttpServerFailureO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> post505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall post505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.post505(booleanValue);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -183,7 +187,7 @@ public final class HttpServerFailureOperationsImpl implements HttpServerFailureO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> post505Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -212,8 +216,9 @@ public final class HttpServerFailureOperationsImpl implements HttpServerFailureO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> delete505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall delete505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.delete505(booleanValue);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -224,7 +229,7 @@ public final class HttpServerFailureOperationsImpl implements HttpServerFailureO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> delete505Delegate(Response<ResponseBody> response) throws ErrorException, IOException {

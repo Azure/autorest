@@ -11,6 +11,7 @@
 package fixtures.bodydate;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
@@ -105,8 +106,9 @@ public final class DateOperationsImpl implements DateOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getNullAsync(final ServiceCallback<LocalDate> serviceCallback) {
+    public ServiceCall getNullAsync(final ServiceCallback<LocalDate> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<LocalDate>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -117,7 +119,7 @@ public final class DateOperationsImpl implements DateOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<LocalDate> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -145,8 +147,9 @@ public final class DateOperationsImpl implements DateOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getInvalidDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
+    public ServiceCall getInvalidDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
         Call<ResponseBody> call = service.getInvalidDate();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<LocalDate>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -157,7 +160,7 @@ public final class DateOperationsImpl implements DateOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<LocalDate> getInvalidDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -185,8 +188,9 @@ public final class DateOperationsImpl implements DateOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getOverflowDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
+    public ServiceCall getOverflowDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
         Call<ResponseBody> call = service.getOverflowDate();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<LocalDate>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -197,7 +201,7 @@ public final class DateOperationsImpl implements DateOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<LocalDate> getOverflowDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -225,8 +229,9 @@ public final class DateOperationsImpl implements DateOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getUnderflowDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
+    public ServiceCall getUnderflowDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
         Call<ResponseBody> call = service.getUnderflowDate();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<LocalDate>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -237,7 +242,7 @@ public final class DateOperationsImpl implements DateOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<LocalDate> getUnderflowDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -271,12 +276,13 @@ public final class DateOperationsImpl implements DateOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putMaxDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putMaxDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) {
         if (dateBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter dateBody is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.putMaxDate(dateBody);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -287,7 +293,7 @@ public final class DateOperationsImpl implements DateOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putMaxDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -315,8 +321,9 @@ public final class DateOperationsImpl implements DateOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getMaxDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
+    public ServiceCall getMaxDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
         Call<ResponseBody> call = service.getMaxDate();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<LocalDate>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -327,7 +334,7 @@ public final class DateOperationsImpl implements DateOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<LocalDate> getMaxDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -361,12 +368,13 @@ public final class DateOperationsImpl implements DateOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putMinDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putMinDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) {
         if (dateBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter dateBody is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.putMinDate(dateBody);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -377,7 +385,7 @@ public final class DateOperationsImpl implements DateOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putMinDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -405,8 +413,9 @@ public final class DateOperationsImpl implements DateOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getMinDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
+    public ServiceCall getMinDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
         Call<ResponseBody> call = service.getMinDate();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<LocalDate>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -417,7 +426,7 @@ public final class DateOperationsImpl implements DateOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<LocalDate> getMinDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException {

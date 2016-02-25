@@ -10,13 +10,12 @@
 
 package fixtures.bodycomplex;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodycomplex.models.Basic;
 import fixtures.bodycomplex.models.ErrorException;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -36,9 +35,9 @@ public interface BasicOperations {
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getValidAsync(final ServiceCallback<Basic> serviceCallback);
+    ServiceCall getValidAsync(final ServiceCallback<Basic> serviceCallback);
 
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
@@ -56,9 +55,9 @@ public interface BasicOperations {
      *
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putValidAsync(Basic complexBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putValidAsync(Basic complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get a basic complex type that is invalid for the local strong type.
@@ -73,9 +72,9 @@ public interface BasicOperations {
      * Get a basic complex type that is invalid for the local strong type.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getInvalidAsync(final ServiceCallback<Basic> serviceCallback);
+    ServiceCall getInvalidAsync(final ServiceCallback<Basic> serviceCallback);
 
     /**
      * Get a basic complex type that is empty.
@@ -90,9 +89,9 @@ public interface BasicOperations {
      * Get a basic complex type that is empty.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getEmptyAsync(final ServiceCallback<Basic> serviceCallback);
+    ServiceCall getEmptyAsync(final ServiceCallback<Basic> serviceCallback);
 
     /**
      * Get a basic complex type whose properties are null.
@@ -107,9 +106,9 @@ public interface BasicOperations {
      * Get a basic complex type whose properties are null.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getNullAsync(final ServiceCallback<Basic> serviceCallback);
+    ServiceCall getNullAsync(final ServiceCallback<Basic> serviceCallback);
 
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
@@ -124,8 +123,8 @@ public interface BasicOperations {
      * Get a basic complex type while the server doesn't provide a response payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getNotProvidedAsync(final ServiceCallback<Basic> serviceCallback);
+    ServiceCall getNotProvidedAsync(final ServiceCallback<Basic> serviceCallback);
 
 }

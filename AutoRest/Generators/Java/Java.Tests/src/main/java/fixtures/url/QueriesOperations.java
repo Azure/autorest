@@ -10,16 +10,15 @@
 
 package fixtures.url;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
 import java.io.IOException;
 import java.util.List;
-import okhttp3.ResponseBody;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
-import retrofit2.Call;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -41,9 +40,9 @@ public interface QueriesOperations {
      *
      * @param boolQuery true boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getBooleanTrueAsync(boolean boolQuery, final ServiceCallback<Void> serviceCallback);
+    ServiceCall getBooleanTrueAsync(boolean boolQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get false Boolean value on path.
@@ -60,9 +59,9 @@ public interface QueriesOperations {
      *
      * @param boolQuery false boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getBooleanFalseAsync(boolean boolQuery, final ServiceCallback<Void> serviceCallback);
+    ServiceCall getBooleanFalseAsync(boolean boolQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null Boolean value on query (query string should be absent).
@@ -79,9 +78,9 @@ public interface QueriesOperations {
      *
      * @param boolQuery null boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getBooleanNullAsync(Boolean boolQuery, final ServiceCallback<Void> serviceCallback);
+    ServiceCall getBooleanNullAsync(Boolean boolQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '1000000' integer value.
@@ -98,9 +97,9 @@ public interface QueriesOperations {
      *
      * @param intQuery '1000000' integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getIntOneMillionAsync(int intQuery, final ServiceCallback<Void> serviceCallback);
+    ServiceCall getIntOneMillionAsync(int intQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '-1000000' integer value.
@@ -117,9 +116,9 @@ public interface QueriesOperations {
      *
      * @param intQuery '-1000000' integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getIntNegativeOneMillionAsync(int intQuery, final ServiceCallback<Void> serviceCallback);
+    ServiceCall getIntNegativeOneMillionAsync(int intQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null integer value (no query parameter).
@@ -136,9 +135,9 @@ public interface QueriesOperations {
      *
      * @param intQuery null integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getIntNullAsync(Integer intQuery, final ServiceCallback<Void> serviceCallback);
+    ServiceCall getIntNullAsync(Integer intQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '10000000000' 64 bit integer value.
@@ -155,9 +154,9 @@ public interface QueriesOperations {
      *
      * @param longQuery '10000000000' 64 bit integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getTenBillionAsync(long longQuery, final ServiceCallback<Void> serviceCallback);
+    ServiceCall getTenBillionAsync(long longQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '-10000000000' 64 bit integer value.
@@ -174,9 +173,9 @@ public interface QueriesOperations {
      *
      * @param longQuery '-10000000000' 64 bit integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getNegativeTenBillionAsync(long longQuery, final ServiceCallback<Void> serviceCallback);
+    ServiceCall getNegativeTenBillionAsync(long longQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
@@ -193,9 +192,9 @@ public interface QueriesOperations {
      *
      * @param longQuery null 64 bit integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getLongNullAsync(Long longQuery, final ServiceCallback<Void> serviceCallback);
+    ServiceCall getLongNullAsync(Long longQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '1.034E+20' numeric value.
@@ -212,9 +211,9 @@ public interface QueriesOperations {
      *
      * @param floatQuery '1.034E+20'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> floatScientificPositiveAsync(double floatQuery, final ServiceCallback<Void> serviceCallback);
+    ServiceCall floatScientificPositiveAsync(double floatQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '-1.034E-20' numeric value.
@@ -231,9 +230,9 @@ public interface QueriesOperations {
      *
      * @param floatQuery '-1.034E-20'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> floatScientificNegativeAsync(double floatQuery, final ServiceCallback<Void> serviceCallback);
+    ServiceCall floatScientificNegativeAsync(double floatQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null numeric value (no query parameter).
@@ -250,9 +249,9 @@ public interface QueriesOperations {
      *
      * @param floatQuery null numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> floatNullAsync(Double floatQuery, final ServiceCallback<Void> serviceCallback);
+    ServiceCall floatNullAsync(Double floatQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '9999999.999' numeric value.
@@ -269,9 +268,9 @@ public interface QueriesOperations {
      *
      * @param doubleQuery '9999999.999'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> doubleDecimalPositiveAsync(double doubleQuery, final ServiceCallback<Void> serviceCallback);
+    ServiceCall doubleDecimalPositiveAsync(double doubleQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '-9999999.999' numeric value.
@@ -288,9 +287,9 @@ public interface QueriesOperations {
      *
      * @param doubleQuery '-9999999.999'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> doubleDecimalNegativeAsync(double doubleQuery, final ServiceCallback<Void> serviceCallback);
+    ServiceCall doubleDecimalNegativeAsync(double doubleQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null numeric value (no query parameter).
@@ -307,9 +306,9 @@ public interface QueriesOperations {
      *
      * @param doubleQuery null numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> doubleNullAsync(Double doubleQuery, final ServiceCallback<Void> serviceCallback);
+    ServiceCall doubleNullAsync(Double doubleQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
@@ -327,9 +326,9 @@ public interface QueriesOperations {
      *
      * @param stringQuery '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> stringUnicodeAsync(String stringQuery, final ServiceCallback<Void> serviceCallback);
+    ServiceCall stringUnicodeAsync(String stringQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
@@ -347,9 +346,9 @@ public interface QueriesOperations {
      *
      * @param stringQuery 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> stringUrlEncodedAsync(String stringQuery, final ServiceCallback<Void> serviceCallback);
+    ServiceCall stringUrlEncodedAsync(String stringQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get ''.
@@ -367,9 +366,9 @@ public interface QueriesOperations {
      *
      * @param stringQuery '' string value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> stringEmptyAsync(String stringQuery, final ServiceCallback<Void> serviceCallback);
+    ServiceCall stringEmptyAsync(String stringQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null (no query parameter in url).
@@ -386,9 +385,9 @@ public interface QueriesOperations {
      *
      * @param stringQuery null string value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> stringNullAsync(String stringQuery, final ServiceCallback<Void> serviceCallback);
+    ServiceCall stringNullAsync(String stringQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get using uri with query parameter 'green color'.
@@ -405,9 +404,9 @@ public interface QueriesOperations {
      *
      * @param enumQuery 'green color' enum value. Possible values include: 'red color', 'green color', 'blue color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> enumValidAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback);
+    ServiceCall enumValidAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null (no query parameter in url).
@@ -424,9 +423,9 @@ public interface QueriesOperations {
      *
      * @param enumQuery null string value. Possible values include: 'red color', 'green color', 'blue color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> enumNullAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback);
+    ServiceCall enumNullAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
@@ -443,9 +442,9 @@ public interface QueriesOperations {
      *
      * @param byteQuery '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> byteMultiByteAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback);
+    ServiceCall byteMultiByteAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '' as byte array.
@@ -463,9 +462,9 @@ public interface QueriesOperations {
      *
      * @param byteQuery '' as byte array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> byteEmptyAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback);
+    ServiceCall byteEmptyAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null as byte array (no query parameters in uri).
@@ -482,9 +481,9 @@ public interface QueriesOperations {
      *
      * @param byteQuery null as byte array (no query parameters in uri)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> byteNullAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback);
+    ServiceCall byteNullAsync(byte[] byteQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '2012-01-01' as date.
@@ -502,9 +501,9 @@ public interface QueriesOperations {
      *
      * @param dateQuery '2012-01-01' as date
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> dateValidAsync(LocalDate dateQuery, final ServiceCallback<Void> serviceCallback);
+    ServiceCall dateValidAsync(LocalDate dateQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null as date - this should result in no query parameters in uri.
@@ -521,9 +520,9 @@ public interface QueriesOperations {
      *
      * @param dateQuery null as date (no query parameters in uri)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> dateNullAsync(LocalDate dateQuery, final ServiceCallback<Void> serviceCallback);
+    ServiceCall dateNullAsync(LocalDate dateQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
@@ -541,9 +540,9 @@ public interface QueriesOperations {
      *
      * @param dateTimeQuery '2012-01-01T01:01:01Z' as date-time
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> dateTimeValidAsync(DateTime dateTimeQuery, final ServiceCallback<Void> serviceCallback);
+    ServiceCall dateTimeValidAsync(DateTime dateTimeQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
@@ -560,9 +559,9 @@ public interface QueriesOperations {
      *
      * @param dateTimeQuery null as date-time (no query parameters)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> dateTimeNullAsync(DateTime dateTimeQuery, final ServiceCallback<Void> serviceCallback);
+    ServiceCall dateTimeNullAsync(DateTime dateTimeQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
@@ -579,9 +578,9 @@ public interface QueriesOperations {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> arrayStringCsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback);
+    ServiceCall arrayStringCsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get a null array of string using the csv-array format.
@@ -598,9 +597,9 @@ public interface QueriesOperations {
      *
      * @param arrayQuery a null array of string using the csv-array format
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> arrayStringCsvNullAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback);
+    ServiceCall arrayStringCsvNullAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get an empty array [] of string using the csv-array format.
@@ -617,9 +616,9 @@ public interface QueriesOperations {
      *
      * @param arrayQuery an empty array [] of string using the csv-array format
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> arrayStringCsvEmptyAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback);
+    ServiceCall arrayStringCsvEmptyAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
@@ -636,9 +635,9 @@ public interface QueriesOperations {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> arrayStringSsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback);
+    ServiceCall arrayStringSsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
@@ -655,9 +654,9 @@ public interface QueriesOperations {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> arrayStringTsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback);
+    ServiceCall arrayStringTsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
@@ -674,8 +673,8 @@ public interface QueriesOperations {
      *
      * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> arrayStringPipesValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback);
+    ServiceCall arrayStringPipesValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback);
 
 }

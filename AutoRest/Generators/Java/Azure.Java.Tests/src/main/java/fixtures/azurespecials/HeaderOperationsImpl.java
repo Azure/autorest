@@ -12,6 +12,7 @@ package fixtures.azurespecials;
 
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.ServiceResponseWithHeaders;
@@ -82,12 +83,13 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> customNamedRequestIdAsync(String fooClientRequestId, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall customNamedRequestIdAsync(String fooClientRequestId, final ServiceCallback<Void> serviceCallback) {
         if (fooClientRequestId == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter fooClientRequestId is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.customNamedRequestId(fooClientRequestId, this.client.getAcceptLanguage());
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -98,7 +100,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders> customNamedRequestIdDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {

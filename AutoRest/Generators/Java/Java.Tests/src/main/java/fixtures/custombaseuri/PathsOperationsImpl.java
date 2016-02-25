@@ -11,6 +11,7 @@
 package fixtures.custombaseuri;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
@@ -85,7 +86,7 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback) {
         if (accountName == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter accountName is required and cannot be null."));
             return null;
@@ -97,6 +98,7 @@ public final class PathsOperationsImpl implements PathsOperations {
         client.getBaseUrl().set("{accountName}", accountName);
         client.getBaseUrl().set("{host}", this.client.getHost());
         Call<ResponseBody> call = service.getEmpty();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -107,7 +109,7 @@ public final class PathsOperationsImpl implements PathsOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {

@@ -10,12 +10,11 @@
 
 package fixtures.azurespecials;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.azurespecials.models.ErrorException;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -38,9 +37,9 @@ public interface ApiVersionLocalOperations {
      *
      * @param apiVersion This should appear as a method parameter, use value '2.0'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getMethodLocalValidAsync(String apiVersion, final ServiceCallback<Void> serviceCallback);
+    ServiceCall getMethodLocalValidAsync(String apiVersion, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
@@ -57,9 +56,9 @@ public interface ApiVersionLocalOperations {
      *
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getMethodLocalNullAsync(String apiVersion, final ServiceCallback<Void> serviceCallback);
+    ServiceCall getMethodLocalNullAsync(String apiVersion, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
@@ -77,9 +76,9 @@ public interface ApiVersionLocalOperations {
      *
      * @param apiVersion This should appear as a method parameter, use value '2.0'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getPathLocalValidAsync(String apiVersion, final ServiceCallback<Void> serviceCallback);
+    ServiceCall getPathLocalValidAsync(String apiVersion, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
@@ -97,8 +96,8 @@ public interface ApiVersionLocalOperations {
      *
      * @param apiVersion The api version, which appears in the query, the value is always '2.0'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getSwaggerLocalValidAsync(String apiVersion, final ServiceCallback<Void> serviceCallback);
+    ServiceCall getSwaggerLocalValidAsync(String apiVersion, final ServiceCallback<Void> serviceCallback);
 
 }

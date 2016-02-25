@@ -11,6 +11,7 @@
 package fixtures.http;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
@@ -149,8 +150,9 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<Void> head200Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall head200Async(final ServiceCallback<Void> serviceCallback) {
         Call<Void> call = service.head200();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -161,7 +163,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> head200Delegate(Response<Void> response) throws ErrorException, IOException {
@@ -189,8 +191,9 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get200Async(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceCall get200Async(final ServiceCallback<Boolean> serviceCallback) {
         Call<ResponseBody> call = service.get200();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Boolean>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -201,7 +204,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Boolean> get200Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -231,8 +234,9 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> put200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall put200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.put200(booleanValue);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -243,7 +247,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> put200Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -273,8 +277,9 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> patch200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall patch200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.patch200(booleanValue);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -285,7 +290,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> patch200Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -315,8 +320,9 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> post200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall post200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.post200(booleanValue);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -327,7 +333,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> post200Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -357,8 +363,9 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> delete200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall delete200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.delete200(booleanValue);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -369,7 +376,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> delete200Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -399,8 +406,9 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> put201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall put201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.put201(booleanValue);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -411,7 +419,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> put201Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -441,8 +449,9 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> post201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall post201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.post201(booleanValue);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -453,7 +462,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> post201Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -483,8 +492,9 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> put202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall put202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.put202(booleanValue);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -495,7 +505,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> put202Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -525,8 +535,9 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> patch202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall patch202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.patch202(booleanValue);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -537,7 +548,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> patch202Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -567,8 +578,9 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> post202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall post202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.post202(booleanValue);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -579,7 +591,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> post202Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -609,8 +621,9 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> delete202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall delete202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.delete202(booleanValue);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -621,7 +634,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> delete202Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -649,8 +662,9 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<Void> head204Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall head204Async(final ServiceCallback<Void> serviceCallback) {
         Call<Void> call = service.head204();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -661,7 +675,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> head204Delegate(Response<Void> response) throws ErrorException, IOException {
@@ -691,8 +705,9 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> put204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall put204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.put204(booleanValue);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -703,7 +718,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> put204Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -733,8 +748,9 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> patch204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall patch204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.patch204(booleanValue);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -745,7 +761,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> patch204Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -775,8 +791,9 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> post204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall post204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.post204(booleanValue);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -787,7 +804,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> post204Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -817,8 +834,9 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> delete204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall delete204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.delete204(booleanValue);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -829,7 +847,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> delete204Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -857,8 +875,9 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<Void> head404Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall head404Async(final ServiceCallback<Void> serviceCallback) {
         Call<Void> call = service.head404();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -869,7 +888,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> head404Delegate(Response<Void> response) throws ErrorException, IOException {

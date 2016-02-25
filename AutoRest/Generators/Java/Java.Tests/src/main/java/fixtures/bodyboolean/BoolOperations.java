@@ -10,12 +10,11 @@
 
 package fixtures.bodyboolean;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodyboolean.models.ErrorException;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -35,9 +34,9 @@ public interface BoolOperations {
      * Get true Boolean value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getTrueAsync(final ServiceCallback<Boolean> serviceCallback);
+    ServiceCall getTrueAsync(final ServiceCallback<Boolean> serviceCallback);
 
     /**
      * Set Boolean value true.
@@ -54,9 +53,9 @@ public interface BoolOperations {
      *
      * @param boolBody the boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get false Boolean value.
@@ -71,9 +70,9 @@ public interface BoolOperations {
      * Get false Boolean value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getFalseAsync(final ServiceCallback<Boolean> serviceCallback);
+    ServiceCall getFalseAsync(final ServiceCallback<Boolean> serviceCallback);
 
     /**
      * Set Boolean value false.
@@ -90,9 +89,9 @@ public interface BoolOperations {
      *
      * @param boolBody the boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get null Boolean value.
@@ -107,9 +106,9 @@ public interface BoolOperations {
      * Get null Boolean value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getNullAsync(final ServiceCallback<Boolean> serviceCallback);
+    ServiceCall getNullAsync(final ServiceCallback<Boolean> serviceCallback);
 
     /**
      * Get invalid Boolean value.
@@ -124,8 +123,8 @@ public interface BoolOperations {
      * Get invalid Boolean value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getInvalidAsync(final ServiceCallback<Boolean> serviceCallback);
+    ServiceCall getInvalidAsync(final ServiceCallback<Boolean> serviceCallback);
 
 }

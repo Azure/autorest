@@ -11,6 +11,7 @@
 package fixtures.bodyformdata;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
@@ -92,7 +93,7 @@ public final class FormdataOperationsImpl implements FormdataOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> uploadFileAsync(InputStream fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) {
+    public ServiceCall uploadFileAsync(InputStream fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) {
         if (fileContent == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter fileContent is required and cannot be null."));
             return null;
@@ -102,6 +103,7 @@ public final class FormdataOperationsImpl implements FormdataOperations {
             return null;
         }
         Call<ResponseBody> call = service.uploadFile(fileContent, fileName);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<InputStream>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -112,7 +114,7 @@ public final class FormdataOperationsImpl implements FormdataOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<InputStream> uploadFileDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -151,7 +153,7 @@ public final class FormdataOperationsImpl implements FormdataOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> uploadFileViaBodyAsync(InputStream fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) {
+    public ServiceCall uploadFileViaBodyAsync(InputStream fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) {
         if (fileContent == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter fileContent is required and cannot be null."));
             return null;
@@ -161,6 +163,7 @@ public final class FormdataOperationsImpl implements FormdataOperations {
             return null;
         }
         Call<ResponseBody> call = service.uploadFileViaBody(fileContent, fileName);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<InputStream>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -171,7 +174,7 @@ public final class FormdataOperationsImpl implements FormdataOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<InputStream> uploadFileViaBodyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {

@@ -15,14 +15,13 @@ import okhttp3.Interceptor;
 import okhttp3.logging.HttpLoggingInterceptor.Level;
 import com.microsoft.rest.AutoRestBaseUrl;
 import com.microsoft.rest.serializer.JacksonMapperAdapter;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.validation.models.ErrorException;
 import fixtures.validation.models.Product;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
 
 /**
  * The interface for AutoRestValidationTest class.
@@ -103,9 +102,9 @@ public interface AutoRestValidationTest {
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> validationOfMethodParametersAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback);
+    ServiceCall validationOfMethodParametersAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback);
     /**
      * Validates body parameters on the method. See swagger for details.
      *
@@ -126,9 +125,9 @@ public interface AutoRestValidationTest {
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param body the Product value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> validationOfBodyAsync(String resourceGroupName, int id, Product body, final ServiceCallback<Product> serviceCallback);
+    ServiceCall validationOfBodyAsync(String resourceGroupName, int id, Product body, final ServiceCallback<Product> serviceCallback);
     /**
      *
      * @param constantParam the String value
@@ -143,9 +142,9 @@ public interface AutoRestValidationTest {
      *
      * @param constantParam the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getWithConstantInPathAsync(String constantParam, final ServiceCallback<Void> serviceCallback);
+    ServiceCall getWithConstantInPathAsync(String constantParam, final ServiceCallback<Void> serviceCallback);
     /**
      *
      * @param constantParam the String value
@@ -162,8 +161,8 @@ public interface AutoRestValidationTest {
      * @param constantParam the String value
      * @param body the Product value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> postWithConstantInBodyAsync(String constantParam, Product body, final ServiceCallback<Product> serviceCallback);
+    ServiceCall postWithConstantInBodyAsync(String constantParam, Product body, final ServiceCallback<Product> serviceCallback);
 
 }

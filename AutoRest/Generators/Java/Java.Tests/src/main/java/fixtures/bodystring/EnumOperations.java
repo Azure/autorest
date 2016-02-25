@@ -10,13 +10,12 @@
 
 package fixtures.bodystring;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodystring.models.Colors;
 import fixtures.bodystring.models.ErrorException;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -36,9 +35,9 @@ public interface EnumOperations {
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getNotExpandableAsync(final ServiceCallback<Colors> serviceCallback);
+    ServiceCall getNotExpandableAsync(final ServiceCallback<Colors> serviceCallback);
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
@@ -56,8 +55,8 @@ public interface EnumOperations {
      *
      * @param stringBody Possible values include: 'red color', 'green-color', 'blue_color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putNotExpandableAsync(Colors stringBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putNotExpandableAsync(Colors stringBody, final ServiceCallback<Void> serviceCallback);
 
 }

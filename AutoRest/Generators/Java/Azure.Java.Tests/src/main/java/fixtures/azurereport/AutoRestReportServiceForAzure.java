@@ -14,6 +14,7 @@ import com.microsoft.azure.AzureClient;
 import com.microsoft.rest.AutoRestBaseUrl;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.serializer.JacksonMapperAdapter;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.azurereport.models.ErrorException;
@@ -22,8 +23,6 @@ import java.util.List;
 import java.util.Map;
 import okhttp3.Interceptor;
 import okhttp3.logging.HttpLoggingInterceptor.Level;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
 
 /**
  * The interface for AutoRestReportServiceForAzure class.
@@ -125,8 +124,8 @@ public interface AutoRestReportServiceForAzure {
      * Get test coverage report.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
+    ServiceCall getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
 
 }

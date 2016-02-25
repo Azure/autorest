@@ -11,6 +11,7 @@
 package fixtures.bodystring;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
@@ -108,8 +109,9 @@ public final class StringOperationsImpl implements StringOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getNullAsync(final ServiceCallback<String> serviceCallback) {
+    public ServiceCall getNullAsync(final ServiceCallback<String> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -120,7 +122,7 @@ public final class StringOperationsImpl implements StringOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<String> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -150,8 +152,9 @@ public final class StringOperationsImpl implements StringOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putNullAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putNullAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putNull(stringBody);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -162,7 +165,7 @@ public final class StringOperationsImpl implements StringOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -190,8 +193,9 @@ public final class StringOperationsImpl implements StringOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getEmptyAsync(final ServiceCallback<String> serviceCallback) {
+    public ServiceCall getEmptyAsync(final ServiceCallback<String> serviceCallback) {
         Call<ResponseBody> call = service.getEmpty();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -202,7 +206,7 @@ public final class StringOperationsImpl implements StringOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<String> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -236,12 +240,13 @@ public final class StringOperationsImpl implements StringOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putEmptyAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putEmptyAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
         if (stringBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.putEmpty(stringBody);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -252,7 +257,7 @@ public final class StringOperationsImpl implements StringOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -280,8 +285,9 @@ public final class StringOperationsImpl implements StringOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getMbcsAsync(final ServiceCallback<String> serviceCallback) {
+    public ServiceCall getMbcsAsync(final ServiceCallback<String> serviceCallback) {
         Call<ResponseBody> call = service.getMbcs();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -292,7 +298,7 @@ public final class StringOperationsImpl implements StringOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<String> getMbcsDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -326,12 +332,13 @@ public final class StringOperationsImpl implements StringOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putMbcsAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putMbcsAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
         if (stringBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.putMbcs(stringBody);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -342,7 +349,7 @@ public final class StringOperationsImpl implements StringOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putMbcsDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -370,8 +377,9 @@ public final class StringOperationsImpl implements StringOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getWhitespaceAsync(final ServiceCallback<String> serviceCallback) {
+    public ServiceCall getWhitespaceAsync(final ServiceCallback<String> serviceCallback) {
         Call<ResponseBody> call = service.getWhitespace();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -382,7 +390,7 @@ public final class StringOperationsImpl implements StringOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<String> getWhitespaceDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -416,12 +424,13 @@ public final class StringOperationsImpl implements StringOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putWhitespaceAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putWhitespaceAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
         if (stringBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.putWhitespace(stringBody);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -432,7 +441,7 @@ public final class StringOperationsImpl implements StringOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putWhitespaceDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -460,8 +469,9 @@ public final class StringOperationsImpl implements StringOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getNotProvidedAsync(final ServiceCallback<String> serviceCallback) {
+    public ServiceCall getNotProvidedAsync(final ServiceCallback<String> serviceCallback) {
         Call<ResponseBody> call = service.getNotProvided();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -472,7 +482,7 @@ public final class StringOperationsImpl implements StringOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<String> getNotProvidedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {

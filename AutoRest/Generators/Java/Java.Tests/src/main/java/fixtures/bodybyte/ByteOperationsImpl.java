@@ -11,6 +11,7 @@
 package fixtures.bodybyte;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
@@ -92,8 +93,9 @@ public final class ByteOperationsImpl implements ByteOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getNullAsync(final ServiceCallback<byte[]> serviceCallback) {
+    public ServiceCall getNullAsync(final ServiceCallback<byte[]> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<byte[]>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -104,7 +106,7 @@ public final class ByteOperationsImpl implements ByteOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<byte[]> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -132,8 +134,9 @@ public final class ByteOperationsImpl implements ByteOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getEmptyAsync(final ServiceCallback<byte[]> serviceCallback) {
+    public ServiceCall getEmptyAsync(final ServiceCallback<byte[]> serviceCallback) {
         Call<ResponseBody> call = service.getEmpty();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<byte[]>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -144,7 +147,7 @@ public final class ByteOperationsImpl implements ByteOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<byte[]> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -172,8 +175,9 @@ public final class ByteOperationsImpl implements ByteOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getNonAsciiAsync(final ServiceCallback<byte[]> serviceCallback) {
+    public ServiceCall getNonAsciiAsync(final ServiceCallback<byte[]> serviceCallback) {
         Call<ResponseBody> call = service.getNonAscii();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<byte[]>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -184,7 +188,7 @@ public final class ByteOperationsImpl implements ByteOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<byte[]> getNonAsciiDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -218,12 +222,13 @@ public final class ByteOperationsImpl implements ByteOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putNonAsciiAsync(byte[] byteBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putNonAsciiAsync(byte[] byteBody, final ServiceCallback<Void> serviceCallback) {
         if (byteBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter byteBody is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.putNonAscii(byteBody);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -234,7 +239,7 @@ public final class ByteOperationsImpl implements ByteOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putNonAsciiDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -262,8 +267,9 @@ public final class ByteOperationsImpl implements ByteOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getInvalidAsync(final ServiceCallback<byte[]> serviceCallback) {
+    public ServiceCall getInvalidAsync(final ServiceCallback<byte[]> serviceCallback) {
         Call<ResponseBody> call = service.getInvalid();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<byte[]>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -274,7 +280,7 @@ public final class ByteOperationsImpl implements ByteOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<byte[]> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {

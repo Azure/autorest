@@ -10,12 +10,11 @@
 
 package fixtures.bodystring;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodystring.models.ErrorException;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -35,9 +34,9 @@ public interface StringOperations {
      * Get null string value value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getNullAsync(final ServiceCallback<String> serviceCallback);
+    ServiceCall getNullAsync(final ServiceCallback<String> serviceCallback);
 
     /**
      * Set string value null.
@@ -54,9 +53,9 @@ public interface StringOperations {
      *
      * @param stringBody the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putNullAsync(String stringBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putNullAsync(String stringBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get empty string value value ''.
@@ -71,9 +70,9 @@ public interface StringOperations {
      * Get empty string value value ''.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getEmptyAsync(final ServiceCallback<String> serviceCallback);
+    ServiceCall getEmptyAsync(final ServiceCallback<String> serviceCallback);
 
     /**
      * Set string value empty ''.
@@ -91,9 +90,9 @@ public interface StringOperations {
      *
      * @param stringBody the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putEmptyAsync(String stringBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putEmptyAsync(String stringBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
@@ -108,9 +107,9 @@ public interface StringOperations {
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getMbcsAsync(final ServiceCallback<String> serviceCallback);
+    ServiceCall getMbcsAsync(final ServiceCallback<String> serviceCallback);
 
     /**
      * Set string value mbcs '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
@@ -128,9 +127,9 @@ public interface StringOperations {
      *
      * @param stringBody the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putMbcsAsync(String stringBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putMbcsAsync(String stringBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
@@ -145,9 +144,9 @@ public interface StringOperations {
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getWhitespaceAsync(final ServiceCallback<String> serviceCallback);
+    ServiceCall getWhitespaceAsync(final ServiceCallback<String> serviceCallback);
 
     /**
      * Set String value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
@@ -165,9 +164,9 @@ public interface StringOperations {
      *
      * @param stringBody the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putWhitespaceAsync(String stringBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putWhitespaceAsync(String stringBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get String value when no string value is sent in response payload.
@@ -182,8 +181,8 @@ public interface StringOperations {
      * Get String value when no string value is sent in response payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getNotProvidedAsync(final ServiceCallback<String> serviceCallback);
+    ServiceCall getNotProvidedAsync(final ServiceCallback<String> serviceCallback);
 
 }

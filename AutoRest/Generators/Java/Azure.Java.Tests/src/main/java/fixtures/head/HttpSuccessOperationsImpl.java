@@ -13,6 +13,7 @@ package fixtures.head;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.azure.CloudException;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseEmptyCallback;
@@ -82,8 +83,9 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<Void> head200Async(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceCall head200Async(final ServiceCallback<Boolean> serviceCallback) {
         Call<Void> call = service.head200(this.client.getAcceptLanguage());
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Boolean>(serviceCallback) {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -94,7 +96,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Boolean> head200Delegate(Response<Void> response) throws CloudException, IOException {
@@ -123,8 +125,9 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<Void> head204Async(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceCall head204Async(final ServiceCallback<Boolean> serviceCallback) {
         Call<Void> call = service.head204(this.client.getAcceptLanguage());
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Boolean>(serviceCallback) {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -135,7 +138,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Boolean> head204Delegate(Response<Void> response) throws CloudException, IOException {
@@ -164,8 +167,9 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<Void> head404Async(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceCall head404Async(final ServiceCallback<Boolean> serviceCallback) {
         Call<Void> call = service.head404(this.client.getAcceptLanguage());
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Boolean>(serviceCallback) {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -176,7 +180,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Boolean> head404Delegate(Response<Void> response) throws CloudException, IOException {

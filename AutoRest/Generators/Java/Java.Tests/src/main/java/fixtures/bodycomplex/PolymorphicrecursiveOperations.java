@@ -10,13 +10,12 @@
 
 package fixtures.bodycomplex;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Fish;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -36,9 +35,9 @@ public interface PolymorphicrecursiveOperations {
      * Get complex types that are polymorphic and have recursive references.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getValidAsync(final ServiceCallback<Fish> serviceCallback);
+    ServiceCall getValidAsync(final ServiceCallback<Fish> serviceCallback);
 
     /**
      * Put complex types that are polymorphic and have recursive references.
@@ -160,8 +159,8 @@ public interface PolymorphicrecursiveOperations {
      ]
  }
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback);
 
 }

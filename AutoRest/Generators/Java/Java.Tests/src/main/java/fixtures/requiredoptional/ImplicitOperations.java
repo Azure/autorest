@@ -10,13 +10,12 @@
 
 package fixtures.requiredoptional;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.requiredoptional.models.Error;
 import fixtures.requiredoptional.models.ErrorException;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -39,9 +38,9 @@ public interface ImplicitOperations {
      *
      * @param pathParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getRequiredPathAsync(String pathParameter, final ServiceCallback<Error> serviceCallback);
+    ServiceCall getRequiredPathAsync(String pathParameter, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Test implicitly optional query parameter.
@@ -58,9 +57,9 @@ public interface ImplicitOperations {
      *
      * @param queryParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putOptionalQueryAsync(String queryParameter, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putOptionalQueryAsync(String queryParameter, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test implicitly optional header parameter.
@@ -77,9 +76,9 @@ public interface ImplicitOperations {
      *
      * @param queryParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putOptionalHeaderAsync(String queryParameter, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putOptionalHeaderAsync(String queryParameter, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test implicitly optional body parameter.
@@ -96,9 +95,9 @@ public interface ImplicitOperations {
      *
      * @param bodyParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putOptionalBodyAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putOptionalBodyAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Test implicitly required path parameter.
@@ -114,9 +113,9 @@ public interface ImplicitOperations {
      * Test implicitly required path parameter.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getRequiredGlobalPathAsync(final ServiceCallback<Error> serviceCallback);
+    ServiceCall getRequiredGlobalPathAsync(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Test implicitly required query parameter.
@@ -132,9 +131,9 @@ public interface ImplicitOperations {
      * Test implicitly required query parameter.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getRequiredGlobalQueryAsync(final ServiceCallback<Error> serviceCallback);
+    ServiceCall getRequiredGlobalQueryAsync(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Test implicitly optional query parameter.
@@ -149,8 +148,8 @@ public interface ImplicitOperations {
      * Test implicitly optional query parameter.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getOptionalGlobalQueryAsync(final ServiceCallback<Error> serviceCallback);
+    ServiceCall getOptionalGlobalQueryAsync(final ServiceCallback<Error> serviceCallback);
 
 }

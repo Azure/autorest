@@ -11,6 +11,7 @@
 package fixtures.bodycomplex;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
@@ -82,8 +83,9 @@ public final class PolymorphicrecursiveOperationsImpl implements Polymorphicrecu
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getValidAsync(final ServiceCallback<Fish> serviceCallback) {
+    public ServiceCall getValidAsync(final ServiceCallback<Fish> serviceCallback) {
         Call<ResponseBody> call = service.getValid();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Fish>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -94,7 +96,7 @@ public final class PolymorphicrecursiveOperationsImpl implements Polymorphicrecu
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Fish> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -233,13 +235,14 @@ public final class PolymorphicrecursiveOperationsImpl implements Polymorphicrecu
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putValid(complexBody);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -250,7 +253,7 @@ public final class PolymorphicrecursiveOperationsImpl implements Polymorphicrecu
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {

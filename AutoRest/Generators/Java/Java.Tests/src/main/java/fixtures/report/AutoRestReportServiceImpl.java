@@ -16,6 +16,7 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import okhttp3.logging.HttpLoggingInterceptor.Level;
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
@@ -135,8 +136,9 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
+    public ServiceCall getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
         Call<ResponseBody> call = service.getReport();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -147,7 +149,7 @@ public final class AutoRestReportServiceImpl extends ServiceClient implements Au
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, Integer>> getReportDelegate(Response<ResponseBody> response) throws ErrorException, IOException {

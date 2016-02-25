@@ -12,6 +12,7 @@ package fixtures.azurespecials;
 
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
@@ -94,12 +95,13 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getMethodLocalValidAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall getMethodLocalValidAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) {
         if (apiVersion == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter apiVersion is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.getMethodLocalValid(apiVersion, this.client.getAcceptLanguage());
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -110,7 +112,7 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> getMethodLocalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -140,8 +142,9 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getMethodLocalNullAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall getMethodLocalNullAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.getAcceptLanguage());
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -152,7 +155,7 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> getMethodLocalNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -186,12 +189,13 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getPathLocalValidAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall getPathLocalValidAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) {
         if (apiVersion == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter apiVersion is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.getPathLocalValid(apiVersion, this.client.getAcceptLanguage());
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -202,7 +206,7 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> getPathLocalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -236,12 +240,13 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getSwaggerLocalValidAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall getSwaggerLocalValidAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) {
         if (apiVersion == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter apiVersion is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.getSwaggerLocalValid(apiVersion, this.client.getAcceptLanguage());
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -252,7 +257,7 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> getSwaggerLocalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {

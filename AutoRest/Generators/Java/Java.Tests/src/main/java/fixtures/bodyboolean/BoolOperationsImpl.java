@@ -11,6 +11,7 @@
 package fixtures.bodyboolean;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
@@ -96,8 +97,9 @@ public final class BoolOperationsImpl implements BoolOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getTrueAsync(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceCall getTrueAsync(final ServiceCallback<Boolean> serviceCallback) {
         Call<ResponseBody> call = service.getTrue();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Boolean>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -108,7 +110,7 @@ public final class BoolOperationsImpl implements BoolOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Boolean> getTrueDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -138,8 +140,9 @@ public final class BoolOperationsImpl implements BoolOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putTrue(boolBody);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -150,7 +153,7 @@ public final class BoolOperationsImpl implements BoolOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putTrueDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -178,8 +181,9 @@ public final class BoolOperationsImpl implements BoolOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getFalseAsync(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceCall getFalseAsync(final ServiceCallback<Boolean> serviceCallback) {
         Call<ResponseBody> call = service.getFalse();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Boolean>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -190,7 +194,7 @@ public final class BoolOperationsImpl implements BoolOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Boolean> getFalseDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -220,8 +224,9 @@ public final class BoolOperationsImpl implements BoolOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putFalse(boolBody);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -232,7 +237,7 @@ public final class BoolOperationsImpl implements BoolOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putFalseDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -260,8 +265,9 @@ public final class BoolOperationsImpl implements BoolOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getNullAsync(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceCall getNullAsync(final ServiceCallback<Boolean> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Boolean>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -272,7 +278,7 @@ public final class BoolOperationsImpl implements BoolOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Boolean> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -300,8 +306,9 @@ public final class BoolOperationsImpl implements BoolOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getInvalidAsync(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceCall getInvalidAsync(final ServiceCallback<Boolean> serviceCallback) {
         Call<ResponseBody> call = service.getInvalid();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Boolean>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -312,7 +319,7 @@ public final class BoolOperationsImpl implements BoolOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Boolean> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {

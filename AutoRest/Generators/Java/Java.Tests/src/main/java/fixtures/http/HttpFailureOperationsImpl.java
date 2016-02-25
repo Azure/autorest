@@ -11,6 +11,7 @@
 package fixtures.http;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
@@ -74,8 +75,9 @@ public final class HttpFailureOperationsImpl implements HttpFailureOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getEmptyErrorAsync(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceCall getEmptyErrorAsync(final ServiceCallback<Boolean> serviceCallback) {
         Call<ResponseBody> call = service.getEmptyError();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Boolean>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -86,7 +88,7 @@ public final class HttpFailureOperationsImpl implements HttpFailureOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Boolean> getEmptyErrorDelegate(Response<ResponseBody> response) throws ErrorException, IOException {

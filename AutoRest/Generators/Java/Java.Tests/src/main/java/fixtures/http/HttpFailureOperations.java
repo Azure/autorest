@@ -10,12 +10,11 @@
 
 package fixtures.http;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -35,8 +34,8 @@ public interface HttpFailureOperations {
      * Get empty error form server.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getEmptyErrorAsync(final ServiceCallback<Boolean> serviceCallback);
+    ServiceCall getEmptyErrorAsync(final ServiceCallback<Boolean> serviceCallback);
 
 }

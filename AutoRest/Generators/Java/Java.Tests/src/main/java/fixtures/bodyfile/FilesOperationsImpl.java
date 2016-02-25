@@ -11,6 +11,7 @@
 package fixtures.bodyfile;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
@@ -79,8 +80,9 @@ public final class FilesOperationsImpl implements FilesOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getFileAsync(final ServiceCallback<InputStream> serviceCallback) {
+    public ServiceCall getFileAsync(final ServiceCallback<InputStream> serviceCallback) {
         Call<ResponseBody> call = service.getFile();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<InputStream>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -91,7 +93,7 @@ public final class FilesOperationsImpl implements FilesOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<InputStream> getFileDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -119,8 +121,9 @@ public final class FilesOperationsImpl implements FilesOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback) {
+    public ServiceCall getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback) {
         Call<ResponseBody> call = service.getEmptyFile();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<InputStream>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -131,7 +134,7 @@ public final class FilesOperationsImpl implements FilesOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<InputStream> getEmptyFileDelegate(Response<ResponseBody> response) throws ErrorException, IOException {

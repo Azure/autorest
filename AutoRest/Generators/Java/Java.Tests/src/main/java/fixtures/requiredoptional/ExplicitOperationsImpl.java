@@ -12,6 +12,7 @@ package fixtures.requiredoptional;
 
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.serializer.CollectionFormat;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
@@ -175,8 +176,9 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> postRequiredIntegerParameterAsync(int bodyParameter, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall postRequiredIntegerParameterAsync(int bodyParameter, final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.postRequiredIntegerParameter(bodyParameter);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -187,7 +189,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> postRequiredIntegerParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -216,8 +218,9 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> postOptionalIntegerParameterAsync(Integer bodyParameter, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall postOptionalIntegerParameterAsync(Integer bodyParameter, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.postOptionalIntegerParameter(bodyParameter);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -228,7 +231,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> postOptionalIntegerParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -263,13 +266,14 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> postRequiredIntegerPropertyAsync(IntWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall postRequiredIntegerPropertyAsync(IntWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
             return null;
         }
         Validator.validate(bodyParameter, serviceCallback);
         Call<ResponseBody> call = service.postRequiredIntegerProperty(bodyParameter);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -280,7 +284,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> postRequiredIntegerPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -310,9 +314,10 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(bodyParameter, serviceCallback);
         Call<ResponseBody> call = service.postOptionalIntegerProperty(bodyParameter);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -323,7 +328,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> postOptionalIntegerPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -353,8 +358,9 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> postRequiredIntegerHeaderAsync(int headerParameter, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall postRequiredIntegerHeaderAsync(int headerParameter, final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.postRequiredIntegerHeader(headerParameter);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -365,7 +371,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> postRequiredIntegerHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -394,8 +400,9 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> postOptionalIntegerHeaderAsync(Integer headerParameter, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall postOptionalIntegerHeaderAsync(Integer headerParameter, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.postOptionalIntegerHeader(headerParameter);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -406,7 +413,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> postOptionalIntegerHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -440,12 +447,13 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> postRequiredStringParameterAsync(String bodyParameter, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall postRequiredStringParameterAsync(String bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.postRequiredStringParameter(bodyParameter);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -456,7 +464,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> postRequiredStringParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -485,8 +493,9 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> postOptionalStringParameterAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall postOptionalStringParameterAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.postOptionalStringParameter(bodyParameter);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -497,7 +506,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> postOptionalStringParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -532,13 +541,14 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> postRequiredStringPropertyAsync(StringWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall postRequiredStringPropertyAsync(StringWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
             return null;
         }
         Validator.validate(bodyParameter, serviceCallback);
         Call<ResponseBody> call = service.postRequiredStringProperty(bodyParameter);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -549,7 +559,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> postRequiredStringPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -579,9 +589,10 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(bodyParameter, serviceCallback);
         Call<ResponseBody> call = service.postOptionalStringProperty(bodyParameter);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -592,7 +603,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> postOptionalStringPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -626,12 +637,13 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> postRequiredStringHeaderAsync(String headerParameter, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall postRequiredStringHeaderAsync(String headerParameter, final ServiceCallback<Error> serviceCallback) {
         if (headerParameter == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter headerParameter is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.postRequiredStringHeader(headerParameter);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -642,7 +654,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> postRequiredStringHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -671,8 +683,9 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> postOptionalStringHeaderAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall postOptionalStringHeaderAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.postOptionalStringHeader(bodyParameter);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -683,7 +696,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> postOptionalStringHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -718,13 +731,14 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> postRequiredClassParameterAsync(Product bodyParameter, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall postRequiredClassParameterAsync(Product bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
             return null;
         }
         Validator.validate(bodyParameter, serviceCallback);
         Call<ResponseBody> call = service.postRequiredClassParameter(bodyParameter);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -735,7 +749,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> postRequiredClassParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -765,9 +779,10 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> postOptionalClassParameterAsync(Product bodyParameter, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall postOptionalClassParameterAsync(Product bodyParameter, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(bodyParameter, serviceCallback);
         Call<ResponseBody> call = service.postOptionalClassParameter(bodyParameter);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -778,7 +793,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> postOptionalClassParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -813,13 +828,14 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> postRequiredClassPropertyAsync(ClassWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall postRequiredClassPropertyAsync(ClassWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
             return null;
         }
         Validator.validate(bodyParameter, serviceCallback);
         Call<ResponseBody> call = service.postRequiredClassProperty(bodyParameter);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -830,7 +846,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> postRequiredClassPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -860,9 +876,10 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(bodyParameter, serviceCallback);
         Call<ResponseBody> call = service.postOptionalClassProperty(bodyParameter);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -873,7 +890,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> postOptionalClassPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -908,13 +925,14 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> postRequiredArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall postRequiredArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
             return null;
         }
         Validator.validate(bodyParameter, serviceCallback);
         Call<ResponseBody> call = service.postRequiredArrayParameter(bodyParameter);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -925,7 +943,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> postRequiredArrayParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -955,9 +973,10 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> postOptionalArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall postOptionalArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(bodyParameter, serviceCallback);
         Call<ResponseBody> call = service.postOptionalArrayParameter(bodyParameter);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -968,7 +987,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> postOptionalArrayParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -1003,13 +1022,14 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) {
         if (bodyParameter == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter bodyParameter is required and cannot be null."));
             return null;
         }
         Validator.validate(bodyParameter, serviceCallback);
         Call<ResponseBody> call = service.postRequiredArrayProperty(bodyParameter);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1020,7 +1040,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> postRequiredArrayPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -1050,9 +1070,10 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(bodyParameter, serviceCallback);
         Call<ResponseBody> call = service.postOptionalArrayProperty(bodyParameter);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1063,7 +1084,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> postOptionalArrayPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -1098,13 +1119,14 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> postRequiredArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall postRequiredArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Error> serviceCallback) {
         if (headerParameter == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter headerParameter is required and cannot be null."));
             return null;
         }
         Validator.validate(headerParameter, serviceCallback);
         Call<ResponseBody> call = service.postRequiredArrayHeader(client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV));
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1115,7 +1137,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> postRequiredArrayHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -1145,9 +1167,10 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> postOptionalArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall postOptionalArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(headerParameter, serviceCallback);
         Call<ResponseBody> call = service.postOptionalArrayHeader(client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV));
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1158,7 +1181,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> postOptionalArrayHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException {

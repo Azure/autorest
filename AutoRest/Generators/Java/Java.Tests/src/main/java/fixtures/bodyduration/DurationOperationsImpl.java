@@ -11,6 +11,7 @@
 package fixtures.bodyduration;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
@@ -89,8 +90,9 @@ public final class DurationOperationsImpl implements DurationOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getNullAsync(final ServiceCallback<Period> serviceCallback) {
+    public ServiceCall getNullAsync(final ServiceCallback<Period> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Period>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -101,7 +103,7 @@ public final class DurationOperationsImpl implements DurationOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Period> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -135,12 +137,13 @@ public final class DurationOperationsImpl implements DurationOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putPositiveDurationAsync(Period durationBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putPositiveDurationAsync(Period durationBody, final ServiceCallback<Void> serviceCallback) {
         if (durationBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter durationBody is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.putPositiveDuration(durationBody);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -151,7 +154,7 @@ public final class DurationOperationsImpl implements DurationOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putPositiveDurationDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -179,8 +182,9 @@ public final class DurationOperationsImpl implements DurationOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getPositiveDurationAsync(final ServiceCallback<Period> serviceCallback) {
+    public ServiceCall getPositiveDurationAsync(final ServiceCallback<Period> serviceCallback) {
         Call<ResponseBody> call = service.getPositiveDuration();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Period>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -191,7 +195,7 @@ public final class DurationOperationsImpl implements DurationOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Period> getPositiveDurationDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -219,8 +223,9 @@ public final class DurationOperationsImpl implements DurationOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getInvalidAsync(final ServiceCallback<Period> serviceCallback) {
+    public ServiceCall getInvalidAsync(final ServiceCallback<Period> serviceCallback) {
         Call<ResponseBody> call = service.getInvalid();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Period>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -231,7 +236,7 @@ public final class DurationOperationsImpl implements DurationOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Period> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {

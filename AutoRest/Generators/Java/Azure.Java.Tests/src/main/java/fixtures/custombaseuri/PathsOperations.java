@@ -10,12 +10,11 @@
 
 package fixtures.custombaseuri;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.custombaseuri.models.ErrorException;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -38,8 +37,8 @@ public interface PathsOperations {
      *
      * @param accountName Account Name
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback);
+    ServiceCall getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback);
 
 }

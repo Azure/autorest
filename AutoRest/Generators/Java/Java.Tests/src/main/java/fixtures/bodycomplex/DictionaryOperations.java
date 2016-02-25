@@ -10,13 +10,12 @@
 
 package fixtures.bodycomplex;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodycomplex.models.DictionaryWrapper;
 import fixtures.bodycomplex.models.ErrorException;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -36,9 +35,9 @@ public interface DictionaryOperations {
      * Get complex types with dictionary property.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getValidAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
+    ServiceCall getValidAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
 
     /**
      * Put complex types with dictionary property.
@@ -56,9 +55,9 @@ public interface DictionaryOperations {
      *
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putValidAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putValidAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get complex types with dictionary property which is empty.
@@ -73,9 +72,9 @@ public interface DictionaryOperations {
      * Get complex types with dictionary property which is empty.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getEmptyAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
+    ServiceCall getEmptyAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
 
     /**
      * Put complex types with dictionary property which is empty.
@@ -93,9 +92,9 @@ public interface DictionaryOperations {
      *
      * @param complexBody Please put an empty dictionary
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putEmptyAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putEmptyAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get complex types with dictionary property which is null.
@@ -110,9 +109,9 @@ public interface DictionaryOperations {
      * Get complex types with dictionary property which is null.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getNullAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
+    ServiceCall getNullAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
 
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
@@ -127,8 +126,8 @@ public interface DictionaryOperations {
      * Get complex types with dictionary property while server doesn't provide a response payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getNotProvidedAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
+    ServiceCall getNotProvidedAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
 
 }

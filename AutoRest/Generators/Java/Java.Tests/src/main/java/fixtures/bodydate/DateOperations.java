@@ -10,13 +10,12 @@
 
 package fixtures.bodydate;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodydate.models.ErrorException;
 import java.io.IOException;
-import okhttp3.ResponseBody;
 import org.joda.time.LocalDate;
-import retrofit2.Call;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -36,9 +35,9 @@ public interface DateOperations {
      * Get null date value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getNullAsync(final ServiceCallback<LocalDate> serviceCallback);
+    ServiceCall getNullAsync(final ServiceCallback<LocalDate> serviceCallback);
 
     /**
      * Get invalid date value.
@@ -53,9 +52,9 @@ public interface DateOperations {
      * Get invalid date value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getInvalidDateAsync(final ServiceCallback<LocalDate> serviceCallback);
+    ServiceCall getInvalidDateAsync(final ServiceCallback<LocalDate> serviceCallback);
 
     /**
      * Get overflow date value.
@@ -70,9 +69,9 @@ public interface DateOperations {
      * Get overflow date value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getOverflowDateAsync(final ServiceCallback<LocalDate> serviceCallback);
+    ServiceCall getOverflowDateAsync(final ServiceCallback<LocalDate> serviceCallback);
 
     /**
      * Get underflow date value.
@@ -87,9 +86,9 @@ public interface DateOperations {
      * Get underflow date value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getUnderflowDateAsync(final ServiceCallback<LocalDate> serviceCallback);
+    ServiceCall getUnderflowDateAsync(final ServiceCallback<LocalDate> serviceCallback);
 
     /**
      * Put max date value 9999-12-31.
@@ -107,9 +106,9 @@ public interface DateOperations {
      *
      * @param dateBody the LocalDate value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putMaxDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putMaxDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get max date value 9999-12-31.
@@ -124,9 +123,9 @@ public interface DateOperations {
      * Get max date value 9999-12-31.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getMaxDateAsync(final ServiceCallback<LocalDate> serviceCallback);
+    ServiceCall getMaxDateAsync(final ServiceCallback<LocalDate> serviceCallback);
 
     /**
      * Put min date value 0000-01-01.
@@ -144,9 +143,9 @@ public interface DateOperations {
      *
      * @param dateBody the LocalDate value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putMinDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putMinDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get min date value 0000-01-01.
@@ -161,8 +160,8 @@ public interface DateOperations {
      * Get min date value 0000-01-01.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getMinDateAsync(final ServiceCallback<LocalDate> serviceCallback);
+    ServiceCall getMinDateAsync(final ServiceCallback<LocalDate> serviceCallback);
 
 }

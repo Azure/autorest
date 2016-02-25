@@ -10,13 +10,12 @@
 
 package fixtures.bodyduration;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodyduration.models.ErrorException;
 import java.io.IOException;
-import okhttp3.ResponseBody;
 import org.joda.time.Period;
-import retrofit2.Call;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -36,9 +35,9 @@ public interface DurationOperations {
      * Get null duration value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getNullAsync(final ServiceCallback<Period> serviceCallback);
+    ServiceCall getNullAsync(final ServiceCallback<Period> serviceCallback);
 
     /**
      * Put a positive duration value.
@@ -56,9 +55,9 @@ public interface DurationOperations {
      *
      * @param durationBody the Period value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putPositiveDurationAsync(Period durationBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putPositiveDurationAsync(Period durationBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get a positive duration value.
@@ -73,9 +72,9 @@ public interface DurationOperations {
      * Get a positive duration value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getPositiveDurationAsync(final ServiceCallback<Period> serviceCallback);
+    ServiceCall getPositiveDurationAsync(final ServiceCallback<Period> serviceCallback);
 
     /**
      * Get an invalid duration value.
@@ -90,8 +89,8 @@ public interface DurationOperations {
      * Get an invalid duration value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getInvalidAsync(final ServiceCallback<Period> serviceCallback);
+    ServiceCall getInvalidAsync(final ServiceCallback<Period> serviceCallback);
 
 }

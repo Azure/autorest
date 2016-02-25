@@ -12,6 +12,7 @@ package fixtures.bodydatetimerfc1123;
 
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.DateTimeRfc1123;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
@@ -109,8 +110,9 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getNullAsync(final ServiceCallback<DateTimeRfc1123> serviceCallback) {
+    public ServiceCall getNullAsync(final ServiceCallback<DateTimeRfc1123> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DateTimeRfc1123>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -121,7 +123,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<DateTimeRfc1123> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -149,8 +151,9 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getInvalidAsync(final ServiceCallback<DateTimeRfc1123> serviceCallback) {
+    public ServiceCall getInvalidAsync(final ServiceCallback<DateTimeRfc1123> serviceCallback) {
         Call<ResponseBody> call = service.getInvalid();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DateTimeRfc1123>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -161,7 +164,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<DateTimeRfc1123> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -189,8 +192,9 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getOverflowAsync(final ServiceCallback<DateTimeRfc1123> serviceCallback) {
+    public ServiceCall getOverflowAsync(final ServiceCallback<DateTimeRfc1123> serviceCallback) {
         Call<ResponseBody> call = service.getOverflow();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DateTimeRfc1123>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -201,7 +205,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<DateTimeRfc1123> getOverflowDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -229,8 +233,9 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getUnderflowAsync(final ServiceCallback<DateTimeRfc1123> serviceCallback) {
+    public ServiceCall getUnderflowAsync(final ServiceCallback<DateTimeRfc1123> serviceCallback) {
         Call<ResponseBody> call = service.getUnderflow();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DateTimeRfc1123>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -241,7 +246,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<DateTimeRfc1123> getUnderflowDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -275,12 +280,13 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putUtcMaxDateTimeAsync(DateTimeRfc1123 datetimeBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putUtcMaxDateTimeAsync(DateTimeRfc1123 datetimeBody, final ServiceCallback<Void> serviceCallback) {
         if (datetimeBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.putUtcMaxDateTime(datetimeBody);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -291,7 +297,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putUtcMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -319,8 +325,9 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getUtcLowercaseMaxDateTimeAsync(final ServiceCallback<DateTimeRfc1123> serviceCallback) {
+    public ServiceCall getUtcLowercaseMaxDateTimeAsync(final ServiceCallback<DateTimeRfc1123> serviceCallback) {
         Call<ResponseBody> call = service.getUtcLowercaseMaxDateTime();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DateTimeRfc1123>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -331,7 +338,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<DateTimeRfc1123> getUtcLowercaseMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -359,8 +366,9 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<DateTimeRfc1123> serviceCallback) {
+    public ServiceCall getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<DateTimeRfc1123> serviceCallback) {
         Call<ResponseBody> call = service.getUtcUppercaseMaxDateTime();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DateTimeRfc1123>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -371,7 +379,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<DateTimeRfc1123> getUtcUppercaseMaxDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -405,12 +413,13 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putUtcMinDateTimeAsync(DateTimeRfc1123 datetimeBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putUtcMinDateTimeAsync(DateTimeRfc1123 datetimeBody, final ServiceCallback<Void> serviceCallback) {
         if (datetimeBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter datetimeBody is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.putUtcMinDateTime(datetimeBody);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -421,7 +430,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putUtcMinDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -449,8 +458,9 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getUtcMinDateTimeAsync(final ServiceCallback<DateTimeRfc1123> serviceCallback) {
+    public ServiceCall getUtcMinDateTimeAsync(final ServiceCallback<DateTimeRfc1123> serviceCallback) {
         Call<ResponseBody> call = service.getUtcMinDateTime();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DateTimeRfc1123>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -461,7 +471,7 @@ public final class Datetimerfc1123OperationsImpl implements Datetimerfc1123Opera
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<DateTimeRfc1123> getUtcMinDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {

@@ -10,13 +10,12 @@
 
 package fixtures.bodyfile;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodyfile.models.ErrorException;
 import java.io.InputStream;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -36,9 +35,9 @@ public interface FilesOperations {
      * Get file.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getFileAsync(final ServiceCallback<InputStream> serviceCallback);
+    ServiceCall getFileAsync(final ServiceCallback<InputStream> serviceCallback);
 
     /**
      * Get empty file.
@@ -53,8 +52,8 @@ public interface FilesOperations {
      * Get empty file.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback);
+    ServiceCall getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback);
 
 }

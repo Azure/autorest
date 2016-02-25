@@ -11,6 +11,7 @@
 package fixtures.bodystring;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
@@ -81,8 +82,9 @@ public final class EnumOperationsImpl implements EnumOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getNotExpandableAsync(final ServiceCallback<Colors> serviceCallback) {
+    public ServiceCall getNotExpandableAsync(final ServiceCallback<Colors> serviceCallback) {
         Call<ResponseBody> call = service.getNotExpandable();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Colors>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -93,7 +95,7 @@ public final class EnumOperationsImpl implements EnumOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Colors> getNotExpandableDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -127,12 +129,13 @@ public final class EnumOperationsImpl implements EnumOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putNotExpandableAsync(Colors stringBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putNotExpandableAsync(Colors stringBody, final ServiceCallback<Void> serviceCallback) {
         if (stringBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.putNotExpandable(stringBody);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -143,7 +146,7 @@ public final class EnumOperationsImpl implements EnumOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putNotExpandableDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {

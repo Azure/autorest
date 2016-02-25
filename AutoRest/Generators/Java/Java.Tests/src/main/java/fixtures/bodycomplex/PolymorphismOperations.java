@@ -10,13 +10,12 @@
 
 package fixtures.bodycomplex;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Fish;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -36,9 +35,9 @@ public interface PolymorphismOperations {
      * Get complex types that are polymorphic.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getValidAsync(final ServiceCallback<Fish> serviceCallback);
+    ServiceCall getValidAsync(final ServiceCallback<Fish> serviceCallback);
 
     /**
      * Put complex types that are polymorphic.
@@ -120,9 +119,9 @@ public interface PolymorphismOperations {
          ]
        };
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client.
@@ -190,8 +189,8 @@ public interface PolymorphismOperations {
      ]
  }
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putValidMissingRequiredAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putValidMissingRequiredAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback);
 
 }

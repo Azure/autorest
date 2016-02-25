@@ -12,6 +12,7 @@ package fixtures.azurespecials;
 
 import com.google.common.reflect.TypeToken;
 import com.microsoft.azure.AzureServiceResponseBuilder;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
@@ -97,12 +98,13 @@ public final class SubscriptionInCredentialsOperationsImpl implements Subscripti
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> postMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall postMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
         if (this.client.getSubscriptionId() == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.postMethodGlobalValid(this.client.getSubscriptionId(), this.client.getAcceptLanguage());
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -113,7 +115,7 @@ public final class SubscriptionInCredentialsOperationsImpl implements Subscripti
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> postMethodGlobalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -145,12 +147,13 @@ public final class SubscriptionInCredentialsOperationsImpl implements Subscripti
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> postMethodGlobalNullAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall postMethodGlobalNullAsync(final ServiceCallback<Void> serviceCallback) {
         if (this.client.getSubscriptionId() == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.postMethodGlobalNull(this.client.getSubscriptionId(), this.client.getAcceptLanguage());
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -161,7 +164,7 @@ public final class SubscriptionInCredentialsOperationsImpl implements Subscripti
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> postMethodGlobalNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -196,7 +199,7 @@ public final class SubscriptionInCredentialsOperationsImpl implements Subscripti
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> postMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall postMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback) {
         if (this.client.getSubscriptionId() == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null."));
             return null;
@@ -206,6 +209,7 @@ public final class SubscriptionInCredentialsOperationsImpl implements Subscripti
             return null;
         }
         Call<ResponseBody> call = service.postMethodGlobalNotProvidedValid(this.client.getSubscriptionId(), this.client.getApiVersion(), this.client.getAcceptLanguage());
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -216,7 +220,7 @@ public final class SubscriptionInCredentialsOperationsImpl implements Subscripti
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> postMethodGlobalNotProvidedValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -248,12 +252,13 @@ public final class SubscriptionInCredentialsOperationsImpl implements Subscripti
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> postPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall postPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
         if (this.client.getSubscriptionId() == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.postPathGlobalValid(this.client.getSubscriptionId(), this.client.getAcceptLanguage());
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -264,7 +269,7 @@ public final class SubscriptionInCredentialsOperationsImpl implements Subscripti
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> postPathGlobalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -296,12 +301,13 @@ public final class SubscriptionInCredentialsOperationsImpl implements Subscripti
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> postSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall postSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback) {
         if (this.client.getSubscriptionId() == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getSubscriptionId() is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.postSwaggerGlobalValid(this.client.getSubscriptionId(), this.client.getAcceptLanguage());
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -312,7 +318,7 @@ public final class SubscriptionInCredentialsOperationsImpl implements Subscripti
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> postSwaggerGlobalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {

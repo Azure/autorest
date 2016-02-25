@@ -546,11 +546,7 @@ namespace Microsoft.Rest.Generator.Java
             {
                 HashSet<string> imports = new HashSet<string>();
                 // static imports
-                imports.Add("retrofit2.Call");
-                if (this.HttpMethod != HttpMethod.Head)
-                {
-                    imports.Add("okhttp3.ResponseBody");
-                }
+                imports.Add("com.microsoft.rest.ServiceCall");
                 imports.Add("com.microsoft.rest." + OperationResponseType);
                 imports.Add("com.microsoft.rest.ServiceCallback");
                 // parameter types
@@ -587,6 +583,7 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     imports.Add("okhttp3.ResponseBody");
                 }
+                imports.Add("com.microsoft.rest.ServiceCall");
                 imports.Add("com.microsoft.rest." + OperationResponseType);
                 imports.Add(RuntimeBasePackage + "." + ResponseBuilder);
                 imports.Add("com.microsoft.rest.ServiceCallback");

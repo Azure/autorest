@@ -12,6 +12,7 @@ package fixtures.bodydictionary;
 
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.DateTimeRfc1123;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
@@ -336,8 +337,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getNullAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
+    public ServiceCall getNullAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -348,7 +350,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, Integer>> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -376,8 +378,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getEmptyAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
+    public ServiceCall getEmptyAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
         Call<ResponseBody> call = service.getEmpty();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -388,7 +391,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, Integer>> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -423,13 +426,14 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putEmptyAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putEmptyAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putEmpty(arrayBody);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -440,7 +444,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -468,8 +472,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getNullValueAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
+    public ServiceCall getNullValueAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
         Call<ResponseBody> call = service.getNullValue();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, String>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -480,7 +485,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, String>> getNullValueDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -508,8 +513,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getNullKeyAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
+    public ServiceCall getNullKeyAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
         Call<ResponseBody> call = service.getNullKey();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, String>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -520,7 +526,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, String>> getNullKeyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -548,8 +554,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getEmptyStringKeyAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
+    public ServiceCall getEmptyStringKeyAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
         Call<ResponseBody> call = service.getEmptyStringKey();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, String>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -560,7 +567,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, String>> getEmptyStringKeyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -588,8 +595,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getInvalidAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
+    public ServiceCall getInvalidAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
         Call<ResponseBody> call = service.getInvalid();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, String>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -600,7 +608,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, String>> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -628,8 +636,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getBooleanTfftAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback) {
+    public ServiceCall getBooleanTfftAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback) {
         Call<ResponseBody> call = service.getBooleanTfft();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Boolean>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -640,7 +649,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, Boolean>> getBooleanTfftDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -675,13 +684,14 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putBooleanTfftAsync(Map<String, Boolean> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putBooleanTfftAsync(Map<String, Boolean> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putBooleanTfft(arrayBody);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -692,7 +702,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putBooleanTfftDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -720,8 +730,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getBooleanInvalidNullAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback) {
+    public ServiceCall getBooleanInvalidNullAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback) {
         Call<ResponseBody> call = service.getBooleanInvalidNull();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Boolean>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -732,7 +743,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, Boolean>> getBooleanInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -760,8 +771,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getBooleanInvalidStringAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback) {
+    public ServiceCall getBooleanInvalidStringAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback) {
         Call<ResponseBody> call = service.getBooleanInvalidString();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Boolean>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -772,7 +784,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, Boolean>> getBooleanInvalidStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -800,8 +812,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getIntegerValidAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
+    public ServiceCall getIntegerValidAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
         Call<ResponseBody> call = service.getIntegerValid();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -812,7 +825,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, Integer>> getIntegerValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -847,13 +860,14 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putIntegerValidAsync(Map<String, Integer> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putIntegerValidAsync(Map<String, Integer> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putIntegerValid(arrayBody);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -864,7 +878,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putIntegerValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -892,8 +906,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getIntInvalidNullAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
+    public ServiceCall getIntInvalidNullAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
         Call<ResponseBody> call = service.getIntInvalidNull();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -904,7 +919,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, Integer>> getIntInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -932,8 +947,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getIntInvalidStringAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
+    public ServiceCall getIntInvalidStringAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
         Call<ResponseBody> call = service.getIntInvalidString();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -944,7 +960,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, Integer>> getIntInvalidStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -972,8 +988,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getLongValidAsync(final ServiceCallback<Map<String, Long>> serviceCallback) {
+    public ServiceCall getLongValidAsync(final ServiceCallback<Map<String, Long>> serviceCallback) {
         Call<ResponseBody> call = service.getLongValid();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Long>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -984,7 +1001,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, Long>> getLongValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -1019,13 +1036,14 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putLongValidAsync(Map<String, Long> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putLongValidAsync(Map<String, Long> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putLongValid(arrayBody);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1036,7 +1054,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putLongValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -1064,8 +1082,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getLongInvalidNullAsync(final ServiceCallback<Map<String, Long>> serviceCallback) {
+    public ServiceCall getLongInvalidNullAsync(final ServiceCallback<Map<String, Long>> serviceCallback) {
         Call<ResponseBody> call = service.getLongInvalidNull();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Long>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1076,7 +1095,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, Long>> getLongInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -1104,8 +1123,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getLongInvalidStringAsync(final ServiceCallback<Map<String, Long>> serviceCallback) {
+    public ServiceCall getLongInvalidStringAsync(final ServiceCallback<Map<String, Long>> serviceCallback) {
         Call<ResponseBody> call = service.getLongInvalidString();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Long>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1116,7 +1136,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, Long>> getLongInvalidStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -1144,8 +1164,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getFloatValidAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
+    public ServiceCall getFloatValidAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
         Call<ResponseBody> call = service.getFloatValid();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Double>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1156,7 +1177,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, Double>> getFloatValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -1191,13 +1212,14 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putFloatValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putFloatValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putFloatValid(arrayBody);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1208,7 +1230,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putFloatValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -1236,8 +1258,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getFloatInvalidNullAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
+    public ServiceCall getFloatInvalidNullAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
         Call<ResponseBody> call = service.getFloatInvalidNull();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Double>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1248,7 +1271,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, Double>> getFloatInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -1276,8 +1299,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getFloatInvalidStringAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
+    public ServiceCall getFloatInvalidStringAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
         Call<ResponseBody> call = service.getFloatInvalidString();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Double>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1288,7 +1312,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, Double>> getFloatInvalidStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -1316,8 +1340,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDoubleValidAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
+    public ServiceCall getDoubleValidAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
         Call<ResponseBody> call = service.getDoubleValid();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Double>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1328,7 +1353,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, Double>> getDoubleValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -1363,13 +1388,14 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putDoubleValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putDoubleValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putDoubleValid(arrayBody);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1380,7 +1406,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putDoubleValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -1408,8 +1434,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDoubleInvalidNullAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
+    public ServiceCall getDoubleInvalidNullAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
         Call<ResponseBody> call = service.getDoubleInvalidNull();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Double>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1420,7 +1447,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, Double>> getDoubleInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -1448,8 +1475,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDoubleInvalidStringAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
+    public ServiceCall getDoubleInvalidStringAsync(final ServiceCallback<Map<String, Double>> serviceCallback) {
         Call<ResponseBody> call = service.getDoubleInvalidString();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Double>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1460,7 +1488,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, Double>> getDoubleInvalidStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -1488,8 +1516,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getStringValidAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
+    public ServiceCall getStringValidAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
         Call<ResponseBody> call = service.getStringValid();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, String>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1500,7 +1529,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, String>> getStringValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -1535,13 +1564,14 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putStringValidAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putStringValidAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putStringValid(arrayBody);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1552,7 +1582,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putStringValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -1580,8 +1610,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getStringWithNullAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
+    public ServiceCall getStringWithNullAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
         Call<ResponseBody> call = service.getStringWithNull();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, String>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1592,7 +1623,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, String>> getStringWithNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -1620,8 +1651,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getStringWithInvalidAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
+    public ServiceCall getStringWithInvalidAsync(final ServiceCallback<Map<String, String>> serviceCallback) {
         Call<ResponseBody> call = service.getStringWithInvalid();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, String>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1632,7 +1664,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, String>> getStringWithInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -1660,8 +1692,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDateValidAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback) {
+    public ServiceCall getDateValidAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback) {
         Call<ResponseBody> call = service.getDateValid();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, LocalDate>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1672,7 +1705,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, LocalDate>> getDateValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -1707,13 +1740,14 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putDateValidAsync(Map<String, LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putDateValidAsync(Map<String, LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putDateValid(arrayBody);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1724,7 +1758,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putDateValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -1752,8 +1786,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDateInvalidNullAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback) {
+    public ServiceCall getDateInvalidNullAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback) {
         Call<ResponseBody> call = service.getDateInvalidNull();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, LocalDate>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1764,7 +1799,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, LocalDate>> getDateInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -1792,8 +1827,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDateInvalidCharsAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback) {
+    public ServiceCall getDateInvalidCharsAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback) {
         Call<ResponseBody> call = service.getDateInvalidChars();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, LocalDate>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1804,7 +1840,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, LocalDate>> getDateInvalidCharsDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -1832,8 +1868,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDateTimeValidAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) {
+    public ServiceCall getDateTimeValidAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) {
         Call<ResponseBody> call = service.getDateTimeValid();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, DateTime>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1844,7 +1881,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, DateTime>> getDateTimeValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -1879,13 +1916,14 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putDateTimeValidAsync(Map<String, DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putDateTimeValidAsync(Map<String, DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putDateTimeValid(arrayBody);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1896,7 +1934,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putDateTimeValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -1924,8 +1962,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDateTimeInvalidNullAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) {
+    public ServiceCall getDateTimeInvalidNullAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) {
         Call<ResponseBody> call = service.getDateTimeInvalidNull();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, DateTime>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1936,7 +1975,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, DateTime>> getDateTimeInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -1964,8 +2003,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDateTimeInvalidCharsAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) {
+    public ServiceCall getDateTimeInvalidCharsAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) {
         Call<ResponseBody> call = service.getDateTimeInvalidChars();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, DateTime>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1976,7 +2016,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, DateTime>> getDateTimeInvalidCharsDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -2004,8 +2044,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDateTimeRfc1123ValidAsync(final ServiceCallback<Map<String, DateTimeRfc1123>> serviceCallback) {
+    public ServiceCall getDateTimeRfc1123ValidAsync(final ServiceCallback<Map<String, DateTimeRfc1123>> serviceCallback) {
         Call<ResponseBody> call = service.getDateTimeRfc1123Valid();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, DateTimeRfc1123>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2016,7 +2057,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, DateTimeRfc1123>> getDateTimeRfc1123ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -2051,13 +2092,14 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putDateTimeRfc1123ValidAsync(Map<String, DateTimeRfc1123> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putDateTimeRfc1123ValidAsync(Map<String, DateTimeRfc1123> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putDateTimeRfc1123Valid(arrayBody);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2068,7 +2110,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putDateTimeRfc1123ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -2096,8 +2138,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDurationValidAsync(final ServiceCallback<Map<String, Period>> serviceCallback) {
+    public ServiceCall getDurationValidAsync(final ServiceCallback<Map<String, Period>> serviceCallback) {
         Call<ResponseBody> call = service.getDurationValid();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Period>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2108,7 +2151,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, Period>> getDurationValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -2143,13 +2186,14 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putDurationValidAsync(Map<String, Period> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putDurationValidAsync(Map<String, Period> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putDurationValid(arrayBody);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2160,7 +2204,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putDurationValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -2188,8 +2232,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getByteValidAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback) {
+    public ServiceCall getByteValidAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback) {
         Call<ResponseBody> call = service.getByteValid();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, byte[]>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2200,7 +2245,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, byte[]>> getByteValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -2235,13 +2280,14 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putByteValidAsync(Map<String, byte[]> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putByteValidAsync(Map<String, byte[]> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putByteValid(arrayBody);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2252,7 +2298,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putByteValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -2280,8 +2326,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getByteInvalidNullAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback) {
+    public ServiceCall getByteInvalidNullAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback) {
         Call<ResponseBody> call = service.getByteInvalidNull();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, byte[]>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2292,7 +2339,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, byte[]>> getByteInvalidNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -2320,8 +2367,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getComplexNullAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
+    public ServiceCall getComplexNullAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
         Call<ResponseBody> call = service.getComplexNull();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Widget>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2332,7 +2380,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, Widget>> getComplexNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -2360,8 +2408,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getComplexEmptyAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
+    public ServiceCall getComplexEmptyAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
         Call<ResponseBody> call = service.getComplexEmpty();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Widget>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2372,7 +2421,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, Widget>> getComplexEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -2400,8 +2449,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getComplexItemNullAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
+    public ServiceCall getComplexItemNullAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
         Call<ResponseBody> call = service.getComplexItemNull();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Widget>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2412,7 +2462,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, Widget>> getComplexItemNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -2440,8 +2490,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getComplexItemEmptyAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
+    public ServiceCall getComplexItemEmptyAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
         Call<ResponseBody> call = service.getComplexItemEmpty();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Widget>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2452,7 +2503,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, Widget>> getComplexItemEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -2480,8 +2531,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getComplexValidAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
+    public ServiceCall getComplexValidAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) {
         Call<ResponseBody> call = service.getComplexValid();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Widget>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2492,7 +2544,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, Widget>> getComplexValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -2527,13 +2579,14 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putComplexValidAsync(Map<String, Widget> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putComplexValidAsync(Map<String, Widget> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putComplexValid(arrayBody);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2544,7 +2597,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putComplexValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -2572,8 +2625,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getArrayNullAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
+    public ServiceCall getArrayNullAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
         Call<ResponseBody> call = service.getArrayNull();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, List<String>>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2584,7 +2638,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, List<String>>> getArrayNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -2612,8 +2666,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getArrayEmptyAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
+    public ServiceCall getArrayEmptyAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
         Call<ResponseBody> call = service.getArrayEmpty();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, List<String>>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2624,7 +2679,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, List<String>>> getArrayEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -2652,8 +2707,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getArrayItemNullAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
+    public ServiceCall getArrayItemNullAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
         Call<ResponseBody> call = service.getArrayItemNull();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, List<String>>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2664,7 +2720,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, List<String>>> getArrayItemNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -2692,8 +2748,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getArrayItemEmptyAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
+    public ServiceCall getArrayItemEmptyAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
         Call<ResponseBody> call = service.getArrayItemEmpty();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, List<String>>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2704,7 +2761,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, List<String>>> getArrayItemEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -2732,8 +2789,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getArrayValidAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
+    public ServiceCall getArrayValidAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) {
         Call<ResponseBody> call = service.getArrayValid();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, List<String>>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2744,7 +2802,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, List<String>>> getArrayValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -2779,13 +2837,14 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putArrayValidAsync(Map<String, List<String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putArrayValidAsync(Map<String, List<String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putArrayValid(arrayBody);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2796,7 +2855,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putArrayValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -2824,8 +2883,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDictionaryNullAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
+    public ServiceCall getDictionaryNullAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
         Call<ResponseBody> call = service.getDictionaryNull();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Map<String, String>>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2836,7 +2896,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, Map<String, String>>> getDictionaryNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -2864,8 +2924,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDictionaryEmptyAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
+    public ServiceCall getDictionaryEmptyAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
         Call<ResponseBody> call = service.getDictionaryEmpty();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Map<String, String>>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2876,7 +2937,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, Map<String, String>>> getDictionaryEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -2904,8 +2965,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDictionaryItemNullAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
+    public ServiceCall getDictionaryItemNullAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
         Call<ResponseBody> call = service.getDictionaryItemNull();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Map<String, String>>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2916,7 +2978,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, Map<String, String>>> getDictionaryItemNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -2944,8 +3006,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDictionaryItemEmptyAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
+    public ServiceCall getDictionaryItemEmptyAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
         Call<ResponseBody> call = service.getDictionaryItemEmpty();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Map<String, String>>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2956,7 +3019,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, Map<String, String>>> getDictionaryItemEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -2984,8 +3047,9 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDictionaryValidAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
+    public ServiceCall getDictionaryValidAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) {
         Call<ResponseBody> call = service.getDictionaryValid();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Map<String, String>>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2996,7 +3060,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, Map<String, String>>> getDictionaryValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -3031,13 +3095,14 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback) {
         if (arrayBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter arrayBody is required and cannot be null."));
             return null;
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putDictionaryValid(arrayBody);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -3048,7 +3113,7 @@ public final class DictionaryOperationsImpl implements DictionaryOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putDictionaryValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {

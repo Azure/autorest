@@ -10,12 +10,11 @@
 
 package fixtures.azurespecials;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.azurespecials.models.ErrorException;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -36,9 +35,9 @@ public interface ApiVersionDefaultOperations {
      * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceCall getMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * GET method with api-version modeled in global settings.
@@ -54,9 +53,9 @@ public interface ApiVersionDefaultOperations {
      * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceCall getMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * GET method with api-version modeled in global settings.
@@ -72,9 +71,9 @@ public interface ApiVersionDefaultOperations {
      * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceCall getPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
 
     /**
      * GET method with api-version modeled in global settings.
@@ -90,8 +89,8 @@ public interface ApiVersionDefaultOperations {
      * GET method with api-version modeled in global settings.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceCall getSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
 
 }

@@ -10,13 +10,12 @@
 
 package fixtures.http;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.http.models.Error;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
 
 /**
  * An instance of this class provides access to all the operations defined
@@ -36,9 +35,9 @@ public interface HttpServerFailureOperations {
      * Return 501 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<Void> head501Async(final ServiceCallback<Error> serviceCallback);
+    ServiceCall head501Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 501 status code - should be represented in the client as an error.
@@ -53,9 +52,9 @@ public interface HttpServerFailureOperations {
      * Return 501 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> get501Async(final ServiceCallback<Error> serviceCallback);
+    ServiceCall get501Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 505 status code - should be represented in the client as an error.
@@ -72,9 +71,9 @@ public interface HttpServerFailureOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> post505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceCall post505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 505 status code - should be represented in the client as an error.
@@ -91,8 +90,8 @@ public interface HttpServerFailureOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> delete505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceCall delete505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
 }

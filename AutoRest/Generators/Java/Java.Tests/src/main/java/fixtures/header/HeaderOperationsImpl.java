@@ -12,6 +12,7 @@ package fixtures.header;
 
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.DateTimeRfc1123;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
@@ -214,12 +215,13 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> paramExistingKeyAsync(String userAgent, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall paramExistingKeyAsync(String userAgent, final ServiceCallback<Void> serviceCallback) {
         if (userAgent == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter userAgent is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.paramExistingKey(userAgent);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -230,7 +232,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> paramExistingKeyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -258,8 +260,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> responseExistingKeyAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall responseExistingKeyAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.responseExistingKey();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -270,7 +273,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseExistingKeyHeaders> responseExistingKeyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -304,12 +307,13 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> paramProtectedKeyAsync(String contentType, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall paramProtectedKeyAsync(String contentType, final ServiceCallback<Void> serviceCallback) {
         if (contentType == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter contentType is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.paramProtectedKey(contentType);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -320,7 +324,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> paramProtectedKeyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -348,8 +352,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> responseProtectedKeyAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall responseProtectedKeyAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.responseProtectedKey();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -360,7 +365,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseProtectedKeyHeaders> responseProtectedKeyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -396,12 +401,13 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> paramIntegerAsync(String scenario, int value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall paramIntegerAsync(String scenario, int value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.paramInteger(scenario, value);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -412,7 +418,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> paramIntegerDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -446,12 +452,13 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> responseIntegerAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall responseIntegerAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.responseInteger(scenario);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -462,7 +469,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseIntegerHeaders> responseIntegerDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -498,12 +505,13 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> paramLongAsync(String scenario, long value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall paramLongAsync(String scenario, long value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.paramLong(scenario, value);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -514,7 +522,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> paramLongDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -548,12 +556,13 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> responseLongAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall responseLongAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.responseLong(scenario);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -564,7 +573,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseLongHeaders> responseLongDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -600,12 +609,13 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> paramFloatAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall paramFloatAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.paramFloat(scenario, value);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -616,7 +626,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> paramFloatDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -650,12 +660,13 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> responseFloatAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall responseFloatAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.responseFloat(scenario);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -666,7 +677,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseFloatHeaders> responseFloatDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -702,12 +713,13 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> paramDoubleAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall paramDoubleAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.paramDouble(scenario, value);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -718,7 +730,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> paramDoubleDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -752,12 +764,13 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> responseDoubleAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall responseDoubleAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.responseDouble(scenario);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -768,7 +781,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseDoubleHeaders> responseDoubleDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -804,12 +817,13 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> paramBoolAsync(String scenario, boolean value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall paramBoolAsync(String scenario, boolean value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.paramBool(scenario, value);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -820,7 +834,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> paramBoolDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -854,12 +868,13 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> responseBoolAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall responseBoolAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.responseBool(scenario);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -870,7 +885,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseBoolHeaders> responseBoolDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -906,12 +921,13 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> paramStringAsync(String scenario, String value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall paramStringAsync(String scenario, String value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.paramString(scenario, value);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -922,7 +938,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> paramStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -956,12 +972,13 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> responseStringAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall responseStringAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.responseString(scenario);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -972,7 +989,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseStringHeaders> responseStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -1011,7 +1028,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> paramDateAsync(String scenario, LocalDate value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall paramDateAsync(String scenario, LocalDate value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
@@ -1021,6 +1038,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             return null;
         }
         Call<ResponseBody> call = service.paramDate(scenario, client.getMapperAdapter().serializeRaw(value));
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1031,7 +1049,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> paramDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -1065,12 +1083,13 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> responseDateAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall responseDateAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.responseDate(scenario);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1081,7 +1100,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseDateHeaders> responseDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -1120,7 +1139,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> paramDatetimeAsync(String scenario, DateTime value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall paramDatetimeAsync(String scenario, DateTime value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
@@ -1130,6 +1149,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             return null;
         }
         Call<ResponseBody> call = service.paramDatetime(scenario, client.getMapperAdapter().serializeRaw(value));
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1140,7 +1160,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> paramDatetimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -1174,12 +1194,13 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> responseDatetimeAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall responseDatetimeAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.responseDatetime(scenario);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1190,7 +1211,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseDatetimeHeaders> responseDatetimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -1226,12 +1247,13 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> paramDatetimeRfc1123Async(String scenario, DateTimeRfc1123 value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall paramDatetimeRfc1123Async(String scenario, DateTimeRfc1123 value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.paramDatetimeRfc1123(scenario, value);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1242,7 +1264,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> paramDatetimeRfc1123Delegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -1276,12 +1298,13 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> responseDatetimeRfc1123Async(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall responseDatetimeRfc1123Async(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.responseDatetimeRfc1123(scenario);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1292,7 +1315,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseDatetimeRfc1123Headers> responseDatetimeRfc1123Delegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -1331,7 +1354,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> paramDurationAsync(String scenario, Period value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall paramDurationAsync(String scenario, Period value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
@@ -1341,6 +1364,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             return null;
         }
         Call<ResponseBody> call = service.paramDuration(scenario, value);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1351,7 +1375,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> paramDurationDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -1385,12 +1409,13 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> responseDurationAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall responseDurationAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.responseDuration(scenario);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1401,7 +1426,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseDurationHeaders> responseDurationDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -1440,7 +1465,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> paramByteAsync(String scenario, byte[] value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall paramByteAsync(String scenario, byte[] value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
@@ -1450,6 +1475,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             return null;
         }
         Call<ResponseBody> call = service.paramByte(scenario, Base64.encodeBase64String(value));
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1460,7 +1486,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> paramByteDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -1494,12 +1520,13 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> responseByteAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall responseByteAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.responseByte(scenario);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1510,7 +1537,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseByteHeaders> responseByteDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -1546,12 +1573,13 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> paramEnumAsync(String scenario, GreyscaleColors value, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall paramEnumAsync(String scenario, GreyscaleColors value, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.paramEnum(scenario, client.getMapperAdapter().serializeRaw(value));
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1562,7 +1590,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> paramEnumDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -1596,12 +1624,13 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> responseEnumAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall responseEnumAsync(String scenario, final ServiceCallback<Void> serviceCallback) {
         if (scenario == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.responseEnum(scenario);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1612,7 +1641,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseEnumHeaders> responseEnumDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -1640,8 +1669,9 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> customRequestIdAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall customRequestIdAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.customRequestId();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1652,7 +1682,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> customRequestIdDelegate(Response<ResponseBody> response) throws ErrorException, IOException {

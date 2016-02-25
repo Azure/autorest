@@ -15,13 +15,12 @@ import okhttp3.Interceptor;
 import okhttp3.logging.HttpLoggingInterceptor.Level;
 import com.microsoft.rest.AutoRestBaseUrl;
 import com.microsoft.rest.serializer.JacksonMapperAdapter;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.report.models.ErrorException;
 import java.io.IOException;
 import java.util.Map;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
 
 /**
  * The interface for AutoRestReportService class.
@@ -69,8 +68,8 @@ public interface AutoRestReportService {
      * Get test coverage report.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
+    ServiceCall getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
 
 }

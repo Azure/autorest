@@ -11,6 +11,7 @@
 package fixtures.requiredoptional;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
@@ -110,12 +111,13 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getRequiredPathAsync(String pathParameter, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall getRequiredPathAsync(String pathParameter, final ServiceCallback<Error> serviceCallback) {
         if (pathParameter == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter pathParameter is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.getRequiredPath(pathParameter);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -126,7 +128,7 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> getRequiredPathDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -155,8 +157,9 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putOptionalQueryAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putOptionalQueryAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putOptionalQuery(queryParameter);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -167,7 +170,7 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putOptionalQueryDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -197,8 +200,9 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putOptionalHeaderAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putOptionalHeaderAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putOptionalHeader(queryParameter);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -209,7 +213,7 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putOptionalHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -239,8 +243,9 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putOptionalBodyAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putOptionalBodyAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putOptionalBody(bodyParameter);
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -251,7 +256,7 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putOptionalBodyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -283,12 +288,13 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getRequiredGlobalPathAsync(final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall getRequiredGlobalPathAsync(final ServiceCallback<Error> serviceCallback) {
         if (this.client.getRequiredGlobalPath() == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getRequiredGlobalPath() is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.getRequiredGlobalPath(this.client.getRequiredGlobalPath());
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -299,7 +305,7 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> getRequiredGlobalPathDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -330,12 +336,13 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getRequiredGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall getRequiredGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) {
         if (this.client.getRequiredGlobalQuery() == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getRequiredGlobalQuery() is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.getRequiredGlobalQuery(this.client.getRequiredGlobalQuery());
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -346,7 +353,7 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> getRequiredGlobalQueryDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -373,8 +380,9 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getOptionalGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall getOptionalGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.getOptionalGlobalQuery(this.client.getOptionalGlobalQuery());
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -385,7 +393,7 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> getOptionalGlobalQueryDelegate(Response<ResponseBody> response) throws ErrorException, IOException {

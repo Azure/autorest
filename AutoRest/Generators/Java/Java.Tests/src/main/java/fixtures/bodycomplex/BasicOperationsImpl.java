@@ -11,6 +11,7 @@
 package fixtures.bodycomplex;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
@@ -99,8 +100,9 @@ public final class BasicOperationsImpl implements BasicOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getValidAsync(final ServiceCallback<Basic> serviceCallback) {
+    public ServiceCall getValidAsync(final ServiceCallback<Basic> serviceCallback) {
         Call<ResponseBody> call = service.getValid();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Basic>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -111,7 +113,7 @@ public final class BasicOperationsImpl implements BasicOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Basic> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -149,7 +151,7 @@ public final class BasicOperationsImpl implements BasicOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putValidAsync(Basic complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putValidAsync(Basic complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
@@ -160,6 +162,7 @@ public final class BasicOperationsImpl implements BasicOperations {
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putValid(complexBody, this.client.getApiVersion());
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -170,7 +173,7 @@ public final class BasicOperationsImpl implements BasicOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -198,8 +201,9 @@ public final class BasicOperationsImpl implements BasicOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getInvalidAsync(final ServiceCallback<Basic> serviceCallback) {
+    public ServiceCall getInvalidAsync(final ServiceCallback<Basic> serviceCallback) {
         Call<ResponseBody> call = service.getInvalid();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Basic>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -210,7 +214,7 @@ public final class BasicOperationsImpl implements BasicOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Basic> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -238,8 +242,9 @@ public final class BasicOperationsImpl implements BasicOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getEmptyAsync(final ServiceCallback<Basic> serviceCallback) {
+    public ServiceCall getEmptyAsync(final ServiceCallback<Basic> serviceCallback) {
         Call<ResponseBody> call = service.getEmpty();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Basic>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -250,7 +255,7 @@ public final class BasicOperationsImpl implements BasicOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Basic> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -278,8 +283,9 @@ public final class BasicOperationsImpl implements BasicOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getNullAsync(final ServiceCallback<Basic> serviceCallback) {
+    public ServiceCall getNullAsync(final ServiceCallback<Basic> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Basic>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -290,7 +296,7 @@ public final class BasicOperationsImpl implements BasicOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Basic> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -318,8 +324,9 @@ public final class BasicOperationsImpl implements BasicOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getNotProvidedAsync(final ServiceCallback<Basic> serviceCallback) {
+    public ServiceCall getNotProvidedAsync(final ServiceCallback<Basic> serviceCallback) {
         Call<ResponseBody> call = service.getNotProvided();
+        ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Basic>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -330,7 +337,7 @@ public final class BasicOperationsImpl implements BasicOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Basic> getNotProvidedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
