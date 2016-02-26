@@ -260,6 +260,10 @@ function serializeCompositeType(mapper, object, objectName) {
             throw new Error(util.format('\'%s\' cannot be null or undefined in \'%s\'.', key, objectName));
           }
         }
+        //make sure that readOnly properties are not sent on the wire
+        if (modelProps[key].readOnly) {
+          continue;
+        }
         //serialize the property if it is present in the provided object instance
         if ((modelProps[key].defaultValue !== null && modelProps[key].defaultValue !== undefined) || 
           (object[key] !== null && object[key] !== undefined)) {

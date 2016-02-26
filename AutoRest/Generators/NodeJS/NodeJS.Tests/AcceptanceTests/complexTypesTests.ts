@@ -310,6 +310,20 @@ describe('nodejs', function () {
 
     });
 
+    describe('Complex Types with ReadOnly Properties', function () {
+      var testClient = new complexClient(baseUri, clientOptions);
+      it('should get and put complex types with readonly properties', function (done) {
+        testClient.readonlyproperty.getValid(function (error, result) {
+          should.not.exist(error);
+          testClient.readonlyproperty.putValid(result, function (error, result) {
+            should.not.exist(error);
+            done();
+          });
+        });
+      });
+
+    });
+
     describe('Complex Types with Polymorphism Operations', function () {
       var fish = {
         'fishtype': 'salmon',

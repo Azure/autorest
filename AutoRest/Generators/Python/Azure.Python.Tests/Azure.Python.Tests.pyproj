@@ -72,6 +72,9 @@
     <Folder Include="Expected\AcceptanceTests\AzureReport\" />
     <Folder Include="Expected\AcceptanceTests\AzureReport\autorestreportserviceforazure\" />
     <Folder Include="Expected\AcceptanceTests\AzureReport\autorestreportserviceforazure\models\" />
+    <Folder Include="Expected\AcceptanceTests\AzureResource\" />
+    <Folder Include="Expected\AcceptanceTests\AzureResource\autorestresourceflatteningtestservice\" />
+    <Folder Include="Expected\AcceptanceTests\AzureResource\autorestresourceflatteningtestservice\models\" />
     <Folder Include="Expected\AcceptanceTests\AzureSpecials\" />
     <Folder Include="Expected\AcceptanceTests\AzureSpecials\autorestazurespecialparameterstestclient\" />
     <Folder Include="Expected\AcceptanceTests\AzureSpecials\autorestazurespecialparameterstestclient\models\" />
