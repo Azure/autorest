@@ -13,6 +13,7 @@ package fixtures.http;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
+import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
 import com.microsoft.rest.ServiceResponseCallback;
@@ -54,6 +55,10 @@ public final class HttpFailureOperationsImpl implements HttpFailureOperations {
         @Headers("Content-Type: application/json; charset=utf-8")
         @GET("http/failure/emptybody/error")
         Call<ResponseBody> getEmptyError();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/failure/nomodel/error")
+        Call<ResponseBody> getNoModelError();
 
     }
 
@@ -99,6 +104,50 @@ public final class HttpFailureOperationsImpl implements HttpFailureOperations {
         return new ServiceResponseBuilder<Boolean, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Boolean>() { }.getType())
                 .registerError(ErrorException.class)
+                .build(response);
+    }
+
+    /**
+     * Get empty error form server.
+     *
+     * @throws ServiceException exception thrown from REST call
+     * @throws IOException exception thrown from serialization/deserialization
+     * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
+     */
+    public ServiceResponse<Boolean> getNoModelError() throws ServiceException, IOException {
+        Call<ResponseBody> call = service.getNoModelError();
+        return getNoModelErrorDelegate(call.execute());
+    }
+
+    /**
+     * Get empty error form server.
+     *
+     * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link Call} object
+     */
+    public ServiceCall getNoModelErrorAsync(final ServiceCallback<Boolean> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
+        Call<ResponseBody> call = service.getNoModelError();
+        final ServiceCall serviceCall = new ServiceCall(call);
+        call.enqueue(new ServiceResponseCallback<Boolean>(serviceCallback) {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                try {
+                    serviceCallback.success(getNoModelErrorDelegate(response));
+                } catch (ServiceException | IOException exception) {
+                    serviceCallback.failure(exception);
+                }
+            }
+        });
+        return serviceCall;
+    }
+
+    private ServiceResponse<Boolean> getNoModelErrorDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
+        return new ServiceResponseBuilder<Boolean, ServiceException>(this.client.getMapperAdapter())
+                .register(200, new TypeToken<Boolean>() { }.getType())
                 .build(response);
     }
 

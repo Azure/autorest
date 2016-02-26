@@ -1762,6 +1762,10 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         {
             var ex = Assert.Throws<Fixtures.AcceptanceTestsHttp.Models.ErrorException>(() => client.HttpFailure.GetEmptyError());
             Assert.Equal("Operation returned an invalid status code 'BadRequest'", ex.Message);
+
+            var ex2 = Assert.Throws<HttpOperationException>(() => client.HttpFailure.GetNoModelError());
+            Assert.Equal("{\"message\":\"NoErrorModel\",\"status\":400}", ex2.Response.Content);
+
             client.HttpSuccess.Head200();
             Assert.True(client.HttpSuccess.Get200());
             client.HttpSuccess.Put200(true);
@@ -2258,6 +2262,7 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
         {
             EnsureThrowsWithErrorModel<Error>(expectedStatusCode, operation, errorValidator);
         }
+
 
         private static void EnsureThrowsWithErrorModel<T>(HttpStatusCode expectedStatusCode,
             Action operation, Action<T> errorValidator = null) where T : class
