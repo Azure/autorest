@@ -152,7 +152,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      */
     public ServiceCall head200Async(final ServiceCallback<Void> serviceCallback) {
         Call<Void> call = service.head200();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -193,7 +193,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      */
     public ServiceCall get200Async(final ServiceCallback<Boolean> serviceCallback) {
         Call<ResponseBody> call = service.get200();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Boolean>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -236,7 +236,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      */
     public ServiceCall put200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.put200(booleanValue);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -279,7 +279,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      */
     public ServiceCall patch200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.patch200(booleanValue);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -322,7 +322,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      */
     public ServiceCall post200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.post200(booleanValue);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -365,7 +365,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      */
     public ServiceCall delete200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.delete200(booleanValue);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -408,7 +408,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      */
     public ServiceCall put201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.put201(booleanValue);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -451,7 +451,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      */
     public ServiceCall post201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.post201(booleanValue);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -494,7 +494,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      */
     public ServiceCall put202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.put202(booleanValue);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -537,7 +537,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      */
     public ServiceCall patch202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.patch202(booleanValue);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -580,7 +580,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      */
     public ServiceCall post202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.post202(booleanValue);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -623,7 +623,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      */
     public ServiceCall delete202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.delete202(booleanValue);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -664,7 +664,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      */
     public ServiceCall head204Async(final ServiceCallback<Void> serviceCallback) {
         Call<Void> call = service.head204();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -707,7 +707,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      */
     public ServiceCall put204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.put204(booleanValue);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -750,7 +750,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      */
     public ServiceCall patch204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.patch204(booleanValue);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -793,7 +793,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      */
     public ServiceCall post204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.post204(booleanValue);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -836,7 +836,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      */
     public ServiceCall delete204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.delete204(booleanValue);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -877,7 +877,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
      */
     public ServiceCall head404Async(final ServiceCallback<Void> serviceCallback) {
         Call<Void> call = service.head404();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {

@@ -26,7 +26,7 @@ public interface HttpSuccessOperations {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Boolean object wrapped in ServiceResponse if successful.
+     * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Boolean> head200() throws CloudException, IOException;
 
@@ -43,7 +43,7 @@ public interface HttpSuccessOperations {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Boolean object wrapped in ServiceResponse if successful.
+     * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Boolean> head204() throws CloudException, IOException;
 
@@ -60,7 +60,7 @@ public interface HttpSuccessOperations {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Boolean object wrapped in ServiceResponse if successful.
+     * @return the Boolean object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Boolean> head404() throws CloudException, IOException;
 

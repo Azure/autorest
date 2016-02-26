@@ -29,7 +29,7 @@ public interface GroupOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the SampleResourceGroup object wrapped in ServiceResponse if successful.
+     * @return the SampleResourceGroup object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<SampleResourceGroup> getSampleResourceGroup(String resourceGroupName) throws ErrorException, IOException, IllegalArgumentException;
 

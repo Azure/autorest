@@ -28,7 +28,7 @@ public interface SkipUrlEncodingOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the ServiceResponse object if successful.
+     * @return the {@link ServiceResponse} object if successful.
      */
     ServiceResponse<Void> getMethodPathValid(String unencodedPathParam) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -48,7 +48,7 @@ public interface SkipUrlEncodingOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the ServiceResponse object if successful.
+     * @return the {@link ServiceResponse} object if successful.
      */
     ServiceResponse<Void> getPathPathValid(String unencodedPathParam) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -68,7 +68,7 @@ public interface SkipUrlEncodingOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the ServiceResponse object if successful.
+     * @return the {@link ServiceResponse} object if successful.
      */
     ServiceResponse<Void> getSwaggerPathValid(String unencodedPathParam) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -88,7 +88,7 @@ public interface SkipUrlEncodingOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the ServiceResponse object if successful.
+     * @return the {@link ServiceResponse} object if successful.
      */
     ServiceResponse<Void> getMethodQueryValid(String q1) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -107,7 +107,7 @@ public interface SkipUrlEncodingOperations {
      * @param q1 Unencoded query parameter with value null
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ServiceResponse object if successful.
+     * @return the {@link ServiceResponse} object if successful.
      */
     ServiceResponse<Void> getMethodQueryNull(String q1) throws ErrorException, IOException;
 
@@ -127,7 +127,7 @@ public interface SkipUrlEncodingOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the ServiceResponse object if successful.
+     * @return the {@link ServiceResponse} object if successful.
      */
     ServiceResponse<Void> getPathQueryValid(String q1) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -147,7 +147,7 @@ public interface SkipUrlEncodingOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the ServiceResponse object if successful.
+     * @return the {@link ServiceResponse} object if successful.
      */
     ServiceResponse<Void> getSwaggerQueryValid(String q1) throws ErrorException, IOException, IllegalArgumentException;
 

@@ -89,7 +89,7 @@ public final class PolymorphismOperationsImpl implements PolymorphismOperations 
      */
     public ServiceCall getValidAsync(final ServiceCallback<Fish> serviceCallback) {
         Call<ResponseBody> call = service.getValid();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Fish>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -206,7 +206,7 @@ public final class PolymorphismOperationsImpl implements PolymorphismOperations 
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putValid(complexBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -309,7 +309,7 @@ public final class PolymorphismOperationsImpl implements PolymorphismOperations 
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putValidMissingRequired(complexBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

@@ -95,7 +95,7 @@ public final class ByteOperationsImpl implements ByteOperations {
      */
     public ServiceCall getNullAsync(final ServiceCallback<byte[]> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<byte[]>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -136,7 +136,7 @@ public final class ByteOperationsImpl implements ByteOperations {
      */
     public ServiceCall getEmptyAsync(final ServiceCallback<byte[]> serviceCallback) {
         Call<ResponseBody> call = service.getEmpty();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<byte[]>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -177,7 +177,7 @@ public final class ByteOperationsImpl implements ByteOperations {
      */
     public ServiceCall getNonAsciiAsync(final ServiceCallback<byte[]> serviceCallback) {
         Call<ResponseBody> call = service.getNonAscii();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<byte[]>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -228,7 +228,7 @@ public final class ByteOperationsImpl implements ByteOperations {
             return null;
         }
         Call<ResponseBody> call = service.putNonAscii(byteBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -269,7 +269,7 @@ public final class ByteOperationsImpl implements ByteOperations {
      */
     public ServiceCall getInvalidAsync(final ServiceCallback<byte[]> serviceCallback) {
         Call<ResponseBody> call = service.getInvalid();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<byte[]>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

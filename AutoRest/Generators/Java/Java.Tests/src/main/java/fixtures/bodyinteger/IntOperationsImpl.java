@@ -115,7 +115,7 @@ public final class IntOperationsImpl implements IntOperations {
      */
     public ServiceCall getNullAsync(final ServiceCallback<Integer> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Integer>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -156,7 +156,7 @@ public final class IntOperationsImpl implements IntOperations {
      */
     public ServiceCall getInvalidAsync(final ServiceCallback<Integer> serviceCallback) {
         Call<ResponseBody> call = service.getInvalid();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Integer>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -197,7 +197,7 @@ public final class IntOperationsImpl implements IntOperations {
      */
     public ServiceCall getOverflowInt32Async(final ServiceCallback<Integer> serviceCallback) {
         Call<ResponseBody> call = service.getOverflowInt32();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Integer>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -238,7 +238,7 @@ public final class IntOperationsImpl implements IntOperations {
      */
     public ServiceCall getUnderflowInt32Async(final ServiceCallback<Integer> serviceCallback) {
         Call<ResponseBody> call = service.getUnderflowInt32();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Integer>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -279,7 +279,7 @@ public final class IntOperationsImpl implements IntOperations {
      */
     public ServiceCall getOverflowInt64Async(final ServiceCallback<Long> serviceCallback) {
         Call<ResponseBody> call = service.getOverflowInt64();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Long>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -320,7 +320,7 @@ public final class IntOperationsImpl implements IntOperations {
      */
     public ServiceCall getUnderflowInt64Async(final ServiceCallback<Long> serviceCallback) {
         Call<ResponseBody> call = service.getUnderflowInt64();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Long>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -363,7 +363,7 @@ public final class IntOperationsImpl implements IntOperations {
      */
     public ServiceCall putMax32Async(int intBody, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putMax32(intBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -406,7 +406,7 @@ public final class IntOperationsImpl implements IntOperations {
      */
     public ServiceCall putMax64Async(long intBody, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putMax64(intBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -449,7 +449,7 @@ public final class IntOperationsImpl implements IntOperations {
      */
     public ServiceCall putMin32Async(int intBody, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putMin32(intBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -492,7 +492,7 @@ public final class IntOperationsImpl implements IntOperations {
      */
     public ServiceCall putMin64Async(long intBody, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putMin64(intBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

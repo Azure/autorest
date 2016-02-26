@@ -55,7 +55,7 @@ public interface LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Product> put200Succeeded(Product product) throws CloudException, IOException, InterruptedException;
 
@@ -74,7 +74,7 @@ public interface LROsOperations {
      * @param product Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Product> beginPut200Succeeded(Product product) throws CloudException, IOException;
 
@@ -94,7 +94,7 @@ public interface LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Product> put200SucceededNoState(Product product) throws CloudException, IOException, InterruptedException;
 
@@ -113,7 +113,7 @@ public interface LROsOperations {
      * @param product Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Product> beginPut200SucceededNoState(Product product) throws CloudException, IOException;
 
@@ -133,7 +133,7 @@ public interface LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Product> put202Retry200(Product product) throws CloudException, IOException, InterruptedException;
 
@@ -152,7 +152,7 @@ public interface LROsOperations {
      * @param product Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Product> beginPut202Retry200(Product product) throws CloudException, IOException;
 
@@ -172,7 +172,7 @@ public interface LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Product> put201CreatingSucceeded200(Product product) throws CloudException, IOException, InterruptedException;
 
@@ -191,7 +191,7 @@ public interface LROsOperations {
      * @param product Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Product> beginPut201CreatingSucceeded200(Product product) throws CloudException, IOException;
 
@@ -211,7 +211,7 @@ public interface LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Product> put200UpdatingSucceeded204(Product product) throws CloudException, IOException, InterruptedException;
 
@@ -230,7 +230,7 @@ public interface LROsOperations {
      * @param product Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Product> beginPut200UpdatingSucceeded204(Product product) throws CloudException, IOException;
 
@@ -250,7 +250,7 @@ public interface LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Product> put201CreatingFailed200(Product product) throws CloudException, IOException, InterruptedException;
 
@@ -269,7 +269,7 @@ public interface LROsOperations {
      * @param product Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Product> beginPut201CreatingFailed200(Product product) throws CloudException, IOException;
 
@@ -289,7 +289,7 @@ public interface LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Product> put200Acceptedcanceled200(Product product) throws CloudException, IOException, InterruptedException;
 
@@ -308,7 +308,7 @@ public interface LROsOperations {
      * @param product Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Product> beginPut200Acceptedcanceled200(Product product) throws CloudException, IOException;
 
@@ -328,7 +328,7 @@ public interface LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     ServiceResponseWithHeaders<Product, LROsPutNoHeaderInRetryHeaders> putNoHeaderInRetry(Product product) throws CloudException, IOException, InterruptedException;
 
@@ -347,7 +347,7 @@ public interface LROsOperations {
      * @param product Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     ServiceResponseWithHeaders<Product, LROsPutNoHeaderInRetryHeaders> beginPutNoHeaderInRetry(Product product) throws CloudException, IOException;
 
@@ -367,7 +367,7 @@ public interface LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     ServiceResponseWithHeaders<Product, LROsPutAsyncRetrySucceededHeaders> putAsyncRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException;
 
@@ -386,7 +386,7 @@ public interface LROsOperations {
      * @param product Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     ServiceResponseWithHeaders<Product, LROsPutAsyncRetrySucceededHeaders> beginPutAsyncRetrySucceeded(Product product) throws CloudException, IOException;
 
@@ -406,7 +406,7 @@ public interface LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrySucceededHeaders> putAsyncNoRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException;
 
@@ -425,7 +425,7 @@ public interface LROsOperations {
      * @param product Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrySucceededHeaders> beginPutAsyncNoRetrySucceeded(Product product) throws CloudException, IOException;
 
@@ -445,7 +445,7 @@ public interface LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     ServiceResponseWithHeaders<Product, LROsPutAsyncRetryFailedHeaders> putAsyncRetryFailed(Product product) throws CloudException, IOException, InterruptedException;
 
@@ -464,7 +464,7 @@ public interface LROsOperations {
      * @param product Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     ServiceResponseWithHeaders<Product, LROsPutAsyncRetryFailedHeaders> beginPutAsyncRetryFailed(Product product) throws CloudException, IOException;
 
@@ -484,7 +484,7 @@ public interface LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrycanceledHeaders> putAsyncNoRetrycanceled(Product product) throws CloudException, IOException, InterruptedException;
 
@@ -503,7 +503,7 @@ public interface LROsOperations {
      * @param product Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     ServiceResponseWithHeaders<Product, LROsPutAsyncNoRetrycanceledHeaders> beginPutAsyncNoRetrycanceled(Product product) throws CloudException, IOException;
 
@@ -523,7 +523,7 @@ public interface LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     ServiceResponseWithHeaders<Product, LROsPutAsyncNoHeaderInRetryHeaders> putAsyncNoHeaderInRetry(Product product) throws CloudException, IOException, InterruptedException;
 
@@ -542,7 +542,7 @@ public interface LROsOperations {
      * @param product Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     ServiceResponseWithHeaders<Product, LROsPutAsyncNoHeaderInRetryHeaders> beginPutAsyncNoHeaderInRetry(Product product) throws CloudException, IOException;
 
@@ -562,7 +562,7 @@ public interface LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Sku object wrapped in ServiceResponse if successful.
+     * @return the Sku object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Sku> putNonResource(Sku sku) throws CloudException, IOException, InterruptedException;
 
@@ -581,7 +581,7 @@ public interface LROsOperations {
      * @param sku sku to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Sku object wrapped in ServiceResponse if successful.
+     * @return the Sku object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Sku> beginPutNonResource(Sku sku) throws CloudException, IOException;
 
@@ -601,7 +601,7 @@ public interface LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Sku object wrapped in ServiceResponse if successful.
+     * @return the Sku object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Sku> putAsyncNonResource(Sku sku) throws CloudException, IOException, InterruptedException;
 
@@ -620,7 +620,7 @@ public interface LROsOperations {
      * @param sku Sku to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Sku object wrapped in ServiceResponse if successful.
+     * @return the Sku object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Sku> beginPutAsyncNonResource(Sku sku) throws CloudException, IOException;
 
@@ -640,7 +640,7 @@ public interface LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the SubProduct object wrapped in ServiceResponse if successful.
+     * @return the SubProduct object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<SubProduct> putSubResource(SubProduct product) throws CloudException, IOException, InterruptedException;
 
@@ -659,7 +659,7 @@ public interface LROsOperations {
      * @param product Sub Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the SubProduct object wrapped in ServiceResponse if successful.
+     * @return the SubProduct object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<SubProduct> beginPutSubResource(SubProduct product) throws CloudException, IOException;
 
@@ -679,7 +679,7 @@ public interface LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the SubProduct object wrapped in ServiceResponse if successful.
+     * @return the SubProduct object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<SubProduct> putAsyncSubResource(SubProduct product) throws CloudException, IOException, InterruptedException;
 
@@ -698,7 +698,7 @@ public interface LROsOperations {
      * @param product Sub Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the SubProduct object wrapped in ServiceResponse if successful.
+     * @return the SubProduct object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<SubProduct> beginPutAsyncSubResource(SubProduct product) throws CloudException, IOException;
 
@@ -717,7 +717,7 @@ public interface LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202Accepted200SucceededHeaders> deleteProvisioning202Accepted200Succeeded() throws CloudException, IOException, InterruptedException;
 
@@ -734,7 +734,7 @@ public interface LROsOperations {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202Accepted200SucceededHeaders> beginDeleteProvisioning202Accepted200Succeeded() throws CloudException, IOException;
 
@@ -752,7 +752,7 @@ public interface LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202DeletingFailed200Headers> deleteProvisioning202DeletingFailed200() throws CloudException, IOException, InterruptedException;
 
@@ -769,7 +769,7 @@ public interface LROsOperations {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202DeletingFailed200Headers> beginDeleteProvisioning202DeletingFailed200() throws CloudException, IOException;
 
@@ -787,7 +787,7 @@ public interface LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202Deletingcanceled200Headers> deleteProvisioning202Deletingcanceled200() throws CloudException, IOException, InterruptedException;
 
@@ -804,7 +804,7 @@ public interface LROsOperations {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     ServiceResponseWithHeaders<Product, LROsDeleteProvisioning202Deletingcanceled200Headers> beginDeleteProvisioning202Deletingcanceled200() throws CloudException, IOException;
 
@@ -822,7 +822,7 @@ public interface LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponse object if successful.
+     * @return the {@link ServiceResponse} object if successful.
      */
     ServiceResponse<Void> delete204Succeeded() throws CloudException, IOException, InterruptedException;
 
@@ -839,7 +839,7 @@ public interface LROsOperations {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ServiceResponse object if successful.
+     * @return the {@link ServiceResponse} object if successful.
      */
     ServiceResponse<Void> beginDelete204Succeeded() throws CloudException, IOException;
 
@@ -857,7 +857,7 @@ public interface LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     ServiceResponseWithHeaders<Product, LROsDelete202Retry200Headers> delete202Retry200() throws CloudException, IOException, InterruptedException;
 
@@ -874,7 +874,7 @@ public interface LROsOperations {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     ServiceResponseWithHeaders<Product, LROsDelete202Retry200Headers> beginDelete202Retry200() throws CloudException, IOException;
 
@@ -892,7 +892,7 @@ public interface LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     ServiceResponseWithHeaders<Product, LROsDelete202NoRetry204Headers> delete202NoRetry204() throws CloudException, IOException, InterruptedException;
 
@@ -909,7 +909,7 @@ public interface LROsOperations {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     ServiceResponseWithHeaders<Product, LROsDelete202NoRetry204Headers> beginDelete202NoRetry204() throws CloudException, IOException;
 
@@ -927,7 +927,7 @@ public interface LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponseWithHeaders object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeaders> deleteNoHeaderInRetry() throws CloudException, IOException, InterruptedException;
 
@@ -944,7 +944,7 @@ public interface LROsOperations {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ServiceResponseWithHeaders object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     ServiceResponseWithHeaders<Void, LROsDeleteNoHeaderInRetryHeaders> beginDeleteNoHeaderInRetry() throws CloudException, IOException;
 
@@ -962,7 +962,7 @@ public interface LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponseWithHeaders object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeaders> deleteAsyncNoHeaderInRetry() throws CloudException, IOException, InterruptedException;
 
@@ -979,7 +979,7 @@ public interface LROsOperations {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ServiceResponseWithHeaders object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoHeaderInRetryHeaders> beginDeleteAsyncNoHeaderInRetry() throws CloudException, IOException;
 
@@ -997,7 +997,7 @@ public interface LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponseWithHeaders object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeaders> deleteAsyncRetrySucceeded() throws CloudException, IOException, InterruptedException;
 
@@ -1014,7 +1014,7 @@ public interface LROsOperations {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ServiceResponseWithHeaders object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrySucceededHeaders> beginDeleteAsyncRetrySucceeded() throws CloudException, IOException;
 
@@ -1032,7 +1032,7 @@ public interface LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponseWithHeaders object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeaders> deleteAsyncNoRetrySucceeded() throws CloudException, IOException, InterruptedException;
 
@@ -1049,7 +1049,7 @@ public interface LROsOperations {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ServiceResponseWithHeaders object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     ServiceResponseWithHeaders<Void, LROsDeleteAsyncNoRetrySucceededHeaders> beginDeleteAsyncNoRetrySucceeded() throws CloudException, IOException;
 
@@ -1067,7 +1067,7 @@ public interface LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponseWithHeaders object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeaders> deleteAsyncRetryFailed() throws CloudException, IOException, InterruptedException;
 
@@ -1084,7 +1084,7 @@ public interface LROsOperations {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ServiceResponseWithHeaders object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetryFailedHeaders> beginDeleteAsyncRetryFailed() throws CloudException, IOException;
 
@@ -1102,7 +1102,7 @@ public interface LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponseWithHeaders object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeaders> deleteAsyncRetrycanceled() throws CloudException, IOException, InterruptedException;
 
@@ -1119,7 +1119,7 @@ public interface LROsOperations {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ServiceResponseWithHeaders object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     ServiceResponseWithHeaders<Void, LROsDeleteAsyncRetrycanceledHeaders> beginDeleteAsyncRetrycanceled() throws CloudException, IOException;
 
@@ -1137,7 +1137,7 @@ public interface LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Sku object wrapped in ServiceResponse if successful.
+     * @return the Sku object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Sku> post200WithPayload() throws CloudException, IOException, InterruptedException;
 
@@ -1154,7 +1154,7 @@ public interface LROsOperations {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Sku object wrapped in ServiceResponse if successful.
+     * @return the Sku object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Sku> beginPost200WithPayload() throws CloudException, IOException;
 
@@ -1173,7 +1173,7 @@ public interface LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponseWithHeaders object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers> post202Retry200(Product product) throws CloudException, IOException, InterruptedException;
 
@@ -1192,7 +1192,7 @@ public interface LROsOperations {
      * @param product Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ServiceResponseWithHeaders object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     ServiceResponseWithHeaders<Void, LROsPost202Retry200Headers> beginPost202Retry200(Product product) throws CloudException, IOException;
 
@@ -1212,7 +1212,7 @@ public interface LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     ServiceResponseWithHeaders<Product, LROsPost202NoRetry204Headers> post202NoRetry204(Product product) throws CloudException, IOException, InterruptedException;
 
@@ -1231,7 +1231,7 @@ public interface LROsOperations {
      * @param product Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     ServiceResponseWithHeaders<Product, LROsPost202NoRetry204Headers> beginPost202NoRetry204(Product product) throws CloudException, IOException;
 
@@ -1251,7 +1251,7 @@ public interface LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     ServiceResponseWithHeaders<Product, LROsPostAsyncRetrySucceededHeaders> postAsyncRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException;
 
@@ -1270,7 +1270,7 @@ public interface LROsOperations {
      * @param product Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     ServiceResponseWithHeaders<Product, LROsPostAsyncRetrySucceededHeaders> beginPostAsyncRetrySucceeded(Product product) throws CloudException, IOException;
 
@@ -1290,7 +1290,7 @@ public interface LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     ServiceResponseWithHeaders<Product, LROsPostAsyncNoRetrySucceededHeaders> postAsyncNoRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException;
 
@@ -1309,7 +1309,7 @@ public interface LROsOperations {
      * @param product Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     ServiceResponseWithHeaders<Product, LROsPostAsyncNoRetrySucceededHeaders> beginPostAsyncNoRetrySucceeded(Product product) throws CloudException, IOException;
 
@@ -1329,7 +1329,7 @@ public interface LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponseWithHeaders object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders> postAsyncRetryFailed(Product product) throws CloudException, IOException, InterruptedException;
 
@@ -1348,7 +1348,7 @@ public interface LROsOperations {
      * @param product Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ServiceResponseWithHeaders object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     ServiceResponseWithHeaders<Void, LROsPostAsyncRetryFailedHeaders> beginPostAsyncRetryFailed(Product product) throws CloudException, IOException;
 
@@ -1368,7 +1368,7 @@ public interface LROsOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponseWithHeaders object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders> postAsyncRetrycanceled(Product product) throws CloudException, IOException, InterruptedException;
 
@@ -1387,7 +1387,7 @@ public interface LROsOperations {
      * @param product Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ServiceResponseWithHeaders object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     ServiceResponseWithHeaders<Void, LROsPostAsyncRetrycanceledHeaders> beginPostAsyncRetrycanceled(Product product) throws CloudException, IOException;
 

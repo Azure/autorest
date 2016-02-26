@@ -175,7 +175,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      */
     public ServiceCall getIntAsync(final ServiceCallback<IntWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getInt();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<IntWrapper>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -228,7 +228,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putInt(complexBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -269,7 +269,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      */
     public ServiceCall getLongAsync(final ServiceCallback<LongWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getLong();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<LongWrapper>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -322,7 +322,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putLong(complexBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -363,7 +363,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      */
     public ServiceCall getFloatAsync(final ServiceCallback<FloatWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getFloat();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<FloatWrapper>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -416,7 +416,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putFloat(complexBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -457,7 +457,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      */
     public ServiceCall getDoubleAsync(final ServiceCallback<DoubleWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getDouble();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DoubleWrapper>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -510,7 +510,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putDouble(complexBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -551,7 +551,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      */
     public ServiceCall getBoolAsync(final ServiceCallback<BooleanWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getBool();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<BooleanWrapper>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -604,7 +604,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putBool(complexBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -645,7 +645,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      */
     public ServiceCall getStringAsync(final ServiceCallback<StringWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getString();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<StringWrapper>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -698,7 +698,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putString(complexBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -739,7 +739,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      */
     public ServiceCall getDateAsync(final ServiceCallback<DateWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getDate();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DateWrapper>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -792,7 +792,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putDate(complexBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -833,7 +833,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      */
     public ServiceCall getDateTimeAsync(final ServiceCallback<DatetimeWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getDateTime();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DatetimeWrapper>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -886,7 +886,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putDateTime(complexBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -927,7 +927,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      */
     public ServiceCall getDateTimeRfc1123Async(final ServiceCallback<Datetimerfc1123Wrapper> serviceCallback) {
         Call<ResponseBody> call = service.getDateTimeRfc1123();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Datetimerfc1123Wrapper>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -980,7 +980,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putDateTimeRfc1123(complexBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1021,7 +1021,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      */
     public ServiceCall getDurationAsync(final ServiceCallback<DurationWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getDuration();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DurationWrapper>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1074,7 +1074,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putDuration(complexBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1115,7 +1115,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      */
     public ServiceCall getByteAsync(final ServiceCallback<ByteWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getByte();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ByteWrapper>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1168,7 +1168,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putByte(complexBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

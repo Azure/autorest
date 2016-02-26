@@ -28,7 +28,7 @@ public interface ApiVersionLocalOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the ServiceResponse object if successful.
+     * @return the {@link ServiceResponse} object if successful.
      */
     ServiceResponse<Void> getMethodLocalValid(String apiVersion) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -47,7 +47,7 @@ public interface ApiVersionLocalOperations {
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ServiceResponse object if successful.
+     * @return the {@link ServiceResponse} object if successful.
      */
     ServiceResponse<Void> getMethodLocalNull(String apiVersion) throws ErrorException, IOException;
 
@@ -67,7 +67,7 @@ public interface ApiVersionLocalOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the ServiceResponse object if successful.
+     * @return the {@link ServiceResponse} object if successful.
      */
     ServiceResponse<Void> getPathLocalValid(String apiVersion) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -87,7 +87,7 @@ public interface ApiVersionLocalOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the ServiceResponse object if successful.
+     * @return the {@link ServiceResponse} object if successful.
      */
     ServiceResponse<Void> getSwaggerLocalValid(String apiVersion) throws ErrorException, IOException, IllegalArgumentException;
 

@@ -77,7 +77,7 @@ public final class HttpFailureOperationsImpl implements HttpFailureOperations {
      */
     public ServiceCall getEmptyErrorAsync(final ServiceCallback<Boolean> serviceCallback) {
         Call<ResponseBody> call = service.getEmptyError();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Boolean>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

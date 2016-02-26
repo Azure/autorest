@@ -178,7 +178,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      */
     public ServiceCall postRequiredIntegerParameterAsync(int bodyParameter, final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.postRequiredIntegerParameter(bodyParameter);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -220,7 +220,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      */
     public ServiceCall postOptionalIntegerParameterAsync(Integer bodyParameter, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.postOptionalIntegerParameter(bodyParameter);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -273,7 +273,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         }
         Validator.validate(bodyParameter, serviceCallback);
         Call<ResponseBody> call = service.postRequiredIntegerProperty(bodyParameter);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -317,7 +317,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
     public ServiceCall postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(bodyParameter, serviceCallback);
         Call<ResponseBody> call = service.postOptionalIntegerProperty(bodyParameter);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -360,7 +360,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      */
     public ServiceCall postRequiredIntegerHeaderAsync(int headerParameter, final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.postRequiredIntegerHeader(headerParameter);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -402,7 +402,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      */
     public ServiceCall postOptionalIntegerHeaderAsync(Integer headerParameter, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.postOptionalIntegerHeader(headerParameter);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -453,7 +453,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
             return null;
         }
         Call<ResponseBody> call = service.postRequiredStringParameter(bodyParameter);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -495,7 +495,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      */
     public ServiceCall postOptionalStringParameterAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.postOptionalStringParameter(bodyParameter);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -548,7 +548,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         }
         Validator.validate(bodyParameter, serviceCallback);
         Call<ResponseBody> call = service.postRequiredStringProperty(bodyParameter);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -592,7 +592,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
     public ServiceCall postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(bodyParameter, serviceCallback);
         Call<ResponseBody> call = service.postOptionalStringProperty(bodyParameter);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -643,7 +643,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
             return null;
         }
         Call<ResponseBody> call = service.postRequiredStringHeader(headerParameter);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -685,7 +685,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      */
     public ServiceCall postOptionalStringHeaderAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.postOptionalStringHeader(bodyParameter);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -738,7 +738,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         }
         Validator.validate(bodyParameter, serviceCallback);
         Call<ResponseBody> call = service.postRequiredClassParameter(bodyParameter);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -782,7 +782,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
     public ServiceCall postOptionalClassParameterAsync(Product bodyParameter, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(bodyParameter, serviceCallback);
         Call<ResponseBody> call = service.postOptionalClassParameter(bodyParameter);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -835,7 +835,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         }
         Validator.validate(bodyParameter, serviceCallback);
         Call<ResponseBody> call = service.postRequiredClassProperty(bodyParameter);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -879,7 +879,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
     public ServiceCall postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(bodyParameter, serviceCallback);
         Call<ResponseBody> call = service.postOptionalClassProperty(bodyParameter);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -932,7 +932,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         }
         Validator.validate(bodyParameter, serviceCallback);
         Call<ResponseBody> call = service.postRequiredArrayParameter(bodyParameter);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -976,7 +976,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
     public ServiceCall postOptionalArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(bodyParameter, serviceCallback);
         Call<ResponseBody> call = service.postOptionalArrayParameter(bodyParameter);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1029,7 +1029,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         }
         Validator.validate(bodyParameter, serviceCallback);
         Call<ResponseBody> call = service.postRequiredArrayProperty(bodyParameter);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1073,7 +1073,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
     public ServiceCall postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(bodyParameter, serviceCallback);
         Call<ResponseBody> call = service.postOptionalArrayProperty(bodyParameter);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1126,7 +1126,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
         }
         Validator.validate(headerParameter, serviceCallback);
         Call<ResponseBody> call = service.postRequiredArrayHeader(client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV));
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1170,7 +1170,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
     public ServiceCall postOptionalArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(headerParameter, serviceCallback);
         Call<ResponseBody> call = service.postOptionalArrayHeader(client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV));
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

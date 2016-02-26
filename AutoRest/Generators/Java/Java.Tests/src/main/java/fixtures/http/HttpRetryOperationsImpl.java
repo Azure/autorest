@@ -112,7 +112,7 @@ public final class HttpRetryOperationsImpl implements HttpRetryOperations {
      */
     public ServiceCall head408Async(final ServiceCallback<Void> serviceCallback) {
         Call<Void> call = service.head408();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -155,7 +155,7 @@ public final class HttpRetryOperationsImpl implements HttpRetryOperations {
      */
     public ServiceCall put500Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.put500(booleanValue);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -198,7 +198,7 @@ public final class HttpRetryOperationsImpl implements HttpRetryOperations {
      */
     public ServiceCall patch500Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.patch500(booleanValue);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -239,7 +239,7 @@ public final class HttpRetryOperationsImpl implements HttpRetryOperations {
      */
     public ServiceCall get502Async(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.get502();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -282,7 +282,7 @@ public final class HttpRetryOperationsImpl implements HttpRetryOperations {
      */
     public ServiceCall post503Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.post503(booleanValue);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -325,7 +325,7 @@ public final class HttpRetryOperationsImpl implements HttpRetryOperations {
      */
     public ServiceCall delete503Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.delete503(booleanValue);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -368,7 +368,7 @@ public final class HttpRetryOperationsImpl implements HttpRetryOperations {
      */
     public ServiceCall put504Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.put504(booleanValue);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -411,7 +411,7 @@ public final class HttpRetryOperationsImpl implements HttpRetryOperations {
      */
     public ServiceCall patch504Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.patch504(booleanValue);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

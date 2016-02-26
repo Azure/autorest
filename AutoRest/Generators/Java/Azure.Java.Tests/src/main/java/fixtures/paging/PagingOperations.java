@@ -32,7 +32,7 @@ public interface PagingOperations {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Product&gt; object wrapped in ServiceResponse if successful.
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<List<Product>> getSinglePages() throws CloudException, IOException;
 
@@ -51,7 +51,7 @@ public interface PagingOperations {
      * @param pagingGetMultiplePagesOptions Additional parameters for the operation
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Product&gt; object wrapped in ServiceResponse if successful.
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<List<Product>> getMultiplePages(final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) throws CloudException, IOException;
 
@@ -73,7 +73,7 @@ public interface PagingOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the List&lt;Product&gt; object wrapped in ServiceResponse if successful.
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<List<Product>> getMultiplePagesWithOffset(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, final String clientRequestId) throws CloudException, IOException, IllegalArgumentException;
 
@@ -92,7 +92,7 @@ public interface PagingOperations {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Product&gt; object wrapped in ServiceResponse if successful.
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<List<Product>> getMultiplePagesRetryFirst() throws CloudException, IOException;
 
@@ -109,7 +109,7 @@ public interface PagingOperations {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Product&gt; object wrapped in ServiceResponse if successful.
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<List<Product>> getMultiplePagesRetrySecond() throws CloudException, IOException;
 
@@ -126,7 +126,7 @@ public interface PagingOperations {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Product&gt; object wrapped in ServiceResponse if successful.
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<List<Product>> getSinglePagesFailure() throws CloudException, IOException;
 
@@ -143,7 +143,7 @@ public interface PagingOperations {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Product&gt; object wrapped in ServiceResponse if successful.
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<List<Product>> getMultiplePagesFailure() throws CloudException, IOException;
 
@@ -160,7 +160,7 @@ public interface PagingOperations {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the List&lt;Product&gt; object wrapped in ServiceResponse if successful.
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<List<Product>> getMultiplePagesFailureUri() throws CloudException, IOException;
 
@@ -179,7 +179,7 @@ public interface PagingOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the List&lt;Product&gt; object wrapped in ServiceResponse if successful.
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<PageImpl<Product>> getSinglePagesNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException;
 
@@ -202,7 +202,7 @@ public interface PagingOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the List&lt;Product&gt; object wrapped in ServiceResponse if successful.
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<PageImpl<Product>> getMultiplePagesNext(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) throws CloudException, IOException, IllegalArgumentException;
 
@@ -227,7 +227,7 @@ public interface PagingOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the List&lt;Product&gt; object wrapped in ServiceResponse if successful.
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<PageImpl<Product>> getMultiplePagesWithOffsetNext(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions) throws CloudException, IOException, IllegalArgumentException;
 
@@ -250,7 +250,7 @@ public interface PagingOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the List&lt;Product&gt; object wrapped in ServiceResponse if successful.
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<PageImpl<Product>> getMultiplePagesRetryFirstNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException;
 
@@ -271,7 +271,7 @@ public interface PagingOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the List&lt;Product&gt; object wrapped in ServiceResponse if successful.
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<PageImpl<Product>> getMultiplePagesRetrySecondNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException;
 
@@ -292,7 +292,7 @@ public interface PagingOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the List&lt;Product&gt; object wrapped in ServiceResponse if successful.
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<PageImpl<Product>> getSinglePagesFailureNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException;
 
@@ -313,7 +313,7 @@ public interface PagingOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the List&lt;Product&gt; object wrapped in ServiceResponse if successful.
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<PageImpl<Product>> getMultiplePagesFailureNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException;
 
@@ -334,7 +334,7 @@ public interface PagingOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the List&lt;Product&gt; object wrapped in ServiceResponse if successful.
+     * @return the List&lt;Product&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<PageImpl<Product>> getMultiplePagesFailureUriNext(final String nextPageLink) throws CloudException, IOException, IllegalArgumentException;
 

@@ -29,7 +29,7 @@ public interface HeaderOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the ServiceResponseWithHeaders object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders> customNamedRequestId(String fooClientRequestId) throws ErrorException, IOException, IllegalArgumentException;
 

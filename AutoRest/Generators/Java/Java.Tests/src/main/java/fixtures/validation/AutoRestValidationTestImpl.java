@@ -225,7 +225,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
             return null;
         }
         Call<ResponseBody> call = service.validationOfMethodParameters(this.getSubscriptionId(), resourceGroupName, id, this.getApiVersion());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -296,7 +296,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         }
         Validator.validate(body, serviceCallback);
         Call<ResponseBody> call = service.validationOfBody(this.getSubscriptionId(), resourceGroupName, id, body, this.getApiVersion());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -345,7 +345,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
             return null;
         }
         Call<ResponseBody> call = service.getWithConstantInPath(constantParam);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -397,7 +397,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
         }
         Validator.validate(body, serviceCallback);
         Call<ResponseBody> call = service.postWithConstantInBody(constantParam, body);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

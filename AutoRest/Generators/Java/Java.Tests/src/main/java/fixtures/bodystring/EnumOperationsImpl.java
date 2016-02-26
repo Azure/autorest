@@ -84,7 +84,7 @@ public final class EnumOperationsImpl implements EnumOperations {
      */
     public ServiceCall getNotExpandableAsync(final ServiceCallback<Colors> serviceCallback) {
         Call<ResponseBody> call = service.getNotExpandable();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Colors>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -135,7 +135,7 @@ public final class EnumOperationsImpl implements EnumOperations {
             return null;
         }
         Call<ResponseBody> call = service.putNotExpandable(stringBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

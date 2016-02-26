@@ -94,7 +94,7 @@ public final class HttpServerFailureOperationsImpl implements HttpServerFailureO
      */
     public ServiceCall head501Async(final ServiceCallback<Error> serviceCallback) {
         Call<Void> call = service.head501();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -134,7 +134,7 @@ public final class HttpServerFailureOperationsImpl implements HttpServerFailureO
      */
     public ServiceCall get501Async(final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.get501();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -176,7 +176,7 @@ public final class HttpServerFailureOperationsImpl implements HttpServerFailureO
      */
     public ServiceCall post505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.post505(booleanValue);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -218,7 +218,7 @@ public final class HttpServerFailureOperationsImpl implements HttpServerFailureO
      */
     public ServiceCall delete505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.delete505(booleanValue);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

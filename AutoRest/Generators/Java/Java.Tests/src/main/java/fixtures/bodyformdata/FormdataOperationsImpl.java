@@ -103,7 +103,7 @@ public final class FormdataOperationsImpl implements FormdataOperations {
             return null;
         }
         Call<ResponseBody> call = service.uploadFile(fileContent, fileName);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<InputStream>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -163,7 +163,7 @@ public final class FormdataOperationsImpl implements FormdataOperations {
             return null;
         }
         Call<ResponseBody> call = service.uploadFileViaBody(fileContent, fileName);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<InputStream>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

@@ -28,7 +28,7 @@ public interface SubscriptionInMethodOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the ServiceResponse object if successful.
+     * @return the {@link ServiceResponse} object if successful.
      */
     ServiceResponse<Void> postMethodLocalValid(String subscriptionId) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -48,7 +48,7 @@ public interface SubscriptionInMethodOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the ServiceResponse object if successful.
+     * @return the {@link ServiceResponse} object if successful.
      */
     ServiceResponse<Void> postMethodLocalNull(String subscriptionId) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -68,7 +68,7 @@ public interface SubscriptionInMethodOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the ServiceResponse object if successful.
+     * @return the {@link ServiceResponse} object if successful.
      */
     ServiceResponse<Void> postPathLocalValid(String subscriptionId) throws ErrorException, IOException, IllegalArgumentException;
 
@@ -88,7 +88,7 @@ public interface SubscriptionInMethodOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the ServiceResponse object if successful.
+     * @return the {@link ServiceResponse} object if successful.
      */
     ServiceResponse<Void> postSwaggerLocalValid(String subscriptionId) throws ErrorException, IOException, IllegalArgumentException;
 

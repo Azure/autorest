@@ -116,7 +116,7 @@ public interface AutoRestReportServiceForAzure {
      *
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Map&lt;String, Integer&gt; object wrapped in ServiceResponse if successful.
+     * @return the Map&lt;String, Integer&gt; object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Map<String, Integer>> getReport() throws ErrorException, IOException;
 

@@ -221,7 +221,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             return null;
         }
         Call<ResponseBody> call = service.paramExistingKey(userAgent);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -262,7 +262,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      */
     public ServiceCall responseExistingKeyAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.responseExistingKey();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -313,7 +313,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             return null;
         }
         Call<ResponseBody> call = service.paramProtectedKey(contentType);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -354,7 +354,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      */
     public ServiceCall responseProtectedKeyAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.responseProtectedKey();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -407,7 +407,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             return null;
         }
         Call<ResponseBody> call = service.paramInteger(scenario, value);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -458,7 +458,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             return null;
         }
         Call<ResponseBody> call = service.responseInteger(scenario);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -511,7 +511,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             return null;
         }
         Call<ResponseBody> call = service.paramLong(scenario, value);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -562,7 +562,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             return null;
         }
         Call<ResponseBody> call = service.responseLong(scenario);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -615,7 +615,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             return null;
         }
         Call<ResponseBody> call = service.paramFloat(scenario, value);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -666,7 +666,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             return null;
         }
         Call<ResponseBody> call = service.responseFloat(scenario);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -719,7 +719,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             return null;
         }
         Call<ResponseBody> call = service.paramDouble(scenario, value);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -770,7 +770,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             return null;
         }
         Call<ResponseBody> call = service.responseDouble(scenario);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -823,7 +823,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             return null;
         }
         Call<ResponseBody> call = service.paramBool(scenario, value);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -874,7 +874,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             return null;
         }
         Call<ResponseBody> call = service.responseBool(scenario);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -927,7 +927,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             return null;
         }
         Call<ResponseBody> call = service.paramString(scenario, value);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -978,7 +978,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             return null;
         }
         Call<ResponseBody> call = service.responseString(scenario);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1038,7 +1038,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             return null;
         }
         Call<ResponseBody> call = service.paramDate(scenario, client.getMapperAdapter().serializeRaw(value));
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1089,7 +1089,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             return null;
         }
         Call<ResponseBody> call = service.responseDate(scenario);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1149,7 +1149,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             return null;
         }
         Call<ResponseBody> call = service.paramDatetime(scenario, client.getMapperAdapter().serializeRaw(value));
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1200,7 +1200,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             return null;
         }
         Call<ResponseBody> call = service.responseDatetime(scenario);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1253,7 +1253,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             return null;
         }
         Call<ResponseBody> call = service.paramDatetimeRfc1123(scenario, value);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1304,7 +1304,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             return null;
         }
         Call<ResponseBody> call = service.responseDatetimeRfc1123(scenario);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1364,7 +1364,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             return null;
         }
         Call<ResponseBody> call = service.paramDuration(scenario, value);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1415,7 +1415,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             return null;
         }
         Call<ResponseBody> call = service.responseDuration(scenario);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1475,7 +1475,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             return null;
         }
         Call<ResponseBody> call = service.paramByte(scenario, Base64.encodeBase64String(value));
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1526,7 +1526,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             return null;
         }
         Call<ResponseBody> call = service.responseByte(scenario);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1579,7 +1579,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             return null;
         }
         Call<ResponseBody> call = service.paramEnum(scenario, client.getMapperAdapter().serializeRaw(value));
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1630,7 +1630,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             return null;
         }
         Call<ResponseBody> call = service.responseEnum(scenario);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1671,7 +1671,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
      */
     public ServiceCall customRequestIdAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.customRequestId();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

@@ -111,7 +111,7 @@ public final class StringOperationsImpl implements StringOperations {
      */
     public ServiceCall getNullAsync(final ServiceCallback<String> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -154,7 +154,7 @@ public final class StringOperationsImpl implements StringOperations {
      */
     public ServiceCall putNullAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putNull(stringBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -195,7 +195,7 @@ public final class StringOperationsImpl implements StringOperations {
      */
     public ServiceCall getEmptyAsync(final ServiceCallback<String> serviceCallback) {
         Call<ResponseBody> call = service.getEmpty();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -246,7 +246,7 @@ public final class StringOperationsImpl implements StringOperations {
             return null;
         }
         Call<ResponseBody> call = service.putEmpty(stringBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -287,7 +287,7 @@ public final class StringOperationsImpl implements StringOperations {
      */
     public ServiceCall getMbcsAsync(final ServiceCallback<String> serviceCallback) {
         Call<ResponseBody> call = service.getMbcs();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -338,7 +338,7 @@ public final class StringOperationsImpl implements StringOperations {
             return null;
         }
         Call<ResponseBody> call = service.putMbcs(stringBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -379,7 +379,7 @@ public final class StringOperationsImpl implements StringOperations {
      */
     public ServiceCall getWhitespaceAsync(final ServiceCallback<String> serviceCallback) {
         Call<ResponseBody> call = service.getWhitespace();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -430,7 +430,7 @@ public final class StringOperationsImpl implements StringOperations {
             return null;
         }
         Call<ResponseBody> call = service.putWhitespace(stringBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -471,7 +471,7 @@ public final class StringOperationsImpl implements StringOperations {
      */
     public ServiceCall getNotProvidedAsync(final ServiceCallback<String> serviceCallback) {
         Call<ResponseBody> call = service.getNotProvided();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

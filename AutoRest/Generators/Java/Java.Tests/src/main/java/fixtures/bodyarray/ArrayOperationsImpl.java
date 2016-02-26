@@ -327,7 +327,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getNullAsync(final ServiceCallback<List<Integer>> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Integer>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -368,7 +368,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getInvalidAsync(final ServiceCallback<List<Integer>> serviceCallback) {
         Call<ResponseBody> call = service.getInvalid();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Integer>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -409,7 +409,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getEmptyAsync(final ServiceCallback<List<Integer>> serviceCallback) {
         Call<ResponseBody> call = service.getEmpty();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Integer>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -462,7 +462,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putEmpty(arrayBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -503,7 +503,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getBooleanTfftAsync(final ServiceCallback<List<Boolean>> serviceCallback) {
         Call<ResponseBody> call = service.getBooleanTfft();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Boolean>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -556,7 +556,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putBooleanTfft(arrayBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -597,7 +597,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getBooleanInvalidNullAsync(final ServiceCallback<List<Boolean>> serviceCallback) {
         Call<ResponseBody> call = service.getBooleanInvalidNull();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Boolean>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -638,7 +638,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getBooleanInvalidStringAsync(final ServiceCallback<List<Boolean>> serviceCallback) {
         Call<ResponseBody> call = service.getBooleanInvalidString();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Boolean>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -679,7 +679,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getIntegerValidAsync(final ServiceCallback<List<Integer>> serviceCallback) {
         Call<ResponseBody> call = service.getIntegerValid();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Integer>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -732,7 +732,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putIntegerValid(arrayBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -773,7 +773,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getIntInvalidNullAsync(final ServiceCallback<List<Integer>> serviceCallback) {
         Call<ResponseBody> call = service.getIntInvalidNull();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Integer>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -814,7 +814,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getIntInvalidStringAsync(final ServiceCallback<List<Integer>> serviceCallback) {
         Call<ResponseBody> call = service.getIntInvalidString();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Integer>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -855,7 +855,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getLongValidAsync(final ServiceCallback<List<Long>> serviceCallback) {
         Call<ResponseBody> call = service.getLongValid();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Long>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -908,7 +908,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putLongValid(arrayBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -949,7 +949,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getLongInvalidNullAsync(final ServiceCallback<List<Long>> serviceCallback) {
         Call<ResponseBody> call = service.getLongInvalidNull();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Long>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -990,7 +990,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getLongInvalidStringAsync(final ServiceCallback<List<Long>> serviceCallback) {
         Call<ResponseBody> call = service.getLongInvalidString();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Long>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1031,7 +1031,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getFloatValidAsync(final ServiceCallback<List<Double>> serviceCallback) {
         Call<ResponseBody> call = service.getFloatValid();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Double>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1084,7 +1084,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putFloatValid(arrayBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1125,7 +1125,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getFloatInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback) {
         Call<ResponseBody> call = service.getFloatInvalidNull();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Double>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1166,7 +1166,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getFloatInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback) {
         Call<ResponseBody> call = service.getFloatInvalidString();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Double>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1207,7 +1207,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getDoubleValidAsync(final ServiceCallback<List<Double>> serviceCallback) {
         Call<ResponseBody> call = service.getDoubleValid();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Double>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1260,7 +1260,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putDoubleValid(arrayBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1301,7 +1301,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getDoubleInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback) {
         Call<ResponseBody> call = service.getDoubleInvalidNull();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Double>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1342,7 +1342,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getDoubleInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback) {
         Call<ResponseBody> call = service.getDoubleInvalidString();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Double>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1383,7 +1383,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getStringValidAsync(final ServiceCallback<List<String>> serviceCallback) {
         Call<ResponseBody> call = service.getStringValid();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<String>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1436,7 +1436,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putStringValid(arrayBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1477,7 +1477,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getStringWithNullAsync(final ServiceCallback<List<String>> serviceCallback) {
         Call<ResponseBody> call = service.getStringWithNull();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<String>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1518,7 +1518,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getStringWithInvalidAsync(final ServiceCallback<List<String>> serviceCallback) {
         Call<ResponseBody> call = service.getStringWithInvalid();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<String>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1559,7 +1559,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getDateValidAsync(final ServiceCallback<List<LocalDate>> serviceCallback) {
         Call<ResponseBody> call = service.getDateValid();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<LocalDate>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1612,7 +1612,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putDateValid(arrayBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1653,7 +1653,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getDateInvalidNullAsync(final ServiceCallback<List<LocalDate>> serviceCallback) {
         Call<ResponseBody> call = service.getDateInvalidNull();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<LocalDate>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1694,7 +1694,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getDateInvalidCharsAsync(final ServiceCallback<List<LocalDate>> serviceCallback) {
         Call<ResponseBody> call = service.getDateInvalidChars();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<LocalDate>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1735,7 +1735,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getDateTimeValidAsync(final ServiceCallback<List<DateTime>> serviceCallback) {
         Call<ResponseBody> call = service.getDateTimeValid();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<DateTime>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1788,7 +1788,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putDateTimeValid(arrayBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1829,7 +1829,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getDateTimeInvalidNullAsync(final ServiceCallback<List<DateTime>> serviceCallback) {
         Call<ResponseBody> call = service.getDateTimeInvalidNull();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<DateTime>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1870,7 +1870,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getDateTimeInvalidCharsAsync(final ServiceCallback<List<DateTime>> serviceCallback) {
         Call<ResponseBody> call = service.getDateTimeInvalidChars();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<DateTime>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1911,7 +1911,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getDateTimeRfc1123ValidAsync(final ServiceCallback<List<DateTimeRfc1123>> serviceCallback) {
         Call<ResponseBody> call = service.getDateTimeRfc1123Valid();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<DateTimeRfc1123>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1964,7 +1964,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putDateTimeRfc1123Valid(arrayBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2005,7 +2005,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getDurationValidAsync(final ServiceCallback<List<Period>> serviceCallback) {
         Call<ResponseBody> call = service.getDurationValid();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Period>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2058,7 +2058,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putDurationValid(arrayBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2099,7 +2099,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getByteValidAsync(final ServiceCallback<List<byte[]>> serviceCallback) {
         Call<ResponseBody> call = service.getByteValid();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<byte[]>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2152,7 +2152,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putByteValid(arrayBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2193,7 +2193,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getByteInvalidNullAsync(final ServiceCallback<List<byte[]>> serviceCallback) {
         Call<ResponseBody> call = service.getByteInvalidNull();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<byte[]>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2234,7 +2234,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getComplexNullAsync(final ServiceCallback<List<Product>> serviceCallback) {
         Call<ResponseBody> call = service.getComplexNull();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2275,7 +2275,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getComplexEmptyAsync(final ServiceCallback<List<Product>> serviceCallback) {
         Call<ResponseBody> call = service.getComplexEmpty();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2316,7 +2316,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getComplexItemNullAsync(final ServiceCallback<List<Product>> serviceCallback) {
         Call<ResponseBody> call = service.getComplexItemNull();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2357,7 +2357,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getComplexItemEmptyAsync(final ServiceCallback<List<Product>> serviceCallback) {
         Call<ResponseBody> call = service.getComplexItemEmpty();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2398,7 +2398,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getComplexValidAsync(final ServiceCallback<List<Product>> serviceCallback) {
         Call<ResponseBody> call = service.getComplexValid();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2451,7 +2451,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putComplexValid(arrayBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2492,7 +2492,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getArrayNullAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
         Call<ResponseBody> call = service.getArrayNull();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<List<String>>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2533,7 +2533,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getArrayEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
         Call<ResponseBody> call = service.getArrayEmpty();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<List<String>>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2574,7 +2574,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getArrayItemNullAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
         Call<ResponseBody> call = service.getArrayItemNull();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<List<String>>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2615,7 +2615,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getArrayItemEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
         Call<ResponseBody> call = service.getArrayItemEmpty();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<List<String>>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2656,7 +2656,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getArrayValidAsync(final ServiceCallback<List<List<String>>> serviceCallback) {
         Call<ResponseBody> call = service.getArrayValid();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<List<String>>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2709,7 +2709,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putArrayValid(arrayBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2750,7 +2750,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getDictionaryNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
         Call<ResponseBody> call = service.getDictionaryNull();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Map<String, String>>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2791,7 +2791,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getDictionaryEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
         Call<ResponseBody> call = service.getDictionaryEmpty();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Map<String, String>>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2832,7 +2832,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getDictionaryItemNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
         Call<ResponseBody> call = service.getDictionaryItemNull();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Map<String, String>>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2873,7 +2873,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getDictionaryItemEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
         Call<ResponseBody> call = service.getDictionaryItemEmpty();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Map<String, String>>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2914,7 +2914,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getDictionaryValidAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) {
         Call<ResponseBody> call = service.getDictionaryValid();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Map<String, String>>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2967,7 +2967,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         }
         Validator.validate(arrayBody, serviceCallback);
         Call<ResponseBody> call = service.putDictionaryValid(arrayBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

@@ -97,7 +97,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getValidAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getValid();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ArrayWrapper>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -150,7 +150,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putValid(complexBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -191,7 +191,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getEmptyAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getEmpty();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ArrayWrapper>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -244,7 +244,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putEmpty(complexBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -285,7 +285,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      */
     public ServiceCall getNotProvidedAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getNotProvided();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ArrayWrapper>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

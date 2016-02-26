@@ -172,7 +172,7 @@ public final class PathsOperationsImpl implements PathsOperations {
      */
     public ServiceCall getBooleanTrueAsync(boolean boolPath, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.getBooleanTrue(boolPath);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -215,7 +215,7 @@ public final class PathsOperationsImpl implements PathsOperations {
      */
     public ServiceCall getBooleanFalseAsync(boolean boolPath, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.getBooleanFalse(boolPath);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -258,7 +258,7 @@ public final class PathsOperationsImpl implements PathsOperations {
      */
     public ServiceCall getIntOneMillionAsync(int intPath, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.getIntOneMillion(intPath);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -301,7 +301,7 @@ public final class PathsOperationsImpl implements PathsOperations {
      */
     public ServiceCall getIntNegativeOneMillionAsync(int intPath, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.getIntNegativeOneMillion(intPath);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -344,7 +344,7 @@ public final class PathsOperationsImpl implements PathsOperations {
      */
     public ServiceCall getTenBillionAsync(long longPath, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.getTenBillion(longPath);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -387,7 +387,7 @@ public final class PathsOperationsImpl implements PathsOperations {
      */
     public ServiceCall getNegativeTenBillionAsync(long longPath, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.getNegativeTenBillion(longPath);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -430,7 +430,7 @@ public final class PathsOperationsImpl implements PathsOperations {
      */
     public ServiceCall floatScientificPositiveAsync(double floatPath, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.floatScientificPositive(floatPath);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -473,7 +473,7 @@ public final class PathsOperationsImpl implements PathsOperations {
      */
     public ServiceCall floatScientificNegativeAsync(double floatPath, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.floatScientificNegative(floatPath);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -516,7 +516,7 @@ public final class PathsOperationsImpl implements PathsOperations {
      */
     public ServiceCall doubleDecimalPositiveAsync(double doublePath, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.doubleDecimalPositive(doublePath);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -559,7 +559,7 @@ public final class PathsOperationsImpl implements PathsOperations {
      */
     public ServiceCall doubleDecimalNegativeAsync(double doublePath, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.doubleDecimalNegative(doublePath);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -610,7 +610,7 @@ public final class PathsOperationsImpl implements PathsOperations {
             return null;
         }
         Call<ResponseBody> call = service.stringUnicode(stringPath);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -661,7 +661,7 @@ public final class PathsOperationsImpl implements PathsOperations {
             return null;
         }
         Call<ResponseBody> call = service.stringUrlEncoded(stringPath);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -712,7 +712,7 @@ public final class PathsOperationsImpl implements PathsOperations {
             return null;
         }
         Call<ResponseBody> call = service.stringEmpty(stringPath);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -763,7 +763,7 @@ public final class PathsOperationsImpl implements PathsOperations {
             return null;
         }
         Call<ResponseBody> call = service.stringNull(stringPath);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -814,7 +814,7 @@ public final class PathsOperationsImpl implements PathsOperations {
             return null;
         }
         Call<ResponseBody> call = service.enumValid(client.getMapperAdapter().serializeRaw(enumPath));
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -865,7 +865,7 @@ public final class PathsOperationsImpl implements PathsOperations {
             return null;
         }
         Call<ResponseBody> call = service.enumNull(client.getMapperAdapter().serializeRaw(enumPath));
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -916,7 +916,7 @@ public final class PathsOperationsImpl implements PathsOperations {
             return null;
         }
         Call<ResponseBody> call = service.byteMultiByte(Base64.encodeBase64String(bytePath));
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -967,7 +967,7 @@ public final class PathsOperationsImpl implements PathsOperations {
             return null;
         }
         Call<ResponseBody> call = service.byteEmpty(Base64.encodeBase64String(bytePath));
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1018,7 +1018,7 @@ public final class PathsOperationsImpl implements PathsOperations {
             return null;
         }
         Call<ResponseBody> call = service.byteNull(Base64.encodeBase64String(bytePath));
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1069,7 +1069,7 @@ public final class PathsOperationsImpl implements PathsOperations {
             return null;
         }
         Call<ResponseBody> call = service.dateValid(client.getMapperAdapter().serializeRaw(datePath));
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1120,7 +1120,7 @@ public final class PathsOperationsImpl implements PathsOperations {
             return null;
         }
         Call<ResponseBody> call = service.dateNull(client.getMapperAdapter().serializeRaw(datePath));
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1171,7 +1171,7 @@ public final class PathsOperationsImpl implements PathsOperations {
             return null;
         }
         Call<ResponseBody> call = service.dateTimeValid(client.getMapperAdapter().serializeRaw(dateTimePath));
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1222,7 +1222,7 @@ public final class PathsOperationsImpl implements PathsOperations {
             return null;
         }
         Call<ResponseBody> call = service.dateTimeNull(client.getMapperAdapter().serializeRaw(dateTimePath));
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

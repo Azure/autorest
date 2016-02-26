@@ -25,53 +25,7 @@ package @(Settings.Namespace.ToLower());
 public interface @Model.MethodGroupType {
     @foreach (var method in Model.MethodTemplateModels)
     {
-    @:/**
-    if (!String.IsNullOrEmpty(method.Summary))
-    {
-    @: * @method.Summary.EscapeXmlComment().Period()
-    }
-    if (!String.IsNullOrEmpty(method.Description))
-    {
-    @: * @method.Description.EscapeXmlComment().Period()
-    }
-    @: *
-    foreach (var param in method.LocalParameters)
-    {
-    @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
-    }
-    foreach (var exception in method.ExceptionStatements)
-    {
-    @: * @@throws @exception
-    }
-    if (method.ReturnType.Body != null)
-    {
-    @: * @@return the @method.ReturnTypeString.EscapeXmlComment() object wrapped in {@@link @method.OperationResponseType} if successful.
-    }
-    else
-    {
-    @: * @@return the {@@link @method.OperationResponseType} object if successful.
-    }
-    @: */
-    @:@method.OperationResponseReturnTypeString @(method.Name)(@method.MethodParameterDeclaration) throws @method.ExceptionString;
-    @EmptyLine
-    @:/**
-    if (!String.IsNullOrEmpty(method.Summary))
-    {
-    @: * @method.Summary.EscapeXmlComment().Period()
-    }
-    if (!String.IsNullOrEmpty(method.Description))
-    {
-    @: * @method.Description.EscapeXmlComment().Period()
-    }
-    @: *
-    foreach (var param in method.LocalParameters)
-    {
-    @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
-    }
-    @:@method.CallbackDocumentation
-    @: * @@return the {@@link ServiceCall} object
-    @: */
-    @:ServiceCall @(method.Name)Async(@method.MethodParameterDeclarationWithCallback);
+    @:@Include(new MethodInterfaceTemplate(), method)
     @EmptyLine
     }
 }

@@ -30,7 +30,7 @@ public interface OdataOperations {
      * @param orderby The orderby parameter with value id.
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ServiceResponse object if successful.
+     * @return the {@link ServiceResponse} object if successful.
      */
     ServiceResponse<Void> getWithFilter(OdataFilter filter, Integer top, String orderby) throws ErrorException, IOException;
 

@@ -152,7 +152,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
      */
     public ServiceCall getNullAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -193,7 +193,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
      */
     public ServiceCall getInvalidAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getInvalid();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -234,7 +234,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
      */
     public ServiceCall getOverflowAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getOverflow();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -275,7 +275,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
      */
     public ServiceCall getUnderflowAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getUnderflow();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -326,7 +326,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
             return null;
         }
         Call<ResponseBody> call = service.putUtcMaxDateTime(datetimeBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -367,7 +367,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
      */
     public ServiceCall getUtcLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getUtcLowercaseMaxDateTime();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -408,7 +408,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
      */
     public ServiceCall getUtcUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getUtcUppercaseMaxDateTime();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -459,7 +459,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
             return null;
         }
         Call<ResponseBody> call = service.putLocalPositiveOffsetMaxDateTime(datetimeBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -500,7 +500,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
      */
     public ServiceCall getLocalPositiveOffsetLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getLocalPositiveOffsetLowercaseMaxDateTime();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -541,7 +541,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
      */
     public ServiceCall getLocalPositiveOffsetUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getLocalPositiveOffsetUppercaseMaxDateTime();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -592,7 +592,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
             return null;
         }
         Call<ResponseBody> call = service.putLocalNegativeOffsetMaxDateTime(datetimeBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -633,7 +633,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
      */
     public ServiceCall getLocalNegativeOffsetUppercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getLocalNegativeOffsetUppercaseMaxDateTime();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -674,7 +674,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
      */
     public ServiceCall getLocalNegativeOffsetLowercaseMaxDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getLocalNegativeOffsetLowercaseMaxDateTime();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -725,7 +725,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
             return null;
         }
         Call<ResponseBody> call = service.putUtcMinDateTime(datetimeBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -766,7 +766,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
      */
     public ServiceCall getUtcMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getUtcMinDateTime();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -817,7 +817,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
             return null;
         }
         Call<ResponseBody> call = service.putLocalPositiveOffsetMinDateTime(datetimeBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -858,7 +858,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
      */
     public ServiceCall getLocalPositiveOffsetMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getLocalPositiveOffsetMinDateTime();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -909,7 +909,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
             return null;
         }
         Call<ResponseBody> call = service.putLocalNegativeOffsetMinDateTime(datetimeBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -950,7 +950,7 @@ public final class DatetimeOperationsImpl implements DatetimeOperations {
      */
     public ServiceCall getLocalNegativeOffsetMinDateTimeAsync(final ServiceCallback<DateTime> serviceCallback) {
         Call<ResponseBody> call = service.getLocalNegativeOffsetMinDateTime();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DateTime>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

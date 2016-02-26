@@ -102,7 +102,7 @@ public final class BasicOperationsImpl implements BasicOperations {
      */
     public ServiceCall getValidAsync(final ServiceCallback<Basic> serviceCallback) {
         Call<ResponseBody> call = service.getValid();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Basic>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -162,7 +162,7 @@ public final class BasicOperationsImpl implements BasicOperations {
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putValid(complexBody, this.client.getApiVersion());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -203,7 +203,7 @@ public final class BasicOperationsImpl implements BasicOperations {
      */
     public ServiceCall getInvalidAsync(final ServiceCallback<Basic> serviceCallback) {
         Call<ResponseBody> call = service.getInvalid();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Basic>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -244,7 +244,7 @@ public final class BasicOperationsImpl implements BasicOperations {
      */
     public ServiceCall getEmptyAsync(final ServiceCallback<Basic> serviceCallback) {
         Call<ResponseBody> call = service.getEmpty();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Basic>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -285,7 +285,7 @@ public final class BasicOperationsImpl implements BasicOperations {
      */
     public ServiceCall getNullAsync(final ServiceCallback<Basic> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Basic>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -326,7 +326,7 @@ public final class BasicOperationsImpl implements BasicOperations {
      */
     public ServiceCall getNotProvidedAsync(final ServiceCallback<Basic> serviceCallback) {
         Call<ResponseBody> call = service.getNotProvided();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Basic>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

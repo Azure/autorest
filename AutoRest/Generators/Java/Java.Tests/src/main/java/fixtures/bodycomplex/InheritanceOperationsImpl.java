@@ -85,7 +85,7 @@ public final class InheritanceOperationsImpl implements InheritanceOperations {
      */
     public ServiceCall getValidAsync(final ServiceCallback<Siamese> serviceCallback) {
         Call<ResponseBody> call = service.getValid();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Siamese>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -138,7 +138,7 @@ public final class InheritanceOperationsImpl implements InheritanceOperations {
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putValid(complexBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

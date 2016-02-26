@@ -28,7 +28,7 @@ public interface PathsOperations {
      * @throws ErrorException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws IllegalArgumentException exception thrown from invalid parameters
-     * @return the ServiceResponse object if successful.
+     * @return the {@link ServiceResponse} object if successful.
      */
     ServiceResponse<Void> getEmpty(String accountName) throws ErrorException, IOException, IllegalArgumentException;
 

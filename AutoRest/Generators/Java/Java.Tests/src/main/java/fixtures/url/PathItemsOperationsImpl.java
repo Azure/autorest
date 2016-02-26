@@ -121,7 +121,7 @@ public final class PathItemsOperationsImpl implements PathItemsOperations {
             return null;
         }
         Call<ResponseBody> call = service.getAllWithValues(localStringPath, pathItemStringPath, this.client.getGlobalStringPath(), localStringQuery, pathItemStringQuery, this.client.getGlobalStringQuery());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -192,7 +192,7 @@ public final class PathItemsOperationsImpl implements PathItemsOperations {
             return null;
         }
         Call<ResponseBody> call = service.getGlobalQueryNull(localStringPath, pathItemStringPath, this.client.getGlobalStringPath(), localStringQuery, pathItemStringQuery, this.client.getGlobalStringQuery());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -263,7 +263,7 @@ public final class PathItemsOperationsImpl implements PathItemsOperations {
             return null;
         }
         Call<ResponseBody> call = service.getGlobalAndLocalQueryNull(localStringPath, pathItemStringPath, this.client.getGlobalStringPath(), localStringQuery, pathItemStringQuery, this.client.getGlobalStringQuery());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -334,7 +334,7 @@ public final class PathItemsOperationsImpl implements PathItemsOperations {
             return null;
         }
         Call<ResponseBody> call = service.getLocalPathItemQueryNull(localStringPath, pathItemStringPath, this.client.getGlobalStringPath(), localStringQuery, pathItemStringQuery, this.client.getGlobalStringQuery());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

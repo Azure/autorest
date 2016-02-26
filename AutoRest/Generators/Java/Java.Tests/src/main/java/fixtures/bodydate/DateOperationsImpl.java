@@ -108,7 +108,7 @@ public final class DateOperationsImpl implements DateOperations {
      */
     public ServiceCall getNullAsync(final ServiceCallback<LocalDate> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<LocalDate>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -149,7 +149,7 @@ public final class DateOperationsImpl implements DateOperations {
      */
     public ServiceCall getInvalidDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
         Call<ResponseBody> call = service.getInvalidDate();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<LocalDate>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -190,7 +190,7 @@ public final class DateOperationsImpl implements DateOperations {
      */
     public ServiceCall getOverflowDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
         Call<ResponseBody> call = service.getOverflowDate();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<LocalDate>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -231,7 +231,7 @@ public final class DateOperationsImpl implements DateOperations {
      */
     public ServiceCall getUnderflowDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
         Call<ResponseBody> call = service.getUnderflowDate();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<LocalDate>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -282,7 +282,7 @@ public final class DateOperationsImpl implements DateOperations {
             return null;
         }
         Call<ResponseBody> call = service.putMaxDate(dateBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -323,7 +323,7 @@ public final class DateOperationsImpl implements DateOperations {
      */
     public ServiceCall getMaxDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
         Call<ResponseBody> call = service.getMaxDate();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<LocalDate>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -374,7 +374,7 @@ public final class DateOperationsImpl implements DateOperations {
             return null;
         }
         Call<ResponseBody> call = service.putMinDate(dateBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -415,7 +415,7 @@ public final class DateOperationsImpl implements DateOperations {
      */
     public ServiceCall getMinDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
         Call<ResponseBody> call = service.getMinDate();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<LocalDate>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

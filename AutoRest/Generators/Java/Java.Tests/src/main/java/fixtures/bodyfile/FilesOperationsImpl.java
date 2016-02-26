@@ -82,7 +82,7 @@ public final class FilesOperationsImpl implements FilesOperations {
      */
     public ServiceCall getFileAsync(final ServiceCallback<InputStream> serviceCallback) {
         Call<ResponseBody> call = service.getFile();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<InputStream>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -123,7 +123,7 @@ public final class FilesOperationsImpl implements FilesOperations {
      */
     public ServiceCall getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback) {
         Call<ResponseBody> call = service.getEmptyFile();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<InputStream>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

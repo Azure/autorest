@@ -33,7 +33,7 @@ public interface LROsCustomHeaderOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     ServiceResponseWithHeaders<Product, LROsCustomHeaderPutAsyncRetrySucceededHeaders> putAsyncRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException;
 
@@ -52,7 +52,7 @@ public interface LROsCustomHeaderOperations {
      * @param product Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     ServiceResponseWithHeaders<Product, LROsCustomHeaderPutAsyncRetrySucceededHeaders> beginPutAsyncRetrySucceeded(Product product) throws CloudException, IOException;
 
@@ -72,7 +72,7 @@ public interface LROsCustomHeaderOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Product> put201CreatingSucceeded200(Product product) throws CloudException, IOException, InterruptedException;
 
@@ -91,7 +91,7 @@ public interface LROsCustomHeaderOperations {
      * @param product Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Product> beginPut201CreatingSucceeded200(Product product) throws CloudException, IOException;
 
@@ -111,7 +111,7 @@ public interface LROsCustomHeaderOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponseWithHeaders object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200Headers> post202Retry200(Product product) throws CloudException, IOException, InterruptedException;
 
@@ -130,7 +130,7 @@ public interface LROsCustomHeaderOperations {
      * @param product Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ServiceResponseWithHeaders object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200Headers> beginPost202Retry200(Product product) throws CloudException, IOException;
 
@@ -150,7 +150,7 @@ public interface LROsCustomHeaderOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponseWithHeaders object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeaders> postAsyncRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException;
 
@@ -169,7 +169,7 @@ public interface LROsCustomHeaderOperations {
      * @param product Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ServiceResponseWithHeaders object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeaders> beginPostAsyncRetrySucceeded(Product product) throws CloudException, IOException;
 

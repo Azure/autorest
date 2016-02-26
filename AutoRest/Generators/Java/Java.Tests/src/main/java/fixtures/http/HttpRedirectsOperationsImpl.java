@@ -156,7 +156,7 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
      */
     public ServiceCall head300Async(final ServiceCallback<Void> serviceCallback) {
         Call<Void> call = service.head300();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -198,7 +198,7 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
      */
     public ServiceCall get300Async(final ServiceCallback<List<String>> serviceCallback) {
         Call<ResponseBody> call = service.get300();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<String>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -240,7 +240,7 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
      */
     public ServiceCall head301Async(final ServiceCallback<Void> serviceCallback) {
         Call<Void> call = service.head301();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -282,7 +282,7 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
      */
     public ServiceCall get301Async(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.get301();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -326,7 +326,7 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
      */
     public ServiceCall put301Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.put301(booleanValue);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -367,7 +367,7 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
      */
     public ServiceCall head302Async(final ServiceCallback<Void> serviceCallback) {
         Call<Void> call = service.head302();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -409,7 +409,7 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
      */
     public ServiceCall get302Async(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.get302();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -453,7 +453,7 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
      */
     public ServiceCall patch302Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.patch302(booleanValue);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -496,7 +496,7 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
      */
     public ServiceCall post303Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.post303(booleanValue);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -538,7 +538,7 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
      */
     public ServiceCall head307Async(final ServiceCallback<Void> serviceCallback) {
         Call<Void> call = service.head307();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -580,7 +580,7 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
      */
     public ServiceCall get307Async(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.get307();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -624,7 +624,7 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
      */
     public ServiceCall put307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.put307(booleanValue);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -668,7 +668,7 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
      */
     public ServiceCall patch307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.patch307(booleanValue);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -712,7 +712,7 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
      */
     public ServiceCall post307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.post307(booleanValue);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -756,7 +756,7 @@ public final class HttpRedirectsOperationsImpl implements HttpRedirectsOperation
      */
     public ServiceCall delete307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.delete307(booleanValue);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

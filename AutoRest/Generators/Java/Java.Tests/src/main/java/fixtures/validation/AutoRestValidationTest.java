@@ -105,6 +105,7 @@ public interface AutoRestValidationTest {
      * @return the {@link ServiceCall} object
      */
     ServiceCall validationOfMethodParametersAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback);
+
     /**
      * Validates body parameters on the method. See swagger for details.
      *
@@ -128,6 +129,7 @@ public interface AutoRestValidationTest {
      * @return the {@link ServiceCall} object
      */
     ServiceCall validationOfBodyAsync(String resourceGroupName, int id, Product body, final ServiceCallback<Product> serviceCallback);
+
     /**
      *
      * @param constantParam the String value
@@ -145,6 +147,7 @@ public interface AutoRestValidationTest {
      * @return the {@link ServiceCall} object
      */
     ServiceCall getWithConstantInPathAsync(String constantParam, final ServiceCallback<Void> serviceCallback);
+
     /**
      *
      * @param constantParam the String value

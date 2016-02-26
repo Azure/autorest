@@ -99,7 +99,7 @@ public final class BoolOperationsImpl implements BoolOperations {
      */
     public ServiceCall getTrueAsync(final ServiceCallback<Boolean> serviceCallback) {
         Call<ResponseBody> call = service.getTrue();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Boolean>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -142,7 +142,7 @@ public final class BoolOperationsImpl implements BoolOperations {
      */
     public ServiceCall putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putTrue(boolBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -183,7 +183,7 @@ public final class BoolOperationsImpl implements BoolOperations {
      */
     public ServiceCall getFalseAsync(final ServiceCallback<Boolean> serviceCallback) {
         Call<ResponseBody> call = service.getFalse();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Boolean>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -226,7 +226,7 @@ public final class BoolOperationsImpl implements BoolOperations {
      */
     public ServiceCall putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putFalse(boolBody);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -267,7 +267,7 @@ public final class BoolOperationsImpl implements BoolOperations {
      */
     public ServiceCall getNullAsync(final ServiceCallback<Boolean> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Boolean>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -308,7 +308,7 @@ public final class BoolOperationsImpl implements BoolOperations {
      */
     public ServiceCall getInvalidAsync(final ServiceCallback<Boolean> serviceCallback) {
         Call<ResponseBody> call = service.getInvalid();
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Boolean>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

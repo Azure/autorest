@@ -36,7 +36,7 @@ public interface LRORetrysOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Product> put201CreatingSucceeded200(Product product) throws CloudException, IOException, InterruptedException;
 
@@ -55,7 +55,7 @@ public interface LRORetrysOperations {
      * @param product Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Product object wrapped in ServiceResponse if successful.
+     * @return the Product object wrapped in {@link ServiceResponse} if successful.
      */
     ServiceResponse<Product> beginPut201CreatingSucceeded200(Product product) throws CloudException, IOException;
 
@@ -75,7 +75,7 @@ public interface LRORetrysOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders> putAsyncRelativeRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException;
 
@@ -94,7 +94,7 @@ public interface LRORetrysOperations {
      * @param product Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     ServiceResponseWithHeaders<Product, LRORetrysPutAsyncRelativeRetrySucceededHeaders> beginPutAsyncRelativeRetrySucceeded(Product product) throws CloudException, IOException;
 
@@ -113,7 +113,7 @@ public interface LRORetrysOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     ServiceResponseWithHeaders<Product, LRORetrysDeleteProvisioning202Accepted200SucceededHeaders> deleteProvisioning202Accepted200Succeeded() throws CloudException, IOException, InterruptedException;
 
@@ -130,7 +130,7 @@ public interface LRORetrysOperations {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the Product object wrapped in ServiceResponseWithHeaders if successful.
+     * @return the Product object wrapped in {@link ServiceResponseWithHeaders} if successful.
      */
     ServiceResponseWithHeaders<Product, LRORetrysDeleteProvisioning202Accepted200SucceededHeaders> beginDeleteProvisioning202Accepted200Succeeded() throws CloudException, IOException;
 
@@ -148,7 +148,7 @@ public interface LRORetrysOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponseWithHeaders object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200Headers> delete202Retry200() throws CloudException, IOException, InterruptedException;
 
@@ -165,7 +165,7 @@ public interface LRORetrysOperations {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ServiceResponseWithHeaders object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     ServiceResponseWithHeaders<Void, LRORetrysDelete202Retry200Headers> beginDelete202Retry200() throws CloudException, IOException;
 
@@ -183,7 +183,7 @@ public interface LRORetrysOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponseWithHeaders object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeaders> deleteAsyncRelativeRetrySucceeded() throws CloudException, IOException, InterruptedException;
 
@@ -200,7 +200,7 @@ public interface LRORetrysOperations {
      *
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ServiceResponseWithHeaders object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     ServiceResponseWithHeaders<Void, LRORetrysDeleteAsyncRelativeRetrySucceededHeaders> beginDeleteAsyncRelativeRetrySucceeded() throws CloudException, IOException;
 
@@ -219,7 +219,7 @@ public interface LRORetrysOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponseWithHeaders object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers> post202Retry200(Product product) throws CloudException, IOException, InterruptedException;
 
@@ -238,7 +238,7 @@ public interface LRORetrysOperations {
      * @param product Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ServiceResponseWithHeaders object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     ServiceResponseWithHeaders<Void, LRORetrysPost202Retry200Headers> beginPost202Retry200(Product product) throws CloudException, IOException;
 
@@ -258,7 +258,7 @@ public interface LRORetrysOperations {
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
      * @throws InterruptedException exception thrown when long running operation is interrupted
-     * @return the ServiceResponseWithHeaders object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders> postAsyncRelativeRetrySucceeded(Product product) throws CloudException, IOException, InterruptedException;
 
@@ -277,7 +277,7 @@ public interface LRORetrysOperations {
      * @param product Product to put
      * @throws CloudException exception thrown from REST call
      * @throws IOException exception thrown from serialization/deserialization
-     * @return the ServiceResponseWithHeaders object if successful.
+     * @return the {@link ServiceResponseWithHeaders} object if successful.
      */
     ServiceResponseWithHeaders<Void, LRORetrysPostAsyncRelativeRetrySucceededHeaders> beginPostAsyncRelativeRetrySucceeded(Product product) throws CloudException, IOException;
 
