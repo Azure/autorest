@@ -10,8 +10,12 @@
 # --------------------------------------------------------------------------
 
 from .auto_rest_long_running_operation_test_service import AutoRestLongRunningOperationTestService, AutoRestLongRunningOperationTestServiceConfiguration
+from .version import VERSION
 
 __all__ = [
     'AutoRestLongRunningOperationTestService',
     'AutoRestLongRunningOperationTestServiceConfiguration'
 ]
+
+__version__ = VERSION
+

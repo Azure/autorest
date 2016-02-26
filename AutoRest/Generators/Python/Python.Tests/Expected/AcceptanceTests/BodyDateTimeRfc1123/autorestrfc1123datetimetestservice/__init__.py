@@ -10,8 +10,12 @@
 # --------------------------------------------------------------------------
 
 from .auto_rest_rfc1123_date_time_test_service import AutoRestRFC1123DateTimeTestService, AutoRestRFC1123DateTimeTestServiceConfiguration
+from .version import VERSION
 
 __all__ = [
     'AutoRestRFC1123DateTimeTestService',
     'AutoRestRFC1123DateTimeTestServiceConfiguration'
 ]
+
+__version__ = VERSION
+

@@ -11,6 +11,7 @@
 
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
+from .version import VERSION
 from .operations.date_model import DateModel
 from . import models
 
@@ -32,7 +33,7 @@ class AutoRestDateTestServiceConfiguration(Configuration):
 
         super(AutoRestDateTestServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.add_user_agent('autorestdatetestservice/1.0.0')
+        self.add_user_agent('autorestdatetestservice/{}'.format(VERSION))
 
 
 class AutoRestDateTestService(object):

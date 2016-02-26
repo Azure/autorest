@@ -11,6 +11,7 @@
 
 from msrest.service_client import ServiceClient
 from msrest import Configuration, Serializer, Deserializer
+from .version import VERSION
 from msrest.pipeline import ClientRawResponse
 from . import models
 
@@ -40,7 +41,7 @@ class AutoRestValidationTestConfiguration(Configuration):
 
         super(AutoRestValidationTestConfiguration, self).__init__(base_url, filepath)
 
-        self.add_user_agent('autorestvalidationtest/1.0.0')
+        self.add_user_agent('autorestvalidationtest/{}'.format(VERSION))
 
         self.subscription_id = subscription_id
         self.api_version = api_version

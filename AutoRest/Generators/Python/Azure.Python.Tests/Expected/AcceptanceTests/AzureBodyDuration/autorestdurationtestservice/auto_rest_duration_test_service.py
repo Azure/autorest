@@ -12,6 +12,7 @@
 from msrest.service_client import ServiceClient
 from msrest import Serializer, Deserializer
 from msrestazure import AzureConfiguration
+from .version import VERSION
 from .operations.duration_operations import DurationOperations
 from . import models
 
@@ -47,7 +48,8 @@ class AutoRestDurationTestServiceConfiguration(AzureConfiguration):
 
         super(AutoRestDurationTestServiceConfiguration, self).__init__(base_url, filepath)
 
-        self.add_user_agent('autorestdurationtestservice/1.0.0')
+        self.add_user_agent('autorestdurationtestservice/{}'.format(VERSION))
+        self.add_user_agent('Azure-SDK-For-Python')
 
         self.credentials = credentials
         self.accept_language = accept_language

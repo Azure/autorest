@@ -10,8 +10,12 @@
 # --------------------------------------------------------------------------
 
 from .auto_rest_parameter_grouping_test_service import AutoRestParameterGroupingTestService, AutoRestParameterGroupingTestServiceConfiguration
+from .version import VERSION
 
 __all__ = [
     'AutoRestParameterGroupingTestService',
     'AutoRestParameterGroupingTestServiceConfiguration'
 ]
+
+__version__ = VERSION
+
