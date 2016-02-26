@@ -2124,6 +2124,68 @@ namespace Microsoft.Rest.Generator.CSharp.Tests
             }
         }
 
+        [Fact]
+        public void ModelFlatteningSimpleTest()
+        {
+            using (var client = new AutoRestResourceFlatteningTestService(Fixture.Uri))
+            {
+                //Dictionary
+                var simpleProduct = new SimpleProduct
+                {
+                    BaseProductDescription = "product description",
+                    BaseProductId = "123",
+                    MaxProductDisplayName = "max name",
+                    Odatavalue = "http://foo"
+                };
+                var resultProduct = client.PutSimpleProduct(simpleProduct);
+                Assert.Equal(JsonConvert.SerializeObject(resultProduct), JsonConvert.SerializeObject(simpleProduct));
+            }
+        }
+
+        [Fact]
+        public void ModelFlatteningWithParameterFlatteningTest()
+        {
+            using (var client = new AutoRestResourceFlatteningTestService(Fixture.Uri))
+            {
+                //Dictionary
+                var simpleProduct = new SimpleProduct
+                {
+                    BaseProductDescription = "product description",
+                    BaseProductId = "123",
+                    MaxProductDisplayName = "max name",
+                    Odatavalue = "http://foo"
+                };
+                var resultProduct = client.PostFlattenedSimpleProduct("123", "max name", "product description", "http://foo");
+                Assert.Equal(JsonConvert.SerializeObject(resultProduct), JsonConvert.SerializeObject(simpleProduct));
+            }
+        }
+
+        [Fact]
+        public void ModelFlatteningWithGroupingTest()
+        {
+            using (var client = new AutoRestResourceFlatteningTestService(Fixture.Uri))
+            {
+                //Dictionary
+                var simpleProduct = new SimpleProduct
+                {
+                    BaseProductDescription = "product description",
+                    BaseProductId = "123",
+                    MaxProductDisplayName = "max name",
+                    Odatavalue = "http://foo"
+                };
+                var flattenParameterGroup = new FlattenParameterGroup
+                {
+                    BaseProductDescription = "product description",
+                    BaseProductId = "123",
+                    MaxProductDisplayName = "max name",
+                    Odatavalue = "http://foo", 
+                    Name = "groupproduct"
+                };
+                var resultProduct = client.PutSimpleProductWithGrouping(flattenParameterGroup);
+                Assert.Equal(JsonConvert.SerializeObject(resultProduct), JsonConvert.SerializeObject(simpleProduct));
+            }
+        }
+
         public void EnsureTestCoverage()
         {
             SwaggerSpecRunner.RunTests(

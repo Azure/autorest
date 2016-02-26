@@ -5,7 +5,7 @@ namespace Microsoft.Rest.Generator.ClientModel
 {
     using System;
     using System.Globalization;
-
+    using Utilities;
     /// <summary>
     /// Defines a parameter mapping.
     /// </summary>
@@ -53,11 +53,8 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// <returns>A deep clone of current object.</returns>
         public object Clone()
         {
-            //ParameterMapping paramMapping = (ParameterMapping)this.MemberwiseClone();
-            //return paramMapping;
-
             ParameterMapping mapping = new ParameterMapping();
-            mapping.InputParameter = this.InputParameter;
+            mapping.InputParameter = (Parameter)this.InputParameter.Clone();
             mapping.InputParameterProperty = this.InputParameterProperty;
             mapping.OutputParameterProperty = this.OutputParameterProperty;
             return mapping;

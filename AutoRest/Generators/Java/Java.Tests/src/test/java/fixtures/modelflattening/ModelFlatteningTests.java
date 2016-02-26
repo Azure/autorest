@@ -1,4 +1,4 @@
-package fixtures.resourceflattening;
+package fixtures.modelflattening;
 
 import com.microsoft.rest.ServiceResponse;
 
@@ -11,17 +11,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import fixtures.resourceflattening.models.FlattenedProduct;
-import fixtures.resourceflattening.models.Resource;
-import fixtures.resourceflattening.models.ResourceCollection;
+import fixtures.modelflattening.models.FlattenedProduct;
+import fixtures.modelflattening.models.SimpleProduct;
+import fixtures.modelflattening.models.Resource;
+import fixtures.modelflattening.models.ResourceCollection;
 
-public class ResourceFlatteningTests {
+public class ModelFlatteningTests {
     private static AutoRestResourceFlatteningTestService client;
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestResourceFlatteningTestServiceImpl("http://localhost.:3000", null);
-        client.setLongRunningOperationRetryTimeout(0);
+        client = new AutoRestResourceFlatteningTestServiceImpl("http://localhost.:3000");
     }
 
     @Test
@@ -191,5 +191,17 @@ public class ResourceFlatteningTests {
 
         ServiceResponse<Void> response = client.putResourceCollection(complexObj);
         Assert.assertEquals(200, response.getResponse().code());
+    }
+
+    @Test
+    public void putSimpleProduct() throws Exception {
+        SimpleProduct simpleProduct = new SimpleProduct();
+        simpleProduct.setBaseProductDescription("product description");
+        simpleProduct.setBaseProductId("123");
+        simpleProduct.setMaxProductDisplayName("max name");
+        simpleProduct.setOdatavalue("http://foo");
+
+        SimpleProduct result = client.putSimpleProduct(simpleProduct).getBody();
+        Assert.assertEquals(simpleProduct, result);
     }
 }

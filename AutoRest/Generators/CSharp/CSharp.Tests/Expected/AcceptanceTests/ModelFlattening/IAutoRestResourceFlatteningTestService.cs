@@ -131,8 +131,19 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// Put Flattened Simple Product with client flattening true on the
         /// parameter
         /// </summary>
-        /// <param name='flattenParameterGroup'>
-        /// Additional parameters for the operation
+        /// <param name='baseProductId'>
+        /// Unique identifier representing a specific product for a given
+        /// latitude &amp; longitude. For example, uberX in San Francisco
+        /// will have a different product_id than uberX in Los Angeles.
+        /// </param>
+        /// <param name='maxProductDisplayName'>
+        /// Display name of product.
+        /// </param>
+        /// <param name='baseProductDescription'>
+        /// Description of product.
+        /// </param>
+        /// <param name='odatavalue'>
+        /// URL value.
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -140,7 +151,7 @@ namespace Fixtures.AcceptanceTestsModelFlattening
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<SimpleProduct>> PostFlattenedSimpleProductWithHttpMessagesAsync(FlattenParameterGroup flattenParameterGroup, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<SimpleProduct>> PostFlattenedSimpleProductWithHttpMessagesAsync(string baseProductId, string maxProductDisplayName, string baseProductDescription = default(string), string odatavalue = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Put Simple Product with client flattening true on the model

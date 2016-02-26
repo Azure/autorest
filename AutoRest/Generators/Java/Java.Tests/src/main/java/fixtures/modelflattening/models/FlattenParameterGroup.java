@@ -13,9 +13,15 @@ package fixtures.modelflattening.models;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Additional parameters for the postFlattenedSimpleProduct operation.
+ * Additional parameters for the putSimpleProductWithGrouping operation.
  */
 public class FlattenParameterGroup {
+    /**
+     * Product name with value 'groupproduct'.
+     */
+    @JsonProperty(value = "", required = true)
+    private String name;
+
     /**
      * Unique identifier representing a specific product for a given latitude
      * &amp; longitude. For example, uberX in San Francisco will have a
@@ -43,10 +49,22 @@ public class FlattenParameterGroup {
     private String odatavalue;
 
     /**
-     * Product name.
+     * Get the name value.
+     *
+     * @return the name value
      */
-    @JsonProperty(value = "", required = true)
-    private String name;
+    public String getName() {
+        return this.name;
+    }
+
+    /**
+     * Set the name value.
+     *
+     * @param name the name value to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
     /**
      * Get the baseProductId value.
@@ -118,24 +136,6 @@ public class FlattenParameterGroup {
      */
     public void setOdatavalue(String odatavalue) {
         this.odatavalue = odatavalue;
-    }
-
-    /**
-     * Get the name value.
-     *
-     * @return the name value
-     */
-    public String getName() {
-        return this.name;
-    }
-
-    /**
-     * Set the name value.
-     *
-     * @param name the name value to set
-     */
-    public void setName(String name) {
-        this.name = name;
     }
 
 }

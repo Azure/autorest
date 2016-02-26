@@ -90,7 +90,7 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// <summary>
         /// Gets the list of input Parameter transformations
         /// </summary>
-        public IList<ParameterTransformation> InputParameterTransformation { get; private set; }
+        public List<ParameterTransformation> InputParameterTransformation { get; private set; }
 
         /// <summary>
         /// Gets or sets request headers.
@@ -162,7 +162,8 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// <returns></returns>
         public object Clone()
         {
-            Method newMethod = (Method)this.MemberwiseClone();
+            Method newMethod = new Method();
+            newMethod.LoadFrom(this);
             newMethod.Extensions = new Dictionary<string, object>();
             newMethod.Parameters = new List<Parameter>();
             newMethod.RequestHeaders = new Dictionary<string, string>();

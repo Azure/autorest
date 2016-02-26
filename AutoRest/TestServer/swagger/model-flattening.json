@@ -246,7 +246,7 @@
           },
           {
             "name": "name",
-            "description": "Product name",
+            "description": "Product name with value 'groupproduct'",
             "in": "path",
             "required": true,
             "type": "string",

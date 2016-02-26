@@ -14,7 +14,9 @@
  * @class
  * Initializes a new instance of the FlattenParameterGroup class.
  * @constructor
- * Additional parameters for the postFlattenedSimpleProduct operation.
+ * Additional parameters for the putSimpleProductWithGrouping operation.
+ * @member {string} name Product name with value 'groupproduct'
+ * 
  * @member {string} baseProductId Unique identifier representing a specific
  * product for a given latitude & longitude. For example, uberX in San
  * Francisco will have a different product_id than uberX in Los Angeles.
@@ -24,8 +26,6 @@
  * @member {string} maxProductDisplayName Display name of product.
  * 
  * @member {string} [odatavalue] URL value.
- * 
- * @member {string} name Product name
  * 
  */
 function FlattenParameterGroup() {
@@ -44,6 +44,12 @@ FlattenParameterGroup.prototype.mapper = function () {
       name: 'Composite',
       className: 'FlattenParameterGroup',
       modelProperties: {
+        name: {
+          required: true,
+          type: {
+            name: 'String'
+          }
+        },
         baseProductId: {
           required: true,
           type: {
@@ -64,12 +70,6 @@ FlattenParameterGroup.prototype.mapper = function () {
         },
         odatavalue: {
           required: false,
-          type: {
-            name: 'String'
-          }
-        },
-        name: {
-          required: true,
           type: {
             name: 'String'
           }

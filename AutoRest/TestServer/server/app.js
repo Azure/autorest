@@ -422,7 +422,9 @@ var coverage = {
   'putModelFlattenDictionary': 0,
   'getModelFlattenResourceCollection': 0,
   'putModelFlattenResourceCollection': 0,
-  'putModelFlattenCustomBase': 0
+  'putModelFlattenCustomBase': 0,
+  'postModelFlattenCustomParameter': 0,
+  'putModelFlattenCustomGroupedParameter': 0
 };
 
 // view engine setup

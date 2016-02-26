@@ -55,32 +55,32 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// <summary>
         /// Gets or sets the client parameters.
         /// </summary>
-        public IList<Property> Properties { get; private set; }
+        public List<Property> Properties { get; private set; }
 
         /// <summary>
         /// Gets the model types.
         /// </summary>
-        public ISet<CompositeType> ModelTypes { get; private set; }
+        public HashSet<CompositeType> ModelTypes { get; private set; }
 
         /// <summary>
         /// Gets the enum types.
         /// </summary>
-        public ISet<EnumType> EnumTypes { get; private set; }
+        public HashSet<EnumType> EnumTypes { get; private set; }
 
         /// <summary>
         /// Gets the list of error type for customize exceptions.
         /// </summary>
-        public ISet<CompositeType> ErrorTypes { get; private set; }
+        public HashSet<CompositeType> ErrorTypes { get; private set; }
 
         /// <summary>
         /// Gets the list of header types.
         /// </summary>
-        public ISet<CompositeType> HeaderTypes { get; private set; }
+        public HashSet<CompositeType> HeaderTypes { get; private set; }
 
         /// <summary>
         /// Gets the methods.
         /// </summary>
-        public IList<Method> Methods { get; private set; }
+        public List<Method> Methods { get; private set; }
 
         /// <summary>
         /// Gets the method groups.

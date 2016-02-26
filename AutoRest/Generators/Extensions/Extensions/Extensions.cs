@@ -239,11 +239,11 @@ namespace Microsoft.Rest.Generator
                 basePath = "";
             }
 
-            basePath = basePath.Replace(".", "\\.");
+            basePath = basePath.Replace(".", "\\\\.");
             string propertyName = property.SerializedName;
             if (escapePropertyName)
             {
-                propertyName = propertyName.Replace(".", "\\.");
+                propertyName = propertyName.Replace(".", "\\\\.");
             }
             property.SerializedName = basePath + "." + propertyName;
             return property;

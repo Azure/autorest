@@ -72,7 +72,7 @@ namespace Microsoft.Rest.Generator.Tests
                                                        && p.Name == "max_product_display_name"));
             Assert.True(simpleProduct.Properties.Any(p => p.SerializedName == "details.max_product_capacity"
                                                        && p.Name == "max_product_capacity"));
-            Assert.True(simpleProduct.Properties.Any(p => p.SerializedName == "details.max_product_image.@odata\\.value"
+            Assert.True(simpleProduct.Properties.Any(p => p.SerializedName == "details.max_product_image.@odata\\\\.value"
                                                        && p.Name == "@odata.value"));
 
             var conflictedProduct = clientModel.ModelTypes.First(m => m.Name == "ConflictedProduct");

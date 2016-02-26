@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using Microsoft.Rest.Generator.Utilities;
 
 namespace Microsoft.Rest.Generator.ClientModel
 {
@@ -99,7 +100,8 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// <returns>A deep clone of current object.</returns>
         public object Clone()
         {
-            Parameter param = (Parameter)this.MemberwiseClone();
+            Parameter param = new Parameter();
+            param.LoadFrom(this);
             return param;
         }
     }

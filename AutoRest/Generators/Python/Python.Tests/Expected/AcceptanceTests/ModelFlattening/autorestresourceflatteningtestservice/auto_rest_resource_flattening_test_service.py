@@ -356,32 +356,27 @@ class AutoRestResourceFlatteningTestService(object):
         return deserialized
 
     def post_flattened_simple_product(
-            self, flatten_parameter_group, custom_headers={}, raw=False, **operation_config):
+            self, base_product_id, max_product_display_name, base_product_description=None, odatavalue=None, custom_headers={}, raw=False, **operation_config):
         """
         Put Flattened Simple Product with client flattening true on the
         parameter
 
-        :param flatten_parameter_group: Additional parameters for the
-         operation
-        :type flatten_parameter_group: FlattenParameterGroup
+        :param base_product_id: Unique identifier representing a specific
+         product for a given latitude & longitude. For example, uberX in San
+         Francisco will have a different product_id than uberX in Los Angeles.
+        :type base_product_id: str
+        :param max_product_display_name: Display name of product.
+        :type max_product_display_name: str
+        :param base_product_description: Description of product.
+        :type base_product_description: str
+        :param odatavalue: URL value.
+        :type odatavalue: str
         :param dict custom_headers: headers that will be added to the request
         :param boolean raw: returns the direct response alongside the
          deserialized response
         :rtype: SimpleProduct
         :rtype: msrest.pipeline.ClientRawResponse if raw=True
         """
-        base_product_id = None
-        if flatten_parameter_group is not None:
-            base_product_id = flatten_parameter_group.base_product_id
-        base_product_description = None
-        if flatten_parameter_group is not None:
-            base_product_description = flatten_parameter_group.base_product_description
-        max_product_display_name = None
-        if flatten_parameter_group is not None:
-            max_product_display_name = flatten_parameter_group.max_product_display_name
-        odatavalue = None
-        if flatten_parameter_group is not None:
-            odatavalue = flatten_parameter_group.odatavalue
         simple_body_product = models.SimpleProduct(max_product_display_name=max_product_display_name, odatavalue=odatavalue)
 
         # Construct URL
