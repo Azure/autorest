@@ -24,6 +24,7 @@
 #
 # --------------------------------------------------------------------------
 
+import collections
 try:
     from urlparse import urlparse
 except ImportError:
@@ -33,7 +34,7 @@ from .serialization import Deserializer
 from .pipeline import ClientRawResponse
 
 
-class Paged(object):
+class Paged(collections.Iterable):
     """A container for paged REST responses.
 
     :param requests.Response response: server response object.
