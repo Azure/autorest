@@ -198,11 +198,16 @@ var modelFlatten = function (coverage) {
 
   router.put('/customFlattening/parametergrouping/:name', function (req, res, next) {
     if (req.body) {
+      console.log('>>>>>>');
+      console.log(util.inspect(req.body, {depth : null}));
+       console.log('>>>>>><<<<<<<<<<<<<<<<<<<<<<<<<<<');
+      console.log(util.inspect(customFlattenBody, {depth : null}));
       if (_.isEqual(req.body, customFlattenBody) && req.params.name === 'groupproduct') {
         coverage['putModelFlattenCustomGroupedParameter']++;
         res.status(200).end(JSON.stringify(customFlattenBody));
       } else {
-        utils.send400(res, next, "The received body '" + JSON.stringify(req.body) + "' did not match the expected body '" + JSON.stringify(customFlattenBody) + "'.");
+        utils.send400(res, next, "The received body '" + JSON.stringify(req.body) + "' did not match the expected body '" + JSON.stringify(customFlattenBody) + 
+          "'. Or the path parameter name does not have the value 'groupproduct'");
       }
     } else {
       utils.send400(res, next, "Was expecting a body in the put request.");
