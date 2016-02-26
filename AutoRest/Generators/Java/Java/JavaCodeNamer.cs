@@ -159,7 +159,6 @@ namespace Microsoft.Rest.Generator.Java
                 {
                     method.Group = method.Group.ToCamelCase();
                 }
-                var scope = new ScopeProvider();
                 foreach (var parameter in method.Parameters)
                 {
                     if (parameter.ClientProperty != null)
@@ -168,10 +167,6 @@ namespace Microsoft.Rest.Generator.Java
                             "{0}.get{1}()",
                             method.Group == null ? "this" : "this.client",
                             parameter.ClientProperty.Name.ToPascalCase());
-                    }
-                    else
-                    {
-                        parameter.Name = scope.GetVariableName(parameter.Name);
                     }
 
                     if (!parameter.IsRequired)

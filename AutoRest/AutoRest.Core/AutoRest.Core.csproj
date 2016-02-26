@@ -66,6 +66,8 @@
     <Compile Include="Logging\CodeGenerationException.cs" />
     <Compile Include="SettingsInfoAttribute.cs" />
     <Compile Include="Logging\ErrorManager.cs" />
+    <Compile Include="Utilities\IScopeProvider.cs" />
+    <Compile Include="Utilities\ScopeProvider.cs" />
     <Compile Include="Utilities\TemplateConstants.cs" />
     <Compile Include="Utilities\CamelCaseContractResolver.cs" />
     <Compile Include="Utilities\Extensions.cs" />

@@ -3,8 +3,11 @@
 
 using System.Collections.Generic;
 
-namespace Microsoft.Rest.Generator.CSharp
+namespace Microsoft.Rest.Generator.Utilities
 {
+    /// <summary>
+    /// Provides scope for variable names.
+    /// </summary>
     public class ScopeProvider : IScopeProvider
     {
         /// <summary>
@@ -13,18 +16,18 @@ namespace Microsoft.Rest.Generator.CSharp
         private readonly HashSet<string> _variables = new HashSet<string>();
 
         /// <summary>
-        /// Get a variable name that is unique in this method's scope
+        /// Get a unique variable name in the current scope
         /// </summary>
-        /// <param name="prefix">The variable prefix</param>
+        /// <param name="variableName">The variable name</param>
         /// <returns>A variable name unique in this method</returns>
-        public string GetVariableName(string prefix)
+        public string GetUniqueName(string variableName)
         {
-            if (_variables.Add(prefix))
+            if (_variables.Add(variableName))
             {
-                return prefix;
+                return variableName;
             }
 
-            return GetAlternateVariableName(prefix, 1);
+            return GetAlternateVariableName(variableName, 1);
         }
 
         private string GetAlternateVariableName(string prefix, int suffix)

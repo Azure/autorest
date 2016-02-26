@@ -328,7 +328,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             }
             else if (sequence != null)
             {
-                var elementVar = scope.GetVariableName("element");
+                var elementVar = scope.GetUniqueName("element");
                 var innerSerialization = sequence.ElementType.DeserializeType(scope, elementVar);
 
                 if (!string.IsNullOrEmpty(innerSerialization))
@@ -352,7 +352,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             }
             else if (dictionary != null)
             {
-                var valueVar = scope.GetVariableName("valueElement");
+                var valueVar = scope.GetUniqueName("valueElement");
                 var innerSerialization = dictionary.ValueType.DeserializeType(scope, valueVar);
                 if (!string.IsNullOrEmpty(innerSerialization))
                 {
@@ -418,7 +418,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             }
             else if (sequence != null)
             {
-                var elementVar = scope.GetVariableName("element");
+                var elementVar = scope.GetUniqueName("element");
                 var innerSerialization = sequence.ElementType.SerializeType(scope, elementVar);
 
                 if (!string.IsNullOrEmpty(innerSerialization))
@@ -442,7 +442,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             }
             else if (dictionary != null)
             {
-                var valueVar = scope.GetVariableName("valueElement");
+                var valueVar = scope.GetUniqueName("valueElement");
                 var innerSerialization = dictionary.ValueType.SerializeType(scope, valueVar);
                 if (!string.IsNullOrEmpty(innerSerialization))
                 {
