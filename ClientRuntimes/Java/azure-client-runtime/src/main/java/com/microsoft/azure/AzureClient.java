@@ -8,6 +8,7 @@
 package com.microsoft.azure;
 
 import com.microsoft.azure.serializer.AzureJacksonMapperAdapter;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -161,10 +162,11 @@ public class AzureClient extends AzureServiceClient {
      * @param response  the initial response from the PUT or PATCH operation.
      * @param <T>       the return type of the caller.
      * @param resourceType the type of the resource.
+     * @param serviceCall the ServiceCall object tracking Retrofit calls.
      * @param callback  the user callback to call when operation terminates.
      * @return          the task describing the asynchronous polling.
      */
-    public <T> AsyncPollingTask<T> getPutOrPatchResultAsync(Response<ResponseBody> response, Type resourceType, ServiceCallback<T> callback) {
+    public <T> AsyncPollingTask<T> getPutOrPatchResultAsync(Response<ResponseBody> response, Type resourceType, ServiceCall serviceCall, ServiceCallback<T> callback) {
         if (response == null) {
             callback.failure(new ServiceException("response is null."));
             return null;
@@ -199,7 +201,7 @@ public class AzureClient extends AzureServiceClient {
         String url = response.raw().request().url().toString();
 
         // Task runner will take it from here
-        PutPatchPollingTask<T> task = new PutPatchPollingTask<>(pollingState, url, callback);
+        PutPatchPollingTask<T> task = new PutPatchPollingTask<>(pollingState, url, serviceCall, callback);
         executor.schedule(task, pollingState.getDelayInMilliseconds(), TimeUnit.MILLISECONDS);
         return task;
     }
@@ -214,11 +216,12 @@ public class AzureClient extends AzureServiceClient {
      * @param <THeader> the type of the response header
      * @param resourceType the type of the resource.
      * @param headerType the type of the response header
+     * @param serviceCall the ServiceCall object tracking Retrofit calls.
      * @param callback  the user callback to call when operation terminates.
      * @return          the task describing the asynchronous polling.
      */
-    public <T, THeader> AsyncPollingTask<T> getPutOrPatchResultWithHeadersAsync(Response<ResponseBody> response, Type resourceType, final Class<THeader> headerType, final ServiceCallback<T> callback) {
-        return this.getPutOrPatchResultAsync(response, resourceType, new ServiceCallback<T>() {
+    public <T, THeader> AsyncPollingTask<T> getPutOrPatchResultWithHeadersAsync(Response<ResponseBody> response, Type resourceType, final Class<THeader> headerType, final ServiceCall serviceCall, final ServiceCallback<T> callback) {
+        return this.getPutOrPatchResultAsync(response, resourceType, serviceCall, new ServiceCallback<T>() {
             @Override
             public void failure(Throwable t) {
                 callback.failure(t);
@@ -331,10 +334,11 @@ public class AzureClient extends AzureServiceClient {
      * @param response  the initial response from the POST or DELETE operation.
      * @param <T>       the return type of the caller.
      * @param resourceType the type of the resource.
+     * @param serviceCall the ServiceCall object tracking Retrofit calls.
      * @param callback  the user callback to call when operation terminates.
      * @return          the task describing the asynchronous polling.
      */
-    public <T> AsyncPollingTask<T> getPostOrDeleteResultAsync(Response<ResponseBody> response, Type resourceType, ServiceCallback<T> callback) {
+    public <T> AsyncPollingTask<T> getPostOrDeleteResultAsync(Response<ResponseBody> response, Type resourceType, ServiceCall serviceCall, ServiceCallback<T> callback) {
         if (response == null) {
             callback.failure(new ServiceException("response is null."));
             return null;
@@ -368,7 +372,7 @@ public class AzureClient extends AzureServiceClient {
         }
 
         // Task runner will take it from here
-        PostDeletePollingTask<T> task = new PostDeletePollingTask<>(pollingState, callback);
+        PostDeletePollingTask<T> task = new PostDeletePollingTask<>(pollingState, serviceCall, callback);
         executor.schedule(task, pollingState.getDelayInMilliseconds(), TimeUnit.MILLISECONDS);
         return task;
     }
@@ -383,11 +387,12 @@ public class AzureClient extends AzureServiceClient {
      * @param <THeader> the type of the response header
      * @param resourceType the type of the resource.
      * @param headerType the type of the response header
+     * @param serviceCall the ServiceCall object tracking Retrofit calls.
      * @param callback  the user callback to call when operation terminates.
      * @return          the task describing the asynchronous polling.
      */
-    public <T, THeader> AsyncPollingTask<T> getPostOrDeleteResultWithHeadersAsync(Response<ResponseBody> response, Type resourceType, final Class<THeader> headerType, final ServiceCallback<T> callback) {
-        return this.getPostOrDeleteResultAsync(response, resourceType, new ServiceCallback<T>() {
+    public <T, THeader> AsyncPollingTask<T> getPostOrDeleteResultWithHeadersAsync(Response<ResponseBody> response, Type resourceType, final Class<THeader> headerType, final ServiceCall serviceCall, final ServiceCallback<T> callback) {
+        return this.getPostOrDeleteResultAsync(response, resourceType, serviceCall, new ServiceCallback<T>() {
             @Override
             public void failure(Throwable t) {
                 callback.failure(t);
@@ -765,23 +770,13 @@ public class AzureClient extends AzureServiceClient {
      */
     abstract class AsyncPollingTask<T> implements Runnable {
         /** The {@link Call} object from Retrofit. */
-        protected Call<ResponseBody> call;
+        protected ServiceCall serviceCall;
         /** The polling state for the current operation. */
         protected PollingState<T> pollingState;
         /** The callback used for asynchronous polling. */
         protected ServiceCallback<T> pollingCallback;
         /** The client callback to call when polling finishes. */
         protected ServiceCallback<T> clientCallback;
-
-        /**
-         * Gets the {@link Call} object from Retrofit so that the client can
-         * cancel or perform other operations on the polling.
-         *
-         * @return the {@link Call} object.
-         */
-        public Call<ResponseBody> getRestCall() {
-            return this.call;
-        }
     }
 
     /**
@@ -798,22 +793,11 @@ public class AzureClient extends AzureServiceClient {
          *
          * @param pollingState the current polling state.
          * @param url the URL to poll from.
+         * @param serviceCall the ServiceCall object tracking Retrofit calls.
          * @param clientCallback the client callback to call when a terminal status is hit.
          */
-        public PutPatchPollingTask(final PollingState<T> pollingState, final String url, final ServiceCallback<T> clientCallback) {
-            this.create(pollingState, url, clientCallback);
-        }
-
-        /**
-         * Creates an instance of Polling task for PUT or PATCH operations.
-         *
-         * @param pollingState the current polling state.
-         * @param url the URL to poll from.
-         * @param clientCallback the client callback to call when a terminal status is hit.
-         * @return a PutPatchPollingTask instance
-         */
-        private PutPatchPollingTask<T> create(final PollingState<T> pollingState, final String url, final ServiceCallback<T> clientCallback) {
-            this.call = null;
+        public PutPatchPollingTask(final PollingState<T> pollingState, final String url, final ServiceCall serviceCall, final ServiceCallback<T> clientCallback) {
+            this.serviceCall = serviceCall;
             this.pollingState = pollingState;
             this.url = url;
             this.clientCallback = clientCallback;
@@ -825,11 +809,10 @@ public class AzureClient extends AzureServiceClient {
 
                 @Override
                 public void success(ServiceResponse<T> result) {
-                    PutPatchPollingTask<T> task = new PutPatchPollingTask<>(pollingState, url, clientCallback);
+                    PutPatchPollingTask<T> task = new PutPatchPollingTask<>(pollingState, url, serviceCall, clientCallback);
                     executor.schedule(task, pollingState.getDelayInMilliseconds(), TimeUnit.MILLISECONDS);
                 }
             };
-            return this;
         }
 
         @Override
@@ -838,16 +821,16 @@ public class AzureClient extends AzureServiceClient {
             if (!AzureAsyncOperation.getTerminalStatuses().contains(pollingState.getStatus())) {
                 if (pollingState.getAzureAsyncOperationHeaderLink() != null
                         && !pollingState.getAzureAsyncOperationHeaderLink().isEmpty()) {
-                    this.call = updateStateFromAzureAsyncOperationHeaderAsync(pollingState, pollingCallback);
+                    this.serviceCall.newCall(updateStateFromAzureAsyncOperationHeaderAsync(pollingState, pollingCallback));
                 } else if (pollingState.getLocationHeaderLink() != null
                         && !pollingState.getLocationHeaderLink().isEmpty()) {
-                    this.call = updateStateFromLocationHeaderOnPutAsync(pollingState, pollingCallback);
+                    this.serviceCall.newCall(updateStateFromLocationHeaderOnPutAsync(pollingState, pollingCallback));
                 } else {
-                    this.call = updateStateFromGetResourceOperationAsync(pollingState, url, pollingCallback);
+                    this.serviceCall.newCall(updateStateFromGetResourceOperationAsync(pollingState, url, pollingCallback));
                 }
             } else {
                 if (AzureAsyncOperation.SUCCESS_STATUS.equals(pollingState.getStatus()) && pollingState.getResource() == null) {
-                    call = updateStateFromGetResourceOperationAsync(pollingState, url, clientCallback);
+                    this.serviceCall.newCall(updateStateFromGetResourceOperationAsync(pollingState, url, clientCallback));
                 } else if (AzureAsyncOperation.getFailedStatuses().contains(pollingState.getStatus())) {
                     clientCallback.failure(new ServiceException("Async operation failed"));
                 } else {
@@ -867,21 +850,11 @@ public class AzureClient extends AzureServiceClient {
          * Creates an instance of Polling task for POST or DELETE operations.
          *
          * @param pollingState the current polling state.
+         * @param serviceCall the ServiceCall object tracking Retrofit calls.
          * @param clientCallback the client callback to call when a terminal status is hit.
          */
-        public PostDeletePollingTask(final PollingState<T> pollingState, final ServiceCallback<T> clientCallback) {
-            this.create(pollingState, clientCallback);
-        }
-
-        /**
-         * Creates an instance of Polling task for POST or DELETE operations.
-         *
-         * @param pollingState the current polling state.
-         * @param clientCallback the client callback to call when a terminal status is hit.
-         * @return a PostDeletePollingTask instance.
-         */
-        private PostDeletePollingTask<T> create(final PollingState<T> pollingState, final ServiceCallback<T> clientCallback) {
-            this.call = null;
+        public PostDeletePollingTask(final PollingState<T> pollingState, final ServiceCall serviceCall, final ServiceCallback<T> clientCallback) {
+            this.serviceCall = serviceCall;
             this.pollingState = pollingState;
             this.clientCallback = clientCallback;
             this.pollingCallback = new ServiceCallback<T>() {
@@ -892,11 +865,10 @@ public class AzureClient extends AzureServiceClient {
 
                 @Override
                 public void success(ServiceResponse<T> result) {
-                    PostDeletePollingTask<T> task = new PostDeletePollingTask<>(pollingState, clientCallback);
+                    PostDeletePollingTask<T> task = new PostDeletePollingTask<>(pollingState, serviceCall, clientCallback);
                     executor.schedule(task, pollingState.getDelayInMilliseconds(), TimeUnit.MILLISECONDS);
                 }
             };
-            return this;
         }
 
         @Override

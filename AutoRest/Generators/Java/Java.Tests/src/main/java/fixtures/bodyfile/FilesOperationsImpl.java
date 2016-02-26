@@ -11,6 +11,7 @@
 package fixtures.bodyfile;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
@@ -20,6 +21,8 @@ import java.io.InputStream;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -45,6 +48,21 @@ public final class FilesOperationsImpl implements FilesOperations {
     }
 
     /**
+     * The interface defining all the services for FilesOperations to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface FilesService {
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("files/stream/nonempty")
+        Call<ResponseBody> getFile();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("files/stream/empty")
+        Call<ResponseBody> getEmptyFile();
+
+    }
+
+    /**
      * Get file.
      *
      * @throws ErrorException exception thrown from REST call
@@ -62,8 +80,9 @@ public final class FilesOperationsImpl implements FilesOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getFileAsync(final ServiceCallback<InputStream> serviceCallback) {
+    public ServiceCall getFileAsync(final ServiceCallback<InputStream> serviceCallback) {
         Call<ResponseBody> call = service.getFile();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<InputStream>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -74,7 +93,7 @@ public final class FilesOperationsImpl implements FilesOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<InputStream> getFileDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -102,8 +121,9 @@ public final class FilesOperationsImpl implements FilesOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback) {
+    public ServiceCall getEmptyFileAsync(final ServiceCallback<InputStream> serviceCallback) {
         Call<ResponseBody> call = service.getEmptyFile();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<InputStream>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -114,7 +134,7 @@ public final class FilesOperationsImpl implements FilesOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<InputStream> getEmptyFileDelegate(Response<ResponseBody> response) throws ErrorException, IOException {

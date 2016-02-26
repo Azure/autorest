@@ -11,6 +11,7 @@
 package fixtures.http;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -25,6 +26,8 @@ import fixtures.http.models.MyException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -50,6 +53,149 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
     }
 
     /**
+     * The interface defining all the services for MultipleResponsesOperations to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface MultipleResponsesService {
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/payloads/200/A/204/none/default/Error/response/200/valid")
+        Call<ResponseBody> get200Model204NoModelDefaultError200Valid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/payloads/200/A/204/none/default/Error/response/204/none")
+        Call<ResponseBody> get200Model204NoModelDefaultError204Valid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/payloads/200/A/204/none/default/Error/response/201/valid")
+        Call<ResponseBody> get200Model204NoModelDefaultError201Invalid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/payloads/200/A/204/none/default/Error/response/202/none")
+        Call<ResponseBody> get200Model204NoModelDefaultError202None();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/payloads/200/A/204/none/default/Error/response/400/valid")
+        Call<ResponseBody> get200Model204NoModelDefaultError400Valid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/payloads/200/A/201/B/default/Error/response/200/valid")
+        Call<ResponseBody> get200Model201ModelDefaultError200Valid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/payloads/200/A/201/B/default/Error/response/201/valid")
+        Call<ResponseBody> get200Model201ModelDefaultError201Valid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/payloads/200/A/201/B/default/Error/response/400/valid")
+        Call<ResponseBody> get200Model201ModelDefaultError400Valid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/payloads/200/A/201/C/404/D/default/Error/response/200/valid")
+        Call<ResponseBody> get200ModelA201ModelC404ModelDDefaultError200Valid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/payloads/200/A/201/C/404/D/default/Error/response/201/valid")
+        Call<ResponseBody> get200ModelA201ModelC404ModelDDefaultError201Valid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/payloads/200/A/201/C/404/D/default/Error/response/404/valid")
+        Call<ResponseBody> get200ModelA201ModelC404ModelDDefaultError404Valid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/payloads/200/A/201/C/404/D/default/Error/response/400/valid")
+        Call<ResponseBody> get200ModelA201ModelC404ModelDDefaultError400Valid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/payloads/202/none/204/none/default/Error/response/202/none")
+        Call<ResponseBody> get202None204NoneDefaultError202None();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/payloads/202/none/204/none/default/Error/response/204/none")
+        Call<ResponseBody> get202None204NoneDefaultError204None();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/payloads/202/none/204/none/default/Error/response/400/valid")
+        Call<ResponseBody> get202None204NoneDefaultError400Valid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/payloads/202/none/204/none/default/none/response/202/invalid")
+        Call<ResponseBody> get202None204NoneDefaultNone202Invalid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/payloads/202/none/204/none/default/none/response/204/none")
+        Call<ResponseBody> get202None204NoneDefaultNone204None();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/payloads/202/none/204/none/default/none/response/400/none")
+        Call<ResponseBody> get202None204NoneDefaultNone400None();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/payloads/202/none/204/none/default/none/response/400/invalid")
+        Call<ResponseBody> get202None204NoneDefaultNone400Invalid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/payloads/default/A/response/200/valid")
+        Call<ResponseBody> getDefaultModelA200Valid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/payloads/default/A/response/200/none")
+        Call<ResponseBody> getDefaultModelA200None();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/payloads/default/A/response/400/valid")
+        Call<ResponseBody> getDefaultModelA400Valid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/payloads/default/A/response/400/none")
+        Call<ResponseBody> getDefaultModelA400None();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/payloads/default/none/response/200/invalid")
+        Call<ResponseBody> getDefaultNone200Invalid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/payloads/default/none/response/200/none")
+        Call<ResponseBody> getDefaultNone200None();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/payloads/default/none/response/400/invalid")
+        Call<ResponseBody> getDefaultNone400Invalid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/payloads/default/none/response/400/none")
+        Call<ResponseBody> getDefaultNone400None();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/payloads/200/A/response/200/none")
+        Call<ResponseBody> get200ModelA200None();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/payloads/200/A/response/200/valid")
+        Call<ResponseBody> get200ModelA200Valid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/payloads/200/A/response/200/invalid")
+        Call<ResponseBody> get200ModelA200Invalid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/payloads/200/A/response/400/none")
+        Call<ResponseBody> get200ModelA400None();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/payloads/200/A/response/400/valid")
+        Call<ResponseBody> get200ModelA400Valid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/payloads/200/A/response/400/invalid")
+        Call<ResponseBody> get200ModelA400Invalid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/payloads/200/A/response/202/valid")
+        Call<ResponseBody> get200ModelA202Valid();
+
+    }
+
+    /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
      * @throws ErrorException exception thrown from REST call
@@ -67,8 +213,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get200Model204NoModelDefaultError200ValidAsync(final ServiceCallback<A> serviceCallback) {
+    public ServiceCall get200Model204NoModelDefaultError200ValidAsync(final ServiceCallback<A> serviceCallback) {
         Call<ResponseBody> call = service.get200Model204NoModelDefaultError200Valid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -79,7 +226,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<A> get200Model204NoModelDefaultError200ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -108,8 +255,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get200Model204NoModelDefaultError204ValidAsync(final ServiceCallback<A> serviceCallback) {
+    public ServiceCall get200Model204NoModelDefaultError204ValidAsync(final ServiceCallback<A> serviceCallback) {
         Call<ResponseBody> call = service.get200Model204NoModelDefaultError204Valid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -120,7 +268,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<A> get200Model204NoModelDefaultError204ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -149,8 +297,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get200Model204NoModelDefaultError201InvalidAsync(final ServiceCallback<A> serviceCallback) {
+    public ServiceCall get200Model204NoModelDefaultError201InvalidAsync(final ServiceCallback<A> serviceCallback) {
         Call<ResponseBody> call = service.get200Model204NoModelDefaultError201Invalid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -161,7 +310,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<A> get200Model204NoModelDefaultError201InvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -190,8 +339,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get200Model204NoModelDefaultError202NoneAsync(final ServiceCallback<A> serviceCallback) {
+    public ServiceCall get200Model204NoModelDefaultError202NoneAsync(final ServiceCallback<A> serviceCallback) {
         Call<ResponseBody> call = service.get200Model204NoModelDefaultError202None();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -202,7 +352,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<A> get200Model204NoModelDefaultError202NoneDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -231,8 +381,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get200Model204NoModelDefaultError400ValidAsync(final ServiceCallback<A> serviceCallback) {
+    public ServiceCall get200Model204NoModelDefaultError400ValidAsync(final ServiceCallback<A> serviceCallback) {
         Call<ResponseBody> call = service.get200Model204NoModelDefaultError400Valid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -243,7 +394,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<A> get200Model204NoModelDefaultError400ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -272,8 +423,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get200Model201ModelDefaultError200ValidAsync(final ServiceCallback<A> serviceCallback) {
+    public ServiceCall get200Model201ModelDefaultError200ValidAsync(final ServiceCallback<A> serviceCallback) {
         Call<ResponseBody> call = service.get200Model201ModelDefaultError200Valid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -284,7 +436,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<A> get200Model201ModelDefaultError200ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -313,8 +465,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get200Model201ModelDefaultError201ValidAsync(final ServiceCallback<A> serviceCallback) {
+    public ServiceCall get200Model201ModelDefaultError201ValidAsync(final ServiceCallback<A> serviceCallback) {
         Call<ResponseBody> call = service.get200Model201ModelDefaultError201Valid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -325,7 +478,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<A> get200Model201ModelDefaultError201ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -354,8 +507,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get200Model201ModelDefaultError400ValidAsync(final ServiceCallback<A> serviceCallback) {
+    public ServiceCall get200Model201ModelDefaultError400ValidAsync(final ServiceCallback<A> serviceCallback) {
         Call<ResponseBody> call = service.get200Model201ModelDefaultError400Valid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -366,7 +520,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<A> get200Model201ModelDefaultError400ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -395,8 +549,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get200ModelA201ModelC404ModelDDefaultError200ValidAsync(final ServiceCallback<Object> serviceCallback) {
+    public ServiceCall get200ModelA201ModelC404ModelDDefaultError200ValidAsync(final ServiceCallback<Object> serviceCallback) {
         Call<ResponseBody> call = service.get200ModelA201ModelC404ModelDDefaultError200Valid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Object>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -407,7 +562,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError200ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -437,8 +592,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get200ModelA201ModelC404ModelDDefaultError201ValidAsync(final ServiceCallback<Object> serviceCallback) {
+    public ServiceCall get200ModelA201ModelC404ModelDDefaultError201ValidAsync(final ServiceCallback<Object> serviceCallback) {
         Call<ResponseBody> call = service.get200ModelA201ModelC404ModelDDefaultError201Valid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Object>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -449,7 +605,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError201ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -479,8 +635,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get200ModelA201ModelC404ModelDDefaultError404ValidAsync(final ServiceCallback<Object> serviceCallback) {
+    public ServiceCall get200ModelA201ModelC404ModelDDefaultError404ValidAsync(final ServiceCallback<Object> serviceCallback) {
         Call<ResponseBody> call = service.get200ModelA201ModelC404ModelDDefaultError404Valid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Object>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -491,7 +648,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError404ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -521,8 +678,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get200ModelA201ModelC404ModelDDefaultError400ValidAsync(final ServiceCallback<Object> serviceCallback) {
+    public ServiceCall get200ModelA201ModelC404ModelDDefaultError400ValidAsync(final ServiceCallback<Object> serviceCallback) {
         Call<ResponseBody> call = service.get200ModelA201ModelC404ModelDDefaultError400Valid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Object>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -533,7 +691,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Object> get200ModelA201ModelC404ModelDDefaultError400ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -563,8 +721,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get202None204NoneDefaultError202NoneAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall get202None204NoneDefaultError202NoneAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.get202None204NoneDefaultError202None();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -575,7 +734,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> get202None204NoneDefaultError202NoneDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -604,8 +763,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get202None204NoneDefaultError204NoneAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall get202None204NoneDefaultError204NoneAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.get202None204NoneDefaultError204None();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -616,7 +776,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> get202None204NoneDefaultError204NoneDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -645,8 +805,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get202None204NoneDefaultError400ValidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall get202None204NoneDefaultError400ValidAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.get202None204NoneDefaultError400Valid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -657,7 +818,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> get202None204NoneDefaultError400ValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -686,8 +847,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get202None204NoneDefaultNone202InvalidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall get202None204NoneDefaultNone202InvalidAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.get202None204NoneDefaultNone202Invalid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -698,7 +860,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> get202None204NoneDefaultNone202InvalidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
@@ -726,8 +888,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get202None204NoneDefaultNone204NoneAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall get202None204NoneDefaultNone204NoneAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.get202None204NoneDefaultNone204None();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -738,7 +901,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> get202None204NoneDefaultNone204NoneDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
@@ -766,8 +929,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get202None204NoneDefaultNone400NoneAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall get202None204NoneDefaultNone400NoneAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.get202None204NoneDefaultNone400None();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -778,7 +942,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> get202None204NoneDefaultNone400NoneDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
@@ -806,8 +970,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get202None204NoneDefaultNone400InvalidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall get202None204NoneDefaultNone400InvalidAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.get202None204NoneDefaultNone400Invalid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -818,7 +983,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> get202None204NoneDefaultNone400InvalidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
@@ -846,8 +1011,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDefaultModelA200ValidAsync(final ServiceCallback<A> serviceCallback) {
+    public ServiceCall getDefaultModelA200ValidAsync(final ServiceCallback<A> serviceCallback) {
         Call<ResponseBody> call = service.getDefaultModelA200Valid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -858,7 +1024,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<A> getDefaultModelA200ValidDelegate(Response<ResponseBody> response) throws MyException, IOException {
@@ -885,8 +1051,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDefaultModelA200NoneAsync(final ServiceCallback<A> serviceCallback) {
+    public ServiceCall getDefaultModelA200NoneAsync(final ServiceCallback<A> serviceCallback) {
         Call<ResponseBody> call = service.getDefaultModelA200None();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -897,7 +1064,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<A> getDefaultModelA200NoneDelegate(Response<ResponseBody> response) throws MyException, IOException {
@@ -924,8 +1091,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDefaultModelA400ValidAsync(final ServiceCallback<A> serviceCallback) {
+    public ServiceCall getDefaultModelA400ValidAsync(final ServiceCallback<A> serviceCallback) {
         Call<ResponseBody> call = service.getDefaultModelA400Valid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -936,7 +1104,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<A> getDefaultModelA400ValidDelegate(Response<ResponseBody> response) throws MyException, IOException {
@@ -963,8 +1131,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDefaultModelA400NoneAsync(final ServiceCallback<A> serviceCallback) {
+    public ServiceCall getDefaultModelA400NoneAsync(final ServiceCallback<A> serviceCallback) {
         Call<ResponseBody> call = service.getDefaultModelA400None();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -975,7 +1144,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<A> getDefaultModelA400NoneDelegate(Response<ResponseBody> response) throws MyException, IOException {
@@ -1002,8 +1171,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDefaultNone200InvalidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall getDefaultNone200InvalidAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.getDefaultNone200Invalid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1014,7 +1184,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> getDefaultNone200InvalidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
@@ -1040,8 +1210,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDefaultNone200NoneAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall getDefaultNone200NoneAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.getDefaultNone200None();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1052,7 +1223,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> getDefaultNone200NoneDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
@@ -1078,8 +1249,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDefaultNone400InvalidAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall getDefaultNone400InvalidAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.getDefaultNone400Invalid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1090,7 +1262,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> getDefaultNone400InvalidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
@@ -1116,8 +1288,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDefaultNone400NoneAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall getDefaultNone400NoneAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.getDefaultNone400None();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1128,7 +1301,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> getDefaultNone400NoneDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
@@ -1154,8 +1327,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get200ModelA200NoneAsync(final ServiceCallback<A> serviceCallback) {
+    public ServiceCall get200ModelA200NoneAsync(final ServiceCallback<A> serviceCallback) {
         Call<ResponseBody> call = service.get200ModelA200None();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1166,7 +1340,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<A> get200ModelA200NoneDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
@@ -1193,8 +1367,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get200ModelA200ValidAsync(final ServiceCallback<A> serviceCallback) {
+    public ServiceCall get200ModelA200ValidAsync(final ServiceCallback<A> serviceCallback) {
         Call<ResponseBody> call = service.get200ModelA200Valid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1205,7 +1380,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<A> get200ModelA200ValidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
@@ -1232,8 +1407,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get200ModelA200InvalidAsync(final ServiceCallback<A> serviceCallback) {
+    public ServiceCall get200ModelA200InvalidAsync(final ServiceCallback<A> serviceCallback) {
         Call<ResponseBody> call = service.get200ModelA200Invalid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1244,7 +1420,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<A> get200ModelA200InvalidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
@@ -1271,8 +1447,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get200ModelA400NoneAsync(final ServiceCallback<A> serviceCallback) {
+    public ServiceCall get200ModelA400NoneAsync(final ServiceCallback<A> serviceCallback) {
         Call<ResponseBody> call = service.get200ModelA400None();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1283,7 +1460,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<A> get200ModelA400NoneDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
@@ -1310,8 +1487,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get200ModelA400ValidAsync(final ServiceCallback<A> serviceCallback) {
+    public ServiceCall get200ModelA400ValidAsync(final ServiceCallback<A> serviceCallback) {
         Call<ResponseBody> call = service.get200ModelA400Valid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1322,7 +1500,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<A> get200ModelA400ValidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
@@ -1349,8 +1527,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get200ModelA400InvalidAsync(final ServiceCallback<A> serviceCallback) {
+    public ServiceCall get200ModelA400InvalidAsync(final ServiceCallback<A> serviceCallback) {
         Call<ResponseBody> call = service.get200ModelA400Invalid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1361,7 +1540,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<A> get200ModelA400InvalidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
@@ -1388,8 +1567,9 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get200ModelA202ValidAsync(final ServiceCallback<A> serviceCallback) {
+    public ServiceCall get200ModelA202ValidAsync(final ServiceCallback<A> serviceCallback) {
         Call<ResponseBody> call = service.get200ModelA202Valid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<A>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1400,7 +1580,7 @@ public final class MultipleResponsesOperationsImpl implements MultipleResponsesO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<A> get200ModelA202ValidDelegate(Response<ResponseBody> response) throws ServiceException, IOException {

@@ -11,6 +11,7 @@
 package fixtures.url;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
@@ -23,6 +24,9 @@ import org.apache.commons.codec.binary.Base64;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.Path;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -48,6 +52,105 @@ public final class PathsOperationsImpl implements PathsOperations {
     }
 
     /**
+     * The interface defining all the services for PathsOperations to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface PathsService {
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("paths/bool/true/{boolPath}")
+        Call<ResponseBody> getBooleanTrue(@Path("boolPath") boolean boolPath);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("paths/bool/false/{boolPath}")
+        Call<ResponseBody> getBooleanFalse(@Path("boolPath") boolean boolPath);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("paths/int/1000000/{intPath}")
+        Call<ResponseBody> getIntOneMillion(@Path("intPath") int intPath);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("paths/int/-1000000/{intPath}")
+        Call<ResponseBody> getIntNegativeOneMillion(@Path("intPath") int intPath);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("paths/long/10000000000/{longPath}")
+        Call<ResponseBody> getTenBillion(@Path("longPath") long longPath);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("paths/long/-10000000000/{longPath}")
+        Call<ResponseBody> getNegativeTenBillion(@Path("longPath") long longPath);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("paths/float/1.034E+20/{floatPath}")
+        Call<ResponseBody> floatScientificPositive(@Path("floatPath") double floatPath);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("paths/float/-1.034E-20/{floatPath}")
+        Call<ResponseBody> floatScientificNegative(@Path("floatPath") double floatPath);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("paths/double/9999999.999/{doublePath}")
+        Call<ResponseBody> doubleDecimalPositive(@Path("doublePath") double doublePath);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("paths/double/-9999999.999/{doublePath}")
+        Call<ResponseBody> doubleDecimalNegative(@Path("doublePath") double doublePath);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("paths/string/unicode/{stringPath}")
+        Call<ResponseBody> stringUnicode(@Path("stringPath") String stringPath);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("paths/string/begin%21%2A%27%28%29%3B%3A%40%20%26%3D%2B%24%2C%2F%3F%23%5B%5Dend/{stringPath}")
+        Call<ResponseBody> stringUrlEncoded(@Path("stringPath") String stringPath);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("paths/string/empty/{stringPath}")
+        Call<ResponseBody> stringEmpty(@Path("stringPath") String stringPath);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("paths/string/null/{stringPath}")
+        Call<ResponseBody> stringNull(@Path("stringPath") String stringPath);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("paths/enum/green%20color/{enumPath}")
+        Call<ResponseBody> enumValid(@Path("enumPath") String enumPath);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("paths/string/null/{enumPath}")
+        Call<ResponseBody> enumNull(@Path("enumPath") String enumPath);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("paths/byte/multibyte/{bytePath}")
+        Call<ResponseBody> byteMultiByte(@Path("bytePath") String bytePath);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("paths/byte/empty/{bytePath}")
+        Call<ResponseBody> byteEmpty(@Path("bytePath") String bytePath);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("paths/byte/null/{bytePath}")
+        Call<ResponseBody> byteNull(@Path("bytePath") String bytePath);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("paths/date/2012-01-01/{datePath}")
+        Call<ResponseBody> dateValid(@Path("datePath") String datePath);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("paths/date/null/{datePath}")
+        Call<ResponseBody> dateNull(@Path("datePath") String datePath);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("paths/datetime/2012-01-01T01%3A01%3A01Z/{dateTimePath}")
+        Call<ResponseBody> dateTimeValid(@Path("dateTimePath") String dateTimePath);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("paths/datetime/null/{dateTimePath}")
+        Call<ResponseBody> dateTimeNull(@Path("dateTimePath") String dateTimePath);
+
+    }
+
+    /**
      * Get true Boolean value on path.
      *
      * @param boolPath true boolean value
@@ -67,8 +170,9 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getBooleanTrueAsync(boolean boolPath, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall getBooleanTrueAsync(boolean boolPath, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.getBooleanTrue(boolPath);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -79,7 +183,7 @@ public final class PathsOperationsImpl implements PathsOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> getBooleanTrueDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -109,8 +213,9 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getBooleanFalseAsync(boolean boolPath, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall getBooleanFalseAsync(boolean boolPath, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.getBooleanFalse(boolPath);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -121,7 +226,7 @@ public final class PathsOperationsImpl implements PathsOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> getBooleanFalseDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -151,8 +256,9 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getIntOneMillionAsync(int intPath, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall getIntOneMillionAsync(int intPath, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.getIntOneMillion(intPath);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -163,7 +269,7 @@ public final class PathsOperationsImpl implements PathsOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> getIntOneMillionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -193,8 +299,9 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getIntNegativeOneMillionAsync(int intPath, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall getIntNegativeOneMillionAsync(int intPath, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.getIntNegativeOneMillion(intPath);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -205,7 +312,7 @@ public final class PathsOperationsImpl implements PathsOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> getIntNegativeOneMillionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -235,8 +342,9 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getTenBillionAsync(long longPath, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall getTenBillionAsync(long longPath, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.getTenBillion(longPath);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -247,7 +355,7 @@ public final class PathsOperationsImpl implements PathsOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> getTenBillionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -277,8 +385,9 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getNegativeTenBillionAsync(long longPath, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall getNegativeTenBillionAsync(long longPath, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.getNegativeTenBillion(longPath);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -289,7 +398,7 @@ public final class PathsOperationsImpl implements PathsOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> getNegativeTenBillionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -319,8 +428,9 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> floatScientificPositiveAsync(double floatPath, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall floatScientificPositiveAsync(double floatPath, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.floatScientificPositive(floatPath);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -331,7 +441,7 @@ public final class PathsOperationsImpl implements PathsOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> floatScientificPositiveDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -361,8 +471,9 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> floatScientificNegativeAsync(double floatPath, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall floatScientificNegativeAsync(double floatPath, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.floatScientificNegative(floatPath);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -373,7 +484,7 @@ public final class PathsOperationsImpl implements PathsOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> floatScientificNegativeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -403,8 +514,9 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> doubleDecimalPositiveAsync(double doublePath, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall doubleDecimalPositiveAsync(double doublePath, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.doubleDecimalPositive(doublePath);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -415,7 +527,7 @@ public final class PathsOperationsImpl implements PathsOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> doubleDecimalPositiveDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -445,8 +557,9 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> doubleDecimalNegativeAsync(double doublePath, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall doubleDecimalNegativeAsync(double doublePath, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.doubleDecimalNegative(doublePath);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -457,7 +570,7 @@ public final class PathsOperationsImpl implements PathsOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> doubleDecimalNegativeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -491,12 +604,13 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> stringUnicodeAsync(String stringPath, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall stringUnicodeAsync(String stringPath, final ServiceCallback<Void> serviceCallback) {
         if (stringPath == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter stringPath is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.stringUnicode(stringPath);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -507,7 +621,7 @@ public final class PathsOperationsImpl implements PathsOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> stringUnicodeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -541,12 +655,13 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> stringUrlEncodedAsync(String stringPath, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall stringUrlEncodedAsync(String stringPath, final ServiceCallback<Void> serviceCallback) {
         if (stringPath == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter stringPath is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.stringUrlEncoded(stringPath);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -557,7 +672,7 @@ public final class PathsOperationsImpl implements PathsOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> stringUrlEncodedDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -591,12 +706,13 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> stringEmptyAsync(String stringPath, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall stringEmptyAsync(String stringPath, final ServiceCallback<Void> serviceCallback) {
         if (stringPath == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter stringPath is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.stringEmpty(stringPath);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -607,7 +723,7 @@ public final class PathsOperationsImpl implements PathsOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> stringEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -641,12 +757,13 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> stringNullAsync(String stringPath, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall stringNullAsync(String stringPath, final ServiceCallback<Void> serviceCallback) {
         if (stringPath == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter stringPath is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.stringNull(stringPath);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -657,7 +774,7 @@ public final class PathsOperationsImpl implements PathsOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> stringNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -691,12 +808,13 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> enumValidAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall enumValidAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback) {
         if (enumPath == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter enumPath is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.enumValid(client.getMapperAdapter().serializeRaw(enumPath));
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -707,7 +825,7 @@ public final class PathsOperationsImpl implements PathsOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> enumValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -741,12 +859,13 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> enumNullAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall enumNullAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback) {
         if (enumPath == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter enumPath is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.enumNull(client.getMapperAdapter().serializeRaw(enumPath));
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -757,7 +876,7 @@ public final class PathsOperationsImpl implements PathsOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> enumNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -791,12 +910,13 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> byteMultiByteAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall byteMultiByteAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) {
         if (bytePath == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter bytePath is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.byteMultiByte(Base64.encodeBase64String(bytePath));
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -807,7 +927,7 @@ public final class PathsOperationsImpl implements PathsOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> byteMultiByteDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -841,12 +961,13 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> byteEmptyAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall byteEmptyAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) {
         if (bytePath == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter bytePath is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.byteEmpty(Base64.encodeBase64String(bytePath));
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -857,7 +978,7 @@ public final class PathsOperationsImpl implements PathsOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> byteEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -891,12 +1012,13 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> byteNullAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall byteNullAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) {
         if (bytePath == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter bytePath is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.byteNull(Base64.encodeBase64String(bytePath));
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -907,7 +1029,7 @@ public final class PathsOperationsImpl implements PathsOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> byteNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -941,12 +1063,13 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> dateValidAsync(LocalDate datePath, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall dateValidAsync(LocalDate datePath, final ServiceCallback<Void> serviceCallback) {
         if (datePath == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter datePath is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.dateValid(client.getMapperAdapter().serializeRaw(datePath));
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -957,7 +1080,7 @@ public final class PathsOperationsImpl implements PathsOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> dateValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -991,12 +1114,13 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> dateNullAsync(LocalDate datePath, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall dateNullAsync(LocalDate datePath, final ServiceCallback<Void> serviceCallback) {
         if (datePath == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter datePath is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.dateNull(client.getMapperAdapter().serializeRaw(datePath));
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1007,7 +1131,7 @@ public final class PathsOperationsImpl implements PathsOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> dateNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -1041,12 +1165,13 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> dateTimeValidAsync(DateTime dateTimePath, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall dateTimeValidAsync(DateTime dateTimePath, final ServiceCallback<Void> serviceCallback) {
         if (dateTimePath == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter dateTimePath is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.dateTimeValid(client.getMapperAdapter().serializeRaw(dateTimePath));
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1057,7 +1182,7 @@ public final class PathsOperationsImpl implements PathsOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> dateTimeValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -1091,12 +1216,13 @@ public final class PathsOperationsImpl implements PathsOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> dateTimeNullAsync(DateTime dateTimePath, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall dateTimeNullAsync(DateTime dateTimePath, final ServiceCallback<Void> serviceCallback) {
         if (dateTimePath == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter dateTimePath is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.dateTimeNull(client.getMapperAdapter().serializeRaw(dateTimePath));
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1107,7 +1233,7 @@ public final class PathsOperationsImpl implements PathsOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> dateTimeNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
