@@ -186,7 +186,7 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
     public ServiceCall beginPut201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -271,7 +271,7 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
     public ServiceCall beginPutAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPutAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -347,7 +347,7 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
      */
     public ServiceCall beginDeleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteProvisioning202Accepted200Succeeded(this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -424,7 +424,7 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
      */
     public ServiceCall beginDelete202Retry200Async(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDelete202Retry200(this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -500,7 +500,7 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
      */
     public ServiceCall beginDeleteAsyncRelativeRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetrySucceeded(this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -584,7 +584,7 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
     public ServiceCall beginPost202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -668,7 +668,7 @@ public final class LRORetrysOperationsImpl implements LRORetrysOperations {
     public ServiceCall beginPostAsyncRelativeRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPostAsyncRelativeRetrySucceeded(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

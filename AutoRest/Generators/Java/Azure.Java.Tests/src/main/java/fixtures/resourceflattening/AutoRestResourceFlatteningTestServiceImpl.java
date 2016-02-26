@@ -286,7 +286,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     public ServiceCall putArrayAsync(List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(resourceArray, serviceCallback);
         Call<ResponseBody> call = service.putArray(resourceArray, this.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -327,7 +327,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      */
     public ServiceCall getArrayAsync(final ServiceCallback<List<FlattenedProduct>> serviceCallback) {
         Call<ResponseBody> call = service.getArray(this.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<FlattenedProduct>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -372,7 +372,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     public ServiceCall putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(resourceDictionary, serviceCallback);
         Call<ResponseBody> call = service.putDictionary(resourceDictionary, this.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -413,7 +413,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      */
     public ServiceCall getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProduct>> serviceCallback) {
         Call<ResponseBody> call = service.getDictionary(this.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, FlattenedProduct>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -458,7 +458,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     public ServiceCall putResourceCollectionAsync(ResourceCollection resourceComplexObject, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(resourceComplexObject, serviceCallback);
         Call<ResponseBody> call = service.putResourceCollection(resourceComplexObject, this.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -499,7 +499,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      */
     public ServiceCall getResourceCollectionAsync(final ServiceCallback<ResourceCollection> serviceCallback) {
         Call<ResponseBody> call = service.getResourceCollection(this.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ResourceCollection>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

@@ -162,6 +162,7 @@ public class AzureClient extends AzureServiceClient {
      * @param response  the initial response from the PUT or PATCH operation.
      * @param <T>       the return type of the caller.
      * @param resourceType the type of the resource.
+     * @param serviceCall the ServiceCall object tracking Retrofit calls.
      * @param callback  the user callback to call when operation terminates.
      * @return          the task describing the asynchronous polling.
      */
@@ -215,6 +216,7 @@ public class AzureClient extends AzureServiceClient {
      * @param <THeader> the type of the response header
      * @param resourceType the type of the resource.
      * @param headerType the type of the response header
+     * @param serviceCall the ServiceCall object tracking Retrofit calls.
      * @param callback  the user callback to call when operation terminates.
      * @return          the task describing the asynchronous polling.
      */
@@ -332,6 +334,7 @@ public class AzureClient extends AzureServiceClient {
      * @param response  the initial response from the POST or DELETE operation.
      * @param <T>       the return type of the caller.
      * @param resourceType the type of the resource.
+     * @param serviceCall the ServiceCall object tracking Retrofit calls.
      * @param callback  the user callback to call when operation terminates.
      * @return          the task describing the asynchronous polling.
      */
@@ -384,6 +387,7 @@ public class AzureClient extends AzureServiceClient {
      * @param <THeader> the type of the response header
      * @param resourceType the type of the resource.
      * @param headerType the type of the response header
+     * @param serviceCall the ServiceCall object tracking Retrofit calls.
      * @param callback  the user callback to call when operation terminates.
      * @return          the task describing the asynchronous polling.
      */
@@ -789,6 +793,7 @@ public class AzureClient extends AzureServiceClient {
          *
          * @param pollingState the current polling state.
          * @param url the URL to poll from.
+         * @param serviceCall the ServiceCall object tracking Retrofit calls.
          * @param clientCallback the client callback to call when a terminal status is hit.
          */
         public PutPatchPollingTask(final PollingState<T> pollingState, final String url, final ServiceCall serviceCall, final ServiceCallback<T> clientCallback) {
@@ -845,6 +850,7 @@ public class AzureClient extends AzureServiceClient {
          * Creates an instance of Polling task for POST or DELETE operations.
          *
          * @param pollingState the current polling state.
+         * @param serviceCall the ServiceCall object tracking Retrofit calls.
          * @param clientCallback the client callback to call when a terminal status is hit.
          */
         public PostDeletePollingTask(final PollingState<T> pollingState, final ServiceCall serviceCall, final ServiceCallback<T> clientCallback) {

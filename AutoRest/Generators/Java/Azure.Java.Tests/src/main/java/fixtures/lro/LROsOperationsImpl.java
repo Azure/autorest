@@ -437,7 +437,7 @@ public final class LROsOperationsImpl implements LROsOperations {
     public ServiceCall beginPut200SucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPut200Succeeded(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -522,7 +522,7 @@ public final class LROsOperationsImpl implements LROsOperations {
     public ServiceCall beginPut200SucceededNoStateAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPut200SucceededNoState(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -606,7 +606,7 @@ public final class LROsOperationsImpl implements LROsOperations {
     public ServiceCall beginPut202Retry200Async(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPut202Retry200(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -690,7 +690,7 @@ public final class LROsOperationsImpl implements LROsOperations {
     public ServiceCall beginPut201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -775,7 +775,7 @@ public final class LROsOperationsImpl implements LROsOperations {
     public ServiceCall beginPut200UpdatingSucceeded204Async(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPut200UpdatingSucceeded204(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -859,7 +859,7 @@ public final class LROsOperationsImpl implements LROsOperations {
     public ServiceCall beginPut201CreatingFailed200Async(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPut201CreatingFailed200(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -944,7 +944,7 @@ public final class LROsOperationsImpl implements LROsOperations {
     public ServiceCall beginPut200Acceptedcanceled200Async(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPut200Acceptedcanceled200(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1028,7 +1028,7 @@ public final class LROsOperationsImpl implements LROsOperations {
     public ServiceCall beginPutNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPutNoHeaderInRetry(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1112,7 +1112,7 @@ public final class LROsOperationsImpl implements LROsOperations {
     public ServiceCall beginPutAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPutAsyncRetrySucceeded(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1196,7 +1196,7 @@ public final class LROsOperationsImpl implements LROsOperations {
     public ServiceCall beginPutAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPutAsyncNoRetrySucceeded(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1280,7 +1280,7 @@ public final class LROsOperationsImpl implements LROsOperations {
     public ServiceCall beginPutAsyncRetryFailedAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPutAsyncRetryFailed(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1364,7 +1364,7 @@ public final class LROsOperationsImpl implements LROsOperations {
     public ServiceCall beginPutAsyncNoRetrycanceledAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPutAsyncNoRetrycanceled(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1448,7 +1448,7 @@ public final class LROsOperationsImpl implements LROsOperations {
     public ServiceCall beginPutAsyncNoHeaderInRetryAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPutAsyncNoHeaderInRetry(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1532,7 +1532,7 @@ public final class LROsOperationsImpl implements LROsOperations {
     public ServiceCall beginPutNonResourceAsync(Sku sku, final ServiceCallback<Sku> serviceCallback) {
         Validator.validate(sku, serviceCallback);
         Call<ResponseBody> call = service.beginPutNonResource(sku, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Sku>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1616,7 +1616,7 @@ public final class LROsOperationsImpl implements LROsOperations {
     public ServiceCall beginPutAsyncNonResourceAsync(Sku sku, final ServiceCallback<Sku> serviceCallback) {
         Validator.validate(sku, serviceCallback);
         Call<ResponseBody> call = service.beginPutAsyncNonResource(sku, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Sku>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1700,7 +1700,7 @@ public final class LROsOperationsImpl implements LROsOperations {
     public ServiceCall beginPutSubResourceAsync(SubProduct product, final ServiceCallback<SubProduct> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPutSubResource(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<SubProduct>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1784,7 +1784,7 @@ public final class LROsOperationsImpl implements LROsOperations {
     public ServiceCall beginPutAsyncSubResourceAsync(SubProduct product, final ServiceCallback<SubProduct> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPutAsyncSubResource(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<SubProduct>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1860,7 +1860,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      */
     public ServiceCall beginDeleteProvisioning202Accepted200SucceededAsync(final ServiceCallback<Product> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteProvisioning202Accepted200Succeeded(this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1937,7 +1937,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      */
     public ServiceCall beginDeleteProvisioning202DeletingFailed200Async(final ServiceCallback<Product> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteProvisioning202DeletingFailed200(this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2014,7 +2014,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      */
     public ServiceCall beginDeleteProvisioning202Deletingcanceled200Async(final ServiceCallback<Product> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteProvisioning202Deletingcanceled200(this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2091,7 +2091,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      */
     public ServiceCall beginDelete204SucceededAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDelete204Succeeded(this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2167,7 +2167,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      */
     public ServiceCall beginDelete202Retry200Async(final ServiceCallback<Product> serviceCallback) {
         Call<ResponseBody> call = service.beginDelete202Retry200(this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2244,7 +2244,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      */
     public ServiceCall beginDelete202NoRetry204Async(final ServiceCallback<Product> serviceCallback) {
         Call<ResponseBody> call = service.beginDelete202NoRetry204(this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2321,7 +2321,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      */
     public ServiceCall beginDeleteNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteNoHeaderInRetry(this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2398,7 +2398,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      */
     public ServiceCall beginDeleteAsyncNoHeaderInRetryAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteAsyncNoHeaderInRetry(this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2475,7 +2475,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      */
     public ServiceCall beginDeleteAsyncRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteAsyncRetrySucceeded(this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2551,7 +2551,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      */
     public ServiceCall beginDeleteAsyncNoRetrySucceededAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteAsyncNoRetrySucceeded(this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2627,7 +2627,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      */
     public ServiceCall beginDeleteAsyncRetryFailedAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteAsyncRetryFailed(this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2703,7 +2703,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      */
     public ServiceCall beginDeleteAsyncRetrycanceledAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteAsyncRetrycanceled(this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2779,7 +2779,7 @@ public final class LROsOperationsImpl implements LROsOperations {
      */
     public ServiceCall beginPost200WithPayloadAsync(final ServiceCallback<Sku> serviceCallback) {
         Call<ResponseBody> call = service.beginPost200WithPayload(this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Sku>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2864,7 +2864,7 @@ public final class LROsOperationsImpl implements LROsOperations {
     public ServiceCall beginPost202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2948,7 +2948,7 @@ public final class LROsOperationsImpl implements LROsOperations {
     public ServiceCall beginPost202NoRetry204Async(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPost202NoRetry204(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -3032,7 +3032,7 @@ public final class LROsOperationsImpl implements LROsOperations {
     public ServiceCall beginPostAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPostAsyncRetrySucceeded(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -3117,7 +3117,7 @@ public final class LROsOperationsImpl implements LROsOperations {
     public ServiceCall beginPostAsyncNoRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPostAsyncNoRetrySucceeded(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -3202,7 +3202,7 @@ public final class LROsOperationsImpl implements LROsOperations {
     public ServiceCall beginPostAsyncRetryFailedAsync(Product product, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPostAsyncRetryFailed(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -3286,7 +3286,7 @@ public final class LROsOperationsImpl implements LROsOperations {
     public ServiceCall beginPostAsyncRetrycanceledAsync(Product product, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPostAsyncRetrycanceled(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

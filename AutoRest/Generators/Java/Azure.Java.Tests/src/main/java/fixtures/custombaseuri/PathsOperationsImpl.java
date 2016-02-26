@@ -99,7 +99,7 @@ public final class PathsOperationsImpl implements PathsOperations {
         client.getBaseUrl().set("{accountName}", accountName);
         client.getBaseUrl().set("{host}", this.client.getHost());
         Call<ResponseBody> call = service.getEmpty(this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

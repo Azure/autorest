@@ -108,7 +108,7 @@ foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("host
 {
 @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
 }
- * @@param serviceCallback the async ServiceCallback to handle successful and failed responses.
+@Model.CallbackDocumentation
  * @@return the {@@link Call} object
  */
 public ServiceCall @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) {
@@ -171,7 +171,7 @@ foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("host
 }
 }
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
-    ServiceCall serviceCall = new ServiceCall(call);
+    @Model.ServiceCallConstruction
     call.enqueue(new @Model.InternalCallback<@(JavaCodeNamer.WrapPrimitiveType(Model.ReturnType.Body).Name)>(serviceCallback) {
         @@Override
         public void onResponse(Call<@Model.CallType> call, Response<@Model.CallType> response) {

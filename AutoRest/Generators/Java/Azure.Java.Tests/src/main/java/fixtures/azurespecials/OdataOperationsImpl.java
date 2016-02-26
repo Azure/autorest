@@ -89,7 +89,7 @@ public final class OdataOperationsImpl implements OdataOperations {
     public ServiceCall getWithFilterAsync(OdataFilter filter, Integer top, String orderby, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(filter, serviceCallback);
         Call<ResponseBody> call = service.getWithFilter(client.getMapperAdapter().serializeRaw(filter), top, orderby, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

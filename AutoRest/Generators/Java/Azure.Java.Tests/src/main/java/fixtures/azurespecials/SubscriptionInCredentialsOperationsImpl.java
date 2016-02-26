@@ -104,7 +104,7 @@ public final class SubscriptionInCredentialsOperationsImpl implements Subscripti
             return null;
         }
         Call<ResponseBody> call = service.postMethodGlobalValid(this.client.getSubscriptionId(), this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -153,7 +153,7 @@ public final class SubscriptionInCredentialsOperationsImpl implements Subscripti
             return null;
         }
         Call<ResponseBody> call = service.postMethodGlobalNull(this.client.getSubscriptionId(), this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -209,7 +209,7 @@ public final class SubscriptionInCredentialsOperationsImpl implements Subscripti
             return null;
         }
         Call<ResponseBody> call = service.postMethodGlobalNotProvidedValid(this.client.getSubscriptionId(), this.client.getApiVersion(), this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -258,7 +258,7 @@ public final class SubscriptionInCredentialsOperationsImpl implements Subscripti
             return null;
         }
         Call<ResponseBody> call = service.postPathGlobalValid(this.client.getSubscriptionId(), this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -307,7 +307,7 @@ public final class SubscriptionInCredentialsOperationsImpl implements Subscripti
             return null;
         }
         Call<ResponseBody> call = service.postSwaggerGlobalValid(this.client.getSubscriptionId(), this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

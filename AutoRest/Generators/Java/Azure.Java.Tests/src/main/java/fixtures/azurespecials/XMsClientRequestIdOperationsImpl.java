@@ -83,7 +83,7 @@ public final class XMsClientRequestIdOperationsImpl implements XMsClientRequestI
      */
     public ServiceCall getAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.get(this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -133,7 +133,7 @@ public final class XMsClientRequestIdOperationsImpl implements XMsClientRequestI
             return null;
         }
         Call<ResponseBody> call = service.paramGet(xMsClientRequestId, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

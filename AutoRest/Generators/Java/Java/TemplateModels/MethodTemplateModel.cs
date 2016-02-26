@@ -540,6 +540,22 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
+        public virtual string ServiceCallConstruction
+        {
+            get
+            {
+                return "final ServiceCall serviceCall = new ServiceCall(call);";
+            }
+        }
+
+        public virtual string CallbackDocumentation
+        {
+            get
+            {
+                return " * @param serviceCallback the async ServiceCallback to handle successful and failed responses.";
+            }
+        }
+
         public virtual List<string> InterfaceImports
         {
             get

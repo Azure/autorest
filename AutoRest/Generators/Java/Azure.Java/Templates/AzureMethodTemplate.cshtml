@@ -71,7 +71,7 @@ public @Model.OperationResponseReturnTypeString @(Model.Name)(@Model.MethodParam
 {
 @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
 }
- * @@param serviceCallback the async ServiceCallback to handle successful and failed responses.
+@Model.CallbackDocumentation
  * @@return the {@@link ServiceCall} object
  */
 public ServiceCall @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) {

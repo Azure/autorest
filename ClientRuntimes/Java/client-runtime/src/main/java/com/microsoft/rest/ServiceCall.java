@@ -39,6 +39,15 @@ public class ServiceCall {
     }
 
     /**
+     * Gets the current Retrofit call object.
+     *
+     * @return the current call object.
+     */
+    public Call<?> getCall() {
+        return call;
+    }
+
+    /**
      * Cancel the Retrofit call if possible.
      */
     public void cancel() {

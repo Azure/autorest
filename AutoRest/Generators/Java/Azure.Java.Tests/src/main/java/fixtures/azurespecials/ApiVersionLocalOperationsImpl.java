@@ -101,7 +101,7 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
             return null;
         }
         Call<ResponseBody> call = service.getMethodLocalValid(apiVersion, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -144,7 +144,7 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
      */
     public ServiceCall getMethodLocalNullAsync(String apiVersion, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.getMethodLocalNull(apiVersion, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -195,7 +195,7 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
             return null;
         }
         Call<ResponseBody> call = service.getPathLocalValid(apiVersion, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -246,7 +246,7 @@ public final class ApiVersionLocalOperationsImpl implements ApiVersionLocalOpera
             return null;
         }
         Call<ResponseBody> call = service.getSwaggerLocalValid(apiVersion, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

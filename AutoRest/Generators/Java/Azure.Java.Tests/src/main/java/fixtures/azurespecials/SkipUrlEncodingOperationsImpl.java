@@ -114,7 +114,7 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
             return null;
         }
         Call<ResponseBody> call = service.getMethodPathValid(unencodedPathParam, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -165,7 +165,7 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
             return null;
         }
         Call<ResponseBody> call = service.getPathPathValid(unencodedPathParam, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -216,7 +216,7 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
             return null;
         }
         Call<ResponseBody> call = service.getSwaggerPathValid(unencodedPathParam, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -267,7 +267,7 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
             return null;
         }
         Call<ResponseBody> call = service.getMethodQueryValid(q1, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -310,7 +310,7 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
      */
     public ServiceCall getMethodQueryNullAsync(String q1, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.getMethodQueryNull(q1, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -361,7 +361,7 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
             return null;
         }
         Call<ResponseBody> call = service.getPathQueryValid(q1, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -412,7 +412,7 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
             return null;
         }
         Call<ResponseBody> call = service.getSwaggerQueryValid(q1, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

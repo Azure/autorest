@@ -85,7 +85,7 @@ public final class HeadExceptionOperationsImpl implements HeadExceptionOperation
      */
     public ServiceCall head200Async(final ServiceCallback<Void> serviceCallback) {
         Call<Void> call = service.head200(this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -125,7 +125,7 @@ public final class HeadExceptionOperationsImpl implements HeadExceptionOperation
      */
     public ServiceCall head204Async(final ServiceCallback<Void> serviceCallback) {
         Call<Void> call = service.head204(this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -165,7 +165,7 @@ public final class HeadExceptionOperationsImpl implements HeadExceptionOperation
      */
     public ServiceCall head404Async(final ServiceCallback<Void> serviceCallback) {
         Call<Void> call = service.head404(this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {

@@ -118,7 +118,7 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
         Integer query = parameterGroupingPostRequiredParameters.getQuery();
         String path = parameterGroupingPostRequiredParameters.getPath();
         Call<ResponseBody> call = service.postRequired(path, this.client.getAcceptLanguage(), body, customHeader, query);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -175,7 +175,7 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
             query = parameterGroupingPostOptionalParameters.getQuery();
         }
         Call<ResponseBody> call = service.postOptional(this.client.getAcceptLanguage(), customHeader, query);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -248,7 +248,7 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
             queryTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.getQueryTwo();
         }
         Call<ResponseBody> call = service.postMultiParamGroups(this.client.getAcceptLanguage(), headerOne, queryOne, headerTwo, queryTwo);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -305,7 +305,7 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
             queryOne = firstParameterGroup.getQueryOne();
         }
         Call<ResponseBody> call = service.postSharedParameterGroupObject(this.client.getAcceptLanguage(), headerOne, queryOne);
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

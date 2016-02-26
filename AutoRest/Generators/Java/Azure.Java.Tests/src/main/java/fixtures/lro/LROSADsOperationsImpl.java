@@ -344,7 +344,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     public ServiceCall beginPutNonRetry400Async(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPutNonRetry400(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -429,7 +429,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     public ServiceCall beginPutNonRetry201Creating400Async(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPutNonRetry201Creating400(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -514,7 +514,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     public ServiceCall beginPutAsyncRelativeRetry400Async(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPutAsyncRelativeRetry400(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -590,7 +590,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      */
     public ServiceCall beginDeleteNonRetry400Async(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteNonRetry400(this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -666,7 +666,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      */
     public ServiceCall beginDelete202NonRetry400Async(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDelete202NonRetry400(this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -742,7 +742,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      */
     public ServiceCall beginDeleteAsyncRelativeRetry400Async(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetry400(this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -826,7 +826,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     public ServiceCall beginPostNonRetry400Async(Product product, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPostNonRetry400(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -910,7 +910,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     public ServiceCall beginPost202NonRetry400Async(Product product, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPost202NonRetry400(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -994,7 +994,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     public ServiceCall beginPostAsyncRelativeRetry400Async(Product product, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPostAsyncRelativeRetry400(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1078,7 +1078,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     public ServiceCall beginPutError201NoProvisioningStatePayloadAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPutError201NoProvisioningStatePayload(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1163,7 +1163,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     public ServiceCall beginPutAsyncRelativeRetryNoStatusAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPutAsyncRelativeRetryNoStatus(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1247,7 +1247,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     public ServiceCall beginPutAsyncRelativeRetryNoStatusPayloadAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPutAsyncRelativeRetryNoStatusPayload(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1323,7 +1323,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      */
     public ServiceCall beginDelete204SucceededAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDelete204Succeeded(this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1399,7 +1399,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      */
     public ServiceCall beginDeleteAsyncRelativeRetryNoStatusAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetryNoStatus(this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1483,7 +1483,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     public ServiceCall beginPost202NoLocationAsync(Product product, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPost202NoLocation(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1567,7 +1567,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     public ServiceCall beginPostAsyncRelativeRetryNoPayloadAsync(Product product, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPostAsyncRelativeRetryNoPayload(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1651,7 +1651,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     public ServiceCall beginPut200InvalidJsonAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPut200InvalidJson(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1736,7 +1736,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     public ServiceCall beginPutAsyncRelativeRetryInvalidHeaderAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPutAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1820,7 +1820,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     public ServiceCall beginPutAsyncRelativeRetryInvalidJsonPollingAsync(Product product, final ServiceCallback<Product> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPutAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Product>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1896,7 +1896,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      */
     public ServiceCall beginDelete202RetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDelete202RetryInvalidHeader(this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1972,7 +1972,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      */
     public ServiceCall beginDeleteAsyncRelativeRetryInvalidHeaderAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetryInvalidHeader(this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2048,7 +2048,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
      */
     public ServiceCall beginDeleteAsyncRelativeRetryInvalidJsonPollingAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.beginDeleteAsyncRelativeRetryInvalidJsonPolling(this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2132,7 +2132,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     public ServiceCall beginPost202RetryInvalidHeaderAsync(Product product, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPost202RetryInvalidHeader(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2216,7 +2216,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     public ServiceCall beginPostAsyncRelativeRetryInvalidHeaderAsync(Product product, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPostAsyncRelativeRetryInvalidHeader(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -2300,7 +2300,7 @@ public final class LROSADsOperationsImpl implements LROSADsOperations {
     public ServiceCall beginPostAsyncRelativeRetryInvalidJsonPollingAsync(Product product, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPostAsyncRelativeRetryInvalidJsonPolling(product, this.client.getAcceptLanguage());
-        ServiceCall serviceCall = new ServiceCall(call);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
