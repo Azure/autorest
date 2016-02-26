@@ -123,14 +123,7 @@ namespace Microsoft.Rest.Generator.Python
         {
             get
             {
-                if (Version != null)
-                {
-                    return string.Format(CultureInfo.InvariantCulture, "{0}/{1}", PackageName, Version);
-                }
-                else
-                {
-                    return PackageName;
-                }
+                return PackageName;
             }
         }
 

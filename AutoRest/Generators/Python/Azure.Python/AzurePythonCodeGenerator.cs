@@ -202,6 +202,12 @@ namespace Microsoft.Rest.Generator.Azure.Python
             };
             await Write(serviceClientTemplate, Path.Combine(serviceClientTemplateModel.PackageName, serviceClientTemplateModel.Name.ToPythonCase() + ".py"));
 
+            var versionTemplate = new VersionTemplate
+            {
+                Model = serviceClientTemplateModel,
+            };
+            await Write(versionTemplate, Path.Combine(serviceClientTemplateModel.PackageName, "version.py"));
+
             var exceptionTemplate = new ExceptionTemplate
             {
                 Model = serviceClientTemplateModel,

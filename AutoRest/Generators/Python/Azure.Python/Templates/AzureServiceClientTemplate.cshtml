@@ -13,6 +13,7 @@
 from msrest.service_client import ServiceClient
 from msrest import Serializer, Deserializer
 from msrestazure import AzureConfiguration
+from .version import VERSION
 @if (Model.MethodTemplateModels.Any())
 {
 <text>
@@ -64,7 +65,8 @@ class @(Model.Name)Configuration(AzureConfiguration):
 @EmptyLine
         super(@(Model.Name)Configuration, self).__init__(base_url, filepath)
 @EmptyLine
-        self.add_user_agent('@Model.UserAgent')
+        self.add_user_agent('@Model.UserAgent/{}'.format(VERSION))
+        self.add_user_agent('Azure-SDK-For-Python')
 @if (Model.Properties.Any())
 {
 @EmptyLine
