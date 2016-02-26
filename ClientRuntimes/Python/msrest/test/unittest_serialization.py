@@ -88,6 +88,11 @@ class GenericResource(Resource):
     _required = []
 
     _attribute_map = {
+        'id': {'key': 'id', 'type': 'str'},
+        'name': {'key': 'name', 'type': 'str'},
+        'type': {'key': 'type', 'type': 'str'},
+        'location': {'key': 'location', 'type': 'str'},
+        'tags': {'key': 'tags', 'type': '{str}'},
         'plan': {'key': 'plan', 'type': 'Plan'},
         'properties': {'key': 'properties', 'type': 'object'},
     }
@@ -569,6 +574,7 @@ class TestRuntimeSerialized(unittest.TestCase):
         class Dog(Animal):
 
             _attribute_map = {
+                "name":{"key":"Name", "type":"str"},
                 "likes_dog_food":{"key":"likesDogFood","type":"bool"}
                 }
 
@@ -579,6 +585,7 @@ class TestRuntimeSerialized(unittest.TestCase):
         class Cat(Animal):
 
             _attribute_map = {
+                "name":{"key":"Name", "type":"str"},
                 "likes_mice":{"key":"likesMice","type":"bool"},
                 "dislikes":{"key":"dislikes","type":"Animal"}
                 }
@@ -595,6 +602,9 @@ class TestRuntimeSerialized(unittest.TestCase):
         class Siamese(Cat):
 
             _attribute_map = {
+                "name":{"key":"Name", "type":"str"},
+                "likes_mice":{"key":"likesMice","type":"bool"},
+                "dislikes":{"key":"dislikes","type":"Animal"},
                 "color":{"key":"Color", "type":"str"}
                 }
 
@@ -1099,12 +1109,14 @@ class TestRuntimeDeserialized(unittest.TestCase):
         class Dog(Animal):
 
             _attribute_map = {
+                "name":{"key":"Name", "type":"str"},
                 "likes_dog_food":{"key":"likesDogFood","type":"bool"}
                 }
 
         class Cat(Animal):
 
             _attribute_map = {
+                "name":{"key":"Name", "type":"str"},
                 "likes_mice":{"key":"likesMice","type":"bool"},
                 "dislikes":{"key":"dislikes","type":"Animal"}
                 }
@@ -1116,6 +1128,9 @@ class TestRuntimeDeserialized(unittest.TestCase):
         class Siamese(Cat):
 
             _attribute_map = {
+                "name":{"key":"Name", "type":"str"},
+                "likes_mice":{"key":"likesMice","type":"bool"},
+                "dislikes":{"key":"dislikes","type":"Animal"},
                 "color":{"key":"Color", "type":"str"}
                 }
 
