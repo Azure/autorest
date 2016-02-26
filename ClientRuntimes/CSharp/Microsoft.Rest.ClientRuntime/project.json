@@ -64,6 +64,7 @@
     "dnxcore50": {
       "compilationOptions": { "define": [ "PORTABLE" ] },
       "dependencies": {
+        "Microsoft.NETCore.Platforms": "1.0.1-rc3-23729",
         "Microsoft.CSharp": "4.0.0",
         "System.Diagnostics.Tools": "4.0.0",
         "System.Net.Http": "4.0.0",
@@ -71,7 +72,7 @@
         "System.Threading.Tasks": "4.0.10",
         "System.Xml.ReaderWriter": "4.0.10",
         "Newtonsoft.Json": "7.0.1"
-     }
+      }
     }
   }
 }
