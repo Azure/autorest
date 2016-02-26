@@ -10,125 +10,18 @@
 
 package fixtures.http;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.http.models.Error;
 import fixtures.http.models.ErrorException;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.HEAD;
-import retrofit2.http.Headers;
-import retrofit2.http.HTTP;
-import retrofit2.http.PATCH;
-import retrofit2.http.POST;
-import retrofit2.http.PUT;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in HttpClientFailureOperations.
  */
 public interface HttpClientFailureOperations {
-    /**
-     * The interface defining all the services for HttpClientFailureOperations to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface HttpClientFailureService {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @HEAD("http/failure/client/400")
-        Call<Void> head400();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("http/failure/client/400")
-        Call<ResponseBody> get400();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("http/failure/client/400")
-        Call<ResponseBody> put400(@Body Boolean booleanValue);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PATCH("http/failure/client/400")
-        Call<ResponseBody> patch400(@Body Boolean booleanValue);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("http/failure/client/400")
-        Call<ResponseBody> post400(@Body Boolean booleanValue);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @HTTP(path = "http/failure/client/400", method = "DELETE", hasBody = true)
-        Call<ResponseBody> delete400(@Body Boolean booleanValue);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @HEAD("http/failure/client/401")
-        Call<Void> head401();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("http/failure/client/402")
-        Call<ResponseBody> get402();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("http/failure/client/403")
-        Call<ResponseBody> get403();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("http/failure/client/404")
-        Call<ResponseBody> put404(@Body Boolean booleanValue);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PATCH("http/failure/client/405")
-        Call<ResponseBody> patch405(@Body Boolean booleanValue);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("http/failure/client/406")
-        Call<ResponseBody> post406(@Body Boolean booleanValue);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @HTTP(path = "http/failure/client/407", method = "DELETE", hasBody = true)
-        Call<ResponseBody> delete407(@Body Boolean booleanValue);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("http/failure/client/409")
-        Call<ResponseBody> put409(@Body Boolean booleanValue);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @HEAD("http/failure/client/410")
-        Call<Void> head410();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("http/failure/client/411")
-        Call<ResponseBody> get411();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("http/failure/client/412")
-        Call<ResponseBody> get412();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("http/failure/client/413")
-        Call<ResponseBody> put413(@Body Boolean booleanValue);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PATCH("http/failure/client/414")
-        Call<ResponseBody> patch414(@Body Boolean booleanValue);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("http/failure/client/415")
-        Call<ResponseBody> post415(@Body Boolean booleanValue);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("http/failure/client/416")
-        Call<ResponseBody> get416();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @HTTP(path = "http/failure/client/417", method = "DELETE", hasBody = true)
-        Call<ResponseBody> delete417(@Body Boolean booleanValue);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @HEAD("http/failure/client/429")
-        Call<Void> head429();
-
-    }
     /**
      * Return 400 status code - should be represented in the client as an error.
      *
@@ -142,9 +35,9 @@ public interface HttpClientFailureOperations {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<Void> head400Async(final ServiceCallback<Error> serviceCallback);
+    ServiceCall head400Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -159,9 +52,9 @@ public interface HttpClientFailureOperations {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> get400Async(final ServiceCallback<Error> serviceCallback);
+    ServiceCall get400Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -178,9 +71,9 @@ public interface HttpClientFailureOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> put400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceCall put400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -197,9 +90,9 @@ public interface HttpClientFailureOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> patch400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceCall patch400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -216,9 +109,9 @@ public interface HttpClientFailureOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> post400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceCall post400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -235,9 +128,9 @@ public interface HttpClientFailureOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> delete400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceCall delete400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 401 status code - should be represented in the client as an error.
@@ -252,9 +145,9 @@ public interface HttpClientFailureOperations {
      * Return 401 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<Void> head401Async(final ServiceCallback<Error> serviceCallback);
+    ServiceCall head401Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 402 status code - should be represented in the client as an error.
@@ -269,9 +162,9 @@ public interface HttpClientFailureOperations {
      * Return 402 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> get402Async(final ServiceCallback<Error> serviceCallback);
+    ServiceCall get402Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 403 status code - should be represented in the client as an error.
@@ -286,9 +179,9 @@ public interface HttpClientFailureOperations {
      * Return 403 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> get403Async(final ServiceCallback<Error> serviceCallback);
+    ServiceCall get403Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 404 status code - should be represented in the client as an error.
@@ -305,9 +198,9 @@ public interface HttpClientFailureOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> put404Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceCall put404Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 405 status code - should be represented in the client as an error.
@@ -324,9 +217,9 @@ public interface HttpClientFailureOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> patch405Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceCall patch405Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 406 status code - should be represented in the client as an error.
@@ -343,9 +236,9 @@ public interface HttpClientFailureOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> post406Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceCall post406Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 407 status code - should be represented in the client as an error.
@@ -362,9 +255,9 @@ public interface HttpClientFailureOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> delete407Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceCall delete407Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 409 status code - should be represented in the client as an error.
@@ -381,9 +274,9 @@ public interface HttpClientFailureOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> put409Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceCall put409Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 410 status code - should be represented in the client as an error.
@@ -398,9 +291,9 @@ public interface HttpClientFailureOperations {
      * Return 410 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<Void> head410Async(final ServiceCallback<Error> serviceCallback);
+    ServiceCall head410Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 411 status code - should be represented in the client as an error.
@@ -415,9 +308,9 @@ public interface HttpClientFailureOperations {
      * Return 411 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> get411Async(final ServiceCallback<Error> serviceCallback);
+    ServiceCall get411Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 412 status code - should be represented in the client as an error.
@@ -432,9 +325,9 @@ public interface HttpClientFailureOperations {
      * Return 412 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> get412Async(final ServiceCallback<Error> serviceCallback);
+    ServiceCall get412Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 413 status code - should be represented in the client as an error.
@@ -451,9 +344,9 @@ public interface HttpClientFailureOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> put413Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceCall put413Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 414 status code - should be represented in the client as an error.
@@ -470,9 +363,9 @@ public interface HttpClientFailureOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> patch414Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceCall patch414Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 415 status code - should be represented in the client as an error.
@@ -489,9 +382,9 @@ public interface HttpClientFailureOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> post415Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceCall post415Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 416 status code - should be represented in the client as an error.
@@ -506,9 +399,9 @@ public interface HttpClientFailureOperations {
      * Return 416 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> get416Async(final ServiceCallback<Error> serviceCallback);
+    ServiceCall get416Async(final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 417 status code - should be represented in the client as an error.
@@ -525,9 +418,9 @@ public interface HttpClientFailureOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> delete417Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceCall delete417Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
 
     /**
      * Return 429 status code - should be represented in the client as an error.
@@ -542,8 +435,8 @@ public interface HttpClientFailureOperations {
      * Return 429 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<Void> head429Async(final ServiceCallback<Error> serviceCallback);
+    ServiceCall head429Async(final ServiceCallback<Error> serviceCallback);
 
 }

@@ -40,6 +40,10 @@ public final class @(Model.MethodGroupType)Impl implements @Model.MethodGroupTyp
     }
     @EmptyLine
 
+    @Include(new MethodGroupRetrofitTemplate(), Model)
+
+    @EmptyLine
+
     @foreach (var method in Model.MethodTemplateModels)
     {
     @:@(Include(new MethodTemplate(), method))

@@ -71,10 +71,10 @@ foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("host
 {
 @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
 }
- * @@param serviceCallback the async ServiceCallback to handle successful and failed responses.
+@Model.CallbackDocumentation
  * @@return the {@@link Call} object
  */
-public Call<@Model.CallType> @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) {
+public ServiceCall @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) {
 @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {
@@ -97,6 +97,7 @@ foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("host
 }
 }
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
+    @Model.ServiceCallConstruction
     call.enqueue(new @Model.InternalCallback<@(JavaCodeNamer.WrapPrimitiveType(Model.ReturnType.Body).Name)>(serviceCallback) {
         @@Override
         public void onResponse(Call<@Model.CallType> call, Response<@Model.CallType> response) {
@@ -107,7 +108,7 @@ foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("host
             }
         }
     });
-    return call;
+    return serviceCall;
 }
 @EmptyLine
 private @Model.DelegateOperationResponseReturnTypeString @(Model.Name)Delegate(Response<@Model.CallType> response) throws @Model.ExceptionString {

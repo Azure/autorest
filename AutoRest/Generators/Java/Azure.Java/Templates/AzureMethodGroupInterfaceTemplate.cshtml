@@ -3,6 +3,7 @@
 @using Microsoft.Rest.Generator.Java.Azure.Templates
 @using Microsoft.Rest.Generator.Utilities
 @using Microsoft.Rest.Generator.Java.TemplateModels
+@using Microsoft.Rest.Generator.Java.Templates
 @using System.Linq;
 @inherits Microsoft.Rest.Generator.Template<Microsoft.Rest.Generator.Java.Azure.AzureMethodGroupTemplateModel>
 /**
@@ -23,80 +24,9 @@ package @(Settings.Namespace.ToLower());
  * in @(Model.MethodGroupType).
  */
 public interface @Model.MethodGroupType {
-    /**
-     * The interface defining all the services for @Model.MethodGroupType to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface @Model.MethodGroupServiceType {
-    @foreach (AzureMethodTemplateModel method in Model.MethodTemplateModels)
+    @foreach (var method in Model.MethodTemplateModels)
     {
-    @:    @@Headers("Content-Type: @method.RequestContentType")
-    if (method.HttpMethod == Microsoft.Rest.Generator.ClientModel.HttpMethod.Delete)
-    {
-    @:    @@HTTP(path = "@(method.Url.TrimStart('/'))", method = "DELETE", hasBody = true)
-    }
-    else if (method.IsPagingNextOperation)
-    {
-    @:    @@GET
-    }
-    else
-    {
-    @:    @@@(method.HttpMethod.ToString().ToUpper())("@(method.Url.TrimStart('/'))")
-    }
-    @:    Call<@method.CallType> @(method.Name)(@method.MethodParameterApiDeclaration);
-    @EmptyLine
-    }
-    }
-
-    @foreach (AzureMethodTemplateModel method in Model.MethodTemplateModels)
-    {
-    @:/**
-    if (!String.IsNullOrEmpty(method.Summary))
-    {
-    @: * @method.Summary.EscapeXmlComment().Period()
-    }
-    if (!String.IsNullOrEmpty(method.Description))
-    {
-    @: * @method.Description.EscapeXmlComment().Period()
-    }
-    @: *
-    foreach (var param in method.LocalParameters)
-    {
-    @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
-    }
-    foreach (var exception in method.ExceptionStatements)
-    {
-    @: * @@throws @exception
-    }
-    if (method.ReturnType.Body != null)
-    {
-    @: * @@return the @method.ReturnTypeString.EscapeXmlComment() object wrapped in @method.OperationResponseType if successful.
-    }
-    else
-    {
-    @: * @@return the @method.OperationResponseType object if successful.
-    }
-    @: */
-    @:@method.OperationResponseReturnTypeString @(method.Name)(@method.MethodParameterDeclaration) throws @method.ExceptionString;
-    @EmptyLine
-    @:/**
-    if (!String.IsNullOrEmpty(method.Summary))
-    {
-    @: * @method.Summary.EscapeXmlComment().Period()
-    }
-    if (!String.IsNullOrEmpty(method.Description))
-    {
-    @: * @method.Description.EscapeXmlComment().Period()
-    }
-    @: *
-    foreach (var param in method.LocalParameters)
-    {
-    @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
-    }
-    @: * @@param serviceCallback the async ServiceCallback to handle successful and failed responses.
-    @: * @@return the {@@link Call} object
-    @: */
-    @:Call<@method.CallType> @(method.Name)Async(@method.MethodParameterDeclarationWithCallback);
+    @:@Include(new MethodInterfaceTemplate(), method)
     @EmptyLine
     }
 }

@@ -107,8 +107,8 @@ namespace Microsoft.Rest.Generator.Cli
 
             // Generate parameters section
             var parametersSection = new StringBuilder();
-            const string parametersPattern = @"\$parameters-start\$\r\n(.+)\r\n\$parameters-end\$";
-            var parameterTemplate = Regex.Match(template, parametersPattern, RegexOptions.Singleline).Groups[1].Value;
+            const string parametersPattern = @"\$parameters-start\$(.+)\$parameters-end\$";
+            var parameterTemplate = Regex.Match(template, parametersPattern, RegexOptions.Singleline).Groups[1].Value.Trim();
             foreach (PropertyInfo property in typeof(Settings).GetProperties())
             {
                 SettingsInfoAttribute doc = (SettingsInfoAttribute)property.GetCustomAttributes(
@@ -131,8 +131,8 @@ namespace Microsoft.Rest.Generator.Cli
 
             // Generate examples section.
             var examplesSection = new StringBuilder();
-            const string examplesPattern = @"\$examples-start\$\r\n(.+)\r\n\$examples-end\$";
-            var exampleTemplate = Regex.Match(template, examplesPattern, RegexOptions.Singleline).Groups[1].Value;
+            const string examplesPattern = @"\$examples-start\$(.+)\$examples-end\$";
+            var exampleTemplate = Regex.Match(template, examplesPattern, RegexOptions.Singleline).Groups[1].Value.Trim() + Environment.NewLine;
             foreach (HelpExample example in Examples)
             {
                 examplesSection.AppendLine(exampleTemplate.
