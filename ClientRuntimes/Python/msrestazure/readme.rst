@@ -9,7 +9,7 @@ To install:
 
 .. code-block:: bash
 
-    $ pip install msrest
+    $ pip install msrestazure
 
 
 Release History
@@ -20,8 +20,8 @@ Release History
 
 **Bugfixes**
 
-- Fixed AAD bug to include connection verification in UserPassCredentials.
-- Source package corrupted in Pypi
+- Fixed AAD bug to include connection verification in UserPassCredentials. (https://github.com/Azure/autorest/pull/725)
+- Source package corrupted in Pypi (https://github.com/Azure/autorest/issues/718)
 
 2016-02-19 Version 0.0.1
 ++++++++++++++++++++++++

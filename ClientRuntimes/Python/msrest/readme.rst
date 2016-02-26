@@ -20,7 +20,7 @@ Release History
 
 **Bugfixes**
 
-- Source package corrupted in Pypi
+- Source package corrupted in Pypi (https://github.com/Azure/autorest/issues/718)
 
 **Improvement**
 
