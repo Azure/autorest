@@ -31,13 +31,11 @@
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="NodeJSCodeGenerator.cs" />
     <Compile Include="NodeJsCodeNamer.cs" />
-    <Compile Include="IScopeProvider.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="ScopeProvider.cs" />
     <Compile Include="TemplateModels\MethodGroupTemplateModel.cs" />
     <Compile Include="TemplateModels\ModelTemplateModel.cs" />
     <Compile Include="TemplateModels\ServiceClientTemplateModel.cs" />

@@ -40,6 +40,7 @@ function mergeOptions(obj1,obj2){
 }
 
 var defaultMappings = {
+  'AcceptanceTests/ParameterFlattening': '../../../TestServer/swagger/parameter-flattening.json',
   'AcceptanceTests/BodyArray': '../../../TestServer/swagger/body-array.json',
   'AcceptanceTests/BodyBoolean': '../../../TestServer/swagger/body-boolean.json',
   'AcceptanceTests/BodyByte': '../../../TestServer/swagger/body-byte.json',
