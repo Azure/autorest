@@ -322,7 +322,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
                         "  enum_is_valid = {0}.constants.any? {{ |e| {0}.const_get(e).to_s.downcase == {1}.downcase }}",
                         enumType.Name, valueReference)
                     .AppendLine(
-                        "  fail MsRest::DeserializationError.new('Error occured while deserializing the enum', nil, nil, nil) unless enum_is_valid")
+                        "  warn 'Enum {0} does not contain ' + {1}.downcase + ', but was received from the server.' unless enum_is_valid", enumType.Name, valueReference)
                     .AppendLine("end")
                     .ToString();
             }
@@ -480,7 +480,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
         {
             return
                 type.BaseModelType != null &&
-                (type.BaseModelType.Equals(possibleAncestorType) || 
+                (type.BaseModelType.Equals(possibleAncestorType) ||
                  type.BaseModelType.DerivesFrom(possibleAncestorType));
         }
     }
