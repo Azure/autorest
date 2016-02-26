@@ -19,6 +19,7 @@ from .operations.dictionary import Dictionary
 from .operations.inheritance import Inheritance
 from .operations.polymorphism import Polymorphism
 from .operations.polymorphicrecursive import Polymorphicrecursive
+from .operations.readonlyproperty import Readonlyproperty
 from . import models
 
 
@@ -68,6 +69,8 @@ class AutoRestComplexTestService(object):
     :vartype polymorphism: .operations.Polymorphism
     :ivar polymorphicrecursive: Polymorphicrecursive operations
     :vartype polymorphicrecursive: .operations.Polymorphicrecursive
+    :ivar readonlyproperty: Readonlyproperty operations
+    :vartype readonlyproperty: .operations.Readonlyproperty
     """
 
     def __init__(self, config):
@@ -92,4 +95,6 @@ class AutoRestComplexTestService(object):
         self.polymorphism = Polymorphism(
             self._client, self.config, self._serialize, self._deserialize)
         self.polymorphicrecursive = Polymorphicrecursive(
+            self._client, self.config, self._serialize, self._deserialize)
+        self.readonlyproperty = Readonlyproperty(
             self._client, self.config, self._serialize, self._deserialize)

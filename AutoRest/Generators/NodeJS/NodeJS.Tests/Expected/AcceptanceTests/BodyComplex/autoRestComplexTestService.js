@@ -39,6 +39,7 @@ var operations = require('./operations');
  *
  */
 function AutoRestComplexTestService(baseUri, options) {
+  this.apiVersion = '2014-04-01-preview';
 
   if (!options) options = {};
 
@@ -48,7 +49,6 @@ function AutoRestComplexTestService(baseUri, options) {
     this.baseUri = 'http://localhost';
   }
 
-  this.apiVersion = '2014-04-01-preview';
   this.basicOperations = new operations.BasicOperations(this);
   this.primitive = new operations.Primitive(this);
   this.arrayModel = new operations.ArrayModel(this);
@@ -56,6 +56,7 @@ function AutoRestComplexTestService(baseUri, options) {
   this.inheritance = new operations.Inheritance(this);
   this.polymorphism = new operations.Polymorphism(this);
   this.polymorphicrecursive = new operations.Polymorphicrecursive(this);
+  this.readonlyproperty = new operations.Readonlyproperty(this);
   this.models = models;
   msRest.addSerializationMixin(this);
 }

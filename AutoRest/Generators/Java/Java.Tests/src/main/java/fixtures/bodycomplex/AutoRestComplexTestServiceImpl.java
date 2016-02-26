@@ -11,6 +11,7 @@
 package fixtures.bodycomplex;
 
 import com.microsoft.rest.ServiceClient;
+import com.microsoft.rest.AutoRestBaseUrl;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 
@@ -19,16 +20,17 @@ import retrofit2.Retrofit;
  */
 public final class AutoRestComplexTestServiceImpl extends ServiceClient implements AutoRestComplexTestService {
     /**
-     * The URI used as the base for all cloud service requests.
+     * The URL used as the base for all cloud service requests.
      */
-    private final String baseUri;
+    private final AutoRestBaseUrl baseUrl;
 
     /**
-     * Gets the URI used as the base for all cloud service requests.
-     * @return The BaseUri value.
+     * Gets the URL used as the base for all cloud service requests.
+     *
+     * @return The BaseUrl value.
      */
-    public String getBaseUri() {
-        return this.baseUri;
+    public AutoRestBaseUrl getBaseUrl() {
+        return this.baseUrl;
     }
 
     /** API ID. */
@@ -109,6 +111,14 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
     }
 
     /**
+     * Gets the ReadonlypropertyOperations object to access its operations.
+     * @return the ReadonlypropertyOperations object.
+     */
+    public ReadonlypropertyOperations getReadonlypropertyOperations() {
+        return new ReadonlypropertyOperationsImpl(this.retrofitBuilder.client(clientBuilder.build()).build(), this);
+    }
+
+    /**
      * Initializes an instance of AutoRestComplexTestService client.
      */
     public AutoRestComplexTestServiceImpl() {
@@ -118,30 +128,30 @@ public final class AutoRestComplexTestServiceImpl extends ServiceClient implemen
     /**
      * Initializes an instance of AutoRestComplexTestService client.
      *
-     * @param baseUri the base URI of the host
+     * @param baseUrl the base URL of the host
      */
-    public AutoRestComplexTestServiceImpl(String baseUri) {
+    public AutoRestComplexTestServiceImpl(String baseUrl) {
         super();
-        this.baseUri = baseUri;
+        this.baseUrl = new AutoRestBaseUrl(baseUrl);
         initialize();
     }
 
     /**
      * Initializes an instance of AutoRestComplexTestService client.
      *
-     * @param baseUri the base URI of the host
+     * @param baseUrl the base URL of the host
      * @param clientBuilder the builder for building up an {@link OkHttpClient}
      * @param retrofitBuilder the builder for building up a {@link Retrofit}
      */
-    public AutoRestComplexTestServiceImpl(String baseUri, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
+    public AutoRestComplexTestServiceImpl(String baseUrl, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
         super(clientBuilder, retrofitBuilder);
-        this.baseUri = baseUri;
+        this.baseUrl = new AutoRestBaseUrl(baseUrl);
         initialize();
     }
 
     @Override
     protected void initialize() {
         super.initialize();
-        this.retrofitBuilder.baseUrl(baseUri);
+        this.retrofitBuilder.baseUrl(baseUrl);
     }
 }

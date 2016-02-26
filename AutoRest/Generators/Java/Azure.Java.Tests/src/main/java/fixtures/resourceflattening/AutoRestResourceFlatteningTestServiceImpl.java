@@ -15,10 +15,12 @@ import com.microsoft.azure.AzureClient;
 import com.microsoft.azure.AzureServiceClient;
 import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.azure.CustomHeaderInterceptor;
+import com.microsoft.rest.AutoRestBaseUrl;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
+import com.microsoft.rest.Validator;
 import fixtures.resourceflattening.models.ErrorException;
 import fixtures.resourceflattening.models.FlattenedProduct;
 import fixtures.resourceflattening.models.Resource;
@@ -40,17 +42,18 @@ import retrofit2.Retrofit;
 public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServiceClient implements AutoRestResourceFlatteningTestService {
     /** The Retrofit service to perform REST calls. */
     private AutoRestResourceFlatteningTestServiceService service;
-    /** The URI used as the base for all cloud service requests. */
-    private final String baseUri;
+    /** The URL used as the base for all cloud service requests. */
+    private final AutoRestBaseUrl baseUrl;
     /** the {@link AzureClient} used for long running operations. */
     private AzureClient azureClient;
 
     /**
-     * Gets the URI used as the base for all cloud service requests.
-     * @return The BaseUri value.
+     * Gets the URL used as the base for all cloud service requests.
+     *
+     * @return The BaseUrl value.
      */
-    public String getBaseUri() {
-        return this.baseUri;
+    public AutoRestBaseUrl getBaseUrl() {
+        return this.baseUrl;
     }
 
     /**
@@ -146,10 +149,10 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Initializes an instance of AutoRestResourceFlatteningTestService client.
      *
-     * @param baseUri the base URI of the host
+     * @param baseUrl the base URL of the host
      */
-    public AutoRestResourceFlatteningTestServiceImpl(String baseUri) {
-        this(baseUri, null);
+    public AutoRestResourceFlatteningTestServiceImpl(String baseUrl) {
+        this(baseUrl, null);
     }
 
     /**
@@ -164,12 +167,12 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Initializes an instance of AutoRestResourceFlatteningTestService client.
      *
-     * @param baseUri the base URI of the host
+     * @param baseUrl the base URL of the host
      * @param credentials the management credentials for Azure
      */
-    public AutoRestResourceFlatteningTestServiceImpl(String baseUri, ServiceClientCredentials credentials) {
+    public AutoRestResourceFlatteningTestServiceImpl(String baseUrl, ServiceClientCredentials credentials) {
         super();
-        this.baseUri = baseUri;
+        this.baseUrl = new AutoRestBaseUrl(baseUrl);
         this.credentials = credentials;
         initialize();
     }
@@ -177,14 +180,14 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     /**
      * Initializes an instance of AutoRestResourceFlatteningTestService client.
      *
-     * @param baseUri the base URI of the host
+     * @param baseUrl the base URL of the host
      * @param credentials the management credentials for Azure
      * @param clientBuilder the builder for building up an {@link OkHttpClient}
      * @param retrofitBuilder the builder for building up a {@link Retrofit}
      */
-    public AutoRestResourceFlatteningTestServiceImpl(String baseUri, ServiceClientCredentials credentials, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
+    public AutoRestResourceFlatteningTestServiceImpl(String baseUrl, ServiceClientCredentials credentials, OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
         super(clientBuilder, retrofitBuilder);
-        this.baseUri = baseUri;
+        this.baseUrl = new AutoRestBaseUrl(baseUrl);
         this.credentials = credentials;
         initialize();
     }
@@ -201,7 +204,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
         super.initialize();
         this.azureClient = new AzureClient(clientBuilder, retrofitBuilder);
         this.azureClient.setCredentials(this.credentials);
-        this.retrofitBuilder.baseUrl(baseUri);
+        this.retrofitBuilder.baseUrl(baseUrl);
         initializeService();
     }
 
@@ -231,6 +234,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putArray(List<Resource> resourceArray) throws ErrorException, IOException {
+        Validator.validate(resourceArray);
         Call<ResponseBody> call = service.putArray(resourceArray, this.getAcceptLanguage());
         return putArrayDelegate(call.execute());
     }
@@ -243,6 +247,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the {@link Call} object
      */
     public Call<ResponseBody> putArrayAsync(List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback) {
+        Validator.validate(resourceArray, serviceCallback);
         Call<ResponseBody> call = service.putArray(resourceArray, this.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -313,6 +318,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putDictionary(Map<String, FlattenedProduct> resourceDictionary) throws ErrorException, IOException {
+        Validator.validate(resourceDictionary);
         Call<ResponseBody> call = service.putDictionary(resourceDictionary, this.getAcceptLanguage());
         return putDictionaryDelegate(call.execute());
     }
@@ -325,6 +331,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the {@link Call} object
      */
     public Call<ResponseBody> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, final ServiceCallback<Void> serviceCallback) {
+        Validator.validate(resourceDictionary, serviceCallback);
         Call<ResponseBody> call = service.putDictionary(resourceDictionary, this.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -395,6 +402,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putResourceCollection(ResourceCollection resourceComplexObject) throws ErrorException, IOException {
+        Validator.validate(resourceComplexObject);
         Call<ResponseBody> call = service.putResourceCollection(resourceComplexObject, this.getAcceptLanguage());
         return putResourceCollectionDelegate(call.execute());
     }
@@ -407,6 +415,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
      * @return the {@link Call} object
      */
     public Call<ResponseBody> putResourceCollectionAsync(ResourceCollection resourceComplexObject, final ServiceCallback<Void> serviceCallback) {
+        Validator.validate(resourceComplexObject, serviceCallback);
         Call<ResponseBody> call = service.putResourceCollection(resourceComplexObject, this.getAcceptLanguage());
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override

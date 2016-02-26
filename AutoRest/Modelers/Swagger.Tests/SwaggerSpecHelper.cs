@@ -89,6 +89,6 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
             {
                 Assert.Equal(expectedLines[i], actualLines[i]);
             }
-        }
+        }        
     }
 }

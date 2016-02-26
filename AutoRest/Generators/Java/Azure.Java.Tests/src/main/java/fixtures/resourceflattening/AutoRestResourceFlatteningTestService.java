@@ -11,6 +11,7 @@
 package fixtures.resourceflattening;
 
 import com.microsoft.azure.AzureClient;
+import com.microsoft.rest.AutoRestBaseUrl;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
 import com.microsoft.rest.serializer.JacksonMapperAdapter;
 import com.microsoft.rest.ServiceCallback;
@@ -37,10 +38,11 @@ import retrofit2.http.PUT;
  */
 public interface AutoRestResourceFlatteningTestService {
     /**
-     * Gets the URI used as the base for all cloud service requests.
-     * @return The BaseUri value.
+     * Gets the URL used as the base for all cloud service requests.
+     *
+     * @return the BaseUrl object.
      */
-    String getBaseUri();
+    AutoRestBaseUrl getBaseUrl();
 
     /**
      * Gets the list of interceptors the OkHttp client will execute.

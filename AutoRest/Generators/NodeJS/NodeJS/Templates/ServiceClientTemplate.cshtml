@@ -49,8 +49,13 @@ var ServiceClient = msRest.ServiceClient;
 @: * @@param {@param.Type.Name.ToCamelCase()} @param.Name - @param.Documentation
 @: *
 }
- * @@param {string} [baseUri] - The base URI of the service.
- *
+
+@if(!Model.IsCustomBaseUri)
+{ 
+@: * @@param {string} [baseUri] - The base URI of the service.
+@: *
+}
+
  * @@param {object} [options] - The parameter options
  *
  * @@param {Array} [options.filters] - Filters to be added to the request pipeline
@@ -67,6 +72,11 @@ var ServiceClient = msRest.ServiceClient;
 }
  */
 function @(Model.Name)(@(Model.RequiredConstructorParameters), options) {
+@foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
+{
+  @:this.@(property.Name) = @(property.DefaultValue);
+}
+
 @foreach (var param in requiredParameters)
 {
 @:  if (@(param.Name) === null || @(param.Name) === undefined) {
@@ -77,26 +87,28 @@ function @(Model.Name)(@(Model.RequiredConstructorParameters), options) {
   if (!options) options = {};
   @EmptyLine
   @(Model.Name)['super_'].call(this, @(requiredParameters.Any(p => p.Type.IsPrimaryType(KnownPrimaryType.Credentials)) ? "credentials" : "null"), options);
-  this.baseUri = baseUri;
+  
+@if(!Model.IsCustomBaseUri)
+{
+  @:this.baseUri = baseUri;
+}
+
   if (!this.baseUri) {
     this.baseUri = '@Model.BaseUrl';
   }
+
 @foreach (var param in requiredParameters)
 {
 @:  this.@(param.Name) = @(param.Name);
 }
   @EmptyLine
-  @foreach (var property in Model.Properties.Where(p => p.DefaultValue != null))
-  {
-  @:this.@(property.Name) = @(property.DefaultValue);
-  }
   @foreach (var property in optionalParameters)
   { 
   @:if(options.@(property.Name) !== null && options.@(property.Name) !== undefined) { 
   @:  this.@(property.Name) = options.@(property.Name);
   @:}
   }
-  
+
   @foreach (var methodGroup in Model.MethodGroupModels)
   {
   @:this.@(methodGroup.MethodGroupName) = new operations.@(methodGroup.MethodGroupType)(this);

@@ -29,6 +29,10 @@ function gulpNugetProjSync(opts) {
 
     var projectJson = JSON.parse(fs.readFileSync(projectJsonPath).toString());
     var packageVersion = projectJson.version;
+    var indexOfDash =  packageVersion.indexOf('-');
+    if (indexOfDash > 0) {
+    	packageVersion = packageVersion.substring(0, indexOfDash);
+    }
     var tokens = packageVersion.split('.')
     var assemblyFileVersion = packageVersion;
     if (tokens.length === 3) {

@@ -16,6 +16,7 @@ from .dictionary import Dictionary
 from .inheritance import Inheritance
 from .polymorphism import Polymorphism
 from .polymorphicrecursive import Polymorphicrecursive
+from .readonlyproperty import Readonlyproperty
 
 __all__ = [
     'BasicOperations',
@@ -25,4 +26,5 @@ __all__ = [
     'Inheritance',
     'Polymorphism',
     'Polymorphicrecursive',
+    'Readonlyproperty',
 ]

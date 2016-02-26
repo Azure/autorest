@@ -16,6 +16,7 @@ using System.Collections.Generic;
 
 namespace Microsoft.Rest.ClientRuntime.Tests
 {
+    [Collection("Serialization Tests")]
     public class JsonSerializationTests
     {
         private const string JsonErrorMessage = "Inappropriate use of JsonConvert.DefaultSettings detected!";

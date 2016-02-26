@@ -3,6 +3,7 @@
 
 using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 #if!NET45
@@ -78,6 +79,30 @@ namespace Microsoft.Rest.Serialization
                     serializer.Serialize(writer, memberValue);
                 }
             }
+        }
+
+        public static string GetPropertyName(this JsonProperty property, out string[] parentPath)
+        {
+            if (property == null)
+            {
+                throw new ArgumentNullException("property");
+            }
+
+            string propertyName = property.PropertyName;
+            parentPath = new string[0];
+
+            if (!string.IsNullOrEmpty(propertyName))
+            {
+                string[] hierarchy = Regex.Split(propertyName, @"(?<!\\)\.")
+                    .Select(p => p?.Replace("\\.", ".")).ToArray();
+                if (hierarchy.Length > 1)
+                {
+                    propertyName = hierarchy.Last();
+                    parentPath = hierarchy.Take(hierarchy.Length - 1).ToArray();
+                }
+            }
+
+            return propertyName;            
         }
     }
 }

@@ -10,6 +10,7 @@
 
 package fixtures.lro.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.microsoft.azure.BaseResource;
 
 /**
@@ -19,6 +20,7 @@ public class SubResource extends BaseResource {
     /**
      * Sub Resource Id.
      */
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String id;
 
     /**

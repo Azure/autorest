@@ -1,0 +1,51 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.13",
+    "title": "Swagger Custom Paths"
+  },
+  "host": "badhost",
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{accountName}.{host}",
+    "parameters": [
+      {
+        "name": "accountName",
+        "description": "Account Name",
+        "required": false,
+        "type": "string",
+        "default": "autorestresourcesproxysite"
+      },
+      {
+        "$ref": "#/parameters/host"
+      }
+    ]
+  },
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/values/foo": {
+      "get": {
+        "tags": [
+          "Values"
+        ],
+        "operationId": "Values_Get",
+        "consumes": [ "application/json" ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "host": {
+      "name": "host",
+      "description": "A string value that is used as a global part of the parameterized host",
+      "type": "string",
+      "required": false,
+      "default": "azurewebsites.net"
+    }
+  }
+}

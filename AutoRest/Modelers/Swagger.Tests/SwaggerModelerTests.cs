@@ -11,6 +11,7 @@ using Microsoft.Rest.Generator.CSharp;
 using Microsoft.Rest.Generator.Extensibility;
 using Microsoft.Rest.Generator.Utilities;
 using Xunit;
+using Newtonsoft.Json.Linq;
 
 namespace Microsoft.Rest.Modeler.Swagger.Tests
 {
@@ -542,6 +543,33 @@ namespace Microsoft.Rest.Modeler.Swagger.Tests
 
             Assert.Equal("MIT", settings.Header);
             Assert.Equal(true, codeGenerator.InternalConstructors);
+        }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
+        [Fact]
+        public void TestParameterizedHostFromSwagger()
+        {
+            var settings = new Settings
+            {
+                Namespace = "Test",
+                Modeler = "Swagger",
+                CodeGenerator = "CSharp",
+                Input = Path.Combine("Swagger", "swagger-x-ms-parameterized-host.json"),
+                Header = "NONE"
+            };
+
+            var modeler = ExtensionsLoader.GetModeler(settings);
+            var client = modeler.Build();
+
+            var hostExtension = client.Extensions["x-ms-parameterized-host"] as JObject;
+            Assert.NotNull(hostExtension);
+            
+            var hostTemplate = (string)hostExtension["hostTemplate"];
+            var jArrayParameters = hostExtension["parameters"] as JArray;
+            Assert.NotNull(jArrayParameters);
+
+            Assert.Equal(2, jArrayParameters.Count);
+            Assert.Equal("{accountName}.{host}", hostTemplate);
         }
     }
 }
