@@ -26,6 +26,7 @@ Release History
 
 - Removed hierarchy scanning for attribute maps from base Model class - relies on generator to populate attribute
   maps according to hierarchy.
+- Base class Paged now inherits from collections.Iterable.
 
 2016-02-19 Version 0.0.2
 ++++++++++++++++++++++++
