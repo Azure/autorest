@@ -52,7 +52,8 @@ public class JacksonMapperAdapter {
                 .registerModule(ByteArraySerializer.getModule())
                 .registerModule(DateTimeSerializer.getModule())
                 .registerModule(DateTimeRfc1123Serializer.getModule())
-                .registerModule(HeadersSerializer.getModule());
+                .registerModule(HeadersSerializer.getModule())
+                .registerModule(FlatteningDeserializer.getModule());
     }
 
     /**

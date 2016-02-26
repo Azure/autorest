@@ -38,6 +38,10 @@ var type = types[i];
 @:})
 }
 }
+@if (Model.NeedsFlatten)
+{
+@:@@JsonFlatten
+}
 public class @(Model.Name)@(Model.BaseModelType != null ? " extends " + Model.BaseModelType.Name : "") {
 @foreach (var property in Model.Properties)
 {

@@ -5,7 +5,7 @@
  *
  */
 
-package com.microsoft.azure.serializer;
+package com.microsoft.rest.serializer;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonFactory;
@@ -21,19 +21,16 @@ import com.fasterxml.jackson.databind.deser.ResolvableDeserializer;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.microsoft.azure.BaseResource;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
 
 /**
- * Custom serializer for deserializing {@link BaseResource} with wrapped properties.
+ * Custom serializer for deserializing complex types with wrapped properties.
  * For example, a property with annotation @JsonProperty(value = "properties.name")
  * will be mapped to a top level "name" property in the POJO model.
- *
- * @param <T> the type to deserialize into.
  */
-public class FlatteningDeserializer<T> extends StdDeserializer<T> implements ResolvableDeserializer {
+public class FlatteningDeserializer extends StdDeserializer<Object> implements ResolvableDeserializer {
     /**
      * The default mapperAdapter for the current type.
      */
@@ -56,13 +53,12 @@ public class FlatteningDeserializer<T> extends StdDeserializer<T> implements Res
      * @return a simple module to be plugged onto Jackson ObjectMapper.
      */
     public static SimpleModule getModule() {
-        final Class<?> vc = BaseResource.class;
         SimpleModule module = new SimpleModule();
         module.setDeserializerModifier(new BeanDeserializerModifier() {
             @Override
             public JsonDeserializer<?> modifyDeserializer(DeserializationConfig config, BeanDescription beanDesc, JsonDeserializer<?> deserializer) {
-                if (vc.isAssignableFrom(beanDesc.getBeanClass()) && vc != beanDesc.getBeanClass()) {
-                    return new FlatteningDeserializer<BaseResource>(beanDesc.getBeanClass(), deserializer);
+                if (beanDesc.getBeanClass().getAnnotation(JsonFlatten.class) != null) {
+                    return new FlatteningDeserializer(beanDesc.getBeanClass(), deserializer);
                 }
                 return deserializer;
             }
@@ -72,8 +68,8 @@ public class FlatteningDeserializer<T> extends StdDeserializer<T> implements Res
 
     @SuppressWarnings("unchecked")
     @Override
-    public T deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
-        JsonNode root = new AzureJacksonMapperAdapter().getObjectMapper().readTree(jp);
+    public Object deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
+        JsonNode root = new JacksonMapperAdapter().getObjectMapper().readTree(jp);
         final Class<?> tClass = this.defaultDeserializer.handledType();
         for (Field field : tClass.getDeclaredFields()) {
             JsonNode node = root;
@@ -94,7 +90,7 @@ public class FlatteningDeserializer<T> extends StdDeserializer<T> implements Res
         }
         JsonParser parser = new JsonFactory().createParser(root.toString());
         parser.nextToken();
-        return (T) defaultDeserializer.deserialize(parser, ctxt);
+        return defaultDeserializer.deserialize(parser, ctxt);
     }
 
     @Override

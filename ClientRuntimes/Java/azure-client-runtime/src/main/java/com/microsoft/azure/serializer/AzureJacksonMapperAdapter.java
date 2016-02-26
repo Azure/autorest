@@ -8,7 +8,7 @@
 package com.microsoft.azure.serializer;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.microsoft.rest.serializer.JacksonMapperAdapter;
+import com.microsoft.rest.serializer.*;
 
 /**
  * A serialization helper class overriding {@link JacksonMapperAdapter} with extra
@@ -26,7 +26,6 @@ public final class AzureJacksonMapperAdapter extends JacksonMapperAdapter {
             azureObjectMapper = new ObjectMapper();
             initializeObjectMapper(azureObjectMapper);
             azureObjectMapper
-                    .registerModule(FlatteningDeserializer.getModule())
                     .registerModule(FlatteningSerializer.getModule())
                     .registerModule(CloudErrorDeserializer.getModule());
         }
