@@ -248,7 +248,7 @@ function serializeCompositeType(mapper, object, objectName) {
         var parentObject = payload;
         paths.forEach(function(pathName) {
            var childObject = parentObject[pathName];
-           if (childObject === null || childObject === undefined) {
+           if ((childObject === null || childObject === undefined) && (object[key] !== null && object[key] !== undefined)) {
             parentObject[pathName] = {};
            }
            parentObject = parentObject[pathName];
@@ -491,10 +491,11 @@ function deserializeCompositeType(mapper, responseBody, objectName) {
         var paths = splitSerializeName(modelProps[key].serializedName);
         paths.forEach(function(item){
             jpath.push(util.format('[\'%s\']', item));
-        })
+        });
         //deserialize the property if it is present in the provided responseBody instance
         var propertyInstance;
         try {
+          /*jslint evil: true */
           propertyInstance = eval(jpath.join(''));
         } catch (err) {
           continue;
@@ -533,6 +534,6 @@ function splitSerializeName(prop) {
   });
 
   return classes;
-};
+}
 
 exports = module.exports;

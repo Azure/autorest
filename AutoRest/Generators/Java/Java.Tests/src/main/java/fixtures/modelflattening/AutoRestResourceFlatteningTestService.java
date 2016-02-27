@@ -15,6 +15,7 @@ import okhttp3.Interceptor;
 import okhttp3.logging.HttpLoggingInterceptor.Level;
 import com.microsoft.rest.AutoRestBaseUrl;
 import com.microsoft.rest.serializer.JacksonMapperAdapter;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.modelflattening.models.ErrorException;
@@ -25,14 +26,6 @@ import fixtures.modelflattening.models.ResourceCollection;
 import fixtures.modelflattening.models.SimpleProduct;
 import java.io.IOException;
 import java.util.Map;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.Path;
-import retrofit2.http.POST;
-import retrofit2.http.PUT;
 
 /**
  * The interface for AutoRestResourceFlatteningTestService class.
@@ -68,49 +61,6 @@ public interface AutoRestResourceFlatteningTestService {
     JacksonMapperAdapter getMapperAdapter();
 
     /**
-     * The interface defining all the services for AutoRestResourceFlatteningTestService to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface AutoRestResourceFlatteningTestServiceService {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("model-flatten/array")
-        Call<ResponseBody> putArray(@Body List<Resource> resourceArray);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("model-flatten/array")
-        Call<ResponseBody> getArray();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("model-flatten/dictionary")
-        Call<ResponseBody> putDictionary(@Body Map<String, FlattenedProduct> resourceDictionary);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("model-flatten/dictionary")
-        Call<ResponseBody> getDictionary();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("model-flatten/resourcecollection")
-        Call<ResponseBody> putResourceCollection(@Body ResourceCollection resourceComplexObject);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("model-flatten/resourcecollection")
-        Call<ResponseBody> getResourceCollection();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("model-flatten/customFlattening")
-        Call<ResponseBody> putSimpleProduct(@Body SimpleProduct simpleBodyProduct);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("model-flatten/customFlattening")
-        Call<ResponseBody> postFlattenedSimpleProduct(@Body SimpleProduct simpleBodyProduct);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("model-flatten/customFlattening/parametergrouping/{name}/")
-        Call<ResponseBody> putSimpleProductWithGrouping(@Path("name") String name, @Body SimpleProduct simpleBodyProduct);
-
-    }
-
-    /**
      * Put External Resource as an Array.
      *
      * @param resourceArray External Resource as an Array to put
@@ -125,9 +75,10 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @param resourceArray External Resource as an Array to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putArrayAsync(List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putArrayAsync(List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback);
+
     /**
      * Get External Resource as an Array.
      *
@@ -141,9 +92,10 @@ public interface AutoRestResourceFlatteningTestService {
      * Get External Resource as an Array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getArrayAsync(final ServiceCallback<List<FlattenedProduct>> serviceCallback);
+    ServiceCall getArrayAsync(final ServiceCallback<List<FlattenedProduct>> serviceCallback);
+
     /**
      * Put External Resource as a Dictionary.
      *
@@ -159,9 +111,10 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @param resourceDictionary External Resource as a Dictionary to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, final ServiceCallback<Void> serviceCallback);
+
     /**
      * Get External Resource as a Dictionary.
      *
@@ -175,9 +128,10 @@ public interface AutoRestResourceFlatteningTestService {
      * Get External Resource as a Dictionary.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProduct>> serviceCallback);
+    ServiceCall getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProduct>> serviceCallback);
+
     /**
      * Put External Resource as a ResourceCollection.
      *
@@ -193,9 +147,10 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putResourceCollectionAsync(ResourceCollection resourceComplexObject, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putResourceCollectionAsync(ResourceCollection resourceComplexObject, final ServiceCallback<Void> serviceCallback);
+
     /**
      * Get External Resource as a ResourceCollection.
      *
@@ -209,9 +164,10 @@ public interface AutoRestResourceFlatteningTestService {
      * Get External Resource as a ResourceCollection.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getResourceCollectionAsync(final ServiceCallback<ResourceCollection> serviceCallback);
+    ServiceCall getResourceCollectionAsync(final ServiceCallback<ResourceCollection> serviceCallback);
+
     /**
      * Put Simple Product with client flattening true on the model.
      *
@@ -227,9 +183,10 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @param simpleBodyProduct Simple body product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putSimpleProductAsync(SimpleProduct simpleBodyProduct, final ServiceCallback<SimpleProduct> serviceCallback);
+    ServiceCall putSimpleProductAsync(SimpleProduct simpleBodyProduct, final ServiceCallback<SimpleProduct> serviceCallback);
+
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
      *
@@ -252,9 +209,10 @@ public interface AutoRestResourceFlatteningTestService {
      * @param baseProductDescription Description of product.
      * @param odatavalue URL value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> postFlattenedSimpleProductAsync(String baseProductId, String maxProductDisplayName, String baseProductDescription, String odatavalue, final ServiceCallback<SimpleProduct> serviceCallback);
+    ServiceCall postFlattenedSimpleProductAsync(String baseProductId, String maxProductDisplayName, String baseProductDescription, String odatavalue, final ServiceCallback<SimpleProduct> serviceCallback);
+
     /**
      * Put Simple Product with client flattening true on the model.
      *
@@ -271,8 +229,8 @@ public interface AutoRestResourceFlatteningTestService {
      *
      * @param flattenParameterGroup Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup, final ServiceCallback<SimpleProduct> serviceCallback);
+    ServiceCall putSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup, final ServiceCallback<SimpleProduct> serviceCallback);
 
 }

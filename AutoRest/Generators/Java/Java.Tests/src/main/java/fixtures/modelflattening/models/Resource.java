@@ -10,6 +10,7 @@
 
 package fixtures.modelflattening.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
 /**
@@ -19,11 +20,13 @@ public class Resource {
     /**
      * Resource Id.
      */
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String id;
 
     /**
      * Resource Type.
      */
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String type;
 
     /**
@@ -39,6 +42,7 @@ public class Resource {
     /**
      * Resource Name.
      */
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String name;
 
     /**

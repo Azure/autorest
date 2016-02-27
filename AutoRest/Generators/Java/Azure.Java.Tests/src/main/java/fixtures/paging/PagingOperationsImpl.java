@@ -766,6 +766,7 @@ public final class PagingOperationsImpl implements PagingOperations {
         if (nextPageLink == null) {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
+        Validator.validate(pagingGetMultiplePagesWithOffsetNextOptions);
         Integer maxresults = null;
         maxresults = pagingGetMultiplePagesWithOffsetNextOptions.getMaxresults();
         Integer timeout = null;
@@ -789,6 +790,7 @@ public final class PagingOperationsImpl implements PagingOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter nextPageLink is required and cannot be null."));
             return null;
         }
+        Validator.validate(pagingGetMultiplePagesWithOffsetNextOptions, serviceCallback);
         Integer maxresults = null;
         maxresults = pagingGetMultiplePagesWithOffsetNextOptions.getMaxresults();
         Integer timeout = null;
