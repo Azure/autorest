@@ -96,7 +96,7 @@ namespace Microsoft.Rest.Generator.Cli
 
             // Generate usage syntax
             var syntaxSection = new StringBuilder("AutoRest.exe ");
-            foreach (var parameter in parameters.OrderByDescending(t => t.Item2.IsRequired))
+            foreach (var parameter in parameters.OrderBy(t => t.Item1).OrderByDescending(t => t.Item2.IsRequired))
             {
                 if (parameter.Item2.IsRequired)
                 {
@@ -112,7 +112,7 @@ namespace Microsoft.Rest.Generator.Cli
             var parametersSection = new StringBuilder();
             const string parametersPattern = @"\$parameters-start\$(.+)\$parameters-end\$";
             var parameterTemplate = Regex.Match(template, parametersPattern, RegexOptions.Singleline).Groups[1].Value.Trim();
-            foreach (PropertyInfo property in typeof(Settings).GetProperties())
+            foreach (PropertyInfo property in typeof(Settings).GetProperties().OrderBy(p => p.Name))
             {
                 SettingsInfoAttribute doc = (SettingsInfoAttribute)property.GetCustomAttributes(
                     typeof(SettingsInfoAttribute)).FirstOrDefault();
@@ -151,7 +151,7 @@ namespace Microsoft.Rest.Generator.Cli
             var generatorsSection = new StringBuilder();
             const string generatorsPattern = @"\$generators-start\$(.+)\$generators-end\$";
             var generatorsTemplate = Regex.Match(template, generatorsPattern, RegexOptions.Singleline).Groups[1].Value.Trim();
-            foreach (string generator in autorestConfig.CodeGenerators.Keys)
+            foreach (string generator in autorestConfig.CodeGenerators.Keys.OrderBy(k => k))
             {
                 try
                 {
