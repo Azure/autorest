@@ -79,7 +79,7 @@ public final class InheritanceOperationsImpl implements InheritanceOperations {
     }
 
     private ServiceResponse<Siamese> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Siamese, ErrorException>()
+        return new ServiceResponseBuilder<Siamese, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Siamese>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -131,7 +131,7 @@ public final class InheritanceOperationsImpl implements InheritanceOperations {
     }
 
     private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

@@ -78,7 +78,7 @@ public final class DateOperationsImpl implements DateOperations {
     }
 
     private ServiceResponse<LocalDate> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<LocalDate, ErrorException>()
+        return new ServiceResponseBuilder<LocalDate, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<LocalDate>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -118,7 +118,7 @@ public final class DateOperationsImpl implements DateOperations {
     }
 
     private ServiceResponse<LocalDate> getInvalidDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<LocalDate, ErrorException>()
+        return new ServiceResponseBuilder<LocalDate, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<LocalDate>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -158,7 +158,7 @@ public final class DateOperationsImpl implements DateOperations {
     }
 
     private ServiceResponse<LocalDate> getOverflowDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<LocalDate, ErrorException>()
+        return new ServiceResponseBuilder<LocalDate, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<LocalDate>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -198,7 +198,7 @@ public final class DateOperationsImpl implements DateOperations {
     }
 
     private ServiceResponse<LocalDate> getUnderflowDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<LocalDate, ErrorException>()
+        return new ServiceResponseBuilder<LocalDate, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<LocalDate>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -248,7 +248,7 @@ public final class DateOperationsImpl implements DateOperations {
     }
 
     private ServiceResponse<Void> putMaxDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -288,7 +288,7 @@ public final class DateOperationsImpl implements DateOperations {
     }
 
     private ServiceResponse<LocalDate> getMaxDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<LocalDate, ErrorException>()
+        return new ServiceResponseBuilder<LocalDate, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<LocalDate>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -338,7 +338,7 @@ public final class DateOperationsImpl implements DateOperations {
     }
 
     private ServiceResponse<Void> putMinDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -378,7 +378,7 @@ public final class DateOperationsImpl implements DateOperations {
     }
 
     private ServiceResponse<LocalDate> getMinDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<LocalDate, ErrorException>()
+        return new ServiceResponseBuilder<LocalDate, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<LocalDate>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

@@ -77,7 +77,7 @@ public final class IntOperationsImpl implements IntOperations {
     }
 
     private ServiceResponse<Integer> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Integer, ErrorException>()
+        return new ServiceResponseBuilder<Integer, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Integer>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -117,7 +117,7 @@ public final class IntOperationsImpl implements IntOperations {
     }
 
     private ServiceResponse<Integer> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Integer, ErrorException>()
+        return new ServiceResponseBuilder<Integer, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Integer>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -157,7 +157,7 @@ public final class IntOperationsImpl implements IntOperations {
     }
 
     private ServiceResponse<Integer> getOverflowInt32Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Integer, ErrorException>()
+        return new ServiceResponseBuilder<Integer, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Integer>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -197,7 +197,7 @@ public final class IntOperationsImpl implements IntOperations {
     }
 
     private ServiceResponse<Integer> getUnderflowInt32Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Integer, ErrorException>()
+        return new ServiceResponseBuilder<Integer, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Integer>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -237,7 +237,7 @@ public final class IntOperationsImpl implements IntOperations {
     }
 
     private ServiceResponse<Long> getOverflowInt64Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Long, ErrorException>()
+        return new ServiceResponseBuilder<Long, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Long>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -277,7 +277,7 @@ public final class IntOperationsImpl implements IntOperations {
     }
 
     private ServiceResponse<Long> getUnderflowInt64Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Long, ErrorException>()
+        return new ServiceResponseBuilder<Long, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Long>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -319,7 +319,7 @@ public final class IntOperationsImpl implements IntOperations {
     }
 
     private ServiceResponse<Void> putMax32Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -361,7 +361,7 @@ public final class IntOperationsImpl implements IntOperations {
     }
 
     private ServiceResponse<Void> putMax64Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -403,7 +403,7 @@ public final class IntOperationsImpl implements IntOperations {
     }
 
     private ServiceResponse<Void> putMin32Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -445,7 +445,7 @@ public final class IntOperationsImpl implements IntOperations {
     }
 
     private ServiceResponse<Void> putMin64Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

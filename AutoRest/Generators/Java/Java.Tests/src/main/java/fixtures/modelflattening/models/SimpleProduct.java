@@ -11,10 +11,12 @@
 package fixtures.modelflattening.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.microsoft.rest.serializer.JsonFlatten;
 
 /**
  * The product documentation.
  */
+@JsonFlatten
 public class SimpleProduct extends BaseProduct {
     /**
      * Display name of product.

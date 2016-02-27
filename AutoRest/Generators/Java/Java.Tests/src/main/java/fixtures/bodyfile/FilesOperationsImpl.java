@@ -78,7 +78,7 @@ public final class FilesOperationsImpl implements FilesOperations {
     }
 
     private ServiceResponse<InputStream> getFileDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<InputStream, ErrorException>()
+        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<InputStream>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -118,7 +118,7 @@ public final class FilesOperationsImpl implements FilesOperations {
     }
 
     private ServiceResponse<InputStream> getEmptyFileDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<InputStream, ErrorException>()
+        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<InputStream>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

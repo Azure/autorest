@@ -79,7 +79,7 @@ public final class BasicOperationsImpl implements BasicOperations {
     }
 
     private ServiceResponse<Basic> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Basic, ErrorException>()
+        return new ServiceResponseBuilder<Basic, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Basic>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -138,7 +138,7 @@ public final class BasicOperationsImpl implements BasicOperations {
     }
 
     private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -178,7 +178,7 @@ public final class BasicOperationsImpl implements BasicOperations {
     }
 
     private ServiceResponse<Basic> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Basic, ErrorException>()
+        return new ServiceResponseBuilder<Basic, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Basic>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -218,7 +218,7 @@ public final class BasicOperationsImpl implements BasicOperations {
     }
 
     private ServiceResponse<Basic> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Basic, ErrorException>()
+        return new ServiceResponseBuilder<Basic, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Basic>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -258,7 +258,7 @@ public final class BasicOperationsImpl implements BasicOperations {
     }
 
     private ServiceResponse<Basic> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Basic, ErrorException>()
+        return new ServiceResponseBuilder<Basic, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Basic>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -298,7 +298,7 @@ public final class BasicOperationsImpl implements BasicOperations {
     }
 
     private ServiceResponse<Basic> getNotProvidedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Basic, ErrorException>()
+        return new ServiceResponseBuilder<Basic, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Basic>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
