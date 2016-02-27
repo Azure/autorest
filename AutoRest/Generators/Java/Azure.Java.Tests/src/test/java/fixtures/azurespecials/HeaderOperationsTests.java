@@ -11,7 +11,7 @@ public class HeaderOperationsTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestAzureSpecialParametersTestClientImpl("http://localhost.:3000");
+        client = new AutoRestAzureSpecialParametersTestClientImpl("http://localhost.:3000", null);
     }
 
     @Test

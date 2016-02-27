@@ -140,22 +140,6 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
 
     /**
      * Initializes an instance of AutoRestReportServiceForAzure client.
-     */
-    public AutoRestReportServiceForAzureImpl() {
-        this("http://localhost");
-    }
-
-    /**
-     * Initializes an instance of AutoRestReportServiceForAzure client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    public AutoRestReportServiceForAzureImpl(String baseUrl) {
-        this(baseUrl, null);
-    }
-
-    /**
-     * Initializes an instance of AutoRestReportServiceForAzure client.
      *
      * @param credentials the management credentials for Azure
      */

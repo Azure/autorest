@@ -147,22 +147,6 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
 
     /**
      * Initializes an instance of AutoRestResourceFlatteningTestService client.
-     */
-    public AutoRestResourceFlatteningTestServiceImpl() {
-        this("http://localhost");
-    }
-
-    /**
-     * Initializes an instance of AutoRestResourceFlatteningTestService client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    public AutoRestResourceFlatteningTestServiceImpl(String baseUrl) {
-        this(baseUrl, null);
-    }
-
-    /**
-     * Initializes an instance of AutoRestResourceFlatteningTestService client.
      *
      * @param credentials the management credentials for Azure
      */

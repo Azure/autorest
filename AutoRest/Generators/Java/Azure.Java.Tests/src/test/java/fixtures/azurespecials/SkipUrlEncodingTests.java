@@ -17,7 +17,7 @@ public class SkipUrlEncodingTests {
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestAzureSpecialParametersTestClientImpl(baseUrl).getSkipUrlEncodingOperations();
+        client = new AutoRestAzureSpecialParametersTestClientImpl(baseUrl, null).getSkipUrlEncodingOperations();
     }
 
     @Ignore("wait for this release -- https://github.com/square/retrofit/commit/2ea70568bd057fa9235ae5183cebbde1659af84d")
