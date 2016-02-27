@@ -85,8 +85,8 @@ public class FlatteningDeserializer extends StdDeserializer<Object> implements R
             JsonProperty property = field.getAnnotation(JsonProperty.class);
             if (property != null) {
                 String value = property.value();
-                if (value.contains(".")) {
-                    String[] values = value.split("\\.");
+                if (value.matches(".+[^\\\\]\\..+")) {
+                    String[] values = value.split("((?<!\\\\))\\.");
                     for (String val : values) {
                         node = node.get(val);
                         if (node == null) {
