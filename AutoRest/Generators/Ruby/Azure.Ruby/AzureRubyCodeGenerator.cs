@@ -139,10 +139,29 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             // Requirements
             var requirementsTemplate = new RequirementsTemplate
             {
-                Model = new AzureRequirementsTemplateModel(serviceClient, sdkName, this.ImplementationFileExtension),
+                Model = new AzureRequirementsTemplateModel(serviceClient, this.packageName ?? this.sdkName, this.ImplementationFileExtension),
             };
-            await Write(requirementsTemplate,
-                RubyCodeNamer.UnderscoreCase(sdkName) + ImplementationFileExtension);
+            await Write(requirementsTemplate, RubyCodeNamer.UnderscoreCase(this.packageName ?? this.sdkName) + ImplementationFileExtension);
+                
+                // Version File
+            if(this.packageVersion != null)
+            {
+                var versionTemplate = new VersionTemplate
+                {
+                    Model = new VersionTemplateModel(packageVersion),
+                };
+                await Write(versionTemplate, Path.Combine(sdkPath, "version" + ImplementationFileExtension));   
+            }
+            
+            // Module Definition File
+            if(Settings.Namespace != null)
+            {
+                var modTemplate = new ModuleDefinitionTemplate
+                {
+                    Model = new ModuleDefinitionTemplateModel(Settings.Namespace),
+                };
+                await Write(modTemplate, Path.Combine(sdkPath, "module_definition" + ImplementationFileExtension));   
+            }
         }
     }
 }

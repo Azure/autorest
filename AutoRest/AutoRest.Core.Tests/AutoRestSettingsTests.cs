@@ -48,6 +48,20 @@ namespace Microsoft.Rest.Generator.Test
         }
 
         [Fact]
+        public void NonEmptyPackageVersionIsSet()
+        {
+            var settings = Settings.Create(new[] {"-pv", "1.2.1"});
+            Assert.Equal("1.2.1", settings.PackageVersion);
+        }
+
+        [Fact]
+        public void NonEmptyPackageNameIsSet()
+        {
+            var settings = Settings.Create(new[] {"-pn", "HelloWorld"});
+            Assert.Equal("HelloWorld", settings.PackageName);
+        }
+
+        [Fact]
         public void CreateWithValidParametersWorks()
         {
             var settings = Settings.Create(new[]
