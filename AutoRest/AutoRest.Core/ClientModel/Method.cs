@@ -25,6 +25,7 @@ namespace Microsoft.Rest.Generator.ClientModel
             RequestHeaders = new Dictionary<string, string>();
             Responses = new Dictionary<HttpStatusCode, Response>();
             InputParameterTransformation = new List<ParameterTransformation>();
+            Scope = new ScopeProvider();
         }
 
         /// <summary>
@@ -145,6 +146,11 @@ namespace Microsoft.Rest.Generator.ClientModel
         public Dictionary<string, object> Extensions { get; private set; }
 
         /// <summary>
+        /// Gets 
+        /// </summary>
+        public IScopeProvider Scope { get; private set; }
+
+        /// <summary>
         /// Returns a string representation of the Method object.
         /// </summary>
         /// <returns>
@@ -169,6 +175,7 @@ namespace Microsoft.Rest.Generator.ClientModel
             newMethod.RequestHeaders = new Dictionary<string, string>();
             newMethod.Responses = new Dictionary<HttpStatusCode, Response>();
             newMethod.InputParameterTransformation = new List<ParameterTransformation>();
+            newMethod.Scope = new ScopeProvider();
             this.Extensions.ForEach(e => newMethod.Extensions[e.Key] = e.Value);
             this.Parameters.ForEach(p => newMethod.Parameters.Add((Parameter)p.Clone()));
             this.InputParameterTransformation.ForEach(m => newMethod.InputParameterTransformation.Add((ParameterTransformation)m.Clone()));

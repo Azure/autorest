@@ -29,7 +29,7 @@ public class Product extends Resource {
      * 'Creating', 'Created', 'Updating', 'Updated', 'Deleting', 'Deleted',
      * 'OK'.
      */
-    @JsonProperty(value = "properties.provisioningStateValues")
+    @JsonProperty(value = "properties.provisioningStateValues", access = JsonProperty.Access.WRITE_ONLY)
     private String provisioningStateValues;
 
     /**

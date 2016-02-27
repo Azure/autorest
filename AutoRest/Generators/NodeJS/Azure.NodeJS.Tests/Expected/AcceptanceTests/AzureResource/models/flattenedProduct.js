@@ -47,6 +47,7 @@ FlattenedProduct.prototype.mapper = function () {
       modelProperties: {
         id: {
           required: false,
+          readOnly: true,
           serializedName: 'id',
           type: {
             name: 'String'
@@ -54,6 +55,7 @@ FlattenedProduct.prototype.mapper = function () {
         },
         type: {
           required: false,
+          readOnly: true,
           serializedName: 'type',
           type: {
             name: 'String'
@@ -82,6 +84,7 @@ FlattenedProduct.prototype.mapper = function () {
         },
         name: {
           required: false,
+          readOnly: true,
           serializedName: 'name',
           type: {
             name: 'String'

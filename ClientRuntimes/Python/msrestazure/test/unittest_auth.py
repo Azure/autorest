@@ -314,7 +314,7 @@ class TestInteractiveCredentials(unittest.TestCase):
         self.assertEqual(creds.token, session.fetch_token.return_value)
         session.fetch_token.assert_called_with(
             "token_uri", client_id="id", username='user',
-            client_secret="secret", password='pass', resource='resource')
+            client_secret="secret", password='pass', resource='resource', verify=True)
 
         session.fetch_token.side_effect = oauthlib.oauth2.OAuth2Error
 
@@ -331,7 +331,7 @@ class TestInteractiveCredentials(unittest.TestCase):
             session.fetch_token.assert_called_with(
                 "https://login.microsoftonline.com/private/oauth2/token",
                 client_id='04b07795-8ddb-461a-bbee-02f9e1bf7b46', username='my_username',
-                password='my_password', resource='resource')
+                password='my_password', resource='resource', verify=False)
 
         with mock.patch.object(
             UserPassCredentials, '_setup_session', return_value=session):
@@ -342,7 +342,7 @@ class TestInteractiveCredentials(unittest.TestCase):
             session.fetch_token.assert_called_with(
                 "https://login.chinacloudapi.cn/private/oauth2/token",
                 client_id="client_id", username='my_username',
-                password='my_password', resource='https://management.core.chinacloudapi.cn/')
+                password='my_password', resource='https://management.core.chinacloudapi.cn/', verify=False)
 
 
 if __name__ == '__main__':

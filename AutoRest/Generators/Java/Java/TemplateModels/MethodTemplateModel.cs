@@ -14,8 +14,6 @@ namespace Microsoft.Rest.Generator.Java
 {
     public class MethodTemplateModel : Method
     {
-        private readonly IScopeProvider _scopeProvider = new ScopeProvider();
-
         public MethodTemplateModel(Method source, ServiceClient serviceClient)
         {
             this.LoadFrom(source);
@@ -42,11 +40,6 @@ namespace Microsoft.Rest.Generator.Java
         public ServiceClient ServiceClient { get; set; }
 
         public List<ParameterTemplateModel> ParameterTemplateModels { get; private set; }
-        
-        public IScopeProvider Scope
-        {
-            get { return _scopeProvider; }
-        }
 
         public IEnumerable<Parameter> RetrofitParameters
         {
@@ -334,10 +327,7 @@ namespace Microsoft.Rest.Generator.Java
                     {
                         continue;
                     }
-                    if (param.IsRequired)
-                    {
-                        yield return param;
-                    }
+                    yield return param;
                 }
             }
         }
@@ -632,18 +622,29 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
+        public virtual string ServiceCallConstruction
+        {
+            get
+            {
+                return "final ServiceCall serviceCall = new ServiceCall(call);";
+            }
+        }
+
+        public virtual string CallbackDocumentation
+        {
+            get
+            {
+                return " * @param serviceCallback the async ServiceCallback to handle successful and failed responses.";
+            }
+        }
+
         public virtual List<string> InterfaceImports
         {
             get
             {
                 HashSet<string> imports = new HashSet<string>();
                 // static imports
-                imports.Add("retrofit2.Call");
-                imports.Add("retrofit2.http.Headers");
-                if (this.HttpMethod != HttpMethod.Head)
-                {
-                    imports.Add("okhttp3.ResponseBody");
-                }
+                imports.Add("com.microsoft.rest.ServiceCall");
                 imports.Add("com.microsoft.rest." + OperationResponseType);
                 imports.Add("com.microsoft.rest.ServiceCallback");
                 // parameter types
@@ -652,21 +653,10 @@ namespace Microsoft.Rest.Generator.Java
                     .Where(p => p.Location == ParameterLocation.Body
                         || !p.Type.NeedsSpecialSerialization())
                     .ForEach(p => imports.AddRange(p.Type.ImportFrom(ServiceClient.Namespace)));
-                // parameter locations
-                this.RetrofitParameters.ForEach(p =>
-                {
-                    string locationImport = p.Location.ImportFrom();
-                    if (!string.IsNullOrEmpty(locationImport))
-                    {
-                        imports.Add(p.Location.ImportFrom());
-                    }
-                });
                 // return type
                 imports.AddRange(this.ReturnType.Body.ImportFrom(ServiceClient.Namespace));
                 // Header type
                 imports.AddRange(this.ReturnType.Headers.ImportFrom(ServiceClient.Namespace));
-                // Http verb annotations
-                imports.Add(this.HttpMethod.ImportFrom());
                 // exceptions
                 this.ExceptionString.Split(new string[] { ", " }, StringSplitOptions.RemoveEmptyEntries)
                     .ForEach(ex => {
@@ -684,16 +674,29 @@ namespace Microsoft.Rest.Generator.Java
                 HashSet<string> imports = new HashSet<string>();
                 // static imports
                 imports.Add("retrofit2.Call");
+                imports.Add("retrofit2.http.Headers");
                 imports.Add("retrofit2.Response");
                 imports.Add("retrofit2.Retrofit");
                 if (this.HttpMethod != HttpMethod.Head)
                 {
                     imports.Add("okhttp3.ResponseBody");
                 }
+                imports.Add("com.microsoft.rest.ServiceCall");
                 imports.Add("com.microsoft.rest." + OperationResponseType);
                 imports.Add(RuntimeBasePackage + "." + ResponseBuilder);
                 imports.Add("com.microsoft.rest.ServiceCallback");
 
+                // parameter locations
+                this.RetrofitParameters.ForEach(p =>
+                {
+                    string locationImport = p.Location.ImportFrom();
+                    if (!string.IsNullOrEmpty(locationImport))
+                    {
+                        imports.Add(p.Location.ImportFrom());
+                    }
+                });
+                // Http verb annotations
+                imports.Add(this.HttpMethod.ImportFrom());
                 // response type conversion
                 if (this.Responses.Any())
                 {

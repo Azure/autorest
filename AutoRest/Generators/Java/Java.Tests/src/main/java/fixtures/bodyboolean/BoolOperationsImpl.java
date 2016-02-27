@@ -11,6 +11,7 @@
 package fixtures.bodyboolean;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
@@ -19,6 +20,10 @@ import fixtures.bodyboolean.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.PUT;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -44,6 +49,37 @@ public final class BoolOperationsImpl implements BoolOperations {
     }
 
     /**
+     * The interface defining all the services for BoolOperations to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface BoolService {
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("bool/true")
+        Call<ResponseBody> getTrue();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("bool/true")
+        Call<ResponseBody> putTrue(@Body boolean boolBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("bool/false")
+        Call<ResponseBody> getFalse();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("bool/false")
+        Call<ResponseBody> putFalse(@Body boolean boolBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("bool/null")
+        Call<ResponseBody> getNull();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("bool/invalid")
+        Call<ResponseBody> getInvalid();
+
+    }
+
+    /**
      * Get true Boolean value.
      *
      * @throws ErrorException exception thrown from REST call
@@ -61,8 +97,9 @@ public final class BoolOperationsImpl implements BoolOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getTrueAsync(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceCall getTrueAsync(final ServiceCallback<Boolean> serviceCallback) {
         Call<ResponseBody> call = service.getTrue();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Boolean>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -73,7 +110,7 @@ public final class BoolOperationsImpl implements BoolOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Boolean> getTrueDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -103,8 +140,9 @@ public final class BoolOperationsImpl implements BoolOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putTrue(boolBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -115,7 +153,7 @@ public final class BoolOperationsImpl implements BoolOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putTrueDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -143,8 +181,9 @@ public final class BoolOperationsImpl implements BoolOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getFalseAsync(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceCall getFalseAsync(final ServiceCallback<Boolean> serviceCallback) {
         Call<ResponseBody> call = service.getFalse();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Boolean>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -155,7 +194,7 @@ public final class BoolOperationsImpl implements BoolOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Boolean> getFalseDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -185,8 +224,9 @@ public final class BoolOperationsImpl implements BoolOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.putFalse(boolBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -197,7 +237,7 @@ public final class BoolOperationsImpl implements BoolOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putFalseDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -225,8 +265,9 @@ public final class BoolOperationsImpl implements BoolOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getNullAsync(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceCall getNullAsync(final ServiceCallback<Boolean> serviceCallback) {
         Call<ResponseBody> call = service.getNull();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Boolean>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -237,7 +278,7 @@ public final class BoolOperationsImpl implements BoolOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Boolean> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -265,8 +306,9 @@ public final class BoolOperationsImpl implements BoolOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getInvalidAsync(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceCall getInvalidAsync(final ServiceCallback<Boolean> serviceCallback) {
         Call<ResponseBody> call = service.getInvalid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Boolean>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -277,7 +319,7 @@ public final class BoolOperationsImpl implements BoolOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Boolean> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {

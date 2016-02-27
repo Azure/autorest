@@ -16,6 +16,7 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import okhttp3.logging.HttpLoggingInterceptor.Level;
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
@@ -32,6 +33,12 @@ import java.util.List;
 import java.util.Map;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.Path;
+import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.Response;
 
 /**
@@ -112,6 +119,49 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
     }
 
     /**
+     * The interface defining all the services for AutoRestResourceFlatteningTestService to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface AutoRestResourceFlatteningTestServiceService {
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("model-flatten/array")
+        Call<ResponseBody> putArray(@Body List<Resource> resourceArray);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("model-flatten/array")
+        Call<ResponseBody> getArray();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("model-flatten/dictionary")
+        Call<ResponseBody> putDictionary(@Body Map<String, FlattenedProduct> resourceDictionary);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("model-flatten/dictionary")
+        Call<ResponseBody> getDictionary();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("model-flatten/resourcecollection")
+        Call<ResponseBody> putResourceCollection(@Body ResourceCollection resourceComplexObject);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("model-flatten/resourcecollection")
+        Call<ResponseBody> getResourceCollection();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("model-flatten/customFlattening")
+        Call<ResponseBody> putSimpleProduct(@Body SimpleProduct simpleBodyProduct);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("model-flatten/customFlattening")
+        Call<ResponseBody> postFlattenedSimpleProduct(@Body SimpleProduct simpleBodyProduct);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("model-flatten/customFlattening/parametergrouping/{name}/")
+        Call<ResponseBody> putSimpleProductWithGrouping(@Path("name") String name, @Body SimpleProduct simpleBodyProduct);
+
+    }
+
+    /**
      * Put External Resource as an Array.
      *
      * @param resourceArray External Resource as an Array to put
@@ -120,6 +170,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putArray(List<Resource> resourceArray) throws ErrorException, IOException {
+        Validator.validate(resourceArray);
         Call<ResponseBody> call = service.putArray(resourceArray);
         return putArrayDelegate(call.execute());
     }
@@ -131,8 +182,10 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putArrayAsync(List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putArrayAsync(List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback) {
+        Validator.validate(resourceArray, serviceCallback);
         Call<ResponseBody> call = service.putArray(resourceArray);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -143,7 +196,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putArrayDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -171,8 +224,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getArrayAsync(final ServiceCallback<List<FlattenedProduct>> serviceCallback) {
+    public ServiceCall getArrayAsync(final ServiceCallback<List<FlattenedProduct>> serviceCallback) {
         Call<ResponseBody> call = service.getArray();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<FlattenedProduct>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -183,7 +237,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<List<FlattenedProduct>> getArrayDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -202,6 +256,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putDictionary(Map<String, FlattenedProduct> resourceDictionary) throws ErrorException, IOException {
+        Validator.validate(resourceDictionary);
         Call<ResponseBody> call = service.putDictionary(resourceDictionary);
         return putDictionaryDelegate(call.execute());
     }
@@ -213,8 +268,10 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, final ServiceCallback<Void> serviceCallback) {
+        Validator.validate(resourceDictionary, serviceCallback);
         Call<ResponseBody> call = service.putDictionary(resourceDictionary);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -225,7 +282,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putDictionaryDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -253,8 +310,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProduct>> serviceCallback) {
+    public ServiceCall getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProduct>> serviceCallback) {
         Call<ResponseBody> call = service.getDictionary();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, FlattenedProduct>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -265,7 +323,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, FlattenedProduct>> getDictionaryDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -284,6 +342,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> putResourceCollection(ResourceCollection resourceComplexObject) throws ErrorException, IOException {
+        Validator.validate(resourceComplexObject);
         Call<ResponseBody> call = service.putResourceCollection(resourceComplexObject);
         return putResourceCollectionDelegate(call.execute());
     }
@@ -295,8 +354,10 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putResourceCollectionAsync(ResourceCollection resourceComplexObject, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putResourceCollectionAsync(ResourceCollection resourceComplexObject, final ServiceCallback<Void> serviceCallback) {
+        Validator.validate(resourceComplexObject, serviceCallback);
         Call<ResponseBody> call = service.putResourceCollection(resourceComplexObject);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -307,7 +368,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putResourceCollectionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -335,8 +396,9 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getResourceCollectionAsync(final ServiceCallback<ResourceCollection> serviceCallback) {
+    public ServiceCall getResourceCollectionAsync(final ServiceCallback<ResourceCollection> serviceCallback) {
         Call<ResponseBody> call = service.getResourceCollection();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ResourceCollection>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -347,7 +409,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<ResourceCollection> getResourceCollectionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -366,6 +428,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @return the SimpleProduct object wrapped in {@link ServiceResponse} if successful.
      */
     public ServiceResponse<SimpleProduct> putSimpleProduct(SimpleProduct simpleBodyProduct) throws ErrorException, IOException {
+        Validator.validate(simpleBodyProduct);
         Call<ResponseBody> call = service.putSimpleProduct(simpleBodyProduct);
         return putSimpleProductDelegate(call.execute());
     }
@@ -377,8 +440,10 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putSimpleProductAsync(SimpleProduct simpleBodyProduct, final ServiceCallback<SimpleProduct> serviceCallback) {
+    public ServiceCall putSimpleProductAsync(SimpleProduct simpleBodyProduct, final ServiceCallback<SimpleProduct> serviceCallback) {
+        Validator.validate(simpleBodyProduct, serviceCallback);
         Call<ResponseBody> call = service.putSimpleProduct(simpleBodyProduct);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<SimpleProduct>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -389,7 +454,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<SimpleProduct> putSimpleProductDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -440,7 +505,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> postFlattenedSimpleProductAsync(String baseProductId, String maxProductDisplayName, String baseProductDescription, String odatavalue, final ServiceCallback<SimpleProduct> serviceCallback) {
+    public ServiceCall postFlattenedSimpleProductAsync(String baseProductId, String maxProductDisplayName, String baseProductDescription, String odatavalue, final ServiceCallback<SimpleProduct> serviceCallback) {
         if (baseProductId == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter baseProductId is required and cannot be null."));
             return null;
@@ -458,6 +523,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
             simpleBodyProduct.setOdatavalue(odatavalue);
         }
         Call<ResponseBody> call = service.postFlattenedSimpleProduct(simpleBodyProduct);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<SimpleProduct>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -468,7 +534,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<SimpleProduct> postFlattenedSimpleProductDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -518,7 +584,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup, final ServiceCallback<SimpleProduct> serviceCallback) {
+    public ServiceCall putSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup, final ServiceCallback<SimpleProduct> serviceCallback) {
         if (flattenParameterGroup == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter flattenParameterGroup is required and cannot be null."));
             return null;
@@ -540,6 +606,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
             simpleBodyProduct.setOdatavalue(odatavalue);
         }
         Call<ResponseBody> call = service.putSimpleProductWithGrouping(name, simpleBodyProduct);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<SimpleProduct>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -550,7 +617,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<SimpleProduct> putSimpleProductWithGroupingDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {

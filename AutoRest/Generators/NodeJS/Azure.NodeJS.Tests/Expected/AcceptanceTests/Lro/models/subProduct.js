@@ -47,6 +47,7 @@ SubProduct.prototype.mapper = function () {
       modelProperties: {
         id: {
           required: false,
+          readOnly: true,
           serializedName: 'id',
           type: {
             name: 'String'
@@ -61,6 +62,7 @@ SubProduct.prototype.mapper = function () {
         },
         provisioningStateValues: {
           required: false,
+          readOnly: true,
           serializedName: 'properties.provisioningStateValues',
           type: {
             name: 'String'

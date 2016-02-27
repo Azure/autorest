@@ -51,6 +51,7 @@ Resource.prototype.mapper = function () {
       modelProperties: {
         id: {
           required: false,
+          readOnly: true,
           serializedName: 'id',
           type: {
             name: 'String'
@@ -58,6 +59,7 @@ Resource.prototype.mapper = function () {
         },
         type: {
           required: false,
+          readOnly: true,
           serializedName: 'type',
           type: {
             name: 'String'
@@ -86,6 +88,7 @@ Resource.prototype.mapper = function () {
         },
         name: {
           required: false,
+          readOnly: true,
           serializedName: 'name',
           type: {
             name: 'String'

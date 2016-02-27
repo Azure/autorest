@@ -105,4 +105,10 @@ public interface AutoRestComplexTestService {
      */
     PolymorphicrecursiveOperations getPolymorphicrecursiveOperations();
 
+    /**
+     * Gets the ReadonlypropertyOperations object to access its operations.
+     * @return the ReadonlypropertyOperations object.
+     */
+    ReadonlypropertyOperations getReadonlypropertyOperations();
+
 }

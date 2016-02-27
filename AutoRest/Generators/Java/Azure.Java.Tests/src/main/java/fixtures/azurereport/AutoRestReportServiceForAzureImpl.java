@@ -17,6 +17,7 @@ import com.microsoft.azure.AzureServiceResponseBuilder;
 import com.microsoft.azure.CustomHeaderInterceptor;
 import com.microsoft.rest.AutoRestBaseUrl;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
@@ -28,6 +29,9 @@ import okhttp3.logging.HttpLoggingInterceptor.Level;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -221,6 +225,17 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
     }
 
     /**
+     * The interface defining all the services for AutoRestReportServiceForAzure to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface AutoRestReportServiceForAzureService {
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("report/azure")
+        Call<ResponseBody> getReport(@Header("accept-language") String acceptLanguage);
+
+    }
+
+    /**
      * Get test coverage report.
      *
      * @throws ErrorException exception thrown from REST call
@@ -238,8 +253,9 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
+    public ServiceCall getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
         Call<ResponseBody> call = service.getReport(this.getAcceptLanguage());
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -250,7 +266,7 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, Integer>> getReportDelegate(Response<ResponseBody> response) throws ErrorException, IOException {

@@ -7,6 +7,7 @@ using System.Linq;
 using Microsoft.Rest.Generator.ClientModel;
 using Microsoft.Rest.Generator.Utilities;
 using Microsoft.Rest.Modeler.Swagger.Model;
+using Microsoft.Rest.Modeler.Swagger.Properties;
 
 namespace Microsoft.Rest.Modeler.Swagger
 {
@@ -86,6 +87,11 @@ namespace Microsoft.Rest.Modeler.Swagger
                         }
                         var propertyType =
                             property.Value.GetBuilder(Modeler).BuildServiceType(propertyServiceTypeName);
+                        if (property.Value.ReadOnly && property.Value.IsRequired)
+                        {
+                            throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture,
+                           Resources.ReadOnlyNotRequired, name, serviceTypeName));
+                        }
 
                         var propertyObj = new Property
                         {

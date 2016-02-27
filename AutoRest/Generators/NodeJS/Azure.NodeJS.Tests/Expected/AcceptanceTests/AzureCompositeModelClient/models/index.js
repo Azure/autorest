@@ -48,11 +48,12 @@ exports.DurationWrapper = require('./durationWrapper');
 exports.ByteWrapper = require('./byteWrapper');
 exports.ArrayWrapper = require('./arrayWrapper');
 exports.DictionaryWrapper = require('./dictionaryWrapper');
+exports.ReadonlyObj = require('./readonlyObj');
 exports.discriminators = {
   'Fish' : exports.Fish,
-  'salmon' : exports.Salmon,
-  'shark' : exports.Shark,
-  'sawshark' : exports.Sawshark,
-  'goblin' : exports.Goblinshark,
-  'cookiecuttershark' : exports.Cookiecuttershark
+  'Fish.salmon' : exports.Salmon,
+  'Fish.shark' : exports.Shark,
+  'Fish.sawshark' : exports.Sawshark,
+  'Fish.goblin' : exports.Goblinshark,
+  'Fish.cookiecuttershark' : exports.Cookiecuttershark
 };

@@ -110,10 +110,30 @@ namespace Microsoft.Rest.Generator.NodeJS
 
                 for (int i = 0; i < polymorphicTypes.Count(); i++ )
                 {
-                    builder.Append(string.Format(CultureInfo.InvariantCulture, 
+                    string discriminatorField = polymorphicTypes.ElementAt(i).SerializedName;
+                    var polymorphicType = polymorphicTypes.ElementAt(i) as CompositeType;
+                    if (polymorphicType.BaseModelType != null)
+                    {
+                        while (polymorphicType.BaseModelType != null)
+                        {
+                            polymorphicType = polymorphicType.BaseModelType;
+                        }
+                        discriminatorField = string.Format(CultureInfo.InvariantCulture, "{0}.{1}",
+                            polymorphicType.Name,
+                            polymorphicTypes.ElementAt(i).SerializedName);
+                        builder.Append(string.Format(CultureInfo.InvariantCulture,
                         "'{0}' : exports.{1}",
-                            polymorphicTypes.ElementAt(i).SerializedName, 
+                            discriminatorField,
                             polymorphicTypes.ElementAt(i).Name));
+                    }
+                    else
+                    {
+                        builder.Append(string.Format(CultureInfo.InvariantCulture,
+                        "'{0}' : exports.{1}",
+                            discriminatorField,
+                            polymorphicTypes.ElementAt(i).Name));
+                    }
+                    
 
                     if(i == polymorphicTypes.Count() -1)
                     {

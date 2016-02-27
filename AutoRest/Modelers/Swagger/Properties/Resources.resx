@@ -171,6 +171,9 @@
   <data name="ParsingSwagger" xml:space="preserve">
     <value>Parsing swagger json file.</value>
   </data>
+  <data name="ReadOnlyNotRequired" xml:space="preserve">
+    <value>Property '{0}' in Model '{1}' is marked readOnly and is also required. This is not allowed.</value>
+  </data>
   <data name="ReferenceDoesNotExist" xml:space="preserve">
     <value>Reference path '{0}' does not exist in the definition section of the Swagger document.</value>
   </data>

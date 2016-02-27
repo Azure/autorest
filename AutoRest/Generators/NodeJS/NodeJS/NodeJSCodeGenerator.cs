@@ -25,8 +25,9 @@ namespace Microsoft.Rest.Generator.NodeJS
             Namer = new NodeJsCodeNamer();
         }
 
+        // Change to true if you want to no longer generate the 3 d.ts files, for some reason
         [SettingsInfo("Disables TypeScript generation.")]
-        public bool DisableTypeScriptGeneration {get; set;}            // Change to true if you want to no longer generate the 3 d.ts files, for some reason
+        public bool DisableTypeScriptGeneration {get; set;}
 
         public override string Name
         {

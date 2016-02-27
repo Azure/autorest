@@ -10,6 +10,7 @@
 
 package fixtures.http;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
@@ -20,6 +21,14 @@ import fixtures.http.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.HEAD;
+import retrofit2.http.Headers;
+import retrofit2.http.HTTP;
+import retrofit2.http.PATCH;
+import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -45,6 +54,105 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
     }
 
     /**
+     * The interface defining all the services for HttpClientFailureOperations to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface HttpClientFailureService {
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HEAD("http/failure/client/400")
+        Call<Void> head400();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/failure/client/400")
+        Call<ResponseBody> get400();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("http/failure/client/400")
+        Call<ResponseBody> put400(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PATCH("http/failure/client/400")
+        Call<ResponseBody> patch400(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("http/failure/client/400")
+        Call<ResponseBody> post400(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "http/failure/client/400", method = "DELETE", hasBody = true)
+        Call<ResponseBody> delete400(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HEAD("http/failure/client/401")
+        Call<Void> head401();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/failure/client/402")
+        Call<ResponseBody> get402();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/failure/client/403")
+        Call<ResponseBody> get403();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("http/failure/client/404")
+        Call<ResponseBody> put404(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PATCH("http/failure/client/405")
+        Call<ResponseBody> patch405(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("http/failure/client/406")
+        Call<ResponseBody> post406(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "http/failure/client/407", method = "DELETE", hasBody = true)
+        Call<ResponseBody> delete407(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("http/failure/client/409")
+        Call<ResponseBody> put409(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HEAD("http/failure/client/410")
+        Call<Void> head410();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/failure/client/411")
+        Call<ResponseBody> get411();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/failure/client/412")
+        Call<ResponseBody> get412();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("http/failure/client/413")
+        Call<ResponseBody> put413(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PATCH("http/failure/client/414")
+        Call<ResponseBody> patch414(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("http/failure/client/415")
+        Call<ResponseBody> post415(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("http/failure/client/416")
+        Call<ResponseBody> get416();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "http/failure/client/417", method = "DELETE", hasBody = true)
+        Call<ResponseBody> delete417(@Body Boolean booleanValue);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HEAD("http/failure/client/429")
+        Call<Void> head429();
+
+    }
+
+    /**
      * Return 400 status code - should be represented in the client as an error.
      *
      * @throws ErrorException exception thrown from REST call
@@ -62,8 +170,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<Void> head400Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall head400Async(final ServiceCallback<Error> serviceCallback) {
         Call<Void> call = service.head400();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -74,7 +183,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> head400Delegate(Response<Void> response) throws ErrorException, IOException {
@@ -101,8 +210,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get400Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall get400Async(final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.get400();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -113,7 +223,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> get400Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -142,8 +252,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> put400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall put400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.put400(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -154,7 +265,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> put400Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -183,8 +294,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> patch400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall patch400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.patch400(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -195,7 +307,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> patch400Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -224,8 +336,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> post400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall post400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.post400(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -236,7 +349,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> post400Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -265,8 +378,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> delete400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall delete400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.delete400(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -277,7 +391,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> delete400Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -304,8 +418,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<Void> head401Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall head401Async(final ServiceCallback<Error> serviceCallback) {
         Call<Void> call = service.head401();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -316,7 +431,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> head401Delegate(Response<Void> response) throws ErrorException, IOException {
@@ -343,8 +458,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get402Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall get402Async(final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.get402();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -355,7 +471,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> get402Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -382,8 +498,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get403Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall get403Async(final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.get403();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -394,7 +511,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> get403Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -423,8 +540,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> put404Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall put404Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.put404(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -435,7 +553,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> put404Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -464,8 +582,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> patch405Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall patch405Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.patch405(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -476,7 +595,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> patch405Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -505,8 +624,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> post406Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall post406Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.post406(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -517,7 +637,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> post406Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -546,8 +666,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> delete407Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall delete407Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.delete407(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -558,7 +679,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> delete407Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -587,8 +708,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> put409Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall put409Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.put409(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -599,7 +721,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> put409Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -626,8 +748,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<Void> head410Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall head410Async(final ServiceCallback<Error> serviceCallback) {
         Call<Void> call = service.head410();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -638,7 +761,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> head410Delegate(Response<Void> response) throws ErrorException, IOException {
@@ -665,8 +788,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get411Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall get411Async(final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.get411();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -677,7 +801,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> get411Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -704,8 +828,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get412Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall get412Async(final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.get412();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -716,7 +841,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> get412Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -745,8 +870,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> put413Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall put413Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.put413(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -757,7 +883,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> put413Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -786,8 +912,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> patch414Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall patch414Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.patch414(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -798,7 +925,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> patch414Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -827,8 +954,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> post415Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall post415Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.post415(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -839,7 +967,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> post415Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -866,8 +994,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> get416Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall get416Async(final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.get416();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -878,7 +1007,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> get416Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -907,8 +1036,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> delete417Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall delete417Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) {
         Call<ResponseBody> call = service.delete417(booleanValue);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -919,7 +1049,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> delete417Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -946,8 +1076,9 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<Void> head429Async(final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall head429Async(final ServiceCallback<Error> serviceCallback) {
         Call<Void> call = service.head429();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Error>(serviceCallback) {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
@@ -958,7 +1089,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Error> head429Delegate(Response<Void> response) throws ErrorException, IOException {

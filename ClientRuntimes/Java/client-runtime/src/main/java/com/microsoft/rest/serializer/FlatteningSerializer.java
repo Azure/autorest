@@ -7,7 +7,6 @@
 
 package com.microsoft.rest.serializer;
 
-import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.BeanDescription;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -81,7 +80,7 @@ public class FlatteningSerializer extends StdSerializer<Object> implements Resol
     }
 
     @Override
-    public void serialize(Object value, JsonGenerator jgen, SerializerProvider provider) throws IOException, JsonGenerationException {
+    public void serialize(Object value, JsonGenerator jgen, SerializerProvider provider) throws IOException {
         if (value == null) {
             jgen.writeNull();
             return;

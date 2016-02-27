@@ -11,6 +11,7 @@
 package fixtures.bodyarray;
 
 import com.microsoft.rest.DateTimeRfc1123;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodyarray.models.ErrorException;
@@ -18,271 +19,15 @@ import fixtures.bodyarray.models.Product;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import okhttp3.ResponseBody;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.Period;
-import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.PUT;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in ArrayOperations.
  */
 public interface ArrayOperations {
-    /**
-     * The interface defining all the services for ArrayOperations to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface ArrayService {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/null")
-        Call<ResponseBody> getNull();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/invalid")
-        Call<ResponseBody> getInvalid();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/empty")
-        Call<ResponseBody> getEmpty();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("array/empty")
-        Call<ResponseBody> putEmpty(@Body List<String> arrayBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/prim/boolean/tfft")
-        Call<ResponseBody> getBooleanTfft();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("array/prim/boolean/tfft")
-        Call<ResponseBody> putBooleanTfft(@Body List<Boolean> arrayBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/prim/boolean/true.null.false")
-        Call<ResponseBody> getBooleanInvalidNull();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/prim/boolean/true.boolean.false")
-        Call<ResponseBody> getBooleanInvalidString();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/prim/integer/1.-1.3.300")
-        Call<ResponseBody> getIntegerValid();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("array/prim/integer/1.-1.3.300")
-        Call<ResponseBody> putIntegerValid(@Body List<Integer> arrayBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/prim/integer/1.null.zero")
-        Call<ResponseBody> getIntInvalidNull();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/prim/integer/1.integer.0")
-        Call<ResponseBody> getIntInvalidString();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/prim/long/1.-1.3.300")
-        Call<ResponseBody> getLongValid();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("array/prim/long/1.-1.3.300")
-        Call<ResponseBody> putLongValid(@Body List<Long> arrayBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/prim/long/1.null.zero")
-        Call<ResponseBody> getLongInvalidNull();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/prim/long/1.integer.0")
-        Call<ResponseBody> getLongInvalidString();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/prim/float/0--0.01-1.2e20")
-        Call<ResponseBody> getFloatValid();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("array/prim/float/0--0.01-1.2e20")
-        Call<ResponseBody> putFloatValid(@Body List<Double> arrayBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/prim/float/0.0-null-1.2e20")
-        Call<ResponseBody> getFloatInvalidNull();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/prim/float/1.number.0")
-        Call<ResponseBody> getFloatInvalidString();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/prim/double/0--0.01-1.2e20")
-        Call<ResponseBody> getDoubleValid();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("array/prim/double/0--0.01-1.2e20")
-        Call<ResponseBody> putDoubleValid(@Body List<Double> arrayBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/prim/double/0.0-null-1.2e20")
-        Call<ResponseBody> getDoubleInvalidNull();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/prim/double/1.number.0")
-        Call<ResponseBody> getDoubleInvalidString();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/prim/string/foo1.foo2.foo3")
-        Call<ResponseBody> getStringValid();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("array/prim/string/foo1.foo2.foo3")
-        Call<ResponseBody> putStringValid(@Body List<String> arrayBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/prim/string/foo.null.foo2")
-        Call<ResponseBody> getStringWithNull();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/prim/string/foo.123.foo2")
-        Call<ResponseBody> getStringWithInvalid();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/prim/date/valid")
-        Call<ResponseBody> getDateValid();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("array/prim/date/valid")
-        Call<ResponseBody> putDateValid(@Body List<LocalDate> arrayBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/prim/date/invalidnull")
-        Call<ResponseBody> getDateInvalidNull();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/prim/date/invalidchars")
-        Call<ResponseBody> getDateInvalidChars();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/prim/date-time/valid")
-        Call<ResponseBody> getDateTimeValid();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("array/prim/date-time/valid")
-        Call<ResponseBody> putDateTimeValid(@Body List<DateTime> arrayBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/prim/date-time/invalidnull")
-        Call<ResponseBody> getDateTimeInvalidNull();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/prim/date-time/invalidchars")
-        Call<ResponseBody> getDateTimeInvalidChars();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/prim/date-time-rfc1123/valid")
-        Call<ResponseBody> getDateTimeRfc1123Valid();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("array/prim/date-time-rfc1123/valid")
-        Call<ResponseBody> putDateTimeRfc1123Valid(@Body List<DateTimeRfc1123> arrayBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/prim/duration/valid")
-        Call<ResponseBody> getDurationValid();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("array/prim/duration/valid")
-        Call<ResponseBody> putDurationValid(@Body List<Period> arrayBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/prim/byte/valid")
-        Call<ResponseBody> getByteValid();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("array/prim/byte/valid")
-        Call<ResponseBody> putByteValid(@Body List<byte[]> arrayBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/prim/byte/invalidnull")
-        Call<ResponseBody> getByteInvalidNull();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/complex/null")
-        Call<ResponseBody> getComplexNull();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/complex/empty")
-        Call<ResponseBody> getComplexEmpty();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/complex/itemnull")
-        Call<ResponseBody> getComplexItemNull();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/complex/itemempty")
-        Call<ResponseBody> getComplexItemEmpty();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/complex/valid")
-        Call<ResponseBody> getComplexValid();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("array/complex/valid")
-        Call<ResponseBody> putComplexValid(@Body List<Product> arrayBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/array/null")
-        Call<ResponseBody> getArrayNull();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/array/empty")
-        Call<ResponseBody> getArrayEmpty();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/array/itemnull")
-        Call<ResponseBody> getArrayItemNull();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/array/itemempty")
-        Call<ResponseBody> getArrayItemEmpty();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/array/valid")
-        Call<ResponseBody> getArrayValid();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("array/array/valid")
-        Call<ResponseBody> putArrayValid(@Body List<List<String>> arrayBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/dictionary/null")
-        Call<ResponseBody> getDictionaryNull();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/dictionary/empty")
-        Call<ResponseBody> getDictionaryEmpty();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/dictionary/itemnull")
-        Call<ResponseBody> getDictionaryItemNull();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/dictionary/itemempty")
-        Call<ResponseBody> getDictionaryItemEmpty();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("array/dictionary/valid")
-        Call<ResponseBody> getDictionaryValid();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("array/dictionary/valid")
-        Call<ResponseBody> putDictionaryValid(@Body List<Map<String, String>> arrayBody);
-
-    }
     /**
      * Get null array value.
      *
@@ -296,9 +41,9 @@ public interface ArrayOperations {
      * Get null array value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getNullAsync(final ServiceCallback<List<Integer>> serviceCallback);
+    ServiceCall getNullAsync(final ServiceCallback<List<Integer>> serviceCallback);
 
     /**
      * Get invalid array [1, 2, 3.
@@ -313,9 +58,9 @@ public interface ArrayOperations {
      * Get invalid array [1, 2, 3.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getInvalidAsync(final ServiceCallback<List<Integer>> serviceCallback);
+    ServiceCall getInvalidAsync(final ServiceCallback<List<Integer>> serviceCallback);
 
     /**
      * Get empty array value [].
@@ -330,9 +75,9 @@ public interface ArrayOperations {
      * Get empty array value [].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getEmptyAsync(final ServiceCallback<List<Integer>> serviceCallback);
+    ServiceCall getEmptyAsync(final ServiceCallback<List<Integer>> serviceCallback);
 
     /**
      * Set array value empty [].
@@ -350,9 +95,9 @@ public interface ArrayOperations {
      *
      * @param arrayBody the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putEmptyAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putEmptyAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get boolean array value [true, false, false, true].
@@ -367,9 +112,9 @@ public interface ArrayOperations {
      * Get boolean array value [true, false, false, true].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getBooleanTfftAsync(final ServiceCallback<List<Boolean>> serviceCallback);
+    ServiceCall getBooleanTfftAsync(final ServiceCallback<List<Boolean>> serviceCallback);
 
     /**
      * Set array value empty [true, false, false, true].
@@ -387,9 +132,9 @@ public interface ArrayOperations {
      *
      * @param arrayBody the List&lt;Boolean&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putBooleanTfftAsync(List<Boolean> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putBooleanTfftAsync(List<Boolean> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get boolean array value [true, null, false].
@@ -404,9 +149,9 @@ public interface ArrayOperations {
      * Get boolean array value [true, null, false].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getBooleanInvalidNullAsync(final ServiceCallback<List<Boolean>> serviceCallback);
+    ServiceCall getBooleanInvalidNullAsync(final ServiceCallback<List<Boolean>> serviceCallback);
 
     /**
      * Get boolean array value [true, 'boolean', false].
@@ -421,9 +166,9 @@ public interface ArrayOperations {
      * Get boolean array value [true, 'boolean', false].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getBooleanInvalidStringAsync(final ServiceCallback<List<Boolean>> serviceCallback);
+    ServiceCall getBooleanInvalidStringAsync(final ServiceCallback<List<Boolean>> serviceCallback);
 
     /**
      * Get integer array value [1, -1, 3, 300].
@@ -438,9 +183,9 @@ public interface ArrayOperations {
      * Get integer array value [1, -1, 3, 300].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getIntegerValidAsync(final ServiceCallback<List<Integer>> serviceCallback);
+    ServiceCall getIntegerValidAsync(final ServiceCallback<List<Integer>> serviceCallback);
 
     /**
      * Set array value empty [1, -1, 3, 300].
@@ -458,9 +203,9 @@ public interface ArrayOperations {
      *
      * @param arrayBody the List&lt;Integer&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putIntegerValidAsync(List<Integer> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putIntegerValidAsync(List<Integer> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get integer array value [1, null, 0].
@@ -475,9 +220,9 @@ public interface ArrayOperations {
      * Get integer array value [1, null, 0].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getIntInvalidNullAsync(final ServiceCallback<List<Integer>> serviceCallback);
+    ServiceCall getIntInvalidNullAsync(final ServiceCallback<List<Integer>> serviceCallback);
 
     /**
      * Get integer array value [1, 'integer', 0].
@@ -492,9 +237,9 @@ public interface ArrayOperations {
      * Get integer array value [1, 'integer', 0].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getIntInvalidStringAsync(final ServiceCallback<List<Integer>> serviceCallback);
+    ServiceCall getIntInvalidStringAsync(final ServiceCallback<List<Integer>> serviceCallback);
 
     /**
      * Get integer array value [1, -1, 3, 300].
@@ -509,9 +254,9 @@ public interface ArrayOperations {
      * Get integer array value [1, -1, 3, 300].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getLongValidAsync(final ServiceCallback<List<Long>> serviceCallback);
+    ServiceCall getLongValidAsync(final ServiceCallback<List<Long>> serviceCallback);
 
     /**
      * Set array value empty [1, -1, 3, 300].
@@ -529,9 +274,9 @@ public interface ArrayOperations {
      *
      * @param arrayBody the List&lt;Long&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putLongValidAsync(List<Long> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putLongValidAsync(List<Long> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get long array value [1, null, 0].
@@ -546,9 +291,9 @@ public interface ArrayOperations {
      * Get long array value [1, null, 0].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getLongInvalidNullAsync(final ServiceCallback<List<Long>> serviceCallback);
+    ServiceCall getLongInvalidNullAsync(final ServiceCallback<List<Long>> serviceCallback);
 
     /**
      * Get long array value [1, 'integer', 0].
@@ -563,9 +308,9 @@ public interface ArrayOperations {
      * Get long array value [1, 'integer', 0].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getLongInvalidStringAsync(final ServiceCallback<List<Long>> serviceCallback);
+    ServiceCall getLongInvalidStringAsync(final ServiceCallback<List<Long>> serviceCallback);
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
@@ -580,9 +325,9 @@ public interface ArrayOperations {
      * Get float array value [0, -0.01, 1.2e20].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getFloatValidAsync(final ServiceCallback<List<Double>> serviceCallback);
+    ServiceCall getFloatValidAsync(final ServiceCallback<List<Double>> serviceCallback);
 
     /**
      * Set array value [0, -0.01, 1.2e20].
@@ -600,9 +345,9 @@ public interface ArrayOperations {
      *
      * @param arrayBody the List&lt;Double&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putFloatValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putFloatValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get float array value [0.0, null, -1.2e20].
@@ -617,9 +362,9 @@ public interface ArrayOperations {
      * Get float array value [0.0, null, -1.2e20].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getFloatInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback);
+    ServiceCall getFloatInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback);
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
@@ -634,9 +379,9 @@ public interface ArrayOperations {
      * Get boolean array value [1.0, 'number', 0.0].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getFloatInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback);
+    ServiceCall getFloatInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback);
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
@@ -651,9 +396,9 @@ public interface ArrayOperations {
      * Get float array value [0, -0.01, 1.2e20].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getDoubleValidAsync(final ServiceCallback<List<Double>> serviceCallback);
+    ServiceCall getDoubleValidAsync(final ServiceCallback<List<Double>> serviceCallback);
 
     /**
      * Set array value [0, -0.01, 1.2e20].
@@ -671,9 +416,9 @@ public interface ArrayOperations {
      *
      * @param arrayBody the List&lt;Double&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putDoubleValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putDoubleValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get float array value [0.0, null, -1.2e20].
@@ -688,9 +433,9 @@ public interface ArrayOperations {
      * Get float array value [0.0, null, -1.2e20].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getDoubleInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback);
+    ServiceCall getDoubleInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback);
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
@@ -705,9 +450,9 @@ public interface ArrayOperations {
      * Get boolean array value [1.0, 'number', 0.0].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getDoubleInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback);
+    ServiceCall getDoubleInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback);
 
     /**
      * Get string array value ['foo1', 'foo2', 'foo3'].
@@ -722,9 +467,9 @@ public interface ArrayOperations {
      * Get string array value ['foo1', 'foo2', 'foo3'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getStringValidAsync(final ServiceCallback<List<String>> serviceCallback);
+    ServiceCall getStringValidAsync(final ServiceCallback<List<String>> serviceCallback);
 
     /**
      * Set array value ['foo1', 'foo2', 'foo3'].
@@ -742,9 +487,9 @@ public interface ArrayOperations {
      *
      * @param arrayBody the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putStringValidAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putStringValidAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get string array value ['foo', null, 'foo2'].
@@ -759,9 +504,9 @@ public interface ArrayOperations {
      * Get string array value ['foo', null, 'foo2'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getStringWithNullAsync(final ServiceCallback<List<String>> serviceCallback);
+    ServiceCall getStringWithNullAsync(final ServiceCallback<List<String>> serviceCallback);
 
     /**
      * Get string array value ['foo', 123, 'foo2'].
@@ -776,9 +521,9 @@ public interface ArrayOperations {
      * Get string array value ['foo', 123, 'foo2'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getStringWithInvalidAsync(final ServiceCallback<List<String>> serviceCallback);
+    ServiceCall getStringWithInvalidAsync(final ServiceCallback<List<String>> serviceCallback);
 
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
@@ -793,9 +538,9 @@ public interface ArrayOperations {
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getDateValidAsync(final ServiceCallback<List<LocalDate>> serviceCallback);
+    ServiceCall getDateValidAsync(final ServiceCallback<List<LocalDate>> serviceCallback);
 
     /**
      * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12'].
@@ -813,9 +558,9 @@ public interface ArrayOperations {
      *
      * @param arrayBody the List&lt;LocalDate&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putDateValidAsync(List<LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putDateValidAsync(List<LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04'].
@@ -830,9 +575,9 @@ public interface ArrayOperations {
      * Get date array value ['2012-01-01', null, '1776-07-04'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getDateInvalidNullAsync(final ServiceCallback<List<LocalDate>> serviceCallback);
+    ServiceCall getDateInvalidNullAsync(final ServiceCallback<List<LocalDate>> serviceCallback);
 
     /**
      * Get date array value ['2011-03-22', 'date'].
@@ -847,9 +592,9 @@ public interface ArrayOperations {
      * Get date array value ['2011-03-22', 'date'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getDateInvalidCharsAsync(final ServiceCallback<List<LocalDate>> serviceCallback);
+    ServiceCall getDateInvalidCharsAsync(final ServiceCallback<List<LocalDate>> serviceCallback);
 
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
@@ -864,9 +609,9 @@ public interface ArrayOperations {
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getDateTimeValidAsync(final ServiceCallback<List<DateTime>> serviceCallback);
+    ServiceCall getDateTimeValidAsync(final ServiceCallback<List<DateTime>> serviceCallback);
 
     /**
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
@@ -884,9 +629,9 @@ public interface ArrayOperations {
      *
      * @param arrayBody the List&lt;DateTime&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putDateTimeValidAsync(List<DateTime> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putDateTimeValidAsync(List<DateTime> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
@@ -901,9 +646,9 @@ public interface ArrayOperations {
      * Get date array value ['2000-12-01t00:00:01z', null].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getDateTimeInvalidNullAsync(final ServiceCallback<List<DateTime>> serviceCallback);
+    ServiceCall getDateTimeInvalidNullAsync(final ServiceCallback<List<DateTime>> serviceCallback);
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
@@ -918,9 +663,9 @@ public interface ArrayOperations {
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getDateTimeInvalidCharsAsync(final ServiceCallback<List<DateTime>> serviceCallback);
+    ServiceCall getDateTimeInvalidCharsAsync(final ServiceCallback<List<DateTime>> serviceCallback);
 
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
@@ -935,9 +680,9 @@ public interface ArrayOperations {
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getDateTimeRfc1123ValidAsync(final ServiceCallback<List<DateTimeRfc1123>> serviceCallback);
+    ServiceCall getDateTimeRfc1123ValidAsync(final ServiceCallback<List<DateTimeRfc1123>> serviceCallback);
 
     /**
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
@@ -955,9 +700,9 @@ public interface ArrayOperations {
      *
      * @param arrayBody the List&lt;DateTimeRfc1123&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putDateTimeRfc1123ValidAsync(List<DateTimeRfc1123> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putDateTimeRfc1123ValidAsync(List<DateTimeRfc1123> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
@@ -972,9 +717,9 @@ public interface ArrayOperations {
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getDurationValidAsync(final ServiceCallback<List<Period>> serviceCallback);
+    ServiceCall getDurationValidAsync(final ServiceCallback<List<Period>> serviceCallback);
 
     /**
      * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
@@ -992,9 +737,9 @@ public interface ArrayOperations {
      *
      * @param arrayBody the List&lt;Period&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putDurationValidAsync(List<Period> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putDurationValidAsync(List<Period> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
@@ -1009,9 +754,9 @@ public interface ArrayOperations {
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getByteValidAsync(final ServiceCallback<List<byte[]>> serviceCallback);
+    ServiceCall getByteValidAsync(final ServiceCallback<List<byte[]>> serviceCallback);
 
     /**
      * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64.
@@ -1029,9 +774,9 @@ public interface ArrayOperations {
      *
      * @param arrayBody the List&lt;byte[]&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putByteValidAsync(List<byte[]> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putByteValidAsync(List<byte[]> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
@@ -1046,9 +791,9 @@ public interface ArrayOperations {
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getByteInvalidNullAsync(final ServiceCallback<List<byte[]>> serviceCallback);
+    ServiceCall getByteInvalidNullAsync(final ServiceCallback<List<byte[]>> serviceCallback);
 
     /**
      * Get array of complex type null value.
@@ -1063,9 +808,9 @@ public interface ArrayOperations {
      * Get array of complex type null value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getComplexNullAsync(final ServiceCallback<List<Product>> serviceCallback);
+    ServiceCall getComplexNullAsync(final ServiceCallback<List<Product>> serviceCallback);
 
     /**
      * Get empty array of complex type [].
@@ -1080,9 +825,9 @@ public interface ArrayOperations {
      * Get empty array of complex type [].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getComplexEmptyAsync(final ServiceCallback<List<Product>> serviceCallback);
+    ServiceCall getComplexEmptyAsync(final ServiceCallback<List<Product>> serviceCallback);
 
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
@@ -1097,9 +842,9 @@ public interface ArrayOperations {
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getComplexItemNullAsync(final ServiceCallback<List<Product>> serviceCallback);
+    ServiceCall getComplexItemNullAsync(final ServiceCallback<List<Product>> serviceCallback);
 
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
@@ -1114,9 +859,9 @@ public interface ArrayOperations {
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getComplexItemEmptyAsync(final ServiceCallback<List<Product>> serviceCallback);
+    ServiceCall getComplexItemEmptyAsync(final ServiceCallback<List<Product>> serviceCallback);
 
     /**
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
@@ -1131,9 +876,9 @@ public interface ArrayOperations {
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getComplexValidAsync(final ServiceCallback<List<Product>> serviceCallback);
+    ServiceCall getComplexValidAsync(final ServiceCallback<List<Product>> serviceCallback);
 
     /**
      * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
@@ -1151,9 +896,9 @@ public interface ArrayOperations {
      *
      * @param arrayBody the List&lt;Product&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putComplexValidAsync(List<Product> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putComplexValidAsync(List<Product> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get a null array.
@@ -1168,9 +913,9 @@ public interface ArrayOperations {
      * Get a null array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getArrayNullAsync(final ServiceCallback<List<List<String>>> serviceCallback);
+    ServiceCall getArrayNullAsync(final ServiceCallback<List<List<String>>> serviceCallback);
 
     /**
      * Get an empty array [].
@@ -1185,9 +930,9 @@ public interface ArrayOperations {
      * Get an empty array [].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getArrayEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback);
+    ServiceCall getArrayEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback);
 
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
@@ -1202,9 +947,9 @@ public interface ArrayOperations {
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getArrayItemNullAsync(final ServiceCallback<List<List<String>>> serviceCallback);
+    ServiceCall getArrayItemNullAsync(final ServiceCallback<List<List<String>>> serviceCallback);
 
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
@@ -1219,9 +964,9 @@ public interface ArrayOperations {
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getArrayItemEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback);
+    ServiceCall getArrayItemEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback);
 
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
@@ -1236,9 +981,9 @@ public interface ArrayOperations {
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getArrayValidAsync(final ServiceCallback<List<List<String>>> serviceCallback);
+    ServiceCall getArrayValidAsync(final ServiceCallback<List<List<String>>> serviceCallback);
 
     /**
      * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
@@ -1256,9 +1001,9 @@ public interface ArrayOperations {
      *
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putArrayValidAsync(List<List<String>> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putArrayValidAsync(List<List<String>> arrayBody, final ServiceCallback<Void> serviceCallback);
 
     /**
      * Get an array of Dictionaries with value null.
@@ -1273,9 +1018,9 @@ public interface ArrayOperations {
      * Get an array of Dictionaries with value null.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getDictionaryNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback);
+    ServiceCall getDictionaryNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback);
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
@@ -1290,9 +1035,9 @@ public interface ArrayOperations {
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getDictionaryEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback);
+    ServiceCall getDictionaryEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback);
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
@@ -1307,9 +1052,9 @@ public interface ArrayOperations {
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getDictionaryItemNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback);
+    ServiceCall getDictionaryItemNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback);
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
@@ -1324,9 +1069,9 @@ public interface ArrayOperations {
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getDictionaryItemEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback);
+    ServiceCall getDictionaryItemEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback);
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
@@ -1341,9 +1086,9 @@ public interface ArrayOperations {
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getDictionaryValidAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback);
+    ServiceCall getDictionaryValidAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback);
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
@@ -1361,8 +1106,8 @@ public interface ArrayOperations {
      *
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putDictionaryValidAsync(List<Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putDictionaryValidAsync(List<Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback);
 
 }

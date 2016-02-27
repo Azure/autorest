@@ -23,5 +23,6 @@
   "strict": false,
   "trailing": true,
   "undef": false,
-  "unused": true
+  "unused": true,
+  "loopfunc": true
 }

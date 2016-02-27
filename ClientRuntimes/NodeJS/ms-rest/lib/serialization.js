@@ -189,22 +189,29 @@ function serializeDictionaryType(mapper, object, objectName) {
 function serializeCompositeType(mapper, object, objectName) {
   /*jshint validthis: true */
   //check for polymorphic discriminator
-  if (mapper.type.polymorphicDiscriminator) {
+  if (mapper.type.polymorphicDiscriminator !== null && mapper.type.polymorphicDiscriminator !== undefined) {
     if (object === null || object === undefined) {
       throw new Error(util.format('\'%s\' cannot be null or undefined. \'%s\' is the ' + 
         'polmorphicDiscriminator and is a required property.', objectName, 
         mapper.type.polymorphicDiscriminator));
     }
-    if (!object[mapper.type.polymorphicDiscriminator]) {
+    if (object[mapper.type.polymorphicDiscriminator] === null || object[mapper.type.polymorphicDiscriminator] === undefined) {
       throw new Error(util.format('No discriminator field \'%s\' was found in \'%s\'.', 
         mapper.type.polymorphicDiscriminator, objectName));
     }
-    if (!this.models.discriminators[object[mapper.type.polymorphicDiscriminator]]) {
-      throw new Error(util.format('\'%s\': \'%s\'  in \'%s\' is not a valid ' + 
-        'discriminator as a corresponding model class for that value was not found.', 
-        mapper.type.polymorphicDiscriminator, object[mapper.type.polymorphicDiscriminator], objectName));
+    var indexDiscriminator = null;
+    if (object[mapper.type.polymorphicDiscriminator] === mapper.type.uberParent) {
+      indexDiscriminator = object[mapper.type.polymorphicDiscriminator];
+    } else {
+      indexDiscriminator = mapper.type.uberParent + '.' + object[mapper.type.polymorphicDiscriminator];
     }
-    mapper = new this.models.discriminators[object[mapper.type.polymorphicDiscriminator]]().mapper();
+    if (!this.models.discriminators[indexDiscriminator]) {
+      throw new Error(util.format('\'%s\': \'%s\'  in \'%s\' is not a valid ' + 
+        'discriminator as a corresponding model class for the disciminator \'%s\' ' + 
+        'was not found in this.models.discriminators object.', 
+        mapper.type.polymorphicDiscriminator, object[mapper.type.polymorphicDiscriminator], objectName, indexDiscriminator));
+    }
+    mapper = new this.models.discriminators[indexDiscriminator]().mapper();
   }
   
   var payload = {};
@@ -241,7 +248,7 @@ function serializeCompositeType(mapper, object, objectName) {
         var parentObject = payload;
         paths.forEach(function(pathName) {
            var childObject = parentObject[pathName];
-           if (childObject === null || childObject === undefined) {
+           if ((childObject === null || childObject === undefined) && (object[key] !== null && object[key] !== undefined)) {
             parentObject[pathName] = {};
            }
            parentObject = parentObject[pathName];
@@ -252,6 +259,10 @@ function serializeCompositeType(mapper, object, objectName) {
           if (object[key] === null || object[key] === undefined) {
             throw new Error(util.format('\'%s\' cannot be null or undefined in \'%s\'.', key, objectName));
           }
+        }
+        //make sure that readOnly properties are not sent on the wire
+        if (modelProps[key].readOnly) {
+          continue;
         }
         //serialize the property if it is present in the provided object instance
         if ((modelProps[key].defaultValue !== null && modelProps[key].defaultValue !== undefined) || 
@@ -422,22 +433,29 @@ function deserializeDictionaryType(mapper, responseBody, objectName) {
 function deserializeCompositeType(mapper, responseBody, objectName) {
   /*jshint validthis: true */
   //check for polymorphic discriminator
-  if (mapper.type.polymorphicDiscriminator) {
+  if (mapper.type.polymorphicDiscriminator !== null && mapper.type.polymorphicDiscriminator !== undefined) {
     if (responseBody === null || responseBody === undefined) {
       throw new Error(util.format('\'%s\' cannot be null or undefined. \'%s\' is the ' + 
         'polmorphicDiscriminator and is a required property.', objectName, 
         mapper.type.polymorphicDiscriminator));
     }
-    if (!responseBody[mapper.type.polymorphicDiscriminator]) {
+    if (responseBody[mapper.type.polymorphicDiscriminator] === null || responseBody[mapper.type.polymorphicDiscriminator] === undefined) {
       throw new Error(util.format('No discriminator field \'%s\' was found in \'%s\'.', 
         mapper.type.polymorphicDiscriminator, objectName));
     }
-    if (!this.models.discriminators[responseBody[mapper.type.polymorphicDiscriminator]]) {
-      throw new Error(util.format('\'%s\': \'%s\'  in \'%s\' is not a valid ' + 
-        'discriminator as a corresponding model class for that value was not found.', 
-        mapper.type.polymorphicDiscriminator, responseBody[mapper.type.polymorphicDiscriminator], objectName));
+    var indexDiscriminator = null;
+    if (responseBody[mapper.type.polymorphicDiscriminator] === mapper.type.uberParent) {
+      indexDiscriminator = responseBody[mapper.type.polymorphicDiscriminator];
+    } else {
+      indexDiscriminator = mapper.type.uberParent + '.' + responseBody[mapper.type.polymorphicDiscriminator];
     }
-    mapper = new this.models.discriminators[responseBody[mapper.type.polymorphicDiscriminator]]().mapper();
+    if (!this.models.discriminators[indexDiscriminator]) {
+      throw new Error(util.format('\'%s\': \'%s\'  in \'%s\' is not a valid ' + 
+        'discriminator as a corresponding model class for the disciminator \'%s\' ' + 
+        'was not found in this.models.discriminators object.', 
+        mapper.type.polymorphicDiscriminator, responseBody[mapper.type.polymorphicDiscriminator], objectName, indexDiscriminator));
+    }
+    mapper = new this.models.discriminators[indexDiscriminator]().mapper();
   }
   
   var instance = {};
@@ -473,10 +491,11 @@ function deserializeCompositeType(mapper, responseBody, objectName) {
         var paths = splitSerializeName(modelProps[key].serializedName);
         paths.forEach(function(item){
             jpath.push(util.format('[\'%s\']', item));
-        })
+        });
         //deserialize the property if it is present in the provided responseBody instance
         var propertyInstance;
         try {
+          /*jslint evil: true */
           propertyInstance = eval(jpath.join(''));
         } catch (err) {
           continue;
@@ -515,6 +534,6 @@ function splitSerializeName(prop) {
   });
 
   return classes;
-};
+}
 
 exports = module.exports;

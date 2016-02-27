@@ -1060,6 +1060,50 @@
           }
         }
       }
+    },
+    "/complex/readonlyproperty/valid": {
+      "get": {
+        "operationId": "readonlyproperty_getValid",
+        "description": "Get complex types that have readonly properties",
+        "responses": {
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/readonly-obj"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "readonlyproperty_putValid",
+        "description": "Put complex types that have readonly properties",
+        "parameters": [
+          {
+            "name": "complexBody",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/readonly-obj"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Empty Response"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }  
+      }
     }
   },
   "definitions": {
@@ -1371,6 +1415,18 @@
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "readonly-obj": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "size": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     }

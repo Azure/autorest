@@ -11,6 +11,7 @@
 package fixtures.bodycomplex;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
@@ -21,6 +22,10 @@ import fixtures.bodycomplex.models.ErrorException;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.PUT;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -46,6 +51,33 @@ public final class ArrayOperationsImpl implements ArrayOperations {
     }
 
     /**
+     * The interface defining all the services for ArrayOperations to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface ArrayService {
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/array/valid")
+        Call<ResponseBody> getValid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("complex/array/valid")
+        Call<ResponseBody> putValid(@Body ArrayWrapper complexBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/array/empty")
+        Call<ResponseBody> getEmpty();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("complex/array/empty")
+        Call<ResponseBody> putEmpty(@Body ArrayWrapper complexBody);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/array/notprovided")
+        Call<ResponseBody> getNotProvided();
+
+    }
+
+    /**
      * Get complex types with array property.
      *
      * @throws ErrorException exception thrown from REST call
@@ -63,8 +95,9 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getValidAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
+    public ServiceCall getValidAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getValid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ArrayWrapper>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -75,7 +108,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<ArrayWrapper> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -110,13 +143,14 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putValidAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putValidAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putValid(complexBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -127,7 +161,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -155,8 +189,9 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getEmptyAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
+    public ServiceCall getEmptyAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getEmpty();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ArrayWrapper>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -167,7 +202,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<ArrayWrapper> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -202,13 +237,14 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putEmptyAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putEmptyAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
         if (complexBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putEmpty(complexBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -219,7 +255,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
@@ -247,8 +283,9 @@ public final class ArrayOperationsImpl implements ArrayOperations {
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getNotProvidedAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
+    public ServiceCall getNotProvidedAsync(final ServiceCallback<ArrayWrapper> serviceCallback) {
         Call<ResponseBody> call = service.getNotProvided();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ArrayWrapper>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -259,7 +296,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<ArrayWrapper> getNotProvidedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {

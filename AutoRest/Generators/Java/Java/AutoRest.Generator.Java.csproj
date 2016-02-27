@@ -43,6 +43,15 @@
     <Compile Include="Templates\ExceptionTemplate.cs">
       <DependentUpon>ExceptionTemplate.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Templates\MethodInterfaceTemplate.cs">
+      <DependentUpon>MethodInterfaceTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\MethodGroupRetrofitTemplate.cs">
+      <DependentUpon>MethodGroupRetrofitTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\ServiceClientRetrofitTemplate.cs">
+      <DependentUpon>ServiceClientRetrofitTemplate.cshtml</DependentUpon>
+    </Compile>
     <Compile Include="Templates\PackageInfoTemplate.cs">
       <DependentUpon>PackageInfoTemplate.cshtml</DependentUpon>
     </Compile>
@@ -68,6 +77,9 @@
       <DependentUpon>ServiceClientTemplate.cshtml</DependentUpon>
     </Compile>
     <None Include="Templates\ExceptionTemplate.cshtml" />
+    <None Include="Templates\MethodGroupRetrofitTemplate.cshtml" />
+    <None Include="Templates\MethodInterfaceTemplate.cshtml" />
+    <None Include="Templates\ServiceClientRetrofitTemplate.cshtml" />
     <None Include="Templates\PackageInfoTemplate.cshtml" />
     <None Include="Templates\EnumTemplate.cshtml" />
     <None Include="Templates\MethodGroupInterfaceTemplate.cshtml" />

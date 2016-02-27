@@ -16,19 +16,6 @@ namespace Microsoft.Rest.Generator.Ruby
     public class MethodTemplateModel : Method
     {
         /// <summary>
-        /// The scope provider (used for creating new variables with non-conflict names).
-        /// </summary>
-        private readonly IScopeProvider scopeProvider = new ScopeProvider();
-
-        /// <summary>
-        /// Gets the scope.
-        /// </summary>
-        public IScopeProvider Scope
-        {
-            get { return scopeProvider; }
-        }
-
-        /// <summary>
         /// Initializes a new instance of the class MethodTemplateModel.
         /// </summary>
         /// <param name="source">The source object.</param>

@@ -313,7 +313,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             }
 
             var builder = new IndentedStringBuilder("  ");
-            var allowedValues = scope.GetVariableName("allowedValues");
+            var allowedValues = scope.GetUniqueName("allowedValues");
 
             builder.AppendLine("if ({0}) {{", valueReference)
                         .Indent()
@@ -371,7 +371,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             var builder = new IndentedStringBuilder("  ");
             var escapedValueReference = valueReference.EscapeSingleQuotes();
 
-            var indexVar = scope.GetVariableName("i");
+            var indexVar = scope.GetUniqueName("i");
             var innerValidation = sequence.ElementType.ValidateType(scope, valueReference + "[" + indexVar + "]", false, modelReference);
             if (!string.IsNullOrEmpty(innerValidation))
             {
@@ -413,7 +413,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
 
             var builder = new IndentedStringBuilder("  ");
             var escapedValueReference = valueReference.EscapeSingleQuotes();
-            var valueVar = scope.GetVariableName("valueElement");
+            var valueVar = scope.GetUniqueName("valueElement");
             var innerValidation = dictionary.ValueType.ValidateType(scope, valueReference + "[" + valueVar + "]", false, modelReference);
             if (!string.IsNullOrEmpty(innerValidation))
             {
@@ -650,13 +650,19 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
 			string defaultValue = null;
 			bool isRequired = false;
 			bool isConstant = false;
+            bool isReadOnly = false;
             Dictionary<Constraint, string> constraints = null;
+            var property = parameter as Property;
             if (parameter != null)
             {
                 defaultValue = parameter.DefaultValue;
                 isRequired = parameter.IsRequired;
                 isConstant = parameter.IsConstant;
                 constraints = parameter.Constraints;
+            }
+            if (property != null)
+            {
+                isReadOnly = property.IsReadOnly;
             }
             CompositeType composite = type as CompositeType;
             if (composite != null && composite.ContainsConstantProperties)
@@ -675,6 +681,10 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             else
             {
                 builder.AppendLine("required: false,");
+            }
+            if (isReadOnly)
+            {
+                builder.AppendLine("readOnly: true,");
             }
             if (isConstant)
             {
@@ -795,6 +805,12 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
                 if (composite.PolymorphicDiscriminator != null)
                 {
                     builder.AppendLine("polymorphicDiscriminator: '{0}',", composite.PolymorphicDiscriminator);
+                    var polymorphicType = composite;
+                    while (polymorphicType.BaseModelType != null)
+                    {
+                        polymorphicType = polymorphicType.BaseModelType;
+                    }
+                    builder.AppendLine("uberParent: '{0}',", polymorphicType.Name);
                 }
                 if (!expandComposite)
                 {
