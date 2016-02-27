@@ -3,7 +3,13 @@ package fixtures.http;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
-import com.microsoft.rest.serializer.JacksonMapperAdapter;
+
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import fixtures.http.models.A;
 import fixtures.http.models.C;
@@ -11,12 +17,6 @@ import fixtures.http.models.D;
 import fixtures.http.models.Error;
 import fixtures.http.models.ErrorException;
 import fixtures.http.models.MyException;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
-
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.fail;
 

@@ -16,7 +16,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.microsoft.azure.CloudError;
-import com.microsoft.rest.serializer.JacksonMapperAdapter;
 
 import java.io.IOException;
 
@@ -24,10 +23,15 @@ import java.io.IOException;
  * Custom serializer for serializing {@link CloudError} objects.
  */
 public class CloudErrorDeserializer extends JsonDeserializer<CloudError> {
-    /** Object mapper for serializations. */
+    /** Object mapper for default deserializations. */
     private ObjectMapper mapper;
 
-    public CloudErrorDeserializer(ObjectMapper mapper) {
+    /**
+     * Creates an instance of CloudErrorDeserializer.
+     *
+     * @param mapper the object mapper for default deserializations.
+     */
+    protected CloudErrorDeserializer(ObjectMapper mapper) {
         this.mapper = mapper;
     }
 
@@ -35,6 +39,7 @@ public class CloudErrorDeserializer extends JsonDeserializer<CloudError> {
      * Gets a module wrapping this serializer as an adapter for the Jackson
      * ObjectMapper.
      *
+     * @param mapper the object mapper for default deserializations.
      * @return a simple module to be plugged onto Jackson ObjectMapper.
      */
     public static SimpleModule getModule(ObjectMapper mapper) {

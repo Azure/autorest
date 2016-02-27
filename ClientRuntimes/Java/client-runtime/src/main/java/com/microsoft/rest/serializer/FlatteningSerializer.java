@@ -43,28 +43,36 @@ public class FlatteningSerializer extends StdSerializer<Object> implements Resol
     private final JsonSerializer<?> defaultSerializer;
 
     /**
+     * The object mapper for default serializations.
+     */
+    private final ObjectMapper mapper;
+
+    /**
      * Creates an instance of FlatteningSerializer.
      * @param vc handled type
      * @param defaultSerializer the default JSON serializer
+     * @param mapper the object mapper for default serializations
      */
-    protected FlatteningSerializer(Class<?> vc, JsonSerializer<?> defaultSerializer) {
+    protected FlatteningSerializer(Class<?> vc, JsonSerializer<?> defaultSerializer, ObjectMapper mapper) {
         super(vc, false);
         this.defaultSerializer = defaultSerializer;
+        this.mapper = mapper;
     }
 
     /**
      * Gets a module wrapping this serializer as an adapter for the Jackson
      * ObjectMapper.
      *
+     * @param mapper the object mapper for default serializations
      * @return a simple module to be plugged onto Jackson ObjectMapper.
      */
-    public static SimpleModule getModule() {
+    public static SimpleModule getModule(final ObjectMapper mapper) {
         SimpleModule module = new SimpleModule();
         module.setSerializerModifier(new BeanSerializerModifier() {
             @Override
             public JsonSerializer<?> modifySerializer(SerializationConfig config, BeanDescription beanDesc, JsonSerializer<?> serializer) {
                 if (beanDesc.getBeanClass().getAnnotation(JsonFlatten.class) != null) {
-                    return new FlatteningSerializer(beanDesc.getBeanClass(), serializer);
+                    return new FlatteningSerializer(beanDesc.getBeanClass(), serializer, mapper);
                 }
                 return serializer;
             }
@@ -80,7 +88,6 @@ public class FlatteningSerializer extends StdSerializer<Object> implements Resol
         }
 
         // BFS for all collapsed properties
-        ObjectMapper mapper = new JacksonMapperAdapter().getSimpleMapper();
         ObjectNode root = mapper.valueToTree(value);
         ObjectNode res = root.deepCopy();
         Queue<ObjectNode> source = new LinkedBlockingQueue<ObjectNode>();
@@ -100,7 +107,9 @@ public class FlatteningSerializer extends StdSerializer<Object> implements Resol
                     String[] values = field.getKey().split("((?<!\\\\))\\.");
                     for (int i = 0; i < values.length; ++i) {
                         values[i] = values[i].replace("\\.", ".");
-                        if (i == values.length - 1) break;
+                        if (i == values.length - 1) {
+                            break;
+                        }
                         String val = values[i];
                         if (node.has(val)) {
                             node = (ObjectNode) node.get(val);

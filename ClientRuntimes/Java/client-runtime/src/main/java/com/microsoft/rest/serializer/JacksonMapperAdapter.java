@@ -65,7 +65,7 @@ public class JacksonMapperAdapter {
      *
      * @return an instance of {@link ObjectMapper}.
      */
-    public ObjectMapper getSimpleMapper() {
+    protected ObjectMapper getSimpleMapper() {
         if (simpleMapper == null) {
             simpleMapper = new ObjectMapper();
             initializeObjectMapper(simpleMapper);
@@ -82,8 +82,8 @@ public class JacksonMapperAdapter {
         if (mapper == null) {
             mapper = new ObjectMapper();
             initializeObjectMapper(mapper);
-            mapper.registerModule(FlatteningSerializer.getModule())
-                    .registerModule(FlatteningDeserializer.getModule());
+            mapper.registerModule(FlatteningSerializer.getModule(getSimpleMapper()))
+                    .registerModule(FlatteningDeserializer.getModule(getSimpleMapper()));
         }
         return mapper;
     }

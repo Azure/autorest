@@ -16,6 +16,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.deser.BeanDeserializerModifier;
 import com.fasterxml.jackson.databind.deser.ResolvableDeserializer;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
@@ -37,28 +38,36 @@ public class FlatteningDeserializer extends StdDeserializer<Object> implements R
     private final JsonDeserializer<?> defaultDeserializer;
 
     /**
+     * The object mapper for default deserializations.
+     */
+    private final ObjectMapper mapper;
+
+    /**
      * Creates an instance of FlatteningDeserializer.
      * @param vc handled type
      * @param defaultDeserializer the default JSON mapperAdapter
+     * @param mapper the object mapper for default deserializations
      */
-    protected FlatteningDeserializer(Class<?> vc, JsonDeserializer<?> defaultDeserializer) {
+    protected FlatteningDeserializer(Class<?> vc, JsonDeserializer<?> defaultDeserializer, ObjectMapper mapper) {
         super(vc);
         this.defaultDeserializer = defaultDeserializer;
+        this.mapper = mapper;
     }
 
     /**
      * Gets a module wrapping this serializer as an adapter for the Jackson
      * ObjectMapper.
      *
+     * @param mapper the object mapper for default deserializations
      * @return a simple module to be plugged onto Jackson ObjectMapper.
      */
-    public static SimpleModule getModule() {
+    public static SimpleModule getModule(final ObjectMapper mapper) {
         SimpleModule module = new SimpleModule();
         module.setDeserializerModifier(new BeanDeserializerModifier() {
             @Override
             public JsonDeserializer<?> modifyDeserializer(DeserializationConfig config, BeanDescription beanDesc, JsonDeserializer<?> deserializer) {
                 if (beanDesc.getBeanClass().getAnnotation(JsonFlatten.class) != null) {
-                    return new FlatteningDeserializer(beanDesc.getBeanClass(), deserializer);
+                    return new FlatteningDeserializer(beanDesc.getBeanClass(), deserializer, mapper);
                 }
                 return deserializer;
             }
@@ -69,7 +78,7 @@ public class FlatteningDeserializer extends StdDeserializer<Object> implements R
     @SuppressWarnings("unchecked")
     @Override
     public Object deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
-        JsonNode root = new JacksonMapperAdapter().getObjectMapper().readTree(jp);
+        JsonNode root = mapper.readTree(jp);
         final Class<?> tClass = this.defaultDeserializer.handledType();
         for (Field field : tClass.getDeclaredFields()) {
             JsonNode node = root;

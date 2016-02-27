@@ -8,12 +8,13 @@
 package com.microsoft.azure;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.microsoft.azure.serializer.AzureJacksonMapperAdapter;
-import okhttp3.ResponseBody;
-import retrofit2.Response;
+import com.microsoft.rest.serializer.JacksonMapperAdapter;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
+
+import okhttp3.ResponseBody;
+import retrofit2.Response;
 
 /**
  * An instance of this class defines the state of a long running operation.
@@ -38,7 +39,7 @@ public class PollingState<T> {
     /** The error during the polling operations. */
     private CloudError error;
     /** The adapter for {@link com.fasterxml.jackson.databind.ObjectMapper}. */
-    private AzureJacksonMapperAdapter mapperAdapter;
+    private JacksonMapperAdapter mapperAdapter;
 
     /**
      * Initializes an instance of {@link PollingState}.
@@ -46,13 +47,14 @@ public class PollingState<T> {
      * @param response the response from Retrofit REST call.
      * @param retryTimeout the long running operation retry timeout.
      * @param resourceType the type of the resource the long running operation returns
+     * @param mapperAdapter the adapter for the Jackson object mapper
      * @throws IOException thrown by deserialization
      */
-    public PollingState(Response<ResponseBody> response, Integer retryTimeout, Type resourceType) throws IOException {
+    public PollingState(Response<ResponseBody> response, Integer retryTimeout, Type resourceType, JacksonMapperAdapter mapperAdapter) throws IOException {
         this.retryTimeout = retryTimeout;
         this.setResponse(response);
         this.resourceType = resourceType;
-        this.mapperAdapter = new AzureJacksonMapperAdapter();
+        this.mapperAdapter = mapperAdapter;
 
         String responseContent = null;
         PollingResource resource = null;
