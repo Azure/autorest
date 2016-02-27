@@ -78,7 +78,7 @@ public final class HttpServerFailureOperationsImpl implements HttpServerFailureO
     }
 
     private ServiceResponse<Error> head501Delegate(Response<Void> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .buildEmpty(response);
     }
@@ -117,7 +117,7 @@ public final class HttpServerFailureOperationsImpl implements HttpServerFailureO
     }
 
     private ServiceResponse<Error> get501Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -158,7 +158,7 @@ public final class HttpServerFailureOperationsImpl implements HttpServerFailureO
     }
 
     private ServiceResponse<Error> post505Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -199,7 +199,7 @@ public final class HttpServerFailureOperationsImpl implements HttpServerFailureO
     }
 
     private ServiceResponse<Error> delete505Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }

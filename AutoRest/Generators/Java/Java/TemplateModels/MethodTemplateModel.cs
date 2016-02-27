@@ -26,12 +26,12 @@ namespace Microsoft.Rest.Generator.Java
             if (source.Group != null)
             {
                 OperationName = source.Group.ToPascalCase();
-                ClientReference = "client";
+                ClientReference = "this.client";
             }
             else
             {
                 OperationName = serviceClient.Name;
-                ClientReference = "";
+                ClientReference = "this";
             }
         }
 

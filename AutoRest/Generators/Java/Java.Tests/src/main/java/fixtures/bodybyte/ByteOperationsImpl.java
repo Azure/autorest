@@ -77,7 +77,7 @@ public final class ByteOperationsImpl implements ByteOperations {
     }
 
     private ServiceResponse<byte[]> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<byte[], ErrorException>()
+        return new ServiceResponseBuilder<byte[], ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<byte[]>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -117,7 +117,7 @@ public final class ByteOperationsImpl implements ByteOperations {
     }
 
     private ServiceResponse<byte[]> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<byte[], ErrorException>()
+        return new ServiceResponseBuilder<byte[], ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<byte[]>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -157,7 +157,7 @@ public final class ByteOperationsImpl implements ByteOperations {
     }
 
     private ServiceResponse<byte[]> getNonAsciiDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<byte[], ErrorException>()
+        return new ServiceResponseBuilder<byte[], ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<byte[]>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -207,7 +207,7 @@ public final class ByteOperationsImpl implements ByteOperations {
     }
 
     private ServiceResponse<Void> putNonAsciiDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -247,7 +247,7 @@ public final class ByteOperationsImpl implements ByteOperations {
     }
 
     private ServiceResponse<byte[]> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<byte[], ErrorException>()
+        return new ServiceResponseBuilder<byte[], ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<byte[]>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

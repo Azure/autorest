@@ -5,7 +5,7 @@
  *
  */
 
-package com.microsoft.azure.serializer;
+package com.microsoft.rest.serializer;
 
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonGenerator;
@@ -23,8 +23,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.ser.BeanSerializerModifier;
 import com.fasterxml.jackson.databind.ser.ResolvableSerializer;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
-import com.microsoft.azure.BaseResource;
-import com.microsoft.rest.serializer.JacksonMapperAdapter;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -33,14 +31,12 @@ import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
- * Custom serializer for serializing {@link BaseResource} with wrapped properties.
+ * Custom serializer for serializing types with wrapped properties.
  * For example, a property with annotation @JsonProperty(value = "properties.name")
  * will be mapped from a top level "name" property in the POJO model to
  * {'properties' : { 'name' : 'my_name' }} in the serialized payload.
- *
- * @param <T> the type of the object to serialize.
  */
-public class FlatteningSerializer<T> extends StdSerializer<T> implements ResolvableSerializer {
+public class FlatteningSerializer extends StdSerializer<Object> implements ResolvableSerializer {
     /**
      * The default mapperAdapter for the current type.
      */
@@ -51,8 +47,8 @@ public class FlatteningSerializer<T> extends StdSerializer<T> implements Resolva
      * @param vc handled type
      * @param defaultSerializer the default JSON serializer
      */
-    protected FlatteningSerializer(Class<T> vc, JsonSerializer<?> defaultSerializer) {
-        super(vc);
+    protected FlatteningSerializer(Class<?> vc, JsonSerializer<?> defaultSerializer) {
+        super(vc, false);
         this.defaultSerializer = defaultSerializer;
     }
 
@@ -67,8 +63,8 @@ public class FlatteningSerializer<T> extends StdSerializer<T> implements Resolva
         module.setSerializerModifier(new BeanSerializerModifier() {
             @Override
             public JsonSerializer<?> modifySerializer(SerializationConfig config, BeanDescription beanDesc, JsonSerializer<?> serializer) {
-                if (BaseResource.class.isAssignableFrom(beanDesc.getBeanClass()) && BaseResource.class != beanDesc.getBeanClass()) {
-                    return new FlatteningSerializer<BaseResource>(BaseResource.class, serializer);
+                if (beanDesc.getBeanClass().getAnnotation(JsonFlatten.class) != null) {
+                    return new FlatteningSerializer(beanDesc.getBeanClass(), serializer);
                 }
                 return serializer;
             }
@@ -77,14 +73,14 @@ public class FlatteningSerializer<T> extends StdSerializer<T> implements Resolva
     }
 
     @Override
-    public void serialize(T value, JsonGenerator jgen, SerializerProvider provider) throws IOException, JsonGenerationException {
+    public void serialize(Object value, JsonGenerator jgen, SerializerProvider provider) throws IOException, JsonGenerationException {
         if (value == null) {
             jgen.writeNull();
             return;
         }
 
         // BFS for all collapsed properties
-        ObjectMapper mapper = new JacksonMapperAdapter().getObjectMapper();
+        ObjectMapper mapper = new JacksonMapperAdapter().getSimpleMapper();
         ObjectNode root = mapper.valueToTree(value);
         ObjectNode res = root.deepCopy();
         Queue<ObjectNode> source = new LinkedBlockingQueue<ObjectNode>();
@@ -98,10 +94,13 @@ public class FlatteningSerializer<T> extends StdSerializer<T> implements Resolva
             while (fields.hasNext()) {
                 Map.Entry<String, JsonNode> field = fields.next();
                 ObjectNode node = resCurrent;
-                JsonNode outNode = resCurrent.get(field.getKey());
-                if (field.getKey().contains(".")) {
-                    String[] values = field.getKey().split("\\.");
-                    for (int i = 0; i < values.length - 1; ++i) {
+                String key = field.getKey();
+                JsonNode outNode = resCurrent.get(key);
+                if (field.getKey().matches(".+[^\\\\]\\..+")) {
+                    String[] values = field.getKey().split("((?<!\\\\))\\.");
+                    for (int i = 0; i < values.length; ++i) {
+                        values[i] = values[i].replace("\\.", ".");
+                        if (i == values.length - 1) break;
                         String val = values[i];
                         if (node.has(val)) {
                             node = (ObjectNode) node.get(val);

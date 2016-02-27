@@ -90,7 +90,7 @@ public class MultipleResponsesTests {
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
-            Error model = new JacksonMapperAdapter().getObjectMapper().convertValue(
+            Error model = client.getMapperAdapter().getObjectMapper().convertValue(
                     ex.getBody(), Error.class);
             Assert.assertEquals(400, model.getStatus().intValue());
             Assert.assertEquals("client error", model.getMessage());
@@ -125,7 +125,7 @@ public class MultipleResponsesTests {
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
-            Error model = new JacksonMapperAdapter().getObjectMapper().convertValue(
+            Error model = client.getMapperAdapter().getObjectMapper().convertValue(
                     ex.getBody(), Error.class);
             Assert.assertEquals(400, model.getStatus().intValue());
             Assert.assertEquals("client error", model.getMessage());
@@ -173,7 +173,7 @@ public class MultipleResponsesTests {
             fail();
         } catch (ErrorException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
-            Error model = new JacksonMapperAdapter().getObjectMapper().convertValue(
+            Error model = client.getMapperAdapter().getObjectMapper().convertValue(
                     ex.getBody(), Error.class);
             Assert.assertEquals(400, model.getStatus().intValue());
             Assert.assertEquals("client error", model.getMessage());
@@ -229,7 +229,7 @@ public class MultipleResponsesTests {
             fail();
         } catch (MyException ex) {
             Assert.assertEquals(400, ex.getResponse().code());
-            A model = new JacksonMapperAdapter().getObjectMapper().convertValue(
+            A model = client.getMapperAdapter().getObjectMapper().convertValue(
                     ex.getBody(), A.class);
             Assert.assertEquals("400", model.getStatusCode());
         }

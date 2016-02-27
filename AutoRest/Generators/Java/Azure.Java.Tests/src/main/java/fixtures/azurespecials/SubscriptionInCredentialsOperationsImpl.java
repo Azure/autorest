@@ -85,7 +85,7 @@ public final class SubscriptionInCredentialsOperationsImpl implements Subscripti
     }
 
     private ServiceResponse<Void> postMethodGlobalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>()
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -133,7 +133,7 @@ public final class SubscriptionInCredentialsOperationsImpl implements Subscripti
     }
 
     private ServiceResponse<Void> postMethodGlobalNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>()
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -188,7 +188,7 @@ public final class SubscriptionInCredentialsOperationsImpl implements Subscripti
     }
 
     private ServiceResponse<Void> postMethodGlobalNotProvidedValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>()
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -236,7 +236,7 @@ public final class SubscriptionInCredentialsOperationsImpl implements Subscripti
     }
 
     private ServiceResponse<Void> postPathGlobalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>()
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -284,7 +284,7 @@ public final class SubscriptionInCredentialsOperationsImpl implements Subscripti
     }
 
     private ServiceResponse<Void> postSwaggerGlobalValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>()
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

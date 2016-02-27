@@ -78,7 +78,7 @@ public final class XMsClientRequestIdOperationsImpl implements XMsClientRequestI
     }
 
     private ServiceResponse<Void> getDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>()
+        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .build(response);
     }
@@ -127,7 +127,7 @@ public final class XMsClientRequestIdOperationsImpl implements XMsClientRequestI
     }
 
     private ServiceResponse<Void> paramGetDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>()
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

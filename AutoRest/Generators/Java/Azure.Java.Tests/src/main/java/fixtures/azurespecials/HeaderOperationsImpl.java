@@ -88,7 +88,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
     }
 
     private ServiceResponseWithHeaders<Void, HeaderCustomNamedRequestIdHeaders> customNamedRequestIdDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>()
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HeaderCustomNamedRequestIdHeaders.class);

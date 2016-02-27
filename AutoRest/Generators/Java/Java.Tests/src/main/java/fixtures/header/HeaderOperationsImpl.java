@@ -108,7 +108,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
     }
 
     private ServiceResponse<Void> paramExistingKeyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -148,7 +148,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseExistingKeyHeaders> responseExistingKeyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HeaderResponseExistingKeyHeaders.class);
@@ -198,7 +198,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
     }
 
     private ServiceResponse<Void> paramProtectedKeyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -238,7 +238,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseProtectedKeyHeaders> responseProtectedKeyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HeaderResponseProtectedKeyHeaders.class);
@@ -290,7 +290,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
     }
 
     private ServiceResponse<Void> paramIntegerDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -340,7 +340,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseIntegerHeaders> responseIntegerDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HeaderResponseIntegerHeaders.class);
@@ -392,7 +392,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
     }
 
     private ServiceResponse<Void> paramLongDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -442,7 +442,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseLongHeaders> responseLongDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HeaderResponseLongHeaders.class);
@@ -494,7 +494,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
     }
 
     private ServiceResponse<Void> paramFloatDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -544,7 +544,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseFloatHeaders> responseFloatDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HeaderResponseFloatHeaders.class);
@@ -596,7 +596,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
     }
 
     private ServiceResponse<Void> paramDoubleDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -646,7 +646,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseDoubleHeaders> responseDoubleDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HeaderResponseDoubleHeaders.class);
@@ -698,7 +698,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
     }
 
     private ServiceResponse<Void> paramBoolDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -748,7 +748,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseBoolHeaders> responseBoolDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HeaderResponseBoolHeaders.class);
@@ -800,7 +800,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
     }
 
     private ServiceResponse<Void> paramStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -850,7 +850,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseStringHeaders> responseStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HeaderResponseStringHeaders.class);
@@ -873,7 +873,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         if (value == null) {
             throw new IllegalArgumentException("Parameter value is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.paramDate(scenario, client.getMapperAdapter().serializeRaw(value));
+        Call<ResponseBody> call = service.paramDate(scenario, this.client.getMapperAdapter().serializeRaw(value));
         return paramDateDelegate(call.execute());
     }
 
@@ -894,7 +894,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter value is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.paramDate(scenario, client.getMapperAdapter().serializeRaw(value));
+        Call<ResponseBody> call = service.paramDate(scenario, this.client.getMapperAdapter().serializeRaw(value));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -909,7 +909,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
     }
 
     private ServiceResponse<Void> paramDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -959,7 +959,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseDateHeaders> responseDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HeaderResponseDateHeaders.class);
@@ -982,7 +982,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         if (value == null) {
             throw new IllegalArgumentException("Parameter value is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.paramDatetime(scenario, client.getMapperAdapter().serializeRaw(value));
+        Call<ResponseBody> call = service.paramDatetime(scenario, this.client.getMapperAdapter().serializeRaw(value));
         return paramDatetimeDelegate(call.execute());
     }
 
@@ -1003,7 +1003,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter value is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.paramDatetime(scenario, client.getMapperAdapter().serializeRaw(value));
+        Call<ResponseBody> call = service.paramDatetime(scenario, this.client.getMapperAdapter().serializeRaw(value));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1018,7 +1018,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
     }
 
     private ServiceResponse<Void> paramDatetimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1068,7 +1068,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseDatetimeHeaders> responseDatetimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HeaderResponseDatetimeHeaders.class);
@@ -1120,7 +1120,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
     }
 
     private ServiceResponse<Void> paramDatetimeRfc1123Delegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1170,7 +1170,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseDatetimeRfc1123Headers> responseDatetimeRfc1123Delegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HeaderResponseDatetimeRfc1123Headers.class);
@@ -1229,7 +1229,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
     }
 
     private ServiceResponse<Void> paramDurationDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1279,7 +1279,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseDurationHeaders> responseDurationDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HeaderResponseDurationHeaders.class);
@@ -1338,7 +1338,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
     }
 
     private ServiceResponse<Void> paramByteDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1388,7 +1388,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseByteHeaders> responseByteDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HeaderResponseByteHeaders.class);
@@ -1408,7 +1408,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
         if (scenario == null) {
             throw new IllegalArgumentException("Parameter scenario is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.paramEnum(scenario, client.getMapperAdapter().serializeRaw(value));
+        Call<ResponseBody> call = service.paramEnum(scenario, this.client.getMapperAdapter().serializeRaw(value));
         return paramEnumDelegate(call.execute());
     }
 
@@ -1425,7 +1425,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter scenario is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.paramEnum(scenario, client.getMapperAdapter().serializeRaw(value));
+        Call<ResponseBody> call = service.paramEnum(scenario, this.client.getMapperAdapter().serializeRaw(value));
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1440,7 +1440,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
     }
 
     private ServiceResponse<Void> paramEnumDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1490,7 +1490,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
     }
 
     private ServiceResponseWithHeaders<Void, HeaderResponseEnumHeaders> responseEnumDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .buildWithHeaders(response, HeaderResponseEnumHeaders.class);
@@ -1530,7 +1530,7 @@ public final class HeaderOperationsImpl implements HeaderOperations {
     }
 
     private ServiceResponse<Void> customRequestIdDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

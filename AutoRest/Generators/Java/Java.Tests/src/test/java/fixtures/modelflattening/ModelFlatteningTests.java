@@ -15,6 +15,7 @@ import fixtures.modelflattening.models.FlattenedProduct;
 import fixtures.modelflattening.models.SimpleProduct;
 import fixtures.modelflattening.models.Resource;
 import fixtures.modelflattening.models.ResourceCollection;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 public class ModelFlatteningTests {
     private static AutoRestResourceFlatteningTestService client;
@@ -22,6 +23,7 @@ public class ModelFlatteningTests {
     @BeforeClass
     public static void setup() {
         client = new AutoRestResourceFlatteningTestServiceImpl("http://localhost.:3000");
+        client.setLogLevel(HttpLoggingInterceptor.Level.BODY);
     }
 
     @Test
@@ -199,9 +201,9 @@ public class ModelFlatteningTests {
         simpleProduct.setBaseProductDescription("product description");
         simpleProduct.setBaseProductId("123");
         simpleProduct.setMaxProductDisplayName("max name");
+        simpleProduct.setMaxProductCapacity("Large");
         simpleProduct.setOdatavalue("http://foo");
 
-        SimpleProduct result = client.putSimpleProduct(simpleProduct).getBody();
-        Assert.assertEquals(simpleProduct, result);
+        client.putSimpleProduct(simpleProduct).getBody();
     }
 }

@@ -260,7 +260,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     }
 
     private ServiceResponse<Void> putArrayDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>()
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -300,7 +300,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     }
 
     private ServiceResponse<List<FlattenedProduct>> getArrayDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<List<FlattenedProduct>, ErrorException>()
+        return new AzureServiceResponseBuilder<List<FlattenedProduct>, ErrorException>(this.getMapperAdapter())
                 .register(200, new TypeToken<List<FlattenedProduct>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -342,7 +342,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     }
 
     private ServiceResponse<Void> putDictionaryDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>()
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -382,7 +382,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     }
 
     private ServiceResponse<Map<String, FlattenedProduct>> getDictionaryDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Map<String, FlattenedProduct>, ErrorException>()
+        return new AzureServiceResponseBuilder<Map<String, FlattenedProduct>, ErrorException>(this.getMapperAdapter())
                 .register(200, new TypeToken<Map<String, FlattenedProduct>>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -424,7 +424,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     }
 
     private ServiceResponse<Void> putResourceCollectionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>()
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -464,7 +464,7 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends AzureServic
     }
 
     private ServiceResponse<ResourceCollection> getResourceCollectionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<ResourceCollection, ErrorException>()
+        return new AzureServiceResponseBuilder<ResourceCollection, ErrorException>(this.getMapperAdapter())
                 .register(200, new TypeToken<ResourceCollection>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

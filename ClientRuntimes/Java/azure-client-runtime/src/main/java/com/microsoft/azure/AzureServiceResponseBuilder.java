@@ -8,7 +8,6 @@
 package com.microsoft.azure;
 
 import com.google.common.reflect.TypeToken;
-import com.microsoft.azure.serializer.AzureJacksonMapperAdapter;
 import com.microsoft.rest.AutoRestException;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
@@ -29,13 +28,6 @@ import retrofit2.Response;
  * @param <E> the exception to throw in case of error.
  */
 public class AzureServiceResponseBuilder<T, E extends AutoRestException> extends ServiceResponseBuilder<T, E> {
-    /**
-     * Create a ServiceResponseBuilder instance.
-     */
-    public AzureServiceResponseBuilder() {
-        this(new AzureJacksonMapperAdapter());
-    }
-
     /**
      * Create a ServiceResponseBuilder instance.
      *
