@@ -154,7 +154,7 @@ namespace Microsoft.Rest.Generator.Extensibility
         {
             T instance = default(T);
 
-            if (!section.IsNullOrEmpty() && section.ContainsKey(key))
+            if (settings != null && section != null && !section.IsNullOrEmpty() && section.ContainsKey(key))
             {
                 string fullTypeName = section[key].TypeName;
                 if (string.IsNullOrEmpty(fullTypeName))
