@@ -23,11 +23,9 @@
   "dependencies": {
     "underscore": "^1.4.0",
     "tunnel": "~0.0.2",
-    "request": "2.52.0",
-    "validator": "~3.1.0",
+    "request": "2.69.0",
     "duplexer": "~0.1.1",
     "through": "~2.3.4",
-    "tough-cookie": "*",
     "moment": "^2.6.0"
   },
   "devDependencies": {

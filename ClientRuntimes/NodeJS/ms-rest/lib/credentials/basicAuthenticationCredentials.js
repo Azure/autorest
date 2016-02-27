@@ -3,7 +3,6 @@
 
 var util = require('util');
 var Constants = require('../constants');
-var validate = require('../validate');
 
 var HeaderConstants = Constants.HeaderConstants;
 var DEFAULT_AUTHORIZATION_SCHEME = 'Basic';
@@ -17,10 +16,13 @@ var DEFAULT_AUTHORIZATION_SCHEME = 'Basic';
 * @param {string} [authorizationScheme]    The authorization scheme.
 */
 function BasicAuthenticationCredentials(userName, password, authorizationScheme) {
-  validate.validateArgs('BasicAuthenticationCredentials', function (v) {
-    v.string(userName, 'userName');
-    v.string(password, 'password');
-  });
+  if (userName === null || userName === undefined || typeof userName.valueOf() !== 'string') {
+    throw new Error('userName cannot be null or undefined and must be of type string.');
+  }
+
+  if (password === null || password === undefined || typeof password.valueOf() !== 'string') {
+    throw new Error('password cannot be null or undefined and must be of type string.');
+  }
 
   this.userName = userName;
   this.password = password;
