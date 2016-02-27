@@ -153,10 +153,11 @@ describe('nodejs', function () {
           should.not.exist(error);
           assert.deepEqual(result.field, new Date('0001-01-01'));
           assert.deepEqual(result.leap, new Date('2016-02-29'));
-          //testClient.primitive.putDate({ 'field': 'goodrequest', 'empty': '' }, function (error, result) {
-          //  should.not.exist(error);
+          var complexBody = <complexClientModels.DateWrapper>{ 'field': new Date('0001-01-01'), 'leap': new Date('2016-02-29') }
+          testClient.primitive.putDate(complexBody, function (error, result) {
+            should.not.exist(error);
           done();
-          //});
+          });
         });
       });
       it('should get and put valid date-time properties', function (done) {
