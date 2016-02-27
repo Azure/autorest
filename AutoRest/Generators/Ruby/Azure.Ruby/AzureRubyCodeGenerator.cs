@@ -37,7 +37,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// </summary>
         public override string Description
         {
-            get { return "Ruby for Http Client Libraries"; }
+            get { return "Azure specific Ruby code generator."; }
         }
 
         /// <summary>

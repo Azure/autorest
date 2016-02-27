@@ -48,9 +48,15 @@ namespace Microsoft.Rest.Generator.Ruby
             {
                 sdkName = Settings.CustomSettings["Name"];
             }
-            else
+
+            if (sdkName == null)
             {
                 sdkName = Path.GetFileNameWithoutExtension(Settings.Input);
+            }
+
+            if (sdkName == null)
+            {
+                sdkName = "client";
             }
 
             sdkName = RubyCodeNamer.UnderscoreCase(CodeNamer.RubyRemoveInvalidCharacters(sdkName));
@@ -71,7 +77,7 @@ namespace Microsoft.Rest.Generator.Ruby
         /// </summary>
         public override string Description
         {
-            get { return "Ruby for Http Client Libraries"; }
+            get { return "Generic Ruby code generator."; }
         }
 
         /// <summary>

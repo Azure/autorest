@@ -20,7 +20,7 @@ namespace Microsoft.Rest.Generator.Extensibility
         /// <summary>
         /// The name of the AutoRest configuration file.
         /// </summary>
-        private const string ConfigurationFileName = "AutoRest.json";
+        internal const string ConfigurationFileName = "AutoRest.json";
 
         /// <summary>
         /// Gets the code generator specified in the provided Settings.
@@ -118,8 +118,17 @@ namespace Microsoft.Rest.Generator.Extensibility
             return modeler;
         }
 
-        private static string GetConfigurationFileContent(Settings settings)
+        public static string GetConfigurationFileContent(Settings settings)
         {
+            if (settings == null)
+            {
+                throw new ArgumentNullException("settings");
+            }
+            if (settings.FileSystem == null)
+            {
+                throw new InvalidOperationException("FileSystem is null in settings.");
+            }
+
             string path = ConfigurationFileName;
             if (!settings.FileSystem.FileExists(path))
             {
@@ -140,7 +149,7 @@ namespace Microsoft.Rest.Generator.Extensibility
         }
 
         [SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Reflection.Assembly.LoadFrom")]
-        private static T LoadTypeFromAssembly<T>(IDictionary<string, AutoRestProviderConfiguration> section,
+        public static T LoadTypeFromAssembly<T>(IDictionary<string, AutoRestProviderConfiguration> section,
             string key, Settings settings)
         {
             T instance = default(T);

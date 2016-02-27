@@ -36,7 +36,7 @@ namespace Microsoft.Rest.Generator.NodeJS
         public override string Description
         {
             // TODO resource string.
-            get { return "NodeJS for Http Client Libraries"; }
+            get { return "Generic NodeJS code generator."; }
         }
 
         public override string UsageInstructions

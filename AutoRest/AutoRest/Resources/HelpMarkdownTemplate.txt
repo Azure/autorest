@@ -11,6 +11,12 @@ $parameters-start$
 
 $parameters-end$
 
+##Code Generators
+$generators-start$
+**-$generator$** $generator-desc$
+
+$generators-end$
+
 ##Examples
 $examples-start$
 - $example-desc$
