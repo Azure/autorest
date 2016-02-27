@@ -85,9 +85,13 @@ public final class PathsOperationsImpl implements PathsOperations {
      *
      * @param accountName Account Name
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall getEmptyAsync(String accountName, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (accountName == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter accountName is required and cannot be null."));
             return null;

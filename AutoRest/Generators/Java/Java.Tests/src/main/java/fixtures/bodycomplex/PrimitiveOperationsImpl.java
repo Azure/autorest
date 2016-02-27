@@ -171,9 +171,13 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      * Get complex types with integer properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getIntAsync(final ServiceCallback<IntWrapper> serviceCallback) {
+    public ServiceCall getIntAsync(final ServiceCallback<IntWrapper> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getInt();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<IntWrapper>(serviceCallback) {
@@ -219,9 +223,13 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      *
      * @param complexBody Please put -1 and 2
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putIntAsync(IntWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putIntAsync(IntWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (complexBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
@@ -265,9 +273,13 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      * Get complex types with long properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getLongAsync(final ServiceCallback<LongWrapper> serviceCallback) {
+    public ServiceCall getLongAsync(final ServiceCallback<LongWrapper> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getLong();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<LongWrapper>(serviceCallback) {
@@ -313,9 +325,13 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      *
      * @param complexBody Please put 1099511627775 and -999511627788
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putLongAsync(LongWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putLongAsync(LongWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (complexBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
@@ -359,9 +375,13 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      * Get complex types with float properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getFloatAsync(final ServiceCallback<FloatWrapper> serviceCallback) {
+    public ServiceCall getFloatAsync(final ServiceCallback<FloatWrapper> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getFloat();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<FloatWrapper>(serviceCallback) {
@@ -407,9 +427,13 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      *
      * @param complexBody Please put 1.05 and -0.003
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putFloatAsync(FloatWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putFloatAsync(FloatWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (complexBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
@@ -453,9 +477,13 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      * Get complex types with double properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getDoubleAsync(final ServiceCallback<DoubleWrapper> serviceCallback) {
+    public ServiceCall getDoubleAsync(final ServiceCallback<DoubleWrapper> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getDouble();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DoubleWrapper>(serviceCallback) {
@@ -501,9 +529,13 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      *
      * @param complexBody Please put 3e-100 and -0.000000000000000000000000000000000000000000000000000000005
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putDoubleAsync(DoubleWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putDoubleAsync(DoubleWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (complexBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
@@ -547,9 +579,13 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      * Get complex types with bool properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getBoolAsync(final ServiceCallback<BooleanWrapper> serviceCallback) {
+    public ServiceCall getBoolAsync(final ServiceCallback<BooleanWrapper> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getBool();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<BooleanWrapper>(serviceCallback) {
@@ -595,9 +631,13 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      *
      * @param complexBody Please put true and false
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putBoolAsync(BooleanWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putBoolAsync(BooleanWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (complexBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
@@ -641,9 +681,13 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      * Get complex types with string properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getStringAsync(final ServiceCallback<StringWrapper> serviceCallback) {
+    public ServiceCall getStringAsync(final ServiceCallback<StringWrapper> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getString();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<StringWrapper>(serviceCallback) {
@@ -689,9 +733,13 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      *
      * @param complexBody Please put 'goodrequest', '', and null
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putStringAsync(StringWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putStringAsync(StringWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (complexBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
@@ -735,9 +783,13 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      * Get complex types with date properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getDateAsync(final ServiceCallback<DateWrapper> serviceCallback) {
+    public ServiceCall getDateAsync(final ServiceCallback<DateWrapper> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getDate();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DateWrapper>(serviceCallback) {
@@ -783,9 +835,13 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      *
      * @param complexBody Please put '0001-01-01' and '2016-02-29'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putDateAsync(DateWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putDateAsync(DateWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (complexBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
@@ -829,9 +885,13 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      * Get complex types with datetime properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getDateTimeAsync(final ServiceCallback<DatetimeWrapper> serviceCallback) {
+    public ServiceCall getDateTimeAsync(final ServiceCallback<DatetimeWrapper> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getDateTime();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DatetimeWrapper>(serviceCallback) {
@@ -877,9 +937,13 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      *
      * @param complexBody Please put '0001-01-01T12:00:00-04:00' and '2015-05-18T11:38:00-08:00'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putDateTimeAsync(DatetimeWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putDateTimeAsync(DatetimeWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (complexBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
@@ -923,9 +987,13 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      * Get complex types with datetimeRfc1123 properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getDateTimeRfc1123Async(final ServiceCallback<Datetimerfc1123Wrapper> serviceCallback) {
+    public ServiceCall getDateTimeRfc1123Async(final ServiceCallback<Datetimerfc1123Wrapper> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getDateTimeRfc1123();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Datetimerfc1123Wrapper>(serviceCallback) {
@@ -971,9 +1039,13 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      *
      * @param complexBody Please put 'Mon, 01 Jan 0001 12:00:00 GMT' and 'Mon, 18 May 2015 11:38:00 GMT'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putDateTimeRfc1123Async(Datetimerfc1123Wrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (complexBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
@@ -1017,9 +1089,13 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      * Get complex types with duration properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getDurationAsync(final ServiceCallback<DurationWrapper> serviceCallback) {
+    public ServiceCall getDurationAsync(final ServiceCallback<DurationWrapper> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getDuration();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<DurationWrapper>(serviceCallback) {
@@ -1065,9 +1141,13 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      *
      * @param complexBody Please put 'P123DT22H14M12.011S'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putDurationAsync(DurationWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putDurationAsync(DurationWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (complexBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
@@ -1111,9 +1191,13 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      * Get complex types with byte properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getByteAsync(final ServiceCallback<ByteWrapper> serviceCallback) {
+    public ServiceCall getByteAsync(final ServiceCallback<ByteWrapper> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getByte();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ByteWrapper>(serviceCallback) {
@@ -1159,9 +1243,13 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
      *
      * @param complexBody Please put non-ascii byte string hex(FF FE FD FC 00 FA F9 F8 F7 F6)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putByteAsync(ByteWrapper complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putByteAsync(ByteWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (complexBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;

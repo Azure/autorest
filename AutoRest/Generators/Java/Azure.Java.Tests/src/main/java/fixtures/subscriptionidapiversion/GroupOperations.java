@@ -38,8 +38,9 @@ public interface GroupOperations {
      *
      * @param resourceGroupName Resource Group name 'testgroup101'.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getSampleResourceGroupAsync(String resourceGroupName, final ServiceCallback<SampleResourceGroup> serviceCallback);
+    ServiceCall getSampleResourceGroupAsync(String resourceGroupName, final ServiceCallback<SampleResourceGroup> serviceCallback) throws IllegalArgumentException;
 
 }

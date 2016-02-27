@@ -107,9 +107,13 @@ public final class StringOperationsImpl implements StringOperations {
      * Get null string value value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getNullAsync(final ServiceCallback<String> serviceCallback) {
+    public ServiceCall getNullAsync(final ServiceCallback<String> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getNull();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
@@ -150,9 +154,13 @@ public final class StringOperationsImpl implements StringOperations {
      *
      * @param stringBody the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putNullAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putNullAsync(String stringBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.putNull(stringBody);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -191,9 +199,13 @@ public final class StringOperationsImpl implements StringOperations {
      * Get empty string value value ''.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getEmptyAsync(final ServiceCallback<String> serviceCallback) {
+    public ServiceCall getEmptyAsync(final ServiceCallback<String> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getEmpty();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
@@ -238,9 +250,13 @@ public final class StringOperationsImpl implements StringOperations {
      *
      * @param stringBody the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putEmptyAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putEmptyAsync(String stringBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (stringBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
             return null;
@@ -283,9 +299,13 @@ public final class StringOperationsImpl implements StringOperations {
      * Get mbcs string value '啊齄丂狛狜隣郎隣兀﨩ˊ▇█〞〡￤℡㈱‐ー﹡﹢﹫、〓ⅰⅹ⒈€㈠㈩ⅠⅫ！￣ぁんァヶΑ︴АЯаяāɡㄅㄩ─╋︵﹄︻︱︳︴ⅰⅹɑɡ〇〾⿻⺁䜣€ '.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getMbcsAsync(final ServiceCallback<String> serviceCallback) {
+    public ServiceCall getMbcsAsync(final ServiceCallback<String> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getMbcs();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
@@ -330,9 +350,13 @@ public final class StringOperationsImpl implements StringOperations {
      *
      * @param stringBody the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putMbcsAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putMbcsAsync(String stringBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (stringBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
             return null;
@@ -375,9 +399,13 @@ public final class StringOperationsImpl implements StringOperations {
      * Get string value with leading and trailing whitespace '&lt;tab&gt;&lt;space&gt;&lt;space&gt;Now is the time for all good men to come to the aid of their country&lt;tab&gt;&lt;space&gt;&lt;space&gt;'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getWhitespaceAsync(final ServiceCallback<String> serviceCallback) {
+    public ServiceCall getWhitespaceAsync(final ServiceCallback<String> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getWhitespace();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
@@ -422,9 +450,13 @@ public final class StringOperationsImpl implements StringOperations {
      *
      * @param stringBody the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putWhitespaceAsync(String stringBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putWhitespaceAsync(String stringBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (stringBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
             return null;
@@ -467,9 +499,13 @@ public final class StringOperationsImpl implements StringOperations {
      * Get String value when no string value is sent in response payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getNotProvidedAsync(final ServiceCallback<String> serviceCallback) {
+    public ServiceCall getNotProvidedAsync(final ServiceCallback<String> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getNotProvided();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {

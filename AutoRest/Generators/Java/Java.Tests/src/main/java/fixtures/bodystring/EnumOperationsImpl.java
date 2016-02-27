@@ -80,9 +80,13 @@ public final class EnumOperationsImpl implements EnumOperations {
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getNotExpandableAsync(final ServiceCallback<Colors> serviceCallback) {
+    public ServiceCall getNotExpandableAsync(final ServiceCallback<Colors> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getNotExpandable();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Colors>(serviceCallback) {
@@ -127,9 +131,13 @@ public final class EnumOperationsImpl implements EnumOperations {
      *
      * @param stringBody Possible values include: 'red color', 'green-color', 'blue_color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putNotExpandableAsync(Colors stringBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putNotExpandableAsync(Colors stringBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (stringBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter stringBody is required and cannot be null."));
             return null;

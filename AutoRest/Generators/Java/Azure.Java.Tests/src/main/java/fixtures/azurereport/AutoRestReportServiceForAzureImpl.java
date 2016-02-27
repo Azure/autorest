@@ -235,9 +235,13 @@ public final class AutoRestReportServiceForAzureImpl extends AzureServiceClient 
      * Get test coverage report.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
+    public ServiceCall getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getReport(this.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCallback) {

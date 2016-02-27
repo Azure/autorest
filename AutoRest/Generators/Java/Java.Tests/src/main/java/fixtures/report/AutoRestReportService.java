@@ -68,8 +68,9 @@ public interface AutoRestReportService {
      * Get test coverage report.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
+    ServiceCall getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) throws IllegalArgumentException;
 
 }

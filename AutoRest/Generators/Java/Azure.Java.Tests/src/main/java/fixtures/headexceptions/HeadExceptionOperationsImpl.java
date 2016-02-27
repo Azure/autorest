@@ -81,9 +81,13 @@ public final class HeadExceptionOperationsImpl implements HeadExceptionOperation
      * Return 200 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall head200Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall head200Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<Void> call = service.head200(this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {
@@ -121,9 +125,13 @@ public final class HeadExceptionOperationsImpl implements HeadExceptionOperation
      * Return 204 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall head204Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall head204Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<Void> call = service.head204(this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {
@@ -161,9 +169,13 @@ public final class HeadExceptionOperationsImpl implements HeadExceptionOperation
      * Return 404 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall head404Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall head404Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<Void> call = service.head404(this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {

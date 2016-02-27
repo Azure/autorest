@@ -41,9 +41,10 @@ public interface DictionaryOperations {
      * Get null dictionary value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getNullAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
+    ServiceCall getNullAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get empty dictionary value {}.
@@ -58,9 +59,10 @@ public interface DictionaryOperations {
      * Get empty dictionary value {}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getEmptyAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
+    ServiceCall getEmptyAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Set dictionary value empty {}.
@@ -78,9 +80,10 @@ public interface DictionaryOperations {
      *
      * @param arrayBody the Map&lt;String, String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putEmptyAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putEmptyAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get Dictionary with null value.
@@ -95,9 +98,10 @@ public interface DictionaryOperations {
      * Get Dictionary with null value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getNullValueAsync(final ServiceCallback<Map<String, String>> serviceCallback);
+    ServiceCall getNullValueAsync(final ServiceCallback<Map<String, String>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get Dictionary with null key.
@@ -112,9 +116,10 @@ public interface DictionaryOperations {
      * Get Dictionary with null key.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getNullKeyAsync(final ServiceCallback<Map<String, String>> serviceCallback);
+    ServiceCall getNullKeyAsync(final ServiceCallback<Map<String, String>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get Dictionary with key as empty string.
@@ -129,9 +134,10 @@ public interface DictionaryOperations {
      * Get Dictionary with key as empty string.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getEmptyStringKeyAsync(final ServiceCallback<Map<String, String>> serviceCallback);
+    ServiceCall getEmptyStringKeyAsync(final ServiceCallback<Map<String, String>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get invalid Dictionary value.
@@ -146,9 +152,10 @@ public interface DictionaryOperations {
      * Get invalid Dictionary value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getInvalidAsync(final ServiceCallback<Map<String, String>> serviceCallback);
+    ServiceCall getInvalidAsync(final ServiceCallback<Map<String, String>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
@@ -163,9 +170,10 @@ public interface DictionaryOperations {
      * Get boolean dictionary value {"0": true, "1": false, "2": false, "3": true }.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getBooleanTfftAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback);
+    ServiceCall getBooleanTfftAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }.
@@ -183,9 +191,10 @@ public interface DictionaryOperations {
      *
      * @param arrayBody the Map&lt;String, Boolean&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putBooleanTfftAsync(Map<String, Boolean> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putBooleanTfftAsync(Map<String, Boolean> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get boolean dictionary value {"0": true, "1": null, "2": false }.
@@ -200,9 +209,10 @@ public interface DictionaryOperations {
      * Get boolean dictionary value {"0": true, "1": null, "2": false }.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getBooleanInvalidNullAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback);
+    ServiceCall getBooleanInvalidNullAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
@@ -217,9 +227,10 @@ public interface DictionaryOperations {
      * Get boolean dictionary value '{"0": true, "1": "boolean", "2": false}'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getBooleanInvalidStringAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback);
+    ServiceCall getBooleanInvalidStringAsync(final ServiceCallback<Map<String, Boolean>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -234,9 +245,10 @@ public interface DictionaryOperations {
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getIntegerValidAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
+    ServiceCall getIntegerValidAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -254,9 +266,10 @@ public interface DictionaryOperations {
      *
      * @param arrayBody the Map&lt;String, Integer&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putIntegerValidAsync(Map<String, Integer> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putIntegerValidAsync(Map<String, Integer> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get integer dictionary value {"0": 1, "1": null, "2": 0}.
@@ -271,9 +284,10 @@ public interface DictionaryOperations {
      * Get integer dictionary value {"0": 1, "1": null, "2": 0}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getIntInvalidNullAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
+    ServiceCall getIntInvalidNullAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}.
@@ -288,9 +302,10 @@ public interface DictionaryOperations {
      * Get integer dictionary value {"0": 1, "1": "integer", "2": 0}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getIntInvalidStringAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
+    ServiceCall getIntInvalidStringAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -305,9 +320,10 @@ public interface DictionaryOperations {
      * Get integer dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getLongValidAsync(final ServiceCallback<Map<String, Long>> serviceCallback);
+    ServiceCall getLongValidAsync(final ServiceCallback<Map<String, Long>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
@@ -325,9 +341,10 @@ public interface DictionaryOperations {
      *
      * @param arrayBody the Map&lt;String, Long&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putLongValidAsync(Map<String, Long> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putLongValidAsync(Map<String, Long> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get long dictionary value {"0": 1, "1": null, "2": 0}.
@@ -342,9 +359,10 @@ public interface DictionaryOperations {
      * Get long dictionary value {"0": 1, "1": null, "2": 0}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getLongInvalidNullAsync(final ServiceCallback<Map<String, Long>> serviceCallback);
+    ServiceCall getLongInvalidNullAsync(final ServiceCallback<Map<String, Long>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get long dictionary value {"0": 1, "1": "integer", "2": 0}.
@@ -359,9 +377,10 @@ public interface DictionaryOperations {
      * Get long dictionary value {"0": 1, "1": "integer", "2": 0}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getLongInvalidStringAsync(final ServiceCallback<Map<String, Long>> serviceCallback);
+    ServiceCall getLongInvalidStringAsync(final ServiceCallback<Map<String, Long>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -376,9 +395,10 @@ public interface DictionaryOperations {
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getFloatValidAsync(final ServiceCallback<Map<String, Double>> serviceCallback);
+    ServiceCall getFloatValidAsync(final ServiceCallback<Map<String, Double>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -396,9 +416,10 @@ public interface DictionaryOperations {
      *
      * @param arrayBody the Map&lt;String, Double&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putFloatValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putFloatValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
@@ -413,9 +434,10 @@ public interface DictionaryOperations {
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getFloatInvalidNullAsync(final ServiceCallback<Map<String, Double>> serviceCallback);
+    ServiceCall getFloatInvalidNullAsync(final ServiceCallback<Map<String, Double>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
@@ -430,9 +452,10 @@ public interface DictionaryOperations {
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getFloatInvalidStringAsync(final ServiceCallback<Map<String, Double>> serviceCallback);
+    ServiceCall getFloatInvalidStringAsync(final ServiceCallback<Map<String, Double>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -447,9 +470,10 @@ public interface DictionaryOperations {
      * Get float dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDoubleValidAsync(final ServiceCallback<Map<String, Double>> serviceCallback);
+    ServiceCall getDoubleValidAsync(final ServiceCallback<Map<String, Double>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
@@ -467,9 +491,10 @@ public interface DictionaryOperations {
      *
      * @param arrayBody the Map&lt;String, Double&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putDoubleValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putDoubleValidAsync(Map<String, Double> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
@@ -484,9 +509,10 @@ public interface DictionaryOperations {
      * Get float dictionary value {"0": 0.0, "1": null, "2": 1.2e20}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDoubleInvalidNullAsync(final ServiceCallback<Map<String, Double>> serviceCallback);
+    ServiceCall getDoubleInvalidNullAsync(final ServiceCallback<Map<String, Double>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
@@ -501,9 +527,10 @@ public interface DictionaryOperations {
      * Get boolean dictionary value {"0": 1.0, "1": "number", "2": 0.0}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDoubleInvalidStringAsync(final ServiceCallback<Map<String, Double>> serviceCallback);
+    ServiceCall getDoubleInvalidStringAsync(final ServiceCallback<Map<String, Double>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
@@ -518,9 +545,10 @@ public interface DictionaryOperations {
      * Get string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getStringValidAsync(final ServiceCallback<Map<String, String>> serviceCallback);
+    ServiceCall getStringValidAsync(final ServiceCallback<Map<String, String>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
@@ -538,9 +566,10 @@ public interface DictionaryOperations {
      *
      * @param arrayBody the Map&lt;String, String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putStringValidAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putStringValidAsync(Map<String, String> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
@@ -555,9 +584,10 @@ public interface DictionaryOperations {
      * Get string dictionary value {"0": "foo", "1": null, "2": "foo2"}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getStringWithNullAsync(final ServiceCallback<Map<String, String>> serviceCallback);
+    ServiceCall getStringWithNullAsync(final ServiceCallback<Map<String, String>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
@@ -572,9 +602,10 @@ public interface DictionaryOperations {
      * Get string dictionary value {"0": "foo", "1": 123, "2": "foo2"}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getStringWithInvalidAsync(final ServiceCallback<Map<String, String>> serviceCallback);
+    ServiceCall getStringWithInvalidAsync(final ServiceCallback<Map<String, String>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
@@ -589,9 +620,10 @@ public interface DictionaryOperations {
      * Get integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDateValidAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback);
+    ServiceCall getDateValidAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
@@ -609,9 +641,10 @@ public interface DictionaryOperations {
      *
      * @param arrayBody the Map&lt;String, LocalDate&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putDateValidAsync(Map<String, LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putDateValidAsync(Map<String, LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
@@ -626,9 +659,10 @@ public interface DictionaryOperations {
      * Get date dictionary value {"0": "2012-01-01", "1": null, "2": "1776-07-04"}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDateInvalidNullAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback);
+    ServiceCall getDateInvalidNullAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get date dictionary value {"0": "2011-03-22", "1": "date"}.
@@ -643,9 +677,10 @@ public interface DictionaryOperations {
      * Get date dictionary value {"0": "2011-03-22", "1": "date"}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDateInvalidCharsAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback);
+    ServiceCall getDateInvalidCharsAsync(final ServiceCallback<Map<String, LocalDate>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
@@ -660,9 +695,10 @@ public interface DictionaryOperations {
      * Get date-time dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDateTimeValidAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback);
+    ServiceCall getDateTimeValidAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2": "1492-10-12T10:15:01-08:00"}.
@@ -680,9 +716,10 @@ public interface DictionaryOperations {
      *
      * @param arrayBody the Map&lt;String, DateTime&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putDateTimeValidAsync(Map<String, DateTime> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putDateTimeValidAsync(Map<String, DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
@@ -697,9 +734,10 @@ public interface DictionaryOperations {
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": null}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDateTimeInvalidNullAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback);
+    ServiceCall getDateTimeInvalidNullAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
@@ -714,9 +752,10 @@ public interface DictionaryOperations {
      * Get date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDateTimeInvalidCharsAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback);
+    ServiceCall getDateTimeInvalidCharsAsync(final ServiceCallback<Map<String, DateTime>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
@@ -731,9 +770,10 @@ public interface DictionaryOperations {
      * Get date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDateTimeRfc1123ValidAsync(final ServiceCallback<Map<String, DateTimeRfc1123>> serviceCallback);
+    ServiceCall getDateTimeRfc1123ValidAsync(final ServiceCallback<Map<String, DateTimeRfc1123>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
@@ -751,9 +791,10 @@ public interface DictionaryOperations {
      *
      * @param arrayBody the Map&lt;String, DateTimeRfc1123&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putDateTimeRfc1123ValidAsync(Map<String, DateTimeRfc1123> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putDateTimeRfc1123ValidAsync(Map<String, DateTimeRfc1123> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
@@ -768,9 +809,10 @@ public interface DictionaryOperations {
      * Get duration dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDurationValidAsync(final ServiceCallback<Map<String, Period>> serviceCallback);
+    ServiceCall getDurationValidAsync(final ServiceCallback<Map<String, Period>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
@@ -788,9 +830,10 @@ public interface DictionaryOperations {
      *
      * @param arrayBody the Map&lt;String, Period&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putDurationValidAsync(Map<String, Period> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putDurationValidAsync(Map<String, Period> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64.
@@ -805,9 +848,10 @@ public interface DictionaryOperations {
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each item encoded in base64.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getByteValidAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback);
+    ServiceCall getByteValidAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each elementencoded in base 64.
@@ -825,9 +869,10 @@ public interface DictionaryOperations {
      *
      * @param arrayBody the Map&lt;String, byte[]&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putByteValidAsync(Map<String, byte[]> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putByteValidAsync(Map<String, byte[]> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
@@ -842,9 +887,10 @@ public interface DictionaryOperations {
      * Get byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getByteInvalidNullAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback);
+    ServiceCall getByteInvalidNullAsync(final ServiceCallback<Map<String, byte[]>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get dictionary of complex type null value.
@@ -859,9 +905,10 @@ public interface DictionaryOperations {
      * Get dictionary of complex type null value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getComplexNullAsync(final ServiceCallback<Map<String, Widget>> serviceCallback);
+    ServiceCall getComplexNullAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get empty dictionary of complex type {}.
@@ -876,9 +923,10 @@ public interface DictionaryOperations {
      * Get empty dictionary of complex type {}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getComplexEmptyAsync(final ServiceCallback<Map<String, Widget>> serviceCallback);
+    ServiceCall getComplexEmptyAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}.
@@ -893,9 +941,10 @@ public interface DictionaryOperations {
      * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5, "string": "6"}}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getComplexItemNullAsync(final ServiceCallback<Map<String, Widget>> serviceCallback);
+    ServiceCall getComplexItemNullAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}.
@@ -910,9 +959,10 @@ public interface DictionaryOperations {
      * Get dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer": 5, "string": "6"}}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getComplexItemEmptyAsync(final ServiceCallback<Map<String, Widget>> serviceCallback);
+    ServiceCall getComplexItemEmptyAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
@@ -927,9 +977,10 @@ public interface DictionaryOperations {
      * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getComplexValidAsync(final ServiceCallback<Map<String, Widget>> serviceCallback);
+    ServiceCall getComplexValidAsync(final ServiceCallback<Map<String, Widget>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2": {"integer": 5, "string": "6"}}.
@@ -947,9 +998,10 @@ public interface DictionaryOperations {
      *
      * @param arrayBody the Map&lt;String, Widget&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putComplexValidAsync(Map<String, Widget> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putComplexValidAsync(Map<String, Widget> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get a null array.
@@ -964,9 +1016,10 @@ public interface DictionaryOperations {
      * Get a null array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getArrayNullAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback);
+    ServiceCall getArrayNullAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get an empty dictionary {}.
@@ -981,9 +1034,10 @@ public interface DictionaryOperations {
      * Get an empty dictionary {}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getArrayEmptyAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback);
+    ServiceCall getArrayEmptyAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
@@ -998,9 +1052,10 @@ public interface DictionaryOperations {
      * Get an dictionary of array of strings {"0": ["1", "2", "3"], "1": null, "2": ["7", "8", "9"]}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getArrayItemNullAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback);
+    ServiceCall getArrayItemNullAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
@@ -1015,9 +1070,10 @@ public interface DictionaryOperations {
      * Get an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getArrayItemEmptyAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback);
+    ServiceCall getArrayItemEmptyAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
@@ -1032,9 +1088,10 @@ public interface DictionaryOperations {
      * Get an array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getArrayValidAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback);
+    ServiceCall getArrayValidAsync(final ServiceCallback<Map<String, List<String>>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
@@ -1052,9 +1109,10 @@ public interface DictionaryOperations {
      *
      * @param arrayBody the Map&lt;String, List&lt;String&gt;&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putArrayValidAsync(Map<String, List<String>> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putArrayValidAsync(Map<String, List<String>> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get an dictionaries of dictionaries with value null.
@@ -1069,9 +1127,10 @@ public interface DictionaryOperations {
      * Get an dictionaries of dictionaries with value null.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDictionaryNullAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback);
+    ServiceCall getDictionaryNullAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
@@ -1086,9 +1145,10 @@ public interface DictionaryOperations {
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDictionaryEmptyAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback);
+    ServiceCall getDictionaryEmptyAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
@@ -1103,9 +1163,10 @@ public interface DictionaryOperations {
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDictionaryItemNullAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback);
+    ServiceCall getDictionaryItemNullAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
@@ -1120,9 +1181,10 @@ public interface DictionaryOperations {
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDictionaryItemEmptyAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback);
+    ServiceCall getDictionaryItemEmptyAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
@@ -1137,9 +1199,10 @@ public interface DictionaryOperations {
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDictionaryValidAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback);
+    ServiceCall getDictionaryValidAsync(final ServiceCallback<Map<String, Map<String, String>>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
@@ -1157,8 +1220,9 @@ public interface DictionaryOperations {
      *
      * @param arrayBody the Map&lt;String, Map&lt;String, String&gt;&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putDictionaryValidAsync(Map<String, Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
 }

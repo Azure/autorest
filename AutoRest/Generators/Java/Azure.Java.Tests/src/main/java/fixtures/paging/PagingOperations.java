@@ -40,9 +40,10 @@ public interface PagingOperations {
      * A paging operation that finishes on the first call without a nextlink.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getSinglePagesAsync(final ListOperationCallback<Product> serviceCallback);
+    ServiceCall getSinglePagesAsync(final ListOperationCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
@@ -61,9 +62,10 @@ public interface PagingOperations {
      * @param clientRequestId the String value
      * @param pagingGetMultiplePagesOptions Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getMultiplePagesAsync(final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, final ListOperationCallback<Product> serviceCallback);
+    ServiceCall getMultiplePagesAsync(final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, final ListOperationCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
@@ -83,9 +85,10 @@ public interface PagingOperations {
      * @param pagingGetMultiplePagesWithOffsetOptions Additional parameters for the operation
      * @param clientRequestId the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getMultiplePagesWithOffsetAsync(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, final String clientRequestId, final ListOperationCallback<Product> serviceCallback);
+    ServiceCall getMultiplePagesWithOffsetAsync(final PagingGetMultiplePagesWithOffsetOptions pagingGetMultiplePagesWithOffsetOptions, final String clientRequestId, final ListOperationCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
@@ -100,9 +103,10 @@ public interface PagingOperations {
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getMultiplePagesRetryFirstAsync(final ListOperationCallback<Product> serviceCallback);
+    ServiceCall getMultiplePagesRetryFirstAsync(final ListOperationCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
@@ -117,9 +121,10 @@ public interface PagingOperations {
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getMultiplePagesRetrySecondAsync(final ListOperationCallback<Product> serviceCallback);
+    ServiceCall getMultiplePagesRetrySecondAsync(final ListOperationCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * A paging operation that receives a 400 on the first call.
@@ -134,9 +139,10 @@ public interface PagingOperations {
      * A paging operation that receives a 400 on the first call.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getSinglePagesFailureAsync(final ListOperationCallback<Product> serviceCallback);
+    ServiceCall getSinglePagesFailureAsync(final ListOperationCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * A paging operation that receives a 400 on the second call.
@@ -151,9 +157,10 @@ public interface PagingOperations {
      * A paging operation that receives a 400 on the second call.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getMultiplePagesFailureAsync(final ListOperationCallback<Product> serviceCallback);
+    ServiceCall getMultiplePagesFailureAsync(final ListOperationCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * A paging operation that receives an invalid nextLink.
@@ -168,9 +175,10 @@ public interface PagingOperations {
      * A paging operation that receives an invalid nextLink.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getMultiplePagesFailureUriAsync(final ListOperationCallback<Product> serviceCallback);
+    ServiceCall getMultiplePagesFailureUriAsync(final ListOperationCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * A paging operation that finishes on the first call without a nextlink.
@@ -189,9 +197,10 @@ public interface PagingOperations {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCall the ServiceCall object tracking the Retrofit calls
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getSinglePagesNextAsync(final String nextPageLink, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback);
+    ServiceCall getSinglePagesNextAsync(final String nextPageLink, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
@@ -214,9 +223,10 @@ public interface PagingOperations {
      * @param pagingGetMultiplePagesOptions Additional parameters for the operation
      * @param serviceCall the ServiceCall object tracking the Retrofit calls
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getMultiplePagesNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback);
+    ServiceCall getMultiplePagesNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * A paging operation that includes a nextLink that has 10 pages.
@@ -239,9 +249,10 @@ public interface PagingOperations {
      * @param pagingGetMultiplePagesWithOffsetNextOptions Additional parameters for the operation
      * @param serviceCall the ServiceCall object tracking the Retrofit calls
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getMultiplePagesWithOffsetNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback);
+    ServiceCall getMultiplePagesWithOffsetNextAsync(final String nextPageLink, final String clientRequestId, final PagingGetMultiplePagesWithOffsetNextOptions pagingGetMultiplePagesWithOffsetNextOptions, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
@@ -260,9 +271,10 @@ public interface PagingOperations {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCall the ServiceCall object tracking the Retrofit calls
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getMultiplePagesRetryFirstNextAsync(final String nextPageLink, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback);
+    ServiceCall getMultiplePagesRetryFirstNextAsync(final String nextPageLink, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
@@ -281,9 +293,10 @@ public interface PagingOperations {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCall the ServiceCall object tracking the Retrofit calls
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getMultiplePagesRetrySecondNextAsync(final String nextPageLink, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback);
+    ServiceCall getMultiplePagesRetrySecondNextAsync(final String nextPageLink, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * A paging operation that receives a 400 on the first call.
@@ -302,9 +315,10 @@ public interface PagingOperations {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCall the ServiceCall object tracking the Retrofit calls
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getSinglePagesFailureNextAsync(final String nextPageLink, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback);
+    ServiceCall getSinglePagesFailureNextAsync(final String nextPageLink, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * A paging operation that receives a 400 on the second call.
@@ -323,9 +337,10 @@ public interface PagingOperations {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCall the ServiceCall object tracking the Retrofit calls
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getMultiplePagesFailureNextAsync(final String nextPageLink, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback);
+    ServiceCall getMultiplePagesFailureNextAsync(final String nextPageLink, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * A paging operation that receives an invalid nextLink.
@@ -344,8 +359,9 @@ public interface PagingOperations {
      * @param nextPageLink The NextLink from the previous successful call to List operation.
      * @param serviceCall the ServiceCall object tracking the Retrofit calls
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getMultiplePagesFailureUriNextAsync(final String nextPageLink, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback);
+    ServiceCall getMultiplePagesFailureUriNextAsync(final String nextPageLink, final ServiceCall serviceCall, final ListOperationCallback<Product> serviceCallback) throws IllegalArgumentException;
 
 }

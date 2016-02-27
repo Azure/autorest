@@ -109,9 +109,13 @@ foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("host
 @: * @@param @param.Name @((param.Documentation ?? "the " + param.Type.ToString() + " value").EscapeXmlComment())
 }
 @Model.CallbackDocumentation
+ * @@throws IllegalArgumentException thrown if callback is null
  * @@return the {@@link Call} object
  */
-public ServiceCall @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) {
+public ServiceCall @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallback) throws IllegalArgumentException {
+    if (serviceCallback == null) {
+        throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+    }
 @foreach (var param in Model.RequiredNullableParameters)
 {
 @:    if (@param.Name == null) {
@@ -126,19 +130,19 @@ public ServiceCall @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallb
 @foreach (var group in Model.InputParameterTransformation.Select(t => t.ParameterMappings[0].InputParameter).Distinct())
 {
     var inParam = group.Name;
-if (!group.IsRequired)
-{
-foreach (var outProp in Model.InputParameterTransformation.Where(t => t.ParameterMappings[0].InputParameter == group).Select(t => t.OutputParameter))
-{
-if (outProp.IsRequired && JavaCodeNamer.JavaBuiltInTypes.Contains(outProp.Type.Name))
-{
+    if (!group.IsRequired)
+    {
+        foreach (var outProp in Model.InputParameterTransformation.Where(t => t.ParameterMappings[0].InputParameter == group).Select(t => t.OutputParameter))
+        {
+            if (outProp.IsRequired && JavaCodeNamer.JavaBuiltInTypes.Contains(outProp.Type.Name))
+            {
 @:    @outProp.Type.Name @outProp.Name;
 }
-else
-{
+            else
+            {
 @:    @JavaCodeNamer.WrapPrimitiveType(outProp.Type).Name @outProp.Name = null;
 }
-}
+        }
 @:    if (@(group.Name) != null) {
     foreach (var transformation in Model.InputParameterTransformation.Where(t => t.ParameterMappings[0].InputParameter.Name == inParam))
     {
@@ -148,25 +152,25 @@ else
     }
 @:    }
 }
-else
-{
-foreach (var transformation in Model.InputParameterTransformation.Where(t => t.ParameterMappings[0].InputParameter.Name == inParam))
-{
-    var outType = transformation.OutputParameter.Type.Name;
-    if (!transformation.OutputParameter.IsRequired)
+    else
     {
-        outType = JavaCodeNamer.WrapPrimitiveType(transformation.OutputParameter.Type).Name;
-    }
-    var outProp = transformation.OutputParameter.Name;
-    var inProp = transformation.ParameterMappings[0].InputParameterProperty;
+        foreach (var transformation in Model.InputParameterTransformation.Where(t => t.ParameterMappings[0].InputParameter.Name == inParam))
+        {
+            var outType = transformation.OutputParameter.Type.Name;
+            if (!transformation.OutputParameter.IsRequired)
+            {
+                outType = JavaCodeNamer.WrapPrimitiveType(transformation.OutputParameter.Type).Name;
+            }
+            var outProp = transformation.OutputParameter.Name;
+            var inProp = transformation.ParameterMappings[0].InputParameterProperty;
 @:    @outType @outProp = @(inParam).get@(inProp.ToPascalCase())();
 }
-}
+    }
 }
 @if (Model.ServiceClient.Extensions.ContainsKey(Microsoft.Rest.Generator.Extensions.ParameterizedHostExtension))
 {
-foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("hostParameter")))
-{
+    foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("hostParameter")))
+    {
 @:    @(Model.ClientReference).getBaseUrl().set("{@(param.SerializedName)}", @param.Name);
 }
 }

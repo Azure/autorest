@@ -37,9 +37,10 @@ public interface MultipleResponsesOperations {
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get200Model204NoModelDefaultError200ValidAsync(final ServiceCallback<A> serviceCallback);
+    ServiceCall get200Model204NoModelDefaultError200ValidAsync(final ServiceCallback<A> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a 204 response with no payload.
@@ -54,9 +55,10 @@ public interface MultipleResponsesOperations {
      * Send a 204 response with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get200Model204NoModelDefaultError204ValidAsync(final ServiceCallback<A> serviceCallback);
+    ServiceCall get200Model204NoModelDefaultError204ValidAsync(final ServiceCallback<A> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201'}.
@@ -71,9 +73,10 @@ public interface MultipleResponsesOperations {
      * Send a 201 response with valid payload: {'statusCode': '201'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get200Model204NoModelDefaultError201InvalidAsync(final ServiceCallback<A> serviceCallback);
+    ServiceCall get200Model204NoModelDefaultError201InvalidAsync(final ServiceCallback<A> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a 202 response with no payload:.
@@ -88,9 +91,10 @@ public interface MultipleResponsesOperations {
      * Send a 202 response with no payload:.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get200Model204NoModelDefaultError202NoneAsync(final ServiceCallback<A> serviceCallback);
+    ServiceCall get200Model204NoModelDefaultError202NoneAsync(final ServiceCallback<A> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
@@ -105,9 +109,10 @@ public interface MultipleResponsesOperations {
      * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get200Model204NoModelDefaultError400ValidAsync(final ServiceCallback<A> serviceCallback);
+    ServiceCall get200Model204NoModelDefaultError400ValidAsync(final ServiceCallback<A> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
@@ -122,9 +127,10 @@ public interface MultipleResponsesOperations {
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get200Model201ModelDefaultError200ValidAsync(final ServiceCallback<A> serviceCallback);
+    ServiceCall get200Model201ModelDefaultError200ValidAsync(final ServiceCallback<A> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
@@ -139,9 +145,10 @@ public interface MultipleResponsesOperations {
      * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get200Model201ModelDefaultError201ValidAsync(final ServiceCallback<A> serviceCallback);
+    ServiceCall get200Model201ModelDefaultError201ValidAsync(final ServiceCallback<A> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
@@ -156,9 +163,10 @@ public interface MultipleResponsesOperations {
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get200Model201ModelDefaultError400ValidAsync(final ServiceCallback<A> serviceCallback);
+    ServiceCall get200Model201ModelDefaultError400ValidAsync(final ServiceCallback<A> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
@@ -173,9 +181,10 @@ public interface MultipleResponsesOperations {
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get200ModelA201ModelC404ModelDDefaultError200ValidAsync(final ServiceCallback<Object> serviceCallback);
+    ServiceCall get200ModelA201ModelC404ModelDDefaultError200ValidAsync(final ServiceCallback<Object> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a 200 response with valid payload: {'httpCode': '201'}.
@@ -190,9 +199,10 @@ public interface MultipleResponsesOperations {
      * Send a 200 response with valid payload: {'httpCode': '201'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get200ModelA201ModelC404ModelDDefaultError201ValidAsync(final ServiceCallback<Object> serviceCallback);
+    ServiceCall get200ModelA201ModelC404ModelDDefaultError201ValidAsync(final ServiceCallback<Object> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
@@ -207,9 +217,10 @@ public interface MultipleResponsesOperations {
      * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get200ModelA201ModelC404ModelDDefaultError404ValidAsync(final ServiceCallback<Object> serviceCallback);
+    ServiceCall get200ModelA201ModelC404ModelDDefaultError404ValidAsync(final ServiceCallback<Object> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
@@ -224,9 +235,10 @@ public interface MultipleResponsesOperations {
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get200ModelA201ModelC404ModelDDefaultError400ValidAsync(final ServiceCallback<Object> serviceCallback);
+    ServiceCall get200ModelA201ModelC404ModelDDefaultError400ValidAsync(final ServiceCallback<Object> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a 202 response with no payload.
@@ -241,9 +253,10 @@ public interface MultipleResponsesOperations {
      * Send a 202 response with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get202None204NoneDefaultError202NoneAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceCall get202None204NoneDefaultError202NoneAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a 204 response with no payload.
@@ -258,9 +271,10 @@ public interface MultipleResponsesOperations {
      * Send a 204 response with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get202None204NoneDefaultError204NoneAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceCall get202None204NoneDefaultError204NoneAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
@@ -275,9 +289,10 @@ public interface MultipleResponsesOperations {
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get202None204NoneDefaultError400ValidAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceCall get202None204NoneDefaultError400ValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a 202 response with an unexpected payload {'property': 'value'}.
@@ -292,9 +307,10 @@ public interface MultipleResponsesOperations {
      * Send a 202 response with an unexpected payload {'property': 'value'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get202None204NoneDefaultNone202InvalidAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceCall get202None204NoneDefaultNone202InvalidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a 204 response with no payload.
@@ -309,9 +325,10 @@ public interface MultipleResponsesOperations {
      * Send a 204 response with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get202None204NoneDefaultNone204NoneAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceCall get202None204NoneDefaultNone204NoneAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a 400 response with no payload.
@@ -326,9 +343,10 @@ public interface MultipleResponsesOperations {
      * Send a 400 response with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get202None204NoneDefaultNone400NoneAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceCall get202None204NoneDefaultNone400NoneAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a 400 response with an unexpected payload {'property': 'value'}.
@@ -343,9 +361,10 @@ public interface MultipleResponsesOperations {
      * Send a 400 response with an unexpected payload {'property': 'value'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get202None204NoneDefaultNone400InvalidAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceCall get202None204NoneDefaultNone400InvalidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
@@ -360,9 +379,10 @@ public interface MultipleResponsesOperations {
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDefaultModelA200ValidAsync(final ServiceCallback<A> serviceCallback);
+    ServiceCall getDefaultModelA200ValidAsync(final ServiceCallback<A> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a 200 response with no payload.
@@ -377,9 +397,10 @@ public interface MultipleResponsesOperations {
      * Send a 200 response with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDefaultModelA200NoneAsync(final ServiceCallback<A> serviceCallback);
+    ServiceCall getDefaultModelA200NoneAsync(final ServiceCallback<A> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
@@ -394,9 +415,10 @@ public interface MultipleResponsesOperations {
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDefaultModelA400ValidAsync(final ServiceCallback<A> serviceCallback);
+    ServiceCall getDefaultModelA400ValidAsync(final ServiceCallback<A> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a 400 response with no payload.
@@ -411,9 +433,10 @@ public interface MultipleResponsesOperations {
      * Send a 400 response with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDefaultModelA400NoneAsync(final ServiceCallback<A> serviceCallback);
+    ServiceCall getDefaultModelA400NoneAsync(final ServiceCallback<A> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a 200 response with invalid payload: {'statusCode': '200'}.
@@ -428,9 +451,10 @@ public interface MultipleResponsesOperations {
      * Send a 200 response with invalid payload: {'statusCode': '200'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDefaultNone200InvalidAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceCall getDefaultNone200InvalidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a 200 response with no payload.
@@ -445,9 +469,10 @@ public interface MultipleResponsesOperations {
      * Send a 200 response with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDefaultNone200NoneAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceCall getDefaultNone200NoneAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a 400 response with valid payload: {'statusCode': '400'}.
@@ -462,9 +487,10 @@ public interface MultipleResponsesOperations {
      * Send a 400 response with valid payload: {'statusCode': '400'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDefaultNone400InvalidAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceCall getDefaultNone400InvalidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a 400 response with no payload.
@@ -479,9 +505,10 @@ public interface MultipleResponsesOperations {
      * Send a 400 response with no payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDefaultNone400NoneAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceCall getDefaultNone400NoneAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A.
@@ -496,9 +523,10 @@ public interface MultipleResponsesOperations {
      * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get200ModelA200NoneAsync(final ServiceCallback<A> serviceCallback);
+    ServiceCall get200ModelA200NoneAsync(final ServiceCallback<A> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a 200 response with payload {'statusCode': '200'}.
@@ -513,9 +541,10 @@ public interface MultipleResponsesOperations {
      * Send a 200 response with payload {'statusCode': '200'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get200ModelA200ValidAsync(final ServiceCallback<A> serviceCallback);
+    ServiceCall get200ModelA200ValidAsync(final ServiceCallback<A> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
@@ -530,9 +559,10 @@ public interface MultipleResponsesOperations {
      * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get200ModelA200InvalidAsync(final ServiceCallback<A> serviceCallback);
+    ServiceCall get200ModelA200InvalidAsync(final ServiceCallback<A> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a 400 response with no payload client should treat as an http error with no error model.
@@ -547,9 +577,10 @@ public interface MultipleResponsesOperations {
      * Send a 400 response with no payload client should treat as an http error with no error model.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get200ModelA400NoneAsync(final ServiceCallback<A> serviceCallback);
+    ServiceCall get200ModelA400NoneAsync(final ServiceCallback<A> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a 200 response with payload {'statusCode': '400'}.
@@ -564,9 +595,10 @@ public interface MultipleResponsesOperations {
      * Send a 200 response with payload {'statusCode': '400'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get200ModelA400ValidAsync(final ServiceCallback<A> serviceCallback);
+    ServiceCall get200ModelA400ValidAsync(final ServiceCallback<A> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
@@ -581,9 +613,10 @@ public interface MultipleResponsesOperations {
      * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get200ModelA400InvalidAsync(final ServiceCallback<A> serviceCallback);
+    ServiceCall get200ModelA400InvalidAsync(final ServiceCallback<A> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a 202 response with payload {'statusCode': '202'}.
@@ -598,8 +631,9 @@ public interface MultipleResponsesOperations {
      * Send a 202 response with payload {'statusCode': '202'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get200ModelA202ValidAsync(final ServiceCallback<A> serviceCallback);
+    ServiceCall get200ModelA202ValidAsync(final ServiceCallback<A> serviceCallback) throws IllegalArgumentException;
 
 }

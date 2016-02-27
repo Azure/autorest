@@ -115,9 +115,13 @@ public final class LROsCustomHeaderOperationsImpl implements LROsCustomHeaderOpe
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall putAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall putAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.putAsyncRetrySucceeded(product, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
@@ -153,9 +157,13 @@ public final class LROsCustomHeaderOperationsImpl implements LROsCustomHeaderOpe
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPutAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall beginPutAsyncRetrySucceededAsync(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPutAsyncRetrySucceeded(product, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
@@ -199,9 +207,13 @@ public final class LROsCustomHeaderOperationsImpl implements LROsCustomHeaderOpe
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall put201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall put201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.put201CreatingSucceeded200(product, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
@@ -237,9 +249,13 @@ public final class LROsCustomHeaderOperationsImpl implements LROsCustomHeaderOpe
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPut201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) {
+    public ServiceCall beginPut201CreatingSucceeded200Async(Product product, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPut201CreatingSucceeded200(product, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
@@ -284,9 +300,13 @@ public final class LROsCustomHeaderOperationsImpl implements LROsCustomHeaderOpe
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall post202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall post202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.post202Retry200(product, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
@@ -322,9 +342,13 @@ public final class LROsCustomHeaderOperationsImpl implements LROsCustomHeaderOpe
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPost202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall beginPost202Retry200Async(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPost202Retry200(product, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
@@ -368,9 +392,13 @@ public final class LROsCustomHeaderOperationsImpl implements LROsCustomHeaderOpe
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    public ServiceCall postAsyncRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall postAsyncRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.postAsyncRetrySucceeded(product, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
@@ -406,9 +434,13 @@ public final class LROsCustomHeaderOperationsImpl implements LROsCustomHeaderOpe
      *
      * @param product Product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall beginPostAsyncRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall beginPostAsyncRetrySucceededAsync(Product product, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Validator.validate(product, serviceCallback);
         Call<ResponseBody> call = service.beginPostAsyncRetrySucceeded(product, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);

@@ -106,9 +106,13 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getMethodPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall getMethodPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (unencodedPathParam == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null."));
             return null;
@@ -157,9 +161,13 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
      *
      * @param unencodedPathParam Unencoded path parameter with value 'path1/path2/path3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getPathPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall getPathPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (unencodedPathParam == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null."));
             return null;
@@ -208,9 +216,13 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
      *
      * @param unencodedPathParam An unencoded path parameter with value 'path1/path2/path3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getSwaggerPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall getSwaggerPathValidAsync(String unencodedPathParam, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (unencodedPathParam == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter unencodedPathParam is required and cannot be null."));
             return null;
@@ -259,9 +271,13 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getMethodQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall getMethodQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (q1 == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter q1 is required and cannot be null."));
             return null;
@@ -306,9 +322,13 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
      *
      * @param q1 Unencoded query parameter with value null
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getMethodQueryNullAsync(String q1, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall getMethodQueryNullAsync(String q1, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getMethodQueryNull(q1, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -353,9 +373,13 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
      *
      * @param q1 Unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getPathQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall getPathQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (q1 == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter q1 is required and cannot be null."));
             return null;
@@ -404,9 +428,13 @@ public final class SkipUrlEncodingOperationsImpl implements SkipUrlEncodingOpera
      *
      * @param q1 An unencoded query parameter with value 'value1&amp;q2=value2&amp;q3=value3'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getSwaggerQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall getSwaggerQueryValidAsync(String q1, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (q1 == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter q1 is required and cannot be null."));
             return null;

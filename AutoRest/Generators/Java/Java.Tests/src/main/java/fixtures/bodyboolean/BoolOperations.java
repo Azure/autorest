@@ -34,9 +34,10 @@ public interface BoolOperations {
      * Get true Boolean value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getTrueAsync(final ServiceCallback<Boolean> serviceCallback);
+    ServiceCall getTrueAsync(final ServiceCallback<Boolean> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Set Boolean value true.
@@ -53,9 +54,10 @@ public interface BoolOperations {
      *
      * @param boolBody the boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get false Boolean value.
@@ -70,9 +72,10 @@ public interface BoolOperations {
      * Get false Boolean value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getFalseAsync(final ServiceCallback<Boolean> serviceCallback);
+    ServiceCall getFalseAsync(final ServiceCallback<Boolean> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Set Boolean value false.
@@ -89,9 +92,10 @@ public interface BoolOperations {
      *
      * @param boolBody the boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get null Boolean value.
@@ -106,9 +110,10 @@ public interface BoolOperations {
      * Get null Boolean value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getNullAsync(final ServiceCallback<Boolean> serviceCallback);
+    ServiceCall getNullAsync(final ServiceCallback<Boolean> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get invalid Boolean value.
@@ -123,8 +128,9 @@ public interface BoolOperations {
      * Get invalid Boolean value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getInvalidAsync(final ServiceCallback<Boolean> serviceCallback);
+    ServiceCall getInvalidAsync(final ServiceCallback<Boolean> serviceCallback) throws IllegalArgumentException;
 
 }

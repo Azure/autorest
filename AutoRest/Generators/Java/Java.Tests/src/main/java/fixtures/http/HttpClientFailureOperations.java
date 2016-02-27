@@ -35,9 +35,10 @@ public interface HttpClientFailureOperations {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall head400Async(final ServiceCallback<Error> serviceCallback);
+    ServiceCall head400Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -52,9 +53,10 @@ public interface HttpClientFailureOperations {
      * Return 400 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get400Async(final ServiceCallback<Error> serviceCallback);
+    ServiceCall get400Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -71,9 +73,10 @@ public interface HttpClientFailureOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall put400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceCall put400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -90,9 +93,10 @@ public interface HttpClientFailureOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall patch400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceCall patch400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -109,9 +113,10 @@ public interface HttpClientFailureOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall post400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceCall post400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 400 status code - should be represented in the client as an error.
@@ -128,9 +133,10 @@ public interface HttpClientFailureOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall delete400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceCall delete400Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 401 status code - should be represented in the client as an error.
@@ -145,9 +151,10 @@ public interface HttpClientFailureOperations {
      * Return 401 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall head401Async(final ServiceCallback<Error> serviceCallback);
+    ServiceCall head401Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 402 status code - should be represented in the client as an error.
@@ -162,9 +169,10 @@ public interface HttpClientFailureOperations {
      * Return 402 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get402Async(final ServiceCallback<Error> serviceCallback);
+    ServiceCall get402Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 403 status code - should be represented in the client as an error.
@@ -179,9 +187,10 @@ public interface HttpClientFailureOperations {
      * Return 403 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get403Async(final ServiceCallback<Error> serviceCallback);
+    ServiceCall get403Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 404 status code - should be represented in the client as an error.
@@ -198,9 +207,10 @@ public interface HttpClientFailureOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall put404Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceCall put404Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 405 status code - should be represented in the client as an error.
@@ -217,9 +227,10 @@ public interface HttpClientFailureOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall patch405Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceCall patch405Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 406 status code - should be represented in the client as an error.
@@ -236,9 +247,10 @@ public interface HttpClientFailureOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall post406Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceCall post406Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 407 status code - should be represented in the client as an error.
@@ -255,9 +267,10 @@ public interface HttpClientFailureOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall delete407Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceCall delete407Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 409 status code - should be represented in the client as an error.
@@ -274,9 +287,10 @@ public interface HttpClientFailureOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall put409Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceCall put409Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 410 status code - should be represented in the client as an error.
@@ -291,9 +305,10 @@ public interface HttpClientFailureOperations {
      * Return 410 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall head410Async(final ServiceCallback<Error> serviceCallback);
+    ServiceCall head410Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 411 status code - should be represented in the client as an error.
@@ -308,9 +323,10 @@ public interface HttpClientFailureOperations {
      * Return 411 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get411Async(final ServiceCallback<Error> serviceCallback);
+    ServiceCall get411Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 412 status code - should be represented in the client as an error.
@@ -325,9 +341,10 @@ public interface HttpClientFailureOperations {
      * Return 412 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get412Async(final ServiceCallback<Error> serviceCallback);
+    ServiceCall get412Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 413 status code - should be represented in the client as an error.
@@ -344,9 +361,10 @@ public interface HttpClientFailureOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall put413Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceCall put413Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 414 status code - should be represented in the client as an error.
@@ -363,9 +381,10 @@ public interface HttpClientFailureOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall patch414Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceCall patch414Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 415 status code - should be represented in the client as an error.
@@ -382,9 +401,10 @@ public interface HttpClientFailureOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall post415Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceCall post415Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 416 status code - should be represented in the client as an error.
@@ -399,9 +419,10 @@ public interface HttpClientFailureOperations {
      * Return 416 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get416Async(final ServiceCallback<Error> serviceCallback);
+    ServiceCall get416Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 417 status code - should be represented in the client as an error.
@@ -418,9 +439,10 @@ public interface HttpClientFailureOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall delete417Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceCall delete417Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 429 status code - should be represented in the client as an error.
@@ -435,8 +457,9 @@ public interface HttpClientFailureOperations {
      * Return 429 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall head429Async(final ServiceCallback<Error> serviceCallback);
+    ServiceCall head429Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
 }

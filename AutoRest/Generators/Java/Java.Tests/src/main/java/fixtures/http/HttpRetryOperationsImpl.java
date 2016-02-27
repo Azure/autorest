@@ -108,9 +108,13 @@ public final class HttpRetryOperationsImpl implements HttpRetryOperations {
      * Return 408 status code, then 200 after retry.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall head408Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall head408Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<Void> call = service.head408();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseEmptyCallback<Void>(serviceCallback) {
@@ -151,9 +155,13 @@ public final class HttpRetryOperationsImpl implements HttpRetryOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall put500Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall put500Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.put500(booleanValue);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -194,9 +202,13 @@ public final class HttpRetryOperationsImpl implements HttpRetryOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall patch500Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall patch500Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.patch500(booleanValue);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -235,9 +247,13 @@ public final class HttpRetryOperationsImpl implements HttpRetryOperations {
      * Return 502 status code, then 200 after retry.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall get502Async(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall get502Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.get502();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -278,9 +294,13 @@ public final class HttpRetryOperationsImpl implements HttpRetryOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall post503Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall post503Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.post503(booleanValue);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -321,9 +341,13 @@ public final class HttpRetryOperationsImpl implements HttpRetryOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall delete503Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall delete503Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.delete503(booleanValue);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -364,9 +388,13 @@ public final class HttpRetryOperationsImpl implements HttpRetryOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall put504Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall put504Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.put504(booleanValue);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -407,9 +435,13 @@ public final class HttpRetryOperationsImpl implements HttpRetryOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall patch504Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall patch504Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.patch504(booleanValue);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
