@@ -107,7 +107,7 @@ public final class DurationOperationsImpl implements DurationOperations {
     }
 
     private ServiceResponse<Period> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Period, ErrorException>()
+        return new ServiceResponseBuilder<Period, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Period>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -158,7 +158,7 @@ public final class DurationOperationsImpl implements DurationOperations {
     }
 
     private ServiceResponse<Void> putPositiveDurationDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -199,7 +199,7 @@ public final class DurationOperationsImpl implements DurationOperations {
     }
 
     private ServiceResponse<Period> getPositiveDurationDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Period, ErrorException>()
+        return new ServiceResponseBuilder<Period, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Period>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -240,7 +240,7 @@ public final class DurationOperationsImpl implements DurationOperations {
     }
 
     private ServiceResponse<Period> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Period, ErrorException>()
+        return new ServiceResponseBuilder<Period, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Period>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

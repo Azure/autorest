@@ -384,7 +384,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
             }
             else
             {
-                invocation = string.Format(CultureInfo.InvariantCulture, "{0}.get{1}().{2}", ClientReference, group, name);
+                invocation = string.Format(CultureInfo.InvariantCulture, "{0}.get{1}().{2}", ClientReference.Replace("this.", ""), group, name);
             }
             return methodModel;
         }

@@ -11,10 +11,12 @@
 package fixtures.modelflattening.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.microsoft.rest.serializer.JsonFlatten;
 
 /**
  * Additional parameters for the putSimpleProductWithGrouping operation.
  */
+@JsonFlatten
 public class FlattenParameterGroup {
     /**
      * Product name with value 'groupproduct'.

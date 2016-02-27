@@ -234,7 +234,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     }
 
     private ServiceResponse<Void> getBooleanTrueDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -277,7 +277,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     }
 
     private ServiceResponse<Void> getBooleanFalseDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -320,7 +320,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     }
 
     private ServiceResponse<Void> getBooleanNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -363,7 +363,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     }
 
     private ServiceResponse<Void> getIntOneMillionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -406,7 +406,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     }
 
     private ServiceResponse<Void> getIntNegativeOneMillionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -449,7 +449,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     }
 
     private ServiceResponse<Void> getIntNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -492,7 +492,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     }
 
     private ServiceResponse<Void> getTenBillionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -535,7 +535,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     }
 
     private ServiceResponse<Void> getNegativeTenBillionDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -578,7 +578,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     }
 
     private ServiceResponse<Void> getLongNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -621,7 +621,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     }
 
     private ServiceResponse<Void> floatScientificPositiveDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -664,7 +664,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     }
 
     private ServiceResponse<Void> floatScientificNegativeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -707,7 +707,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     }
 
     private ServiceResponse<Void> floatNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -750,7 +750,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     }
 
     private ServiceResponse<Void> doubleDecimalPositiveDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -793,7 +793,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     }
 
     private ServiceResponse<Void> doubleDecimalNegativeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -836,7 +836,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     }
 
     private ServiceResponse<Void> doubleNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -887,7 +887,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     }
 
     private ServiceResponse<Void> stringUnicodeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -938,7 +938,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     }
 
     private ServiceResponse<Void> stringUrlEncodedDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -989,7 +989,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     }
 
     private ServiceResponse<Void> stringEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1032,7 +1032,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     }
 
     private ServiceResponse<Void> stringNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1047,7 +1047,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> enumValid(UriColor enumQuery) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.enumValid(client.getMapperAdapter().serializeRaw(enumQuery));
+        Call<ResponseBody> call = service.enumValid(this.client.getMapperAdapter().serializeRaw(enumQuery));
         return enumValidDelegate(call.execute());
     }
 
@@ -1059,7 +1059,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link Call} object
      */
     public ServiceCall enumValidAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.enumValid(client.getMapperAdapter().serializeRaw(enumQuery));
+        Call<ResponseBody> call = service.enumValid(this.client.getMapperAdapter().serializeRaw(enumQuery));
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1075,7 +1075,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     }
 
     private ServiceResponse<Void> enumValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1090,7 +1090,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> enumNull(UriColor enumQuery) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.enumNull(client.getMapperAdapter().serializeRaw(enumQuery));
+        Call<ResponseBody> call = service.enumNull(this.client.getMapperAdapter().serializeRaw(enumQuery));
         return enumNullDelegate(call.execute());
     }
 
@@ -1102,7 +1102,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link Call} object
      */
     public ServiceCall enumNullAsync(UriColor enumQuery, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.enumNull(client.getMapperAdapter().serializeRaw(enumQuery));
+        Call<ResponseBody> call = service.enumNull(this.client.getMapperAdapter().serializeRaw(enumQuery));
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1118,7 +1118,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     }
 
     private ServiceResponse<Void> enumNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1161,7 +1161,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     }
 
     private ServiceResponse<Void> byteMultiByteDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1212,7 +1212,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     }
 
     private ServiceResponse<Void> byteEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1255,7 +1255,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     }
 
     private ServiceResponse<Void> byteNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1274,7 +1274,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         if (dateQuery == null) {
             throw new IllegalArgumentException("Parameter dateQuery is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.dateValid(client.getMapperAdapter().serializeRaw(dateQuery));
+        Call<ResponseBody> call = service.dateValid(this.client.getMapperAdapter().serializeRaw(dateQuery));
         return dateValidDelegate(call.execute());
     }
 
@@ -1290,7 +1290,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter dateQuery is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.dateValid(client.getMapperAdapter().serializeRaw(dateQuery));
+        Call<ResponseBody> call = service.dateValid(this.client.getMapperAdapter().serializeRaw(dateQuery));
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1306,7 +1306,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     }
 
     private ServiceResponse<Void> dateValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1321,7 +1321,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> dateNull(LocalDate dateQuery) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.dateNull(client.getMapperAdapter().serializeRaw(dateQuery));
+        Call<ResponseBody> call = service.dateNull(this.client.getMapperAdapter().serializeRaw(dateQuery));
         return dateNullDelegate(call.execute());
     }
 
@@ -1333,7 +1333,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link Call} object
      */
     public ServiceCall dateNullAsync(LocalDate dateQuery, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.dateNull(client.getMapperAdapter().serializeRaw(dateQuery));
+        Call<ResponseBody> call = service.dateNull(this.client.getMapperAdapter().serializeRaw(dateQuery));
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1349,7 +1349,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     }
 
     private ServiceResponse<Void> dateNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1368,7 +1368,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
         if (dateTimeQuery == null) {
             throw new IllegalArgumentException("Parameter dateTimeQuery is required and cannot be null.");
         }
-        Call<ResponseBody> call = service.dateTimeValid(client.getMapperAdapter().serializeRaw(dateTimeQuery));
+        Call<ResponseBody> call = service.dateTimeValid(this.client.getMapperAdapter().serializeRaw(dateTimeQuery));
         return dateTimeValidDelegate(call.execute());
     }
 
@@ -1384,7 +1384,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter dateTimeQuery is required and cannot be null."));
             return null;
         }
-        Call<ResponseBody> call = service.dateTimeValid(client.getMapperAdapter().serializeRaw(dateTimeQuery));
+        Call<ResponseBody> call = service.dateTimeValid(this.client.getMapperAdapter().serializeRaw(dateTimeQuery));
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1400,7 +1400,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     }
 
     private ServiceResponse<Void> dateTimeValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1415,7 +1415,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link ServiceResponse} object if successful.
      */
     public ServiceResponse<Void> dateTimeNull(DateTime dateTimeQuery) throws ErrorException, IOException {
-        Call<ResponseBody> call = service.dateTimeNull(client.getMapperAdapter().serializeRaw(dateTimeQuery));
+        Call<ResponseBody> call = service.dateTimeNull(this.client.getMapperAdapter().serializeRaw(dateTimeQuery));
         return dateTimeNullDelegate(call.execute());
     }
 
@@ -1427,7 +1427,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      * @return the {@link Call} object
      */
     public ServiceCall dateTimeNullAsync(DateTime dateTimeQuery, final ServiceCallback<Void> serviceCallback) {
-        Call<ResponseBody> call = service.dateTimeNull(client.getMapperAdapter().serializeRaw(dateTimeQuery));
+        Call<ResponseBody> call = service.dateTimeNull(this.client.getMapperAdapter().serializeRaw(dateTimeQuery));
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1443,7 +1443,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     }
 
     private ServiceResponse<Void> dateTimeNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1459,7 +1459,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> arrayStringCsvValid(List<String> arrayQuery) throws ErrorException, IOException {
         Validator.validate(arrayQuery);
-        Call<ResponseBody> call = service.arrayStringCsvValid(client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
+        Call<ResponseBody> call = service.arrayStringCsvValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
         return arrayStringCsvValidDelegate(call.execute());
     }
 
@@ -1472,7 +1472,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceCall arrayStringCsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(arrayQuery, serviceCallback);
-        Call<ResponseBody> call = service.arrayStringCsvValid(client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
+        Call<ResponseBody> call = service.arrayStringCsvValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1488,7 +1488,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     }
 
     private ServiceResponse<Void> arrayStringCsvValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1504,7 +1504,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> arrayStringCsvNull(List<String> arrayQuery) throws ErrorException, IOException {
         Validator.validate(arrayQuery);
-        Call<ResponseBody> call = service.arrayStringCsvNull(client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
+        Call<ResponseBody> call = service.arrayStringCsvNull(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
         return arrayStringCsvNullDelegate(call.execute());
     }
 
@@ -1517,7 +1517,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceCall arrayStringCsvNullAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(arrayQuery, serviceCallback);
-        Call<ResponseBody> call = service.arrayStringCsvNull(client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
+        Call<ResponseBody> call = service.arrayStringCsvNull(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1533,7 +1533,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     }
 
     private ServiceResponse<Void> arrayStringCsvNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1549,7 +1549,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> arrayStringCsvEmpty(List<String> arrayQuery) throws ErrorException, IOException {
         Validator.validate(arrayQuery);
-        Call<ResponseBody> call = service.arrayStringCsvEmpty(client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
+        Call<ResponseBody> call = service.arrayStringCsvEmpty(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
         return arrayStringCsvEmptyDelegate(call.execute());
     }
 
@@ -1562,7 +1562,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceCall arrayStringCsvEmptyAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(arrayQuery, serviceCallback);
-        Call<ResponseBody> call = service.arrayStringCsvEmpty(client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
+        Call<ResponseBody> call = service.arrayStringCsvEmpty(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.CSV));
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1578,7 +1578,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     }
 
     private ServiceResponse<Void> arrayStringCsvEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1594,7 +1594,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> arrayStringSsvValid(List<String> arrayQuery) throws ErrorException, IOException {
         Validator.validate(arrayQuery);
-        Call<ResponseBody> call = service.arrayStringSsvValid(client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.SSV));
+        Call<ResponseBody> call = service.arrayStringSsvValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.SSV));
         return arrayStringSsvValidDelegate(call.execute());
     }
 
@@ -1607,7 +1607,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceCall arrayStringSsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(arrayQuery, serviceCallback);
-        Call<ResponseBody> call = service.arrayStringSsvValid(client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.SSV));
+        Call<ResponseBody> call = service.arrayStringSsvValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.SSV));
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1623,7 +1623,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     }
 
     private ServiceResponse<Void> arrayStringSsvValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1639,7 +1639,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> arrayStringTsvValid(List<String> arrayQuery) throws ErrorException, IOException {
         Validator.validate(arrayQuery);
-        Call<ResponseBody> call = service.arrayStringTsvValid(client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.TSV));
+        Call<ResponseBody> call = service.arrayStringTsvValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.TSV));
         return arrayStringTsvValidDelegate(call.execute());
     }
 
@@ -1652,7 +1652,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceCall arrayStringTsvValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(arrayQuery, serviceCallback);
-        Call<ResponseBody> call = service.arrayStringTsvValid(client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.TSV));
+        Call<ResponseBody> call = service.arrayStringTsvValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.TSV));
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1668,7 +1668,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     }
 
     private ServiceResponse<Void> arrayStringTsvValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1684,7 +1684,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceResponse<Void> arrayStringPipesValid(List<String> arrayQuery) throws ErrorException, IOException {
         Validator.validate(arrayQuery);
-        Call<ResponseBody> call = service.arrayStringPipesValid(client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.PIPES));
+        Call<ResponseBody> call = service.arrayStringPipesValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.PIPES));
         return arrayStringPipesValidDelegate(call.execute());
     }
 
@@ -1697,7 +1697,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
      */
     public ServiceCall arrayStringPipesValidAsync(List<String> arrayQuery, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(arrayQuery, serviceCallback);
-        Call<ResponseBody> call = service.arrayStringPipesValid(client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.PIPES));
+        Call<ResponseBody> call = service.arrayStringPipesValid(this.client.getMapperAdapter().serializeList(arrayQuery, CollectionFormat.PIPES));
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1713,7 +1713,7 @@ public final class QueriesOperationsImpl implements QueriesOperations {
     }
 
     private ServiceResponse<Void> arrayStringPipesValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

@@ -45,13 +45,6 @@ public class ServiceResponseBuilder<T, E extends AutoRestException> {
 
     /**
      * Create a ServiceResponseBuilder instance.
-     */
-    public ServiceResponseBuilder() {
-        this(new JacksonMapperAdapter());
-    }
-
-    /**
-     * Create a ServiceResponseBuilder instance.
      *
      * @param mapperAdapter the serialization utils to use for deserialization operations
      */

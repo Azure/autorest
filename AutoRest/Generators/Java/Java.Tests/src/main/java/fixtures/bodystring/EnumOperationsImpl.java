@@ -99,7 +99,7 @@ public final class EnumOperationsImpl implements EnumOperations {
     }
 
     private ServiceResponse<Colors> getNotExpandableDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Colors, ErrorException>()
+        return new ServiceResponseBuilder<Colors, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Colors>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -150,7 +150,7 @@ public final class EnumOperationsImpl implements EnumOperations {
     }
 
     private ServiceResponse<Void> putNotExpandableDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

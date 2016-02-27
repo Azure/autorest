@@ -73,7 +73,7 @@ public final class OdataOperationsImpl implements OdataOperations {
      */
     public ServiceResponse<Void> getWithFilter(OdataFilter filter, Integer top, String orderby) throws ErrorException, IOException {
         Validator.validate(filter);
-        Call<ResponseBody> call = service.getWithFilter(client.getMapperAdapter().serializeRaw(filter), top, orderby, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getWithFilter(this.client.getMapperAdapter().serializeRaw(filter), top, orderby, this.client.getAcceptLanguage());
         return getWithFilterDelegate(call.execute());
     }
 
@@ -88,7 +88,7 @@ public final class OdataOperationsImpl implements OdataOperations {
      */
     public ServiceCall getWithFilterAsync(OdataFilter filter, Integer top, String orderby, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(filter, serviceCallback);
-        Call<ResponseBody> call = service.getWithFilter(client.getMapperAdapter().serializeRaw(filter), top, orderby, this.client.getAcceptLanguage());
+        Call<ResponseBody> call = service.getWithFilter(this.client.getMapperAdapter().serializeRaw(filter), top, orderby, this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -104,7 +104,7 @@ public final class OdataOperationsImpl implements OdataOperations {
     }
 
     private ServiceResponse<Void> getWithFilterDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>()
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

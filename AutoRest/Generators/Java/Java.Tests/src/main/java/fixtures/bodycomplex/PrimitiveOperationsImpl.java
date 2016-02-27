@@ -190,7 +190,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
     }
 
     private ServiceResponse<IntWrapper> getIntDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<IntWrapper, ErrorException>()
+        return new ServiceResponseBuilder<IntWrapper, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<IntWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -243,7 +243,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
     }
 
     private ServiceResponse<Void> putIntDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -284,7 +284,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
     }
 
     private ServiceResponse<LongWrapper> getLongDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<LongWrapper, ErrorException>()
+        return new ServiceResponseBuilder<LongWrapper, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<LongWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -337,7 +337,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
     }
 
     private ServiceResponse<Void> putLongDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -378,7 +378,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
     }
 
     private ServiceResponse<FloatWrapper> getFloatDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<FloatWrapper, ErrorException>()
+        return new ServiceResponseBuilder<FloatWrapper, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<FloatWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -431,7 +431,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
     }
 
     private ServiceResponse<Void> putFloatDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -472,7 +472,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
     }
 
     private ServiceResponse<DoubleWrapper> getDoubleDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DoubleWrapper, ErrorException>()
+        return new ServiceResponseBuilder<DoubleWrapper, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<DoubleWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -525,7 +525,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
     }
 
     private ServiceResponse<Void> putDoubleDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -566,7 +566,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
     }
 
     private ServiceResponse<BooleanWrapper> getBoolDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<BooleanWrapper, ErrorException>()
+        return new ServiceResponseBuilder<BooleanWrapper, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<BooleanWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -619,7 +619,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
     }
 
     private ServiceResponse<Void> putBoolDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -660,7 +660,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
     }
 
     private ServiceResponse<StringWrapper> getStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<StringWrapper, ErrorException>()
+        return new ServiceResponseBuilder<StringWrapper, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<StringWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -713,7 +713,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
     }
 
     private ServiceResponse<Void> putStringDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -754,7 +754,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
     }
 
     private ServiceResponse<DateWrapper> getDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DateWrapper, ErrorException>()
+        return new ServiceResponseBuilder<DateWrapper, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<DateWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -807,7 +807,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
     }
 
     private ServiceResponse<Void> putDateDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -848,7 +848,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
     }
 
     private ServiceResponse<DatetimeWrapper> getDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DatetimeWrapper, ErrorException>()
+        return new ServiceResponseBuilder<DatetimeWrapper, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<DatetimeWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -901,7 +901,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
     }
 
     private ServiceResponse<Void> putDateTimeDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -942,7 +942,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
     }
 
     private ServiceResponse<Datetimerfc1123Wrapper> getDateTimeRfc1123Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Datetimerfc1123Wrapper, ErrorException>()
+        return new ServiceResponseBuilder<Datetimerfc1123Wrapper, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Datetimerfc1123Wrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -995,7 +995,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
     }
 
     private ServiceResponse<Void> putDateTimeRfc1123Delegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1036,7 +1036,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
     }
 
     private ServiceResponse<DurationWrapper> getDurationDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<DurationWrapper, ErrorException>()
+        return new ServiceResponseBuilder<DurationWrapper, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<DurationWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1089,7 +1089,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
     }
 
     private ServiceResponse<Void> putDurationDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1130,7 +1130,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
     }
 
     private ServiceResponse<ByteWrapper> getByteDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<ByteWrapper, ErrorException>()
+        return new ServiceResponseBuilder<ByteWrapper, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<ByteWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1183,7 +1183,7 @@ public final class PrimitiveOperationsImpl implements PrimitiveOperations {
     }
 
     private ServiceResponse<Void> putByteDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

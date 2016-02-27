@@ -100,7 +100,7 @@ public final class ReadonlypropertyOperationsImpl implements ReadonlypropertyOpe
     }
 
     private ServiceResponse<ReadonlyObj> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<ReadonlyObj, ErrorException>()
+        return new ServiceResponseBuilder<ReadonlyObj, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<ReadonlyObj>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -153,7 +153,7 @@ public final class ReadonlypropertyOperationsImpl implements ReadonlypropertyOpe
     }
 
     private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

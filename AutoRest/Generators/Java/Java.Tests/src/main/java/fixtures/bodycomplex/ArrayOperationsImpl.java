@@ -112,7 +112,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
     }
 
     private ServiceResponse<ArrayWrapper> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<ArrayWrapper, ErrorException>()
+        return new ServiceResponseBuilder<ArrayWrapper, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<ArrayWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -165,7 +165,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
     }
 
     private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -206,7 +206,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
     }
 
     private ServiceResponse<ArrayWrapper> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<ArrayWrapper, ErrorException>()
+        return new ServiceResponseBuilder<ArrayWrapper, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<ArrayWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -259,7 +259,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
     }
 
     private ServiceResponse<Void> putEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -300,7 +300,7 @@ public final class ArrayOperationsImpl implements ArrayOperations {
     }
 
     private ServiceResponse<ArrayWrapper> getNotProvidedDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<ArrayWrapper, ErrorException>()
+        return new ServiceResponseBuilder<ArrayWrapper, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<ArrayWrapper>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

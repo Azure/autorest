@@ -7,7 +7,6 @@
 
 package com.microsoft.azure;
 
-import com.microsoft.azure.serializer.AzureJacksonMapperAdapter;
 import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
@@ -15,6 +14,7 @@ import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseCallback;
 import com.microsoft.rest.ServiceResponseWithHeaders;
 import com.microsoft.rest.credentials.ServiceClientCredentials;
+import com.microsoft.rest.serializer.JacksonMapperAdapter;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -63,10 +63,11 @@ public class AzureClient extends AzureServiceClient {
      *
      * @param clientBuilder customized http client.
      * @param retrofitBuilder customized retrofit builder
+     * @param mapperAdapter the adapter for the Jackson object mapper
      */
-    public AzureClient(OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder) {
+    public AzureClient(OkHttpClient.Builder clientBuilder, Retrofit.Builder retrofitBuilder, JacksonMapperAdapter mapperAdapter) {
         super(clientBuilder, retrofitBuilder);
-        this.mapperAdapter = new AzureJacksonMapperAdapter();
+        this.mapperAdapter = mapperAdapter;
     }
 
     /**
@@ -102,7 +103,7 @@ public class AzureClient extends AzureServiceClient {
             throw exception;
         }
 
-        PollingState<T> pollingState = new PollingState<>(response, this.getLongRunningOperationRetryTimeout(), resourceType);
+        PollingState<T> pollingState = new PollingState<>(response, this.getLongRunningOperationRetryTimeout(), resourceType, mapperAdapter);
         String url = response.raw().request().url().toString();
 
         // Check provisioning state
@@ -193,7 +194,7 @@ public class AzureClient extends AzureServiceClient {
 
         PollingState<T> pollingState;
         try {
-            pollingState = new PollingState<>(response, this.getLongRunningOperationRetryTimeout(), resourceType);
+            pollingState = new PollingState<>(response, this.getLongRunningOperationRetryTimeout(), resourceType, mapperAdapter);
         } catch (IOException e) {
             callback.failure(e);
             return null;
@@ -275,7 +276,7 @@ public class AzureClient extends AzureServiceClient {
             throw exception;
         }
 
-        PollingState<T> pollingState = new PollingState<>(response, this.getLongRunningOperationRetryTimeout(), resourceType);
+        PollingState<T> pollingState = new PollingState<>(response, this.getLongRunningOperationRetryTimeout(), resourceType, mapperAdapter);
 
         // Check provisioning state
         while (!AzureAsyncOperation.getTerminalStatuses().contains(pollingState.getStatus())) {
@@ -365,7 +366,7 @@ public class AzureClient extends AzureServiceClient {
 
         PollingState<T> pollingState;
         try {
-            pollingState = new PollingState<>(response, this.getLongRunningOperationRetryTimeout(), resourceType);
+            pollingState = new PollingState<>(response, this.getLongRunningOperationRetryTimeout(), resourceType, mapperAdapter);
         } catch (IOException e) {
             callback.failure(e);
             return null;

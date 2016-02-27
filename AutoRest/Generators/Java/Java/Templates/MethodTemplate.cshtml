@@ -112,7 +112,7 @@ foreach (var param in Model.Parameters.Where(p => p.Extensions.ContainsKey("host
 }
 @EmptyLine
 private @Model.DelegateOperationResponseReturnTypeString @(Model.Name)Delegate(Response<@Model.CallType> response) throws @Model.ExceptionString {
-    return new @Model.ResponseBuilder<@Model.DelegateReturnTypeString, @Model.OperationExceptionTypeString>()
+    return new @Model.ResponseBuilder<@Model.DelegateReturnTypeString, @Model.OperationExceptionTypeString>(@(Model.ClientReference).getMapperAdapter())
 @foreach (var response in Model.Responses)
 {
 

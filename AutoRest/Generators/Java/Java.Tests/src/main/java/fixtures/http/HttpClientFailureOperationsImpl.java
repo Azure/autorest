@@ -187,7 +187,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
     }
 
     private ServiceResponse<Error> head400Delegate(Response<Void> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .buildEmpty(response);
     }
@@ -227,7 +227,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
     }
 
     private ServiceResponse<Error> get400Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -269,7 +269,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
     }
 
     private ServiceResponse<Error> put400Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -311,7 +311,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
     }
 
     private ServiceResponse<Error> patch400Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -353,7 +353,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
     }
 
     private ServiceResponse<Error> post400Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -395,7 +395,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
     }
 
     private ServiceResponse<Error> delete400Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -435,7 +435,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
     }
 
     private ServiceResponse<Error> head401Delegate(Response<Void> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .buildEmpty(response);
     }
@@ -475,7 +475,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
     }
 
     private ServiceResponse<Error> get402Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -515,7 +515,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
     }
 
     private ServiceResponse<Error> get403Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -557,7 +557,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
     }
 
     private ServiceResponse<Error> put404Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -599,7 +599,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
     }
 
     private ServiceResponse<Error> patch405Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -641,7 +641,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
     }
 
     private ServiceResponse<Error> post406Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -683,7 +683,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
     }
 
     private ServiceResponse<Error> delete407Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -725,7 +725,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
     }
 
     private ServiceResponse<Error> put409Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -765,7 +765,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
     }
 
     private ServiceResponse<Error> head410Delegate(Response<Void> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .buildEmpty(response);
     }
@@ -805,7 +805,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
     }
 
     private ServiceResponse<Error> get411Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -845,7 +845,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
     }
 
     private ServiceResponse<Error> get412Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -887,7 +887,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
     }
 
     private ServiceResponse<Error> put413Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -929,7 +929,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
     }
 
     private ServiceResponse<Error> patch414Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -971,7 +971,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
     }
 
     private ServiceResponse<Error> post415Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -1011,7 +1011,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
     }
 
     private ServiceResponse<Error> get416Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -1053,7 +1053,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
     }
 
     private ServiceResponse<Error> delete417Delegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -1093,7 +1093,7 @@ public final class HttpClientFailureOperationsImpl implements HttpClientFailureO
     }
 
     private ServiceResponse<Error> head429Delegate(Response<Void> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .buildEmpty(response);
     }

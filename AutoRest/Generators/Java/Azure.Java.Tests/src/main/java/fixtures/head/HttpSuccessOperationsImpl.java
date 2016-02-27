@@ -100,7 +100,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
     }
 
     private ServiceResponse<Boolean> head200Delegate(Response<Void> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Boolean, CloudException>()
+        return new AzureServiceResponseBuilder<Boolean, CloudException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .register(404, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
@@ -142,7 +142,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
     }
 
     private ServiceResponse<Boolean> head204Delegate(Response<Void> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Boolean, CloudException>()
+        return new AzureServiceResponseBuilder<Boolean, CloudException>(this.client.getMapperAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .register(404, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
@@ -184,7 +184,7 @@ public final class HttpSuccessOperationsImpl implements HttpSuccessOperations {
     }
 
     private ServiceResponse<Boolean> head404Delegate(Response<Void> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Boolean, CloudException>()
+        return new AzureServiceResponseBuilder<Boolean, CloudException>(this.client.getMapperAdapter())
                 .register(204, new TypeToken<Void>() { }.getType())
                 .register(404, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)

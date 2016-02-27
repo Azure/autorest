@@ -173,7 +173,7 @@ public final class LROsCustomHeaderOperationsImpl implements LROsCustomHeaderOpe
     }
 
     private ServiceResponseWithHeaders<Product, LROsCustomHeaderPutAsyncRetrySucceededHeaders> beginPutAsyncRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Product, CloudException>()
+        return new AzureServiceResponseBuilder<Product, CloudException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Product>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsCustomHeaderPutAsyncRetrySucceededHeaders.class);
@@ -257,7 +257,7 @@ public final class LROsCustomHeaderOperationsImpl implements LROsCustomHeaderOpe
     }
 
     private ServiceResponse<Product> beginPut201CreatingSucceeded200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Product, CloudException>()
+        return new AzureServiceResponseBuilder<Product, CloudException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Product>() { }.getType())
                 .register(201, new TypeToken<Product>() { }.getType())
                 .registerError(CloudException.class)
@@ -342,7 +342,7 @@ public final class LROsCustomHeaderOperationsImpl implements LROsCustomHeaderOpe
     }
 
     private ServiceResponseWithHeaders<Void, LROsCustomHeaderPost202Retry200Headers> beginPost202Retry200Delegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>()
+        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsCustomHeaderPost202Retry200Headers.class);
@@ -426,7 +426,7 @@ public final class LROsCustomHeaderOperationsImpl implements LROsCustomHeaderOpe
     }
 
     private ServiceResponseWithHeaders<Void, LROsCustomHeaderPostAsyncRetrySucceededHeaders> beginPostAsyncRetrySucceededDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<Void, CloudException>()
+        return new AzureServiceResponseBuilder<Void, CloudException>(this.client.getMapperAdapter())
                 .register(202, new TypeToken<Void>() { }.getType())
                 .registerError(CloudException.class)
                 .buildWithHeaders(response, LROsCustomHeaderPostAsyncRetrySucceededHeaders.class);
