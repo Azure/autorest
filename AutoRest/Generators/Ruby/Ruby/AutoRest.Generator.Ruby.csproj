@@ -46,6 +46,8 @@
     <Compile Include="TemplateModels\ParameterTemplateModel.cs" />
     <Compile Include="TemplateModels\PropertyTemplateModel.cs" />
     <Compile Include="TemplateModels\ModelTemplateModel.cs" />
+    <Compile Include="TemplateModels\ModuleDefinitionTemplateModel.cs" />
+    <Compile Include="TemplateModels\VersionTemplateModel.cs" />
     <Compile Include="Templates\EnumTemplate.cs">
       <DependentUpon>EnumTemplate.cshtml</DependentUpon>
     </Compile>
@@ -64,12 +66,20 @@
     <Compile Include="Templates\ServiceClientTemplate.cs">
       <DependentUpon>ServiceClientTemplate.cshtml</DependentUpon>
     </Compile>
+    <Compile Include="Templates\ModuleDefinitionTemplate.cs">
+      <DependentUpon>ModuleDefinitionTemplate.cshtml</DependentUpon>
+    </Compile>
+    <Compile Include="Templates\VersionTemplate.cs">
+      <DependentUpon>VersionTemplate.cshtml</DependentUpon>
+    </Compile>
     <None Include="Templates\EnumTemplate.cshtml" />
     <None Include="Templates\MethodGroupTemplate.cshtml" />
     <None Include="Templates\RequirementsTemplate.cshtml" />
     <None Include="Templates\ServiceClientTemplate.cshtml" />
     <None Include="Templates\MethodTemplate.cshtml" />
     <None Include="Templates\ModelTemplate.cshtml" />
+    <None Include="Templates\VersionTemplate.cshtml" />
+    <None Include="Templates\ModuleDefinitionTemplate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
