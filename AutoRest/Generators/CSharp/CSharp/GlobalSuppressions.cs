@@ -53,13 +53,13 @@
     "CA1303:Do not pass literals as localized parameters", 
     MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)", 
     Scope = "member", 
-    Target = "Microsoft.Rest.Generator.CSharp.TemplateModels.ClientModelExtensions.#ValidateType(Microsoft.Rest.Generator.ClientModel.IType,Microsoft.Rest.Generator.CSharp.IScopeProvider,System.String)",
+    Target = "Microsoft.Rest.Generator.CSharp.TemplateModels.ClientModelExtensions.#ValidateType(Microsoft.Rest.Generator.ClientModel.IType,Microsoft.Rest.Generator.Utilities.IScopeProvider,System.String)",
     Justification = "The string is generated code, it is much more readable and maintainable if this is a literal rather than a string resource, " +
     "and there are no globalization concerns for source code.")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", 
     MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)", 
     Scope = "member", 
-    Target = "Microsoft.Rest.Generator.CSharp.TemplateModels.ClientModelExtensions.#ValidateType(Microsoft.Rest.Generator.ClientModel.IType,Microsoft.Rest.Generator.CSharp.IScopeProvider,System.String,System.Collections.Generic.Dictionary`2<Microsoft.Rest.Generator.ClientModel.Constraint,System.String>)")]
+    Target = "Microsoft.Rest.Generator.CSharp.TemplateModels.ClientModelExtensions.#ValidateType(Microsoft.Rest.Generator.ClientModel.IType,Microsoft.Rest.Generator.Utilities.IScopeProvider,System.String,System.Collections.Generic.Dictionary`2<Microsoft.Rest.Generator.ClientModel.Constraint,System.String>)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", 
     MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)", 
     Scope = "member", 
@@ -74,6 +74,6 @@
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase", Scope = "member", Target = "Microsoft.Rest.Generator.CSharp.CSharpCodeNamer.#EscapeDefaultValue(System.String,Microsoft.Rest.Generator.ClientModel.IType)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Scope = "member", Target = "Microsoft.Rest.Generator.CSharp.TemplateModels.ClientModelExtensions.#IsValueType(Microsoft.Rest.Generator.ClientModel.PrimaryType)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)", Scope = "member", Target = "Microsoft.Rest.Generator.CSharp.ClientModelExtensions.#CheckNull(System.String,System.String)")]
-[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)", Scope = "member", Target = "Microsoft.Rest.Generator.CSharp.ClientModelExtensions.#ValidateType(Microsoft.Rest.Generator.ClientModel.IType,Microsoft.Rest.Generator.CSharp.IScopeProvider,System.String,System.Collections.Generic.Dictionary`2<Microsoft.Rest.Generator.ClientModel.Constraint,System.String>)")]
+[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)", Scope = "member", Target = "Microsoft.Rest.Generator.CSharp.ClientModelExtensions.#ValidateType(Microsoft.Rest.Generator.ClientModel.IType,Microsoft.Rest.Generator.Utilities.IScopeProvider,System.String,System.Collections.Generic.Dictionary`2<Microsoft.Rest.Generator.ClientModel.Constraint,System.String>)")]
 [assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1303:Do not pass literals as localized parameters", MessageId = "Microsoft.Rest.Generator.Utilities.IndentedStringBuilder.AppendLine(System.String)", Scope = "member", Target = "Microsoft.Rest.Generator.CSharp.ClientModelExtensions.#AppendConstraintValidations(System.String,System.Collections.Generic.Dictionary`2<Microsoft.Rest.Generator.ClientModel.Constraint,System.String>,Microsoft.Rest.Generator.Utilities.IndentedStringBuilder)")]
 

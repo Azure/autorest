@@ -182,14 +182,14 @@ namespace Microsoft.Rest.Generator
             }
             foreach (var parameter in method.Parameters)
             {
-                parameter.Name = GetParameterName(parameter.Name);
+                parameter.Name = method.Scope.GetUniqueName(GetParameterName(parameter.Name));
                 parameter.Type = NormalizeTypeReference(parameter.Type);
                 QuoteParameter(parameter);
             }
 
             foreach (var parameterTransformation in method.InputParameterTransformation)
             {
-                parameterTransformation.OutputParameter.Name = GetParameterName(parameterTransformation.OutputParameter.Name);
+                parameterTransformation.OutputParameter.Name = method.Scope.GetUniqueName(GetParameterName(parameterTransformation.OutputParameter.Name));
                 parameterTransformation.OutputParameter.Type = NormalizeTypeReference(parameterTransformation.OutputParameter.Type);
 
                 QuoteParameter(parameterTransformation.OutputParameter);

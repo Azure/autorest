@@ -142,7 +142,6 @@ namespace Microsoft.Rest.Generator.Ruby
             base.NormalizeClientModel(client);
             foreach (var method in client.Methods)
             {
-                var scope = new ScopeProvider();
                 foreach (var parameter in method.Parameters)
                 {
                     if (parameter.ClientProperty != null)
@@ -155,10 +154,6 @@ namespace Microsoft.Rest.Generator.Ruby
                         {
                             parameter.Name = string.Format(CultureInfo.InvariantCulture, "{0}.{1}", "@client", parameter.ClientProperty.Name);
                         }
-                    }
-                    else
-                    {
-                        parameter.Name = scope.GetVariableName(parameter.Name);
                     }
                 }
             }

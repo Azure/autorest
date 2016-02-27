@@ -30,14 +30,12 @@
     <Compile Include="CSharpCodeGenerator.cs" />
     <Compile Include="CSharpCodeNamer.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="IScopeProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="ScopeProvider.cs" />
     <Compile Include="TemplateModels\ExtensionsTemplateModel.cs" />
     <Compile Include="TemplateModels\MethodGroupTemplateModel.cs" />
     <Compile Include="TemplateModels\EnumTemplateModel.cs" />

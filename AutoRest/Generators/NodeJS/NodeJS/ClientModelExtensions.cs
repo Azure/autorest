@@ -313,7 +313,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             }
 
             var builder = new IndentedStringBuilder("  ");
-            var allowedValues = scope.GetVariableName("allowedValues");
+            var allowedValues = scope.GetUniqueName("allowedValues");
 
             builder.AppendLine("if ({0}) {{", valueReference)
                         .Indent()
@@ -371,7 +371,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
             var builder = new IndentedStringBuilder("  ");
             var escapedValueReference = valueReference.EscapeSingleQuotes();
 
-            var indexVar = scope.GetVariableName("i");
+            var indexVar = scope.GetUniqueName("i");
             var innerValidation = sequence.ElementType.ValidateType(scope, valueReference + "[" + indexVar + "]", false, modelReference);
             if (!string.IsNullOrEmpty(innerValidation))
             {
@@ -413,7 +413,7 @@ namespace Microsoft.Rest.Generator.NodeJS.TemplateModels
 
             var builder = new IndentedStringBuilder("  ");
             var escapedValueReference = valueReference.EscapeSingleQuotes();
-            var valueVar = scope.GetVariableName("valueElement");
+            var valueVar = scope.GetUniqueName("valueElement");
             var innerValidation = dictionary.ValueType.ValidateType(scope, valueReference + "[" + valueVar + "]", false, modelReference);
             if (!string.IsNullOrEmpty(innerValidation))
             {
