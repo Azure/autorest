@@ -16,9 +16,11 @@ var util = require('util');
  * 
  * @member {object} [tags] Resource tags
  * 
- * @member {string} accountType Gets or sets the account type. Possible values
- * include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS',
- * 'Premium_LRS'
+ * @member {object} [properties]
+ * 
+ * @member {string} [properties.accountType] Gets or sets the account type.
+ * Possible values include: 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS',
+ * 'Standard_RAGRS', 'Premium_LRS'
  * 
  */
 function StorageAccountCreateParameters() {
@@ -62,12 +64,12 @@ StorageAccountCreateParameters.prototype.mapper = function () {
             }
           }
         },
-        accountType: {
-          required: true,
-          serializedName: 'properties.accountType',
+        properties: {
+          required: false,
+          serializedName: 'properties',
           type: {
-            name: 'Enum',
-            allowedValues: [ 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS' ]
+            name: 'Composite',
+            className: 'StorageAccountPropertiesCreateParameters'
           }
         }
       }

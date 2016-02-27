@@ -9,37 +9,36 @@ namespace Petstore.Models
     using Microsoft.Rest.Serialization;
     using Microsoft.Rest.Azure;
 
-    public partial class StorageAccountRegenerateKeyParameters
+    public partial class StorageAccountPropertiesCreateParameters
     {
         /// <summary>
         /// Initializes a new instance of the
-        /// StorageAccountRegenerateKeyParameters class.
+        /// StorageAccountPropertiesCreateParameters class.
         /// </summary>
-        public StorageAccountRegenerateKeyParameters() { }
+        public StorageAccountPropertiesCreateParameters() { }
 
         /// <summary>
         /// Initializes a new instance of the
-        /// StorageAccountRegenerateKeyParameters class.
+        /// StorageAccountPropertiesCreateParameters class.
         /// </summary>
-        public StorageAccountRegenerateKeyParameters(string keyName)
+        public StorageAccountPropertiesCreateParameters(AccountType accountType)
         {
-            KeyName = keyName;
+            AccountType = accountType;
         }
 
         /// <summary>
+        /// Gets or sets the account type. Possible values include:
+        /// 'Standard_LRS', 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS',
+        /// 'Premium_LRS'
         /// </summary>
-        [JsonProperty(PropertyName = "keyName")]
-        public string KeyName { get; set; }
+        [JsonProperty(PropertyName = "accountType")]
+        public AccountType AccountType { get; set; }
 
         /// <summary>
         /// Validate the object. Throws ValidationException if validation fails.
         /// </summary>
         public virtual void Validate()
         {
-            if (KeyName == null)
-            {
-                throw new ValidationException(ValidationRules.CannotBeNull, "KeyName");
-            }
         }
     }
 }

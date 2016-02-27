@@ -10,6 +10,7 @@ import retrofit2.Retrofit;
 import okhttp3.logging.HttpLoggingInterceptor.Level;
 import com.google.common.reflect.TypeToken;
 import com.microsoft.rest.serializer.CollectionFormat;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
@@ -25,6 +26,15 @@ import petstore.models.Order;
 import petstore.models.Pet;
 import petstore.models.User;
 import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
+import retrofit2.http.HTTP;
+import retrofit2.http.Path;
+import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Query;
 import retrofit2.Response;
 
 /**
@@ -105,6 +115,101 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
     }
 
     /**
+     * The interface defining all the services for SwaggerPetstore to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface SwaggerPetstoreService {
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("pet")
+        Call<ResponseBody> addPetUsingByteArray(@Body String body);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("pet")
+        Call<ResponseBody> addPet(@Body Pet body);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("pet")
+        Call<ResponseBody> updatePet(@Body Pet body);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("pet/findByStatus")
+        Call<ResponseBody> findPetsByStatus(@Query("status") String status);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("pet/findByTags")
+        Call<ResponseBody> findPetsByTags(@Query("tags") String tags);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("pet/{petId}")
+        Call<ResponseBody> findPetsWithByteArray(@Path("petId") long petId);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("pet/{petId}")
+        Call<ResponseBody> getPetById(@Path("petId") long petId);
+
+        @Headers("Content-Type: application/x-www-form-urlencoded")
+        @POST("pet/{petId}")
+        Call<ResponseBody> updatePetWithForm(@Path("petId") String petId, String name, String status);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "pet/{petId}", method = "DELETE", hasBody = true)
+        Call<ResponseBody> deletePet(@Path("petId") long petId, @Header("api_key") String apiKey);
+
+        @Headers("Content-Type: multipart/form-data")
+        @POST("pet/{petId}/uploadImage")
+        Call<ResponseBody> uploadFile(@Path("petId") long petId, String additionalMetadata, InputStream file);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("store/inventory")
+        Call<ResponseBody> getInventory();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("store/order")
+        Call<ResponseBody> placeOrder(@Body Order body);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("store/order/{orderId}")
+        Call<ResponseBody> getOrderById(@Path("orderId") String orderId);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "store/order/{orderId}", method = "DELETE", hasBody = true)
+        Call<ResponseBody> deleteOrder(@Path("orderId") String orderId);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("user")
+        Call<ResponseBody> createUser(@Body User body);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("user/createWithArray")
+        Call<ResponseBody> createUsersWithArrayInput(@Body List<User> body);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @POST("user/createWithList")
+        Call<ResponseBody> createUsersWithListInput(@Body List<User> body);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("user/login")
+        Call<ResponseBody> loginUser(@Query("username") String username, @Query("password") String password);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("user/logout")
+        Call<ResponseBody> logoutUser();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("user/{username}")
+        Call<ResponseBody> getUserByName(@Path("username") String username);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("user/{username}")
+        Call<ResponseBody> updateUser(@Path("username") String username, @Body User body);
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @HTTP(path = "user/{username}", method = "DELETE", hasBody = true)
+        Call<ResponseBody> deleteUser(@Path("username") String username);
+
+    }
+
+    /**
      * Fake endpoint to test byte array in body parameter for adding a new pet to the store.
      *
      * @param body Pet object in the form of byte array
@@ -124,8 +229,9 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> addPetUsingByteArrayAsync(String body, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall addPetUsingByteArrayAsync(String body, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.addPetUsingByteArray(body);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -136,11 +242,11 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> addPetUsingByteArrayDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void, ServiceException>()
+        return new ServiceResponseBuilder<Void, ServiceException>(this.getMapperAdapter())
                 .register(405, new TypeToken<Void>() { }.getType())
                 .build(response);
     }
@@ -166,9 +272,10 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> addPetAsync(Pet body, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall addPetAsync(Pet body, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(body, serviceCallback);
         Call<ResponseBody> call = service.addPet(body);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -179,11 +286,11 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> addPetDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void, ServiceException>()
+        return new ServiceResponseBuilder<Void, ServiceException>(this.getMapperAdapter())
                 .register(405, new TypeToken<Void>() { }.getType())
                 .build(response);
     }
@@ -209,9 +316,10 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> updatePetAsync(Pet body, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall updatePetAsync(Pet body, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(body, serviceCallback);
         Call<ResponseBody> call = service.updatePet(body);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -222,11 +330,11 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> updatePetDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void, ServiceException>()
+        return new ServiceResponseBuilder<Void, ServiceException>(this.getMapperAdapter())
                 .register(405, new TypeToken<Void>() { }.getType())
                 .register(404, new TypeToken<Void>() { }.getType())
                 .register(400, new TypeToken<Void>() { }.getType())
@@ -244,7 +352,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      */
     public ServiceResponse<List<Pet>> findPetsByStatus(List<String> status) throws ServiceException, IOException {
         Validator.validate(status);
-        Call<ResponseBody> call = service.findPetsByStatus(.getMapperAdapter().serializeList(status, CollectionFormat.CSV));
+        Call<ResponseBody> call = service.findPetsByStatus(this.getMapperAdapter().serializeList(status, CollectionFormat.CSV));
         return findPetsByStatusDelegate(call.execute());
     }
 
@@ -256,9 +364,10 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> findPetsByStatusAsync(List<String> status, final ServiceCallback<List<Pet>> serviceCallback) {
+    public ServiceCall findPetsByStatusAsync(List<String> status, final ServiceCallback<List<Pet>> serviceCallback) {
         Validator.validate(status, serviceCallback);
-        Call<ResponseBody> call = service.findPetsByStatus(.getMapperAdapter().serializeList(status, CollectionFormat.CSV));
+        Call<ResponseBody> call = service.findPetsByStatus(this.getMapperAdapter().serializeList(status, CollectionFormat.CSV));
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Pet>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -269,11 +378,11 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<List<Pet>> findPetsByStatusDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<List<Pet>, ServiceException>()
+        return new ServiceResponseBuilder<List<Pet>, ServiceException>(this.getMapperAdapter())
                 .register(200, new TypeToken<List<Pet>>() { }.getType())
                 .register(400, new TypeToken<Void>() { }.getType())
                 .build(response);
@@ -290,7 +399,7 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      */
     public ServiceResponse<List<Pet>> findPetsByTags(List<String> tags) throws ServiceException, IOException {
         Validator.validate(tags);
-        Call<ResponseBody> call = service.findPetsByTags(.getMapperAdapter().serializeList(tags, CollectionFormat.CSV));
+        Call<ResponseBody> call = service.findPetsByTags(this.getMapperAdapter().serializeList(tags, CollectionFormat.CSV));
         return findPetsByTagsDelegate(call.execute());
     }
 
@@ -302,9 +411,10 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> findPetsByTagsAsync(List<String> tags, final ServiceCallback<List<Pet>> serviceCallback) {
+    public ServiceCall findPetsByTagsAsync(List<String> tags, final ServiceCallback<List<Pet>> serviceCallback) {
         Validator.validate(tags, serviceCallback);
-        Call<ResponseBody> call = service.findPetsByTags(.getMapperAdapter().serializeList(tags, CollectionFormat.CSV));
+        Call<ResponseBody> call = service.findPetsByTags(this.getMapperAdapter().serializeList(tags, CollectionFormat.CSV));
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Pet>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -315,11 +425,11 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<List<Pet>> findPetsByTagsDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<List<Pet>, ServiceException>()
+        return new ServiceResponseBuilder<List<Pet>, ServiceException>(this.getMapperAdapter())
                 .register(200, new TypeToken<List<Pet>>() { }.getType())
                 .register(400, new TypeToken<Void>() { }.getType())
                 .build(response);
@@ -347,8 +457,9 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> findPetsWithByteArrayAsync(long petId, final ServiceCallback<String> serviceCallback) {
+    public ServiceCall findPetsWithByteArrayAsync(long petId, final ServiceCallback<String> serviceCallback) {
         Call<ResponseBody> call = service.findPetsWithByteArray(petId);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -359,11 +470,11 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<String> findPetsWithByteArrayDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<String, ServiceException>()
+        return new ServiceResponseBuilder<String, ServiceException>(this.getMapperAdapter())
                 .register(404, new TypeToken<Void>() { }.getType())
                 .register(200, new TypeToken<String>() { }.getType())
                 .register(400, new TypeToken<Void>() { }.getType())
@@ -392,8 +503,9 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getPetByIdAsync(long petId, final ServiceCallback<Pet> serviceCallback) {
+    public ServiceCall getPetByIdAsync(long petId, final ServiceCallback<Pet> serviceCallback) {
         Call<ResponseBody> call = service.getPetById(petId);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Pet>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -404,11 +516,11 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Pet> getPetByIdDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Pet, ServiceException>()
+        return new ServiceResponseBuilder<Pet, ServiceException>(this.getMapperAdapter())
                 .register(404, new TypeToken<Void>() { }.getType())
                 .register(200, new TypeToken<Pet>() { }.getType())
                 .register(400, new TypeToken<Void>() { }.getType())
@@ -443,12 +555,13 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> updatePetWithFormAsync(String petId, String name, String status, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall updatePetWithFormAsync(String petId, String name, String status, final ServiceCallback<Void> serviceCallback) {
         if (petId == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter petId is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.updatePetWithForm(petId, name, status);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -459,11 +572,11 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> updatePetWithFormDelegate(Response<ResponseBody> response) throws ServiceException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ServiceException>()
+        return new ServiceResponseBuilder<Void, ServiceException>(this.getMapperAdapter())
                 .register(405, new TypeToken<Void>() { }.getType())
                 .build(response);
     }
@@ -490,8 +603,9 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> deletePetAsync(long petId, String apiKey, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall deletePetAsync(long petId, String apiKey, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.deletePet(petId, apiKey);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -502,11 +616,11 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> deletePetDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void, ServiceException>()
+        return new ServiceResponseBuilder<Void, ServiceException>(this.getMapperAdapter())
                 .register(400, new TypeToken<Void>() { }.getType())
                 .build(response);
     }
@@ -535,8 +649,9 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> uploadFileAsync(long petId, String additionalMetadata, InputStream file, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall uploadFileAsync(long petId, String additionalMetadata, InputStream file, final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.uploadFile(petId, additionalMetadata, file);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -547,11 +662,11 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> uploadFileDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void, ServiceException>()
+        return new ServiceResponseBuilder<Void, ServiceException>(this.getMapperAdapter())
                 .build(response);
     }
 
@@ -575,8 +690,9 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getInventoryAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
+    public ServiceCall getInventoryAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) {
         Call<ResponseBody> call = service.getInventory();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, Integer>>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -587,11 +703,11 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Map<String, Integer>> getInventoryDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Map<String, Integer>, ServiceException>()
+        return new ServiceResponseBuilder<Map<String, Integer>, ServiceException>(this.getMapperAdapter())
                 .register(200, new TypeToken<Map<String, Integer>>() { }.getType())
                 .build(response);
     }
@@ -617,9 +733,10 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> placeOrderAsync(Order body, final ServiceCallback<Order> serviceCallback) {
+    public ServiceCall placeOrderAsync(Order body, final ServiceCallback<Order> serviceCallback) {
         Validator.validate(body, serviceCallback);
         Call<ResponseBody> call = service.placeOrder(body);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Order>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -630,11 +747,11 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Order> placeOrderDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Order, ServiceException>()
+        return new ServiceResponseBuilder<Order, ServiceException>(this.getMapperAdapter())
                 .register(200, new TypeToken<Order>() { }.getType())
                 .register(400, new TypeToken<Void>() { }.getType())
                 .build(response);
@@ -666,12 +783,13 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getOrderByIdAsync(String orderId, final ServiceCallback<Order> serviceCallback) {
+    public ServiceCall getOrderByIdAsync(String orderId, final ServiceCallback<Order> serviceCallback) {
         if (orderId == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter orderId is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.getOrderById(orderId);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Order>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -682,11 +800,11 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Order> getOrderByIdDelegate(Response<ResponseBody> response) throws ServiceException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Order, ServiceException>()
+        return new ServiceResponseBuilder<Order, ServiceException>(this.getMapperAdapter())
                 .register(404, new TypeToken<Void>() { }.getType())
                 .register(200, new TypeToken<Order>() { }.getType())
                 .register(400, new TypeToken<Void>() { }.getType())
@@ -719,12 +837,13 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> deleteOrderAsync(String orderId, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall deleteOrderAsync(String orderId, final ServiceCallback<Void> serviceCallback) {
         if (orderId == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter orderId is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.deleteOrder(orderId);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -735,11 +854,11 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> deleteOrderDelegate(Response<ResponseBody> response) throws ServiceException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ServiceException>()
+        return new ServiceResponseBuilder<Void, ServiceException>(this.getMapperAdapter())
                 .register(404, new TypeToken<Void>() { }.getType())
                 .register(400, new TypeToken<Void>() { }.getType())
                 .build(response);
@@ -768,9 +887,10 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> createUserAsync(User body, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall createUserAsync(User body, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(body, serviceCallback);
         Call<ResponseBody> call = service.createUser(body);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -781,11 +901,11 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> createUserDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void, ServiceException>()
+        return new ServiceResponseBuilder<Void, ServiceException>(this.getMapperAdapter())
                 .build(response);
     }
 
@@ -810,9 +930,10 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> createUsersWithArrayInputAsync(List<User> body, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall createUsersWithArrayInputAsync(List<User> body, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(body, serviceCallback);
         Call<ResponseBody> call = service.createUsersWithArrayInput(body);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -823,11 +944,11 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> createUsersWithArrayInputDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void, ServiceException>()
+        return new ServiceResponseBuilder<Void, ServiceException>(this.getMapperAdapter())
                 .build(response);
     }
 
@@ -852,9 +973,10 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> createUsersWithListInputAsync(List<User> body, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall createUsersWithListInputAsync(List<User> body, final ServiceCallback<Void> serviceCallback) {
         Validator.validate(body, serviceCallback);
         Call<ResponseBody> call = service.createUsersWithListInput(body);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -865,11 +987,11 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> createUsersWithListInputDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void, ServiceException>()
+        return new ServiceResponseBuilder<Void, ServiceException>(this.getMapperAdapter())
                 .build(response);
     }
 
@@ -895,8 +1017,9 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> loginUserAsync(String username, String password, final ServiceCallback<String> serviceCallback) {
+    public ServiceCall loginUserAsync(String username, String password, final ServiceCallback<String> serviceCallback) {
         Call<ResponseBody> call = service.loginUser(username, password);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<String>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -907,11 +1030,11 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<String> loginUserDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<String, ServiceException>()
+        return new ServiceResponseBuilder<String, ServiceException>(this.getMapperAdapter())
                 .register(200, new TypeToken<String>() { }.getType())
                 .register(400, new TypeToken<Void>() { }.getType())
                 .build(response);
@@ -935,8 +1058,9 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> logoutUserAsync(final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall logoutUserAsync(final ServiceCallback<Void> serviceCallback) {
         Call<ResponseBody> call = service.logoutUser();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -947,11 +1071,11 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> logoutUserDelegate(Response<ResponseBody> response) throws ServiceException, IOException {
-        return new ServiceResponseBuilder<Void, ServiceException>()
+        return new ServiceResponseBuilder<Void, ServiceException>(this.getMapperAdapter())
                 .build(response);
     }
 
@@ -979,12 +1103,13 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getUserByNameAsync(String username, final ServiceCallback<User> serviceCallback) {
+    public ServiceCall getUserByNameAsync(String username, final ServiceCallback<User> serviceCallback) {
         if (username == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter username is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.getUserByName(username);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<User>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -995,11 +1120,11 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<User> getUserByNameDelegate(Response<ResponseBody> response) throws ServiceException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<User, ServiceException>()
+        return new ServiceResponseBuilder<User, ServiceException>(this.getMapperAdapter())
                 .register(404, new TypeToken<Void>() { }.getType())
                 .register(200, new TypeToken<User>() { }.getType())
                 .register(400, new TypeToken<Void>() { }.getType())
@@ -1035,13 +1160,14 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> updateUserAsync(String username, User body, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall updateUserAsync(String username, User body, final ServiceCallback<Void> serviceCallback) {
         if (username == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter username is required and cannot be null."));
             return null;
         }
         Validator.validate(body, serviceCallback);
         Call<ResponseBody> call = service.updateUser(username, body);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1052,11 +1178,11 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> updateUserDelegate(Response<ResponseBody> response) throws ServiceException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ServiceException>()
+        return new ServiceResponseBuilder<Void, ServiceException>(this.getMapperAdapter())
                 .register(404, new TypeToken<Void>() { }.getType())
                 .register(400, new TypeToken<Void>() { }.getType())
                 .build(response);
@@ -1088,12 +1214,13 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> deleteUserAsync(String username, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall deleteUserAsync(String username, final ServiceCallback<Void> serviceCallback) {
         if (username == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter username is required and cannot be null."));
             return null;
         }
         Call<ResponseBody> call = service.deleteUser(username);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1104,11 +1231,11 @@ public final class SwaggerPetstoreImpl extends ServiceClient implements SwaggerP
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> deleteUserDelegate(Response<ResponseBody> response) throws ServiceException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ServiceException>()
+        return new ServiceResponseBuilder<Void, ServiceException>(this.getMapperAdapter())
                 .register(404, new TypeToken<Void>() { }.getType())
                 .register(400, new TypeToken<Void>() { }.getType())
                 .build(response);

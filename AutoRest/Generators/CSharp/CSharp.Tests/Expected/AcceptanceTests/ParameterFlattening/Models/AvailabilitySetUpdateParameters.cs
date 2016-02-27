@@ -15,8 +15,6 @@ namespace Fixtures.AcceptanceTestsParameterFlattening.Models
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
 
-    /// <summary>
-    /// </summary>
     public partial class AvailabilitySetUpdateParameters
     {
         /// <summary>

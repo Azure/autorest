@@ -8,26 +8,16 @@ import okhttp3.Interceptor;
 import okhttp3.logging.HttpLoggingInterceptor.Level;
 import com.microsoft.rest.AutoRestBaseUrl;
 import com.microsoft.rest.serializer.JacksonMapperAdapter;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
 import java.io.InputStream;
 import java.io.IOException;
 import java.util.Map;
-import okhttp3.ResponseBody;
 import petstore.models.Order;
 import petstore.models.Pet;
 import petstore.models.User;
-import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.Header;
-import retrofit2.http.Headers;
-import retrofit2.http.HTTP;
-import retrofit2.http.Path;
-import retrofit2.http.POST;
-import retrofit2.http.PUT;
-import retrofit2.http.Query;
 
 /**
  * The interface for SwaggerPetstore class.
@@ -63,101 +53,6 @@ public interface SwaggerPetstore {
     JacksonMapperAdapter getMapperAdapter();
 
     /**
-     * The interface defining all the services for SwaggerPetstore to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface SwaggerPetstoreService {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("pet")
-        Call<ResponseBody> addPetUsingByteArray(@Body String body);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("pet")
-        Call<ResponseBody> addPet(@Body Pet body);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("pet")
-        Call<ResponseBody> updatePet(@Body Pet body);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("pet/findByStatus")
-        Call<ResponseBody> findPetsByStatus(@Query("status") String status);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("pet/findByTags")
-        Call<ResponseBody> findPetsByTags(@Query("tags") String tags);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("pet/{petId}")
-        Call<ResponseBody> findPetsWithByteArray(@Path("petId") long petId);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("pet/{petId}")
-        Call<ResponseBody> getPetById(@Path("petId") long petId);
-
-        @Headers("Content-Type: application/x-www-form-urlencoded")
-        @POST("pet/{petId}")
-        Call<ResponseBody> updatePetWithForm(@Path("petId") String petId, String name, String status);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @HTTP(path = "pet/{petId}", method = "DELETE", hasBody = true)
-        Call<ResponseBody> deletePet(@Path("petId") long petId, @Header("api_key") String apiKey);
-
-        @Headers("Content-Type: multipart/form-data")
-        @POST("pet/{petId}/uploadImage")
-        Call<ResponseBody> uploadFile(@Path("petId") long petId, String additionalMetadata, InputStream file);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("store/inventory")
-        Call<ResponseBody> getInventory();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("store/order")
-        Call<ResponseBody> placeOrder(@Body Order body);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("store/order/{orderId}")
-        Call<ResponseBody> getOrderById(@Path("orderId") String orderId);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @HTTP(path = "store/order/{orderId}", method = "DELETE", hasBody = true)
-        Call<ResponseBody> deleteOrder(@Path("orderId") String orderId);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("user")
-        Call<ResponseBody> createUser(@Body User body);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("user/createWithArray")
-        Call<ResponseBody> createUsersWithArrayInput(@Body List<User> body);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("user/createWithList")
-        Call<ResponseBody> createUsersWithListInput(@Body List<User> body);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("user/login")
-        Call<ResponseBody> loginUser(@Query("username") String username, @Query("password") String password);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("user/logout")
-        Call<ResponseBody> logoutUser();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("user/{username}")
-        Call<ResponseBody> getUserByName(@Path("username") String username);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("user/{username}")
-        Call<ResponseBody> updateUser(@Path("username") String username, @Body User body);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @HTTP(path = "user/{username}", method = "DELETE", hasBody = true)
-        Call<ResponseBody> deleteUser(@Path("username") String username);
-
-    }
-
-    /**
      * Fake endpoint to test byte array in body parameter for adding a new pet to the store.
      *
      * @param body Pet object in the form of byte array
@@ -172,9 +67,10 @@ public interface SwaggerPetstore {
      *
      * @param body Pet object in the form of byte array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> addPetUsingByteArrayAsync(String body, final ServiceCallback<Void> serviceCallback);
+    ServiceCall addPetUsingByteArrayAsync(String body, final ServiceCallback<Void> serviceCallback);
+
     /**
      * Add a new pet to the store.
      *
@@ -190,9 +86,10 @@ public interface SwaggerPetstore {
      *
      * @param body Pet object that needs to be added to the store
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> addPetAsync(Pet body, final ServiceCallback<Void> serviceCallback);
+    ServiceCall addPetAsync(Pet body, final ServiceCallback<Void> serviceCallback);
+
     /**
      * Update an existing pet.
      *
@@ -208,9 +105,10 @@ public interface SwaggerPetstore {
      *
      * @param body Pet object that needs to be added to the store
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> updatePetAsync(Pet body, final ServiceCallback<Void> serviceCallback);
+    ServiceCall updatePetAsync(Pet body, final ServiceCallback<Void> serviceCallback);
+
     /**
      * Finds Pets by status.
      * Multiple status values can be provided with comma seperated strings.
@@ -228,9 +126,10 @@ public interface SwaggerPetstore {
      *
      * @param status Status values that need to be considered for filter
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> findPetsByStatusAsync(List<String> status, final ServiceCallback<List<Pet>> serviceCallback);
+    ServiceCall findPetsByStatusAsync(List<String> status, final ServiceCallback<List<Pet>> serviceCallback);
+
     /**
      * Finds Pets by tags.
      * Muliple tags can be provided with comma seperated strings. Use tag1, tag2, tag3 for testing.
@@ -248,9 +147,10 @@ public interface SwaggerPetstore {
      *
      * @param tags Tags to filter by
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> findPetsByTagsAsync(List<String> tags, final ServiceCallback<List<Pet>> serviceCallback);
+    ServiceCall findPetsByTagsAsync(List<String> tags, final ServiceCallback<List<Pet>> serviceCallback);
+
     /**
      * Fake endpoint to test byte array return by 'Find pet by ID'.
      * Returns a pet when ID &lt; 10.  ID &gt; 10 or nonintegers will simulate API error conditions.
@@ -268,9 +168,10 @@ public interface SwaggerPetstore {
      *
      * @param petId ID of pet that needs to be fetched
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> findPetsWithByteArrayAsync(long petId, final ServiceCallback<String> serviceCallback);
+    ServiceCall findPetsWithByteArrayAsync(long petId, final ServiceCallback<String> serviceCallback);
+
     /**
      * Find pet by ID.
      * Returns a pet when ID &lt; 10.  ID &gt; 10 or nonintegers will simulate API error conditions.
@@ -288,9 +189,10 @@ public interface SwaggerPetstore {
      *
      * @param petId ID of pet that needs to be fetched
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getPetByIdAsync(long petId, final ServiceCallback<Pet> serviceCallback);
+    ServiceCall getPetByIdAsync(long petId, final ServiceCallback<Pet> serviceCallback);
+
     /**
      * Updates a pet in the store with form data.
      *
@@ -311,9 +213,10 @@ public interface SwaggerPetstore {
      * @param name Updated name of the pet
      * @param status Updated status of the pet
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> updatePetWithFormAsync(String petId, String name, String status, final ServiceCallback<Void> serviceCallback);
+    ServiceCall updatePetWithFormAsync(String petId, String name, String status, final ServiceCallback<Void> serviceCallback);
+
     /**
      * Deletes a pet.
      *
@@ -331,9 +234,10 @@ public interface SwaggerPetstore {
      * @param petId Pet id to delete
      * @param apiKey 
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> deletePetAsync(long petId, String apiKey, final ServiceCallback<Void> serviceCallback);
+    ServiceCall deletePetAsync(long petId, String apiKey, final ServiceCallback<Void> serviceCallback);
+
     /**
      * uploads an image.
      *
@@ -353,9 +257,10 @@ public interface SwaggerPetstore {
      * @param additionalMetadata Additional data to pass to server
      * @param file file to upload
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> uploadFileAsync(long petId, String additionalMetadata, InputStream file, final ServiceCallback<Void> serviceCallback);
+    ServiceCall uploadFileAsync(long petId, String additionalMetadata, InputStream file, final ServiceCallback<Void> serviceCallback);
+
     /**
      * Returns pet inventories by status.
      * Returns a map of status codes to quantities.
@@ -371,9 +276,10 @@ public interface SwaggerPetstore {
      * Returns a map of status codes to quantities.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getInventoryAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
+    ServiceCall getInventoryAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
+
     /**
      * Place an order for a pet.
      *
@@ -389,9 +295,10 @@ public interface SwaggerPetstore {
      *
      * @param body order placed for purchasing the pet
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> placeOrderAsync(Order body, final ServiceCallback<Order> serviceCallback);
+    ServiceCall placeOrderAsync(Order body, final ServiceCallback<Order> serviceCallback);
+
     /**
      * Find purchase order by ID.
      * For valid response try integer IDs with value &lt;= 5 or &gt; 10. Other values will generated exceptions.
@@ -410,9 +317,10 @@ public interface SwaggerPetstore {
      *
      * @param orderId ID of pet that needs to be fetched
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getOrderByIdAsync(String orderId, final ServiceCallback<Order> serviceCallback);
+    ServiceCall getOrderByIdAsync(String orderId, final ServiceCallback<Order> serviceCallback);
+
     /**
      * Delete purchase order by ID.
      * For valid response try integer IDs with value &lt; 1000. Anything above 1000 or nonintegers will generate API errors.
@@ -431,9 +339,10 @@ public interface SwaggerPetstore {
      *
      * @param orderId ID of the order that needs to be deleted
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> deleteOrderAsync(String orderId, final ServiceCallback<Void> serviceCallback);
+    ServiceCall deleteOrderAsync(String orderId, final ServiceCallback<Void> serviceCallback);
+
     /**
      * Create user.
      * This can only be done by the logged in user.
@@ -451,9 +360,10 @@ public interface SwaggerPetstore {
      *
      * @param body Created user object
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> createUserAsync(User body, final ServiceCallback<Void> serviceCallback);
+    ServiceCall createUserAsync(User body, final ServiceCallback<Void> serviceCallback);
+
     /**
      * Creates list of users with given input array.
      *
@@ -469,9 +379,10 @@ public interface SwaggerPetstore {
      *
      * @param body List of user object
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> createUsersWithArrayInputAsync(List<User> body, final ServiceCallback<Void> serviceCallback);
+    ServiceCall createUsersWithArrayInputAsync(List<User> body, final ServiceCallback<Void> serviceCallback);
+
     /**
      * Creates list of users with given input array.
      *
@@ -487,9 +398,10 @@ public interface SwaggerPetstore {
      *
      * @param body List of user object
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> createUsersWithListInputAsync(List<User> body, final ServiceCallback<Void> serviceCallback);
+    ServiceCall createUsersWithListInputAsync(List<User> body, final ServiceCallback<Void> serviceCallback);
+
     /**
      * Logs user into the system.
      *
@@ -507,9 +419,10 @@ public interface SwaggerPetstore {
      * @param username The user name for login
      * @param password The password for login in clear text
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> loginUserAsync(String username, String password, final ServiceCallback<String> serviceCallback);
+    ServiceCall loginUserAsync(String username, String password, final ServiceCallback<String> serviceCallback);
+
     /**
      * Logs out current logged in user session.
      *
@@ -523,9 +436,10 @@ public interface SwaggerPetstore {
      * Logs out current logged in user session.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> logoutUserAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceCall logoutUserAsync(final ServiceCallback<Void> serviceCallback);
+
     /**
      * Get user by user name.
      *
@@ -542,9 +456,10 @@ public interface SwaggerPetstore {
      *
      * @param username The name that needs to be fetched. Use user1 for testing. 
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getUserByNameAsync(String username, final ServiceCallback<User> serviceCallback);
+    ServiceCall getUserByNameAsync(String username, final ServiceCallback<User> serviceCallback);
+
     /**
      * Updated user.
      * This can only be done by the logged in user.
@@ -565,9 +480,10 @@ public interface SwaggerPetstore {
      * @param username name that need to be deleted
      * @param body Updated user object
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> updateUserAsync(String username, User body, final ServiceCallback<Void> serviceCallback);
+    ServiceCall updateUserAsync(String username, User body, final ServiceCallback<Void> serviceCallback);
+
     /**
      * Delete user.
      * This can only be done by the logged in user.
@@ -586,8 +502,8 @@ public interface SwaggerPetstore {
      *
      * @param username The name that needs to be deleted
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> deleteUserAsync(String username, final ServiceCallback<Void> serviceCallback);
+    ServiceCall deleteUserAsync(String username, final ServiceCallback<Void> serviceCallback);
 
 }

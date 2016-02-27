@@ -142,14 +142,14 @@ module Petstore
         deserialized_property = object['provisioningState']
         if (!deserialized_property.nil? && !deserialized_property.empty?)
           enum_is_valid = ProvisioningState.constants.any? { |e| ProvisioningState.const_get(e).to_s.downcase == deserialized_property.downcase }
-          fail MsRest::DeserializationError.new('Error occured while deserializing the enum', nil, nil, nil) unless enum_is_valid
+          warn 'Enum ProvisioningState does not contain ' + deserialized_property.downcase + ', but was received from the server.' unless enum_is_valid
         end
         output_object.provisioning_state = deserialized_property
 
         deserialized_property = object['accountType']
         if (!deserialized_property.nil? && !deserialized_property.empty?)
           enum_is_valid = AccountType.constants.any? { |e| AccountType.const_get(e).to_s.downcase == deserialized_property.downcase }
-          fail MsRest::DeserializationError.new('Error occured while deserializing the enum', nil, nil, nil) unless enum_is_valid
+          warn 'Enum AccountType does not contain ' + deserialized_property.downcase + ', but was received from the server.' unless enum_is_valid
         end
         output_object.account_type = deserialized_property
 
@@ -165,7 +165,7 @@ module Petstore
         deserialized_property = object['statusOfPrimary']
         if (!deserialized_property.nil? && !deserialized_property.empty?)
           enum_is_valid = AccountStatus.constants.any? { |e| AccountStatus.const_get(e).to_s.downcase == deserialized_property.downcase }
-          fail MsRest::DeserializationError.new('Error occured while deserializing the enum', nil, nil, nil) unless enum_is_valid
+          warn 'Enum AccountStatus does not contain ' + deserialized_property.downcase + ', but was received from the server.' unless enum_is_valid
         end
         output_object.status_of_primary = deserialized_property
 
@@ -179,7 +179,7 @@ module Petstore
         deserialized_property = object['statusOfSecondary']
         if (!deserialized_property.nil? && !deserialized_property.empty?)
           enum_is_valid = AccountStatus.constants.any? { |e| AccountStatus.const_get(e).to_s.downcase == deserialized_property.downcase }
-          fail MsRest::DeserializationError.new('Error occured while deserializing the enum', nil, nil, nil) unless enum_is_valid
+          warn 'Enum AccountStatus does not contain ' + deserialized_property.downcase + ', but was received from the server.' unless enum_is_valid
         end
         output_object.status_of_secondary = deserialized_property
 

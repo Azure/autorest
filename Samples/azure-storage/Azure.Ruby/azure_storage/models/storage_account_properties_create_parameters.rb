@@ -48,7 +48,7 @@ module Petstore
         deserialized_property = object['accountType']
         if (!deserialized_property.nil? && !deserialized_property.empty?)
           enum_is_valid = AccountType.constants.any? { |e| AccountType.const_get(e).to_s.downcase == deserialized_property.downcase }
-          fail MsRest::DeserializationError.new('Error occured while deserializing the enum', nil, nil, nil) unless enum_is_valid
+          warn 'Enum AccountType does not contain ' + deserialized_property.downcase + ', but was received from the server.' unless enum_is_valid
         end
         output_object.account_type = deserialized_property
 
