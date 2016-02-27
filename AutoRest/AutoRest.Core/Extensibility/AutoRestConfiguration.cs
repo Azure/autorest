@@ -11,6 +11,12 @@ namespace Microsoft.Rest.Generator.Extensibility
     /// </summary>
     public class AutoRestConfiguration
     {
+        public AutoRestConfiguration()
+        {
+            CodeGenerators = new Dictionary<string, AutoRestProviderConfiguration>();
+            Modelers = new Dictionary<string, AutoRestProviderConfiguration>();
+        }
+
         /// <summary>
         /// Gets or sets collections of CodeGenerators.
         /// </summary>

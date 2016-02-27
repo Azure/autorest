@@ -28,7 +28,7 @@ namespace Microsoft.Rest.Generator.Test
         public void CreateWithMultipleEmptyKeysStoreInCustomDictonary()
         {
             var settings = Settings.Create(new[] {"-Help", " -Bar ", " -Foo"});
-            Assert.Equal("", settings.CustomSettings["Help"]);
+            Assert.True(settings.ShowHelp);
             Assert.Equal("", settings.CustomSettings["Foo"]);
             Assert.Equal("", settings.CustomSettings["Bar"]);
         }
@@ -69,7 +69,7 @@ namespace Microsoft.Rest.Generator.Test
                 "-Help", " -Input", "c:\\input",
                 "-outputDirectory", " c:\\output", "-clientName", "MyClient"
             });
-            Assert.Equal("", settings.CustomSettings["Help"]);
+            Assert.True(settings.ShowHelp);
             Assert.Equal("c:\\input", settings.Input);
             Assert.Equal("c:\\output", settings.OutputDirectory);
             Assert.Equal("MyClient", settings.ClientName);

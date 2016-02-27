@@ -50,6 +50,11 @@ namespace Microsoft.Rest.Generator.Ruby
         /// <returns>The formatted string.</returns>
         public static string UnderscoreCase(string name)
         {
+            if (string.IsNullOrEmpty(name))
+            {
+                return name;
+            }
+
             return Regex.Replace(name, @"(\p{Ll})(\p{Lu})", "$1_$2").ToLower();
         }
 

@@ -61,6 +61,10 @@ namespace Microsoft.Rest.Modeler.Swagger
         public override ServiceClient Build()
         {
             Logger.LogInfo(Resources.ParsingSwagger);
+            if (string.IsNullOrWhiteSpace(Settings.Input))
+            {
+                throw ErrorManager.CreateError("Input parameter is required.");
+            }
             ServiceDefinition = SwaggerParser.Load(Settings.Input, Settings.FileSystem);
             Logger.LogInfo(Resources.GeneratingClient);
             // Update settings

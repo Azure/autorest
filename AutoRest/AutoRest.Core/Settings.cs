@@ -188,6 +188,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
         /// </summary>
         [SettingsAlias("?")]
         [SettingsAlias("h")]
+        [SettingsAlias("help")]
         public bool ShowHelp { get; set; }
 
         /// <summary>
@@ -262,7 +263,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
         public static Settings Create(IDictionary<string, string> settings)
         {
             var autoRestSettings = new Settings();
-            if (settings == null || settings.Count > 0)
+            if (settings == null || settings.Count == 0)
             {
                 autoRestSettings.ShowHelp = true;
             }
