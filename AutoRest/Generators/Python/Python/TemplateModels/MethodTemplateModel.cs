@@ -555,7 +555,7 @@ namespace Microsoft.Rest.Generator.Python
 
                     foreach (var mapping in transformation.ParameterMappings)
                     {
-                        var mappedParams = composite.Properties.Where(x => x.Name == mapping.InputParameter.Name);
+                        var mappedParams = composite.ComposedProperties.Where(x => x.Name == mapping.InputParameter.Name);
                         if (mappedParams.Any())
                         {
                             var param = mappedParams.First();
