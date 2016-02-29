@@ -179,16 +179,18 @@ namespace Microsoft.Rest.Generator.Python
         public virtual string MethodParameterDeclaration(bool addCustomHeaderParameters)
         {
             List<string> declarations = new List<string>();
+            List<string> requiredDeclarations = new List<string>();
+            List<string> combinedDeclarations = new List<string>();
+
             foreach (var parameter in LocalParameters)
             {
                 var defaultValue = GetParameterDefault(parameter);
                 if (parameter.IsRequired && defaultValue.Equals("None"))
                 {
-                    declarations.Add(parameter.Name);
+                    requiredDeclarations.Add(parameter.Name);
                 }
                 else
                 {
-                    
                     declarations.Add(string.Format(
                         CultureInfo.InvariantCulture,
                         "{0}={1}",
@@ -208,8 +210,13 @@ namespace Microsoft.Rest.Generator.Python
                 declarations.Add("callback=None");
             }
             declarations.Add("**operation_config");
-            var declaration = string.Join(", ", declarations);
-            return declaration;
+
+            if (requiredDeclarations.Any())
+            {
+                combinedDeclarations.Add(string.Join(", ", requiredDeclarations));
+            }
+            combinedDeclarations.Add(string.Join(", ", declarations));
+            return string.Join(", ", combinedDeclarations);
         }
 
         private static string BuildSerializeDataCall(Parameter parameter, string functionName)
