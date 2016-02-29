@@ -29,8 +29,8 @@ class Product(Resource):
     _required = []
 
     _attribute_map = {
-        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str', 'flatten': True},
-        'provisioning_state_values': {'key': 'properties.provisioningStateValues', 'type': 'str', 'flatten': True},
+        'provisioning_state': {'key': 'properties.provisioningState', 'type': 'str'},
+        'provisioning_state_values': {'key': 'properties.provisioningStateValues', 'type': 'str'},
     }
 
     def __init__(self, id=None, type=None, tags=None, location=None, name=None, provisioning_state=None, provisioning_state_values=None):
