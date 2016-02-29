@@ -1,4 +1,4 @@
-# --------------------------------------------------------------------------
+﻿# --------------------------------------------------------------------------
 #
 # Copyright (c) Microsoft Corporation. All rights reserved.
 #
@@ -59,7 +59,6 @@ from autorestresourceflatteningtestservice.models import (
 class ModelFlatteningTests(unittest.TestCase):
 
     def setUp(self):
-        #cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
         config = AutoRestResourceFlatteningTestServiceConfiguration(base_url="http://localhost:3000")
         config.log_level = log_level
         self.client = AutoRestResourceFlatteningTestService(config)
@@ -98,7 +97,6 @@ class ModelFlatteningTests(unittest.TestCase):
                     location = "Building 44")]
 
         self.client.put_array(resourceArray)
-        pass
 
     def test_flattening_dictionary(self):
 
@@ -240,6 +238,7 @@ class ModelFlatteningTests(unittest.TestCase):
             max_product_capacity = "Large",
             odatavalue = "http://foo"
             )
+        # TODO - this should work once constant support has been implemented
         #result = self.client.post_flattened_simple_product("123", "max name", "product description" "http://foo") # TODO
         #self.assertEqual(result, simple_product) # TODO
 
@@ -259,7 +258,7 @@ class ModelFlatteningTests(unittest.TestCase):
             max_product_display_name="max name",
             odatavalue="http://foo",
             name="groupproduct")
-
+        # TODO - this should work once constant support has been implemented
         #result = self.client.put_simple_product_with_grouping(group)
         #self.assertEqual(result, simple_prduct)
 
