@@ -110,22 +110,22 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             var encodedQueryParams = new List<string>();
             foreach (var param in queryParametres)
             {
-                bool hasSkipUrlExtension = param.Extensions.ContainsKey(AzureExtensions.SkipUrlEncodingExtension);
+                bool hasSkipUrlExtension = param.Extensions.ContainsKey(Generator.Extensions.SkipUrlEncodingExtension);
 
                 if (hasSkipUrlExtension)
                 {
-                    nonEncodedQueryParams.Add(string.Format("'{0}' => {1}", param.SerializedName, param.Name));
+                    nonEncodedQueryParams.Add(string.Format(CultureInfo.InvariantCulture, "'{0}' => {1}", param.SerializedName, param.Name));
                 }
                 else
                 {
-                    encodedQueryParams.Add(string.Format("'{0}' => {1}", param.SerializedName, param.Name));
+                    encodedQueryParams.Add(string.Format(CultureInfo.InvariantCulture, "'{0}' => {1}", param.SerializedName, param.Name));
                 }
             }
             builder
                 .AppendLine("params = {{{0}}}", string.Join(",", encodedQueryParams))
                 .AppendLine("params.reject!{ |_, value| value.nil? }");
             
-            if(nonEncodedQueryParams.Count() > 0)
+            if(nonEncodedQueryParams.Any())
             {
                 builder
                     .AppendLine("skipEncodingQueryParams = {{{0}}}", string.Join(",", nonEncodedQueryParams))
@@ -147,13 +147,13 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
             foreach (var pathParameter in ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
             {
                 string variableName = pathParameter.Type.ToString(pathParameter.Name);
-                if (pathParameter.Extensions.ContainsKey(AzureExtensions.SkipUrlEncodingExtension))
+                if (pathParameter.Extensions.ContainsKey(Generator.Extensions.SkipUrlEncodingExtension))
                 {
-                    nonEncodedPathParams.Add(string.Format("'{0}' => {1}", pathParameter.SerializedName, variableName));
+                    nonEncodedPathParams.Add(string.Format(CultureInfo.InvariantCulture, "'{0}' => {1}", pathParameter.SerializedName, variableName));
                 }
                 else
                 {
-                    encodedPathParams.Add(string.Format("'{0}' => {1}", pathParameter.SerializedName, variableName));
+                    encodedPathParams.Add(string.Format(CultureInfo.InvariantCulture, "'{0}' => {1}", pathParameter.SerializedName, variableName));
                 }
             }
             
