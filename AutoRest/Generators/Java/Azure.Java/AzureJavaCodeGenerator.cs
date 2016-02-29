@@ -38,7 +38,7 @@ namespace Microsoft.Rest.Generator.Java.Azure
 
         public override string Description
         {
-            get { return "Java for Http Client Libraries"; }
+            get { return "Azure specific Java code generator."; }
         }
 
         public override string UsageInstructions

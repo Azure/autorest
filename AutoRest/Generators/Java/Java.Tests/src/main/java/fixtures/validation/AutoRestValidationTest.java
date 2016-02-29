@@ -102,9 +102,10 @@ public interface AutoRestValidationTest {
      * @param resourceGroupName Required string between 3 and 10 chars with pattern [a-zA-Z0-9]+.
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall validationOfMethodParametersAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback);
+    ServiceCall validationOfMethodParametersAsync(String resourceGroupName, int id, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Validates body parameters on the method. See swagger for details.
@@ -126,9 +127,10 @@ public interface AutoRestValidationTest {
      * @param id Required int multiple of 10 from 100 to 1000.
      * @param body the Product value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall validationOfBodyAsync(String resourceGroupName, int id, Product body, final ServiceCallback<Product> serviceCallback);
+    ServiceCall validationOfBodyAsync(String resourceGroupName, int id, Product body, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
     /**
      *
@@ -144,9 +146,10 @@ public interface AutoRestValidationTest {
      *
      * @param constantParam the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getWithConstantInPathAsync(String constantParam, final ServiceCallback<Void> serviceCallback);
+    ServiceCall getWithConstantInPathAsync(String constantParam, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      *
@@ -164,8 +167,9 @@ public interface AutoRestValidationTest {
      * @param constantParam the String value
      * @param body the Product value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall postWithConstantInBodyAsync(String constantParam, Product body, final ServiceCallback<Product> serviceCallback);
+    ServiceCall postWithConstantInBodyAsync(String constantParam, Product body, final ServiceCallback<Product> serviceCallback) throws IllegalArgumentException;
 
 }

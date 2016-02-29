@@ -168,9 +168,13 @@ public final class NumberOperationsImpl implements NumberOperations {
      * Get null Number value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getNullAsync(final ServiceCallback<Double> serviceCallback) {
+    public ServiceCall getNullAsync(final ServiceCallback<Double> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getNull();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Double>(serviceCallback) {
@@ -209,9 +213,13 @@ public final class NumberOperationsImpl implements NumberOperations {
      * Get invalid float Number value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getInvalidFloatAsync(final ServiceCallback<Double> serviceCallback) {
+    public ServiceCall getInvalidFloatAsync(final ServiceCallback<Double> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getInvalidFloat();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Double>(serviceCallback) {
@@ -250,9 +258,13 @@ public final class NumberOperationsImpl implements NumberOperations {
      * Get invalid double Number value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getInvalidDoubleAsync(final ServiceCallback<Double> serviceCallback) {
+    public ServiceCall getInvalidDoubleAsync(final ServiceCallback<Double> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getInvalidDouble();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Double>(serviceCallback) {
@@ -291,9 +303,13 @@ public final class NumberOperationsImpl implements NumberOperations {
      * Get invalid decimal Number value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getInvalidDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) {
+    public ServiceCall getInvalidDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getInvalidDecimal();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<BigDecimal>(serviceCallback) {
@@ -334,9 +350,13 @@ public final class NumberOperationsImpl implements NumberOperations {
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putBigFloatAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putBigFloatAsync(double numberBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.putBigFloat(numberBody);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -375,9 +395,13 @@ public final class NumberOperationsImpl implements NumberOperations {
      * Get big float value 3.402823e+20.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getBigFloatAsync(final ServiceCallback<Double> serviceCallback) {
+    public ServiceCall getBigFloatAsync(final ServiceCallback<Double> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getBigFloat();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Double>(serviceCallback) {
@@ -418,9 +442,13 @@ public final class NumberOperationsImpl implements NumberOperations {
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putBigDoubleAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putBigDoubleAsync(double numberBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.putBigDouble(numberBody);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -459,9 +487,13 @@ public final class NumberOperationsImpl implements NumberOperations {
      * Get big double value 2.5976931e+101.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getBigDoubleAsync(final ServiceCallback<Double> serviceCallback) {
+    public ServiceCall getBigDoubleAsync(final ServiceCallback<Double> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getBigDouble();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Double>(serviceCallback) {
@@ -502,9 +534,13 @@ public final class NumberOperationsImpl implements NumberOperations {
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putBigDoublePositiveDecimalAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putBigDoublePositiveDecimalAsync(double numberBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.putBigDoublePositiveDecimal(numberBody);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -543,9 +579,13 @@ public final class NumberOperationsImpl implements NumberOperations {
      * Get big double value 99999999.99.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getBigDoublePositiveDecimalAsync(final ServiceCallback<Double> serviceCallback) {
+    public ServiceCall getBigDoublePositiveDecimalAsync(final ServiceCallback<Double> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getBigDoublePositiveDecimal();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Double>(serviceCallback) {
@@ -586,9 +626,13 @@ public final class NumberOperationsImpl implements NumberOperations {
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putBigDoubleNegativeDecimalAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putBigDoubleNegativeDecimalAsync(double numberBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.putBigDoubleNegativeDecimal(numberBody);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -627,9 +671,13 @@ public final class NumberOperationsImpl implements NumberOperations {
      * Get big double value -99999999.99.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getBigDoubleNegativeDecimalAsync(final ServiceCallback<Double> serviceCallback) {
+    public ServiceCall getBigDoubleNegativeDecimalAsync(final ServiceCallback<Double> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getBigDoubleNegativeDecimal();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Double>(serviceCallback) {
@@ -674,9 +722,13 @@ public final class NumberOperationsImpl implements NumberOperations {
      *
      * @param numberBody the BigDecimal value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putBigDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putBigDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (numberBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter numberBody is required and cannot be null."));
             return null;
@@ -719,9 +771,13 @@ public final class NumberOperationsImpl implements NumberOperations {
      * Get big decimal value 2.5976931e+101.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getBigDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) {
+    public ServiceCall getBigDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getBigDecimal();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<BigDecimal>(serviceCallback) {
@@ -766,9 +822,13 @@ public final class NumberOperationsImpl implements NumberOperations {
      *
      * @param numberBody the BigDecimal value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putBigDecimalPositiveDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putBigDecimalPositiveDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (numberBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter numberBody is required and cannot be null."));
             return null;
@@ -811,9 +871,13 @@ public final class NumberOperationsImpl implements NumberOperations {
      * Get big decimal value 99999999.99.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getBigDecimalPositiveDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) {
+    public ServiceCall getBigDecimalPositiveDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getBigDecimalPositiveDecimal();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<BigDecimal>(serviceCallback) {
@@ -858,9 +922,13 @@ public final class NumberOperationsImpl implements NumberOperations {
      *
      * @param numberBody the BigDecimal value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putBigDecimalNegativeDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putBigDecimalNegativeDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (numberBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter numberBody is required and cannot be null."));
             return null;
@@ -903,9 +971,13 @@ public final class NumberOperationsImpl implements NumberOperations {
      * Get big decimal value -99999999.99.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getBigDecimalNegativeDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) {
+    public ServiceCall getBigDecimalNegativeDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getBigDecimalNegativeDecimal();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<BigDecimal>(serviceCallback) {
@@ -946,9 +1018,13 @@ public final class NumberOperationsImpl implements NumberOperations {
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putSmallFloatAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putSmallFloatAsync(double numberBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.putSmallFloat(numberBody);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -987,9 +1063,13 @@ public final class NumberOperationsImpl implements NumberOperations {
      * Get big double value 3.402823e-20.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getSmallFloatAsync(final ServiceCallback<Double> serviceCallback) {
+    public ServiceCall getSmallFloatAsync(final ServiceCallback<Double> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getSmallFloat();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Double>(serviceCallback) {
@@ -1030,9 +1110,13 @@ public final class NumberOperationsImpl implements NumberOperations {
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putSmallDoubleAsync(double numberBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putSmallDoubleAsync(double numberBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.putSmallDouble(numberBody);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -1071,9 +1155,13 @@ public final class NumberOperationsImpl implements NumberOperations {
      * Get big double value 2.5976931e-101.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getSmallDoubleAsync(final ServiceCallback<Double> serviceCallback) {
+    public ServiceCall getSmallDoubleAsync(final ServiceCallback<Double> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getSmallDouble();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Double>(serviceCallback) {
@@ -1118,9 +1206,13 @@ public final class NumberOperationsImpl implements NumberOperations {
      *
      * @param numberBody the BigDecimal value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putSmallDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putSmallDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (numberBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter numberBody is required and cannot be null."));
             return null;
@@ -1163,9 +1255,13 @@ public final class NumberOperationsImpl implements NumberOperations {
      * Get small decimal value 2.5976931e-101.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getSmallDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) {
+    public ServiceCall getSmallDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getSmallDecimal();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<BigDecimal>(serviceCallback) {

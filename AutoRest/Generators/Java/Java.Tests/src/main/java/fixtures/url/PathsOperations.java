@@ -39,9 +39,10 @@ public interface PathsOperations {
      *
      * @param boolPath true boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getBooleanTrueAsync(boolean boolPath, final ServiceCallback<Void> serviceCallback);
+    ServiceCall getBooleanTrueAsync(boolean boolPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get false Boolean value on path.
@@ -58,9 +59,10 @@ public interface PathsOperations {
      *
      * @param boolPath false boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getBooleanFalseAsync(boolean boolPath, final ServiceCallback<Void> serviceCallback);
+    ServiceCall getBooleanFalseAsync(boolean boolPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '1000000' integer value.
@@ -77,9 +79,10 @@ public interface PathsOperations {
      *
      * @param intPath '1000000' integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getIntOneMillionAsync(int intPath, final ServiceCallback<Void> serviceCallback);
+    ServiceCall getIntOneMillionAsync(int intPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '-1000000' integer value.
@@ -96,9 +99,10 @@ public interface PathsOperations {
      *
      * @param intPath '-1000000' integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getIntNegativeOneMillionAsync(int intPath, final ServiceCallback<Void> serviceCallback);
+    ServiceCall getIntNegativeOneMillionAsync(int intPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '10000000000' 64 bit integer value.
@@ -115,9 +119,10 @@ public interface PathsOperations {
      *
      * @param longPath '10000000000' 64 bit integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getTenBillionAsync(long longPath, final ServiceCallback<Void> serviceCallback);
+    ServiceCall getTenBillionAsync(long longPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '-10000000000' 64 bit integer value.
@@ -134,9 +139,10 @@ public interface PathsOperations {
      *
      * @param longPath '-10000000000' 64 bit integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getNegativeTenBillionAsync(long longPath, final ServiceCallback<Void> serviceCallback);
+    ServiceCall getNegativeTenBillionAsync(long longPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '1.034E+20' numeric value.
@@ -153,9 +159,10 @@ public interface PathsOperations {
      *
      * @param floatPath '1.034E+20'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall floatScientificPositiveAsync(double floatPath, final ServiceCallback<Void> serviceCallback);
+    ServiceCall floatScientificPositiveAsync(double floatPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '-1.034E-20' numeric value.
@@ -172,9 +179,10 @@ public interface PathsOperations {
      *
      * @param floatPath '-1.034E-20'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall floatScientificNegativeAsync(double floatPath, final ServiceCallback<Void> serviceCallback);
+    ServiceCall floatScientificNegativeAsync(double floatPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '9999999.999' numeric value.
@@ -191,9 +199,10 @@ public interface PathsOperations {
      *
      * @param doublePath '9999999.999'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall doubleDecimalPositiveAsync(double doublePath, final ServiceCallback<Void> serviceCallback);
+    ServiceCall doubleDecimalPositiveAsync(double doublePath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '-9999999.999' numeric value.
@@ -210,9 +219,10 @@ public interface PathsOperations {
      *
      * @param doublePath '-9999999.999'numeric value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall doubleDecimalNegativeAsync(double doublePath, final ServiceCallback<Void> serviceCallback);
+    ServiceCall doubleDecimalNegativeAsync(double doublePath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value.
@@ -230,9 +240,10 @@ public interface PathsOperations {
      *
      * @param stringPath '啊齄丂狛狜隣郎隣兀﨩'multi-byte string value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall stringUnicodeAsync(String stringPath, final ServiceCallback<Void> serviceCallback);
+    ServiceCall stringUnicodeAsync(String stringPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
@@ -250,9 +261,10 @@ public interface PathsOperations {
      *
      * @param stringPath 'begin!*'();:@ &amp;=+$,/?#[]end' url encoded string value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall stringUrlEncodedAsync(String stringPath, final ServiceCallback<Void> serviceCallback);
+    ServiceCall stringUrlEncodedAsync(String stringPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get ''.
@@ -270,9 +282,10 @@ public interface PathsOperations {
      *
      * @param stringPath '' string value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall stringEmptyAsync(String stringPath, final ServiceCallback<Void> serviceCallback);
+    ServiceCall stringEmptyAsync(String stringPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get null (should throw).
@@ -290,9 +303,10 @@ public interface PathsOperations {
      *
      * @param stringPath null string value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall stringNullAsync(String stringPath, final ServiceCallback<Void> serviceCallback);
+    ServiceCall stringNullAsync(String stringPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get using uri with 'green color' in path parameter.
@@ -310,9 +324,10 @@ public interface PathsOperations {
      *
      * @param enumPath send the value green. Possible values include: 'red color', 'green color', 'blue color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall enumValidAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback);
+    ServiceCall enumValidAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get null (should throw on the client before the request is sent on wire).
@@ -330,9 +345,10 @@ public interface PathsOperations {
      *
      * @param enumPath send null should throw. Possible values include: 'red color', 'green color', 'blue color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall enumNullAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback);
+    ServiceCall enumNullAsync(UriColor enumPath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
@@ -350,9 +366,10 @@ public interface PathsOperations {
      *
      * @param bytePath '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall byteMultiByteAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback);
+    ServiceCall byteMultiByteAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '' as byte array.
@@ -370,9 +387,10 @@ public interface PathsOperations {
      *
      * @param bytePath '' as byte array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall byteEmptyAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback);
+    ServiceCall byteEmptyAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get null as byte array (should throw).
@@ -390,9 +408,10 @@ public interface PathsOperations {
      *
      * @param bytePath null as byte array (should throw)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall byteNullAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback);
+    ServiceCall byteNullAsync(byte[] bytePath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '2012-01-01' as date.
@@ -410,9 +429,10 @@ public interface PathsOperations {
      *
      * @param datePath '2012-01-01' as date
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall dateValidAsync(LocalDate datePath, final ServiceCallback<Void> serviceCallback);
+    ServiceCall dateValidAsync(LocalDate datePath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get null as date - this should throw or be unusable on the client side, depending on date representation.
@@ -430,9 +450,10 @@ public interface PathsOperations {
      *
      * @param datePath null as date (should throw)
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall dateNullAsync(LocalDate datePath, final ServiceCallback<Void> serviceCallback);
+    ServiceCall dateNullAsync(LocalDate datePath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get '2012-01-01T01:01:01Z' as date-time.
@@ -450,9 +471,10 @@ public interface PathsOperations {
      *
      * @param dateTimePath '2012-01-01T01:01:01Z' as date-time
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall dateTimeValidAsync(DateTime dateTimePath, final ServiceCallback<Void> serviceCallback);
+    ServiceCall dateTimeValidAsync(DateTime dateTimePath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get null as date-time, should be disallowed or throw depending on representation of date-time.
@@ -470,8 +492,9 @@ public interface PathsOperations {
      *
      * @param dateTimePath null as date-time
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall dateTimeNullAsync(DateTime dateTimePath, final ServiceCallback<Void> serviceCallback);
+    ServiceCall dateTimeNullAsync(DateTime dateTimePath, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
 }

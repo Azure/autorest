@@ -35,9 +35,10 @@ public interface NumberOperations {
      * Get null Number value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getNullAsync(final ServiceCallback<Double> serviceCallback);
+    ServiceCall getNullAsync(final ServiceCallback<Double> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get invalid float Number value.
@@ -52,9 +53,10 @@ public interface NumberOperations {
      * Get invalid float Number value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getInvalidFloatAsync(final ServiceCallback<Double> serviceCallback);
+    ServiceCall getInvalidFloatAsync(final ServiceCallback<Double> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get invalid double Number value.
@@ -69,9 +71,10 @@ public interface NumberOperations {
      * Get invalid double Number value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getInvalidDoubleAsync(final ServiceCallback<Double> serviceCallback);
+    ServiceCall getInvalidDoubleAsync(final ServiceCallback<Double> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get invalid decimal Number value.
@@ -86,9 +89,10 @@ public interface NumberOperations {
      * Get invalid decimal Number value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getInvalidDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback);
+    ServiceCall getInvalidDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put big float value 3.402823e+20.
@@ -105,9 +109,10 @@ public interface NumberOperations {
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putBigFloatAsync(double numberBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putBigFloatAsync(double numberBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get big float value 3.402823e+20.
@@ -122,9 +127,10 @@ public interface NumberOperations {
      * Get big float value 3.402823e+20.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getBigFloatAsync(final ServiceCallback<Double> serviceCallback);
+    ServiceCall getBigFloatAsync(final ServiceCallback<Double> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put big double value 2.5976931e+101.
@@ -141,9 +147,10 @@ public interface NumberOperations {
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putBigDoubleAsync(double numberBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putBigDoubleAsync(double numberBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get big double value 2.5976931e+101.
@@ -158,9 +165,10 @@ public interface NumberOperations {
      * Get big double value 2.5976931e+101.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getBigDoubleAsync(final ServiceCallback<Double> serviceCallback);
+    ServiceCall getBigDoubleAsync(final ServiceCallback<Double> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put big double value 99999999.99.
@@ -177,9 +185,10 @@ public interface NumberOperations {
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putBigDoublePositiveDecimalAsync(double numberBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putBigDoublePositiveDecimalAsync(double numberBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get big double value 99999999.99.
@@ -194,9 +203,10 @@ public interface NumberOperations {
      * Get big double value 99999999.99.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getBigDoublePositiveDecimalAsync(final ServiceCallback<Double> serviceCallback);
+    ServiceCall getBigDoublePositiveDecimalAsync(final ServiceCallback<Double> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put big double value -99999999.99.
@@ -213,9 +223,10 @@ public interface NumberOperations {
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putBigDoubleNegativeDecimalAsync(double numberBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putBigDoubleNegativeDecimalAsync(double numberBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get big double value -99999999.99.
@@ -230,9 +241,10 @@ public interface NumberOperations {
      * Get big double value -99999999.99.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getBigDoubleNegativeDecimalAsync(final ServiceCallback<Double> serviceCallback);
+    ServiceCall getBigDoubleNegativeDecimalAsync(final ServiceCallback<Double> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put big decimal value 2.5976931e+101.
@@ -250,9 +262,10 @@ public interface NumberOperations {
      *
      * @param numberBody the BigDecimal value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putBigDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putBigDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get big decimal value 2.5976931e+101.
@@ -267,9 +280,10 @@ public interface NumberOperations {
      * Get big decimal value 2.5976931e+101.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getBigDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback);
+    ServiceCall getBigDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put big decimal value 99999999.99.
@@ -287,9 +301,10 @@ public interface NumberOperations {
      *
      * @param numberBody the BigDecimal value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putBigDecimalPositiveDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putBigDecimalPositiveDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get big decimal value 99999999.99.
@@ -304,9 +319,10 @@ public interface NumberOperations {
      * Get big decimal value 99999999.99.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getBigDecimalPositiveDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback);
+    ServiceCall getBigDecimalPositiveDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put big decimal value -99999999.99.
@@ -324,9 +340,10 @@ public interface NumberOperations {
      *
      * @param numberBody the BigDecimal value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putBigDecimalNegativeDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putBigDecimalNegativeDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get big decimal value -99999999.99.
@@ -341,9 +358,10 @@ public interface NumberOperations {
      * Get big decimal value -99999999.99.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getBigDecimalNegativeDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback);
+    ServiceCall getBigDecimalNegativeDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put small float value 3.402823e-20.
@@ -360,9 +378,10 @@ public interface NumberOperations {
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putSmallFloatAsync(double numberBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putSmallFloatAsync(double numberBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get big double value 3.402823e-20.
@@ -377,9 +396,10 @@ public interface NumberOperations {
      * Get big double value 3.402823e-20.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getSmallFloatAsync(final ServiceCallback<Double> serviceCallback);
+    ServiceCall getSmallFloatAsync(final ServiceCallback<Double> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put small double value 2.5976931e-101.
@@ -396,9 +416,10 @@ public interface NumberOperations {
      *
      * @param numberBody the double value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putSmallDoubleAsync(double numberBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putSmallDoubleAsync(double numberBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get big double value 2.5976931e-101.
@@ -413,9 +434,10 @@ public interface NumberOperations {
      * Get big double value 2.5976931e-101.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getSmallDoubleAsync(final ServiceCallback<Double> serviceCallback);
+    ServiceCall getSmallDoubleAsync(final ServiceCallback<Double> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put small decimal value 2.5976931e-101.
@@ -433,9 +455,10 @@ public interface NumberOperations {
      *
      * @param numberBody the BigDecimal value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putSmallDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putSmallDecimalAsync(BigDecimal numberBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get small decimal value 2.5976931e-101.
@@ -450,8 +473,9 @@ public interface NumberOperations {
      * Get small decimal value 2.5976931e-101.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getSmallDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback);
+    ServiceCall getSmallDecimalAsync(final ServiceCallback<BigDecimal> serviceCallback) throws IllegalArgumentException;
 
 }

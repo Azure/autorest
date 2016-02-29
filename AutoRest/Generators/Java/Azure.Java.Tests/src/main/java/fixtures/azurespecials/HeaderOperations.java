@@ -38,8 +38,9 @@ public interface HeaderOperations {
      *
      * @param fooClientRequestId The fooRequestId
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall customNamedRequestIdAsync(String fooClientRequestId, final ServiceCallback<Void> serviceCallback);
+    ServiceCall customNamedRequestIdAsync(String fooClientRequestId, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
 }

@@ -85,9 +85,13 @@ public final class PolymorphismOperationsImpl implements PolymorphismOperations 
      * Get complex types that are polymorphic.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getValidAsync(final ServiceCallback<Fish> serviceCallback) {
+    public ServiceCall getValidAsync(final ServiceCallback<Fish> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getValid();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Fish>(serviceCallback) {
@@ -197,9 +201,13 @@ public final class PolymorphismOperationsImpl implements PolymorphismOperations 
              ]
            };
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (complexBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
@@ -300,9 +308,13 @@ public final class PolymorphismOperationsImpl implements PolymorphismOperations 
          ]
      }
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putValidMissingRequiredAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putValidMissingRequiredAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (complexBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;

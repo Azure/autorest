@@ -35,9 +35,10 @@ public interface DictionaryOperations {
      * Get complex types with dictionary property.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getValidAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
+    ServiceCall getValidAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put complex types with dictionary property.
@@ -55,9 +56,10 @@ public interface DictionaryOperations {
      *
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putValidAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putValidAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get complex types with dictionary property which is empty.
@@ -72,9 +74,10 @@ public interface DictionaryOperations {
      * Get complex types with dictionary property which is empty.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getEmptyAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
+    ServiceCall getEmptyAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put complex types with dictionary property which is empty.
@@ -92,9 +95,10 @@ public interface DictionaryOperations {
      *
      * @param complexBody Please put an empty dictionary
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putEmptyAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putEmptyAsync(DictionaryWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get complex types with dictionary property which is null.
@@ -109,9 +113,10 @@ public interface DictionaryOperations {
      * Get complex types with dictionary property which is null.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getNullAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
+    ServiceCall getNullAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get complex types with dictionary property while server doesn't provide a response payload.
@@ -126,8 +131,9 @@ public interface DictionaryOperations {
      * Get complex types with dictionary property while server doesn't provide a response payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getNotProvidedAsync(final ServiceCallback<DictionaryWrapper> serviceCallback);
+    ServiceCall getNotProvidedAsync(final ServiceCallback<DictionaryWrapper> serviceCallback) throws IllegalArgumentException;
 
 }

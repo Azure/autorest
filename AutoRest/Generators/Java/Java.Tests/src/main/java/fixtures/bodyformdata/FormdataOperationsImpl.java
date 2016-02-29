@@ -91,9 +91,13 @@ public final class FormdataOperationsImpl implements FormdataOperations {
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall uploadFileAsync(InputStream fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) {
+    public ServiceCall uploadFileAsync(InputStream fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (fileContent == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter fileContent is required and cannot be null."));
             return null;
@@ -151,9 +155,13 @@ public final class FormdataOperationsImpl implements FormdataOperations {
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall uploadFileViaBodyAsync(InputStream fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) {
+    public ServiceCall uploadFileViaBodyAsync(InputStream fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (fileContent == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter fileContent is required and cannot be null."));
             return null;

@@ -36,7 +36,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 ";
 
-        public const string MicrosoftMitLicenseHeader = @"Copyright (c) Microsoft Corporation. All rights reserved. 
+        public const string MicrosoftMitLicenseHeader = @"Copyright (c) Microsoft Corporation. All rights reserved.
 Licensed under the MIT License. See License.txt in the project root for license information.
 ";
 
@@ -109,8 +109,8 @@ Licensed under the MIT License. See License.txt in the project root for license 
         #endregion
 
         /// <summary>
-        /// Gets or sets a name of the generated client type. If not specified, will use 
-        /// a value from the specification. For Swagger specifications, 
+        /// Gets or sets a name of the generated client type. If not specified, will use
+        /// a value from the specification. For Swagger specifications,
         /// the value of the 'Title' field is used.
         /// </summary>
         [SettingsInfo("Name to use for the generated client type. By default, uses " +
@@ -119,13 +119,13 @@ Licensed under the MIT License. See License.txt in the project root for license 
         public string ClientName { get; set; }
 
         /// <summary>
-        /// Gets or sets the maximum number of properties in the request body. 
-        /// If the number of properties in the request body is less than or 
+        /// Gets or sets the maximum number of properties in the request body.
+        /// If the number of properties in the request body is less than or
         /// equal to this value, then these properties will be represented as method arguments.
         /// </summary>
-        [SettingsInfo("The maximum number of properties in the request body. " + 
-                      "If the number of properties in the request body is less " + 
-                      "than or equal to this value, these properties will " + 
+        [SettingsInfo("The maximum number of properties in the request body. " +
+                      "If the number of properties in the request body is less " +
+                      "than or equal to this value, these properties will " +
                       "be represented as method arguments.")]
         [SettingsAlias("ft")]
         public int PayloadFlatteningThreshold { get; set; }
@@ -169,7 +169,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
         }
 
         /// <summary>
-        /// If set to true, generate client with a ServiceClientCredentials property and optional constructor parameter. 
+        /// If set to true, generate client with a ServiceClientCredentials property and optional constructor parameter.
         /// </summary>
         [SettingsInfo(
             "If true, the generated client includes a ServiceClientCredentials property and constructor parameter. " +
@@ -177,18 +177,33 @@ Licensed under the MIT License. See License.txt in the project root for license 
         public bool AddCredentials { get; set; }
 
         /// <summary>
-        /// If set, will cause generated code to be output to a single file. Not supported by all code generators. 
+        /// If set, will cause generated code to be output to a single file. Not supported by all code generators.
         /// </summary>
         [SettingsInfo(
             "If set, will cause generated code to be output to a single file. Not supported by all code generators.")]
         public string OutputFileName { get; set; }
 
         /// <summary>
-        /// If set to true, print out help message. 
+        /// If set to true, print out help message.
         /// </summary>
         [SettingsAlias("?")]
         [SettingsAlias("h")]
+        [SettingsAlias("help")]
         public bool ShowHelp { get; set; }
+
+        /// <summary>
+        /// PackageName of then generated code package. Should be then names wanted for the package in then package manager.
+        /// </summary>
+        [SettingsAlias("pn")]
+        [SettingsInfo("Package name of then generated code package. Should be then names wanted for the package in then package manager.")]
+        public string PackageName { get; set; }
+
+        /// <summary>
+        /// PackageName of then generated code package. Should be then names wanted for the package in then package manager.
+        /// </summary>
+        [SettingsAlias("pv")]
+        [SettingsInfo("Package version of then generated code package. Should be then version wanted for the package in then package manager.")]
+        public string PackageVersion { get; set; }
 
         /// <summary>
         /// Factory method to generate CodeGenerationSettings from command line arguments.
@@ -240,7 +255,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
         }
 
         /// <summary>
-        /// Factory method to generate Settings from a dictionary. Matches dictionary 
+        /// Factory method to generate Settings from a dictionary. Matches dictionary
         /// keys to the settings properties.
         /// </summary>
         /// <param name="settings">Dictionary of settings</param>
@@ -248,7 +263,7 @@ Licensed under the MIT License. See License.txt in the project root for license 
         public static Settings Create(IDictionary<string, string> settings)
         {
             var autoRestSettings = new Settings();
-            if (settings == null || settings.Count > 0)
+            if (settings == null || settings.Count == 0)
             {
                 autoRestSettings.ShowHelp = true;
             }

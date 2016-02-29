@@ -35,9 +35,10 @@ public interface DurationOperations {
      * Get null duration value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getNullAsync(final ServiceCallback<Period> serviceCallback);
+    ServiceCall getNullAsync(final ServiceCallback<Period> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put a positive duration value.
@@ -55,9 +56,10 @@ public interface DurationOperations {
      *
      * @param durationBody the Period value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putPositiveDurationAsync(Period durationBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putPositiveDurationAsync(Period durationBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get a positive duration value.
@@ -72,9 +74,10 @@ public interface DurationOperations {
      * Get a positive duration value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getPositiveDurationAsync(final ServiceCallback<Period> serviceCallback);
+    ServiceCall getPositiveDurationAsync(final ServiceCallback<Period> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get an invalid duration value.
@@ -89,8 +92,9 @@ public interface DurationOperations {
      * Get an invalid duration value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getInvalidAsync(final ServiceCallback<Period> serviceCallback);
+    ServiceCall getInvalidAsync(final ServiceCallback<Period> serviceCallback) throws IllegalArgumentException;
 
 }

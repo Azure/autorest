@@ -109,9 +109,13 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
      *
      * @param pathParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getRequiredPathAsync(String pathParameter, final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall getRequiredPathAsync(String pathParameter, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (pathParameter == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter pathParameter is required and cannot be null."));
             return null;
@@ -155,9 +159,13 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
      *
      * @param queryParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putOptionalQueryAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putOptionalQueryAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.putOptionalQuery(queryParameter);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -198,9 +206,13 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
      *
      * @param queryParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putOptionalHeaderAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putOptionalHeaderAsync(String queryParameter, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.putOptionalHeader(queryParameter);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -241,9 +253,13 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
      *
      * @param bodyParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putOptionalBodyAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putOptionalBodyAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.putOptionalBody(bodyParameter);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -286,9 +302,13 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
      * Test implicitly required path parameter.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getRequiredGlobalPathAsync(final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall getRequiredGlobalPathAsync(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (this.client.getRequiredGlobalPath() == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getRequiredGlobalPath() is required and cannot be null."));
             return null;
@@ -334,9 +354,13 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
      * Test implicitly required query parameter.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getRequiredGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall getRequiredGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (this.client.getRequiredGlobalQuery() == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getRequiredGlobalQuery() is required and cannot be null."));
             return null;
@@ -378,9 +402,13 @@ public final class ImplicitOperationsImpl implements ImplicitOperations {
      * Test implicitly optional query parameter.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getOptionalGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) {
+    public ServiceCall getOptionalGlobalQueryAsync(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getOptionalGlobalQuery(this.client.getOptionalGlobalQuery());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {

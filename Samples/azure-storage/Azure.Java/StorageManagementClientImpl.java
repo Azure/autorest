@@ -164,22 +164,6 @@ public final class StorageManagementClientImpl extends AzureServiceClient implem
 
     /**
      * Initializes an instance of StorageManagementClient client.
-     */
-    public StorageManagementClientImpl() {
-        this("https://management.azure.com");
-    }
-
-    /**
-     * Initializes an instance of StorageManagementClient client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    public StorageManagementClientImpl(String baseUrl) {
-        this(baseUrl, null);
-    }
-
-    /**
-     * Initializes an instance of StorageManagementClient client.
      *
      * @param credentials the management credentials for Azure
      */
