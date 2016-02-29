@@ -103,7 +103,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// </summary>
         /// <param name="pathName">The name of the path variable.</param>
         /// <param name="builder">The string builder instance to use to build up the series of calls.</param>
-        public virtual void BuildQueryParams(string pathName, IndentedStringBuilder builder)
+        protected virtual void BuildQueryParams(string pathName, IndentedStringBuilder builder)
         {
             var queryParametres = ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Query).ToList();
             var nonEncodedQueryParams = new List<string>();
@@ -140,7 +140,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// </summary>
         /// <param name="pathName">The name of the path variable.</param>
         /// <param name="builder">The string builder instance to use to build up the series of calls.</param>
-        public override void BuildPathParams(string pathName, IndentedStringBuilder builder)
+        protected override void BuildPathParams(string pathName, IndentedStringBuilder builder)
         {
             var nonEncodedPathParams = new List<string>();
             var encodedPathParams = new List<string>();
@@ -245,7 +245,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
         /// <summary>
         /// Gets the list of middelwares required for HTTP requests.
         /// </summary>
-        public override List<string> FaradayMiddlewares
+        public override IList<string> FaradayMiddlewares
         {
             get
             {

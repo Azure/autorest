@@ -318,7 +318,7 @@ namespace Microsoft.Rest.Generator.Ruby
         /// </summary>
         /// <param name="pathName">The name of the path variable.</param>
         /// <param name="builder">The string builder instance to use to build up the series of calls.</param>
-        public virtual void BuildPathParams(string pathName, IndentedStringBuilder builder)
+        protected virtual void BuildPathParams(string pathName, IndentedStringBuilder builder)
         {
             var encodedPathParams = new List<string>();
             foreach (var pathParameter in ParameterTemplateModels.Where(p => p.Location == ParameterLocation.Path))
@@ -377,7 +377,7 @@ namespace Microsoft.Rest.Generator.Ruby
         /// <summary>
         /// Gets the list of middelwares required for HTTP requests.
         /// </summary>
-        public virtual List<string> FaradayMiddlewares
+        public virtual IList<string> FaradayMiddlewares
         {
             get
             {
