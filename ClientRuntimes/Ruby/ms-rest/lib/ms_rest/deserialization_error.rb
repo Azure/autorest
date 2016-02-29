@@ -1,6 +1,7 @@
 # encoding: utf-8
 # Copyright (c) Microsoft Corporation. All rights reserved.
 # Licensed under the MIT License. See License.txt in the project root for license information.
+require 'json'
 
 module MsRest
   #
@@ -26,11 +27,15 @@ module MsRest
     # @param [String] exception_message the inner exception stacktrace.
     # @param [String] exception_stacktrace the inner exception stacktrace.
     # @param [String] response_body server response which client was unable to parse.
-    def initialize(message, exception_message, exception_stacktrace, response_body)
-      @message = message
+    def initialize(msg, exception_message, exception_stacktrace, response_body)
+      @msg = msg || self.class.name
       @exception_message = exception_message
       @exception_stacktrace = exception_stacktrace
       @response_body = response_body
+    end
+    
+    def to_s
+      JSON.pretty_generate(exception_message: exception_message, message: @msg,  stacktrace: exception_stacktrace, response_body: response_body)
     end
 
   end
