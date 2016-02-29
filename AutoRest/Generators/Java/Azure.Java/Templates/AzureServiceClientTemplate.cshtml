@@ -90,22 +90,6 @@ if(!property.IsReadOnly)
 @:    }
 }
 @EmptyLine
-    /**
-     * Initializes an instance of @(Model.Name) client.
-     */
-    public @(Model.Name)Impl() {
-        this("@Model.BaseUrl");
-    }
-@EmptyLine
-    /**
-     * Initializes an instance of @(Model.Name) client.
-     *
-     * @@param baseUrl the base URL of the host
-     */
-    @(Model.IsCustomBaseUri ? "private" : "public") @(Model.Name)Impl(String baseUrl) {
-        this(baseUrl, null);
-    }
-@EmptyLine
 
 @if (Settings.AddCredentials)
 {
@@ -172,6 +156,22 @@ else
 else
 {
 <text>
+    /**
+     * Initializes an instance of @(Model.Name) client.
+     */
+    public @(Model.Name)Impl() {
+        this("@Model.BaseUrl");
+    }
+@EmptyLine
+    /**
+     * Initializes an instance of @(Model.Name) client.
+     *
+     * @@param baseUrl the base URL of the host
+     */
+    @(Model.IsCustomBaseUri ? "private" : "public") @(Model.Name)Impl(String baseUrl) {
+        this(baseUrl, null);
+    }
+@EmptyLine
 @if(Model.IsCustomBaseUri)
 {
 @:    /**

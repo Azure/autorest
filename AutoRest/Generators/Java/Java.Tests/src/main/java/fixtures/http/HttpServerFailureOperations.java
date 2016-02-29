@@ -35,9 +35,10 @@ public interface HttpServerFailureOperations {
      * Return 501 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall head501Async(final ServiceCallback<Error> serviceCallback);
+    ServiceCall head501Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 501 status code - should be represented in the client as an error.
@@ -52,9 +53,10 @@ public interface HttpServerFailureOperations {
      * Return 501 status code - should be represented in the client as an error.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get501Async(final ServiceCallback<Error> serviceCallback);
+    ServiceCall get501Async(final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 505 status code - should be represented in the client as an error.
@@ -71,9 +73,10 @@ public interface HttpServerFailureOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall post505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceCall post505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 505 status code - should be represented in the client as an error.
@@ -90,8 +93,9 @@ public interface HttpServerFailureOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall delete505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback);
+    ServiceCall delete505Async(Boolean booleanValue, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
 }

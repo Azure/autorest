@@ -151,22 +151,6 @@ public final class AutoRestParameterizedHostTestClientImpl extends AzureServiceC
 
     /**
      * Initializes an instance of AutoRestParameterizedHostTestClient client.
-     */
-    public AutoRestParameterizedHostTestClientImpl() {
-        this("http://{accountName}{host}");
-    }
-
-    /**
-     * Initializes an instance of AutoRestParameterizedHostTestClient client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    private AutoRestParameterizedHostTestClientImpl(String baseUrl) {
-        this(baseUrl, null);
-    }
-
-    /**
-     * Initializes an instance of AutoRestParameterizedHostTestClient client.
      *
      * @param credentials the management credentials for Azure
      */

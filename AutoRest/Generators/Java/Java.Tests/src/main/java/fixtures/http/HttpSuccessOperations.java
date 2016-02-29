@@ -34,9 +34,10 @@ public interface HttpSuccessOperations {
      * Return 200 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall head200Async(final ServiceCallback<Void> serviceCallback);
+    ServiceCall head200Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get 200 success.
@@ -51,9 +52,10 @@ public interface HttpSuccessOperations {
      * Get 200 success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall get200Async(final ServiceCallback<Boolean> serviceCallback);
+    ServiceCall get200Async(final ServiceCallback<Boolean> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put boolean value true returning 200 success.
@@ -70,9 +72,10 @@ public interface HttpSuccessOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall put200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceCall put200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Patch true Boolean value in request returning 200.
@@ -89,9 +92,10 @@ public interface HttpSuccessOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall patch200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceCall patch200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Post bollean value true in request that returns a 200.
@@ -108,9 +112,10 @@ public interface HttpSuccessOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall post200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceCall post200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Delete simple boolean value true returns 200.
@@ -127,9 +132,10 @@ public interface HttpSuccessOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall delete200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceCall delete200Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put true Boolean value in request returns 201.
@@ -146,9 +152,10 @@ public interface HttpSuccessOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall put201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceCall put201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Post true Boolean value in request returns 201 (Created).
@@ -165,9 +172,10 @@ public interface HttpSuccessOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall post201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceCall post201Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put true Boolean value in request returns 202 (Accepted).
@@ -184,9 +192,10 @@ public interface HttpSuccessOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall put202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceCall put202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Patch true Boolean value in request returns 202.
@@ -203,9 +212,10 @@ public interface HttpSuccessOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall patch202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceCall patch202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Post true Boolean value in request returns 202 (Accepted).
@@ -222,9 +232,10 @@ public interface HttpSuccessOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall post202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceCall post202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Delete true Boolean value in request returns 202 (accepted).
@@ -241,9 +252,10 @@ public interface HttpSuccessOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall delete202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceCall delete202Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 204 status code if successful.
@@ -258,9 +270,10 @@ public interface HttpSuccessOperations {
      * Return 204 status code if successful.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall head204Async(final ServiceCallback<Void> serviceCallback);
+    ServiceCall head204Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put true Boolean value in request returns 204 (no content).
@@ -277,9 +290,10 @@ public interface HttpSuccessOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall put204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceCall put204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Patch true Boolean value in request returns 204 (no content).
@@ -296,9 +310,10 @@ public interface HttpSuccessOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall patch204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceCall patch204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Post true Boolean value in request returns 204 (no content).
@@ -315,9 +330,10 @@ public interface HttpSuccessOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall post204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceCall post204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Delete true Boolean value in request returns 204 (no content).
@@ -334,9 +350,10 @@ public interface HttpSuccessOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall delete204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceCall delete204Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 404 status code.
@@ -351,8 +368,9 @@ public interface HttpSuccessOperations {
      * Return 404 status code.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall head404Async(final ServiceCallback<Void> serviceCallback);
+    ServiceCall head404Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
 }
