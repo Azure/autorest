@@ -34,6 +34,7 @@ from .duration_wrapper import DurationWrapper
 from .byte_wrapper import ByteWrapper
 from .array_wrapper import ArrayWrapper
 from .dictionary_wrapper import DictionaryWrapper
+from .readonly_obj import ReadonlyObj
 from .auto_rest_complex_test_service_enums import (
     CMYKColors,
 )
@@ -64,5 +65,6 @@ __all__ = [
     'ByteWrapper',
     'ArrayWrapper',
     'DictionaryWrapper',
+    'ReadonlyObj',
     'CMYKColors',
 ]

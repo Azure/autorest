@@ -10,52 +10,17 @@
 
 package fixtures.bodyboolean;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodyboolean.models.ErrorException;
 import java.io.IOException;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.PUT;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in BoolOperations.
  */
 public interface BoolOperations {
-    /**
-     * The interface defining all the services for BoolOperations to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface BoolService {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("bool/true")
-        Call<ResponseBody> getTrue();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("bool/true")
-        Call<ResponseBody> putTrue(@Body boolean boolBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("bool/false")
-        Call<ResponseBody> getFalse();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("bool/false")
-        Call<ResponseBody> putFalse(@Body boolean boolBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("bool/null")
-        Call<ResponseBody> getNull();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("bool/invalid")
-        Call<ResponseBody> getInvalid();
-
-    }
     /**
      * Get true Boolean value.
      *
@@ -69,9 +34,10 @@ public interface BoolOperations {
      * Get true Boolean value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getTrueAsync(final ServiceCallback<Boolean> serviceCallback);
+    ServiceCall getTrueAsync(final ServiceCallback<Boolean> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Set Boolean value true.
@@ -88,9 +54,10 @@ public interface BoolOperations {
      *
      * @param boolBody the boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putTrueAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get false Boolean value.
@@ -105,9 +72,10 @@ public interface BoolOperations {
      * Get false Boolean value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getFalseAsync(final ServiceCallback<Boolean> serviceCallback);
+    ServiceCall getFalseAsync(final ServiceCallback<Boolean> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Set Boolean value false.
@@ -124,9 +92,10 @@ public interface BoolOperations {
      *
      * @param boolBody the boolean value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putFalseAsync(boolean boolBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get null Boolean value.
@@ -141,9 +110,10 @@ public interface BoolOperations {
      * Get null Boolean value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getNullAsync(final ServiceCallback<Boolean> serviceCallback);
+    ServiceCall getNullAsync(final ServiceCallback<Boolean> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get invalid Boolean value.
@@ -158,8 +128,9 @@ public interface BoolOperations {
      * Get invalid Boolean value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getInvalidAsync(final ServiceCallback<Boolean> serviceCallback);
+    ServiceCall getInvalidAsync(final ServiceCallback<Boolean> serviceCallback) throws IllegalArgumentException;
 
 }

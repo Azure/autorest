@@ -956,3 +956,44 @@ export interface Polymorphicrecursive {
     putValid(complexBody: models.Fish, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
     putValid(complexBody: models.Fish, callback: ServiceCallback<void>): void;
 }
+
+/**
+ * @class
+ * Readonlyproperty
+ * __NOTE__: An instance of this class is automatically created for an
+ * instance of the AutoRestComplexTestService.
+ */
+export interface Readonlyproperty {
+
+    /**
+     * Get complex types that have readonly properties
+     *
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    getValid(options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<models.ReadonlyObj>): void;
+    getValid(callback: ServiceCallback<models.ReadonlyObj>): void;
+
+    /**
+     * Put complex types that have readonly properties
+     *
+     * @param {object} complexBody
+     * 
+     * @param {number} [complexBody.size]
+     * 
+     * @param {object} [options] Optional Parameters.
+     * 
+     * @param {object} [options.customHeaders] Headers that will be added to the
+     * request
+     * 
+     * @param {ServiceCallback} [callback] callback function; see ServiceCallback
+     * doc in ms-rest index.d.ts for details
+     */
+    putValid(complexBody: models.ReadonlyObj, options: { customHeaders? : { [headerName: string]: string; } }, callback: ServiceCallback<void>): void;
+    putValid(complexBody: models.ReadonlyObj, callback: ServiceCallback<void>): void;
+}

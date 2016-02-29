@@ -82,6 +82,7 @@ function AzureCompositeModel(credentials, baseUri, options) {
   this.inheritance = new operations.Inheritance(this);
   this.polymorphism = new operations.Polymorphism(this);
   this.polymorphicrecursive = new operations.Polymorphicrecursive(this);
+  this.readonlyproperty = new operations.Readonlyproperty(this);
   this.models = models;
   msRest.addSerializationMixin(this);
 }

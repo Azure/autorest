@@ -11,6 +11,7 @@
 package fixtures.bodycomplex;
 
 import com.google.common.reflect.TypeToken;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseBuilder;
@@ -21,6 +22,10 @@ import fixtures.bodycomplex.models.Fish;
 import java.io.IOException;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.GET;
+import retrofit2.http.Headers;
+import retrofit2.http.PUT;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 
@@ -46,6 +51,21 @@ public final class PolymorphicrecursiveOperationsImpl implements Polymorphicrecu
     }
 
     /**
+     * The interface defining all the services for PolymorphicrecursiveOperations to be
+     * used by Retrofit to perform actually REST calls.
+     */
+    interface PolymorphicrecursiveService {
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @GET("complex/polymorphicrecursive/valid")
+        Call<ResponseBody> getValid();
+
+        @Headers("Content-Type: application/json; charset=utf-8")
+        @PUT("complex/polymorphicrecursive/valid")
+        Call<ResponseBody> putValid(@Body Fish complexBody);
+
+    }
+
+    /**
      * Get complex types that are polymorphic and have recursive references.
      *
      * @throws ErrorException exception thrown from REST call
@@ -61,10 +81,15 @@ public final class PolymorphicrecursiveOperationsImpl implements Polymorphicrecu
      * Get complex types that are polymorphic and have recursive references.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> getValidAsync(final ServiceCallback<Fish> serviceCallback) {
+    public ServiceCall getValidAsync(final ServiceCallback<Fish> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getValid();
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Fish>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -75,7 +100,7 @@ public final class PolymorphicrecursiveOperationsImpl implements Polymorphicrecu
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Fish> getValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
@@ -212,15 +237,20 @@ public final class PolymorphicrecursiveOperationsImpl implements Polymorphicrecu
          ]
      }
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public Call<ResponseBody> putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (complexBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
             return null;
         }
         Validator.validate(complexBody, serviceCallback);
         Call<ResponseBody> call = service.putValid(complexBody);
+        final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -231,7 +261,7 @@ public final class PolymorphicrecursiveOperationsImpl implements Polymorphicrecu
                 }
             }
         });
-        return call;
+        return serviceCall;
     }
 
     private ServiceResponse<Void> putValidDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {

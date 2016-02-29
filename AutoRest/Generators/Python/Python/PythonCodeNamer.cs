@@ -175,11 +175,6 @@ namespace Microsoft.Rest.Generator.Python
             base.NormalizeClientModel(client);
             foreach (var method in client.Methods)
             {
-                //if (method.Group != null)
-                //{
-                //    method.Group = method.Group.ToPythonCase();
-                //}
-                var scope = new ScopeProvider();
                 foreach (var parameter in method.Parameters)
                 {
                     if (parameter.ClientProperty != null)
@@ -187,10 +182,6 @@ namespace Microsoft.Rest.Generator.Python
                         parameter.Name = string.Format(CultureInfo.InvariantCulture,
                             "self.config.{0}",
                             parameter.ClientProperty.Name);
-                    }
-                    else
-                    {
-                        parameter.Name = scope.GetVariableName(parameter.Name);
                     }
                 }
             }

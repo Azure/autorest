@@ -1,19 +1,21 @@
 package fixtures.azureparametergrouping;
 
 import com.microsoft.rest.ServiceResponse;
+
+import org.junit.BeforeClass;
+import org.junit.Test;
+
 import fixtures.azureparametergrouping.models.FirstParameterGroup;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostMultiParamGroupsSecondParamGroup;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostOptionalParameters;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostRequiredParameters;
-import org.junit.BeforeClass;
-import org.junit.Test;
 
 public class ParameterGroupingTests {
     private static AutoRestParameterGroupingTestService client;
 
     @BeforeClass
     public static void setup() {
-        client = new AutoRestParameterGroupingTestServiceImpl("http://localhost.:3000");
+        client = new AutoRestParameterGroupingTestServiceImpl("http://localhost.:3000", null);
     }
 
     @Test

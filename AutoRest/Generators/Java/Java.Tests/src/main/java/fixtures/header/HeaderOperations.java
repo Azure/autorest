@@ -11,6 +11,7 @@
 package fixtures.header;
 
 import com.microsoft.rest.DateTimeRfc1123;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import com.microsoft.rest.ServiceResponseWithHeaders;
@@ -31,142 +32,15 @@ import fixtures.header.models.HeaderResponseLongHeaders;
 import fixtures.header.models.HeaderResponseProtectedKeyHeaders;
 import fixtures.header.models.HeaderResponseStringHeaders;
 import java.io.IOException;
-import okhttp3.ResponseBody;
 import org.joda.time.DateTime;
 import org.joda.time.LocalDate;
 import org.joda.time.Period;
-import retrofit2.Call;
-import retrofit2.http.Header;
-import retrofit2.http.Headers;
-import retrofit2.http.POST;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in HeaderOperations.
  */
 public interface HeaderOperations {
-    /**
-     * The interface defining all the services for HeaderOperations to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface HeaderService {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("header/param/existingkey")
-        Call<ResponseBody> paramExistingKey(@Header("User-Agent") String userAgent);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("header/response/existingkey")
-        Call<ResponseBody> responseExistingKey();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("header/param/protectedkey")
-        Call<ResponseBody> paramProtectedKey(@Header("Content-Type") String contentType);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("header/response/protectedkey")
-        Call<ResponseBody> responseProtectedKey();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("header/param/prim/integer")
-        Call<ResponseBody> paramInteger(@Header("scenario") String scenario, @Header("value") int value);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("header/response/prim/integer")
-        Call<ResponseBody> responseInteger(@Header("scenario") String scenario);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("header/param/prim/long")
-        Call<ResponseBody> paramLong(@Header("scenario") String scenario, @Header("value") long value);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("header/response/prim/long")
-        Call<ResponseBody> responseLong(@Header("scenario") String scenario);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("header/param/prim/float")
-        Call<ResponseBody> paramFloat(@Header("scenario") String scenario, @Header("value") double value);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("header/response/prim/float")
-        Call<ResponseBody> responseFloat(@Header("scenario") String scenario);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("header/param/prim/double")
-        Call<ResponseBody> paramDouble(@Header("scenario") String scenario, @Header("value") double value);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("header/response/prim/double")
-        Call<ResponseBody> responseDouble(@Header("scenario") String scenario);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("header/param/prim/bool")
-        Call<ResponseBody> paramBool(@Header("scenario") String scenario, @Header("value") boolean value);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("header/response/prim/bool")
-        Call<ResponseBody> responseBool(@Header("scenario") String scenario);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("header/param/prim/string")
-        Call<ResponseBody> paramString(@Header("scenario") String scenario, @Header("value") String value);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("header/response/prim/string")
-        Call<ResponseBody> responseString(@Header("scenario") String scenario);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("header/param/prim/date")
-        Call<ResponseBody> paramDate(@Header("scenario") String scenario, @Header("value") String value);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("header/response/prim/date")
-        Call<ResponseBody> responseDate(@Header("scenario") String scenario);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("header/param/prim/datetime")
-        Call<ResponseBody> paramDatetime(@Header("scenario") String scenario, @Header("value") String value);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("header/response/prim/datetime")
-        Call<ResponseBody> responseDatetime(@Header("scenario") String scenario);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("header/param/prim/datetimerfc1123")
-        Call<ResponseBody> paramDatetimeRfc1123(@Header("scenario") String scenario, @Header("value") DateTimeRfc1123 value);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("header/response/prim/datetimerfc1123")
-        Call<ResponseBody> responseDatetimeRfc1123(@Header("scenario") String scenario);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("header/param/prim/duration")
-        Call<ResponseBody> paramDuration(@Header("scenario") String scenario, @Header("value") Period value);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("header/response/prim/duration")
-        Call<ResponseBody> responseDuration(@Header("scenario") String scenario);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("header/param/prim/byte")
-        Call<ResponseBody> paramByte(@Header("scenario") String scenario, @Header("value") String value);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("header/response/prim/byte")
-        Call<ResponseBody> responseByte(@Header("scenario") String scenario);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("header/param/prim/enum")
-        Call<ResponseBody> paramEnum(@Header("scenario") String scenario, @Header("value") String value);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("header/response/prim/enum")
-        Call<ResponseBody> responseEnum(@Header("scenario") String scenario);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("header/custom/x-ms-client-request-id/9C4D50EE-2D56-4CD3-8152-34347DC9F2B0")
-        Call<ResponseBody> customRequestId();
-
-    }
     /**
      * Send a post request with header value "User-Agent": "overwrite".
      *
@@ -183,9 +57,10 @@ public interface HeaderOperations {
      *
      * @param userAgent Send a post request with header value "User-Agent": "overwrite"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> paramExistingKeyAsync(String userAgent, final ServiceCallback<Void> serviceCallback);
+    ServiceCall paramExistingKeyAsync(String userAgent, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get a response with header value "User-Agent": "overwrite".
@@ -200,9 +75,10 @@ public interface HeaderOperations {
      * Get a response with header value "User-Agent": "overwrite".
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> responseExistingKeyAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceCall responseExistingKeyAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a post request with header value "Content-Type": "text/html".
@@ -220,9 +96,10 @@ public interface HeaderOperations {
      *
      * @param contentType Send a post request with header value "Content-Type": "text/html"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> paramProtectedKeyAsync(String contentType, final ServiceCallback<Void> serviceCallback);
+    ServiceCall paramProtectedKeyAsync(String contentType, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get a response with header value "Content-Type": "text/html".
@@ -237,9 +114,10 @@ public interface HeaderOperations {
      * Get a response with header value "Content-Type": "text/html".
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> responseProtectedKeyAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceCall responseProtectedKeyAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2.
@@ -259,9 +137,10 @@ public interface HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 1 or -2
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> paramIntegerAsync(String scenario, int value, final ServiceCallback<Void> serviceCallback);
+    ServiceCall paramIntegerAsync(String scenario, int value, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get a response with header value "value": 1 or -2.
@@ -279,9 +158,10 @@ public interface HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> responseIntegerAsync(String scenario, final ServiceCallback<Void> serviceCallback);
+    ServiceCall responseIntegerAsync(String scenario, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value": -2.
@@ -301,9 +181,10 @@ public interface HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 105 or -2
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> paramLongAsync(String scenario, long value, final ServiceCallback<Void> serviceCallback);
+    ServiceCall paramLongAsync(String scenario, long value, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get a response with header value "value": 105 or -2.
@@ -321,9 +202,10 @@ public interface HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> responseLongAsync(String scenario, final ServiceCallback<Void> serviceCallback);
+    ServiceCall responseLongAsync(String scenario, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value": -3.0.
@@ -343,9 +225,10 @@ public interface HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 0.07 or -3.0
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> paramFloatAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback);
+    ServiceCall paramFloatAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get a response with header value "value": 0.07 or -3.0.
@@ -363,9 +246,10 @@ public interface HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> responseFloatAsync(String scenario, final ServiceCallback<Void> serviceCallback);
+    ServiceCall responseFloatAsync(String scenario, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value": -3.0.
@@ -385,9 +269,10 @@ public interface HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param value Send a post request with header values 7e120 or -3.0
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> paramDoubleAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback);
+    ServiceCall paramDoubleAsync(String scenario, double value, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get a response with header value "value": 7e120 or -3.0.
@@ -405,9 +290,10 @@ public interface HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "positive" or "negative"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> responseDoubleAsync(String scenario, final ServiceCallback<Void> serviceCallback);
+    ServiceCall responseDoubleAsync(String scenario, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a post request with header values "scenario": "true", "value": true or "scenario": "false", "value": false.
@@ -427,9 +313,10 @@ public interface HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "true" or "false"
      * @param value Send a post request with header values true or false
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> paramBoolAsync(String scenario, boolean value, final ServiceCallback<Void> serviceCallback);
+    ServiceCall paramBoolAsync(String scenario, boolean value, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get a response with header value "value": true or false.
@@ -447,9 +334,10 @@ public interface HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "true" or "false"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> responseBoolAsync(String scenario, final ServiceCallback<Void> serviceCallback);
+    ServiceCall responseBoolAsync(String scenario, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
@@ -469,9 +357,10 @@ public interface HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or ""
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> paramStringAsync(String scenario, String value, final ServiceCallback<Void> serviceCallback);
+    ServiceCall paramStringAsync(String scenario, String value, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get a response with header values "The quick brown fox jumps over the lazy dog" or null or "".
@@ -489,9 +378,10 @@ public interface HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> responseStringAsync(String scenario, final ServiceCallback<Void> serviceCallback);
+    ServiceCall responseStringAsync(String scenario, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value": "0001-01-01".
@@ -511,9 +401,10 @@ public interface HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> paramDateAsync(String scenario, LocalDate value, final ServiceCallback<Void> serviceCallback);
+    ServiceCall paramDateAsync(String scenario, LocalDate value, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get a response with header values "2010-01-01" or "0001-01-01".
@@ -531,9 +422,10 @@ public interface HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> responseDateAsync(String scenario, final ServiceCallback<Void> serviceCallback);
+    ServiceCall responseDateAsync(String scenario, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min", "value": "0001-01-01T00:00:00Z".
@@ -553,9 +445,10 @@ public interface HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> paramDatetimeAsync(String scenario, DateTime value, final ServiceCallback<Void> serviceCallback);
+    ServiceCall paramDatetimeAsync(String scenario, DateTime value, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
@@ -573,9 +466,10 @@ public interface HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> responseDatetimeAsync(String scenario, final ServiceCallback<Void> serviceCallback);
+    ServiceCall responseDatetimeAsync(String scenario, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
@@ -595,9 +489,10 @@ public interface HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> paramDatetimeRfc1123Async(String scenario, DateTimeRfc1123 value, final ServiceCallback<Void> serviceCallback);
+    ServiceCall paramDatetimeRfc1123Async(String scenario, DateTimeRfc1123 value, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
@@ -615,9 +510,10 @@ public interface HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "min"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> responseDatetimeRfc1123Async(String scenario, final ServiceCallback<Void> serviceCallback);
+    ServiceCall responseDatetimeRfc1123Async(String scenario, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "P123DT22H14M12.011S".
@@ -637,9 +533,10 @@ public interface HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "P123DT22H14M12.011S"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> paramDurationAsync(String scenario, Period value, final ServiceCallback<Void> serviceCallback);
+    ServiceCall paramDurationAsync(String scenario, Period value, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get a response with header values "P123DT22H14M12.011S".
@@ -657,9 +554,10 @@ public interface HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> responseDurationAsync(String scenario, final ServiceCallback<Void> serviceCallback);
+    ServiceCall responseDurationAsync(String scenario, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "啊齄丂狛狜隣郎隣兀﨩".
@@ -679,9 +577,10 @@ public interface HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param value Send a post request with header values "啊齄丂狛狜隣郎隣兀﨩"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> paramByteAsync(String scenario, byte[] value, final ServiceCallback<Void> serviceCallback);
+    ServiceCall paramByteAsync(String scenario, byte[] value, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get a response with header values "啊齄丂狛狜隣郎隣兀﨩".
@@ -699,9 +598,10 @@ public interface HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "valid"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> responseByteAsync(String scenario, final ServiceCallback<Void> serviceCallback);
+    ServiceCall responseByteAsync(String scenario, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
@@ -721,9 +621,10 @@ public interface HeaderOperations {
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param value Send a post request with header values 'GREY' . Possible values include: 'White', 'black', 'GREY'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> paramEnumAsync(String scenario, GreyscaleColors value, final ServiceCallback<Void> serviceCallback);
+    ServiceCall paramEnumAsync(String scenario, GreyscaleColors value, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get a response with header values "GREY" or null.
@@ -741,9 +642,10 @@ public interface HeaderOperations {
      *
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> responseEnumAsync(String scenario, final ServiceCallback<Void> serviceCallback);
+    ServiceCall responseEnumAsync(String scenario, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
@@ -758,8 +660,9 @@ public interface HeaderOperations {
      * Send x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> customRequestIdAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceCall customRequestIdAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
 }

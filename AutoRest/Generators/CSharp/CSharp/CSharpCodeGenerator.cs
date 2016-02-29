@@ -37,7 +37,7 @@ namespace Microsoft.Rest.Generator.CSharp
         public override string Description
         {
             // TODO resource string.
-            get { return "C# for Http Client Libraries"; }
+            get { return "Generic C# code generator."; }
         }
 
         public override string UsageInstructions

@@ -10,45 +10,18 @@
 
 package fixtures.bodyduration;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.bodyduration.models.ErrorException;
 import java.io.IOException;
-import okhttp3.ResponseBody;
 import org.joda.time.Period;
-import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
-import retrofit2.http.PUT;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in DurationOperations.
  */
 public interface DurationOperations {
-    /**
-     * The interface defining all the services for DurationOperations to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface DurationService {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("duration/null")
-        Call<ResponseBody> getNull();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("duration/positiveduration")
-        Call<ResponseBody> putPositiveDuration(@Body Period durationBody);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("duration/positiveduration")
-        Call<ResponseBody> getPositiveDuration();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("duration/invalid")
-        Call<ResponseBody> getInvalid();
-
-    }
     /**
      * Get null duration value.
      *
@@ -62,9 +35,10 @@ public interface DurationOperations {
      * Get null duration value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getNullAsync(final ServiceCallback<Period> serviceCallback);
+    ServiceCall getNullAsync(final ServiceCallback<Period> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put a positive duration value.
@@ -82,9 +56,10 @@ public interface DurationOperations {
      *
      * @param durationBody the Period value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> putPositiveDurationAsync(Period durationBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putPositiveDurationAsync(Period durationBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get a positive duration value.
@@ -99,9 +74,10 @@ public interface DurationOperations {
      * Get a positive duration value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getPositiveDurationAsync(final ServiceCallback<Period> serviceCallback);
+    ServiceCall getPositiveDurationAsync(final ServiceCallback<Period> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get an invalid duration value.
@@ -116,8 +92,9 @@ public interface DurationOperations {
      * Get an invalid duration value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getInvalidAsync(final ServiceCallback<Period> serviceCallback);
+    ServiceCall getInvalidAsync(final ServiceCallback<Period> serviceCallback) throws IllegalArgumentException;
 
 }

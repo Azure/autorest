@@ -78,5 +78,10 @@ namespace Fixtures.AcceptanceTestsBodyComplex
         /// </summary>
         IPolymorphicrecursive Polymorphicrecursive { get; }
 
+        /// <summary>
+        /// Gets the IReadonlyproperty.
+        /// </summary>
+        IReadonlyproperty Readonlyproperty { get; }
+
     }
 }

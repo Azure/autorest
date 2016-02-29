@@ -66,6 +66,7 @@ Goblinshark.prototype.mapper = function () {
                 type: {
                   name: 'Composite',
                   polymorphicDiscriminator: 'fishtype',
+                  uberParent: 'Fish',
                   className: 'Fish'
                 }
             }

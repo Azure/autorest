@@ -237,7 +237,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
 
             if (sequence != null || dictionary != null)
             {
-                return string.Format("{0}.each{{ |e| e.validate if e.respond_to?(:validate) }} unless {0}.nil?\r\n", valueReference);
+                return string.Format("{0}.each{{ |e| e.validate if e.respond_to?(:validate) }} unless {0}.nil?" + Environment.NewLine, valueReference);
             }
 
             return null;
@@ -322,13 +322,13 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
                         "  enum_is_valid = {0}.constants.any? {{ |e| {0}.const_get(e).to_s.downcase == {1}.downcase }}",
                         enumType.Name, valueReference)
                     .AppendLine(
-                        "  fail MsRest::DeserializationError.new('Error occured while deserializing the enum', nil, nil, nil) unless enum_is_valid")
+                        "  warn 'Enum {0} does not contain ' + {1}.downcase + ', but was received from the server.' unless enum_is_valid", enumType.Name, valueReference)
                     .AppendLine("end")
                     .ToString();
             }
             else if (sequence != null)
             {
-                var elementVar = scope.GetVariableName("element");
+                var elementVar = scope.GetUniqueName("element");
                 var innerSerialization = sequence.ElementType.DeserializeType(scope, elementVar);
 
                 if (!string.IsNullOrEmpty(innerSerialization))
@@ -337,14 +337,14 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
                         builder
                             .AppendLine("unless {0}.nil?", valueReference)
                                 .Indent()
-                                    .AppendLine("deserialized{0} = [];", sequence.Name)
+                                    .AppendLine("deserialized_{0} = []", sequence.Name.ToLower())
                                     .AppendLine("{0}.each do |{1}|", valueReference, elementVar)
                                     .Indent()
                                         .AppendLine(innerSerialization)
-                                        .AppendLine("deserialized{0}.push({1});", sequence.Name.ToPascalCase(), elementVar)
+                                        .AppendLine("deserialized_{0}.push({1})", sequence.Name.ToLower(), elementVar)
                                     .Outdent()
                                     .AppendLine("end")
-                                    .AppendLine("{0} = deserialized{1};", valueReference, sequence.Name.ToPascalCase())
+                                    .AppendLine("{0} = deserialized_{1}", valueReference, sequence.Name.ToLower())
                                 .Outdent()
                             .AppendLine("end")
                             .ToString();
@@ -352,7 +352,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             }
             else if (dictionary != null)
             {
-                var valueVar = scope.GetVariableName("valueElement");
+                var valueVar = scope.GetUniqueName("valueElement");
                 var innerSerialization = dictionary.ValueType.DeserializeType(scope, valueVar);
                 if (!string.IsNullOrEmpty(innerSerialization))
                 {
@@ -418,7 +418,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             }
             else if (sequence != null)
             {
-                var elementVar = scope.GetVariableName("element");
+                var elementVar = scope.GetUniqueName("element");
                 var innerSerialization = sequence.ElementType.SerializeType(scope, elementVar);
 
                 if (!string.IsNullOrEmpty(innerSerialization))
@@ -442,7 +442,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
             }
             else if (dictionary != null)
             {
-                var valueVar = scope.GetVariableName("valueElement");
+                var valueVar = scope.GetUniqueName("valueElement");
                 var innerSerialization = dictionary.ValueType.SerializeType(scope, valueVar);
                 if (!string.IsNullOrEmpty(innerSerialization))
                 {
@@ -480,7 +480,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
         {
             return
                 type.BaseModelType != null &&
-                (type.BaseModelType.Equals(possibleAncestorType) || 
+                (type.BaseModelType.Equals(possibleAncestorType) ||
                  type.BaseModelType.DerivesFrom(possibleAncestorType));
         }
     }

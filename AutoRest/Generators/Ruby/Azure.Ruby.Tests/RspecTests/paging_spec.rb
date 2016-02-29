@@ -99,6 +99,6 @@ describe 'Paging' do
     expect(result.response.status).to eq(200)
     expect(result.body.next_link).not_to be_nil
 
-    expect { @client.paging.get_multiple_pages_failure_uri_next(result.body.next_link).value! }.to raise_exception(URI::Error)
+    expect { @client.paging.get_multiple_pages_failure_uri_next(result.body.next_link).value! }.to raise_exception(MsRest::HttpOperationError)
   end
 end

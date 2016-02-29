@@ -75,7 +75,6 @@ namespace Microsoft.Rest.Generator.CSharp
 
             foreach (var method in client.Methods)
             {
-                var scope = new ScopeProvider();
                 foreach (var parameter in method.Parameters)
                 {
                     if (parameter.ClientProperty != null)
@@ -87,7 +86,6 @@ namespace Microsoft.Rest.Generator.CSharp
                     }
                     else
                     {
-                        parameter.Name = scope.GetVariableName(parameter.Name);
                         if (!parameter.IsRequired)
                         {
                             MakeTypeNullable(parameter.Type);

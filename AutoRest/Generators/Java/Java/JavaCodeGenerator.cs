@@ -32,7 +32,7 @@ namespace Microsoft.Rest.Generator.Java
         public override string Description
         {
             // TODO resource string.
-            get { return "Java for Http Client Libraries"; }
+            get { return "Generic Java code generator."; }
         }
 
         public override string UsageInstructions

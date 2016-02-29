@@ -7,6 +7,8 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
+using Microsoft.Rest.Generator.Extensibility;
+using Newtonsoft.Json;
 
 namespace Microsoft.Rest.Generator.Cli
 {
@@ -71,8 +73,9 @@ namespace Microsoft.Rest.Generator.Cli
         ///    $examples-end$
         /// </example>
         /// <param name="template">Template to use.</param>
+        /// <param name="settings">Settings to use.</param>
         /// <returns>Generated help.</returns>
-        public static string Generate(string template)
+        public static string Generate(string template, Settings settings)
         {
             if (String.IsNullOrEmpty(template))
             {
@@ -92,8 +95,8 @@ namespace Microsoft.Rest.Generator.Cli
             }
 
             // Generate usage syntax
-            var syntaxSection = new StringBuilder("AutoRest.exe ");
-            foreach (var parameter in parameters.OrderByDescending(t => t.Item2.IsRequired))
+            var syntaxSection = new StringBuilder("autorest ");
+            foreach (var parameter in parameters.OrderBy(t => t.Item1).OrderByDescending(t => t.Item2.IsRequired))
             {
                 if (parameter.Item2.IsRequired)
                 {
@@ -107,9 +110,9 @@ namespace Microsoft.Rest.Generator.Cli
 
             // Generate parameters section
             var parametersSection = new StringBuilder();
-            const string parametersPattern = @"\$parameters-start\$\r\n(.+)\r\n\$parameters-end\$";
-            var parameterTemplate = Regex.Match(template, parametersPattern, RegexOptions.Singleline).Groups[1].Value;
-            foreach (PropertyInfo property in typeof(Settings).GetProperties())
+            const string parametersPattern = @"\$parameters-start\$(.+)\$parameters-end\$";
+            var parameterTemplate = Regex.Match(template, parametersPattern, RegexOptions.Singleline).Groups[1].Value.Trim();
+            foreach (PropertyInfo property in typeof(Settings).GetProperties().OrderBy(p => p.Name))
             {
                 SettingsInfoAttribute doc = (SettingsInfoAttribute)property.GetCustomAttributes(
                     typeof(SettingsInfoAttribute)).FirstOrDefault();
@@ -123,19 +126,54 @@ namespace Microsoft.Rest.Generator.Cli
                     {
                         documentation += " Aliases: " + aliases;
                     }
-                    parametersSection.AppendLine(parameterTemplate.
+                    parametersSection.AppendLine("  " + parameterTemplate.
                         Replace("$parameter$", property.Name).
                         Replace("$parameter-desc$", documentation));
                 }
             }
 
+            // Parse autorest.json
+            AutoRestConfiguration autorestConfig = new AutoRestConfiguration();
+            string configurationFile = ExtensionsLoader.GetConfigurationFileContent(settings);
+            if (configurationFile != null)
+            {
+                try
+                {
+                    autorestConfig = JsonConvert.DeserializeObject<AutoRestConfiguration>(configurationFile);                    
+                }
+                catch
+                {
+                    // Ignore
+                }
+            }
+
+            // Generate generators section
+            var generatorsSection = new StringBuilder();
+            const string generatorsPattern = @"\$generators-start\$(.+)\$generators-end\$";
+            var generatorsTemplate = Regex.Match(template, generatorsPattern, RegexOptions.Singleline).Groups[1].Value.Trim();
+            foreach (string generator in autorestConfig.CodeGenerators.Keys.OrderBy(k => k))
+            {
+                try
+                {
+                    var codeGenerator = ExtensionsLoader.LoadTypeFromAssembly<CodeGenerator>(autorestConfig.CodeGenerators, generator,
+                       settings);
+                    generatorsSection.AppendLine("  " + generatorsTemplate.
+                        Replace("$generator$", codeGenerator.Name).
+                        Replace("$generator-desc$", codeGenerator.Description));
+                }
+                catch
+                {
+                    // Skip
+                }                
+            }
+
             // Generate examples section.
             var examplesSection = new StringBuilder();
-            const string examplesPattern = @"\$examples-start\$\r\n(.+)\r\n\$examples-end\$";
-            var exampleTemplate = Regex.Match(template, examplesPattern, RegexOptions.Singleline).Groups[1].Value;
+            const string examplesPattern = @"\$examples-start\$(.+)\$examples-end\$";
+            var exampleTemplate = Regex.Match(template, examplesPattern, RegexOptions.Singleline).Groups[1].Value.Trim() + Environment.NewLine;
             foreach (HelpExample example in Examples)
             {
-                examplesSection.AppendLine(exampleTemplate.
+                examplesSection.AppendLine("  " + exampleTemplate.
                     Replace("$example$", example.Example).
                     Replace("$example-desc$", example.Description));
             }
@@ -147,6 +185,7 @@ namespace Microsoft.Rest.Generator.Cli
 
             template = Regex.Replace(template, parametersPattern, parametersSection.ToString(), RegexOptions.Singleline);
             template = Regex.Replace(template, examplesPattern, examplesSection.ToString(), RegexOptions.Singleline);
+            template = Regex.Replace(template, generatorsPattern, generatorsSection.ToString(), RegexOptions.Singleline);
 
             return template;
         }

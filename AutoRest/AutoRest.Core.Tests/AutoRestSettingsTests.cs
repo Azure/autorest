@@ -28,7 +28,7 @@ namespace Microsoft.Rest.Generator.Test
         public void CreateWithMultipleEmptyKeysStoreInCustomDictonary()
         {
             var settings = Settings.Create(new[] {"-Help", " -Bar ", " -Foo"});
-            Assert.Equal("", settings.CustomSettings["Help"]);
+            Assert.True(settings.ShowHelp);
             Assert.Equal("", settings.CustomSettings["Foo"]);
             Assert.Equal("", settings.CustomSettings["Bar"]);
         }
@@ -48,6 +48,20 @@ namespace Microsoft.Rest.Generator.Test
         }
 
         [Fact]
+        public void NonEmptyPackageVersionIsSet()
+        {
+            var settings = Settings.Create(new[] {"-pv", "1.2.1"});
+            Assert.Equal("1.2.1", settings.PackageVersion);
+        }
+
+        [Fact]
+        public void NonEmptyPackageNameIsSet()
+        {
+            var settings = Settings.Create(new[] {"-pn", "HelloWorld"});
+            Assert.Equal("HelloWorld", settings.PackageName);
+        }
+
+        [Fact]
         public void CreateWithValidParametersWorks()
         {
             var settings = Settings.Create(new[]
@@ -55,7 +69,7 @@ namespace Microsoft.Rest.Generator.Test
                 "-Help", " -Input", "c:\\input",
                 "-outputDirectory", " c:\\output", "-clientName", "MyClient"
             });
-            Assert.Equal("", settings.CustomSettings["Help"]);
+            Assert.True(settings.ShowHelp);
             Assert.Equal("c:\\input", settings.Input);
             Assert.Equal("c:\\output", settings.OutputDirectory);
             Assert.Equal("MyClient", settings.ClientName);

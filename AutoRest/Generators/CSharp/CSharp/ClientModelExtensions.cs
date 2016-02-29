@@ -310,7 +310,7 @@ namespace Microsoft.Rest.Generator.CSharp
 
             if (sequence != null && sequence.ShouldValidateChain())
             {
-                var elementVar = scope.GetVariableName("element");
+                var elementVar = scope.GetUniqueName("element");
                 var innerValidation = sequence.ElementType.ValidateType(scope, elementVar, null);
                 if (!string.IsNullOrEmpty(innerValidation))
                 {
@@ -322,7 +322,7 @@ namespace Microsoft.Rest.Generator.CSharp
             }
             else if (dictionary != null && dictionary.ShouldValidateChain())
             {
-                var valueVar = scope.GetVariableName("valueElement");
+                var valueVar = scope.GetUniqueName("valueElement");
                 var innerValidation = dictionary.ValueType.ValidateType(scope, valueVar, null);
                 if (!string.IsNullOrEmpty(innerValidation))
                 {

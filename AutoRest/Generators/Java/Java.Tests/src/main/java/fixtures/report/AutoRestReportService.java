@@ -15,15 +15,12 @@ import okhttp3.Interceptor;
 import okhttp3.logging.HttpLoggingInterceptor.Level;
 import com.microsoft.rest.AutoRestBaseUrl;
 import com.microsoft.rest.serializer.JacksonMapperAdapter;
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.report.models.ErrorException;
 import java.io.IOException;
 import java.util.Map;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.http.GET;
-import retrofit2.http.Headers;
 
 /**
  * The interface for AutoRestReportService class.
@@ -59,17 +56,6 @@ public interface AutoRestReportService {
     JacksonMapperAdapter getMapperAdapter();
 
     /**
-     * The interface defining all the services for AutoRestReportService to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface AutoRestReportServiceService {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("report")
-        Call<ResponseBody> getReport();
-
-    }
-
-    /**
      * Get test coverage report.
      *
      * @throws ErrorException exception thrown from REST call
@@ -82,8 +68,9 @@ public interface AutoRestReportService {
      * Get test coverage report.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback);
+    ServiceCall getReportAsync(final ServiceCallback<Map<String, Integer>> serviceCallback) throws IllegalArgumentException;
 
 }

@@ -10,6 +10,7 @@
 
 package fixtures.http;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponseWithHeaders;
 import fixtures.http.models.ErrorException;
@@ -30,88 +31,12 @@ import fixtures.http.models.HttpRedirectsPut301Headers;
 import fixtures.http.models.HttpRedirectsPut307Headers;
 import java.io.IOException;
 import java.util.List;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.HEAD;
-import retrofit2.http.Headers;
-import retrofit2.http.HTTP;
-import retrofit2.http.PATCH;
-import retrofit2.http.POST;
-import retrofit2.http.PUT;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in HttpRedirectsOperations.
  */
 public interface HttpRedirectsOperations {
-    /**
-     * The interface defining all the services for HttpRedirectsOperations to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface HttpRedirectsService {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @HEAD("http/redirect/300")
-        Call<Void> head300();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("http/redirect/300")
-        Call<ResponseBody> get300();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @HEAD("http/redirect/301")
-        Call<Void> head301();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("http/redirect/301")
-        Call<ResponseBody> get301();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("http/redirect/301")
-        Call<ResponseBody> put301(@Body Boolean booleanValue);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @HEAD("http/redirect/302")
-        Call<Void> head302();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("http/redirect/302")
-        Call<ResponseBody> get302();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PATCH("http/redirect/302")
-        Call<ResponseBody> patch302(@Body Boolean booleanValue);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("http/redirect/303")
-        Call<ResponseBody> post303(@Body Boolean booleanValue);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @HEAD("http/redirect/307")
-        Call<Void> head307();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @GET("http/redirect/307")
-        Call<ResponseBody> get307();
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PUT("http/redirect/307")
-        Call<ResponseBody> put307(@Body Boolean booleanValue);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @PATCH("http/redirect/307")
-        Call<ResponseBody> patch307(@Body Boolean booleanValue);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("http/redirect/307")
-        Call<ResponseBody> post307(@Body Boolean booleanValue);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @HTTP(path = "http/redirect/307", method = "DELETE", hasBody = true)
-        Call<ResponseBody> delete307(@Body Boolean booleanValue);
-
-    }
     /**
      * Return 300 status code and redirect to /http/success/200.
      *
@@ -125,9 +50,10 @@ public interface HttpRedirectsOperations {
      * Return 300 status code and redirect to /http/success/200.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<Void> head300Async(final ServiceCallback<Void> serviceCallback);
+    ServiceCall head300Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 300 status code and redirect to /http/success/200.
@@ -142,9 +68,10 @@ public interface HttpRedirectsOperations {
      * Return 300 status code and redirect to /http/success/200.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> get300Async(final ServiceCallback<List<String>> serviceCallback);
+    ServiceCall get300Async(final ServiceCallback<List<String>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 301 status code and redirect to /http/success/200.
@@ -159,9 +86,10 @@ public interface HttpRedirectsOperations {
      * Return 301 status code and redirect to /http/success/200.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<Void> head301Async(final ServiceCallback<Void> serviceCallback);
+    ServiceCall head301Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 301 status code and redirect to /http/success/200.
@@ -176,9 +104,10 @@ public interface HttpRedirectsOperations {
      * Return 301 status code and redirect to /http/success/200.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> get301Async(final ServiceCallback<Void> serviceCallback);
+    ServiceCall get301Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should return the received 301 to the caller for evaluation.
@@ -195,9 +124,10 @@ public interface HttpRedirectsOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> put301Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceCall put301Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 302 status code and redirect to /http/success/200.
@@ -212,9 +142,10 @@ public interface HttpRedirectsOperations {
      * Return 302 status code and redirect to /http/success/200.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<Void> head302Async(final ServiceCallback<Void> serviceCallback);
+    ServiceCall head302Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Return 302 status code and redirect to /http/success/200.
@@ -229,9 +160,10 @@ public interface HttpRedirectsOperations {
      * Return 302 status code and redirect to /http/success/200.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> get302Async(final ServiceCallback<Void> serviceCallback);
+    ServiceCall get302Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but should return the received 302 to the caller for evaluation.
@@ -248,9 +180,10 @@ public interface HttpRedirectsOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> patch302Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceCall patch302Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get, ultimately returning a 200 status code.
@@ -267,9 +200,10 @@ public interface HttpRedirectsOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> post303Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceCall post303Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Redirect with 307, resulting in a 200 success.
@@ -284,9 +218,10 @@ public interface HttpRedirectsOperations {
      * Redirect with 307, resulting in a 200 success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<Void> head307Async(final ServiceCallback<Void> serviceCallback);
+    ServiceCall head307Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Redirect get with 307, resulting in a 200 success.
@@ -301,9 +236,10 @@ public interface HttpRedirectsOperations {
      * Redirect get with 307, resulting in a 200 success.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> get307Async(final ServiceCallback<Void> serviceCallback);
+    ServiceCall get307Async(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put redirected with 307, resulting in a 200 after redirect.
@@ -320,9 +256,10 @@ public interface HttpRedirectsOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> put307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceCall put307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Patch redirected with 307, resulting in a 200 after redirect.
@@ -339,9 +276,10 @@ public interface HttpRedirectsOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> patch307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceCall patch307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Post redirected with 307, resulting in a 200 after redirect.
@@ -358,9 +296,10 @@ public interface HttpRedirectsOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> post307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceCall post307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Delete redirected with 307, resulting in a 200 after redirect.
@@ -377,8 +316,9 @@ public interface HttpRedirectsOperations {
      *
      * @param booleanValue Simple boolean value true
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> delete307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback);
+    ServiceCall delete307Async(Boolean booleanValue, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
 }

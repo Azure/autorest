@@ -10,6 +10,7 @@
 
 package fixtures.requiredoptional;
 
+import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceResponse;
 import fixtures.requiredoptional.models.ArrayOptionalWrapper;
@@ -25,112 +26,12 @@ import fixtures.requiredoptional.models.StringOptionalWrapper;
 import fixtures.requiredoptional.models.StringWrapper;
 import java.io.IOException;
 import java.util.List;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.Header;
-import retrofit2.http.Headers;
-import retrofit2.http.POST;
 
 /**
  * An instance of this class provides access to all the operations defined
  * in ExplicitOperations.
  */
 public interface ExplicitOperations {
-    /**
-     * The interface defining all the services for ExplicitOperations to be
-     * used by Retrofit to perform actually REST calls.
-     */
-    interface ExplicitService {
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("reqopt/requied/integer/parameter")
-        Call<ResponseBody> postRequiredIntegerParameter(@Body int bodyParameter);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("reqopt/optional/integer/parameter")
-        Call<ResponseBody> postOptionalIntegerParameter(@Body Integer bodyParameter);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("reqopt/requied/integer/property")
-        Call<ResponseBody> postRequiredIntegerProperty(@Body IntWrapper bodyParameter);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("reqopt/optional/integer/property")
-        Call<ResponseBody> postOptionalIntegerProperty(@Body IntOptionalWrapper bodyParameter);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("reqopt/requied/integer/header")
-        Call<ResponseBody> postRequiredIntegerHeader(@Header("headerParameter") int headerParameter);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("reqopt/optional/integer/header")
-        Call<ResponseBody> postOptionalIntegerHeader(@Header("headerParameter") Integer headerParameter);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("reqopt/requied/string/parameter")
-        Call<ResponseBody> postRequiredStringParameter(@Body String bodyParameter);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("reqopt/optional/string/parameter")
-        Call<ResponseBody> postOptionalStringParameter(@Body String bodyParameter);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("reqopt/requied/string/property")
-        Call<ResponseBody> postRequiredStringProperty(@Body StringWrapper bodyParameter);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("reqopt/optional/string/property")
-        Call<ResponseBody> postOptionalStringProperty(@Body StringOptionalWrapper bodyParameter);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("reqopt/requied/string/header")
-        Call<ResponseBody> postRequiredStringHeader(@Header("headerParameter") String headerParameter);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("reqopt/optional/string/header")
-        Call<ResponseBody> postOptionalStringHeader(@Header("bodyParameter") String bodyParameter);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("reqopt/requied/class/parameter")
-        Call<ResponseBody> postRequiredClassParameter(@Body Product bodyParameter);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("reqopt/optional/class/parameter")
-        Call<ResponseBody> postOptionalClassParameter(@Body Product bodyParameter);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("reqopt/requied/class/property")
-        Call<ResponseBody> postRequiredClassProperty(@Body ClassWrapper bodyParameter);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("reqopt/optional/class/property")
-        Call<ResponseBody> postOptionalClassProperty(@Body ClassOptionalWrapper bodyParameter);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("reqopt/requied/array/parameter")
-        Call<ResponseBody> postRequiredArrayParameter(@Body List<String> bodyParameter);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("reqopt/optional/array/parameter")
-        Call<ResponseBody> postOptionalArrayParameter(@Body List<String> bodyParameter);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("reqopt/requied/array/property")
-        Call<ResponseBody> postRequiredArrayProperty(@Body ArrayWrapper bodyParameter);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("reqopt/optional/array/property")
-        Call<ResponseBody> postOptionalArrayProperty(@Body ArrayOptionalWrapper bodyParameter);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("reqopt/requied/array/header")
-        Call<ResponseBody> postRequiredArrayHeader(@Header("headerParameter") String headerParameter);
-
-        @Headers("Content-Type: application/json; charset=utf-8")
-        @POST("reqopt/optional/array/header")
-        Call<ResponseBody> postOptionalArrayHeader(@Header("headerParameter") String headerParameter);
-
-    }
     /**
      * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
      *
@@ -146,9 +47,10 @@ public interface ExplicitOperations {
      *
      * @param bodyParameter the int value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> postRequiredIntegerParameterAsync(int bodyParameter, final ServiceCallback<Error> serviceCallback);
+    ServiceCall postRequiredIntegerParameterAsync(int bodyParameter, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Test explicitly optional integer. Please put null.
@@ -165,9 +67,10 @@ public interface ExplicitOperations {
      *
      * @param bodyParameter the Integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> postOptionalIntegerParameterAsync(Integer bodyParameter, final ServiceCallback<Void> serviceCallback);
+    ServiceCall postOptionalIntegerParameterAsync(Integer bodyParameter, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -185,9 +88,10 @@ public interface ExplicitOperations {
      *
      * @param bodyParameter the IntWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> postRequiredIntegerPropertyAsync(IntWrapper bodyParameter, final ServiceCallback<Error> serviceCallback);
+    ServiceCall postRequiredIntegerPropertyAsync(IntWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Test explicitly optional integer. Please put a valid int-wrapper with 'value' = null.
@@ -204,9 +108,10 @@ public interface ExplicitOperations {
      *
      * @param bodyParameter the IntOptionalWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback);
+    ServiceCall postOptionalIntegerPropertyAsync(IntOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
@@ -223,9 +128,10 @@ public interface ExplicitOperations {
      *
      * @param headerParameter the int value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> postRequiredIntegerHeaderAsync(int headerParameter, final ServiceCallback<Error> serviceCallback);
+    ServiceCall postRequiredIntegerHeaderAsync(int headerParameter, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
@@ -242,9 +148,10 @@ public interface ExplicitOperations {
      *
      * @param headerParameter the Integer value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> postOptionalIntegerHeaderAsync(Integer headerParameter, final ServiceCallback<Void> serviceCallback);
+    ServiceCall postOptionalIntegerHeaderAsync(Integer headerParameter, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Test explicitly required string. Please put null and the client library should throw before the request is sent.
@@ -262,9 +169,10 @@ public interface ExplicitOperations {
      *
      * @param bodyParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> postRequiredStringParameterAsync(String bodyParameter, final ServiceCallback<Error> serviceCallback);
+    ServiceCall postRequiredStringParameterAsync(String bodyParameter, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Test explicitly optional string. Please put null.
@@ -281,9 +189,10 @@ public interface ExplicitOperations {
      *
      * @param bodyParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> postOptionalStringParameterAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback);
+    ServiceCall postOptionalStringParameterAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -301,9 +210,10 @@ public interface ExplicitOperations {
      *
      * @param bodyParameter the StringWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> postRequiredStringPropertyAsync(StringWrapper bodyParameter, final ServiceCallback<Error> serviceCallback);
+    ServiceCall postRequiredStringPropertyAsync(StringWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Test explicitly optional integer. Please put a valid string-wrapper with 'value' = null.
@@ -320,9 +230,10 @@ public interface ExplicitOperations {
      *
      * @param bodyParameter the StringOptionalWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback);
+    ServiceCall postOptionalStringPropertyAsync(StringOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
@@ -340,9 +251,10 @@ public interface ExplicitOperations {
      *
      * @param headerParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> postRequiredStringHeaderAsync(String headerParameter, final ServiceCallback<Error> serviceCallback);
+    ServiceCall postRequiredStringHeaderAsync(String headerParameter, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Test explicitly optional string. Please put a header 'headerParameter' =&gt; null.
@@ -359,9 +271,10 @@ public interface ExplicitOperations {
      *
      * @param bodyParameter the String value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> postOptionalStringHeaderAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback);
+    ServiceCall postOptionalStringHeaderAsync(String bodyParameter, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
@@ -379,9 +292,10 @@ public interface ExplicitOperations {
      *
      * @param bodyParameter the Product value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> postRequiredClassParameterAsync(Product bodyParameter, final ServiceCallback<Error> serviceCallback);
+    ServiceCall postRequiredClassParameterAsync(Product bodyParameter, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Test explicitly optional complex object. Please put null.
@@ -398,9 +312,10 @@ public interface ExplicitOperations {
      *
      * @param bodyParameter the Product value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> postOptionalClassParameterAsync(Product bodyParameter, final ServiceCallback<Void> serviceCallback);
+    ServiceCall postOptionalClassParameterAsync(Product bodyParameter, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -418,9 +333,10 @@ public interface ExplicitOperations {
      *
      * @param bodyParameter the ClassWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> postRequiredClassPropertyAsync(ClassWrapper bodyParameter, final ServiceCallback<Error> serviceCallback);
+    ServiceCall postRequiredClassPropertyAsync(ClassWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Test explicitly optional complex object. Please put a valid class-wrapper with 'value' = null.
@@ -437,9 +353,10 @@ public interface ExplicitOperations {
      *
      * @param bodyParameter the ClassOptionalWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback);
+    ServiceCall postOptionalClassPropertyAsync(ClassOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Test explicitly required array. Please put null and the client library should throw before the request is sent.
@@ -457,9 +374,10 @@ public interface ExplicitOperations {
      *
      * @param bodyParameter the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> postRequiredArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Error> serviceCallback);
+    ServiceCall postRequiredArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Test explicitly optional array. Please put null.
@@ -476,9 +394,10 @@ public interface ExplicitOperations {
      *
      * @param bodyParameter the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> postOptionalArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Void> serviceCallback);
+    ServiceCall postOptionalArrayParameterAsync(List<String> bodyParameter, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
@@ -496,9 +415,10 @@ public interface ExplicitOperations {
      *
      * @param bodyParameter the ArrayWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter, final ServiceCallback<Error> serviceCallback);
+    ServiceCall postRequiredArrayPropertyAsync(ArrayWrapper bodyParameter, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Test explicitly optional array. Please put a valid array-wrapper with 'value' = null.
@@ -515,9 +435,10 @@ public interface ExplicitOperations {
      *
      * @param bodyParameter the ArrayOptionalWrapper value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback);
+    ServiceCall postOptionalArrayPropertyAsync(ArrayOptionalWrapper bodyParameter, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
@@ -535,9 +456,10 @@ public interface ExplicitOperations {
      *
      * @param headerParameter the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> postRequiredArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Error> serviceCallback);
+    ServiceCall postRequiredArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Error> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
@@ -554,8 +476,9 @@ public interface ExplicitOperations {
      *
      * @param headerParameter the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
-     * @return the {@link Call} object
+     * @throws IllegalArgumentException thrown if callback is null
+     * @return the {@link ServiceCall} object
      */
-    Call<ResponseBody> postOptionalArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Void> serviceCallback);
+    ServiceCall postOptionalArrayHeaderAsync(List<String> headerParameter, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
 }
