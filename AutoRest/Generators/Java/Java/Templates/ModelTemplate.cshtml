@@ -57,6 +57,28 @@ if (!jsonSetting.IsNullOrEmpty())
 @EmptyLine
 }
 
+@if (Model.Properties.Any(p => p.IsConstant))
+{
+<text>
+    /**
+     * Creates an instance of @(Model.Name) class.
+     */
+    public @(Model.Name)() {
+    @foreach (var property in Model.Properties.Where(p => p.IsConstant))
+    {
+        if (property.Type is CompositeType) {
+        @:@(property.Name) = new @(property.Type.Name)();
+        }
+        else
+        {
+        @:@(property.Name) = @(property.DefaultValue);
+        }
+    }
+    }
+@EmptyLine
+</text>
+}
+
 @foreach (var property in Model.Properties)
 {
 @:    /**
