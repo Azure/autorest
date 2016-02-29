@@ -52,8 +52,6 @@ module Petstore
         end
         output_object.account_type = deserialized_property
 
-        output_object.validate
-
         output_object
       end
     end

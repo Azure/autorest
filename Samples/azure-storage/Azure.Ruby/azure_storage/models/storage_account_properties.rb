@@ -199,8 +199,6 @@ module Petstore
         end
         output_object.secondary_endpoints = deserialized_property
 
-        output_object.validate
-
         output_object
       end
     end
