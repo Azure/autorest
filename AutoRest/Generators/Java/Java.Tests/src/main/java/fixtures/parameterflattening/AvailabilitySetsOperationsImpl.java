@@ -84,8 +84,8 @@ public final class AvailabilitySetsOperationsImpl implements AvailabilitySetsOpe
             throw new IllegalArgumentException("Parameter tags is required and cannot be null.");
         }
         Validator.validate(tags);
-        tags1 = new AvailabilitySetUpdateParameters();
-        AvailabilitySetUpdateParameters tags1.setTags(tags);
+        AvailabilitySetUpdateParameters tags1 = new AvailabilitySetUpdateParameters();
+        tags1.setTags(tags);
         Call<ResponseBody> call = service.update(resourceGroupName, availabilitySetName, tags1);
         return updateDelegate(call.execute());
     }
@@ -117,8 +117,8 @@ public final class AvailabilitySetsOperationsImpl implements AvailabilitySetsOpe
             return null;
         }
         Validator.validate(tags, serviceCallback);
-        tags1 = new AvailabilitySetUpdateParameters();
-        AvailabilitySetUpdateParameters tags1.setTags(tags);
+        AvailabilitySetUpdateParameters tags1 = new AvailabilitySetUpdateParameters();
+        tags1.setTags(tags);
         Call<ResponseBody> call = service.update(resourceGroupName, availabilitySetName, tags1);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {

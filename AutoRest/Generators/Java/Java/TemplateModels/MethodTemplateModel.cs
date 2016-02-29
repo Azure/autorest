@@ -242,7 +242,8 @@ namespace Microsoft.Rest.Generator.Java
                 if (transformation.ParameterMappings.Any(m => !string.IsNullOrEmpty(m.OutputParameterProperty)) &&
                     transformation.OutputParameter.Type is CompositeType)
                 {
-                    builder.AppendLine("{0} = new {1}();",
+                    builder.AppendLine("{0}{1} = new {2}();",
+                        transformation.OutputParameter.IsRequired ? transformation.OutputParameter.Type.Name + " " : "",
                         transformation.OutputParameter.Name,
                         transformation.OutputParameter.Type.Name);
                 }
@@ -250,7 +251,8 @@ namespace Microsoft.Rest.Generator.Java
                 foreach (var mapping in transformation.ParameterMappings)
                 {
                     builder.AppendLine("{0}{1}{2};",
-                        transformation.OutputParameter.IsRequired ? transformation.OutputParameter.Type.Name + " " : "",
+                        transformation.OutputParameter.IsRequired && !(transformation.OutputParameter.Type is CompositeType) ? 
+                            transformation.OutputParameter.Type.Name + " " : "",
                         transformation.OutputParameter.Name,
                         GetMapping(mapping));
                 }
