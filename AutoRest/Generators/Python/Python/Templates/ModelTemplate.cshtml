@@ -92,7 +92,7 @@ else
 </text>
 }
 @EmptyLine
-    def __init__(self, @(Model.MethodParameterDeclaration())):
+    def __init__(self@(Model.MethodParameterDeclaration())):
 @if (Model.HasParent)
 {
         @:super(@(Model.Name), self).__init__(@(Model.SuperParameterDeclaration()))

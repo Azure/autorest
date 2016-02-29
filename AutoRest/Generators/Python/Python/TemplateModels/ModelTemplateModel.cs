@@ -228,13 +228,17 @@ namespace Microsoft.Rest.Generator.Python
                     if (property.Name == this.BasePolymorphicDiscriminator)
                         continue;
 
-                if (property.IsRequired)
+                var defaultValue = GetPropertyDefault(property);
+                if (property.IsConstant)
+                {
+                    continue;
+                }
+                if (property.IsRequired && defaultValue.Equals("None"))
                 {
                     requiredDeclarations.Add(property.Name);
                 }
                 else
                 {
-                    var defaultValue = GetPropertyDefault(property);
                     declarations.Add(string.Format(CultureInfo.InvariantCulture, "{0}={1}", property.Name, defaultValue));
                 }
             }
@@ -248,7 +252,11 @@ namespace Microsoft.Rest.Generator.Python
                 combinedDeclarations.Add(string.Join(", ", declarations));
             }
 
-            return string.Join(", ", combinedDeclarations);
+            if (!combinedDeclarations.Any())
+            {
+                return string.Empty;
+            }
+            return ", " + string.Join(", ", combinedDeclarations);
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA2204:Literals should be spelled correctly", MessageId = "PolymorphicDiscriminator")]
@@ -313,6 +321,10 @@ namespace Microsoft.Rest.Generator.Python
             if (property == null || property.Type == null)
             {
                 throw new ArgumentNullException("property");
+            }
+            if (property.IsConstant)
+            {
+                return string.Format(CultureInfo.InvariantCulture, "{0}.{1} = {2}", objectName, property.Name, GetPropertyDefault(property));
             }
             if (IsPolymorphic)
             {

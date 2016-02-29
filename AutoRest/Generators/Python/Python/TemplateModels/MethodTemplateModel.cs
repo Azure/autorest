@@ -181,13 +181,14 @@ namespace Microsoft.Rest.Generator.Python
             List<string> declarations = new List<string>();
             foreach (var parameter in LocalParameters)
             {
-                if (parameter.IsRequired)
+                var defaultValue = GetParameterDefault(parameter);
+                if (parameter.IsRequired && defaultValue.Equals("None"))
                 {
                     declarations.Add(parameter.Name);
                 }
                 else
                 {
-                    var defaultValue = GetParameterDefault(parameter);
+                    
                     declarations.Add(string.Format(
                         CultureInfo.InvariantCulture,
                         "{0}={1}",
