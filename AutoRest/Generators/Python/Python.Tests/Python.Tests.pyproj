@@ -28,6 +28,7 @@
   <ItemGroup>
     <Compile Include="AcceptanceTests\form_data_tests.py" />
     <Compile Include="AcceptanceTests\custom_base_uri_tests.py" />
+    <Compile Include="AcceptanceTests\validation_tests.py" />
     <Compile Include="AcceptanceTests\zzz_tests.py">
       <SubType>Code</SubType>
     </Compile>
@@ -147,8 +148,6 @@
     <Folder Include="Expected\AcceptanceTests\Validation\" />
     <Folder Include="Expected\AcceptanceTests\Validation\autorestvalidationtest\" />
     <Folder Include="Expected\AcceptanceTests\Validation\autorestvalidationtest\models\" />
-    <Folder Include="Expected\AcceptanceTests\Validation\auto_rest_validation_test\" />
-    <Folder Include="Expected\AcceptanceTests\Validation\auto_rest_validation_test\models\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
