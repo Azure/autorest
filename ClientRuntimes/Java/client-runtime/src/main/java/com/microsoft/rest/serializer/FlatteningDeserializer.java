@@ -88,6 +88,7 @@ public class FlatteningDeserializer extends StdDeserializer<Object> implements R
                 if (value.matches(".+[^\\\\]\\..+")) {
                     String[] values = value.split("((?<!\\\\))\\.");
                     for (String val : values) {
+                        val = val.replace("\\.", ".");
                         node = node.get(val);
                         if (node == null) {
                             break;
