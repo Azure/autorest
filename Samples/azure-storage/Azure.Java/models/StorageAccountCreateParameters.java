@@ -23,11 +23,9 @@ public class StorageAccountCreateParameters extends BaseResource {
     private Map<String, String> tags;
 
     /**
-     * Gets or sets the account type. Possible values include: 'Standard_LRS',
-     * 'Standard_ZRS', 'Standard_GRS', 'Standard_RAGRS', 'Premium_LRS'.
+     * The properties property.
      */
-    @JsonProperty(value = "properties.accountType", required = true)
-    private AccountType accountType;
+    private StorageAccountPropertiesCreateParameters properties;
 
     /**
      * Get the location value.
@@ -66,21 +64,21 @@ public class StorageAccountCreateParameters extends BaseResource {
     }
 
     /**
-     * Get the accountType value.
+     * Get the properties value.
      *
-     * @return the accountType value
+     * @return the properties value
      */
-    public AccountType getAccountType() {
-        return this.accountType;
+    public StorageAccountPropertiesCreateParameters getProperties() {
+        return this.properties;
     }
 
     /**
-     * Set the accountType value.
+     * Set the properties value.
      *
-     * @param accountType the accountType value to set
+     * @param properties the properties value to set
      */
-    public void setAccountType(AccountType accountType) {
-        this.accountType = accountType;
+    public void setProperties(StorageAccountPropertiesCreateParameters properties) {
+        this.properties = properties;
     }
 
 }

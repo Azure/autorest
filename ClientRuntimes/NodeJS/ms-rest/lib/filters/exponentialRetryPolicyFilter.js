@@ -155,8 +155,6 @@ function ExponentialRetryPolicyFilter(retryCount, retryInterval, minRetryInterva
   });
 
   return newFilter;
-
-
 }
 
 /**

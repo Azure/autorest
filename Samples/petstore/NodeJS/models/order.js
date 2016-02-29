@@ -40,6 +40,7 @@ Order.prototype.mapper = function () {
       modelProperties: {
         id: {
           required: false,
+          readOnly: true,
           serializedName: 'id',
           type: {
             name: 'Number'

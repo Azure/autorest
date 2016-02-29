@@ -244,7 +244,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
     }
 
     private ServiceResponse<Product> validationOfMethodParametersDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Product, ErrorException>()
+        return new ServiceResponseBuilder<Product, ErrorException>(this.getMapperAdapter())
                 .register(200, new TypeToken<Product>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -319,7 +319,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
     }
 
     private ServiceResponse<Product> validationOfBodyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Product, ErrorException>()
+        return new ServiceResponseBuilder<Product, ErrorException>(this.getMapperAdapter())
                 .register(200, new TypeToken<Product>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -372,7 +372,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
     }
 
     private ServiceResponse<Void> getWithConstantInPathDelegate(Response<ResponseBody> response) throws ServiceException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ServiceException>()
+        return new ServiceResponseBuilder<Void, ServiceException>(this.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .build(response);
     }
@@ -428,7 +428,7 @@ public final class AutoRestValidationTestImpl extends ServiceClient implements A
     }
 
     private ServiceResponse<Product> postWithConstantInBodyDelegate(Response<ResponseBody> response) throws ServiceException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Product, ServiceException>()
+        return new ServiceResponseBuilder<Product, ServiceException>(this.getMapperAdapter())
                 .register(200, new TypeToken<Product>() { }.getType())
                 .build(response);
     }

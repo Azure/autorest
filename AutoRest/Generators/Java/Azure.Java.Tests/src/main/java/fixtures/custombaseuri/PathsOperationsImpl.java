@@ -74,8 +74,8 @@ public final class PathsOperationsImpl implements PathsOperations {
         if (this.client.getHost() == null) {
             throw new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null.");
         }
-        client.getBaseUrl().set("{accountName}", accountName);
-        client.getBaseUrl().set("{host}", this.client.getHost());
+        this.client.getBaseUrl().set("{accountName}", accountName);
+        this.client.getBaseUrl().set("{host}", this.client.getHost());
         Call<ResponseBody> call = service.getEmpty(this.client.getAcceptLanguage());
         return getEmptyDelegate(call.execute());
     }
@@ -100,8 +100,8 @@ public final class PathsOperationsImpl implements PathsOperations {
             serviceCallback.failure(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
             return null;
         }
-        client.getBaseUrl().set("{accountName}", accountName);
-        client.getBaseUrl().set("{host}", this.client.getHost());
+        this.client.getBaseUrl().set("{accountName}", accountName);
+        this.client.getBaseUrl().set("{host}", this.client.getHost());
         Call<ResponseBody> call = service.getEmpty(this.client.getAcceptLanguage());
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
@@ -118,7 +118,7 @@ public final class PathsOperationsImpl implements PathsOperations {
     }
 
     private ServiceResponse<Void> getEmptyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>()
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

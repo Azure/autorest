@@ -28,6 +28,9 @@
   <ItemGroup>
     <Compile Include="AcceptanceTests\form_data_tests.py" />
     <Compile Include="AcceptanceTests\custom_base_uri_tests.py" />
+    <Compile Include="AcceptanceTests\model_flattening_tests.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="AcceptanceTests\zzz_tests.py">
       <SubType>Code</SubType>
     </Compile>
@@ -133,6 +136,9 @@
     <Folder Include="Expected\AcceptanceTests\Http\autoresthttpinfrastructuretestservice\" />
     <Folder Include="Expected\AcceptanceTests\Http\autoresthttpinfrastructuretestservice\models\" />
     <Folder Include="Expected\AcceptanceTests\Http\autoresthttpinfrastructuretestservice\operations\" />
+    <Folder Include="Expected\AcceptanceTests\ModelFlattening\" />
+    <Folder Include="Expected\AcceptanceTests\ModelFlattening\autorestresourceflatteningtestservice\" />
+    <Folder Include="Expected\AcceptanceTests\ModelFlattening\autorestresourceflatteningtestservice\models\" />
     <Folder Include="Expected\AcceptanceTests\ParameterFlattening\" />
     <Folder Include="Expected\AcceptanceTests\ParameterFlattening\autorestparameterflattening\" />
     <Folder Include="Expected\AcceptanceTests\ParameterFlattening\autorestparameterflattening\models\" />

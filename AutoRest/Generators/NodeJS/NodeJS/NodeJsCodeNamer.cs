@@ -101,7 +101,7 @@ namespace Microsoft.Rest.Generator.NodeJS
 
         public override string GetPropertyName(string name)
         {
-            return CamelCase(name);
+            return CamelCase(RemoveInvalidCharacters(name));
         }
 
         public override string GetMethodName(string name)

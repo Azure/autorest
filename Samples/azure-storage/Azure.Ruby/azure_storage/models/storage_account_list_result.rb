@@ -56,18 +56,16 @@ module Petstore
 
         deserialized_property = object['value']
         unless deserialized_property.nil?
-          deserializedArray = [];
+          deserialized_array = []
           deserialized_property.each do |element1|
             unless element1.nil?
               element1 = StorageAccount.deserialize_object(element1)
             end
-            deserializedArray.push(element1);
+            deserialized_array.push(element1)
           end
-          deserialized_property = deserializedArray;
+          deserialized_property = deserialized_array
         end
         output_object.value = deserialized_property
-
-        output_object.validate
 
         output_object
       end

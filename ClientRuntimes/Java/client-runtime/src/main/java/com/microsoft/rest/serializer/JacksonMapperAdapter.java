@@ -29,12 +29,17 @@ public class JacksonMapperAdapter {
     /**
      * An instance of {@link ObjectMapper} to serialize/deserialize objects.
      */
-    private static ObjectMapper mapper;
+    private ObjectMapper mapper;
+
+    /**
+     * An instance of {@link ObjectMapper} that does not do flattening.
+     */
+    private ObjectMapper simpleMapper;
 
     /**
      * An instance of {@link JacksonConverterFactory} for Retrofit to use.
      */
-    private static JacksonConverterFactory converterFactory;
+    private JacksonConverterFactory converterFactory;
 
     /**
      * Initializes an instance of JacksonMapperAdapter with default configurations
@@ -56,6 +61,19 @@ public class JacksonMapperAdapter {
     }
 
     /**
+     * Gets a static instance of {@link ObjectMapper} that doesn't handle flattening.
+     *
+     * @return an instance of {@link ObjectMapper}.
+     */
+    protected ObjectMapper getSimpleMapper() {
+        if (simpleMapper == null) {
+            simpleMapper = new ObjectMapper();
+            initializeObjectMapper(simpleMapper);
+        }
+        return simpleMapper;
+    }
+
+    /**
      * Gets a static instance of {@link ObjectMapper}.
      *
      * @return an instance of {@link ObjectMapper}.
@@ -64,6 +82,8 @@ public class JacksonMapperAdapter {
         if (mapper == null) {
             mapper = new ObjectMapper();
             initializeObjectMapper(mapper);
+            mapper.registerModule(FlatteningSerializer.getModule(getSimpleMapper()))
+                    .registerModule(FlatteningDeserializer.getModule(getSimpleMapper()));
         }
         return mapper;
     }

@@ -46,8 +46,6 @@ module Petstore
         deserialized_property = object['keyName']
         output_object.key_name = deserialized_property
 
-        output_object.validate
-
         output_object
       end
     end

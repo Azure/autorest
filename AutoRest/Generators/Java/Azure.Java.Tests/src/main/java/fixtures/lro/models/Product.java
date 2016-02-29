@@ -11,10 +11,12 @@
 package fixtures.lro.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.microsoft.rest.serializer.JsonFlatten;
 
 /**
  * The Product model.
  */
+@JsonFlatten
 public class Product extends Resource {
     /**
      * The provisioningState property.

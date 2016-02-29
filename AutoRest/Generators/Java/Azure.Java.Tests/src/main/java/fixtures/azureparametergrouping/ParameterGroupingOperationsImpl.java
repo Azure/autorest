@@ -93,8 +93,10 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
         }
         Validator.validate(parameterGroupingPostRequiredParameters);
         int body = parameterGroupingPostRequiredParameters.getBody();
-        String customHeader = parameterGroupingPostRequiredParameters.getCustomHeader();
-        Integer query = parameterGroupingPostRequiredParameters.getQuery();
+        String customHeader = null;
+        customHeader = parameterGroupingPostRequiredParameters.getCustomHeader();
+        Integer query = null;
+        query = parameterGroupingPostRequiredParameters.getQuery();
         String path = parameterGroupingPostRequiredParameters.getPath();
         Call<ResponseBody> call = service.postRequired(path, this.client.getAcceptLanguage(), body, customHeader, query);
         return postRequiredDelegate(call.execute());
@@ -118,8 +120,10 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
         }
         Validator.validate(parameterGroupingPostRequiredParameters, serviceCallback);
         int body = parameterGroupingPostRequiredParameters.getBody();
-        String customHeader = parameterGroupingPostRequiredParameters.getCustomHeader();
-        Integer query = parameterGroupingPostRequiredParameters.getQuery();
+        String customHeader = null;
+        customHeader = parameterGroupingPostRequiredParameters.getCustomHeader();
+        Integer query = null;
+        query = parameterGroupingPostRequiredParameters.getQuery();
         String path = parameterGroupingPostRequiredParameters.getPath();
         Call<ResponseBody> call = service.postRequired(path, this.client.getAcceptLanguage(), body, customHeader, query);
         final ServiceCall serviceCall = new ServiceCall(call);
@@ -137,7 +141,7 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
     }
 
     private ServiceResponse<Void> postRequiredDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>()
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -154,9 +158,11 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
     public ServiceResponse<Void> postOptional(ParameterGroupingPostOptionalParameters parameterGroupingPostOptionalParameters) throws ErrorException, IOException {
         Validator.validate(parameterGroupingPostOptionalParameters);
         String customHeader = null;
-        Integer query = null;
         if (parameterGroupingPostOptionalParameters != null) {
             customHeader = parameterGroupingPostOptionalParameters.getCustomHeader();
+        }
+        Integer query = null;
+        if (parameterGroupingPostOptionalParameters != null) {
             query = parameterGroupingPostOptionalParameters.getQuery();
         }
         Call<ResponseBody> call = service.postOptional(this.client.getAcceptLanguage(), customHeader, query);
@@ -177,9 +183,11 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
         }
         Validator.validate(parameterGroupingPostOptionalParameters, serviceCallback);
         String customHeader = null;
-        Integer query = null;
         if (parameterGroupingPostOptionalParameters != null) {
             customHeader = parameterGroupingPostOptionalParameters.getCustomHeader();
+        }
+        Integer query = null;
+        if (parameterGroupingPostOptionalParameters != null) {
             query = parameterGroupingPostOptionalParameters.getQuery();
         }
         Call<ResponseBody> call = service.postOptional(this.client.getAcceptLanguage(), customHeader, query);
@@ -198,7 +206,7 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
     }
 
     private ServiceResponse<Void> postOptionalDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>()
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -217,15 +225,19 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
         Validator.validate(firstParameterGroup);
         Validator.validate(parameterGroupingPostMultiParamGroupsSecondParamGroup);
         String headerOne = null;
-        Integer queryOne = null;
         if (firstParameterGroup != null) {
             headerOne = firstParameterGroup.getHeaderOne();
+        }
+        Integer queryOne = null;
+        if (firstParameterGroup != null) {
             queryOne = firstParameterGroup.getQueryOne();
         }
         String headerTwo = null;
-        Integer queryTwo = null;
         if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null) {
             headerTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.getHeaderTwo();
+        }
+        Integer queryTwo = null;
+        if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null) {
             queryTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.getQueryTwo();
         }
         Call<ResponseBody> call = service.postMultiParamGroups(this.client.getAcceptLanguage(), headerOne, queryOne, headerTwo, queryTwo);
@@ -248,15 +260,19 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
         Validator.validate(firstParameterGroup, serviceCallback);
         Validator.validate(parameterGroupingPostMultiParamGroupsSecondParamGroup, serviceCallback);
         String headerOne = null;
-        Integer queryOne = null;
         if (firstParameterGroup != null) {
             headerOne = firstParameterGroup.getHeaderOne();
+        }
+        Integer queryOne = null;
+        if (firstParameterGroup != null) {
             queryOne = firstParameterGroup.getQueryOne();
         }
         String headerTwo = null;
-        Integer queryTwo = null;
         if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null) {
             headerTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.getHeaderTwo();
+        }
+        Integer queryTwo = null;
+        if (parameterGroupingPostMultiParamGroupsSecondParamGroup != null) {
             queryTwo = parameterGroupingPostMultiParamGroupsSecondParamGroup.getQueryTwo();
         }
         Call<ResponseBody> call = service.postMultiParamGroups(this.client.getAcceptLanguage(), headerOne, queryOne, headerTwo, queryTwo);
@@ -275,7 +291,7 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
     }
 
     private ServiceResponse<Void> postMultiParamGroupsDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>()
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -292,9 +308,11 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
     public ServiceResponse<Void> postSharedParameterGroupObject(FirstParameterGroup firstParameterGroup) throws ErrorException, IOException {
         Validator.validate(firstParameterGroup);
         String headerOne = null;
-        Integer queryOne = null;
         if (firstParameterGroup != null) {
             headerOne = firstParameterGroup.getHeaderOne();
+        }
+        Integer queryOne = null;
+        if (firstParameterGroup != null) {
             queryOne = firstParameterGroup.getQueryOne();
         }
         Call<ResponseBody> call = service.postSharedParameterGroupObject(this.client.getAcceptLanguage(), headerOne, queryOne);
@@ -315,9 +333,11 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
         }
         Validator.validate(firstParameterGroup, serviceCallback);
         String headerOne = null;
-        Integer queryOne = null;
         if (firstParameterGroup != null) {
             headerOne = firstParameterGroup.getHeaderOne();
+        }
+        Integer queryOne = null;
+        if (firstParameterGroup != null) {
             queryOne = firstParameterGroup.getQueryOne();
         }
         Call<ResponseBody> call = service.postSharedParameterGroupObject(this.client.getAcceptLanguage(), headerOne, queryOne);
@@ -336,7 +356,7 @@ public final class ParameterGroupingOperationsImpl implements ParameterGroupingO
     }
 
     private ServiceResponse<Void> postSharedParameterGroupObjectDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new AzureServiceResponseBuilder<Void, ErrorException>()
+        return new AzureServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

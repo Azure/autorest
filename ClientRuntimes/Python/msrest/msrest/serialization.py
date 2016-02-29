@@ -137,6 +137,7 @@ class Serializer(object):
             4: "Fri", 5: "Sat", 6: "Sun"}
     months = {1: "Jan", 2: "Feb", 3: "Mar", 4: "Apr", 5: "May", 6: "Jun",
               7: "Jul", 8: "Aug", 9: "Sep", 10: "Oct", 11: "Nov", 12: "Dec"}
+    flattten = re.compile(r"(?<!\\)\.")
 
     def __init__(self):
         self.serialize_type = {
@@ -185,10 +186,8 @@ class Serializer(object):
             for attr, map in attributes.items():
                 attr_name = attr
                 try:
-                    if map.get('flatten'):
-                        keys = map['key'].split('.')
-                    else:
-                        keys = [map['key']]
+                    keys = self.flattten.split(map['key'])
+                    keys = [k.replace('\\.', '.') for k in keys]
                     attr_type = map['type']
                     orig_attr = getattr(target_obj, attr)
                     new_attr = self.serialize_data(
@@ -562,6 +561,7 @@ class Deserializer(object):
     valid_date = re.compile(
         r'\d{4}[-]\d{2}[-]\d{2}T\d{2}:\d{2}:\d{2}'
         '\.?\d*Z?[-+]?[\d{2}]?:?[\d{2}]?')
+    flatten = re.compile(r"(?<!\\)\.")
 
     def __init__(self, classes={}):
         self.deserialize_type = {
@@ -602,14 +602,16 @@ class Deserializer(object):
             for attr, map in attributes.items():
                 attr_type = map['type']
                 key = map['key']
-                flattened = map.get('flatten')
                 working_data = data
 
-                if flattened:
-                    while '.' in key:
-                        dict_keys = key.partition('.')
-                        working_data = working_data.get(dict_keys[0], data)
-                        key = ''.join(dict_keys[2:])
+                while '.' in key:
+                    dict_keys = self.flatten.split(key)
+                    if len(dict_keys) == 1:
+                        key = dict_keys[0].replace('\\.', '.')
+                        break
+                    working_key = dict_keys[0].replace('\\.', '.')
+                    working_data = working_data.get(working_key, data)
+                    key = '.'.join(dict_keys[1:])
 
                 raw_value = working_data.get(key)
                 value = self.deserialize_data(raw_value, attr_type)

@@ -41,9 +41,9 @@ var util = require('util');
  * 
  * @member {object} [primaryEndpoints.fooPoint] Foo point
  * 
- * @member {object} [primaryEndpoints.fooPoint.'bar.Point'] Bar point
+ * @member {object} [primaryEndpoints.fooPoint.barPoint] Bar point
  * 
- * @member {object} [primaryEndpoints.fooPoint.'bar.Point'.recursivePoint]
+ * @member {object} [primaryEndpoints.fooPoint.barPoint.recursivePoint]
  * Recursive Endpoints
  * 
  * @member {string} [primaryLocation] Gets the location of the primary for the
@@ -96,9 +96,9 @@ var util = require('util');
  * 
  * @member {object} [secondaryEndpoints.fooPoint] Foo point
  * 
- * @member {object} [secondaryEndpoints.fooPoint.'bar.Point'] Bar point
+ * @member {object} [secondaryEndpoints.fooPoint.barPoint] Bar point
  * 
- * @member {object} [secondaryEndpoints.fooPoint.'bar.Point'.recursivePoint]
+ * @member {object} [secondaryEndpoints.fooPoint.barPoint.recursivePoint]
  * Recursive Endpoints
  * 
  */
@@ -124,6 +124,7 @@ StorageAccount.prototype.mapper = function () {
       modelProperties: {
         id: {
           required: false,
+          readOnly: true,
           serializedName: 'id',
           type: {
             name: 'String'
@@ -131,6 +132,7 @@ StorageAccount.prototype.mapper = function () {
         },
         name: {
           required: false,
+          readOnly: true,
           serializedName: 'name',
           type: {
             name: 'String'
@@ -138,6 +140,7 @@ StorageAccount.prototype.mapper = function () {
         },
         type: {
           required: false,
+          readOnly: true,
           serializedName: 'type',
           type: {
             name: 'String'

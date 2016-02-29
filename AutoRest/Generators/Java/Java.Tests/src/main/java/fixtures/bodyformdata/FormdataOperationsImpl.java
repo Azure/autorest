@@ -122,7 +122,7 @@ public final class FormdataOperationsImpl implements FormdataOperations {
     }
 
     private ServiceResponse<InputStream> uploadFileDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<InputStream, ErrorException>()
+        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<InputStream>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -186,7 +186,7 @@ public final class FormdataOperationsImpl implements FormdataOperations {
     }
 
     private ServiceResponse<InputStream> uploadFileViaBodyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<InputStream, ErrorException>()
+        return new ServiceResponseBuilder<InputStream, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<InputStream>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

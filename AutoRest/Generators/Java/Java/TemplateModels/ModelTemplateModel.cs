@@ -43,6 +43,14 @@ namespace Microsoft.Rest.Generator.Java
             }
         }
 
+        public bool NeedsFlatten
+        {
+            get
+            {
+                return this.Properties.Any(p => p.WasFlattened());
+            }
+        }
+
         public string EvaluatedPolymorphicDiscriminator
         {
             get
@@ -153,6 +161,11 @@ namespace Microsoft.Rest.Generator.Java
                     {
                         classes.Add("com.fasterxml.jackson.annotation.JsonSubTypes");
                     }
+                }
+                // For flattening
+                if (NeedsFlatten)
+                {
+                    classes.Add("com.microsoft.rest.serializer.JsonFlatten");
                 }
                 return classes.AsEnumerable();
             }

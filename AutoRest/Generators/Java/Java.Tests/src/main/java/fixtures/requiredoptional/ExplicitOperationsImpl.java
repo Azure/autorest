@@ -197,7 +197,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
     }
 
     private ServiceResponse<Error> postRequiredIntegerParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -243,7 +243,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
     }
 
     private ServiceResponse<Void> postOptionalIntegerParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -300,7 +300,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
     }
 
     private ServiceResponse<Error> postRequiredIntegerPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -348,7 +348,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
     }
 
     private ServiceResponse<Void> postOptionalIntegerPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -395,7 +395,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
     }
 
     private ServiceResponse<Error> postRequiredIntegerHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -441,7 +441,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
     }
 
     private ServiceResponse<Void> postOptionalIntegerHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -496,7 +496,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
     }
 
     private ServiceResponse<Error> postRequiredStringParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -542,7 +542,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
     }
 
     private ServiceResponse<Void> postOptionalStringParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -599,7 +599,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
     }
 
     private ServiceResponse<Error> postRequiredStringPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -647,7 +647,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
     }
 
     private ServiceResponse<Void> postOptionalStringPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -702,7 +702,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
     }
 
     private ServiceResponse<Error> postRequiredStringHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -748,7 +748,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
     }
 
     private ServiceResponse<Void> postOptionalStringHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -805,7 +805,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
     }
 
     private ServiceResponse<Error> postRequiredClassParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -853,7 +853,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
     }
 
     private ServiceResponse<Void> postOptionalClassParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -910,7 +910,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
     }
 
     private ServiceResponse<Error> postRequiredClassPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -958,7 +958,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
     }
 
     private ServiceResponse<Void> postOptionalClassPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1015,7 +1015,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
     }
 
     private ServiceResponse<Error> postRequiredArrayParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -1063,7 +1063,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
     }
 
     private ServiceResponse<Void> postOptionalArrayParameterDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1120,7 +1120,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
     }
 
     private ServiceResponse<Error> postRequiredArrayPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -1168,7 +1168,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
     }
 
     private ServiceResponse<Void> postOptionalArrayPropertyDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1188,7 +1188,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
             throw new IllegalArgumentException("Parameter headerParameter is required and cannot be null.");
         }
         Validator.validate(headerParameter);
-        Call<ResponseBody> call = service.postRequiredArrayHeader(client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV));
+        Call<ResponseBody> call = service.postRequiredArrayHeader(this.client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV));
         return postRequiredArrayHeaderDelegate(call.execute());
     }
 
@@ -1209,7 +1209,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
             return null;
         }
         Validator.validate(headerParameter, serviceCallback);
-        Call<ResponseBody> call = service.postRequiredArrayHeader(client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV));
+        Call<ResponseBody> call = service.postRequiredArrayHeader(this.client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV));
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Error>(serviceCallback) {
             @Override
@@ -1225,7 +1225,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
     }
 
     private ServiceResponse<Error> postRequiredArrayHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Error, ErrorException>()
+        return new ServiceResponseBuilder<Error, ErrorException>(this.client.getMapperAdapter())
                 .registerError(ErrorException.class)
                 .build(response);
     }
@@ -1240,7 +1240,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
      */
     public ServiceResponse<Void> postOptionalArrayHeader(List<String> headerParameter) throws ErrorException, IOException {
         Validator.validate(headerParameter);
-        Call<ResponseBody> call = service.postOptionalArrayHeader(client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV));
+        Call<ResponseBody> call = service.postOptionalArrayHeader(this.client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV));
         return postOptionalArrayHeaderDelegate(call.execute());
     }
 
@@ -1257,7 +1257,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
             throw new IllegalArgumentException("ServiceCallback is required for async calls.");
         }
         Validator.validate(headerParameter, serviceCallback);
-        Call<ResponseBody> call = service.postOptionalArrayHeader(client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV));
+        Call<ResponseBody> call = service.postOptionalArrayHeader(this.client.getMapperAdapter().serializeList(headerParameter, CollectionFormat.CSV));
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Void>(serviceCallback) {
             @Override
@@ -1273,7 +1273,7 @@ public final class ExplicitOperationsImpl implements ExplicitOperations {
     }
 
     private ServiceResponse<Void> postOptionalArrayHeaderDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

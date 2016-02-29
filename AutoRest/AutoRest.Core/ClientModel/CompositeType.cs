@@ -28,7 +28,7 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// <summary>
         /// Gets or sets the list of CompositeType properties.
         /// </summary>
-        public IList<Property> Properties { get; private set; }
+        public List<Property> Properties { get; private set; }
 
         /// <summary>
         /// Gets the union of Parent and current type properties
@@ -75,7 +75,7 @@ namespace Microsoft.Rest.Generator.ClientModel
         /// <summary>
         /// Gets the union of Parent and current type properties
         /// </summary>
-        public IDictionary<string, object> ComposedExtensions
+        public Dictionary<string, object> ComposedExtensions
         {
             get
             {

@@ -118,7 +118,7 @@ public final class BoolOperationsImpl implements BoolOperations {
     }
 
     private ServiceResponse<Boolean> getTrueDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Boolean, ErrorException>()
+        return new ServiceResponseBuilder<Boolean, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Boolean>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -165,7 +165,7 @@ public final class BoolOperationsImpl implements BoolOperations {
     }
 
     private ServiceResponse<Void> putTrueDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -210,7 +210,7 @@ public final class BoolOperationsImpl implements BoolOperations {
     }
 
     private ServiceResponse<Boolean> getFalseDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Boolean, ErrorException>()
+        return new ServiceResponseBuilder<Boolean, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Boolean>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -257,7 +257,7 @@ public final class BoolOperationsImpl implements BoolOperations {
     }
 
     private ServiceResponse<Void> putFalseDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -302,7 +302,7 @@ public final class BoolOperationsImpl implements BoolOperations {
     }
 
     private ServiceResponse<Boolean> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Boolean, ErrorException>()
+        return new ServiceResponseBuilder<Boolean, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Boolean>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -347,7 +347,7 @@ public final class BoolOperationsImpl implements BoolOperations {
     }
 
     private ServiceResponse<Boolean> getInvalidDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Boolean, ErrorException>()
+        return new ServiceResponseBuilder<Boolean, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Boolean>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);

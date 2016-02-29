@@ -179,7 +179,7 @@ public final class PagingOperationsImpl implements PagingOperations {
     }
 
     private ServiceResponse<PageImpl<Product>> getSinglePagesDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>()
+        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -197,9 +197,11 @@ public final class PagingOperationsImpl implements PagingOperations {
     public ServiceResponse<List<Product>> getMultiplePages(final String clientRequestId, final PagingGetMultiplePagesOptions pagingGetMultiplePagesOptions) throws CloudException, IOException {
         Validator.validate(pagingGetMultiplePagesOptions);
         Integer maxresults = null;
-        Integer timeout = null;
         if (pagingGetMultiplePagesOptions != null) {
             maxresults = pagingGetMultiplePagesOptions.getMaxresults();
+        }
+        Integer timeout = null;
+        if (pagingGetMultiplePagesOptions != null) {
             timeout = pagingGetMultiplePagesOptions.getTimeout();
         }
         Call<ResponseBody> call = service.getMultiplePages(clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
@@ -227,9 +229,11 @@ public final class PagingOperationsImpl implements PagingOperations {
         }
         Validator.validate(pagingGetMultiplePagesOptions, serviceCallback);
         Integer maxresults = null;
-        Integer timeout = null;
         if (pagingGetMultiplePagesOptions != null) {
             maxresults = pagingGetMultiplePagesOptions.getMaxresults();
+        }
+        Integer timeout = null;
+        if (pagingGetMultiplePagesOptions != null) {
             timeout = pagingGetMultiplePagesOptions.getTimeout();
         }
         Call<ResponseBody> call = service.getMultiplePages(clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
@@ -255,7 +259,7 @@ public final class PagingOperationsImpl implements PagingOperations {
     }
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>()
+        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -276,9 +280,11 @@ public final class PagingOperationsImpl implements PagingOperations {
             throw new IllegalArgumentException("Parameter pagingGetMultiplePagesWithOffsetOptions is required and cannot be null.");
         }
         Validator.validate(pagingGetMultiplePagesWithOffsetOptions);
-        Integer maxresults = pagingGetMultiplePagesWithOffsetOptions.getMaxresults();
+        Integer maxresults = null;
+        maxresults = pagingGetMultiplePagesWithOffsetOptions.getMaxresults();
         int offset = pagingGetMultiplePagesWithOffsetOptions.getOffset();
-        Integer timeout = pagingGetMultiplePagesWithOffsetOptions.getTimeout();
+        Integer timeout = null;
+        timeout = pagingGetMultiplePagesWithOffsetOptions.getTimeout();
         Call<ResponseBody> call = service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
         ServiceResponse<PageImpl<Product>> response = getMultiplePagesWithOffsetDelegate(call.execute());
         List<Product> result = response.getBody().getItems();
@@ -310,9 +316,11 @@ public final class PagingOperationsImpl implements PagingOperations {
             return null;
         }
         Validator.validate(pagingGetMultiplePagesWithOffsetOptions, serviceCallback);
-        Integer maxresults = pagingGetMultiplePagesWithOffsetOptions.getMaxresults();
+        Integer maxresults = null;
+        maxresults = pagingGetMultiplePagesWithOffsetOptions.getMaxresults();
         int offset = pagingGetMultiplePagesWithOffsetOptions.getOffset();
-        Integer timeout = pagingGetMultiplePagesWithOffsetOptions.getTimeout();
+        Integer timeout = null;
+        timeout = pagingGetMultiplePagesWithOffsetOptions.getTimeout();
         Call<ResponseBody> call = service.getMultiplePagesWithOffset(offset, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
@@ -339,7 +347,7 @@ public final class PagingOperationsImpl implements PagingOperations {
     }
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesWithOffsetDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>()
+        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -397,7 +405,7 @@ public final class PagingOperationsImpl implements PagingOperations {
     }
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesRetryFirstDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>()
+        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -455,7 +463,7 @@ public final class PagingOperationsImpl implements PagingOperations {
     }
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesRetrySecondDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>()
+        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -513,7 +521,7 @@ public final class PagingOperationsImpl implements PagingOperations {
     }
 
     private ServiceResponse<PageImpl<Product>> getSinglePagesFailureDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>()
+        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -571,7 +579,7 @@ public final class PagingOperationsImpl implements PagingOperations {
     }
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesFailureDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>()
+        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -629,7 +637,7 @@ public final class PagingOperationsImpl implements PagingOperations {
     }
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesFailureUriDelegate(Response<ResponseBody> response) throws CloudException, IOException {
-        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>()
+        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -692,7 +700,7 @@ public final class PagingOperationsImpl implements PagingOperations {
     }
 
     private ServiceResponse<PageImpl<Product>> getSinglePagesNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>()
+        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -715,9 +723,11 @@ public final class PagingOperationsImpl implements PagingOperations {
         }
         Validator.validate(pagingGetMultiplePagesOptions);
         Integer maxresults = null;
-        Integer timeout = null;
         if (pagingGetMultiplePagesOptions != null) {
             maxresults = pagingGetMultiplePagesOptions.getMaxresults();
+        }
+        Integer timeout = null;
+        if (pagingGetMultiplePagesOptions != null) {
             timeout = pagingGetMultiplePagesOptions.getTimeout();
         }
         Call<ResponseBody> call = service.getMultiplePagesNext(nextPageLink, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
@@ -745,9 +755,11 @@ public final class PagingOperationsImpl implements PagingOperations {
         }
         Validator.validate(pagingGetMultiplePagesOptions, serviceCallback);
         Integer maxresults = null;
-        Integer timeout = null;
         if (pagingGetMultiplePagesOptions != null) {
             maxresults = pagingGetMultiplePagesOptions.getMaxresults();
+        }
+        Integer timeout = null;
+        if (pagingGetMultiplePagesOptions != null) {
             timeout = pagingGetMultiplePagesOptions.getTimeout();
         }
         Call<ResponseBody> call = service.getMultiplePagesNext(nextPageLink, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
@@ -773,7 +785,7 @@ public final class PagingOperationsImpl implements PagingOperations {
     }
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>()
+        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -795,8 +807,10 @@ public final class PagingOperationsImpl implements PagingOperations {
             throw new IllegalArgumentException("Parameter nextPageLink is required and cannot be null.");
         }
         Validator.validate(pagingGetMultiplePagesWithOffsetNextOptions);
-        Integer maxresults = pagingGetMultiplePagesWithOffsetNextOptions.getMaxresults();
-        Integer timeout = pagingGetMultiplePagesWithOffsetNextOptions.getTimeout();
+        Integer maxresults = null;
+        maxresults = pagingGetMultiplePagesWithOffsetNextOptions.getMaxresults();
+        Integer timeout = null;
+        timeout = pagingGetMultiplePagesWithOffsetNextOptions.getTimeout();
         Call<ResponseBody> call = service.getMultiplePagesWithOffsetNext(nextPageLink, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
         return getMultiplePagesWithOffsetNextDelegate(call.execute());
     }
@@ -821,8 +835,10 @@ public final class PagingOperationsImpl implements PagingOperations {
             return null;
         }
         Validator.validate(pagingGetMultiplePagesWithOffsetNextOptions, serviceCallback);
-        Integer maxresults = pagingGetMultiplePagesWithOffsetNextOptions.getMaxresults();
-        Integer timeout = pagingGetMultiplePagesWithOffsetNextOptions.getTimeout();
+        Integer maxresults = null;
+        maxresults = pagingGetMultiplePagesWithOffsetNextOptions.getMaxresults();
+        Integer timeout = null;
+        timeout = pagingGetMultiplePagesWithOffsetNextOptions.getTimeout();
         Call<ResponseBody> call = service.getMultiplePagesWithOffsetNext(nextPageLink, clientRequestId, this.client.getAcceptLanguage(), maxresults, timeout);
         serviceCall.newCall(call);
         call.enqueue(new ServiceResponseCallback<List<Product>>(serviceCallback) {
@@ -846,7 +862,7 @@ public final class PagingOperationsImpl implements PagingOperations {
     }
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesWithOffsetNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>()
+        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -909,7 +925,7 @@ public final class PagingOperationsImpl implements PagingOperations {
     }
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesRetryFirstNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>()
+        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -972,7 +988,7 @@ public final class PagingOperationsImpl implements PagingOperations {
     }
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesRetrySecondNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>()
+        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -1035,7 +1051,7 @@ public final class PagingOperationsImpl implements PagingOperations {
     }
 
     private ServiceResponse<PageImpl<Product>> getSinglePagesFailureNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>()
+        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -1098,7 +1114,7 @@ public final class PagingOperationsImpl implements PagingOperations {
     }
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesFailureNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>()
+        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);
@@ -1161,7 +1177,7 @@ public final class PagingOperationsImpl implements PagingOperations {
     }
 
     private ServiceResponse<PageImpl<Product>> getMultiplePagesFailureUriNextDelegate(Response<ResponseBody> response) throws CloudException, IOException, IllegalArgumentException {
-        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>()
+        return new AzureServiceResponseBuilder<PageImpl<Product>, CloudException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<PageImpl<Product>>() { }.getType())
                 .registerError(CloudException.class)
                 .build(response);

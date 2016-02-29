@@ -28,9 +28,9 @@ var models = require('./index');
  * 
  * @member {object} [fooPoint] Foo point
  * 
- * @member {object} [fooPoint.'bar.Point'] Bar point
+ * @member {object} [fooPoint.barPoint] Bar point
  * 
- * @member {object} [fooPoint.'bar.Point'.recursivePoint] Recursive Endpoints
+ * @member {object} [fooPoint.barPoint.recursivePoint] Recursive Endpoints
  * 
  */
 function Endpoints() {

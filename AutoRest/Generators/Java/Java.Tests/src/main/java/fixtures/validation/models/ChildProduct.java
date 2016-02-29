@@ -28,6 +28,13 @@ public class ChildProduct {
     private Integer count;
 
     /**
+     * Creates an instance of ChildProduct class.
+     */
+    public ChildProduct() {
+        constProperty = "constant";
+    }
+
+    /**
      * Get the constProperty value.
      *
      * @return the constProperty value

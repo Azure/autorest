@@ -175,7 +175,7 @@ public final class AutoRestPagingTestServiceImpl extends AzureServiceClient impl
             this.credentials.applyCredentialsFilter(clientBuilder);
         }
         super.initialize();
-        this.azureClient = new AzureClient(clientBuilder, retrofitBuilder);
+        this.azureClient = new AzureClient(clientBuilder, retrofitBuilder, mapperAdapter);
         this.azureClient.setCredentials(this.credentials);
         this.retrofitBuilder.baseUrl(baseUrl);
     }

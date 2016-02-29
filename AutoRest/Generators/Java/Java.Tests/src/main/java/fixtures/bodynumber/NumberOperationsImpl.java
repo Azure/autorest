@@ -191,7 +191,7 @@ public final class NumberOperationsImpl implements NumberOperations {
     }
 
     private ServiceResponse<Double> getNullDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Double, ErrorException>()
+        return new ServiceResponseBuilder<Double, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Double>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -236,7 +236,7 @@ public final class NumberOperationsImpl implements NumberOperations {
     }
 
     private ServiceResponse<Double> getInvalidFloatDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Double, ErrorException>()
+        return new ServiceResponseBuilder<Double, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Double>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -281,7 +281,7 @@ public final class NumberOperationsImpl implements NumberOperations {
     }
 
     private ServiceResponse<Double> getInvalidDoubleDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Double, ErrorException>()
+        return new ServiceResponseBuilder<Double, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Double>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -326,7 +326,7 @@ public final class NumberOperationsImpl implements NumberOperations {
     }
 
     private ServiceResponse<BigDecimal> getInvalidDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<BigDecimal, ErrorException>()
+        return new ServiceResponseBuilder<BigDecimal, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<BigDecimal>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -373,7 +373,7 @@ public final class NumberOperationsImpl implements NumberOperations {
     }
 
     private ServiceResponse<Void> putBigFloatDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -418,7 +418,7 @@ public final class NumberOperationsImpl implements NumberOperations {
     }
 
     private ServiceResponse<Double> getBigFloatDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Double, ErrorException>()
+        return new ServiceResponseBuilder<Double, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Double>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -465,7 +465,7 @@ public final class NumberOperationsImpl implements NumberOperations {
     }
 
     private ServiceResponse<Void> putBigDoubleDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -510,7 +510,7 @@ public final class NumberOperationsImpl implements NumberOperations {
     }
 
     private ServiceResponse<Double> getBigDoubleDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Double, ErrorException>()
+        return new ServiceResponseBuilder<Double, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Double>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -557,7 +557,7 @@ public final class NumberOperationsImpl implements NumberOperations {
     }
 
     private ServiceResponse<Void> putBigDoublePositiveDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -602,7 +602,7 @@ public final class NumberOperationsImpl implements NumberOperations {
     }
 
     private ServiceResponse<Double> getBigDoublePositiveDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Double, ErrorException>()
+        return new ServiceResponseBuilder<Double, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Double>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -649,7 +649,7 @@ public final class NumberOperationsImpl implements NumberOperations {
     }
 
     private ServiceResponse<Void> putBigDoubleNegativeDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -694,7 +694,7 @@ public final class NumberOperationsImpl implements NumberOperations {
     }
 
     private ServiceResponse<Double> getBigDoubleNegativeDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Double, ErrorException>()
+        return new ServiceResponseBuilder<Double, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Double>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -749,7 +749,7 @@ public final class NumberOperationsImpl implements NumberOperations {
     }
 
     private ServiceResponse<Void> putBigDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -794,7 +794,7 @@ public final class NumberOperationsImpl implements NumberOperations {
     }
 
     private ServiceResponse<BigDecimal> getBigDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<BigDecimal, ErrorException>()
+        return new ServiceResponseBuilder<BigDecimal, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<BigDecimal>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -849,7 +849,7 @@ public final class NumberOperationsImpl implements NumberOperations {
     }
 
     private ServiceResponse<Void> putBigDecimalPositiveDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -894,7 +894,7 @@ public final class NumberOperationsImpl implements NumberOperations {
     }
 
     private ServiceResponse<BigDecimal> getBigDecimalPositiveDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<BigDecimal, ErrorException>()
+        return new ServiceResponseBuilder<BigDecimal, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<BigDecimal>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -949,7 +949,7 @@ public final class NumberOperationsImpl implements NumberOperations {
     }
 
     private ServiceResponse<Void> putBigDecimalNegativeDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -994,7 +994,7 @@ public final class NumberOperationsImpl implements NumberOperations {
     }
 
     private ServiceResponse<BigDecimal> getBigDecimalNegativeDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<BigDecimal, ErrorException>()
+        return new ServiceResponseBuilder<BigDecimal, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<BigDecimal>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1041,7 +1041,7 @@ public final class NumberOperationsImpl implements NumberOperations {
     }
 
     private ServiceResponse<Void> putSmallFloatDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1086,7 +1086,7 @@ public final class NumberOperationsImpl implements NumberOperations {
     }
 
     private ServiceResponse<Double> getSmallFloatDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Double, ErrorException>()
+        return new ServiceResponseBuilder<Double, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Double>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1133,7 +1133,7 @@ public final class NumberOperationsImpl implements NumberOperations {
     }
 
     private ServiceResponse<Void> putSmallDoubleDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1178,7 +1178,7 @@ public final class NumberOperationsImpl implements NumberOperations {
     }
 
     private ServiceResponse<Double> getSmallDoubleDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<Double, ErrorException>()
+        return new ServiceResponseBuilder<Double, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Double>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1233,7 +1233,7 @@ public final class NumberOperationsImpl implements NumberOperations {
     }
 
     private ServiceResponse<Void> putSmallDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException, IllegalArgumentException {
-        return new ServiceResponseBuilder<Void, ErrorException>()
+        return new ServiceResponseBuilder<Void, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<Void>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
@@ -1278,7 +1278,7 @@ public final class NumberOperationsImpl implements NumberOperations {
     }
 
     private ServiceResponse<BigDecimal> getSmallDecimalDelegate(Response<ResponseBody> response) throws ErrorException, IOException {
-        return new ServiceResponseBuilder<BigDecimal, ErrorException>()
+        return new ServiceResponseBuilder<BigDecimal, ErrorException>(this.client.getMapperAdapter())
                 .register(200, new TypeToken<BigDecimal>() { }.getType())
                 .registerError(ErrorException.class)
                 .build(response);
