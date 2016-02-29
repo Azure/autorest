@@ -14,7 +14,6 @@ import com.microsoft.rest.ServiceCall;
 import com.microsoft.rest.ServiceCallback;
 import com.microsoft.rest.ServiceException;
 import com.microsoft.rest.ServiceResponse;
-import fixtures.parameterflattening.models.AvailabilitySetUpdateParameters;
 import java.io.IOException;
 import java.util.Map;
 
