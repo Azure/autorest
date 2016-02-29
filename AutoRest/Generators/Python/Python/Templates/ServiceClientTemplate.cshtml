@@ -19,6 +19,10 @@ from .version import VERSION
 from msrest.pipeline import ClientRawResponse
 </text>
 }
+@if (Model.HasAnyDefaultExceptions)
+{
+@:from msrest.exceptions import HttpOperationError
+}
 @if (Model.MethodGroupModels.Any())
 {
   foreach (var modelGroupType in Model.MethodGroupModels)

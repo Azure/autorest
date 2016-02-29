@@ -194,5 +194,10 @@ namespace Microsoft.Rest.Generator.Python
         {
             get { return false; }
         }
+
+        public bool HasAnyDefaultExceptions
+        {
+            get { return this.MethodTemplateModels.Any(item => item.DefaultResponse.Body == null); }
+        }
     }
 }
