@@ -95,7 +95,7 @@ namespace Microsoft.Rest.Generator.Cli
             }
 
             // Generate usage syntax
-            var syntaxSection = new StringBuilder("AutoRest.exe ");
+            var syntaxSection = new StringBuilder("autorest ");
             foreach (var parameter in parameters.OrderBy(t => t.Item1).OrderByDescending(t => t.Item2.IsRequired))
             {
                 if (parameter.Item2.IsRequired)
