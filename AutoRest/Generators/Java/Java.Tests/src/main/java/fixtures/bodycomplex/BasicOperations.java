@@ -35,9 +35,10 @@ public interface BasicOperations {
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getValidAsync(final ServiceCallback<Basic> serviceCallback);
+    ServiceCall getValidAsync(final ServiceCallback<Basic> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
@@ -55,9 +56,10 @@ public interface BasicOperations {
      *
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putValidAsync(Basic complexBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putValidAsync(Basic complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get a basic complex type that is invalid for the local strong type.
@@ -72,9 +74,10 @@ public interface BasicOperations {
      * Get a basic complex type that is invalid for the local strong type.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getInvalidAsync(final ServiceCallback<Basic> serviceCallback);
+    ServiceCall getInvalidAsync(final ServiceCallback<Basic> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get a basic complex type that is empty.
@@ -89,9 +92,10 @@ public interface BasicOperations {
      * Get a basic complex type that is empty.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getEmptyAsync(final ServiceCallback<Basic> serviceCallback);
+    ServiceCall getEmptyAsync(final ServiceCallback<Basic> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get a basic complex type whose properties are null.
@@ -106,9 +110,10 @@ public interface BasicOperations {
      * Get a basic complex type whose properties are null.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getNullAsync(final ServiceCallback<Basic> serviceCallback);
+    ServiceCall getNullAsync(final ServiceCallback<Basic> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
@@ -123,8 +128,9 @@ public interface BasicOperations {
      * Get a basic complex type while the server doesn't provide a response payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getNotProvidedAsync(final ServiceCallback<Basic> serviceCallback);
+    ServiceCall getNotProvidedAsync(final ServiceCallback<Basic> serviceCallback) throws IllegalArgumentException;
 
 }

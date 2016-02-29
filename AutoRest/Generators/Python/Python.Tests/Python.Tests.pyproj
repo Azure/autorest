@@ -133,6 +133,10 @@
     <Folder Include="Expected\AcceptanceTests\Http\autoresthttpinfrastructuretestservice\" />
     <Folder Include="Expected\AcceptanceTests\Http\autoresthttpinfrastructuretestservice\models\" />
     <Folder Include="Expected\AcceptanceTests\Http\autoresthttpinfrastructuretestservice\operations\" />
+    <Folder Include="Expected\AcceptanceTests\ParameterFlattening\" />
+    <Folder Include="Expected\AcceptanceTests\ParameterFlattening\autorestparameterflattening\" />
+    <Folder Include="Expected\AcceptanceTests\ParameterFlattening\autorestparameterflattening\models\" />
+    <Folder Include="Expected\AcceptanceTests\ParameterFlattening\autorestparameterflattening\operations\" />
     <Folder Include="Expected\AcceptanceTests\Report\" />
     <Folder Include="Expected\AcceptanceTests\Report\autorestreportservice\" />
     <Folder Include="Expected\AcceptanceTests\Report\autorestreportservice\models\" />

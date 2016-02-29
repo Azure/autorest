@@ -41,9 +41,10 @@ public interface ArrayOperations {
      * Get null array value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getNullAsync(final ServiceCallback<List<Integer>> serviceCallback);
+    ServiceCall getNullAsync(final ServiceCallback<List<Integer>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get invalid array [1, 2, 3.
@@ -58,9 +59,10 @@ public interface ArrayOperations {
      * Get invalid array [1, 2, 3.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getInvalidAsync(final ServiceCallback<List<Integer>> serviceCallback);
+    ServiceCall getInvalidAsync(final ServiceCallback<List<Integer>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get empty array value [].
@@ -75,9 +77,10 @@ public interface ArrayOperations {
      * Get empty array value [].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getEmptyAsync(final ServiceCallback<List<Integer>> serviceCallback);
+    ServiceCall getEmptyAsync(final ServiceCallback<List<Integer>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Set array value empty [].
@@ -95,9 +98,10 @@ public interface ArrayOperations {
      *
      * @param arrayBody the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putEmptyAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putEmptyAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get boolean array value [true, false, false, true].
@@ -112,9 +116,10 @@ public interface ArrayOperations {
      * Get boolean array value [true, false, false, true].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getBooleanTfftAsync(final ServiceCallback<List<Boolean>> serviceCallback);
+    ServiceCall getBooleanTfftAsync(final ServiceCallback<List<Boolean>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Set array value empty [true, false, false, true].
@@ -132,9 +137,10 @@ public interface ArrayOperations {
      *
      * @param arrayBody the List&lt;Boolean&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putBooleanTfftAsync(List<Boolean> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putBooleanTfftAsync(List<Boolean> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get boolean array value [true, null, false].
@@ -149,9 +155,10 @@ public interface ArrayOperations {
      * Get boolean array value [true, null, false].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getBooleanInvalidNullAsync(final ServiceCallback<List<Boolean>> serviceCallback);
+    ServiceCall getBooleanInvalidNullAsync(final ServiceCallback<List<Boolean>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get boolean array value [true, 'boolean', false].
@@ -166,9 +173,10 @@ public interface ArrayOperations {
      * Get boolean array value [true, 'boolean', false].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getBooleanInvalidStringAsync(final ServiceCallback<List<Boolean>> serviceCallback);
+    ServiceCall getBooleanInvalidStringAsync(final ServiceCallback<List<Boolean>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get integer array value [1, -1, 3, 300].
@@ -183,9 +191,10 @@ public interface ArrayOperations {
      * Get integer array value [1, -1, 3, 300].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getIntegerValidAsync(final ServiceCallback<List<Integer>> serviceCallback);
+    ServiceCall getIntegerValidAsync(final ServiceCallback<List<Integer>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Set array value empty [1, -1, 3, 300].
@@ -203,9 +212,10 @@ public interface ArrayOperations {
      *
      * @param arrayBody the List&lt;Integer&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putIntegerValidAsync(List<Integer> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putIntegerValidAsync(List<Integer> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get integer array value [1, null, 0].
@@ -220,9 +230,10 @@ public interface ArrayOperations {
      * Get integer array value [1, null, 0].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getIntInvalidNullAsync(final ServiceCallback<List<Integer>> serviceCallback);
+    ServiceCall getIntInvalidNullAsync(final ServiceCallback<List<Integer>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get integer array value [1, 'integer', 0].
@@ -237,9 +248,10 @@ public interface ArrayOperations {
      * Get integer array value [1, 'integer', 0].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getIntInvalidStringAsync(final ServiceCallback<List<Integer>> serviceCallback);
+    ServiceCall getIntInvalidStringAsync(final ServiceCallback<List<Integer>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get integer array value [1, -1, 3, 300].
@@ -254,9 +266,10 @@ public interface ArrayOperations {
      * Get integer array value [1, -1, 3, 300].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getLongValidAsync(final ServiceCallback<List<Long>> serviceCallback);
+    ServiceCall getLongValidAsync(final ServiceCallback<List<Long>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Set array value empty [1, -1, 3, 300].
@@ -274,9 +287,10 @@ public interface ArrayOperations {
      *
      * @param arrayBody the List&lt;Long&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putLongValidAsync(List<Long> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putLongValidAsync(List<Long> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get long array value [1, null, 0].
@@ -291,9 +305,10 @@ public interface ArrayOperations {
      * Get long array value [1, null, 0].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getLongInvalidNullAsync(final ServiceCallback<List<Long>> serviceCallback);
+    ServiceCall getLongInvalidNullAsync(final ServiceCallback<List<Long>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get long array value [1, 'integer', 0].
@@ -308,9 +323,10 @@ public interface ArrayOperations {
      * Get long array value [1, 'integer', 0].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getLongInvalidStringAsync(final ServiceCallback<List<Long>> serviceCallback);
+    ServiceCall getLongInvalidStringAsync(final ServiceCallback<List<Long>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
@@ -325,9 +341,10 @@ public interface ArrayOperations {
      * Get float array value [0, -0.01, 1.2e20].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getFloatValidAsync(final ServiceCallback<List<Double>> serviceCallback);
+    ServiceCall getFloatValidAsync(final ServiceCallback<List<Double>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Set array value [0, -0.01, 1.2e20].
@@ -345,9 +362,10 @@ public interface ArrayOperations {
      *
      * @param arrayBody the List&lt;Double&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putFloatValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putFloatValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get float array value [0.0, null, -1.2e20].
@@ -362,9 +380,10 @@ public interface ArrayOperations {
      * Get float array value [0.0, null, -1.2e20].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getFloatInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback);
+    ServiceCall getFloatInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
@@ -379,9 +398,10 @@ public interface ArrayOperations {
      * Get boolean array value [1.0, 'number', 0.0].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getFloatInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback);
+    ServiceCall getFloatInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get float array value [0, -0.01, 1.2e20].
@@ -396,9 +416,10 @@ public interface ArrayOperations {
      * Get float array value [0, -0.01, 1.2e20].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDoubleValidAsync(final ServiceCallback<List<Double>> serviceCallback);
+    ServiceCall getDoubleValidAsync(final ServiceCallback<List<Double>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Set array value [0, -0.01, 1.2e20].
@@ -416,9 +437,10 @@ public interface ArrayOperations {
      *
      * @param arrayBody the List&lt;Double&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putDoubleValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putDoubleValidAsync(List<Double> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get float array value [0.0, null, -1.2e20].
@@ -433,9 +455,10 @@ public interface ArrayOperations {
      * Get float array value [0.0, null, -1.2e20].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDoubleInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback);
+    ServiceCall getDoubleInvalidNullAsync(final ServiceCallback<List<Double>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get boolean array value [1.0, 'number', 0.0].
@@ -450,9 +473,10 @@ public interface ArrayOperations {
      * Get boolean array value [1.0, 'number', 0.0].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDoubleInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback);
+    ServiceCall getDoubleInvalidStringAsync(final ServiceCallback<List<Double>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get string array value ['foo1', 'foo2', 'foo3'].
@@ -467,9 +491,10 @@ public interface ArrayOperations {
      * Get string array value ['foo1', 'foo2', 'foo3'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getStringValidAsync(final ServiceCallback<List<String>> serviceCallback);
+    ServiceCall getStringValidAsync(final ServiceCallback<List<String>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Set array value ['foo1', 'foo2', 'foo3'].
@@ -487,9 +512,10 @@ public interface ArrayOperations {
      *
      * @param arrayBody the List&lt;String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putStringValidAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putStringValidAsync(List<String> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get string array value ['foo', null, 'foo2'].
@@ -504,9 +530,10 @@ public interface ArrayOperations {
      * Get string array value ['foo', null, 'foo2'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getStringWithNullAsync(final ServiceCallback<List<String>> serviceCallback);
+    ServiceCall getStringWithNullAsync(final ServiceCallback<List<String>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get string array value ['foo', 123, 'foo2'].
@@ -521,9 +548,10 @@ public interface ArrayOperations {
      * Get string array value ['foo', 123, 'foo2'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getStringWithInvalidAsync(final ServiceCallback<List<String>> serviceCallback);
+    ServiceCall getStringWithInvalidAsync(final ServiceCallback<List<String>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
@@ -538,9 +566,10 @@ public interface ArrayOperations {
      * Get integer array value ['2000-12-01', '1980-01-02', '1492-10-12'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDateValidAsync(final ServiceCallback<List<LocalDate>> serviceCallback);
+    ServiceCall getDateValidAsync(final ServiceCallback<List<LocalDate>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Set array value  ['2000-12-01', '1980-01-02', '1492-10-12'].
@@ -558,9 +587,10 @@ public interface ArrayOperations {
      *
      * @param arrayBody the List&lt;LocalDate&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putDateValidAsync(List<LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putDateValidAsync(List<LocalDate> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get date array value ['2012-01-01', null, '1776-07-04'].
@@ -575,9 +605,10 @@ public interface ArrayOperations {
      * Get date array value ['2012-01-01', null, '1776-07-04'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDateInvalidNullAsync(final ServiceCallback<List<LocalDate>> serviceCallback);
+    ServiceCall getDateInvalidNullAsync(final ServiceCallback<List<LocalDate>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get date array value ['2011-03-22', 'date'].
@@ -592,9 +623,10 @@ public interface ArrayOperations {
      * Get date array value ['2011-03-22', 'date'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDateInvalidCharsAsync(final ServiceCallback<List<LocalDate>> serviceCallback);
+    ServiceCall getDateInvalidCharsAsync(final ServiceCallback<List<LocalDate>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
@@ -609,9 +641,10 @@ public interface ArrayOperations {
      * Get date-time array value ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDateTimeValidAsync(final ServiceCallback<List<DateTime>> serviceCallback);
+    ServiceCall getDateTimeValidAsync(final ServiceCallback<List<DateTime>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Set array value  ['2000-12-01t00:00:01z', '1980-01-02T00:11:35+01:00', '1492-10-12T10:15:01-08:00'].
@@ -629,9 +662,10 @@ public interface ArrayOperations {
      *
      * @param arrayBody the List&lt;DateTime&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putDateTimeValidAsync(List<DateTime> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putDateTimeValidAsync(List<DateTime> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', null].
@@ -646,9 +680,10 @@ public interface ArrayOperations {
      * Get date array value ['2000-12-01t00:00:01z', null].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDateTimeInvalidNullAsync(final ServiceCallback<List<DateTime>> serviceCallback);
+    ServiceCall getDateTimeInvalidNullAsync(final ServiceCallback<List<DateTime>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
@@ -663,9 +698,10 @@ public interface ArrayOperations {
      * Get date array value ['2000-12-01t00:00:01z', 'date-time'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDateTimeInvalidCharsAsync(final ServiceCallback<List<DateTime>> serviceCallback);
+    ServiceCall getDateTimeInvalidCharsAsync(final ServiceCallback<List<DateTime>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
@@ -680,9 +716,10 @@ public interface ArrayOperations {
      * Get date-time array value ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDateTimeRfc1123ValidAsync(final ServiceCallback<List<DateTimeRfc1123>> serviceCallback);
+    ServiceCall getDateTimeRfc1123ValidAsync(final ServiceCallback<List<DateTimeRfc1123>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Set array value  ['Fri, 01 Dec 2000 00:00:01 GMT', 'Wed, 02 Jan 1980 00:11:35 GMT', 'Wed, 12 Oct 1492 10:15:01 GMT'].
@@ -700,9 +737,10 @@ public interface ArrayOperations {
      *
      * @param arrayBody the List&lt;DateTimeRfc1123&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putDateTimeRfc1123ValidAsync(List<DateTimeRfc1123> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putDateTimeRfc1123ValidAsync(List<DateTimeRfc1123> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
@@ -717,9 +755,10 @@ public interface ArrayOperations {
      * Get duration array value ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDurationValidAsync(final ServiceCallback<List<Period>> serviceCallback);
+    ServiceCall getDurationValidAsync(final ServiceCallback<List<Period>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Set array value  ['P123DT22H14M12.011S', 'P5DT1H0M0S'].
@@ -737,9 +776,10 @@ public interface ArrayOperations {
      *
      * @param arrayBody the List&lt;Period&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putDurationValidAsync(List<Period> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putDurationValidAsync(List<Period> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
@@ -754,9 +794,10 @@ public interface ArrayOperations {
      * Get byte array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each item encoded in base64.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getByteValidAsync(final ServiceCallback<List<byte[]>> serviceCallback);
+    ServiceCall getByteValidAsync(final ServiceCallback<List<byte[]>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put the array value [hex(FF FF FF FA), hex(01 02 03), hex (25, 29, 43)] with each elementencoded in base 64.
@@ -774,9 +815,10 @@ public interface ArrayOperations {
      *
      * @param arrayBody the List&lt;byte[]&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putByteValidAsync(List<byte[]> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putByteValidAsync(List<byte[]> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
@@ -791,9 +833,10 @@ public interface ArrayOperations {
      * Get byte array value [hex(AB, AC, AD), null] with the first item base64 encoded.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getByteInvalidNullAsync(final ServiceCallback<List<byte[]>> serviceCallback);
+    ServiceCall getByteInvalidNullAsync(final ServiceCallback<List<byte[]>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get array of complex type null value.
@@ -808,9 +851,10 @@ public interface ArrayOperations {
      * Get array of complex type null value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getComplexNullAsync(final ServiceCallback<List<Product>> serviceCallback);
+    ServiceCall getComplexNullAsync(final ServiceCallback<List<Product>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get empty array of complex type [].
@@ -825,9 +869,10 @@ public interface ArrayOperations {
      * Get empty array of complex type [].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getComplexEmptyAsync(final ServiceCallback<List<Product>> serviceCallback);
+    ServiceCall getComplexEmptyAsync(final ServiceCallback<List<Product>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
@@ -842,9 +887,10 @@ public interface ArrayOperations {
      * Get array of complex type with null item [{'integer': 1 'string': '2'}, null, {'integer': 5, 'string': '6'}].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getComplexItemNullAsync(final ServiceCallback<List<Product>> serviceCallback);
+    ServiceCall getComplexItemNullAsync(final ServiceCallback<List<Product>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
@@ -859,9 +905,10 @@ public interface ArrayOperations {
      * Get array of complex type with empty item [{'integer': 1 'string': '2'}, {}, {'integer': 5, 'string': '6'}].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getComplexItemEmptyAsync(final ServiceCallback<List<Product>> serviceCallback);
+    ServiceCall getComplexItemEmptyAsync(final ServiceCallback<List<Product>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
@@ -876,9 +923,10 @@ public interface ArrayOperations {
      * Get array of complex type with [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getComplexValidAsync(final ServiceCallback<List<Product>> serviceCallback);
+    ServiceCall getComplexValidAsync(final ServiceCallback<List<Product>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put an array of complex type with values [{'integer': 1 'string': '2'}, {'integer': 3, 'string': '4'}, {'integer': 5, 'string': '6'}].
@@ -896,9 +944,10 @@ public interface ArrayOperations {
      *
      * @param arrayBody the List&lt;Product&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putComplexValidAsync(List<Product> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putComplexValidAsync(List<Product> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get a null array.
@@ -913,9 +962,10 @@ public interface ArrayOperations {
      * Get a null array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getArrayNullAsync(final ServiceCallback<List<List<String>>> serviceCallback);
+    ServiceCall getArrayNullAsync(final ServiceCallback<List<List<String>>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get an empty array [].
@@ -930,9 +980,10 @@ public interface ArrayOperations {
      * Get an empty array [].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getArrayEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback);
+    ServiceCall getArrayEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
@@ -947,9 +998,10 @@ public interface ArrayOperations {
      * Get an array of array of strings [['1', '2', '3'], null, ['7', '8', '9']].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getArrayItemNullAsync(final ServiceCallback<List<List<String>>> serviceCallback);
+    ServiceCall getArrayItemNullAsync(final ServiceCallback<List<List<String>>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
@@ -964,9 +1016,10 @@ public interface ArrayOperations {
      * Get an array of array of strings [['1', '2', '3'], [], ['7', '8', '9']].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getArrayItemEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback);
+    ServiceCall getArrayItemEmptyAsync(final ServiceCallback<List<List<String>>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
@@ -981,9 +1034,10 @@ public interface ArrayOperations {
      * Get an array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getArrayValidAsync(final ServiceCallback<List<List<String>>> serviceCallback);
+    ServiceCall getArrayValidAsync(final ServiceCallback<List<List<String>>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put An array of array of strings [['1', '2', '3'], ['4', '5', '6'], ['7', '8', '9']].
@@ -1001,9 +1055,10 @@ public interface ArrayOperations {
      *
      * @param arrayBody the List&lt;List&lt;String&gt;&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putArrayValidAsync(List<List<String>> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putArrayValidAsync(List<List<String>> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get an array of Dictionaries with value null.
@@ -1018,9 +1073,10 @@ public interface ArrayOperations {
      * Get an array of Dictionaries with value null.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDictionaryNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback);
+    ServiceCall getDictionaryNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
@@ -1035,9 +1091,10 @@ public interface ArrayOperations {
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDictionaryEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback);
+    ServiceCall getDictionaryEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
@@ -1052,9 +1109,10 @@ public interface ArrayOperations {
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, null, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDictionaryItemNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback);
+    ServiceCall getDictionaryItemNullAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
@@ -1069,9 +1127,10 @@ public interface ArrayOperations {
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDictionaryItemEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback);
+    ServiceCall getDictionaryItemEmptyAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
@@ -1086,9 +1145,10 @@ public interface ArrayOperations {
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getDictionaryValidAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback);
+    ServiceCall getDictionaryValidAsync(final ServiceCallback<List<Map<String, String>>> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get an array of Dictionaries of type &lt;string, string&gt; with value [{'1': 'one', '2': 'two', '3': 'three'}, {'4': 'four', '5': 'five', '6': 'six'}, {'7': 'seven', '8': 'eight', '9': 'nine'}].
@@ -1106,8 +1166,9 @@ public interface ArrayOperations {
      *
      * @param arrayBody the List&lt;Map&lt;String, String&gt;&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putDictionaryValidAsync(List<Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putDictionaryValidAsync(List<Map<String, String>> arrayBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
 }
