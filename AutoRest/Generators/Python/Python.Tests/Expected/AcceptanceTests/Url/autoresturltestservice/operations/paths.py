@@ -32,7 +32,7 @@ class Paths(object):
         self.config = config
 
     def get_boolean_true(
-            self, bool_path, custom_headers={}, raw=False, **operation_config):
+            self, bool_path=False, custom_headers={}, raw=False, **operation_config):
         """
         Get true Boolean value on path
 
@@ -72,7 +72,7 @@ class Paths(object):
             return client_raw_response
 
     def get_boolean_false(
-            self, bool_path, custom_headers={}, raw=False, **operation_config):
+            self, bool_path=False, custom_headers={}, raw=False, **operation_config):
         """
         Get false Boolean value on path
 
@@ -112,7 +112,7 @@ class Paths(object):
             return client_raw_response
 
     def get_int_one_million(
-            self, int_path, custom_headers={}, raw=False, **operation_config):
+            self, int_path=1000000, custom_headers={}, raw=False, **operation_config):
         """
         Get '1000000' integer value
 
@@ -152,7 +152,7 @@ class Paths(object):
             return client_raw_response
 
     def get_int_negative_one_million(
-            self, int_path, custom_headers={}, raw=False, **operation_config):
+            self, int_path=-1000000, custom_headers={}, raw=False, **operation_config):
         """
         Get '-1000000' integer value
 
@@ -192,7 +192,7 @@ class Paths(object):
             return client_raw_response
 
     def get_ten_billion(
-            self, long_path, custom_headers={}, raw=False, **operation_config):
+            self, long_path=10000000000, custom_headers={}, raw=False, **operation_config):
         """
         Get '10000000000' 64 bit integer value
 
@@ -232,7 +232,7 @@ class Paths(object):
             return client_raw_response
 
     def get_negative_ten_billion(
-            self, long_path, custom_headers={}, raw=False, **operation_config):
+            self, long_path=-10000000000, custom_headers={}, raw=False, **operation_config):
         """
         Get '-10000000000' 64 bit integer value
 
@@ -272,7 +272,7 @@ class Paths(object):
             return client_raw_response
 
     def float_scientific_positive(
-            self, float_path, custom_headers={}, raw=False, **operation_config):
+            self, float_path=1.034E+20, custom_headers={}, raw=False, **operation_config):
         """
         Get '1.034E+20' numeric value
 
@@ -312,7 +312,7 @@ class Paths(object):
             return client_raw_response
 
     def float_scientific_negative(
-            self, float_path, custom_headers={}, raw=False, **operation_config):
+            self, float_path=-1.034E-20, custom_headers={}, raw=False, **operation_config):
         """
         Get '-1.034E-20' numeric value
 
@@ -352,7 +352,7 @@ class Paths(object):
             return client_raw_response
 
     def double_decimal_positive(
-            self, double_path, custom_headers={}, raw=False, **operation_config):
+            self, double_path=9999999.999, custom_headers={}, raw=False, **operation_config):
         """
         Get '9999999.999' numeric value
 
@@ -392,7 +392,7 @@ class Paths(object):
             return client_raw_response
 
     def double_decimal_negative(
-            self, double_path, custom_headers={}, raw=False, **operation_config):
+            self, double_path=-9999999.999, custom_headers={}, raw=False, **operation_config):
         """
         Get '-9999999.999' numeric value
 
@@ -432,7 +432,7 @@ class Paths(object):
             return client_raw_response
 
     def string_unicode(
-            self, string_path, custom_headers={}, raw=False, **operation_config):
+            self, string_path="啊齄丂狛狜隣郎隣兀﨩", custom_headers={}, raw=False, **operation_config):
         """
         Get '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value
 
@@ -472,7 +472,7 @@ class Paths(object):
             return client_raw_response
 
     def string_url_encoded(
-            self, string_path, custom_headers={}, raw=False, **operation_config):
+            self, string_path="begin!*'();:@ &=+$,/?#[]end", custom_headers={}, raw=False, **operation_config):
         """
         Get 'begin!*'();:@ &=+$,/?#[]end
 
@@ -513,7 +513,7 @@ class Paths(object):
             return client_raw_response
 
     def string_empty(
-            self, string_path, custom_headers={}, raw=False, **operation_config):
+            self, string_path="", custom_headers={}, raw=False, **operation_config):
         """
         Get ''
 

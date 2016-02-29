@@ -76,10 +76,10 @@
     <Folder Include="Expected\AcceptanceTests\AzureSpecials\autorestazurespecialparameterstestclient\" />
     <Folder Include="Expected\AcceptanceTests\AzureSpecials\autorestazurespecialparameterstestclient\models\" />
     <Folder Include="Expected\AcceptanceTests\AzureSpecials\autorestazurespecialparameterstestclient\operations\" />
-    <Folder Include="Expected\AcceptanceTests\AzureCustomBaseUri\" />
-    <Folder Include="Expected\AcceptanceTests\AzureCustomBaseUri\autorestparameterizedhosttestclient\" />
-    <Folder Include="Expected\AcceptanceTests\AzureCustomBaseUri\autorestparameterizedhosttestclient\models\" />
-    <Folder Include="Expected\AcceptanceTests\AzureCustomBaseUri\autorestparameterizedhosttestclient\operations\" />
+    <Folder Include="Expected\AcceptanceTests\CustomBaseUri\" />
+    <Folder Include="Expected\AcceptanceTests\CustomBaseUri\autorestparameterizedhosttestclient\" />
+    <Folder Include="Expected\AcceptanceTests\CustomBaseUri\autorestparameterizedhosttestclient\models\" />
+    <Folder Include="Expected\AcceptanceTests\CustomBaseUri\autorestparameterizedhosttestclient\operations\" />
     <Folder Include="Expected\AcceptanceTests\HeadExceptions\" />
     <Folder Include="Expected\AcceptanceTests\HeadExceptions\autorestheadexceptiontestservice\" />
     <Folder Include="Expected\AcceptanceTests\HeadExceptions\autorestheadexceptiontestservice\operations\" />

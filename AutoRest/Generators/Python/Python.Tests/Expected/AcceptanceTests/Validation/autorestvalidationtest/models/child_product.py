@@ -27,6 +27,6 @@ class ChildProduct(Model):
         'count': {'key': 'count', 'type': 'int'},
     }
 
-    def __init__(self, const_property, count=None):
-        self.const_property = const_property
+    def __init__(self, count=None):
+        self.const_property = "constant"
         self.count = count

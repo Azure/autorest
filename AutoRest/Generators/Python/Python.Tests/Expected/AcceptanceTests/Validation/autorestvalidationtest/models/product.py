@@ -38,11 +38,11 @@ class Product(Model):
         'const_string': {'key': 'constString', 'type': 'str'},
     }
 
-    def __init__(self, const_int, const_string, display_names=None, capacity=None, image=None, child=None, const_child=None):
+    def __init__(self, display_names=None, capacity=None, image=None, child=None):
         self.display_names = display_names
         self.capacity = capacity
         self.image = image
         self.child = child
-        self.const_child = const_child
-        self.const_int = const_int
-        self.const_string = const_string
+        self.const_child = None
+        self.const_int = 0
+        self.const_string = "constant"
