@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import fixtures.modelflattening.models.FlattenParameterGroup;
 import fixtures.modelflattening.models.FlattenedProduct;
 import fixtures.modelflattening.models.SimpleProduct;
 import fixtures.modelflattening.models.Resource;
@@ -204,6 +205,46 @@ public class ModelFlatteningTests {
         simpleProduct.setMaxProductCapacity("Large");
         simpleProduct.setOdatavalue("http://foo");
 
-        client.putSimpleProduct(simpleProduct).getBody();
+        SimpleProduct product = client.putSimpleProduct(simpleProduct).getBody();
+        assertSimpleProductEquals(simpleProduct, product);
+    }
+
+    @Test
+    public void postFlattenedSimpleProduct() throws Exception {
+        SimpleProduct simpleProduct = new SimpleProduct();
+        simpleProduct.setBaseProductDescription("product description");
+        simpleProduct.setBaseProductId("123");
+        simpleProduct.setMaxProductDisplayName("max name");
+        simpleProduct.setMaxProductCapacity("Large");
+        simpleProduct.setOdatavalue("http://foo");
+        client.postFlattenedSimpleProduct("123", "max name", "product description", "http://foo");
+    }
+
+    @Test
+    public void putSimpleProductWithGrouping() throws Exception {
+        SimpleProduct simpleProduct = new SimpleProduct();
+        simpleProduct.setBaseProductDescription("product description");
+        simpleProduct.setBaseProductId("123");
+        simpleProduct.setMaxProductDisplayName("max name");
+        simpleProduct.setMaxProductCapacity("Large");
+        simpleProduct.setOdatavalue("http://foo");
+
+        FlattenParameterGroup flattenParameterGroup = new FlattenParameterGroup();
+        flattenParameterGroup.setBaseProductDescription("product description");
+        flattenParameterGroup.setBaseProductId("123");
+        flattenParameterGroup.setMaxProductDisplayName("max name");
+        flattenParameterGroup.setOdatavalue("http://foo");
+        flattenParameterGroup.setName("groupproduct");
+
+        SimpleProduct product = client.putSimpleProductWithGrouping(flattenParameterGroup).getBody();
+        assertSimpleProductEquals(simpleProduct, product);
+    }
+
+    private void assertSimpleProductEquals(SimpleProduct expected, SimpleProduct actual) throws Exception {
+        Assert.assertEquals(expected.getBaseProductId(), actual.getBaseProductId());
+        Assert.assertEquals(expected.getBaseProductDescription(), actual.getBaseProductDescription());
+        Assert.assertEquals(expected.getMaxProductCapacity(), actual.getMaxProductCapacity());
+        Assert.assertEquals(expected.getMaxProductDisplayName(), actual.getMaxProductDisplayName());
+        Assert.assertEquals(expected.getOdatavalue(), actual.getOdatavalue());
     }
 }
