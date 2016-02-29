@@ -237,7 +237,7 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
 
             if (sequence != null || dictionary != null)
             {
-                return string.Format("{0}.each{{ |e| e.validate if e.respond_to?(:validate) }} unless {0}.nil?\r\n", valueReference);
+                return string.Format("{0}.each{{ |e| e.validate if e.respond_to?(:validate) }} unless {0}.nil?" + Environment.NewLine, valueReference);
             }
 
             return null;
@@ -337,14 +337,14 @@ namespace Microsoft.Rest.Generator.Ruby.TemplateModels
                         builder
                             .AppendLine("unless {0}.nil?", valueReference)
                                 .Indent()
-                                    .AppendLine("deserialized{0} = [];", sequence.Name)
+                                    .AppendLine("deserialized_{0} = []", sequence.Name.ToLower())
                                     .AppendLine("{0}.each do |{1}|", valueReference, elementVar)
                                     .Indent()
                                         .AppendLine(innerSerialization)
-                                        .AppendLine("deserialized{0}.push({1});", sequence.Name.ToPascalCase(), elementVar)
+                                        .AppendLine("deserialized_{0}.push({1})", sequence.Name.ToLower(), elementVar)
                                     .Outdent()
                                     .AppendLine("end")
-                                    .AppendLine("{0} = deserialized{1};", valueReference, sequence.Name.ToPascalCase())
+                                    .AppendLine("{0} = deserialized_{1}", valueReference, sequence.Name.ToLower())
                                 .Outdent()
                             .AppendLine("end")
                             .ToString();

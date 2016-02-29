@@ -27,6 +27,7 @@
     <Compile Include="$(SolutionDir)\Tools\AssemblyVersionInfo.cs">
       <Link>Properties\AssemblyVersionInfo.cs</Link>
     </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="RubyCodeGenerator.cs" />
     <Compile Include="RubyCodeNamer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
