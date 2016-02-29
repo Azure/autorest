@@ -37,6 +37,13 @@ public class SimpleProduct extends BaseProduct {
     private String odatavalue;
 
     /**
+     * Creates an instance of SimpleProduct class.
+     */
+    public SimpleProduct() {
+        maxProductCapacity = "Large";
+    }
+
+    /**
      * Get the maxProductDisplayName value.
      *
      * @return the maxProductDisplayName value
