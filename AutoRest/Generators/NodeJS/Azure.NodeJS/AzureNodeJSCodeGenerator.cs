@@ -37,7 +37,7 @@ namespace Microsoft.Rest.Generator.Azure.NodeJS
         public override string Description
         {
             // TODO resource string.
-            get { return "Azure NodeJS for Http Client Libraries"; }
+            get { return "Azure specific NodeJS code generator."; }
         }
 
         public override string UsageInstructions

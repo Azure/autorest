@@ -16,74 +16,74 @@ namespace Microsoft.Rest.Generator.Cli
         {
             try
             {
-                if (IsShowMarkdownHelpIncluded(args))
+                Settings settings = null;
+                try
                 {
-                    Console.WriteLine(HelpGenerator.Generate(Resources.HelpMarkdownTemplate));
-                }
-                else if (IsShowHelpIncluded(args))
-                {
-                    Console.WriteLine(HelpGenerator.Generate(Resources.HelpTextTemplate));
-                }
-                else
-                {
-                    Settings settings = null;
-                    try
+                    settings = Settings.Create(args);
+                    if (settings.ShowHelp && IsShowMarkdownHelpIncluded(args))
                     {
-                        settings = Settings.Create(args);
+                        Console.WriteLine(HelpGenerator.Generate(Resources.HelpMarkdownTemplate, settings));
+                    }
+                    else if (settings.ShowHelp)
+                    {
+                        Console.WriteLine(HelpGenerator.Generate(Resources.HelpTextTemplate, settings));
+                    }
+                    else
+                    {
                         AutoRest.Generate(settings);
                         var codeGenerator = ExtensionsLoader.GetCodeGenerator(settings);
                         Console.WriteLine(codeGenerator.UsageInstructions);
                     }
-                    catch (CodeGenerationException)
+                }
+                catch (CodeGenerationException)
+                {
+                    // Do not add the CodeGenerationException again. Will be written in finally block
+                }
+                catch (Exception exception)
+                {
+                    Logger.LogError(exception, exception.Message);
+                }
+                finally
+                {
+                    if (
+                        Logger.Entries.Any(
+                            e => e.Severity == LogEntrySeverity.Error || e.Severity == LogEntrySeverity.Fatal))
                     {
-                        // Do not add the CodeGenerationException again. Will be written in finally block
+                        Console.ForegroundColor = ConsoleColor.Red;
                     }
-                    catch (Exception exception)
+                    else if (Logger.Entries.Any(e => e.Severity == LogEntrySeverity.Warning))
                     {
-                        Logger.LogError(exception, exception.Message);
+                        Console.ForegroundColor = ConsoleColor.Yellow;
                     }
-                    finally
+
+                    if (settings != null && !settings.ShowHelp)
                     {
-                        if (
-                            Logger.Entries.Any(
-                                e => e.Severity == LogEntrySeverity.Error || e.Severity == LogEntrySeverity.Fatal))
+                        if (Logger.Entries.Any(e => e.Severity == LogEntrySeverity.Error || e.Severity == LogEntrySeverity.Fatal))
                         {
-                            Console.ForegroundColor = ConsoleColor.Red;
+                            Console.WriteLine(Resources.GenerationFailed);
+                            Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "{0} {1}",
+                                typeof(Program).Assembly.ManifestModule.Name,
+                                string.Join(" ", args)));
                         }
-                        else if (Logger.Entries.Any(e => e.Severity == LogEntrySeverity.Warning))
+                        else
                         {
-                            Console.ForegroundColor = ConsoleColor.Yellow;
+                            Console.WriteLine(Resources.GenerationComplete,
+                                settings.CodeGenerator, settings.Input);
                         }
-
-                        if (settings != null)
-                        {
-                            if (Logger.Entries.Any(e => e.Severity == LogEntrySeverity.Error || e.Severity == LogEntrySeverity.Fatal))
-                            {
-                                Console.WriteLine(Resources.GenerationFailed);
-                                Console.WriteLine(string.Format(CultureInfo.InvariantCulture, "{0} {1}",
-                                    typeof(Program).Assembly.ManifestModule.Name,
-                                    string.Join(" ", args)));
-                            }
-                            else
-                            {
-                                Console.WriteLine(Resources.GenerationComplete,
-                                    settings.CodeGenerator, settings.Input);
-                            }
-                        }
-
-                        Logger.WriteErrors(Console.Error,
-                            args.Any(a => "-Verbose".Equals(a, StringComparison.OrdinalIgnoreCase)));
-
-                        Logger.WriteWarnings(Console.Out);
-
-                        // Include LogEntrySeverity.Infos for verbose logging.
-                        if (args.Any(a => "-Verbose".Equals(a, StringComparison.OrdinalIgnoreCase)))
-                        {
-                            Logger.WriteInfos(Console.Out);
-                        }
-
-                        Console.ResetColor();
                     }
+
+                    Logger.WriteErrors(Console.Error,
+                        args.Any(a => "-Verbose".Equals(a, StringComparison.OrdinalIgnoreCase)));
+
+                    Logger.WriteWarnings(Console.Out);
+
+                    // Include LogEntrySeverity.Infos for verbose logging.
+                    if (args.Any(a => "-Verbose".Equals(a, StringComparison.OrdinalIgnoreCase)))
+                    {
+                        Logger.WriteInfos(Console.Out);
+                    }
+
+                    Console.ResetColor();
                 }
             }
             catch (Exception exception)
@@ -94,30 +94,13 @@ namespace Microsoft.Rest.Generator.Cli
         }
 
         /// <summary>
-        /// Returns true if one of the help flags are specified among the command line arguments.
-        /// Supported help flags are: '-?' '/?' '-help' and no argument at all.
-        /// </summary>
-        /// <param name="args">Command line arguments.</param>
-        /// <returns>True if help should be shown, otherwise false.</returns>
-        private static bool IsShowHelpIncluded(string[] args)
-        {
-            if (args == null || args.Length == 0 ||
-                args.Any(a => a == "-?" || a == "/?" || "-help".Equals(a, StringComparison.OrdinalIgnoreCase)))
-            {
-                return true;
-            }
-            return false;
-        }
-
-        /// <summary>
         /// Returns true if show markdown flag is specified among the command line arguments.
         /// </summary>
         /// <param name="args">Command line arguments.</param>
         /// <returns>True if markdown formatted help should be shown, otherwise false.</returns>
         private static bool IsShowMarkdownHelpIncluded(string[] args)
         {
-            if (IsShowHelpIncluded(args) &&
-                args.Any(a => a == "-md" || "-markdown".Equals(a, StringComparison.OrdinalIgnoreCase)))
+            if (args.Any(a => a == "-md" || "-markdown".Equals(a, StringComparison.OrdinalIgnoreCase)))
             {
                 return true;
             }

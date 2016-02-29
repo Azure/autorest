@@ -35,9 +35,10 @@ public interface ReadonlypropertyOperations {
      * Get complex types that have readonly properties.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getValidAsync(final ServiceCallback<ReadonlyObj> serviceCallback);
+    ServiceCall getValidAsync(final ServiceCallback<ReadonlyObj> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put complex types that have readonly properties.
@@ -55,8 +56,9 @@ public interface ReadonlypropertyOperations {
      *
      * @param complexBody the ReadonlyObj value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putValidAsync(ReadonlyObj complexBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putValidAsync(ReadonlyObj complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
 }

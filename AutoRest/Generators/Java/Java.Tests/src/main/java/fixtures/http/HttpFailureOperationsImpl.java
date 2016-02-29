@@ -73,9 +73,13 @@ public final class HttpFailureOperationsImpl implements HttpFailureOperations {
      * Get empty error form server.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getEmptyErrorAsync(final ServiceCallback<Boolean> serviceCallback) {
+    public ServiceCall getEmptyErrorAsync(final ServiceCallback<Boolean> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getEmptyError();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Boolean>(serviceCallback) {

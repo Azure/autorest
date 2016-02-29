@@ -43,8 +43,9 @@ public interface AvailabilitySetsOperations {
      * @param availabilitySetName The name of the storage availability set.
      * @param tags the Map&lt;String, String&gt; value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall updateAsync(String resourceGroupName, String availabilitySetName, Map<String, String> tags, final ServiceCallback<Void> serviceCallback);
+    ServiceCall updateAsync(String resourceGroupName, String availabilitySetName, Map<String, String> tags, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
 }

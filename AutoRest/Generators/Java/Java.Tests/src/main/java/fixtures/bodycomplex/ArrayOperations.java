@@ -35,9 +35,10 @@ public interface ArrayOperations {
      * Get complex types with array property.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getValidAsync(final ServiceCallback<ArrayWrapper> serviceCallback);
+    ServiceCall getValidAsync(final ServiceCallback<ArrayWrapper> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put complex types with array property.
@@ -55,9 +56,10 @@ public interface ArrayOperations {
      *
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog"
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putValidAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putValidAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get complex types with array property which is empty.
@@ -72,9 +74,10 @@ public interface ArrayOperations {
      * Get complex types with array property which is empty.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getEmptyAsync(final ServiceCallback<ArrayWrapper> serviceCallback);
+    ServiceCall getEmptyAsync(final ServiceCallback<ArrayWrapper> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put complex types with array property which is empty.
@@ -92,9 +95,10 @@ public interface ArrayOperations {
      *
      * @param complexBody Please put an empty array
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putEmptyAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putEmptyAsync(ArrayWrapper complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Get complex types with array property while server doesn't provide a response payload.
@@ -109,8 +113,9 @@ public interface ArrayOperations {
      * Get complex types with array property while server doesn't provide a response payload.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getNotProvidedAsync(final ServiceCallback<ArrayWrapper> serviceCallback);
+    ServiceCall getNotProvidedAsync(final ServiceCallback<ArrayWrapper> serviceCallback) throws IllegalArgumentException;
 
 }

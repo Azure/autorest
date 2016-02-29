@@ -104,9 +104,13 @@ public final class DateOperationsImpl implements DateOperations {
      * Get null date value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getNullAsync(final ServiceCallback<LocalDate> serviceCallback) {
+    public ServiceCall getNullAsync(final ServiceCallback<LocalDate> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getNull();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<LocalDate>(serviceCallback) {
@@ -145,9 +149,13 @@ public final class DateOperationsImpl implements DateOperations {
      * Get invalid date value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getInvalidDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
+    public ServiceCall getInvalidDateAsync(final ServiceCallback<LocalDate> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getInvalidDate();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<LocalDate>(serviceCallback) {
@@ -186,9 +194,13 @@ public final class DateOperationsImpl implements DateOperations {
      * Get overflow date value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getOverflowDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
+    public ServiceCall getOverflowDateAsync(final ServiceCallback<LocalDate> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getOverflowDate();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<LocalDate>(serviceCallback) {
@@ -227,9 +239,13 @@ public final class DateOperationsImpl implements DateOperations {
      * Get underflow date value.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getUnderflowDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
+    public ServiceCall getUnderflowDateAsync(final ServiceCallback<LocalDate> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getUnderflowDate();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<LocalDate>(serviceCallback) {
@@ -274,9 +290,13 @@ public final class DateOperationsImpl implements DateOperations {
      *
      * @param dateBody the LocalDate value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putMaxDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putMaxDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (dateBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter dateBody is required and cannot be null."));
             return null;
@@ -319,9 +339,13 @@ public final class DateOperationsImpl implements DateOperations {
      * Get max date value 9999-12-31.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getMaxDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
+    public ServiceCall getMaxDateAsync(final ServiceCallback<LocalDate> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getMaxDate();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<LocalDate>(serviceCallback) {
@@ -366,9 +390,13 @@ public final class DateOperationsImpl implements DateOperations {
      *
      * @param dateBody the LocalDate value
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putMinDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putMinDateAsync(LocalDate dateBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (dateBody == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter dateBody is required and cannot be null."));
             return null;
@@ -411,9 +439,13 @@ public final class DateOperationsImpl implements DateOperations {
      * Get min date value 0000-01-01.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getMinDateAsync(final ServiceCallback<LocalDate> serviceCallback) {
+    public ServiceCall getMinDateAsync(final ServiceCallback<LocalDate> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getMinDate();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<LocalDate>(serviceCallback) {

@@ -39,7 +39,7 @@ namespace Microsoft.Rest.Generator.Azure.Python
         public override string Description
         {
             // TODO resource string.
-            get { return "Python for Http Client Libraries"; }
+            get { return "Azure specific Python code generator."; }
         }
 
         public override string UsageInstructions

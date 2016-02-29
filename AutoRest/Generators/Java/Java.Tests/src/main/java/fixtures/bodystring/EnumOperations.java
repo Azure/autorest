@@ -35,9 +35,10 @@ public interface EnumOperations {
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getNotExpandableAsync(final ServiceCallback<Colors> serviceCallback);
+    ServiceCall getNotExpandableAsync(final ServiceCallback<Colors> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
@@ -55,8 +56,9 @@ public interface EnumOperations {
      *
      * @param stringBody Possible values include: 'red color', 'green-color', 'blue_color'
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putNotExpandableAsync(Colors stringBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putNotExpandableAsync(Colors stringBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
 }

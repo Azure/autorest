@@ -40,9 +40,10 @@ public interface FormdataOperations {
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall uploadFileAsync(InputStream fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback);
+    ServiceCall uploadFileAsync(InputStream fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Upload file.
@@ -62,8 +63,9 @@ public interface FormdataOperations {
      * @param fileContent File to upload.
      * @param fileName File name to upload. Name has to be spelled exactly as written here.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall uploadFileViaBodyAsync(InputStream fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback);
+    ServiceCall uploadFileViaBodyAsync(InputStream fileContent, String fileName, final ServiceCallback<InputStream> serviceCallback) throws IllegalArgumentException;
 
 }

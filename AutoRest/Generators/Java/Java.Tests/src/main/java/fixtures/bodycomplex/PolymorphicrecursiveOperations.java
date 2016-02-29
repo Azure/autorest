@@ -35,9 +35,10 @@ public interface PolymorphicrecursiveOperations {
      * Get complex types that are polymorphic and have recursive references.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall getValidAsync(final ServiceCallback<Fish> serviceCallback);
+    ServiceCall getValidAsync(final ServiceCallback<Fish> serviceCallback) throws IllegalArgumentException;
 
     /**
      * Put complex types that are polymorphic and have recursive references.
@@ -159,8 +160,9 @@ public interface PolymorphicrecursiveOperations {
          ]
      }
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback);
+    ServiceCall putValidAsync(Fish complexBody, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
 }

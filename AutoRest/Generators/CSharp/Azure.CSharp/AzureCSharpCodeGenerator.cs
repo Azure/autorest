@@ -37,7 +37,7 @@ namespace Microsoft.Rest.Generator.CSharp.Azure
 
         public override string Description
         {
-            get { return "C# for Http Client Libraries"; }
+            get { return "Azure specific C# code generator."; }
         }
 
         public override string UsageInstructions

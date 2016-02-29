@@ -35,9 +35,10 @@ public interface SubscriptionInCredentialsOperations {
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall postMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceCall postMethodGlobalValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call.
@@ -53,9 +54,10 @@ public interface SubscriptionInCredentialsOperations {
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall postMethodGlobalNullAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceCall postMethodGlobalNullAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
@@ -71,9 +73,10 @@ public interface SubscriptionInCredentialsOperations {
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall postMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceCall postMethodGlobalNotProvidedValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
@@ -89,9 +92,10 @@ public interface SubscriptionInCredentialsOperations {
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall postPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceCall postPathGlobalValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
     /**
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
@@ -107,8 +111,9 @@ public interface SubscriptionInCredentialsOperations {
      * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link ServiceCall} object
      */
-    ServiceCall postSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback);
+    ServiceCall postSwaggerGlobalValidAsync(final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException;
 
 }

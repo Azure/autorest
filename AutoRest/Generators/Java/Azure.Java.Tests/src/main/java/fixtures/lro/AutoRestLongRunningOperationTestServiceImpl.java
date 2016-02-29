@@ -154,22 +154,6 @@ public final class AutoRestLongRunningOperationTestServiceImpl extends AzureServ
 
     /**
      * Initializes an instance of AutoRestLongRunningOperationTestService client.
-     */
-    public AutoRestLongRunningOperationTestServiceImpl() {
-        this("http://localhost");
-    }
-
-    /**
-     * Initializes an instance of AutoRestLongRunningOperationTestService client.
-     *
-     * @param baseUrl the base URL of the host
-     */
-    public AutoRestLongRunningOperationTestServiceImpl(String baseUrl) {
-        this(baseUrl, null);
-    }
-
-    /**
-     * Initializes an instance of AutoRestLongRunningOperationTestService client.
      *
      * @param credentials the management credentials for Azure
      */

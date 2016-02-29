@@ -180,9 +180,13 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @param resourceArray External Resource as an Array to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putArrayAsync(List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putArrayAsync(List<Resource> resourceArray, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Validator.validate(resourceArray, serviceCallback);
         Call<ResponseBody> call = service.putArray(resourceArray);
         final ServiceCall serviceCall = new ServiceCall(call);
@@ -222,9 +226,13 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * Get External Resource as an Array.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getArrayAsync(final ServiceCallback<List<FlattenedProduct>> serviceCallback) {
+    public ServiceCall getArrayAsync(final ServiceCallback<List<FlattenedProduct>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getArray();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<List<FlattenedProduct>>(serviceCallback) {
@@ -266,9 +274,13 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @param resourceDictionary External Resource as a Dictionary to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putDictionaryAsync(Map<String, FlattenedProduct> resourceDictionary, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Validator.validate(resourceDictionary, serviceCallback);
         Call<ResponseBody> call = service.putDictionary(resourceDictionary);
         final ServiceCall serviceCall = new ServiceCall(call);
@@ -308,9 +320,13 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * Get External Resource as a Dictionary.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProduct>> serviceCallback) {
+    public ServiceCall getDictionaryAsync(final ServiceCallback<Map<String, FlattenedProduct>> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getDictionary();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<Map<String, FlattenedProduct>>(serviceCallback) {
@@ -352,9 +368,13 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @param resourceComplexObject External Resource as a ResourceCollection to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putResourceCollectionAsync(ResourceCollection resourceComplexObject, final ServiceCallback<Void> serviceCallback) {
+    public ServiceCall putResourceCollectionAsync(ResourceCollection resourceComplexObject, final ServiceCallback<Void> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Validator.validate(resourceComplexObject, serviceCallback);
         Call<ResponseBody> call = service.putResourceCollection(resourceComplexObject);
         final ServiceCall serviceCall = new ServiceCall(call);
@@ -394,9 +414,13 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * Get External Resource as a ResourceCollection.
      *
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall getResourceCollectionAsync(final ServiceCallback<ResourceCollection> serviceCallback) {
+    public ServiceCall getResourceCollectionAsync(final ServiceCallback<ResourceCollection> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Call<ResponseBody> call = service.getResourceCollection();
         final ServiceCall serviceCall = new ServiceCall(call);
         call.enqueue(new ServiceResponseCallback<ResourceCollection>(serviceCallback) {
@@ -438,9 +462,13 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @param simpleBodyProduct Simple body product to put
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putSimpleProductAsync(SimpleProduct simpleBodyProduct, final ServiceCallback<SimpleProduct> serviceCallback) {
+    public ServiceCall putSimpleProductAsync(SimpleProduct simpleBodyProduct, final ServiceCallback<SimpleProduct> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         Validator.validate(simpleBodyProduct, serviceCallback);
         Call<ResponseBody> call = service.putSimpleProduct(simpleBodyProduct);
         final ServiceCall serviceCall = new ServiceCall(call);
@@ -503,9 +531,13 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      * @param baseProductDescription Description of product.
      * @param odatavalue URL value.
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall postFlattenedSimpleProductAsync(String baseProductId, String maxProductDisplayName, String baseProductDescription, String odatavalue, final ServiceCallback<SimpleProduct> serviceCallback) {
+    public ServiceCall postFlattenedSimpleProductAsync(String baseProductId, String maxProductDisplayName, String baseProductDescription, String odatavalue, final ServiceCallback<SimpleProduct> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (baseProductId == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter baseProductId is required and cannot be null."));
             return null;
@@ -582,9 +614,13 @@ public final class AutoRestResourceFlatteningTestServiceImpl extends ServiceClie
      *
      * @param flattenParameterGroup Additional parameters for the operation
      * @param serviceCallback the async ServiceCallback to handle successful and failed responses.
+     * @throws IllegalArgumentException thrown if callback is null
      * @return the {@link Call} object
      */
-    public ServiceCall putSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup, final ServiceCallback<SimpleProduct> serviceCallback) {
+    public ServiceCall putSimpleProductWithGroupingAsync(FlattenParameterGroup flattenParameterGroup, final ServiceCallback<SimpleProduct> serviceCallback) throws IllegalArgumentException {
+        if (serviceCallback == null) {
+            throw new IllegalArgumentException("ServiceCallback is required for async calls.");
+        }
         if (flattenParameterGroup == null) {
             serviceCallback.failure(new IllegalArgumentException("Parameter flattenParameterGroup is required and cannot be null."));
             return null;
