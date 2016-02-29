@@ -185,10 +185,8 @@ class Serializer(object):
             for attr, map in attributes.items():
                 attr_name = attr
                 try:
-                    if map.get('flatten'):
-                        keys = map['key'].split('.')
-                    else:
-                        keys = [map['key']]
+                    keys = re.split(r"(?<!\\)\.", map['key'])
+                    keys = [k.replace('\\.', '.') for k in keys]
                     attr_type = map['type']
                     orig_attr = getattr(target_obj, attr)
                     new_attr = self.serialize_data(
@@ -602,14 +600,16 @@ class Deserializer(object):
             for attr, map in attributes.items():
                 attr_type = map['type']
                 key = map['key']
-                flattened = map.get('flatten')
                 working_data = data
 
-                if flattened:
-                    while '.' in key:
-                        dict_keys = key.partition('.')
-                        working_data = working_data.get(dict_keys[0], data)
-                        key = ''.join(dict_keys[2:])
+                while '.' in key:
+                    dict_keys = re.split(r"(?<!\\)\.", key)
+                    if len(dict_keys) == 1:
+                        key = dict_keys[0].replace('\\.', '.')
+                        break
+                    working_key = dict_keys[0].replace('\\.', '.')
+                    working_data = working_data.get(working_key, data)
+                    key = '.'.join(dict_keys[1:])
 
                 raw_value = working_data.get(key)
                 value = self.deserialize_data(raw_value, attr_type)
