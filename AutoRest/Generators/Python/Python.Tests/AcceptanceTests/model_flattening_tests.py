@@ -30,7 +30,6 @@ import sys
 import isodate
 import tempfile
 import json
-from uuid import uuid4
 from datetime import date, datetime, timedelta
 import os
 from os.path import dirname, pardir, join, realpath, sep, pardir
@@ -38,29 +37,33 @@ from os.path import dirname, pardir, join, realpath, sep, pardir
 cwd = dirname(realpath(__file__))
 root = realpath(join(cwd , pardir, pardir, pardir, pardir, pardir))
 sys.path.append(join(root, "ClientRuntimes" , "Python", "msrest"))
-sys.path.append(join(root, "ClientRuntimes" , "Python", "msrestazure"))
 log_level = int(os.environ.get('PythonLogLevel', 30))
 
 tests = realpath(join(cwd, pardir, "Expected", "AcceptanceTests"))
-sys.path.append(join(tests, "ResourceFlattening"))
+sys.path.append(join(tests, "ModelFlattening"))
 
 from msrest.serialization import Deserializer
 from msrest.exceptions import DeserializationError
-from msrest.authentication import BasicTokenAuthentication
 
-from autorestresourceflatteningtestservice import AutoRestResourceFlatteningTestService, AutoRestResourceFlatteningTestServiceConfiguration
-from autorestresourceflatteningtestservice.models import FlattenedProduct, ErrorException, ResourceCollection
+from autorestresourceflatteningtestservice import (
+    AutoRestResourceFlatteningTestService, 
+    AutoRestResourceFlatteningTestServiceConfiguration)
 
+from autorestresourceflatteningtestservice.models import (
+    FlattenedProduct,
+    ErrorException,
+    ResourceCollection,
+    SimpleProduct,
+    FlattenParameterGroup)
 
-class ResourceFlatteningTests(unittest.TestCase):
+class ModelFlatteningTests(unittest.TestCase):
 
     def setUp(self):
-        cred = BasicTokenAuthentication({"access_token" :str(uuid4())})
-        config = AutoRestResourceFlatteningTestServiceConfiguration(cred, base_url="http://localhost:3000")
+        config = AutoRestResourceFlatteningTestServiceConfiguration(base_url="http://localhost:3000")
         config.log_level = log_level
         self.client = AutoRestResourceFlatteningTestService(config)
 
-        return super(ResourceFlatteningTests, self).setUp()
+        return super(ModelFlatteningTests, self).setUp()
 
     def test_flattening_array(self):
 
@@ -94,7 +97,6 @@ class ResourceFlatteningTests(unittest.TestCase):
                     location = "Building 44")]
 
         self.client.put_array(resourceArray)
-        pass
 
     def test_flattening_dictionary(self):
 
@@ -213,6 +215,52 @@ class ResourceFlatteningTests(unittest.TestCase):
                     flattened_product_type = "Flat"))
 
         self.client.put_resource_collection(resourceComplexObject)
+
+    def test_model_flattening_simple(self):
+
+        simple_prduct = SimpleProduct(
+            base_product_id = "123",
+            base_product_description = "product description",
+            max_product_display_name = "max name",
+            max_product_capacity = "Large",
+            odatavalue = "http://foo"
+            )
+
+        result = self.client.put_simple_product(simple_prduct)
+        self.assertEqual(result, simple_prduct)
+        
+    def test_model_flattening_with_parameter_flattening(self):
+
+        simple_prduct = SimpleProduct(
+            base_product_id = "123",
+            base_product_description = "product description",
+            max_product_display_name = "max name",
+            max_product_capacity = "Large",
+            odatavalue = "http://foo"
+            )
+        # TODO - this should work once constant support has been implemented
+        #result = self.client.post_flattened_simple_product("123", "max name", "product description" "http://foo") # TODO
+        #self.assertEqual(result, simple_product) # TODO
+
+    def test_model_flattening_with_grouping(self):
+
+        simple_prduct = SimpleProduct(
+            base_product_id = "123",
+            base_product_description = "product description",
+            max_product_display_name = "max name",
+            max_product_capacity = "Large",
+            odatavalue = "http://foo"
+            )
+
+        group = FlattenParameterGroup(
+            base_product_id="123",
+            base_product_description="product description",
+            max_product_display_name="max name",
+            odatavalue="http://foo",
+            name="groupproduct")
+        # TODO - this should work once constant support has been implemented
+        #result = self.client.put_simple_product_with_grouping(group)
+        #self.assertEqual(result, simple_prduct)
 
 if __name__ == '__main__':
     unittest.main()
