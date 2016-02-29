@@ -137,6 +137,7 @@ class Serializer(object):
             4: "Fri", 5: "Sat", 6: "Sun"}
     months = {1: "Jan", 2: "Feb", 3: "Mar", 4: "Apr", 5: "May", 6: "Jun",
               7: "Jul", 8: "Aug", 9: "Sep", 10: "Oct", 11: "Nov", 12: "Dec"}
+    flattten = re.compile(r"(?<!\\)\.")
 
     def __init__(self):
         self.serialize_type = {
@@ -185,7 +186,7 @@ class Serializer(object):
             for attr, map in attributes.items():
                 attr_name = attr
                 try:
-                    keys = re.split(r"(?<!\\)\.", map['key'])
+                    keys = self.flattten.split(map['key'])
                     keys = [k.replace('\\.', '.') for k in keys]
                     attr_type = map['type']
                     orig_attr = getattr(target_obj, attr)
@@ -560,6 +561,7 @@ class Deserializer(object):
     valid_date = re.compile(
         r'\d{4}[-]\d{2}[-]\d{2}T\d{2}:\d{2}:\d{2}'
         '\.?\d*Z?[-+]?[\d{2}]?:?[\d{2}]?')
+    flatten = re.compile(r"(?<!\\)\.")
 
     def __init__(self, classes={}):
         self.deserialize_type = {
@@ -603,7 +605,7 @@ class Deserializer(object):
                 working_data = data
 
                 while '.' in key:
-                    dict_keys = re.split(r"(?<!\\)\.", key)
+                    dict_keys = self.flatten.split(key)
                     if len(dict_keys) == 1:
                         key = dict_keys[0].replace('\\.', '.')
                         break
