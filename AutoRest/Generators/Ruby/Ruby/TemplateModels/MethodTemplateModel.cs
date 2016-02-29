@@ -329,7 +329,7 @@ namespace Microsoft.Rest.Generator.Ruby
             
             builder
                 .AppendLine(string.Format("pathParams = {{{0}}}", string.Join(",", encodedPathParams)))
-                .AppendLine("pathParams.each{{ |key, value| {0}[\"{{#{{key}}}}\"] = URI.escape(value) }}", pathName);
+                .AppendLine("pathParams.each{{ |key, value| {0}[\"{{#{{key}}}}\"] = ERB::Util.url_encode(value) }}", pathName);
         }
 
         /// <summary>

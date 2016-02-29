@@ -161,7 +161,7 @@ namespace Microsoft.Rest.Generator.Azure.Ruby
                 .AppendLine("skipEncodingPathParams = {{{0}}}", string.Join(",", nonEncodedPathParams))
                 .AppendLine("encodingPathParams = {{{0}}}", string.Join(",", encodedPathParams))
                 .AppendLine("skipEncodingPathParams.each{{ |key, value| {0}[\"{{#{{key}}}}\"] = value }}", pathName)
-                .AppendLine("encodingPathParams.each{{ |key, value| {0}[\"{{#{{key}}}}\"] = URI.escape(value) }}", pathName);
+                .AppendLine("encodingPathParams.each{{ |key, value| {0}[\"{{#{{key}}}}\"] = ERB::Util.url_encode(value) }}", pathName);
         }
 
         /// <summary>
