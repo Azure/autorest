@@ -219,6 +219,16 @@ namespace Microsoft.Rest.Modeler.CompositeSwagger
                     && m.Group == subClientMethod.Group);
                 if (compositeClientMethod == null)
                 {
+                    // Re-link client parameters
+                    foreach (var parameter in subClientMethod.Parameters.Where(p => p.ClientProperty != null))
+                    {
+                        var clientProperty = compositeClient.Properties
+                            .FirstOrDefault(p => p.SerializedName == parameter.ClientProperty.SerializedName);
+                        if (clientProperty != null)
+                        {
+                            parameter.ClientProperty = clientProperty;
+                        }
+                    }
                     compositeClient.Methods.Add(subClientMethod);
                 }
             }
