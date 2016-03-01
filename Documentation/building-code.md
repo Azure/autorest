@@ -109,7 +109,7 @@ If you would like to see what commands are available to you, run `gulp -T`. That
 ### Running the tests
 Prior to executing `gulp` to build and then test the code, make sure that the latest tools are setup for your build environment.
 
-- run `bundle install` from the root directory
+ >gulp test
 
 # Releasing AutoRest and ClientRuntimes
 
