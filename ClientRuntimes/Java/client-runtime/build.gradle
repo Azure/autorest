@@ -12,7 +12,7 @@ apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'checkstyle'
 
 group = 'com.microsoft.rest'
-version = '1.0.0-SNAPSHOT'
+version = '1.0.0-beta1'
 
 checkstyle {
     toolVersion = "6.9"
@@ -43,6 +43,7 @@ uploadArchives {
             snapshotRepository(url: "ftp://waws-prod-bay-005.ftp.azurewebsites.windows.net/site/wwwroot/") {
                 authentication(userName: username, password: password)
             }
+            repository(url: "file://$buildDir/repository")
             pom.project {
                 name 'Microsoft AutoRest Runtime for Java'
                 description 'This is the client runtime for AutoRest generated Java clients.'

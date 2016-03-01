@@ -8,7 +8,7 @@ buildscript {
 apply plugin: 'com.android.library'
 apply plugin: 'maven'
 
-version = '1.0.0-SNAPSHOT'
+version = '1.0.0-beta1'
 
 android {
     compileSdkVersion 23
@@ -18,7 +18,7 @@ android {
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
-        versionName "0.0.1-SNAPSHOT"
+        versionName "1.0.0-beta1"
     }
 
     buildTypes {
@@ -42,7 +42,7 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'com.microsoft.aad:adal:1.1.11'
-    compile 'com.microsoft.rest:client-runtime:1.0.0-SNAPSHOT'
+    compile 'com.microsoft.rest:client-runtime:1.0.0-beta1'
     testCompile 'junit:junit:4.12'
     testCompile 'junit:junit-dep:4.11'
     deployerJars "org.apache.maven.wagon:wagon-ftp:2.10"
@@ -55,6 +55,7 @@ uploadArchives {
             snapshotRepository(url: "ftp://waws-prod-bay-005.ftp.azurewebsites.windows.net/site/wwwroot/") {
                 authentication(userName: username, password: password)
             }
+            repository(url: "file://$buildDir/repository")
             pom.setArtifactId "azure-android-client-authentication"
             pom.project {
                 name 'Microsoft Azure AutoRest Authentication Library for Java'
