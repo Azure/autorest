@@ -17,8 +17,7 @@
     - Overview
     - Code Generators
     - Modelers
-5. Compiling AutoRest
-    - [Functional & Unit testing](building-code.md)
+5. [Building AutoRest](building-code.md)
 6. Contributing to the code
 
 [Swagger2.0]:https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md
