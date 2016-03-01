@@ -53,6 +53,9 @@ public @Model.OperationResponseReturnTypeString @(Model.Name)(@Model.MethodParam
 {
 @:    Validator.validate(@(param.Name));
 }
+
+    @Model.BuildInputMappings()
+
     Response<ResponseBody> result = service.@(Model.Name)(@Model.MethodParameterApiInvocation).execute();
     return client.getAzureClient().@(Model.PollingMethod)(result, @Model.PollingResourceTypeArgs);
 }
@@ -89,6 +92,9 @@ public ServiceCall @(Model.Name)Async(@Model.MethodParameterDeclarationWithCallb
 {
 @:    Validator.validate(@(param.Name), serviceCallback);
 }
+
+    @Model.BuildInputMappings()
+
     Call<@Model.CallType> call = service.@(Model.Name)(@Model.MethodParameterApiInvocation);
     final ServiceCall serviceCall = new ServiceCall(call);
     call.enqueue(new Callback<@Model.CallType>() {
