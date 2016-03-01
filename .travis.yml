@@ -10,8 +10,6 @@ os:
 - linux
 addons:
   apt:
-    sources:
-    - deadsnakes
     packages:
     # Packages required for android build
     - libc6-i386
@@ -19,8 +17,6 @@ addons:
     - lib32gcc1
     - lib32ncurses5
     - lib32z1
-    # packages for python
-    - python3.5
     # Packages for DNX 
     - gettext
     - libcurl4-openssl-dev
